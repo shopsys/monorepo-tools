@@ -41,6 +41,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
     - existence of the class enables adding new custom positions from project-base (by using class inheritance)
     - twig templates: advert position names are used directly instead of using class constants to ease the usage
     - added new [cookbook for adding a new advert position](./docs/cookbook/adding-a-new-advert-position.md)
+- [#378 - Upgrade PostgreSQL to version 10](https://github.com/shopsys/shopsys/pull/335):
+    - please look at [UPGRADE.md](./UPGRADE.md) to upgrade without losing your data.
 
 #### Fixed
 - [#260 - JS validation: dynamically added form inputs are now validated](https://github.com/shopsys/shopsys/pull/260)

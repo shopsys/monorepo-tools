@@ -62,7 +62,7 @@ Composer will prompt you to set main parameters (`app/config/parameters.yml`):
 | `database_name`                   | ...                                                                           | shopsys       |
 | `database_user`                   | ...                                                                           | postgres      |
 | `database_password`               | ...                                                                           | ...           |
-| `database_server_version`         | version of your PostgreSQL server                                             | 9.5           |
+| `database_server_version`         | version of your PostgreSQL server                                             | 10.5          |
 | `redis_host`                      | host of your Redis storage (credentials are not supported right now)          | 127.0.0.1     |
 | `mailer_transport`                | access data of your mail server                                               | ...           |
 | `mailer_host`                     | ...                                                                           | ...           |

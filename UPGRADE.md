@@ -25,6 +25,48 @@ There is a list of all the repositories maintained by monorepo, changes in log b
     - create Elasticsearch indexes by running `php phing elasticsearch-indexes-create`
     - export products into Elasticsearch by `php phing elasticsearch-products-export`
 
+#### PostgreSQL upgrade:
+We decided to move onto a newer version of PostgreSQL.
+
+These steps are for migrating your data onto newer version of postgres and are inspired by [official documentation](https://www.postgresql.org/docs/10/static/upgrading.html):
+
+If you are running your project natively then just follow [official instructions](https://www.postgresql.org/docs/10/static/upgrading.html), 
+if you are using docker infrastructure you can follow steps written below.
+
+1. create a backup of your database by executing::
+
+    `docker exec -it shopsys-framework-postgres pg_dumpall > backupfile`
+
+1. copy new version of `docker-compose.`:
+
+    `cp docker/conf/docker-compose.yml.dist -f docker-compose.yml`
+
+    *Note: select correct `docker-compose` according to your operating system*
+
+1. update version of `database_server_version` from *9.5* to *10.5* in your `parameters.yml`
+
+1. stop containers and delete old data:
+
+    `docker-compose down`
+
+    `rm -rf <project-root-path>/var/postgres-data/*`
+
+1. start new docker-compose stack with newer version of postgres by just recreating your containers:
+
+    `docker-compose up -d --force-recreate`
+
+1. copy backup into postgres container root folder
+
+    `docker cp backupfile shopsys-framework-postgres:/`
+
+1. restore you data:
+
+    `docker exec -it shopsys-framework-postgres psql -d postgres -f backupfile`
+
+1. delete backup file:
+
+    `docker exec -it shopsys-framework-postgres rm backupfile`
+
 ### [shopsys/project-base]
 - standardize indentation in your yaml files
     - you can find yaml files with wrong indentation with regexp `^( {4})* {1,3}[^ ]`
