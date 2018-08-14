@@ -16,11 +16,8 @@ use Shopsys\FrameworkBundle\Form\Admin\QuickSearch\QuickSearchFormType;
 use Shopsys\FrameworkBundle\Model\Administrator\AdministratorGridFacade;
 use Shopsys\FrameworkBundle\Model\AdminNavigation\BreadcrumbOverrider;
 use Shopsys\FrameworkBundle\Model\AdvancedSearch\AdvancedSearchFacade;
-use Shopsys\FrameworkBundle\Model\Category\CategoryFacade;
-use Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroupFacade;
 use Shopsys\FrameworkBundle\Model\Product\Listing\ProductListAdminFacade;
 use Shopsys\FrameworkBundle\Model\Product\MassAction\ProductMassActionFacade;
-use Shopsys\FrameworkBundle\Model\Product\Pricing\AdminProductPriceCalculationFacade;
 use Shopsys\FrameworkBundle\Model\Product\Product;
 use Shopsys\FrameworkBundle\Model\Product\ProductDataFactoryInterface;
 use Shopsys\FrameworkBundle\Model\Product\ProductFacade;
@@ -30,11 +27,6 @@ use Symfony\Component\HttpFoundation\Request;
 
 class ProductController extends AdminBaseController
 {
-    /**
-     * @var \Shopsys\FrameworkBundle\Model\Category\CategoryFacade
-     */
-    private $categoryFacade;
-
     /**
      * @var \Shopsys\FrameworkBundle\Model\Product\MassAction\ProductMassActionFacade
      */
@@ -56,19 +48,9 @@ class ProductController extends AdminBaseController
     private $productDataFactory;
 
     /**
-     * @var \Shopsys\FrameworkBundle\Model\Product\Pricing\AdminProductPriceCalculationFacade
-     */
-    private $adminProductPriceCalculationFacade;
-
-    /**
      * @var \Shopsys\FrameworkBundle\Model\AdminNavigation\BreadcrumbOverrider
      */
     private $breadcrumbOverrider;
-
-    /**
-     * @var \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroupFacade
-     */
-    private $pricingGroupFacade;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Administrator\AdministratorGridFacade
@@ -101,14 +83,11 @@ class ProductController extends AdminBaseController
     private $domain;
 
     public function __construct(
-        CategoryFacade $categoryFacade,
         ProductMassActionFacade $productMassActionFacade,
         GridFactory $gridFactory,
         ProductFacade $productFacade,
         ProductDataFactoryInterface $productDataFactory,
-        AdminProductPriceCalculationFacade $adminProductPriceCalculationFacade,
         BreadcrumbOverrider $breadcrumbOverrider,
-        PricingGroupFacade $pricingGroupFacade,
         AdministratorGridFacade $administratorGridFacade,
         ProductListAdminFacade $productListAdminFacade,
         AdvancedSearchFacade $advancedSearchFacade,
@@ -116,14 +95,11 @@ class ProductController extends AdminBaseController
         ProductExtension $productExtension,
         Domain $domain
     ) {
-        $this->categoryFacade = $categoryFacade;
         $this->productMassActionFacade = $productMassActionFacade;
         $this->gridFactory = $gridFactory;
         $this->productFacade = $productFacade;
         $this->productDataFactory = $productDataFactory;
-        $this->adminProductPriceCalculationFacade = $adminProductPriceCalculationFacade;
         $this->breadcrumbOverrider = $breadcrumbOverrider;
-        $this->pricingGroupFacade = $pricingGroupFacade;
         $this->administratorGridFacade = $administratorGridFacade;
         $this->productListAdminFacade = $productListAdminFacade;
         $this->advancedSearchFacade = $advancedSearchFacade;
@@ -165,18 +141,8 @@ class ProductController extends AdminBaseController
         $viewParameters = [
             'form' => $form->createView(),
             'product' => $product,
-            'productMainCategoriesIndexedByDomainId' => $this->categoryFacade->getProductMainCategoriesIndexedByDomainId($product),
             'domains' => $this->domain->getAll(),
         ];
-        if ($product->getPriceCalculationType() === Product::PRICE_CALCULATION_TYPE_AUTO) {
-            $viewParameters['productBasePrice'] = $this->adminProductPriceCalculationFacade->calculateProductBasePrice($product);
-        }
-
-        try {
-            $productSellingPricesIndexedByDomainId = $this->productFacade->getAllProductSellingPricesIndexedByDomainId($product);
-            $viewParameters['productSellingPricesIndexedByDomainId'] = $productSellingPricesIndexedByDomainId;
-        } catch (\Shopsys\FrameworkBundle\Model\Product\Pricing\Exception\MainVariantPriceCalculationException $ex) {
-        }
 
         return $this->render('@ShopsysFramework/Admin/Content/Product/edit.html.twig', $viewParameters);
     }
@@ -210,7 +176,6 @@ class ProductController extends AdminBaseController
 
         return $this->render('@ShopsysFramework/Admin/Content/Product/new.html.twig', [
             'form' => $form->createView(),
-            'pricingGroupsIndexedByDomainId' => $this->pricingGroupFacade->getAllIndexedByDomainId(),
         ]);
     }
 

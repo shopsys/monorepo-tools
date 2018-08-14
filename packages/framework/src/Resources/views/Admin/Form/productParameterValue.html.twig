@@ -1,0 +1,61 @@
+{% macro parameterRow(parameter, index) %}
+    <tr class="js-parameters-item js-form-group table-form__row" data-index="{{ index }}">
+        <td class="table-form__cell table-form__cell--del-before">
+            {{ form_widget(parameter.parameter, { isSimple: true} ) }}
+        </td>
+        <td class="table-form__cell table-form__cell--del">
+            <span class="svg svg-arrow-right"></span>
+        </td>
+        <td class="table-form__cell  table-form__cell--del-after">
+            {% for locale, valueTextLocaleForm in parameter.valueTextsByLocale %}
+                <div class="input__wrap">
+                    {{ form_widget(valueTextLocaleForm, { attr: { class: 'input--flag'} })  }}
+                    <span class="input__flag">
+                        {{ localeFlag(locale) }}
+                    </span>
+                    {{ form_errors(valueTextLocaleForm, { errors_attr: { class: 'table-form__cell__error' } } ) }}
+                </div>
+            {% endfor %}
+        </td>
+        <td class="table-form__cell text-right">
+            <a href="#" class="js-parameters-item-remove table-form__action"><i class="svg svg-circle-cross"></i></a>
+        </td>
+    </tr>
+{% endmacro %}
+
+{% block product_parameter_value_widget %}
+    {% import _self as self %}
+    <div class="js-form-group wrap-border form-group">
+        <table class="table-form" id="product_edit_form_parameters">
+            <thead>
+            <tr class="table-form__row">
+                <th class="table-form__cell table-form__cell--del-before table-form__cell--label">{{ 'Parameter'|trans }}</th>
+                <th class="table-form__cell table-form__cell--del"></th>
+                <th class="table-form__cell table-form__cell--del-after">{{ 'Value'|trans }}</th>
+                <th class="table-form__cell"></th>
+            </tr>
+            </thead>
+            <tbody class="js-parameters" data-prototype="{{ self.parameterRow(form.vars.prototype)|escape }}" data-index="{{ form|length }}">
+
+            {% for key, parameter in form %}
+                {{ self.parameterRow(parameter, key) }}
+            {% else %}
+                {% do form.setRendered %}
+            {% endfor %}
+
+            <tr class="js-parameters-empty-item table-form__row">
+                <td class="table-form__cell" colspan="4">{{ 'Add some parameters'|trans }}</td>
+            </tr>
+            </tbody>
+        </table>
+
+        <div class="form-line form-line--no-top-border">
+            <div class="form-line__line form-line__line--no-space">
+                <a href="#" class="js-parameters-item-add btn btn--plus">
+                    <i class="btn__icon">+</i>
+                    {{ 'Add another parameter'|trans }}
+                </a>
+            </div>
+        </div>
+    </div>
+{% endblock product_parameter_value_widget %}

@@ -5,9 +5,6 @@ solution of extending forms is not complete and there will be several tasks that
 At this time we do not have every single form in our application ready for extension, the list of not prepared
 forms for extensions is below:
 
-* `BrandFormType`
-* `ProductFormType`
-* `ProductEditFormType`
 * `ProductMassActionFormType`
 * `VariantFormType`
 * `OrderFormType`
@@ -38,6 +35,16 @@ option if it is last group of fields.
 ### [DisplayOnlyType](../../packages/framework/src/Form/DisplayOnlyType.php)
 Sometimes form needs to only display information but does not need to change and persist this data, for this usages
 there is `DisplayOnlyType` which does not map property onto `entity` and let you to display your own data.
+
+### [WarningMessageType](../../packages/framework/src/Form/WarningMessageType.php)
+Sometimes the form needs to contain some information that is important for viewer, for this usage there is  `WarningMessageType` 
+that shows highlighted message with warning icon.
+
+### [DisplayOnlyUrlType](../../packages/framework/src/Form/DisplayOnlyUrlType.php)
+For displaying custom URL based on routing system, there can be used `DisplayOnlyUrlType`.
+
+### [LocalizedFullWidthType](../../packages/framework/src/Form/LocalizedFullWidthType.php)
+For displaying localized field in vertical order of full-width label and inputs, there can be used `LocalizedFullWidthType`.
 
 ## Adding fields into already existing form types
 Imagine that you have added new property into `Product entity` and you want this property to be set in administration

@@ -56,22 +56,22 @@ class NewProductTest extends FunctionalTestCase
      */
     private function fillForm(Form $form)
     {
-        $nameForms = $form->get('product_edit_form[productData][name]');
+        $nameForms = $form->get('product_edit_form[name]');
         /* @var $nameForms \Symfony\Component\DomCrawler\Field\InputFormField[] */
         foreach ($nameForms as $nameForm) {
             $nameForm->setValue('testProduct');
         }
-        $form['product_edit_form[productData][catnum]'] = '123456';
-        $form['product_edit_form[productData][partno]'] = '123456';
-        $form['product_edit_form[productData][ean]'] = '123456';
-        $form['product_edit_form[productData][descriptions][1]'] = 'test description';
-        $form['product_edit_form[productData][price]'] = '10000';
-        $form['product_edit_form[productData][vat]']->select($this->getReference(VatDataFixture::VAT_ZERO)->getId());
-        $form['product_edit_form[productData][sellingFrom]'] = '1.1.1990';
-        $form['product_edit_form[productData][sellingTo]'] = '1.1.2000';
-        $form['product_edit_form[productData][stockQuantity]'] = '10';
-        $form['product_edit_form[productData][unit]']->select($this->getReference(UnitDataFixture::UNIT_CUBIC_METERS)->getId());
-        $form['product_edit_form[productData][availability]']->select($this->getReference(AvailabilityDataFixture::AVAILABILITY_IN_STOCK)->getId());
+        $form['product_edit_form[productData][basicInformationGroup][catnum]'] = '123456';
+        $form['product_edit_form[productData][basicInformationGroup][partno]'] = '123456';
+        $form['product_edit_form[productData][basicInformationGroup][ean]'] = '123456';
+        $form['product_edit_form[productData][descriptionsGroup][descriptions][1]'] = 'test description';
+        $form['product_edit_form[productData][pricesGroup][productCalculatedPricesGroup][price]'] = '10000';
+        $form['product_edit_form[productData][pricesGroup][vat]']->select($this->getReference(VatDataFixture::VAT_ZERO)->getId());
+        $form['product_edit_form[productData][displayAvailabilityGroup][sellingFrom]'] = '1.1.1990';
+        $form['product_edit_form[productData][displayAvailabilityGroup][sellingTo]'] = '1.1.2000';
+        $form['product_edit_form[productData][displayAvailabilityGroup][stockGroup][stockQuantity]'] = '10';
+        $form['product_edit_form[productData][displayAvailabilityGroup][unit]']->select($this->getReference(UnitDataFixture::UNIT_CUBIC_METERS)->getId());
+        $form['product_edit_form[productData][displayAvailabilityGroup][availability]']->select($this->getReference(AvailabilityDataFixture::AVAILABILITY_IN_STOCK)->getId());
     }
 
     /**

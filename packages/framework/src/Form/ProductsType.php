@@ -44,6 +44,8 @@ class ProductsType extends AbstractType
         $view->vars['sortable'] = $options['sortable'];
         $view->vars['allow_main_variants'] = $options['allow_main_variants'];
         $view->vars['allow_variants'] = $options['allow_variants'];
+        $view->vars['label_button_add'] = $options['label_button_add'];
+        $view->vars['top_info_title'] = $options['top_info_title'];
     }
 
     /**
@@ -61,6 +63,8 @@ class ProductsType extends AbstractType
             'sortable' => false,
             'allow_main_variants' => true,
             'allow_variants' => true,
+            'label_button_add' => t('Add product'),
+            'top_info_title' => '',
         ]);
     }
 

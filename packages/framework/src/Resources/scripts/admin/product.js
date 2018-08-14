@@ -4,8 +4,8 @@
     Shopsys.product = Shopsys.product || {};
 
     Shopsys.product.init = function () {
-        var usingStockSelection = $('#product_edit_form_productData_usingStock input[type="radio"]');
-        var $outOfStockActionSelection = $('select[name="product_edit_form[productData][outOfStockAction]"]');
+        var usingStockSelection = $('#product_edit_form_productData_displayAvailabilityGroup_usingStock input[type="radio"]');
+        var $outOfStockActionSelection = $('select[name="product_edit_form[productData][displayAvailabilityGroup][stockGroup][outOfStockAction]"]');
 
         usingStockSelection.change(function () {
             Shopsys.product.toggleIsUsingStock($(this).val() === '1');
@@ -28,11 +28,11 @@
 
     Shopsys.product.toggleIsUsingStock = function (isUsingStock) {
         $('.js-product-using-stock').toggle(isUsingStock);
-        $('.js-product-not-using-stock').toggle(!isUsingStock);
+        $('.js-product-not-using-stock').closest('.form-line').toggle(!isUsingStock);
     };
 
     Shopsys.product.toggleIsUsingAlternateAvailability = function (isUsingStockAndAlternateAvailability) {
-        $('.js-product-using-stock-and-alternate-availability').toggle(isUsingStockAndAlternateAvailability);
+        $('.js-product-using-stock-and-alternate-availability').closest('.form-line').toggle(isUsingStockAndAlternateAvailability);
     };
 
     Shopsys.product.initializeSideNavigation = function () {

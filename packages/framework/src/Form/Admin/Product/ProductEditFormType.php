@@ -5,17 +5,18 @@ namespace Shopsys\FrameworkBundle\Form\Admin\Product;
 use Shopsys\FrameworkBundle\Component\Plugin\PluginCrudExtensionFacade;
 use Shopsys\FrameworkBundle\Form\Admin\Product\Parameter\ProductParameterValueFormType;
 use Shopsys\FrameworkBundle\Form\Constraints\UniqueProductParameters;
+use Shopsys\FrameworkBundle\Form\DisplayOnlyType;
+use Shopsys\FrameworkBundle\Form\GroupType;
 use Shopsys\FrameworkBundle\Form\ImageUploadType;
+use Shopsys\FrameworkBundle\Form\ProductParameterValueType;
 use Shopsys\FrameworkBundle\Form\ProductsType;
 use Shopsys\FrameworkBundle\Form\Transformers\ProductParameterValueToProductParameterValuesLocalizedTransformer;
 use Shopsys\FrameworkBundle\Form\Transformers\RemoveDuplicatesFromArrayTransformer;
-use Shopsys\FrameworkBundle\Form\UrlListType;
 use Shopsys\FrameworkBundle\Form\ValidationGroup;
 use Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroupFacade;
 use Shopsys\FrameworkBundle\Model\Product\Product;
 use Shopsys\FrameworkBundle\Model\Product\ProductData;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\Form\Extension\Core\Type\MoneyType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -68,12 +69,80 @@ class ProductEditFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $editedProduct = $options['product'];
+        /* @var $editedProduct \Shopsys\FrameworkBundle\Model\Product\Product */
 
-        $builder
-            ->add('productData', ProductFormType::class, [
-                'product' => $editedProduct,
-                'inherit_data' => true,
+        $productDataGroup = $builder->create('productData', ProductFormType::class, [
+            'product' => $editedProduct,
+            'inherit_data' => true,
+            'render_form_row' => false,
+        ]);
+
+        // moved out of the productData to be rendered on the top of the form
+        $nameGroup = $productDataGroup->get('name');
+        $productDataGroup->remove('name');
+        $builder->add($nameGroup);
+
+        if ($editedProduct !== null && $editedProduct->isMainVariant()) {
+            $builder->add('variants', ProductsType::class, [
+                'required' => false,
+                'main_product' => $editedProduct,
+                'allow_main_variants' => false,
+                'allow_variants' => false,
+                'label_button_add' => t('Add variant'),
+                'label' => t('Variants'),
+                'top_info_title' => t('Product is main variant.'),
+                'attr' => [
+                    'class' => 'wrap-border',
+                ],
+            ]);
+        }
+
+        $builder->add($productDataGroup);
+
+        // seo group will be rendered after the parameters group in the form
+        $seoGroup = $builder->get('productData')->get('seoGroup');
+        $builder->get('productData')->remove('seoGroup');
+
+        $builderParametersGroup = $builder->create('parametersGroup', GroupType::class, [
+            'label' => t('Parameters'),
+            'is_group_container_to_render_as_the_last_one' => true,
+        ]);
+
+        $builderParametersGroup
+            ->add($builder->create('parameters', ProductParameterValueType::class, [
+                'required' => false,
+                'allow_add' => true,
+                'allow_delete' => true,
+                'entry_type' => ProductParameterValueFormType::class,
+                'constraints' => [
+                    new UniqueProductParameters([
+                        'message' => 'Each parameter can be used only once',
+                    ]),
+                ],
+                'error_bubbling' => false,
+                'render_form_row' => false,
             ])
+                ->addViewTransformer($this->productParameterValueToProductParameterValuesLocalizedTransformer));
+
+        $builder->add($builderParametersGroup);
+
+        $builder->add($seoGroup);
+
+        $pricesGroup = $builder->get('productData')->get('pricesGroup');
+
+        $productCalculatedPricesGroup = $pricesGroup->get('productCalculatedPricesGroup');
+
+        $productCalculatedPricesGroup
+            ->add('manualInputPricesByPricingGroupId', FormType::class, [
+                'compound' => true,
+                'render_form_row' => false,
+                'disabled' => $editedProduct !== null && $editedProduct->isMainVariant(),
+            ]);
+
+        $builderImageGroup = $builder->create('imageGroup', GroupType::class, [
+            'label' => t('Images'),
+        ]);
+        $builderImageGroup
             ->add('images', ImageUploadType::class, [
                 'required' => false,
                 'multiple' => true,
@@ -88,42 +157,37 @@ class ProductEditFormType extends AbstractType
                 ],
                 'entity' => $options['product'],
                 'info_text' => t('You can upload following formats: PNG, JPG, GIF'),
-            ])
-            ->add($builder->create('parameters', CollectionType::class, [
+                'label' => t('Images'),
+            ]);
+
+        $builder->add($builderImageGroup);
+
+        $builder->add(
+            $builder
+                ->create('accessories', ProductsType::class, [
                     'required' => false,
-                    'allow_add' => true,
-                    'allow_delete' => true,
-                    'entry_type' => ProductParameterValueFormType::class,
-                    'constraints' => [
-                        new UniqueProductParameters([
-                            'message' => 'Each parameter can be used only once',
-                        ]),
+                    'main_product' => $editedProduct,
+                    'sortable' => true,
+                    'label' => t('Accessories'),
+                    'attr' => [
+                        'class' => 'wrap-border',
                     ],
-                    'error_bubbling' => false,
                 ])
-                ->addViewTransformer($this->productParameterValueToProductParameterValuesLocalizedTransformer))
-            ->add('manualInputPricesByPricingGroupId', FormType::class, [
-                'compound' => true,
-            ])
-            ->add('urls', UrlListType::class, [
-                'route_name' => 'front_product_detail',
-                'entity_id' => $editedProduct !== null ? $editedProduct->getId() : null,
-            ])
-            ->add(
-                $builder
-                    ->create('accessories', ProductsType::class, [
-                        'required' => false,
-                        'main_product' => $editedProduct,
-                        'sortable' => true,
-                    ])
-                    ->addViewTransformer($this->removeDuplicatesTransformer)
-            )
-            ->add('save', SubmitType::class);
+                ->addViewTransformer($this->removeDuplicatesTransformer)
+        );
+
+        $builder->add('save', SubmitType::class);
 
         $this->pluginDataFormExtensionFacade->extendForm($builder, 'product', 'pluginData');
 
+        $manualInputPricesByPricingGroup = $builder
+            ->get('productData')
+            ->get('pricesGroup')
+            ->get('productCalculatedPricesGroup')
+            ->get('manualInputPricesByPricingGroupId');
+
         foreach ($this->pricingGroupFacade->getAll() as $pricingGroup) {
-            $builder->get('manualInputPricesByPricingGroupId')
+            $manualInputPricesByPricingGroup
                 ->add($pricingGroup->getId(), MoneyType::class, [
                     'currency' => false,
                     'scale' => 6,
@@ -140,20 +204,22 @@ class ProductEditFormType extends AbstractType
                             'groups' => [self::VALIDATION_GROUP_MANUAL_PRICE_CALCULATION],
                         ]),
                     ],
+                    'label' => $pricingGroup->getName(),
                 ]);
         }
 
         if ($editedProduct !== null && $editedProduct->isMainVariant()) {
-            $builder->add('variants', ProductsType::class, [
-                'required' => false,
-                'main_product' => $editedProduct,
-                'allow_main_variants' => false,
-                'allow_variants' => false,
+            $pricesGroup->remove('vat');
+            $pricesGroup->remove('priceCalculationType');
+            $pricesGroup->remove('productCalculatedPricesGroup');
+            $pricesGroup->add('disabledPricesOnMainVariant', DisplayOnlyType::class, [
+                'mapped' => false,
+                'required' => true,
+                'data' => t('You can set the prices on product detail of specific variant.'),
+                'attr' => [
+                    'class' => 'form-input-disabled form-line--disabled position__actual font-size-13',
+                ],
             ]);
-        }
-
-        if ($editedProduct !== null) {
-            $this->disableIrrelevantFields($builder, $editedProduct);
         }
     }
 
@@ -181,16 +247,5 @@ class ProductEditFormType extends AbstractType
                     return $validationGroups;
                 },
             ]);
-    }
-
-    /**
-     * @param \Symfony\Component\Form\FormBuilderInterface $builder
-     * @param \Shopsys\FrameworkBundle\Model\Product\Product $product
-     */
-    private function disableIrrelevantFields(FormBuilderInterface $builder, Product $product)
-    {
-        if ($product->isMainVariant()) {
-            $builder->get('manualInputPricesByPricingGroupId')->setDisabled(true);
-        }
     }
 }

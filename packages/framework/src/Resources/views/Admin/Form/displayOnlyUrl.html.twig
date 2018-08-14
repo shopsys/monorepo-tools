@@ -1,0 +1,9 @@
+{% block display_only_url_widget %}
+    <div class="form-line__side">
+        <div class="form-line__item form-line__item--text">
+            <a href="{{ url( data.route_name, {id: data.id}) }}" target="_blank">
+                <i class="svg svg-forward-page in-icon in-icon--link ml5 mr5"></i>{{ data.name }}
+            </a>
+        </div>
+    </div>
+{% endblock display_only_url_widget %}

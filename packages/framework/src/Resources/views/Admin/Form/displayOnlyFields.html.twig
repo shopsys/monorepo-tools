@@ -1,12 +1,16 @@
 {% block display_only_row %}
-    <div class="form-line">
-        <div class="form-line__label">
-            {{ form.vars.label }}:
-        </div>
-        <div class="form-line__side">
-            <div class="form-line__item form-line__item--text">
-                {{ form.vars.data }}
+    <div class="form-line {{ attr.class }}">
+        {% if label is not empty %}
+            <div class="form-line__label">
+                {{ label }}:
             </div>
-        </div>
+            <div class="form-line__side">
+        {% endif %}
+                <div class="form-line__item form-line__item--text">
+                    {{ data }}
+                </div>
+        {% if label is not empty %}
+            </div>
+        {% endif %}
     </div>
 {% endblock %}
