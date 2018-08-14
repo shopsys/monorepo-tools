@@ -4,7 +4,6 @@ namespace Shopsys\FrameworkBundle\DataFixtures\Demo;
 
 use Doctrine\Common\Persistence\ObjectManager;
 use Shopsys\FrameworkBundle\Component\DataFixture\AbstractReferenceFixture;
-use Shopsys\FrameworkBundle\Model\Administrator\AdministratorDataFactoryInterface;
 use Shopsys\FrameworkBundle\Model\Administrator\AdministratorFacade;
 
 class AdministratorDataFixture extends AbstractReferenceFixture
@@ -17,15 +16,9 @@ class AdministratorDataFixture extends AbstractReferenceFixture
      */
     private $administratorFacade;
 
-    /**
-     * @var \Shopsys\FrameworkBundle\Model\Administrator\AdministratorDataFactoryInterface
-     */
-    private $administratorDataFactory;
-
-    public function __construct(AdministratorFacade $administratorFacade, AdministratorDataFactoryInterface $administratorDataFactory)
+    public function __construct(AdministratorFacade $administratorFacade)
     {
         $this->administratorFacade = $administratorFacade;
-        $this->administratorDataFactory = $administratorDataFactory;
     }
 
     /**

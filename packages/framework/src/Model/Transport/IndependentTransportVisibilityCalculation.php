@@ -7,20 +7,12 @@ use Shopsys\FrameworkBundle\Component\Domain\Domain;
 class IndependentTransportVisibilityCalculation
 {
     /**
-     * @var \Shopsys\FrameworkBundle\Model\Transport\TransportRepository
-     */
-    private $transportRepository;
-
-    /**
      * @var \Shopsys\FrameworkBundle\Component\Domain\Domain
      */
     private $domain;
 
-    public function __construct(
-        TransportRepository $transportRepository,
-        Domain $domain
-    ) {
-        $this->transportRepository = $transportRepository;
+    public function __construct(Domain $domain)
+    {
         $this->domain = $domain;
     }
 

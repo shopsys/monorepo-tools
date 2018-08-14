@@ -13,20 +13,6 @@ class EntityNameResolverTest extends TestCase
     const STRING_WITH_SPACES_ON_BORDERS = ' string ';
     const STRING_WITHOUT_SPACES_ON_BORDERS = 'string';
 
-    /**
-     * @var \Shopsys\FrameworkBundle\Component\EntityExtension\EntityNameResolver
-     */
-    private $entityNameResolver;
-
-    protected function setUp(): void
-    {
-        $entityExtensionMap = [
-            self::PARENT_ENTITY_FQCN => self::CUSTOM_ENTITY_FQCN,
-        ];
-        $this->entityNameResolver = new EntityNameResolver($entityExtensionMap);
-        parent::setUp();
-    }
-
     public function resolvingProvider(): array
     {
         return [

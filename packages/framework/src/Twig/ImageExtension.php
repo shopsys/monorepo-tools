@@ -7,7 +7,6 @@ use Shopsys\FrameworkBundle\Component\Image\ImageFacade;
 use Shopsys\FrameworkBundle\Component\Image\ImageLocator;
 use Shopsys\FrameworkBundle\Component\Utils\Utils;
 use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
-use Symfony\Component\DependencyInjection\ContainerInterface;
 use Twig_Extension;
 use Twig_SimpleFunction;
 
@@ -19,11 +18,6 @@ class ImageExtension extends Twig_Extension
      * @var string
      */
     private $frontDesignImageUrlPrefix;
-
-    /**
-     * @var \Symfony\Component\DependencyInjection\ContainerInterface
-     */
-    private $container;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\Domain\Domain
@@ -47,21 +41,18 @@ class ImageExtension extends Twig_Extension
 
     /**
      * @param string $frontDesignImageUrlPrefix
-     * @param \Symfony\Component\DependencyInjection\ContainerInterface $container
      * @param \Shopsys\FrameworkBundle\Component\Domain\Domain $domain
      * @param \Shopsys\FrameworkBundle\Component\Image\ImageLocator $imageLocator
      * @param \Shopsys\FrameworkBundle\Component\Image\ImageFacade $imageFacade
      */
     public function __construct(
         $frontDesignImageUrlPrefix,
-        ContainerInterface $container,
         Domain $domain,
         ImageLocator $imageLocator,
         ImageFacade $imageFacade,
         EngineInterface $templating
     ) {
         $this->frontDesignImageUrlPrefix = $frontDesignImageUrlPrefix;
-        $this->container = $container;
         $this->domain = $domain;
         $this->imageLocator = $imageLocator;
         $this->imageFacade = $imageFacade;

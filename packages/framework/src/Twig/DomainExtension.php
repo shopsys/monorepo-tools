@@ -5,7 +5,6 @@ namespace Shopsys\FrameworkBundle\Twig;
 use Shopsys\FrameworkBundle\Component\Domain\Domain;
 use Shopsys\FrameworkBundle\Component\Domain\DomainFacade;
 use Symfony\Component\Asset\Packages;
-use Symfony\Component\DependencyInjection\ContainerInterface;
 use Twig_SimpleFunction;
 
 class DomainExtension extends \Twig_Extension
@@ -14,11 +13,6 @@ class DomainExtension extends \Twig_Extension
      * @var string
      */
     private $domainImagesUrlPrefix;
-
-    /**
-     * @var \Symfony\Component\DependencyInjection\ContainerInterface
-     */
-    private $container;
 
     /**
      * @var \Symfony\Component\Asset\Packages
@@ -37,13 +31,11 @@ class DomainExtension extends \Twig_Extension
 
     public function __construct(
         $domainImagesUrlPrefix,
-        ContainerInterface $container,
         Packages $assetPackages,
         Domain $domain,
         DomainFacade $domainFacade
     ) {
         $this->domainImagesUrlPrefix = $domainImagesUrlPrefix;
-        $this->container = $container;
         $this->assetPackages = $assetPackages;
         $this->domain = $domain;
         $this->domainFacade = $domainFacade;

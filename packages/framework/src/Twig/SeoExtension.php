@@ -4,16 +4,10 @@ namespace Shopsys\FrameworkBundle\Twig;
 
 use Shopsys\FrameworkBundle\Component\Domain\Domain;
 use Shopsys\FrameworkBundle\Model\Seo\SeoSettingFacade;
-use Symfony\Component\DependencyInjection\ContainerInterface;
 use Twig_SimpleFunction;
 
 class SeoExtension extends \Twig_Extension
 {
-    /**
-     * @var \Symfony\Component\DependencyInjection\ContainerInterface
-     */
-    private $container;
-
     /**
      * @var \Shopsys\FrameworkBundle\Model\Seo\SeoSettingFacade
      */
@@ -25,16 +19,13 @@ class SeoExtension extends \Twig_Extension
     private $domain;
 
     /**
-     * @param \Symfony\Component\DependencyInjection\ContainerInterface $container
      * @param \Shopsys\FrameworkBundle\Model\Seo\SeoSettingFacade $seoSettingFacade
      * @param \Shopsys\FrameworkBundle\Component\Domain\Domain $domain
      */
     public function __construct(
-        ContainerInterface $container,
         SeoSettingFacade $seoSettingFacade,
         Domain $domain
     ) {
-        $this->container = $container;
         $this->seoSettingFacade = $seoSettingFacade;
         $this->domain = $domain;
     }

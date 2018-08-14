@@ -2,7 +2,6 @@
 
 namespace Shopsys\ProductFeed\HeurekaBundle\DataFixtures;
 
-use Shopsys\FrameworkBundle\Model\Product\ProductFacade;
 use Shopsys\Plugin\PluginDataFixtureInterface;
 use Shopsys\ProductFeed\HeurekaBundle\Model\Product\HeurekaProductDomainDataFactoryInterface;
 use Shopsys\ProductFeed\HeurekaBundle\Model\Product\HeurekaProductDomainFacade;
@@ -23,21 +22,14 @@ class HeurekaProductDataFixture implements PluginDataFixtureInterface
     private $heurekaProductDomainFacade;
 
     /**
-     * @param \Shopsys\FrameworkBundle\Model\Product\ProductFacade $productFacade
-     */
-    private $productFacade;
-
-    /**
      * @var \Shopsys\ProductFeed\HeurekaBundle\Model\Product\HeurekaProductDomainDataFactoryInterface
      */
     private $heurekaProductDomainDataFactory;
 
     public function __construct(
         HeurekaProductDomainFacade $heurekaProductDomainFacade,
-        ProductFacade $productFacade,
         HeurekaProductDomainDataFactoryInterface $heurekaProductDomainDataFactory
     ) {
-        $this->productFacade = $productFacade;
         $this->heurekaProductDomainFacade = $heurekaProductDomainFacade;
         $this->heurekaProductDomainDataFactory = $heurekaProductDomainDataFactory;
     }
