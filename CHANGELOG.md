@@ -65,6 +65,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - [#260 - JS validation: dynamically added form inputs are now validated](https://github.com/shopsys/shopsys/pull/260)
 - [#397 - classes excluded from ObjectIsCreatedByFactorySniff rule are fixed](https://github.com/shopsys/shopsys/pull/397)
 
+### [shopsys/monorepo-tools]
+#### Fixed
+- [#399 - monorepo-tools: Handle rewriting of empty commits](https://github.com/shopsys/shopsys/pull/399) [@drekbour]
+
 ### [shopsys/project-base]
 #### Fixed
 - [#359 - fix wrong variable usage in url to reset product filter](https://github.com/shopsys/shopsys/pull/359)
@@ -1393,3 +1397,4 @@ That's why is this section formatted differently.
 [@DavidKuna]: https://github.com/DavidKuna
 [@lukaso]: https://github.com/lukaso
 [@TomasVotruba]: https://github.com/TomasVotruba
+[@drekbour]: https://github.com/drekbour
