@@ -17,6 +17,6 @@ echo "Rewriting history into a subdirectory '$SUBDIRECTORY'"
 # The tags are rewritten as well as commits (the "cat" command will use original name without any change)
 SUBDIRECTORY_SED=${SUBDIRECTORY//-/\\-} TAB=$'\t' git filter-branch \
     --index-filter '
-    git ls-files -s | sed "s-$TAB\"*-&$SUBDIRECTORY_SED/-" | GIT_INDEX_FILE=$GIT_INDEX_FILE.new git update-index --index-info && mv $GIT_INDEX_FILE.new $GIT_INDEX_FILE' \
+    git ls-files -s | sed "s-$TAB\"*-&$SUBDIRECTORY_SED/-" | GIT_INDEX_FILE=$GIT_INDEX_FILE.new git update-index --index-info && if [ -f "$GIT_INDEX_FILE.new" ]; then mv "$GIT_INDEX_FILE.new" "$GIT_INDEX_FILE"; fi' \
     --tag-name-filter 'cat' \
     -- $REV_LIST_PARAMS
