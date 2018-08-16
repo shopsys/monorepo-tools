@@ -631,6 +631,10 @@ services:
 
     FM\ElfinderBundle\Configuration\ElFinderConfigurationReader: '@fm_elfinder.configurator.default'
 
+    Shopsys\FrameworkBundle\Command\CheckMicroservicesCommand:
+        arguments:
+            $microserviceProductSearchClient: '@shopsys.microservice_client.product_search'
+
     Shopsys\FrameworkBundle\Model\PersonalData\PersonalDataAccessRequestFactoryInterface:
         alias: Shopsys\FrameworkBundle\Model\PersonalData\PersonalDataAccessRequestFactory
 

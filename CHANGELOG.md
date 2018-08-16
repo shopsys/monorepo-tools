@@ -85,6 +85,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
         - standards-packages
         - standards-fix-packages
         - standards-fix-packages-diff
+    - availability of microservices is checked during the build
 
 #### Fixed
 - [#359 - fix wrong variable usage in url to reset product filter](https://github.com/shopsys/shopsys/pull/359)
