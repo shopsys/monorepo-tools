@@ -10,3 +10,7 @@ services:
     Shopsys\ShopBundle\Form\Admin\ArticleFormTypeExtension:
         tags:
             - { name: form.type_extension, extended_type: Shopsys\FrameworkBundle\Form\Admin\Article\ArticleFormType }
+
+    Shopsys\ShopBundle\Form\Admin\CategoryFormTypeExtension:
+        tags:
+            - { name: form.type_extension, extended_type: Shopsys\FrameworkBundle\Form\Admin\Category\CategoryFormType }

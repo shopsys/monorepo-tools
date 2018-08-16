@@ -32,3 +32,5 @@ services:
     Shopsys\ShopBundle\Model\Category\CurrentCategoryResolver: ~
 
     League\Flysystem\FilesystemInterface: '@main_filesystem'
+
+    Shopsys\FrameworkBundle\Model\Category\CategoryDataFactoryInterface: '@Shopsys\ShopBundle\Model\Category\CategoryDataFactory'

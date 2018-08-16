@@ -108,6 +108,9 @@ DiscriminatorMap must always contain descendants' FQN because LoadORMMetadataSub
 ## How can I extend an entity?
 
 * Create a new entity in your `src/Shopsys/ShopBundle/Model` directory that extends already existing framework entity
+  * there are entities that are already prepared out of the box
+    * `Article`
+    * `Category`
   * keep entity and table annotations
   * you can add new properties and use annotations to configure ORM
 * Add information about the entity extension into the container configuration

@@ -2,9 +2,9 @@
 
 namespace Tests\ShopBundle\Database\Model\Category;
 
-use Shopsys\FrameworkBundle\Model\Category\Category;
-use Shopsys\FrameworkBundle\Model\Category\CategoryDataFactory;
+use Shopsys\FrameworkBundle\Model\Category\CategoryDataFactoryInterface;
 use Shopsys\FrameworkBundle\Model\Category\CategoryFactory;
+use Shopsys\ShopBundle\Model\Category\Category;
 use Tests\ShopBundle\Test\DatabaseTestCase;
 
 class CategoryDomainTest extends DatabaseTestCase
@@ -16,7 +16,7 @@ class CategoryDomainTest extends DatabaseTestCase
     const DEMONSTRATIVE_SEO_H1 = 'Demonstrative seo H1';
 
     /**
-     * @var \Shopsys\FrameworkBundle\Model\Category\CategoryDataFactory
+     * @var \Shopsys\ShopBundle\Model\Category\CategoryDataFactory
      */
     private $categoryDataFactory;
 
@@ -33,7 +33,7 @@ class CategoryDomainTest extends DatabaseTestCase
     public function setUp()
     {
         parent::setUp();
-        $this->categoryDataFactory = $this->getContainer()->get(CategoryDataFactory::class);
+        $this->categoryDataFactory = $this->getContainer()->get(CategoryDataFactoryInterface::class);
         $this->categoryFactory = $this->getContainer()->get(CategoryFactory::class);
         $this->em = $this->getEntityManager();
     }
@@ -126,8 +126,8 @@ class CategoryDomainTest extends DatabaseTestCase
     }
 
     /**
-     * @param \Shopsys\FrameworkBundle\Model\Category\Category $category
-     * @return \Shopsys\FrameworkBundle\Model\Category\Category
+     * @param \Shopsys\ShopBundle\Model\Category\Category $category
+     * @return \Shopsys\ShopBundle\Model\Category\Category
      */
     private function getRefreshedCategoryFromDatabase(Category $category)
     {

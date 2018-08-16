@@ -19,3 +19,4 @@ parameters:
     container.autowiring.strict_mode: true
     shopsys.entity_extension.map:
         Shopsys\FrameworkBundle\Model\Article\Article: Shopsys\ShopBundle\Model\Article\Article
+        Shopsys\FrameworkBundle\Model\Category\Category: Shopsys\ShopBundle\Model\Category\Category
