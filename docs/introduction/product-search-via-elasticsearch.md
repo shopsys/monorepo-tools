@@ -67,7 +67,7 @@ When using docker installation, Elasticsearch API is available on the address [h
 If you wish to reconfigure the indexes setting, simply change the `%shopsys.framework.elasticsearch_sources_dir%` parameter
 to your custom directory and put your own JSON configurations in it using the same naming pattern (`<domain_id>.json`).
 
-If you need to change the data that are exported into Elasticsearch, overwrite appropriate methods in `ElasticsearchProductRepository` and `ElasticsearchProductTranslator` classes.
+If you need to change the data that are exported into Elasticsearch, overwrite appropriate methods in `ElasticsearchProductRepository` and `ElasticsearchProductDataConverter` classes.
 
 You can also change the searching behavior by overwriting `ElasticsearchSearchClient` class.
 
