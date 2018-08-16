@@ -109,6 +109,7 @@ DiscriminatorMap must always contain descendants' FQN because LoadORMMetadataSub
 
 * Create a new entity in your `src/Shopsys/ShopBundle/Model` directory that extends already existing framework entity
   * there are entities that are already prepared out of the box
+    * `Administrator`
     * `Article`
     * `Category`
   * keep entity and table annotations

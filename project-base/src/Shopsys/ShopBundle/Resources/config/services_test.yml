@@ -32,4 +32,6 @@ services:
 
     Shopsys\FrameworkBundle\Model\Article\ArticleDataFactoryInterface: '@Shopsys\ShopBundle\Model\Article\ArticleDataFactory'
 
+    Shopsys\FrameworkBundle\Model\Administrator\AdministratorDataFactoryInterface: '@Shopsys\ShopBundle\Model\Administrator\AdministratorDataFactory'
+
     Shopsys\FrameworkBundle\Model\Category\CategoryDataFactoryInterface: '@Shopsys\ShopBundle\Model\Category\CategoryDataFactory'

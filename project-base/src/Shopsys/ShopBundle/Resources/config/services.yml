@@ -33,4 +33,6 @@ services:
 
     League\Flysystem\FilesystemInterface: '@main_filesystem'
 
+    Shopsys\FrameworkBundle\Model\Administrator\AdministratorDataFactoryInterface: '@Shopsys\ShopBundle\Model\Administrator\AdministratorDataFactory'
+
     Shopsys\FrameworkBundle\Model\Category\CategoryDataFactoryInterface: '@Shopsys\ShopBundle\Model\Category\CategoryDataFactory'
