@@ -18,3 +18,7 @@ services:
     Shopsys\ShopBundle\Form\Admin\CategoryFormTypeExtension:
         tags:
             - { name: form.type_extension, extended_type: Shopsys\FrameworkBundle\Form\Admin\Category\CategoryFormType }
+
+    Shopsys\ShopBundle\Form\Admin\TransportFormTypeExtension:
+        tags:
+            - { name: form.type_extension, extended_type: Shopsys\FrameworkBundle\Form\Admin\Transport\TransportFormType }

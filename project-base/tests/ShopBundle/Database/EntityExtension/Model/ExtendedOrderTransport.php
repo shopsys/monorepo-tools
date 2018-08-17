@@ -7,7 +7,7 @@ use Shopsys\FrameworkBundle\Model\Order\Item\OrderItemData;
 use Shopsys\FrameworkBundle\Model\Order\Item\OrderTransportData;
 use Shopsys\FrameworkBundle\Model\Order\Order;
 use Shopsys\FrameworkBundle\Model\Pricing\Price;
-use Shopsys\FrameworkBundle\Model\Transport\Transport;
+use Shopsys\ShopBundle\Model\Transport\Transport;
 
 /**
  * @ORM\Entity
@@ -20,9 +20,9 @@ use Shopsys\FrameworkBundle\Model\Transport\Transport;
 class ExtendedOrderTransport extends ExtendedOrderItem
 {
     /**
-     * @var \Shopsys\FrameworkBundle\Model\Transport\Transport
+     * @var \Shopsys\ShopBundle\Model\Transport\Transport
      *
-     * @ORM\ManyToOne(targetEntity="Shopsys\FrameworkBundle\Model\Transport\Transport")
+     * @ORM\ManyToOne(targetEntity="Shopsys\ShopBundle\Model\Transport\Transport")
      * @ORM\JoinColumn(nullable=true)
      */
     protected $transport;

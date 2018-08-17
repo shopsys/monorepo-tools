@@ -17,7 +17,7 @@ use Shopsys\FrameworkBundle\Model\Product\Availability\AvailabilityData;
 use Shopsys\FrameworkBundle\Model\Product\Product;
 use Shopsys\FrameworkBundle\Model\Product\ProductDataFactory;
 use Shopsys\FrameworkBundle\Model\Product\ProductFacade;
-use Shopsys\FrameworkBundle\Model\Transport\TransportDataFactory;
+use Shopsys\FrameworkBundle\Model\Transport\TransportDataFactoryInterface;
 use Shopsys\FrameworkBundle\Model\Transport\TransportFacade;
 use Symfony\Component\HttpKernel\Event\FilterResponseEvent;
 use Tests\ShopBundle\Test\DatabaseTestCase;
@@ -106,8 +106,8 @@ class InputPriceRecalculationSchedulerTest extends DatabaseTestCase
         /* @var $transportFacade \Shopsys\FrameworkBundle\Model\Transport\TransportFacade */
         $paymentDataFactory = $this->getContainer()->get(PaymentDataFactory::class);
         /* @var $paymentDataFactory \Shopsys\FrameworkBundle\Model\Payment\PaymentDataFactory */
-        $transportDataFactory = $this->getContainer()->get(TransportDataFactory::class);
-        /* @var $transportDataFactory \Shopsys\FrameworkBundle\Model\Transport\TransportDataFactory */
+        $transportDataFactory = $this->getContainer()->get(TransportDataFactoryInterface::class);
+        /* @var $transportDataFactory \Shopsys\ShopBundle\Model\Transport\TransportDataFactory */
 
         $setting->set(PricingSetting::INPUT_PRICE_TYPE, PricingSetting::INPUT_PRICE_TYPE_WITH_VAT);
 
@@ -142,7 +142,7 @@ class InputPriceRecalculationSchedulerTest extends DatabaseTestCase
         $transportData->pricesByCurrencyId = [$currency1->getId() => $inputPriceWithVat, $currency2->getId() => $inputPriceWithVat];
         $transportData->vat = $vat;
         $transport = $transportFacade->create($transportData);
-        /* @var $transport \Shopsys\FrameworkBundle\Model\Transport\Transport */
+        /* @var $transport \Shopsys\ShopBundle\Model\Transport\Transport */
         $em->flush();
 
         $filterResponseEventMock = $this->getMockBuilder(FilterResponseEvent::class)
@@ -184,8 +184,8 @@ class InputPriceRecalculationSchedulerTest extends DatabaseTestCase
         /* @var $transportFacade \Shopsys\FrameworkBundle\Model\Transport\TransportFacade */
         $paymentDataFactory = $this->getContainer()->get(PaymentDataFactory::class);
         /* @var $paymentDataFactory \Shopsys\FrameworkBundle\Model\Payment\PaymentDataFactory */
-        $transportDataFactory = $this->getContainer()->get(TransportDataFactory::class);
-        /* @var $transportDataFactory \Shopsys\FrameworkBundle\Model\Transport\TransportDataFactory */
+        $transportDataFactory = $this->getContainer()->get(TransportDataFactoryInterface::class);
+        /* @var $transportDataFactory \Shopsys\ShopBundle\Model\Transport\TransportDataFactory */
 
         $setting->set(PricingSetting::INPUT_PRICE_TYPE, PricingSetting::INPUT_PRICE_TYPE_WITHOUT_VAT);
 
@@ -219,7 +219,7 @@ class InputPriceRecalculationSchedulerTest extends DatabaseTestCase
         $transportData->pricesByCurrencyId = [$currency1->getId() => $inputPriceWithoutVat, $currency2->getId() => $inputPriceWithoutVat];
         $transportData->vat = $vat;
         $transport = $transportFacade->create($transportData);
-        /* @var $transport \Shopsys\FrameworkBundle\Model\Transport\Transport */
+        /* @var $transport \Shopsys\ShopBundle\Model\Transport\Transport */
 
         $em->flush();
 

@@ -6,9 +6,9 @@ use Shopsys\FrameworkBundle\Model\Payment\Payment;
 use Shopsys\FrameworkBundle\Model\Payment\PaymentDataFactory;
 use Shopsys\FrameworkBundle\Model\Pricing\Vat\Vat;
 use Shopsys\FrameworkBundle\Model\Pricing\Vat\VatData;
-use Shopsys\FrameworkBundle\Model\Transport\Transport;
-use Shopsys\FrameworkBundle\Model\Transport\TransportDataFactory;
+use Shopsys\FrameworkBundle\Model\Transport\TransportDataFactoryInterface;
 use Shopsys\FrameworkBundle\Model\Transport\TransportFacade;
+use Shopsys\ShopBundle\Model\Transport\Transport;
 use Tests\ShopBundle\Test\DatabaseTestCase;
 
 class PaymentTest extends DatabaseTestCase
@@ -17,8 +17,8 @@ class PaymentTest extends DatabaseTestCase
     {
         $paymentDataFactory = $this->getContainer()->get(PaymentDataFactory::class);
         /** @var \Shopsys\FrameworkBundle\Model\Payment\PaymentDataFactory $paymentDataFactory */
-        $transportDataFactory = $this->getContainer()->get(TransportDataFactory::class);
-        /** @var \Shopsys\FrameworkBundle\Model\Transport\TransportDataFactory $transportDataFactory */
+        $transportDataFactory = $this->getContainer()->get(TransportDataFactoryInterface::class);
+        /** @var \Shopsys\ShopBundle\Model\Transport\TransportDataFactory $transportDataFactory */
         $em = $this->getEntityManager();
 
         $vatData = new VatData();
