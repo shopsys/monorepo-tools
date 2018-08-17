@@ -37,6 +37,8 @@ services:
 
     Shopsys\FrameworkBundle\Model\Category\CategoryDataFactoryInterface: '@Shopsys\ShopBundle\Model\Category\CategoryDataFactory'
 
+    Shopsys\FrameworkBundle\Model\Customer\UserDataFactoryInterface: '@Shopsys\ShopBundle\Model\Customer\UserDataFactory'
+
     Shopsys\FrameworkBundle\Model\Transport\TransportDataFactoryInterface: '@Shopsys\ShopBundle\Model\Transport\TransportDataFactory'
 
     Shopsys\FrameworkBundle\Model\Payment\PaymentDataFactoryInterface: '@Shopsys\ShopBundle\Model\Payment\PaymentDataFactory'

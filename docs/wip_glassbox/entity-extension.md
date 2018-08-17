@@ -116,6 +116,7 @@ DiscriminatorMap must always contain descendants' FQN because LoadORMMetadataSub
     * `Payment`
     * `Product`
     * `Transport`
+    * `User`
   * keep entity and table annotations
   * you can add new properties and use annotations to configure ORM
 * Add information about the entity extension into the container configuration

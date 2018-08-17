@@ -21,6 +21,7 @@ parameters:
         Shopsys\FrameworkBundle\Model\Article\Article: Shopsys\ShopBundle\Model\Article\Article
         Shopsys\FrameworkBundle\Model\Administrator\Administrator: Shopsys\ShopBundle\Model\Administrator\Administrator
         Shopsys\FrameworkBundle\Model\Category\Category: Shopsys\ShopBundle\Model\Category\Category
+        Shopsys\FrameworkBundle\Model\Customer\User: Shopsys\ShopBundle\Model\Customer\User
         Shopsys\FrameworkBundle\Model\Transport\Transport: Shopsys\ShopBundle\Model\Transport\Transport
         Shopsys\FrameworkBundle\Model\Payment\Payment: Shopsys\ShopBundle\Model\Payment\Payment
         Shopsys\FrameworkBundle\Model\Product\Product: Shopsys\ShopBundle\Model\Product\Product

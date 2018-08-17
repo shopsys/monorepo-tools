@@ -345,7 +345,7 @@ class RouteConfigCustomization
             })
             ->customizeByRouteName('front_registration_set_new_password', function (RouteConfig $config) {
                 $customer = $this->getPersistentReference(UserDataFixture::USER_WITH_RESET_PASSWORD_HASH);
-                /* @var $customer \Shopsys\FrameworkBundle\Model\Customer\User */
+                /* @var $customer \Shopsys\ShopBundle\Model\Customer\User */
 
                 $config->changeDefaultRequestDataSet('See new password page for customer with reset password hash.')
                     ->setParameter('email', $customer->getEmail())

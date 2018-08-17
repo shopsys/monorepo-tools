@@ -23,6 +23,10 @@ services:
         tags:
             - { name: form.type_extension, extended_type: Shopsys\FrameworkBundle\Form\Admin\Category\CategoryFormType }
 
+    Shopsys\ShopBundle\Form\Admin\UserFormTypeExtension:
+        tags:
+            - { name: form.type_extension, extended_type: Shopsys\FrameworkBundle\Form\Admin\Customer\UserFormType }
+
     Shopsys\ShopBundle\Form\Admin\TransportFormTypeExtension:
         tags:
             - { name: form.type_extension, extended_type: Shopsys\FrameworkBundle\Form\Admin\Transport\TransportFormType }
