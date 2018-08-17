@@ -2,9 +2,9 @@
 
 namespace Tests\ShopBundle\Database\Model\Product\Brand;
 
-use Shopsys\FrameworkBundle\Model\Product\Brand\Brand;
-use Shopsys\FrameworkBundle\Model\Product\Brand\BrandDataFactory;
+use Shopsys\FrameworkBundle\Model\Product\Brand\BrandDataFactoryInterface;
 use Shopsys\FrameworkBundle\Model\Product\Brand\BrandFactory;
+use Shopsys\ShopBundle\Model\Product\Brand\Brand;
 use Tests\ShopBundle\Test\DatabaseTestCase;
 
 class BrandDomainTest extends DatabaseTestCase
@@ -15,7 +15,7 @@ class BrandDomainTest extends DatabaseTestCase
     const DEMONSTRATIVE_SEO_H1 = 'Demonstrative seo h1';
 
     /**
-     * @var \Shopsys\FrameworkBundle\Model\Product\Brand\BrandDataFactory
+     * @var \Shopsys\ShopBundle\Model\Product\Brand\BrandDataFactory
      */
     private $brandDataFactory;
 
@@ -32,7 +32,7 @@ class BrandDomainTest extends DatabaseTestCase
     public function setUp()
     {
         parent::setUp();
-        $this->brandDataFactory = $this->getContainer()->get(BrandDataFactory::class);
+        $this->brandDataFactory = $this->getContainer()->get(BrandDataFactoryInterface::class);
         $this->brandFactory = $this->getContainer()->get(BrandFactory::class);
         $this->em = $this->getEntityManager();
     }
@@ -76,8 +76,8 @@ class BrandDomainTest extends DatabaseTestCase
     }
 
     /**
-     * @param \Shopsys\FrameworkBundle\Model\Product\Brand\Brand $brand
-     * @return \Shopsys\FrameworkBundle\Model\Product\Brand\Brand
+     * @param \Shopsys\ShopBundle\Model\Product\Brand\Brand $brand
+     * @return \Shopsys\ShopBundle\Model\Product\Brand\Brand
      */
     private function getRefreshedBrandFromDatabase(Brand $brand)
     {

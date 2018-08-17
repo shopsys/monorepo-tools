@@ -12,7 +12,9 @@ use Shopsys\FrameworkBundle\Model\Order\Item\OrderPayment;
 use Shopsys\FrameworkBundle\Model\Order\Item\OrderProduct;
 use Shopsys\FrameworkBundle\Model\Order\Item\OrderTransport;
 use Shopsys\FrameworkBundle\Model\Payment\Payment;
+use Shopsys\FrameworkBundle\Model\Product\Brand\Brand;
 use Shopsys\ShopBundle\Model\Category\Category;
+use Shopsys\ShopBundle\Model\Product\Brand\Brand as ExtendedBrand;
 use Shopsys\ShopBundle\Model\Product\Product;
 use Shopsys\ShopBundle\Model\Transport\Transport;
 use Tests\ShopBundle\Database\EntityExtension\Model\CategoryManyToManyBidirectionalEntity;
@@ -64,6 +66,7 @@ class EntityExtensionTest extends DatabaseTestCase
             OrderProduct::class => ExtendedOrderProduct::class,
             OrderPayment::class => ExtendedOrderPayment::class,
             OrderTransport::class => ExtendedOrderTransport::class,
+            Brand::class => ExtendedBrand::class,
         ];
 
         $newEntities = [

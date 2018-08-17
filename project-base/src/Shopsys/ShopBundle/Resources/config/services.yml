@@ -13,7 +13,7 @@ services:
         tags: ['controller.service_arguments']
 
     Shopsys\ShopBundle\Model\:
-        resource: '../../Model/*/*{Facade,Factory}.php'
+        resource: '../../Model/**/*{Facade,Factory}.php'
 
     League\Flysystem\MountManager:
         arguments:
@@ -40,3 +40,5 @@ services:
     Shopsys\FrameworkBundle\Model\Transport\TransportDataFactoryInterface: '@Shopsys\ShopBundle\Model\Transport\TransportDataFactory'
 
     Shopsys\FrameworkBundle\Model\Product\ProductDataFactoryInterface: '@Shopsys\ShopBundle\Model\Product\ProductDataFactory'
+
+    Shopsys\FrameworkBundle\Model\Product\Brand\BrandDataFactoryInterface: '@Shopsys\ShopBundle\Model\Product\Brand\BrandDataFactory'

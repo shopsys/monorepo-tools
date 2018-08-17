@@ -15,6 +15,10 @@ services:
         tags:
             - { name: form.type_extension, extended_type: Shopsys\FrameworkBundle\Form\Admin\Administrator\AdministratorFormType }
 
+    Shopsys\ShopBundle\Form\Admin\BrandFormTypeExtension:
+        tags:
+            - { name: form.type_extension, extended_type: Shopsys\FrameworkBundle\Form\Admin\Product\Brand\BrandFormType }
+
     Shopsys\ShopBundle\Form\Admin\CategoryFormTypeExtension:
         tags:
             - { name: form.type_extension, extended_type: Shopsys\FrameworkBundle\Form\Admin\Category\CategoryFormType }
