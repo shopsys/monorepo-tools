@@ -39,6 +39,12 @@ services:
 
     Shopsys\FrameworkBundle\Model\Customer\UserDataFactoryInterface: '@Shopsys\ShopBundle\Model\Customer\UserDataFactory'
 
+    Shopsys\FrameworkBundle\Model\Order\OrderDataFactoryInterface: '@Shopsys\ShopBundle\Model\Order\OrderDataFactory'
+
+    Shopsys\ShopBundle\Model\Order\OrderDataMapper: ~
+
+    Shopsys\FrameworkBundle\Model\Order\OrderDataMapper: '@Shopsys\ShopBundle\Model\Order\OrderDataMapper'
+
     Shopsys\FrameworkBundle\Model\Transport\TransportDataFactoryInterface: '@Shopsys\ShopBundle\Model\Transport\TransportDataFactory'
 
     Shopsys\FrameworkBundle\Model\Payment\PaymentDataFactoryInterface: '@Shopsys\ShopBundle\Model\Payment\PaymentDataFactory'

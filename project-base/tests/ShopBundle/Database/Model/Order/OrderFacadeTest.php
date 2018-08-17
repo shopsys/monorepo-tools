@@ -10,14 +10,14 @@ use Shopsys\FrameworkBundle\Model\Cart\CartFacade;
 use Shopsys\FrameworkBundle\Model\Cart\CartService;
 use Shopsys\FrameworkBundle\Model\Customer\CustomerIdentifier;
 use Shopsys\FrameworkBundle\Model\Order\Item\OrderItemData;
-use Shopsys\FrameworkBundle\Model\Order\OrderData;
-use Shopsys\FrameworkBundle\Model\Order\OrderDataFactory;
+use Shopsys\FrameworkBundle\Model\Order\OrderDataFactoryInterface;
 use Shopsys\FrameworkBundle\Model\Order\OrderFacade;
 use Shopsys\FrameworkBundle\Model\Order\OrderRepository;
 use Shopsys\FrameworkBundle\Model\Order\Preview\OrderPreviewFactory;
 use Shopsys\FrameworkBundle\Model\Payment\PaymentRepository;
 use Shopsys\FrameworkBundle\Model\Product\ProductRepository;
 use Shopsys\FrameworkBundle\Model\Transport\TransportRepository;
+use Shopsys\ShopBundle\Model\Order\OrderData;
 use Tests\ShopBundle\Test\DatabaseTestCase;
 
 class OrderFacadeTest extends DatabaseTestCase
@@ -120,11 +120,11 @@ class OrderFacadeTest extends DatabaseTestCase
         /* @var $orderFacade \Shopsys\FrameworkBundle\Model\Order\OrderFacade */
         $orderRepository = $this->getContainer()->get(OrderRepository::class);
         /* @var $orderRepository \Shopsys\FrameworkBundle\Model\Order\OrderRepository */
-        $orderDataFactory = $this->getContainer()->get(OrderDataFactory::class);
-        /* @var $orderDataFactory \Shopsys\FrameworkBundle\Model\Order\OrderDataFactory */
+        $orderDataFactory = $this->getContainer()->get(OrderDataFactoryInterface::class);
+        /* @var $orderDataFactory \Shopsys\ShopBundle\Model\Order\OrderDataFactory */
 
         $order = $this->getReference('order_1');
-        /* @var $order \Shopsys\FrameworkBundle\Model\Order\Order */
+        /* @var $order \Shopsys\ShopBundle\Model\Order\Order */
 
         $this->assertCount(4, $order->getItems());
 

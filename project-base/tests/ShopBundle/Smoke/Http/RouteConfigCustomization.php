@@ -280,7 +280,7 @@ class RouteConfigCustomization
             })
             ->customizeByRouteName('front_customer_order_detail_unregistered', function (RouteConfig $config) {
                 $order = $this->getPersistentReference(OrderDataFixture::ORDER_PREFIX . '1');
-                /* @var $order \Shopsys\FrameworkBundle\Model\Order\Order */
+                /* @var $order \Shopsys\ShopBundle\Model\Order\Order */
 
                 $debugNote = sprintf('Use hash of order n. %s for unregistered access.', $order->getNumber());
                 $config->changeDefaultRequestDataSet($debugNote)
@@ -288,7 +288,7 @@ class RouteConfigCustomization
             })
             ->customizeByRouteName('front_customer_order_detail_registered', function (RouteConfig $config) {
                 $order = $this->getPersistentReference(OrderDataFixture::ORDER_PREFIX . '1');
-                /* @var $order \Shopsys\FrameworkBundle\Model\Order\Order */
+                /* @var $order \Shopsys\ShopBundle\Model\Order\Order */
 
                 $debugNote = sprintf('Log as demo user "Jaromír Jágr" on front-end to access order n. %s.', $order->getNumber());
                 $config->changeDefaultRequestDataSet($debugNote)

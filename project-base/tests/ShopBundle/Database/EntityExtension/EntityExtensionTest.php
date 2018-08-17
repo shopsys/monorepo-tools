@@ -14,6 +14,8 @@ use Shopsys\FrameworkBundle\Model\Order\Item\OrderTransport;
 use Shopsys\FrameworkBundle\Model\Payment\Payment;
 use Shopsys\FrameworkBundle\Model\Product\Brand\Brand;
 use Shopsys\ShopBundle\Model\Category\Category;
+use Shopsys\ShopBundle\Model\Order\Order;
+use Shopsys\ShopBundle\Model\Order\Order as ExtendedOrder;
 use Shopsys\ShopBundle\Model\Product\Brand\Brand as ExtendedBrand;
 use Shopsys\ShopBundle\Model\Product\Product;
 use Shopsys\ShopBundle\Model\Transport\Transport;
@@ -67,6 +69,7 @@ class EntityExtensionTest extends DatabaseTestCase
             OrderPayment::class => ExtendedOrderPayment::class,
             OrderTransport::class => ExtendedOrderTransport::class,
             Brand::class => ExtendedBrand::class,
+            Order::class => ExtendedOrder::class,
         ];
 
         $newEntities = [

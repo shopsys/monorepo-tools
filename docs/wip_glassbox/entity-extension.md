@@ -113,6 +113,7 @@ DiscriminatorMap must always contain descendants' FQN because LoadORMMetadataSub
     * `Article`
     * `Brand`
     * `Category`
+    * `Order`
     * `Payment`
     * `Product`
     * `Transport`

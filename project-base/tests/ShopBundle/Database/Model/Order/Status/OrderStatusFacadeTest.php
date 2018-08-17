@@ -4,7 +4,7 @@ namespace Tests\ShopBundle\Database\Model\Order\Status;
 
 use Shopsys\FrameworkBundle\DataFixtures\Demo\OrderDataFixture;
 use Shopsys\FrameworkBundle\DataFixtures\Demo\OrderStatusDataFixture;
-use Shopsys\FrameworkBundle\Model\Order\OrderDataFactory;
+use Shopsys\FrameworkBundle\Model\Order\OrderDataFactoryInterface;
 use Shopsys\FrameworkBundle\Model\Order\OrderFacade;
 use Shopsys\FrameworkBundle\Model\Order\Status\OrderStatusData;
 use Shopsys\FrameworkBundle\Model\Order\Status\OrderStatusFacade;
@@ -26,9 +26,9 @@ class OrderStatusFacadeTest extends DatabaseTestCase
         $orderStatusToReplaceWith = $this->getReference(OrderStatusDataFixture::ORDER_STATUS_NEW);
         /* @var $orderStatusToReplaceWith \Shopsys\FrameworkBundle\Model\Order\Status\OrderStatus */
         $order = $this->getReference(OrderDataFixture::ORDER_PREFIX . '1');
-        /* @var $order \Shopsys\FrameworkBundle\Model\Order\Order */
-        $orderDataFactory = $this->getContainer()->get(OrderDataFactory::class);
-        /* @var $orderDataFactory \Shopsys\FrameworkBundle\Model\Order\OrderDataFactory */
+        /* @var $order \Shopsys\ShopBundle\Model\Order\Order */
+        $orderDataFactory = $this->getContainer()->get(OrderDataFactoryInterface::class);
+        /* @var $orderDataFactory \Shopsys\ShopBundle\Model\Order\OrderDataFactory */
 
         $orderData = $orderDataFactory->createFromOrder($order);
         $orderData->status = $orderStatusToDelete;
