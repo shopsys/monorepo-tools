@@ -6,8 +6,8 @@ use Doctrine\ORM\Mapping as ORM;
 use Shopsys\FrameworkBundle\Model\Order\Item\OrderItemData;
 use Shopsys\FrameworkBundle\Model\Order\Item\OrderPaymentData;
 use Shopsys\FrameworkBundle\Model\Order\Order;
-use Shopsys\FrameworkBundle\Model\Payment\Payment;
 use Shopsys\FrameworkBundle\Model\Pricing\Price;
+use Shopsys\ShopBundle\Model\Payment\Payment;
 
 /**
  * @ORM\Entity
@@ -20,9 +20,9 @@ use Shopsys\FrameworkBundle\Model\Pricing\Price;
 class ExtendedOrderPayment extends ExtendedOrderItem
 {
     /**
-     * @var \Shopsys\FrameworkBundle\Model\Payment\Payment
+     * @var \Shopsys\ShopBundle\Model\Payment\Payment
      *
-     * @ORM\ManyToOne(targetEntity="Shopsys\FrameworkBundle\Model\Payment\Payment")
+     * @ORM\ManyToOne(targetEntity="Shopsys\ShopBundle\Model\Payment\Payment")
      * @ORM\JoinColumn(nullable=true)
      */
     protected $payment;
@@ -40,7 +40,7 @@ class ExtendedOrderPayment extends ExtendedOrderItem
      * @param \Shopsys\FrameworkBundle\Model\Pricing\Price $price
      * @param string $vatPercent
      * @param int $quantity
-     * @param \Shopsys\FrameworkBundle\Model\Payment\Payment $payment
+     * @param \Shopsys\ShopBundle\Model\Payment\Payment $payment
      */
     public function __construct(
         Order $order,
@@ -63,7 +63,7 @@ class ExtendedOrderPayment extends ExtendedOrderItem
     }
 
     /**
-     * @return \Shopsys\FrameworkBundle\Model\Payment\Payment
+     * @return \Shopsys\ShopBundle\Model\Payment\Payment
      */
     public function getPayment()
     {

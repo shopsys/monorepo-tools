@@ -113,6 +113,7 @@ DiscriminatorMap must always contain descendants' FQN because LoadORMMetadataSub
     * `Article`
     * `Brand`
     * `Category`
+    * `Payment`
     * `Product`
     * `Transport`
   * keep entity and table annotations

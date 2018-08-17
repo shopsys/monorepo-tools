@@ -5,7 +5,7 @@ namespace Tests\ShopBundle\Database\Model\Vat;
 use Shopsys\FrameworkBundle\DataFixtures\Demo\PaymentDataFixture;
 use Shopsys\FrameworkBundle\DataFixtures\Demo\TransportDataFixture;
 use Shopsys\FrameworkBundle\DataFixtures\Demo\VatDataFixture;
-use Shopsys\FrameworkBundle\Model\Payment\PaymentDataFactory;
+use Shopsys\FrameworkBundle\Model\Payment\PaymentDataFactoryInterface;
 use Shopsys\FrameworkBundle\Model\Payment\PaymentFacade;
 use Shopsys\FrameworkBundle\Model\Pricing\Vat\VatData;
 use Shopsys\FrameworkBundle\Model\Pricing\Vat\VatFacade;
@@ -24,8 +24,8 @@ class VatFacadeTest extends DatabaseTestCase
         /* @var $transportFacade \Shopsys\FrameworkBundle\Model\Transport\TransportFacade */
         $transportDataFactory = $this->getContainer()->get(TransportDataFactoryInterface::class);
         /* @var $transportDataFactory \Shopsys\ShopBundle\Model\Transport\TransportDataFactory */
-        $paymentDataFactory = $this->getContainer()->get(PaymentDataFactory::class);
-        /* @var $paymentDataFactory \Shopsys\FrameworkBundle\Model\Payment\PaymentDataFactory */
+        $paymentDataFactory = $this->getContainer()->get(PaymentDataFactoryInterface::class);
+        /* @var $paymentDataFactory \Shopsys\ShopBundle\Model\Payment\PaymentDataFactory */
         $paymentFacade = $this->getContainer()->get(PaymentFacade::class);
         /* @var $paymentFacade \Shopsys\FrameworkBundle\Model\Payment\PaymentFacade */
 
@@ -39,7 +39,7 @@ class VatFacadeTest extends DatabaseTestCase
         /* @var $transport \Shopsys\ShopBundle\Model\Transport\Transport */
         $transportData = $transportDataFactory->createFromTransport($transport);
         $payment = $this->getReference(PaymentDataFixture::PAYMENT_CASH);
-        /* @var $payment \Shopsys\FrameworkBundle\Model\Payment\Payment */
+        /* @var $payment \Shopsys\ShopBundle\Model\Payment\Payment */
         $paymentData = $paymentDataFactory->createFromPayment($payment);
 
         $transportData->vat = $vatToDelete;

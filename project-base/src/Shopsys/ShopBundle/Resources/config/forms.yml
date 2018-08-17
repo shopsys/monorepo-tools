@@ -30,3 +30,7 @@ services:
     Shopsys\ShopBundle\Form\Admin\ProductFormTypeExtension:
         tags:
             - { name: form.type_extension, extended_type: Shopsys\FrameworkBundle\Form\Admin\Product\ProductFormType }
+
+    Shopsys\ShopBundle\Form\Admin\PaymentFormTypeExtension:
+        tags:
+            - { name: form.type_extension, extended_type: Shopsys\FrameworkBundle\Form\Admin\Payment\PaymentFormType }
