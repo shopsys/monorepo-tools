@@ -14,11 +14,11 @@ use Shopsys\FrameworkBundle\Model\Pricing\Vat\Vat;
 use Shopsys\FrameworkBundle\Model\Pricing\Vat\VatData;
 use Shopsys\FrameworkBundle\Model\Product\Availability\Availability;
 use Shopsys\FrameworkBundle\Model\Product\Availability\AvailabilityData;
-use Shopsys\FrameworkBundle\Model\Product\Product;
-use Shopsys\FrameworkBundle\Model\Product\ProductDataFactory;
+use Shopsys\FrameworkBundle\Model\Product\ProductDataFactoryInterface;
 use Shopsys\FrameworkBundle\Model\Product\ProductFacade;
 use Shopsys\FrameworkBundle\Model\Transport\TransportDataFactoryInterface;
 use Shopsys\FrameworkBundle\Model\Transport\TransportFacade;
+use Shopsys\ShopBundle\Model\Product\Product;
 use Symfony\Component\HttpKernel\Event\FilterResponseEvent;
 use Tests\ShopBundle\Test\DatabaseTestCase;
 
@@ -59,15 +59,15 @@ class InputPriceRecalculationSchedulerTest extends DatabaseTestCase
     /**
      * @param string $inputPrice
      * @param string $vatPercent
-     * @return \Shopsys\FrameworkBundle\Model\Product\Product
+     * @return \Shopsys\ShopBundle\Model\Product\Product
      */
     private function createProductWithInputPriceAndVatPercentAndAutoCalculationPriceType(
         $inputPrice,
         $vatPercent
     ) {
         $em = $this->getEntityManager();
-        $productDataFactory = $this->getContainer()->get(ProductDataFactory::class);
-        /* @var $productDataFactory \Shopsys\FrameworkBundle\Model\Product\ProductDataFactory */
+        $productDataFactory = $this->getContainer()->get(ProductDataFactoryInterface::class);
+        /* @var $productDataFactory \Shopsys\ShopBundle\Model\Product\ProductDataFactory */
         $productFacade = $this->getContainer()->get(ProductFacade::class);
         /* @var $productFacade \Shopsys\FrameworkBundle\Model\Product\ProductFacade */
 

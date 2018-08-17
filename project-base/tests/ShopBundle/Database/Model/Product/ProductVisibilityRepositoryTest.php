@@ -12,17 +12,17 @@ use Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroupFacade;
 use Shopsys\FrameworkBundle\Model\Pricing\Vat\Vat;
 use Shopsys\FrameworkBundle\Model\Pricing\Vat\VatData;
 use Shopsys\FrameworkBundle\Model\Product\Pricing\ProductPriceRecalculator;
-use Shopsys\FrameworkBundle\Model\Product\Product;
-use Shopsys\FrameworkBundle\Model\Product\ProductDataFactory;
+use Shopsys\FrameworkBundle\Model\Product\ProductDataFactoryInterface;
 use Shopsys\FrameworkBundle\Model\Product\ProductFacade;
 use Shopsys\FrameworkBundle\Model\Product\ProductVisibility;
 use Shopsys\FrameworkBundle\Model\Product\ProductVisibilityRepository;
+use Shopsys\ShopBundle\Model\Product\Product;
 use Tests\ShopBundle\Test\DatabaseTestCase;
 
 class ProductVisibilityRepositoryTest extends DatabaseTestCase
 {
     /**
-     * @return \Shopsys\FrameworkBundle\Model\Product\ProductData
+     * @return \Shopsys\ShopBundle\Model\Product\ProductData
      */
     private function getDefaultProductData()
     {
@@ -35,8 +35,8 @@ class ProductVisibilityRepositoryTest extends DatabaseTestCase
         $vat = new Vat($vatData);
         $em->persist($vat);
 
-        $productDataFactory = $this->getContainer()->get(ProductDataFactory::class);
-        /* @var $productDataFactory \Shopsys\FrameworkBundle\Model\Product\ProductDataFactory */
+        $productDataFactory = $this->getContainer()->get(ProductDataFactoryInterface::class);
+        /* @var $productDataFactory \Shopsys\ShopBundle\Model\Product\ProductDataFactory */
 
         $productData = $productDataFactory->create();
         $productData->name = ['cs' => 'Name', 'en' => 'Name'];
@@ -71,7 +71,7 @@ class ProductVisibilityRepositoryTest extends DatabaseTestCase
         $productVisibilityRepository->refreshProductsVisibility();
 
         $productAgain = $em->getRepository(Product::class)->find($id);
-        /* @var $productAgain \Shopsys\FrameworkBundle\Model\Product\Product */
+        /* @var $productAgain \Shopsys\ShopBundle\Model\Product\Product */
 
         $productVisibility1 = $em->getRepository(ProductVisibility::class)->findOneBy([
             'product' => $productAgain,
@@ -104,7 +104,7 @@ class ProductVisibilityRepositoryTest extends DatabaseTestCase
         $productVisibilityRepository->refreshProductsVisibility();
 
         $productAgain = $em->getRepository(Product::class)->find($id);
-        /* @var $productAgain \Shopsys\FrameworkBundle\Model\Product\Product */
+        /* @var $productAgain \Shopsys\ShopBundle\Model\Product\Product */
 
         $productVisibility1 = $em->getRepository(ProductVisibility::class)->findOneBy([
             'product' => $productAgain->getId(),
@@ -141,7 +141,7 @@ class ProductVisibilityRepositoryTest extends DatabaseTestCase
         $productVisibilityRepository->refreshProductsVisibility();
 
         $productAgain = $em->getRepository(Product::class)->find($id);
-        /* @var $productAgain \Shopsys\FrameworkBundle\Model\Product\Product */
+        /* @var $productAgain \Shopsys\ShopBundle\Model\Product\Product */
 
         $this->assertFalse($productAgain->isVisible());
     }
@@ -170,7 +170,7 @@ class ProductVisibilityRepositoryTest extends DatabaseTestCase
         $productVisibilityRepository->refreshProductsVisibility();
 
         $productAgain = $em->getRepository(Product::class)->find($id);
-        /* @var $productAgain \Shopsys\FrameworkBundle\Model\Product\Product */
+        /* @var $productAgain \Shopsys\ShopBundle\Model\Product\Product */
 
         $this->assertFalse($productAgain->isVisible());
     }
@@ -202,7 +202,7 @@ class ProductVisibilityRepositoryTest extends DatabaseTestCase
         $productVisibilityRepository->refreshProductsVisibility();
 
         $productAgain = $em->getRepository(Product::class)->find($id);
-        /* @var $productAgain \Shopsys\FrameworkBundle\Model\Product\Product */
+        /* @var $productAgain \Shopsys\ShopBundle\Model\Product\Product */
 
         $this->assertTrue($productAgain->isVisible());
     }
@@ -231,9 +231,9 @@ class ProductVisibilityRepositoryTest extends DatabaseTestCase
         $productVisibilityRepository->refreshProductsVisibility();
 
         $product1Again = $em->getRepository(Product::class)->find($product1Id);
-        /* @var $product1Again \Shopsys\FrameworkBundle\Model\Product\Product */
+        /* @var $product1Again \Shopsys\ShopBundle\Model\Product\Product */
         $product2Again = $em->getRepository(Product::class)->find($product2Id);
-        /* @var $product2Again \Shopsys\FrameworkBundle\Model\Product\Product */
+        /* @var $product2Again \Shopsys\ShopBundle\Model\Product\Product */
 
         $this->assertFalse($product1Again->isVisible());
         $this->assertFalse($product2Again->isVisible());
@@ -444,17 +444,17 @@ class ProductVisibilityRepositoryTest extends DatabaseTestCase
         /* @var $productVisibilityRepository \Shopsys\FrameworkBundle\Model\Product\ProductVisibilityRepository */
         $productFacade = $this->getContainer()->get(ProductFacade::class);
         /* @var $productFacade \Shopsys\FrameworkBundle\Model\Product\ProductFacade */
-        $productDataFactory = $this->getContainer()->get(ProductDataFactory::class);
-        /* @var $productDataFactory \Shopsys\FrameworkBundle\Model\Product\ProductDataFactory */
+        $productDataFactory = $this->getContainer()->get(ProductDataFactoryInterface::class);
+        /* @var $productDataFactory \Shopsys\ShopBundle\Model\Product\ProductDataFactory */
 
         $variant1 = $this->getReference(ProductDataFixture::PRODUCT_PREFIX . '53');
-        /* @var $variant1 \Shopsys\FrameworkBundle\Model\Product\Product */
+        /* @var $variant1 \Shopsys\ShopBundle\Model\Product\Product */
         $variant2 = $this->getReference(ProductDataFixture::PRODUCT_PREFIX . '54');
-        /* @var $variant2 \Shopsys\FrameworkBundle\Model\Product\Product */
+        /* @var $variant2 \Shopsys\ShopBundle\Model\Product\Product */
         $variant3 = $this->getReference(ProductDataFixture::PRODUCT_PREFIX . '69');
-        /* @var $variant3 \Shopsys\FrameworkBundle\Model\Product\Product */
+        /* @var $variant3 \Shopsys\ShopBundle\Model\Product\Product */
         $mainVariant = $this->getReference(ProductDataFixture::PRODUCT_PREFIX . '148');
-        /* @var $mainVariant \Shopsys\FrameworkBundle\Model\Product\Product */
+        /* @var $mainVariant \Shopsys\ShopBundle\Model\Product\Product */
 
         $variant1productData = $productDataFactory->createFromProduct($variant1);
         $variant1productData->hidden = true;
@@ -480,17 +480,17 @@ class ProductVisibilityRepositoryTest extends DatabaseTestCase
         /* @var $productVisibilityRepository \Shopsys\FrameworkBundle\Model\Product\ProductVisibilityRepository */
         $productFacade = $this->getContainer()->get(ProductFacade::class);
         /* @var $productFacade \Shopsys\FrameworkBundle\Model\Product\ProductFacade */
-        $productDataFactory = $this->getContainer()->get(ProductDataFactory::class);
-        /* @var $productDataFactory \Shopsys\FrameworkBundle\Model\Product\ProductDataFactory */
+        $productDataFactory = $this->getContainer()->get(ProductDataFactoryInterface::class);
+        /* @var $productDataFactory \Shopsys\ShopBundle\Model\Product\ProductDataFactory */
 
         $variant1 = $this->getReference(ProductDataFixture::PRODUCT_PREFIX . '53');
-        /* @var $variant1 \Shopsys\FrameworkBundle\Model\Product\Product */
+        /* @var $variant1 \Shopsys\ShopBundle\Model\Product\Product */
         $variant2 = $this->getReference(ProductDataFixture::PRODUCT_PREFIX . '54');
-        /* @var $variant2 \Shopsys\FrameworkBundle\Model\Product\Product */
+        /* @var $variant2 \Shopsys\ShopBundle\Model\Product\Product */
         $variant3 = $this->getReference(ProductDataFixture::PRODUCT_PREFIX . '69');
-        /* @var $variant3 \Shopsys\FrameworkBundle\Model\Product\Product */
+        /* @var $variant3 \Shopsys\ShopBundle\Model\Product\Product */
         $mainVariant = $this->getReference(ProductDataFixture::PRODUCT_PREFIX . '148');
-        /* @var $mainVariant \Shopsys\FrameworkBundle\Model\Product\Product */
+        /* @var $mainVariant \Shopsys\ShopBundle\Model\Product\Product */
 
         $variant1productData = $productDataFactory->createFromProduct($variant1);
         $variant1productData->hidden = true;
@@ -524,17 +524,17 @@ class ProductVisibilityRepositoryTest extends DatabaseTestCase
         /* @var $productVisibilityRepository \Shopsys\FrameworkBundle\Model\Product\ProductVisibilityRepository */
         $productFacade = $this->getContainer()->get(ProductFacade::class);
         /* @var $productFacade \Shopsys\FrameworkBundle\Model\Product\ProductFacade */
-        $productDataFactory = $this->getContainer()->get(ProductDataFactory::class);
-        /* @var $productDataFactory \Shopsys\FrameworkBundle\Model\Product\ProductDataFactory */
+        $productDataFactory = $this->getContainer()->get(ProductDataFactoryInterface::class);
+        /* @var $productDataFactory \Shopsys\ShopBundle\Model\Product\ProductDataFactory */
 
         $variant1 = $this->getReference(ProductDataFixture::PRODUCT_PREFIX . '53');
-        /* @var $variant1 \Shopsys\FrameworkBundle\Model\Product\Product */
+        /* @var $variant1 \Shopsys\ShopBundle\Model\Product\Product */
         $variant2 = $this->getReference(ProductDataFixture::PRODUCT_PREFIX . '54');
-        /* @var $variant2 \Shopsys\FrameworkBundle\Model\Product\Product */
+        /* @var $variant2 \Shopsys\ShopBundle\Model\Product\Product */
         $variant3 = $this->getReference(ProductDataFixture::PRODUCT_PREFIX . '69');
-        /* @var $variant3 \Shopsys\FrameworkBundle\Model\Product\Product */
+        /* @var $variant3 \Shopsys\ShopBundle\Model\Product\Product */
         $mainVariant = $this->getReference(ProductDataFixture::PRODUCT_PREFIX . '148');
-        /* @var $mainVariant \Shopsys\FrameworkBundle\Model\Product\Product */
+        /* @var $mainVariant \Shopsys\ShopBundle\Model\Product\Product */
 
         $mainVariantproductData = $productDataFactory->createFromProduct($mainVariant);
         $mainVariantproductData->hidden = true;

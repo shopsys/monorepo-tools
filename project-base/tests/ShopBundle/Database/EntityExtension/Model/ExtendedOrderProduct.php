@@ -3,9 +3,9 @@
 namespace Tests\ShopBundle\Database\EntityExtension\Model;
 
 use Doctrine\ORM\Mapping as ORM;
-use Shopsys\FrameworkBundle\Model\Order\Order;
 use Shopsys\FrameworkBundle\Model\Pricing\Price;
-use Shopsys\FrameworkBundle\Model\Product\Product;
+use Shopsys\ShopBundle\Model\Order\Order;
+use Shopsys\ShopBundle\Model\Product\Product;
 
 /**
  * @ORM\Entity
@@ -20,7 +20,7 @@ class ExtendedOrderProduct extends ExtendedOrderItem
     /**
      * @var \Shopsys\FrameworkBundle\Model\Product\Product|null
      *
-     * @ORM\ManyToOne(targetEntity="Shopsys\FrameworkBundle\Model\Product\Product")
+     * @ORM\ManyToOne(targetEntity="Shopsys\ShopBundle\Model\Product\Product")
      * @ORM\JoinColumn(nullable=true, name="product_id", referencedColumnName="id", onDelete="SET NULL")
      */
     protected $product;

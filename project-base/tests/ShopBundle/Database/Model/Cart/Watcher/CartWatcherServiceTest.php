@@ -12,11 +12,11 @@ use Shopsys\FrameworkBundle\Model\Customer\CustomerIdentifier;
 use Shopsys\FrameworkBundle\Model\Pricing\Vat\Vat;
 use Shopsys\FrameworkBundle\Model\Pricing\Vat\VatData;
 use Shopsys\FrameworkBundle\Model\Product\Pricing\ProductPriceCalculationForUser;
-use Shopsys\FrameworkBundle\Model\Product\Product;
 use Shopsys\FrameworkBundle\Model\Product\ProductCategoryDomainFactory;
-use Shopsys\FrameworkBundle\Model\Product\ProductDataFactory;
+use Shopsys\FrameworkBundle\Model\Product\ProductDataFactoryInterface;
 use Shopsys\FrameworkBundle\Model\Product\ProductVisibility;
 use Shopsys\FrameworkBundle\Model\Product\ProductVisibilityRepository;
+use Shopsys\ShopBundle\Model\Product\Product;
 use Tests\ShopBundle\Test\FunctionalTestCase;
 
 class CartWatcherServiceTest extends FunctionalTestCase
@@ -24,7 +24,7 @@ class CartWatcherServiceTest extends FunctionalTestCase
     public function testGetModifiedPriceItemsAndUpdatePrices()
     {
         $customerIdentifier = new CustomerIdentifier('randomString');
-        $productDataFactory = $this->getContainer()->get(ProductDataFactory::class);
+        $productDataFactory = $this->getContainer()->get(ProductDataFactoryInterface::class);
 
         $vatData = new VatData();
         $vatData->name = 'vat';
@@ -92,7 +92,7 @@ class CartWatcherServiceTest extends FunctionalTestCase
 
     public function testGetNotListableItemsWithVisibleButNotSellableProduct()
     {
-        $productDataFactory = $this->getContainer()->get(ProductDataFactory::class);
+        $productDataFactory = $this->getContainer()->get(ProductDataFactoryInterface::class);
 
         $productData = $productDataFactory->create();
         $productData->name = [];

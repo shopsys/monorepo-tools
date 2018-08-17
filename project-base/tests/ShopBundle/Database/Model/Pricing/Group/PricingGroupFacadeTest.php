@@ -20,7 +20,7 @@ class PricingGroupFacadeTest extends DatabaseTestCase
     {
         $em = $this->getEntityManager();
         $product = $this->getReference(ProductDataFixture::PRODUCT_PREFIX . '1');
-        /* @var $prodcu \Shopsys\FrameworkBundle\Model\Product\Product */
+        /* @var $prodcu \Shopsys\ShopBundle\Model\Product\Product */
         $pricingGroupFacade = $this->getContainer()->get(PricingGroupFacade::class);
         /* @var $pricingGroupFacade \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroupFacade */
         $productPriceRecalculator = $this->getContainer()->get(ProductPriceRecalculator::class);
@@ -43,7 +43,7 @@ class PricingGroupFacadeTest extends DatabaseTestCase
     {
         $em = $this->getEntityManager();
         $product = $this->getReference(ProductDataFixture::PRODUCT_PREFIX . '1');
-        /* @var $prodcu \Shopsys\FrameworkBundle\Model\Product\Product */
+        /* @var $prodcu \Shopsys\ShopBundle\Model\Product\Product */
         $pricingGroup = $this->getReference(PricingGroupDataFixture::PRICING_GROUP_ORDINARY_DOMAIN_1);
         /* @var $pricingGroup \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroup */
         $pricingGroupFacade = $this->getContainer()->get(PricingGroupFacade::class);

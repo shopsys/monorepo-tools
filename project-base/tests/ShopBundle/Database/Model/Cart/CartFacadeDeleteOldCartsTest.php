@@ -13,9 +13,9 @@ use Shopsys\FrameworkBundle\Model\Customer\CustomerFacade;
 use Shopsys\FrameworkBundle\Model\Customer\CustomerIdentifier;
 use Shopsys\FrameworkBundle\Model\Customer\CustomerIdentifierFactory;
 use Shopsys\FrameworkBundle\Model\Order\PromoCode\CurrentPromoCodeFacade;
-use Shopsys\FrameworkBundle\Model\Product\Product;
 use Shopsys\FrameworkBundle\Model\Product\ProductFacade;
 use Shopsys\FrameworkBundle\Model\Product\ProductRepository;
+use Shopsys\ShopBundle\Model\Product\Product;
 use Tests\ShopBundle\Test\DatabaseTestCase;
 
 class CartFacadeDeleteOldCartsTest extends DatabaseTestCase
@@ -74,7 +74,7 @@ class CartFacadeDeleteOldCartsTest extends DatabaseTestCase
 
     /**
      * @param int $productId
-     * @return \Shopsys\FrameworkBundle\Model\Product\Product
+     * @return \Shopsys\ShopBundle\Model\Product\Product
      */
     private function getProductById($productId)
     {
@@ -141,7 +141,7 @@ class CartFacadeDeleteOldCartsTest extends DatabaseTestCase
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\Cart\CartFacade $cartFacade
-     * @param \Shopsys\FrameworkBundle\Model\Product\Product $product
+     * @param \Shopsys\ShopBundle\Model\Product\Product $product
      * @param \DateTime $addedAt
      */
     private function addProductToCartAtTime(CartFacade $cartFacade, Product $product, DateTime $addedAt)

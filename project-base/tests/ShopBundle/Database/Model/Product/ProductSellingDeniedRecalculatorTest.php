@@ -3,7 +3,7 @@
 namespace Tests\ShopBundle\Database\Model\Product;
 
 use Shopsys\FrameworkBundle\DataFixtures\Demo\ProductDataFixture;
-use Shopsys\FrameworkBundle\Model\Product\ProductDataFactory;
+use Shopsys\FrameworkBundle\Model\Product\ProductDataFactoryInterface;
 use Shopsys\FrameworkBundle\Model\Product\ProductFacade;
 use Shopsys\FrameworkBundle\Model\Product\ProductSellingDeniedRecalculator;
 use Tests\ShopBundle\Test\DatabaseTestCase;
@@ -17,17 +17,17 @@ class ProductSellingDeniedRecalculatorTest extends DatabaseTestCase
         /* @var $productSellingDeniedRecalculator \Shopsys\FrameworkBundle\Model\Product\ProductSellingDeniedRecalculator */
         $productFacade = $this->getContainer()->get(ProductFacade::class);
         /* @var $productFacade \Shopsys\FrameworkBundle\Model\Product\ProductFacade */
-        $productDataFactory = $this->getContainer()->get(ProductDataFactory::class);
-        /* @var $productDataFactory \Shopsys\FrameworkBundle\Model\Product\ProductDataFactory */
+        $productDataFactory = $this->getContainer()->get(ProductDataFactoryInterface::class);
+        /* @var $productDataFactory \Shopsys\ShopBundle\Model\Product\ProductDataFactory */
 
         $variant1 = $this->getReference(ProductDataFixture::PRODUCT_PREFIX . '53');
-        /* @var $variant1 \Shopsys\FrameworkBundle\Model\Product\Product */
+        /* @var $variant1 \Shopsys\ShopBundle\Model\Product\Product */
         $variant2 = $this->getReference(ProductDataFixture::PRODUCT_PREFIX . '54');
-        /* @var $variant2 \Shopsys\FrameworkBundle\Model\Product\Product */
+        /* @var $variant2 \Shopsys\ShopBundle\Model\Product\Product */
         $variant3 = $this->getReference(ProductDataFixture::PRODUCT_PREFIX . '69');
-        /* @var $variant3 \Shopsys\FrameworkBundle\Model\Product\Product */
+        /* @var $variant3 \Shopsys\ShopBundle\Model\Product\Product */
         $mainVariant = $this->getReference(ProductDataFixture::PRODUCT_PREFIX . '148');
-        /* @var $mainVariant \Shopsys\FrameworkBundle\Model\Product\Product */
+        /* @var $mainVariant \Shopsys\ShopBundle\Model\Product\Product */
 
         $variant1productData = $productDataFactory->createFromProduct($variant1);
         $variant1productData->sellingDenied = true;
@@ -53,17 +53,17 @@ class ProductSellingDeniedRecalculatorTest extends DatabaseTestCase
         /* @var $productSellingDeniedRecalculator \Shopsys\FrameworkBundle\Model\Product\ProductSellingDeniedRecalculator */
         $productFacade = $this->getContainer()->get(ProductFacade::class);
         /* @var $productFacade \Shopsys\FrameworkBundle\Model\Product\ProductFacade */
-        $productDataFactory = $this->getContainer()->get(ProductDataFactory::class);
-        /* @var $productDataFactory \Shopsys\FrameworkBundle\Model\Product\ProductDataFactory */
+        $productDataFactory = $this->getContainer()->get(ProductDataFactoryInterface::class);
+        /* @var $productDataFactory \Shopsys\ShopBundle\Model\Product\ProductDataFactory */
 
         $variant1 = $this->getReference(ProductDataFixture::PRODUCT_PREFIX . '53');
-        /* @var $variant1 \Shopsys\FrameworkBundle\Model\Product\Product */
+        /* @var $variant1 \Shopsys\ShopBundle\Model\Product\Product */
         $variant2 = $this->getReference(ProductDataFixture::PRODUCT_PREFIX . '54');
-        /* @var $variant2 \Shopsys\FrameworkBundle\Model\Product\Product */
+        /* @var $variant2 \Shopsys\ShopBundle\Model\Product\Product */
         $variant3 = $this->getReference(ProductDataFixture::PRODUCT_PREFIX . '69');
-        /* @var $variant2 \Shopsys\FrameworkBundle\Model\Product\Product */
+        /* @var $variant2 \Shopsys\ShopBundle\Model\Product\Product */
         $mainVariant = $this->getReference(ProductDataFixture::PRODUCT_PREFIX . '148');
-        /* @var $variant2 \Shopsys\FrameworkBundle\Model\Product\Product */
+        /* @var $variant2 \Shopsys\ShopBundle\Model\Product\Product */
 
         $variant1productData = $productDataFactory->createFromProduct($variant1);
         $variant1productData->sellingDenied = true;
@@ -95,17 +95,17 @@ class ProductSellingDeniedRecalculatorTest extends DatabaseTestCase
         /* @var $productSellingDeniedRecalculator \Shopsys\FrameworkBundle\Model\Product\ProductSellingDeniedRecalculator */
         $productFacade = $this->getContainer()->get(ProductFacade::class);
         /* @var $productFacade \Shopsys\FrameworkBundle\Model\Product\ProductFacade */
-        $productDataFactory = $this->getContainer()->get(ProductDataFactory::class);
-        /* @var $productDataFactory \Shopsys\FrameworkBundle\Model\Product\ProductDataFactory */
+        $productDataFactory = $this->getContainer()->get(ProductDataFactoryInterface::class);
+        /* @var $productDataFactory \Shopsys\ShopBundle\Model\Product\ProductDataFactory */
 
         $variant1 = $this->getReference(ProductDataFixture::PRODUCT_PREFIX . '53');
-        /* @var $variant1 \Shopsys\FrameworkBundle\Model\Product\Product */
+        /* @var $variant1 \Shopsys\ShopBundle\Model\Product\Product */
         $variant2 = $this->getReference(ProductDataFixture::PRODUCT_PREFIX . '54');
-        /* @var $variant2 \Shopsys\FrameworkBundle\Model\Product\Product */
+        /* @var $variant2 \Shopsys\ShopBundle\Model\Product\Product */
         $variant3 = $this->getReference(ProductDataFixture::PRODUCT_PREFIX . '69');
-        /* @var $variant3 \Shopsys\FrameworkBundle\Model\Product\Product */
+        /* @var $variant3 \Shopsys\ShopBundle\Model\Product\Product */
         $mainVariant = $this->getReference(ProductDataFixture::PRODUCT_PREFIX . '148');
-        /* @var $mainVariant \Shopsys\FrameworkBundle\Model\Product\Product */
+        /* @var $mainVariant \Shopsys\ShopBundle\Model\Product\Product */
 
         $mainVariantproductData = $productDataFactory->createFromProduct($mainVariant);
         $mainVariantproductData->sellingDenied = true;

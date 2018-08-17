@@ -19,7 +19,7 @@ use Shopsys\FrameworkBundle\Model\Order\Status\OrderStatus;
 use Shopsys\FrameworkBundle\Model\Pricing\Currency\Currency;
 use Shopsys\FrameworkBundle\Model\Pricing\Currency\CurrencyData;
 use Shopsys\FrameworkBundle\Model\Pricing\Price;
-use Shopsys\FrameworkBundle\Model\Product\Product;
+use Shopsys\ShopBundle\Model\Product\Product;
 use Tests\ShopBundle\Test\DatabaseTestCase;
 
 class PersonalDataExportXmlTest extends DatabaseTestCase

@@ -4,7 +4,7 @@ namespace Tests\ShopBundle\Database\Component\Doctrine;
 
 use Doctrine\ORM\Query;
 use Shopsys\FrameworkBundle\Component\Doctrine\SortableNullsWalker;
-use Shopsys\FrameworkBundle\Model\Product\Product;
+use Shopsys\ShopBundle\Model\Product\Product;
 use Tests\ShopBundle\Test\FunctionalTestCase;
 
 class SortableNullsWalkerTest extends FunctionalTestCase

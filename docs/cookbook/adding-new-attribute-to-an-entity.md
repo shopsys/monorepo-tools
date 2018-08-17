@@ -3,9 +3,7 @@ In the following example, we will add `extId` (alias "external ID") field to the
 It is a common modification when you need your e-commerce application and ERP system to co-work smoothly.
 
 ## Extend framework `Product` entity
-1. Create new `Product` class in `Shopsys\ShopBundle\Model\Product` 
-namespace by extending [`Shopsys\FrameworkBundle\Model\Product\Product`](../../packages/framework/src/Model/Product/Product.php) 
-and keep the ORM table and entity annotations.
+1. Edit `Product` class in `Shopsys\ShopBundle\Model\Product`.
 
 *Note: How does the entity extension work? Find it out in the [separate article](../wip_glassbox/entity-extension.md).*
 
@@ -88,8 +86,7 @@ $this->sql('ALTER TABLE products ALTER ext_id DROP DEFAULT');
 php phing db-migrations
 ```
 
-7. Create new `ProductData` class in the same namespace as your `Product` entity
-by extending [`Shopsys\FrameworkBundle\Model\Product\ProductData`](../../packages/framework/src/Model/Product/ProductData.php).
+7. Edit `ProductData` class in the same namespace as your `Product` entity.
 Add public `extId` field to the data object.
 ```php
 <?php
@@ -109,8 +106,7 @@ class ProductData extends BaseProductData
 In the following steps, we will overwrite all services that are responsible 
 for `Product` and `ProductData` instantiation to make them return our extended classes.
 
-8. Create new `ProductDataFactory` in the same namespace as your entity
-by extending [`Shopsys\FrameworkBundle\Model\Product\ProductDataFactory`](../../packages/framework/src/Model/Product/ProductDataFactory.php)
+8. Edit `ProductDataFactory` in the same namespace as your entity
 and overwrite `create()` and `createFromProduct()` methods. Or you can create an independent class by implementing
 [`Shopsys\FrameworkBundle\Model\Product\ProductDataFactoryInterface`](../../packages/framework/src/Model/Product/ProductDataFactoryInterface.php).
 
@@ -150,15 +146,15 @@ class ProductDataFactory extends BaseProductDataFactory
 }
 ```
 
-Register your `ProductDataFactory` in [`services.yml`](../../project-base/src/Shopsys/ShopBundle/Resources/config/services.yml) 
+Your `ProductDataFactory` is already registered in [`services.yml`](../../project-base/src/Shopsys/ShopBundle/Resources/config/services.yml) 
 as an alias for the original interface.
 ```
 Shopsys\FrameworkBundle\Model\Product\ProductDataFactoryInterface: '@Shopsys\ShopBundle\Model\Product\ProductDataFactory'
 ```
 
 ## Enable administrator to edit the `extId` field
-1. Add your `extId` field into the form by creating new `ProductFormTypeExtension` in `Shopsys\ShopBundle\Form\Admin` namespace.
-Set the original `ProductFormType` as the extended type by implementing the `getExtendedType()` method.
+1. Add your `extId` field into the form by editing `ProductFormTypeExtension` in `Shopsys\ShopBundle\Form\Admin` namespace.
+The original `ProductFormType` is set as the extended type by implementation of `getExtendedType()` method.
 ```php
 <?php
 
@@ -196,7 +192,7 @@ class ProductFormTypeExtension extends AbstractTypeExtension
 }
 ```
 
-2. Register `ProductFormTypeExtension` in [`forms.yml`](../../project-base/src/Shopsys/ShopBundle/Resources/config/forms.yml).
+2. `ProductFormTypeExtension` is already extended in [`forms.yml`](../../project-base/src/Shopsys/ShopBundle/Resources/config/forms.yml).
 ```
 Shopsys\ShopBundle\Form\Admin\ProductFormTypeExtension:
   tags:

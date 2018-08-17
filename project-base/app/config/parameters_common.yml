@@ -22,3 +22,4 @@ parameters:
         Shopsys\FrameworkBundle\Model\Administrator\Administrator: Shopsys\ShopBundle\Model\Administrator\Administrator
         Shopsys\FrameworkBundle\Model\Category\Category: Shopsys\ShopBundle\Model\Category\Category
         Shopsys\FrameworkBundle\Model\Transport\Transport: Shopsys\ShopBundle\Model\Transport\Transport
+        Shopsys\FrameworkBundle\Model\Product\Product: Shopsys\ShopBundle\Model\Product\Product

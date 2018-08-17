@@ -9,9 +9,9 @@ use Shopsys\FrameworkBundle\Model\Pricing\PricingSetting;
 use Shopsys\FrameworkBundle\Model\Pricing\Vat\Vat;
 use Shopsys\FrameworkBundle\Model\Pricing\Vat\VatData;
 use Shopsys\FrameworkBundle\Model\Product\Pricing\ProductManualInputPrice;
-use Shopsys\FrameworkBundle\Model\Product\Product;
-use Shopsys\FrameworkBundle\Model\Product\ProductDataFactory;
+use Shopsys\FrameworkBundle\Model\Product\ProductDataFactoryInterface;
 use Shopsys\FrameworkBundle\Model\Product\ProductService;
+use Shopsys\ShopBundle\Model\Product\Product;
 use Tests\ShopBundle\Test\DatabaseTestCase;
 
 class ProductServiceTest extends DatabaseTestCase
@@ -22,7 +22,7 @@ class ProductServiceTest extends DatabaseTestCase
         /* @var $productService \Shopsys\FrameworkBundle\Model\Product\ProductService */
         $setting = $this->getContainer()->get(Setting::class);
         /* @var $setting \Shopsys\FrameworkBundle\Component\Setting\Setting */
-        $producDataFactory = $this->getContainer()->get(ProductDataFactory::class);
+        $producDataFactory = $this->getContainer()->get(ProductDataFactoryInterface::class);
 
         $setting->set(PricingSetting::INPUT_PRICE_TYPE, PricingSetting::INPUT_PRICE_TYPE_WITHOUT_VAT);
 
@@ -53,7 +53,7 @@ class ProductServiceTest extends DatabaseTestCase
         /* @var $productService \Shopsys\FrameworkBundle\Model\Product\ProductService */
         $setting = $this->getContainer()->get(Setting::class);
         /* @var $setting \Shopsys\FrameworkBundle\Component\Setting\Setting */
-        $productDataFactory = $this->getContainer()->get(ProductDataFactory::class);
+        $productDataFactory = $this->getContainer()->get(ProductDataFactoryInterface::class);
 
         $setting->set(PricingSetting::INPUT_PRICE_TYPE, PricingSetting::INPUT_PRICE_TYPE_WITH_VAT);
 
