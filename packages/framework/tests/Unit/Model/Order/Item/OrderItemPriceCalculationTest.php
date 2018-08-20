@@ -3,6 +3,7 @@
 namespace Tests\FrameworkBundle\Unit\Model\Order\Item;
 
 use PHPUnit\Framework\TestCase;
+use Shopsys\FrameworkBundle\Component\EntityExtension\EntityNameResolver;
 use Shopsys\FrameworkBundle\Model\Order\Item\OrderItem;
 use Shopsys\FrameworkBundle\Model\Order\Item\OrderItemData;
 use Shopsys\FrameworkBundle\Model\Order\Item\OrderItemPriceCalculation;
@@ -24,7 +25,7 @@ class OrderItemPriceCalculationTest extends TestCase
         $orderItemData->priceWithVat = 1000;
         $orderItemData->vatPercent = 10;
 
-        $orderItemPriceCalculation = new OrderItemPriceCalculation($priceCalculationMock, new VatFactory(), new VatDataFactory());
+        $orderItemPriceCalculation = new OrderItemPriceCalculation($priceCalculationMock, new VatFactory(new EntityNameResolver([])), new VatDataFactory());
         $priceWithoutVat = $orderItemPriceCalculation->calculatePriceWithoutVat($orderItemData);
 
         $this->assertSame(round(1000 - 100, 6), round($priceWithoutVat, 6));
@@ -38,7 +39,7 @@ class OrderItemPriceCalculationTest extends TestCase
             ->getMock();
         $priceCalculationMock->expects($this->once())->method('getVatAmountByPriceWithVat')->willReturn(10);
 
-        $orderItemPriceCalculation = new OrderItemPriceCalculation($priceCalculationMock, new VatFactory(), new VatDataFactory());
+        $orderItemPriceCalculation = new OrderItemPriceCalculation($priceCalculationMock, new VatFactory(new EntityNameResolver([])), new VatDataFactory());
 
         $orderItem = $this->getMockForAbstractClass(
             OrderItem::class,

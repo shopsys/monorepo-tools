@@ -2,12 +2,26 @@
 
 namespace Shopsys\FrameworkBundle\Model\Order\Item;
 
+use Shopsys\FrameworkBundle\Component\EntityExtension\EntityNameResolver;
 use Shopsys\FrameworkBundle\Model\Order\Order;
 use Shopsys\FrameworkBundle\Model\Pricing\Price;
 use Shopsys\FrameworkBundle\Model\Product\Product;
 
 class OrderProductFactory implements OrderProductFactoryInterface
 {
+    /**
+     * @var \Shopsys\FrameworkBundle\Component\EntityExtension\EntityNameResolver
+     */
+    private $entityNameResolver;
+
+    /**
+     * @param \Shopsys\FrameworkBundle\Component\EntityExtension\EntityNameResolver $entityNameResolver
+     */
+    public function __construct(EntityNameResolver $entityNameResolver)
+    {
+        $this->entityNameResolver = $entityNameResolver;
+    }
+
     /**
      * @param \Shopsys\FrameworkBundle\Model\Order\Order $order
      * @param string $name
@@ -29,7 +43,9 @@ class OrderProductFactory implements OrderProductFactoryInterface
         ?string $catnum,
         Product $product = null
     ): OrderProduct {
-        return new OrderProduct(
+        $classData = $this->entityNameResolver->resolve(OrderProduct::class);
+
+        return new $classData(
             $order,
             $name,
             $price,

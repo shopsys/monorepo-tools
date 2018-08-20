@@ -5,6 +5,7 @@ namespace Tests\FrameworkBundle\Unit\Model\Newsletter;
 use Doctrine\ORM\EntityManager;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
+use Shopsys\FrameworkBundle\Component\EntityExtension\EntityNameResolver;
 use Shopsys\FrameworkBundle\Model\Newsletter\NewsletterFacade;
 use Shopsys\FrameworkBundle\Model\Newsletter\NewsletterRepository;
 use Shopsys\FrameworkBundle\Model\Newsletter\NewsletterSubscriber;
@@ -35,7 +36,7 @@ class NewsletterFacadeTest extends TestCase
         $this->newsletterFacade = new NewsletterFacade(
             $this->em,
             $this->newsletterRepository,
-            new NewsletterSubscriberFactory()
+            new NewsletterSubscriberFactory(new EntityNameResolver([]))
         );
     }
 

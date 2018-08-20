@@ -2,6 +2,7 @@
 
 namespace Shopsys\FrameworkBundle\Model\Cart;
 
+use Shopsys\FrameworkBundle\Component\EntityExtension\EntityNameResolver;
 use Shopsys\FrameworkBundle\Model\Cart\Item\CartItemRepository;
 use Shopsys\FrameworkBundle\Model\Cart\Watcher\CartWatcherFacade;
 use Shopsys\FrameworkBundle\Model\Customer\CustomerIdentifier;
@@ -24,13 +25,20 @@ class CartFactory
     private $cartWatcherFacade;
 
     /**
+     * @var \Shopsys\FrameworkBundle\Component\EntityExtension\EntityNameResolver
+     */
+    private $entityNameResolver;
+
+    /**
      * @param \Shopsys\FrameworkBundle\Model\Cart\Item\CartItemRepository $cartItemRepository
      * @param \Shopsys\FrameworkBundle\Model\Cart\Watcher\CartWatcherFacade $cartWatcherFacade
+     * @param \Shopsys\FrameworkBundle\Component\EntityExtension\EntityNameResolver $entityNameResolver
      */
-    public function __construct(CartItemRepository $cartItemRepository, CartWatcherFacade $cartWatcherFacade)
+    public function __construct(CartItemRepository $cartItemRepository, CartWatcherFacade $cartWatcherFacade, EntityNameResolver $entityNameResolver)
     {
         $this->cartItemRepository = $cartItemRepository;
         $this->cartWatcherFacade = $cartWatcherFacade;
+        $this->entityNameResolver = $entityNameResolver;
     }
 
     /**
@@ -57,8 +65,9 @@ class CartFactory
     private function createNewCart(CustomerIdentifier $customerIdentifier)
     {
         $cartItems = $this->cartItemRepository->getAllByCustomerIdentifier($customerIdentifier);
+        $classData = $this->entityNameResolver->resolve(Cart::class);
 
-        return new Cart($cartItems);
+        return new $classData($cartItems);
     }
 
     public function clearCache()

@@ -3,6 +3,7 @@
 namespace Tests\FrameworkBundle\Unit\Model\Category;
 
 use PHPUnit\Framework\TestCase;
+use Shopsys\FrameworkBundle\Component\EntityExtension\EntityNameResolver;
 use Shopsys\FrameworkBundle\Model\Category\Category;
 use Shopsys\FrameworkBundle\Model\Category\CategoryData;
 use Shopsys\FrameworkBundle\Model\Category\CategoryFactory;
@@ -15,7 +16,7 @@ class CategoryServiceTest extends TestCase
         $categoryData = new CategoryData();
         $rootCategory = new Category($categoryData);
 
-        $categoryService = new CategoryService(new CategoryFactory());
+        $categoryService = new CategoryService(new CategoryFactory(new EntityNameResolver([])));
         $category = $categoryService->create($categoryData, $rootCategory);
 
         $this->assertSame($rootCategory, $category->getParent());
@@ -28,7 +29,7 @@ class CategoryServiceTest extends TestCase
         $categoryData = new CategoryData();
         $categoryData->parent = $parentCategory;
 
-        $categoryService = new CategoryService(new CategoryFactory());
+        $categoryService = new CategoryService(new CategoryFactory(new EntityNameResolver([])));
         $category = $categoryService->create($categoryData, $rootCategory);
 
         $this->assertSame($parentCategory, $category->getParent());
@@ -40,7 +41,7 @@ class CategoryServiceTest extends TestCase
         $rootCategory = new Category($categoryData);
         $category = new Category(new CategoryData());
 
-        $categoryService = new CategoryService(new CategoryFactory());
+        $categoryService = new CategoryService(new CategoryFactory(new EntityNameResolver([])));
         $categoryService->edit($category, $categoryData, $rootCategory);
 
         $this->assertSame($rootCategory, $category->getParent());
@@ -54,7 +55,7 @@ class CategoryServiceTest extends TestCase
         $categoryData->parent = $parentCategory;
         $category = new Category(new CategoryData());
 
-        $categoryService = new CategoryService(new CategoryFactory());
+        $categoryService = new CategoryService(new CategoryFactory(new EntityNameResolver([])));
         $categoryService->edit($category, $categoryData, $rootCategory);
 
         $this->assertSame($parentCategory, $category->getParent());

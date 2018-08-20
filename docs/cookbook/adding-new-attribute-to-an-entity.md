@@ -11,7 +11,7 @@ and keep the ORM table and entity annotations.
 
 2. Add new `extId` field with Doctrine ORM annotations and a getter for the field.
 
-3. Overwrite constructor and static methods for creating `Product` instances.
+3. Overwrite constructor for creating `Product` instances.
 ```php
 <?php
 
@@ -42,25 +42,6 @@ class Product extends BaseProduct
     {
         $this->extId = $productData->extId ?? 0;
         parent::__construct($productData, $variants);
-    }
-
-    /**
-     * @param \Shopsys\ShopBundle\Model\Product\ProductData $productData
-     * @return \Shopsys\ShopBundle\Model\Product\Product
-     */
-    public static function create(BaseProductData $productData)
-    {
-        return new self($productData, null);
-    }
-
-    /**
-     * @param \Shopsys\ShopBundle\Model\Product\ProductData $productData
-     * @param \Shopsys\ShopBundle\Model\Product\Product[] $variants
-     * @return \Shopsys\ShopBundle\Model\Product\Product
-     */
-    public static function createMainVariant(BaseProductData $productData, array $variants)
-    {
-        return new self($productData, $variants);
     }
 
     /**
@@ -127,54 +108,8 @@ class ProductData extends BaseProductData
 ```
 In the following steps, we will overwrite all services that are responsible 
 for `Product` and `ProductData` instantiation to make them return our extended classes.
- 
-8. Create new `ProductFactory` in the same namespace as your entity
-by implementing [`Shopsys\FrameworkBundle\Model\Product\ProductFactoryInterface`](../../packages/framework/src/Model/Product/ProductFactoryInterface.php)
-and implement the `create()` and `createMainVariant()` methods. Use your `Product` instead of the base one. 
-```php
-<?php
 
-namespace Shopsys\ShopBundle\Model\Product;
-
-use Shopsys\FrameworkBundle\Model\Product\Product as BaseProduct;
-use Shopsys\FrameworkBundle\Model\Product\ProductData as BaseProductData;
-use Shopsys\FrameworkBundle\Model\Product\ProductFactoryInterface;
-
-class ProductFactory implements ProductFactoryInterface
-{
-    /**
-     * @param \Shopsys\ShopBundle\Model\Product\ProductData $data
-     * @return \Shopsys\ShopBundle\Model\Product\Product
-     */
-    public function create(BaseProductData $data): BaseProduct
-    {
-        return Product::create($data);
-    }
-
-    /**
-     * @param \Shopsys\ShopBundle\Model\Product\ProductData $data
-     * @param \Shopsys\ShopBundle\Model\Product\Product[] $variants
-     * @return \Shopsys\ShopBundle\Model\Product\Product
-     */
-    public function createMainVariant(BaseProductData $data, array $variants): BaseProduct
-    {
-        return Product::createMainVariant($data, $variants);
-    }
-}
-```
-Again, notice that type hints and annotations of the methods do not match. 
-This is on purpose - extended class must respect interface of its parent while annotation ensures proper IDE autocomplete.
-
-Set your new `ProductFactory` for auto discovery in [`services.yml`](../../project-base/src/Shopsys/ShopBundle/Resources/config/services.yml) 
-and register it as an alias for the interface to overwrite the original implementation.
-```
-Shopsys\ShopBundle\Model\:
-  resource: '../../Model/*/*Factory.php'
-
-Shopsys\FrameworkBundle\Model\Product\ProductFactoryInterface: '@Shopsys\ShopBundle\Model\Product\ProductFactory'
-```
-
-9. Create new `ProductDataFactory` in the same namespace as your entity
+8. Create new `ProductDataFactory` in the same namespace as your entity
 by extending [`Shopsys\FrameworkBundle\Model\Product\ProductDataFactory`](../../packages/framework/src/Model/Product/ProductDataFactory.php)
 and overwrite `create()` and `createFromProduct()` methods. Or you can create an independent class by implementing
 [`Shopsys\FrameworkBundle\Model\Product\ProductDataFactoryInterface`](../../packages/framework/src/Model/Product/ProductDataFactoryInterface.php).

@@ -39,6 +39,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 #### Added
 - [#429 - Microservice Product Search Export](https://github.com/shopsys/shopsys/pull/429)
     - added [Microservice Product Search Export](https://github.com/shopsys/microservice-product-search-export), microservice is used for feeding Elasticsearch by products
+- [#409 - Project-base: framework models extension](https://github.com/shopsys/shopsys/pull/409)
+    - factories use EntityNameResolver to create their entities for simplification of extensibility
 
 ### [shopsys/coding-standards]
 #### Added

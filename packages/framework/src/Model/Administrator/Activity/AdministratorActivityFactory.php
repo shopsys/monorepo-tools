@@ -2,10 +2,24 @@
 
 namespace Shopsys\FrameworkBundle\Model\Administrator\Activity;
 
+use Shopsys\FrameworkBundle\Component\EntityExtension\EntityNameResolver;
 use Shopsys\FrameworkBundle\Model\Administrator\Administrator;
 
 class AdministratorActivityFactory implements AdministratorActivityFactoryInterface
 {
+    /**
+     * @var \Shopsys\FrameworkBundle\Component\EntityExtension\EntityNameResolver
+     */
+    private $entityNameResolver;
+
+    /**
+     * @param \Shopsys\FrameworkBundle\Component\EntityExtension\EntityNameResolver $entityNameResolver
+     */
+    public function __construct(EntityNameResolver $entityNameResolver)
+    {
+        $this->entityNameResolver = $entityNameResolver;
+    }
+
     /**
      * @param \Shopsys\FrameworkBundle\Model\Administrator\Administrator $administrator
      * @param string $ipAddress
@@ -13,6 +27,8 @@ class AdministratorActivityFactory implements AdministratorActivityFactoryInterf
      */
     public function create(Administrator $administrator, string $ipAddress): AdministratorActivity
     {
-        return new AdministratorActivity($administrator, $ipAddress);
+        $classData = $this->entityNameResolver->resolve(AdministratorActivity::class);
+
+        return new $classData($administrator, $ipAddress);
     }
 }

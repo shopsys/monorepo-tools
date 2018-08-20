@@ -114,15 +114,6 @@ DiscriminatorMap must always contain descendants' FQN because LoadORMMetadataSub
   * add it to the configuration parameter `shopsys.entity_extension.map`
   * use the parent entity name as a key and the extended entity name as a value
   * eg. `Shopsys\FrameworkBunde\Model\Product\Product: DreamProject\Model\Product\Product`
-* Create a factory for this entity
-  * Implement the factory interface from the framework
-    * eg. `class ProductFactory implements ProductFactoryInterface`
-  * Rewrite symfony configuration for the interface to alias your factory
-    * eg.
-      ```php
-        Shopsys\FrameworkBundle\Model\Product\ProductFactoryInterface:
-          alias: DreamProject\Model\Product\ProductFactory
-      ```
 * Create a new data object in your `src/Shopsys/ShopBundle/Model` directory that extends already existing framework entity data
 * Create a factory for this entity data
 * Implement the factory interface from the framework

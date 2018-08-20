@@ -2,8 +2,23 @@
 
 namespace Shopsys\FrameworkBundle\Model\Mail;
 
+use Shopsys\FrameworkBundle\Component\EntityExtension\EntityNameResolver;
+
 class MailTemplateFactory implements MailTemplateFactoryInterface
 {
+    /**
+     * @var \Shopsys\FrameworkBundle\Component\EntityExtension\EntityNameResolver
+     */
+    private $entityNameResolver;
+
+    /**
+     * @param \Shopsys\FrameworkBundle\Component\EntityExtension\EntityNameResolver $entityNameResolver
+     */
+    public function __construct(EntityNameResolver $entityNameResolver)
+    {
+        $this->entityNameResolver = $entityNameResolver;
+    }
+
     /**
      * @param string $name
      * @param int $domainId
@@ -12,6 +27,8 @@ class MailTemplateFactory implements MailTemplateFactoryInterface
      */
     public function create(string $name, int $domainId, MailTemplateData $data): MailTemplate
     {
-        return new MailTemplate($name, $domainId, $data);
+        $classData = $this->entityNameResolver->resolve(MailTemplate::class);
+
+        return new $classData($name, $domainId, $data);
     }
 }

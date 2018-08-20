@@ -2,12 +2,26 @@
 
 namespace Shopsys\FrameworkBundle\Model\Order\Item;
 
+use Shopsys\FrameworkBundle\Component\EntityExtension\EntityNameResolver;
 use Shopsys\FrameworkBundle\Model\Order\Order;
 use Shopsys\FrameworkBundle\Model\Payment\Payment;
 use Shopsys\FrameworkBundle\Model\Pricing\Price;
 
 class OrderPaymentFactory implements OrderPaymentFactoryInterface
 {
+    /**
+     * @var \Shopsys\FrameworkBundle\Component\EntityExtension\EntityNameResolver
+     */
+    private $entityNameResolver;
+
+    /**
+     * @param \Shopsys\FrameworkBundle\Component\EntityExtension\EntityNameResolver $entityNameResolver
+     */
+    public function __construct(EntityNameResolver $entityNameResolver)
+    {
+        $this->entityNameResolver = $entityNameResolver;
+    }
+
     /**
      * @param \Shopsys\FrameworkBundle\Model\Order\Order $order
      * @param string $name
@@ -25,7 +39,9 @@ class OrderPaymentFactory implements OrderPaymentFactoryInterface
         int $quantity,
         Payment $payment
     ): OrderPayment {
-        return new OrderPayment(
+        $classData = $this->entityNameResolver->resolve(OrderPayment::class);
+
+        return new $classData(
             $order,
             $name,
             $price,
