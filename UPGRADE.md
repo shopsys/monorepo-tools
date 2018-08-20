@@ -16,7 +16,9 @@ There is a list of all the repositories maintained by monorepo, changes in log b
 * [shopsys/product-feed-zbozi]
 * [shopsys/microservice-product-search]
 
-## [From 7.0.0-alpha4 to Unreleased]
+## [From 7.0.0-alpha5 to Unreleased]
+
+## [From 7.0.0-alpha4 to 7.0.0-alpha5]
 
 ### [shopsys/framework]
 - for [product search via Elasticsearch](/docs/introduction/product-search-via-elasticsearch.md), you'll have to:
@@ -69,10 +71,6 @@ if you are using docker infrastructure you can follow steps written below.
 
     `docker exec -it shopsys-framework-postgres rm backupfile`
 
-### [shopsys/project-base]
-- standardize indentation in your yaml files
-    - you can find yaml files with wrong indentation with regexp `^( {4})* {1,3}[^ ]`
-
 ### [shopsys/project-base] 
 - added [Microservice Product Search](https://github.com/shopsys/microservice-product-search)
     - check changes in the `docker-compose.yml` template you used and replicate them, there is a new container `microservice-product-search`
@@ -84,6 +82,8 @@ if you are using docker infrastructure you can follow steps written below.
         - `Shopsys\FrameworkBundle\Model\Product\Search\ElasticsearchSearchClient`
         - `Shopsys\FrameworkBundle\Model\Product\Search\CachedSearchClient`
         - `Shopsys\FrameworkBundle\Model\Product\Search\SearchClient`
+- standardize indentation in your yaml files
+    - you can find yaml files with wrong indentation with regexp `^( {4})* {1,3}[^ ]`
         
 ## [From 7.0.0-alpha3 to 7.0.0-alpha4]
 
@@ -300,7 +300,8 @@ parameters:
         - *_generated/*
 
 ```
-[From 7.0.0-alpha4 to Unreleased]: https://github.com/shopsys/shopsys/compare/v7.0.0-alpha4...HEAD
+[From 7.0.0-alpha5 to Unreleased]: https://github.com/shopsys/shopsys/compare/v7.0.0-alpha5...HEAD
+[From 7.0.0-alpha4 to 7.0.0-alpha5]: https://github.com/shopsys/shopsys/compare/v7.0.0-alpha4...v7.0.0-alpha5
 [From 7.0.0-alpha3 to 7.0.0-alpha4]: https://github.com/shopsys/shopsys/compare/v7.0.0-alpha3...v7.0.0-alpha4
 [From 7.0.0-alpha2 to 7.0.0-alpha3]: https://github.com/shopsys/shopsys/compare/v7.0.0-alpha2...v7.0.0-alpha3
 [From 7.0.0-alpha1 to 7.0.0-alpha2]: https://github.com/shopsys/shopsys/compare/v7.0.0-alpha1...v7.0.0-alpha2
