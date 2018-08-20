@@ -28,7 +28,7 @@ services:
 
     League\Flysystem\FilesystemInterface: '@main_filesystem'
 
-    Shopsys\FrameworkBundle\Model\Article\ArticleFactoryInterface: '@Shopsys\ShopBundle\Model\Article\ArticleFactory'
+    Shopsys\FrameworkBundle\Model\Article\ArticleFactoryInterface: '@Shopsys\FrameworkBundle\Model\Article\ArticleFactory'
 
     Shopsys\FrameworkBundle\Model\Article\ArticleDataFactoryInterface: '@Shopsys\ShopBundle\Model\Article\ArticleDataFactory'
 
