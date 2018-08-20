@@ -97,6 +97,21 @@ services:
         environment:
             - discovery.type=single-node
 
+    microservice-product-search:
+        build:
+            context: ../microservices/product-search/docker
+            args:
+                www_data_uid: 82
+                www_data_gid: 82
+        container_name: shopsys-framework-microservice-product-search
+        volumes:
+            - ../microservices/product-search:/var/www/html
+            - ../microservices/product-search/php-fpm/php-ini-overrides.ini:/usr/local/etc/php/php.ini
+        links:
+            - elasticsearch
+        depends_on:
+            - elasticsearch
+
 volumes:
     pgdata:
         driver: local

@@ -1,27 +1,25 @@
 <?php
 
-namespace Shopsys\FrameworkBundle\Model\Product\Search;
+namespace Shopsys\MicroserviceProductSearch\Repository;
 
 use Elasticsearch\Client;
 
-class ElasticsearchSearchClient implements SearchClient
+class ProductSearchRepository
 {
     /**
      * @var \Elasticsearch\Client
      */
     private $client;
 
+    /**
+     * @param \Elasticsearch\Client $client
+     */
     public function __construct(Client $client)
     {
         $this->client = $client;
     }
 
-    /**
-     * @param int $domainId
-     * @param string|null $searchText
-     * @return int[]
-     */
-    public function search(int $domainId, $searchText): array
+    public function getProductIdsBySearchText(int $domainId, string $searchText): array
     {
         if (!$searchText) {
             return [];
@@ -33,6 +31,7 @@ class ElasticsearchSearchClient implements SearchClient
     }
 
     /**
+     * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-body.html
      * @param int $domainId
      * @param string $searchText
      * @return array

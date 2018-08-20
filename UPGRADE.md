@@ -14,6 +14,7 @@ There is a list of all the repositories maintained by monorepo, changes in log b
 * [shopsys/product-feed-heureka]
 * [shopsys/product-feed-heureka-delivery]
 * [shopsys/product-feed-zbozi]
+* [shopsys/microservice-product-search]
 
 ## [From 7.0.0-alpha4 to Unreleased]
 
@@ -24,7 +25,8 @@ There is a list of all the repositories maintained by monorepo, changes in log b
     - update composer dependencies `composer update`
     - create Elasticsearch indexes by running `php phing elasticsearch-indexes-create`
     - export products into Elasticsearch by `php phing elasticsearch-products-export`
-
+- since the fully installed and ready [Microservice Product Search](https://github.com/shopsys/microservice-product-search) is a necessary condition for the Shopsys Framework to run, the installation procedure of this microservice is a part of Shopsys Framework [installation guide](/docs/installation/installation-using-docker-application-setup.md)
+ 
 #### PostgreSQL upgrade:
 We decided to move onto a newer version of PostgreSQL.
 
@@ -71,6 +73,18 @@ if you are using docker infrastructure you can follow steps written below.
 - standardize indentation in your yaml files
     - you can find yaml files with wrong indentation with regexp `^( {4})* {1,3}[^ ]`
 
+### [shopsys/project-base] 
+- added [Microservice Product Search](https://github.com/shopsys/microservice-product-search)
+    - check changes in the `docker-compose.yml` template you used and replicate them, there is a new container `microservice-product-search`
+    - `parameters.yml.dist` contains new parameter `microservice_product_search_url`
+    - modify a configuration in `services.yml` for:
+        - `Shopsys\FrameworkBundle\Model\Product\Search\ProductSearchRepository`
+        - `shopsys.microservice_client.product_search`
+    - remove a configuration in `services.yml` for:
+        - `Shopsys\FrameworkBundle\Model\Product\Search\ElasticsearchSearchClient`
+        - `Shopsys\FrameworkBundle\Model\Product\Search\CachedSearchClient`
+        - `Shopsys\FrameworkBundle\Model\Product\Search\SearchClient`
+        
 ## [From 7.0.0-alpha3 to 7.0.0-alpha4]
 
 ### [shopsys/framework]
@@ -305,3 +319,4 @@ parameters:
 [shopsys/form-types-bundle]: https://github.com/shopsys/form-types-bundle 
 [shopsys/migrations]: https://github.com/shopsys/migrations 
 [shopsys/monorepo-tools]: https://github.com/shopsys/monorepo-tools
+[shopsys/microservice-product-search]: https://github.com/shopsys/microservice-product-search

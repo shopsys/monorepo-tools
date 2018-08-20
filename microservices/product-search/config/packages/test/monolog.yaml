@@ -1,0 +1,7 @@
+monolog:
+    handlers:
+        main:
+            type: stream
+            path: "%env(LOG_STREAM)%"
+            level: debug
+            channels: ["!event"]

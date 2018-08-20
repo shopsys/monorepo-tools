@@ -283,6 +283,8 @@ services:
         tags:
             - { name: kernel.event_subscriber }
 
+    Shopsys\FrameworkBundle\Component\Microservice\MicroserviceClient: ~
+
     Shopsys\FrameworkBundle\Component\HttpFoundation\TransactionalMasterRequestService:
         tags:
             - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest }
@@ -629,6 +631,10 @@ services:
 
     FM\ElfinderBundle\Configuration\ElFinderConfigurationReader: '@fm_elfinder.configurator.default'
 
+    Shopsys\FrameworkBundle\Command\CheckMicroservicesCommand:
+        arguments:
+            $microserviceProductSearchClient: '@shopsys.microservice_client.product_search'
+
     Shopsys\FrameworkBundle\Model\PersonalData\PersonalDataAccessRequestFactoryInterface:
         alias: Shopsys\FrameworkBundle\Model\PersonalData\PersonalDataAccessRequestFactory
 
@@ -893,6 +899,10 @@ services:
     Shopsys\FrameworkBundle\Model\Product\Unit\UnitDataFactoryInterface:
         alias: Shopsys\FrameworkBundle\Model\Product\Unit\UnitDataFactory
 
+    Shopsys\FrameworkBundle\Model\Product\Search\ProductSearchRepository:
+        arguments:
+            $microserviceProductSearchClient: '@shopsys.microservice_client.product_search'
+
     Shopsys\FrameworkBundle\Model\Product\ProductDataFactoryInterface:
         alias: Shopsys\FrameworkBundle\Model\Product\ProductDataFactory
 
@@ -925,12 +935,7 @@ services:
 
     Shopsys\FrameworkBundle\Model\Product\Elasticsearch\ElasticsearchProductDataConverter: ~
 
-    Shopsys\FrameworkBundle\Model\Product\Search\ElasticsearchSearchClient: ~
-
-    Shopsys\FrameworkBundle\Model\Product\Search\CachedSearchClient:
-        class: Shopsys\FrameworkBundle\Model\Product\Search\CachedSearchClient
+    shopsys.microservice_client.product_search:
+        factory: 'Shopsys\FrameworkBundle\Component\Microservice\MicroserviceClientFactory:create'
         arguments:
-            - '@Shopsys\FrameworkBundle\Model\Product\Search\ElasticsearchSearchClient'
-
-    Shopsys\FrameworkBundle\Model\Product\Search\SearchClient:
-        alias: Shopsys\FrameworkBundle\Model\Product\Search\CachedSearchClient
+            $microserviceUrl: '%microservice_product_search_url%'
