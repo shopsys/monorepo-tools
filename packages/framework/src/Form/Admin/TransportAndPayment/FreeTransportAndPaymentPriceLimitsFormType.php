@@ -55,8 +55,8 @@ class FreeTransportAndPaymentPriceLimitsFormType extends AbstractType
                     'validation_groups' => function (FormInterface $form) {
                         $validationGroups = [ValidationGroup::VALIDATION_GROUP_DEFAULT];
                         $formData = $form->getData();
-                        if ($formData[FreeTransportAndPaymentPriceLimitsFormType::FIELD_ENABLED]) {
-                            $validationGroups[] = FreeTransportAndPaymentPriceLimitsFormType::VALIDATION_GROUP_PRICE_LIMIT_ENABLED;
+                        if ($formData[self::FIELD_ENABLED]) {
+                            $validationGroups[] = self::VALIDATION_GROUP_PRICE_LIMIT_ENABLED;
                         }
 
                         return $validationGroups;
