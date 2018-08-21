@@ -1210,10 +1210,10 @@ msgstr ""
 msgid "Main administrator e-mail"
 msgstr ""
 
-msgid "Main category on domains:"
+msgid "Main category"
 msgstr ""
 
-msgid "Main category:"
+msgid "Main category on domains"
 msgstr ""
 
 msgid "Main image"

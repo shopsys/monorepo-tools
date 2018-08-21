@@ -1210,11 +1210,11 @@ msgstr "Hlavní URL nelze smazat"
 msgid "Main administrator e-mail"
 msgstr "Hlavní administrátorský email"
 
-msgid "Main category on domains:"
-msgstr "Hlavní kategorie na doménách:"
+msgid "Main category"
+msgstr "Hlavní kategorie"
 
-msgid "Main category:"
-msgstr "Hlavní kategorie:"
+msgid "Main category on domains"
+msgstr "Hlavní kategorie na doménách"
 
 msgid "Main image"
 msgstr "Hlavní obrázek"
