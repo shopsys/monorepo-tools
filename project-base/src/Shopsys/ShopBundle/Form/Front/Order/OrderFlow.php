@@ -164,7 +164,7 @@ class OrderFlow extends FormFlow
         $request = $this->getRequest()->request;
         $requestParameters = $request->all();
         $requestParameters['flow_order_step'] = $step->getNumber();
-        $requestParameters[$step->getFormType()->getName()] = $stepData;
+        $requestParameters[$step->getFormType()] = $stepData;
         $request->replace($requestParameters);
     }
 }
