@@ -48,6 +48,18 @@ If you want to add a new custom position, let us say on the product detail page,
     If you misspell the position name (or otherwise use a non-registered one) an exception will be thrown including the list of all registered positions.
     So don't worry about calling the controller in a wrong way.
 
+4. Add new entry into `noticer` section in `src/Shopsys/ShopBundle/Resources/config/images.yml` config if you want to provide additional information about the new position for the images overview admin page (`Settings > Image size > Image size` on URL `admin/image/overview/`)
+    ```yaml
+    -   name: noticer
+        class: Shopsys\FrameworkBundle\Model\Advert\Advert
+        sizes:
+            -   name: productDetail
+                width: 1160
+                height: ~
+                crop: false
+                occurrence: 'Front-end: Product detail'
+    ```
+
 ## Conclusion
 
 An administrator can now pick the newly created position when creating an ad in the *Marketing > Advertising system* section.
