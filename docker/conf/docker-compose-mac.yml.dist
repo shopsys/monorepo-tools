@@ -25,7 +25,7 @@ services:
     php-fpm:
         build:
             context: project-base/docker/php-fpm
-            args:
+            args: &common_build_args
                 www_data_uid: 501
                 www_data_gid: 20
         container_name: shopsys-framework-php-fpm
@@ -47,8 +47,7 @@ services:
         build:
             context: microservices/product-search/docker
             args:
-                www_data_uid: 501
-                www_data_gid: 20
+                <<: *common_build_args
         container_name: shopsys-framework-microservice-product-search
         volumes:
             - shopsys-framework-microservice-product-search-sync:/var/www/html
@@ -62,8 +61,7 @@ services:
         build:
             context: microservices/product-search-export/docker
             args:
-                www_data_uid: 501
-                www_data_gid: 20
+                <<: *common_build_args
         container_name: shopsys-framework-microservice-product-search-export
         volumes:
             - shopsys-framework-microservice-product-search-export-sync:/var/www/html
