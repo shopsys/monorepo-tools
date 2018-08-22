@@ -49,6 +49,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
     - Payment is extended
     - User is extended
     - Order is extended
+#### Changed
+- Docker Compose uses pre-built images of microservices for easier installation (part of [#430 - Microservices are built as Docker images](https://github.com/shopsys/shopsys/pull/430))
 
 ### [shopsys/shopsys]
 #### Added
@@ -65,6 +67,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 #### Added
 - [#384 - cs: keep class spacing consistent](https://github.com/shopsys/shopsys/pull/384) [@TomasVotruba]
     - added new rule (along with fixer `ClassAttributesSeparationFixer`) into `easy-coding-standard.yml`
+
+###[shopsys/microservice-product-search]
+#### Changed
+- [#430 - Microservices are built as Docker images](https://github.com/shopsys/shopsys/pull/430)
+    - source codes and all Composer dependencies are part of the Docker image for easier usage
+    - when a container with a microservice is started, it runs its web server automatically
 
 ### [shopsys/microservice-product-search-export]
 #### Added

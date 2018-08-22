@@ -26,7 +26,7 @@ services:
     php-fpm:
         build:
             context: docker/php-fpm
-            args: &common_build_args
+            args:
                 www_data_uid: 82
                 www_data_gid: 82
                 github_oauth_token: place-your-token-here
@@ -99,28 +99,16 @@ services:
             - discovery.type=single-node
 
     microservice-product-search:
-        build:
-            context: ../microservices/product-search/docker
-            args:
-                <<: *common_build_args
+        image: shopsys/microservice-product-search:latest
         container_name: shopsys-framework-microservice-product-search
-        volumes:
-            - ../microservices/product-search:/var/www/html
-            - ../microservices/product-search/docker/php-ini-overrides.ini:/usr/local/etc/php/php.ini
         links:
             - elasticsearch
         depends_on:
             - elasticsearch
 
     microservice-product-search-export:
-        build:
-            context: ../microservices/product-search-export/docker
-            args:
-                <<: *common_build_args
+        image: shopsys/microservice-product-search-export:latest
         container_name: shopsys-framework-microservice-product-search-export
-        volumes:
-            - ../microservices/product-search-export:/var/www/html
-            - ../microservices/product-search-export/docker/php-ini-overrides.ini:/usr/local/etc/php/php.ini
         links:
             - elasticsearch
         depends_on:

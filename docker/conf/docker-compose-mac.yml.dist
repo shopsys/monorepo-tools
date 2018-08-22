@@ -46,7 +46,8 @@ services:
 
     microservice-product-search:
         build:
-            context: microservices/product-search/docker
+            context: microservices/product-search
+            dockerfile: docker/Dockerfile
             args:
                 <<: *common_build_args
         container_name: shopsys-framework-microservice-product-search
@@ -60,7 +61,8 @@ services:
 
     microservice-product-search-export:
         build:
-            context: microservices/product-search-export/docker
+            context: microservices/product-search-export
+            dockerfile: docker/Dockerfile
             args:
                 <<: *common_build_args
         container_name: shopsys-framework-microservice-product-search-export

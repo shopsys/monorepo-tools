@@ -10,11 +10,3 @@ syncs:
 
     shopsys-framework-elasticsearch-data-sync:
         src: './var/elasticsearch-data/'
-
-    shopsys-framework-microservice-product-search-sync:
-        sync_userid: 501
-        src: '../microservices/product-search/'
-
-    shopsys-framework-microservice-product-search-export-sync:
-        sync_userid: 501
-        src: '../microservices/product-search-export/'
