@@ -20,6 +20,7 @@ parameters:
             - '*/src/Model/Product/ProductData.php'
 
         ObjectCalisthenics\Sniffs\Files\ClassTraitAndInterfaceLengthSniff:
+            - '*/src/Form/Admin/Product/ProductFormType.php'
             - '*/src/Component/Grid/Grid.php'
             - '*/src/DataFixtures/Demo/OrderDataFixture.php'
             - '*/src/Model/Order/Order.php'

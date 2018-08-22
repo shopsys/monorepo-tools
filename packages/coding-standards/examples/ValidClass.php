@@ -17,5 +17,7 @@ final class ValidClass
     public function method(Type $parameterCamelCase)
     {
         $this->parameterCamelCase = $parameterCamelCase;
+
+        return $this->parameterCamelCase;
     }
 }

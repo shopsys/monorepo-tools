@@ -19,7 +19,6 @@ parameters:
 
         ObjectCalisthenics\Sniffs\Files\ClassTraitAndInterfaceLengthSniff:
             - '*/tests/ShopBundle/Database/Model/Product/ProductVisibilityRepositoryTest.php'
-            - '*/src/Form/Admin/Product/ProductFormType.php'
 
         Shopsys\CodingStandards\Sniffs\ValidVariableNameSniff:
             - '*/tests/ShopBundle/Database/EntityExtension/EntityExtensionTest.php'
