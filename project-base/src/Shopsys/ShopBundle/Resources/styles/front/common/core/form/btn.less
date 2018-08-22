@@ -95,6 +95,40 @@
     }
 }
 
+// Button with icon
+.btn--with-icon {
+    display: inline-flex;
+    align-items: center;
+
+    &:before {
+        display:inline-block;
+        vertical-align:middle;
+        line-height:1;
+        font-weight:normal;
+        font-style:normal;
+        speak:none;
+        text-decoration:inherit;
+        text-transform:none;
+        text-rendering:auto;
+        -webkit-font-smoothing:antialiased;
+        -moz-osx-font-smoothing:grayscale;
+        font-family:"svg";
+    }
+
+    &--right {
+        &:before {
+            order: 1;
+            margin-left: 5px;
+        }
+    }
+
+    &--left {
+        &:before {
+            margin-right: 5px;
+        }
+    }
+}
+
 // Button with removed styles
 .btn-no-style {
     padding: 0;
