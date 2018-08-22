@@ -24,6 +24,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+
+## [7.0.0-alpha5] - 2018-08-22
 ### [shopsys/framework]
 #### Added
 - [#354 - Product search in elasticsearch](https://github.com/shopsys/shopsys/pull/354)
@@ -69,10 +71,6 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - [#260 - JS validation: dynamically added form inputs are now validated](https://github.com/shopsys/shopsys/pull/260)
 - [#397 - classes excluded from ObjectIsCreatedByFactorySniff rule are fixed](https://github.com/shopsys/shopsys/pull/397)
 
-### [shopsys/monorepo-tools]
-#### Fixed
-- [#399 - monorepo-tools: Handle rewriting of empty commits](https://github.com/shopsys/shopsys/pull/399) [@drekbour]
-
 ### [shopsys/project-base]
 #### Changed
 - [#401 - Microservice Product Search](https://github.com/shopsys/shopsys/pull/401)
@@ -88,7 +86,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
     - availability of microservices is checked during the build
 
 #### Fixed
-- [#359 - fix wrong variable usage in url to reset product filter](https://github.com/shopsys/shopsys/pull/359)
+- [#359 - product search: fix wrong variable usage in url to reset product filter](https://github.com/shopsys/shopsys/pull/359)
 
 ### [shopsys/shopsys]
 #### Added
@@ -100,7 +98,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
        
 #### Changed
 - [#389 - Standardized YAML files indentation to 4 spaces](https://github.com/shopsys/shopsys/pull/389)
-              
+
+### [shopsys/monorepo-tools]
+#### Fixed
+- [#399 - monorepo-tools: Handle rewriting of empty commits](https://github.com/shopsys/shopsys/pull/399) [@drekbour]
+
 ## [7.0.0-alpha4] - 2018-08-02
 ### [shopsys/framework]
 #### Added
@@ -1396,7 +1398,8 @@ That's why is this section formatted differently.
     - YesNoType
 - `.travis.yml` file with Travis CI configuration
 
-[Unreleased]: https://github.com/shopsys/shopsys/compare/v7.0.0-alpha4...HEAD
+[Unreleased]: https://github.com/shopsys/shopsys/compare/v7.0.0-alpha5...HEAD
+[7.0.0-alpha5]: https://github.com/shopsys/shopsys/compare/v7.0.0-alpha4...v7.0.0-alpha5
 [7.0.0-alpha4]: https://github.com/shopsys/shopsys/compare/v7.0.0-alpha3...v7.0.0-alpha4
 [7.0.0-alpha3]: https://github.com/shopsys/shopsys/compare/v7.0.0-alpha2...v7.0.0-alpha3
 [7.0.0-alpha2]: https://github.com/shopsys/shopsys/compare/v7.0.0-alpha1...v7.0.0-alpha2

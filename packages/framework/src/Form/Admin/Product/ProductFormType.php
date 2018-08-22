@@ -338,7 +338,7 @@ class ProductFormType extends AbstractType
                         'readonly' => 'readonly',
                         'show_label' => true,
                     ],
-                    'label' => $this->domain->getDomainConfigById($domainId)->getName(),
+                    'label' => count($productMainCategoriesIndexedByDomainId) > 1 ? $this->domain->getDomainConfigById($domainId)->getName() : t('Main category'),
                     'data' => $productMainCategory === null ? '-' : $productMainCategory->getName(),
                 ];
             }
@@ -719,6 +719,7 @@ class ProductFormType extends AbstractType
                     new Constraints\Length(['max' => 255, 'maxMessage' => 'Variant alias cannot be longer then {{ limit }} characters']),
                 ],
             ],
+            'label' => t('Variant alias'),
             'render_form_row' => true,
         ]);
 
