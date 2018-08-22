@@ -71,9 +71,6 @@ The optimized composer speed up your application.
 composer install -o
 ```
 
-Composer will prompt you to insert token to avoid GitHub API rate limit. You can create this token on `https://github.com/settings/tokens/new`.
-This token is reusable so keep it for further usage.
-
 Composer will prompt you to set parameters ([description of parameters](native-installation.md#2-install-dependencies-and-configure-parameters)).
 The default parameters suggested by composer are currently set for application running in Docker so you can just use these.
 
