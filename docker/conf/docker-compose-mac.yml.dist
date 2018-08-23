@@ -34,6 +34,7 @@ services:
             - ./project-base/docker/php-fpm/php-ini-overrides.ini:/usr/local/etc/php/php.ini
         links:
             - microservice-product-search
+            - microservice-product-search-export
             - postgres
             - redis
         ports:
@@ -52,6 +53,21 @@ services:
         volumes:
             - shopsys-framework-microservice-product-search-sync:/var/www/html
             - ./microservices/product-search/docker/php-fpm/php-ini-overrides.ini:/usr/local/etc/php/php.ini
+        links:
+            - elasticsearch
+        depends_on:
+            - elasticsearch
+
+    microservice-product-search-export:
+        build:
+            context: microservices/product-search-export/docker
+            args:
+                www_data_uid: 501
+                www_data_gid: 20
+        container_name: shopsys-framework-microservice-product-search-export
+        volumes:
+            - shopsys-framework-microservice-product-search-export-sync:/var/www/html
+            - ./microservices/product-search-export/docker/php-fpm/php-ini-overrides.ini:/usr/local/etc/php/php.ini
         links:
             - elasticsearch
         depends_on:

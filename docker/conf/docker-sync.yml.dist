@@ -9,6 +9,10 @@ syncs:
         sync_userid: 501
         src: './microservices/product-search/'
 
+    shopsys-framework-microservice-product-search-export-sync:
+        sync_userid: 501
+        src: './microservices/product-search-export/'
+
     shopsys-framework-postgres-data-sync:
         src: './project-base/var/postgres-data/'
 
