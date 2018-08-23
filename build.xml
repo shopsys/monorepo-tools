@@ -4,6 +4,7 @@
     <property name="path.root" value="./project-base"/>
     <property name="path.vendor" value="./vendor"/>
     <property name="path.packages" value="./packages"/>
+    <property name="path.microservices" value="./microservices"/>
     <property name="path.bin-console" value="./project-base/bin/console"/>
     <property name="path.framework" value="${path.packages}/framework"/>
 
@@ -178,6 +179,9 @@
         <exec executable="${path.vendor}/bin/phpunit" logoutput="true" passthru="true" checkreturn="true">
             <arg value="--configuration"/>
             <arg value="${path.packages}/framework/phpunit.xml"/>
+        </exec>
+        <exec executable="${path.vendor}/bin/phpunit" logoutput="true" passthru="true" checkreturn="true">
+            <arg value="${path.microservices}/product-search-export/tests"/>
         </exec>
     </target>
 
