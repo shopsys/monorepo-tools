@@ -2,25 +2,25 @@
 
 namespace Shopsys\FrameworkBundle\Command;
 
-use Shopsys\FrameworkBundle\Model\Product\Elasticsearch\ElasticsearchExportProductFacade;
+use Shopsys\FrameworkBundle\Model\Product\ProductSearchExport\ProductSearchExportFacade;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
-class ElasticsearchExportProductsCommand extends Command
+class MicroserviceProductSearchExportProductsCommand extends Command
 {
     /**
      * @var string
      */
-    protected static $defaultName = 'shopsys:elasticsearch:export-products';
+    protected static $defaultName = 'shopsys:microservice:product-search:export-products';
 
     /**
-     * @var ElasticsearchExportProductFacade
+     * @var ProductSearchExportFacade
      */
     protected $exportFacade;
 
-    public function __construct(ElasticsearchExportProductFacade $exportFacade)
+    public function __construct(ProductSearchExportFacade $exportFacade)
     {
         parent::__construct();
         $this->exportFacade = $exportFacade;
@@ -29,7 +29,7 @@ class ElasticsearchExportProductsCommand extends Command
     protected function configure()
     {
         $this
-            ->setDescription('Export all products to the elasticsearch');
+            ->setDescription('Exports all products for searching via microservice');
     }
 
     /**
@@ -39,7 +39,7 @@ class ElasticsearchExportProductsCommand extends Command
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $symfonyStyleIo = new SymfonyStyle($input, $output);
-        $output->writeln('Exporting products to the elasticsearch');
+        $output->writeln('Exporting products to microservice');
         $this->exportFacade->exportAll();
         $symfonyStyleIo->success('All products successfully exported');
     }

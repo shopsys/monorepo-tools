@@ -45,4 +45,40 @@ class MicroserviceClient
 
         return json_decode($response->getBody()->getContents());
     }
+
+    public function post(string $resource, array $parameters = [])
+    {
+        $response = $this->guzzleClient->post($resource, [
+            RequestOptions::JSON => $parameters,
+            RequestOptions::CONNECT_TIMEOUT => 0.1,
+            RequestOptions::TIMEOUT => 1.0,
+            RequestOptions::HEADERS => ['Accept' => 'application/json'],
+        ]);
+
+        return json_decode($response->getBody()->getContents());
+    }
+
+    public function delete(string $resource, array $parameters = [])
+    {
+        $response = $this->guzzleClient->delete($resource, [
+            RequestOptions::JSON => $parameters,
+            RequestOptions::CONNECT_TIMEOUT => 0.1,
+            RequestOptions::TIMEOUT => 1.0,
+            RequestOptions::HEADERS => ['Accept' => 'application/json'],
+        ]);
+
+        return json_decode($response->getBody()->getContents());
+    }
+
+    public function patch(string $resource, array $parameters = [])
+    {
+        $response = $this->guzzleClient->patch($resource, [
+            RequestOptions::JSON => $parameters,
+            RequestOptions::CONNECT_TIMEOUT => 0.1,
+            RequestOptions::TIMEOUT => 1.0,
+            RequestOptions::HEADERS => ['Accept' => 'application/json'],
+        ]);
+
+        return json_decode($response->getBody()->getContents());
+    }
 }

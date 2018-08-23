@@ -1,6 +1,6 @@
 <?php
 
-namespace Shopsys\FrameworkBundle\Model\Product\Elasticsearch;
+namespace Shopsys\FrameworkBundle\Model\Product\ProductSearchExport;
 
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Query\Expr\Join;
@@ -8,7 +8,7 @@ use Doctrine\ORM\QueryBuilder;
 use Shopsys\FrameworkBundle\Model\Product\Product;
 use Shopsys\FrameworkBundle\Model\Product\ProductVisibility;
 
-class ElasticsearchProductRepository
+class ProductSearchExportRepository
 {
     /**
      * @var \Doctrine\ORM\EntityManagerInterface

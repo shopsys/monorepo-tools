@@ -1,10 +1,10 @@
 <?php
 
-namespace Shopsys\FrameworkBundle\Model\Product\Elasticsearch;
+namespace Shopsys\FrameworkBundle\Model\Product\ProductSearchExport;
 
 use Shopsys\FrameworkBundle\Component\Domain\Domain;
 
-class ElasticsearchExportProductFacade
+class ProductSearchExportFacade
 {
     /**
      * @var \Shopsys\FrameworkBundle\Component\Domain\Domain
@@ -12,11 +12,11 @@ class ElasticsearchExportProductFacade
     protected $domain;
 
     /**
-     * @var \Shopsys\FrameworkBundle\Model\Product\Elasticsearch\ElasticsearchProductExporter
+     * @var \Shopsys\FrameworkBundle\Model\Product\ProductSearchExport\ProductSearchExportExporter
      */
     protected $exporter;
 
-    public function __construct(Domain $domain, ElasticsearchProductExporter $exporter)
+    public function __construct(Domain $domain, ProductSearchExportExporter $exporter)
     {
         $this->domain = $domain;
         $this->exporter = $exporter;

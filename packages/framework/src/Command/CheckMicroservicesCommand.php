@@ -19,9 +19,17 @@ class CheckMicroservicesCommand extends Command
      */
     protected $microserviceProductSearchClient;
 
-    public function __construct(MicroserviceClient $microserviceProductSearchClient)
-    {
+    /**
+     * @var \Shopsys\FrameworkBundle\Component\Microservice\MicroserviceClient
+     */
+    protected $microserviceProductSearchExportClient;
+
+    public function __construct(
+        MicroserviceClient $microserviceProductSearchClient,
+        MicroserviceClient $microserviceProductSearchExportClient
+    ) {
         $this->microserviceProductSearchClient = $microserviceProductSearchClient;
+        $this->microserviceProductSearchExportClient = $microserviceProductSearchExportClient;
 
         parent::__construct();
     }
@@ -35,6 +43,7 @@ class CheckMicroservicesCommand extends Command
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $this->checkAvailabilityOfMicroserviceProductSearch($output);
+        $this->checkAvailabilityOfMicroserviceProductSearchExport($output);
     }
 
     private function checkAvailabilityOfMicroserviceProductSearch(OutputInterface $output)
@@ -52,5 +61,19 @@ class CheckMicroservicesCommand extends Command
         }
 
         $output->writeln('Microservice Product Search is available');
+    }
+
+    private function checkAvailabilityOfMicroserviceProductSearchExport(OutputInterface $output)
+    {
+        $output->writeln('Checks availability of Microservice Product Search Export...');
+
+        try {
+            $this->microserviceProductSearchExportClient->get('/', []);
+        } catch (\GuzzleHttp\Exception\ConnectException $ex) {
+            $message = 'Microservice Product Search Export is unvailable!';
+            throw new \Shopsys\FrameworkBundle\Command\Exception\UnavailableMicroserviceException($message, 0, $ex);
+        }
+
+        $output->writeln('Microservice Product Search Export is available');
     }
 }

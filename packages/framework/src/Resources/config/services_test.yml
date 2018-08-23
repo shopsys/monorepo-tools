@@ -175,4 +175,4 @@ services:
 
     Shopsys\FrameworkBundle\Model\Localization\Localization: ~
 
-    Shopsys\FrameworkBundle\Model\Product\Elasticsearch\ElasticsearchProductRepository: ~
+    Shopsys\FrameworkBundle\Model\Product\ProductSearchExport\ProductSearchExportRepository: ~

@@ -1,15 +1,15 @@
 <?php
 
-namespace Tests\ShopBundle\Database\Model\Product\Elasticsearch;
+namespace Tests\ShopBundle\Database\Model\Product\ProductSearchExport;
 
 use Shopsys\FrameworkBundle\Component\Domain\Domain;
-use Shopsys\FrameworkBundle\Model\Product\Elasticsearch\ElasticsearchProductRepository;
+use Shopsys\FrameworkBundle\Model\Product\ProductSearchExport\ProductSearchExportRepository;
 use Tests\ShopBundle\Test\DatabaseTestCase;
 
-class ElasticsearchProductRepositoryTest extends DatabaseTestCase
+class ProductSearchExportRepositoryTest extends DatabaseTestCase
 {
     /**
-     * @var \Shopsys\FrameworkBundle\Model\Product\Elasticsearch\ElasticsearchProductRepository
+     * @var \Shopsys\FrameworkBundle\Model\Product\ProductSearchExport\ProductSearchExportRepository
      */
     private $repository;
 
@@ -21,7 +21,7 @@ class ElasticsearchProductRepositoryTest extends DatabaseTestCase
     protected function setUp()
     {
         parent::setUp();
-        $this->repository = $this->getContainer()->get(ElasticsearchProductRepository::class);
+        $this->repository = $this->getContainer()->get(ProductSearchExportRepository::class);
         $this->domain = $this->getContainer()->get(Domain::class);
     }
 

@@ -283,8 +283,6 @@ services:
         tags:
             - { name: kernel.event_subscriber }
 
-    Shopsys\FrameworkBundle\Component\Microservice\MicroserviceClient: ~
-
     Shopsys\FrameworkBundle\Component\HttpFoundation\TransactionalMasterRequestService:
         tags:
             - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest }
@@ -634,6 +632,7 @@ services:
     Shopsys\FrameworkBundle\Command\CheckMicroservicesCommand:
         arguments:
             $microserviceProductSearchClient: '@shopsys.microservice_client.product_search'
+            $microserviceProductSearchExportClient: '@shopsys.microservice_client.product_search_export'
 
     Shopsys\FrameworkBundle\Model\PersonalData\PersonalDataAccessRequestFactoryInterface:
         alias: Shopsys\FrameworkBundle\Model\PersonalData\PersonalDataAccessRequestFactory
@@ -915,27 +914,22 @@ services:
     Shopsys\FrameworkBundle\Model\Transport\TransportDataFactoryInterface:
         alias: Shopsys\FrameworkBundle\Model\Transport\TransportDataFactory
 
-    Elasticsearch\ClientBuilder:
-        class: Elasticsearch\ClientBuilder
-        factory: [Elasticsearch\ClientBuilder, create]
-        calls:
-            -   method: setHosts
-                arguments:
-                    - '%elasticsearch_hosts%'
-
-    Elasticsearch\Client:
-        class: Elasticsearch\Client
-        factory: ['@Elasticsearch\ClientBuilder', build]
-
-    Shopsys\FrameworkBundle\Component\Elasticsearch\ElasticsearchStructureFacade:
+    Shopsys\FrameworkBundle\Component\Microservice\ProductSearchExport\ProductSearchExportStructureFacade:
         arguments:
-            - '%shopsys.framework.elasticsearch_sources_dir%'
+            $microserviceClient: '@shopsys.microservice_client.product_search_export'
 
-    Shopsys\FrameworkBundle\Model\Product\Elasticsearch\ElasticsearchProductExporter: ~
+    Shopsys\FrameworkBundle\Model\Product\ProductSearchExport\ProductSearchExportExporter:
+        arguments:
+            $client: '@shopsys.microservice_client.product_search_export'
 
-    Shopsys\FrameworkBundle\Model\Product\Elasticsearch\ElasticsearchProductDataConverter: ~
+    Shopsys\FrameworkBundle\Model\Product\ProductSearchExport\ProductSearchExportDataConverter: ~
 
     shopsys.microservice_client.product_search:
         factory: 'Shopsys\FrameworkBundle\Component\Microservice\MicroserviceClientFactory:create'
         arguments:
             $microserviceUrl: '%microservice_product_search_url%'
+
+    shopsys.microservice_client.product_search_export:
+        factory: 'Shopsys\FrameworkBundle\Component\Microservice\MicroserviceClientFactory:create'
+        arguments:
+            $microserviceUrl: '%microservice_product_search_export_url%'
