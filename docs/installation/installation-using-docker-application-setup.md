@@ -39,15 +39,28 @@ In this moment the microservice is ready for the requests processing.
 
 *Note: You can switch the running process to run in the background by pressing `CTRL+Z` and executing `bg`.*
 
-## 2. Setup the Shopsys Framework application
+## 2. Setup the microservice for product search export
+
+You have to follow the same steps as you did for **product search microservice** also for **product search export microservice**.
+The product search export is in [its own repository](https://github.com/shopsys/microservice-product-search-export).
+
+Edit your `docker-compose.yml` and run `docker-compose --force-recreate -d`
+
+Connect to container `docker exec -it shopsys-framework-microservice-product-search-export sh`
+
+Install dependecies `composer install`
+
+Run server `php bin/console server:run *:8000`
+
+## 3. Setup the Shopsys Framework application
 Now that the Docker environment is prepared and the product search microservice is up and running, we can setup the application itself.
 
-### 2.1. Connect into terminal of the Docker container
+### 3.1. Connect into terminal of the Docker container
 ```
 docker exec -it shopsys-framework-php-fpm sh
 ```
 
-### 2.2. Install dependencies and configure parameters
+### 3.2. Install dependencies and configure parameters
 ```
 composer install
 ```
@@ -71,26 +84,26 @@ For development choose `n` when asked `Build in production environment? (Y/n)`.
 
 It will set the environment in your application to `dev` (this will, for example, show Symfony Web Debug Toolbar).
 
-### 2.3. Configure domains
+### 3.3. Configure domains
 Create `domains_urls.yml` from `domains_urls.yml.dist`.
 
 ```
 cp app/config/domains_urls.yml.dist app/config/domains_urls.yml
 ```
 
-### 2.4. Create databases
+### 3.4. Create databases
 ```
 php phing db-create
 php phing test-db-create
 ```
 
-### 2.5. Build the application
+### 3.5. Build the application
 ```
 php phing build-demo-dev
 php phing img-demo
 ```
 
-## 3. See it in your browser!
+## 4. See it in your browser!
 
 Open [http://127.0.0.1:8000/](http://127.0.0.1:8000/) to see running application.
 

@@ -15,8 +15,13 @@ There is a list of all the repositories maintained by monorepo, changes in log b
 * [shopsys/product-feed-heureka-delivery]
 * [shopsys/product-feed-zbozi]
 * [shopsys/microservice-product-search]
+* [shopsys/microservice-product-search-export]
 
 ## [From 7.0.0-alpha5 to Unreleased]
+### [shopsys/project-base]
+- added [Microservice Product Search Export](https://github.com/shopsys/microservice-product-search-export)
+    - check changes in the `docker-compose.yml` template you used and replicate them, there is a new container `microservice-product-search-export`
+    - `parameters.yml.dist` contains new parameter `microservice_product_search_export_url`
 
 ### [shopsys/framework]
 - check for usages of `TransportEditFormType` - it was removed and all it's attributes were moved to `TransportFormType` so use this form instead
@@ -327,3 +332,4 @@ parameters:
 [shopsys/migrations]: https://github.com/shopsys/migrations 
 [shopsys/monorepo-tools]: https://github.com/shopsys/monorepo-tools
 [shopsys/microservice-product-search]: https://github.com/shopsys/microservice-product-search
+[shopsys/microservice-product-search-export]: https://github.com/shopsys/microservice-product-search-export

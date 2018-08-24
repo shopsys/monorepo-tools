@@ -17,6 +17,7 @@ There is a list of all the repositories maintained by monorepo, changes in log b
 * [shopsys/product-feed-heureka-delivery]
 * [shopsys/product-feed-zbozi]
 * [shopsys/microservice-product-search]
+* [shopsys/microservice-product-search-export]
 
 Packages are formatted by release version. You can see all the changes done to package that you carry about with this tree.
 
@@ -30,11 +31,24 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
     - `TransportEditFormType` was removed and it's attributes were moved to `TransportFormType`
     - `PaymentEditFormType` was removed and it's attributes were moved to `PaymentFormType`
     - `ProductEditFormType` was removed and it's attributes were moved to `ProductFormType`
+- [#429 - Microservice Product Search Export](https://github.com/shopsys/shopsys/pull/429)
+    - framework doesn't use Elasticsearch directly anymore
+    - feeds Elasticsearch via Product Search Export microservice
+
+### [shopsys/shopsys]
+#### Added
+- [#429 - Microservice Product Search Export](https://github.com/shopsys/shopsys/pull/429)
+    - added [Microservice Product Search Export](https://github.com/shopsys/microservice-product-search-export), microservice is used for feeding Elasticsearch by products
 
 ### [shopsys/coding-standards]
 #### Added
 - [#384 - cs: keep class spacing consistent](https://github.com/shopsys/shopsys/pull/384) [@TomasVotruba]
     - added new rule (along with fixer `ClassAttributesSeparationFixer`) into `easy-coding-standard.yml`
+
+### [shopsys/microservice-product-search-export]
+#### Added
+- [#429 - Microservice Product Search Export](https://github.com/shopsys/shopsys/pull/429)
+    - the repository was added, extracting product search export functionality from the Shopsys Framework
 
 ## [7.0.0-alpha5] - 2018-08-22
 ### [shopsys/framework]
@@ -1432,6 +1446,7 @@ That's why is this section formatted differently.
 [shopsys/migrations]: https://github.com/shopsys/migrations
 [shopsys/monorepo-tools]: https://github.com/shopsys/monorepo-tools
 [shopsys/microservice-product-search]: https://github.com/shopsys/microservice-product-search
+[shopsys/microservice-product-search-export]: https://github.com/shopsys/microservice-product-search-export
 
 [@pk16011990]: https://github.com/pk16011990
 [@stanoMilan]: https://github.com/stanoMilan
