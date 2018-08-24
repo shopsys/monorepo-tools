@@ -4,7 +4,7 @@ namespace Shopsys\FrameworkBundle\Controller\Admin;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Shopsys\FrameworkBundle\Component\Router\Security\Annotation\CsrfProtection;
-use Shopsys\FrameworkBundle\Form\Admin\Transport\TransportEditFormType;
+use Shopsys\FrameworkBundle\Form\Admin\Transport\TransportFormType;
 use Shopsys\FrameworkBundle\Model\AdminNavigation\BreadcrumbOverrider;
 use Shopsys\FrameworkBundle\Model\Pricing\Currency\CurrencyFacade;
 use Shopsys\FrameworkBundle\Model\Transport\Grid\TransportGridFactory;
@@ -61,7 +61,7 @@ class TransportController extends AdminBaseController
     {
         $transportData = $this->transportDataFactory->create();
 
-        $form = $this->createForm(TransportEditFormType::class, $transportData, [
+        $form = $this->createForm(TransportFormType::class, $transportData, [
             'transport' => null,
         ]);
         $form->handleRequest($request);
@@ -99,7 +99,7 @@ class TransportController extends AdminBaseController
         $transport = $this->transportFacade->getById($id);
         $transportData = $this->transportDataFactory->createFromTransport($transport);
 
-        $form = $this->createForm(TransportEditFormType::class, $transportData, [
+        $form = $this->createForm(TransportFormType::class, $transportData, [
             'transport' => $transport,
         ]);
         $form->handleRequest($request);

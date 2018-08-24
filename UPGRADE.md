@@ -18,6 +18,9 @@ There is a list of all the repositories maintained by monorepo, changes in log b
 
 ## [From 7.0.0-alpha5 to Unreleased]
 
+### [shopsys/framework]
+- check for usages of `TransportEditFormType` - it was removed and all it's attributes were moved to `TransportFormType` so use this form instead
+
 ## [From 7.0.0-alpha4 to 7.0.0-alpha5]
 
 ### [shopsys/framework]
