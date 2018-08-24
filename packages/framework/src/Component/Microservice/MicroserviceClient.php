@@ -7,8 +7,6 @@ use GuzzleHttp\RequestOptions;
 
 class MicroserviceClient
 {
-    const PARAMETER_DOMAIN_ID = 'domainId';
-
     /**
      * @var \GuzzleHttp\Client
      */
@@ -29,56 +27,76 @@ class MicroserviceClient
      */
     public function get(string $resource, array $parameters = [])
     {
-        if (array_key_exists(self::PARAMETER_DOMAIN_ID, $parameters)) {
-            $domainId = (int)$parameters[self::PARAMETER_DOMAIN_ID];
-            $resource = $domainId . '/' . $resource;
+        $options = array_merge(
+            $this->createDefaultOptions(),
+            [RequestOptions::QUERY => $parameters]
+        );
 
-            unset($parameters[self::PARAMETER_DOMAIN_ID]);
-        }
-
-        $response = $this->guzzleClient->get($resource, [
-            RequestOptions::QUERY => $parameters,
-            RequestOptions::CONNECT_TIMEOUT => 0.1,
-            RequestOptions::TIMEOUT => 1.0,
-            RequestOptions::HEADERS => ['Accept' => 'application/json'],
-        ]);
+        $response = $this->guzzleClient->get($resource, $options);
 
         return json_decode($response->getBody()->getContents());
     }
 
+    /**
+     * @param string $resource
+     * @param array $parameters
+     * @return mixed
+     */
     public function post(string $resource, array $parameters = [])
     {
-        $response = $this->guzzleClient->post($resource, [
-            RequestOptions::JSON => $parameters,
-            RequestOptions::CONNECT_TIMEOUT => 0.1,
-            RequestOptions::TIMEOUT => 1.0,
-            RequestOptions::HEADERS => ['Accept' => 'application/json'],
-        ]);
+        $options = $this->createJsonOptions($parameters);
+        $response = $this->guzzleClient->post($resource, $options);
 
         return json_decode($response->getBody()->getContents());
     }
 
+    /**
+     * @param string $resource
+     * @param array $parameters
+     * @return mixed
+     */
     public function delete(string $resource, array $parameters = [])
     {
-        $response = $this->guzzleClient->delete($resource, [
-            RequestOptions::JSON => $parameters,
-            RequestOptions::CONNECT_TIMEOUT => 0.1,
-            RequestOptions::TIMEOUT => 1.0,
-            RequestOptions::HEADERS => ['Accept' => 'application/json'],
-        ]);
+        $options = $this->createJsonOptions($parameters);
+        $response = $this->guzzleClient->delete($resource, $options);
 
         return json_decode($response->getBody()->getContents());
     }
 
+    /**
+     * @param string $resource
+     * @param array $parameters
+     * @return mixed
+     */
     public function patch(string $resource, array $parameters = [])
     {
-        $response = $this->guzzleClient->patch($resource, [
-            RequestOptions::JSON => $parameters,
+        $options = $this->createJsonOptions($parameters);
+        $response = $this->guzzleClient->patch($resource, $options);
+
+        return json_decode($response->getBody()->getContents());
+    }
+
+    /**
+     * @return array
+     */
+    protected function createDefaultOptions(): array
+    {
+        return [
             RequestOptions::CONNECT_TIMEOUT => 0.1,
             RequestOptions::TIMEOUT => 1.0,
             RequestOptions::HEADERS => ['Accept' => 'application/json'],
-        ]);
+        ];
+    }
 
-        return json_decode($response->getBody()->getContents());
+    /**
+     * @param array $jsonData
+     * @return array
+     */
+    protected function createJsonOptions(array $jsonData): array
+    {
+        return array_merge(
+            $this->createDefaultOptions(),
+            [RequestOptions::JSON => $jsonData]
+        );
     }
 }

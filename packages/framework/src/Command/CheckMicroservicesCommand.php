@@ -51,9 +51,9 @@ class CheckMicroservicesCommand extends Command
         $output->writeln('Checks availability of Microservice Product Search...');
 
         try {
-            $this->microserviceProductSearchClient->get('search-product-ids', [
+            $resource = sprintf('%s/search-product-ids', 1);
+            $this->microserviceProductSearchClient->get($resource, [
                 'searchText' => '',
-                'domainId' => 1,
             ]);
         } catch (\GuzzleHttp\Exception\ConnectException $ex) {
             $message = 'Microservice Product Search is unvailable!';
