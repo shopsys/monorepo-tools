@@ -28,6 +28,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 #### Changed
 - [#428 - *EditFromTypes removal](https://github.com/shopsys/shopsys/pull/428)
     - `TransportEditFormType` was removed and it's attributes were moved to `TransportFormType`
+    - `PaymentEditFormType` was removed and it's attributes were moved to `PaymentFormType`
 
 ### [shopsys/coding-standards]
 #### Added
