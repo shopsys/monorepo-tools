@@ -360,7 +360,7 @@ class ProductVisibilityRepositoryTest extends DatabaseTestCase
 In [`NewProductTest`](../../project-base/tests/ShopBundle/Smoke/NewProductTest.php) 
 add following line to the `fillForm()` method:
 ```php
-$form['product_edit_form[productData][extId]'] = 123456;
+$form['product_form[extId]'] = 123456;
 ```
 
 ## Data fixtures

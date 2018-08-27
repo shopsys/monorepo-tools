@@ -6,24 +6,34 @@ use Ivory\CKEditorBundle\Form\Type\CKEditorType;
 use Shopsys\FormTypesBundle\MultidomainType;
 use Shopsys\FormTypesBundle\YesNoType;
 use Shopsys\FrameworkBundle\Component\Domain\Domain;
+use Shopsys\FrameworkBundle\Component\Plugin\PluginCrudExtensionFacade;
+use Shopsys\FrameworkBundle\Form\Admin\Product\Parameter\ProductParameterValueFormType;
 use Shopsys\FrameworkBundle\Form\CategoriesType;
+use Shopsys\FrameworkBundle\Form\Constraints\UniqueProductParameters;
 use Shopsys\FrameworkBundle\Form\DatePickerType;
 use Shopsys\FrameworkBundle\Form\DisplayOnlyType;
 use Shopsys\FrameworkBundle\Form\DisplayOnlyUrlType;
 use Shopsys\FrameworkBundle\Form\FormRenderingConfigurationExtension;
 use Shopsys\FrameworkBundle\Form\GroupType;
+use Shopsys\FrameworkBundle\Form\ImageUploadType;
 use Shopsys\FrameworkBundle\Form\Locale\LocalizedType;
 use Shopsys\FrameworkBundle\Form\LocalizedFullWidthType;
 use Shopsys\FrameworkBundle\Form\ProductCalculatedPricesType;
+use Shopsys\FrameworkBundle\Form\ProductParameterValueType;
+use Shopsys\FrameworkBundle\Form\ProductsType;
+use Shopsys\FrameworkBundle\Form\Transformers\ProductParameterValueToProductParameterValuesLocalizedTransformer;
+use Shopsys\FrameworkBundle\Form\Transformers\RemoveDuplicatesFromArrayTransformer;
 use Shopsys\FrameworkBundle\Form\UrlListType;
 use Shopsys\FrameworkBundle\Form\ValidationGroup;
 use Shopsys\FrameworkBundle\Form\WarningMessageType;
 use Shopsys\FrameworkBundle\Model\Category\CategoryFacade;
+use Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroupFacade;
 use Shopsys\FrameworkBundle\Model\Pricing\Vat\VatFacade;
 use Shopsys\FrameworkBundle\Model\Product\Availability\AvailabilityFacade;
 use Shopsys\FrameworkBundle\Model\Product\Brand\BrandFacade;
 use Shopsys\FrameworkBundle\Model\Product\Flag\FlagFacade;
 use Shopsys\FrameworkBundle\Model\Product\Product;
+use Shopsys\FrameworkBundle\Model\Product\ProductData;
 use Shopsys\FrameworkBundle\Model\Product\Unit\UnitFacade;
 use Shopsys\FrameworkBundle\Model\Seo\SeoSettingFacade;
 use Symfony\Component\Form\AbstractType;
@@ -31,6 +41,7 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\MoneyType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -44,6 +55,9 @@ class ProductFormType extends AbstractType
     const VALIDATION_GROUP_USING_STOCK = 'usingStock';
     const VALIDATION_GROUP_USING_STOCK_AND_ALTERNATE_AVAILABILITY = 'usingStockAndAlternateAvailability';
     const VALIDATION_GROUP_NOT_USING_STOCK = 'notUsingStock';
+
+    const CSRF_TOKEN_ID = 'product_edit_type';
+    const VALIDATION_GROUP_MANUAL_PRICE_CALCULATION = 'manualPriceCalculation';
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Pricing\Vat\VatFacade
@@ -85,6 +99,26 @@ class ProductFormType extends AbstractType
      */
     private $categoryFacade;
 
+    /**
+     * @var \Shopsys\FrameworkBundle\Form\Transformers\RemoveDuplicatesFromArrayTransformer
+     */
+    private $removeDuplicatesTransformer;
+
+    /**
+     * @var \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroupFacade
+     */
+    private $pricingGroupFacade;
+
+    /**
+     * @var \Shopsys\FrameworkBundle\Component\Plugin\PluginCrudExtensionFacade
+     */
+    private $pluginDataFormExtensionFacade;
+
+    /**
+     * @var \Shopsys\FrameworkBundle\Form\Transformers\ProductParameterValueToProductParameterValuesLocalizedTransformer
+     */
+    private $productParameterValueToProductParameterValuesLocalizedTransformer;
+
     public function __construct(
         VatFacade $vatFacade,
         AvailabilityFacade $availabilityFacade,
@@ -93,7 +127,11 @@ class ProductFormType extends AbstractType
         UnitFacade $unitFacade,
         Domain $domain,
         SeoSettingFacade $seoSettingFacade,
-        CategoryFacade $categoryFacade
+        CategoryFacade $categoryFacade,
+        RemoveDuplicatesFromArrayTransformer $removeDuplicatesTransformer,
+        PricingGroupFacade $pricingGroupFacade,
+        PluginCrudExtensionFacade $pluginDataFormExtensionFacade,
+        ProductParameterValueToProductParameterValuesLocalizedTransformer $productParameterValueToProductParameterValuesLocalizedTransformer
     ) {
         $this->vatFacade = $vatFacade;
         $this->availabilityFacade = $availabilityFacade;
@@ -103,6 +141,10 @@ class ProductFormType extends AbstractType
         $this->domain = $domain;
         $this->seoSettingFacade = $seoSettingFacade;
         $this->categoryFacade = $categoryFacade;
+        $this->removeDuplicatesTransformer = $removeDuplicatesTransformer;
+        $this->pricingGroupFacade = $pricingGroupFacade;
+        $this->pluginDataFormExtensionFacade = $pluginDataFormExtensionFacade;
+        $this->productParameterValueToProductParameterValuesLocalizedTransformer = $productParameterValueToProductParameterValuesLocalizedTransformer;
     }
 
     /**
@@ -143,7 +185,12 @@ class ProductFormType extends AbstractType
         $builder->add($this->createPricesGroup($builder, $product));
         $builder->add($this->createDescriptionsGroup($builder, $product));
         $builder->add($this->createShortDescriptionsGroup($builder, $product));
+        $builder->add($this->createParametersGroup($builder));
         $builder->add($this->createSeoGroup($builder, $product));
+        $builder->add($this->createImagesGroup($builder, $options));
+        $builder->add($this->createAccessoriesGroup($builder, $product));
+        $builder->add('save', SubmitType::class);
+        $this->pluginDataFormExtensionFacade->extendForm($builder, 'product', 'pluginData');
     }
 
     /**
@@ -155,7 +202,9 @@ class ProductFormType extends AbstractType
             ->setRequired('product')
             ->setAllowedTypes('product', [Product::class, 'null'])
             ->setDefaults([
+                'data_class' => ProductData::class,
                 'attr' => ['novalidate' => 'novalidate'],
+                'csrf_token_id' => self::CSRF_TOKEN_ID,
                 'validation_groups' => function (FormInterface $form) {
                     $validationGroups = [ValidationGroup::VALIDATION_GROUP_DEFAULT];
                     $productData = $form->getData();
@@ -172,6 +221,10 @@ class ProductFormType extends AbstractType
 
                     if ($productData->priceCalculationType === Product::PRICE_CALCULATION_TYPE_AUTO) {
                         $validationGroups[] = self::VALIDATION_GROUP_AUTO_PRICE_CALCULATION;
+                    }
+
+                    if ($productData->priceCalculationType === Product::PRICE_CALCULATION_TYPE_MANUAL) {
+                        $validationGroups[] = self::VALIDATION_GROUP_MANUAL_PRICE_CALCULATION;
                     }
 
                     return $validationGroups;
@@ -609,6 +662,48 @@ class ProductFormType extends AbstractType
                 'disabled' => $this->isProductMainVariant($product),
                 'label' => t('Base price'),
             ]);
+        $manualInputPricesByPricingGroup = $builder->create('manualInputPricesByPricingGroupId', FormType::class, [
+            'compound' => true,
+            'render_form_row' => false,
+            'disabled' => $product !== null && $product->isMainVariant(),
+        ]);
+        foreach ($this->pricingGroupFacade->getAll() as $pricingGroup) {
+            $manualInputPricesByPricingGroup
+                ->add($pricingGroup->getId(), MoneyType::class, [
+                    'currency' => false,
+                    'scale' => 6,
+                    'required' => true,
+                    'invalid_message' => 'Please enter price in correct format (positive number with decimal separator)',
+                    'constraints' => [
+                        new Constraints\NotBlank([
+                            'message' => 'Please enter price',
+                            'groups' => [self::VALIDATION_GROUP_MANUAL_PRICE_CALCULATION],
+                        ]),
+                        new Constraints\GreaterThanOrEqual([
+                            'value' => 0,
+                            'message' => 'Price must be greater or equal to {{ compared_value }}',
+                            'groups' => [self::VALIDATION_GROUP_MANUAL_PRICE_CALCULATION],
+                        ]),
+                    ],
+                    'label' => $pricingGroup->getName(),
+                ]);
+        }
+        $productCalculatedPricesGroup->add($manualInputPricesByPricingGroup);
+        $builderPricesGroup->add($productCalculatedPricesGroup);
+
+        if ($product !== null && $product->isMainVariant()) {
+            $builderPricesGroup->remove('vat');
+            $builderPricesGroup->remove('priceCalculationType');
+            $builderPricesGroup->remove('productCalculatedPricesGroup');
+            $builderPricesGroup->add('disabledPricesOnMainVariant', DisplayOnlyType::class, [
+                'mapped' => false,
+                'required' => true,
+                'data' => t('You can set the prices on product detail of specific variant.'),
+                'attr' => [
+                    'class' => 'form-input-disabled form-line--disabled position__actual font-size-13',
+                ],
+            ]);
+        }
 
         return $builderPricesGroup;
     }
@@ -631,7 +726,7 @@ class ProductFormType extends AbstractType
                 'attr' => [
                     'placeholder' => $this->getTitlePlaceholder($locale, $product),
                     'class' => 'js-dynamic-placeholder',
-                    'data-placeholder-source-input-id' => 'product_edit_form_productData_name_' . $locale,
+                    'data-placeholder-source-input-id' => 'product_form_name_' . $locale,
                 ],
             ];
             $seoMetaDescriptionsOptionsByDomainId[$domainId] = [
@@ -723,6 +818,19 @@ class ProductFormType extends AbstractType
             'render_form_row' => true,
         ]);
 
+        $variantGroup->add('variants', ProductsType::class, [
+            'required' => false,
+            'main_product' => $product,
+            'allow_main_variants' => false,
+            'allow_variants' => false,
+            'label_button_add' => t('Add variant'),
+            'label' => t('Variants'),
+            'top_info_title' => t('Product is main variant.'),
+            'attr' => [
+                'class' => 'wrap-border',
+            ],
+        ]);
+
         return $variantGroup;
     }
 
@@ -752,5 +860,86 @@ class ProductFormType extends AbstractType
     private function isProductVariant(?Product $product)
     {
         return $product !== null && $product->isVariant();
+    }
+
+    /**
+     * @param \Symfony\Component\Form\FormBuilderInterface $builder
+     * @return \Symfony\Component\Form\FormBuilderInterface
+     */
+    private function createParametersGroup(FormBuilderInterface $builder): FormBuilderInterface
+    {
+        $builderParametersGroup = $builder->create('parametersGroup', GroupType::class, [
+            'label' => t('Parameters'),
+            'is_group_container_to_render_as_the_last_one' => true,
+        ]);
+
+        $builderParametersGroup
+            ->add($builder->create('parameters', ProductParameterValueType::class, [
+                'required' => false,
+                'allow_add' => true,
+                'allow_delete' => true,
+                'entry_type' => ProductParameterValueFormType::class,
+                'constraints' => [
+                    new UniqueProductParameters([
+                        'message' => 'Each parameter can be used only once',
+                    ]),
+                ],
+                'error_bubbling' => false,
+                'render_form_row' => false,
+            ])
+                ->addViewTransformer($this->productParameterValueToProductParameterValuesLocalizedTransformer));
+
+        return $builderParametersGroup;
+    }
+
+    /**
+     * @param \Symfony\Component\Form\FormBuilderInterface $builder
+     * @param array $options
+     * @return \Symfony\Component\Form\FormBuilderInterface
+     */
+    private function createImagesGroup(FormBuilderInterface $builder, array $options): FormBuilderInterface
+    {
+        $builderImageGroup = $builder->create('imageGroup', GroupType::class, [
+            'label' => t('Images'),
+        ]);
+        $builderImageGroup
+            ->add('images', ImageUploadType::class, [
+                'required' => false,
+                'multiple' => true,
+                'file_constraints' => [
+                    new Constraints\Image([
+                        'mimeTypes' => ['image/png', 'image/jpg', 'image/jpeg', 'image/gif'],
+                        'mimeTypesMessage' => 'Image can be only in JPG, GIF or PNG format',
+                        'maxSize' => '2M',
+                        'maxSizeMessage' => 'Uploaded image is to large ({{ size }} {{ suffix }}). '
+                            . 'Maximum size of an image is {{ limit }} {{ suffix }}.',
+                    ]),
+                ],
+                'entity' => $options['product'],
+                'info_text' => t('You can upload following formats: PNG, JPG, GIF'),
+                'label' => t('Images'),
+            ]);
+
+        return $builderImageGroup;
+    }
+
+    /**
+     * @param \Symfony\Component\Form\FormBuilderInterface $builder
+     * @param \Shopsys\FrameworkBundle\Model\Product\Product|null $product
+     * @return \Symfony\Component\Form\FormBuilderInterface
+     */
+    private function createAccessoriesGroup(FormBuilderInterface $builder, ?Product $product): FormBuilderInterface
+    {
+        return $builder
+            ->create('accessories', ProductsType::class, [
+                'required' => false,
+                'main_product' => $product,
+                'sortable' => true,
+                'label' => t('Accessories'),
+                'attr' => [
+                    'class' => 'wrap-border',
+                ],
+            ])
+            ->addViewTransformer($this->removeDuplicatesTransformer);
     }
 }

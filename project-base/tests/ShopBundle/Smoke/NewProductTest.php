@@ -5,7 +5,7 @@ namespace Tests\ShopBundle\Smoke;
 use Shopsys\FrameworkBundle\DataFixtures\Demo\AvailabilityDataFixture;
 use Shopsys\FrameworkBundle\DataFixtures\Demo\UnitDataFixture;
 use Shopsys\FrameworkBundle\DataFixtures\Demo\VatDataFixture;
-use Shopsys\FrameworkBundle\Form\Admin\Product\ProductEditFormType;
+use Shopsys\FrameworkBundle\Form\Admin\Product\ProductFormType;
 use Symfony\Component\DomCrawler\Form;
 use Symfony\Component\Security\Csrf\CsrfToken;
 use Tests\ShopBundle\Test\FunctionalTestCase;
@@ -25,7 +25,7 @@ class NewProductTest extends FunctionalTestCase
         $client1 = $this->getClient(false, 'admin', 'admin123');
         $crawler = $client1->request('GET', $relativeUrl);
 
-        $form = $crawler->filter('form[name=product_edit_form]')->form();
+        $form = $crawler->filter('form[name=product_form]')->form();
         $this->fillForm($form);
 
         $client2 = $this->getClient(true, 'admin', 'admin123');
@@ -36,7 +36,7 @@ class NewProductTest extends FunctionalTestCase
 
         $tokenManager = $client2->getContainer()->get('security.csrf.token_manager');
         /* @var $tokenManager \Symfony\Component\Security\Csrf\CsrfTokenManager */
-        $token = $tokenManager->getToken(ProductEditFormType::CSRF_TOKEN_ID);
+        $token = $tokenManager->getToken(ProductFormType::CSRF_TOKEN_ID);
         $this->setFormCsrfToken($form, $token);
 
         $client2->submit($form);
@@ -56,22 +56,22 @@ class NewProductTest extends FunctionalTestCase
      */
     private function fillForm(Form $form)
     {
-        $nameForms = $form->get('product_edit_form[name]');
+        $nameForms = $form->get('product_form[name]');
         /* @var $nameForms \Symfony\Component\DomCrawler\Field\InputFormField[] */
         foreach ($nameForms as $nameForm) {
             $nameForm->setValue('testProduct');
         }
-        $form['product_edit_form[productData][basicInformationGroup][catnum]'] = '123456';
-        $form['product_edit_form[productData][basicInformationGroup][partno]'] = '123456';
-        $form['product_edit_form[productData][basicInformationGroup][ean]'] = '123456';
-        $form['product_edit_form[productData][descriptionsGroup][descriptions][1]'] = 'test description';
-        $form['product_edit_form[productData][pricesGroup][productCalculatedPricesGroup][price]'] = '10000';
-        $form['product_edit_form[productData][pricesGroup][vat]']->select($this->getReference(VatDataFixture::VAT_ZERO)->getId());
-        $form['product_edit_form[productData][displayAvailabilityGroup][sellingFrom]'] = '1.1.1990';
-        $form['product_edit_form[productData][displayAvailabilityGroup][sellingTo]'] = '1.1.2000';
-        $form['product_edit_form[productData][displayAvailabilityGroup][stockGroup][stockQuantity]'] = '10';
-        $form['product_edit_form[productData][displayAvailabilityGroup][unit]']->select($this->getReference(UnitDataFixture::UNIT_CUBIC_METERS)->getId());
-        $form['product_edit_form[productData][displayAvailabilityGroup][availability]']->select($this->getReference(AvailabilityDataFixture::AVAILABILITY_IN_STOCK)->getId());
+        $form['product_form[basicInformationGroup][catnum]'] = '123456';
+        $form['product_form[basicInformationGroup][partno]'] = '123456';
+        $form['product_form[basicInformationGroup][ean]'] = '123456';
+        $form['product_form[descriptionsGroup][descriptions][1]'] = 'test description';
+        $form['product_form[pricesGroup][productCalculatedPricesGroup][price]'] = '10000';
+        $form['product_form[pricesGroup][vat]']->select($this->getReference(VatDataFixture::VAT_ZERO)->getId());
+        $form['product_form[displayAvailabilityGroup][sellingFrom]'] = '1.1.1990';
+        $form['product_form[displayAvailabilityGroup][sellingTo]'] = '1.1.2000';
+        $form['product_form[displayAvailabilityGroup][stockGroup][stockQuantity]'] = '10';
+        $form['product_form[displayAvailabilityGroup][unit]']->select($this->getReference(UnitDataFixture::UNIT_CUBIC_METERS)->getId());
+        $form['product_form[displayAvailabilityGroup][availability]']->select($this->getReference(AvailabilityDataFixture::AVAILABILITY_IN_STOCK)->getId());
     }
 
     /**
@@ -80,6 +80,6 @@ class NewProductTest extends FunctionalTestCase
      */
     private function setFormCsrfToken(Form $form, CsrfToken $token)
     {
-        $form['product_edit_form[_token]'] = $token->getValue();
+        $form['product_form[_token]'] = $token->getValue();
     }
 }
