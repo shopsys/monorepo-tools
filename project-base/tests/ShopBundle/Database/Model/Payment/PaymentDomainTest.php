@@ -2,9 +2,9 @@
 
 namespace Tests\ShopBundle\Database\Model\Payment;
 
-use Shopsys\FrameworkBundle\Model\Payment\Payment;
-use Shopsys\FrameworkBundle\Model\Payment\PaymentDataFactory;
+use Shopsys\FrameworkBundle\Model\Payment\PaymentDataFactoryInterface;
 use Shopsys\FrameworkBundle\Model\Payment\PaymentFactory;
+use Shopsys\ShopBundle\Model\Payment\Payment;
 use Tests\ShopBundle\Test\DatabaseTestCase;
 
 class PaymentDomainTest extends DatabaseTestCase
@@ -13,7 +13,7 @@ class PaymentDomainTest extends DatabaseTestCase
     const SECOND_DOMAIN_ID = 2;
 
     /**
-     * @var \Shopsys\FrameworkBundle\Model\Payment\PaymentDataFactory
+     * @var \Shopsys\ShopBundle\Model\Payment\PaymentDataFactory
      */
     private $paymentDataFactory;
 
@@ -30,7 +30,7 @@ class PaymentDomainTest extends DatabaseTestCase
     public function setUp()
     {
         parent::setUp();
-        $this->paymentDataFactory = $this->getContainer()->get(PaymentDataFactory::class);
+        $this->paymentDataFactory = $this->getContainer()->get(PaymentDataFactoryInterface::class);
         $this->paymentFactory = $this->getContainer()->get(PaymentFactory::class);
         $this->em = $this->getEntityManager();
     }
@@ -79,8 +79,8 @@ class PaymentDomainTest extends DatabaseTestCase
     }
 
     /**
-     * @param \Shopsys\FrameworkBundle\Model\Payment\Payment $payment
-     * @return \Shopsys\FrameworkBundle\Model\Payment\Payment
+     * @param \Shopsys\ShopBundle\Model\Payment\Payment $payment
+     * @return \Shopsys\ShopBundle\Model\Payment\Payment
      */
     private function getRefreshedPaymentFromDatabase(Payment $payment)
     {

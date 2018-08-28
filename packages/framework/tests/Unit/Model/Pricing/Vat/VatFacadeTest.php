@@ -4,6 +4,7 @@ namespace Tests\FrameworkBundle\Unit\Model\Pricing\Vat;
 
 use Doctrine\ORM\EntityManager;
 use PHPUnit\Framework\TestCase;
+use Shopsys\FrameworkBundle\Component\EntityExtension\EntityNameResolver;
 use Shopsys\FrameworkBundle\Component\Setting\Setting;
 use Shopsys\FrameworkBundle\Model\Pricing\Vat\Vat;
 use Shopsys\FrameworkBundle\Model\Pricing\Vat\VatFacade;
@@ -51,7 +52,7 @@ class VatFacadeTest extends TestCase
             $vatService,
             $settingMock,
             $productPriceRecalculationSchedulerMock,
-            new VatFactory()
+            new VatFactory(new EntityNameResolver([]))
         );
 
         $this->assertSame($expected, $vatFacade->getDefaultVat());
@@ -88,7 +89,7 @@ class VatFacadeTest extends TestCase
             $vatService,
             $settingMock,
             $productPriceRecalculationSchedulerMock,
-            new VatFactory()
+            new VatFactory(new EntityNameResolver([]))
         );
         $vatFacade->setDefaultVat($vatMock);
     }

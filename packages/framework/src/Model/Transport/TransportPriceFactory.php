@@ -2,10 +2,24 @@
 
 namespace Shopsys\FrameworkBundle\Model\Transport;
 
+use Shopsys\FrameworkBundle\Component\EntityExtension\EntityNameResolver;
 use Shopsys\FrameworkBundle\Model\Pricing\Currency\Currency;
 
 class TransportPriceFactory implements TransportPriceFactoryInterface
 {
+    /**
+     * @var \Shopsys\FrameworkBundle\Component\EntityExtension\EntityNameResolver
+     */
+    private $entityNameResolver;
+
+    /**
+     * @param \Shopsys\FrameworkBundle\Component\EntityExtension\EntityNameResolver $entityNameResolver
+     */
+    public function __construct(EntityNameResolver $entityNameResolver)
+    {
+        $this->entityNameResolver = $entityNameResolver;
+    }
+
     /**
      * @param \Shopsys\FrameworkBundle\Model\Transport\Transport $transport
      * @param \Shopsys\FrameworkBundle\Model\Pricing\Currency\Currency $currency
@@ -17,6 +31,8 @@ class TransportPriceFactory implements TransportPriceFactoryInterface
         Currency $currency,
         string $price
     ): TransportPrice {
-        return new TransportPrice($transport, $currency, $price);
+        $classData = $this->entityNameResolver->resolve(TransportPrice::class);
+
+        return new $classData($transport, $currency, $price);
     }
 }

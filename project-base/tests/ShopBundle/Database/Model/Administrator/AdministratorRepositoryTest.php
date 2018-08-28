@@ -15,7 +15,7 @@ class AdministratorRepositoryTest extends DatabaseTestCase
         $multidomainLoginTokenExpiration = new DateTime('+60 seconds');
 
         $administrator = $this->getReference(AdministratorDataFixture::ADMINISTRATOR);
-        /* @var $administrator \Shopsys\FrameworkBundle\Model\Administrator\Administrator */
+        /* @var $administrator \Shopsys\ShopBundle\Model\Administrator\Administrator */
         $administratorRepository = $this->getContainer()->get(AdministratorRepository::class);
         /* @var $administratorRepository \Shopsys\FrameworkBundle\Model\Administrator\AdministratorRepository */
 
@@ -34,7 +34,7 @@ class AdministratorRepositoryTest extends DatabaseTestCase
         $multidomainLoginTokenExpiration = new DateTime('+60 seconds');
 
         $administrator = $this->getReference(AdministratorDataFixture::ADMINISTRATOR);
-        /* @var $administrator \Shopsys\FrameworkBundle\Model\Administrator\Administrator */
+        /* @var $administrator \Shopsys\ShopBundle\Model\Administrator\Administrator */
         $administratorRepository = $this->getContainer()->get(AdministratorRepository::class);
         /* @var $administratorRepository \Shopsys\FrameworkBundle\Model\Administrator\AdministratorRepository */
 
@@ -52,7 +52,7 @@ class AdministratorRepositoryTest extends DatabaseTestCase
         $multidomainLoginTokenExpiration = new DateTime('-60 seconds');
 
         $administrator = $this->getReference(AdministratorDataFixture::ADMINISTRATOR);
-        /* @var $administrator \Shopsys\FrameworkBundle\Model\Administrator\Administrator */
+        /* @var $administrator \Shopsys\ShopBundle\Model\Administrator\Administrator */
         $administratorRepository = $this->getContainer()->get(AdministratorRepository::class);
         /* @var $administratorRepository \Shopsys\FrameworkBundle\Model\Administrator\AdministratorRepository */
 

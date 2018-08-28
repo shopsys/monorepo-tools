@@ -16,7 +16,7 @@ class ArticleTest extends DatabaseTestCase
     private $articleDataFactory;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Article\ArticleFactory
+     * @var \Shopsys\FrameworkBundle\Model\Article\ArticleFactory
      */
     private $articleFactory;
 

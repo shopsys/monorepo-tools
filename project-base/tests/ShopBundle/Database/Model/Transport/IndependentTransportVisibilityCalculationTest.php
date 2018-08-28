@@ -5,8 +5,8 @@ namespace Tests\ShopBundle\Database\Model\Transport;
 use Shopsys\FrameworkBundle\Model\Pricing\Vat\Vat;
 use Shopsys\FrameworkBundle\Model\Pricing\Vat\VatData;
 use Shopsys\FrameworkBundle\Model\Transport\IndependentTransportVisibilityCalculation;
-use Shopsys\FrameworkBundle\Model\Transport\Transport;
-use Shopsys\FrameworkBundle\Model\Transport\TransportDataFactory;
+use Shopsys\FrameworkBundle\Model\Transport\TransportDataFactoryInterface;
+use Shopsys\ShopBundle\Model\Transport\Transport;
 use Tests\ShopBundle\Test\DatabaseTestCase;
 
 class IndependentTransportVisibilityCalculationTest extends DatabaseTestCase
@@ -117,7 +117,7 @@ class IndependentTransportVisibilityCalculationTest extends DatabaseTestCase
      * @param \Shopsys\FrameworkBundle\Model\Pricing\Vat\Vat $vat
      * @param array $enabledForDomains
      * @param bool $hidden
-     * @return \Shopsys\FrameworkBundle\Model\Transport\Transport
+     * @return \Shopsys\ShopBundle\Model\Transport\Transport
      */
     public function getDefaultTransport(Vat $vat, $enabledForDomains, $hidden)
     {
@@ -148,10 +148,10 @@ class IndependentTransportVisibilityCalculationTest extends DatabaseTestCase
     }
 
     /**
-     * @return \Shopsys\FrameworkBundle\Model\Transport\TransportDataFactory
+     * @return \Shopsys\ShopBundle\Model\Transport\TransportDataFactory
      */
     public function getTransportDataFactory()
     {
-        return $this->getContainer()->get(TransportDataFactory::class);
+        return $this->getContainer()->get(TransportDataFactoryInterface::class);
     }
 }

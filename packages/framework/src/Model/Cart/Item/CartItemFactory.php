@@ -2,11 +2,25 @@
 
 namespace Shopsys\FrameworkBundle\Model\Cart\Item;
 
+use Shopsys\FrameworkBundle\Component\EntityExtension\EntityNameResolver;
 use Shopsys\FrameworkBundle\Model\Customer\CustomerIdentifier;
 use Shopsys\FrameworkBundle\Model\Product\Product;
 
 class CartItemFactory implements CartItemFactoryInterface
 {
+    /**
+     * @var \Shopsys\FrameworkBundle\Component\EntityExtension\EntityNameResolver
+     */
+    private $entityNameResolver;
+
+    /**
+     * @param \Shopsys\FrameworkBundle\Component\EntityExtension\EntityNameResolver $entityNameResolver
+     */
+    public function __construct(EntityNameResolver $entityNameResolver)
+    {
+        $this->entityNameResolver = $entityNameResolver;
+    }
+
     /**
      * @param \Shopsys\FrameworkBundle\Model\Customer\CustomerIdentifier $customerIdentifier
      * @param \Shopsys\FrameworkBundle\Model\Product\Product $product
@@ -20,6 +34,8 @@ class CartItemFactory implements CartItemFactoryInterface
         int $quantity,
         string $watchedPrice
     ): CartItem {
-        return new CartItem($customerIdentifier, $product, $quantity, $watchedPrice);
+        $classData = $this->entityNameResolver->resolve(CartItem::class);
+
+        return new $classData($customerIdentifier, $product, $quantity, $watchedPrice);
     }
 }

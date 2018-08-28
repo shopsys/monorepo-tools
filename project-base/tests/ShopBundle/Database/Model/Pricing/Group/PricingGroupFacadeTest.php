@@ -7,7 +7,7 @@ use Shopsys\FrameworkBundle\DataFixtures\Demo\PricingGroupDataFixture;
 use Shopsys\FrameworkBundle\DataFixtures\Demo\ProductDataFixture;
 use Shopsys\FrameworkBundle\Model\Customer\CustomerDataFactory;
 use Shopsys\FrameworkBundle\Model\Customer\CustomerFacade;
-use Shopsys\FrameworkBundle\Model\Customer\UserDataFactory;
+use Shopsys\FrameworkBundle\Model\Customer\UserDataFactoryInterface;
 use Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroupData;
 use Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroupFacade;
 use Shopsys\FrameworkBundle\Model\Product\Pricing\ProductCalculatedPrice;
@@ -20,7 +20,7 @@ class PricingGroupFacadeTest extends DatabaseTestCase
     {
         $em = $this->getEntityManager();
         $product = $this->getReference(ProductDataFixture::PRODUCT_PREFIX . '1');
-        /* @var $prodcu \Shopsys\FrameworkBundle\Model\Product\Product */
+        /* @var $prodcu \Shopsys\ShopBundle\Model\Product\Product */
         $pricingGroupFacade = $this->getContainer()->get(PricingGroupFacade::class);
         /* @var $pricingGroupFacade \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroupFacade */
         $productPriceRecalculator = $this->getContainer()->get(ProductPriceRecalculator::class);
@@ -43,7 +43,7 @@ class PricingGroupFacadeTest extends DatabaseTestCase
     {
         $em = $this->getEntityManager();
         $product = $this->getReference(ProductDataFixture::PRODUCT_PREFIX . '1');
-        /* @var $prodcu \Shopsys\FrameworkBundle\Model\Product\Product */
+        /* @var $prodcu \Shopsys\ShopBundle\Model\Product\Product */
         $pricingGroup = $this->getReference(PricingGroupDataFixture::PRICING_GROUP_ORDINARY_DOMAIN_1);
         /* @var $pricingGroup \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroup */
         $pricingGroupFacade = $this->getContainer()->get(PricingGroupFacade::class);
@@ -92,9 +92,9 @@ class PricingGroupFacadeTest extends DatabaseTestCase
         $pricingGroupToReplaceWith = $this->getReference(PricingGroupDataFixture::PRICING_GROUP_ORDINARY_DOMAIN_1);
         /* @var $pricingGroup \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroup */
         $user = $customerFacade->getUserById(1);
-        /* @var $user \Shopsys\FrameworkBundle\Model\Customer\User */
-        $userDataFactory = $this->getContainer()->get(UserDataFactory::class);
-        /* @var $userDataFactory \Shopsys\FrameworkBundle\Model\Customer\UserDataFactory */
+        /* @var $user \Shopsys\ShopBundle\Model\Customer\User */
+        $userDataFactory = $this->getContainer()->get(UserDataFactoryInterface::class);
+        /* @var $userDataFactory \Shopsys\ShopBundle\Model\Customer\UserDataFactory */
         $userData = $userDataFactory->createFromUser($user);
         $customerDataFactory = $this->getContainer()->get(CustomerDataFactory::class);
         /* @var $customerDataFactory \Shopsys\FrameworkBundle\Model\Customer\CustomerDataFactory */

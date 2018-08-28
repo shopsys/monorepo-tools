@@ -2,10 +2,24 @@
 
 namespace Shopsys\FrameworkBundle\Model\Category\TopCategory;
 
+use Shopsys\FrameworkBundle\Component\EntityExtension\EntityNameResolver;
 use Shopsys\FrameworkBundle\Model\Category\Category;
 
 class TopCategoryFactory implements TopCategoryFactoryInterface
 {
+    /**
+     * @var \Shopsys\FrameworkBundle\Component\EntityExtension\EntityNameResolver
+     */
+    private $entityNameResolver;
+
+    /**
+     * @param \Shopsys\FrameworkBundle\Component\EntityExtension\EntityNameResolver $entityNameResolver
+     */
+    public function __construct(EntityNameResolver $entityNameResolver)
+    {
+        $this->entityNameResolver = $entityNameResolver;
+    }
+
     /**
      * @param \Shopsys\FrameworkBundle\Model\Category\Category $category
      * @param int $domainId
@@ -17,6 +31,8 @@ class TopCategoryFactory implements TopCategoryFactoryInterface
         int $domainId,
         int $position
     ): TopCategory {
-        return new TopCategory($category, $domainId, $position);
+        $classData = $this->entityNameResolver->resolve(TopCategory::class);
+
+        return new $classData($category, $domainId, $position);
     }
 }

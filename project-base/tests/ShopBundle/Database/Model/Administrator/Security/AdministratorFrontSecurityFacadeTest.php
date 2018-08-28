@@ -26,7 +26,7 @@ class AdministratorFrontSecurityFacadeTest extends DatabaseTestCase
         /* @var $administratorFrontSecurityFacade \Shopsys\FrameworkBundle\Model\Administrator\Security\AdministratorFrontSecurityFacade */
 
         $administrator = $this->getReference(AdministratorDataFixture::ADMINISTRATOR);
-        /* @var $administrator \Shopsys\FrameworkBundle\Model\Administrator\Administrator */
+        /* @var $administrator \Shopsys\ShopBundle\Model\Administrator\Administrator */
         $password = '';
         $roles = $administrator->getRoles();
         $token = new UsernamePasswordToken($administrator, $password, AdministratorFrontSecurityFacade::ADMINISTRATION_CONTEXT, $roles);

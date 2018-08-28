@@ -3,6 +3,7 @@
 namespace Tests\FrameworkBundle\Unit\Model\Product;
 
 use PHPUnit\Framework\TestCase;
+use Shopsys\FrameworkBundle\Component\EntityExtension\EntityNameResolver;
 use Shopsys\FrameworkBundle\Model\Product\Product;
 use Shopsys\FrameworkBundle\Model\Product\ProductData;
 use Shopsys\FrameworkBundle\Model\Product\ProductFactory;
@@ -12,7 +13,7 @@ class ProductVariantServiceTest extends TestCase
 {
     public function testCheckProductIsNotMainVariantException()
     {
-        $productVariantService = new ProductVariantService(new ProductFactory());
+        $productVariantService = new ProductVariantService(new ProductFactory(new EntityNameResolver([])));
         $productData = new ProductData();
         $variant = Product::create($productData);
         $mainVariant = Product::createMainVariant($productData, [$variant]);
@@ -23,7 +24,7 @@ class ProductVariantServiceTest extends TestCase
 
     public function testRefreshProductVariants()
     {
-        $productVariantService = new ProductVariantService(new ProductFactory());
+        $productVariantService = new ProductVariantService(new ProductFactory(new EntityNameResolver([])));
         $productData = new ProductData();
         $variant1 = Product::create($productData);
         $variant2 = Product::create($productData);
@@ -46,7 +47,7 @@ class ProductVariantServiceTest extends TestCase
         $mainProduct = Product::create(new ProductData());
         $variants = [];
 
-        $productVariantService = new ProductVariantService(new ProductFactory());
+        $productVariantService = new ProductVariantService(new ProductFactory(new EntityNameResolver([])));
         $mainVariant = $productVariantService->createMainVariant($mainVariantData, $mainProduct, $variants);
 
         $this->assertNotSame($mainProduct, $mainVariant);

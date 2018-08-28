@@ -4,8 +4,8 @@ namespace Tests\ShopBundle\Database\EntityExtension\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
-use Shopsys\FrameworkBundle\Model\Product\Product;
 use Shopsys\FrameworkBundle\Model\Product\ProductData;
+use Shopsys\ShopBundle\Model\Product\Product;
 
 /**
  * @ORM\Entity

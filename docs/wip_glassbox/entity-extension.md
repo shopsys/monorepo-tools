@@ -108,21 +108,22 @@ DiscriminatorMap must always contain descendants' FQN because LoadORMMetadataSub
 ## How can I extend an entity?
 
 * Create a new entity in your `src/Shopsys/ShopBundle/Model` directory that extends already existing framework entity
+  * there are entities that are already prepared out of the box
+    * `Administrator`
+    * `Article`
+    * `Brand`
+    * `Category`
+    * `Order`
+    * `Payment`
+    * `Product`
+    * `Transport`
+    * `User`
   * keep entity and table annotations
   * you can add new properties and use annotations to configure ORM
 * Add information about the entity extension into the container configuration
   * add it to the configuration parameter `shopsys.entity_extension.map`
   * use the parent entity name as a key and the extended entity name as a value
   * eg. `Shopsys\FrameworkBunde\Model\Product\Product: DreamProject\Model\Product\Product`
-* Create a factory for this entity
-  * Implement the factory interface from the framework
-    * eg. `class ProductFactory implements ProductFactoryInterface`
-  * Rewrite symfony configuration for the interface to alias your factory
-    * eg.
-      ```php
-        Shopsys\FrameworkBundle\Model\Product\ProductFactoryInterface:
-          alias: DreamProject\Model\Product\ProductFactory
-      ```
 * Create a new data object in your `src/Shopsys/ShopBundle/Model` directory that extends already existing framework entity data
 * Create a factory for this entity data
 * Implement the factory interface from the framework

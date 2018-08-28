@@ -3,10 +3,10 @@
 namespace Tests\ShopBundle\Database\Model\Payment;
 
 use Shopsys\FrameworkBundle\Model\Payment\IndependentPaymentVisibilityCalculation;
-use Shopsys\FrameworkBundle\Model\Payment\Payment;
-use Shopsys\FrameworkBundle\Model\Payment\PaymentDataFactory;
+use Shopsys\FrameworkBundle\Model\Payment\PaymentDataFactoryInterface;
 use Shopsys\FrameworkBundle\Model\Pricing\Vat\Vat;
 use Shopsys\FrameworkBundle\Model\Pricing\Vat\VatData;
+use Shopsys\ShopBundle\Model\Payment\Payment;
 use Tests\ShopBundle\Test\DatabaseTestCase;
 
 class IndependentPaymentVisibilityCalculationTest extends DatabaseTestCase
@@ -144,10 +144,10 @@ class IndependentPaymentVisibilityCalculationTest extends DatabaseTestCase
     }
 
     /**
-     * @return \Shopsys\FrameworkBundle\Model\Payment\PaymentDataFactory
+     * @return \Shopsys\ShopBundle\Model\Payment\PaymentDataFactory
      */
     public function getPaymentDataFactory()
     {
-        return $this->getContainer()->get(PaymentDataFactory::class);
+        return $this->getContainer()->get(PaymentDataFactoryInterface::class);
     }
 }

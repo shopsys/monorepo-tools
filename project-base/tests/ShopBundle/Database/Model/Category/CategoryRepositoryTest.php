@@ -2,7 +2,7 @@
 
 namespace Tests\ShopBundle\Database\Model\Category;
 
-use Shopsys\FrameworkBundle\Model\Category\CategoryDataFactory;
+use Shopsys\FrameworkBundle\Model\Category\CategoryDataFactoryInterface;
 use Shopsys\FrameworkBundle\Model\Category\CategoryFacade;
 use Shopsys\FrameworkBundle\Model\Category\CategoryRepository;
 use Shopsys\FrameworkBundle\Model\Category\CategoryVisibilityRepository;
@@ -21,8 +21,8 @@ class CategoryRepositoryTest extends DatabaseTestCase
         /* @var $categoryRepository \Shopsys\FrameworkBundle\Model\Category\CategoryRepository */
         $categoryVisibilityRepository = $this->getContainer()->get(CategoryVisibilityRepository::class);
         /* @var $categoryVisibilityRepository \Shopsys\FrameworkBundle\Model\Category\CategoryVisibilityRepository */
-        $categoryDataFactory = $this->getContainer()->get(CategoryDataFactory::class);
-        /* @var $categoryDataFactory \Shopsys\FrameworkBundle\Model\Category\CategoryDataFactory */
+        $categoryDataFactory = $this->getContainer()->get(CategoryDataFactoryInterface::class);
+        /* @var $categoryDataFactory \Shopsys\ShopBundle\Model\Category\CategoryDataFactory */
 
         $categoryData = $categoryDataFactory->create();
         $categoryData->name = ['en' => 'name'];
@@ -51,8 +51,8 @@ class CategoryRepositoryTest extends DatabaseTestCase
         /* @var $categoryRepository \Shopsys\FrameworkBundle\Model\Category\CategoryRepository */
         $categoryVisibilityRepository = $this->getContainer()->get(CategoryVisibilityRepository::class);
         /* @var $categoryVisibilityRepository \Shopsys\FrameworkBundle\Model\Category\CategoryVisibilityRepository */
-        $categoryDataFactory = $this->getContainer()->get(CategoryDataFactory::class);
-        /* @var $categoryDataFactory \Shopsys\FrameworkBundle\Model\Category\CategoryDataFactory */
+        $categoryDataFactory = $this->getContainer()->get(CategoryDataFactoryInterface::class);
+        /* @var $categoryDataFactory \Shopsys\ShopBundle\Model\Category\CategoryDataFactory */
 
         $categoryData = $categoryDataFactory->create();
         $categoryData->name = ['en' => 'name'];

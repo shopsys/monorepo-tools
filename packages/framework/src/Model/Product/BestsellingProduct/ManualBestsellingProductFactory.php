@@ -2,11 +2,25 @@
 
 namespace Shopsys\FrameworkBundle\Model\Product\BestsellingProduct;
 
+use Shopsys\FrameworkBundle\Component\EntityExtension\EntityNameResolver;
 use Shopsys\FrameworkBundle\Model\Category\Category;
 use Shopsys\FrameworkBundle\Model\Product\Product;
 
 class ManualBestsellingProductFactory implements ManualBestsellingProductFactoryInterface
 {
+    /**
+     * @var \Shopsys\FrameworkBundle\Component\EntityExtension\EntityNameResolver
+     */
+    private $entityNameResolver;
+
+    /**
+     * @param \Shopsys\FrameworkBundle\Component\EntityExtension\EntityNameResolver $entityNameResolver
+     */
+    public function __construct(EntityNameResolver $entityNameResolver)
+    {
+        $this->entityNameResolver = $entityNameResolver;
+    }
+
     /**
      * @param int $domainId
      * @param \Shopsys\FrameworkBundle\Model\Category\Category $category
@@ -20,6 +34,8 @@ class ManualBestsellingProductFactory implements ManualBestsellingProductFactory
         Product $product,
         int $position
     ): ManualBestsellingProduct {
-        return new ManualBestsellingProduct($domainId, $category, $product, $position);
+        $classData = $this->entityNameResolver->resolve(ManualBestsellingProduct::class);
+
+        return new $classData($domainId, $category, $product, $position);
     }
 }

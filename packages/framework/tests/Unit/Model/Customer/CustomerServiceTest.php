@@ -4,6 +4,7 @@ namespace Tests\FrameworkBundle\Unit\Model\Customer;
 
 use DateTime;
 use PHPUnit\Framework\TestCase;
+use Shopsys\FrameworkBundle\Component\EntityExtension\EntityNameResolver;
 use Shopsys\FrameworkBundle\Model\Country\Country;
 use Shopsys\FrameworkBundle\Model\Country\CountryData;
 use Shopsys\FrameworkBundle\Model\Customer\BillingAddress;
@@ -353,8 +354,8 @@ class CustomerServiceTest extends TestCase
     private function getCustomerService()
     {
         $customerPasswordServiceMock = $this->createMock(CustomerPasswordService::class);
-        $deliveryAddressFactory = new DeliveryAddressFactory();
-        $userFactory = new UserFactory();
+        $deliveryAddressFactory = new DeliveryAddressFactory(new EntityNameResolver([]));
+        $userFactory = new UserFactory(new EntityNameResolver([]));
         $billingAddressDataFactory = new BillingAddressDataFactory();
         $deliveryAddressDataFactory = new DeliveryAddressDataFactory();
         $userDataFactory = new UserDataFactory($this->createMock(PricingGroupSettingFacade::class));

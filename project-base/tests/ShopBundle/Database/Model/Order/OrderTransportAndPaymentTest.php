@@ -2,14 +2,14 @@
 
 namespace Tests\ShopBundle\Database\Model\Order;
 
-use Shopsys\FrameworkBundle\Model\Payment\Payment;
-use Shopsys\FrameworkBundle\Model\Payment\PaymentDataFactory;
+use Shopsys\FrameworkBundle\Model\Payment\PaymentDataFactoryInterface;
 use Shopsys\FrameworkBundle\Model\Payment\PaymentFacade;
 use Shopsys\FrameworkBundle\Model\Pricing\Vat\Vat;
 use Shopsys\FrameworkBundle\Model\Pricing\Vat\VatData;
-use Shopsys\FrameworkBundle\Model\Transport\Transport;
-use Shopsys\FrameworkBundle\Model\Transport\TransportDataFactory;
+use Shopsys\FrameworkBundle\Model\Transport\TransportDataFactoryInterface;
 use Shopsys\FrameworkBundle\Model\Transport\TransportFacade;
+use Shopsys\ShopBundle\Model\Payment\Payment;
+use Shopsys\ShopBundle\Model\Transport\Transport;
 use Tests\ShopBundle\Test\DatabaseTestCase;
 
 class OrderTransportAndPaymentTest extends DatabaseTestCase
@@ -395,7 +395,7 @@ class OrderTransportAndPaymentTest extends DatabaseTestCase
      * @param \Shopsys\FrameworkBundle\Model\Pricing\Vat\Vat $vat
      * @param bool[] $enabledForDomains
      * @param bool $hidden
-     * @return \Shopsys\FrameworkBundle\Model\Transport\Transport
+     * @return \Shopsys\ShopBundle\Model\Transport\Transport
      */
     public function getDefaultTransport(Vat $vat, $enabledForDomains, $hidden)
     {
@@ -426,18 +426,18 @@ class OrderTransportAndPaymentTest extends DatabaseTestCase
     }
 
     /**
-     * @return \Shopsys\FrameworkBundle\Model\Payment\PaymentDataFactory
+     * @return \Shopsys\ShopBundle\Model\Payment\PaymentDataFactory
      */
     public function getPaymentDataFactory()
     {
-        return $this->getContainer()->get(PaymentDataFactory::class);
+        return $this->getContainer()->get(PaymentDataFactoryInterface::class);
     }
 
     /**
-     * @return \Shopsys\FrameworkBundle\Model\Transport\TransportDataFactory
+     * @return \Shopsys\ShopBundle\Model\Transport\TransportDataFactory
      */
     public function getTransportDataFactory()
     {
-        return $this->getContainer()->get(TransportDataFactory::class);
+        return $this->getContainer()->get(TransportDataFactoryInterface::class);
     }
 }

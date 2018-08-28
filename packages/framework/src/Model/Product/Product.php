@@ -349,7 +349,7 @@ class Product extends AbstractTranslatableEntity
      */
     public static function create(ProductData $productData)
     {
-        return new self($productData, null);
+        return new static($productData, null);
     }
 
     /**
@@ -359,7 +359,7 @@ class Product extends AbstractTranslatableEntity
      */
     public static function createMainVariant(ProductData $productData, array $variants)
     {
-        return new self($productData, $variants);
+        return new static($productData, $variants);
     }
 
     /**

@@ -2,10 +2,24 @@
 
 namespace Shopsys\FrameworkBundle\Model\Payment;
 
+use Shopsys\FrameworkBundle\Component\EntityExtension\EntityNameResolver;
 use Shopsys\FrameworkBundle\Model\Pricing\Currency\Currency;
 
 class PaymentPriceFactory implements PaymentPriceFactoryInterface
 {
+    /**
+     * @var \Shopsys\FrameworkBundle\Component\EntityExtension\EntityNameResolver
+     */
+    private $entityNameResolver;
+
+    /**
+     * @param \Shopsys\FrameworkBundle\Component\EntityExtension\EntityNameResolver $entityNameResolver
+     */
+    public function __construct(EntityNameResolver $entityNameResolver)
+    {
+        $this->entityNameResolver = $entityNameResolver;
+    }
+
     /**
      * @param \Shopsys\FrameworkBundle\Model\Payment\Payment $payment
      * @param \Shopsys\FrameworkBundle\Model\Pricing\Currency\Currency $currency
@@ -17,6 +31,8 @@ class PaymentPriceFactory implements PaymentPriceFactoryInterface
         Currency $currency,
         string $price
     ): PaymentPrice {
-        return new PaymentPrice($payment, $currency, $price);
+        $classData = $this->entityNameResolver->resolve(PaymentPrice::class);
+
+        return new $classData($payment, $currency, $price);
     }
 }

@@ -2,9 +2,9 @@
 
 namespace Tests\ShopBundle\Database\Model\Transport;
 
-use Shopsys\FrameworkBundle\Model\Transport\Transport;
-use Shopsys\FrameworkBundle\Model\Transport\TransportDataFactory;
+use Shopsys\FrameworkBundle\Model\Transport\TransportDataFactoryInterface;
 use Shopsys\FrameworkBundle\Model\Transport\TransportFactory;
+use Shopsys\ShopBundle\Model\Transport\Transport;
 use Tests\ShopBundle\Test\DatabaseTestCase;
 
 class TransportDomainTest extends DatabaseTestCase
@@ -13,7 +13,7 @@ class TransportDomainTest extends DatabaseTestCase
     const SECOND_DOMAIN_ID = 2;
 
     /**
-     * @var \Shopsys\FrameworkBundle\Model\Transport\TransportDataFactory
+     * @var \Shopsys\ShopBundle\Model\Transport\TransportDataFactory
      */
     private $transportDataFactory;
 
@@ -30,7 +30,7 @@ class TransportDomainTest extends DatabaseTestCase
     public function setUp()
     {
         parent::setUp();
-        $this->transportDataFactory = $this->getContainer()->get(TransportDataFactory::class);
+        $this->transportDataFactory = $this->getContainer()->get(TransportDataFactoryInterface::class);
         $this->transportFactory = $this->getContainer()->get(TransportFactory::class);
         $this->em = $this->getEntityManager();
     }
@@ -77,8 +77,8 @@ class TransportDomainTest extends DatabaseTestCase
     }
 
     /**
-     * @param \Shopsys\FrameworkBundle\Model\Transport\Transport $transport
-     * @return \Shopsys\FrameworkBundle\Model\Transport\Transport
+     * @param \Shopsys\ShopBundle\Model\Transport\Transport $transport
+     * @return \Shopsys\ShopBundle\Model\Transport\Transport
      */
     private function getRefreshedTransportFromDatabase(Transport $transport)
     {

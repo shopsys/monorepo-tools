@@ -64,7 +64,7 @@ class UserDataFactory implements UserDataFactoryInterface
      * @param \Shopsys\FrameworkBundle\Model\Customer\UserData $userData
      * @param \Shopsys\FrameworkBundle\Model\Customer\User $user
      */
-    private function fillFromUser(UserData $userData, User $user)
+    protected function fillFromUser(UserData $userData, User $user)
     {
         $userData->domainId = $user->getDomainId();
         $userData->firstName = $user->getFirstName();

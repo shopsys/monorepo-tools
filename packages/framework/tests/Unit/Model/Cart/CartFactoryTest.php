@@ -3,6 +3,7 @@
 namespace Tests\FrameworkBundle\Unit\Model\Cart;
 
 use PHPUnit\Framework\TestCase;
+use Shopsys\FrameworkBundle\Component\EntityExtension\EntityNameResolver;
 use Shopsys\FrameworkBundle\Model\Cart\CartFactory;
 use Shopsys\FrameworkBundle\Model\Cart\Item\CartItemRepository;
 use Shopsys\FrameworkBundle\Model\Cart\Watcher\CartWatcherFacade;
@@ -56,6 +57,6 @@ class CartFactoryTest extends TestCase
             ->getMock();
         $cartWatcherFacade->expects($this->any())->method('checkCartModifications');
 
-        return new CartFactory($cartItemRepository, $cartWatcherFacade);
+        return new CartFactory($cartItemRepository, $cartWatcherFacade, new EntityNameResolver([]));
     }
 }

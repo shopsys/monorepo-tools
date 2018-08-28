@@ -3,6 +3,7 @@
 namespace Tests\FrameworkBundle\Unit\Model\Transport;
 
 use PHPUnit\Framework\TestCase;
+use Shopsys\FrameworkBundle\Component\EntityExtension\EntityNameResolver;
 use Shopsys\FrameworkBundle\Model\Pricing\BasePriceCalculation;
 use Shopsys\FrameworkBundle\Model\Pricing\Currency\Currency;
 use Shopsys\FrameworkBundle\Model\Pricing\Currency\CurrencyData;
@@ -75,7 +76,7 @@ class TransportPriceCalculationTest extends TestCase
         $transportData->name = ['cs' => 'transportName'];
         $transportData->vat = $vat;
         $transport = new Transport($transportData);
-        $transport->setPrice(new TransportPriceFactory(), $currency, $inputPrice);
+        $transport->setPrice(new TransportPriceFactory(new EntityNameResolver([])), $currency, $inputPrice);
 
         $price = $transportPriceCalculation->calculateIndependentPrice($transport, $currency);
 

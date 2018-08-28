@@ -5,7 +5,7 @@ namespace Tests\ShopBundle\Database\Component\Doctrine;
 use Doctrine\ORM\Query\Expr\Join;
 use Shopsys\FrameworkBundle\Component\Doctrine\GroupedScalarHydrator;
 use Shopsys\FrameworkBundle\Model\Order\Item\OrderItem;
-use Shopsys\FrameworkBundle\Model\Order\Order;
+use Shopsys\ShopBundle\Model\Order\Order;
 use Tests\ShopBundle\Test\DatabaseTestCase;
 
 class GroupedScalarHydratorTest extends DatabaseTestCase

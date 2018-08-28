@@ -3,6 +3,7 @@
 namespace Tests\FrameworkBundle\Unit\Model\Product\Flag;
 
 use PHPUnit\Framework\TestCase;
+use Shopsys\FrameworkBundle\Component\EntityExtension\EntityNameResolver;
 use Shopsys\FrameworkBundle\Model\Product\Flag\Flag;
 use Shopsys\FrameworkBundle\Model\Product\Flag\FlagData;
 use Shopsys\FrameworkBundle\Model\Product\Flag\FlagDataFactory;
@@ -13,7 +14,7 @@ class FlagServiceTest extends TestCase
 {
     public function testCreate()
     {
-        $flagService = new FlagService(new FlagFactory());
+        $flagService = new FlagService(new FlagFactory(new EntityNameResolver([])));
 
         $flagDataOriginal = new FlagData();
         $flagDataOriginal->name = ['cs' => 'flagNameCs', 'en' => 'flagNameEn'];
@@ -28,7 +29,7 @@ class FlagServiceTest extends TestCase
 
     public function testEdit()
     {
-        $flagService = new FlagService(new FlagFactory());
+        $flagService = new FlagService(new FlagFactory(new EntityNameResolver([])));
 
         $flagDataOld = new FlagData();
         $flagDataOld->name = ['cs' => 'flagNameCs', 'en' => 'flagNameEn'];

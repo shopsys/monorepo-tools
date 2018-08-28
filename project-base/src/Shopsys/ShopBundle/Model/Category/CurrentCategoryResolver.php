@@ -18,6 +18,10 @@ class CurrentCategoryResolver
      */
     private $productFacade;
 
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Category\CategoryFacade $categoryFacade
+     * @param \Shopsys\FrameworkBundle\Model\Product\ProductFacade $productFacade
+     */
     public function __construct(
         CategoryFacade $categoryFacade,
         ProductFacade $productFacade
@@ -29,7 +33,7 @@ class CurrentCategoryResolver
     /**
      * @param \Symfony\Component\HttpFoundation\Request $request
      * @param int $domainId
-     * @return \Shopsys\FrameworkBundle\Model\Category\Category|null
+     * @return \Shopsys\ShopBundle\Model\Category\Category|null
      */
     public function findCurrentCategoryByRequest(Request $request, $domainId)
     {
