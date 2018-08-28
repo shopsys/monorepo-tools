@@ -2,6 +2,8 @@
 This guide provides instructions how to install Shopsys Framework on your local machine as a server.
 If you would like to use a prepared Docker container instead go to [Installation Using Docker](installation-using-docker.md).
 
+*This installation guide is not tested due to experimental microservices development.*
+
 ## Requirements
 First of all, you need to install the following software on your system:
 
@@ -78,27 +80,46 @@ In this moment the microservice is ready for the requests processing.
 
 *Note: If you use other port for the microservice to run, you'll have to pass its URL to the application as a parameter `microservice_product_search_url`.*
 
+#### 2.3. Set up the microservice for product search export
+You have to install also [microservice for product search export](https://github.com/shopsys/microservice-product-search-export).
+The installation is as same as for product search microservice. In short, it is:
+
+```
+git clone https://github.com/shopsys/microservice-product-search-export.git
+cd microservice-product-search-export
+
+composer install
+```
+
+configure connection to the Elasticsearch by setting up the ELASTICSEARCH_HOSTS_STRING environment variable
+```
+php bin/console server:run 127.0.0.1:8002
+```
+
+*Note: If you use other port for the microservice to run, you'll have to pass its URL to the application as a parameter `microservice_product_search_export_url`.*
+
 ### 3. Install dependencies and configure parameters
 Composer will prompt you to set main parameters (`app/config/parameters.yml`):
 
-| Name                              | Description                                                                   | Default value |
-| --------------------------------- | ----------------------------------------------------------------------------- | ------------- |
-| `database_host`                   | access data of your PostgreSQL database                                       | 127.0.0.1     |
-| `database_port`                   | ...                                                                           | 5432          |
-| `database_name`                   | ...                                                                           | shopsys       |
-| `database_user`                   | ...                                                                           | postgres      |
-| `database_password`               | ...                                                                           | ...           |
-| `database_server_version`         | version of your PostgreSQL server                                             | 10.5          |
-| `redis_host`                      | host of your Redis storage (credentials are not supported right now)          | 127.0.0.1     |
-| `mailer_transport`                | access data of your mail server                                               | ...           |
-| `mailer_host`                     | ...                                                                           | ...           |
-| `mailer_user`                     | ...                                                                           | ...           |
-| `mailer_password`                 | ...                                                                           | ...           |
-| `mailer_disable_delivery`         | set to `true` if you don't want to send any e-mails                           | ...           |
-| `mailer_master_email_address`     | set if you want to send all e-mails to one address (useful for development)   | ...           |
-| `mailer_delivery_whitelist`       | set if you want to have master e-mail but allow sending to specific addresses | ...           |
-| `microservice_product_search_url` | URL of the product search microservice                                        | http://127.0.0.1:8001 |
-| `secret`                          | randomly generated secret token                                               | ...           |
+| Name                                     | Description                                                                   | Default value |
+| ---------------------------------        | ----------------------------------------------------------------------------- | ------------- |
+| `database_host`                          | access data of your PostgreSQL database                                       | 127.0.0.1     |
+| `database_port`                          | ...                                                                           | 5432          |
+| `database_name`                          | ...                                                                           | shopsys       |
+| `database_user`                          | ...                                                                           | postgres      |
+| `database_password`                      | ...                                                                           | ...           |
+| `database_server_version`                | version of your PostgreSQL server                                             | 10.5          |
+| `redis_host`                             | host of your Redis storage (credentials are not supported right now)          | 127.0.0.1     |
+| `mailer_transport`                       | access data of your mail server                                               | ...           |
+| `mailer_host`                            | ...                                                                           | ...           |
+| `mailer_user`                            | ...                                                                           | ...           |
+| `mailer_password`                        | ...                                                                           | ...           |
+| `mailer_disable_delivery`                | set to `true` if you don't want to send any e-mails                           | ...           |
+| `mailer_master_email_address`            | set if you want to send all e-mails to one address (useful for development)   | ...           |
+| `mailer_delivery_whitelist`              | set if you want to have master e-mail but allow sending to specific addresses | ...           |
+| `microservice_product_search_url`        | URL of the product search microservice                                        | http://127.0.0.1:8001 |
+| `microservice_product_search_export_url` | URL of the product search export microservice                                 | http://127.0.0.1:8002 |
+| `secret`                                 | randomly generated secret token                                               | ...           |
 
 Composer will then prompt you to set parameters for testing environment (`app/config/parameters_test.yml`):
 

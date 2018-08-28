@@ -1,0 +1,37 @@
+live_check:
+    path: /
+    controller: Shopsys\MicroserviceProductSearchExport\Controller\LiveCheckController::checkAction
+    methods:
+        - GET
+
+create_index:
+    path: /{domainId}
+    controller: Shopsys\MicroserviceProductSearchExport\Controller\StructureController::createAction
+    methods:
+        - POST
+    requirements:
+        domainId: \d+
+
+delete_index:
+    path: /{domainId}
+    controller: Shopsys\MicroserviceProductSearchExport\Controller\StructureController::deleteAction
+    methods:
+        - DELETE
+    requirements:
+        domainId: \d+
+
+update_products:
+    path: /{domainId}/products
+    controller: Shopsys\MicroserviceProductSearchExport\Controller\ExportController::updateAction
+    methods:
+        - PATCH
+    requirements:
+        domainId: \d+
+
+delete_products:
+    path: /{domainId}/products
+    controller: Shopsys\MicroserviceProductSearchExport\Controller\ExportController::deleteAction
+    methods:
+        - DELETE
+    requirements:
+        domainId: \d+

@@ -1,4 +1,3 @@
 parameters:
     shopsys.framework.resources_dir: "%shopsys.framework.root_dir%/src/Resources"
     shopsys.framework.javascript_sources_dir: "%shopsys.framework.resources_dir%/scripts"
-    shopsys.framework.elasticsearch_sources_dir: "%shopsys.framework.resources_dir%/elasticsearch/definitions"

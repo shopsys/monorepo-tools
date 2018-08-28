@@ -4,6 +4,7 @@
     <property name="path.root" value="./project-base"/>
     <property name="path.vendor" value="./vendor"/>
     <property name="path.packages" value="./packages"/>
+    <property name="path.microservices" value="./microservices"/>
     <property name="path.bin-console" value="./project-base/bin/console"/>
     <property name="path.framework" value="${path.packages}/framework"/>
 
@@ -67,6 +68,7 @@
             <arg path="./packages/*/src"/>
             <arg path="./microservices/*/src"/>
             <arg path="./packages/*/tests" />
+            <arg path="./microservices/*/tests"/>
         </exec>
         <exec executable="${path.ecs.executable}" logoutput="true" passthru="true" checkreturn="true">
             <arg value="check" />
@@ -74,6 +76,7 @@
             <arg path="./packages/*/src"/>
             <arg path="./microservices/*/src"/>
             <arg path="./packages/*/tests" />
+            <arg path="./microservices/*/tests"/>
         </exec>
         <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
             <arg value="${path.bin-console}" />
@@ -105,6 +108,7 @@
             <arg path="./packages/*/src"/>
             <arg path="./microservices/*/src"/>
             <arg path="./packages/*/tests" />
+            <arg path="./microservices/*/tests"/>
         </exec>
         <exec executable="${path.eslint.executable}" passthru="true" checkreturn="true">
             <arg value="--color" />
@@ -125,6 +129,7 @@
             <arg path="./packages/*/src"/>
             <arg path="./microservices/*/src"/>
             <arg path="./packages/*/tests" />
+            <arg path="./microservices/*/tests"/>
         </exec>
         <exec executable="${path.eslint.executable}" passthru="true" checkreturn="true">
             <arg value="--color" />
@@ -174,6 +179,9 @@
         <exec executable="${path.vendor}/bin/phpunit" logoutput="true" passthru="true" checkreturn="true">
             <arg value="--configuration"/>
             <arg value="${path.packages}/framework/phpunit.xml"/>
+        </exec>
+        <exec executable="${path.vendor}/bin/phpunit" logoutput="true" passthru="true" checkreturn="true">
+            <arg value="${path.microservices}/product-search-export/tests"/>
         </exec>
     </target>
 

@@ -40,7 +40,8 @@
       "Tests\\ProductFeed\\ZboziBundle\\": "packages/product-feed-zbozi/tests/",
       "Tests\\ProductFeed\\GoogleBundle\\": "packages/product-feed-google/tests/",
       "Tests\\ProductFeed\\HeurekaBundle\\": "packages/product-feed-heureka/tests/",
-      "Tests\\ProductFeed\\HeurekaDeliveryBundle\\": "packages/product-feed-heureka-delivery/tests/"
+      "Tests\\ProductFeed\\HeurekaDeliveryBundle\\": "packages/product-feed-heureka-delivery/tests/",
+      "Shopsys\\MicroserviceProductSearchExport\\": "microservices/product-search-export/src/"
     }
   },
   "repositories": [

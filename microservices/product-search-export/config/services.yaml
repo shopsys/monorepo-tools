@@ -1,0 +1,33 @@
+parameters:
+    env(LOG_STREAM): /tmp/log-pipe
+    structure_dir: '../src/Resources/definition'
+
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        public: false
+
+    Elasticsearch\ClientBuilder:
+      class: Elasticsearch\ClientBuilder
+      factory: [Elasticsearch\ClientBuilder, create]
+      calls:
+        - method: setHosts
+          arguments:
+            - ['%env(ELASTICSEARCH_HOSTS_STRING)%']
+
+    Elasticsearch\Client:
+      class: Elasticsearch\Client
+      factory: ['@Elasticsearch\ClientBuilder', build]
+
+    Shopsys\MicroserviceProductSearchExport\:
+        resource: '../src/*'
+        exclude: '../src/{DependencyInjection,Entity,Migrations,Tests,Kernel.php}'
+
+    Shopsys\MicroserviceProductSearchExport\Controller\:
+        resource: '../src/Controller'
+        tags: ['controller.service_arguments']
+
+    Shopsys\MicroserviceProductSearchExport\Structure\StructureManager:
+        arguments:
+            - '%structure_dir%'
