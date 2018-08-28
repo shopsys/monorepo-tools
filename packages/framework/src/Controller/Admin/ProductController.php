@@ -8,7 +8,7 @@ use Shopsys\FrameworkBundle\Component\Domain\Domain;
 use Shopsys\FrameworkBundle\Component\Grid\GridFactory;
 use Shopsys\FrameworkBundle\Component\Grid\QueryBuilderWithRowManipulatorDataSource;
 use Shopsys\FrameworkBundle\Component\Router\Security\Annotation\CsrfProtection;
-use Shopsys\FrameworkBundle\Form\Admin\Product\ProductEditFormType;
+use Shopsys\FrameworkBundle\Form\Admin\Product\ProductFormType;
 use Shopsys\FrameworkBundle\Form\Admin\Product\ProductMassActionFormType;
 use Shopsys\FrameworkBundle\Form\Admin\Product\VariantFormType;
 use Shopsys\FrameworkBundle\Form\Admin\QuickSearch\QuickSearchFormData;
@@ -117,7 +117,7 @@ class ProductController extends AdminBaseController
         $product = $this->productFacade->getById($id);
         $productData = $this->productDataFactory->createFromProduct($product);
 
-        $form = $this->createForm(ProductEditFormType::class, $productData, ['product' => $product]);
+        $form = $this->createForm(ProductFormType::class, $productData, ['product' => $product]);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -155,7 +155,7 @@ class ProductController extends AdminBaseController
     {
         $productData = $this->productDataFactory->create();
 
-        $form = $this->createForm(ProductEditFormType::class, $productData, ['product' => null]);
+        $form = $this->createForm(ProductFormType::class, $productData, ['product' => null]);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {

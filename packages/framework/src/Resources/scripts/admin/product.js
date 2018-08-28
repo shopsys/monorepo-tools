@@ -4,8 +4,8 @@
     Shopsys.product = Shopsys.product || {};
 
     Shopsys.product.init = function () {
-        var usingStockSelection = $('#product_edit_form_productData_displayAvailabilityGroup_usingStock input[type="radio"]');
-        var $outOfStockActionSelection = $('select[name="product_edit_form[productData][displayAvailabilityGroup][stockGroup][outOfStockAction]"]');
+        var usingStockSelection = $('#product_form_displayAvailabilityGroup_usingStock input[type="radio"]');
+        var $outOfStockActionSelection = $('select[name="product_form[displayAvailabilityGroup][stockGroup][outOfStockAction]"]');
 
         usingStockSelection.change(function () {
             Shopsys.product.toggleIsUsingStock($(this).val() === '1');

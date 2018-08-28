@@ -4,7 +4,7 @@ namespace Shopsys\FrameworkBundle\Controller\Admin;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Shopsys\FrameworkBundle\Component\Router\Security\Annotation\CsrfProtection;
-use Shopsys\FrameworkBundle\Form\Admin\Payment\PaymentEditFormType;
+use Shopsys\FrameworkBundle\Form\Admin\Payment\PaymentFormType;
 use Shopsys\FrameworkBundle\Model\AdminNavigation\BreadcrumbOverrider;
 use Shopsys\FrameworkBundle\Model\Payment\Grid\PaymentGridFactory;
 use Shopsys\FrameworkBundle\Model\Payment\PaymentDataFactoryInterface;
@@ -61,7 +61,7 @@ class PaymentController extends AdminBaseController
     {
         $paymentData = $this->paymentDataFactory->create();
 
-        $form = $this->createForm(PaymentEditFormType::class, $paymentData, [
+        $form = $this->createForm(PaymentFormType::class, $paymentData, [
             'payment' => null,
         ]);
         $form->handleRequest($request);
@@ -99,7 +99,7 @@ class PaymentController extends AdminBaseController
         $payment = $this->paymentFacade->getById($id);
         $paymentData = $this->paymentDataFactory->createFromPayment($payment);
 
-        $form = $this->createForm(PaymentEditFormType::class, $paymentData, [
+        $form = $this->createForm(PaymentFormType::class, $paymentData, [
             'payment' => $payment,
         ]);
         $form->handleRequest($request);

@@ -9,7 +9,7 @@
 
             var $item = $(this).closest('.js-parameters-item');
             var index = $item.data('index');
-            Shopsys.validation.removeItemFromCollection('#product_edit_form_parameters', index);
+            Shopsys.validation.removeItemFromCollection('#product_form_parameters', index);
             $item.remove();
 
             Shopsys.formChangeInfo.showInfo();
@@ -35,7 +35,7 @@
             $collection.append($item);
             Shopsys.register.registerNewContent($item);
 
-            Shopsys.validation.addNewItemToCollection('#product_edit_form_parameters', index);
+            Shopsys.validation.addNewItemToCollection('#product_form_parameters', index);
             Shopsys.formChangeInfo.showInfo();
             Shopsys.parameters.refreshCount($collection);
 

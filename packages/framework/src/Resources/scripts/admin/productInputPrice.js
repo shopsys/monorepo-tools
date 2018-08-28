@@ -4,7 +4,7 @@
     Shopsys.productInputPrice = Shopsys.productInputPrice || {};
 
     Shopsys.productInputPrice.init = function () {
-        var $priceCalculationTypeSelection = $('#product_edit_form_productData_pricesGroup_priceCalculationType input[type="radio"]');
+        var $priceCalculationTypeSelection = $('#product_form_pricesGroup_priceCalculationType input[type="radio"]');
         $priceCalculationTypeSelection.change(function () {
             Shopsys.productInputPrice.showInputByPriceCalculationType($(this).val() === Shopsys.constant('\\Shopsys\\FrameworkBundle\\Model\\Product\\Product::PRICE_CALCULATION_TYPE_AUTO'));
         });

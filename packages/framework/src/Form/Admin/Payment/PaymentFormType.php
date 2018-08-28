@@ -9,11 +9,16 @@ use Shopsys\FrameworkBundle\Form\DomainsType;
 use Shopsys\FrameworkBundle\Form\GroupType;
 use Shopsys\FrameworkBundle\Form\ImageUploadType;
 use Shopsys\FrameworkBundle\Form\Locale\LocalizedType;
+use Shopsys\FrameworkBundle\Form\PriceTableType;
 use Shopsys\FrameworkBundle\Model\Payment\Payment;
+use Shopsys\FrameworkBundle\Model\Payment\PaymentData;
+use Shopsys\FrameworkBundle\Model\Payment\PaymentFacade;
+use Shopsys\FrameworkBundle\Model\Pricing\Currency\CurrencyFacade;
 use Shopsys\FrameworkBundle\Model\Pricing\Vat\VatFacade;
 use Shopsys\FrameworkBundle\Model\Transport\TransportFacade;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -31,12 +36,26 @@ class PaymentFormType extends AbstractType
      */
     private $vatFacade;
 
+    /**
+     * @var \Shopsys\FrameworkBundle\Model\Pricing\Currency\CurrencyFacade
+     */
+    private $currencyFacade;
+
+    /**
+     * @var \Shopsys\FrameworkBundle\Model\Payment\PaymentFacade
+     */
+    private $paymentFacade;
+
     public function __construct(
         TransportFacade $transportFacade,
-        VatFacade $vatFacade
+        VatFacade $vatFacade,
+        CurrencyFacade $currencyFacade,
+        PaymentFacade $paymentFacade
     ) {
         $this->transportFacade = $transportFacade;
         $this->vatFacade = $vatFacade;
+        $this->currencyFacade = $currencyFacade;
+        $this->paymentFacade = $paymentFacade;
     }
 
     /**
@@ -140,10 +159,22 @@ class PaymentFormType extends AbstractType
                 'info_text' => t('You can upload following formats: PNG, JPG, GIF'),
             ]);
 
+        $builderPriceGroup = $builder->create('prices', GroupType::class, [
+            'label' => t('Prices'),
+            'is_group_container_to_render_as_the_last_one' => true,
+        ]);
+        $builderPriceGroup
+            ->add('pricesByCurrencyId', PriceTableType::class, [
+                'currencies' => $this->currencyFacade->getAllIndexedById(),
+                'base_prices' => $payment !== null ? $this->paymentFacade->getIndependentBasePricesIndexedByCurrencyId($payment) : [],
+            ]);
+
         $builder
             ->add($builderBasicInformationGroup)
             ->add($builderAdditionalInformationGroup)
-            ->add($builderImageGroup);
+            ->add($builderImageGroup)
+            ->add($builderPriceGroup)
+            ->add('save', SubmitType::class);
     }
 
     /**
@@ -154,6 +185,7 @@ class PaymentFormType extends AbstractType
         $resolver->setRequired('payment')
             ->setAllowedTypes('payment', [Payment::class, 'null'])
             ->setDefaults([
+                'data_class' => PaymentData::class,
                 'attr' => ['novalidate' => 'novalidate'],
             ]);
     }
