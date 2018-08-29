@@ -36,15 +36,15 @@ done
 # Only non-empty are filtered by the commit-filter
 # The tags are rewritten as well as commits (the "cat" command will use original name without any change)
 if [ $(uname) == "Darwin" ]; then
-    XARGS_OPTS=""
+    XARGS_OPTS="-0"
     SED_OPTS="-E"
 else
-    XARGS_OPTS="-r"
+    XARGS_OPTS="-r -0"
     SED_OPTS="-r"
 fi
 SUBDIRECTORY=$SUBDIRECTORY SUBDIRECTORY_SED=${SUBDIRECTORY//-/\\-} TAB=$'\t' XARGS_OPTS=$XARGS_OPTS SED_OPTS=$SED_OPTS git filter-branch \
     --index-filter '
-    git -c core.quotepath=false ls-files | grep -vE "^\"*$SUBDIRECTORY/" | xargs $XARGS_OPTS git rm -q --cached
+    git -c core.quotepath=false ls-files | grep -vE "^\"*$SUBDIRECTORY/" | tr "\n" "\0" | xargs $XARGS_OPTS git rm -q --cached
     if [ "$(git ls-files)" != "" ]; then
         git ls-files -s | sed $SED_OPTS "s-($TAB\"*)$SUBDIRECTORY_SED/-\1-" | GIT_INDEX_FILE=$GIT_INDEX_FILE.new git update-index --index-info && mv $GIT_INDEX_FILE.new $GIT_INDEX_FILE
     fi' \
