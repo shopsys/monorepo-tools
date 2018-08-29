@@ -64,6 +64,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - [#429 - Microservice Product Search Export](https://github.com/shopsys/shopsys/pull/429)
     - the repository was added, extracting product search export functionality from the Shopsys Framework
 
+### [shopsys/monorepo-tools]
+#### Fixed
+- [#433 - monorepo-tools: splitting now works correctly on repositories containing files with spaces](https://github.com/shopsys/shopsys/pull/433) [@dominikkaluza]
+
+
 ## [7.0.0-alpha5] - 2018-08-22
 ### [shopsys/framework]
 #### Added
@@ -1469,3 +1474,4 @@ That's why is this section formatted differently.
 [@lukaso]: https://github.com/lukaso
 [@TomasVotruba]: https://github.com/TomasVotruba
 [@drekbour]: https://github.com/drekbour
+[@dominikkaluza]: https://github.com/dominikkaluza
