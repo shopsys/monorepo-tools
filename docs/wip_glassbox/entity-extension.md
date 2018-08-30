@@ -138,5 +138,7 @@ DiscriminatorMap must always contain descendants' FQN because LoadORMMetadataSub
   * in hydrated Doctrine references
   * in the EntityManager, Repositories and QueryBuilders
   * in newly created entities
+* If You are running tests, update also `\Tests\ShopBundle\Database\EntityExtension\EntityExtensionTest`
+  * add your extended entity into `$entityExtensionMap` in the `setUp()` method
 
 *Tip: to see how it works in practice check out `\Tests\ShopBundle\Database\EntityExtension\EntityExtensionTest` that tests end-to-end extensibility of `Product`, `Category` and `OrderItem`.*
