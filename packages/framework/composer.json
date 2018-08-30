@@ -108,5 +108,8 @@
     "suggest": {
         "ext-pgsql": "Required for dumping the Postgres database in shopsys:database:dump command",
         "ext-zip": "Required for handling the archive with images in shopsys:image:demo command"
+    },
+    "conflict": {
+        "symfony/dependency-injection": ">=3.4.15"
     }
 }

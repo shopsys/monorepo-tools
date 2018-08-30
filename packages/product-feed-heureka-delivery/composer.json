@@ -53,5 +53,8 @@
         "shopsys/coding-standards": "dev-master",
         "twig/extensions": "^1.5.1",
         "twig/twig": "^2.4.8"
+    },
+    "conflict": {
+        "symfony/dependency-injection": ">=3.4.15"
     }
 }
