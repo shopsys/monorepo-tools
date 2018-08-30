@@ -111,9 +111,9 @@ class UserRepository
             ->select('
                 u.id,
                 u.email,
+                u.telephone,
                 MAX(pg.name) AS pricingGroup,
                 MAX(ba.city) city,
-                MAX(ba.telephone) telephone,
                 MAX(CASE WHEN ba.companyCustomer = true
                         THEN ba.companyName
                         ELSE CONCAT(u.lastName, \' \', u.firstName)
@@ -140,7 +140,7 @@ class UserRepository
                         OR
                         NORMALIZE(ba.companyName) LIKE NORMALIZE(:text)
                         OR
-                        NORMALIZE(ba.telephone) LIKE :text
+                        NORMALIZE(u.telephone) LIKE :text
                     )');
             $querySearchText = DatabaseSearching::getFullTextLikeSearchString($quickSearchData->text);
             $queryBuilder->setParameter('text', $querySearchText);

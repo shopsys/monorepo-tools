@@ -204,7 +204,7 @@ class OrderDataFixture
             $orderData->email = $user->getEmail();
 
             $billingAddress = $user->getBillingAddress();
-            $orderData->telephone = $billingAddress->getTelephone();
+            $orderData->telephone = $user->getTelephone();
             $orderData->street = $billingAddress->getStreet();
             $orderData->city = $billingAddress->getCity();
             $orderData->postcode = $billingAddress->getPostcode();

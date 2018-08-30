@@ -23,6 +23,10 @@ There is a list of all the repositories maintained by monorepo, changes in log b
     - check changes in the `docker-compose.yml` template you used and replicate them, there is a new container `microservice-product-search-export`
     - `parameters.yml.dist` contains new parameter `microservice_product_search_export_url` which need to be filled in your `parameters.yml` (executing `composer install` should be enough)
 - instead of building the Docker images of the microservices yourself, you can use pre-built images on Docker Hub (see the `docker-compose.yml` template you used)
+- [#438 - Attribute telephone moved from a billing address to the personal data of a user](https://github.com/shopsys/shopsys/pull/438)
+    - edit `ShopBundle/Form/Front/Customer/BillingAddressFormType` - remove `telephone`
+    - edit `ShopBundle/Form/Front/Customer/UserFormType` - add `telephone`
+    - edit twig templates and tests in such a way as to reflect the movement of `telephone` attribute according to the [pull request](https://github.com/shopsys/shopsys/pull/438)
 
 ### [shopsys/framework]
 - check for usages of `TransportEditFormType` - it was removed and all it's attributes were moved to `TransportFormType` so use this form instead
@@ -33,6 +37,8 @@ There is a list of all the repositories maintained by monorepo, changes in log b
     - see the `github_oauth_token` argument setting in the `docker-compose.yml` template you used and replicate it
     - replace the `place-your-token-here` string by the token generated on [Github -> Settings -> Developer Settings -> Personal access tokens](https://github.com/settings/tokens/new?scopes=repo&description=Composer+API+token)
 - as there were changes in the Dockerfiles, rebuilding images  is needed (`docker-compose up -d --build`)
+- [#438 - Attribute telephone moved from a billing address to the personal data of a user](https://github.com/shopsys/shopsys/pull/438)
+    - this change can affect your extended forms and entities, reflect this change into your project
 
 ### [shopsys/shopsys]
 - when upgrading your installed [monorepo](docs/introduction/monorepo.md), you'll have to change the build context for the images of the microservices in `docker-compose.yml`

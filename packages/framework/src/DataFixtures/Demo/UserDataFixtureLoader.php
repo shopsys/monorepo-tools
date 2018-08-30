@@ -163,6 +163,7 @@ class UserDataFixtureLoader
         $userData->lastName = $row[self::COLUMN_LASTNAME];
         $userData->email = $row[self::COLUMN_EMAIL];
         $userData->password = $row[self::COLUMN_PASSWORD];
+        $userData->telephone = $row[self::COLUMN_TELEPHONE];
 
         $billingAddressData->companyCustomer = $row[self::COLUMN_COMPANY_CUSTOMER];
         $billingAddressData->companyName = $row[self::COLUMN_COMPANY_NAME];
@@ -171,7 +172,6 @@ class UserDataFixtureLoader
         $billingAddressData->street = $row[self::COLUMN_STREET];
         $billingAddressData->city = $row[self::COLUMN_CITY];
         $billingAddressData->postcode = $row[self::COLUMN_POSTCODE];
-        $billingAddressData->telephone = $row[self::COLUMN_TELEPHONE];
         $billingAddressData->country = $this->getCountryByName($row[self::COLUMN_COUNTRY]);
         if ($row[self::COLUMN_DELIVERY_ADDRESS_FILLED] === 'true') {
             $deliveryAddressData = $this->deliveryAddressDataFactory->create();

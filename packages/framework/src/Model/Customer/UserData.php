@@ -39,6 +39,11 @@ class UserData
      */
     public $createdAt;
 
+    /**
+     * @var string|null
+     */
+    public $telephone;
+
     public function __construct()
     {
         $this->domainId = 1;

@@ -34,6 +34,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - [#429 - Microservice Product Search Export](https://github.com/shopsys/shopsys/pull/429)
     - framework doesn't use Elasticsearch directly anymore
     - feeds Elasticsearch via Product Search Export microservice
+- [#438 - Attribute telephone moved from a billing address to the personal data of a user](https://github.com/shopsys/shopsys/pull/438)
+
 #### Fixed
 - [#420 - Order flow fix](https://github.com/shopsys/shopsys/pull/420)
     - fix fatal error in OrderFlow (issue #419): function call on string, also method getName does not exists since upgrade to Symfony 3 [@jDolba]
@@ -49,6 +51,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
     - Payment is extended
     - User is extended
     - Order is extended
+- [#438 - Attribute telephone moved from a billing address to the personal data of a user](https://github.com/shopsys/shopsys/pull/438)
+
 #### Changed
 - Docker Compose uses pre-built images of microservices for easier installation (part of [#430 - Microservices are built as Docker images](https://github.com/shopsys/shopsys/pull/430))
 
@@ -59,6 +63,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - [#409 - Project-base: framework models extension](https://github.com/shopsys/shopsys/pull/409)
     - factories use EntityNameResolver to create their entities for simplification of extensibility
 - GitHub OAuth token is now passed to Docker images during build to avoid problems with Composer (part of [#430 - Microservices are built as Docker images](https://github.com/shopsys/shopsys/pull/430))
+
 #### Fixed
 - [#436 - Symfony >=3.4.15 marked as conflicting in composer.json](https://github.com/shopsys/shopsys/pull/436)
     - bug https://github.com/symfony/symfony/issues/28296 in Symfony 3.4.15 version causes application build to fail

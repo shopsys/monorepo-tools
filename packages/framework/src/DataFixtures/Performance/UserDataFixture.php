@@ -182,6 +182,7 @@ class UserDataFixture
         $userData->password = $this->faker->password;
         $userData->domainId = $domainId;
         $userData->createdAt = $this->faker->dateTimeBetween('-1 year', 'now');
+        $userData->telephone = $this->faker->phoneNumber;
 
         $customerData->userData = $userData;
 
@@ -196,7 +197,6 @@ class UserDataFixture
         $billingAddressData->city = $this->faker->city;
         $billingAddressData->postcode = $this->faker->postcode;
         $billingAddressData->country = $country;
-        $billingAddressData->telephone = $this->faker->phoneNumber;
         $customerData->billingAddressData = $billingAddressData;
 
         $deliveryAddressData = $this->deliveryAddressDataFactory->create();
