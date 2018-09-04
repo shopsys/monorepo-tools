@@ -65,6 +65,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
     - factories use EntityNameResolver to create their entities for simplification of extensibility
 - GitHub OAuth token is now passed to Docker images during build to avoid problems with Composer (part of [#430 - Microservices are built as Docker images](https://github.com/shopsys/shopsys/pull/430))
 
+#### Changed
+- [#444 - Improve Postgres configuration to improve performance](https://github.com/shopsys/shopsys/pull/444)
+    - performance improvement on our performance server with 80k products is about 7-8%
+    - introduced configuration of postgres docker image
 #### Fixed
 - [#436 - Symfony >=3.4.15 marked as conflicting in composer.json](https://github.com/shopsys/shopsys/pull/436)
     - bug https://github.com/symfony/symfony/issues/28296 in Symfony 3.4.15 version causes application build to fail

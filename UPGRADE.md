@@ -27,6 +27,21 @@ There is a list of all the repositories maintained by monorepo, changes in log b
     - edit `ShopBundle/Form/Front/Customer/BillingAddressFormType` - remove `telephone`
     - edit `ShopBundle/Form/Front/Customer/UserFormType` - add `telephone`
     - edit twig templates and tests in such a way as to reflect the movement of `telephone` attribute according to the [pull request](https://github.com/shopsys/shopsys/pull/438)
+- to use custom postgres configuration check changes in the `docker-compose.yml` templates and replicate them, there is a new volume for `postgres` container
+    - PR [Improve Postgres configuration to improve performance](https://github.com/shopsys/shopsys/pull/444)
+    - Stop running containers `docker-compose down`
+    - Move data from `project-base/var/postgres-data` into `project-base/var/postgres-data/pgdata`. The directory must have correct permission depending on your OS.
+      To provide you with a better image of what exactly needs to be done, there are instructions for Ubuntu:
+        - `sudo su`
+        - `cd project-base/var/postgres-data/`
+        - trick to create directory `pgdata` with correct permissions
+            - `cp -rp base/ pgdata`
+            - `rm -fr pgdata/*`
+        - `shopt -s extglob dotglob`
+        - `mv !(pgdata) pgdata`
+        - `shopt -u dotglob`
+        - `exit`
+    - Start containers `docker-compose up -d`
 
 ### [shopsys/framework]
 - check for usages of `TransportEditFormType` - it was removed and all it's attributes were moved to `TransportFormType` so use this form instead

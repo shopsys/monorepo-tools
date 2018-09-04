@@ -5,7 +5,9 @@ services:
         container_name: shopsys-framework-postgres
         volumes:
             - shopsys-framework-postgres-data-sync:/var/lib/postgresql/data
+            - ./project-base/docker/postgres/postgres.conf:/var/lib/postgresql/data/postgresql.conf
         environment:
+            - PGDATA=/var/lib/postgresql/data/pgdata
             - POSTGRES_USER=root
             - POSTGRES_PASSWORD=root
             - POSTGRES_DB=shopsys
