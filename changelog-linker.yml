@@ -1,0 +1,45 @@
+# setup for ChangelogLinker: https://github.com/Symplify/ChangelogLinker
+parameters:
+    authors_to_ignore:
+        - boris-brtan
+        - LukasHeinz
+        - MattCzerner
+        - Miroslav-Stopka
+        - PetrHeinz
+        - simara-svatopluk
+        - TomasLudvik
+        - vitek-rostislav
+    names_to_urls:
+        'shopsys/shopsys': 'https://github.com/shopsys/shopsys'
+        'shopsys/project-base': 'https://github.com/shopsys/project-base'
+        'shopsys/framework': 'https://github.com/shopsys/framework'
+        'shopsys/product-feed-zbozi': 'https://github.com/shopsys/product-feed-zbozi'
+        'shopsys/product-feed-google': 'https://github.com/shopsys/product-feed-google'
+        'shopsys/product-feed-heureka': 'https://github.com/shopsys/product-feed-heureka'
+        'shopsys/product-feed-heureka-delivery': 'https://github.com/shopsys/product-feed-heureka-delivery'
+        'shopsys/product-feed-interface': 'https://github.com/shopsys/product-feed-interface'
+        'shopsys/plugin-interface': 'https://github.com/shopsys/plugin-interface'
+        'shopsys/coding-standards': 'https://github.com/shopsys/coding-standards'
+        'shopsys/http-smoke-testing': 'https://github.com/shopsys/http-smoke-testing'
+        'shopsys/form-types-bundle': 'https://github.com/shopsys/form-types-bundle'
+        'shopsys/migrations': 'https://github.com/shopsys/migrations'
+        'shopsys/monorepo-tools': 'https://github.com/shopsys/monorepo-tools'
+        'shopsys/microservice-product-search': 'https://github.com/shopsys/microservice-product-search'
+        'shopsys/microservice-product-search-export': 'https://github.com/shopsys/microservice-product-search-export'
+    package_aliases:
+        'shopsys': 'shopsys/shopsys'
+        'project-base': 'shopsys/project-base'
+        'framework': 'shopsys/framework'
+        'product-feed-zbozi': 'shopsys/product-feed-zbozi'
+        'product-feed-google': 'shopsys/product-feed-google'
+        'product-feed-heureka': 'shopsys/product-feed-heureka'
+        'product-feed-heureka-delivery': 'shopsys/product-feed-heureka-delivery'
+        'product-feed-interface': 'shopsys/product-feed-interface'
+        'plugin-interface': 'shopsys/plugin-interface'
+        'coding-standards': 'shopsys/coding-standards'
+        'http-smoke-testing': 'shopsys/http-smoke-testing'
+        'form-types-bundle': 'shopsys/form-types-bundle'
+        'migrations': 'shopsys/migrations'
+        'monorepo-tools': 'shopsys/monorepo-tools'
+        'microservice-product-search': 'shopsys/microservice-product-search'
+        'microservice-product-search-export': 'shopsys/microservice-product-search-export'

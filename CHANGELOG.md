@@ -1,7 +1,7 @@
 # Changelog
 All notable changes, that change in some way the behavior of any of our packages that are maintained by monorepo repository.
 
-There is a list of all the repositories maintained by monorepo, changes in log below are ordered as this list:
+There is a list of all the repositories maintained by monorepo:
 
 * [shopsys/framework]
 * [shopsys/project-base]
@@ -24,80 +24,9 @@ Packages are formatted by release version. You can see all the changes done to p
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
-## [Unreleased]
-### [shopsys/framework]
-#### Changed
-- [#428 - *EditFromTypes removal](https://github.com/shopsys/shopsys/pull/428)
-    - `TransportEditFormType` was removed and it's attributes were moved to `TransportFormType`
-    - `PaymentEditFormType` was removed and it's attributes were moved to `PaymentFormType`
-    - `ProductEditFormType` was removed and it's attributes were moved to `ProductFormType`
-- [#429 - Microservice Product Search Export](https://github.com/shopsys/shopsys/pull/429)
-    - framework doesn't use Elasticsearch directly anymore
-    - feeds Elasticsearch via Product Search Export microservice
-- [#438 - Attribute telephone moved from a billing address to the personal data of a user](https://github.com/shopsys/shopsys/pull/438)
-- [#295 - Javascript compiling: lower memory consumption](https://github.com/shopsys/shopsys/pull/295), thanks to [@pk16011990]
+The changelog is generated during the release process using [ChangelogLinker](https://github.com/symplify/changeloglinker) since `7.0.0-alpha6` release.
 
-#### Fixed
-- [#420 - Order flow fix](https://github.com/shopsys/shopsys/pull/420)
-    - fix fatal error in OrderFlow (issue #419): function call on string, also method getName does not exists since upgrade to Symfony 3 [@jDolba]
-
-### [shopsys/project-base]
-#### Added
-- [#409 - Project-base: framework models extension](https://github.com/shopsys/shopsys/pull/409)
-    - Category is extended
-    - Administrator is extended
-    - Transport is extended
-    - Product is extended
-    - Brand is extended
-    - Payment is extended
-    - User is extended
-    - Order is extended
-- [#438 - Attribute telephone moved from a billing address to the personal data of a user](https://github.com/shopsys/shopsys/pull/438)
-
-#### Changed
-- Docker Compose uses pre-built images of microservices for easier installation (part of [#430 - Microservices are built as Docker images](https://github.com/shopsys/shopsys/pull/430))
-- [#447 - Unable to resolve domain error page](https://github.com/shopsys/shopsys/pull/447)
-- [#449 - Config files are now split into individual package configuration files](https://github.com/shopsys/shopsys/pull/449)
-
-### [shopsys/shopsys]
-#### Added
-- [#429 - Microservice Product Search Export](https://github.com/shopsys/shopsys/pull/429)
-    - added [Microservice Product Search Export](https://github.com/shopsys/microservice-product-search-export), microservice is used for feeding Elasticsearch by products
-- [#409 - Project-base: framework models extension](https://github.com/shopsys/shopsys/pull/409)
-    - factories use EntityNameResolver to create their entities for simplification of extensibility
-- GitHub OAuth token is now passed to Docker images during build to avoid problems with Composer (part of [#430 - Microservices are built as Docker images](https://github.com/shopsys/shopsys/pull/430))
-
-#### Changed
-- [#444 - Improve Postgres configuration to improve performance](https://github.com/shopsys/shopsys/pull/444)
-    - performance improvement on our performance server with 80k products is about 7-8%
-    - introduced configuration of postgres docker image
-#### Fixed
-- [#436 - Symfony >=3.4.15 marked as conflicting in composer.json](https://github.com/shopsys/shopsys/pull/436)
-    - bug https://github.com/symfony/symfony/issues/28296 in Symfony 3.4.15 version causes application build to fail
-#### Changed
-- [#393 - Continuous integration via Kubernetes](https://github.com/shopsys/shopsys/pull/393)
-    - for details, see [Introduction to Kubernetes](/docs/kubernetes/introduction-to-kubernetes.md)
-
-### [shopsys/coding-standards]
-#### Added
-- [#384 - cs: keep class spacing consistent](https://github.com/shopsys/shopsys/pull/384) [@TomasVotruba]
-    - added new rule (along with fixer `ClassAttributesSeparationFixer`) into `easy-coding-standard.yml`
-
-###[shopsys/microservice-product-search]
-#### Changed
-- [#430 - Microservices are built as Docker images](https://github.com/shopsys/shopsys/pull/430)
-    - source codes and all Composer dependencies are part of the Docker image for easier usage
-    - when a container with a microservice is started, it runs its web server automatically
-
-### [shopsys/microservice-product-search-export]
-#### Added
-- [#429 - Microservice Product Search Export](https://github.com/shopsys/shopsys/pull/429)
-    - the repository was added, extracting product search export functionality from the Shopsys Framework
-
-### [shopsys/monorepo-tools]
-#### Fixed
-- [#433 - monorepo-tools: splitting now works correctly on repositories containing files with spaces](https://github.com/shopsys/shopsys/pull/433) [@dominikkaluza]
-
+<!-- changelog-linker -->
 
 ## [7.0.0-alpha5] - 2018-08-22
 ### [shopsys/framework]

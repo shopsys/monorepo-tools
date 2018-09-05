@@ -26,7 +26,8 @@ git rebase origin/master
 
 * You have to check your change using the command `php phing standards tests tests-acceptance` as it’s mentioned in [contributing](../../project-base/CONTRIBUTING.md).
 * Please make sure you sign form to agree with the [license agreement](https://www.shopsys-framework.com/license-agreement).
-* [Create a PR](https://github.com/shopsys/shopsys/compare?expand=1) with essential information to make our code review easier. 
+* [Create a PR](https://github.com/shopsys/shopsys/compare?expand=1) with essential information to make our code review easier.
+    * you do not have to update `CHANGELOG.md` at all as it is generated automatically using [symplify/changelog-linker](https://github.com/symplify/changeloglinker) during our release process.
 * Now just wait for review of your change.
 
 ## 2. Changes after review

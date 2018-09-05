@@ -151,7 +151,9 @@
     "codeception/codeception": "^2.4.0",
     "codeception/phpunit-wrapper": "^7.0",
     "phpstan/phpstan": "^0.7",
-    "symplify/easy-coding-standard-tester": "^4.4"
+    "symplify/easy-coding-standard-tester": "^4.4",
+    "symplify/changelog-linker": "dev-master as 4.7",
+    "symplify/package-builder": "dev-master as 4.7"
   },
   "conflict": {
     "codeception/stub": ">=2.0.2",
