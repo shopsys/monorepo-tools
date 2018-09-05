@@ -4,7 +4,7 @@ When you need to add functionality that is not in the system, like an advertisin
 then you need your own, custom entities.
 
 * The system is prepared and configured for custom entities.
-The configuration is placed in [config.yml](/project-base/app/config/config.yml), section `doctrine.orm.mappings`.
+The configuration is placed in [doctrine.yml](/project-base/app/config/packages/doctrine.yml), section `doctrine.orm.mappings`.
 * An entity should be in namespace `Shopsys\ShopBundle\Model` (directory `src/Shopsys/ShopBundle/Model`).
 * We use annotations for Doctrine mapping.
 More in [annotations reference](https://www.doctrine-project.org/projects/doctrine-orm/en/latest/reference/annotations-reference.html).

@@ -56,6 +56,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 #### Changed
 - Docker Compose uses pre-built images of microservices for easier installation (part of [#430 - Microservices are built as Docker images](https://github.com/shopsys/shopsys/pull/430))
 - [#447 - Unable to resolve domain error page](https://github.com/shopsys/shopsys/pull/447)
+- [#449 - Config files are now split into individual package configuration files](https://github.com/shopsys/shopsys/pull/449)
 
 ### [shopsys/shopsys]
 #### Added

@@ -1,0 +1,50 @@
+doctrine:
+    dbal:
+        driver: "%database_driver%"
+        host: "%database_host%"
+        port: "%database_port%"
+        dbname: "%database_name%"
+        user: "%database_user%"
+        password: "%database_password%"
+        charset: UTF8
+        # Explicitly define server version to overcome the need to connect to the database in early
+        # initialization phase (during DIC service creation) for auto-detecting version from the server.
+        # See \Doctrine\DBAL\Connection::getDatabasePlatformVersion().
+        server_version: "%database_server_version%"
+
+    orm:
+        auto_generate_proxy_classes: false
+        dql:
+            string_functions:
+                collate: Shopsys\FrameworkBundle\Component\Doctrine\CollateFunction
+                normalize: Shopsys\FrameworkBundle\Component\Doctrine\NormalizeFunction
+                field: Shopsys\FrameworkBundle\Component\Doctrine\FieldFunction
+        naming_strategy: doctrine.orm.naming_strategy.underscore
+        metadata_cache_driver:
+            type: service
+            id: Doctrine\Common\Cache\ChainCache
+        query_cache_driver:
+            type: service
+            id: Doctrine\Common\Cache\ChainCache
+        auto_mapping: false
+        mappings:
+            ShopsysFrameworkBundle:
+                type: annotation
+                dir: '%shopsys.framework.root_dir%/src/Model'
+                alias: ShopsysFrameworkBundle
+                prefix: Shopsys\FrameworkBundle\Model
+                is_bundle: false
+            ShopsysFrameworkBundleComponent:
+                type: annotation
+                dir: '%shopsys.framework.root_dir%/src/Component'
+                alias: ShopsysFrameworkBundleComponent
+                prefix: Shopsys\FrameworkBundle\Component
+                is_bundle: false
+            ShopsysShopBundle:
+                type: annotation
+                dir: '%shopsys.root_dir%/src/Shopsys/ShopBundle/Model'
+                alias: ShopsysShopBundle
+                prefix: Shopsys\ShopBundle\Model
+                is_bundle: false
+        hydrators:
+            GroupedScalarHydrator: \Shopsys\FrameworkBundle\Component\Doctrine\GroupedScalarHydrator

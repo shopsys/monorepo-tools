@@ -1,0 +1,3 @@
+doctrine_migrations:
+    table_name: migrations
+    name: Migrations

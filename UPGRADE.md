@@ -42,6 +42,8 @@ There is a list of all the repositories maintained by monorepo, changes in log b
         - `shopt -u dotglob`
         - `exit`
     - Start containers `docker-compose up -d`
+- configuration files (`config.yml`, `config_dev.yml`, `config_test.yml`, `security.yml` and `wysiwyg.yml`) has been split into packages config files (see `app/config/packages` folder)
+    - update appropriate package configs in case you had some custom configuration set in those files
 
 ### [shopsys/framework]
 - check for usages of `TransportEditFormType` - it was removed and all it's attributes were moved to `TransportFormType` so use this form instead

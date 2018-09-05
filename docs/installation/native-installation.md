@@ -49,7 +49,7 @@ cd project-base
 
 ### 2. Set up configuration for native installation
 #### 2.1. Set up logging
-Monolog is configured to log into streams in `app/config/config.yml`.
+Monolog is configured to log into streams in `app/config/packages/monolog.yml`.
 If you want to log into a file change the configuration of handlers like this:
 ```yaml
 monolog:

@@ -82,7 +82,6 @@ class AppKernel extends Kernel
             __DIR__ . '/config/parameters.yml',
             __DIR__ . '/config/paths.yml',
             __DIR__ . '/config/config.yml',
-            __DIR__ . '/config/security.yml',
         ];
         switch ($this->getEnvironment()) {
             case EnvironmentType::DEVELOPMENT:

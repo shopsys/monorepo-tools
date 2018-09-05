@@ -1,0 +1,5 @@
+swiftmailer:
+    transport: "%test_mailer_transport%"
+    host: "%test_mailer_host%"
+    username: "%test_mailer_user%"
+    password: "%test_mailer_password%"

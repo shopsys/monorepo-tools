@@ -1,0 +1,25 @@
+framework:
+    secret: "%secret%"
+    router:
+        resource: "%kernel.root_dir%/config/routing.yml"
+        strict_requirements: true
+    form: ~
+    csrf_protection: ~
+    validation: { enable_annotations: true }
+    templating:
+        engines: ['twig']
+    default_locale: "%locale%"
+    trusted_hosts: ~
+    session:
+        handler_id: snc_redis.session.handler
+        cookie_httponly: true
+        # Disable the default PHP session garbage collection.
+        # Session garbage collection is responsibility of hosting.
+        gc_probability: 0
+    fragments: ~
+    http_method_override: true
+    translator: ~
+    profiler:
+        enabled: false
+        collect: false
+    assets: ~

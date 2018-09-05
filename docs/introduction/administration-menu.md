@@ -10,7 +10,7 @@ There are a few customizations on top of the standard [KnpMenu](https://symfony.
 
 ## Template
 
-The template is not configured globally (via `config.yml`) but instead the template is provided during the rendering in a Twig template:
+The template is not configured globally (via `app/config/packages/twig.yml`) but instead the template is provided during the rendering in a Twig template:
 ```twig
 {{ knp_menu_render('admin_side_menu', {template: 'ShopsysFrameworkBundle:Admin/Menu:side_menu.html.twig'}) }}`.
 ```
