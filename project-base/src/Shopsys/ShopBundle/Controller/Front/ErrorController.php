@@ -4,6 +4,7 @@ namespace Shopsys\ShopBundle\Controller\Front;
 
 use Exception;
 use Shopsys\FrameworkBundle\Component\Domain\Domain;
+use Shopsys\FrameworkBundle\Component\Domain\Exception\UnableToResolveDomainException;
 use Shopsys\FrameworkBundle\Component\Error\ErrorPagesFacade;
 use Shopsys\FrameworkBundle\Component\Error\ExceptionController;
 use Shopsys\FrameworkBundle\Component\Error\ExceptionListener;
@@ -69,7 +70,9 @@ class ErrorController extends FrontBaseController
         FlattenException $exception,
         DebugLoggerInterface $logger = null
     ) {
-        if ($this->exceptionController->isShownErrorPagePrototype()) {
+        if ($this->isUnableToResolveDomainInNotDebug($exception)) {
+            return $this->createUnableToResolveDomainResponse($request);
+        } elseif ($this->exceptionController->isShownErrorPagePrototype()) {
             return $this->createErrorPagePrototypeResponse($request, $exception, $logger);
         } elseif ($this->exceptionController->getDebug()) {
             return $this->createExceptionResponse($request, $exception, $logger);
@@ -151,5 +154,30 @@ class ErrorController extends FrontBaseController
         ob_end_clean();
 
         return new Response($blueScreenHtml);
+    }
+
+    /**
+     * @param \Symfony\Component\Debug\Exception\FlattenException $exception
+     * @return bool
+     */
+    private function isUnableToResolveDomainInNotDebug(FlattenException $exception): bool
+    {
+        if ($this->exceptionController->getDebug()) {
+            return false;
+        }
+
+        return $exception->getClass() === UnableToResolveDomainException::class;
+    }
+
+    /**
+     * @param \Symfony\Component\HttpFoundation\Request $request
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    private function createUnableToResolveDomainResponse(Request $request): Response
+    {
+        $url = $request->getSchemeAndHttpHost() . $request->getBasePath();
+        $content = sprintf("You are trying to access an unknown domain '%s'", $url);
+
+        return new Response($content, Response::HTTP_INTERNAL_SERVER_ERROR);
     }
 }

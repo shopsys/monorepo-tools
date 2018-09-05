@@ -25,4 +25,12 @@ class ErrorHandlerController extends FrontBaseController
     {
         throw new \Shopsys\ShopBundle\Controller\Test\ExpectedTestException('Expected exception');
     }
+
+    /**
+     * @Route("/error-handler/unknown-domain")
+     */
+    public function unknownDomainAction()
+    {
+        throw new \Shopsys\FrameworkBundle\Component\Domain\Exception\UnableToResolveDomainException('http://localhost:8000');
+    }
 }
