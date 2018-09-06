@@ -19,15 +19,26 @@ There is a list of all the repositories maintained by monorepo, changes in log b
 
 ## [From 7.0.0-alpha5 to Unreleased]
 ### [shopsys/project-base]
-- added [Microservice Product Search Export](https://github.com/shopsys/microservice-product-search-export)
+- [Microservice Product Search Export](https://github.com/shopsys/microservice-product-search-export) was added and it needs to be installed and run
     - check changes in the `docker-compose.yml` template you used and replicate them, there is a new container `microservice-product-search-export`
-    - `parameters.yml.dist` contains new parameter `microservice_product_search_export_url`
+    - `parameters.yml.dist` contains new parameter `microservice_product_search_export_url` which need to be filled in your `parameters.yml` (executing `composer install` should be enough)
+- instead of building the Docker images of the microservices yourself, you can use pre-built images on Docker Hub (see the `docker-compose.yml` template you used)
 
 ### [shopsys/framework]
 - check for usages of `TransportEditFormType` - it was removed and all it's attributes were moved to `TransportFormType` so use this form instead
 - check for usages of `PaymentEditFormType` - it was removed and all it's attributes were moved to `PaymentFormType` so use this form instead
 - check for usages of `ProductEditFormType` - it was removed and all it's attributes were moved to `ProductFormType` so use this form instead
-- pay attention to javascripts bound to your forms as well as the elements' names and ids has changed (e.g. from `#product_edit_form_productData` to `#product_form`) 
+- pay attention to javascripts bound to your forms as well as the elements' names and ids has changed (e.g. from `#product_edit_form_productData` to `#product_form`)
+- PHP-FPM and microservice containers now expect a GitHub OAuth token set via a build argument, so it is not necessary to provide it every time those containers are rebuilt
+    - see the `github_oauth_token` argument setting in the `docker-compose.yml` template you used and replicate it
+    - replace the `place-your-token-here` string by the token generated on [Github -> Settings -> Developer Settings -> Personal access tokens](https://github.com/settings/tokens/new?scopes=repo&description=Composer+API+token)
+- as there were changes in the Dockerfiles, rebuilding images  is needed (`docker-compose up -d --build`)
+
+### [shopsys/shopsys]
+- when upgrading your installed [monorepo](docs/introduction/monorepo.md), you'll have to change the build context for the images of the microservices in `docker-compose.yml`
+    - `build.context` should be the root of the microservice (eg. `microservices/product-search-export`)
+    - `build.dockerfile` should be `docker/Dockerfile`
+    - execute `docker-compose up -d --build`, microservices should be up and running
 
 ## [From 7.0.0-alpha4 to 7.0.0-alpha5]
 

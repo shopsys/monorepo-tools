@@ -20,14 +20,14 @@ services:
             - "8000:8080"
         links:
             - php-fpm
-            - smtp-server
 
     php-fpm:
         build:
             context: project-base/docker/php-fpm
-            args:
+            args: &common_build_args
                 www_data_uid: 1000
                 www_data_gid: 1000
+                github_oauth_token: place-your-token-here
         container_name: shopsys-framework-php-fpm
         volumes:
             - .:/var/www/html
@@ -45,14 +45,14 @@ services:
 
     microservice-product-search:
         build:
-            context: microservices/product-search/docker
+            context: microservices/product-search
+            dockerfile: docker/Dockerfile
             args:
-                www_data_uid: 1000
-                www_data_gid: 1000
+                <<: *common_build_args
         container_name: shopsys-framework-microservice-product-search
         volumes:
             - ./microservices/product-search:/var/www/html
-            - ./microservices/product-search/php-fpm/php-ini-overrides.ini:/usr/local/etc/php/php.ini
+            - ./microservices/product-search/docker/php-ini-overrides.ini:/usr/local/etc/php/php.ini
         links:
             - elasticsearch
         depends_on:
@@ -60,14 +60,14 @@ services:
 
     microservice-product-search-export:
         build:
-            context: microservices/product-search-export/docker
+            context: microservices/product-search-export
+            dockerfile: docker/Dockerfile
             args:
-                www_data_uid: 1000
-                www_data_gid: 1000
+                <<: *common_build_args
         container_name: shopsys-framework-microservice-product-search-export
         volumes:
             - ./microservices/product-search-export:/var/www/html
-            - ./microservices/product-search-export/php-fpm/php-ini-overrides.ini:/usr/local/etc/php/php.ini
+            - ./microservices/product-search-export/docker/php-ini-overrides.ini:/usr/local/etc/php/php.ini
         links:
             - elasticsearch
         depends_on:

@@ -28,6 +28,7 @@ services:
             args:
                 www_data_uid: 501
                 www_data_gid: 20
+                github_oauth_token: place-your-token-here
         container_name: shopsys-framework-php-fpm
         volumes:
             - shopsys-framework-sync:/var/www/html
@@ -97,15 +98,16 @@ services:
             - discovery.type=single-node
 
     microservice-product-search:
-        build:
-            context: ../microservices/product-search/docker
-            args:
-                www_data_uid: 501
-                www_data_gid: 20
+        image: shopsys/microservice-product-search:latest
         container_name: shopsys-framework-microservice-product-search
-        volumes:
-            - shopsys-framework-microservice-product-search-sync:/var/www/html
-            - ../microservices/product-search/docker/php-fpm/php-ini-overrides.ini:/usr/local/etc/php/php.ini
+        links:
+            - elasticsearch
+        depends_on:
+            - elasticsearch
+
+    microservice-product-search-export:
+        image: shopsys/microservice-product-search-export:latest
+        container_name: shopsys-framework-microservice-product-search-export
         links:
             - elasticsearch
         depends_on:

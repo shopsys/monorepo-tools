@@ -49,6 +49,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
     - Payment is extended
     - User is extended
     - Order is extended
+#### Changed
+- Docker Compose uses pre-built images of microservices for easier installation (part of [#430 - Microservices are built as Docker images](https://github.com/shopsys/shopsys/pull/430))
 
 ### [shopsys/shopsys]
 #### Added
@@ -56,6 +58,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
     - added [Microservice Product Search Export](https://github.com/shopsys/microservice-product-search-export), microservice is used for feeding Elasticsearch by products
 - [#409 - Project-base: framework models extension](https://github.com/shopsys/shopsys/pull/409)
     - factories use EntityNameResolver to create their entities for simplification of extensibility
+- GitHub OAuth token is now passed to Docker images during build to avoid problems with Composer (part of [#430 - Microservices are built as Docker images](https://github.com/shopsys/shopsys/pull/430))
 #### Fixed
 - [#436 - Symfony >=3.4.15 marked as conflicting in composer.json](https://github.com/shopsys/shopsys/pull/436)
     - bug https://github.com/symfony/symfony/issues/28296 in Symfony 3.4.15 version causes application build to fail
@@ -64,6 +67,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 #### Added
 - [#384 - cs: keep class spacing consistent](https://github.com/shopsys/shopsys/pull/384) [@TomasVotruba]
     - added new rule (along with fixer `ClassAttributesSeparationFixer`) into `easy-coding-standard.yml`
+
+###[shopsys/microservice-product-search]
+#### Changed
+- [#430 - Microservices are built as Docker images](https://github.com/shopsys/shopsys/pull/430)
+    - source codes and all Composer dependencies are part of the Docker image for easier usage
+    - when a container with a microservice is started, it runs its web server automatically
 
 ### [shopsys/microservice-product-search-export]
 #### Added

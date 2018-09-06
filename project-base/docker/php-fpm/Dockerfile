@@ -66,3 +66,7 @@ ARG www_data_uid
 ARG www_data_gid
 RUN deluser www-data && (addgroup -g $www_data_gid www-data || addgroup -g 82 www-data) && adduser -u $www_data_uid -D -S -G www-data www-data
 USER www-data
+
+# allow configuring the GitHub OAuth token
+ARG github_oauth_token
+RUN if [ -n "$github_oauth_token" ]; then composer config -g github-oauth.github.com $github_oauth_token; fi
