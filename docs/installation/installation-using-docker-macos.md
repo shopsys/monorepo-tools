@@ -12,9 +12,16 @@ This solution uses [*docker-sync*](http://docker-sync.io/) (for fast two-way syn
 ## Steps
 ### 1. Create new project from Shopsys Framework sources
 ```
-composer create-project shopsys/project-base --stability=alpha --no-install --keep-vcs
+composer create-project shopsys/project-base --stability=dev --no-install --keep-vcs
 cd project-base
 ```
+**Important note:** 
+
+**Due to changes in the installation process (see [changelog](/CHANGELOG.md) for details), we recommend using the current `dev-master` as a base for your project.**
+**Therefore there is the `stability=dev` flag used in the `composer` command above.**
+**After the next release, we will again return to our standard recommended stability (see notes below).**
+
+<!--- TODO Remove important note after tag release and change stability in composer line to standard -->
 
 *Notes:* 
 - *The `--no-install` option disables installation of the vendors - this will be done later in the Docker container.*
@@ -39,7 +46,6 @@ Create `docker-sync.yml` from template [`docker-sync.yml.dist`](../../project-ba
 cp docker/conf/docker-sync.yml.dist docker-sync.yml
 ```
 
-
 #### Set the UID and GID to allow file access in mounted volumes
 Because we want both the user in host machine (you) and the user running php-fpm in the container to access shared files, we need to make sure that they both have the same UID and GID.
 This can be achieved by build arguments `www_data_uid` and `www_data_gid` that should be set to the same UID and GID as your own user in your `docker-compose.yml`.
@@ -50,6 +56,13 @@ You can find out your UID by running `id -u` and your GID by running `id -g`.
 Once you get these values, set these values into your `docker-compose.yml` into `php-fpm` container definition by replacing values in `args` section.
 
 Also you need to insert your UID into `docker-sync.yml` into value `sync_userid`.
+
+#### Set the Github token in your docker-compose.yml file
+Shopsys Framework includes a lot of dependencies installed via Composer.
+During `composer install` the GitHub API Rate Limit is reached and it is necessary to provide GitHub OAuth token to overcome this limit.
+This token can be generated on [Github -> Settings -> Developer Settings -> Personal access tokens](https://github.com/settings/tokens/new?scopes=repo&description=Composer+API+token)
+Save your token into the `docker-compose.yml` file.
+Token is located in `services -> php-fpm -> build -> args -> github_oauth_token`.
 
 ### 3. Compose Docker container
 On MacOS you need to synchronize folders using docker-sync.
@@ -65,5 +78,5 @@ docker-compose up -d --build
 
 ```
 
-### 5. Setup the application
+### 4. Setup the application
 [Application setup guide](installation-using-docker-application-setup.md)

@@ -107,6 +107,13 @@ class User implements UserInterface, TimelimitLoginInterface, Serializable
     protected $resetPasswordHashValidThrough;
 
     /**
+     * @var string|null
+     *
+     * @ORM\Column(type="string", length=30, nullable=true)
+     */
+    protected $telephone;
+
+    /**
      * @param \Shopsys\FrameworkBundle\Model\Customer\UserData $userData
      * @param \Shopsys\FrameworkBundle\Model\Customer\BillingAddress $billingAddress
      * @param \Shopsys\FrameworkBundle\Model\Customer\DeliveryAddress|null $deliveryAddress
@@ -128,6 +135,7 @@ class User implements UserInterface, TimelimitLoginInterface, Serializable
         }
         $this->domainId = $userData->domainId;
         $this->pricingGroup = $userData->pricingGroup;
+        $this->telephone = $userData->telephone;
     }
 
     /**
@@ -138,6 +146,7 @@ class User implements UserInterface, TimelimitLoginInterface, Serializable
         $this->firstName = $userData->firstName;
         $this->lastName = $userData->lastName;
         $this->pricingGroup = $userData->pricingGroup;
+        $this->telephone = $userData->telephone;
     }
 
     /**
@@ -381,5 +390,13 @@ class User implements UserInterface, TimelimitLoginInterface, Serializable
     public function getSalt()
     {
         return null; // bcrypt include salt in password hash
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getTelephone()
+    {
+        return $this->telephone;
     }
 }

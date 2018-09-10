@@ -39,6 +39,15 @@ class UserFormType extends AbstractType
                 'attr' => ['readonly' => true],
                 'required' => false,
             ])
+            ->add('telephone', TextType::class, [
+                'required' => false,
+                'constraints' => [
+                    new Constraints\Length([
+                        'max' => 30,
+                        'maxMessage' => 'Telephone number cannot be longer than {{ limit }} characters',
+                    ]),
+                ],
+            ])
             ->add('password', RepeatedType::class, [
                 'type' => PasswordType::class,
                 'required' => false,

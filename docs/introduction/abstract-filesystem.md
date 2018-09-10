@@ -15,14 +15,14 @@ In Shopsys Framework we currently use [Flysystem](https://github.com/thephpleagu
 
 ### How to change storage adapter for filesystem
 Flysystem supports a huge number of storage adapters. You can find [full list here](https://github.com/thephpleague/flysystem#community-integrations).
-You can change the setting of the adapter in `app/config/config.yml` file in `oneup_flysystem` section.
+You can change the setting of the adapter in `app/config/packages/oneup_flysystem.yml` file.
 There you find two adapters by default. 
 The first one `main_filesystem` is the one that application uses for storing files. 
 In order to change the storage of your files update the `main_adapter` adapter appropriately.
 For more information how to set up adapter visit [OneUpFlysystem documentation](https://github.com/1up-lab/OneupFlysystemBundle/blob/master/Resources/doc/index.md#step3-configure-your-filesystems).
 
 #### How to change storage adapter for WYSIWYG
-WYSIWYG configuration is stored in `app/config/wysiwyg.yml` file in `fm_elfinder\instances\default\connector\roots` section.
+WYSIWYG configuration is stored in `app/config/packages/fm_elfinder.yml` file in `fm_elfinder\instances\default\connector\roots` section.
 For more information how to set up Flysystem with WYSIWYG visit [FMElfinderBundle Documentation](https://github.com/helios-ag/FMElfinderBundle/blob/master/Resources/doc/flysystem.md).
 
 #### Create Nginx proxy to load files from different storage

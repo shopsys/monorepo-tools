@@ -5,11 +5,6 @@ namespace Shopsys\FrameworkBundle\Model\Customer;
 class BillingAddressData
 {
     /**
-     * @var string|null
-     */
-    public $telephone;
-
-    /**
      * @var bool
      */
     public $companyCustomer;

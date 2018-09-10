@@ -27,5 +27,8 @@
     },
     "require-dev": {
         "shopsys/coding-standards": "dev-master"
+    },
+    "conflict": {
+        "symfony/dependency-injection": ">=3.4.15"
     }
 }

@@ -61,7 +61,7 @@ If you want to change way the form is rendered or if you want to add your own cl
 Many of our forms have their own
 theme which describe on how to render form row. These files are situated in `Resource/views/Form` folder. 
 Copy theme of form type you want to change into `project-base` directory and replace file you want to
-change with your own file in `twig/form_themes` in `config.yml` file. Now you can change whatever you want.
+change with your own file in `twig/form_themes` in `app/config/packages/twig.yml` file. Now you can change whatever you want.
 
 Remember that files that you copy into `project-base` cannot be automatically upgraded with newer versions of Shopsys.
 
@@ -73,7 +73,7 @@ You can add your own form type if you want. Just create your own FormType, for e
 to influence how this form type will be displayed you need to create theme for this form type.
 
 Create new file into `Resource/views/Form` directory, Name it for example `amazingFields.html.twig` and register 
-this theme into `twig/form_themes` in `config.yml`.
+this theme into `twig/form_themes` in `app/config/packages/twig.yml`.
 
 Now you can define how form type will be rendered. There are two options with which you can influence rendering of form type.
 

@@ -88,7 +88,6 @@ class PersonalDataExportXmlTest extends DatabaseTestCase
         $billingAddressData->companyNumber = 123456;
         $billingAddressData->companyTaxNumber = 123456;
         $billingAddressData->postcode = 70200;
-        $billingAddressData->telephone = '+420987654321';
 
         $billingAddress = new BillingAddress($billingAddressData);
 
@@ -128,6 +127,7 @@ class PersonalDataExportXmlTest extends DatabaseTestCase
         $userData->domainId = self::DOMAIN_ID_FIRST;
         $userData->createdAt = new \DateTime('2018-04-13');
         $userData->email = 'no-reply@shopsys.com';
+        $userData->telephone = '+420987654321';
 
         $user = new User($userData, $billingAddress, $deliveryAddress);
 

@@ -206,10 +206,6 @@ class CustomerService
             $billingAddressData->country = $order->getCountry();
         }
 
-        if ($billingAddress->getTelephone() === null) {
-            $billingAddressData->telephone = $order->getTelephone();
-        }
-
         return $billingAddressData;
     }
 

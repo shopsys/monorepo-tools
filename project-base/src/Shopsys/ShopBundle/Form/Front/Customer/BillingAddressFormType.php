@@ -37,15 +37,6 @@ class BillingAddressFormType extends AbstractType
         $countries = $this->countryFacade->getAllByDomainId($options['domain_id']);
 
         $builder
-            ->add('telephone', TextType::class, [
-                'required' => false,
-                'constraints' => [
-                    new Constraints\Length([
-                        'max' => 30,
-                        'maxMessage' => 'Telephone number cannot be longer than {{ limit }} characters',
-                    ]),
-                ],
-            ])
             ->add('companyCustomer', CheckboxType::class, ['required' => false])
             ->add('companyName', TextType::class, [
                 'required' => true,

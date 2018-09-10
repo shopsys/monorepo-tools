@@ -35,10 +35,10 @@
                             <th>{{ 'Last name'|trans }}:</th>
                             <td>{{ user.lastName }} </td>
                         </tr>
-                        {% if user.billingAddress.telephone is not null %}
+                        {% if user.telephone is not null %}
                             <tr>
                                 <th>{{ 'Telephone'|trans }}:</th>
-                                <td>{{ user.billingAddress.telephone }} </td>
+                                <td>{{ user.telephone }} </td>
                             </tr>
                         {% endif %}
                         <tr>

@@ -31,5 +31,8 @@
     "require-dev": {
         "phpunit/phpunit": "^5.4.3|^6.0|^7.0",
         "shopsys/coding-standards": "^3.0.2"
+    },
+    "conflict": {
+        "symfony/dependency-injection": ">=3.4.15"
     }
 }

@@ -131,6 +131,16 @@ class UserFormType extends AbstractType
                     new UniqueEmail(['ignoredEmail' => $user !== null ? $user->getEmail() : null]),
                 ],
                 'label' => t('E-mail'),
+            ])
+            ->add('telephone', TextType::class, [
+                'required' => false,
+                'constraints' => [
+                    new Constraints\Length([
+                        'max' => 30,
+                        'maxMessage' => 'Telephone number cannot be longer than {{ limit }} characters',
+                    ]),
+                ],
+                'label' => t('Telephone'),
             ]);
 
         $builderRegisteredCustomerGroup = $builder->create('registeredCustomer', GroupType::class, [

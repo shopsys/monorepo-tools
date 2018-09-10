@@ -178,6 +178,7 @@ class CustomerServiceTest extends TestCase
         $userData->firstName = 'firstName';
         $userData->lastName = 'lastName';
         $userData->createdAt = new DateTime();
+        $userData->telephone = 'telephone';
 
         $billingCountryData = new CountryData();
         $billingCountryData->name = 'Česká republika';
@@ -190,7 +191,6 @@ class CustomerServiceTest extends TestCase
         $billingAddressData->companyName = 'companyName';
         $billingAddressData->companyNumber = 'companyNumber';
         $billingAddressData->companyTaxNumber = 'companyTaxNumber';
-        $billingAddressData->telephone = 'telephone';
         $billingAddressData->country = $billingCountry;
 
         $deliveryCountryData = new CountryData();
@@ -344,7 +344,6 @@ class CustomerServiceTest extends TestCase
         $this->assertSame($order->getStreet(), $customerData->billingAddressData->street);
         $this->assertSame($order->getCity(), $customerData->billingAddressData->city);
         $this->assertSame($order->getPostcode(), $customerData->billingAddressData->postcode);
-        $this->assertSame($order->getTelephone(), $customerData->billingAddressData->telephone);
         $this->assertSame($order->getCountry(), $customerData->billingAddressData->country);
     }
 

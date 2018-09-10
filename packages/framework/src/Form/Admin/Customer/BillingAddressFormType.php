@@ -109,16 +109,6 @@ class BillingAddressFormType extends AbstractType
         ]);
 
         $builderAddressGroup
-            ->add('telephone', TextType::class, [
-                'required' => false,
-                'constraints' => [
-                    new Constraints\Length([
-                        'max' => 30,
-                        'maxMessage' => 'Telephone number cannot be longer than {{ limit }} characters',
-                    ]),
-                ],
-                'label' => t('Telephone'),
-            ])
             ->add('street', TextType::class, [
                 'required' => false,
                 'constraints' => [

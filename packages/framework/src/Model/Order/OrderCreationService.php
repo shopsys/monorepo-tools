@@ -111,7 +111,7 @@ class OrderCreationService
         $frontOrderData->firstName = $user->getFirstName();
         $frontOrderData->lastName = $user->getLastName();
         $frontOrderData->email = $user->getEmail();
-        $frontOrderData->telephone = $user->getBillingAddress()->getTelephone();
+        $frontOrderData->telephone = $user->getTelephone();
         $frontOrderData->companyCustomer = $user->getBillingAddress()->isCompanyCustomer();
         $frontOrderData->companyName = $user->getBillingAddress()->getCompanyName();
         $frontOrderData->companyNumber = $user->getBillingAddress()->getCompanyNumber();

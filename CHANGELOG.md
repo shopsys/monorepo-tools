@@ -34,6 +34,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - [#429 - Microservice Product Search Export](https://github.com/shopsys/shopsys/pull/429)
     - framework doesn't use Elasticsearch directly anymore
     - feeds Elasticsearch via Product Search Export microservice
+- [#438 - Attribute telephone moved from a billing address to the personal data of a user](https://github.com/shopsys/shopsys/pull/438)
+
+#### Fixed
+- [#420 - Order flow fix](https://github.com/shopsys/shopsys/pull/420)
+    - fix fatal error in OrderFlow (issue #419): function call on string, also method getName does not exists since upgrade to Symfony 3 [@jDolba]
 
 ### [shopsys/project-base]
 #### Added
@@ -46,6 +51,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
     - Payment is extended
     - User is extended
     - Order is extended
+- [#438 - Attribute telephone moved from a billing address to the personal data of a user](https://github.com/shopsys/shopsys/pull/438)
+
+#### Changed
+- Docker Compose uses pre-built images of microservices for easier installation (part of [#430 - Microservices are built as Docker images](https://github.com/shopsys/shopsys/pull/430))
+- [#447 - Unable to resolve domain error page](https://github.com/shopsys/shopsys/pull/447)
+- [#449 - Config files are now split into individual package configuration files](https://github.com/shopsys/shopsys/pull/449)
 
 ### [shopsys/shopsys]
 #### Added
@@ -53,11 +64,26 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
     - added [Microservice Product Search Export](https://github.com/shopsys/microservice-product-search-export), microservice is used for feeding Elasticsearch by products
 - [#409 - Project-base: framework models extension](https://github.com/shopsys/shopsys/pull/409)
     - factories use EntityNameResolver to create their entities for simplification of extensibility
+- GitHub OAuth token is now passed to Docker images during build to avoid problems with Composer (part of [#430 - Microservices are built as Docker images](https://github.com/shopsys/shopsys/pull/430))
+
+#### Changed
+- [#444 - Improve Postgres configuration to improve performance](https://github.com/shopsys/shopsys/pull/444)
+    - performance improvement on our performance server with 80k products is about 7-8%
+    - introduced configuration of postgres docker image
+#### Fixed
+- [#436 - Symfony >=3.4.15 marked as conflicting in composer.json](https://github.com/shopsys/shopsys/pull/436)
+    - bug https://github.com/symfony/symfony/issues/28296 in Symfony 3.4.15 version causes application build to fail
 
 ### [shopsys/coding-standards]
 #### Added
 - [#384 - cs: keep class spacing consistent](https://github.com/shopsys/shopsys/pull/384) [@TomasVotruba]
     - added new rule (along with fixer `ClassAttributesSeparationFixer`) into `easy-coding-standard.yml`
+
+###[shopsys/microservice-product-search]
+#### Changed
+- [#430 - Microservices are built as Docker images](https://github.com/shopsys/shopsys/pull/430)
+    - source codes and all Composer dependencies are part of the Docker image for easier usage
+    - when a container with a microservice is started, it runs its web server automatically
 
 ### [shopsys/microservice-product-search-export]
 #### Added
@@ -100,8 +126,6 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - [#401 - Microservice Product Search](https://github.com/shopsys/shopsys/pull/401)
     - added [Microservice Product Search](https://github.com/shopsys/microservice-product-search), microservice is used for the searching of products on Shopsys Framework 
     - added MicroserviceClient component
-- [#420 - Order flow fix](https://github.com/shopsys/shopsys/pull/420)
-    - fix fatal error in OrderFlow (issue #419): function call on string, also method getName does not exists since upgrade to Symfony 3
 
 #### Changed
 - [#385 - AccessDeniedHttpException replaced by AccessDeniedException](https://github.com/shopsys/shopsys/pull/385)
@@ -1475,3 +1499,4 @@ That's why is this section formatted differently.
 [@TomasVotruba]: https://github.com/TomasVotruba
 [@drekbour]: https://github.com/drekbour
 [@dominikkaluza]: https://github.com/dominikkaluza
+[@jDolba]: https://github.com/jDolba

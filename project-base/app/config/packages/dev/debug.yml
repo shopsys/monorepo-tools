@@ -1,0 +1,3 @@
+debug:
+    max_items: 500
+    max_string_length: 5000

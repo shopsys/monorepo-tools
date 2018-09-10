@@ -1,0 +1,14 @@
+#!/bin/sh
+
+# install Composer dependencies
+# avoids the need to install them manually when using a mounted volume
+if composer validate --no-check-all --no-check-publish; then
+    echo "The lock file is valid, installing dependencies..."
+    composer install
+else
+    echo "The lock file is invalid, updating dependencies..."
+    composer update
+fi
+
+# start the PHP server
+php bin/console server:run *:8000

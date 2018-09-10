@@ -1,0 +1,16 @@
+oneup_flysystem:
+    adapters:
+        main_adapter:
+            local:
+                directory: "%kernel.project_dir%"
+        local_adapter:
+            local:
+                directory: "/"
+
+    filesystems:
+        main_filesystem:
+            adapter: main_adapter
+            alias: "main_filesystem"
+        local_filesystem:
+            adapter: local_adapter
+            alias: "local_filesystem"

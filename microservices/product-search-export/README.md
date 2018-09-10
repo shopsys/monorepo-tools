@@ -18,9 +18,12 @@ This leanest Symfony version is highly optimized and it is suitable for this typ
 The microservice is responsible for feeding the Elasticsearch by product data so [product search microservice](https://github.com/shopsys/microservice-product-search) can work properly.
 
 ## Installation
-Since the fully installed and ready microservice is a necessary condition for the Shopsys Framework to run, the installation procedure of this microservice is a part of Shopsys Framework [installation guide](https://github.com/shopsys/shopsys/blob/master/docs/installation/installation-using-docker-application-setup.md).
-
 Basically, in the Docker container of the microservice, all the dependencies have to be installed using `composer install` and the server has to be started by `php bin/console server:run *:8000`.
+All this is automatically done when the container starts.
+
+If you don't want to build the Docker image yourself, you can use [`shopsys/microservice-product-search-export:latest`](https://hub.docker.com/r/shopsys/microservice-product-search-export/).
+
+If you don't use Docker, please check [Shopsys Framework Native Installation Guide](https://github.com/shopsys/shopsys/blob/master/docs/installation/native-installation.md) to see how to install and run it natively.
 
 ## How to use
 

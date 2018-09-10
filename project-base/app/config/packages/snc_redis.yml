@@ -1,0 +1,27 @@
+snc_redis:
+    clients:
+        bestselling_products:
+            type: 'phpredis'
+            alias: 'bestselling_products'
+            dsn: 'redis://%redis_host%'
+            options:
+                prefix: 'bestselling_products_'
+        doctrine_metadata:
+            type: 'phpredis'
+            alias: 'doctrine_metadata'
+            dsn: 'redis://%redis_host%'
+            options:
+                prefix: 'doctrine_metadata_'
+        doctrine_query:
+            type: 'phpredis'
+            alias: 'doctrine_query'
+            dsn: 'redis://%redis_host%'
+            options:
+                prefix: 'doctrine_query_'
+        session:
+            type: 'phpredis'
+            alias: 'session'
+            dsn: 'redis://%redis_host%'
+    session:
+        client: 'session'
+        prefix: 'session_'

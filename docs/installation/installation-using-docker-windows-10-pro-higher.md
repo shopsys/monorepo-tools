@@ -15,9 +15,16 @@
 ## Steps
 ### 1. Create new project from Shopsys Framework sources
 ```
-composer create-project shopsys/project-base --stability=alpha --no-install --keep-vcs
+composer create-project shopsys/project-base --stability=dev --no-install --keep-vcs
 cd project-base
 ```
+**Important note:** 
+
+**Due to changes in the installation process (see [changelog](/CHANGELOG.md) for details), we recommend using the current `dev-master` as a base for your project.**
+**Therefore there is the `stability=dev` flag used in the `composer` command above.**
+**After the next release, we will again return to our standard recommended stability (see notes below).**
+
+<!--- TODO Remove important note after tag release and change stability in composer line to standard -->
 
 *Notes:* 
 - *The `--no-install` option disables installation of the vendors - this will be done later in the Docker container.*
@@ -30,6 +37,13 @@ Create `docker-compose.yml` from template [`docker-compose-win.yml.dist`](../../
 ```
 copy docker\conf\docker-compose-win.yml.dist docker-compose.yml
 ```
+
+#### Set the Github token in your docker-compose.yml file
+Shopsys Framework includes a lot of dependencies installed via Composer.
+During `composer install` the GitHub API Rate Limit is reached and it is necessary to provide GitHub OAuth token to overcome this limit.
+This token can be generated on [Github -> Settings -> Developer Settings -> Personal access tokens](https://github.com/settings/tokens/new?scopes=repo&description=Composer+API+token)
+Save your token into the `docker-compose.yml` file.
+Token is located in `services -> php-fpm -> build -> args -> github_oauth_token`.
 
 ### 3. Grant Docker access to your files
 - Right click Docker icon in your system tray and choose `Settings...`
