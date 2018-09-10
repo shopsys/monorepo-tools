@@ -12,9 +12,16 @@ This solution uses [*docker-sync*](http://docker-sync.io/) (for fast two-way syn
 ## Steps
 ### 1. Create new project from Shopsys Framework sources
 ```
-composer create-project shopsys/project-base --stability=alpha --no-install --keep-vcs
+composer create-project shopsys/project-base --stability=dev --no-install --keep-vcs
 cd project-base
 ```
+**Important note:** 
+
+**Due to changes in the installation process (see [changelog](/CHANGELOG.md) for details), we recommend using the current `dev-master` as a base for your project.**
+**Therefore there is the `stability=dev` flag used in the `composer` command above.**
+**After the next release, we will again return to our standard recommended stability (see notes below).**
+
+<!--- TODO Remove important note after tag release and change stability in composer line to standard -->
 
 *Notes:* 
 - *The `--no-install` option disables installation of the vendors - this will be done later in the Docker container.*
