@@ -283,7 +283,7 @@
         </exec>
     </target>
 
-    <target name="grunt" depends="gruntfile,clean-styles" description="Builds CSS into LESS via Grunt.">
+    <target name="grunt" depends="gruntfile,clean-styles" description="Builds CSS from LESS via Grunt.">
         <exec executable="${path.grunt.executable}" dir="${path.root}" passthru="true" checkreturn="true" />
     </target>
 

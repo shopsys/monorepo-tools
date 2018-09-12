@@ -117,7 +117,7 @@ Essential for the production environment. Periodically executed Cron modules rec
 Lists all available background jobs.
 
 #### grunt
-Builds CSS into LESS via Grunt.
+Builds CSS from LESS via Grunt.
 
 Useful when modifying only LESS files.
 
