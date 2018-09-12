@@ -3,6 +3,9 @@ Continuous Integration (CI) brings to us a lot of options for automatizations so
 Automatic start of build and tests after push? Yes, why not. Need for inspection of the built application in the state of
 `xxx-new-feature` branch without having to build on your local station? No problem.
 
+Alternative way is to use [Continuous Integration Using Kubernetes](/docs/kubernetes/continuous-integration-using-kubernetes.md).
+Kubernetes will provide you with more features and options, but it's more difficult to setup.
+
 Jenkins is a really powerful tool on his own, but to be able to make everything really automatic and effective, we will need
 to make few other tools co-op with Jenkins.
 
@@ -552,6 +555,8 @@ something like operating system and if you underestimate cleaning of containers 
 
 To be sure about cleaning more of unnecessary docker files, you can create job that would just execute `docker system prune`
 sometimes, this command clears unnecessary docker files.
+
+Some of the issues can be overcome via [Continuous Integration Using Kubernetes](/docs/kubernetes/continuous-integration-using-kubernetes.md).
 
 ## Conclusion
 We just did pretty big job, we just configured jenkins that can automatically create jobs by git branches,

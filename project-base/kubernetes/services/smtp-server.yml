@@ -1,0 +1,11 @@
+kind: Service
+apiVersion: v1
+metadata:
+    name: smtp-server
+spec:
+    selector:
+        app: smtp-server
+    ports:
+    -   name: smtp
+        port: 25
+        targetPort: 25

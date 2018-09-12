@@ -1,0 +1,18 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+    name: smtp-server
+spec:
+    replicas: 1
+    template:
+        metadata:
+            labels:
+                app: smtp-server
+        spec:
+            containers:
+            -   name: smtp-server
+                image: namshi/smtp:latest
+                ports:
+                -   name: smtp
+                    containerPort: 25
+                    protocol: TCP

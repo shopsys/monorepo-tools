@@ -1,0 +1,18 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+    name: redis
+spec:
+    replicas: 1
+    template:
+        metadata:
+            labels:
+                app: redis
+        spec:
+            containers:
+            -   name: redis
+                image: redis:4.0-alpine
+                ports:
+                -   name: redis
+                    containerPort: 6379
+                    protocol: TCP

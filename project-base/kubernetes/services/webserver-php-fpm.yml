@@ -1,0 +1,12 @@
+kind: Service
+apiVersion: v1
+metadata:
+    name: webserver-php-fpm
+spec:
+    selector:
+        app: webserver-php-fpm
+    type: NodePort
+    ports:
+    -   name: http
+        port: 8080
+        targetPort: 8080

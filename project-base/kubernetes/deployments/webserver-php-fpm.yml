@@ -1,0 +1,76 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: webserver-php-fpm
+    labels:
+        app: webserver-php-fpm
+spec:
+    replicas: 1
+    strategy:
+        rollingUpdate:
+            maxSurge: 1
+            maxUnavailable: 0
+        type: RollingUpdate
+    selector:
+        matchLabels:
+            app: webserver-php-fpm
+    template:
+        metadata:
+            labels:
+                app: webserver-php-fpm
+        spec:
+            hostAliases:
+            -   ip: "127.0.0.1"
+                hostnames:
+                -   "webserver-php-fpm"
+                -   "php-fpm"
+                -   "webserver"
+            volumes:
+                -   name: source-codes
+                    emptyDir: {}
+                -   name: nginx-configuration
+                    configMap:
+                        name: nginx-configuration
+                        items:
+                        -   key: nginx.conf
+                            path: default.conf
+                -   name: php-configuration
+                    configMap:
+                        name: php-configuration
+                        items:
+                        -   key: php-ini-overrides.ini
+                            path: php.ini
+            initContainers:
+                -   name: copy-source-codes-to-application-folder
+                    image: $PHP_FPM_IMAGE
+                    command: ["sh", "-c", "cp -r /source-code/. /var/www/html && chown -R www-data:www-data /var/www/html"]
+                    volumeMounts:
+                    -       name: source-codes
+                            mountPath: /var/www/html
+            containers:
+            -   image: $PHP_FPM_IMAGE
+                name: php-fpm
+                securityContext:
+                        runAsUser: 82
+                workingDir: /var/www/html
+                volumeMounts:
+                    -   name: php-configuration
+                        mountPath: /usr/local/etc/php/php.ini
+                        subPath: php.ini
+                    -   name: source-codes
+                        mountPath: /var/www/html
+            -   image: nginx:1.13.10-alpine
+                name: webserver
+                ports:
+                    -   containerPort: 8080
+                        name: http
+                volumeMounts:
+                    -   name: nginx-configuration
+                        mountPath: /etc/nginx/conf.d
+                    -   name: source-codes
+                        mountPath: /var/www/html
+                lifecycle:
+                    preStop:
+                        exec:
+                            command:
+                            -   nginx -s quit

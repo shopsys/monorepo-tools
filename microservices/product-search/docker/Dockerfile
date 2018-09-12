@@ -20,7 +20,7 @@ COPY docker/docker-php-entrypoint /usr/local/bin/
 # configure docker command that properly starts the microservice
 COPY docker/docker-after-start /usr/local/bin/docker-after-start
 RUN chmod +x /usr/local/bin/docker-after-start
-CMD /usr/local/bin/docker-after-start
+CMD docker-after-start
 
 # copy source code and PHP configuration to the container
 COPY / /var/www/html

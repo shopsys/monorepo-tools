@@ -1,0 +1,11 @@
+kind: Service
+apiVersion: v1
+metadata:
+    name: selenium-server
+spec:
+    selector:
+        app: selenium-server
+    ports:
+    -   name: selenium
+        port: 4444
+        targetPort: 4444

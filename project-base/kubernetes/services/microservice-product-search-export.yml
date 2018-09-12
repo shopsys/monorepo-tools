@@ -1,0 +1,12 @@
+kind: Service
+apiVersion: v1
+metadata:
+    name: microservice-product-search-export
+spec:
+    selector:
+        app: microservice-product-search-export
+    type: NodePort
+    ports:
+    -   name: microservice-product-search-export
+        port: 8000
+        targetPort: 8000

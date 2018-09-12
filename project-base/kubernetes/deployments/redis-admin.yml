@@ -1,0 +1,21 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+    name: redis-admin
+spec:
+    replicas: 1
+    template:
+        metadata:
+            labels:
+                app: redis-admin
+        spec:
+            containers:
+            -   name: redis-admin
+                image: erikdubbelboer/phpredisadmin:v1.10.2
+                env:
+                    -   name: REDIS_1_HOST
+                        value: redis
+                ports:
+                -   name: http
+                    containerPort: 80
+                    protocol: TCP

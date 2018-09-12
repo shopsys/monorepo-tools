@@ -1,0 +1,20 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+    name: shopsys
+spec:
+    rules:
+    -   host: $FIRST_DOMAIN_HOSTNAME
+        http:
+            paths:
+            -   path: /
+                backend:
+                    serviceName: webserver-php-fpm
+                    servicePort: 8080
+    -   host: $SECOND_DOMAIN_HOSTNAME
+        http:
+            paths:
+            -   path: /
+                backend:
+                    serviceName: webserver-php-fpm
+                    servicePort: 8080

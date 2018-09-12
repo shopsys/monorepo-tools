@@ -74,6 +74,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 #### Fixed
 - [#436 - Symfony >=3.4.15 marked as conflicting in composer.json](https://github.com/shopsys/shopsys/pull/436)
     - bug https://github.com/symfony/symfony/issues/28296 in Symfony 3.4.15 version causes application build to fail
+#### Changed
+- [#393 - Continuous integration via Kubernetes](https://github.com/shopsys/shopsys/pull/393)
+    - for details, see [Introduction to Kubernetes](/docs/kubernetes/introduction-to-kubernetes.md)
 
 ### [shopsys/coding-standards]
 #### Added

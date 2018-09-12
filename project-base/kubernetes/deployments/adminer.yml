@@ -1,0 +1,21 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+    name: adminer
+spec:
+    replicas: 1
+    template:
+        metadata:
+            labels:
+                app: adminer
+        spec:
+            containers:
+            -   name: adminer
+                image: adminer:4.6
+                env:
+                    -   name: ADMINER_DEFAULT_SERVER
+                        value: postgres
+                ports:
+                -   name: http
+                    containerPort: 8080
+                    protocol: TCP

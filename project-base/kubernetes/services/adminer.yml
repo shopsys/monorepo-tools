@@ -1,0 +1,12 @@
+kind: Service
+apiVersion: v1
+metadata:
+    name: adminer
+spec:
+    selector:
+        app: adminer
+    type: NodePort
+    ports:
+    -   name: http
+        port: 80
+        targetPort: 8080
