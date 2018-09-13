@@ -82,8 +82,8 @@ class MicroserviceClient
     protected function createDefaultOptions(): array
     {
         return [
-            RequestOptions::CONNECT_TIMEOUT => 0.1,
-            RequestOptions::TIMEOUT => 1.0,
+            RequestOptions::CONNECT_TIMEOUT => 15,
+            RequestOptions::TIMEOUT => 15,
             RequestOptions::HEADERS => ['Accept' => 'application/json'],
         ];
     }
