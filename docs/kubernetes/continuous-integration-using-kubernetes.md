@@ -74,7 +74,7 @@ You must provide the following environment variables:
 | **$GITHUB_OAUTH_TOKEN**                 | authorization token for GitHub, required by Composer
 | **$GIT_COMMIT**                         | hash of the built commit, used for tagging images
 | **$JOB_NAME**                           | branch name used for domain names and build process
-| **$NGINX_INGRESS_CONTROLLER_HOST_PORT** | port used in the ingress controller running on node, don't use 80 (for details, see [How to Get a Cluster Running](/docs/kubernetes/how-to-get-a-cluster built commit, used for tagging images
+| **$NGINX_INGRESS_CONTROLLER_HOST_PORT** | port used in the ingress controller running on node, don't use 80 (for details, see [How to Get a Cluster Running](/docs/kubernetes/how-to-get-a-cluster-running.md))
 
 ### Build
 Build of the application is then executed by one single command since the build process is saved into shell file which is part of the repository.
