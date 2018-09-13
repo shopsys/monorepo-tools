@@ -76,6 +76,14 @@ Other branches are not pushed.
 
 It may again take a while, depending on the size of your monorepo.
 
+***Note:***  
+*The commits in the split repositories should be identical to those from the original repo, keeping the git history intact.*
+*Thus, if you have checked out the original `master` previously, you should be able to fast-forward to the new version after splitting.*  
+*The only known exception is a signed commit (note that GitHub signs commits made via its web UI by default).*
+*If you have signed commits in your original repository, the split commits will NOT be signed.*
+*This will prevent `monorepo_split.sh` from pushing the unsigned commits to the remote.*  
+*To overcome this you can add [the `--force` flag](https://git-scm.com/docs/git-push#git-push--f) to the `git push` calls in the script, but it may cause unforeseen consequences if you're not sure what you're doing.*
+
 ### Add a new package into the monorepo
 
 When you have the monorepo, you may find a reason for adding a new package after some time you already use the monorepo.
