@@ -41,4 +41,7 @@ RUN composer config -g github-oauth.github.com $github_oauth_token
 # install composer dependencies (as www-data user)
 RUN composer install
 
+# warm up the Symfony cache
+RUN php bin/console cache:warmup
+
 WORKDIR /var/www/html

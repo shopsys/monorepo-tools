@@ -10,5 +10,8 @@ else
     composer update
 fi
 
+# warm up the Symfony cache
+php bin/console cache:warmup
+
 # start the PHP server
 php bin/console server:run *:8000
