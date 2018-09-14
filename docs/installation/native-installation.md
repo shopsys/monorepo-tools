@@ -32,16 +32,9 @@ After that, you can follow the steps below in order to install and configure Sho
 ## Steps
 ### 1. Create new project from Shopsys Framework sources
 ```
-composer create-project shopsys/project-base --stability=dev --keep-vcs
+composer create-project shopsys/project-base --stability=alpha --keep-vcs
 cd project-base
 ```
-**Important note:** 
-
-**Due to changes in the installation process (see [changelog](/CHANGELOG.md) for details), we recommend using the current `dev-master` as a base for your project.**
-**Therefore there is the `stability=dev` flag used in the `composer` command above.**
-**After the next release, we will again return to our standard recommended stability (see notes below).**
-
-<!--- TODO Remove important note after tag release and change stability in composer line to standard -->
 
 *Notes:* 
 - *The `--keep-vcs` option initializes GIT repository in your project folder that is needed for diff commands of the application build and keeps the GIT history of `shopsys/project-base`.*

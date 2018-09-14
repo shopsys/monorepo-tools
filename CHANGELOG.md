@@ -28,6 +28,66 @@ The changelog is generated during the release process using [ChangelogLinker](ht
 
 <!-- changelog-linker -->
 
+## [7.0.0-alpha6] - 2018-09-14
+
+### [shopsys/coding-standards]
+
+#### Added
+
+- [#384] added new rule to keep class spacing consistent, Thanks to [@TomasVotruba]
+
+### [shopsys/framework]
+
+- [#425] Solves issue: Difficult to add icon into submit button [#161], Thanks to [@kulincz]
+
+#### Changed
+
+- [#295] javascript compiling: improved memory consumption, Thanks to [@pk16011990]
+
+#### Fixed
+
+- [#386] fixed FileUpload wrong second parameter for UploadFailedException, Thanks to [@Maybeway]
+- [#420] Order flow fix - function call on string ([#419]), Thanks to [@jDolba]
+
+#### Removed
+
+- [#428] \*EditFormTypes removed
+
+### [shopsys/monorepo-tools]
+
+#### Fixed
+
+- [#433] fix: splitting now works correctly on repositories containing files with spaces, Thanks to [@dominikkaluza]
+
+### [shopsys/project-base]
+
+#### Changed
+
+- [#449] config files are now split into individual package configuration files
+- [#447] improved `UnableToResolveDomainException` error page
+
+### [shopsys/shopsys]
+
+#### Added
+
+- [#409] added framework models extension
+- [#424] adding-a-new-advert-position.md: added instructions for editing images.yml config file
+- [#429] added microservice for product search export
+- [#463] warm up Symfony cache in microservices during start-up
+
+#### Changed
+
+- [#393] Continuous integration via Kubernetes
+    - for details, see [Introduction to Kubernetes](/docs/kubernetes/introduction-to-kubernetes.md)
+- [#444] Improve Postgres configuration to improve performance
+- [#430] Microservices are now built as Docker images
+- [#446] Generate CHANGELOG.md with ChangelogLinker, Thanks to [@TomasVotruba]
+- [#438] Attribute telephone moved from a billing address to the personal data of a user
+
+#### Fixed
+
+- [#436] fix: Symfony >=3.4.15 marked as conflicting in composer.json
+
 ## [7.0.0-alpha5] - 2018-08-22
 ### [shopsys/framework]
 #### Added
@@ -1401,7 +1461,7 @@ That's why is this section formatted differently.
     - YesNoType
 - `.travis.yml` file with Travis CI configuration
 
-[Unreleased]: https://github.com/shopsys/shopsys/compare/v7.0.0-alpha5...HEAD
+[7.0.0-alpha6]: https://github.com/shopsys/shopsys/compare/v7.0.0-alpha5...v7.0.0-alpha6
 [7.0.0-alpha5]: https://github.com/shopsys/shopsys/compare/v7.0.0-alpha4...v7.0.0-alpha5
 [7.0.0-alpha4]: https://github.com/shopsys/shopsys/compare/v7.0.0-alpha3...v7.0.0-alpha4
 [7.0.0-alpha3]: https://github.com/shopsys/shopsys/compare/v7.0.0-alpha2...v7.0.0-alpha3
@@ -1433,3 +1493,45 @@ That's why is this section formatted differently.
 [@drekbour]: https://github.com/drekbour
 [@dominikkaluza]: https://github.com/dominikkaluza
 [@jDolba]: https://github.com/jDolba
+
+[#466]: https://github.com/shopsys/shopsys/pull/466
+[#465]: https://github.com/shopsys/shopsys/pull/465
+[#463]: https://github.com/shopsys/shopsys/pull/463
+[#461]: https://github.com/shopsys/shopsys/pull/461
+[#460]: https://github.com/shopsys/shopsys/pull/460
+[#459]: https://github.com/shopsys/shopsys/pull/459
+[#458]: https://github.com/shopsys/shopsys/pull/458
+[#456]: https://github.com/shopsys/shopsys/pull/456
+[#451]: https://github.com/shopsys/shopsys/pull/451
+[#449]: https://github.com/shopsys/shopsys/pull/449
+[#447]: https://github.com/shopsys/shopsys/pull/447
+[#446]: https://github.com/shopsys/shopsys/pull/446
+[#444]: https://github.com/shopsys/shopsys/pull/444
+[#439]: https://github.com/shopsys/shopsys/pull/439
+[#438]: https://github.com/shopsys/shopsys/pull/438
+[#436]: https://github.com/shopsys/shopsys/pull/436
+[#433]: https://github.com/shopsys/shopsys/pull/433
+[#432]: https://github.com/shopsys/shopsys/pull/432
+[#431]: https://github.com/shopsys/shopsys/pull/431
+[#430]: https://github.com/shopsys/shopsys/pull/430
+[#429]: https://github.com/shopsys/shopsys/pull/429
+[#428]: https://github.com/shopsys/shopsys/pull/428
+[#427]: https://github.com/shopsys/shopsys/pull/427
+[#425]: https://github.com/shopsys/shopsys/pull/425
+[#424]: https://github.com/shopsys/shopsys/pull/424
+[#423]: https://github.com/shopsys/shopsys/pull/423
+[#422]: https://github.com/shopsys/shopsys/pull/422
+[#420]: https://github.com/shopsys/shopsys/pull/420
+[#419]: https://github.com/shopsys/shopsys/pull/419
+[#411]: https://github.com/shopsys/shopsys/pull/411
+[#410]: https://github.com/shopsys/shopsys/pull/410
+[#409]: https://github.com/shopsys/shopsys/pull/409
+[#403]: https://github.com/shopsys/shopsys/pull/403
+[#393]: https://github.com/shopsys/shopsys/pull/393
+[#386]: https://github.com/shopsys/shopsys/pull/386
+[#384]: https://github.com/shopsys/shopsys/pull/384
+[#295]: https://github.com/shopsys/shopsys/pull/295
+[#161]: https://github.com/shopsys/shopsys/pull/161
+[#142]: https://github.com/shopsys/shopsys/pull/142
+[@kulincz]: https://github.com/kulincz
+[@Maybeway]: https://github.com/Maybeway

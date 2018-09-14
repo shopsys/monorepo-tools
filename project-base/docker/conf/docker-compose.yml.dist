@@ -100,7 +100,7 @@ services:
             - discovery.type=single-node
 
     microservice-product-search:
-        image: shopsys/microservice-product-search:latest
+        image: shopsys/microservice-product-search:v7.0.0-alpha6
         container_name: shopsys-framework-microservice-product-search
         links:
             - elasticsearch
@@ -108,7 +108,7 @@ services:
             - elasticsearch
 
     microservice-product-search-export:
-        image: shopsys/microservice-product-search-export:latest
+        image: shopsys/microservice-product-search-export:7.0.0-alpha6
         container_name: shopsys-framework-microservice-product-search-export
         links:
             - elasticsearch
