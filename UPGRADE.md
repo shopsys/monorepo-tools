@@ -17,7 +17,21 @@ There is a list of all the repositories maintained by monorepo, changes in log b
 * [shopsys/microservice-product-search]
 * [shopsys/microservice-product-search-export]
 
-## [From 7.0.0-alpha5 to Unreleased]
+## [From 7.0.0-alpha6 to Unreleased]
+
+## [From 7.0.0-alpha5 to 7.0.0-alpha6]
+### [shopsys/framework]
+- check for usages of `TransportEditFormType` - it was removed and all it's attributes were moved to `TransportFormType` so use this form instead
+- check for usages of `PaymentEditFormType` - it was removed and all it's attributes were moved to `PaymentFormType` so use this form instead
+- check for usages of `ProductEditFormType` - it was removed and all it's attributes were moved to `ProductFormType` so use this form instead
+- pay attention to javascripts bound to your forms as well as the elements' names and ids has changed (e.g. from `#product_edit_form_productData` to `#product_form`)
+- PHP-FPM and microservice containers now expect a GitHub OAuth token set via a build argument, so it is not necessary to provide it every time those containers are rebuilt
+    - see the `github_oauth_token` argument setting in the `docker-compose.yml` template you used and replicate it
+    - replace the `place-your-token-here` string by the token generated on [Github -> Settings -> Developer Settings -> Personal access tokens](https://github.com/settings/tokens/new?scopes=repo&description=Composer+API+token)
+- as there were changes in the Dockerfiles, rebuilding images  is needed (`docker-compose up -d --build`)
+- [#438 - Attribute telephone moved from a billing address to the personal data of a user](https://github.com/shopsys/shopsys/pull/438)
+    - this change can affect your extended forms and entities, reflect this change into your project
+
 ### [shopsys/project-base]
 - [Microservice Product Search Export](https://github.com/shopsys/microservice-product-search-export) was added and it needs to be installed and run
     - check changes in the `docker-compose.yml` template you used and replicate them, there is a new container `microservice-product-search-export`
@@ -44,18 +58,6 @@ There is a list of all the repositories maintained by monorepo, changes in log b
     - Start containers `docker-compose up -d`
 - configuration files (`config.yml`, `config_dev.yml`, `config_test.yml`, `security.yml` and `wysiwyg.yml`) has been split into packages config files (see `app/config/packages` folder)
     - update appropriate package configs in case you had some custom configuration set in those files
-
-### [shopsys/framework]
-- check for usages of `TransportEditFormType` - it was removed and all it's attributes were moved to `TransportFormType` so use this form instead
-- check for usages of `PaymentEditFormType` - it was removed and all it's attributes were moved to `PaymentFormType` so use this form instead
-- check for usages of `ProductEditFormType` - it was removed and all it's attributes were moved to `ProductFormType` so use this form instead
-- pay attention to javascripts bound to your forms as well as the elements' names and ids has changed (e.g. from `#product_edit_form_productData` to `#product_form`)
-- PHP-FPM and microservice containers now expect a GitHub OAuth token set via a build argument, so it is not necessary to provide it every time those containers are rebuilt
-    - see the `github_oauth_token` argument setting in the `docker-compose.yml` template you used and replicate it
-    - replace the `place-your-token-here` string by the token generated on [Github -> Settings -> Developer Settings -> Personal access tokens](https://github.com/settings/tokens/new?scopes=repo&description=Composer+API+token)
-- as there were changes in the Dockerfiles, rebuilding images  is needed (`docker-compose up -d --build`)
-- [#438 - Attribute telephone moved from a billing address to the personal data of a user](https://github.com/shopsys/shopsys/pull/438)
-    - this change can affect your extended forms and entities, reflect this change into your project
 
 ### [shopsys/shopsys]
 - when upgrading your installed [monorepo](docs/introduction/monorepo.md), you'll have to change the build context for the images of the microservices in `docker-compose.yml`
@@ -345,7 +347,8 @@ parameters:
         - *_generated/*
 
 ```
-[From 7.0.0-alpha5 to Unreleased]: https://github.com/shopsys/shopsys/compare/v7.0.0-alpha5...HEAD
+[From 7.0.0-alpha6 to Unreleased]: https://github.com/shopsys/shopsys/compare/v7.0.0-alpha6...HEAD
+[From 7.0.0-alpha5 to 7.0.0-alpha6]: https://github.com/shopsys/shopsys/compare/v7.0.0-alpha5...v7.0.0-alpha6
 [From 7.0.0-alpha4 to 7.0.0-alpha5]: https://github.com/shopsys/shopsys/compare/v7.0.0-alpha4...v7.0.0-alpha5
 [From 7.0.0-alpha3 to 7.0.0-alpha4]: https://github.com/shopsys/shopsys/compare/v7.0.0-alpha3...v7.0.0-alpha4
 [From 7.0.0-alpha2 to 7.0.0-alpha3]: https://github.com/shopsys/shopsys/compare/v7.0.0-alpha2...v7.0.0-alpha3
