@@ -25,7 +25,7 @@ class ProgressBarFactory
         return $bar;
     }
 
-    private function initializeCustomPlaceholderFormatters()
+    protected function initializeCustomPlaceholderFormatters()
     {
         ProgressBar::setPlaceholderFormatterDefinition('remaining_hms', function (ProgressBar $bar) {
             if ($bar->getProgress() !== 0) {
@@ -49,7 +49,7 @@ class ProgressBarFactory
      * @param int $timeInSeconds
      * @return string
      */
-    private function formatTimeHms($timeInSeconds)
+    protected function formatTimeHms($timeInSeconds)
     {
         return sprintf(
             '%dh %02dm %02ds',

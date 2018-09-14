@@ -11,17 +11,17 @@ class OrderDataFactory implements OrderDataFactoryInterface
     /**
      * @var \Shopsys\FrameworkBundle\Model\Order\Item\OrderItemDataFactoryInterface
      */
-    private $orderItemDataFactory;
+    protected $orderItemDataFactory;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Order\Item\OrderTransportDataFactoryInterface
      */
-    private $orderTransportDataFactory;
+    protected $orderTransportDataFactory;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Order\Item\OrderPaymentDataFactoryInterface
      */
-    private $orderPaymentDataFactory;
+    protected $orderPaymentDataFactory;
 
     public function __construct(
         OrderItemDataFactoryInterface $orderItemDataFactory,

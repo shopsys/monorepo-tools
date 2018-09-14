@@ -21,22 +21,22 @@ class LoginController extends AdminBaseController
     /**
      * @var \Shopsys\FrameworkBundle\Model\Security\LoginService
      */
-    private $loginService;
+    protected $loginService;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\Domain\Domain
      */
-    private $domain;
+    protected $domain;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\Router\DomainRouterFactory
      */
-    private $domainRouterFactory;
+    protected $domainRouterFactory;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Security\AdministratorLoginFacade
      */
-    private $administratorLoginFacade;
+    protected $administratorLoginFacade;
 
     public function __construct(
         LoginService $loginService,

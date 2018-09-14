@@ -20,27 +20,27 @@ class CategoryController extends AdminBaseController
     /**
      * @var \Shopsys\FrameworkBundle\Model\AdminNavigation\BreadcrumbOverrider
      */
-    private $breadcrumbOverrider;
+    protected $breadcrumbOverrider;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Category\CategoryDataFactoryInterface
      */
-    private $categoryDataFactory;
+    protected $categoryDataFactory;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Category\CategoryFacade
      */
-    private $categoryFacade;
+    protected $categoryFacade;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\Domain\Domain
      */
-    private $domain;
+    protected $domain;
 
     /**
      * @var \Symfony\Component\HttpFoundation\Session\SessionInterface
      */
-    private $session;
+    protected $session;
 
     public function __construct(
         CategoryFacade $categoryFacade,

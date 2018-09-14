@@ -19,17 +19,17 @@ class NewsletterController extends AdminBaseController
     /**
      * @var \Shopsys\FrameworkBundle\Model\Newsletter\NewsletterFacade
      */
-    private $newsletterFacade;
+    protected $newsletterFacade;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\Domain\AdminDomainTabsFacade
      */
-    private $adminDomainTabsFacade;
+    protected $adminDomainTabsFacade;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\Grid\GridFactory
      */
-    private $gridFactory;
+    protected $gridFactory;
 
     public function __construct(
         NewsletterFacade $newsletterFacade,
@@ -118,7 +118,7 @@ class NewsletterController extends AdminBaseController
     /**
      * @param int $domainId
      */
-    private function streamCsvExport($domainId)
+    protected function streamCsvExport($domainId)
     {
         $output = new SplFileObject('php://output', 'w+');
 

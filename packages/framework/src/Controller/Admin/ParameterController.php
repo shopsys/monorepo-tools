@@ -12,12 +12,12 @@ class ParameterController extends AdminBaseController
     /**
      * @var \Shopsys\FrameworkBundle\Model\Product\Parameter\ParameterFacade
      */
-    private $parameterFacade;
+    protected $parameterFacade;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Product\Parameter\ParameterInlineEdit
      */
-    private $parameterInlineEdit;
+    protected $parameterInlineEdit;
 
     public function __construct(
         ParameterFacade $parameterFacade,

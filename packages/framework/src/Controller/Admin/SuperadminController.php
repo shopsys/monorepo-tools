@@ -21,37 +21,37 @@ class SuperadminController extends AdminBaseController
     /**
      * @var \Shopsys\FrameworkBundle\Model\Module\ModuleList
      */
-    private $moduleList;
+    protected $moduleList;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Module\ModuleFacade
      */
-    private $moduleFacade;
+    protected $moduleFacade;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\Router\LocalizedRouterFactory
      */
-    private $localizedRouterFactory;
+    protected $localizedRouterFactory;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\Grid\GridFactory
      */
-    private $gridFactory;
+    protected $gridFactory;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Localization\Localization
      */
-    private $localization;
+    protected $localization;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Pricing\PricingSetting
      */
-    private $pricingSetting;
+    protected $pricingSetting;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Pricing\DelayedPricingSetting
      */
-    private $delayedPricingSetting;
+    protected $delayedPricingSetting;
 
     public function __construct(
         ModuleList $moduleList,
@@ -129,7 +129,7 @@ class SuperadminController extends AdminBaseController
      * @param array $locales
      * @return array
      */
-    private function loadDataForUrls(array $locales)
+    protected function loadDataForUrls(array $locales)
     {
         $data = [];
         $requestContext = new RequestContext();

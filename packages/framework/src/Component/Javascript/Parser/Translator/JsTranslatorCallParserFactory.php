@@ -14,12 +14,12 @@ class JsTranslatorCallParserFactory
     /**
      * @var \Shopsys\FrameworkBundle\Component\Javascript\Parser\JsFunctionCallParser
      */
-    private $jsFunctionCallParser;
+    protected $jsFunctionCallParser;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\Javascript\Parser\JsStringParser
      */
-    private $jsStringParser;
+    protected $jsStringParser;
 
     /**
      * @param \Shopsys\FrameworkBundle\Component\Javascript\Parser\JsFunctionCallParser $jsFunctionCallParser

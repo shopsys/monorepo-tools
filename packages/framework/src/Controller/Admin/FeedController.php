@@ -15,17 +15,17 @@ class FeedController extends AdminBaseController
     /**
      * @var \Shopsys\FrameworkBundle\Component\Domain\Domain
      */
-    private $domain;
+    protected $domain;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Feed\FeedFacade
      */
-    private $feedFacade;
+    protected $feedFacade;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\Grid\GridFactory
      */
-    private $gridFactory;
+    protected $gridFactory;
 
     public function __construct(
         FeedFacade $feedFacade,

@@ -11,17 +11,17 @@ class LocalizedRouterFactory
     /**
      * @var \Symfony\Component\Config\Loader\LoaderInterface
      */
-    private $configLoader;
+    protected $configLoader;
 
     /**
      * @var string[]
      */
-    private $localeRoutersResourcesFilepaths;
+    protected $localeRoutersResourcesFilepaths;
 
     /**
      * @var \Symfony\Component\Routing\Router[][]
      */
-    private $routersByLocaleAndHost;
+    protected $routersByLocaleAndHost;
 
     public function __construct($localeRoutersResourcesFilepaths, LoaderInterface $configLoader)
     {

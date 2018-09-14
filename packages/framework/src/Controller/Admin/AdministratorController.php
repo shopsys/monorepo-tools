@@ -22,27 +22,27 @@ class AdministratorController extends AdminBaseController
     /**
      * @var \Shopsys\FrameworkBundle\Model\AdminNavigation\BreadcrumbOverrider
      */
-    private $breadcrumbOverrider;
+    protected $breadcrumbOverrider;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Administrator\AdministratorFacade
      */
-    private $administratorFacade;
+    protected $administratorFacade;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\Grid\GridFactory
      */
-    private $gridFactory;
+    protected $gridFactory;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Administrator\Activity\AdministratorActivityFacade
      */
-    private $administratorActivityFacade;
+    protected $administratorActivityFacade;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Administrator\AdministratorDataFactoryInterface
      */
-    private $administratorDataFactory;
+    protected $administratorDataFactory;
 
     public function __construct(
         AdministratorFacade $administratorFacade,

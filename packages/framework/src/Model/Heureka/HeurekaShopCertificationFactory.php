@@ -11,17 +11,17 @@ class HeurekaShopCertificationFactory
     /**
      * @var \Shopsys\FrameworkBundle\Component\Domain\Domain
      */
-    private $domain;
+    protected $domain;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Heureka\HeurekaSetting
      */
-    private $heurekaSetting;
+    protected $heurekaSetting;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Heureka\HeurekaShopCertificationService
      */
-    private $heurekaShopCertificationService;
+    protected $heurekaShopCertificationService;
 
     /**
      * @param \Shopsys\FrameworkBundle\Component\Domain\Domain $domain

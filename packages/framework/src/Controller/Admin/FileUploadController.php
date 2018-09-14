@@ -14,12 +14,12 @@ class FileUploadController extends AdminBaseController
     /**
      * @var \Shopsys\FrameworkBundle\Component\FileUpload\FileUpload
      */
-    private $fileUpload;
+    protected $fileUpload;
 
     /**
      * @var \Shopsys\FrameworkBundle\Twig\FileThumbnail\FileThumbnailExtension
      */
-    private $fileThumbnailExtension;
+    protected $fileThumbnailExtension;
 
     public function __construct(
         FileUpload $fileUpload,

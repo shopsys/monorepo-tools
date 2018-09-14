@@ -12,22 +12,22 @@ class GridFactory
     /**
      * @var \Symfony\Component\HttpFoundation\RequestStack
      */
-    private $requestStack;
+    protected $requestStack;
 
     /**
      * @var \Symfony\Component\Routing\RouterInterface
      */
-    private $router;
+    protected $router;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\Router\Security\RouteCsrfProtector
      */
-    private $routeCsrfProtector;
+    protected $routeCsrfProtector;
 
     /**
      * @var \Twig_Environment
      */
-    private $twig;
+    protected $twig;
 
     public function __construct(
         RequestStack $requestStack,

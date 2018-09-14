@@ -16,17 +16,17 @@ class UnitController extends AdminBaseController
     /**
      * @var \Shopsys\FrameworkBundle\Model\Product\Unit\UnitFacade
      */
-    private $unitFacade;
+    protected $unitFacade;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Product\Unit\UnitInlineEdit
      */
-    private $unitInlineEdit;
+    protected $unitInlineEdit;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\ConfirmDelete\ConfirmDeleteResponseFactory
      */
-    private $confirmDeleteResponseFactory;
+    protected $confirmDeleteResponseFactory;
 
     public function __construct(
         UnitFacade $unitFacade,

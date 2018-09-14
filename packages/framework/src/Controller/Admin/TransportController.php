@@ -17,27 +17,27 @@ class TransportController extends AdminBaseController
     /**
      * @var \Shopsys\FrameworkBundle\Model\AdminNavigation\BreadcrumbOverrider
      */
-    private $breadcrumbOverrider;
+    protected $breadcrumbOverrider;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Pricing\Currency\CurrencyFacade
      */
-    private $currencyFacade;
+    protected $currencyFacade;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Transport\Grid\TransportGridFactory
      */
-    private $transportGridFactory;
+    protected $transportGridFactory;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Transport\TransportDataFactoryInterface
      */
-    private $transportDataFactory;
+    protected $transportDataFactory;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Transport\TransportFacade
      */
-    private $transportFacade;
+    protected $transportFacade;
 
     public function __construct(
         TransportFacade $transportFacade,

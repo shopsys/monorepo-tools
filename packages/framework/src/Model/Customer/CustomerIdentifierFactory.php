@@ -9,12 +9,12 @@ class CustomerIdentifierFactory
     /**
      * @var \Shopsys\FrameworkBundle\Model\Customer\CurrentCustomer
      */
-    private $currentCustomer;
+    protected $currentCustomer;
 
     /**
      * @var \Symfony\Component\HttpFoundation\Session\SessionInterface
      */
-    private $session;
+    protected $session;
 
     public function __construct(CurrentCustomer $currentCustomer, SessionInterface $session)
     {

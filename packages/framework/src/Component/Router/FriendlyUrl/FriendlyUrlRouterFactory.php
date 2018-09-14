@@ -11,17 +11,17 @@ class FriendlyUrlRouterFactory
     /**
      * @var \Symfony\Component\Config\Loader\LoaderInterface
      */
-    private $configLoader;
+    protected $configLoader;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\FriendlyUrlRepository
      */
-    private $friendlyUrlRepository;
+    protected $friendlyUrlRepository;
 
     /**
      * @var string
      */
-    private $friendlyUrlRouterResourceFilepath;
+    protected $friendlyUrlRouterResourceFilepath;
 
     public function __construct(
         $friendlyUrlRouterResourceFilepath,

@@ -17,27 +17,27 @@ class PaymentController extends AdminBaseController
     /**
      * @var \Shopsys\FrameworkBundle\Model\AdminNavigation\BreadcrumbOverrider
      */
-    private $breadcrumbOverrider;
+    protected $breadcrumbOverrider;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Payment\Grid\PaymentGridFactory
      */
-    private $paymentGridFactory;
+    protected $paymentGridFactory;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Payment\PaymentDataFactoryInterface
      */
-    private $paymentDataFactory;
+    protected $paymentDataFactory;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Payment\PaymentFacade
      */
-    private $paymentFacade;
+    protected $paymentFacade;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Pricing\Currency\CurrencyFacade
      */
-    private $currencyFacade;
+    protected $currencyFacade;
 
     public function __construct(
         PaymentDataFactoryInterface $paymentDataFactory,

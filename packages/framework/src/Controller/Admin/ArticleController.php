@@ -23,42 +23,42 @@ class ArticleController extends AdminBaseController
     /**
      * @var \Shopsys\FrameworkBundle\Model\AdminNavigation\BreadcrumbOverrider
      */
-    private $breadcrumbOverrider;
+    protected $breadcrumbOverrider;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Article\ArticleFacade
      */
-    private $articleFacade;
+    protected $articleFacade;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Article\ArticleDataFactoryInterface
      */
-    private $articleDataFactory;
+    protected $articleDataFactory;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\Domain\AdminDomainTabsFacade
      */
-    private $adminDomainTabsFacade;
+    protected $adminDomainTabsFacade;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\Grid\GridFactory
      */
-    private $gridFactory;
+    protected $gridFactory;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\ConfirmDelete\ConfirmDeleteResponseFactory
      */
-    private $confirmDeleteResponseFactory;
+    protected $confirmDeleteResponseFactory;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\LegalConditions\LegalConditionsFacade
      */
-    private $legalConditionsFacade;
+    protected $legalConditionsFacade;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Cookies\CookiesFacade
      */
-    private $cookiesFacade;
+    protected $cookiesFacade;
 
     public function __construct(
         ArticleFacade $articleFacade,
@@ -246,7 +246,7 @@ class ArticleController extends AdminBaseController
      * @param string $articlePlacement
      * @return \Shopsys\FrameworkBundle\Component\Grid\Grid
      */
-    private function getGrid($articlePlacement)
+    protected function getGrid($articlePlacement)
     {
         $queryBuilder = $this->articleFacade->getOrderedArticlesByDomainIdAndPlacementQueryBuilder(
             $this->adminDomainTabsFacade->getSelectedDomainId(),

@@ -9,7 +9,7 @@ class PhpFileExtractorFactory
     /**
      * @var \Doctrine\Common\Annotations\DocParser
      */
-    private $docParser;
+    protected $docParser;
 
     public function __construct(DocParser $docParser)
     {

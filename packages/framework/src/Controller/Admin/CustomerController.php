@@ -31,57 +31,57 @@ class CustomerController extends AdminBaseController
     /**
      * @var \Shopsys\FrameworkBundle\Model\Customer\UserDataFactoryInterface
      */
-    private $userDataFactory;
+    protected $userDataFactory;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Customer\CustomerListAdminFacade
      */
-    private $customerListAdminFacade;
+    protected $customerListAdminFacade;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Customer\CustomerFacade
      */
-    private $customerFacade;
+    protected $customerFacade;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\AdminNavigation\BreadcrumbOverrider
      */
-    private $breadcrumbOverrider;
+    protected $breadcrumbOverrider;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Administrator\AdministratorGridFacade
      */
-    private $administratorGridFacade;
+    protected $administratorGridFacade;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\Grid\GridFactory
      */
-    private $gridFactory;
+    protected $gridFactory;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\Domain\AdminDomainTabsFacade
      */
-    private $adminDomainTabsFacade;
+    protected $adminDomainTabsFacade;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Order\OrderFacade
      */
-    private $orderFacade;
+    protected $orderFacade;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Security\LoginAsUserFacade
      */
-    private $loginAsUserFacade;
+    protected $loginAsUserFacade;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\Router\DomainRouterFactory
      */
-    private $domainRouterFactory;
+    protected $domainRouterFactory;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Customer\CustomerDataFactoryInterface
      */
-    private $customerDataFactory;
+    protected $customerDataFactory;
 
     public function __construct(
         UserDataFactoryInterface $userDataFactory,
@@ -286,7 +286,7 @@ class CustomerController extends AdminBaseController
      * @param \Shopsys\FrameworkBundle\Model\Customer\User $user
      * @return string
      */
-    private function getSsoLoginAsUserUrl(User $user)
+    protected function getSsoLoginAsUserUrl(User $user)
     {
         $customerDomainRouter = $this->domainRouterFactory->getRouter($user->getDomainId());
         $loginAsUserUrl = $customerDomainRouter->generate(

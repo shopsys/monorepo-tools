@@ -14,17 +14,17 @@ class ParameterGridFactory implements GridFactoryInterface
     /**
      * @var \Doctrine\ORM\EntityManagerInterface
      */
-    private $em;
+    protected $em;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\Grid\GridFactory
      */
-    private $gridFactory;
+    protected $gridFactory;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Localization\Localization
      */
-    private $localization;
+    protected $localization;
 
     public function __construct(
         EntityManagerInterface $em,
@@ -86,7 +86,7 @@ class ParameterGridFactory implements GridFactoryInterface
     /**
      * @return QueryBuilderDataSource
      */
-    private function getParametersDataSource()
+    protected function getParametersDataSource()
     {
         $locales = $this->localization->getLocalesOfAllDomains();
         $queryBuilder = $this->em->createQueryBuilder();

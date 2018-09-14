@@ -13,12 +13,12 @@ class TopProductController extends AdminBaseController
     /**
      * @var \Shopsys\FrameworkBundle\Model\Product\TopProduct\TopProductFacade
      */
-    private $topProductFacade;
+    protected $topProductFacade;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\Domain\AdminDomainTabsFacade
      */
-    private $adminDomainTabsFacade;
+    protected $adminDomainTabsFacade;
 
     public function __construct(
         TopProductFacade $topProductFacade,
@@ -58,7 +58,7 @@ class TopProductController extends AdminBaseController
      * @param int $domainId
      * @return \Shopsys\FrameworkBundle\Model\Product\Product[]
      */
-    private function getProductsForDomain($domainId)
+    protected function getProductsForDomain($domainId)
     {
         $topProducts = $this->topProductFacade->getAll($domainId);
         $products = [];

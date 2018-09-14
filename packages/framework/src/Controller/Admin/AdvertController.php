@@ -22,42 +22,42 @@ class AdvertController extends AdminBaseController
     /**
      * @var \Shopsys\FrameworkBundle\Model\AdminNavigation\BreadcrumbOverrider
      */
-    private $breadcrumbOverrider;
+    protected $breadcrumbOverrider;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Administrator\AdministratorGridFacade
      */
-    private $administratorGridFacade;
+    protected $administratorGridFacade;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Advert\AdvertFacade
      */
-    private $advertFacade;
+    protected $advertFacade;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\Domain\AdminDomainTabsFacade
      */
-    private $adminDomainTabsFacade;
+    protected $adminDomainTabsFacade;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\Grid\GridFactory
      */
-    private $gridFactory;
+    protected $gridFactory;
 
     /**
      * @var \Shopsys\FrameworkBundle\Twig\ImageExtension
      */
-    private $imageExtension;
+    protected $imageExtension;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Advert\AdvertDataFactoryInterface
      */
-    private $advertDataFactory;
+    protected $advertDataFactory;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Advert\AdvertPositionRegistry
      */
-    private $advertPositionRegistry;
+    protected $advertPositionRegistry;
 
     public function __construct(
         AdvertFacade $advertFacade,

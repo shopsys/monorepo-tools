@@ -27,57 +27,57 @@ class OrderController extends AdminBaseController
     /**
      * @var \Shopsys\FrameworkBundle\Model\AdminNavigation\BreadcrumbOverrider
      */
-    private $breadcrumbOverrider;
+    protected $breadcrumbOverrider;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Administrator\AdministratorGridFacade
      */
-    private $administratorGridFacade;
+    protected $administratorGridFacade;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\AdvancedSearchOrder\AdvancedSearchOrderFacade
      */
-    private $advancedSearchOrderFacade;
+    protected $advancedSearchOrderFacade;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\Grid\GridFactory
      */
-    private $gridFactory;
+    protected $gridFactory;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Order\Item\OrderItemPriceCalculation
      */
-    private $orderItemPriceCalculation;
+    protected $orderItemPriceCalculation;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Order\OrderFacade
      */
-    private $orderFacade;
+    protected $orderFacade;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Order\Item\OrderItemFacade
      */
-    private $orderItemFacade;
+    protected $orderItemFacade;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Transport\TransportFacade
      */
-    private $transportFacade;
+    protected $transportFacade;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Payment\PaymentFacade
      */
-    private $paymentFacade;
+    protected $paymentFacade;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\Domain\Domain
      */
-    private $domain;
+    protected $domain;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Order\OrderDataFactoryInterface
      */
-    private $orderDataFactory;
+    protected $orderDataFactory;
 
     public function __construct(
         OrderFacade $orderFacade,
@@ -255,7 +255,7 @@ class OrderController extends AdminBaseController
      * @param array $row
      * @return array
      */
-    private function addOrderEntityToDataSource(array $row)
+    protected function addOrderEntityToDataSource(array $row)
     {
         $row['order'] = $this->orderFacade->getById($row['id']);
 

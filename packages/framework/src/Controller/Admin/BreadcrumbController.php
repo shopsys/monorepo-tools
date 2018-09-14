@@ -9,7 +9,7 @@ class BreadcrumbController extends AdminBaseController
     /**
      * @var \Shopsys\FrameworkBundle\Model\AdminNavigation\BreadcrumbOverrider
      */
-    private $breadcrumbOverrider;
+    protected $breadcrumbOverrider;
 
     public function __construct(BreadcrumbOverrider $breadcrumbOverrider)
     {

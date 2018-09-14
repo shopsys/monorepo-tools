@@ -18,22 +18,22 @@ class ScriptController extends AdminBaseController
     /**
      * @var \Shopsys\FrameworkBundle\Model\Script\ScriptFacade
      */
-    private $scriptFacade;
+    protected $scriptFacade;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\Grid\GridFactory
      */
-    private $gridFactory;
+    protected $gridFactory;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\Domain\AdminDomainTabsFacade
      */
-    private $adminDomainTabsFacade;
+    protected $adminDomainTabsFacade;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Script\ScriptDataFactoryInterface
      */
-    private $scriptDataFactory;
+    protected $scriptDataFactory;
 
     public function __construct(
         ScriptFacade $scriptFacade,
@@ -189,7 +189,7 @@ class ScriptController extends AdminBaseController
     /**
      * @return string[]
      */
-    private function getOrderSentPageScriptVariableLabelsIndexedByVariables()
+    protected function getOrderSentPageScriptVariableLabelsIndexedByVariables()
     {
         return [
             ScriptFacade::VARIABLE_NUMBER => t('Order number'),

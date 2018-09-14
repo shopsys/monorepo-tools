@@ -20,32 +20,32 @@ class BrandController extends AdminBaseController
     /**
      * @var \Shopsys\FrameworkBundle\Model\AdminNavigation\BreadcrumbOverrider
      */
-    private $breadcrumbOverrider;
+    protected $breadcrumbOverrider;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Administrator\AdministratorGridFacade
      */
-    private $administratorGridFacade;
+    protected $administratorGridFacade;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Product\Brand\BrandFacade
      */
-    private $brandFacade;
+    protected $brandFacade;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\Grid\GridFactory
      */
-    private $gridFactory;
+    protected $gridFactory;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\Domain\Domain
      */
-    private $domain;
+    protected $domain;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Product\Brand\BrandDataFactoryInterface
      */
-    private $brandDataFactory;
+    protected $brandDataFactory;
 
     public function __construct(
         BrandFacade $brandFacade,

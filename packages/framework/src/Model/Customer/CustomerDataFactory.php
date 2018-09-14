@@ -7,17 +7,17 @@ class CustomerDataFactory implements CustomerDataFactoryInterface
     /**
      * @var \Shopsys\FrameworkBundle\Model\Customer\BillingAddressDataFactoryInterface
      */
-    private $billingAddressDataFactory;
+    protected $billingAddressDataFactory;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Customer\DeliveryAddressDataFactoryInterface
      */
-    private $deliveryAddressDataFactory;
+    protected $deliveryAddressDataFactory;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Customer\UserDataFactoryInterface
      */
-    private $userDataFactory;
+    protected $userDataFactory;
 
     public function __construct(
         BillingAddressDataFactoryInterface $billingAddressDataFactory,

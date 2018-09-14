@@ -10,12 +10,12 @@ class DomainFactory
     /**
      * @var \Shopsys\FrameworkBundle\Component\Domain\Config\DomainsConfigLoader
      */
-    private $domainsConfigLoader;
+    protected $domainsConfigLoader;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\Setting\Setting
      */
-    private $setting;
+    protected $setting;
 
     /**
      * @param \Shopsys\FrameworkBundle\Component\Domain\Config\DomainsConfigLoader $domainsConfigLoader

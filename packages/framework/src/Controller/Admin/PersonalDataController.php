@@ -13,12 +13,12 @@ class PersonalDataController extends AdminBaseController
     /**
      * @var \Shopsys\FrameworkBundle\Component\Domain\AdminDomainTabsFacade
      */
-    private $adminDomainTabsFacade;
+    protected $adminDomainTabsFacade;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\Setting\Setting
      */
-    private $setting;
+    protected $setting;
 
     public function __construct(
         AdminDomainTabsFacade $adminDomainTabsFacade,

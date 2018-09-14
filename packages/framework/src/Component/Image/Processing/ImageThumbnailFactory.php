@@ -10,7 +10,7 @@ class ImageThumbnailFactory
     /**
      * @var \Shopsys\FrameworkBundle\Component\Image\Processing\ImageProcessingService
      */
-    private $imageProcessingService;
+    protected $imageProcessingService;
 
     /**
      * @param \Shopsys\FrameworkBundle\Component\Image\Processing\ImageProcessingService $imageProcessingService

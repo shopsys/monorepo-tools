@@ -11,17 +11,17 @@ class DomainFactoryOverwritingDomainUrl
     /**
      * @var string|null
      */
-    private $overwriteDomainUrl;
+    protected $overwriteDomainUrl;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\Domain\Config\DomainsConfigLoader
      */
-    private $domainsConfigLoader;
+    protected $domainsConfigLoader;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\Setting\Setting
      */
-    private $setting;
+    protected $setting;
 
     /**
      * @param string|null $overwriteDomainUrl

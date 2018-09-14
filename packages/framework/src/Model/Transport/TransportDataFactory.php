@@ -20,7 +20,7 @@ class TransportDataFactory implements TransportDataFactoryInterface
     /**
      * @var \Shopsys\FrameworkBundle\Component\Domain\Domain
      */
-    private $domain;
+    protected $domain;
 
     public function __construct(
         TransportFacade $transportFacade,

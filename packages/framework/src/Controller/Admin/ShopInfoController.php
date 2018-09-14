@@ -13,12 +13,12 @@ class ShopInfoController extends AdminBaseController
     /**
      * @var \Shopsys\FrameworkBundle\Component\Domain\AdminDomainTabsFacade
      */
-    private $adminDomainTabsFacade;
+    protected $adminDomainTabsFacade;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\ShopInfo\ShopInfoSettingFacade
      */
-    private $shopInfoSettingFacade;
+    protected $shopInfoSettingFacade;
 
     public function __construct(
         ShopInfoSettingFacade $shopInfoSettingFacade,

@@ -17,32 +17,32 @@ class OrderPreviewFactory
     /**
      * @var \Shopsys\FrameworkBundle\Model\Order\Preview\OrderPreviewCalculation
      */
-    private $orderPreviewCalculation;
+    protected $orderPreviewCalculation;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\Domain\Domain
      */
-    private $domain;
+    protected $domain;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Pricing\Currency\CurrencyFacade
      */
-    private $currencyFacade;
+    protected $currencyFacade;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Customer\CurrentCustomer
      */
-    private $currentCustomer;
+    protected $currentCustomer;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Cart\CartFacade
      */
-    private $cartFacade;
+    protected $cartFacade;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Order\PromoCode\CurrentPromoCodeFacade
      */
-    private $currentPromoCodeFacade;
+    protected $currentPromoCodeFacade;
 
     public function __construct(
         OrderPreviewCalculation $orderPreviewCalculation,

@@ -13,12 +13,12 @@ class SeoController extends AdminBaseController
     /**
      * @var \Shopsys\FrameworkBundle\Component\Domain\AdminDomainTabsFacade
      */
-    private $adminDomainTabsFacade;
+    protected $adminDomainTabsFacade;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Seo\SeoSettingFacade
      */
-    private $seoSettingFacade;
+    protected $seoSettingFacade;
 
     public function __construct(
         SeoSettingFacade $seoSettingFacade,

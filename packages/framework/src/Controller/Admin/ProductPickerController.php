@@ -19,27 +19,27 @@ class ProductPickerController extends AdminBaseController
     /**
      * @var \Shopsys\FrameworkBundle\Model\Administrator\AdministratorGridFacade
      */
-    private $administratorGridFacade;
+    protected $administratorGridFacade;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\AdvancedSearch\AdvancedSearchFacade
      */
-    private $advancedSearchFacade;
+    protected $advancedSearchFacade;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\Grid\GridFactory
      */
-    private $gridFactory;
+    protected $gridFactory;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Product\Listing\ProductListAdminFacade
      */
-    private $productListAdminFacade;
+    protected $productListAdminFacade;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Product\ProductFacade
      */
-    private $productFacade;
+    protected $productFacade;
 
     public function __construct(
         AdministratorGridFacade $administratorGridFacade,
@@ -102,7 +102,7 @@ class ProductPickerController extends AdminBaseController
      * @param array $viewParameters
      * @param array $gridViewParameters
      */
-    private function getPickerResponse(Request $request, array $viewParameters, array $gridViewParameters)
+    protected function getPickerResponse(Request $request, array $viewParameters, array $gridViewParameters)
     {
         $administrator = $this->getUser();
         /* @var $administrator \Shopsys\FrameworkBundle\Model\Administrator\Administrator */

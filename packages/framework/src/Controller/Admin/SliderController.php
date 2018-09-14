@@ -19,27 +19,27 @@ class SliderController extends AdminBaseController
     /**
      * @var \Shopsys\FrameworkBundle\Model\AdminNavigation\BreadcrumbOverrider
      */
-    private $breadcrumbOverrider;
+    protected $breadcrumbOverrider;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\Domain\AdminDomainTabsFacade
      */
-    private $adminDomainTabsFacade;
+    protected $adminDomainTabsFacade;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\Grid\GridFactory
      */
-    private $gridFactory;
+    protected $gridFactory;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Slider\SliderItemFacade
      */
-    private $sliderItemFacade;
+    protected $sliderItemFacade;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Slider\SliderItemDataFactoryInterface
      */
-    private $sliderItemDataFactory;
+    protected $sliderItemDataFactory;
 
     public function __construct(
         SliderItemFacade $sliderItemFacade,

@@ -18,27 +18,27 @@ class DomainController extends AdminBaseController
     /**
      * @var \Shopsys\FrameworkBundle\Component\Domain\Domain
      */
-    private $domain;
+    protected $domain;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\Domain\AdminDomainTabsFacade
      */
-    private $adminDomainTabsFacade;
+    protected $adminDomainTabsFacade;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\Grid\GridFactory
      */
-    private $gridFactory;
+    protected $gridFactory;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\Domain\DomainFacade
      */
-    private $domainFacade;
+    protected $domainFacade;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\FlashMessage\ErrorService
      */
-    private $errorService;
+    protected $errorService;
 
     public function __construct(
         Domain $domain,
@@ -151,7 +151,7 @@ class DomainController extends AdminBaseController
         ]);
     }
 
-    private function loadData()
+    protected function loadData()
     {
         $data = [];
         foreach ($this->domain->getAll() as $domainConfig) {

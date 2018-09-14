@@ -14,17 +14,17 @@ class CurrencyGridFactory implements GridFactoryInterface
     /**
      * @var \Doctrine\ORM\EntityManagerInterface
      */
-    private $em;
+    protected $em;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\Grid\GridFactory
      */
-    private $gridFactory;
+    protected $gridFactory;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Pricing\Currency\CurrencyFacade
      */
-    private $currencyFacade;
+    protected $currencyFacade;
 
     /**
      * @param \Doctrine\ORM\EntityManagerInterface $em

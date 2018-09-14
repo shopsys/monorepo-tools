@@ -10,27 +10,27 @@ class ProductFilterConfigFactory
     /**
      * @var \Shopsys\FrameworkBundle\Model\Product\Filter\ParameterFilterChoiceRepository
      */
-    private $parameterFilterChoiceRepository;
+    protected $parameterFilterChoiceRepository;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Product\Filter\FlagFilterChoiceRepository
      */
-    private $flagFilterChoiceRepository;
+    protected $flagFilterChoiceRepository;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Customer\CurrentCustomer
      */
-    private $currentCustomer;
+    protected $currentCustomer;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Product\Filter\BrandFilterChoiceRepository
      */
-    private $brandFilterChoiceRepository;
+    protected $brandFilterChoiceRepository;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Product\Filter\PriceRangeRepository
      */
-    private $priceRangeRepository;
+    protected $priceRangeRepository;
 
     public function __construct(
         ParameterFilterChoiceRepository $parameterFilterChoiceRepository,

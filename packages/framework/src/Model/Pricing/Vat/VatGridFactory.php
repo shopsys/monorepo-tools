@@ -14,22 +14,22 @@ class VatGridFactory implements GridFactoryInterface
     /**
      * @var \Doctrine\ORM\EntityManagerInterface
      */
-    private $em;
+    protected $em;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\Grid\GridFactory
      */
-    private $gridFactory;
+    protected $gridFactory;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Pricing\Vat\VatFacade
      */
-    private $vatFacade;
+    protected $vatFacade;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Pricing\PriceCalculation
      */
-    private $priceCalculation;
+    protected $priceCalculation;
 
     public function __construct(
         EntityManagerInterface $em,

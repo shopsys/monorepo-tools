@@ -18,22 +18,22 @@ class PaymentGridFactory implements GridFactoryInterface
     /**
      * @var \Shopsys\FrameworkBundle\Component\Grid\GridFactory
      */
-    private $gridFactory;
+    protected $gridFactory;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Payment\PaymentRepository
      */
-    private $paymentRepository;
+    protected $paymentRepository;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Localization\Localization
      */
-    private $localization;
+    protected $localization;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Payment\PaymentFacade
      */
-    private $paymentFacade;
+    protected $paymentFacade;
 
     public function __construct(
         GridFactory $gridFactory,
@@ -86,7 +86,7 @@ class PaymentGridFactory implements GridFactoryInterface
      * @param \Shopsys\FrameworkBundle\Model\Payment\Payment $payment
      * @return string
      */
-    private function getDisplayPrice(Payment $payment)
+    protected function getDisplayPrice(Payment $payment)
     {
         $transportBasePricesIndexedByCurrencyId = $this->paymentFacade->getIndependentBasePricesIndexedByCurrencyId($payment);
 

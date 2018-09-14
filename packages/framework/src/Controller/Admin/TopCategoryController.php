@@ -13,12 +13,12 @@ class TopCategoryController extends AdminBaseController
     /**
      * @var \Shopsys\FrameworkBundle\Model\Category\TopCategory\TopCategoryFacade
      */
-    private $topCategoryFacade;
+    protected $topCategoryFacade;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\Domain\AdminDomainTabsFacade
      */
-    private $adminDomainTabsFacade;
+    protected $adminDomainTabsFacade;
 
     public function __construct(
         TopCategoryFacade $topCategoryFacade,

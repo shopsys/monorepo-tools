@@ -9,7 +9,7 @@ class MenuController extends AdminBaseController
     /**
      * @var \Shopsys\FrameworkBundle\Component\Domain\DomainFacade
      */
-    private $domainFacade;
+    protected $domainFacade;
 
     public function __construct(DomainFacade $domainFacade)
     {

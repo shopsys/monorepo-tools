@@ -12,12 +12,12 @@ class MutexFactory
     /**
      * @var \NinjaMutex\Lock\LockInterface
      */
-    private $lock;
+    protected $lock;
 
     /**
      * @var \NinjaMutex\Mutex[]
      */
-    private $mutexesByName;
+    protected $mutexesByName;
 
     public function __construct(LockInterface $lock)
     {

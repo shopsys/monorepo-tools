@@ -35,7 +35,7 @@ Besides the rules that are checked by automatic tools, we have few rules for whi
     {
         return $this->getProductRepository()->find($id);
     }
-    
+
     /**
      * @param int $id
      * @return \Shopsys\FrameworkBundle\Model\Product\Product
@@ -95,4 +95,8 @@ Besides the rules that are checked by automatic tools, we have few rules for whi
     }
     ```
 - Entities have to be created by factories. Only allowed exception are `*Translation` entities that are created by their owner entity.
-- Visibility of all properties and methods of entities must be protected or public to enable extensibility. 
+- Visibility of all properties and methods of following classes must be protected or public to enable extensibility.
+  This is valid for packages in which we plan extensibility - Framework, ProductFeed\*
+    - Entities
+    - Factories
+    - Controllers

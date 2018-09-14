@@ -17,22 +17,22 @@ class VatController extends AdminBaseController
     /**
      * @var \Shopsys\FrameworkBundle\Component\ConfirmDelete\ConfirmDeleteResponseFactory
      */
-    private $confirmDeleteResponseFactory;
+    protected $confirmDeleteResponseFactory;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Pricing\PricingSetting
      */
-    private $pricingSetting;
+    protected $pricingSetting;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Pricing\Vat\VatFacade
      */
-    private $vatFacade;
+    protected $vatFacade;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Pricing\Vat\VatInlineEdit
      */
-    private $vatInlineEdit;
+    protected $vatInlineEdit;
 
     public function __construct(
         VatFacade $vatFacade,

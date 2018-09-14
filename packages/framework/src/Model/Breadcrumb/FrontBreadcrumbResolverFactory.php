@@ -14,7 +14,7 @@ class FrontBreadcrumbResolverFactory
     /**
      * @var \Shopsys\FrameworkBundle\Model\Breadcrumb\SimpleBreadcrumbGenerator[]
      */
-    private $breadcrumbGenerators;
+    protected $breadcrumbGenerators;
 
     public function __construct(
         ArticleBreadcrumbGenerator $articleBreadcrumbGenerator,

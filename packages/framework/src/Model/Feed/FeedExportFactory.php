@@ -19,17 +19,17 @@ class FeedExportFactory
     /**
      * @var \League\Flysystem\FilesystemInterface
      */
-    private $filesystem;
+    protected $filesystem;
 
     /**
      * @var \Doctrine\ORM\EntityManagerInterface
      */
-    private $em;
+    protected $em;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Feed\FeedPathProvider
      */
-    private $feedPathProvider;
+    protected $feedPathProvider;
 
     public function __construct(
         FeedRendererFactory $feedRendererFactory,

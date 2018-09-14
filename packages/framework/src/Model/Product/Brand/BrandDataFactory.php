@@ -20,7 +20,7 @@ class BrandDataFactory implements BrandDataFactoryInterface
     /**
      * @var \Shopsys\FrameworkBundle\Component\Domain\Domain
      */
-    private $domain;
+    protected $domain;
 
     public function __construct(
         FriendlyUrlFacade $friendlyUrlFacade,

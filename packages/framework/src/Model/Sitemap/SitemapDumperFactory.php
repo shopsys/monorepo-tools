@@ -14,27 +14,27 @@ class SitemapDumperFactory
     /**
      * @var \Symfony\Component\EventDispatcher\EventDispatcherInterface
      */
-    private $eventDispatcher;
+    protected $eventDispatcher;
 
     /**
      * @var \Symfony\Component\Filesystem\Filesystem
      */
-    private $localFilesystem;
+    protected $localFilesystem;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Sitemap\SitemapService
      */
-    private $sitemapService;
+    protected $sitemapService;
 
     /**
      * @var \League\Flysystem\MountManager
      */
-    private $mountManager;
+    protected $mountManager;
 
     /**
      * @var \League\Flysystem\FilesystemInterface
      */
-    private $filesystem;
+    protected $filesystem;
 
     public function __construct(
         EventDispatcherInterface $eventDispatcher,

@@ -14,32 +14,32 @@ class DomainRouterFactory
     /**
      * @var \Shopsys\FrameworkBundle\Component\Router\LocalizedRouterFactory
      */
-    private $localizedRouterFactory;
+    protected $localizedRouterFactory;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\FriendlyUrlRouterFactory
      */
-    private $friendlyUrlRouterFactory;
+    protected $friendlyUrlRouterFactory;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\Domain\Domain
      */
-    private $domain;
+    protected $domain;
 
     /**
      * @var \Symfony\Component\Config\Loader\LoaderInterface
      */
-    private $configLoader;
+    protected $configLoader;
 
     /**
      * @var string
      */
-    private $routerConfiguration;
+    protected $routerConfiguration;
 
     /**
      * @var \Symfony\Component\Routing\Router[]
      */
-    private $routersByDomainId = [];
+    protected $routersByDomainId = [];
 
     public function __construct(
         $routerConfiguration,
@@ -86,7 +86,7 @@ class DomainRouterFactory
      * @param \Shopsys\FrameworkBundle\Component\Domain\Config\DomainConfig $domainConfig
      * @return \Symfony\Component\Routing\Router
      */
-    private function getBasicRouter(DomainConfig $domainConfig)
+    protected function getBasicRouter(DomainConfig $domainConfig)
     {
         return new Router(
             $this->configLoader,
@@ -100,7 +100,7 @@ class DomainRouterFactory
      * @param \Shopsys\FrameworkBundle\Component\Domain\Config\DomainConfig $domainConfig
      * @return \Symfony\Component\Routing\RequestContext
      */
-    private function getRequestContextByDomainConfig(DomainConfig $domainConfig)
+    protected function getRequestContextByDomainConfig(DomainConfig $domainConfig)
     {
         $urlComponents = parse_url($domainConfig->getUrl());
         $requestContext = new RequestContext();

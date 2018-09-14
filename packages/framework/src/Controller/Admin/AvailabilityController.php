@@ -16,17 +16,17 @@ class AvailabilityController extends AdminBaseController
     /**
      * @var \Shopsys\FrameworkBundle\Component\ConfirmDelete\ConfirmDeleteResponseFactory
      */
-    private $confirmDeleteResponseFactory;
+    protected $confirmDeleteResponseFactory;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Product\Availability\AvailabilityFacade
      */
-    private $availabilityFacade;
+    protected $availabilityFacade;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Product\Availability\AvailabilityInlineEdit
      */
-    private $availabilityInlineEdit;
+    protected $availabilityInlineEdit;
 
     public function __construct(
         AvailabilityFacade $availabilityFacade,

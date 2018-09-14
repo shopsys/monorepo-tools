@@ -13,12 +13,12 @@ class PromoCodeGridFactory implements GridFactoryInterface
     /**
      * @var \Doctrine\ORM\EntityManagerInterface
      */
-    private $em;
+    protected $em;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\Grid\GridFactory
      */
-    private $gridFactory;
+    protected $gridFactory;
 
     public function __construct(
         EntityManagerInterface $em,

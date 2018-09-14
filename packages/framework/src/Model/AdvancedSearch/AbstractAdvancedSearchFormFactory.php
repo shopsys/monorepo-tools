@@ -13,22 +13,22 @@ abstract class AbstractAdvancedSearchFormFactory
     /**
      * @var \Shopsys\FrameworkBundle\Model\AdvancedSearch\AdvancedSearchConfig
      */
-    private $advancedSearchConfig;
+    protected $advancedSearchConfig;
 
     /**
      * @var \Shopsys\FrameworkBundle\Form\Admin\AdvancedSearch\AdvancedSearchFilterTranslation
      */
-    private $advancedSearchFilterTranslation;
+    protected $advancedSearchFilterTranslation;
 
     /**
      * @var \Symfony\Component\Form\FormFactoryInterface
      */
-    private $formFactory;
+    protected $formFactory;
 
     /**
      * @var \Shopsys\FrameworkBundle\Form\Admin\AdvancedSearch\AdvancedSearchOperatorTranslation
      */
-    private $advancedSearchOperatorTranslation;
+    protected $advancedSearchOperatorTranslation;
 
     public function __construct(
         AdvancedSearchConfig $advancedSearchConfig,
@@ -72,7 +72,7 @@ abstract class AbstractAdvancedSearchFormFactory
      * @param \Shopsys\FrameworkBundle\Model\AdvancedSearch\AdvancedSearchFilterInterface $ruleFilter
      * @return \Symfony\Component\Form\FormBuilderInterface
      */
-    private function createRuleFormBuilder($name, AdvancedSearchFilterInterface $ruleFilter)
+    protected function createRuleFormBuilder($name, AdvancedSearchFilterInterface $ruleFilter)
     {
         $filterFormBuilder = $this->formFactory->createNamedBuilder($name, FormType::class, null, [
             'data_class' => AdvancedSearchRuleData::class,
@@ -96,7 +96,7 @@ abstract class AbstractAdvancedSearchFormFactory
      * @param \Shopsys\FrameworkBundle\Model\AdvancedSearch\AdvancedSearchFilterInterface $filter
      * @return string[]
      */
-    private function getFilterOperatorChoices(AdvancedSearchFilterInterface $filter)
+    protected function getFilterOperatorChoices(AdvancedSearchFilterInterface $filter)
     {
         $choices = [];
         foreach ($filter->getAllowedOperators() as $operator) {
@@ -109,7 +109,7 @@ abstract class AbstractAdvancedSearchFormFactory
     /**
      * @return string[]
      */
-    private function getSubjectChoices()
+    protected function getSubjectChoices()
     {
         $choices = [];
         foreach ($this->advancedSearchConfig->getAllFilters() as $filter) {

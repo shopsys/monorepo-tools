@@ -10,7 +10,7 @@ class CountryController extends AdminBaseController
     /**
      * @var \Shopsys\FrameworkBundle\Model\Country\CountryInlineEdit
      */
-    private $countryInlineEdit;
+    protected $countryInlineEdit;
 
     public function __construct(
         CountryInlineEdit $countryInlineEdit

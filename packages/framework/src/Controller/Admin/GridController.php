@@ -13,12 +13,12 @@ class GridController extends AdminBaseController
     /**
      * @var \Shopsys\FrameworkBundle\Component\Grid\InlineEdit\InlineEditService
      */
-    private $inlineEditService;
+    protected $inlineEditService;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\Grid\Ordering\GridOrderingFacade
      */
-    private $gridOrderingFacade;
+    protected $gridOrderingFacade;
 
     public function __construct(
         GridOrderingFacade $gridOrderingFacade,

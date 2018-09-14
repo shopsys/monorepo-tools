@@ -13,12 +13,12 @@ class CookiesController extends AdminBaseController
     /**
      * @var \Shopsys\FrameworkBundle\Component\Domain\AdminDomainTabsFacade
      */
-    private $adminDomainTabsFacade;
+    protected $adminDomainTabsFacade;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Cookies\CookiesFacade
      */
-    private $cookiesFacade;
+    protected $cookiesFacade;
 
     public function __construct(
         AdminDomainTabsFacade $adminDomainTabsFacade,

@@ -20,7 +20,7 @@ class PaymentDataFactory implements PaymentDataFactoryInterface
     /**
      * @var \Shopsys\FrameworkBundle\Component\Domain\Domain
      */
-    private $domain;
+    protected $domain;
 
     public function __construct(
         PaymentFacade $paymentFacade,

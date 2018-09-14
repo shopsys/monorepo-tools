@@ -18,22 +18,22 @@ class TransportGridFactory implements GridFactoryInterface
     /**
      * @var \Shopsys\FrameworkBundle\Component\Grid\GridFactory
      */
-    private $gridFactory;
+    protected $gridFactory;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Transport\TransportRepository
      */
-    private $transportRepository;
+    protected $transportRepository;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Localization\Localization
      */
-    private $localization;
+    protected $localization;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Transport\TransportFacade
      */
-    private $transportFacade;
+    protected $transportFacade;
 
     public function __construct(
         GridFactory $gridFactory,
@@ -86,7 +86,7 @@ class TransportGridFactory implements GridFactoryInterface
      * @param \Shopsys\FrameworkBundle\Model\Transport\Transport $transport
      * @return string
      */
-    private function getDisplayPrice(Transport $transport)
+    protected function getDisplayPrice(Transport $transport)
     {
         $transportBasePricesIndexedByCurrencyId = $this->transportFacade->getIndependentBasePricesIndexedByCurrencyId($transport);
 

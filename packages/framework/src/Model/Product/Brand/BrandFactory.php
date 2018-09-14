@@ -9,7 +9,7 @@ class BrandFactory implements BrandFactoryInterface
     /**
      * @var \Shopsys\FrameworkBundle\Component\EntityExtension\EntityNameResolver
      */
-    private $entityNameResolver;
+    protected $entityNameResolver;
 
     /**
      * @param \Shopsys\FrameworkBundle\Component\EntityExtension\EntityNameResolver $entityNameResolver

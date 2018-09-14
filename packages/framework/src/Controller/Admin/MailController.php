@@ -23,47 +23,47 @@ class MailController extends AdminBaseController
     /**
      * @var \Shopsys\FrameworkBundle\Model\Customer\Mail\RegistrationMailService
      */
-    private $registrationMailService;
+    protected $registrationMailService;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Customer\Mail\ResetPasswordMail
      */
-    private $resetPasswordMail;
+    protected $resetPasswordMail;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\Domain\AdminDomainTabsFacade
      */
-    private $adminDomainTabsFacade;
+    protected $adminDomainTabsFacade;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Mail\MailTemplateFacade
      */
-    private $mailTemplateFacade;
+    protected $mailTemplateFacade;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Mail\Setting\MailSettingFacade
      */
-    private $mailSettingFacade;
+    protected $mailSettingFacade;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Order\Mail\OrderMailService
      */
-    private $orderMailService;
+    protected $orderMailService;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Order\Status\OrderStatusFacade
      */
-    private $orderStatusFacade;
+    protected $orderStatusFacade;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\PersonalData\Mail\PersonalDataAccessMail
      */
-    private $personalDataAccessMail;
+    protected $personalDataAccessMail;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\PersonalData\Mail\PersonalDataExportMail
      */
-    private $personalDataExportMail;
+    protected $personalDataExportMail;
 
     public function __construct(
         ResetPasswordMail $resetPasswordMail,
@@ -90,7 +90,7 @@ class MailController extends AdminBaseController
     /**
      * @return array
      */
-    private function getOrderStatusVariablesLabels()
+    protected function getOrderStatusVariablesLabels()
     {
         return [
             OrderMailService::VARIABLE_NUMBER => t('Order number'),
@@ -116,7 +116,7 @@ class MailController extends AdminBaseController
     /**
      * @return array
      */
-    private function getRegistrationVariablesLabels()
+    protected function getRegistrationVariablesLabels()
     {
         return [
             RegistrationMailService::VARIABLE_FIRST_NAME => t('First name'),
@@ -130,7 +130,7 @@ class MailController extends AdminBaseController
     /**
      * @return array
      */
-    private function getResetPasswordVariablesLabels()
+    protected function getResetPasswordVariablesLabels()
     {
         return [
             ResetPasswordMail::VARIABLE_EMAIL => t('E-mail'),
@@ -141,7 +141,7 @@ class MailController extends AdminBaseController
     /**
      * @return array
      */
-    private function getPersonalDataAccessVariablesLabels()
+    protected function getPersonalDataAccessVariablesLabels()
     {
         return [
             PersonalDataAccessMail::VARIABLE_DOMAIN => t('E-shop name'),
@@ -153,7 +153,7 @@ class MailController extends AdminBaseController
     /**
      * @return array
      */
-    private function getPersonalExportVariablesLabels()
+    protected function getPersonalExportVariablesLabels()
     {
         return [
             PersonalDataExportMail::VARIABLE_DOMAIN => t('E-shop name'),
@@ -165,7 +165,7 @@ class MailController extends AdminBaseController
     /**
      * @return array
      */
-    private function getTemplateParameters()
+    protected function getTemplateParameters()
     {
         $orderStatusesTemplateVariables = $this->orderMailService->getTemplateVariables();
         $registrationTemplateVariables = $this->registrationMailService->getTemplateVariables();

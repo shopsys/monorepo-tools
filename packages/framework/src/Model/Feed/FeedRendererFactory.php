@@ -9,7 +9,7 @@ class FeedRendererFactory
     /**
      * @var \Twig_Environment
      */
-    private $twig;
+    protected $twig;
 
     public function __construct(Twig_Environment $twig)
     {

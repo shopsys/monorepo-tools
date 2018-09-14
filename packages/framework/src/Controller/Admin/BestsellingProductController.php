@@ -15,22 +15,22 @@ class BestsellingProductController extends AdminBaseController
     /**
      * @var \Shopsys\FrameworkBundle\Model\AdminNavigation\BreadcrumbOverrider
      */
-    private $breadcrumbOverrider;
+    protected $breadcrumbOverrider;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Category\CategoryFacade
      */
-    private $categoryFacade;
+    protected $categoryFacade;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\Domain\AdminDomainTabsFacade
      */
-    private $adminDomainTabsFacade;
+    protected $adminDomainTabsFacade;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Product\BestsellingProduct\ManualBestsellingProductFacade
      */
-    private $manualBestsellingProductFacade;
+    protected $manualBestsellingProductFacade;
 
     public function __construct(
         ManualBestsellingProductFacade $manualBestsellingProductFacade,

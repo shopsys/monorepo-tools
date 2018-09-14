@@ -14,12 +14,12 @@ class LegalConditionsController extends AdminBaseController
     /**
      * @var \Shopsys\FrameworkBundle\Component\Domain\AdminDomainTabsFacade
      */
-    private $adminDomainTabsFacade;
+    protected $adminDomainTabsFacade;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\LegalConditions\LegalConditionsFacade
      */
-    private $legalConditionsFacade;
+    protected $legalConditionsFacade;
 
     public function __construct(
         AdminDomainTabsFacade $adminDomainTabsFacade,

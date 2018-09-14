@@ -12,22 +12,22 @@ class CartFactory
     /**
      * @var \Shopsys\FrameworkBundle\Model\Cart\Cart[]
      */
-    private $carts = [];
+    protected $carts = [];
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Cart\Item\CartItemRepository
      */
-    private $cartItemRepository;
+    protected $cartItemRepository;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Cart\Watcher\CartWatcherFacade
      */
-    private $cartWatcherFacade;
+    protected $cartWatcherFacade;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\EntityExtension\EntityNameResolver
      */
-    private $entityNameResolver;
+    protected $entityNameResolver;
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\Cart\Item\CartItemRepository $cartItemRepository
@@ -62,7 +62,7 @@ class CartFactory
      * @param \Shopsys\FrameworkBundle\Model\Customer\CustomerIdentifier $customerIdentifier
      * @return \Shopsys\FrameworkBundle\Model\Cart\Cart
      */
-    private function createNewCart(CustomerIdentifier $customerIdentifier)
+    protected function createNewCart(CustomerIdentifier $customerIdentifier)
     {
         $cartItems = $this->cartItemRepository->getAllByCustomerIdentifier($customerIdentifier);
         $classData = $this->entityNameResolver->resolve(Cart::class);

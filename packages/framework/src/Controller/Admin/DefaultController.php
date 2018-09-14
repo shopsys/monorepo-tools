@@ -15,32 +15,32 @@ class DefaultController extends AdminBaseController
     /**
      * @var \Shopsys\FrameworkBundle\Model\Statistics\StatisticsFacade
      */
-    private $statisticsFacade;
+    protected $statisticsFacade;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Statistics\StatisticsProcessingFacade
      */
-    private $statisticsProcessingFacade;
+    protected $statisticsProcessingFacade;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Mail\MailTemplateFacade
      */
-    private $mailTemplateFacade;
+    protected $mailTemplateFacade;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Product\Unit\UnitFacade
      */
-    private $unitFacade;
+    protected $unitFacade;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\Setting\Setting
      */
-    private $setting;
+    protected $setting;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Product\Availability\AvailabilityFacade
      */
-    private $availabilityFacade;
+    protected $availabilityFacade;
 
     public function __construct(
         StatisticsFacade $statisticsFacade,
@@ -83,7 +83,7 @@ class DefaultController extends AdminBaseController
         );
     }
 
-    private function addWarningMessagesOnDashboard(): void
+    protected function addWarningMessagesOnDashboard(): void
     {
         if ($this->mailTemplateFacade->existsTemplateWithEnabledSendingHavingEmptyBodyOrSubject()) {
             $this->getFlashMessageSender()->addErrorFlashTwig(

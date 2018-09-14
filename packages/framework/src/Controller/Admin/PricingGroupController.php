@@ -18,27 +18,27 @@ class PricingGroupController extends AdminBaseController
     /**
      * @var \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroupSettingFacade
      */
-    private $pricingGroupSettingFacade;
+    protected $pricingGroupSettingFacade;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroupFacade
      */
-    private $pricingGroupFacade;
+    protected $pricingGroupFacade;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Pricing\Group\Grid\PricingGroupInlineEdit
      */
-    private $pricingGroupInlineEdit;
+    protected $pricingGroupInlineEdit;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\ConfirmDelete\ConfirmDeleteResponseFactory
      */
-    private $confirmDeleteResponseFactory;
+    protected $confirmDeleteResponseFactory;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\Domain\AdminDomainTabsFacade
      */
-    private $adminDomainTabsFacade;
+    protected $adminDomainTabsFacade;
 
     public function __construct(
         PricingGroupSettingFacade $pricingGroupSettingFacade,

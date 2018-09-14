@@ -9,7 +9,7 @@ class ExceptionController extends BaseController
     /**
      * @var bool
      */
-    private $showErrorPagePrototype = false;
+    protected $showErrorPagePrototype = false;
 
     /**
      * @param bool $bool

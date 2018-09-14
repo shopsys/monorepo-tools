@@ -30,57 +30,57 @@ class ProductController extends AdminBaseController
     /**
      * @var \Shopsys\FrameworkBundle\Model\Product\MassAction\ProductMassActionFacade
      */
-    private $productMassActionFacade;
+    protected $productMassActionFacade;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\Grid\GridFactory
      */
-    private $gridFactory;
+    protected $gridFactory;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Product\ProductFacade
      */
-    private $productFacade;
+    protected $productFacade;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Product\ProductDataFactoryInterface
      */
-    private $productDataFactory;
+    protected $productDataFactory;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\AdminNavigation\BreadcrumbOverrider
      */
-    private $breadcrumbOverrider;
+    protected $breadcrumbOverrider;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Administrator\AdministratorGridFacade
      */
-    private $administratorGridFacade;
+    protected $administratorGridFacade;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Product\Listing\ProductListAdminFacade
      */
-    private $productListAdminFacade;
+    protected $productListAdminFacade;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\AdvancedSearch\AdvancedSearchFacade
      */
-    private $advancedSearchFacade;
+    protected $advancedSearchFacade;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Product\ProductVariantFacade
      */
-    private $productVariantFacade;
+    protected $productVariantFacade;
 
     /**
      * @var \Shopsys\FrameworkBundle\Twig\ProductExtension
      */
-    private $productExtension;
+    protected $productExtension;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\Domain\Domain
      */
-    private $domain;
+    protected $domain;
 
     public function __construct(
         ProductMassActionFacade $productMassActionFacade,
@@ -310,7 +310,7 @@ class ProductController extends AdminBaseController
      * @param \Doctrine\ORM\QueryBuilder $queryBuilder
      * @return \Shopsys\FrameworkBundle\Component\Grid\Grid
      */
-    private function getGrid(QueryBuilder $queryBuilder)
+    protected function getGrid(QueryBuilder $queryBuilder)
     {
         $dataSource = new QueryBuilderWithRowManipulatorDataSource(
             $queryBuilder,

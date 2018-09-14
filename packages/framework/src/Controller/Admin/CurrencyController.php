@@ -17,22 +17,22 @@ class CurrencyController extends AdminBaseController
     /**
      * @var \Shopsys\FrameworkBundle\Component\ConfirmDelete\ConfirmDeleteResponseFactory
      */
-    private $confirmDeleteResponseFactory;
+    protected $confirmDeleteResponseFactory;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\Domain\Domain
      */
-    private $domain;
+    protected $domain;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Pricing\Currency\CurrencyFacade
      */
-    private $currencyFacade;
+    protected $currencyFacade;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Pricing\Currency\Grid\CurrencyInlineEdit
      */
-    private $currencyInlineEdit;
+    protected $currencyInlineEdit;
 
     public function __construct(
         CurrencyFacade $currencyFacade,

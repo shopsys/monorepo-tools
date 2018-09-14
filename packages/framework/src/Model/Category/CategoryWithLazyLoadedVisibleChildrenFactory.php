@@ -9,7 +9,7 @@ class CategoryWithLazyLoadedVisibleChildrenFactory
     /**
      * @var \Shopsys\FrameworkBundle\Model\Category\CategoryRepository
      */
-    private $categoryRepository;
+    protected $categoryRepository;
 
     public function __construct(CategoryRepository $categoryRepository)
     {
