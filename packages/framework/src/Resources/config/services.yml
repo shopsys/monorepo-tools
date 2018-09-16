@@ -416,6 +416,13 @@ services:
         arguments:
             - "%shopsys.performance_data.user.count_per_domain%"
 
+    Shopsys\FrameworkBundle\DataFixtures\Demo\ImageDataFixture:
+        arguments:
+            - '%shopsys.data_fixtures_images.resources_dir%'
+            - '%shopsys.image_dir%'
+            - '%shopsys.domain_images_dir%'
+        tags: ['doctrine.fixture.orm']
+
     Shopsys\FrameworkBundle\DataFixtures\Demo\ProductDataFixtureCsvReader:
         arguments:
             - '%shopsys.data_fixtures.resource_products_filepath%'

@@ -163,7 +163,6 @@ php phing test-db-create
 ### 6. Build application
 ```
 php phing build-demo-dev
-php phing img-demo
 ```
 **For solutions to commonly encountered problems during build see section [Troubleshooting](#troubleshooting) below or you might want to check [Required PHP Configuration](../introduction/required-php-configuration.md).**
 

@@ -63,9 +63,6 @@ Drops all data in the test database and creates a new one with demo data.
 
 *Note: All database related targets `db-*` have their `test-db-*` variant for the test database.*
 
-#### img-demo
-Installs demo images.
-
 #### elasticsearch-indexes-recreate
 Recreates Elasticsearch indexes structure.
 Consists of two subtasks that can be run independently:

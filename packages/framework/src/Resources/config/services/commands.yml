@@ -27,13 +27,6 @@ services:
             - '%shopsys.framework.resources_dir%'
             - '%shopsys.root_dir%'
 
-    Shopsys\FrameworkBundle\Command\ImageDemoCommand:
-        arguments:
-            - '%shopsys.data_fixtures_images.resources_dir%'
-            - '%shopsys.data_fixtures_images_sql%'
-            - '%shopsys.image_dir%'
-            - '%shopsys.domain_images_dir%'
-
     Shopsys\MigrationBundle\Command\GenerateMigrationCommand:
         arguments:
             - '%shopsys.vendor_dir%'

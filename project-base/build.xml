@@ -294,13 +294,6 @@
         </exec>
     </target>
 
-    <target name="img-demo" description="Installs demo images.">
-        <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
-            <arg value="${path.bin-console}" />
-            <arg value="shopsys:image:demo" />
-        </exec>
-    </target>
-
     <target name="list" description="Hidden target to make Phing list all targets when called without an argument." hidden="true">
         <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
             <arg value="phing" />
