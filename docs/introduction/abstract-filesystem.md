@@ -31,5 +31,3 @@ You need to update your Nginx proxy to access your new storage.
 
 ### The Inevitable Exceptions
 In some cases, you need to download/upload files to your local filesystem, do some job with them and then upload the result via the abstract filesystem.
-One of those cases is `ImageDemoCommand` that downloads zip file with demo images to the local filesystem, extracts them in local filesystem and in the end, moves them to the `main_filesystem` storage.
-The reason is that `ZipArchive` support only local filesystem.
