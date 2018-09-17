@@ -1,5 +1,5 @@
 # Installation Using Docker for Windows 10 Pro and higher
-*Virtualization technology (e.g. Docker, Vagrant) is generally significantly slower on Windows than on UNIX operating systems. Running Shopsys Framework on Windows via Docker can cause performance issues such as page load taking a few seconds (~4s on Windows, ~0,5s on Linux or Mac OS).*
+*Virtualization technology (e.g. Docker, Vagrant) is generally significantly slower on Windows than on UNIX operating systems. Running Shopsys Framework on Windows via Docker can cause performance issues such as page load taking a several seconds (~20s on Windows with 4GB RAM and Intel i5; ~0,5s on Linux or Mac OS). We are still trying to improve this situation so please stay tuned.*
 
 ## Supported systems
 - Windows 10 Pro
