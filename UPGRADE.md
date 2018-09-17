@@ -58,12 +58,18 @@ There is a list of all the repositories maintained by monorepo, changes in log b
     - Start containers `docker-compose up -d`
 - configuration files (`config.yml`, `config_dev.yml`, `config_test.yml`, `security.yml` and `wysiwyg.yml`) has been split into packages config files (see `app/config/packages` folder)
     - update appropriate package configs in case you had some custom configuration set in those files
+- [#468 - Setting for docker on mac are now more optimized](https://github.com/shopsys/shopsys/pull/468)
+    - if you use the Shopsys Framework with docker on the platform Mac, modify your docker-compose.yml and docker-sync.yml according to the new templates
+    - next restart docker-compose and docker-sync
 
 ### [shopsys/shopsys]
 - when upgrading your installed [monorepo](docs/introduction/monorepo.md), you'll have to change the build context for the images of the microservices in `docker-compose.yml`
     - `build.context` should be the root of the microservice (eg. `microservices/product-search-export`)
     - `build.dockerfile` should be `docker/Dockerfile`
     - execute `docker-compose up -d --build`, microservices should be up and running
+- [#468 - Setting for docker on mac are now more optimized](https://github.com/shopsys/shopsys/pull/468)
+    - if you use the Shopsys Framework with docker on the platform Mac, modify your docker-compose.yml and docker-sync.yml according to the new templates
+    - next restart docker-compose and docker-sync
 
 ## [From 7.0.0-alpha4 to 7.0.0-alpha5]
 

@@ -134,5 +134,13 @@ Start docker-sync so your docker-sync containers and volumes will be recreated:
 docker-sync start
 ```
 
+## Application is slow on Mac
+We focus on enhancing the performance of the application on all platforms.
+With Docker for Mac and Docker for Windows there are known some performance issues because of all project files need to be synchronized from host computer to application running in a virtual machine.
+On Mac, we partially solved this by implementing docker-sync. 
+Docker-sync has some limits and that is the reason why we use Docker native volumes for syncing PostgreSQL and Elasticsearch data to ensure the data persistence.
+In some cases, performance can be more important than the persistence of the data.
+In this case, you can increase the performance by deleting these volumes in your `docker-compose.yml` file but that will result in loss of persistence, which means that the data will be lost after the removal of the container, e.g. during `docker-compose down`.
+
 ## A docker container is not running
 You can inspect what is wrong by using `docker logs <container-name>` command.

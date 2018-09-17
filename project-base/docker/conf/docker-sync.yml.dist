@@ -3,10 +3,36 @@ syncs:
     shopsys-framework-sync:
         sync_userid: 501
         src: './'
-        sync_excludes: ['docker/']
+        sync_excludes: [
+            'docker/',
+            '.git',
+            '.idea',
+            '.docker-sync',
+            '.DS_Store',
+            'docker',
+            'node_modules',
+            'var/cache',
+            'var/postgres-data',
+            'var/elasticsearch-data',
+            'web',
+            'vendor'
+        ]
+        host_disk_mount_mode: 'delegated'
 
     shopsys-framework-postgres-data-sync:
         src: './var/postgres-data/'
+        host_disk_mount_mode: 'cached'
 
     shopsys-framework-elasticsearch-data-sync:
         src: './var/elasticsearch-data/'
+        host_disk_mount_mode: 'cached'
+
+    shopsys-framework-web-sync:
+        sync_userid: 501
+        src: './web'
+        host_disk_mount_mode: 'cached'
+
+    shopsys-framework-vendor-sync:
+        sync_userid: 501
+        src: './vendor'
+        host_disk_mount_mode: 'cached'

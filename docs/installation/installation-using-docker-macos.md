@@ -61,7 +61,7 @@ Token is located in `services -> php-fpm -> build -> args -> github_oauth_token`
 On MacOS you need to synchronize folders using docker-sync.
 Before starting synchronization you need to create a directory for persisting Postgres and Elasticsearch data so you won't lose it when the container is shut down.
 ```
-mkdir -p var/postgres-data var/elasticsearch-data
+mkdir -p var/postgres-data var/elasticsearch-data vendor
 docker-sync start
 ```
 
