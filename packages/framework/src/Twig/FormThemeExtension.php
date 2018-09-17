@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Shopsys\FrameworkBundle\Twig;
 
 use Symfony\Component\HttpFoundation\RequestStack;
@@ -39,11 +41,21 @@ class FormThemeExtension extends \Twig_Extension
     public function getDefaultFormTheme()
     {
         $masterRequest = $this->requestStack->getMasterRequest();
-        if (mb_stripos($masterRequest->get('_controller'), 'Shopsys\FrameworkBundle\Controller\Admin') === 0) {
+        if ($this->isAdmin($masterRequest->get('_controller'))) {
             return self::ADMIN_THEME;
         } else {
             return self::FRONT_THEME;
         }
+    }
+
+    /**
+     * @param string $controller
+     * @return bool
+     */
+    private function isAdmin(string $controller) : bool
+    {
+        return strpos($controller, 'Shopsys\FrameworkBundle\Controller\Admin') === 0 ||
+            strpos($controller, 'Shopsys\ShopBundle\Controller\Admin') === 0;
     }
 
     /**
