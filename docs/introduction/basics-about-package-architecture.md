@@ -53,7 +53,7 @@ So far, we created a [Microservice responsible for product search](https://githu
 ### Create new project from Shopsys Framework sources
 Install [`shopsys/project-base`](https://github.com/shopsys/project-base) using composer to get your own private copy.
 ```
-composer create-project shopsys/project-base --stability=alpha --no-install --keep-vcs
+composer create-project shopsys/project-base --stability=beta --no-install --keep-vcs
 ```
 For more detailed instructions, follow [Installation Using Docker](../installation/installation-using-docker.md).
 #### Why not clone or fork?
