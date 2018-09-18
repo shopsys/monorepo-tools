@@ -17,7 +17,13 @@ There is a list of all the repositories maintained by monorepo, changes in log b
 * [shopsys/microservice-product-search]
 * [shopsys/microservice-product-search-export]
 
-## [From 7.0.0-alpha6 to Unreleased]
+## [From 7.0.0-beta1 to Unreleased]
+
+## [From 7.0.0-alpha6 to 7.0.0-beta1]
+### [shopsys/framework]
+- [#468 - Setting for docker on mac are now more optimized](https://github.com/shopsys/shopsys/pull/468)
+    - if you use the Shopsys Framework with docker on the platform Mac, modify your docker-compose.yml and docker-sync.yml according to the new templates
+    - next restart docker-compose and docker-sync
 - [#483 - updated info about Docker on Mac](https://github.com/shopsys/shopsys/pull/483)
     - if you use Docker for Mac and experience issues with `composer install` resulting in `Killed` status, try increasing the allowed memory
     - we recommend to set 2 GB RAM, 1 CPU and 2 GB Swap in `Docker -> Preferences… -> Advanced`
@@ -61,18 +67,12 @@ There is a list of all the repositories maintained by monorepo, changes in log b
     - Start containers `docker-compose up -d`
 - configuration files (`config.yml`, `config_dev.yml`, `config_test.yml`, `security.yml` and `wysiwyg.yml`) has been split into packages config files (see `app/config/packages` folder)
     - update appropriate package configs in case you had some custom configuration set in those files
-- [#468 - Setting for docker on mac are now more optimized](https://github.com/shopsys/shopsys/pull/468)
-    - if you use the Shopsys Framework with docker on the platform Mac, modify your docker-compose.yml and docker-sync.yml according to the new templates
-    - next restart docker-compose and docker-sync
 
 ### [shopsys/shopsys]
 - when upgrading your installed [monorepo](docs/introduction/monorepo.md), you'll have to change the build context for the images of the microservices in `docker-compose.yml`
     - `build.context` should be the root of the microservice (eg. `microservices/product-search-export`)
     - `build.dockerfile` should be `docker/Dockerfile`
     - execute `docker-compose up -d --build`, microservices should be up and running
-- [#468 - Setting for docker on mac are now more optimized](https://github.com/shopsys/shopsys/pull/468)
-    - if you use the Shopsys Framework with docker on the platform Mac, modify your docker-compose.yml and docker-sync.yml according to the new templates
-    - next restart docker-compose and docker-sync
 
 ## [From 7.0.0-alpha4 to 7.0.0-alpha5]
 
@@ -356,7 +356,8 @@ parameters:
         - *_generated/*
 
 ```
-[From 7.0.0-alpha6 to Unreleased]: https://github.com/shopsys/shopsys/compare/v7.0.0-alpha6...HEAD
+[From 7.0.0-beta1 to Unreleased]: https://github.com/shopsys/shopsys/compare/v7.0.0-beta1...HEAD
+[From 7.0.0-alpha6 to 7.0.0-beta1]: https://github.com/shopsys/shopsys/compare/v7.0.0-alpha6...v7.0.0-beta1
 [From 7.0.0-alpha5 to 7.0.0-alpha6]: https://github.com/shopsys/shopsys/compare/v7.0.0-alpha5...v7.0.0-alpha6
 [From 7.0.0-alpha4 to 7.0.0-alpha5]: https://github.com/shopsys/shopsys/compare/v7.0.0-alpha4...v7.0.0-alpha5
 [From 7.0.0-alpha3 to 7.0.0-alpha4]: https://github.com/shopsys/shopsys/compare/v7.0.0-alpha3...v7.0.0-alpha4
