@@ -1,10 +1,12 @@
 # Shopsys Framework
-Shopsys Framework is a **scalable e-commerce framework** for fast-growing e-commerce sites created and maintained by in-house developers or outsourcing agencies.
+Shopsys Framework is a **fully functional ecommerce platform for businesses transitioning into tech-companies with their own software development team**. 
+It contains the most common B2C and B2B features for online stores, and its infrastructure is prepared for high scalability.
 
-Our product provides the tools and know-how **to help save thousands of developer man-hours** in the short and long-term growth of e-merchants and their websites. 
+Shopsys Framework is **the fruit of our 15 years of experience in creating custom-made online stores and it’s dedicated to best in-house devs teams who work with online stores with tens of millions of Euros of turnover per year**. 
 
-A typical project using our framework is a **B2B or B2C site with a yearly revenue ranging from €5M to €100M,
-thousands of orders and hundreds of thousands of pageviews each day**.
+Our platform’s **architecture is modern and corresponds to the latest trends in the production of software for leading ecommerce solutions**. 
+Deployment and scaling of our system are comfortable thanks to the use of the containerization and orchestration concepts (**Docker, Kubernetes**). 
+The platform is based on one of the best PHP frameworks on the market - **Symfony**.
 
 ## Shopsys Framework Infrastructure
 ![Shopsys Framework Infrastructure](./docs/img/shopsys-framework-infrastructure.png 'Shopsys Framework Infrastructure')
