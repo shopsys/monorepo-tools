@@ -28,6 +28,26 @@ The changelog is generated during the release process using [ChangelogLinker](ht
 
 <!-- changelog-linker -->
 
+## [7.0.0-beta1] - 2018-09-18
+
+### [shopsys/framework]
+
+#### Changed
+
+- [#472] Changed controllers and factories "private" methods and attributes to "protected" to allow extensibility
+
+#### Fixed
+
+- [#473] Fixed rendering forms in extended admin controller to be as same as in framework
+- [#480] admin: fix product form for product variants
+
+### [shopsys/shopsys]
+
+#### Changed
+
+- [#476] Demo images are part of the framework package now
+- [#468] Settings for docker on mac are now more optimized
+
 ## [7.0.0-alpha6] - 2018-09-14
 
 ### [shopsys/coding-standards]
@@ -1461,6 +1481,7 @@ That's why is this section formatted differently.
     - YesNoType
 - `.travis.yml` file with Travis CI configuration
 
+[7.0.0-beta1]: https://github.com/shopsys/shopsys/compare/v7.0.0-alpha6...v7.0.0-beta1
 [7.0.0-alpha6]: https://github.com/shopsys/shopsys/compare/v7.0.0-alpha5...v7.0.0-alpha6
 [7.0.0-alpha5]: https://github.com/shopsys/shopsys/compare/v7.0.0-alpha4...v7.0.0-alpha5
 [7.0.0-alpha4]: https://github.com/shopsys/shopsys/compare/v7.0.0-alpha3...v7.0.0-alpha4
@@ -1535,3 +1556,8 @@ That's why is this section formatted differently.
 [#142]: https://github.com/shopsys/shopsys/pull/142
 [@kulincz]: https://github.com/kulincz
 [@Maybeway]: https://github.com/Maybeway
+[#480]: https://github.com/shopsys/shopsys/pull/480
+[#476]: https://github.com/shopsys/shopsys/pull/476
+[#473]: https://github.com/shopsys/shopsys/pull/473
+[#472]: https://github.com/shopsys/shopsys/pull/472
+[#468]: https://github.com/shopsys/shopsys/pull/468
