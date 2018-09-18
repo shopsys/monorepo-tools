@@ -18,7 +18,9 @@ For more info see the article [Basics About Package Architecture](./docs/introdu
 ![Shopsys Framework package architecture schema](./docs/img/package-architecture.png 'Shopsys Framework Package Architecture')
 *Note: The specific modules in this diagram are just examples.*
 
-## Current State 
+## Current State and Roadmap
+
+### Current State
 
 Shopsys Framework is fully functional e-commerce platform with all basic functionality all e-commerce sites needs:
 * product catalogue
@@ -35,6 +37,14 @@ Shopsys Framework is fully functional e-commerce platform with all basic functio
 * GDPR compliance
 * Preparation for scalability
 * Manifest for orchestration via Kubernetes
+
+### Further Plan for Stable Release (February 2019)
+
+* More performance optimizations
+* Modulestore with first modules
+* Asynchronous Processing (RabbitMQ)
+* Best practice manuals
+* Basic API
 
 ## Sites Built on Shopsys Framework
 List of typical projects built on previous versions of Shopsys Framework:
