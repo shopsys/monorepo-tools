@@ -6,7 +6,9 @@ This solution uses [*docker-sync*](http://docker-sync.io/) (for fast two-way syn
 * [GIT](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
 * [PHP](http://php.net/manual/en/install.macosx.php)
 * [Composer](https://getcomposer.org/doc/00-intro.md#installation-linux-unix-osx)
-* [Docker for Mac](https://docs.docker.com/engine/installation/) (Docker-sync suggests ([in known issue](https://github.com/EugenMayer/docker-sync/issues/517)) to use Docker for Mac in version 17.09.1-ce-mac42 (21090)) 
+* [Docker for Mac](https://docs.docker.com/engine/installation/)
+    * Docker-sync suggests ([in known issue](https://github.com/EugenMayer/docker-sync/issues/517)) to use Docker for Mac in version 17.09.1-ce-mac42 (21090)
+    * Docker for Mac requires at least 4 GB of memory, otherwise, `composer install` can result in `Killed` status (we recommend to set 2 GB RAM, 1 CPU and 2 GB Swap in `Docker -> Preferences… -> Advanced`) 
 * [Docker-sync](http://docker-sync.io/) (install via `sudo gem install docker-sync`)
 
 ## Steps

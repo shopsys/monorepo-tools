@@ -18,6 +18,9 @@ There is a list of all the repositories maintained by monorepo, changes in log b
 * [shopsys/microservice-product-search-export]
 
 ## [From 7.0.0-alpha6 to Unreleased]
+- [#483 - updated info about Docker on Mac](https://github.com/shopsys/shopsys/pull/483)
+    - if you use Docker for Mac and experience issues with `composer install` resulting in `Killed` status, try increasing the allowed memory
+    - we recommend to set 2 GB RAM, 1 CPU and 2 GB Swap in `Docker -> Preferences… -> Advanced`
 
 ## [From 7.0.0-alpha5 to 7.0.0-alpha6]
 ### [shopsys/framework]
