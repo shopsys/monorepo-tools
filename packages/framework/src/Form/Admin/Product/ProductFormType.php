@@ -165,10 +165,6 @@ class ProductFormType extends AbstractType
             ];
         }
 
-        if ($product !== null && $product->isVariant()) {
-            $builder->add($this->createVariantGroup($builder, $product));
-        }
-
         $builder->add('name', LocalizedFullWidthType::class, [
             'required' => false,
             'entry_options' => [
@@ -179,6 +175,10 @@ class ProductFormType extends AbstractType
             'label' => t('Name'),
             'render_form_row' => false,
         ]);
+
+        if ($this->isProductVariant($product) || $this->isProductMainVariant($product)) {
+            $builder->add($this->createVariantGroup($builder, $product));
+        }
 
         $builder->add($this->createBasicInformationGroup($builder, $product, $disabledItemInMainVariantAttr));
         $builder->add($this->createDisplayAvailabilityGroup($builder, $product, $disabledItemInMainVariantAttr));
@@ -665,7 +665,7 @@ class ProductFormType extends AbstractType
         $manualInputPricesByPricingGroup = $builder->create('manualInputPricesByPricingGroupId', FormType::class, [
             'compound' => true,
             'render_form_row' => false,
-            'disabled' => $product !== null && $product->isMainVariant(),
+            'disabled' => $this->isProductMainVariant($product),
         ]);
         foreach ($this->pricingGroupFacade->getAll() as $pricingGroup) {
             $manualInputPricesByPricingGroup
@@ -691,7 +691,7 @@ class ProductFormType extends AbstractType
         $productCalculatedPricesGroup->add($manualInputPricesByPricingGroup);
         $builderPricesGroup->add($productCalculatedPricesGroup);
 
-        if ($product !== null && $product->isMainVariant()) {
+        if ($this->isProductMainVariant($product)) {
             $builderPricesGroup->remove('vat');
             $builderPricesGroup->remove('priceCalculationType');
             $builderPricesGroup->remove('productCalculatedPricesGroup');
@@ -787,49 +787,46 @@ class ProductFormType extends AbstractType
     private function createVariantGroup(FormBuilderInterface $builder, ?Product $product)
     {
         $variantGroup = $builder->create('variantGroup', FormType::class, [
-            'mapped' => false,
+            'inherit_data' => true,
             'attr' => [
                 'class' => 'wrap-border',
             ],
             'render_form_row' => false,
         ]);
 
-        $builder->add($variantGroup);
-        $variantGroup->add('mainVariantUrl', DisplayOnlyUrlType::class, [
-            'label' => t('Product is variant'),
-            'data' => [
-                'route_name' => 'admin_product_edit',
-                'id' => $product->getMainVariant()->getId(),
-                'name' => $product->getMainVariant()->getName(),
-            ],
-            'attr' => [
-                'class' => 'wrap-border',
-            ],
-        ]);
-
-        $variantGroup->add('variantAlias', LocalizedType::class, [
-            'required' => false,
-            'entry_options' => [
-                'constraints' => [
-                    new Constraints\Length(['max' => 255, 'maxMessage' => 'Variant alias cannot be longer then {{ limit }} characters']),
+        if ($this->isProductVariant($product)) {
+            $variantGroup->add('mainVariantUrl', DisplayOnlyUrlType::class, [
+                'label' => t('Product is variant'),
+                'data' => [
+                    'route_name' => 'admin_product_edit',
+                    'id' => $product->getMainVariant()->getId(),
+                    'name' => $product->getMainVariant()->getName(),
                 ],
-            ],
-            'label' => t('Variant alias'),
-            'render_form_row' => true,
-        ]);
+            ]);
 
-        $variantGroup->add('variants', ProductsType::class, [
-            'required' => false,
-            'main_product' => $product,
-            'allow_main_variants' => false,
-            'allow_variants' => false,
-            'label_button_add' => t('Add variant'),
-            'label' => t('Variants'),
-            'top_info_title' => t('Product is main variant.'),
-            'attr' => [
-                'class' => 'wrap-border',
-            ],
-        ]);
+            $variantGroup->add('variantAlias', LocalizedType::class, [
+                'required' => false,
+                'entry_options' => [
+                    'constraints' => [
+                        new Constraints\Length(['max' => 255, 'maxMessage' => 'Variant alias cannot be longer then {{ limit }} characters']),
+                    ],
+                ],
+                'label' => t('Variant alias'),
+                'render_form_row' => true,
+            ]);
+        }
+
+        if ($this->isProductMainVariant($product)) {
+            $variantGroup->add('variants', ProductsType::class, [
+                'required' => false,
+                'main_product' => $product,
+                'allow_main_variants' => false,
+                'allow_variants' => false,
+                'label_button_add' => t('Add variant'),
+                'label' => t('Variants'),
+                'top_info_title' => t('Product is main variant.'),
+            ]);
+        }
 
         return $variantGroup;
     }
