@@ -4,8 +4,6 @@ parameters:
     shopsys.data_fixtures.resource_products_filepath: '%shopsys.data_fixtures.resources_dir%/demo-data-products.csv'
     shopsys.data_fixtures.resources_dir: '%shopsys.framework.root_dir%/src/DataFixtures/resources'
     shopsys.default_db_schema_filepath: '%shopsys.framework.resources_dir%/database/schema.sql'
-    shopsys.demo_images_archive_url: https://images.shopsysdemo.com/demoImages.v11.zip
-    shopsys.demo_images_sql_url: https://images.shopsysdemo.com/demoImagesSql.v8.sql
     shopsys.domain_config_filepath: '%kernel.root_dir%/config/domains.yml'
     shopsys.domain_images_dir: '/web%shopsys.domain_images_url_prefix%'
     shopsys.domain_images_url_prefix: /content/admin/images/domain
@@ -33,3 +31,4 @@ parameters:
     shopsys.web_dir: '%shopsys.root_dir%/web'
     shopsys.vendor_dir: '%kernel.root_dir%/../vendor'
     shopsys.js_form_validator_output_vendor_dir: '../vendor'
+    shopsys.data_fixtures_images.resources_dir: '%shopsys.data_fixtures.resources_dir%/images/'

@@ -48,7 +48,6 @@ php phing test-db-create
 ### 1.5. Build the application
 ```
 php phing build-demo-dev
-php phing img-demo
 ```
 
 ## 2. See it in your browser!

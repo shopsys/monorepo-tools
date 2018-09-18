@@ -69,4 +69,4 @@ opcache.use_cwd=1
 | simplexml      | used by Heureka product feed module in `\Shopsys\ProductFeed\HeurekaBundle\Model\HeurekaCategory\HeurekaCategoryCronModule`                                   |
 | tokenizer      | used for `T_*` constants by `shopsys\coding-standards` package                                                                                                |
 | xml            | used by Phing for XML parsing                                                                                                                                 |
-| zip            | used by `Shopsys\FrameworkBundle\Command\ImageDemoCommand` to extract demo images                                                                                  |
+| zip            | used by facebook package during the acceptance tests                                                                                  |

@@ -47,7 +47,6 @@
         "ext-redis": "*",
         "ext-xml": "*",
         "ext-filter": "*",
-        "ext-zip": "*",
         "arvenil/ninja-mutex": "^0.4.1",
         "bmatzner/jquery-bundle": "^2.2.2",
         "bmatzner/jquery-ui-bundle": "^1.10.3",
@@ -106,8 +105,7 @@
         "shopsys/coding-standards": "dev-master"
     },
     "suggest": {
-        "ext-pgsql": "Required for dumping the Postgres database in shopsys:database:dump command",
-        "ext-zip": "Required for handling the archive with images in shopsys:image:demo command"
+        "ext-pgsql": "Required for dumping the Postgres database in shopsys:database:dump command"
     },
     "conflict": {
         "symfony/dependency-injection": ">=3.4.15"
