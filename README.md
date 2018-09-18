@@ -18,9 +18,8 @@ For more info see the article [Basics About Package Architecture](./docs/introdu
 ![Shopsys Framework package architecture schema](./docs/img/package-architecture.png 'Shopsys Framework Package Architecture')
 *Note: The specific modules in this diagram are just examples.*
 
-## Current State and a Roadmap
+## Current State 
 
-### State in March 2018
 Shopsys Framework is fully functional e-commerce platform with all basic functionality all e-commerce sites needs:
 * product catalogue
 * registered customers
@@ -31,36 +30,11 @@ Shopsys Framework is fully functional e-commerce platform with all basic functio
 * basic CMS
 * support for several currencies, languages, and domains
 * full friendly URL for main entities
-
-Last stable release of Shopsys 6.1 was internally published at the beginning of 2018 and on this version we created several big B2C and B2B projects.
-Experience we got through implementations lead us to ideas and plans for next version of our Shopsys Framework.
-The main change is a bigger focus on performance and scalability and significant architecture changes which will provide easy upgradability.
-You can read a full article about our goals
-[on our blog](https://blog.shopsys.com/shopsys-framework-goals-for-the-beta-and-the-stabile-version-9facf4763376).
-
-Shopsys Framework is currently in the process of architecture refactoring.
-Because of this fact, there will be lots of BC breaks in next few months and architecture is not consistent at the moment.
-**So we strictly recommend to use the last stable version of Shopsys 6.1 for production - contact us and we will provide you the access for free.**
-
-### Summer 2018 - Alpha
-* Experimental projects to validate upgradability
-* Heavy performance testing
-* Security audits
-
-### September 2018 - Open beta
 * Performance optimization through Elasticsearch, Redis, PostgreSQL
 * Full core upgradability
 * GDPR compliance
-* First modules
-
-### February 2019 - Stable version
-* Ready to scale
-* Asynchronous Processing (RabbitMQ)
-* API for front-end applications
-* Module store (10 modules)
-* Best practice manuals
-
-You can learn more about our development plans [on our blog](https://blog.shopsys.com/here-it-is-shopsys-framework-development-roadmap-154edb549c97). 
+* Preparation for scalability
+* Manifest for orchestration via Kubernetes
 
 ## Sites Built on Shopsys Framework
 List of typical projects built on previous versions of Shopsys Framework:
