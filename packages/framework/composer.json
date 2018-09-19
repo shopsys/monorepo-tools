@@ -17,12 +17,6 @@
             "Tests\\FrameworkBundle\\": "tests/"
         }
     },
-    "repositories": [
-        {
-            "type": "vcs",
-            "url": "https://github.com/molaux/PostgreSearchBundle.git"
-        }
-    ],
     "require": {
         "php": "^7.1",
         "ext-bcmath": "*",
@@ -59,7 +53,6 @@
         "guzzlehttp/guzzle": "^6.3",
         "helios-ag/fm-elfinder-bundle": "^6.2.1",
         "heureka/overeno-zakazniky": "^2.0.6",
-        "intaro/postgres-search-bundle": "dev-master#06625bdc1d",
         "intervention/image": "^2.3.14",
         "jms/metadata": "^1.6",
         "jms/translation-bundle": "^1.4.1",
@@ -76,6 +69,7 @@
         "sensio/framework-extra-bundle": "^3.0.29",
         "shopsys/doctrine-orm": "2.6.2",
         "shopsys/jparser": "0.1",
+        "shopsys/postgres-search-bundle": "0.1",
         "shopsys/migrations": "dev-master",
         "shopsys/form-types-bundle": "dev-master",
         "shopsys/plugin-interface": "dev-master",

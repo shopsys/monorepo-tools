@@ -20,16 +20,9 @@
             "Tests\\ProductFeed\\HeurekaDeliveryBundle\\": "tests/"
         }
     },
-    "repositories": [
-        {
-            "type": "vcs",
-            "url": "https://github.com/molaux/PostgreSearchBundle.git"
-        }
-    ],
     "require": {
         "php": "^7.1",
         "shopsys/doctrine-orm": "2.6.2",
-        "intaro/postgres-search-bundle": "@dev",
         "shopsys/form-types-bundle": "dev-master",
         "shopsys/framework": "dev-master",
         "shopsys/migrations": "dev-master",
