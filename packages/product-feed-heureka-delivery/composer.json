@@ -24,10 +24,6 @@
         {
             "type": "vcs",
             "url": "https://github.com/molaux/PostgreSearchBundle.git"
-        },
-        {
-            "type": "vcs",
-            "url": "https://github.com/shopsys/jparser.git"
         }
     ],
     "require": {
@@ -41,8 +37,7 @@
         "symfony/config": "^3.4",
         "symfony/dependency-injection": "^3.4",
         "symfony/framework-bundle": "^3.4",
-        "symfony/http-kernel": "^3.4",
-        "timwhitlock/jparser": "@dev"
+        "symfony/http-kernel": "^3.4"
     },
     "require-dev": {
         "phpunit/phpunit": "^6.0|^7.0",
