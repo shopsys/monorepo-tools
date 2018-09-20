@@ -38,6 +38,9 @@ USER www-data
 ARG github_oauth_token
 RUN composer config -g github-oauth.github.com $github_oauth_token
 
+# hirak/prestissimo makes the install of Composer dependencies faster by parallel downloading
+RUN composer global require hirak/prestissimo
+
 # install composer dependencies (as www-data user)
 RUN composer install
 
