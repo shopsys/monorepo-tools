@@ -13,5 +13,5 @@ fi
 # warm up the Symfony cache
 php bin/console cache:warmup
 
-sudo php-fpm -D
+sudo -E php-fpm -D
 sudo nginx -g "daemon off;"

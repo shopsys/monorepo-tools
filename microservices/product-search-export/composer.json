@@ -16,8 +16,7 @@
     },
     "require-dev": {
         "phpunit/phpunit": "^7.0",
-        "shopsys/coding-standards": "dev-master",
-        "symfony/dotenv": "^4.1"
+        "shopsys/coding-standards": "dev-master"
     },
     "config": {
         "preferred-install": {

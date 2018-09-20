@@ -1,4 +1,4 @@
-version: "3.1"
+version: "3.4"
 services:
     postgres:
         image: postgres:10.5-alpine
@@ -48,6 +48,7 @@ services:
         build:
             context: microservices/product-search
             dockerfile: docker/Dockerfile
+            target: development
             args:
                 <<: *common_build_args
         container_name: shopsys-framework-microservice-product-search
@@ -62,6 +63,7 @@ services:
         build:
             context: microservices/product-search-export
             dockerfile: docker/Dockerfile
+            target: development
             args:
                 <<: *common_build_args
         container_name: shopsys-framework-microservice-product-search-export

@@ -1,21 +1,4 @@
-FROM php:7.2-fpm-alpine
-
-# install Composer
-COPY docker/docker-install-composer /usr/local/bin/docker-install-composer
-RUN chmod +x /usr/local/bin/docker-install-composer && docker-install-composer
-
-# install necessary PHP extension
-RUN docker-php-ext-install \
-    opcache
-
-# install locales and switch to en_US.utf8 in order to enable UTF-8 support
-# see https://github.com/docker-library/php/issues/240#issuecomment-305038173
-# sudo is needed to "www-data" user running "php-fpm" and "nginx" as root (needed during the execution of "docker-after-start")
-RUN apk add --update --no-cache --repository http://dl-cdn.alpinelinux.org/alpine/edge/testing gnu-libiconv \
-    sudo
-
-ENV LD_PRELOAD /usr/lib/preloadable_libiconv.so php
-ENV LC_ALL=en_US.utf8 LANG=en_US.utf8 LANGUAGE=en_US.utf8
+FROM php:7.2-fpm-alpine as base
 
 # install nginx as in nginx:stable-alpine
 # https://hub.docker.com/r/library/nginx/tags/stable-alpine/
@@ -156,48 +139,107 @@ RUN GPG_KEYS=B0F4253373F8F6F510D42178520A9993A1C052F8 \
     && ln -sf /dev/stderr /var/log/nginx/error.log
 
 COPY docker/nginx/nginx.conf /etc/nginx/nginx.conf
-COPY docker/nginx/nginx-site.conf /etc/nginx/conf.d/nginx-site.conf
 
 EXPOSE 80
 
 STOPSIGNAL SIGTERM
 
-# nginx and php-fpm need to be started under root privileges after the container gets started
-# since our image runs under the user www-data, we need to modify sudoers (exceptions to sudo permission)
-# this allows the user www-data to execute both commands with sudo without the need of providing password
-RUN echo "www-data ALL=(ALL) NOPASSWD: /usr/sbin/nginx, /usr/local/sbin/php-fpm" >> /etc/sudoers
+ENV ELASTICSEARCH_HOSTS_STRING='elasticsearch:9200'
+ENV APP_SECRET=bef043dff42c07c95949d8bfddf1081f
+
+# install necessary PHP extension
+RUN docker-php-ext-install \
+    opcache
+
+# install locales and switch to en_US.utf8 in order to enable UTF-8 support
+# see https://github.com/docker-library/php/issues/240#issuecomment-305038173
+RUN apk add --update --no-cache --repository http://dl-cdn.alpinelinux.org/alpine/edge/testing \
+    gnu-libiconv \
+    sudo
+
+ENV LD_PRELOAD /usr/lib/preloadable_libiconv.so php
+ENV LC_ALL=en_US.utf8 LANG=en_US.utf8 LANGUAGE=en_US.utf8
+
+COPY docker/nginx/nginx-site.conf /etc/nginx/conf.d/nginx-site.conf
+COPY docker/php-ini-overrides.ini /usr/local/etc/php/php.ini
 
 # overwrite the original entry-point from the PHP Docker image with our own
 COPY docker/docker-php-entrypoint /usr/local/bin/
 
-# configure docker command that properly starts the microservice
-COPY docker/docker-after-start /usr/local/bin/docker-after-start
-RUN chmod +x /usr/local/bin/docker-after-start
-CMD docker-after-start
+# nginx and php-fpm need to be started under root privileges after the container gets started
+# since our image runs under the user www-data, we need to modify sudoers (exceptions to sudo permission)
+# this allows the user www-data to execute both commands with sudo without the need of providing password
+# we want to pass enviroment variables so they are accesible in php-fpm so we use sudo with -E option so we allowed SETENV in sudoers
+RUN echo "www-data ALL=(ALL) NOPASSWD:SETENV: /usr/sbin/nginx, /usr/local/sbin/php-fpm" >> /etc/sudoers
 
-# copy source code and PHP configuration to the container
-COPY / /var/www/html
-COPY docker/php-ini-overrides.ini /usr/local/etc/php/php.ini
+CMD sudo -E php-fpm -D && sudo nginx -g "daemon off;"
+
+USER www-data
+
+WORKDIR /var/www/html
+
+########################################################################################################################
+
+FROM base as development
+
+ENV APP_ENV dev
+
+USER root
+
+# configure docker command that properly starts the microservice
+COPY docker/docker-cmd-development /usr/local/bin/docker-cmd-development
+RUN chmod +x /usr/local/bin/docker-cmd-development
+CMD docker-cmd-development
+
+# install Composer
+COPY docker/docker-install-composer /usr/local/bin/docker-install-composer
+RUN chmod +x /usr/local/bin/docker-install-composer && docker-install-composer
 
 # allow overwriting UID and GID o the user "www-data" to help solve issues with permissions in mounted volumes
 # if the GID is already in use, we will assign GID 82 instead (82 is the standard uid/gid for "www-data" in Alpine)
 ARG www_data_uid
 ARG www_data_gid
 RUN if [ -n "$www_data_uid" ]; then deluser www-data && (addgroup -g $www_data_gid www-data || addgroup -g 82 www-data) && adduser -u $www_data_uid -D -S -G www-data www-data; fi
-RUN chown --recursive www-data:www-data /var/www/html
+
 USER www-data
+
+# hirak/prestissimo makes the install of Composer dependencies faster by parallel downloading
+RUN composer global require hirak/prestissimo
 
 # allow configuring the GitHub OAuth token
 ARG github_oauth_token
 RUN composer config -g github-oauth.github.com $github_oauth_token
 
+########################################################################################################################
+
+FROM php:7.2-fpm-alpine as production-builder
+
+ENV APP_ENV prod
+
+# install Composer
+COPY docker/docker-install-composer /usr/local/bin/docker-install-composer
+RUN chmod +x /usr/local/bin/docker-install-composer && docker-install-composer
+
 # hirak/prestissimo makes the install of Composer dependencies faster by parallel downloading
 RUN composer global require hirak/prestissimo
 
-# install composer dependencies (as www-data user)
-RUN composer install
+# allow configuring the GitHub OAuth token
+ARG github_oauth_token
+RUN composer config -g github-oauth.github.com $github_oauth_token
+
+# copy source code to the container
+COPY --chown=www-data:www-data / /var/www/html
+
+RUN composer install -o --no-dev
+
+########################################################################################################################
+
+FROM base as production
+
+ENV APP_ENV prod
+
+# copy source code to the container
+COPY --from=production-builder --chown=www-data:www-data /var/www/html /var/www/html
 
 # warm up the Symfony cache
 RUN php bin/console cache:warmup
-
-WORKDIR /var/www/html
