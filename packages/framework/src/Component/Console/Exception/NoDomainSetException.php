@@ -1,10 +1,10 @@
 <?php
 
-namespace Shopsys\FrameworkBundle\Command\Exception;
+namespace Shopsys\FrameworkBundle\Component\Console\Exception;
 
 use Exception;
 
-class NoDomainSetCommandException extends Exception implements CommandException
+class NoDomainSetException extends Exception implements ConsoleException
 {
     /**
      * @param \Exception|null $previous

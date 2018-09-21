@@ -2,8 +2,8 @@
 
 namespace Shopsys\FrameworkBundle\Command;
 
+use Shopsys\FrameworkBundle\Component\Console\DomainChoiceHandler;
 use Shopsys\FrameworkBundle\Component\Domain\Config\DomainConfig;
-use Shopsys\FrameworkBundle\Component\Domain\Domain;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Input\InputInterface;
@@ -18,16 +18,16 @@ class ServerRunForDomainCommand extends Command
     protected static $defaultName = 'shopsys:server:run';
 
     /**
-     * @var \Shopsys\FrameworkBundle\Component\Domain\Domain
+     * @var \Shopsys\FrameworkBundle\Component\Console\DomainChoiceHandler
      */
-    private $domain;
+    private $domainChoiceHelper;
 
     /**
-     * @param \Shopsys\FrameworkBundle\Component\Domain\Domain $domain
+     * @param \Shopsys\FrameworkBundle\Component\Console\DomainChoiceHandler $domainChoiceHelper
      */
-    public function __construct(Domain $domain)
+    public function __construct(DomainChoiceHandler $domainChoiceHelper)
     {
-        $this->domain = $domain;
+        $this->domainChoiceHelper = $domainChoiceHelper;
 
         parent::__construct();
     }
@@ -55,43 +55,9 @@ class ServerRunForDomainCommand extends Command
             return 1;
         }
 
-        $domainConfig = $this->chooseDomainConfig($io);
+        $domainConfig = $this->domainChoiceHelper->chooseDomainConfig($io);
 
         return $this->runServerForDomain($domainConfig, $output);
-    }
-
-    /**
-     * @param \Symfony\Component\Console\Style\SymfonyStyle $io
-     * @return \Shopsys\FrameworkBundle\Component\Domain\Config\DomainConfig
-     */
-    private function chooseDomainConfig(SymfonyStyle $io)
-    {
-        $domainConfigs = $this->domain->getAll();
-
-        if (count($domainConfigs) === 0) {
-            throw new \Shopsys\FrameworkBundle\Command\Exception\NoDomainSetCommandException();
-        }
-
-        $firstDomainConfig = reset($domainConfigs);
-
-        if (count($domainConfigs) === 1) {
-            return $firstDomainConfig;
-        }
-
-        $domainChoices = [];
-        foreach ($domainConfigs as $domainConfig) {
-            $domainChoices[$domainConfig->getId()] = $domainConfig->getName();
-        }
-        $chosenDomainName = $io->choice(
-            'There are more than one domain. Which domain do you want to use?',
-            $domainChoices,
-            $firstDomainConfig->getName()
-        );
-        foreach ($domainConfigs as $domainConfig) {
-            if ($domainConfig->getName() === $chosenDomainName) {
-                return $domainConfig;
-            }
-        }
     }
 
     /**
