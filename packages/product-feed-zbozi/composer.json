@@ -27,10 +27,6 @@
         },
         {
             "type": "vcs",
-            "url": "https://github.com/shopsys/doctrine2.git"
-        },
-        {
-            "type": "vcs",
             "url": "https://github.com/shopsys/jparser.git"
         }
     ],
@@ -40,7 +36,7 @@
         "ext-json": "*",
         "doctrine/dbal": "^2.7",
         "doctrine/doctrine-bundle": "^1.8",
-        "doctrine/orm": "dev-doctrine-260-with-ddc1960-hotfix-and-ddc4005-hotfix as 2.6.0",
+        "shopsys/doctrine-orm": "2.6.2",
         "intaro/postgres-search-bundle": "@dev",
         "shopsys/form-types-bundle": "dev-master",
         "shopsys/framework": "dev-master",
