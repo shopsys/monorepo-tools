@@ -18,6 +18,12 @@ There is a list of all the repositories maintained by monorepo, changes in log b
 * [shopsys/microservice-product-search-export]
 
 ## [From 7.0.0-beta1 to Unreleased]
+### [shopsys/project-base]
+- [#494 Microservices webserver using nginx + php-fpm](https://github.com/shopsys/shopsys/pull/494)
+    - execute `docker-compose pull` to pull new microservice images and `docker-compose up -d` to start newly pulled microservices
+    - url addresses to microservices have changed, you need to upgrade url address provided in `app/config/parameters.yml`  
+        - update parameter `microservice_product_search_url` from `microservice-product-search:8000` to `microservice-product-search`
+        - update parameter `microservice_product_search_export_url`, from `microservice-product-search-export:8000` to `microservice-product-search-export`
 
 ## [From 7.0.0-alpha6 to 7.0.0-beta1]
 ### [shopsys/framework]

@@ -16,8 +16,7 @@ This leanest Symfony version is highly optimized and it is suitable for this typ
 For the search process is used a super fast no-SQL database Elasticsearch. For more information about the Elasticsearch on Shopsys Framework, see [Product search via Elasticsearch]((https://github.com/shopsys/shopsys/blob/master/docs/introduction/product-search-via-elasticsearch.md).) 
 
 ## Installation
-Basically, in the Docker container of the microservice, all the dependencies have to be installed using `composer install` and the server has to be started by `php bin/console server:run *:8000`.
-All this is automatically done when the container starts.
+Microservice is installed by running container from image, during build of image all dependencies gets installed and nginx with php-fpm si configured to allow traffic into microservice.
 
 If you don't want to build the Docker image yourself, you can use [`shopsys/microservice-product-search:latest`](https://hub.docker.com/r/shopsys/microservice-product-search/).
 

@@ -13,5 +13,5 @@ fi
 # warm up the Symfony cache
 php bin/console cache:warmup
 
-# start the PHP server
-php bin/console server:run *:8000
+sudo php-fpm -D
+sudo nginx -g "daemon off;"

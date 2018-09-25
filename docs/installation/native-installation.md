@@ -59,26 +59,33 @@ monolog:
 For the product search to be working correctly, you'll have to install a [microservice for product search](https://github.com/shopsys/microservice-product-search).
 It will act as a fully independent unit with a separate web server and repository.
 
-Clone the repository into a separate directory,
+Clone the repository into a separate directory:
 ```
 git clone https://github.com/shopsys/microservice-product-search.git
 cd microservice-product-search
 ```
 
-install all its dependencies,
+Require symfony webserver:
+
+```
+composer require-dev symfony/web-server-bundle
+```
+
+Install composer dependencies:
+
 ```
 composer install
 ```
 
-configure connection to the Elasticsearch by setting up the ELASTICSEARCH_HOSTS_STRING environment variable (or the [.env file](http://symfony.com/doc/current/components/dotenv.html)) and run the server.
-In the current version of this experimental microservice, the PHP's built-in Web Server is used.
+Configure connection to the Elasticsearch by setting up the ELASTICSEARCH_HOSTS_STRING environment variable (or the [.env file](http://symfony.com/doc/current/components/dotenv.html)) and run the server:
+
 ```
 php bin/console server:run 127.0.0.1:8001
 ```
 
-In this moment the microservice is ready for the requests processing.
-
 *Note: If you use other port for the microservice to run, you'll have to pass its URL to the application as a parameter `microservice_product_search_url`.*
+
+In this moment the microservice is ready for the requests processing.
 
 #### 2.3. Set up the microservice for product search export
 You have to install also [microservice for product search export](https://github.com/shopsys/microservice-product-search-export).
@@ -88,10 +95,13 @@ The installation is as same as for product search microservice. In short, it is:
 git clone https://github.com/shopsys/microservice-product-search-export.git
 cd microservice-product-search-export
 
+composer require-dev symfony/web-server-bundle
+
 composer install
 ```
 
-configure connection to the Elasticsearch by setting up the ELASTICSEARCH_HOSTS_STRING environment variable
+Configure connection to the Elasticsearch by setting up the ELASTICSEARCH_HOSTS_STRING environment variable.
+
 ```
 php bin/console server:run 127.0.0.1:8002
 ```
