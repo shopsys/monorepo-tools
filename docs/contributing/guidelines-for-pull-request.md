@@ -47,7 +47,7 @@ We use fixup commits for correcting pull request so the reviewer can see what ed
 
 ![alt text](./img/console-hash-commit.png)
 
-### 3. Approved
+## 3. Approved
 If the reviewer is satisfied with changes, squash fixup commits.
 * Update the branch on current master:
 
