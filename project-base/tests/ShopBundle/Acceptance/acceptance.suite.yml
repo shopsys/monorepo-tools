@@ -27,7 +27,7 @@ modules:
             user: ~
             password: ~
             dump: ../var/cache/test-db-dump.sql
-            populate: false
+            populate: true
             cleanup: true
         Tests\ShopBundle\Test\Codeception\Module\StrictWebDriver:
             host: "%selenium_server_host%"

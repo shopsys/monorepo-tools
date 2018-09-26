@@ -24,6 +24,9 @@ There is a list of all the repositories maintained by monorepo, changes in log b
     - url addresses to microservices have changed, you need to upgrade url address provided in `app/config/parameters.yml`  
         - update parameter `microservice_product_search_url` from `microservice-product-search:8000` to `microservice-product-search`
         - update parameter `microservice_product_search_export_url`, from `microservice-product-search-export:8000` to `microservice-product-search-export`
+- [#502 - fixed acceptance tests (loading DB dump)](https://github.com/shopsys/shopsys/pull/502)
+    - when you upgrade `codeception/codeception` to version `2.5.0`, you have to change parameter `populate` to `true`
+      in `tests/ShopBundle/Acceptance/acceptance.suite.yml`
 
 ## [From 7.0.0-alpha6 to 7.0.0-beta1]
 ### [shopsys/framework]
