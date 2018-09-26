@@ -33,7 +33,6 @@ services:
         container_name: shopsys-framework-php-fpm
         volumes:
             - .:/var/www/html
-            - ./project-base/docker/php-fpm/php-ini-overrides.ini:/usr/local/etc/php/php.ini
         links:
             - microservice-product-search
             - microservice-product-search-export
@@ -54,7 +53,6 @@ services:
         container_name: shopsys-framework-microservice-product-search
         volumes:
             - ./microservices/product-search:/var/www/html
-            - ./microservices/product-search/docker/php-ini-overrides.ini:/usr/local/etc/php/php.ini
         links:
             - elasticsearch
         depends_on:
@@ -69,7 +67,6 @@ services:
         container_name: shopsys-framework-microservice-product-search-export
         volumes:
             - ./microservices/product-search-export:/var/www/html
-            - ./microservices/product-search-export/docker/php-ini-overrides.ini:/usr/local/etc/php/php.ini
         links:
             - elasticsearch
         depends_on:

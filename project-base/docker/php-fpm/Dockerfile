@@ -60,6 +60,9 @@ ENV LC_ALL=en_US.utf8 LANG=en_US.utf8 LANGUAGE=en_US.utf8
 # overwrite the original entry-point from the PHP Docker image with our own
 COPY docker-php-entrypoint /usr/local/bin/
 
+# copy php.ini configuration
+COPY php-ini-overrides.ini /usr/local/etc/php/php.ini
+
 # allow overwriting UID and GID o the user "www-data" to help solve issues with permissions in mounted volumes
 # if the GID is already in use, we will assign GID 82 instead (82 is the standard uid/gid for "www-data" in Alpine)
 ARG www_data_uid

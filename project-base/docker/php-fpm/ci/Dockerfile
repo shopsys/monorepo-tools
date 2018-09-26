@@ -63,6 +63,9 @@ ENV LC_ALL=en_US.utf8 LANG=en_US.utf8 LANGUAGE=en_US.utf8
 # overwrite the original entry-point from the PHP Docker image with our own
 COPY project-base/docker/php-fpm/docker-php-entrypoint /usr/local/bin/
 
+# copy php.ini configuration
+COPY project-base/docker/php-fpm/php-ini-overrides.ini /usr/local/etc/php/php.ini
+
 # allow configuring the GitHub OAuth token
 ARG github_oauth_token
 RUN composer config -g github-oauth.github.com $github_oauth_token

@@ -36,7 +36,6 @@ services:
             - shopsys-framework-sync:/var/www/html
             - shopsys-framework-vendor-sync:/var/www/html/vendor
             - shopsys-framework-web-sync:/var/www/html/project-base/web
-            - ./project-base/docker/php-fpm/php-ini-overrides.ini:/usr/local/etc/php/php.ini:delegated
         links:
             - microservice-product-search
             - microservice-product-search-export
@@ -57,7 +56,6 @@ services:
         container_name: shopsys-framework-microservice-product-search
         volumes:
             - shopsys-framework-microservice-product-search-sync:/var/www/html
-            - ./microservices/product-search/docker/php-ini-overrides.ini:/usr/local/etc/php/php.ini
         links:
             - elasticsearch
         depends_on:
@@ -72,7 +70,6 @@ services:
         container_name: shopsys-framework-microservice-product-search-export
         volumes:
             - shopsys-framework-microservice-product-search-export-sync:/var/www/html
-            - ./microservices/product-search-export/docker/php-ini-overrides.ini:/usr/local/etc/php/php.ini
         links:
             - elasticsearch
         depends_on:

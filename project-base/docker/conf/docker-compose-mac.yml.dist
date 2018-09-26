@@ -36,7 +36,6 @@ services:
             - shopsys-framework-sync:/var/www/html
             - shopsys-framework-vendor-sync:/var/www/html/vendor
             - shopsys-framework-web-sync:/var/www/html/web
-            - ./docker/php-fpm/php-ini-overrides.ini:/usr/local/etc/php/php.ini:delegated
         links:
             - postgres
             - redis

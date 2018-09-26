@@ -19,17 +19,6 @@ spec:
             labels:
                 app: microservice-product-search-export
         spec:
-            volumes:
-            -   name: product-search-export-php-configuration
-                configMap:
-                    name: product-search-export-php-configuration
-                    items:
-                    -   key: php-ini-overrides.ini
-                        path: php.ini
             containers:
             -   image: $MICROSERVICE_PRODUCT_SEARCH_EXPORT_PHP_FPM_IMAGE
                 name: microservice-product-search-export
-                volumeMounts:
-                -   name: product-search-export-php-configuration
-                    mountPath: /usr/local/etc/php/php.ini
-                    subPath: php.ini

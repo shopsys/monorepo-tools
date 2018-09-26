@@ -19,9 +19,6 @@ yq write --inplace project-base/kubernetes/deployments/webserver-php-fpm.yml spe
 
 # Create configmaps for configuration files used by pods
 kubectl create configmap nginx-configuration --from-file docker/nginx/nginx.conf --dry-run --output=yaml > project-base/kubernetes/nginx-configuration.yml
-kubectl create configmap php-configuration --from-file project-base/docker/php-fpm/php-ini-overrides.ini --dry-run --output=yaml > project-base/kubernetes/php-configuration.yml
-kubectl create configmap product-search-php-configuration --from-file microservices/product-search/docker/php-ini-overrides.ini --dry-run --output=yaml > project-base/kubernetes/product-search-php-configuration.yml
-kubectl create configmap product-search-export-php-configuration --from-file microservices/product-search-export/docker/php-ini-overrides.ini --dry-run --output=yaml > project-base/kubernetes/product-search-export-php-configuration.yml
 kubectl create configmap postgres-configuration --from-file project-base/docker/postgres/postgres.conf --dry-run --output=yaml > project-base/kubernetes/postgres-configuration.yml
 
 # Set parameters.yml file and domains_urls

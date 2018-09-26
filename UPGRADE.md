@@ -19,6 +19,9 @@ There is a list of all the repositories maintained by monorepo, changes in log b
 
 ## [From 7.0.0-beta1 to Unreleased]
 ### [shopsys/project-base]
+- [#497 adding php.ini to image is now done only in dockerfiles](https://github.com/shopsys/shopsys/pull/497)
+    - you should make the same changes in your repository for the php.ini configuration files to be added to your Docker images
+    - from now on, you will have to rebuild your Docker images (`docker-compose up -d --build`) for the changes in the php.ini file to apply
 - [#494 Microservices webserver using nginx + php-fpm](https://github.com/shopsys/shopsys/pull/494)
     - execute `docker-compose pull` to pull new microservice images and `docker-compose up -d` to start newly pulled microservices
     - url addresses to microservices have changed, you need to upgrade url address provided in `app/config/parameters.yml`  
