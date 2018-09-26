@@ -19,14 +19,6 @@ syncs:
         ]
         host_disk_mount_mode: 'delegated'
 
-    shopsys-framework-postgres-data-sync:
-        src: './var/postgres-data/'
-        host_disk_mount_mode: 'cached'
-
-    shopsys-framework-elasticsearch-data-sync:
-        src: './var/elasticsearch-data/'
-        host_disk_mount_mode: 'cached'
-
     shopsys-framework-web-sync:
         sync_userid: 501
         src: './web'
