@@ -14,7 +14,8 @@
     var lastIsDesktop = null;
 
     Shopsys.responsive.isDesktopVersion = function () {
-        return $(window).width() >= Shopsys.responsive.LG;
+        var windowWidth = window.innerWidth || $(window).width();
+        return windowWidth >= Shopsys.responsive.LG;
     };
 
     Shopsys.responsive.registerOnLayoutChange = function (callback) {
