@@ -5,6 +5,7 @@
 * [PHP](http://php.net/manual/en/install.unix.php)
 * [Composer](https://getcomposer.org/doc/00-intro.md#installation-linux-unix-osx)
 * [Docker](https://docs.docker.com/engine/installation/)
+* [Docker Compose](https://docs.docker.com/compose/install/)
 
 ## Steps
 ### 1. Create new project from Shopsys Framework sources
