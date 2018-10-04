@@ -169,7 +169,7 @@ class ProductDataFixtureLoader
     {
         $domainId = 1;
 
-        $productData->name['en'] = $row[self::COLUMN_NAME_EN];
+        $productData->name[$this->domain->getDomainConfigById($domainId)->getLocale()] = $row[$this->getCsvProductColumnNameByDomainId($domainId)];
         $productData->catnum = $row[self::COLUMN_CATNUM];
         $productData->partno = $row[self::COLUMN_PARTNO];
         $productData->ean = $row[self::COLUMN_EAN];
@@ -346,7 +346,7 @@ class ProductDataFixtureLoader
                 }
 
                 $manualInputPricesFromCsvByPricingGroupId = $productData->manualInputPricesByPricingGroupId;
-                $manualPricesForAllPricingGroups  = $this->addZeroPricesForPricingGroupsThatAreMissingInDemoData($manualInputPricesFromCsvByPricingGroupId);
+                $manualPricesForAllPricingGroups = $this->addZeroPricesForPricingGroupsThatAreMissingInDemoData($manualInputPricesFromCsvByPricingGroupId);
                 $productData->manualInputPricesByPricingGroupId = $manualPricesForAllPricingGroups;
                 break;
             default:
@@ -383,5 +383,21 @@ class ProductDataFixtureLoader
         }
 
         return $demoDataManualPrices;
+    }
+
+    /**
+     * @param int $domainId
+     * @return int
+     */
+    private function getCsvProductColumnNameByDomainId(int $domainId)
+    {
+        switch ($this->domain->getDomainConfigById($domainId)->getLocale()) {
+            case 'cs':
+                return self::COLUMN_NAME_CS;
+            case 'en':
+                return self::COLUMN_NAME_EN;
+            default:
+                throw new \Shopsys\FrameworkBundle\Component\DataFixture\Exception\UnsupportedLocaleException($this->domain->getDomainConfigById($domainId)->getLocale());
+        }
     }
 }

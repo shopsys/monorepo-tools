@@ -117,6 +117,10 @@
             <arg value="${path.bin-console}" />
             <arg value="shopsys:domains-data:create" />
         </exec>
+        <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
+            <arg value="${path.bin-console}" />
+            <arg value="shopsys:recalculations" />
+        </exec>
     </target>
 
     <target name="microservice-product-search-create-structure" description="Creates structure for searching via microservice.">
