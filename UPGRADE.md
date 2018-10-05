@@ -1,4 +1,36 @@
 # UPGRADING
+## Recommended way of upgrading
+Since these are 3 possible scenarios how you can use shopsys, instructions are divided by these scenarios.
+
+### You use our packages only
+Follow instructions in relevant sections, eg. `shopsys/coding-standards`, `shopsys/microservice-product-search`.
+
+### You are using monorepo
+Follow instructions in the section `shopsys/shopsys`.
+
+### You are developing a project based on project-base
+* upgrade only your composer dependencies and follow instructions
+* if you want update your project with the changes from [shopsys/project-base], you can follow the *(optional)* instructions or cherry-pick from the repository whatever is relevant for you but we do not recommend rebasing or merging everything because the changes might not be compatible with your project as it probably evolves in time
+* check all instructions in all sections, any of them could be relevant for you
+* upgrade locally first. After you fix all issues caused by the upgrade, commit your changes and then continue with upgrading application on a server
+* upgrade one version at a time:
+    * Start with a working application
+    * Upgrade to the next version
+    * Fix all issues
+    * Repeat
+* typical upgrade sequence should be:
+    * `docker-compose down`
+    * follow upgrade notes for `docker-compose.yml`, `Dockerfile`, docker containers
+    * `docker-compose up -d`
+    * update shopsys framework dependencies in `composer.json` to version you are upgrading to
+        eg. `"shopsys/framework": "v7.0.0-beta1"`
+    * `composer update`
+    * follow all upgrade notes you have not done yet
+    * `php phing clean`
+    * `php phing db-migrations`
+    * commit your changes
+* even we care a lot about these instructions, it is possible we miss something. In case something doesn't work after the upgrade, you'll find more information in the [CHANGELOG](CHANGELOG.md)
+
 There is a list of all the repositories maintained by monorepo, changes in log below are ordered as this list:
 
 * [shopsys/framework]
