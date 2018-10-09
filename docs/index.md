@@ -23,6 +23,7 @@
 * [Product Searching via Elasticsearch](./introduction/product-search-via-elasticsearch.md)
 * [Introduction to Kubernetes](/docs/kubernetes/introduction-to-kubernetes.md)
 * [Continuous Integration Using Kubernetes](/docs/kubernetes/continuous-integration-using-kubernetes.md)
+* [How to Set Up Domains and Locales (Languages)](./introduction/how-to-set-up-domains-and-locales.md)
 
 ## Cookbook
 * [Dumping and Importing the Database](./cookbook/dumping-and-importing-the-database.md)
