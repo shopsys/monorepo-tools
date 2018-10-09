@@ -65,12 +65,12 @@ There is a list of all the repositories maintained by monorepo, changes in log b
 
 ## [From 7.0.0-alpha6 to 7.0.0-beta1]
 ### [shopsys/framework]
-- [#468 - Setting for docker on mac are now more optimized](https://github.com/shopsys/shopsys/pull/468)
+- *(optional)* [#468 - Setting for docker on mac are now more optimized](https://github.com/shopsys/shopsys/pull/468)
     - if you use the Shopsys Framework with docker on the platform Mac, modify your
       [`docker-compose.yml`](https://github.com/shopsys/shopsys/blob/v7.0.0-beta1/docker/conf/docker-compose-mac.yml.dist)
       and [`docker-sync.yml`](https://github.com/shopsys/shopsys/blob/v7.0.0-beta1/docker/conf/docker-sync.yml.dist) according to the new templates
     - next restart docker-compose and docker-sync
-- [#483 - updated info about Docker on Mac](https://github.com/shopsys/shopsys/pull/483)
+- *(optional)* [#483 - updated info about Docker on Mac](https://github.com/shopsys/shopsys/pull/483)
     - if you use Docker for Mac and experience issues with `composer install` resulting in `Killed` status, try increasing the allowed memory
     - we recommend to set 2 GB RAM, 1 CPU and 2 GB Swap in `Docker -> Preferences… -> Advanced`
 - we changed visibility of Controllers' and Factories' methods and properties to protected
@@ -113,12 +113,12 @@ There is a list of all the repositories maintained by monorepo, changes in log b
     - `parameters.yml.dist` contains new parameter `microservice_product_search_export_url`
         - add `microservice_product_search_export_url: 'http://microservice-product-search-export:8000'` into your `parameters.yml.dist`
         - execute `composer install` *(it will copy parameter into `parameters.yml`)*
-- instead of building the Docker images of the microservices yourself, you can use pre-built images on Docker Hub (see the [`docker-compose.yml`](https://github.com/shopsys/shopsys/blob/v7.0.0-alpha6/project-base/docker/conf) template you used)
+- *(optional)* instead of building the Docker images of the microservices yourself, you can use pre-built images on Docker Hub (see the [`docker-compose.yml`](https://github.com/shopsys/shopsys/blob/v7.0.0-alpha6/project-base/docker/conf) template you used)
 - [#438 - Attribute telephone moved from a billing address to the personal data of a user](https://github.com/shopsys/shopsys/pull/438)
     - edit `ShopBundle/Form/Front/Customer/BillingAddressFormType` - remove `telephone`
     - edit `ShopBundle/Form/Front/Customer/UserFormType` - add `telephone`
     - edit twig templates and tests in such a way as to reflect the movement of `telephone` attribute according to the [pull request](https://github.com/shopsys/shopsys/pull/438)
-- to use custom postgres configuration check changes in the [`docker-compose.yml`](https://github.com/shopsys/shopsys/blob/v7.0.0-alpha6/project-base/docker/conf) templates and replicate them, there is a new volume for `postgres` container
+- *(optional)* to use custom postgres configuration check changes in the [`docker-compose.yml`](https://github.com/shopsys/shopsys/blob/v7.0.0-alpha6/project-base/docker/conf) templates and replicate them, there is a new volume for `postgres` container
     - PR [Improve Postgres configuration to improve performance](https://github.com/shopsys/shopsys/pull/444)
     - Stop running containers `docker-compose down`
     - Move data from `project-base/var/postgres-data` into `project-base/var/postgres-data/pgdata`. The directory must have correct permission depending on your OS.
@@ -133,7 +133,7 @@ There is a list of all the repositories maintained by monorepo, changes in log b
         - `shopt -u dotglob`
         - `exit`
     - Start containers `docker-compose up -d`
-- configuration files (`config.yml`, `config_dev.yml`, `config_test.yml`, `security.yml` and `wysiwyg.yml`) has been split into packages config files, for details [see #449](https://github.com/shopsys/shopsys/pull/449)
+- *(optional)* configuration files (`config.yml`, `config_dev.yml`, `config_test.yml`, `security.yml` and `wysiwyg.yml`) has been split into packages config files, for details [see #449](https://github.com/shopsys/shopsys/pull/449)
     - extract each section into own config file
         - eg. from `config.yml` extract `doctrine:` section into file `packages/doctrine.yml`
         - eg. from `config_dev.yml` extract `assetic:` section info file `packages/dev/assetic.yml`
@@ -251,9 +251,9 @@ if you are using docker infrastructure you can follow steps written below.
         - `Shopsys\FrameworkBundle\Model\Product\Search\ElasticsearchSearchClient`
         - `Shopsys\FrameworkBundle\Model\Product\Search\CachedSearchClient`
         - `Shopsys\FrameworkBundle\Model\Product\Search\SearchClient`
-- standardize indentation in your yaml files
+- *(optional)* standardize indentation in your yaml files
     - you can find yaml files with wrong indentation with regexp `^( {4})* {1,3}[^ ]`
-- we added a new phing target that checks [availabitliy of microservices](https://github.com/shopsys/shopsys/blob/v7.0.0-alpha5/project-base/build-dev.xml#L726-L731).
+- *(optional)* we added a new phing target that checks [availabitliy of microservices](https://github.com/shopsys/shopsys/blob/v7.0.0-alpha5/project-base/build-dev.xml#L726-L731).
   Feel free to include this target into your build process.
 - add new themes to configuration `app/config/config.yml`, path `twig.form_themes`:
     ```
