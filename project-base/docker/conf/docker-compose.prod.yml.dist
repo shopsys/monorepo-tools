@@ -1,0 +1,60 @@
+version: "3.1"
+services:
+    webserver:
+        restart: always
+        image: nginx:1.13-alpine
+        container_name: production-webserver
+        volumes:
+            - /var/www/production-content:/var/www/html/web/content
+            - web-volume:/var/www/html/web
+            - nginx-conf:/etc/nginx/conf.d/
+        ports:
+            - 8000:8080
+        links:
+            - php-fpm
+        networks:
+            - shopsys-network
+
+    php-fpm:
+        restart: always
+        image: production-php-fpm
+        container_name: production-php-fpm
+        volumes:
+            - /var/www/production-content:/var/www/html/web/content
+            - web-volume:/var/www/html/web
+            - nginx-conf:/var/www/html/docker/nginx
+        extra_hosts:
+            - postgres:192.168.0.1
+            - redis:192.168.0.1
+            - smtp-server:192.168.0.1
+        networks:
+            - shopsys-network
+
+    microservice-product-search:
+        restart: always
+        image: shopsys/microservice-product-search
+        container_name: shopsys-framework-microservice-product-search
+        environment:
+            - ELASTICSEARCH_HOSTS_STRING=192.168.0.1:9200
+        networks:
+            - shopsys-network
+
+    microservice-product-search-export:
+        restart: always
+        image: shopsys/microservice-product-search-export
+        container_name: shopsys-framework-microservice-product-search-export
+        environment:
+            - ELASTICSEARCH_HOSTS_STRING=192.168.0.1:9200
+        networks:
+            - shopsys-network
+volumes:
+    web-volume:
+    nginx-conf:
+networks:
+    shopsys-network:
+        driver: bridge
+        ipam:
+            driver: default
+            config:
+            - subnet: 192.168.0.1/16
+
