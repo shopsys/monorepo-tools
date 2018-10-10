@@ -8,6 +8,7 @@ You can take part in making Shopsys Framework better.
 * [Guidelines for Writing Documentation](./docs/contributing/guidelines-for-writing-documentation.md)
 * [Guidelines for Pull Request](./docs/contributing/guidelines-for-pull-request.md)
 * [Guidelines for Dependencies](./docs/contributing/guidelines-for-dependencies.md)
+* [Guidelines for writing UPGRADE.md](./docs/contributing/guidelines-for-writing-upgrade.md)
 * [Merging to Master on Github](./docs/contributing/merging-to-master-on-github.md)
 
 For your code to be accepted, you should follow our guidelines mentioned above,

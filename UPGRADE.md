@@ -1,4 +1,36 @@
 # UPGRADING
+## Recommended way of upgrading
+Since these are 3 possible scenarios how you can use shopsys, instructions are divided by these scenarios.
+
+### You use our packages only
+Follow instructions in relevant sections, eg. `shopsys/coding-standards`, `shopsys/microservice-product-search`.
+
+### You are using monorepo
+Follow instructions in the section `shopsys/shopsys`.
+
+### You are developing a project based on project-base
+* upgrade only your composer dependencies and follow instructions
+* if you want update your project with the changes from [shopsys/project-base], you can follow the *(optional)* instructions or cherry-pick from the repository whatever is relevant for you but we do not recommend rebasing or merging everything because the changes might not be compatible with your project as it probably evolves in time
+* check all instructions in all sections, any of them could be relevant for you
+* upgrade locally first. After you fix all issues caused by the upgrade, commit your changes and then continue with upgrading application on a server
+* upgrade one version at a time:
+    * Start with a working application
+    * Upgrade to the next version
+    * Fix all issues
+    * Repeat
+* typical upgrade sequence should be:
+    * `docker-compose down`
+    * follow upgrade notes for `docker-compose.yml`, `Dockerfile`, docker containers
+    * `docker-compose up -d`
+    * update shopsys framework dependencies in `composer.json` to version you are upgrading to
+        eg. `"shopsys/framework": "v7.0.0-beta1"`
+    * `composer update`
+    * follow all upgrade notes you have not done yet
+    * `php phing clean`
+    * `php phing db-migrations`
+    * commit your changes
+* even we care a lot about these instructions, it is possible we miss something. In case something doesn't work after the upgrade, you'll find more information in the [CHANGELOG](CHANGELOG.md)
+
 There is a list of all the repositories maintained by monorepo, changes in log below are ordered as this list:
 
 * [shopsys/framework]
@@ -33,36 +65,60 @@ There is a list of all the repositories maintained by monorepo, changes in log b
 
 ## [From 7.0.0-alpha6 to 7.0.0-beta1]
 ### [shopsys/framework]
-- [#468 - Setting for docker on mac are now more optimized](https://github.com/shopsys/shopsys/pull/468)
-    - if you use the Shopsys Framework with docker on the platform Mac, modify your docker-compose.yml and docker-sync.yml according to the new templates
+- *(optional)* [#468 - Setting for docker on mac are now more optimized](https://github.com/shopsys/shopsys/pull/468)
+    - if you use the Shopsys Framework with docker on the platform Mac, modify your
+      [`docker-compose.yml`](https://github.com/shopsys/shopsys/blob/v7.0.0-beta1/docker/conf/docker-compose-mac.yml.dist)
+      and [`docker-sync.yml`](https://github.com/shopsys/shopsys/blob/v7.0.0-beta1/docker/conf/docker-sync.yml.dist) according to the new templates
     - next restart docker-compose and docker-sync
-- [#483 - updated info about Docker on Mac](https://github.com/shopsys/shopsys/pull/483)
+- *(optional)* [#483 - updated info about Docker on Mac](https://github.com/shopsys/shopsys/pull/483)
     - if you use Docker for Mac and experience issues with `composer install` resulting in `Killed` status, try increasing the allowed memory
     - we recommend to set 2 GB RAM, 1 CPU and 2 GB Swap in `Docker -> Preferences… -> Advanced`
+- we changed visibility of Controllers' and Factories' methods and properties to protected
+    - you have to change visibility of overriden methods and properties to protected
+    - you can use parents' methods and properties
+- update `paths.yml`:
+    - add `shopsys.data_fixtures_images.resources_dir: '%shopsys.data_fixtures.resources_dir%/images/'`
+    - remove
+      ```
+        shopsys.demo_images_archive_url: https://images.shopsysdemo.com/demoImages.v11.zip
+        shopsys.demo_images_sql_url: https://images.shopsysdemo.com/demoImagesSql.v8.sql
+      ```
+- remove phing target `img-demo` as demonstration images are part of data fixtures
+    - remove `img-demo` phing target from `build.xml`
+    - remove all occurrences of `img-demo` in `build-dev.xml`
+    - remove all occurrences of `img-demo` from your build/deploy process
 
 ## [From 7.0.0-alpha5 to 7.0.0-alpha6]
 ### [shopsys/framework]
 - check for usages of `TransportEditFormType` - it was removed and all it's attributes were moved to `TransportFormType` so use this form instead
 - check for usages of `PaymentEditFormType` - it was removed and all it's attributes were moved to `PaymentFormType` so use this form instead
 - check for usages of `ProductEditFormType` - it was removed and all it's attributes were moved to `ProductFormType` so use this form instead
-- pay attention to javascripts bound to your forms as well as the elements' names and ids has changed (e.g. from `#product_edit_form_productData` to `#product_form`)
+- pay attention to javascripts bound to your forms as well as the elements' [names and ids has changed #428](https://github.com/shopsys/shopsys/pull/428)
+    - e.g. change id from `#product_edit_form_productData` to `#product_form`
+    - check also your tests, you need to change names and ids of elements too
 - PHP-FPM and microservice containers now expect a GitHub OAuth token set via a build argument, so it is not necessary to provide it every time those containers are rebuilt
-    - see the `github_oauth_token` argument setting in the `docker-compose.yml` template you used and replicate it
+    - see the `github_oauth_token` argument setting in the [`docker-compose.yml`](https://github.com/shopsys/shopsys/blob/v7.0.0-alpha6/project-base/docker/conf/docker-compose.yml.dist#L33) template you used and replicate it in your `docker-compose.yml`
+        - *since `docker-compose.yml` is not versioned, apply changes also in your `docker-compose.yml.dist` templates so it is easier to upgrade for your team members or for server upgrade*
     - replace the `place-your-token-here` string by the token generated on [Github -> Settings -> Developer Settings -> Personal access tokens](https://github.com/settings/tokens/new?scopes=repo&description=Composer+API+token)
-- as there were changes in the Dockerfiles, rebuilding images  is needed (`docker-compose up -d --build`)
+- as there were changes in the Dockerfiles, replace `php-fpm` dockerfile by a new version:
+    - copy [`docker/php-fpm/Dockerfile`](https://github.com/shopsys/shopsys/blob/v7.0.0-alpha6/project-base/docker/php-fpm/Dockerfile) from github
+    - rebuild images `docker-compose up -d --build`
+    - if you are in monorepo with microservices, just run `docker-compose up -d --build`
 - [#438 - Attribute telephone moved from a billing address to the personal data of a user](https://github.com/shopsys/shopsys/pull/438)
     - this change can affect your extended forms and entities, reflect this change into your project
 
 ### [shopsys/project-base]
 - [Microservice Product Search Export](https://github.com/shopsys/microservice-product-search-export) was added and it needs to be installed and run
     - check changes in the `docker-compose.yml` template you used and replicate them, there is a new container `microservice-product-search-export`
-    - `parameters.yml.dist` contains new parameter `microservice_product_search_export_url` which need to be filled in your `parameters.yml` (executing `composer install` should be enough)
-- instead of building the Docker images of the microservices yourself, you can use pre-built images on Docker Hub (see the `docker-compose.yml` template you used)
+    - `parameters.yml.dist` contains new parameter `microservice_product_search_export_url`
+        - add `microservice_product_search_export_url: 'http://microservice-product-search-export:8000'` into your `parameters.yml.dist`
+        - execute `composer install` *(it will copy parameter into `parameters.yml`)*
+- *(optional)* instead of building the Docker images of the microservices yourself, you can use pre-built images on Docker Hub (see the [`docker-compose.yml`](https://github.com/shopsys/shopsys/blob/v7.0.0-alpha6/project-base/docker/conf) template you used)
 - [#438 - Attribute telephone moved from a billing address to the personal data of a user](https://github.com/shopsys/shopsys/pull/438)
     - edit `ShopBundle/Form/Front/Customer/BillingAddressFormType` - remove `telephone`
     - edit `ShopBundle/Form/Front/Customer/UserFormType` - add `telephone`
     - edit twig templates and tests in such a way as to reflect the movement of `telephone` attribute according to the [pull request](https://github.com/shopsys/shopsys/pull/438)
-- to use custom postgres configuration check changes in the `docker-compose.yml` templates and replicate them, there is a new volume for `postgres` container
+- *(optional)* to use custom postgres configuration check changes in the [`docker-compose.yml`](https://github.com/shopsys/shopsys/blob/v7.0.0-alpha6/project-base/docker/conf) templates and replicate them, there is a new volume for `postgres` container
     - PR [Improve Postgres configuration to improve performance](https://github.com/shopsys/shopsys/pull/444)
     - Stop running containers `docker-compose down`
     - Move data from `project-base/var/postgres-data` into `project-base/var/postgres-data/pgdata`. The directory must have correct permission depending on your OS.
@@ -77,8 +133,30 @@ There is a list of all the repositories maintained by monorepo, changes in log b
         - `shopt -u dotglob`
         - `exit`
     - Start containers `docker-compose up -d`
-- configuration files (`config.yml`, `config_dev.yml`, `config_test.yml`, `security.yml` and `wysiwyg.yml`) has been split into packages config files (see `app/config/packages` folder)
-    - update appropriate package configs in case you had some custom configuration set in those files
+- *(optional)* configuration files (`config.yml`, `config_dev.yml`, `config_test.yml`, `security.yml` and `wysiwyg.yml`) has been split into packages config files, for details [see #449](https://github.com/shopsys/shopsys/pull/449)
+    - extract each section into own config file
+        - eg. from `config.yml` extract `doctrine:` section into file `packages/doctrine.yml`
+        - eg. from `config_dev.yml` extract `assetic:` section info file `packages/dev/assetic.yml`
+        - and also split `wysiwyg.yml` into `packages/*.yml`
+            - *(since `config.yml` will include all files in `packages/`, splitted `wysiwyg.yml` will be included automatically)*
+    - move `security.yml` to `packages/security.yml`
+    - the only thing that have to be left in the original configuration files is the import of these new configuration files
+        - eg. `config_dev.yml` will contain only
+            ```
+            imports:
+                 - { resource: packages/dev/*.yml }
+            ```
+- phing targets and console commands for working with elasticsearch were renamed, so rename them in `build.xml`, `build-dev.xml`. Also if you call them from other places, rename calling too:
+    - phing targets:
+        - `elasticsearch-indexes-create` -> `microservice-product-search-create-structure`
+        - `elasticsearch-indexes-delete` -> `microservice-product-search-delete-structure`
+        - `elasticsearch-indexes-recreate` -> `microservice-product-search-recreate-structure`
+        - `elasticsearch-products-export` -> `microservice-product-search-export-products`
+    - console commands:
+        - `shopsys:elasticsearch:create-indexes` -> `shopsys:microservice:product-search:create-structure`
+        - `shopsys:elasticsearch:delete-indexes` -> `shopsys:microservice:product-search:delete-structure`
+        - `shopsys:elasticsearch:export-products` -> `shopsys:microservice:product-search:export-products`
+- run `php phing ecs-fix` to apply new coding standards - [keep class spacing consistent #384](https://github.com/shopsys/shopsys/pull/384)
 
 ### [shopsys/shopsys]
 - when upgrading your installed [monorepo](docs/introduction/monorepo.md), you'll have to change the build context for the images of the microservices in `docker-compose.yml`
@@ -90,13 +168,21 @@ There is a list of all the repositories maintained by monorepo, changes in log b
 
 ### [shopsys/framework]
 - for [product search via Elasticsearch](/docs/introduction/product-search-via-elasticsearch.md), you'll have to:
-    - check changes in the `docker-compose.yml` template you used and replicate them, there is a new container with Elasticsearch
+    - check changes in the [`docker-compose.yml`](https://github.com/shopsys/shopsys/blob/v7.0.0-alpha5/docker/conf) template you used and replicate them, there is a new container with Elasticsearch
+        - *since `docker-compose.yml` is not versioned, apply changes also in your `docker-compose.yml.dist` templates so it is easier to upgrade for your team members or for server upgrade*
+    - since the fully installed and ready [Microservice Product Search](https://github.com/shopsys/microservice-product-search) is a necessary condition for the Shopsys Framework to run, the installation procedure of this microservice is a part of Shopsys Framework [installation guide](https://github.com/shopsys/shopsys/blob/v7.0.0-alpha5/docs/installation/installation-using-docker-application-setup.md)
+        - alternately you can use [docker microservice image](https://github.com/shopsys/demoshop/blob/4946be4111d7fae4d7497921f9a4ec9aed24db42/docker/conf/docker-compose.yml.dist#L104-L110) that require no installation
     - run `docker-compose up -d`
     - update composer dependencies `composer update`
     - create Elasticsearch indexes by running `php phing elasticsearch-indexes-create`
     - export products into Elasticsearch by `php phing elasticsearch-products-export`
-- since the fully installed and ready [Microservice Product Search](https://github.com/shopsys/microservice-product-search) is a necessary condition for the Shopsys Framework to run, the installation procedure of this microservice is a part of Shopsys Framework [installation guide](/docs/installation/installation-using-docker-application-setup.md)
- 
+- `ProductFormType` [is extensible now #375](https://github.com/shopsys/shopsys/pull/375). If you extended the product form, you have to:
+    - move form parts into right subsections, eg. [this change on demoshop](https://github.com/shopsys/demoshop/commit/62ae3dd3f2880f4c0d2a5ec33747c3f2f8448f41)
+    - if you don't have custom rendering, remove your template for form
+    - if you have custom rendering, change rendering of these parts as they are now in subsections
+    - as the form changed structure, you have to also fix tests. see [this change on demoshop](https://github.com/shopsys/demoshop/commit/62ae3dd3f2880f4c0d2a5ec33747c3f2f8448f41)
+        - form fields changed names and also ids
+
 #### PostgreSQL upgrade:
 We decided to move onto a newer version of PostgreSQL.
 
@@ -109,11 +195,11 @@ if you are using docker infrastructure you can follow steps written below.
 
     `docker exec -it shopsys-framework-postgres pg_dumpall > backupfile`
 
-1. copy new version of `docker-compose.`:
-
-    `cp docker/conf/docker-compose.yml.dist -f docker-compose.yml`
+1. apply changes in `docker-compose.yml`, you can find them in a new version of [`docker-compose.yml.dist`](https://github.com/shopsys/shopsys/blob/v7.0.0-alpha5/docker/conf) templates
 
     *Note: select correct `docker-compose` according to your operating system*
+
+    *since `docker-compose.yml` is not versioned, apply changes also in your `docker-compose.yml.dist` templates so it is easier to upgrade for your team members or for server upgrade*
 
 1. update version of `database_server_version` from *9.5* to *10.5* in your `parameters.yml`
 
@@ -122,6 +208,12 @@ if you are using docker infrastructure you can follow steps written below.
     `docker-compose down`
 
     `rm -rf <project-root-path>/var/postgres-data/*`
+
+1. use a new version of `php-fpm` container:
+
+    `curl -L https://github.com/shopsys/shopsys/raw/v7.0.0-alpha5/project-base/docker/php-fpm/Dockerfile --output docker/php-fpm/Dockerfile`
+
+    `docker-compose build php-fpm`
 
 1. start new docker-compose stack with newer version of postgres by just recreating your containers:
 
@@ -139,10 +231,19 @@ if you are using docker infrastructure you can follow steps written below.
 
     `docker exec -it shopsys-framework-postgres rm backupfile`
 
+1. recreate collations:
+
+    `docker exec shopsys-framework-php-fpm ./phing db-create test-db-create`
+
 ### [shopsys/project-base] 
 - added [Microservice Product Search](https://github.com/shopsys/microservice-product-search)
-    - check changes in the `docker-compose.yml` template you used and replicate them, there is a new container `microservice-product-search`
-    - `parameters.yml.dist` contains new parameter `microservice_product_search_url`
+    - check changes in the [`docker-compose.yml`](https://github.com/shopsys/shopsys/blob/v7.0.0-alpha5/docker/conf) template you used and replicate them, there is a new container `microservice-product-search`
+        - *since `docker-compose.yml` is not versioned, apply changes also in your `docker-compose.yml.dist` templates so it is easier to upgrade for your team members or for server upgrade*
+        - follow [installation guide](https://github.com/shopsys/shopsys/blob/v7.0.0-alpha5/docs/installation/installation-using-docker-application-setup.md) to install microservice
+          or use [docker microservice image](https://github.com/shopsys/demoshop/blob/4946be4111d7fae4d7497921f9a4ec9aed24db42/docker/conf/docker-compose.yml.dist#L104-L110) that require no installation
+    - into `parameters.yml.dist` add a new parameter `microservice_product_search_url`:
+        - `microservice_product_search_url: 'http://microservice-product-search:8000'`
+        - and add it also into `parameters.yml`
     - modify a configuration in `services.yml` for:
         - `Shopsys\FrameworkBundle\Model\Product\Search\ProductSearchRepository`
         - `shopsys.microservice_client.product_search`
@@ -150,8 +251,18 @@ if you are using docker infrastructure you can follow steps written below.
         - `Shopsys\FrameworkBundle\Model\Product\Search\ElasticsearchSearchClient`
         - `Shopsys\FrameworkBundle\Model\Product\Search\CachedSearchClient`
         - `Shopsys\FrameworkBundle\Model\Product\Search\SearchClient`
-- standardize indentation in your yaml files
+- *(optional)* standardize indentation in your yaml files
     - you can find yaml files with wrong indentation with regexp `^( {4})* {1,3}[^ ]`
+- *(optional)* we added a new phing target that checks [availabitliy of microservices](https://github.com/shopsys/shopsys/blob/v7.0.0-alpha5/project-base/build-dev.xml#L726-L731).
+  Feel free to include this target into your build process.
+- add new themes to configuration `app/config/config.yml`, path `twig.form_themes`:
+    ```
+        - '@ShopsysFramework/Admin/Form/warningMessage.html.twig'
+        - '@ShopsysFramework/Admin/Form/displayOnlyUrl.html.twig'
+        - '@ShopsysFramework/Admin/Form/localizedFullWidth.html.twig'
+        - '@ShopsysFramework/Admin/Form/productParameterValue.html.twig'
+        - '@ShopsysFramework/Admin/Form/productCalculatedPrices.html.twig'
+    ```
         
 ## [From 7.0.0-alpha3 to 7.0.0-alpha4]
 
