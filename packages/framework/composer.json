@@ -17,20 +17,6 @@
             "Tests\\FrameworkBundle\\": "tests/"
         }
     },
-    "repositories": [
-        {
-            "type": "vcs",
-            "url": "https://github.com/molaux/PostgreSearchBundle.git"
-        },
-        {
-            "type": "vcs",
-            "url": "https://github.com/shopsys/doctrine2.git"
-        },
-        {
-            "type": "vcs",
-            "url": "https://github.com/shopsys/jparser.git"
-        }
-    ],
     "require": {
         "php": "^7.1",
         "ext-bcmath": "*",
@@ -60,7 +46,6 @@
         "doctrine/dbal": "^2.7",
         "doctrine/doctrine-bundle": "^1.8.1",
         "doctrine/doctrine-fixtures-bundle": "^3.0.2",
-        "doctrine/orm": "dev-doctrine-260-with-ddc1960-hotfix-and-ddc4005-hotfix as 2.6.0",
         "egeloen/ckeditor-bundle": "^4.0.6",
         "fp/jsformvalidator-bundle": "^1.5.1",
         "fzaninotto/faker": "^1.7.1",
@@ -68,7 +53,6 @@
         "guzzlehttp/guzzle": "^6.3",
         "helios-ag/fm-elfinder-bundle": "^6.2.1",
         "heureka/overeno-zakazniky": "^2.0.6",
-        "intaro/postgres-search-bundle": "dev-master#06625bdc1d",
         "intervention/image": "^2.3.14",
         "jms/metadata": "^1.6",
         "jms/translation-bundle": "^1.4.1",
@@ -83,6 +67,9 @@
         "psr/log": "^1.0",
         "sensio/distribution-bundle": "^5.0.21",
         "sensio/framework-extra-bundle": "^3.0.29",
+        "shopsys/doctrine-orm": "2.6.2",
+        "shopsys/jparser": "0.1",
+        "shopsys/postgres-search-bundle": "0.1",
         "shopsys/migrations": "dev-master",
         "shopsys/form-types-bundle": "dev-master",
         "shopsys/plugin-interface": "dev-master",
@@ -95,7 +82,6 @@
         "symfony/symfony": "^3.4.8",
         "symfony-cmf/routing": "^2.0.3",
         "symfony-cmf/routing-bundle": "^2.0.3",
-        "timwhitlock/jparser": "dev-get-rid-of-import#c37f4c6",
         "twig/extensions": "^1.5.1",
         "twig/twig": "^2.4.8"
     },
