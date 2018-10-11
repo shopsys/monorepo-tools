@@ -56,7 +56,7 @@
     <target name="build-deploy-part-2-db-dependent" depends="db-migrations,create-domains-data,generate-friendly-urls,replace-domains-urls,grunt,error-pages-generate,warmup" description="Second part of application build for production preserving your DB (must be run with maintenance page when containing DB migrations)."/>
     <target name="build-new" depends="wipe,composer,npm,dirs-create,domains-urls-check,assets,db-rebuild,grunt,error-pages-generate,warmup,microservice-product-search-create-structure" description="Builds application for production with clean DB (with base data only)."/>
     <target name="build-demo" depends="wipe,composer,npm,dirs-create,domains-urls-check,assets,db-demo,grunt,error-pages-generate,warmup,microservice-product-search-recreate-structure" description="Builds application for production with clean demo DB."/>
-    <target name="db-demo" depends="db-wipe-public-schema,db-import-basic-structure,db-migrations,db-fixtures-demo-singledomain,create-domains-data,db-fixtures-demo-multidomain,load-plugin-demo-data,generate-friendly-urls,replace-domains-urls" description="Creates DB and fills it with demo data"/>
+    <target name="db-demo" depends="db-wipe-public-schema,db-import-basic-structure,db-migrations,create-domains-db-functions,db-fixtures-demo-singledomain,create-domains-data,db-fixtures-demo-multidomain,load-plugin-demo-data,generate-friendly-urls,replace-domains-urls" description="Creates DB and fills it with demo data"/>
     <target name="db-rebuild" depends="db-wipe-public-schema,db-import-basic-structure,db-migrations,create-domains-data,generate-friendly-urls,replace-domains-urls" description="Drops all data in database and creates a new one with base data only."/>
     <target name="microservice-product-search-recreate-structure" depends="microservice-product-search-delete-structure,microservice-product-search-create-structure" description="Recreates structure for searching via microservice (deletes existing structure and creates new one)" />
 
@@ -120,6 +120,13 @@
         <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
             <arg value="${path.bin-console}" />
             <arg value="shopsys:recalculations" />
+        </exec>
+    </target>
+
+    <target name="create-domains-db-functions" description="Creates new domains DB functions.">
+        <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
+            <arg value="${path.bin-console}" />
+            <arg value="shopsys:domains-db-functions:create" />
         </exec>
     </target>
 

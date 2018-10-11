@@ -73,8 +73,12 @@ There is a list of all the repositories maintained by monorepo, changes in log b
         - `"doctrine/orm": "dev-doctrine-260-..."` -> `"shopsys/doctrine-orm": "2.6.2"`
         - `"intaro/postgres-search-bundle": "@dev"` -> `"shopsys/postgres-search-bundle": "0.1"`
 - [#513 - Manipulation with domains is modified and documented now](https://github.com/shopsys/shopsys/pull/513)
-    - modify your `build.xml` according to this pull request so recalculations will be processed after `create-domains-data` command
-      
+    - modify your `build.xml` according to this pull request
+        - recalculations will be processed after `create-domains-data` command
+        - creation of some database functions was moved from `create-domains-data` phing target to a new phing target `create-domains-db-functions`
+    - modify your `build-dev.xml` according to this pull request
+        - creation of some database functions was moved from `test-create-domains-data` phing target to a new phing target `test-create-domains-db-functions`
+  
 ## [From 7.0.0-alpha6 to 7.0.0-beta1]
 ### [shopsys/framework]
 - *(optional)* [#468 - Setting for docker on mac are now more optimized](https://github.com/shopsys/shopsys/pull/468)

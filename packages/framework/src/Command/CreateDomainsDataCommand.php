@@ -4,7 +4,6 @@ namespace Shopsys\FrameworkBundle\Command;
 
 use Doctrine\ORM\EntityManagerInterface;
 use Shopsys\FrameworkBundle\Component\Domain\DomainDataCreator;
-use Shopsys\FrameworkBundle\Component\Domain\DomainDbFunctionsFacade;
 use Shopsys\FrameworkBundle\Component\Domain\Multidomain\MultidomainEntityClassFinderFacade;
 use Shopsys\FrameworkBundle\Model\Localization\DbIndexesFacade;
 use Symfony\Component\Console\Command\Command;
@@ -24,11 +23,6 @@ class CreateDomainsDataCommand extends Command
     private $em;
 
     /**
-     * @var \Shopsys\FrameworkBundle\Component\Domain\DomainDbFunctionsFacade
-     */
-    private $domainDbFunctionsFacade;
-
-    /**
      * @var \Shopsys\FrameworkBundle\Component\Domain\DomainDataCreator
      */
     private $domainDataCreator;
@@ -45,20 +39,17 @@ class CreateDomainsDataCommand extends Command
 
     /**
      * @param \Doctrine\ORM\EntityManagerInterface $em
-     * @param \Shopsys\FrameworkBundle\Component\Domain\DomainDbFunctionsFacade $domainDbFunctionsFacade
      * @param \Shopsys\FrameworkBundle\Component\Domain\DomainDataCreator $domainDataCreator
      * @param \Shopsys\FrameworkBundle\Component\Domain\Multidomain\MultidomainEntityClassFinderFacade $multidomainEntityClassFinderFacade
      * @param \Shopsys\FrameworkBundle\Model\Localization\DbIndexesFacade $dbIndexesFacade
      */
     public function __construct(
         EntityManagerInterface $em,
-        DomainDbFunctionsFacade $domainDbFunctionsFacade,
         DomainDataCreator $domainDataCreator,
         MultidomainEntityClassFinderFacade $multidomainEntityClassFinderFacade,
         DbIndexesFacade $dbIndexesFacade
     ) {
         $this->em = $em;
-        $this->domainDbFunctionsFacade = $domainDbFunctionsFacade;
         $this->domainDataCreator = $domainDataCreator;
         $this->multidomainEntityClassFinderFacade = $multidomainEntityClassFinderFacade;
         $this->dbIndexesFacade = $dbIndexesFacade;
@@ -87,7 +78,6 @@ class CreateDomainsDataCommand extends Command
     {
         $output->writeln('Start of creating new domains data.');
 
-        $this->domainDbFunctionsFacade->createDomainDbFunctions();
         $domainsCreated = $this->domainDataCreator->createNewDomainsData();
 
         $output->writeln('<fg=green>New domains created: ' . $domainsCreated . '.</fg=green>');
