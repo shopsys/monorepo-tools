@@ -99,6 +99,7 @@ class DailyFeedCronModule implements IteratedCronModuleInterface
      */
     public function sleep(): void
     {
+        $this->currentFeedExport->sleep();
         $currentFeedName = $this->feedExportCreationDataQueue->getCurrentFeedName();
         $currentDomain = $this->feedExportCreationDataQueue->getCurrentDomain();
         $lastSeekId = $this->currentFeedExport !== null ? $this->currentFeedExport->getLastSeekId() : null;
@@ -131,6 +132,7 @@ class DailyFeedCronModule implements IteratedCronModuleInterface
 
         $lastSeekId = $this->setting->get(Setting::FEED_ITEM_ID_TO_CONTINUE);
         $this->currentFeedExport = $this->createCurrentFeedExport($lastSeekId);
+        $this->currentFeedExport->wakeUp();
 
         $this->logger->addDebug(sprintf(
             'Waking up... Continuing with feed "%s" on "%s", processing from ID %d.',

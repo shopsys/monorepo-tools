@@ -22,11 +22,17 @@ class FeedPathProvider
      */
     protected $setting;
 
-    public function __construct(string $feedUrlPrefix, string $feedDir, Setting $setting)
+    /**
+     * @var string
+     */
+    private $projectDir;
+
+    public function __construct(string $feedUrlPrefix, string $feedDir, string $projectDir, Setting $setting)
     {
         $this->feedUrlPrefix = $feedUrlPrefix;
         $this->feedDir = $feedDir;
         $this->setting = $setting;
+        $this->projectDir = $projectDir;
     }
 
     /**
@@ -47,6 +53,16 @@ class FeedPathProvider
     public function getFeedFilepath(FeedInfoInterface $feedInfo, DomainConfig $domainConfig)
     {
         return $this->feedDir . $this->getFeedFilename($feedInfo, $domainConfig);
+    }
+
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Feed\FeedInfoInterface $feedInfo
+     * @param \Shopsys\FrameworkBundle\Component\Domain\Config\DomainConfig $domainConfig
+     * @return string
+     */
+    public function getFeedLocalFilepath(FeedInfoInterface $feedInfo, DomainConfig $domainConfig)
+    {
+        return $this->projectDir . $this->feedDir . $this->getFeedFilename($feedInfo, $domainConfig);
     }
 
     /**

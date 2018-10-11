@@ -4,7 +4,9 @@ namespace Shopsys\FrameworkBundle\Model\Feed;
 
 use Doctrine\ORM\EntityManagerInterface;
 use League\Flysystem\FilesystemInterface;
+use League\Flysystem\MountManager;
 use Shopsys\FrameworkBundle\Component\Domain\Config\DomainConfig;
+use Symfony\Component\Filesystem\Filesystem;
 
 class FeedExport
 {
@@ -32,6 +34,16 @@ class FeedExport
     protected $filesystem;
 
     /**
+     * @var \Symfony\Component\Filesystem\Filesystem
+     */
+    protected $localFilesystem;
+
+    /**
+     * @var \League\Flysystem\MountManager
+     */
+    protected $mountManager;
+
+    /**
      * @var \Doctrine\ORM\EntityManagerInterface
      */
     protected $em;
@@ -40,6 +52,11 @@ class FeedExport
      * @var string
      */
     protected $feedFilepath;
+
+    /**
+     * @var string
+     */
+    protected $feedLocalFilepath;
 
     /**
      * @var int|null
@@ -61,17 +78,37 @@ class FeedExport
         DomainConfig $domainConfig,
         FeedRenderer $feedRenderer,
         FilesystemInterface $filesystem,
+        Filesystem $localFilesystem,
+        MountManager $mountManager,
         EntityManagerInterface $em,
         string $feedFilepath,
+        string $feedLocalFilepath,
         ?int $lastSeekId
     ) {
         $this->feed = $feed;
         $this->domainConfig = $domainConfig;
         $this->feedRenderer = $feedRenderer;
         $this->filesystem = $filesystem;
+        $this->localFilesystem = $localFilesystem;
+        $this->mountManager = $mountManager;
         $this->em = $em;
         $this->feedFilepath = $feedFilepath;
+        $this->feedLocalFilepath = $feedLocalFilepath;
         $this->lastSeekId = $lastSeekId;
+    }
+
+    public function wakeUp(): void
+    {
+        if ($this->filesystem->has($this->getTemporaryFilepath())) {
+            $this->mountManager->move('main://' . $this->getTemporaryFilepath(), 'local://' . $this->getTemporaryLocalFilepath());
+        } else {
+            $this->localFilesystem->touch($this->getTemporaryLocalFilepath());
+        }
+    }
+
+    public function sleep(): void
+    {
+        $this->mountManager->move('local://' . $this->getTemporaryLocalFilepath(), 'main://' . $this->getTemporaryFilepath());
     }
 
     public function generateBatch(): void
@@ -83,23 +120,19 @@ class FeedExport
         $itemsInBatch = $this->feed->getItems($this->domainConfig, $this->lastSeekId, self::BATCH_SIZE);
 
         if ($this->lastSeekId === null) {
-            $this->fileContentBuffer = $this->feedRenderer->renderBegin($this->domainConfig);
-        } elseif ($this->fileContentBuffer === null) {
-            $this->readFileToBuffer();
+            $this->writeToFeed($this->feedRenderer->renderBegin($this->domainConfig));
         }
 
         $countInBatch = 0;
         foreach ($itemsInBatch as $item) {
-            $this->fileContentBuffer .= $this->feedRenderer->renderItem($this->domainConfig, $item);
+            $this->writeToFeed($this->feedRenderer->renderItem($this->domainConfig, $item));
             $this->lastSeekId = $item->getSeekId();
             $countInBatch++;
         }
 
         if ($countInBatch < self::BATCH_SIZE) {
-            $this->fileContentBuffer .= $this->feedRenderer->renderEnd($this->domainConfig);
+            $this->writeToFeed($this->feedRenderer->renderEnd($this->domainConfig));
             $this->finishFile();
-        } else {
-            $this->writeBufferToFile();
         }
 
         $this->em->clear();
@@ -137,30 +170,23 @@ class FeedExport
         return $this->finished;
     }
 
-    protected function readFileToBuffer(): void
-    {
-        if (!$this->filesystem->has($this->getTemporaryFilepath())) {
-            $this->fileContentBuffer = '';
-        }
-
-        $this->fileContentBuffer = $this->filesystem->read($this->getTemporaryFilepath());
-    }
-
-    protected function writeBufferToFile(): void
-    {
-        $this->filesystem->put($this->getTemporaryFilepath(), $this->fileContentBuffer);
-    }
-
     protected function finishFile(): void
     {
-        $this->writeBufferToFile();
-
         if ($this->filesystem->has($this->feedFilepath)) {
             $this->filesystem->delete($this->feedFilepath);
         }
-        $this->filesystem->rename($this->getTemporaryFilepath(), $this->feedFilepath);
+
+        $this->mountManager->move('local://' . $this->getTemporaryLocalFilepath(), 'main://' . $this->feedFilepath);
 
         $this->finished = true;
+    }
+
+    /**
+     * @param string $content
+     */
+    protected function writeToFeed(string $content): void
+    {
+        $this->localFilesystem->appendToFile($this->getTemporaryLocalFilepath(), $content);
     }
 
     /**
@@ -169,5 +195,13 @@ class FeedExport
     protected function getTemporaryFilepath(): string
     {
         return $this->feedFilepath . self::TEMPORARY_FILENAME_SUFFIX;
+    }
+
+    /**
+     * @return string
+     */
+    protected function getTemporaryLocalFilepath(): string
+    {
+        return $this->feedLocalFilepath . '_local' . self::TEMPORARY_FILENAME_SUFFIX;
     }
 }

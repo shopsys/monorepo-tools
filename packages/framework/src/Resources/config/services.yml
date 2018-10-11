@@ -440,6 +440,7 @@ services:
         arguments:
             $feedUrlPrefix: '%shopsys.feed_url_prefix%'
             $feedDir: '%shopsys.feed_dir%'
+            $projectDir: '%kernel.project_dir%'
 
     Shopsys\FrameworkBundle\Model\Feed\FeedRegistry:
         arguments:
