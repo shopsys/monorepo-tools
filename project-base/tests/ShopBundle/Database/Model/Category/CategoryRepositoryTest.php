@@ -30,10 +30,9 @@ class CategoryRepositoryTest extends DatabaseTestCase
 
         $parentCategory = $categoryFacade->create($categoryData);
 
-        $categoryData->enabled = [
-            self::FIRST_DOMAIN_ID => false,
-            self::SECOND_DOMAIN_ID => false,
-        ];
+        $categoryData->enabled[self::FIRST_DOMAIN_ID] = false;
+        $categoryData->enabled[self::SECOND_DOMAIN_ID] = false;
+
         $categoryData->parent = $parentCategory;
         $categoryFacade->create($categoryData);
 
