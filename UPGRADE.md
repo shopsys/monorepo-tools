@@ -62,6 +62,16 @@ There is a list of all the repositories maintained by monorepo, changes in log b
 - [#502 - fixed acceptance tests (loading DB dump)](https://github.com/shopsys/shopsys/pull/502)
     - when you upgrade `codeception/codeception` to version `2.5.0`, you have to change parameter `populate` to `true`
       in `tests/ShopBundle/Acceptance/acceptance.suite.yml`
+- make changes in `composer.json`:
+    - remove repositories:
+        - `https://github.com/shopsys/doctrine2.git`
+        - `https://github.com/shopsys/jparser.git`
+        - `https://github.com/molaux/PostgreSearchBundle.git`
+    - remove dependencies:
+        - `"timwhitlock/jparser": "@dev"`
+    - change dependencies:
+        - `"doctrine/orm": "dev-doctrine-260-..."` -> `"shopsys/doctrine-orm": "2.6.2"`
+        - `"intaro/postgres-search-bundle": "@dev"` -> `"shopsys/postgres-search-bundle": "0.1"`
 
 ## [From 7.0.0-alpha6 to 7.0.0-beta1]
 ### [shopsys/framework]
