@@ -14,12 +14,12 @@ class ProductAvailabilityRecalculatorTest extends TransactionFunctionalTestCase
 {
     public function testRecalculateOnProductEditNotUsingStock()
     {
+        /** @var \Shopsys\FrameworkBundle\Model\Product\ProductFacade $productFacade */
         $productFacade = $this->getContainer()->get(ProductFacade::class);
-        /* @var $productFacade \Shopsys\FrameworkBundle\Model\Product\ProductFacade */
+        /** @var \Shopsys\ShopBundle\Model\Product\ProductDataFactory $productDataFactory */
         $productDataFactory = $this->getContainer()->get(ProductDataFactoryInterface::class);
-        /* @var $productDataFactory \Shopsys\ShopBundle\Model\Product\ProductDataFactory */
+        /** @var \Shopsys\FrameworkBundle\Model\Product\Availability\ProductAvailabilityRecalculator $productAvailabilityRecalculator */
         $productAvailabilityRecalculator = $this->getContainer()->get(ProductAvailabilityRecalculator::class);
-        /* @var $productAvailabilityRecalculator \Shopsys\FrameworkBundle\Model\Product\Availability\ProductAvailabilityRecalculator */
 
         $productId = 1;
 
@@ -41,14 +41,14 @@ class ProductAvailabilityRecalculatorTest extends TransactionFunctionalTestCase
 
     public function testRecalculateOnProductEditUsingStockInStock()
     {
+        /** @var \Shopsys\FrameworkBundle\Model\Product\ProductFacade $productFacade */
         $productFacade = $this->getContainer()->get(ProductFacade::class);
-        /* @var $productFacade \Shopsys\FrameworkBundle\Model\Product\ProductFacade */
+        /** @var \Shopsys\ShopBundle\Model\Product\ProductDataFactory $productDataFactory */
         $productDataFactory = $this->getContainer()->get(ProductDataFactoryInterface::class);
-        /* @var $productDataFactory \Shopsys\ShopBundle\Model\Product\ProductDataFactory */
+        /** @var \Shopsys\FrameworkBundle\Model\Product\Availability\AvailabilityFacade $availabilityFacade */
         $availabilityFacade = $this->getContainer()->get(AvailabilityFacade::class);
-        /* @var $availabilityFacade \Shopsys\FrameworkBundle\Model\Product\Availability\AvailabilityFacade */
+        /** @var \Shopsys\FrameworkBundle\Model\Product\Availability\ProductAvailabilityRecalculator $productAvailabilityRecalculator */
         $productAvailabilityRecalculator = $this->getContainer()->get(ProductAvailabilityRecalculator::class);
-        /* @var $productAvailabilityRecalculator \Shopsys\FrameworkBundle\Model\Product\Availability\ProductAvailabilityRecalculator */
 
         $productId = 1;
 
@@ -72,12 +72,12 @@ class ProductAvailabilityRecalculatorTest extends TransactionFunctionalTestCase
 
     public function testRecalculateOnProductEditUsingStockOutOfStock()
     {
+        /** @var \Shopsys\FrameworkBundle\Model\Product\ProductFacade $productFacade */
         $productFacade = $this->getContainer()->get(ProductFacade::class);
-        /* @var $productFacade \Shopsys\FrameworkBundle\Model\Product\ProductFacade */
+        /** @var \Shopsys\ShopBundle\Model\Product\ProductDataFactory $productDataFactory */
         $productDataFactory = $this->getContainer()->get(ProductDataFactoryInterface::class);
-        /* @var $productDataFactory \Shopsys\ShopBundle\Model\Product\ProductDataFactory */
+        /** @var \Shopsys\FrameworkBundle\Model\Product\Availability\ProductAvailabilityRecalculator $productAvailabilityRecalculator */
         $productAvailabilityRecalculator = $this->getContainer()->get(ProductAvailabilityRecalculator::class);
-        /* @var $productAvailabilityRecalculator \Shopsys\FrameworkBundle\Model\Product\Availability\ProductAvailabilityRecalculator */
 
         $productId = 1;
 

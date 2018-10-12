@@ -10,13 +10,13 @@ class AdvancedSearchOperatorTranslationTest extends FunctionalTestCase
 {
     public function testTranslateOperator()
     {
+        /** @var \Shopsys\FrameworkBundle\Model\AdvancedSearch\ProductAdvancedSearchConfig $productAdvancedSearchConfig */
         $productAdvancedSearchConfig = $this->getContainer()->get(ProductAdvancedSearchConfig::class);
-        /* @var $productAdvancedSearchConfig \Shopsys\FrameworkBundle\Model\AdvancedSearch\ProductAdvancedSearchConfig */
+        /** @var \Shopsys\FrameworkBundle\Model\AdvancedSearch\OrderAdvancedSearchConfig $orderAdvancedSearchConfig */
         $orderAdvancedSearchConfig = $this->getContainer()->get(ProductAdvancedSearchConfig::class);
-        /* @var $orderAdvancedSearchConfig \Shopsys\FrameworkBundle\Model\AdvancedSearch\OrderAdvancedSearchConfig */
 
+        /** @var \Shopsys\FrameworkBundle\Form\Admin\AdvancedSearch\AdvancedSearchOperatorTranslation $advancedSearchOperatorTranslation */
         $advancedSearchOperatorTranslation = $this->getContainer()->get(AdvancedSearchOperatorTranslation::class);
-        /* @var $advancedSearchOperatorTranslation \Shopsys\FrameworkBundle\Form\Admin\AdvancedSearch\AdvancedSearchOperatorTranslation */
 
         $operators = [];
         foreach ($productAdvancedSearchConfig->getAllFilters() as $filter) {

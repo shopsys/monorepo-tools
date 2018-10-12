@@ -37,15 +37,15 @@ class CartWatcherServiceTest extends FunctionalTestCase
         $productData1->priceCalculationType = Product::PRICE_CALCULATION_TYPE_AUTO;
         $productMock = Product::create($productData1);
 
+        /** @var \Shopsys\FrameworkBundle\Model\Product\Pricing\ProductPriceCalculationForUser $productPriceCalculationForUser */
         $productPriceCalculationForUser = $this->getContainer()->get(ProductPriceCalculationForUser::class);
-        /* @var $productPriceCalculationForUser \Shopsys\FrameworkBundle\Model\Product\Pricing\ProductPriceCalculationForUser */
         $productPrice = $productPriceCalculationForUser->calculatePriceForCurrentUser($productMock);
         $cartItem = new CartItem($customerIdentifier, $productMock, 1, $productPrice->getPriceWithVat());
         $cartItems = [$cartItem];
         $cart = new Cart($cartItems);
 
+        /** @var \Shopsys\FrameworkBundle\Model\Cart\Watcher\CartWatcherService $cartWatcherService */
         $cartWatcherService = $this->getContainer()->get(CartWatcherService::class);
-        /* @var $cartWatcherService \Shopsys\FrameworkBundle\Model\Cart\Watcher\CartWatcherService */
 
         $modifiedItems1 = $cartWatcherService->getModifiedPriceItemsAndUpdatePrices($cart);
         $this->assertEmpty($modifiedItems1);
@@ -83,8 +83,8 @@ class CartWatcherServiceTest extends FunctionalTestCase
         $cartItems = [$cartItemMock];
         $cart = new Cart($cartItems);
 
+        /** @var \Shopsys\FrameworkBundle\Model\Cart\Watcher\CartWatcherService $cartWatcherService */
         $cartWatcherService = $this->getContainer()->get(CartWatcherService::class);
-        /* @var $cartWatcherService \Shopsys\FrameworkBundle\Model\Cart\Watcher\CartWatcherService */
 
         $notListableItems = $cartWatcherService->getNotListableItems($cart, $currentCustomerMock);
         $this->assertCount(1, $notListableItems);

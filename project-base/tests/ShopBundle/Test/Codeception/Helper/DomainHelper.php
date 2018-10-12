@@ -14,12 +14,12 @@ class DomainHelper extends Module
      */
     public function _before(TestInterface $test)
     {
+        /** @var \Tests\ShopBundle\Test\Codeception\Module\StrictWebDriver $webDriver */
         $webDriver = $this->getModule(StrictWebDriver::class);
-        /* @var $webDriver \Tests\ShopBundle\Test\Codeception\Module\StrictWebDriver */
+        /** @var \Tests\ShopBundle\Test\Codeception\Helper\SymfonyHelper $symfonyHelper */
         $symfonyHelper = $this->getModule(SymfonyHelper::class);
-        /* @var $symfonyHelper \Tests\ShopBundle\Test\Codeception\Helper\SymfonyHelper */
+        /** @var \Shopsys\FrameworkBundle\Component\Domain\Domain $domain */
         $domain = $symfonyHelper->grabServiceFromContainer(Domain::class);
-        /* @var $domain \Shopsys\FrameworkBundle\Component\Domain\Domain */
 
         $domainConfig = $domain->getDomainConfigById(1);
 

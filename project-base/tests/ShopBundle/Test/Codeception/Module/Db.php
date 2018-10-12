@@ -19,10 +19,10 @@ class Db extends BaseDb
 
     public function cleanup()
     {
+        /** @var \Tests\ShopBundle\Test\Codeception\Helper\SymfonyHelper $symfonyHelper */
         $symfonyHelper = $this->getModule(SymfonyHelper::class);
-        /* @var $symfonyHelper \Tests\ShopBundle\Test\Codeception\Helper\SymfonyHelper */
+        /** @var \Shopsys\FrameworkBundle\Component\Doctrine\DatabaseSchemaFacade $databaseSchemaFacade */
         $databaseSchemaFacade = $symfonyHelper->grabServiceFromContainer(DatabaseSchemaFacade::class);
-        /* @var $databaseSchemaFacade \Shopsys\FrameworkBundle\Component\Doctrine\DatabaseSchemaFacade */
         $databaseSchemaFacade->dropSchemaIfExists('public');
         $databaseSchemaFacade->createSchema('public');
     }

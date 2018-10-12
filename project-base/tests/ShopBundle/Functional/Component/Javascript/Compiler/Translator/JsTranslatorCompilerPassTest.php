@@ -10,10 +10,10 @@ class JsTranslatorCompilerPassTest extends FunctionalTestCase
 {
     public function testProcess()
     {
+        /** @var \Shopsys\FrameworkBundle\Component\Translation\Translator $translator */
         $translator = $this->getContainer()->get('translator');
-        /* @var $translator \Shopsys\FrameworkBundle\Component\Translation\Translator */
+        /** @var \Shopsys\FrameworkBundle\Component\Javascript\Compiler\Translator\JsTranslatorCompilerPass $jsTranslatorCompilerPass */
         $jsTranslatorCompilerPass = $this->getContainer()->get(JsTranslatorCompilerPass::class);
-        /* @var $jsTranslatorCompilerPass \Shopsys\FrameworkBundle\Component\Javascript\Compiler\Translator\JsTranslatorCompilerPass */
 
         $translator->setLocale('testLocale');
         $translator->getCatalogue()->add([

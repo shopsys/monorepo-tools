@@ -62,9 +62,12 @@ class AllFeedsTest extends KernelTestCase
         $performanceTestSamples = [];
         $allFeedGenerationData = $this->getAllFeedGenerationData();
         foreach ($allFeedGenerationData as $feedGenerationData) {
-            list($feedInfo, $domainConfig, $maxDuration) = $feedGenerationData;
-            /* @var $feedInfo \Shopsys\FrameworkBundle\Model\Feed\FeedInfoInterface */
-            /* @var $domainConfig \Shopsys\FrameworkBundle\Component\Domain\Config\DomainConfig */
+            /** @var \Shopsys\FrameworkBundle\Model\Feed\FeedInfoInterface $feedInfo */
+            $feedInfo = $feedGenerationData[0];
+            /** @var \Shopsys\FrameworkBundle\Component\Domain\Config\DomainConfig $domainConfig */
+            $domainConfig = $feedGenerationData[1];
+            /** @var int $maxDuration */
+            $maxDuration = $feedGenerationData[2];
 
             $consoleOutput->writeln(
                 sprintf(
@@ -109,11 +112,10 @@ class AllFeedsTest extends KernelTestCase
      */
     public function getAllFeedGenerationData()
     {
+        /** @var \Shopsys\FrameworkBundle\Model\Feed\FeedRegistry $feedRegistry */
         $feedRegistry = self::$kernel->getContainer()->get(FeedRegistry::class);
-        /* @var $feedRegistry \Shopsys\FrameworkBundle\Model\Feed\FeedRegistry */
+        /** @var \Shopsys\FrameworkBundle\Component\Domain\Domain $domain */
         $domain = self::$kernel->getContainer()->get(Domain::class);
-        /* @var $domain \Shopsys\FrameworkBundle\Component\Domain\Domain */
-
         $dailyFeedGenerationData = $this->getFeedGenerationData(
             $feedRegistry->getFeeds('daily'),
             $domain->getAll(),
@@ -179,8 +181,8 @@ class AllFeedsTest extends KernelTestCase
     {
         $this->setUp();
 
+        /** @var \Symfony\Component\Routing\RouterInterface $router */
         $router = self::$kernel->getContainer()->get('router');
-        /* @var $router \Symfony\Component\Routing\RouterInterface */
 
         $uri = $router->generate(
             self::ROUTE_NAME_GENERATE_FEED,
@@ -193,8 +195,8 @@ class AllFeedsTest extends KernelTestCase
         $auth = new BasicHttpAuth(self::ADMIN_USERNAME, self::ADMIN_PASSWORD);
         $auth->authenticateRequest($request);
 
+        /** @var \Doctrine\ORM\EntityManager $entityManager */
         $entityManager = self::$kernel->getContainer()->get('doctrine.orm.entity_manager');
-        /* @var $entityManager \Doctrine\ORM\EntityManager */
 
         $startTime = microtime(true);
         $entityManager->beginTransaction();

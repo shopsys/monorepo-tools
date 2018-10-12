@@ -15,14 +15,14 @@ class CategoryRepositoryTest extends TransactionFunctionalTestCase
 
     public function testDoNotGetCategoriesWithoutVisibleChildren()
     {
+        /** @var \Shopsys\FrameworkBundle\Model\Category\CategoryFacade $categoryFacade */
         $categoryFacade = $this->getContainer()->get(CategoryFacade::class);
-        /* @var $categoryFacade \Shopsys\FrameworkBundle\Model\Category\CategoryFacade */
+        /** @var \Shopsys\FrameworkBundle\Model\Category\CategoryRepository $categoryRepository */
         $categoryRepository = $this->getContainer()->get(CategoryRepository::class);
-        /* @var $categoryRepository \Shopsys\FrameworkBundle\Model\Category\CategoryRepository */
+        /** @var \Shopsys\FrameworkBundle\Model\Category\CategoryVisibilityRepository $categoryVisibilityRepository */
         $categoryVisibilityRepository = $this->getContainer()->get(CategoryVisibilityRepository::class);
-        /* @var $categoryVisibilityRepository \Shopsys\FrameworkBundle\Model\Category\CategoryVisibilityRepository */
+        /** @var \Shopsys\ShopBundle\Model\Category\CategoryDataFactory $categoryDataFactory */
         $categoryDataFactory = $this->getContainer()->get(CategoryDataFactoryInterface::class);
-        /* @var $categoryDataFactory \Shopsys\ShopBundle\Model\Category\CategoryDataFactory */
 
         $categoryData = $categoryDataFactory->create();
         $categoryData->name = ['en' => 'name', 'cs' => 'name'];
@@ -44,14 +44,14 @@ class CategoryRepositoryTest extends TransactionFunctionalTestCase
 
     public function testGetCategoriesWithAtLeastOneVisibleChild()
     {
+        /** @var \Shopsys\FrameworkBundle\Model\Category\CategoryFacade $categoryFacade */
         $categoryFacade = $this->getContainer()->get(CategoryFacade::class);
-        /* @var $categoryFacade \Shopsys\FrameworkBundle\Model\Category\CategoryFacade */
+        /** @var \Shopsys\FrameworkBundle\Model\Category\CategoryRepository $categoryRepository */
         $categoryRepository = $this->getContainer()->get(CategoryRepository::class);
-        /* @var $categoryRepository \Shopsys\FrameworkBundle\Model\Category\CategoryRepository */
+        /** @var \Shopsys\FrameworkBundle\Model\Category\CategoryVisibilityRepository $categoryVisibilityRepository */
         $categoryVisibilityRepository = $this->getContainer()->get(CategoryVisibilityRepository::class);
-        /* @var $categoryVisibilityRepository \Shopsys\FrameworkBundle\Model\Category\CategoryVisibilityRepository */
+        /** @var \Shopsys\ShopBundle\Model\Category\CategoryDataFactory $categoryDataFactory */
         $categoryDataFactory = $this->getContainer()->get(CategoryDataFactoryInterface::class);
-        /* @var $categoryDataFactory \Shopsys\ShopBundle\Model\Category\CategoryDataFactory */
 
         $categoryData = $categoryDataFactory->create();
         $categoryData->name = ['en' => 'name', 'cs' => 'name'];

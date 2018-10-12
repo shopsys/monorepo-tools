@@ -15,22 +15,22 @@ class AvailabilityFacadeTest extends TransactionFunctionalTestCase
     public function testDeleteByIdAndReplace()
     {
         $em = $this->getEntityManager();
+        /** @var \Shopsys\FrameworkBundle\Model\Product\Availability\AvailabilityFacade $availabilityFacade */
         $availabilityFacade = $this->getContainer()->get(AvailabilityFacade::class);
-        /* @var $availabilityFacade \Shopsys\FrameworkBundle\Model\Product\Availability\AvailabilityFacade */
+        /** @var \Shopsys\ShopBundle\Model\Product\ProductDataFactory $productDataFactory */
         $productDataFactory = $this->getContainer()->get(ProductDataFactoryInterface::class);
-        /* @var $productDataFactory \Shopsys\ShopBundle\Model\Product\ProductDataFactory */
+        /** @var \Shopsys\FrameworkBundle\Model\Product\ProductFacade $productFacade */
         $productFacade = $this->getContainer()->get(ProductFacade::class);
-        /* @var $productFacade \Shopsys\FrameworkBundle\Model\Product\ProductFacade */
 
         $availabilityData = new AvailabilityData();
         $availabilityData->name = ['cs' => 'name'];
         $availabilityToDelete = $availabilityFacade->create($availabilityData);
+        /** @var \Shopsys\FrameworkBundle\Model\Product\Availability\Availability $availabilityToReplaceWith */
         $availabilityToReplaceWith = $this->getReference(AvailabilityDataFixture::AVAILABILITY_IN_STOCK);
-        /* @var $availabilityToReplaceWith \Shopsys\FrameworkBundle\Model\Product\Availability\Availability */
+        /** @var \Shopsys\ShopBundle\Model\Product\Product $product */
         $product = $this->getReference(ProductDataFixture::PRODUCT_PREFIX . '1');
-        /* @var $product \Shopsys\ShopBundle\Model\Product\Product */
+        /** @var \Shopsys\FrameworkBundle\Model\Product\ProductData $productData */
         $productData = $productDataFactory->createFromProduct($product);
-        /* @var $productData \Shopsys\FrameworkBundle\Model\Product\ProductData */
 
         $productData->availability = $availabilityToDelete;
         $productData->outOfStockAvailability = $availabilityToDelete;

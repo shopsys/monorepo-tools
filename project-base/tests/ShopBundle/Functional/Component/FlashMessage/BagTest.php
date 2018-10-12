@@ -8,10 +8,10 @@ class BagTest extends FunctionalTestCase
 {
     public function testAddFrontVsAdmin()
     {
+        /** @var \Shopsys\FrameworkBundle\Component\FlashMessage\Bag $flashMessageAdmin */
         $flashMessageAdmin = $this->getContainer()->get('shopsys.shop.component.flash_message.bag.admin');
-        /* @var $flashMessageAdmin \Shopsys\FrameworkBundle\Component\FlashMessage\Bag */
+        /** @var \Shopsys\FrameworkBundle\Component\FlashMessage\Bag $flashMessageFront */
         $flashMessageFront = $this->getContainer()->get('shopsys.shop.component.flash_message.bag.front');
-        /* @var $flashMessageAdmin \Shopsys\FrameworkBundle\Component\FlashMessage\Bag */
 
         $errorMessageAdmin = 'Error message admin';
         $errorMessageFront = 'Error message front';
@@ -31,8 +31,8 @@ class BagTest extends FunctionalTestCase
 
     public function testAddArrayOfMessages()
     {
+        /** @var \Shopsys\FrameworkBundle\Component\FlashMessage\Bag $flashMessageAdmin */
         $flashMessageAdmin = $this->getContainer()->get('shopsys.shop.component.flash_message.bag.admin');
-        /* @var $flashMessageAdmin \Shopsys\FrameworkBundle\Component\FlashMessage\Bag */
 
         $errorMessagesAdmin = ['First error message admin', 'Second error message admin'];
 
@@ -43,8 +43,8 @@ class BagTest extends FunctionalTestCase
 
     public function testGetUniqueMessage()
     {
+        /** @var \Shopsys\FrameworkBundle\Component\FlashMessage\Bag $flashMessageAdmin */
         $flashMessageAdmin = $this->getContainer()->get('shopsys.shop.component.flash_message.bag.admin');
-        /* @var $flashMessageAdmin \Shopsys\FrameworkBundle\Component\FlashMessage\Bag */
 
         $errorMessageAdmin = 'Error message admin';
 
@@ -56,8 +56,8 @@ class BagTest extends FunctionalTestCase
 
     public function testGetAndClearBag()
     {
+        /** @var \Shopsys\FrameworkBundle\Component\FlashMessage\Bag $flashMessageAdmin */
         $flashMessageAdmin = $this->getContainer()->get('shopsys.shop.component.flash_message.bag.admin');
-        /* @var $flashMessageAdmin \Shopsys\FrameworkBundle\Component\FlashMessage\Bag */
 
         $errorMessageAdmin = 'Error message admin';
 
@@ -69,8 +69,8 @@ class BagTest extends FunctionalTestCase
 
     public function testIsEmpty()
     {
+        /** @var \Shopsys\FrameworkBundle\Component\FlashMessage\Bag $flashMessageAdmin */
         $flashMessageAdmin = $this->getContainer()->get('shopsys.shop.component.flash_message.bag.admin');
-        /* @var $flashMessageAdmin \Shopsys\FrameworkBundle\Component\FlashMessage\Bag */
 
         // clearing after previous tests
         $flashMessageAdmin->getErrorMessages();

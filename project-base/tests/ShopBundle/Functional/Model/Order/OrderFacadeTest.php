@@ -24,24 +24,24 @@ class OrderFacadeTest extends TransactionFunctionalTestCase
 {
     public function testCreate()
     {
+        /** @var \Shopsys\FrameworkBundle\Model\Cart\CartFacade $cartFacade */
         $cartFacade = $this->getContainer()->get(CartFacade::class);
-        /* @var $cartFacade \Shopsys\FrameworkBundle\Model\Cart\CartFacade */
+        /** @var \Shopsys\FrameworkBundle\Model\Cart\CartService $cartService */
         $cartService = $this->getContainer()->get(CartService::class);
-        /* @var $cartService \Shopsys\FrameworkBundle\Model\Cart\CartService */
+        /** @var \Shopsys\FrameworkBundle\Model\Order\OrderFacade $orderFacade */
         $orderFacade = $this->getContainer()->get(OrderFacade::class);
-        /* @var $orderFacade \Shopsys\FrameworkBundle\Model\Order\OrderFacade */
+        /** @var \Shopsys\FrameworkBundle\Model\Order\Preview\OrderPreviewFactory $orderPreviewFactory */
         $orderPreviewFactory = $this->getContainer()->get(OrderPreviewFactory::class);
-        /* @var $orderPreviewFactory \Shopsys\FrameworkBundle\Model\Order\Preview\OrderPreviewFactory */
+        /** @var \Shopsys\FrameworkBundle\Model\Order\OrderRepository $orderRepository */
         $orderRepository = $this->getContainer()->get(OrderRepository::class);
-        /* @var $orderRepository \Shopsys\FrameworkBundle\Model\Order\OrderRepository */
+        /** @var \Shopsys\FrameworkBundle\Model\Product\ProductRepository $productRepository */
         $productRepository = $this->getContainer()->get(ProductRepository::class);
-        /* @var $productRepository \Shopsys\FrameworkBundle\Model\Product\ProductRepository */
+        /** @var \Shopsys\FrameworkBundle\Model\Transport\TransportRepository $transportRepository */
         $transportRepository = $this->getContainer()->get(TransportRepository::class);
-        /* @var $transportRepository \Shopsys\FrameworkBundle\Model\Transport\TransportRepository */
+        /** @var \Shopsys\FrameworkBundle\Model\Payment\PaymentRepository $paymentRepository */
         $paymentRepository = $this->getContainer()->get(PaymentRepository::class);
-        /* @var $paymentRepository \Shopsys\FrameworkBundle\Model\Payment\PaymentRepository */
+        /** @var \Shopsys\FrameworkBundle\Component\DataFixture\PersistentReferenceFacade $persistentReferenceFacade */
         $persistentReferenceFacade = $this->getContainer()->get(PersistentReferenceFacade::class);
-        /* @var $persistentReferenceFacade \Shopsys\FrameworkBundle\Component\DataFixture\PersistentReferenceFacade */
 
         $cart = $cartFacade->getCartOfCurrentCustomer();
 
@@ -116,15 +116,15 @@ class OrderFacadeTest extends TransactionFunctionalTestCase
 
     public function testEdit()
     {
+        /** @var \Shopsys\FrameworkBundle\Model\Order\OrderFacade $orderFacade */
         $orderFacade = $this->getContainer()->get(OrderFacade::class);
-        /* @var $orderFacade \Shopsys\FrameworkBundle\Model\Order\OrderFacade */
+        /** @var \Shopsys\FrameworkBundle\Model\Order\OrderRepository $orderRepository */
         $orderRepository = $this->getContainer()->get(OrderRepository::class);
-        /* @var $orderRepository \Shopsys\FrameworkBundle\Model\Order\OrderRepository */
+        /** @var \Shopsys\ShopBundle\Model\Order\OrderDataFactory $orderDataFactory */
         $orderDataFactory = $this->getContainer()->get(OrderDataFactoryInterface::class);
-        /* @var $orderDataFactory \Shopsys\ShopBundle\Model\Order\OrderDataFactory */
 
+        /** @var \Shopsys\ShopBundle\Model\Order\Order $order */
         $order = $this->getReference('order_1');
-        /* @var $order \Shopsys\ShopBundle\Model\Order\Order */
 
         $this->assertCount(4, $order->getItems());
 

@@ -109,10 +109,10 @@ class EntityExtensionTest extends TransactionFunctionalTestCase
      */
     public function overwriteEntityExtensionMapInServicesInContainer(array $entityExtensionMap): void
     {
+        /** @var \Tests\ShopBundle\Functional\EntityExtension\OverwritableLoadORMMetadataSubscriber $loadORMMetadataSubscriber */
         $loadORMMetadataSubscriber = $this->getContainer()->get('joschi127_doctrine_entity_override.event_subscriber.load_orm_metadata');
-        /* @var $loadORMMetadataSubscriber \Tests\ShopBundle\Functional\EntityExtension\OverwritableLoadORMMetadataSubscriber */
+        /** @var \Tests\ShopBundle\Functional\EntityExtension\OverwritableEntityNameResolver $entityNameResolver */
         $entityNameResolver = $this->getContainer()->get(EntityNameResolver::class);
-        /* @var $entityNameResolver \Tests\ShopBundle\Functional\EntityExtension\OverwritableEntityNameResolver */
 
         $loadORMMetadataSubscriber->overwriteEntityExtensionMap($entityExtensionMap);
         $entityNameResolver->overwriteEntityExtensionMap($entityExtensionMap);

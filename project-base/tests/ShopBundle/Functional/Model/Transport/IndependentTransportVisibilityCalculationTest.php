@@ -30,9 +30,9 @@ class IndependentTransportVisibilityCalculationTest extends TransactionFunctiona
         $em->persist($transport);
         $em->flush();
 
+        /** @var \Shopsys\FrameworkBundle\Model\Transport\IndependentTransportVisibilityCalculation $independentTransportVisibilityCalculation */
         $independentTransportVisibilityCalculation =
             $this->getContainer()->get(IndependentTransportVisibilityCalculation::class);
-        /* @var $independentTransportVisibilityCalculation \Shopsys\FrameworkBundle\Model\Transport\IndependentTransportVisibilityCalculation */
 
         $this->assertTrue($independentTransportVisibilityCalculation->isIndependentlyVisible($transport, self::FIRST_DOMAIN_ID));
     }
@@ -60,9 +60,9 @@ class IndependentTransportVisibilityCalculationTest extends TransactionFunctiona
         $em->persist($transport);
         $em->flush();
 
+        /** @var \Shopsys\FrameworkBundle\Model\Transport\IndependentTransportVisibilityCalculation $independentTransportVisibilityCalculation */
         $independentTransportVisibilityCalculation =
             $this->getContainer()->get(IndependentTransportVisibilityCalculation::class);
-        /* @var $independentTransportVisibilityCalculation \Shopsys\FrameworkBundle\Model\Transport\IndependentTransportVisibilityCalculation */
 
         $this->assertFalse($independentTransportVisibilityCalculation->isIndependentlyVisible($transport, self::FIRST_DOMAIN_ID));
     }
@@ -83,9 +83,9 @@ class IndependentTransportVisibilityCalculationTest extends TransactionFunctiona
         $em->persist($transport);
         $em->flush();
 
+        /** @var \Shopsys\FrameworkBundle\Model\Transport\IndependentTransportVisibilityCalculation $independentTransportVisibilityCalculation */
         $independentTransportVisibilityCalculation =
             $this->getContainer()->get(IndependentTransportVisibilityCalculation::class);
-        /* @var $independentTransportVisibilityCalculation \Shopsys\FrameworkBundle\Model\Transport\IndependentTransportVisibilityCalculation */
 
         $this->assertFalse($independentTransportVisibilityCalculation->isIndependentlyVisible($transport, self::FIRST_DOMAIN_ID));
     }
@@ -106,9 +106,9 @@ class IndependentTransportVisibilityCalculationTest extends TransactionFunctiona
         $em->persist($transport);
         $em->flush();
 
+        /** @var \Shopsys\FrameworkBundle\Model\Transport\IndependentTransportVisibilityCalculation $independentTransportVisibilityCalculation */
         $independentTransportVisibilityCalculation =
             $this->getContainer()->get(IndependentTransportVisibilityCalculation::class);
-        /* @var $independentTransportVisibilityCalculation \Shopsys\FrameworkBundle\Model\Transport\IndependentTransportVisibilityCalculation */
 
         $this->assertFalse($independentTransportVisibilityCalculation->isIndependentlyVisible($transport, self::FIRST_DOMAIN_ID));
     }

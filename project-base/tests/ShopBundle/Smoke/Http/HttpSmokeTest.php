@@ -32,8 +32,8 @@ class HttpSmokeTest extends HttpSmokeTestCase
      */
     protected function handleRequest(Request $request)
     {
+        /** @var \Doctrine\ORM\EntityManager $entityManager */
         $entityManager = self::$kernel->getContainer()->get('doctrine.orm.entity_manager');
-        /* @var $entityManager \Doctrine\ORM\EntityManager */
 
         $entityManager->beginTransaction();
         ob_start();

@@ -22,6 +22,8 @@ class CartFacadeTest extends TransactionFunctionalTestCase
     {
         $customerIdentifier = new CustomerIdentifier('secretSessionHash');
         $anotherCustomerIdentifier = new CustomerIdentifier('anotherSecretSessionHash');
+
+        /** @var \Shopsys\ShopBundle\Model\Product\Product $product */
         $product = $this->getReference(ProductDataFixture::PRODUCT_PREFIX . '1');
         $productId = $product->getId();
         $quantity = 10;
@@ -41,6 +43,7 @@ class CartFacadeTest extends TransactionFunctionalTestCase
 
     public function testCannotAddUnsellableProductToCart()
     {
+        /** @var \Shopsys\ShopBundle\Model\Product\Product $product */
         $product = $this->getReference(ProductDataFixture::PRODUCT_PREFIX . '6');
         $productId = $product->getId();
         $quantity = 1;
@@ -59,7 +62,9 @@ class CartFacadeTest extends TransactionFunctionalTestCase
 
     public function testCanChangeCartItemsQuantities()
     {
+        /** @var \Shopsys\ShopBundle\Model\Product\Product $product1 */
         $product1 = $this->getReference(ProductDataFixture::PRODUCT_PREFIX . '1');
+        /** @var \Shopsys\ShopBundle\Model\Product\Product $product2 */
         $product2 = $this->getReference(ProductDataFixture::PRODUCT_PREFIX . '3');
 
         $customerIdentifier = new CustomerIdentifier('secretSessionHash');
@@ -89,6 +94,7 @@ class CartFacadeTest extends TransactionFunctionalTestCase
     {
         $customerIdentifier = new CustomerIdentifier('secretSessionHash');
 
+        /** @var \Shopsys\ShopBundle\Model\Product\Product $product */
         $product = $this->getReference(ProductDataFixture::PRODUCT_PREFIX . '1');
         $quantity = 1;
 
@@ -107,13 +113,15 @@ class CartFacadeTest extends TransactionFunctionalTestCase
     {
         // Set currentLocale in TranslatableListener as it done in real request
         // because CartWatcherFacade works with entity translations.
+        /** @var \Shopsys\FrameworkBundle\Model\Localization\TranslatableListener $translatableListener */
         $translatableListener = $this->getContainer()->get(TranslatableListener::class);
-        /* @var $translatableListener \Shopsys\FrameworkBundle\Model\Localization\TranslatableListener */
         $translatableListener->setCurrentLocale('cs');
 
         $customerIdentifier = new CustomerIdentifier('secretSessionHash');
 
+        /** @var \Shopsys\ShopBundle\Model\Product\Product $product1 */
         $product1 = $this->getReference(ProductDataFixture::PRODUCT_PREFIX . '1');
+        /** @var \Shopsys\ShopBundle\Model\Product\Product $product2 */
         $product2 = $this->getReference(ProductDataFixture::PRODUCT_PREFIX . '2');
         $quantity = 1;
 

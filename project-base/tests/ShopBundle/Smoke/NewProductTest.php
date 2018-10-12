@@ -29,13 +29,13 @@ class NewProductTest extends FunctionalTestCase
         $this->fillForm($form);
 
         $client2 = $this->getClient(true, 'admin', 'admin123');
+        /** @var \Doctrine\ORM\EntityManager $em2 */
         $em2 = $client2->getContainer()->get('doctrine.orm.entity_manager');
-        /* @var $em2 \Doctrine\ORM\EntityManager */
 
         $em2->beginTransaction();
 
+        /** @var \Symfony\Component\Security\Csrf\CsrfTokenManager $tokenManager */
         $tokenManager = $client2->getContainer()->get('security.csrf.token_manager');
-        /* @var $tokenManager \Symfony\Component\Security\Csrf\CsrfTokenManager */
         $token = $tokenManager->getToken(ProductFormType::CSRF_TOKEN_ID);
         $this->setFormCsrfToken($form, $token);
 
@@ -43,8 +43,8 @@ class NewProductTest extends FunctionalTestCase
 
         $em2->rollback();
 
+        /** @var \Shopsys\FrameworkBundle\Component\FlashMessage\Bag $flashMessageBag */
         $flashMessageBag = $client2->getContainer()->get('shopsys.shop.component.flash_message.bag.admin');
-        /* @var $flashMessageBag \Shopsys\FrameworkBundle\Component\FlashMessage\Bag */
 
         $this->assertSame(302, $client2->getResponse()->getStatusCode());
         $this->assertNotEmpty($flashMessageBag->getSuccessMessages());
@@ -56,8 +56,8 @@ class NewProductTest extends FunctionalTestCase
      */
     private function fillForm(Form $form)
     {
+        /** @var \Symfony\Component\DomCrawler\Field\InputFormField[] $nameForms */
         $nameForms = $form->get('product_form[name]');
-        /* @var $nameForms \Symfony\Component\DomCrawler\Field\InputFormField[] */
         foreach ($nameForms as $nameForm) {
             $nameForm->setValue('testProduct');
         }

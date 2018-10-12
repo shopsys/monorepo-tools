@@ -18,10 +18,10 @@ class ProductServiceTest extends TransactionFunctionalTestCase
 {
     public function testRecalculateInputPriceForNewVatPercentWithInputPriceWithoutVat()
     {
+        /** @var \Shopsys\FrameworkBundle\Model\Product\ProductService $productService */
         $productService = $this->getContainer()->get(ProductService::class);
-        /* @var $productService \Shopsys\FrameworkBundle\Model\Product\ProductService */
+        /** @var \Shopsys\FrameworkBundle\Component\Setting\Setting $setting */
         $setting = $this->getContainer()->get(Setting::class);
-        /* @var $setting \Shopsys\FrameworkBundle\Component\Setting\Setting */
         $producDataFactory = $this->getContainer()->get(ProductDataFactoryInterface::class);
 
         $setting->set(PricingSetting::INPUT_PRICE_TYPE, PricingSetting::INPUT_PRICE_TYPE_WITHOUT_VAT);
@@ -49,10 +49,10 @@ class ProductServiceTest extends TransactionFunctionalTestCase
 
     public function testRecalculateInputPriceForNewVatPercentWithInputPriceWithVat()
     {
+        /** @var \Shopsys\FrameworkBundle\Model\Product\ProductService $productService */
         $productService = $this->getContainer()->get(ProductService::class);
-        /* @var $productService \Shopsys\FrameworkBundle\Model\Product\ProductService */
+        /** @var \Shopsys\FrameworkBundle\Component\Setting\Setting $setting */
         $setting = $this->getContainer()->get(Setting::class);
-        /* @var $setting \Shopsys\FrameworkBundle\Component\Setting\Setting */
         $productDataFactory = $this->getContainer()->get(ProductDataFactoryInterface::class);
 
         $setting->set(PricingSetting::INPUT_PRICE_TYPE, PricingSetting::INPUT_PRICE_TYPE_WITH_VAT);

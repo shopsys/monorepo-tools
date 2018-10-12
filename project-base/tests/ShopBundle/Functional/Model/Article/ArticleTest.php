@@ -53,6 +53,7 @@ class ArticleTest extends TransactionFunctionalTestCase
 
         $this->em->clear();
 
+        /** @var Article $refreshedArticle */
         $refreshedArticle = $this->em->getRepository(Article::class)->find($articleId);
 
         $this->assertSame('Demonstrative name', $refreshedArticle->getName());

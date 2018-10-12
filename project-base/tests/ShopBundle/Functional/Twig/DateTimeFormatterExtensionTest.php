@@ -33,9 +33,8 @@ class DateTimeFormatterExtensionTest extends FunctionalTestCase
         $localizationMock->expects($this->any())->method('getLocale')
             ->willReturn($locale);
 
+        /** @var \Shopsys\FrameworkBundle\Component\Localization\DateTimeFormatter $dateTimeFormatter */
         $dateTimeFormatter = $this->getContainer()->get(DateTimeFormatter::class);
-        /* @var $dateTimeFormatter \Shopsys\FrameworkBundle\Component\Localization\DateTimeFormatter */
-
         $dateTimeFormatterExtension = new DateTimeFormatterExtension($dateTimeFormatter, $localizationMock);
 
         $this->assertSame($result, $dateTimeFormatterExtension->formatDate($input));

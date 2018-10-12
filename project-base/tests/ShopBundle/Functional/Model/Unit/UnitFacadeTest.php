@@ -15,22 +15,22 @@ class UnitFacadeTest extends TransactionFunctionalTestCase
     public function testDeleteByIdAndReplace()
     {
         $em = $this->getEntityManager();
+        /** @var \Shopsys\FrameworkBundle\Model\Product\Unit\UnitFacade $unitFacade */
         $unitFacade = $this->getContainer()->get(UnitFacade::class);
-        /* @var $unitFacade \Shopsys\FrameworkBundle\Model\Product\Unit\UnitFacade */
+        /** @var \Shopsys\ShopBundle\Model\Product\ProductDataFactory $productDataFactory */
         $productDataFactory = $this->getContainer()->get(ProductDataFactoryInterface::class);
-        /* @var $productDataFactory \Shopsys\ShopBundle\Model\Product\ProductDataFactory */
+        /** @var \Shopsys\FrameworkBundle\Model\Product\ProductFacade $productFacade */
         $productFacade = $this->getContainer()->get(ProductFacade::class);
-        /* @var $productFacade \Shopsys\FrameworkBundle\Model\Product\ProductFacade */
 
         $unitData = new UnitData();
         $unitData->name = ['cs' => 'name'];
         $unitToDelete = $unitFacade->create($unitData);
+        /** @var \Shopsys\FrameworkBundle\Model\Product\Unit\Unit $unitToReplaceWith */
         $unitToReplaceWith = $this->getReference(UnitDataFixture::UNIT_PIECES);
-        /* @var $newUnit \Shopsys\FrameworkBundle\Model\Product\Unit\Unit */
+        /** @var \Shopsys\ShopBundle\Model\Product\Product $product */
         $product = $this->getReference(ProductDataFixture::PRODUCT_PREFIX . '1');
-        /* @var $product \Shopsys\ShopBundle\Model\Product\Product */
+        /** @var \Shopsys\ShopBundle\Model\Product\ProductData $productData */
         $productData = $productDataFactory->createFromProduct($product);
-        /* @var $productData \Shopsys\ShopBundle\Model\Product\ProductData */
 
         $productData->unit = $unitToDelete;
         $productFacade->edit($product->getId(), $productData);
