@@ -2,6 +2,7 @@
 
 namespace Shopsys\MigrationBundle\Command;
 
+use Doctrine\Bundle\MigrationsBundle\Command\DoctrineCommand;
 use Doctrine\DBAL\Migrations\Version;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -26,6 +27,7 @@ class GetCountOfMigrationsToExecuteCommand extends AbstractCommand
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $migrationsConfiguration = $this->getMigrationsConfiguration();
+        DoctrineCommand::configureMigrations($this->getApplication()->getKernel()->getContainer(), $migrationsConfiguration);
 
         $latestVersion = $migrationsConfiguration->getLatestVersion();
         $migrationsToExecute = $migrationsConfiguration->getMigrationsToExecute(Version::DIRECTION_UP, $latestVersion);
