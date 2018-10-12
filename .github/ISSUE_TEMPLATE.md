@@ -8,4 +8,4 @@
 <!--- Tell us what happens -->
 
 ### Expected result
-<!--- Tell us what should happened instead -->
+<!--- Tell us what should happen instead -->
