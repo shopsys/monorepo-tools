@@ -56,6 +56,15 @@ class NewProductTest extends FunctionalTestCase
      */
     private function fillForm(Form $form)
     {
+        /** @var \Shopsys\FrameworkBundle\Model\Pricing\Vat\Vat $vat */
+        $vat = $this->getReference(VatDataFixture::VAT_ZERO);
+
+        /** @var \Shopsys\FrameworkBundle\Model\Product\Unit\Unit $unit */
+        $unit = $this->getReference(UnitDataFixture::UNIT_CUBIC_METERS);
+
+        /** @var \Shopsys\FrameworkBundle\Model\Product\Availability\Availability $availability */
+        $availability = $this->getReference(AvailabilityDataFixture::AVAILABILITY_IN_STOCK);
+
         /** @var \Symfony\Component\DomCrawler\Field\InputFormField[] $nameForms */
         $nameForms = $form->get('product_form[name]');
         foreach ($nameForms as $nameForm) {
@@ -66,12 +75,12 @@ class NewProductTest extends FunctionalTestCase
         $form['product_form[basicInformationGroup][ean]'] = '123456';
         $form['product_form[descriptionsGroup][descriptions][1]'] = 'test description';
         $form['product_form[pricesGroup][productCalculatedPricesGroup][price]'] = '10000';
-        $form['product_form[pricesGroup][vat]']->select($this->getReference(VatDataFixture::VAT_ZERO)->getId());
+        $form['product_form[pricesGroup][vat]']->select($vat->getId());
         $form['product_form[displayAvailabilityGroup][sellingFrom]'] = '1.1.1990';
         $form['product_form[displayAvailabilityGroup][sellingTo]'] = '1.1.2000';
         $form['product_form[displayAvailabilityGroup][stockGroup][stockQuantity]'] = '10';
-        $form['product_form[displayAvailabilityGroup][unit]']->select($this->getReference(UnitDataFixture::UNIT_CUBIC_METERS)->getId());
-        $form['product_form[displayAvailabilityGroup][availability]']->select($this->getReference(AvailabilityDataFixture::AVAILABILITY_IN_STOCK)->getId());
+        $form['product_form[displayAvailabilityGroup][unit]']->select($unit->getId());
+        $form['product_form[displayAvailabilityGroup][availability]']->select($availability->getId());
     }
 
     /**
