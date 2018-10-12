@@ -206,11 +206,13 @@ class ProductRepositoryTest extends DatabaseTestCase
         /* @var $productRepository \Shopsys\FrameworkBundle\Model\Product\ProductRepository */
         $pricingGroup = $this->getReference(PricingGroupDataFixture::PRICING_GROUP_ORDINARY_DOMAIN_1);
         /* @var $pricingGroup \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroup */
+        $domain = $this->getContainer()->get(Domain::class);
+        /* @var $domain \Shopsys\FrameworkBundle\Component\Domain\Domain */
 
         $paginationResult = $productRepository->getPaginationResultForSearchListable(
             $searchText,
             1,
-            'en',
+            $domain->getDomainConfigById(1)->getLocale(),
             new ProductFilterData(),
             ProductListOrderingModeService::ORDER_BY_PRIORITY,
             $pricingGroup,
@@ -231,11 +233,13 @@ class ProductRepositoryTest extends DatabaseTestCase
         /* @var $productRepository \Shopsys\FrameworkBundle\Model\Product\ProductRepository */
         $pricingGroup = $this->getReference(PricingGroupDataFixture::PRICING_GROUP_ORDINARY_DOMAIN_1);
         /* @var $pricingGroup \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroup */
+        $domain = $this->getContainer()->get(Domain::class);
+        /* @var $domain \Shopsys\FrameworkBundle\Component\Domain\Domain */
 
         $paginationResult = $productRepository->getPaginationResultForListableInCategory(
             $category,
             1,
-            'en',
+            $domain->getDomainConfigById(1)->getLocale(),
             new ProductFilterData(),
             ProductListOrderingModeService::ORDER_BY_PRIORITY,
             $pricingGroup,
