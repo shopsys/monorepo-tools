@@ -20,7 +20,7 @@ class ProductManyToManyBidirectionalEntity
     protected $id;
 
     /**
-     * @var \Tests\ShopBundle\Functional\EntityExtension\Model\ExtendedProduct[]
+     * @var \Doctrine\Common\Collections\Collection|\Tests\ShopBundle\Functional\EntityExtension\Model\ExtendedProduct[]
      *
      * @ORM\ManyToMany(targetEntity="ExtendedProduct", mappedBy="manyToManyBidirectionalEntities")
      */

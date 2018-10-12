@@ -20,7 +20,7 @@ class CategoryManyToManyBidirectionalEntity
     protected $id;
 
     /**
-     * @var \Tests\ShopBundle\Functional\EntityExtension\Model\ExtendedCategory[]
+     * @var \Doctrine\Common\Collections\Collection|\Tests\ShopBundle\Functional\EntityExtension\Model\ExtendedCategory[]
      *
      * @ORM\ManyToMany(targetEntity="ExtendedCategory", mappedBy="manyToManyBidirectionalEntities")
      */
