@@ -29,7 +29,7 @@ class CloseNewlyOpenedWindowsHelper extends Module
     }
 
     /**
-     * @param \RemoteWebDriver $webDriver
+     * @param \Facebook\WebDriver\Remote\RemoteWebDriver $webDriver
      */
     private function closeNewlyOpenedWindows(RemoteWebDriver $webDriver)
     {

@@ -40,7 +40,7 @@ class ExtendedOrderProduct extends ExtendedOrderItem
      * @param int $quantity
      * @param string $unitName
      * @param string|null $catnum
-     * @param \Shopsys\FrameworkBundle\Model\Product\Product|null $product
+     * @param \Shopsys\ShopBundle\Model\Product\Product|null $product
      */
     public function __construct(
         Order $order,

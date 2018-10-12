@@ -43,7 +43,7 @@ class RegistrationPage extends AbstractPage
     }
 
     /**
-     * @param $fieldClass $text
+     * @param string $fieldClass
      * @param string $text
      */
     private function seeErrorForField($fieldClass, $text)

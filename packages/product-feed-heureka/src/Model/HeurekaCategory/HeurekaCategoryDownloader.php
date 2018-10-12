@@ -51,7 +51,7 @@ class HeurekaCategoryDownloader
     }
 
     /**
-     * @param \SimpleXMLElement[] $categoryDataObjects
+     * @param \SimpleXMLElement[] $xmlCategoryDataObjects
      * @return \Shopsys\ProductFeed\HeurekaBundle\Model\HeurekaCategory\HeurekaCategoryData[]
      */
     private function convertToShopEntities(array $xmlCategoryDataObjects)

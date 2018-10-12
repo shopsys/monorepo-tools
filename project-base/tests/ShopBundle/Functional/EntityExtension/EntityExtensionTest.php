@@ -450,7 +450,7 @@ class EntityExtensionTest extends TransactionFunctionalTestCase
 
     /**
      * @param int $id
-     * @return \Tests\ShopBundle\Functional\EntityExtension\Model\ExtendedCategory
+     * @return \Tests\ShopBundle\Functional\EntityExtension\Model\ExtendedOrderTransport
      */
     private function getOrderTransport(int $id): ExtendedOrderTransport
     {

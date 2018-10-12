@@ -40,7 +40,7 @@ class ExtendedOrderTransport extends ExtendedOrderItem
      * @param \Shopsys\FrameworkBundle\Model\Pricing\Price $price
      * @param string $vatPercent
      * @param int $quantity
-     * @param \Shopsys\FrameworkBundle\Model\Transport\Transport $transport
+     * @param \Shopsys\ShopBundle\Model\Transport\Transport $transport
      */
     public function __construct(
         Order $order,

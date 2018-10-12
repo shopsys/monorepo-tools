@@ -55,7 +55,7 @@ class PerformanceTestSamplesAggregator
     }
 
     /**
-     * @param \Tests\ShopBundle\Performance\Page\PerformanceTestSample[][] $performanceTestSamples
+     * @param \Tests\ShopBundle\Performance\Page\PerformanceTestSample[] $performanceTestSamples
      */
     private function getPerformanceTestSamplesGroupedByUrl(array $performanceTestSamples)
     {

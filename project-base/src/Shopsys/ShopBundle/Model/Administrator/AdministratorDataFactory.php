@@ -17,7 +17,7 @@ class AdministratorDataFactory extends BaseAdministratorDataFactory
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Administrator\Administrator
+     * @param \Shopsys\ShopBundle\Model\Administrator\Administrator $administrator
      * @return \Shopsys\ShopBundle\Model\Administrator\AdministratorData
      */
     public function createFromAdministrator(BaseAdministrator $administrator): BaseAdministratorData
