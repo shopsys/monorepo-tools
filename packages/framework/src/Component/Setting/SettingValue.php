@@ -89,6 +89,11 @@ class SettingValue
      */
     public function getValue()
     {
+        if ($this->value === null && $this->type !== self::TYPE_NULL) {
+            $message = 'Setting value type "' . $this->type . '" does not allow null value.';
+            throw new \Shopsys\FrameworkBundle\Component\Setting\Exception\SettingValueTypeNotMatchValueException($message);
+        }
+
         switch ($this->type) {
             case self::TYPE_INTEGER:
                 return (int)$this->value;
@@ -97,10 +102,6 @@ class SettingValue
             case self::TYPE_BOOLEAN:
                 return $this->value === self::BOOLEAN_TRUE;
             case self::TYPE_DATETIME:
-                if ($this->value === null) {
-                    return null;
-                }
-
                 return DateTimeHelper::createFromFormat(self::DATETIME_STORED_FORMAT, $this->value);
             default:
                 return $this->value;
