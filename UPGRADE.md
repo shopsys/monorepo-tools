@@ -51,17 +51,18 @@ There is a list of all the repositories maintained by monorepo, changes in log b
 
 ## [From 7.0.0-beta1 to Unreleased]
 ### [shopsys/project-base]
-- [#497 adding php.ini to image is now done only in dockerfiles](https://github.com/shopsys/shopsys/pull/497)
+- *(optional)* [#497 adding php.ini to image is now done only in dockerfiles](https://github.com/shopsys/shopsys/pull/497)
     - you should make the same changes in your repository for the php.ini configuration files to be added to your Docker images
+        - remove all volumes from `docker-compose.yml.dist` templates that include `php-ini-overrides.ini`
+            - remove them also from your local `docker-compose.yml`
+        - add `COPY php-ini-overrides.ini /usr/local/etc/php/php.ini` into `docker/php-fpm/Dockerfile`
     - from now on, you will have to rebuild your Docker images (`docker-compose up -d --build`) for the changes in the php.ini file to apply
 - [#494 Microservices webserver using nginx + php-fpm](https://github.com/shopsys/shopsys/pull/494)
     - execute `docker-compose pull` to pull new microservice images and `docker-compose up -d` to start newly pulled microservices
-    - url addresses to microservices have changed, you need to upgrade url address provided in `app/config/parameters.yml`  
+    - url addresses to microservices have changed, you need to upgrade url address provided in `app/config/parameters.yml`
         - update parameter `microservice_product_search_url` from `microservice-product-search:8000` to `microservice-product-search`
         - update parameter `microservice_product_search_export_url`, from `microservice-product-search-export:8000` to `microservice-product-search-export`
-- [#502 - fixed acceptance tests (loading DB dump)](https://github.com/shopsys/shopsys/pull/502)
-    - when you upgrade `codeception/codeception` to version `2.5.0`, you have to change parameter `populate` to `true`
-      in `tests/ShopBundle/Acceptance/acceptance.suite.yml`
+- *(optional)* when you upgrade `codeception/codeception` to version `2.5.0`, you have to change parameter `populate` to `true` in `tests/ShopBundle/Acceptance/acceptance.suite.yml`
 - make changes in `composer.json`:
     - remove repositories:
         - `https://github.com/shopsys/doctrine2.git`
@@ -78,7 +79,9 @@ There is a list of all the repositories maintained by monorepo, changes in log b
         - creation of some database functions was moved from `create-domains-data` phing target to a new phing target `create-domains-db-functions`
     - modify your `build-dev.xml` according to this pull request
         - creation of some database functions was moved from `test-create-domains-data` phing target to a new phing target `test-create-domains-db-functions`
-  
+- *(optional)* speed up composer in your `php-fpm` container by adding `RUN composer global require hirak/prestissimo` into `docker/php-fpm/Dockerfile`
+- *(optional)* to enable logging of errors in the `php-fpm` container, add `log_errors = true` to `docker/php-fpm/php-ini-overrides.ini`
+
 ## [From 7.0.0-alpha6 to 7.0.0-beta1]
 ### [shopsys/framework]
 - *(optional)* [#468 - Setting for docker on mac are now more optimized](https://github.com/shopsys/shopsys/pull/468)
