@@ -26,11 +26,14 @@ services:
 
     php-fpm:
         build:
-            context: project-base/docker/php-fpm
+            context: .
+            dockerfile: project-base/docker/php-fpm/Dockerfile
+            target: development
             args: &common_build_args
                 www_data_uid: 501
                 www_data_gid: 20
                 github_oauth_token: place-your-token-here
+                project_root: project-base
         container_name: shopsys-framework-php-fpm
         volumes:
             - shopsys-framework-sync:/var/www/html
