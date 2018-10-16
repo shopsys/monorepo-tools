@@ -16,7 +16,7 @@ services:
         image: nginx:1.13-alpine
         container_name: shopsys-framework-webserver
         volumes:
-            - .:/var/www/html
+            - shopsys-framework-web-sync:/var/www/html/web
             - ./docker/nginx/nginx.conf:/etc/nginx/conf.d/default.conf
         ports:
             - "8000:8080"
@@ -28,12 +28,15 @@ services:
         build:
             context: docker/php-fpm
             args:
-                www_data_uid: 82
-                www_data_gid: 82
+                www_data_uid: 1000
+                www_data_gid: 1000
                 github_oauth_token: place-your-token-here
         container_name: shopsys-framework-php-fpm
         volumes:
-            - .:/var/www/html
+            - shopsys-framework-sync:/var/www/html
+            - shopsys-framework-vendor-sync:/var/www/html/vendor
+            - shopsys-framework-web-sync:/var/www/html/web
+            - ./docker/php-fpm/php-ini-overrides.ini:/usr/local/etc/php/php.ini
         links:
             - postgres
             - redis
@@ -119,3 +122,9 @@ volumes:
         driver: local
     elasticsearch-data:
         driver: local
+    shopsys-framework-sync:
+        external: true
+    shopsys-framework-vendor-sync:
+        external: true
+    shopsys-framework-web-sync:
+        external: true

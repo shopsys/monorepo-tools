@@ -59,6 +59,7 @@ ENV LC_ALL=en_US.utf8 LANG=en_US.utf8 LANGUAGE=en_US.utf8
 
 # overwrite the original entry-point from the PHP Docker image with our own
 COPY docker-php-entrypoint /usr/local/bin/
+RUN chmod +x /usr/local/bin/docker-php-entrypoint
 
 # copy php.ini configuration
 COPY php-ini-overrides.ini /usr/local/etc/php/php.ini

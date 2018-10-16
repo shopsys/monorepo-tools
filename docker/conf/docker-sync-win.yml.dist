@@ -1,0 +1,44 @@
+version: '2'
+syncs:
+    shopsys-framework-sync:
+        sync_userid: 1000
+        sync_host_port: 10872
+        sync_strategy: 'unison'
+        src: './'
+        sync_excludes: [
+            '.git',
+            '.idea',
+            '.docker-sync',
+            '.DS_Store',
+            'docker',
+            'project-base/docker',
+            'project-base/node_modules',
+            'project-base/var/cache',
+            'project-base/var/elasticsearch-data',
+            'project-base/var/postgres-data',
+            'project-base/web',
+            'vendor'
+        ]
+        host_disk_mount_mode: 'delegated'
+
+    shopsys-framework-microservice-product-search-sync:
+        sync_userid: 1000
+        sync_strategy: 'unison'
+        src: './microservices/product-search/'
+
+    shopsys-framework-microservice-product-search-export-sync:
+        sync_userid: 1000
+        sync_strategy: 'unison'
+        src: './microservices/product-search-export/'
+
+    shopsys-framework-web-sync:
+        sync_userid: 1000
+        sync_strategy: 'unison'
+        src: './project-base/web'
+        host_disk_mount_mode: 'cached'
+
+    shopsys-framework-vendor-sync:
+        sync_userid: 1000
+        sync_strategy: 'unison'
+        src: './vendor'
+        host_disk_mount_mode: 'cached'
