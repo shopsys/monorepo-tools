@@ -6,6 +6,8 @@ use Shopsys\FrameworkBundle\Component\Domain\Multidomain\MultidomainEntityDataCr
 use Shopsys\FrameworkBundle\Component\Setting\Setting;
 use Shopsys\FrameworkBundle\Component\Setting\SettingValueRepository;
 use Shopsys\FrameworkBundle\Component\Translation\TranslatableEntityDataCreator;
+use Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroupDataFactory;
+use Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroupFacade;
 
 class DomainDataCreator
 {
@@ -36,18 +38,32 @@ class DomainDataCreator
      */
     private $translatableEntityDataCreator;
 
+    /**
+     * @var \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroupDataFactory
+     */
+    private $pricingGroupDataFactory;
+
+    /**
+     * @var \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroupFacade
+     */
+    private $pricingGroupFacade;
+
     public function __construct(
         Domain $domain,
         Setting $setting,
         SettingValueRepository $settingValueRepository,
         MultidomainEntityDataCreator $multidomainEntityDataCreator,
-        TranslatableEntityDataCreator $translatableEntityDataCreator
+        TranslatableEntityDataCreator $translatableEntityDataCreator,
+        PricingGroupDataFactory $pricingGroupDataFactory,
+        PricingGroupFacade $pricingGroupFacade
     ) {
         $this->domain = $domain;
         $this->setting = $setting;
         $this->settingValueRepository = $settingValueRepository;
         $this->multidomainEntityDataCreator = $multidomainEntityDataCreator;
         $this->translatableEntityDataCreator = $translatableEntityDataCreator;
+        $this->pricingGroupDataFactory = $pricingGroupDataFactory;
+        $this->pricingGroupFacade = $pricingGroupFacade;
     }
 
     /**
@@ -66,6 +82,9 @@ class DomainDataCreator
                 $this->settingValueRepository->copyAllMultidomainSettings(self::TEMPLATE_DOMAIN_ID, $domainId);
                 $this->setting->clearCache();
                 $this->setting->setForDomain(Setting::BASE_URL, $domainConfig->getUrl(), $domainId);
+
+                $this->processDefaultPricingGroupForNewDomain($domainId);
+
                 $this->multidomainEntityDataCreator->copyAllMultidomainDataForNewDomain(self::TEMPLATE_DOMAIN_ID, $domainId);
                 if ($isNewLocale) {
                     $this->translatableEntityDataCreator->copyAllTranslatableDataForNewLocale(
@@ -101,5 +120,25 @@ class DomainDataCreator
     private function getTemplateLocale()
     {
         return $this->domain->getDomainConfigById(self::TEMPLATE_DOMAIN_ID)->getLocale();
+    }
+
+    /**
+     * @param int $domainId
+     */
+    private function processDefaultPricingGroupForNewDomain(int $domainId)
+    {
+        $pricingGroup = $this->createDefaultPricingGroupForNewDomain($domainId);
+        $this->setting->setForDomain(Setting::DEFAULT_PRICING_GROUP, $pricingGroup->getId(), $domainId);
+    }
+
+    /**
+     * @param int $domainId
+     * @return \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroup
+     */
+    private function createDefaultPricingGroupForNewDomain(int $domainId)
+    {
+        $pricingGroupData = $this->pricingGroupDataFactory->create();
+        $pricingGroupData->name = 'Default';
+        return $this->pricingGroupFacade->create($pricingGroupData, $domainId);
     }
 }

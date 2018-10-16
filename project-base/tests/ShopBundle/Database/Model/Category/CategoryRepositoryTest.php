@@ -25,15 +25,14 @@ class CategoryRepositoryTest extends DatabaseTestCase
         /* @var $categoryDataFactory \Shopsys\ShopBundle\Model\Category\CategoryDataFactory */
 
         $categoryData = $categoryDataFactory->create();
-        $categoryData->name = ['en' => 'name'];
+        $categoryData->name = ['en' => 'name', 'cs' => 'name'];
         $categoryData->parent = $categoryFacade->getRootCategory();
 
         $parentCategory = $categoryFacade->create($categoryData);
 
-        $categoryData->enabled = [
-            self::FIRST_DOMAIN_ID => false,
-            self::SECOND_DOMAIN_ID => false,
-        ];
+        $categoryData->enabled[self::FIRST_DOMAIN_ID] = false;
+        $categoryData->enabled[self::SECOND_DOMAIN_ID] = false;
+
         $categoryData->parent = $parentCategory;
         $categoryFacade->create($categoryData);
 
@@ -55,7 +54,7 @@ class CategoryRepositoryTest extends DatabaseTestCase
         /* @var $categoryDataFactory \Shopsys\ShopBundle\Model\Category\CategoryDataFactory */
 
         $categoryData = $categoryDataFactory->create();
-        $categoryData->name = ['en' => 'name'];
+        $categoryData->name = ['en' => 'name', 'cs' => 'name'];
         $categoryData->parent = $categoryFacade->getRootCategory();
 
         $parentCategory = $categoryFacade->create($categoryData);

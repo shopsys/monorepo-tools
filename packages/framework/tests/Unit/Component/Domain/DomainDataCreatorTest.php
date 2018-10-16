@@ -10,6 +10,10 @@ use Shopsys\FrameworkBundle\Component\Domain\Multidomain\MultidomainEntityDataCr
 use Shopsys\FrameworkBundle\Component\Setting\Setting;
 use Shopsys\FrameworkBundle\Component\Setting\SettingValueRepository;
 use Shopsys\FrameworkBundle\Component\Translation\TranslatableEntityDataCreator;
+use Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroup;
+use Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroupData;
+use Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroupDataFactory;
+use Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroupFacade;
 
 class DomainDataCreatorTest extends TestCase
 {
@@ -31,13 +35,17 @@ class DomainDataCreatorTest extends TestCase
         $settingValueRepositoryMock = $this->createMock(SettingValueRepository::class);
         $multidomainEntityDataCreatorMock = $this->createMock(MultidomainEntityDataCreator::class);
         $translatableEntityDataCreatorMock = $this->createMock(TranslatableEntityDataCreator::class);
+        $pricingGroupDataFactoryMock = $this->createMock(PricingGroupDataFactory::class);
+        $pricingGroupFacadeMock = $this->createMock(PricingGroupFacade::class);
 
         $domainDataCreator = new DomainDataCreator(
             $domain,
             $settingMock,
             $settingValueRepositoryMock,
             $multidomainEntityDataCreatorMock,
-            $translatableEntityDataCreatorMock
+            $translatableEntityDataCreatorMock,
+            $pricingGroupDataFactoryMock,
+            $pricingGroupFacadeMock
         );
         $newDomainsDataCreated = $domainDataCreator->createNewDomainsData();
 
@@ -77,12 +85,30 @@ class DomainDataCreatorTest extends TestCase
 
         $translatableEntityDataCreatorMock = $this->createMock(TranslatableEntityDataCreator::class);
 
+        $pricingGroupData = new PricingGroupData();
+        $pricingGroupData->name = 'Default';
+
+        $pricingGroupDataFactoryMock = $this->createMock(PricingGroupDataFactory::class);
+        $pricingGroupDataFactoryMock
+            ->method('create')
+            ->willReturn($pricingGroupData);
+
+        $pricingGroup = new PricingGroup($pricingGroupData, 2);
+
+        $pricingGroupFacadeMock = $this->createMock(PricingGroupFacade::class);
+        $pricingGroupFacadeMock
+            ->method('create')
+            ->with($pricingGroupData, 2)
+            ->willReturn($pricingGroup);
+
         $domainDataCreator = new DomainDataCreator(
             $domain,
             $settingMock,
             $settingValueRepositoryMock,
             $multidomainEntityDataCreatorMock,
-            $translatableEntityDataCreatorMock
+            $translatableEntityDataCreatorMock,
+            $pricingGroupDataFactoryMock,
+            $pricingGroupFacadeMock
         );
         $newDomainsDataCreated = $domainDataCreator->createNewDomainsData();
 
@@ -131,12 +157,17 @@ class DomainDataCreatorTest extends TestCase
             ->method('copyAllTranslatableDataForNewLocale')
             ->with($domainConfigWithDataCreated->getLocale(), $domainConfigWithNewLocale->getLocale());
 
+        $pricingGroupDataFactoryMock = $this->createMock(PricingGroupDataFactory::class);
+        $pricingGroupFacadeMock = $this->createMock(PricingGroupFacade::class);
+
         $domainDataCreator = new DomainDataCreator(
             $domainMock,
             $settingMock,
             $settingValueRepositoryMock,
             $multidomainEntityDataCreatorMock,
-            $translatableEntityDataCreatorMock
+            $translatableEntityDataCreatorMock,
+            $pricingGroupDataFactoryMock,
+            $pricingGroupFacadeMock
         );
 
         $domainDataCreator->createNewDomainsData();
