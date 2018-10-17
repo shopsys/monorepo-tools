@@ -99,7 +99,6 @@
         "shopsys/http-smoke-testing": "dev-master"
     },
     "conflict": {
-        "codeception/stub": ">=2.0.2",
         "symfony/dependency-injection": "3.4.15|3.4.16"
     },
     "scripts": {
