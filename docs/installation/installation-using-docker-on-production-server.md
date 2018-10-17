@@ -276,9 +276,9 @@ docker-compose -p production exec php-fpm ./phing db-create build-new
 ```
 Now the application should be running.
 We want to setup scheduler for execution of cron jobs by adding one line into `/etc/crontab` file.
-Cron job is executed every 5 minutes in `php-fpm` container.
+Cron job is executed every 5 minutes in `php-fpm` container under `root` user privileges.
 ```
-*/5 * * * * /usr/bin/docker exec production-php-fpm php phing cron
+*/5 * * * * root /usr/bin/docker exec production-php-fpm php phing cron
 ```
 Since web application is running we can go to administration and change passwords for default administrators.
 With login `superadmin` and password `admin123` we can do it via these urls:
