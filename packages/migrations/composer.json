@@ -40,6 +40,6 @@
         "shopsys/coding-standards": "dev-master"
     },
     "conflict": {
-        "symfony/dependency-injection": ">=3.4.15"
+        "symfony/dependency-injection": "3.4.15|3.4.16"
     }
 }

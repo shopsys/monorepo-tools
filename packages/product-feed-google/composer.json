@@ -40,6 +40,6 @@
         "twig/twig": "^2.4.8"
     },
     "conflict": {
-        "symfony/dependency-injection": ">=3.4.15"
+        "symfony/dependency-injection": "3.4.15|3.4.16"
     }
 }

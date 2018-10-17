@@ -33,6 +33,6 @@
         "shopsys/coding-standards": "^3.0.2"
     },
     "conflict": {
-        "symfony/dependency-injection": ">=3.4.15"
+        "symfony/dependency-injection": "3.4.15|3.4.16"
     }
 }

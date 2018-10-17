@@ -100,7 +100,7 @@
     },
     "conflict": {
         "codeception/stub": ">=2.0.2",
-        "symfony/dependency-injection": ">=3.4.15"
+        "symfony/dependency-injection": "3.4.15|3.4.16"
     },
     "scripts": {
         "post-install-cmd": [
