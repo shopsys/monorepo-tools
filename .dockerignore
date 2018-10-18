@@ -21,9 +21,6 @@ vendor
 # ignore kubernetes manifests
 project-base/kubernetes
 
-# ignore the microservices, their images are built separately
-microservices
-
 # ignore docker configs for other images than php-fpm, and the php-fpm's Dockerfile itself
 docker
 project-base/docker
