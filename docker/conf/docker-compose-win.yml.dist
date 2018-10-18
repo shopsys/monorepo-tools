@@ -1,4 +1,11 @@
 version: "3.4"
+
+x-variables:
+    common_build_args: &common_build_args
+        www_data_uid: 1000
+        www_data_gid: 1000
+        github_oauth_token: place-your-token-here
+
 services:
     postgres:
         image: postgres:10.5-alpine
@@ -29,10 +36,8 @@ services:
             context: .
             dockerfile: project-base/docker/php-fpm/Dockerfile
             target: development
-            args: &common_build_args
-                www_data_uid: 1000
-                www_data_gid: 1000
-                github_oauth_token: place-your-token-here
+            args:
+                <<: *common_build_args
                 project_root: project-base
         container_name: shopsys-framework-php-fpm
         volumes:
