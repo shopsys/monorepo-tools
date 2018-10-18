@@ -217,10 +217,6 @@ echo $'domains_urls:
 ```
 Then we check whether `mailer_master_email_address` property in [`parameters.yml.dist`](../../project-base/app/config/parameters.yml.dist) is set correctly.
 
-We remove `.git` folder so the built image doesn't have additional data.
-```
-rm -rf .git
-```
 After the project is setup correctly, we launch the build of php-fpm container by docker build command that will build image with composer, npm packages and created assets.
 ```
 docker build \

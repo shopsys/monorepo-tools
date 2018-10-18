@@ -62,6 +62,8 @@ There is a list of all the repositories maintained by monorepo, changes in log b
     - in your `build-dev.xml`, make your `test-create-domains-data` task dependent on `test-create-domains-db-functions` task
 - [#558 - Missing standards check in CI build process #558](https://github.com/shopsys/shopsys/pull/558)
     - the Dockerfile for `php-fpm` has changed for CI stage build, update your `docker/php-fpm/Dockerfile`
+- *(optional)* [#535 added .dockerignore files](https://github.com/shopsys/shopsys/pull/535)
+    - to make your Docker image build faster, copy the `.dockerignore` file to the root of you project
 
 ### [shopsys/shopsys]
 - *(MacOS only)* [#503 updated docker-sync configuration](https://github.com/shopsys/shopsys/pull/503/)
