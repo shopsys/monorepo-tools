@@ -63,13 +63,13 @@ Drops all data in the test database and creates a new one with demo data.
 
 *Note: All database related targets `db-*` have their `test-db-*` variant for the test database.*
 
-#### elasticsearch-indexes-recreate
+#### microservice-product-search-recreate-structure
 Recreates Elasticsearch indexes structure.
 Consists of two subtasks that can be run independently:
-* `elasticsearch-indexes-delete` - deletes existing indexes structure
-* `elasticsearch-indexes-create` - creates new indexes structure by json definitions stored in `%shopsys.framework.elasticsearch_sources_dir%` directory.
+* `microservice-product-search-delete-structure` - deletes existing indexes structure
+* `microservice-product-search-create-structure` - creates new indexes structure by json definitions stored in [the microservice resources directory](/microservices/product-search-export/src/Resources/definition).
 
-#### elasticsearch-products-export
+#### microservice-product-search-export-products
 Exports all visible products to Elasticsearch.
 
 ### Coding standards
