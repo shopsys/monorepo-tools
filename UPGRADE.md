@@ -64,6 +64,7 @@ There is a list of all the repositories maintained by monorepo, changes in log b
     - the Dockerfile for `php-fpm` has changed for CI stage build, update your `docker/php-fpm/Dockerfile`
 - *(optional)* [#535 added .dockerignore files](https://github.com/shopsys/shopsys/pull/535)
     - to make your Docker image build faster, copy the `.dockerignore` file to the root of you project
+    - if you're using Docker-sync, add the directories mentioned in the PR into `sync_exclude` section of your `docker-sync.yml` to make the synchronization faster as well
 
 ### [shopsys/shopsys]
 - *(MacOS only)* [#503 updated docker-sync configuration](https://github.com/shopsys/shopsys/pull/503/)
@@ -123,6 +124,8 @@ There is a list of all the repositories maintained by monorepo, changes in log b
     - modify your `build.xml`, phing target `wipe-excluding-logs`  according to this pull request so the directory `content-test` will be truncated too
     - modify your `nginx.conf`, change location for images from `^/content/images/` to `^/content(-test)?/images/`
     - modify your `routing_front.yml`, change configuration for routes `front_image`, `front_image_without_type` - replace `/content/` by `/%shopsys.content_dir_name%/`
+- *(optional)* [#535 added .dockerignore files](https://github.com/shopsys/shopsys/pull/535)
+    - if you're using Docker-sync, add the directories mentioned in the PR into `sync_exclude` section of your `docker-sync.yml` to make the synchronization faster
 
 ## [From 7.0.0-beta1 to 7.0.0-beta2]
 ### [shopsys/project-base]
