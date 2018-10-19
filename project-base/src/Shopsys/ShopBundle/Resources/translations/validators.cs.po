@@ -40,6 +40,9 @@ msgstr "Heslo nesmí být stejné jako část e-mailu před zavináčem."
 msgid "Passwords do not match"
 msgstr "Hesla se neshodují"
 
+msgid "Please choose a valid combination of transport and payment"
+msgstr "Prosím vyberte povolenou kombinaci dopravy a platby"
+
 msgid "Please choose country"
 msgstr "Prosím vyberte stát"
 

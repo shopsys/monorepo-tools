@@ -328,6 +328,9 @@ msgstr "Cena musí být větší nebo rovna {{ compared_value }}"
 msgid "Product name cannot be longer than {{ limit }} characters"
 msgstr "Název produktu nesmí být delší než {{ limit }} znaků"
 
+msgid "Promo code with this code already exists"
+msgstr "Slevový kupón s tímto kódem již existuje"
+
 msgid "Quantity must be greater than {{ compared_value }}"
 msgstr "Množství musí být větší než {{ compared_value }}"
 

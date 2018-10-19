@@ -40,6 +40,9 @@ msgstr ""
 msgid "Passwords do not match"
 msgstr ""
 
+msgid "Please choose a valid combination of transport and payment"
+msgstr ""
+
 msgid "Please choose country"
 msgstr ""
 

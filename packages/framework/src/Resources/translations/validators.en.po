@@ -328,6 +328,9 @@ msgstr ""
 msgid "Product name cannot be longer than {{ limit }} characters"
 msgstr ""
 
+msgid "Promo code with this code already exists"
+msgstr ""
+
 msgid "Quantity must be greater than {{ compared_value }}"
 msgstr ""
 
