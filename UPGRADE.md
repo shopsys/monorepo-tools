@@ -49,7 +49,9 @@ There is a list of all the repositories maintained by monorepo, changes in log b
 * [shopsys/microservice-product-search]
 * [shopsys/microservice-product-search-export]
 
-## [From 7.0.0-beta1 to Unreleased]
+## [From 7.0.0-beta2 to Unreleased]
+
+## [From 7.0.0-beta1 to 7.0.0-beta2]
 ### [shopsys/project-base]
 - *(optional)* [#497 adding php.ini to image is now done only in dockerfiles](https://github.com/shopsys/shopsys/pull/497)
     - you should make the same changes in your repository for the php.ini configuration files to be added to your Docker images
@@ -81,6 +83,9 @@ There is a list of all the repositories maintained by monorepo, changes in log b
         - creation of some database functions was moved from `test-create-domains-data` phing target to a new phing target `test-create-domains-db-functions`
 - *(optional)* speed up composer in your `php-fpm` container by adding `RUN composer global require hirak/prestissimo` into `docker/php-fpm/Dockerfile`
 - *(optional)* to enable logging of errors in the `php-fpm` container, add `log_errors = true` to `docker/php-fpm/php-ini-overrides.ini`
+- *(optional)* make changes in `composer.json`:
+    - remove conflict `"codeception/stub"`, the conflicting version doesn't exist anymore and conflict is solved
+    - change conflict of `"symfony/dependency-injection"` to `"3.4.15|3.4.16"`
 
 ## [From 7.0.0-alpha6 to 7.0.0-beta1]
 ### [shopsys/framework]
@@ -498,7 +503,8 @@ parameters:
         - *_generated/*
 
 ```
-[From 7.0.0-beta1 to Unreleased]: https://github.com/shopsys/shopsys/compare/v7.0.0-beta1...HEAD
+[From 7.0.0-beta2 to Unreleased]: https://github.com/shopsys/shopsys/compare/v7.0.0-beta2...HEAD
+[From 7.0.0-beta1 to 7.0.0-beta2]: https://github.com/shopsys/shopsys/compare/v7.0.0-beta1...v7.0.0-beta2
 [From 7.0.0-alpha6 to 7.0.0-beta1]: https://github.com/shopsys/shopsys/compare/v7.0.0-alpha6...v7.0.0-beta1
 [From 7.0.0-alpha5 to 7.0.0-alpha6]: https://github.com/shopsys/shopsys/compare/v7.0.0-alpha5...v7.0.0-alpha6
 [From 7.0.0-alpha4 to 7.0.0-alpha5]: https://github.com/shopsys/shopsys/compare/v7.0.0-alpha4...v7.0.0-alpha5

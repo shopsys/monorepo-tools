@@ -28,6 +28,65 @@ The changelog is generated during the release process using [ChangelogLinker](ht
 
 <!-- changelog-linker -->
 
+## [7.0.0-beta2] - 2018-10-19
+
+### [shopsys/framework]
+
+#### Changed
+
+- [#519] Feeds generation now works with performance data
+- [#513] Manipulation with domains is modified and documented now
+- [#509] Records of `SettingValues` table need to be valid with application
+
+#### Fixed
+
+- [#491] Fixed command `debug:router` by asking for domain
+
+### [shopsys/migrations]
+
+#### Fixed
+
+- [#515] Migration count command is now fixed and initialized with correct configuration
+
+### [shopsys/project-base]
+
+#### Added
+
+- [#497] Adding `php.ini` to image is now done only in `Dockerfiles`
+- [#486] Docker for production
+
+#### Changed
+
+- [#496] Require global package hirak/prestisimo in docker images
+
+#### Fixed
+
+- [#502] Fixed acceptance tests (loading DB dump)
+
+### [shopsys/shopsys]
+
+#### Added
+
+- [#493] Added list of 3rd party licenses
+- [#499] Added Docker-sync for Windows development
+- [#500] Docs for Docker installation on Linux: add Docker Compose, Thanks to [@thirdknown]
+- [#510] Added link to `upgrade.md` file in knowledgebase index
+- [#498] Docs: instructions for merging into master
+- [#511] Enable logging of errors in all php containers
+
+#### Changed
+
+- [#506] Improved upgrade instruction
+- [#487] Installation guides: minimal stability for composer create-project changed from alpha to beta
+- [#512] `Dockerfiles` of microservices now use multi-stage build feature
+- [#525] `UPGRADE.md`: improved unreleased instructions
+- [#494] Microservices webserver using `nginx` + `php-fpm`
+- [#490] Use shopsys packages instead of hacking composer.json to speed up installation
+
+#### Fixed
+
+- [#521] Fixed typo in `.github/ISSUE_TEMPLATE.md`
+
 ## [7.0.0-beta1] - 2018-09-18
 
 ### [shopsys/framework]
@@ -1481,6 +1540,7 @@ That's why is this section formatted differently.
     - YesNoType
 - `.travis.yml` file with Travis CI configuration
 
+[7.0.0-beta2]: https://github.com/shopsys/shopsys/compare/v7.0.0-beta1...v7.0.0-beta2
 [7.0.0-beta1]: https://github.com/shopsys/shopsys/compare/v7.0.0-alpha6...v7.0.0-beta1
 [7.0.0-alpha6]: https://github.com/shopsys/shopsys/compare/v7.0.0-alpha5...v7.0.0-alpha6
 [7.0.0-alpha5]: https://github.com/shopsys/shopsys/compare/v7.0.0-alpha4...v7.0.0-alpha5
@@ -1561,3 +1621,26 @@ That's why is this section formatted differently.
 [#473]: https://github.com/shopsys/shopsys/pull/473
 [#472]: https://github.com/shopsys/shopsys/pull/472
 [#468]: https://github.com/shopsys/shopsys/pull/468
+[#525]: https://github.com/shopsys/shopsys/pull/525
+[#521]: https://github.com/shopsys/shopsys/pull/521
+[#519]: https://github.com/shopsys/shopsys/pull/519
+[#515]: https://github.com/shopsys/shopsys/pull/515
+[#513]: https://github.com/shopsys/shopsys/pull/513
+[#512]: https://github.com/shopsys/shopsys/pull/512
+[#511]: https://github.com/shopsys/shopsys/pull/511
+[#510]: https://github.com/shopsys/shopsys/pull/510
+[#509]: https://github.com/shopsys/shopsys/pull/509
+[#506]: https://github.com/shopsys/shopsys/pull/506
+[#502]: https://github.com/shopsys/shopsys/pull/502
+[#500]: https://github.com/shopsys/shopsys/pull/500
+[#499]: https://github.com/shopsys/shopsys/pull/499
+[#498]: https://github.com/shopsys/shopsys/pull/498
+[#497]: https://github.com/shopsys/shopsys/pull/497
+[#496]: https://github.com/shopsys/shopsys/pull/496
+[#494]: https://github.com/shopsys/shopsys/pull/494
+[#493]: https://github.com/shopsys/shopsys/pull/493
+[#491]: https://github.com/shopsys/shopsys/pull/491
+[#490]: https://github.com/shopsys/shopsys/pull/490
+[#487]: https://github.com/shopsys/shopsys/pull/487
+[#486]: https://github.com/shopsys/shopsys/pull/486
+[@thirdknown]: https://github.com/thirdknown

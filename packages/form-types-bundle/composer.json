@@ -26,9 +26,9 @@
         "symfony/translation": "^3.4"
     },
     "require-dev": {
-        "shopsys/coding-standards": "dev-master"
+        "shopsys/coding-standards": "7.0.0-beta2"
     },
     "conflict": {
-        "symfony/dependency-injection": ">=3.4.15"
+        "symfony/dependency-injection": "3.4.15|3.4.16"
     }
 }
