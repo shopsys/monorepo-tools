@@ -79,7 +79,7 @@ class EnvironmentFileSetting
      * @param string $environment
      * @return string
      */
-    private function getEnvironmentFilePath(string $environment): string
+    public function getEnvironmentFilePath(string $environment): string
     {
         return $this->environmentFileDirectory . '/' . self::FILE_NAMES_BY_ENVIRONMENT[$environment];
     }

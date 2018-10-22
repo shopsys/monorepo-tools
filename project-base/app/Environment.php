@@ -22,12 +22,11 @@ class Environment
         $io = $event->getIO();
         /* @var $io \Composer\IO\IOInterface */
         $environmentFileSetting = self::getEnvironmentFileSetting();
-        if ($io->isInteractive() && !$environmentFileSetting->isAnyEnvironmentSet()) {
-            if ($io->askConfirmation('Build in production environment? (Y/n): ', true)) {
-                $environmentFileSetting->createFileForEnvironment(EnvironmentType::PRODUCTION);
-            } else {
-                $environmentFileSetting->createFileForEnvironment(EnvironmentType::DEVELOPMENT);
-            }
+        if (!$environmentFileSetting->isAnyEnvironmentSet()) {
+            $environment = $event->isDevMode() ? EnvironmentType::DEVELOPMENT : EnvironmentType::PRODUCTION;
+            $environmentFileSetting->createFileForEnvironment($environment);
+            $environmentFilePath = $environmentFileSetting->getEnvironmentFilePath($environment);
+            $io->write(sprintf('Created a file "%s" to set the application environment!', $environmentFilePath));
         }
         self::printEnvironmentInfo($io);
     }

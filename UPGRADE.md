@@ -165,6 +165,7 @@ There is a list of all the repositories maintained by monorepo, changes in log b
 - *(optional)* [#551 - github token erase](https://github.com/shopsys/shopsys/pull/551)
     - remove the lines mentioning `github_oauth_token` from your `docker/php-fpm/Dockerfile` and `docker-compose.yml`
     - rebuild `php-fpm` container
+- *(optional)* you can change your `Shopsys\Environment` class for consistent env setting during `composer install` ([see diff](https://github.com/shopsys/shopsys/pull/543/files#diff-02efa1bf1cc55b01e582e2b8bff3f2f7))
 
 ### [shopsys/shopsys]
 - *(MacOS only)* [#503 updated docker-sync configuration](https://github.com/shopsys/shopsys/pull/503/)
