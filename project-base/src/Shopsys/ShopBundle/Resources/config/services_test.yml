@@ -12,14 +12,14 @@ services:
     Shopsys\FrameworkBundle\Model\Localization\IntlCurrencyRepository: ~
 
     Shopsys\FrameworkBundle\Component\EntityExtension\EntityNameResolver:
-        class: Tests\ShopBundle\Database\EntityExtension\OverwritableEntityNameResolver
+        class: Tests\ShopBundle\Functional\EntityExtension\OverwritableEntityNameResolver
         arguments:
             - "%shopsys.entity_extension.map%"
 
     Symfony\Component\Filesystem\Filesystem: ~
 
     joschi127_doctrine_entity_override.event_subscriber.load_orm_metadata:
-        class: Tests\ShopBundle\Database\EntityExtension\OverwritableLoadORMMetadataSubscriber
+        class: Tests\ShopBundle\Functional\EntityExtension\OverwritableLoadORMMetadataSubscriber
         arguments:
             - "@service_container"
             - "%shopsys.entity_extension.map%"

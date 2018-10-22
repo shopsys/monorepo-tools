@@ -102,7 +102,7 @@ All tests are isolated from each other thanks to database transactions. This mea
 * low-level testing of components that are hard to unit-test
 
 #### Example:
-See test class [`\Tests\ShopBundle\Database\Model\Cart\CartFacadeTest`](../../project-base/tests/ShopBundle/Database/Model/Cart/CartFacadeTest.php). Notice usage of demo data instead of preparing own entities.
+See test class [`\Tests\ShopBundle\Functional\Model\Cart\CartFacadeTest`](../../project-base/tests/ShopBundle/Functional/Model/Cart/CartFacadeTest.php). Notice usage of demo data instead of preparing own entities.
   
 ### HTTP smoke tests
 Test HTTP codes returned by individual controller actions provided by the routing (e.g. product detail page should return *200 OK* for a visible product and *404 Not Found* for a hidden one).

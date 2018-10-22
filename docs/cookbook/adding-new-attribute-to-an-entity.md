@@ -247,13 +247,13 @@ as it is a part of your open-box, eg. [`detail.html.twig`](../../project-base/sr
 ## Tests
 You need to fix your tests to reflect new changes:
 * Instances of `Product` and `ProductData` are often created directly in tests - change all of them to your classes.
-* In [`ProductVisibilityRepositoryTest`](../../project-base/tests/ShopBundle/Database/Model/Product/ProductVisibilityRepositoryTest.php), 
+* In [`ProductVisibilityRepositoryTest`](../../project-base/tests/ShopBundle/Functional/Model/Product/ProductVisibilityRepositoryTest.php), 
 instance of `ProductData` is created directly. 
 so you need to use there your class:
 ```php
 <?php
 
-namespace Tests\ShopBundle\Database\Model\Product;
+namespace Tests\ShopBundle\Functional\Model\Product;
 
 use Shopsys\ShopBundle\Model\Product\ProductData;
 
