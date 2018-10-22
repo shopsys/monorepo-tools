@@ -161,6 +161,7 @@ services:
         arguments:
             - '%shopsys.domain_config_filepath%'
             - '%shopsys.domain_urls_config_filepath%'
+        lazy: true
 
     Shopsys\FrameworkBundle\Component\Domain\Multidomain\MultiDomainEntityClassProvider: ~
 

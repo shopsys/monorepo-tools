@@ -165,6 +165,8 @@ cp app/config/domains_urls.yml.dist app/config/domains_urls.yml
 copy app\config\domains_urls.yml.dist app\config\domains_urls.yml
 ```
 
+<!--- TODO When releasing new version, remove the step "Configure domains" as (in current master) the default config is automatically copied during "composer install"-->
+
 ### 5. Create databases
 ```
 php phing db-create
@@ -182,7 +184,6 @@ php phing build-demo-dev
 ```
 php bin/console server:run
 ```
-*Note: If you did not use default domain URLs in step 4 you should run `php bin/console server:run <your-domain-address>`.*
 
 ### 8. See it in your browser!
 Open [http://127.0.0.1:8000/](http://127.0.0.1:8000/) to see running application.

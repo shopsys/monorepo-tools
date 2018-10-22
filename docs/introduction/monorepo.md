@@ -61,7 +61,3 @@ Installation of Shopsys Framework is described in [Installation Using Docker](..
 ## Troubleshooting
 * Package is functional in monorepo but broken outside of monorepo - ensure that every parameter required by package
 is available even outside the monorepo
-
-* Command `cp app/config/domains_urls.yml.dist app/config/domains_urls.yml` results in failure - during the development
-in monorepo, Shopsys Framework is placed in the directory `project-base/`. The correct form of this command during the
-development in monorepo is `cp project-base/app/config/domains_urls.yml.dist project-base/app/config/domains_urls.yml`

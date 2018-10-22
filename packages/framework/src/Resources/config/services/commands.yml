@@ -7,6 +7,10 @@ services:
     Shopsys\FrameworkBundle\Command\:
         resource: '../../Command'
 
+    Shopsys\FrameworkBundle\Command\ConfigureDomainsUrlsCommand:
+        arguments:
+            $configFilepath: '%shopsys.domain_urls_config_filepath%'
+
     Shopsys\FrameworkBundle\Command\ServerRunWithCustomRouterCommand:
         arguments:
             - '%kernel.project_dir%/web'
