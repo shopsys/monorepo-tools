@@ -6,9 +6,9 @@ use Shopsys\FrameworkBundle\DataFixtures\Demo\AvailabilityDataFixture;
 use Shopsys\FrameworkBundle\Model\Product\ProductDataFactoryInterface;
 use Shopsys\FrameworkBundle\Model\Product\ProductFactory;
 use Shopsys\ShopBundle\Model\Product\Product;
-use Tests\ShopBundle\Test\DatabaseTestCase;
+use Tests\ShopBundle\Test\TransactionFunctionalTestCase;
 
-class ProductDomainTest extends DatabaseTestCase
+class ProductDomainTest extends TransactionFunctionalTestCase
 {
     const FIRST_DOMAIN_ID = 1;
     const SECOND_DOMAIN_ID = 2;

@@ -32,9 +32,9 @@ use Tests\ShopBundle\Database\EntityExtension\Model\ProductManyToManyBidirection
 use Tests\ShopBundle\Database\EntityExtension\Model\ProductOneToManyBidirectionalEntity;
 use Tests\ShopBundle\Database\EntityExtension\Model\ProductOneToOneBidirectionalEntity;
 use Tests\ShopBundle\Database\EntityExtension\Model\UnidirectionalEntity;
-use Tests\ShopBundle\Test\DatabaseTestCase;
+use Tests\ShopBundle\Test\TransactionFunctionalTestCase;
 
-class EntityExtensionTest extends DatabaseTestCase
+class EntityExtensionTest extends TransactionFunctionalTestCase
 {
     const MAIN_PRODUCT_ID = 1;
     const ONE_TO_ONE_SELF_REFERENCING_PRODUCT_ID = 2;

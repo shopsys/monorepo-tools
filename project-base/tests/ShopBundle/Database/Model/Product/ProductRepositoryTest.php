@@ -13,9 +13,9 @@ use Shopsys\FrameworkBundle\Model\Product\ProductFacade;
 use Shopsys\FrameworkBundle\Model\Product\ProductRepository;
 use Shopsys\ShopBundle\Model\Category\Category;
 use Shopsys\ShopBundle\Model\Product\Product;
-use Tests\ShopBundle\Test\DatabaseTestCase;
+use Tests\ShopBundle\Test\TransactionFunctionalTestCase;
 
-class ProductRepositoryTest extends DatabaseTestCase
+class ProductRepositoryTest extends TransactionFunctionalTestCase
 {
     public function testVisibleAndNotSellingDeniedProductIsListed()
     {

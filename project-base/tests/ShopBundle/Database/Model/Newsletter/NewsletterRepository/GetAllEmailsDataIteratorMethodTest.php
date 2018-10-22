@@ -5,9 +5,9 @@ namespace Tests\ShopBundle\Database\Model\Newsletter\NewsletterRepository;
 use Doctrine\ORM\Internal\Hydration\IterableResult;
 use PHPUnit\Framework\Assert;
 use Shopsys\FrameworkBundle\Model\Newsletter\NewsletterRepository;
-use Tests\ShopBundle\Test\DatabaseTestCase;
+use Tests\ShopBundle\Test\TransactionFunctionalTestCase;
 
-class GetAllEmailsDataIteratorMethodTest extends DatabaseTestCase
+class GetAllEmailsDataIteratorMethodTest extends TransactionFunctionalTestCase
 {
     const FIRST_DOMAIN_SUBSCRIBER_EMAIL = 'james.black@no-reply.com';
 

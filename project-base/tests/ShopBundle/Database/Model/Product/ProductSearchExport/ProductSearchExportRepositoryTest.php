@@ -4,9 +4,9 @@ namespace Tests\ShopBundle\Database\Model\Product\ProductSearchExport;
 
 use Shopsys\FrameworkBundle\Component\Domain\Domain;
 use Shopsys\FrameworkBundle\Model\Product\ProductSearchExport\ProductSearchExportRepository;
-use Tests\ShopBundle\Test\DatabaseTestCase;
+use Tests\ShopBundle\Test\TransactionFunctionalTestCase;
 
-class ProductSearchExportRepositoryTest extends DatabaseTestCase
+class ProductSearchExportRepositoryTest extends TransactionFunctionalTestCase
 {
     /**
      * @var \Shopsys\FrameworkBundle\Model\Product\ProductSearchExport\ProductSearchExportRepository

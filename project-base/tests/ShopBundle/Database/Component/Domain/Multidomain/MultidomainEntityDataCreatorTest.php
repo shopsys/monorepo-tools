@@ -5,9 +5,9 @@ namespace Tests\ShopBundle\Database\Component\Domain\Multidomain;
 use Shopsys\FrameworkBundle\Component\Doctrine\SqlQuoter;
 use Shopsys\FrameworkBundle\Component\Domain\Multidomain\MultidomainEntityClassFinderFacade;
 use Shopsys\FrameworkBundle\Component\Domain\Multidomain\MultidomainEntityDataCreator;
-use Tests\ShopBundle\Test\DatabaseTestCase;
+use Tests\ShopBundle\Test\TransactionFunctionalTestCase;
 
-class MultidomainEntityDataCreatorTest extends DatabaseTestCase
+class MultidomainEntityDataCreatorTest extends TransactionFunctionalTestCase
 {
     public function testCopyAllMultidomainDataForNewDomainCopiesTestRow()
     {

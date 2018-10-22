@@ -7,9 +7,9 @@ use Shopsys\FrameworkBundle\Model\Pricing\Vat\VatData;
 use Shopsys\FrameworkBundle\Model\Transport\IndependentTransportVisibilityCalculation;
 use Shopsys\FrameworkBundle\Model\Transport\TransportDataFactoryInterface;
 use Shopsys\ShopBundle\Model\Transport\Transport;
-use Tests\ShopBundle\Test\DatabaseTestCase;
+use Tests\ShopBundle\Test\TransactionFunctionalTestCase;
 
-class IndependentTransportVisibilityCalculationTest extends DatabaseTestCase
+class IndependentTransportVisibilityCalculationTest extends TransactionFunctionalTestCase
 {
     const FIRST_DOMAIN_ID = 1;
     const SECOND_DOMAIN_ID = 2;

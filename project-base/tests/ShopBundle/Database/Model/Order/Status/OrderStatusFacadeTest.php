@@ -8,9 +8,9 @@ use Shopsys\FrameworkBundle\Model\Order\OrderDataFactoryInterface;
 use Shopsys\FrameworkBundle\Model\Order\OrderFacade;
 use Shopsys\FrameworkBundle\Model\Order\Status\OrderStatusData;
 use Shopsys\FrameworkBundle\Model\Order\Status\OrderStatusFacade;
-use Tests\ShopBundle\Test\DatabaseTestCase;
+use Tests\ShopBundle\Test\TransactionFunctionalTestCase;
 
-class OrderStatusFacadeTest extends DatabaseTestCase
+class OrderStatusFacadeTest extends TransactionFunctionalTestCase
 {
     public function testDeleteByIdAndReplace()
     {

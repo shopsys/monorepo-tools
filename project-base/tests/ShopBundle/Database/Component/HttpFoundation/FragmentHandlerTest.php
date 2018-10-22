@@ -5,9 +5,9 @@ namespace Tests\ShopBundle\Database\Component\HttpFoundation;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\HttpFoundation\Session\Storage\MockArraySessionStorage;
-use Tests\ShopBundle\Test\DatabaseTestCase;
+use Tests\ShopBundle\Test\TransactionFunctionalTestCase;
 
-class FragmentHandlerTest extends DatabaseTestCase
+class FragmentHandlerTest extends TransactionFunctionalTestCase
 {
     public function testRenderingFragmentDoesNotIgnoreException()
     {

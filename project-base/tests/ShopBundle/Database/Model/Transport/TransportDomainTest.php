@@ -5,9 +5,9 @@ namespace Tests\ShopBundle\Database\Model\Transport;
 use Shopsys\FrameworkBundle\Model\Transport\TransportDataFactoryInterface;
 use Shopsys\FrameworkBundle\Model\Transport\TransportFactory;
 use Shopsys\ShopBundle\Model\Transport\Transport;
-use Tests\ShopBundle\Test\DatabaseTestCase;
+use Tests\ShopBundle\Test\TransactionFunctionalTestCase;
 
-class TransportDomainTest extends DatabaseTestCase
+class TransportDomainTest extends TransactionFunctionalTestCase
 {
     const FIRST_DOMAIN_ID = 1;
     const SECOND_DOMAIN_ID = 2;

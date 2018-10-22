@@ -12,9 +12,9 @@ use Shopsys\FrameworkBundle\Model\Product\Availability\Availability;
 use Shopsys\FrameworkBundle\Model\Product\Availability\AvailabilityData;
 use Shopsys\FrameworkBundle\Model\Product\ProductDataFactoryInterface;
 use Shopsys\ShopBundle\Model\Product\Product;
-use Tests\ShopBundle\Test\DatabaseTestCase;
+use Tests\ShopBundle\Test\TransactionFunctionalTestCase;
 
-class CartTest extends DatabaseTestCase
+class CartTest extends TransactionFunctionalTestCase
 {
     public function testRemoveItem()
     {

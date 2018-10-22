@@ -5,9 +5,9 @@ namespace Tests\ShopBundle\Database\Model\Administrator;
 use DateTime;
 use Shopsys\FrameworkBundle\DataFixtures\Demo\AdministratorDataFixture;
 use Shopsys\FrameworkBundle\Model\Administrator\AdministratorRepository;
-use Tests\ShopBundle\Test\DatabaseTestCase;
+use Tests\ShopBundle\Test\TransactionFunctionalTestCase;
 
-class AdministratorRepositoryTest extends DatabaseTestCase
+class AdministratorRepositoryTest extends TransactionFunctionalTestCase
 {
     public function testGetByValidMultidomainLogin()
     {

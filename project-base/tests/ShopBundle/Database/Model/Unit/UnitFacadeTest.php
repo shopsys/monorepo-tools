@@ -8,9 +8,9 @@ use Shopsys\FrameworkBundle\Model\Product\ProductDataFactoryInterface;
 use Shopsys\FrameworkBundle\Model\Product\ProductFacade;
 use Shopsys\FrameworkBundle\Model\Product\Unit\UnitData;
 use Shopsys\FrameworkBundle\Model\Product\Unit\UnitFacade;
-use Tests\ShopBundle\Test\DatabaseTestCase;
+use Tests\ShopBundle\Test\TransactionFunctionalTestCase;
 
-class UnitFacadeTest extends DatabaseTestCase
+class UnitFacadeTest extends TransactionFunctionalTestCase
 {
     public function testDeleteByIdAndReplace()
     {

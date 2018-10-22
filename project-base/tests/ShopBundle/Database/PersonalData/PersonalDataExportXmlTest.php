@@ -20,9 +20,9 @@ use Shopsys\ShopBundle\Model\Customer\User;
 use Shopsys\ShopBundle\Model\Customer\UserData;
 use Shopsys\ShopBundle\Model\Order\Order;
 use Shopsys\ShopBundle\Model\Order\OrderData;
-use Tests\ShopBundle\Test\DatabaseTestCase;
+use Tests\ShopBundle\Test\TransactionFunctionalTestCase;
 
-class PersonalDataExportXmlTest extends DatabaseTestCase
+class PersonalDataExportXmlTest extends TransactionFunctionalTestCase
 {
     const EMAIL = 'no-reply@shopsys.com';
     const EXPECTED_XML_FILE_NAME = 'test.xml';

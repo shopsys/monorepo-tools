@@ -18,9 +18,9 @@ use Shopsys\FrameworkBundle\Model\Payment\PaymentRepository;
 use Shopsys\FrameworkBundle\Model\Product\ProductRepository;
 use Shopsys\FrameworkBundle\Model\Transport\TransportRepository;
 use Shopsys\ShopBundle\Model\Order\OrderData;
-use Tests\ShopBundle\Test\DatabaseTestCase;
+use Tests\ShopBundle\Test\TransactionFunctionalTestCase;
 
-class OrderFacadeTest extends DatabaseTestCase
+class OrderFacadeTest extends TransactionFunctionalTestCase
 {
     public function testCreate()
     {

@@ -20,9 +20,9 @@ use Shopsys\FrameworkBundle\Model\Transport\TransportDataFactoryInterface;
 use Shopsys\FrameworkBundle\Model\Transport\TransportFacade;
 use Shopsys\ShopBundle\Model\Product\Product;
 use Symfony\Component\HttpKernel\Event\FilterResponseEvent;
-use Tests\ShopBundle\Test\DatabaseTestCase;
+use Tests\ShopBundle\Test\TransactionFunctionalTestCase;
 
-class InputPriceRecalculationSchedulerTest extends DatabaseTestCase
+class InputPriceRecalculationSchedulerTest extends TransactionFunctionalTestCase
 {
     public function testOnKernelResponseNoAction()
     {

@@ -5,9 +5,9 @@ namespace Tests\ShopBundle\Database\Model\Payment;
 use Shopsys\FrameworkBundle\Model\Payment\PaymentDataFactoryInterface;
 use Shopsys\FrameworkBundle\Model\Payment\PaymentFactory;
 use Shopsys\ShopBundle\Model\Payment\Payment;
-use Tests\ShopBundle\Test\DatabaseTestCase;
+use Tests\ShopBundle\Test\TransactionFunctionalTestCase;
 
-class PaymentDomainTest extends DatabaseTestCase
+class PaymentDomainTest extends TransactionFunctionalTestCase
 {
     const FIRST_DOMAIN_ID = 1;
     const SECOND_DOMAIN_ID = 2;

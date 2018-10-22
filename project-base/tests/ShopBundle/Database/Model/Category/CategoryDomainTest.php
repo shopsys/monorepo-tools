@@ -5,9 +5,9 @@ namespace Tests\ShopBundle\Database\Model\Category;
 use Shopsys\FrameworkBundle\Model\Category\CategoryDataFactoryInterface;
 use Shopsys\FrameworkBundle\Model\Category\CategoryFactory;
 use Shopsys\ShopBundle\Model\Category\Category;
-use Tests\ShopBundle\Test\DatabaseTestCase;
+use Tests\ShopBundle\Test\TransactionFunctionalTestCase;
 
-class CategoryDomainTest extends DatabaseTestCase
+class CategoryDomainTest extends TransactionFunctionalTestCase
 {
     const FIRST_DOMAIN_ID = 1;
     const SECOND_DOMAIN_ID = 2;

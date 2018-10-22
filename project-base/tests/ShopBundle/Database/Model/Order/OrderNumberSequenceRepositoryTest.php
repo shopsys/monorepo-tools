@@ -3,9 +3,9 @@
 namespace Tests\ShopBundle\Database\Model\Order;
 
 use Shopsys\FrameworkBundle\Model\Order\OrderNumberSequenceRepository;
-use Tests\ShopBundle\Test\DatabaseTestCase;
+use Tests\ShopBundle\Test\TransactionFunctionalTestCase;
 
-class OrderNumberSequenceRepositoryTest extends DatabaseTestCase
+class OrderNumberSequenceRepositoryTest extends TransactionFunctionalTestCase
 {
     public function testGetNextNumber()
     {

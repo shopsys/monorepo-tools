@@ -5,9 +5,9 @@ namespace Tests\ShopBundle\Database\Model\Product\Brand;
 use Shopsys\FrameworkBundle\Model\Product\Brand\BrandDataFactoryInterface;
 use Shopsys\FrameworkBundle\Model\Product\Brand\BrandFactory;
 use Shopsys\ShopBundle\Model\Product\Brand\Brand;
-use Tests\ShopBundle\Test\DatabaseTestCase;
+use Tests\ShopBundle\Test\TransactionFunctionalTestCase;
 
-class BrandDomainTest extends DatabaseTestCase
+class BrandDomainTest extends TransactionFunctionalTestCase
 {
     const FIRST_DOMAIN_ID = 1;
     const SECOND_DOMAIN_ID = 2;

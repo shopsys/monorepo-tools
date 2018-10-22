@@ -12,9 +12,9 @@ use Shopsys\FrameworkBundle\Model\Product\Parameter\ParameterRepository;
 use Shopsys\FrameworkBundle\Model\Product\Parameter\ParameterValue;
 use Shopsys\FrameworkBundle\Model\Product\ProductOnCurrentDomainFacade;
 use Shopsys\ShopBundle\Model\Category\Category;
-use Tests\ShopBundle\Test\DatabaseTestCase;
+use Tests\ShopBundle\Test\TransactionFunctionalTestCase;
 
-class ProductOnCurrentDomainFacadeTest extends DatabaseTestCase
+class ProductOnCurrentDomainFacadeTest extends TransactionFunctionalTestCase
 {
     public function testFilterByMinimalPrice()
     {

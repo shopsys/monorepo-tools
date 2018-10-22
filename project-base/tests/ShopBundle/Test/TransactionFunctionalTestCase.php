@@ -2,7 +2,7 @@
 
 namespace Tests\ShopBundle\Test;
 
-abstract class DatabaseTestCase extends FunctionalTestCase
+abstract class TransactionFunctionalTestCase extends FunctionalTestCase
 {
     /**
      * @return \Doctrine\ORM\EntityManagerInterface

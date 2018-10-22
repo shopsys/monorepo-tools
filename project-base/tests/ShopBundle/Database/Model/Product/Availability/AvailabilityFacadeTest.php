@@ -8,9 +8,9 @@ use Shopsys\FrameworkBundle\Model\Product\Availability\AvailabilityData;
 use Shopsys\FrameworkBundle\Model\Product\Availability\AvailabilityFacade;
 use Shopsys\FrameworkBundle\Model\Product\ProductDataFactoryInterface;
 use Shopsys\FrameworkBundle\Model\Product\ProductFacade;
-use Tests\ShopBundle\Test\DatabaseTestCase;
+use Tests\ShopBundle\Test\TransactionFunctionalTestCase;
 
-class AvailabilityFacadeTest extends DatabaseTestCase
+class AvailabilityFacadeTest extends TransactionFunctionalTestCase
 {
     public function testDeleteByIdAndReplace()
     {

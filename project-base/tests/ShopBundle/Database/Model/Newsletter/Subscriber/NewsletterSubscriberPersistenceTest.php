@@ -5,9 +5,9 @@ namespace Tests\ShopBundle\Database\Model\Newsletter\Subscriber;
 use DateTimeImmutable;
 use PHPUnit\Framework\Assert;
 use Shopsys\FrameworkBundle\Model\Newsletter\NewsletterSubscriber;
-use Tests\ShopBundle\Test\DatabaseTestCase;
+use Tests\ShopBundle\Test\TransactionFunctionalTestCase;
 
-class NewsletterSubscriberPersistenceTest extends DatabaseTestCase
+class NewsletterSubscriberPersistenceTest extends TransactionFunctionalTestCase
 {
     public function testPersistence(): void
     {

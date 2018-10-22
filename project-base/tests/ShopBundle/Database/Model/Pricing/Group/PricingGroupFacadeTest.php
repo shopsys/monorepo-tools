@@ -12,9 +12,9 @@ use Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroupData;
 use Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroupFacade;
 use Shopsys\FrameworkBundle\Model\Product\Pricing\ProductCalculatedPrice;
 use Shopsys\FrameworkBundle\Model\Product\Pricing\ProductPriceRecalculator;
-use Tests\ShopBundle\Test\DatabaseTestCase;
+use Tests\ShopBundle\Test\TransactionFunctionalTestCase;
 
-class PricingGroupFacadeTest extends DatabaseTestCase
+class PricingGroupFacadeTest extends TransactionFunctionalTestCase
 {
     public function testCreate()
     {

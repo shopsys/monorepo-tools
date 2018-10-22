@@ -257,7 +257,7 @@ namespace Tests\ShopBundle\Database\Model\Product;
 
 use Shopsys\ShopBundle\Model\Product\ProductData;
 
-class ProductVisibilityRepositoryTest extends DatabaseTestCase
+class ProductVisibilityRepositoryTest extends TransactionFunctionalTestCaseTestCase
 {
     /**
      * @return \Shopsys\FrameworkBundle\Model\Product\ProductData

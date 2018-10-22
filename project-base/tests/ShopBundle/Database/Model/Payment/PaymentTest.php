@@ -9,9 +9,9 @@ use Shopsys\FrameworkBundle\Model\Transport\TransportDataFactoryInterface;
 use Shopsys\FrameworkBundle\Model\Transport\TransportFacade;
 use Shopsys\ShopBundle\Model\Payment\Payment;
 use Shopsys\ShopBundle\Model\Transport\Transport;
-use Tests\ShopBundle\Test\DatabaseTestCase;
+use Tests\ShopBundle\Test\TransactionFunctionalTestCase;
 
-class PaymentTest extends DatabaseTestCase
+class PaymentTest extends TransactionFunctionalTestCase
 {
     public function testRemoveTransportFromPaymentAfterDelete()
     {

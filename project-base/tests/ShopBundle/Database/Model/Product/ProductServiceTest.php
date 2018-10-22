@@ -12,9 +12,9 @@ use Shopsys\FrameworkBundle\Model\Product\Pricing\ProductManualInputPrice;
 use Shopsys\FrameworkBundle\Model\Product\ProductDataFactoryInterface;
 use Shopsys\FrameworkBundle\Model\Product\ProductService;
 use Shopsys\ShopBundle\Model\Product\Product;
-use Tests\ShopBundle\Test\DatabaseTestCase;
+use Tests\ShopBundle\Test\TransactionFunctionalTestCase;
 
-class ProductServiceTest extends DatabaseTestCase
+class ProductServiceTest extends TransactionFunctionalTestCase
 {
     public function testRecalculateInputPriceForNewVatPercentWithInputPriceWithoutVat()
     {

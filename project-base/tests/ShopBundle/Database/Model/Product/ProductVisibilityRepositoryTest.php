@@ -17,9 +17,9 @@ use Shopsys\FrameworkBundle\Model\Product\ProductFacade;
 use Shopsys\FrameworkBundle\Model\Product\ProductVisibility;
 use Shopsys\FrameworkBundle\Model\Product\ProductVisibilityRepository;
 use Shopsys\ShopBundle\Model\Product\Product;
-use Tests\ShopBundle\Test\DatabaseTestCase;
+use Tests\ShopBundle\Test\TransactionFunctionalTestCase;
 
-class ProductVisibilityRepositoryTest extends DatabaseTestCase
+class ProductVisibilityRepositoryTest extends TransactionFunctionalTestCase
 {
     /**
      * @return \Shopsys\ShopBundle\Model\Product\ProductData

@@ -10,9 +10,9 @@ use Shopsys\FrameworkBundle\DataFixtures\Demo\VatDataFixture;
 use Shopsys\FrameworkBundle\Model\Product\ProductDataFactoryInterface;
 use Shopsys\FrameworkBundle\Model\Product\ProductFacade;
 use Shopsys\ShopBundle\Model\Product\Product;
-use Tests\ShopBundle\Test\DatabaseTestCase;
+use Tests\ShopBundle\Test\TransactionFunctionalTestCase;
 
-class ProductFacadeTest extends DatabaseTestCase
+class ProductFacadeTest extends TransactionFunctionalTestCase
 {
     /**
      * @dataProvider getTestHandleOutOfStockStateDataProvider

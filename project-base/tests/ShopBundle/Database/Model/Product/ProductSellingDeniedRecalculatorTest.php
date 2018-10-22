@@ -6,9 +6,9 @@ use Shopsys\FrameworkBundle\DataFixtures\Demo\ProductDataFixture;
 use Shopsys\FrameworkBundle\Model\Product\ProductDataFactoryInterface;
 use Shopsys\FrameworkBundle\Model\Product\ProductFacade;
 use Shopsys\FrameworkBundle\Model\Product\ProductSellingDeniedRecalculator;
-use Tests\ShopBundle\Test\DatabaseTestCase;
+use Tests\ShopBundle\Test\TransactionFunctionalTestCase;
 
-class ProductSellingDeniedRecalculatorTest extends DatabaseTestCase
+class ProductSellingDeniedRecalculatorTest extends TransactionFunctionalTestCase
 {
     public function testCalculateSellingDeniedForProductSellableVariant()
     {

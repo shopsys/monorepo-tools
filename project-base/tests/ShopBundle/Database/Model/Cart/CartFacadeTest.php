@@ -14,9 +14,9 @@ use Shopsys\FrameworkBundle\Model\Customer\CustomerIdentifierFactory;
 use Shopsys\FrameworkBundle\Model\Localization\TranslatableListener;
 use Shopsys\FrameworkBundle\Model\Order\PromoCode\CurrentPromoCodeFacade;
 use Shopsys\FrameworkBundle\Model\Product\ProductRepository;
-use Tests\ShopBundle\Test\DatabaseTestCase;
+use Tests\ShopBundle\Test\TransactionFunctionalTestCase;
 
-class CartFacadeTest extends DatabaseTestCase
+class CartFacadeTest extends TransactionFunctionalTestCase
 {
     public function testAddProductToCartAddsItemsOnlyToCurrentCart()
     {

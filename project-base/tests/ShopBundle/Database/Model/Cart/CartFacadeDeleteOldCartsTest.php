@@ -16,9 +16,9 @@ use Shopsys\FrameworkBundle\Model\Order\PromoCode\CurrentPromoCodeFacade;
 use Shopsys\FrameworkBundle\Model\Product\ProductFacade;
 use Shopsys\FrameworkBundle\Model\Product\ProductRepository;
 use Shopsys\ShopBundle\Model\Product\Product;
-use Tests\ShopBundle\Test\DatabaseTestCase;
+use Tests\ShopBundle\Test\TransactionFunctionalTestCase;
 
-class CartFacadeDeleteOldCartsTest extends DatabaseTestCase
+class CartFacadeDeleteOldCartsTest extends TransactionFunctionalTestCase
 {
     public function testOldUnregisteredCustomerCartGetsDeleted()
     {

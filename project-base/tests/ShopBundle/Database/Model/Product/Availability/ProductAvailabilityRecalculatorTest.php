@@ -8,9 +8,9 @@ use Shopsys\FrameworkBundle\Model\Product\Availability\ProductAvailabilityRecalc
 use Shopsys\FrameworkBundle\Model\Product\ProductDataFactoryInterface;
 use Shopsys\FrameworkBundle\Model\Product\ProductFacade;
 use Shopsys\ShopBundle\Model\Product\Product;
-use Tests\ShopBundle\Test\DatabaseTestCase;
+use Tests\ShopBundle\Test\TransactionFunctionalTestCase;
 
-class ProductAvailabilityRecalculatorTest extends DatabaseTestCase
+class ProductAvailabilityRecalculatorTest extends TransactionFunctionalTestCase
 {
     public function testRecalculateOnProductEditNotUsingStock()
     {

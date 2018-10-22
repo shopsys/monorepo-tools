@@ -6,9 +6,9 @@ use DateTime;
 use Shopsys\FrameworkBundle\Model\Article\ArticleDataFactoryInterface;
 use Shopsys\FrameworkBundle\Model\Article\ArticleFactoryInterface;
 use Shopsys\ShopBundle\Model\Article\Article;
-use Tests\ShopBundle\Test\DatabaseTestCase;
+use Tests\ShopBundle\Test\TransactionFunctionalTestCase;
 
-class ArticleTest extends DatabaseTestCase
+class ArticleTest extends TransactionFunctionalTestCase
 {
     /**
      * @var \Shopsys\ShopBundle\Model\Article\ArticleDataFactory

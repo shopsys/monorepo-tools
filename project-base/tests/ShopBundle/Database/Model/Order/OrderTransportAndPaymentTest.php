@@ -10,9 +10,9 @@ use Shopsys\FrameworkBundle\Model\Transport\TransportDataFactoryInterface;
 use Shopsys\FrameworkBundle\Model\Transport\TransportFacade;
 use Shopsys\ShopBundle\Model\Payment\Payment;
 use Shopsys\ShopBundle\Model\Transport\Transport;
-use Tests\ShopBundle\Test\DatabaseTestCase;
+use Tests\ShopBundle\Test\TransactionFunctionalTestCase;
 
-class OrderTransportAndPaymentTest extends DatabaseTestCase
+class OrderTransportAndPaymentTest extends TransactionFunctionalTestCase
 {
 //    public function testVisibleTransport()
 //    {
