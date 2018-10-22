@@ -38,8 +38,10 @@ DOCKER_IMAGE_TAG=ci-commit-${GIT_COMMIT}
 docker image pull ${DOCKER_USERNAME}/php-fpm:${DOCKER_IMAGE_TAG} || (
     echo "Image not found (see warning above), building it instead..." &&
     docker image build --build-arg github_oauth_token=${GITHUB_OAUTH_TOKEN} \
+        --build-arg project_root=project-base \
         --tag ${DOCKER_USERNAME}/php-fpm:${DOCKER_IMAGE_TAG} \
-        -f project-base/docker/php-fpm/ci/Dockerfile \
+        --target ci \
+        -f project-base/docker/php-fpm/Dockerfile \
         . &&
     docker image push ${DOCKER_USERNAME}/php-fpm:${DOCKER_IMAGE_TAG}
 )

@@ -224,7 +224,8 @@ rm -rf .git
 After the project is setup correctly, we launch the build of php-fpm container by docker build command.
 ```
 docker build \
-    -f ./docker/php-fpm/Dockerfile-production \
+    -f ./docker/php-fpm/Dockerfile \
+    --target production \
     -t production-php-fpm \
     --compress \
     --build-arg github_oauth_token=PERSONAL_ACCESS_TOKEN_FROM_GITHUB \

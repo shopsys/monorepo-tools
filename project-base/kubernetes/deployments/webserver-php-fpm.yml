@@ -37,7 +37,7 @@ spec:
             initContainers:
                 -   name: copy-source-codes-to-application-folder
                     image: $PHP_FPM_IMAGE
-                    command: ["sh", "-c", "cp -r /source-code/. /var/www/html && chown -R www-data:www-data /var/www/html"]
+                    command: ["sh", "-c", "cp -r /source-code/. /var/www/html"]
                     volumeMounts:
                     -       name: source-codes
                             mountPath: /var/www/html

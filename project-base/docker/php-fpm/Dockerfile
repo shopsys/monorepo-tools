@@ -1,10 +1,12 @@
-FROM php:7.2-fpm-alpine
+FROM php:7.2-fpm-alpine as base
+
+ARG project_root=.
 
 # install git for computing diffs
 RUN apk add --update git
 
 # install Composer
-COPY docker-install-composer /usr/local/bin/docker-install-composer
+COPY ${project_root}/docker/php-fpm/docker-install-composer /usr/local/bin/docker-install-composer
 RUN chmod +x /usr/local/bin/docker-install-composer && docker-install-composer
 
 # libpng-dev needed by "gd" extension
@@ -58,17 +60,14 @@ ENV LD_PRELOAD /usr/lib/preloadable_libiconv.so php
 ENV LC_ALL=en_US.utf8 LANG=en_US.utf8 LANGUAGE=en_US.utf8
 
 # overwrite the original entry-point from the PHP Docker image with our own
-COPY docker-php-entrypoint /usr/local/bin/
+COPY ${project_root}/docker/php-fpm/docker-php-entrypoint /usr/local/bin/
 RUN chmod +x /usr/local/bin/docker-php-entrypoint
 
 # copy php.ini configuration
-COPY php-ini-overrides.ini /usr/local/etc/php/php.ini
+COPY ${project_root}/docker/php-fpm/php-ini-overrides.ini /usr/local/etc/php/php.ini
 
-# allow overwriting UID and GID o the user "www-data" to help solve issues with permissions in mounted volumes
-# if the GID is already in use, we will assign GID 82 instead (82 is the standard uid/gid for "www-data" in Alpine)
-ARG www_data_uid
-ARG www_data_gid
-RUN deluser www-data && (addgroup -g $www_data_gid www-data || addgroup -g 82 www-data) && adduser -u $www_data_uid -D -S -G www-data www-data
+# the user "www-data" is used when running the image, and therefore should own the workdir
+RUN chown www-data:www-data /var/www/html
 USER www-data
 
 # allow configuring the GitHub OAuth token
@@ -77,3 +76,44 @@ RUN if [ -n "$github_oauth_token" ]; then composer config -g github-oauth.github
 
 # hirak/prestissimo makes the install of Composer dependencies faster by parallel downloading
 RUN composer global require hirak/prestissimo
+
+########################################################################################################################
+
+FROM base as production
+
+COPY --chown=www-data:www-data / /var/www/html
+
+RUN touch /var/www/html/PRODUCTION
+
+RUN composer install --optimize-autoloader --no-interaction --no-progress --no-dev
+
+########################################################################################################################
+
+FROM base as ci
+
+# copy all files in the context to /source-code and install Composer dependencies
+# the files will be copied inside a mounted volume in /var/www/html so it's available both in php-fpm and nginx container
+# see project-base/kubernetes/deployments/webserver-php-fpm.yml for details
+COPY --chown=www-data:www-data / /source-code
+WORKDIR /source-code
+RUN composer install --optimize-autoloader --no-interaction --no-progress
+
+# switch back to the original workdir
+WORKDIR /var/www/html
+
+########################################################################################################################
+
+FROM base as development
+
+USER root
+
+# allow overwriting UID and GID o the user "www-data" to help solve issues with permissions in mounted volumes
+# if the GID is already in use, we will assign GID 82 instead (82 is the standard uid/gid for "www-data" in Alpine)
+ARG www_data_uid
+ARG www_data_gid
+RUN deluser www-data && (addgroup -g $www_data_gid www-data || addgroup -g 82 www-data) && adduser -u $www_data_uid -D -S -G www-data www-data
+
+# as the UID and GID might have changed, change the ownership of the home directory workdir again
+RUN chown www-data:www-data -R /home/www-data && chown www-data:www-data /var/www/html
+
+USER www-data
