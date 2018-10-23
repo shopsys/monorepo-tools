@@ -54,7 +54,7 @@ After the build is completed, a singledomain application is created.
 
 #### 1.6 Tests
 Some tests are prepared for the configuration with the first domain with `en` locale.
-For example `Tests\ShopBundle\Database\Twig\PriceExtensionTest` is expecting the specific format of displayed currency.
+For example `Tests\ShopBundle\Functional\Twig\PriceExtensionTest` is expecting the specific format of displayed currency.
 If you want to use already created tests for your specific configuration, you may need to modify these tests to be able to test your specific configuration of the domain.
 
 ### 2. How to add a new domain

@@ -22,8 +22,8 @@
         <testsuite name="Unit">
             <directory>tests/*Bundle/Unit</directory>
         </testsuite>
-        <testsuite name="Database">
-            <directory>tests/*Bundle/Database</directory>
+        <testsuite name="Functional">
+            <directory>tests/*Bundle/Functional</directory>
         </testsuite>
         <testsuite name="Smoke">
             <directory>tests/*Bundle/Smoke</directory>
@@ -40,7 +40,7 @@
             <exclude>
                 <directory>src/*/*Bundle/Resources</directory>
                 <directory>tests/*Bundle/Unit</directory>
-                <directory>tests/*Bundle/Database</directory>
+                <directory>tests/*Bundle/Functional</directory>
                 <directory>tests/*Bundle/Smoke</directory>
                 <directory>tests/*Bundle/Performance</directory>
             </exclude>

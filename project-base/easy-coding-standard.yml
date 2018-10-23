@@ -11,21 +11,21 @@ parameters:
             - '*/src/Shopsys/ShopBundle/Form/Front/Customer/BillingAddressFormType.php'
             - '*/src/Shopsys/ShopBundle/Form/Front/Customer/DeliveryAddressFormType.php'
             - '*/src/Shopsys/ShopBundle/Form/Front/Order/PersonalInfoFormType.php'
-            - '*/tests/ShopBundle/Database/EntityExtension/EntityExtensionTest.php'
-            - '*/tests/ShopBundle/Database/Model/Order/OrderFacadeTest.php'
-            - '*/tests/ShopBundle/Database/Model/Order/Preview/OrderPreviewCalculationTest.php'
-            - '*/tests/ShopBundle/Database/Model/Pricing/InputPriceRecalculationSchedulerTest.php'
+            - '*/tests/ShopBundle/Functional/EntityExtension/EntityExtensionTest.php'
+            - '*/tests/ShopBundle/Functional/Model/Order/OrderFacadeTest.php'
+            - '*/tests/ShopBundle/Functional/Model/Order/Preview/OrderPreviewCalculationTest.php'
+            - '*/tests/ShopBundle/Functional/Model/Pricing/InputPriceRecalculationSchedulerTest.php'
             - '*/tests/ShopBundle/Smoke/Http/RouteConfigCustomization.php'
 
         ObjectCalisthenics\Sniffs\Files\ClassTraitAndInterfaceLengthSniff:
-            - '*/tests/ShopBundle/Database/Model/Product/ProductVisibilityRepositoryTest.php'
+            - '*/tests/ShopBundle/Functional/Model/Product/ProductVisibilityRepositoryTest.php'
 
         Shopsys\CodingStandards\Sniffs\ValidVariableNameSniff:
-            - '*/tests/ShopBundle/Database/EntityExtension/EntityExtensionTest.php'
+            - '*/tests/ShopBundle/Functional/EntityExtension/EntityExtensionTest.php'
             - '*/tests/ShopBundle/Test/Codeception/_generated/AcceptanceTesterActions.php'
 
         Shopsys\CodingStandards\Sniffs\ObjectIsCreatedByFactorySniff:
             - '*/tests/*'
 
         Shopsys\CodingStandards\Sniffs\ForbiddenDumpSniff:
-            - '*/tests/ShopBundle/Database/Model/Cart/CartFacadeTest.php'
+            - '*/tests/ShopBundle/Functional/Model/Cart/CartFacadeTest.php'

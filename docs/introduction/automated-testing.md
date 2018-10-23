@@ -3,7 +3,7 @@
 Testing is a crucial part of development and maintenance of reliable software.
 For this reason Shopsys Framework comes with 5 types of automated tests:
 * [Unit tests](#unit-tests)
-* [Database tests](#database-tests-aka-integration-tests)
+* [Functional tests](#functional-tests)
 * [HTTP smoke tests](#http-smoke-tests)
 * [Acceptance tests](#acceptance-tests-aka-functional-tests-or-selenium-tests)
 * [Performance tests](#performance-tests)
@@ -83,13 +83,11 @@ When a test fails it provides detailed feedback to the developer.
 You can create similar unit tests anywhere in your directory `tests/Unit/`.
 If they are named with a prefix `Test` and are extending `\PHPUnit\Framework\TestCase` they will be executed during the [`tests` Phing target](./phing-targets.md#tests).
   
-
-### Database tests (a.k.a. integration tests)
+### Functional tests
 Even when all parts are working it is not guaranteed they work well together. Mocking can still be used for isolation when appropriate.
 
+Functional tests build DI container, so you can get any service you want. The service includes all dependencies as in a real application, so you test how the service **functions**.
 These tests use a separate database to not affect your application data so you can still use the application in *DEVELOPMENT* environment. It is still **not recommended** to run tests on a production server because things like filesystem are shared among all kernel environments.
-
-All tests are isolated from each other thanks to database transactions. This means they can be executed in any order as each has the same starting conditions.
 
 #### Advantages:
 * demo data can be used for testing with [`PersistentReferenceFacade`](https://github.com/shopsys/framework/blob/master/src/Component/DataFixture/PersistentReferenceFacade.php)
@@ -102,8 +100,19 @@ All tests are isolated from each other thanks to database transactions. This mea
 * low-level testing of components that are hard to unit-test
 
 #### Example:
-See test class [`\Tests\ShopBundle\Database\Model\Cart\CartFacadeTest`](../../project-base/tests/ShopBundle/Database/Model/Cart/CartFacadeTest.php). Notice usage of demo data instead of preparing own entities.
-  
+See test class [`\Tests\ShopBundle\Functional\Model\Cart\CartFacadeTest`](../../project-base/tests/ShopBundle/Functional/Model/Cart/CartFacadeTest.php). Notice usage of demo data instead of preparing own entities.
+
+#### Choose base test class
+We have two base classes that you can choose from
+
+##### [`\Tests\ShopBundle\Test\TransactionFunctionalTestCase`](../../project-base/tests/ShopBundle/Test/TransactionFunctionalTestCase.php)
+All tests are isolated from each other thanks to database transactions. This means they can be executed in any order as each has the same starting conditions.
+`TransactionFunctionalTestCase` is always a safe choice.
+
+##### [`\Tests\ShopBundle\Test\FunctionalTestCase`](../../project-base/tests/ShopBundle/Test/FunctionalTestCase.php)
+Tests do not use database transactions, so they are quicker.
+Use `FunctionalTestCase` if you are sure that you won't commit anything into the database.
+
 ### HTTP smoke tests
 Test HTTP codes returned by individual controller actions provided by the routing (e.g. product detail page should return *200 OK* for a visible product and *404 Not Found* for a hidden one).
 

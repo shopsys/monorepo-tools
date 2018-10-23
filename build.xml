@@ -155,7 +155,7 @@
         </exec>
     </target>
 
-    <target name="tests" depends="test-db-demo,tests-unit,tests-db,tests-smoke,tests-packages" description="Runs unit, database and smoke tests on a newly built test database and runs tests of all packages."/>
+    <target name="tests" depends="test-db-demo,tests-unit,tests-functional,tests-smoke,tests-packages" description="Runs unit, functional and smoke tests on a newly built test database and runs tests of all packages."/>
 
     <target name="tests-packages" description="Runs tests of packages.">
         <exec executable="${path.vendor}/bin/phpunit" logoutput="true" passthru="true" checkreturn="true">

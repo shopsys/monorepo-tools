@@ -6,9 +6,9 @@ use Shopsys\FrameworkBundle\Component\Domain\Domain;
 use Shopsys\FrameworkBundle\Component\Router\CurrentDomainRouter;
 use Shopsys\FrameworkBundle\Component\Router\DomainRouterFactory;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
-use Tests\ShopBundle\Test\DatabaseTestCase;
+use Tests\ShopBundle\Test\TransactionFunctionalTestCase;
 
-class LocalizationListenerTest extends DatabaseTestCase
+class LocalizationListenerTest extends TransactionFunctionalTestCase
 {
     public function testProductDetailOnFirstDomainHasEnglishLocale()
     {
