@@ -50,14 +50,14 @@ There is a list of all the repositories maintained by monorepo, changes in log b
 * [shopsys/microservice-product-search-export]
 
 ## [From 7.0.0-beta2 to Unreleased]
-
-## [From 7.0.0-beta1 to 7.0.0-beta2]
-### [shopsys/project-base]
 - [#533 main php-fpm container now uses multi-stage build feature](https://github.com/shopsys/shopsys/pull/533)
     - the Dockerfile for `php-fpm` has changed, update your `docker-compose.yml` and `docker/php-fpm/Dockerfile` accordingly
         - copy [`docker/php-fpm/Dockerfile`](https://github.com/shopsys/shopsys/blob/master/project-base/docker/php-fpm/Dockerfile) from GitHub
         - update the build config in `docker-compose.yml` ([changes in version and build config can be seen in the PR](https://github.com/shopsys/shopsys/pull/533/files#diff-1aa104f9fc120d0743883a5ba02bfe21))
     - rebuild images by running `docker-compose up -d --build`
+
+## [From 7.0.0-beta1 to 7.0.0-beta2]
+### [shopsys/project-base]
 - *(optional)* [#497 adding php.ini to image is now done only in dockerfiles](https://github.com/shopsys/shopsys/pull/497)
     - you should make the same changes in your repository for the php.ini configuration files to be added to your Docker images
         - remove all volumes from `docker-compose.yml.dist` templates that include `php-ini-overrides.ini`
