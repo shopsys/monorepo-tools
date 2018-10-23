@@ -10,8 +10,6 @@ services:
             - nginx-conf:/etc/nginx/conf.d/
         ports:
             - 8000:8080
-        links:
-            - php-fpm
         networks:
             - shopsys-network
 

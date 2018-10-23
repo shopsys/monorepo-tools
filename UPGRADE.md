@@ -50,6 +50,9 @@ There is a list of all the repositories maintained by monorepo, changes in log b
 * [shopsys/microservice-product-search-export]
 
 ## [From 7.0.0-beta2 to Unreleased]
+### [shopsys/project-base]
+- *(optional)* [#428 Removed depends_on and links from docker-compose.yml files](https://github.com/shopsys/shopsys/pull/528) 
+    - remove all `depends_on` and `links` from your docker-compose files because they are unnecessary
 - [#533 main php-fpm container now uses multi-stage build feature](https://github.com/shopsys/shopsys/pull/533)
     - the Dockerfile for `php-fpm` has changed, update your `docker-compose.yml` and `docker/php-fpm/Dockerfile` accordingly
         - copy [`docker/php-fpm/Dockerfile`](https://github.com/shopsys/shopsys/blob/master/project-base/docker/php-fpm/Dockerfile) from GitHub

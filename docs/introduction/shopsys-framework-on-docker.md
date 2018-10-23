@@ -48,9 +48,6 @@ The definition of container consists of some options:
 * **volumes**: location of data storage in which the data will remain even after the container is removed (see [Volumes official docs.](https://docs.docker.com/engine/admin/volumes/volumes/))
 * **ports**: ports mapping, in default configuration is port 8000 mapped on port 8080 inside container
 * **environment**: environment variables, after setting they can be used throughout the container
-* **links**: settings with which containers can the actual container communicate. If nothing is set,
-an actual container can communicate with all containers
-* **depends_on**: definition of dependency on another running container
 
 ##### Volumes
 The definition of volumes, example:

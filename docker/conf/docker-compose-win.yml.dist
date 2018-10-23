@@ -27,9 +27,6 @@ services:
             - ./docker/nginx/nginx.conf:/etc/nginx/conf.d/default.conf
         ports:
             - "8000:8080"
-        links:
-            - php-fpm
-            - smtp-server
 
     php-fpm:
         build:
@@ -45,16 +42,8 @@ services:
             - shopsys-framework-vendor-sync:/var/www/html/vendor
             - shopsys-framework-web-sync:/var/www/html/web
             - ./project-base/docker/php-fpm/php-ini-overrides.ini:/usr/local/etc/php/php.ini
-        links:
-            - microservice-product-search
-            - microservice-product-search-export
-            - postgres
-            - redis
         ports:
             - "35729:35729"
-        depends_on:
-            - postgres
-            - redis
 
     microservice-product-search:
         build:
@@ -66,10 +55,6 @@ services:
         container_name: shopsys-framework-microservice-product-search
         volumes:
             - ./microservices/product-search:/var/www/html
-        links:
-            - elasticsearch
-        depends_on:
-            - elasticsearch
 
     microservice-product-search-export:
         build:
@@ -81,10 +66,6 @@ services:
         container_name: shopsys-framework-microservice-product-search-export
         volumes:
             - ./microservices/product-search-export:/var/www/html
-        links:
-            - elasticsearch
-        depends_on:
-            - elasticsearch
 
     redis:
         image: redis:4.0-alpine
@@ -95,10 +76,6 @@ services:
         container_name: shopsys-framework-redis-admin
         environment:
             - REDIS_1_HOST=redis
-        links:
-            - redis
-        depends_on:
-            - redis
         ports:
             - "1600:80"
 
@@ -110,18 +87,12 @@ services:
         environment:
             - HUB_PORT_4444_TCP_ADDR=hub
             - HUB_PORT_4444_TCP_PORT=4444
-        links:
-            - webserver
 
     adminer:
         image: adminer:4.6
         container_name: shopsys-framework-adminer
         ports:
             - "1100:8080"
-        links:
-            - postgres
-        depends_on:
-            - postgres
 
     smtp-server:
         image: namshi/smtp:latest
