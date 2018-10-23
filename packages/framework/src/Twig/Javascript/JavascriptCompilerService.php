@@ -24,6 +24,11 @@ class JavascriptCompilerService
     /**
      * @var string[]
      */
+    private $allowedDirectories;
+
+    /**
+     * @var string[]
+     */
     private $jsSourcePaths;
 
     /**
@@ -55,6 +60,7 @@ class JavascriptCompilerService
         string $webPath,
         array $jsSourcePaths,
         string $jsUrlPrefix,
+        array $allowedDirectories,
         Filesystem $filesystem,
         Domain $domain,
         JsCompiler $jsCompiler,
@@ -63,6 +69,7 @@ class JavascriptCompilerService
         $this->webPath = $webPath;
         $this->jsSourcePaths = $jsSourcePaths;
         $this->jsUrlPrefix = $jsUrlPrefix;
+        $this->allowedDirectories = $allowedDirectories;
         $this->filesystem = $filesystem;
         $this->domain = $domain;
         $this->jsCompiler = $jsCompiler;
@@ -148,7 +155,7 @@ class JavascriptCompilerService
     private function getRelativeTargetPath($javascript)
     {
         $relativeTargetPath = null;
-        if (strpos($javascript, 'admin/') === 0 || strpos($javascript, 'frontend/') === 0 || strpos($javascript, 'common/') === 0) {
+        if ($this->isDirectoryAllowed($javascript)) {
             $relativeTargetPath = substr($this->jsUrlPrefix, 1) . $javascript;
             if (strpos($relativeTargetPath, '/') === 0) {
                 $relativeTargetPath = substr($relativeTargetPath, 1);
@@ -158,6 +165,20 @@ class JavascriptCompilerService
         }
 
         return $relativeTargetPath;
+    }
+
+    /**
+     * @param string $javascript
+     * @return bool
+     */
+    private function isDirectoryAllowed(string $javascript): bool
+    {
+        foreach ($this->allowedDirectories as $allowedDirectory) {
+            if (strpos($javascript, $allowedDirectory) === 0) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /**

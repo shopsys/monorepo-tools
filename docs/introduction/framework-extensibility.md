@@ -22,6 +22,8 @@ as well as a list of customizations that are not (and will not be) possible at a
 * open-box modifications in `project-base`
     * e.g. adding new entities, changing the FE design, customization of FE javascripts, adding new FE pages (routes and controllers), ...
 * [Hiding the existing features and functionality](https://github.com/shopsys/demoshop/pull/13)
+* adding a new javascript into admin
+    * add the new javascript files into the directory `src/Shopsys/ShopBundle/Resources/scripts/custom_admin` and they will be loaded automatically
 
 ## What is achievable with additional effort
 

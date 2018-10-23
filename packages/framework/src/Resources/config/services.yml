@@ -578,6 +578,7 @@ services:
             - '%shopsys.web_dir%'
             - ['%shopsys.javascript_sources_dir%', '%shopsys.framework.javascript_sources_dir%']
             - '%shopsys.javascript_url_prefix%'
+            - ['admin/', 'common/', 'custom_admin/', 'frontend/']
 
     translation.loader.po:
         class: Shopsys\FrameworkBundle\Component\Translation\PoFileLoader
