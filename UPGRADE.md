@@ -53,6 +53,40 @@ There is a list of all the repositories maintained by monorepo, changes in log b
 ### [shopsys/project-base]
 - *(optional)* [#428 Removed depends_on and links from docker-compose.yml files](https://github.com/shopsys/shopsys/pull/528) 
     - remove all `depends_on` and `links` from your docker-compose files because they are unnecessary
+
+### [shopsys/shopsys]
+- *(MacOS only)* [#503 updated docker-sync configuration](https://github.com/shopsys/shopsys/pull/503/)
+    - run `docker-compose down` to turn off your containers
+    - run `docker-sync clean` so your volumes will be removed
+    - remove these lines from `docker-compose.yml`
+        ```
+        shopsys-framework-postgres-data-sync:
+            external: true
+        shopsys-framework-elasticsearch-data-sync:
+            external: true
+        ```
+    - remove these lines from `docker-sync.yml`
+        ```
+        shopsys-framework-postgres-data-sync:
+            src: './project-base/var/postgres-data/'
+            host_disk_mount_mode: 'cached'
+         shopsys-framework-elasticsearch-data-sync:
+            src: './project-base/var/elasticsearch-data/'
+            host_disk_mount_mode: 'cached'
+        ```
+    - *(monorepo only)* add `shopsys-framework-microservice-product-search-sync` and `shopsys-framework-microservice-product-search-export-sync` volumes to `docker-compose.yml` for `php-fpm` service
+        ```
+        services:
+            # ... 
+            php-fpm:
+                # ...
+                volumes:
+                    # ...
+                    - shopsys-framework-microservice-product-search-sync:/var/www/html/microservices/product-search
+                    - shopsys-framework-microservice-product-search-export-sync:/var/www/html/microservices/product-search-export
+        ```
+    - run `docker-sync start` to create volumes
+    - run `docker-compose up -d --force-recreate` to start application again 
 - [#533 main php-fpm container now uses multi-stage build feature](https://github.com/shopsys/shopsys/pull/533)
     - the Dockerfile for `php-fpm` has changed, update your `docker-compose.yml` and `docker/php-fpm/Dockerfile` accordingly
         - copy [`docker/php-fpm/Dockerfile`](https://github.com/shopsys/shopsys/blob/master/project-base/docker/php-fpm/Dockerfile) from GitHub
