@@ -55,6 +55,11 @@ There is a list of all the repositories maintained by monorepo, changes in log b
         - copy [`docker/php-fpm/Dockerfile`](https://github.com/shopsys/shopsys/blob/master/project-base/docker/php-fpm/Dockerfile) from GitHub
         - update the build config in `docker-compose.yml` ([changes in version and build config can be seen in the PR](https://github.com/shopsys/shopsys/pull/533/files#diff-1aa104f9fc120d0743883a5ba02bfe21))
     - rebuild images by running `docker-compose up -d --build`
+- *(optional)* rename Database tests to Functional tests
+    - rename base class `DatabaseTestCase` to `TransactionFunctionalTestCase`
+    - rename test namespace `Database` to `Functional`
+    - rename phing target `tests-db` to `tests-functional`
+    - you can follow [#541 Rename database tests to functional tests](https://github.com/shopsys/shopsys/pull/541)
 
 ## [From 7.0.0-beta1 to 7.0.0-beta2]
 ### [shopsys/project-base]
