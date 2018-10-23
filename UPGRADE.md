@@ -106,6 +106,11 @@ There is a list of all the repositories maintained by monorepo, changes in log b
 - [#530 - Update of installation for production via docker](https://github.com/shopsys/shopsys/pull/530)
     - update `docker-compose.yml` on production server with the new configuration from updated [`docker-compose.prod.yml`](./project-base/docker/conf/docker-compose.prod.yml.dist) file
     - update `nginx.conf` with configuration from updated [`nginx.conf`](./project-base/docker/nginx/nginx.conf)
+- [#545 - Part of the application build is now contained in the build of the image](https://github.com/shopsys/shopsys/pull/545)
+    - the Dockerfile for `php-fpm` has changed, update your `docker/php-fpm/Dockerfile`
+    - rebuild image by running `docker-compose up -d --build`
+    - files `build.xml` and `build-dev.xml` were updated to speed up deployment process of built docker images of php-fpm
+    - installation guide for production via Docker was updated, now there is no need for the first part of the build phing target
 
 ## [From 7.0.0-beta1 to 7.0.0-beta2]
 ### [shopsys/project-base]

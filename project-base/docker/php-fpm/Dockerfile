@@ -87,6 +87,8 @@ RUN touch /var/www/html/PRODUCTION
 
 RUN composer install --optimize-autoloader --no-interaction --no-progress --no-dev
 
+RUN php phing composer npm dirs-create assets
+
 ########################################################################################################################
 
 FROM base as ci
@@ -97,6 +99,9 @@ FROM base as ci
 COPY --chown=www-data:www-data / /source-code
 WORKDIR /source-code
 RUN composer install --optimize-autoloader --no-interaction --no-progress
+
+# clean cache because of recreating valid autloading of vendor after /source-code is copied into /var/www/html
+RUN php phing composer-dev npm dirs-create assets tests-static tests-acceptance-build clean
 
 # switch back to the original workdir
 WORKDIR /var/www/html

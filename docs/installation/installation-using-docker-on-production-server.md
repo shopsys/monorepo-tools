@@ -221,7 +221,7 @@ We remove `.git` folder so the built image doesn't have additional data.
 ```
 rm -rf .git
 ```
-After the project is setup correctly, we launch the build of php-fpm container by docker build command.
+After the project is setup correctly, we launch the build of php-fpm container by docker build command that will build image with composer, npm packages and created assets.
 ```
 docker build \
     -f ./docker/php-fpm/Dockerfile \
@@ -292,9 +292,7 @@ Now we go to `/admin/dashboard/` and fulfill all requests that are demanding for
 We have running production shop project and we want to update it with some changes that were made in the project git repository.
 We need to follow some steps that will change old version of the shop for the new one.
  
-To preserve created data we need to use phing targets for building application environment of `php-fpm` container.
-* `build-deploy-part-1-db-independent` no maintenance page is needed during execution of this command 
-* `build-deploy-part-2-db-dependent` maintenance page is needed if there exist unapplied database migrations  
+To preserve created data we need to use phing target `build-deploy-part-2-db-dependent` for building application environment of `php-fpm` container, maintenance page is needed if there exist unapplied database migrations. 
 
 With each update of master branch in our repository we need to rebuild image based on [Docker Image Building](./installation-using-docker-on-production-server.md#docker-image-building) section.
 
@@ -312,9 +310,6 @@ docker run --detach --name build-php-fpm-container \
     --network production_shopsys-network \
     production-php-fpm \
     docker-php-entrypoint php-fpm
-
-# launch build part1 that doesn't have impact on actual running production container
-docker exec build-php-fpm-container php phing build-deploy-part-1-db-independent
 
 # turn on maintenance page on actual running production container
 docker exec production-php-fpm php phing maintenance-on
