@@ -18,7 +18,7 @@
 
     <target name="test-db-demo" depends="clean,test-db-wipe-public-schema,test-db-import-basic-structure,test-db-migrations,test-create-domains-db-functions,test-db-fixtures-demo-singledomain,test-create-domains-data,test-generate-friendly-urls,test-db-fixtures-demo-multidomain,test-load-plugin-demo-data,test-replace-domains-urls" description="Drops all data in test database and creates a new one with demo data."/>
     <target name="test-db-performance" depends="test-db-demo,test-db-fixtures-performance" description="Drops all data in test database and creates a new one with performance data."/>
-    <target name="tests" depends="test-db-demo,tests-unit,tests-db,tests-smoke" description="Runs unit, database and smoke tests on a newly built test database."/>
+    <target name="tests" depends="test-db-demo,tests-unit,tests-functional,tests-smoke" description="Runs unit, functional and smoke tests on a newly built test database."/>
 
     <target name="tests-performance-run" depends="clean,test-db-performance,tests-performance-warmup,tests-performance" description="Runs performance tests on a newly built test database with performance data."/>
 
@@ -442,7 +442,7 @@
         </if>
     </target>
 
-    <target name="tests-db" depends="clean" description="Runs database/integration tests.">
+    <target name="tests-functional" depends="clean" description="Runs functional tests.">
         <if>
             <istrue value="${is-multidomain}" />
             <then>
