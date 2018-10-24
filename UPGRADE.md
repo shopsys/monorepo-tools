@@ -51,9 +51,10 @@ There is a list of all the repositories maintained by monorepo, changes in log b
 
 ## [From 7.0.0-beta2 to Unreleased]
 ### [shopsys/project-base]
-- *(optional)* to simplify installation, add `"Shopsys\\FrameworkBundle\\Command\\ComposerScriptHandler::configureDomainsUrls"` to `post-install-cmd` and `post-update-cmd` scripts in your `composer.json`  
-You will not have to copy the `domains_urls.yml.dist` during the installation anymore.
-You can also remove the now redundant Phing target `domains-urls-check` from your `build.xml` and `build-dev.xml`.
+- *(optional)* [#540 domains URLs are auto-configured during "composer install"](https://github.com/shopsys/shopsys/pull/540)
+    - to simplify installation, add `"Shopsys\\FrameworkBundle\\Command\\ComposerScriptHandler::postInstall"` to `post-install-cmd` and `"Shopsys\\FrameworkBundle\\Command\\ComposerScriptHandler::postInstall"` to  `post-update-cmd` scripts in your `composer.json`
+    - you will not have to copy the `domains_urls.yml.dist` during the installation anymore
+    - you can also remove the now redundant Phing target `domains-urls-check` from your `build.xml` and `build-dev.xml`
 - *(optional)* [#428 Removed depends_on and links from docker-compose.yml files](https://github.com/shopsys/shopsys/pull/528) 
     - remove all `depends_on` and `links` from your docker-compose files because they are unnecessary
 - [#538 - phing targets: create-domains-data is now dependent on create-domains-db-functions](https://github.com/shopsys/shopsys/pull/538)

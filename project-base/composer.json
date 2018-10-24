@@ -106,13 +106,13 @@
             "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::buildBootstrap",
             "Shopsys\\Environment::checkEnvironment",
-            "Shopsys\\FrameworkBundle\\Command\\ComposerScriptHandler::configureDomainsUrls"
+            "Shopsys\\FrameworkBundle\\Command\\ComposerScriptHandler::postInstall"
         ],
         "post-update-cmd": [
             "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::buildBootstrap",
             "Shopsys\\Environment::checkEnvironment",
-            "Shopsys\\FrameworkBundle\\Command\\ComposerScriptHandler::configureDomainsUrls"
+            "Shopsys\\FrameworkBundle\\Command\\ComposerScriptHandler::postUpdate"
         ]
     },
     "config": {

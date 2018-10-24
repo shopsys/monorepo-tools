@@ -13,17 +13,45 @@ class ComposerScriptHandler extends ScriptHandler
     /**
      * @param \Composer\Script\Event $event
      */
-    public static function configureDomainsUrls(Event $event)
+    public static function postInstall(Event $event)
     {
+        static::executeCommands($event, [
+            'shopsys:domains-urls:configure',
+        ]);
+    }
+
+    /**
+     * @param \Composer\Script\Event $event
+     */
+    public static function postUpdate(Event $event)
+    {
+        static::executeCommands($event, [
+            'shopsys:domains-urls:configure',
+        ]);
+    }
+
+    /**
+     * @param \Composer\Script\Event $event
+     * @param string[] $commands
+     */
+    protected static function executeCommands(Event $event, array $commands)
+    {
+        $io = $event->getIO();
+        $actionName = sprintf('execute Shopsys Framework commands for "%s" Composer event', $event->getName());
         $options = self::getOptions($event);
-        $consoleDir = self::getConsoleDir($event, 'configure domains URLs');
+        $consoleDir = self::getConsoleDir($event, $actionName);
 
         if (null === $consoleDir) {
-            $event->getIO()->writeError('Could not locate console dir to configure domains URLs.');
+            $io->writeError(sprintf('Could not locate console dir to %s.', $actionName));
+            $io->writeError(sprintf('Commands "%s" not executed.', implode('", "', $commands)));
 
             return;
         }
 
-        static::executeCommand($event, $consoleDir, 'shopsys:domains-urls:configure', $options['process-timeout']);
+        foreach ($commands as $command) {
+            $io->write(['', sprintf('> Running "%s" command:', $command)]);
+
+            static::executeCommand($event, $consoleDir, $command, $options['process-timeout']);
+        }
     }
 }
