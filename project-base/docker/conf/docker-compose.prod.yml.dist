@@ -24,7 +24,6 @@ services:
         extra_hosts:
             - postgres:192.168.0.1
             - redis:192.168.0.1
-            - smtp-server:192.168.0.1
         networks:
             - shopsys-network
 
@@ -45,6 +44,13 @@ services:
             - ELASTICSEARCH_HOSTS_STRING=192.168.0.1:9200
         networks:
             - shopsys-network
+
+    smtp-server:
+        image: namshi/smtp:latest
+        container_name: shopsys-framework-smtp-server
+        networks:
+            - shopsys-network
+
 volumes:
     web-volume:
     nginx-conf:

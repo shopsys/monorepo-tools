@@ -63,6 +63,9 @@ There is a list of all the repositories maintained by monorepo, changes in log b
     - rename test namespace `Database` to `Functional`
     - rename phing target `tests-db` to `tests-functional`
     - you can follow [#541 Rename database tests to functional tests](https://github.com/shopsys/shopsys/pull/541)
+- [#530 - Update of installation for production via docker](https://github.com/shopsys/shopsys/pull/530)
+    - update `docker-compose.yml` on production server with the new configuration from updated [`docker-compose.prod.yml`](./project-base/docker/conf/docker-compose.prod.yml.dist) file
+    - update `nginx.conf` with configuration from updated [`nginx.conf`](./project-base/docker/nginx/nginx.conf)
 
 ## [From 7.0.0-beta1 to 7.0.0-beta2]
 ### [shopsys/project-base]
