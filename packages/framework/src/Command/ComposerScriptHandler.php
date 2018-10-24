@@ -17,6 +17,7 @@ class ComposerScriptHandler extends ScriptHandler
     {
         static::executeCommands($event, [
             'shopsys:domains-urls:configure',
+            'cache:clear --no-warmup',
         ]);
     }
 
@@ -27,6 +28,7 @@ class ComposerScriptHandler extends ScriptHandler
     {
         static::executeCommands($event, [
             'shopsys:domains-urls:configure',
+            'cache:clear --no-warmup',
         ]);
     }
 
