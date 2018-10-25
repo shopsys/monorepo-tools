@@ -1,20 +1,65 @@
-# Phing Targets
+# Console Commands for Application Management (Phing Targets)
 
 ## Phing
-[Phing](https://www.phing.info/) is a PHP project build tool with similar capabilities as GNU `make`. It can be configured via XML (see `build.xml` and `build-dev.xml`) to install your application, run automatic tests and code standards checks, build CSS files from LESS and more.
+[Phing](https://www.phing.info/) is a PHP project build tool with similar capabilities as GNU `make`. It can be configured via XML to install your application, run automatic tests and code standards checks, build CSS files from LESS and more.
 
 ## List of all available targets
 You can list all available Phing targets by running:
 ```
-php phing -l
+php phing
 ```
 
-## Targets
-Every Phing target is a task that can be executed simply by `php phing <target-name>` command.
+## How Phing targets work
+Phing targets are defined in `build.xml` and `build-dev.xml` files.
+Any Phing target can execute a subset of other targets or console commands.
 
 *Tip: You can use shorthand command `./phing <target-name>` on Unix system or `phing <target-name>` in Windows CMD instead of `php phing <target-name>`.*
 
+Let us take `build` target for example.
+It is located in `build.xml` file and looks like this:
+```xml
+<target name="build" depends="build-deploy-part-1-db-independent, build-deploy-part-2-db-dependent" description="Builds application for production preserving your DB."/>
+```
+This means that every time you run `php phing build` the `build-deploy-part-1-db-independent` and `build-deploy-part-2-db-dependent` targets are executed.
+But what do those targets do?
+Let us take look at the first one, that is located in the same file:
+```xml
+<target name="build-deploy-part-1-db-independent" depends="clean,composer,npm,dirs-create,domains-urls-check,assets" description="First part of application build for production preserving your DB (can be run without maintenance page)."/>
+```
+Target `build-deploy-part-1-db-independent` also executes subset of Phing targets (`clean`,`composer`,`npm`,`dirs-create`,`domains-urls-check`,`assets`).
+Let us move a little deeper and take a look at the first one, `clean`:
+```xml
+<target name="clean" description="Cleans up directories with cache and scripts which are generated on demand.">
+    <delete failonerror="false" includeemptydirs="true">
+        <fileset dir="${path.var}/cache/">
+            <exclude name="/" />
+        </fileset>
+        <fileset dir="${path.web.scripts}/">
+            <exclude name="/" />
+        </fileset>
+    </delete>
+</target>
+```
+Here we can see that this target deletes all dirs in folder `/var/cache/` and `/web/scripts/`.
+
+More information about working with Phing can be found in its [documentation](https://www.phing.info/phing/guide/en/output/hlhtml/#d5e795).
+
+## Most Used Phing Targets
+Every Phing target is a task that can be executed simply by `php phing <target-name>` command.
+
 ### Basic
+
+#### build
+Builds the application for production preserving your DB.
+
+Most important build command for production. Cleans cache, installs composer dependencies, installs npm, install assets, installs database migrations and much more.
+
+*Note: More about how to install and deploy your application in production can be found in [Installation Using Docker on Production Server](/docs/installation/installation-using-docker-on-production-server.md)* 
+
+#### build-demo-ci
+Most important build command for continuous integration server. Builds the whole application and after that runs all coding standards checks and all tests.
+
+*Note: More about how to build your CI and check your application there can be found in [Configuring Jenkins for Continuous Integration](/docs/cookbook/jenkins-configuration.md)*
 
 #### build-demo-dev
 Builds the application for development with clean demo DB and runs checks on changed files.
@@ -25,6 +70,9 @@ Most important build command for development. Wipes the application data, instal
 Builds the application for development preserving your DB while skipping non-essential steps.
 
 Useful for quick migration of recently pulled changes. Cleans cache, installs missing dependencies via Composer, executes DB migrations, prepares assets and builds LESS into CSS.
+
+#### build-demo-dev-quick
+This target is useful if you have already running application and you want to quickly rebuild your application without checking coding standards, running tests, checking right timezone set and checking microservices.
 
 #### server-run
 Runs PHP built-in web server for a chosen domain.

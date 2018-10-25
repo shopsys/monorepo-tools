@@ -50,6 +50,9 @@ Start the build, for example using a phing target
 ```
 php phing build-demo-dev
 ```
+*Note: In this step you were using Phing target `build-demo-dev`. 
+More information about what Phing targets are and how they work can be found in [Console Commands for Application Management (Phing Targets)](/docs/introduction/console-commands-for-application-management-phing-targets.md)*
+
 After the build is completed, a singledomain application is created.
 
 #### 1.6 Tests

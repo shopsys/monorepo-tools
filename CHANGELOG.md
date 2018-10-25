@@ -1227,7 +1227,7 @@ That's why is this section formatted differently.
 - admin: E-mail newsletter: now contains list of registered e-mails with ability to delete them
 
 ##### Changed
-- cache is cleared before PHPUnit tests only when run via [Phing targets](https://github.com/shopsys/shopsys/blob/master/docs/introduction/phing-targets.md), not when run using `phpunit` directly 
+- cache is cleared before PHPUnit tests only when run via [Console Commands for Application Management (Phing Targets)](https://github.com/shopsys/shopsys/blob/master/docs/introduction/console-commands-for-application-management-phing-targets.md), not when run using `phpunit` directly 
 - PHPUnit tests now fail on warning 
 - end of support of PHP 7.0 
 - renamed TermsAndCondition to LegalCondition to avoid multiple classes for legal conditions agreements 

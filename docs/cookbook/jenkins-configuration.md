@@ -362,6 +362,9 @@ Install the application:
 /usr/bin/docker exec $JOB_NAME-shopsys-framework-php-fpm php phing db-create test-db-create build-demo-ci
 ```
 
+*Note: In this step you were using multiple Phing targets. 
+More information about what Phing targets are and how they work can be found in [Console Commands for Application Management (Phing Targets)](/docs/introduction/console-commands-for-application-management-phing-targets.md)*
+
 Our template is done, now we just need to create actual jobs from this template.
 
 ### Special Jobs

@@ -23,4 +23,4 @@ Apply the same procedure if you make the changes in Dockerfile or docker-compose
 
 These rules ensure that the code will remain consistent and the project is maintainable in the future.
 
-*Tip: Read more about automatic checks in [Phing Targets](./docs/introduction/phing-targets.md) and [Running Acceptance Tests](./docs/introduction/running-acceptance-tests.md).*
+*Tip: Read more about automatic checks in [Console Commands for Application Management (Phing Targets)](./docs/introduction/console-commands-for-application-management-phing-targets.md) and [Running Acceptance Tests](./docs/introduction/running-acceptance-tests.md).*

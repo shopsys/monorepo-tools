@@ -172,13 +172,15 @@ copy app\config\domains_urls.yml.dist app\config\domains_urls.yml
 php phing db-create
 php phing test-db-create
 ```
+
+*Note: In this step you were using multiple Phing targets. 
+More information about what Phing targets are and how they work can be found in [Console Commands for Application Management (Phing Targets)](/docs/introduction/console-commands-for-application-management-phing-targets.md)*
+
 ### 6. Build application
 ```
 php phing build-demo-dev
 ```
 **For solutions to commonly encountered problems during build see section [Troubleshooting](#troubleshooting) below or you might want to check [Required PHP Configuration](../introduction/required-php-configuration.md).**
-
-*Tip: See introduction into [Phing Targets](../introduction/phing-targets.md) to learn how can you easily accomplish some common tasks.*
 
 ### 7. Run integrated HTTP server
 ```
