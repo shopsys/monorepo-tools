@@ -66,7 +66,7 @@ class HeurekaProductDomainFacade
     }
 
     /**
-     * @param $productId
+     * @param int $productId
      */
     public function delete($productId)
     {
@@ -79,7 +79,7 @@ class HeurekaProductDomainFacade
     }
 
     /**
-     * @param $productId
+     * @param int $productId
      * @param \Shopsys\ProductFeed\HeurekaBundle\Model\Product\HeurekaProductDomainData[] $heurekaProductDomainsData
      */
     public function saveHeurekaProductDomainsForProductId($productId, array $heurekaProductDomainsData)
@@ -94,7 +94,7 @@ class HeurekaProductDomainFacade
     }
 
     /**
-     * @param $productId
+     * @param int $productId
      * @param \Shopsys\ProductFeed\HeurekaBundle\Model\Product\HeurekaProductDomainData $heurekaProductDomainData
      */
     public function saveHeurekaProductDomain($productId, HeurekaProductDomainData $heurekaProductDomainData)

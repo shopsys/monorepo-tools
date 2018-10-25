@@ -149,8 +149,8 @@ class OrderController extends FrontBaseController
 
     public function indexAction()
     {
+        /** @var \Shopsys\FrameworkBundle\Component\FlashMessage\Bag $flashMessageBag */
         $flashMessageBag = $this->get('shopsys.shop.component.flash_message.bag.front');
-        /* @var $flashMessageBag \Shopsys\FrameworkBundle\Component\FlashMessage\Bag */
 
         $cart = $this->cartFacade->getCartOfCurrentCustomer();
         if ($cart->isEmpty()) {
@@ -274,7 +274,7 @@ class OrderController extends FrontBaseController
     }
 
     /**
-     * @param \Shopsys\FrameworkBundle\Model\Order\OrderData $orderData
+     * @param \Shopsys\ShopBundle\Model\Order\OrderData $orderData
      * @param \Shopsys\FrameworkBundle\Model\Order\Preview\OrderPreview $orderPreview
      * @param \Shopsys\FrameworkBundle\Model\Transport\Transport[] $transports
      * @param \Shopsys\FrameworkBundle\Model\Payment\Payment[] $payments

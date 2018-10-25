@@ -24,7 +24,7 @@ class Product extends BaseProduct
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\Product\ProductCategoryDomainFactoryInterface $productCategoryDomainFactory
-     * @param \Shopsys\ShopBundle\Model\Product\ProductData
+     * @param \Shopsys\ShopBundle\Model\Product\ProductData $productData
      */
     public function edit(
         ProductCategoryDomainFactoryInterface $productCategoryDomainFactory,

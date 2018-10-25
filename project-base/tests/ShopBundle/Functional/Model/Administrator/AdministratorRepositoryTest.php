@@ -14,10 +14,10 @@ class AdministratorRepositoryTest extends TransactionFunctionalTestCase
         $validMultidomainLoginToken = 'validMultidomainLoginToken';
         $multidomainLoginTokenExpiration = new DateTime('+60 seconds');
 
+        /** @var \Shopsys\ShopBundle\Model\Administrator\Administrator $administrator */
         $administrator = $this->getReference(AdministratorDataFixture::ADMINISTRATOR);
-        /* @var $administrator \Shopsys\ShopBundle\Model\Administrator\Administrator */
+        /** @var \Shopsys\FrameworkBundle\Model\Administrator\AdministratorRepository $administratorRepository */
         $administratorRepository = $this->getContainer()->get(AdministratorRepository::class);
-        /* @var $administratorRepository \Shopsys\FrameworkBundle\Model\Administrator\AdministratorRepository */
 
         $administrator->setMultidomainLoginTokenWithExpiration($validMultidomainLoginToken, $multidomainLoginTokenExpiration);
         $this->getEntityManager()->flush($administrator);
@@ -33,10 +33,10 @@ class AdministratorRepositoryTest extends TransactionFunctionalTestCase
         $invalidMultidomainLoginToken = 'invalidMultidomainLoginToken';
         $multidomainLoginTokenExpiration = new DateTime('+60 seconds');
 
+        /** @var \Shopsys\ShopBundle\Model\Administrator\Administrator $administrator */
         $administrator = $this->getReference(AdministratorDataFixture::ADMINISTRATOR);
-        /* @var $administrator \Shopsys\ShopBundle\Model\Administrator\Administrator */
+        /** @var \Shopsys\FrameworkBundle\Model\Administrator\AdministratorRepository $administratorRepository */
         $administratorRepository = $this->getContainer()->get(AdministratorRepository::class);
-        /* @var $administratorRepository \Shopsys\FrameworkBundle\Model\Administrator\AdministratorRepository */
 
         $administrator->setMultidomainLoginTokenWithExpiration($validMultidomainLoginToken, $multidomainLoginTokenExpiration);
         $this->getEntityManager()->flush($administrator);
@@ -51,10 +51,10 @@ class AdministratorRepositoryTest extends TransactionFunctionalTestCase
         $validMultidomainLoginToken = 'validMultidomainLoginToken';
         $multidomainLoginTokenExpiration = new DateTime('-60 seconds');
 
+        /** @var \Shopsys\ShopBundle\Model\Administrator\Administrator $administrator */
         $administrator = $this->getReference(AdministratorDataFixture::ADMINISTRATOR);
-        /* @var $administrator \Shopsys\ShopBundle\Model\Administrator\Administrator */
+        /** @var \Shopsys\FrameworkBundle\Model\Administrator\AdministratorRepository $administratorRepository */
         $administratorRepository = $this->getContainer()->get(AdministratorRepository::class);
-        /* @var $administratorRepository \Shopsys\FrameworkBundle\Model\Administrator\AdministratorRepository */
 
         $administrator->setMultidomainLoginTokenWithExpiration($validMultidomainLoginToken, $multidomainLoginTokenExpiration);
         $this->getEntityManager()->flush($administrator);

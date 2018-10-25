@@ -12,29 +12,29 @@ class AdministratorFrontSecurityFacadeTest extends TransactionFunctionalTestCase
 {
     public function testIsAdministratorLoggedNot()
     {
+        /** @var \Shopsys\FrameworkBundle\Model\Administrator\Security\AdministratorFrontSecurityFacade $administratorFrontSecurityFacade */
         $administratorFrontSecurityFacade = $this->getContainer()->get(AdministratorFrontSecurityFacade::class);
-        /* @var $administratorFrontSecurityFacade \Shopsys\FrameworkBundle\Model\Administrator\Security\AdministratorFrontSecurityFacade */
 
         $this->assertFalse($administratorFrontSecurityFacade->isAdministratorLogged());
     }
 
     public function testIsAdministratorLogged()
     {
+        /** @var \Symfony\Component\HttpFoundation\Session\SessionInterface $session */
         $session = $this->getContainer()->get('session');
-        /* @var $session \Symfony\Component\HttpFoundation\Session\SessionInterface */
+        /** @var \Shopsys\FrameworkBundle\Model\Administrator\Security\AdministratorFrontSecurityFacade $administratorFrontSecurityFacade */
         $administratorFrontSecurityFacade = $this->getContainer()->get(AdministratorFrontSecurityFacade::class);
-        /* @var $administratorFrontSecurityFacade \Shopsys\FrameworkBundle\Model\Administrator\Security\AdministratorFrontSecurityFacade */
 
+        /** @var \Shopsys\ShopBundle\Model\Administrator\Administrator $administrator */
         $administrator = $this->getReference(AdministratorDataFixture::ADMINISTRATOR);
-        /* @var $administrator \Shopsys\ShopBundle\Model\Administrator\Administrator */
         $password = '';
         $roles = $administrator->getRoles();
         $token = new UsernamePasswordToken($administrator, $password, AdministratorFrontSecurityFacade::ADMINISTRATION_CONTEXT, $roles);
 
         $session->set('_security_' . AdministratorFrontSecurityFacade::ADMINISTRATION_CONTEXT, serialize($token));
 
+        /** @var \Shopsys\FrameworkBundle\Model\Administrator\Activity\AdministratorActivityFacade $administratorActivityFacade */
         $administratorActivityFacade = $this->getContainer()->get(AdministratorActivityFacade::class);
-        /* @var $administratorActivityFacade \Shopsys\FrameworkBundle\Model\Administrator\Activity\AdministratorActivityFacade */
         $administratorActivityFacade->create($administrator, '127.0.0.1');
 
         $this->assertTrue($administratorFrontSecurityFacade->isAdministratorLogged());

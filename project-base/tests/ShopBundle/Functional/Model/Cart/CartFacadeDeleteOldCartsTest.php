@@ -78,8 +78,8 @@ class CartFacadeDeleteOldCartsTest extends TransactionFunctionalTestCase
      */
     private function getProductById($productId)
     {
+        /** @var \Shopsys\FrameworkBundle\Model\Product\ProductFacade $productFacade */
         $productFacade = $this->getContainer()->get(ProductFacade::class);
-        /* @var $productFacade \Shopsys\FrameworkBundle\Model\Product\ProductFacade */
 
         return $productFacade->getById($productId);
     }
@@ -89,8 +89,8 @@ class CartFacadeDeleteOldCartsTest extends TransactionFunctionalTestCase
      */
     private function getCartFacadeForRegisteredCustomer()
     {
+        /** @var \Shopsys\FrameworkBundle\Model\Customer\CustomerFacade $customerFacade */
         $customerFacade = $this->getContainer()->get(CustomerFacade::class);
-        /* @var $customerFacade \Shopsys\FrameworkBundle\Model\Customer\CustomerFacade */
 
         $user = $customerFacade->getUserById(1);
 

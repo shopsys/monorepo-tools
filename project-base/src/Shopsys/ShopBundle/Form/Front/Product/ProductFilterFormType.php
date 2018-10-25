@@ -24,8 +24,8 @@ class ProductFilterFormType extends AbstractType
     {
         $priceScale = 2;
         $priceTransformer = new MoneyToLocalizedStringTransformer($priceScale, false);
+        /** @var \Shopsys\FrameworkBundle\Model\Product\Filter\ProductFilterConfig $config */
         $config = $options['product_filter_config'];
-        /* @var $config \Shopsys\FrameworkBundle\Model\Product\Filter\ProductFilterConfig */
 
         $builder
             ->add('minimalPrice', MoneyType::class, [

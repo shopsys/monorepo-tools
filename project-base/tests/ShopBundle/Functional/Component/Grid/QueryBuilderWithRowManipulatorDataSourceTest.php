@@ -11,8 +11,8 @@ class QueryBuilderWithRowManipulatorDataSourceTest extends TransactionFunctional
 {
     public function testGetOneRow()
     {
+        /** @var \Doctrine\ORM\EntityManager $em */
         $em = $this->getContainer()->get('doctrine.orm.entity_manager');
-        /* @var $em \Doctrine\ORM\EntityManager */
 
         $qb = $em->createQueryBuilder();
         $qb->select('p')
@@ -32,8 +32,8 @@ class QueryBuilderWithRowManipulatorDataSourceTest extends TransactionFunctional
 
     public function testGetTotalRowsCount()
     {
+        /** @var \Doctrine\ORM\EntityManager $em */
         $em = $this->getContainer()->get('doctrine.orm.entity_manager');
-        /* @var $em \Doctrine\ORM\EntityManager */
 
         $qb = $em->createQueryBuilder();
         $qb->select('p')
@@ -54,8 +54,8 @@ class QueryBuilderWithRowManipulatorDataSourceTest extends TransactionFunctional
 
     public function testGetRows()
     {
+        /** @var \Doctrine\ORM\EntityManager $em */
         $em = $this->getContainer()->get('doctrine.orm.entity_manager');
-        /* @var $em \Doctrine\ORM\EntityManager */
 
         $qb = $em->createQueryBuilder();
         $qb->select('p')

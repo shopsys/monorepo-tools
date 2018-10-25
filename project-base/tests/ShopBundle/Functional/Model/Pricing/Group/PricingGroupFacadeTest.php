@@ -19,12 +19,12 @@ class PricingGroupFacadeTest extends TransactionFunctionalTestCase
     public function testCreate()
     {
         $em = $this->getEntityManager();
+        /** @var \Shopsys\ShopBundle\Model\Product\Product $product */
         $product = $this->getReference(ProductDataFixture::PRODUCT_PREFIX . '1');
-        /* @var $prodcu \Shopsys\ShopBundle\Model\Product\Product */
+        /** @var \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroupFacade $pricingGroupFacade */
         $pricingGroupFacade = $this->getContainer()->get(PricingGroupFacade::class);
-        /* @var $pricingGroupFacade \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroupFacade */
+        /** @var \Shopsys\FrameworkBundle\Model\Product\Pricing\ProductPriceRecalculator $productPriceRecalculator */
         $productPriceRecalculator = $this->getContainer()->get(ProductPriceRecalculator::class);
-        /* @var $productPriceRecalculator \Shopsys\FrameworkBundle\Model\Product\Pricing\ProductPriceRecalculator */
         $pricingGroupData = new PricingGroupData();
         $pricingGroupData->name = 'pricing_group_name';
         $pricingGroupData->coefficient = 1;
@@ -42,14 +42,14 @@ class PricingGroupFacadeTest extends TransactionFunctionalTestCase
     public function testEdit()
     {
         $em = $this->getEntityManager();
+        /** @var \Shopsys\ShopBundle\Model\Product\Product $product */
         $product = $this->getReference(ProductDataFixture::PRODUCT_PREFIX . '1');
-        /* @var $prodcu \Shopsys\ShopBundle\Model\Product\Product */
+        /** @var \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroup $pricingGroup */
         $pricingGroup = $this->getReference(PricingGroupDataFixture::PRICING_GROUP_ORDINARY_DOMAIN_1);
-        /* @var $pricingGroup \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroup */
+        /** @var \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroupFacade $pricingGroupFacade */
         $pricingGroupFacade = $this->getContainer()->get(PricingGroupFacade::class);
-        /* @var $pricingGroupFacade \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroupFacade */
+        /** @var \Shopsys\FrameworkBundle\Model\Product\Pricing\ProductPriceRecalculator $productPriceRecalculator */
         $productPriceRecalculator = $this->getContainer()->get(ProductPriceRecalculator::class);
-        /* @var $productPriceRecalculator \Shopsys\FrameworkBundle\Model\Product\Pricing\ProductPriceRecalculator */
         $productCalculatedPrice = $em->getRepository(ProductCalculatedPrice::class)->findOneBy([
             'product' => $product,
             'pricingGroup' => $pricingGroup,
@@ -80,24 +80,24 @@ class PricingGroupFacadeTest extends TransactionFunctionalTestCase
     public function testDeleteAndReplace()
     {
         $em = $this->getEntityManager();
+        /** @var \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroupFacade $pricingGroupFacade */
         $pricingGroupFacade = $this->getContainer()->get(PricingGroupFacade::class);
-        /* @var $pricingGroupFacade \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroupFacade */
+        /** @var \Shopsys\FrameworkBundle\Model\Customer\CustomerFacade $customerFacade */
         $customerFacade = $this->getContainer()->get(CustomerFacade::class);
-        /* @var $customerFacade \Shopsys\FrameworkBundle\Model\Customer\CustomerFacade */
 
         $domainId = 1;
         $pricingGroupData = new PricingGroupData();
         $pricingGroupData->name = 'name';
         $pricingGroupToDelete = $pricingGroupFacade->create($pricingGroupData, $domainId);
+        /** @var \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroup $pricingGroupToReplaceWith */
         $pricingGroupToReplaceWith = $this->getReference(PricingGroupDataFixture::PRICING_GROUP_ORDINARY_DOMAIN_1);
-        /* @var $pricingGroup \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroup */
+        /** @var \Shopsys\ShopBundle\Model\Customer\User $user */
         $user = $customerFacade->getUserById(1);
-        /* @var $user \Shopsys\ShopBundle\Model\Customer\User */
+        /** @var \Shopsys\ShopBundle\Model\Customer\UserDataFactory $userDataFactory */
         $userDataFactory = $this->getContainer()->get(UserDataFactoryInterface::class);
-        /* @var $userDataFactory \Shopsys\ShopBundle\Model\Customer\UserDataFactory */
         $userData = $userDataFactory->createFromUser($user);
+        /** @var \Shopsys\FrameworkBundle\Model\Customer\CustomerDataFactory $customerDataFactory */
         $customerDataFactory = $this->getContainer()->get(CustomerDataFactory::class);
-        /* @var $customerDataFactory \Shopsys\FrameworkBundle\Model\Customer\CustomerDataFactory */
 
         $userData->pricingGroup = $pricingGroupToDelete;
         $customerData = $customerDataFactory->create();

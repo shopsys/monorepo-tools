@@ -15,10 +15,10 @@ class PaymentTest extends TransactionFunctionalTestCase
 {
     public function testRemoveTransportFromPaymentAfterDelete()
     {
-        $paymentDataFactory = $this->getContainer()->get(PaymentDataFactoryInterface::class);
         /** @var \Shopsys\ShopBundle\Model\Payment\PaymentDataFactory $paymentDataFactory */
-        $transportDataFactory = $this->getContainer()->get(TransportDataFactoryInterface::class);
+        $paymentDataFactory = $this->getContainer()->get(PaymentDataFactoryInterface::class);
         /** @var \Shopsys\ShopBundle\Model\Transport\TransportDataFactory $transportDataFactory */
+        $transportDataFactory = $this->getContainer()->get(TransportDataFactoryInterface::class);
         $em = $this->getEntityManager();
 
         $vatData = new VatData();
@@ -42,8 +42,8 @@ class PaymentTest extends TransactionFunctionalTestCase
         $em->persist($payment);
         $em->flush();
 
+        /** @var \Shopsys\FrameworkBundle\Model\Transport\TransportFacade $transportFacade */
         $transportFacade = $this->getContainer()->get(TransportFacade::class);
-        /* @var $transportFacade \Shopsys\FrameworkBundle\Model\Transport\TransportFacade */
         $transportFacade->deleteById($transport->getId());
 
         $this->assertFalse($payment->getTransports()->contains($transport));

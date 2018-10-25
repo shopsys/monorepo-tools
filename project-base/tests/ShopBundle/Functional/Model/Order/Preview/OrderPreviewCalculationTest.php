@@ -24,8 +24,8 @@ class OrderPreviewCalculationTest extends FunctionalTestCase
 {
     public function testCalculatePreviewWithTransportAndPayment()
     {
+        /** @var \Shopsys\FrameworkBundle\Component\Domain\Domain $domain */
         $domain = $this->getContainer()->get(Domain::class);
-        /* @var $domain \Shopsys\FrameworkBundle\Component\Domain\Domain */
         $vatData = new VatData();
         $vatData->name = 'vatName';
         $vatData->percent = 20;
@@ -111,8 +111,8 @@ class OrderPreviewCalculationTest extends FunctionalTestCase
 
     public function testCalculatePreviewWithoutTransportAndPayment()
     {
+        /** @var \Shopsys\FrameworkBundle\Component\Domain\Domain $domain */
         $domain = $this->getContainer()->get(Domain::class);
-        /* @var $domain \Shopsys\FrameworkBundle\Component\Domain\Domain */
         $vatData = new VatData();
         $vatData->name = 'vatName';
         $vatData->percent = 20;

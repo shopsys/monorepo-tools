@@ -13,12 +13,12 @@ class DatabaseHelper extends Module
      */
     public function _initialize()
     {
+        /** @var \Tests\ShopBundle\Test\Codeception\Module\Db $dbModule */
         $dbModule = $this->getModule(Db::class);
-        /* @var $dbModule \Tests\ShopBundle\Test\Codeception\Module\Db */
+        /** @var \Tests\ShopBundle\Test\Codeception\Helper\SymfonyHelper $symfonyHelper */
         $symfonyHelper = $this->getModule(SymfonyHelper::class);
-        /* @var $symfonyHelper \Tests\ShopBundle\Test\Codeception\Helper\SymfonyHelper */
+        /** @var \Doctrine\DBAL\Connection $connection */
         $connection = $symfonyHelper->grabServiceFromContainer('doctrine.dbal.default_connection');
-        /* @var $connection \Doctrine\DBAL\Connection */
 
         $dbModule->_reconfigure([
             'dsn' => $this->getConnectionDsn($connection),

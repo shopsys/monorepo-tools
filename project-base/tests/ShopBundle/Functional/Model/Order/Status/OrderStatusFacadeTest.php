@@ -15,20 +15,20 @@ class OrderStatusFacadeTest extends TransactionFunctionalTestCase
     public function testDeleteByIdAndReplace()
     {
         $em = $this->getEntityManager();
+        /** @var \Shopsys\FrameworkBundle\Model\Order\Status\OrderStatusFacade $orderStatusFacade */
         $orderStatusFacade = $this->getContainer()->get(OrderStatusFacade::class);
-        /* @var $orderStatusFacade \Shopsys\FrameworkBundle\Model\Order\Status\OrderStatusFacade */
+        /** @var \Shopsys\FrameworkBundle\Model\Order\OrderFacade $orderFacade */
         $orderFacade = $this->getContainer()->get(OrderFacade::class);
-        /* @var $orderFacade \Shopsys\FrameworkBundle\Model\Order\OrderFacade */
 
         $orderStatusData = new OrderStatusData();
         $orderStatusData->name = ['cs' => 'name'];
         $orderStatusToDelete = $orderStatusFacade->create($orderStatusData);
+        /** @var \Shopsys\FrameworkBundle\Model\Order\Status\OrderStatus $orderStatusToReplaceWith */
         $orderStatusToReplaceWith = $this->getReference(OrderStatusDataFixture::ORDER_STATUS_NEW);
-        /* @var $orderStatusToReplaceWith \Shopsys\FrameworkBundle\Model\Order\Status\OrderStatus */
+        /** @var \Shopsys\ShopBundle\Model\Order\Order $order */
         $order = $this->getReference(OrderDataFixture::ORDER_PREFIX . '1');
-        /* @var $order \Shopsys\ShopBundle\Model\Order\Order */
+        /** @var \Shopsys\ShopBundle\Model\Order\OrderDataFactory $orderDataFactory */
         $orderDataFactory = $this->getContainer()->get(OrderDataFactoryInterface::class);
-        /* @var $orderDataFactory \Shopsys\ShopBundle\Model\Order\OrderDataFactory */
 
         $orderData = $orderDataFactory->createFromOrder($order);
         $orderData->status = $orderStatusToDelete;

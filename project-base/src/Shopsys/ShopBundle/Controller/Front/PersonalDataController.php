@@ -175,7 +175,7 @@ class PersonalDataController extends FrontBaseController
     }
 
     /**
-     * @param $hash
+     * @param string $hash
      */
     public function accessExportAction($hash)
     {
@@ -211,7 +211,7 @@ class PersonalDataController extends FrontBaseController
     }
 
     /**
-     * @param $hash
+     * @param string $hash
      */
     public function exportXmlAction($hash)
     {

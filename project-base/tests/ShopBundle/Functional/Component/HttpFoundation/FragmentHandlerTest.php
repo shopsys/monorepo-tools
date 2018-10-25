@@ -11,8 +11,8 @@ class FragmentHandlerTest extends TransactionFunctionalTestCase
 {
     public function testRenderingFragmentDoesNotIgnoreException()
     {
+        /** @var \Symfony\Bridge\Twig\Extension\HttpKernelRuntime $httpKernelRuntime */
         $httpKernelRuntime = $this->getContainer()->get('twig.runtime.httpkernel');
-        /* @var $httpKernelRuntime \Symfony\Bridge\Twig\Extension\HttpKernelRuntime */
 
         // Rendering a fragment can only be done when handling a Request.
         $this->putFakeRequestToRequestStack();
@@ -25,8 +25,8 @@ class FragmentHandlerTest extends TransactionFunctionalTestCase
 
     private function putFakeRequestToRequestStack()
     {
+        /** @var \Symfony\Component\HttpFoundation\RequestStack $requestStack */
         $requestStack = $this->getContainer()->get('request_stack');
-        /* @var $requestStack \Symfony\Component\HttpFoundation\RequestStack */
 
         $request = new Request();
         $session = new Session(new MockArraySessionStorage());

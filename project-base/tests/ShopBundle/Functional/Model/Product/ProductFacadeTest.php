@@ -37,8 +37,8 @@ class ProductFacadeTest extends TransactionFunctionalTestCase
         $productData->vat = $this->getReference(VatDataFixture::VAT_HIGH);
         $productData->unit = $this->getReference(UnitDataFixture::UNIT_PIECES);
 
+        /** @var \Shopsys\FrameworkBundle\Model\Product\ProductFacade $productFacade */
         $productFacade = $this->getContainer()->get(ProductFacade::class);
-        /* @var $productFacade \Shopsys\FrameworkBundle\Model\Product\ProductFacade */
 
         $product = $productFacade->create($productData);
 
@@ -106,12 +106,12 @@ class ProductFacadeTest extends TransactionFunctionalTestCase
 
     public function testEditMarkProductForVisibilityRecalculation()
     {
+        /** @var \Shopsys\ShopBundle\Model\Product\Product $product */
         $product = $this->getReference(ProductDataFixture::PRODUCT_PREFIX . '1');
-        /* @var $product \Shopsys\ShopBundle\Model\Product\Product */
+        /** @var \Shopsys\FrameworkBundle\Model\Product\ProductFacade $productFacade */
         $productFacade = $this->getContainer()->get(ProductFacade::class);
-        /* @var $productFacade \Shopsys\FrameworkBundle\Model\Product\ProductFacade */
+        /** @var \Shopsys\ShopBundle\Model\Product\ProductDataFactory $productDataFactory */
         $productDataFactory = $this->getContainer()->get(ProductDataFactoryInterface::class);
-        /* @var $productDataFactory \Shopsys\ShopBundle\Model\Product\ProductDataFactory */
 
         $reflectionClass = new ReflectionClass(Product::class);
         $reflectionPropertyRecalculateVisibility = $reflectionClass->getProperty('recalculateVisibility');

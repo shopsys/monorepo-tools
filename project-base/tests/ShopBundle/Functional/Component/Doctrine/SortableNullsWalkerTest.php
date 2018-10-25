@@ -11,10 +11,10 @@ class SortableNullsWalkerTest extends FunctionalTestCase
 {
     public function testWalkOrderByItemAsc()
     {
+        /** @var \Doctrine\ORM\EntityManager $em */
         $em = $this->getContainer()->get('doctrine.orm.entity_manager');
-        /* @var $em \Doctrine\ORM\EntityManager */
+        /** @var \Doctrine\ORM\QueryBuilder $queryBuilder */
         $queryBuilder = $em->createQueryBuilder();
-        /* @var $queryBuilder \Doctrine\ORM\QueryBuilder */
 
         $queryBuilder
             ->select('p.id')
@@ -29,10 +29,10 @@ class SortableNullsWalkerTest extends FunctionalTestCase
 
     public function testWalkOrderByItemDesc()
     {
+        /** @var \Doctrine\ORM\EntityManager $em */
         $em = $this->getContainer()->get('doctrine.orm.entity_manager');
-        /* @var $em \Doctrine\ORM\EntityManager */
+        /** @var \Doctrine\ORM\QueryBuilder $queryBuilder */
         $queryBuilder = $em->createQueryBuilder();
-        /* @var $queryBuilder \Doctrine\ORM\QueryBuilder */
 
         $queryBuilder
             ->select('p.id')
@@ -47,10 +47,10 @@ class SortableNullsWalkerTest extends FunctionalTestCase
 
     public function testWalkOrderByItemWithoutOrdering()
     {
+        /** @var \Doctrine\ORM\EntityManager $em */
         $em = $this->getContainer()->get('doctrine.orm.entity_manager');
-        /* @var $em \Doctrine\ORM\EntityManager */
+        /** @var \Doctrine\ORM\QueryBuilder $queryBuilder */
         $queryBuilder = $em->createQueryBuilder();
-        /* @var $queryBuilder \Doctrine\ORM\QueryBuilder */
 
         $queryBuilder
             ->select('p.id')

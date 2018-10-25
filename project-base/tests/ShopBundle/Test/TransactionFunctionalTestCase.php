@@ -5,7 +5,7 @@ namespace Tests\ShopBundle\Test;
 abstract class TransactionFunctionalTestCase extends FunctionalTestCase
 {
     /**
-     * @return \Doctrine\ORM\EntityManagerInterface
+     * @return \Shopsys\FrameworkBundle\Component\EntityExtension\EntityManagerDecorator
      */
     protected function getEntityManager()
     {

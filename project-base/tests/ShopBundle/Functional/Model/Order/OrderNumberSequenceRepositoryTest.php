@@ -9,8 +9,8 @@ class OrderNumberSequenceRepositoryTest extends TransactionFunctionalTestCase
 {
     public function testGetNextNumber()
     {
+        /** @var \Shopsys\FrameworkBundle\Model\Order\OrderNumberSequenceRepository $orderNumberSequenceRepository */
         $orderNumberSequenceRepository = $this->getContainer()->get(OrderNumberSequenceRepository::class);
-        /* @var $orderNumberSequenceRepository \Shopsys\FrameworkBundle\Model\Order\OrderNumberSequenceRepository */
 
         $numbers = [];
         for ($i = 0; $i < 10; $i++) {

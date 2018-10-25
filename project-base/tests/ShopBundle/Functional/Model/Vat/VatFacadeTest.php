@@ -18,28 +18,28 @@ class VatFacadeTest extends TransactionFunctionalTestCase
     public function testDeleteByIdAndReplace()
     {
         $em = $this->getEntityManager();
+        /** @var \Shopsys\FrameworkBundle\Model\Pricing\Vat\VatFacade $vatFacade */
         $vatFacade = $this->getContainer()->get(VatFacade::class);
-        /* @var $vatFacade \Shopsys\FrameworkBundle\Model\Pricing\Vat\VatFacade */
+        /** @var \Shopsys\FrameworkBundle\Model\Transport\TransportFacade $transportFacade */
         $transportFacade = $this->getContainer()->get(TransportFacade::class);
-        /* @var $transportFacade \Shopsys\FrameworkBundle\Model\Transport\TransportFacade */
+        /** @var \Shopsys\ShopBundle\Model\Transport\TransportDataFactory $transportDataFactory */
         $transportDataFactory = $this->getContainer()->get(TransportDataFactoryInterface::class);
-        /* @var $transportDataFactory \Shopsys\ShopBundle\Model\Transport\TransportDataFactory */
+        /** @var \Shopsys\ShopBundle\Model\Payment\PaymentDataFactory $paymentDataFactory */
         $paymentDataFactory = $this->getContainer()->get(PaymentDataFactoryInterface::class);
-        /* @var $paymentDataFactory \Shopsys\ShopBundle\Model\Payment\PaymentDataFactory */
+        /** @var \Shopsys\FrameworkBundle\Model\Payment\PaymentFacade $paymentFacade */
         $paymentFacade = $this->getContainer()->get(PaymentFacade::class);
-        /* @var $paymentFacade \Shopsys\FrameworkBundle\Model\Payment\PaymentFacade */
 
         $vatData = new VatData();
         $vatData->name = 'name';
         $vatData->percent = 10;
         $vatToDelete = $vatFacade->create($vatData);
+        /** @var \Shopsys\FrameworkBundle\Model\Pricing\Vat\Vat $vatToReplaceWith */
         $vatToReplaceWith = $this->getReference(VatDataFixture::VAT_HIGH);
-        /* @var $vatToReplaceWith \Shopsys\FrameworkBundle\Model\Pricing\Vat\Vat */
+        /** @var \Shopsys\ShopBundle\Model\Transport\Transport $transport */
         $transport = $this->getReference(TransportDataFixture::TRANSPORT_PERSONAL);
-        /* @var $transport \Shopsys\ShopBundle\Model\Transport\Transport */
         $transportData = $transportDataFactory->createFromTransport($transport);
+        /** @var \Shopsys\ShopBundle\Model\Payment\Payment $payment */
         $payment = $this->getReference(PaymentDataFixture::PAYMENT_CASH);
-        /* @var $payment \Shopsys\ShopBundle\Model\Payment\Payment */
         $paymentData = $paymentDataFactory->createFromPayment($payment);
 
         $transportData->vat = $vatToDelete;

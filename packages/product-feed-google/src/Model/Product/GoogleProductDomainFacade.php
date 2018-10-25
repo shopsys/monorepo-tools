@@ -47,7 +47,7 @@ class GoogleProductDomainFacade
     }
 
     /**
-     * @param $productId
+     * @param int $productId
      * @param \Shopsys\ProductFeed\GoogleBundle\Model\Product\GoogleProductDomainData[] $googleProductDomainsData
      */
     public function saveGoogleProductDomainsForProductId($productId, array $googleProductDomainsData)
@@ -84,7 +84,7 @@ class GoogleProductDomainFacade
     }
 
     /**
-     * @param $productId
+     * @param int $productId
      * @param \Shopsys\ProductFeed\GoogleBundle\Model\Product\GoogleProductDomainData $googleProductDomainData
      */
     public function saveGoogleProductDomain($productId, GoogleProductDomainData $googleProductDomainData)
@@ -108,7 +108,7 @@ class GoogleProductDomainFacade
     }
 
     /**
-     * @param $productId
+     * @param int $productId
      */
     public function delete($productId)
     {

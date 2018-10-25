@@ -45,9 +45,9 @@ class PerformanceTestSample
     /**
      * @param \Shopsys\FrameworkBundle\Model\Feed\FeedInfoInterface $feedInfo
      * @param \Shopsys\FrameworkBundle\Component\Domain\Config\DomainConfig $domainConfig
-     * @param $generationUri
-     * @param $duration
-     * @param $statusCode
+     * @param string $generationUri
+     * @param float $duration
+     * @param int $statusCode
      */
     public function __construct(
         FeedInfoInterface $feedInfo,

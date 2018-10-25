@@ -43,7 +43,7 @@ class PersonalInfoFormTypeTest extends TypeTestCase
 
     /**
      * @param array $personalInfoFormData
-     * @param $isExpectedValid
+     * @param bool $isExpectedValid
      * @dataProvider getTermsAndConditionsAgreementIsMandatoryData
      */
     public function testTermsAndConditionsAgreementIsMandatory(array $personalInfoFormData, $isExpectedValid)

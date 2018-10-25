@@ -66,7 +66,7 @@ class ZboziProductDomainFacade
     }
 
     /**
-     * @param $productId
+     * @param int $productId
      * @param \Shopsys\ProductFeed\ZboziBundle\Model\Product\ZboziProductDomainData[] $zboziProductDomainsData
      */
     public function saveZboziProductDomainsForProductId($productId, array $zboziProductDomainsData)
@@ -101,7 +101,7 @@ class ZboziProductDomainFacade
     }
 
     /**
-     * @param $productId
+     * @param int $productId
      * @param \Shopsys\ProductFeed\ZboziBundle\Model\Product\ZboziProductDomainData $zboziProductDomainData
      */
     public function saveZboziProductDomain($productId, ZboziProductDomainData $zboziProductDomainData)
@@ -125,7 +125,7 @@ class ZboziProductDomainFacade
     }
 
     /**
-     * @param $productId
+     * @param int $productId
      */
     public function delete($productId)
     {

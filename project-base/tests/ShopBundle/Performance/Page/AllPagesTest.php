@@ -182,8 +182,8 @@ class AllPagesTest extends KernelTestCase
         $request = Request::create($uri);
         $requestDataSet->getAuth()->authenticateRequest($request);
 
+        /** @var \Doctrine\ORM\EntityManager $entityManager */
         $entityManager = self::$kernel->getContainer()->get('doctrine.orm.entity_manager');
-        /* @var $entityManager \Doctrine\ORM\EntityManager */
 
         $startTime = microtime(true);
         $entityManager->beginTransaction();

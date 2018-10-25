@@ -100,8 +100,8 @@ class CustomerController extends FrontBaseController
             return $this->redirectToRoute('front_login');
         }
 
+        /** @var \Shopsys\FrameworkBundle\Model\Customer\User $user */
         $user = $this->getUser();
-        /* @var $user \Shopsys\FrameworkBundle\Model\Customer\User */
 
         $orders = $this->orderFacade->getCustomerOrderList($user);
         return $this->render('@ShopsysShop/Front/Content/Customer/orders.html.twig', [
@@ -139,15 +139,15 @@ class CustomerController extends FrontBaseController
 
             $user = $this->getUser();
             try {
+                /** @var \Shopsys\FrameworkBundle\Model\Order\Order $order */
                 $order = $this->orderFacade->getByOrderNumberAndUser($orderNumber, $user);
-                /* @var $order \Shopsys\FrameworkBundle\Model\Order\Order */
             } catch (\Shopsys\FrameworkBundle\Model\Order\Exception\OrderNotFoundException $ex) {
                 $this->getFlashMessageSender()->addErrorFlash(t('Order not found'));
                 return $this->redirectToRoute('front_customer_orders');
             }
         } else {
+            /** @var \Shopsys\FrameworkBundle\Model\Order\Order $order */
             $order = $this->orderFacade->getByUrlHashAndDomain($urlHash, $this->domain->getId());
-            /* @var $order \Shopsys\FrameworkBundle\Model\Order\Order */
         }
 
         $orderItemTotalPricesById = $this->orderItemPriceCalculation->calculateTotalPricesIndexedById($order->getItems());
@@ -167,8 +167,8 @@ class CustomerController extends FrontBaseController
         try {
             $this->loginAsUserFacade->loginAsRememberedUser($request);
         } catch (\Shopsys\FrameworkBundle\Model\Customer\Exception\UserNotFoundException $e) {
+            /** @var \Shopsys\FrameworkBundle\Component\FlashMessage\FlashMessageSender $adminFlashMessageSender */
             $adminFlashMessageSender = $this->get('shopsys.shop.component.flash_message.sender.admin');
-            /* @var $adminFlashMessageSender \Shopsys\FrameworkBundle\Component\FlashMessage\FlashMessageSender */
             $adminFlashMessageSender->addErrorFlash(t('User not found.'));
 
             return $this->redirectToRoute('admin_customer_list');

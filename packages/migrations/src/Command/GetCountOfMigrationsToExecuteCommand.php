@@ -27,7 +27,10 @@ class GetCountOfMigrationsToExecuteCommand extends AbstractCommand
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $migrationsConfiguration = $this->getMigrationsConfiguration();
-        DoctrineCommand::configureMigrations($this->getApplication()->getKernel()->getContainer(), $migrationsConfiguration);
+
+        /** @var \Symfony\Bundle\FrameworkBundle\Console\Application $application */
+        $application = $this->getApplication();
+        DoctrineCommand::configureMigrations($application->getKernel()->getContainer(), $migrationsConfiguration);
 
         $latestVersion = $migrationsConfiguration->getLatestVersion();
         $migrationsToExecute = $migrationsConfiguration->getMigrationsToExecute(Version::DIRECTION_UP, $latestVersion);

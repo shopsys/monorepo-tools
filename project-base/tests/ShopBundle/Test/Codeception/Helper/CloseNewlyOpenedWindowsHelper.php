@@ -15,8 +15,8 @@ class CloseNewlyOpenedWindowsHelper extends Module
      */
     public function _after(TestInterface $test)
     {
+        /** @var \Tests\ShopBundle\Test\Codeception\Module\StrictWebDriver $webDriver */
         $webDriver = $this->getModule(StrictWebDriver::class);
-        /* @var $webDriver \Tests\ShopBundle\Test\Codeception\Module\StrictWebDriver */
 
         if ($webDriver->webDriver === null) {
             // Workaround: When Codeception fails to connect to Selenium WebDriver,
@@ -29,7 +29,7 @@ class CloseNewlyOpenedWindowsHelper extends Module
     }
 
     /**
-     * @param \RemoteWebDriver $webDriver
+     * @param \Facebook\WebDriver\Remote\RemoteWebDriver $webDriver
      */
     private function closeNewlyOpenedWindows(RemoteWebDriver $webDriver)
     {
