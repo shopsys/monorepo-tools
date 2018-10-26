@@ -53,6 +53,8 @@ There is a list of all the repositories maintained by monorepo, changes in log b
 ### [shopsys/project-base]
 - *(optional)* [#428 Removed depends_on and links from docker-compose.yml files](https://github.com/shopsys/shopsys/pull/528) 
     - remove all `depends_on` and `links` from your docker-compose files because they are unnecessary
+- [#538 - phing targets: create-domains-data is now dependent on create-domains-db-functions](https://github.com/shopsys/shopsys/pull/538)
+    - modify your `build.xml` and `build-dev.xml` according to this pull request
 
 ### [shopsys/shopsys]
 - *(MacOS only)* [#503 updated docker-sync configuration](https://github.com/shopsys/shopsys/pull/503/)
