@@ -39,6 +39,8 @@ Create `domains_urls.yml` from `domains_urls.yml.dist`.
 cp app/config/domains_urls.yml.dist app/config/domains_urls.yml
 ```
 
+<!--- TODO When releasing new version, remove the step "Configure domains" as (in current master) the default config is automatically copied during "composer install" -->
+
 ### 1.4. Create databases
 ```
 php phing db-create
