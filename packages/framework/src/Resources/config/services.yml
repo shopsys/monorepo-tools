@@ -118,6 +118,10 @@ services:
 
     Shopsys\FrameworkBundle\Component\Cron\Config\CronConfig: ~
 
+    Shopsys\FrameworkBundle\Component\Environment\EnvironmentFileSetting:
+        arguments:
+            $environmentFileDirectory: '%shopsys.root_dir%'
+
     Shopsys\FrameworkBundle\Model\Cart\Watcher\CartWatcherFacade:
         arguments:
             - '@shopsys.shop.component.flash_message.sender.front'

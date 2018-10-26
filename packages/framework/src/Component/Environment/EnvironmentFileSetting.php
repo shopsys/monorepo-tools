@@ -64,6 +64,17 @@ class EnvironmentFileSetting
         touch($this->getEnvironmentFilePath($environment));
     }
 
+    public function removeFilesForAllEnvironments(): void
+    {
+        foreach (EnvironmentType::ALL as $environment) {
+            $environmentFilePath = $this->getEnvironmentFilePath($environment);
+
+            if (is_file($environmentFilePath)) {
+                unlink($environmentFilePath);
+            }
+        }
+    }
+
     /**
      * @param string $environment
      * @return string
