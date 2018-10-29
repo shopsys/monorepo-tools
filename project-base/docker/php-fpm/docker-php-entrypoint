@@ -6,11 +6,11 @@ set -e
 
 # reading from a named pipe and writing to stdout via "tail -f"
 # this workaround prevents logs from being output to console during console commands
+# multistage build uses different UIDs and logpipe is transformed into something else than pipe so best way is to recreate it
 PIPE=/tmp/log-pipe
-if ! [ -p $PIPE ]; then
-    mkfifo $PIPE
-    chmod 660 $PIPE
-fi
+rm -rf $PIPE
+mkfifo $PIPE
+chmod 666 $PIPE
 tail -f $PIPE &
 
 # first arg is `-f` or `--some-option`
