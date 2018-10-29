@@ -111,6 +111,7 @@ There is a list of all the repositories maintained by monorepo, changes in log b
     - rebuild image by running `docker-compose up -d --build`
     - files `build.xml` and `build-dev.xml` were updated to speed up deployment process of built docker images of php-fpm
     - installation guide for production via Docker was updated, now there is no need for the first part of the build phing target
+    - file `docker/php-fpm/docker-php-entrypoint` was changed, update it according to [`project-base/docker/php-fpm/docker-php-entrypoint`](./project-base/docker/php-fpm/docker-php-entrypoint)
 
 ## [From 7.0.0-beta1 to 7.0.0-beta2]
 ### [shopsys/project-base]
