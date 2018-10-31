@@ -4,6 +4,9 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Language: cs\n"
 
+msgid "Address {{ url }} already exists."
+msgstr "Adresa {{ url }} již existuje."
+
 msgid "Availability name cannot be longer than {{ limit }} characters"
 msgstr "Název dostupnosti nesmí být delší než {{ limit }} znaků"
 
@@ -40,8 +43,20 @@ msgstr "Každý parametr může být nastaven pouze jednou"
 msgid "Email cannot be longer then {{ limit }} characters"
 msgstr "E-mail nesmí být delší než {{ limit }} znaků"
 
+msgid "Email {{ email }} is already registered"
+msgstr "Email {{ email }} je již registrován"
+
 msgid "Enter date in DD.MM.YYYY format"
 msgstr "Datum zadávejte ve formátu dd.mm.rrrr"
+
+msgid "Field must contain {{ needle }}."
+msgstr "Pole musí obsahovat {{ needle }}."
+
+msgid "Fields must not be identical"
+msgstr "Pole se musí shodovat."
+
+msgid "File extension {{ value }} is too long. It should have {{ limit }} character or less."
+msgstr "Přípona souboru {{ value }} je příliš dlouhá. Měla by mít {{ limit }} znaků nebo méně."
 
 msgid "First name cannot be longer then {{ limit }} characters"
 msgstr "Jméno nesmí být delší než {{ limit }} znaků"
@@ -96,6 +111,9 @@ msgstr "Název parametru nesmí být delší než {{ limit }} znaků"
 
 msgid "Part number cannot be longer than {{ limit }} characters"
 msgstr "Výrobní číslo nesmí být delší než {{ limit }} znaků"
+
+msgid "Password cannot be local part of e-mail."
+msgstr "Heslo nesmí být stejné jako první část e-mailu."
 
 msgid "Password cannot be longer then {{ limit }} characters"
 msgstr "Heslo musí mít minimálně {{ limit }} znaků"
@@ -328,6 +346,9 @@ msgstr "Cena musí být větší nebo rovna {{ compared_value }}"
 msgid "Product name cannot be longer than {{ limit }} characters"
 msgstr "Název produktu nesmí být delší než {{ limit }} znaků"
 
+msgid "Product parameters are duplicate."
+msgstr "Parametry produktů jsou duplicitní."
+
 msgid "Promo code with this code already exists"
 msgstr "Slevový kupón s tímto kódem již existuje"
 
@@ -358,6 +379,9 @@ msgstr "Telefon nesmí být delší než {{ limit }} znaků"
 msgid "This field must be empty"
 msgstr "Toto pole musí zůstat prázdné"
 
+msgid "This value is not a valid email address."
+msgstr "Tato hodnota není platnou e-mailovou adresou."
+
 msgid "Unit name cannot be longer than {{ limit }} characters"
 msgstr "Název jednotky nesmí být delší než {{ limit }} znaků"
 
@@ -373,6 +397,12 @@ msgstr "Přihlašovací jméno nesmí být delší než {{ limit }} znaků"
 msgid "VAT name cannot be longer than {{ limit }} characters"
 msgstr "Název DPH nesmí být delší než {{ limit }} znaků"
 
+msgid "Value must not be neither of following: {{ array }}"
+msgstr "Hodnota nesmí být žádná z následujících: {{ array }}"
+
+msgid "Values are duplicate."
+msgstr "Hodnoty jsou duplicitní."
+
 msgid "Variable {{ needle }} is required"
 msgstr "Proměnná {{ needle }} je povinná"
 
@@ -381,6 +411,9 @@ msgstr "Alias varianty nesmí být delší než {{ limit }} znaků"
 
 msgid "You entered same product twice. In list of bestsellers can be product only once. Please correct it and then save form again."
 msgstr "Zadali jste duplicitní zboží. V seznamu nejprodávanějšího zboží musí být každé zboží jen jedenkrát. Prosím chybu opravte a poté znovu uložte."
+
+msgid "You have to select any domain."
+msgstr "Musíte vybrat nějakou doménu."
 
 msgid "Zip code cannot be longer than {{ limit }} characters"
 msgstr "PSČ nesmí být delší než {{ limit }} znaků"
