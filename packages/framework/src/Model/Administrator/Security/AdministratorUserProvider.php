@@ -66,13 +66,13 @@ class AdministratorUserProvider implements UserProviderInterface
             throw new \Symfony\Component\Security\Core\Exception\UnsupportedUserException($message);
         }
 
-        if ($administrator instanceof UniqueLoginInterface) {
-            $freshAdministrator = $this->administratorRepository->findByIdAndLoginToken(
-                $administrator->getId(),
-                $administrator->getLoginToken()
-            );
-        } else {
-            $freshAdministrator = $this->administratorRepository->findById($administrator->getId());
+        $freshAdministrator = $this->administratorRepository->findById($administrator->getId());
+
+        if ($administrator instanceof UniqueLoginInterface
+            && $freshAdministrator !== null
+            && $freshAdministrator->getLoginToken() !== $administrator->getLoginToken()
+        ) {
+            throw new \Symfony\Component\Security\Core\Exception\AuthenticationExpiredException();
         }
 
         if ($administrator instanceof TimelimitLoginInterface) {

@@ -118,19 +118,6 @@ class AdministratorRepository
     }
 
     /**
-     * @param int $id
-     * @param string $loginToken
-     * @return \Shopsys\FrameworkBundle\Model\Administrator\Administrator|null
-     */
-    public function findByIdAndLoginToken($id, $loginToken)
-    {
-        return $this->getAdministratorRepository()->findOneBy([
-            'id' => $id,
-            'loginToken' => $loginToken,
-        ]);
-    }
-
-    /**
      * @return \Shopsys\FrameworkBundle\Model\Administrator\Administrator[]
      */
     public function getAllSuperadmins()
