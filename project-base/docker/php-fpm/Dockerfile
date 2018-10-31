@@ -79,6 +79,23 @@ RUN composer global require hirak/prestissimo
 
 ########################################################################################################################
 
+FROM base as development
+
+USER root
+
+# allow overwriting UID and GID o the user "www-data" to help solve issues with permissions in mounted volumes
+# if the GID is already in use, we will assign GID 82 instead (82 is the standard uid/gid for "www-data" in Alpine)
+ARG www_data_uid
+ARG www_data_gid
+RUN deluser www-data && (addgroup -g $www_data_gid www-data || addgroup -g 82 www-data) && adduser -u $www_data_uid -D -S -G www-data www-data
+
+# as the UID and GID might have changed, change the ownership of the home directory workdir again
+RUN chown www-data:www-data -R /home/www-data && chown www-data:www-data /var/www/html
+
+USER www-data
+
+########################################################################################################################
+
 FROM base as production
 
 COPY --chown=www-data:www-data / /var/www/html
@@ -98,20 +115,3 @@ COPY --chown=www-data:www-data / /var/www/html
 RUN composer install --optimize-autoloader --no-interaction --no-progress
 
 RUN php phing composer-dev npm dirs-create test-dirs-create assets standards tests-static tests-acceptance-build
-
-########################################################################################################################
-
-FROM base as development
-
-USER root
-
-# allow overwriting UID and GID o the user "www-data" to help solve issues with permissions in mounted volumes
-# if the GID is already in use, we will assign GID 82 instead (82 is the standard uid/gid for "www-data" in Alpine)
-ARG www_data_uid
-ARG www_data_gid
-RUN deluser www-data && (addgroup -g $www_data_gid www-data || addgroup -g 82 www-data) && adduser -u $www_data_uid -D -S -G www-data www-data
-
-# as the UID and GID might have changed, change the ownership of the home directory workdir again
-RUN chown www-data:www-data -R /home/www-data && chown www-data:www-data /var/www/html
-
-USER www-data
