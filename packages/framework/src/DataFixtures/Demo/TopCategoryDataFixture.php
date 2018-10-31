@@ -10,15 +10,20 @@ use Shopsys\FrameworkBundle\Model\Category\TopCategory\TopCategoryFacade;
 
 class TopCategoryDataFixture extends AbstractReferenceFixture implements DependentFixtureInterface
 {
-    /** @var \Shopsys\FrameworkBundle\Model\Category\TopCategory\TopCategoryFacade */
+    /**
+     * @var \Shopsys\FrameworkBundle\Model\Category\TopCategory\TopCategoryFacade
+     */
     private $topCategoryFacade;
 
     /**
-     * @param \Shopsys\FrameworkBundle\Model\Category\TopCategory\TopCategoryFacade $topCategoryFacade
+     * @var \Shopsys\FrameworkBundle\Component\Domain\Domain
      */
-    public function __construct(TopCategoryFacade $topCategoryFacade)
+    private $domain;
+
+    public function __construct(TopCategoryFacade $topCategoryFacade, Domain $domain)
     {
         $this->topCategoryFacade = $topCategoryFacade;
+        $this->domain = $domain;
     }
 
     /**
@@ -32,7 +37,9 @@ class TopCategoryDataFixture extends AbstractReferenceFixture implements Depende
             $this->getReference(CategoryDataFixture::CATEGORY_TOYS),
         ];
 
-        $this->topCategoryFacade->saveTopCategoriesForDomain(Domain::FIRST_DOMAIN_ID, $categories);
+        foreach ($this->domain->getAllIds() as $domainId) {
+            $this->topCategoryFacade->saveTopCategoriesForDomain($domainId, $categories);
+        }
     }
 
     /**
