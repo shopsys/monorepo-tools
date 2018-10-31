@@ -118,6 +118,7 @@ There is a list of all the repositories maintained by monorepo, changes in log b
     - rename `test-db-fixtures-demo-singledomain` to `test-db-fixtures-demo`
 - *(optional)* [#566 - Set development docker build target before production and CI targets](https://github.com/shopsys/shopsys/pull/566)
     - move `development` stage build before `production` stage in `docker/php-fpm/Dockerfile` to make your dev build faster
+    - make the `www_data_uid` and `www_data_gid` arguments optional using an if condition (for building ci and production stage)
 
 ### [shopsys/shopsys]
 - *(MacOS only)* [#503 updated docker-sync configuration](https://github.com/shopsys/shopsys/pull/503/)

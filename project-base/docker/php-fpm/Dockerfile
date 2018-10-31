@@ -87,7 +87,7 @@ USER root
 # if the GID is already in use, we will assign GID 82 instead (82 is the standard uid/gid for "www-data" in Alpine)
 ARG www_data_uid
 ARG www_data_gid
-RUN deluser www-data && (addgroup -g $www_data_gid www-data || addgroup -g 82 www-data) && adduser -u $www_data_uid -D -S -G www-data www-data
+RUN if [ -n "$www_data_uid" ]; then deluser www-data && (addgroup -g $www_data_gid www-data || addgroup -g 82 www-data) && adduser -u $www_data_uid -D -S -G www-data www-data; fi;
 
 # as the UID and GID might have changed, change the ownership of the home directory workdir again
 RUN chown www-data:www-data -R /home/www-data && chown www-data:www-data /var/www/html
