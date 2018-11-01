@@ -23,25 +23,10 @@ abstract class AbstractReferenceFixture implements FixtureInterface
     /**
      * @param string $name
      * @param object $object
-     * @param bool $persistent
      */
-    public function addReference($name, $object, $persistent = true)
+    public function addReference($name, $object)
     {
-        if ($persistent) {
-            $this->persistentReferenceFacade->persistReference($name, $object);
-        }
-    }
-
-    /**
-     * @param string $name
-     * @param object $object
-     * @param bool $persistent
-     */
-    public function setReference($name, $object, $persistent = true)
-    {
-        if ($persistent) {
-            $this->persistentReferenceFacade->persistReference($name, $object);
-        }
+        $this->persistentReferenceFacade->persistReference($name, $object);
     }
 
     /**
