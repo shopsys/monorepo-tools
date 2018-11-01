@@ -96,7 +96,7 @@
                 var index = $orderItem.data('index');
 
                 $collection.append($orderItem);
-                Shopsys.register.registerNewContent($item);
+                Shopsys.register.registerNewContent($orderItem);
 
                 Shopsys.validation.addNewItemToCollection('#js-order-items', index);
                 Shopsys.order.items.refreshCount($collection);

@@ -5,7 +5,7 @@
             {% if domain_id is not null %}
                 {% set url = findUrlByDomainId(route, route_params, domain_id) %}
             {% else %}
-                {% set url = url( route, route_params) %}
+                {% set url = url(route, route_params) %}
             {% endif %}
 
             <a href="{{ url }}" target="_blank">

@@ -7,7 +7,6 @@ forms for extensions is below:
 
 * `ProductMassActionFormType`
 * `VariantFormType`
-* `OrderFormType`
 * `OrderItemFormType`
 * `OrderPaymentFormType`
 * `OrderTransportFormType`
@@ -32,19 +31,26 @@ email address are all in section with label 'Personal Data'
 Right now we need to tell form type which GroupType is the last one to render form correctly, just remember to add this
 option if it is last group of fields.
 
+### [DisplayOnlyCustomerType](../../packages/framework/src/Form/DisplayOnlyCustomerType.php)
+Displays name of a registered customer along with a link to his/her detail.
+If there is no customer set, `unregistered customer` text will be displayed instead.
+
 ### [DisplayOnlyType](../../packages/framework/src/Form/DisplayOnlyType.php)
 Sometimes form needs to only display information but does not need to change and persist this data, for this usages
 there is `DisplayOnlyType` which does not map property onto `entity` and let you to display your own data.
-
-### [WarningMessageType](../../packages/framework/src/Form/WarningMessageType.php)
-Sometimes the form needs to contain some information that is important for viewer, for this usage there is  `WarningMessageType`
-that shows highlighted message with warning icon.
 
 ### [DisplayOnlyUrlType](../../packages/framework/src/Form/DisplayOnlyUrlType.php)
 For displaying custom URL based on routing system, there can be used `DisplayOnlyUrlType`.
 
 ### [LocalizedFullWidthType](../../packages/framework/src/Form/LocalizedFullWidthType.php)
 For displaying localized field in vertical order of full-width label and inputs, there can be used `LocalizedFullWidthType`.
+
+### [OrderItemsType](../../packages/framework/src/Form/OrderItemsType.php)
+Displays editable table of OrderItems from provided Order.
+
+### [WarningMessageType](../../packages/framework/src/Form/WarningMessageType.php)
+Sometimes the form needs to contain some information that is important for viewer, for this usage there is  `WarningMessageType`
+that shows highlighted message with warning icon.
 
 ## Adding fields into already existing form types
 Imagine that you have added new property into `Product entity` and you want this property to be set in administration

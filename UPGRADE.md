@@ -75,6 +75,9 @@ There is a list of all the repositories maintained by monorepo, changes in log b
             'route_label' => $product->getMainVariant()->getName(),
         ]);
         ```
+    - if you have extended OrderFormType or its template in any way you will need to review your changes and update them appropriately
+    - there are two new FormTypes DisplayOnlyCustomerType and OrderItemsType.
+        - you need to register their templates in `app/config/packages/twig.yml`
 - *(optional)* [#540 domains URLs are auto-configured during "composer install"](https://github.com/shopsys/shopsys/pull/540)
     - to simplify installation, add `"Shopsys\\FrameworkBundle\\Command\\ComposerScriptHandler::postInstall"` to `post-install-cmd` and `"Shopsys\\FrameworkBundle\\Command\\ComposerScriptHandler::postUpdate"` to  `post-update-cmd` scripts in your `composer.json`
     - you will not have to copy the `domains_urls.yml.dist` during the installation anymore
