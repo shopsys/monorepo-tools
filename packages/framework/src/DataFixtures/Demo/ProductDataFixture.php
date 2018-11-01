@@ -6,6 +6,7 @@ use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use Shopsys\FrameworkBundle\Component\DataFixture\AbstractReferenceFixture;
 use Shopsys\FrameworkBundle\Component\DataFixture\PersistentReferenceFacade;
+use Shopsys\FrameworkBundle\Component\Domain\Domain;
 use Shopsys\FrameworkBundle\DataFixtures\ProductDataFixtureReferenceInjector;
 use Shopsys\FrameworkBundle\Model\Product\ProductData;
 use Shopsys\FrameworkBundle\Model\Product\ProductFacade;
@@ -62,8 +63,7 @@ class ProductDataFixture extends AbstractReferenceFixture implements DependentFi
      */
     public function load(ObjectManager $manager)
     {
-        $onlyForFirstDomain = true;
-        $this->referenceInjector->loadReferences($this->productDataFixtureLoader, $this->persistentReferenceFacade, $onlyForFirstDomain);
+        $this->referenceInjector->loadReferences($this->productDataFixtureLoader, $this->persistentReferenceFacade, Domain::FIRST_DOMAIN_ID);
 
         $csvRows = $this->productDataFixtureCsvReader->getProductDataFixtureCsvRows();
         $productNo = 1;

@@ -296,11 +296,10 @@ class ProductDataFixture
         $this->clearResources();
         $this->productsByCatnum = [];
 
-        $onlyForFirstDomain = false;
         $this->productDataReferenceInjector->loadReferences(
             $this->productDataFixtureLoader,
             $this->persistentReferenceFacade,
-            $onlyForFirstDomain
+            2
         );
     }
 
