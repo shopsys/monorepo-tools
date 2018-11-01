@@ -108,6 +108,23 @@ class Domain implements DomainIdsProviderInterface
     }
 
     /**
+     * @return int[]
+     */
+    public function getAllIdsExcludingFirstDomain(): array
+    {
+        $ids = [];
+        foreach ($this->getAll() as $domainConfig) {
+            $id = $domainConfig->getId();
+            if ($id === self::FIRST_DOMAIN_ID) {
+                continue;
+            }
+            $ids[] = $id;
+        }
+
+        return $ids;
+    }
+
+    /**
      * @return \Shopsys\FrameworkBundle\Component\Domain\Config\DomainConfig[]
      */
     public function getAllIncludingDomainConfigsWithoutDataCreated()
