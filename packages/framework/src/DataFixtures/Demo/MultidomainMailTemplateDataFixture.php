@@ -2,8 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Shopsys\FrameworkBundle\DataFixtures\DemoMultidomain;
+namespace Shopsys\FrameworkBundle\DataFixtures\Demo;
 
+use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use Shopsys\FrameworkBundle\Component\DataFixture\AbstractReferenceFixture;
 use Shopsys\FrameworkBundle\Component\Domain\Domain;
@@ -12,7 +13,7 @@ use Shopsys\FrameworkBundle\Model\Mail\MailTemplateData;
 use Shopsys\FrameworkBundle\Model\Mail\MailTemplateDataFactoryInterface;
 use Shopsys\FrameworkBundle\Model\Mail\MailTemplateFacade;
 
-class MailTemplateDataFixture extends AbstractReferenceFixture
+class MultidomainMailTemplateDataFixture extends AbstractReferenceFixture implements DependentFixtureInterface
 {
     /**
      * @var \Shopsys\FrameworkBundle\Model\Mail\MailTemplateFacade
@@ -169,5 +170,15 @@ class MailTemplateDataFixture extends AbstractReferenceFixture
     private function updateMailTemplate(MailTemplateData $mailTemplateData, int $domainId)
     {
         $this->mailTemplateFacade->saveMailTemplatesData([$mailTemplateData], $domainId);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getDependencies()
+    {
+        return [
+            MailTemplateDataFixture::class,
+        ];
     }
 }

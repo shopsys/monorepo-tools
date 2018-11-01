@@ -8,11 +8,11 @@ use Shopsys\FrameworkBundle\DataFixtures\Demo\AvailabilityDataFixture;
 use Shopsys\FrameworkBundle\DataFixtures\Demo\BrandDataFixture;
 use Shopsys\FrameworkBundle\DataFixtures\Demo\CategoryDataFixture;
 use Shopsys\FrameworkBundle\DataFixtures\Demo\FlagDataFixture;
-use Shopsys\FrameworkBundle\DataFixtures\Demo\PricingGroupDataFixture as DemoPricingGroupDataFixture;
+use Shopsys\FrameworkBundle\DataFixtures\Demo\MultidomainPricingGroupDataFixture;
+use Shopsys\FrameworkBundle\DataFixtures\Demo\PricingGroupDataFixture;
 use Shopsys\FrameworkBundle\DataFixtures\Demo\ProductDataFixtureLoader;
 use Shopsys\FrameworkBundle\DataFixtures\Demo\UnitDataFixture;
 use Shopsys\FrameworkBundle\DataFixtures\Demo\VatDataFixture;
-use Shopsys\FrameworkBundle\DataFixtures\DemoMultidomain\PricingGroupDataFixture as MultidomainPricingGroupDataFixture;
 
 class ProductDataFixtureReferenceInjector
 {
@@ -166,9 +166,9 @@ class ProductDataFixtureReferenceInjector
     private function getPricingGroupReferencesForFirstDomain(PersistentReferenceFacade $persistentReferenceFacade)
     {
         return [
-            'ordinary_domain_1' => $persistentReferenceFacade->getReference(DemoPricingGroupDataFixture::PRICING_GROUP_ORDINARY_DOMAIN_1),
-            'partner_domain_1' => $persistentReferenceFacade->getReference(DemoPricingGroupDataFixture::PRICING_GROUP_PARTNER_DOMAIN_1),
-            'vip_domain_1' => $persistentReferenceFacade->getReference(DemoPricingGroupDataFixture::PRICING_GROUP_VIP_DOMAIN_1),
+            'ordinary_domain_1' => $persistentReferenceFacade->getReference(PricingGroupDataFixture::PRICING_GROUP_ORDINARY_DOMAIN_1),
+            'partner_domain_1' => $persistentReferenceFacade->getReference(PricingGroupDataFixture::PRICING_GROUP_PARTNER_DOMAIN_1),
+            'vip_domain_1' => $persistentReferenceFacade->getReference(PricingGroupDataFixture::PRICING_GROUP_VIP_DOMAIN_1),
         ];
     }
 
@@ -180,10 +180,10 @@ class ProductDataFixtureReferenceInjector
     private function getPricingGroupReferences(PersistentReferenceFacade $persistentReferenceFacade, int $domainId)
     {
         return [
-            'ordinary_domain_1' => $persistentReferenceFacade->getReference(DemoPricingGroupDataFixture::PRICING_GROUP_ORDINARY_DOMAIN_1),
+            'ordinary_domain_1' => $persistentReferenceFacade->getReference(PricingGroupDataFixture::PRICING_GROUP_ORDINARY_DOMAIN_1),
             'ordinary_domain_2' => $persistentReferenceFacade->getReferenceForDomain(MultidomainPricingGroupDataFixture::PRICING_GROUP_ORDINARY_DOMAIN, $domainId),
-            'partner_domain_1' => $persistentReferenceFacade->getReference(DemoPricingGroupDataFixture::PRICING_GROUP_PARTNER_DOMAIN_1),
-            'vip_domain_1' => $persistentReferenceFacade->getReference(DemoPricingGroupDataFixture::PRICING_GROUP_VIP_DOMAIN_1),
+            'partner_domain_1' => $persistentReferenceFacade->getReference(PricingGroupDataFixture::PRICING_GROUP_PARTNER_DOMAIN_1),
+            'vip_domain_1' => $persistentReferenceFacade->getReference(PricingGroupDataFixture::PRICING_GROUP_VIP_DOMAIN_1),
             'vip_domain_2' => $persistentReferenceFacade->getReferenceForDomain(MultidomainPricingGroupDataFixture::PRICING_GROUP_VIP_DOMAIN, $domainId),
         ];
     }
@@ -199,17 +199,7 @@ class ProductDataFixtureReferenceInjector
             CategoryDataFixture::class,
             BrandDataFixture::class,
             UnitDataFixture::class,
-            DemoPricingGroupDataFixture::class,
-        ];
-    }
-
-    /**
-     * @return string[]
-     */
-    public static function getDependenciesForMultidomain()
-    {
-        return [
-            MultidomainPricingGroupDataFixture::class,
+            PricingGroupDataFixture::class,
         ];
     }
 }

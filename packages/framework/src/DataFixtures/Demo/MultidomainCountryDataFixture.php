@@ -2,8 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Shopsys\FrameworkBundle\DataFixtures\DemoMultidomain;
+namespace Shopsys\FrameworkBundle\DataFixtures\Demo;
 
+use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use Shopsys\FrameworkBundle\Component\DataFixture\AbstractReferenceFixture;
 use Shopsys\FrameworkBundle\Component\Domain\Domain;
@@ -11,7 +12,7 @@ use Shopsys\FrameworkBundle\Model\Country\CountryData;
 use Shopsys\FrameworkBundle\Model\Country\CountryDataFactoryInterface;
 use Shopsys\FrameworkBundle\Model\Country\CountryFacade;
 
-class CountryDataFixture extends AbstractReferenceFixture
+class MultidomainCountryDataFixture extends AbstractReferenceFixture implements DependentFixtureInterface
 {
     const COUNTRY_CZECH_REPUBLIC = 'country_czech_republic';
     const COUNTRY_SLOVAKIA = 'country_slovakia';
@@ -81,5 +82,15 @@ class CountryDataFixture extends AbstractReferenceFixture
     {
         $country = $this->countryFacade->create($countryData, $domainId);
         $this->addReferenceForDomain($referenceName, $country, $domainId);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getDependencies()
+    {
+        return [
+            CountryDataFixture::class,
+        ];
     }
 }

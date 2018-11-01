@@ -2,8 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Shopsys\FrameworkBundle\DataFixtures\DemoMultidomain;
+namespace Shopsys\FrameworkBundle\DataFixtures\Demo;
 
+use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use Shopsys\FrameworkBundle\Component\DataFixture\AbstractReferenceFixture;
 use Shopsys\FrameworkBundle\Component\Domain\Domain;
@@ -11,7 +12,7 @@ use Shopsys\FrameworkBundle\DataFixtures\Demo\CategoryDataFixture as DemoCategor
 use Shopsys\FrameworkBundle\Model\Category\CategoryDataFactoryInterface;
 use Shopsys\FrameworkBundle\Model\Category\CategoryFacade;
 
-class CategoryDataFixture extends AbstractReferenceFixture
+class MultidomainCategoryDataFixture extends AbstractReferenceFixture implements DependentFixtureInterface
 {
     /**
      * @var \Shopsys\FrameworkBundle\Model\Category\CategoryFacade
@@ -164,5 +165,15 @@ class CategoryDataFixture extends AbstractReferenceFixture
         $categoryData = $this->categoryDataFacade->createFromCategory($category);
         $categoryData->descriptions[$domainId] = $description;
         $this->categoryFacade->edit($category->getId(), $categoryData);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getDependencies()
+    {
+        return [
+            CategoryDataFixture::class,
+        ];
     }
 }

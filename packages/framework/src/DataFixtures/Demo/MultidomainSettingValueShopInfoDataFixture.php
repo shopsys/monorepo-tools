@@ -2,15 +2,16 @@
 
 declare(strict_types=1);
 
-namespace Shopsys\FrameworkBundle\DataFixtures\DemoMultidomain;
+namespace Shopsys\FrameworkBundle\DataFixtures\Demo;
 
+use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use Shopsys\FrameworkBundle\Component\DataFixture\AbstractReferenceFixture;
 use Shopsys\FrameworkBundle\Component\Domain\Domain;
 use Shopsys\FrameworkBundle\Component\Setting\Setting;
 use Shopsys\FrameworkBundle\Model\ShopInfo\ShopInfoSettingFacade;
 
-class SettingValueShopInfoDataFixture extends AbstractReferenceFixture
+class MultidomainSettingValueShopInfoDataFixture extends AbstractReferenceFixture implements DependentFixtureInterface
 {
     const SETTING_VALUES = [
         ShopInfoSettingFacade::SHOP_INFO_PHONE_NUMBER => '+420123456789',
@@ -52,5 +53,15 @@ class SettingValueShopInfoDataFixture extends AbstractReferenceFixture
         foreach (self::SETTING_VALUES as $key => $value) {
             $this->setting->setForDomain($key, $value, $domainId);
         }
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getDependencies()
+    {
+        return [
+            SettingValueShopInfoDataFixture::class,
+        ];
     }
 }

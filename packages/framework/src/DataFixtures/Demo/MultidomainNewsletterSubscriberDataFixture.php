@@ -2,14 +2,15 @@
 
 declare(strict_types=1);
 
-namespace Shopsys\FrameworkBundle\DataFixtures\DemoMultidomain;
+namespace Shopsys\FrameworkBundle\DataFixtures\Demo;
 
+use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use Shopsys\FrameworkBundle\Component\DataFixture\AbstractReferenceFixture;
 use Shopsys\FrameworkBundle\Component\Domain\Domain;
 use Shopsys\FrameworkBundle\Model\Newsletter\NewsletterFacade;
 
-class NewsletterSubscriberDataFixture extends AbstractReferenceFixture
+class MultidomainNewsletterSubscriberDataFixture extends AbstractReferenceFixture implements DependentFixtureInterface
 {
     /**
      * @var \Shopsys\FrameworkBundle\Model\Newsletter\NewsletterFacade
@@ -60,6 +61,16 @@ class NewsletterSubscriberDataFixture extends AbstractReferenceFixture
             'anna.anina@no-reply.com',
             'jonathan.anderson@no-reply.com',
             'peter.parkson@no-reply.com',
+        ];
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getDependencies()
+    {
+        return [
+            NewsletterSubscriberDataFixture::class,
         ];
     }
 }

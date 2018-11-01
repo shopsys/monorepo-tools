@@ -2,18 +2,17 @@
 
 declare(strict_types=1);
 
-namespace Shopsys\FrameworkBundle\DataFixtures\DemoMultidomain;
+namespace Shopsys\FrameworkBundle\DataFixtures\Demo;
 
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use Shopsys\FrameworkBundle\Component\DataFixture\AbstractReferenceFixture;
 use Shopsys\FrameworkBundle\Component\Domain\Domain;
 use Shopsys\FrameworkBundle\Component\Setting\Setting;
-use Shopsys\FrameworkBundle\DataFixtures\Demo\CurrencyDataFixture;
 use Shopsys\FrameworkBundle\Model\Pricing\PricingSetting;
 use Shopsys\FrameworkBundle\Model\Seo\SeoSettingFacade;
 
-class SettingValueDataFixture extends AbstractReferenceFixture implements DependentFixtureInterface
+class MultidomainSettingValueDataFixture extends AbstractReferenceFixture implements DependentFixtureInterface
 {
     /**
      * @var \Shopsys\FrameworkBundle\Component\Setting\Setting
@@ -46,20 +45,20 @@ class SettingValueDataFixture extends AbstractReferenceFixture implements Depend
      */
     private function loadForDomain(int $domainId)
     {
-        $termsAndConditionsDomain = $this->getReferenceForDomain(ArticleDataFixture::ARTICLE_TERMS_AND_CONDITIONS, $domainId);
+        $termsAndConditionsDomain = $this->getReferenceForDomain(MultidomainArticleDataFixture::ARTICLE_TERMS_AND_CONDITIONS, $domainId);
         /* @var $termsAndConditionsDomain \Shopsys\FrameworkBundle\Model\Article\Article */
         $this->setting->setForDomain(Setting::TERMS_AND_CONDITIONS_ARTICLE_ID, $termsAndConditionsDomain->getId(), $domainId);
 
-        $privacyPolicyDomain = $this->getReferenceForDomain(ArticleDataFixture::ARTICLE_PRIVACY_POLICY, $domainId);
+        $privacyPolicyDomain = $this->getReferenceForDomain(MultidomainArticleDataFixture::ARTICLE_PRIVACY_POLICY, $domainId);
         /* @var $privacyPolicyDomain \Shopsys\FrameworkBundle\Model\Article\Article */
         $this->setting->setForDomain(Setting::PRIVACY_POLICY_ARTICLE_ID, $privacyPolicyDomain->getId(), $domainId);
 
-        $cookiesDomain = $this->getReferenceForDomain(ArticleDataFixture::ARTICLE_COOKIES, $domainId);
+        $cookiesDomain = $this->getReferenceForDomain(MultidomainArticleDataFixture::ARTICLE_COOKIES, $domainId);
         /* @var $cookiesDomain \Shopsys\FrameworkBundle\Model\Article\Article */
         $this->setting->setForDomain(Setting::COOKIES_ARTICLE_ID, $cookiesDomain->getId(), $domainId);
 
         /* @var $pricingGroup \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroup */
-        $pricingGroup = $this->getReferenceForDomain(PricingGroupDataFixture::PRICING_GROUP_ORDINARY_DOMAIN, $domainId);
+        $pricingGroup = $this->getReferenceForDomain(MultidomainPricingGroupDataFixture::PRICING_GROUP_ORDINARY_DOMAIN, $domainId);
         $this->setting->setForDomain(Setting::DEFAULT_PRICING_GROUP, $pricingGroup->getId(), $domainId);
 
         $orderSentText = '
@@ -105,8 +104,9 @@ class SettingValueDataFixture extends AbstractReferenceFixture implements Depend
     public function getDependencies()
     {
         return [
-            ArticleDataFixture::class,
-            PricingGroupDataFixture::class,
+            MultidomainArticleDataFixture::class,
+            MultidomainPricingGroupDataFixture::class,
+            SettingValueDataFixture::class,
         ];
     }
 }

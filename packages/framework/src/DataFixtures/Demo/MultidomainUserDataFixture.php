@@ -2,17 +2,16 @@
 
 declare(strict_types=1);
 
-namespace Shopsys\FrameworkBundle\DataFixtures\DemoMultidomain;
+namespace Shopsys\FrameworkBundle\DataFixtures\Demo;
 
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use Faker\Generator;
 use Shopsys\FrameworkBundle\Component\DataFixture\AbstractReferenceFixture;
 use Shopsys\FrameworkBundle\Component\Domain\Domain;
-use Shopsys\FrameworkBundle\DataFixtures\Demo\UserDataFixtureLoader;
 use Shopsys\FrameworkBundle\Model\Customer\CustomerFacade;
 
-class UserDataFixture extends AbstractReferenceFixture implements DependentFixtureInterface
+class MultidomainUserDataFixture extends AbstractReferenceFixture implements DependentFixtureInterface
 {
     /**
      * @var \Shopsys\FrameworkBundle\DataFixtures\Demo\UserDataFixtureLoader
@@ -62,8 +61,8 @@ class UserDataFixture extends AbstractReferenceFixture implements DependentFixtu
     private function loadForDomain(int $domainId)
     {
         $countries = [
-            $this->getReferenceForDomain(CountryDataFixture::COUNTRY_CZECH_REPUBLIC, $domainId),
-            $this->getReferenceForDomain(CountryDataFixture::COUNTRY_SLOVAKIA, $domainId),
+            $this->getReferenceForDomain(MultidomainCountryDataFixture::COUNTRY_CZECH_REPUBLIC, $domainId),
+            $this->getReferenceForDomain(MultidomainCountryDataFixture::COUNTRY_SLOVAKIA, $domainId),
         ];
         $this->loaderService->injectReferences($countries);
 
@@ -82,7 +81,8 @@ class UserDataFixture extends AbstractReferenceFixture implements DependentFixtu
     public function getDependencies()
     {
         return [
-            CountryDataFixture::class,
+            MultidomainCountryDataFixture::class,
+            UserDataFixture::class,
         ];
     }
 }

@@ -2,21 +2,19 @@
 
 declare(strict_types=1);
 
-namespace Shopsys\FrameworkBundle\DataFixtures\DemoMultidomain;
+namespace Shopsys\FrameworkBundle\DataFixtures\Demo;
 
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use Shopsys\FrameworkBundle\Component\DataFixture\AbstractReferenceFixture;
 use Shopsys\FrameworkBundle\Component\DataFixture\PersistentReferenceFacade;
 use Shopsys\FrameworkBundle\Component\Domain\Domain;
-use Shopsys\FrameworkBundle\DataFixtures\Demo\ProductDataFixtureCsvReader;
-use Shopsys\FrameworkBundle\DataFixtures\Demo\ProductDataFixtureLoader;
 use Shopsys\FrameworkBundle\DataFixtures\ProductDataFixtureReferenceInjector;
 use Shopsys\FrameworkBundle\Model\Product\Product;
 use Shopsys\FrameworkBundle\Model\Product\ProductDataFactoryInterface;
 use Shopsys\FrameworkBundle\Model\Product\ProductFacade;
 
-class ProductDataFixture extends AbstractReferenceFixture implements DependentFixtureInterface
+class MultidomainProductDataFixture extends AbstractReferenceFixture implements DependentFixtureInterface
 {
     /**
      * @var \Shopsys\FrameworkBundle\DataFixtures\Demo\ProductDataFixtureLoader
@@ -116,6 +114,9 @@ class ProductDataFixture extends AbstractReferenceFixture implements DependentFi
      */
     public function getDependencies()
     {
-        return ProductDataFixtureReferenceInjector::getDependenciesForMultidomain();
+        return [
+            MultidomainPricingGroupDataFixture::class,
+            ProductDataFixture::class,
+        ];
     }
 }
