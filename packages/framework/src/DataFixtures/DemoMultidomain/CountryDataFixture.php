@@ -1,17 +1,20 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Shopsys\FrameworkBundle\DataFixtures\DemoMultidomain;
 
 use Doctrine\Common\Persistence\ObjectManager;
 use Shopsys\FrameworkBundle\Component\DataFixture\AbstractReferenceFixture;
+use Shopsys\FrameworkBundle\Component\Domain\Domain;
 use Shopsys\FrameworkBundle\Model\Country\CountryData;
 use Shopsys\FrameworkBundle\Model\Country\CountryDataFactoryInterface;
 use Shopsys\FrameworkBundle\Model\Country\CountryFacade;
 
 class CountryDataFixture extends AbstractReferenceFixture
 {
-    const COUNTRY_CZECH_REPUBLIC_2 = 'country_czech_republic_2';
-    const COUNTRY_SLOVAKIA_2 = 'country_slovakia_2';
+    const COUNTRY_CZECH_REPUBLIC = 'country_czech_republic';
+    const COUNTRY_SLOVAKIA = 'country_slovakia';
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Country\CountryFacade
@@ -24,13 +27,23 @@ class CountryDataFixture extends AbstractReferenceFixture
     private $countryDataFactory;
 
     /**
+     * @var \Shopsys\FrameworkBundle\Component\Domain\Domain
+     */
+    private $domain;
+
+    /**
      * @param \Shopsys\FrameworkBundle\Model\Country\CountryFacade $countryFacade
      * @param \Shopsys\FrameworkBundle\Model\Country\CountryDataFactoryInterface $countryDataFactory
+     * @param \Shopsys\FrameworkBundle\Component\Domain\Domain
      */
-    public function __construct(CountryFacade $countryFacade, CountryDataFactoryInterface $countryDataFactory)
-    {
+    public function __construct(
+        CountryFacade $countryFacade,
+        CountryDataFactoryInterface $countryDataFactory,
+        Domain $domain
+    ) {
         $this->countryFacade = $countryFacade;
         $this->countryDataFactory = $countryDataFactory;
+        $this->domain = $domain;
     }
 
     /**
@@ -38,17 +51,25 @@ class CountryDataFixture extends AbstractReferenceFixture
      */
     public function load(ObjectManager $manager)
     {
-        $domainId = 2;
+        foreach ($this->domain->getAllIdsExcludingFirstDomain() as $domainId) {
+            $this->loadForDomain($domainId);
+        }
+    }
+
+    /**
+     * @param int $domainId
+     */
+    private function loadForDomain(int $domainId)
+    {
         $countryData = $this->countryDataFactory->create();
         $countryData->name = 'Česká republika';
         $countryData->code = 'CZ';
-        $this->createCountry($countryData, $domainId, self::COUNTRY_CZECH_REPUBLIC_2);
+        $this->createCountry($countryData, $domainId, self::COUNTRY_CZECH_REPUBLIC);
 
-        $domainId = 2;
         $countryData = $this->countryDataFactory->create();
         $countryData->name = 'Slovenská republika';
         $countryData->code = 'SK';
-        $this->createCountry($countryData, $domainId, self::COUNTRY_SLOVAKIA_2);
+        $this->createCountry($countryData, $domainId, self::COUNTRY_SLOVAKIA);
     }
 
     /**
@@ -56,9 +77,9 @@ class CountryDataFixture extends AbstractReferenceFixture
      * @param int $domainId
      * @param string $referenceName
      */
-    private function createCountry(CountryData $countryData, $domainId, $referenceName)
+    private function createCountry(CountryData $countryData, int $domainId, string $referenceName)
     {
         $country = $this->countryFacade->create($countryData, $domainId);
-        $this->addReference($referenceName, $country);
+        $this->addReferenceForDomain($referenceName, $country, $domainId);
     }
 }

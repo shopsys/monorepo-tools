@@ -176,10 +176,10 @@ class ProductDataFixtureReferenceInjector
     {
         return [
             'ordinary_domain_1' => $persistentReferenceFacade->getReference(DemoPricingGroupDataFixture::PRICING_GROUP_ORDINARY_DOMAIN_1),
-            'ordinary_domain_2' => $persistentReferenceFacade->getReference(MultidomainPricingGroupDataFixture::PRICING_GROUP_ORDINARY_DOMAIN_2),
+            'ordinary_domain_2' => $persistentReferenceFacade->getReferenceForDomain(MultidomainPricingGroupDataFixture::PRICING_GROUP_ORDINARY_DOMAIN, 2),
             'partner_domain_1' => $persistentReferenceFacade->getReference(DemoPricingGroupDataFixture::PRICING_GROUP_PARTNER_DOMAIN_1),
             'vip_domain_1' => $persistentReferenceFacade->getReference(DemoPricingGroupDataFixture::PRICING_GROUP_VIP_DOMAIN_1),
-            'vip_domain_2' => $persistentReferenceFacade->getReference(MultidomainPricingGroupDataFixture::PRICING_GROUP_VIP_DOMAIN_2),
+            'vip_domain_2' => $persistentReferenceFacade->getReferenceForDomain(MultidomainPricingGroupDataFixture::PRICING_GROUP_VIP_DOMAIN, 2),
         ];
     }
 

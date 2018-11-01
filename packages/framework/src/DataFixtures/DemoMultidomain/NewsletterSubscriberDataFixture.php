@@ -1,35 +1,53 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Shopsys\FrameworkBundle\DataFixtures\DemoMultidomain;
 
 use Doctrine\Common\Persistence\ObjectManager;
 use Shopsys\FrameworkBundle\Component\DataFixture\AbstractReferenceFixture;
+use Shopsys\FrameworkBundle\Component\Domain\Domain;
 use Shopsys\FrameworkBundle\Model\Newsletter\NewsletterFacade;
 
 class NewsletterSubscriberDataFixture extends AbstractReferenceFixture
 {
-    const SECOND_DOMAIN_ID = 2;
+    /**
+     * @var \Shopsys\FrameworkBundle\Model\Newsletter\NewsletterFacade
+     */
+    private $newsletterFacade;
 
     /**
-     * @param \Shopsys\FrameworkBundle\Model\Newsletter\NewsletterFacade $newsletterFacade
+     * @var \Shopsys\FrameworkBundle\Component\Domain\Domain
      */
-    public function __construct(NewsletterFacade $newsletterFacade)
-    {
-        $this->newsletterFacade = $newsletterFacade;
-    }
+    private $domain;
 
-    /** @var \Shopsys\FrameworkBundle\Model\Newsletter\NewsletterFacade */
-    private $newsletterFacade;
+    public function __construct(
+        NewsletterFacade $newsletterFacade,
+        Domain $domain
+    ) {
+        $this->newsletterFacade = $newsletterFacade;
+        $this->domain = $domain;
+    }
 
     /**
      * @param \Doctrine\Common\Persistence\ObjectManager $manager
      */
     public function load(ObjectManager $manager)
     {
+        foreach ($this->domain->getAllIdsExcludingFirstDomain() as $domainId) {
+            $this->loadForDomain($domainId);
+        }
+    }
+
+    /**
+     * @param int $domainId
+     */
+    private function loadForDomain(int $domainId)
+    {
         $newsletterSubscribersData = $this->getEmailData();
 
         foreach ($newsletterSubscribersData as $email) {
-            $this->newsletterFacade->addSubscribedEmail($email, self::SECOND_DOMAIN_ID);
+            $this->newsletterFacade->addSubscribedEmail($email, $domainId);
         }
     }
 

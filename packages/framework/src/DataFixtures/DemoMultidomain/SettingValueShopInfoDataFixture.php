@@ -1,9 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Shopsys\FrameworkBundle\DataFixtures\DemoMultidomain;
 
 use Doctrine\Common\Persistence\ObjectManager;
 use Shopsys\FrameworkBundle\Component\DataFixture\AbstractReferenceFixture;
+use Shopsys\FrameworkBundle\Component\Domain\Domain;
 use Shopsys\FrameworkBundle\Component\Setting\Setting;
 use Shopsys\FrameworkBundle\Model\ShopInfo\ShopInfoSettingFacade;
 
@@ -21,11 +24,14 @@ class SettingValueShopInfoDataFixture extends AbstractReferenceFixture
     private $setting;
 
     /**
-     * @param \Shopsys\FrameworkBundle\Component\Setting\Setting $setting
+     * @var \Shopsys\FrameworkBundle\Component\Domain\Domain
      */
-    public function __construct(Setting $setting)
+    private $domain;
+
+    public function __construct(Setting $setting, Domain $domain)
     {
         $this->setting = $setting;
+        $this->domain = $domain;
     }
 
     /**
@@ -33,7 +39,16 @@ class SettingValueShopInfoDataFixture extends AbstractReferenceFixture
      */
     public function load(ObjectManager $manager)
     {
-        $domainId = 2;
+        foreach ($this->domain->getAllIdsExcludingFirstDomain() as $domainId) {
+            $this->loadForDomain($domainId);
+        }
+    }
+
+    /**
+     * @param int $domainId
+     */
+    private function loadForDomain(int $domainId)
+    {
         foreach (self::SETTING_VALUES as $key => $value) {
             $this->setting->setForDomain($key, $value, $domainId);
         }
