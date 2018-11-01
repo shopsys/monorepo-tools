@@ -25,6 +25,10 @@ git rebase origin/master
 ```
 
 * You have to check your change using the command `php phing standards tests tests-acceptance` as it’s mentioned in [contributing](../../project-base/CONTRIBUTING.md).
+
+    *Note: In this step you were using multiple Phing targets. 
+    More information about what Phing targets are and how they work can be found in [Console Commands for Application Management (Phing Targets)](/docs/introduction/console-commands-for-application-management-phing-targets.md)*
+
 * Please make sure you sign form to agree with the [license agreement](https://www.shopsys-framework.com/license-agreement).
 * [Create a PR](https://github.com/shopsys/shopsys/compare?expand=1) with essential information to make our code review easier.
     * you do not have to update `CHANGELOG.md` at all as it is generated automatically using [symplify/changelog-linker](https://github.com/symplify/changeloglinker) during our release process.

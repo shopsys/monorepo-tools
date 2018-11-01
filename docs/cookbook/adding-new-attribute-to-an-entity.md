@@ -72,6 +72,9 @@ It is a common modification when you need your e-commerce application and ERP sy
     $this->sql('ALTER TABLE products ADD ext_id INT NOT NULL DEFAULT 0');
     $this->sql('ALTER TABLE products ALTER ext_id DROP DEFAULT');
     ```
+    
+    *Note: In this step you were using Phing target `db-migrations-generate`. 
+    More information about what Phing targets are and how they work can be found in [Console Commands for Application Management (Phing Targets)](/docs/introduction/console-commands-for-application-management-phing-targets.md)*
 
 1. Run the migration to actually create the column in your database:
     ```

@@ -274,6 +274,9 @@ Then we create database and build the application.
 ```
 docker-compose -p production exec php-fpm ./phing db-create build-new
 ```
+*Note: In this step you were using multiple Phing targets. 
+More information about what Phing targets are and how they work can be found in [Console Commands for Application Management (Phing Targets)](/docs/introduction/console-commands-for-application-management-phing-targets.md)*
+
 Now the application should be running.
 We want to setup scheduler for execution of cron jobs by adding one line into `/etc/crontab` file.
 Cron job is executed every 5 minutes in `php-fpm` container under `root` user privileges.

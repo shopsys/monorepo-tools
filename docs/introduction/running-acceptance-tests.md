@@ -17,7 +17,10 @@ you can run acceptance tests:
 ```
 php phing tests-acceptance
 
-```   
+```
+
+*Note: In this step you were using Phing target `tests-acceptance`. 
+More information about what Phing targets are and how they work can be found in [Console Commands for Application Management (Phing Targets)](/docs/introduction/console-commands-for-application-management-phing-targets.md)*
 
 ## Native installation
 For running acceptance tests you need to install [Google Chrome browser](https://www.google.com/chrome/browser/desktop/) and download [ChromeDriver](https://sites.google.com/a/chromium.org/chromedriver/).

@@ -15,7 +15,7 @@ This allows modules to have their own database migrations making them easier to 
 ## Generating migrations automatically
 
 Whenever you create a new entity or edit some existing entity, you need to create a migration in order to update your database structure.
-You can do this automatically via a [Phing target](phing-targets.md).
+You can do this automatically via a [Console Commands for Application Management (Phing Targets)](console-commands-for-application-management-phing-targets.md).
 Just run `php phing db-migrations-generate` in your console.
 A new migration will be generated in the correct namespace.
 You should always check the generated migrations, sometimes a minor manual change is required.

@@ -7,7 +7,7 @@
 ## Introduction
 * [Installation Using Docker](installation/installation-using-docker.md) and [Native Installation](installation/native-installation.md) 
 * [Installation Using Docker on Production Server](installation/installation-using-docker-on-production-server.md)
-* [Phing Targets](./introduction/phing-targets.md)
+* [Console Commands for Application Management (Phing Targets)](./introduction/console-commands-for-application-management-phing-targets.md)
 * [Automated Testing](./introduction/automated-testing.md)
 * [Basics About Model Architecture](./introduction/basics-about-model-architecture.md)
 * [Framework Extensibility](introduction/framework-extensibility.md)
@@ -25,6 +25,7 @@
 * [Continuous Integration Using Kubernetes](/docs/kubernetes/continuous-integration-using-kubernetes.md)
 * [How to Set Up Domains and Locales (Languages)](./introduction/how-to-set-up-domains-and-locales.md)
 * [Logging on Continuous Integration server running Kubernetes](/docs/kubernetes/logging-on-continuous-integration-server-running-kubernetes.md)
+* [Shopsys Framework Development Workflow](introduction/shopsys-framework-development-workflow.md)
 
 ## Cookbook
 * [Dumping and Importing the Database](./cookbook/dumping-and-importing-the-database.md)
