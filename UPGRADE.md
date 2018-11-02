@@ -58,7 +58,8 @@ There is a list of all the repositories maintained by monorepo, changes in log b
 - *(optional)* [#428 Removed depends_on and links from docker-compose.yml files](https://github.com/shopsys/shopsys/pull/528) 
     - remove all `depends_on` and `links` from your docker-compose files because they are unnecessary
 - [#538 - phing targets: create-domains-data is now dependent on create-domains-db-functions](https://github.com/shopsys/shopsys/pull/538)
-    - modify your `build.xml` and `build-dev.xml` according to this pull request
+    - in your `build.xml`, make your `create-domains-data` task dependent on `create-domains-db-functions` task
+    - in your `build-dev.xml`, make your `test-create-domains-data` task dependent on `test-create-domains-db-functions` task
 - [#558 - Missing standards check in CI build process #558](https://github.com/shopsys/shopsys/pull/558)
     - the Dockerfile for `php-fpm` has changed for CI stage build, update your `docker/php-fpm/Dockerfile`
 
