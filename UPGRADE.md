@@ -20,7 +20,7 @@ Follow instructions in the section `shopsys/shopsys`.
     * Repeat
 * typical upgrade sequence should be:
     * `docker-compose down`
-    * follow upgrade notes for `docker-compose.yml`, `Dockerfile`, docker containers
+    * follow upgrade notes for `docker-compose.yml`, `Dockerfile`, docker containers, `nginx.conf`, `php.ini`
     * `docker-compose up -d`
     * update shopsys framework dependencies in `composer.json` to version you are upgrading to
         eg. `"shopsys/framework": "v7.0.0-beta1"`
@@ -115,6 +115,12 @@ There is a list of all the repositories maintained by monorepo, changes in log b
     - files `build.xml` and `build-dev.xml` were updated to speed up deployment process of built docker images of php-fpm
     - installation guide for production via Docker was updated, now there is no need for the first part of the build phing target
     - file `docker/php-fpm/docker-php-entrypoint` was changed, update it according to [`project-base/docker/php-fpm/docker-php-entrypoint`](./project-base/docker/php-fpm/docker-php-entrypoint)
+- [#547 - content-test directory is used instead of content during the tests](https://github.com/shopsys/shopsys/pull/547)
+    - modify your `parameters_test.yml.dist`, `parameters_test.yml`, `paths.yml` according to this pull request so there will be used different directory for feeds, images, etc., during the tests
+    - modify your `build-dev.xml`, add a new phing target `test-dirs-create` and add it as a dependency after each `dirs-create` in this file
+    - modify your `build.xml`, phing target `wipe-excluding-logs`  according to this pull request so the directory `content-test` will be truncated too
+    - modify your `nginx.conf`, change location for images from `^/content/images/` to `^/content(-test)?/images/`
+    - modify your `routing_front.yml`, change configuration for routes `front_image`, `front_image_without_type` - replace `/content/` by `/%shopsys.content_dir_name%/`
 
 ## [From 7.0.0-beta1 to 7.0.0-beta2]
 ### [shopsys/project-base]

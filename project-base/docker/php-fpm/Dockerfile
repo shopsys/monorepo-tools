@@ -101,7 +101,7 @@ WORKDIR /source-code
 RUN composer install --optimize-autoloader --no-interaction --no-progress
 
 # clean cache because of recreating valid autloading of vendor after /source-code is copied into /var/www/html
-RUN php phing composer-dev npm dirs-create assets standards tests-static tests-acceptance-build clean
+RUN php phing composer-dev npm dirs-create test-dirs-create assets standards tests-static tests-acceptance-build clean
 
 # switch back to the original workdir
 WORKDIR /var/www/html

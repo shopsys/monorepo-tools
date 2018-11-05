@@ -24,6 +24,7 @@ services:
     Shopsys\FrameworkBundle\Command\CreateApplicationDirectoriesCommand:
         arguments:
             - '%kernel.project_dir%'
+            - '%shopsys.content_dir_name%'
 
     Shopsys\FrameworkBundle\Command\GenerateGruntfileCommand:
         arguments:

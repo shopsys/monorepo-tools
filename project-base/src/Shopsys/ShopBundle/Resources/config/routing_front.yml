@@ -57,13 +57,13 @@ front_homepage:
     defaults: { _controller: ShopsysShopBundle:Front\Homepage:index }
 
 front_image:
-    path: /content/images/{entityName}/{type}/{sizeName}/{imageId}.{extension}
+    path: /%shopsys.content_dir_name%/images/{entityName}/{type}/{sizeName}/{imageId}.{extension}
     defaults: { _controller: ShopsysShopBundle:Front\Image:getImage }
     requirements:
         imageId: \d+
 
 front_image_without_type:
-    path: /content/images/{entityName}/{sizeName}/{imageId}.{extension}
+    path: /%shopsys.content_dir_name%/images/{entityName}/{sizeName}/{imageId}.{extension}
     defaults:
         _controller: ShopsysShopBundle:Front\Image:getImage
         type: ~

@@ -1,4 +1,5 @@
 parameters:
+    shopsys.content_dir_name: 'content'
     shopsys.css_version_filepath: '%shopsys.web_dir%/assets/cssVersion'
     shopsys.data_fixtures.resource_customers_filepath: '%shopsys.data_fixtures.resources_dir%/demo-data-customers.csv'
     shopsys.data_fixtures.resource_products_filepath: '%shopsys.data_fixtures.resources_dir%/demo-data-products.csv'
@@ -6,28 +7,28 @@ parameters:
     shopsys.default_db_schema_filepath: '%shopsys.framework.resources_dir%/database/schema.sql'
     shopsys.domain_config_filepath: '%kernel.root_dir%/config/domains.yml'
     shopsys.domain_images_dir: '/web%shopsys.domain_images_url_prefix%'
-    shopsys.domain_images_url_prefix: /content/admin/images/domain
+    shopsys.domain_images_url_prefix: '/%shopsys.content_dir_name%/admin/images/domain'
     shopsys.domain_urls_config_filepath: '%kernel.root_dir%/config/domains_urls.yml'
     shopsys.error_pages_dir: '%shopsys.root_dir%/var/errorPages/'
     shopsys.feed_dir: '/web%shopsys.feed_url_prefix%'
-    shopsys.feed_url_prefix: /content/feeds/
+    shopsys.feed_url_prefix: '/%shopsys.content_dir_name%/feeds/'
     shopsys.filemanager_upload_dir: '%shopsys.web_dir%/%shopsys.filemanager_upload_web_dir%'
-    shopsys.filemanager_upload_web_dir: content/wysiwyg
+    shopsys.filemanager_upload_web_dir: '%shopsys.content_dir_name%/wysiwyg'
     shopsys.framework.root_dir: '%shopsys.root_dir%/vendor/shopsys/framework'
     shopsys.front_design_image_url_prefix: /assets/frontend/images/
     shopsys.image_config_filepath: '%shopsys.root_dir%/src/Shopsys/ShopBundle/Resources/config/images.yml'
     shopsys.image_dir: '/web%shopsys.image_url_prefix%'
-    shopsys.image_url_prefix: /content/images/
+    shopsys.image_url_prefix: '/%shopsys.content_dir_name%/images/'
     shopsys.javascript_sources_dir: '%shopsys.resources_dir%/scripts'
     shopsys.javascript_url_prefix: /assets/scripts/
     shopsys.log_stream: /tmp/log-pipe
     shopsys.resources_dir: '%shopsys.root_dir%/src/Shopsys/ShopBundle/Resources'
     shopsys.root_dir: '%kernel.root_dir%/..'
     shopsys.sitemaps_dir: '/web%shopsys.sitemaps_url_prefix%'
-    shopsys.sitemaps_url_prefix: /content/sitemaps
+    shopsys.sitemaps_url_prefix: '/%shopsys.content_dir_name%/sitemaps'
     shopsys.uploaded_file_config_filepath: '%shopsys.root_dir%/src/Shopsys/ShopBundle/Resources/config/uploaded_files.yml'
     shopsys.uploaded_file_dir: '/web%shopsys.uploaded_file_url_prefix%'
-    shopsys.uploaded_file_url_prefix: /content/uploadedFiles/
+    shopsys.uploaded_file_url_prefix: '/%shopsys.content_dir_name%/uploadedFiles/'
     shopsys.web_dir: '%shopsys.root_dir%/web'
     shopsys.vendor_dir: '%kernel.root_dir%/../vendor'
     shopsys.js_form_validator_output_vendor_dir: '../vendor'

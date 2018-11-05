@@ -378,6 +378,9 @@
             <fileset dir="${path.web}/content/">
                 <exclude name="/" />
             </fileset>
+            <fileset dir="${path.web}/content-test/">
+                <exclude name="/" />
+            </fileset>
         </delete>
     </target>
 

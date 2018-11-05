@@ -43,7 +43,13 @@ class CreateApplicationDirectoriesCommand extends Command
     private $projectDir;
 
     /**
+     * @var string
+     */
+    private $webContentDirName;
+
+    /**
      * @param string $projectDir
+     * @param string $webContentDirName
      * @param \League\Flysystem\FilesystemInterface $filesystem
      * @param \Symfony\Component\Filesystem\Filesystem $localFilesystem
      * @param \Shopsys\FrameworkBundle\Component\Image\DirectoryStructureCreator $imageDirectoryStructureCreator
@@ -51,6 +57,7 @@ class CreateApplicationDirectoriesCommand extends Command
      */
     public function __construct(
         string $projectDir,
+        string $webContentDirName,
         FilesystemInterface $filesystem,
         Filesystem $localFilesystem,
         ImageDirectoryStructureCreator $imageDirectoryStructureCreator,
@@ -63,6 +70,7 @@ class CreateApplicationDirectoriesCommand extends Command
 
         parent::__construct();
         $this->projectDir = $projectDir;
+        $this->webContentDirName = $webContentDirName;
     }
 
     protected function configure()
@@ -85,9 +93,9 @@ class CreateApplicationDirectoriesCommand extends Command
     private function createMiscellaneousDirectories(OutputInterface $output)
     {
         $directories = [
-            '/web/content/feeds',
-            '/web/content/sitemaps',
-            '/web/content/wysiwyg',
+            '/web/' . $this->webContentDirName . '/feeds',
+            '/web/' . $this->webContentDirName . '/sitemaps',
+            '/web/' . $this->webContentDirName . '/wysiwyg',
         ];
 
         $localDirectories = [

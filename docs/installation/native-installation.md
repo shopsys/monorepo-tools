@@ -146,6 +146,7 @@ Composer will then prompt you to set parameters for testing environment (`app/co
 | `test_mailer_host`                | ...                                                                           | ...           |
 | `test_mailer_user`                | ...                                                                           | ...           |
 | `test_mailer_password`            | ...                                                                           | ...           |
+| `shopsys.content_dir_name`        | web/content-test/ directory is used instead of web/content/ during the tests  | content-test  |
 
 #### Choose environment type
 For development choose `n` when asked `Build in production environment? (Y/n)`.

@@ -12,3 +12,5 @@ parameters:
     test_mailer_host: smtp-server
     test_mailer_user: ~
     test_mailer_password: ~
+
+    shopsys.content_dir_name: 'content-test'
