@@ -1,0 +1,5 @@
+services:
+    # helper services
+    PhpCsFixer\Tokenizer\Analyzer\FunctionsAnalyzer: ~
+
+    Shopsys\CodingStandards\CsFixer\Phpdoc\OrderedParamAnnotationsFixer: ~

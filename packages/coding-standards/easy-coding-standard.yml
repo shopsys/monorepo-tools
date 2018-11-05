@@ -141,6 +141,8 @@ services:
 parameters:
     exclude_files:
         - '*/tests/Unit/**/wrong/*'
+        - '*/tests/Unit/**/correct/*'
+        - '*/tests/Unit/**/fixed/*'
     skip:
         SlevomatCodingStandard\Sniffs\Classes\UnusedPrivateElementsSniff:
             - '*/tests/Unit/CsFixer/OrmJoinColumnRequireNullableFixer/*'

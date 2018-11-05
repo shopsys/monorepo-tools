@@ -1,0 +1,10 @@
+services:
+    Shopsys\CodingStandards\CsFixer\Phpdoc\MissingReturnAnnotationFixer: ~
+
+    # helper services
+    _defaults:
+        autowire: true
+
+    PhpCsFixer\Tokenizer\Analyzer\FunctionsAnalyzer: ~
+    Symplify\TokenRunner\Analyzer\FixerAnalyzer\IndentDetector: ~
+    Shopsys\CodingStandards\Helper\PhpToDocTypeTransformer: ~
