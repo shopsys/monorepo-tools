@@ -6,12 +6,18 @@ syncs:
         sync_strategy: 'unison'
         src: './'
         sync_excludes: [
+            '.ci',
             '.git',
+            '.github',
             '.idea',
             '.docker-sync',
             '.DS_Store',
             'docker',
+            'docs',
+            'nbproject',
             'project-base/docker',
+            'project-base/docs',
+            'project-base/kubernetes',
             'project-base/node_modules',
             'project-base/var/cache',
             'project-base/var/elasticsearch-data',

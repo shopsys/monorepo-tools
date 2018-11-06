@@ -1,0 +1,34 @@
+# ignore .git (can be volume-mounted in development environment)
+.git
+
+# ignore directories with meta-data
+.ci
+.idea
+.github
+.idea
+nbproject
+
+# ignore directories that should be created and filled during the image build
+project-base/node_modules
+project-base/var
+!project-base/var/.gitkeep
+project-base/web/assets/scripts
+project-base/web/bundles
+project-base/web/components
+project-base/web/content
+vendor
+
+# ignore kubernetes manifests
+project-base/kubernetes
+
+# ignore docker configs for other images than php-fpm, and the php-fpm's Dockerfile itself
+docker
+project-base/docker
+!project-base/docker/php-fpm
+project-base/docker/php-fpm/Dockerfile
+
+# ignore the docs (along with .md files in root dir)
+*.md
+docs
+project-base/*.md
+project-base/docs

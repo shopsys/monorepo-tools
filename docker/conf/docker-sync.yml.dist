@@ -4,13 +4,19 @@ syncs:
         sync_userid: 501
         src: './'
         sync_excludes: [
+            '.ci',
             '.git',
+            '.github',
             '.idea',
             '.docker-sync',
             '.DS_Store',
             'docker',
+            'docs',
             'microservices',
+            'nbproject',
             'project-base/docker',
+            'project-base/docs',
+            'project-base/kubernetes',
             'project-base/node_modules',
             'project-base/var/cache',
             'project-base/var/elasticsearch-data',
