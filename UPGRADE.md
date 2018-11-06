@@ -132,7 +132,7 @@ There is a list of all the repositories maintained by monorepo, changes in log b
 ### [shopsys/coding-standards]
 - there are a few new standards, i.e. [new fixers enabled](https://github.com/shopsys/shopsys/pull/573/files#diff-709e8469a9fc8c8b45f8b285ac1a4c92) in the `easy-coding-standard.yml` config that enforce using annotations for all your methods:
     - if you want to use the standards as well, let the fixers check and fix your code
-        - on projects built from `shopsys/project-base` just run `php phing standrds-fix`
+        - on projects built from `shopsys/project-base` just run `php phing standards-fix`
         - on any other projects, where you do not have our phing targets available, run `vendor/bin/ecs check path/to/your/source-codes --fix`
     - if you do not want to use these standards, disable them in your custom configuration (`easy-coding-standard.yml` by default)
 
