@@ -35,12 +35,12 @@ spec:
                         -   key: nginx.conf
                             path: default.conf
             initContainers:
-                -   name: copy-source-codes-to-application-folder
+                -   name: copy-source-codes-to-volume
                     image: $PHP_FPM_IMAGE
-                    command: ["sh", "-c", "cp -r /source-code/. /var/www/html"]
+                    command: ["sh", "-c", "cp -r /var/www/html/. /tmp/source-codes"]
                     volumeMounts:
                     -       name: source-codes
-                            mountPath: /var/www/html
+                            mountPath: /tmp/source-codes
             containers:
             -   image: $PHP_FPM_IMAGE
                 name: php-fpm

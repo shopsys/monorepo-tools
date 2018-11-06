@@ -93,18 +93,11 @@ RUN php phing composer npm dirs-create assets
 
 FROM base as ci
 
-# copy all files in the context to /source-code and install Composer dependencies
-# the files will be copied inside a mounted volume in /var/www/html so it's available both in php-fpm and nginx container
-# see project-base/kubernetes/deployments/webserver-php-fpm.yml for details
-COPY --chown=www-data:www-data / /source-code
-WORKDIR /source-code
+COPY --chown=www-data:www-data / /var/www/html
+
 RUN composer install --optimize-autoloader --no-interaction --no-progress
 
-# clean cache because of recreating valid autloading of vendor after /source-code is copied into /var/www/html
-RUN php phing composer-dev npm dirs-create test-dirs-create assets standards tests-static tests-acceptance-build clean
-
-# switch back to the original workdir
-WORKDIR /var/www/html
+RUN php phing composer-dev npm dirs-create test-dirs-create assets standards tests-static tests-acceptance-build
 
 ########################################################################################################################
 
