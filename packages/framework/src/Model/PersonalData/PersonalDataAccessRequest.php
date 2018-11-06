@@ -31,7 +31,7 @@ class PersonalDataAccessRequest
     protected $email;
 
     /**
-     * @var DateTime
+     * @var \DateTime
      *
      * @ORM\Column(type="datetime")
      */
@@ -85,7 +85,7 @@ class PersonalDataAccessRequest
     }
 
     /**
-     * @return DateTime
+     * @return \DateTime
      */
     public function getCreatedAt()
     {

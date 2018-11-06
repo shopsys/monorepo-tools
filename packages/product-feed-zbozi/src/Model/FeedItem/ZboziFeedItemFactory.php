@@ -33,6 +33,12 @@ class ZboziFeedItemFactory
      */
     protected $categoryFacade;
 
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Product\Pricing\ProductPriceCalculationForUser $productPriceCalculationForUser
+     * @param \Shopsys\FrameworkBundle\Model\Product\Collection\ProductUrlsBatchLoader $productUrlsBatchLoader
+     * @param \Shopsys\FrameworkBundle\Model\Product\Collection\ProductParametersBatchLoader $productParametersBatchLoader
+     * @param \Shopsys\FrameworkBundle\Model\Category\CategoryFacade $categoryFacade
+     */
     public function __construct(
         ProductPriceCalculationForUser $productPriceCalculationForUser,
         ProductUrlsBatchLoader $productUrlsBatchLoader,

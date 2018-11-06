@@ -10,10 +10,13 @@ namespace ShopsysNamespace;
 final class ValidClass
 {
     /**
-     * @var Type
+     * @var \ShopsysNamespace\Type
      */
     private $parameterCamelCase;
 
+    /**
+     * @param \ShopsysNamespace\Type $parameterCamelCase
+     */
     public function method(Type $parameterCamelCase)
     {
         $this->parameterCamelCase = $parameterCamelCase;

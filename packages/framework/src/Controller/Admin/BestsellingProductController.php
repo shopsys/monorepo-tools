@@ -32,6 +32,12 @@ class BestsellingProductController extends AdminBaseController
      */
     protected $manualBestsellingProductFacade;
 
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Product\BestsellingProduct\ManualBestsellingProductFacade $manualBestsellingProductFacade
+     * @param \Shopsys\FrameworkBundle\Model\Category\CategoryFacade $categoryFacade
+     * @param \Shopsys\FrameworkBundle\Component\Domain\AdminDomainTabsFacade $adminDomainTabsFacade
+     * @param \Shopsys\FrameworkBundle\Model\AdminNavigation\BreadcrumbOverrider $breadcrumbOverrider
+     */
     public function __construct(
         ManualBestsellingProductFacade $manualBestsellingProductFacade,
         CategoryFacade $categoryFacade,
@@ -65,6 +71,7 @@ class BestsellingProductController extends AdminBaseController
 
     /**
      * @Route("/product/bestselling-product/detail/")
+     * @param \Symfony\Component\HttpFoundation\Request $request
      */
     public function detailAction(Request $request)
     {

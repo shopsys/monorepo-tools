@@ -26,6 +26,9 @@ class FixturesLoader extends Loader
      */
     private $loadedFixtures = [];
 
+    /**
+     * @param \Doctrine\Bundle\FixturesBundle\Loader\SymfonyFixturesLoader $symfonyFixturesLoader
+     */
     public function __construct(SymfonyFixturesLoader $symfonyFixturesLoader)
     {
         $this->symfonyFixturesLoader = $symfonyFixturesLoader;

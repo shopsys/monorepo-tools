@@ -18,6 +18,10 @@ class FeedRenderer
      */
     private $template;
 
+    /**
+     * @param \Twig_Environment $twig
+     * @param \Twig_TemplateWrapper $template
+     */
     public function __construct(Twig_Environment $twig, Twig_TemplateWrapper $template)
     {
         $this->twig = $twig;

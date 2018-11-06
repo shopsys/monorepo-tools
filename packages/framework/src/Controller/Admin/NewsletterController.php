@@ -31,6 +31,11 @@ class NewsletterController extends AdminBaseController
      */
     protected $gridFactory;
 
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Newsletter\NewsletterFacade $newsletterFacade
+     * @param \Shopsys\FrameworkBundle\Component\Domain\AdminDomainTabsFacade $adminDomainTabsFacade
+     * @param \Shopsys\FrameworkBundle\Component\Grid\GridFactory $gridFactory
+     */
     public function __construct(
         NewsletterFacade $newsletterFacade,
         AdminDomainTabsFacade $adminDomainTabsFacade,
@@ -43,6 +48,7 @@ class NewsletterController extends AdminBaseController
 
     /**
      * @Route("/newsletter/list/")
+     * @param \Symfony\Component\HttpFoundation\Request $request
      */
     public function listAction(Request $request)
     {

@@ -24,6 +24,10 @@ class ProductFilterRepository
      */
     private $parameterFilterRepository;
 
+    /**
+     * @param \Shopsys\FrameworkBundle\Component\Doctrine\QueryBuilderService $queryBuilderService
+     * @param \Shopsys\FrameworkBundle\Model\Product\Filter\ParameterFilterRepository $parameterFilterRepository
+     */
     public function __construct(
         QueryBuilderService $queryBuilderService,
         ParameterFilterRepository $parameterFilterRepository

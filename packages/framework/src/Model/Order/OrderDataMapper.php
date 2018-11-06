@@ -9,6 +9,9 @@ class OrderDataMapper
      */
     private $orderDataFactory;
 
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Order\OrderDataFactoryInterface $orderDataFactory
+     */
     public function __construct(OrderDataFactoryInterface $orderDataFactory)
     {
         $this->orderDataFactory = $orderDataFactory;

@@ -28,6 +28,11 @@ class ProductCalculatedPricesType extends AbstractType
      */
     private $productFacade;
 
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Product\Pricing\AdminProductPriceCalculationFacade $adminProductPriceCalculationFacade
+     * @param \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroupFacade $pricingGroupFacade
+     * @param \Shopsys\FrameworkBundle\Model\Product\ProductFacade $productFacade
+     */
     public function __construct(
         AdminProductPriceCalculationFacade $adminProductPriceCalculationFacade,
         PricingGroupFacade $pricingGroupFacade,

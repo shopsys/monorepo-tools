@@ -123,6 +123,7 @@ class Administrator implements UserInterface, Serializable, UniqueLoginInterface
     }
 
     /**
+     * @param \Shopsys\FrameworkBundle\Model\Administrator\AdministratorGridLimit $gridLimit
      * @param \Shopsys\FrameworkBundle\Model\Administrator\AdministratorGridLimit
      */
     public function addGridLimit(AdministratorGridLimit $gridLimit)

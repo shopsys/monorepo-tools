@@ -26,6 +26,10 @@ class HeurekaProductDataFixture implements PluginDataFixtureInterface
      */
     private $heurekaProductDomainDataFactory;
 
+    /**
+     * @param \Shopsys\ProductFeed\HeurekaBundle\Model\Product\HeurekaProductDomainFacade $heurekaProductDomainFacade
+     * @param \Shopsys\ProductFeed\HeurekaBundle\Model\Product\HeurekaProductDomainDataFactoryInterface $heurekaProductDomainDataFactory
+     */
     public function __construct(
         HeurekaProductDomainFacade $heurekaProductDomainFacade,
         HeurekaProductDomainDataFactoryInterface $heurekaProductDomainDataFactory

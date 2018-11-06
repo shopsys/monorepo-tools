@@ -16,6 +16,10 @@ class GridOrderingFacade
      */
     protected $gridOrderingService;
 
+    /**
+     * @param \Doctrine\ORM\EntityManagerInterface $em
+     * @param \Shopsys\FrameworkBundle\Component\Grid\Ordering\GridOrderingService $gridOrderingService
+     */
     public function __construct(EntityManagerInterface $em, GridOrderingService $gridOrderingService)
     {
         $this->em = $em;

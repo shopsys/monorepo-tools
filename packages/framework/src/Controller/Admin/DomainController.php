@@ -40,6 +40,13 @@ class DomainController extends AdminBaseController
      */
     protected $errorService;
 
+    /**
+     * @param \Shopsys\FrameworkBundle\Component\Domain\Domain $domain
+     * @param \Shopsys\FrameworkBundle\Component\Domain\AdminDomainTabsFacade $adminDomainTabsFacade
+     * @param \Shopsys\FrameworkBundle\Component\Grid\GridFactory $gridFactory
+     * @param \Shopsys\FrameworkBundle\Component\Domain\DomainFacade $domainFacade
+     * @param \Shopsys\FrameworkBundle\Component\FlashMessage\ErrorService $errorService
+     */
     public function __construct(
         Domain $domain,
         AdminDomainTabsFacade $adminDomainTabsFacade,
@@ -64,7 +71,8 @@ class DomainController extends AdminBaseController
 
     /**
      * @Route("/multidomain/select-domain/{id}", requirements={"id" = "\d+"})
-     * @param Request $request
+     * @param \Symfony\Component\HttpFoundation\Request $request
+     * @param mixed $id
      */
     public function selectDomainAction(Request $request, $id)
     {

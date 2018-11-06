@@ -17,6 +17,17 @@ services:
     Shopsys\CodingStandards\Sniffs\ForbiddenSuperGlobalSniff: ~
     # method arguments and variables should be $camelCase
     Shopsys\CodingStandards\Sniffs\ValidVariableNameSniff: ~
+    # add all @param, @return and @var annotations, in FQN
+    Shopsys\CodingStandards\CsFixer\Phpdoc\MissingParamAnnotationsFixer: ~
+    Shopsys\CodingStandards\CsFixer\Phpdoc\MissingReturnAnnotationFixer: ~
+    Shopsys\CodingStandards\CsFixer\Phpdoc\OrderedParamAnnotationsFixer: ~
+    SlevomatCodingStandard\Sniffs\Namespaces\FullyQualifiedClassNameInAnnotationSniff: ~
+    # helper services ↓
+    _defaults:
+        autowire: true
+    PhpCsFixer\Tokenizer\Analyzer\FunctionsAnalyzer: ~
+    Shopsys\CodingStandards\Helper\PhpToDocTypeTransformer: ~
+    Symplify\TokenRunner\Analyzer\FixerAnalyzer\IndentDetector: ~
 
     # Custom Shopsys standards
     PHP_CodeSniffer\Standards\Generic\Sniffs\CodeAnalysis\EmptyStatementSniff: ~

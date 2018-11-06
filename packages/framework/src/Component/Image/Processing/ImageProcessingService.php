@@ -36,6 +36,11 @@ class ImageProcessingService
      */
     private $localFilesystem;
 
+    /**
+     * @param \Intervention\Image\ImageManager $imageManager
+     * @param \League\Flysystem\FilesystemInterface $filesystem
+     * @param \Symfony\Component\Filesystem\Filesystem $localFilesystem
+     */
     public function __construct(
         ImageManager $imageManager,
         FilesystemInterface $filesystem,

@@ -21,6 +21,9 @@ final class ObjectIsCreatedByFactorySniffTest extends AbstractCheckerTestCase
         $this->doTestWrongFile(__DIR__ . '/Wrong/SomeController.php');
     }
 
+    /**
+     * @return string
+     */
     protected function provideConfig(): string
     {
         return __DIR__ . '/config.yml';

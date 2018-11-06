@@ -20,6 +20,10 @@ class TopCategoryController extends AdminBaseController
      */
     protected $adminDomainTabsFacade;
 
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Category\TopCategory\TopCategoryFacade $topCategoryFacade
+     * @param \Shopsys\FrameworkBundle\Component\Domain\AdminDomainTabsFacade $adminDomainTabsFacade
+     */
     public function __construct(
         TopCategoryFacade $topCategoryFacade,
         AdminDomainTabsFacade $adminDomainTabsFacade
@@ -30,6 +34,7 @@ class TopCategoryController extends AdminBaseController
 
     /**
      * @Route("/category/top-category/list/")
+     * @param \Symfony\Component\HttpFoundation\Request $request
      */
     public function listAction(Request $request)
     {

@@ -28,6 +28,10 @@ class RegistrationMailService
      */
     private $domainRouterFactory;
 
+    /**
+     * @param \Shopsys\FrameworkBundle\Component\Setting\Setting $setting
+     * @param \Shopsys\FrameworkBundle\Component\Router\DomainRouterFactory $domainRouterFactory
+     */
     public function __construct(Setting $setting, DomainRouterFactory $domainRouterFactory)
     {
         $this->setting = $setting;

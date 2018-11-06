@@ -9,6 +9,9 @@ class StatisticsProcessingFacade
      */
     protected $statisticsService;
 
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Statistics\StatisticsService $statisticsService
+     */
     public function __construct(StatisticsService $statisticsService)
     {
         $this->statisticsService = $statisticsService;

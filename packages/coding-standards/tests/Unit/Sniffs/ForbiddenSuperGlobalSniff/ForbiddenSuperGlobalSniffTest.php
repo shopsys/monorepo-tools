@@ -14,6 +14,9 @@ final class ForbiddenSuperGlobalSniffTest extends AbstractCheckerTestCase
         $this->doTestWrongFile(__DIR__ . '/wrong/post.php.inc');
     }
 
+    /**
+     * @return string
+     */
     protected function provideConfig(): string
     {
         return __DIR__ . '/config.yml';

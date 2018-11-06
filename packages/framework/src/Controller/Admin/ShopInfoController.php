@@ -20,6 +20,10 @@ class ShopInfoController extends AdminBaseController
      */
     protected $shopInfoSettingFacade;
 
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\ShopInfo\ShopInfoSettingFacade $shopInfoSettingFacade
+     * @param \Shopsys\FrameworkBundle\Component\Domain\AdminDomainTabsFacade $adminDomainTabsFacade
+     */
     public function __construct(
         ShopInfoSettingFacade $shopInfoSettingFacade,
         AdminDomainTabsFacade $adminDomainTabsFacade
@@ -30,6 +34,7 @@ class ShopInfoController extends AdminBaseController
 
     /**
      * @Route("/shop-info/setting/")
+     * @param \Symfony\Component\HttpFoundation\Request $request
      */
     public function settingAction(Request $request)
     {

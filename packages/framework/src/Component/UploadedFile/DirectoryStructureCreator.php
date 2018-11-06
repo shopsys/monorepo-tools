@@ -22,6 +22,11 @@ class DirectoryStructureCreator
      */
     private $filesysytem;
 
+    /**
+     * @param \Shopsys\FrameworkBundle\Component\UploadedFile\Config\UploadedFileConfig $uploadedFileConfig
+     * @param \Shopsys\FrameworkBundle\Component\UploadedFile\UploadedFileLocator $uploadedFileLocator
+     * @param \League\Flysystem\FilesystemInterface $filesystem
+     */
     public function __construct(
         UploadedFileConfig $uploadedFileConfig,
         UploadedFileLocator $uploadedFileLocator,

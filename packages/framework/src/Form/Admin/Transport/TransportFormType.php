@@ -46,6 +46,12 @@ class TransportFormType extends AbstractType
      */
     private $transportFacade;
 
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Pricing\Vat\VatFacade $vatFacade
+     * @param \Shopsys\FrameworkBundle\Model\Payment\PaymentFacade $paymentFacade
+     * @param \Shopsys\FrameworkBundle\Model\Pricing\Currency\CurrencyFacade $currencyFacade
+     * @param \Shopsys\FrameworkBundle\Model\Transport\TransportFacade $transportFacade
+     */
     public function __construct(
         VatFacade $vatFacade,
         PaymentFacade $paymentFacade,

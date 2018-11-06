@@ -18,6 +18,10 @@ class CategoryBreadcrumbGenerator implements BreadcrumbGeneratorInterface
      */
     private $domain;
 
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Category\CategoryRepository $categoryRepository
+     * @param \Shopsys\FrameworkBundle\Component\Domain\Domain $domain
+     */
     public function __construct(
         CategoryRepository $categoryRepository,
         Domain $domain

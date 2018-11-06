@@ -23,6 +23,10 @@ class AdministratorUserProvider implements UserProviderInterface
      */
     private $administratorActivityFacade;
 
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Administrator\AdministratorRepository $administratorRepository
+     * @param \Shopsys\FrameworkBundle\Model\Administrator\Activity\AdministratorActivityFacade $administratorActivityFacade
+     */
     public function __construct(
         AdministratorRepository $administratorRepository,
         AdministratorActivityFacade $administratorActivityFacade

@@ -20,6 +20,10 @@ class JsTranslatorCompilerPass implements JsCompilerPassInterface
      */
     private $translator;
 
+    /**
+     * @param \Shopsys\FrameworkBundle\Component\Javascript\Parser\Translator\JsTranslatorCallParser $jsTranslatorCallParser
+     * @param \Shopsys\FrameworkBundle\Component\Translation\Translator $translator
+     */
     public function __construct(
         JsTranslatorCallParser $jsTranslatorCallParser,
         Translator $translator

@@ -17,7 +17,7 @@ class ActionColumn
     private $router;
 
     /**
-     * @var RouteCsrfProtector
+     * @var \Shopsys\FrameworkBundle\Component\Router\Security\RouteCsrfProtector
      */
     private $routeCsrfProtector;
 

@@ -2,7 +2,6 @@
 
 namespace Shopsys\FrameworkBundle\Model\Product;
 
-use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Prezent\Doctrine\Translatable\Annotation as Prezent;
@@ -364,6 +363,7 @@ class Product extends AbstractTranslatableEntity
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\Product\ProductCategoryDomainFactoryInterface $productCategoryDomainFactory
+     * @param \Shopsys\FrameworkBundle\Model\Product\ProductData $productData
      * @param \Shopsys\FrameworkBundle\Model\Product\ProductData
      */
     public function edit(
@@ -514,7 +514,7 @@ class Product extends AbstractTranslatableEntity
     }
 
     /**
-     * @return DateTime|null
+     * @return \DateTime|null
      */
     public function getSellingFrom()
     {
@@ -522,7 +522,7 @@ class Product extends AbstractTranslatableEntity
     }
 
     /**
-     * @return DateTime|null
+     * @return \DateTime|null
      */
     public function getSellingTo()
     {

@@ -23,6 +23,11 @@ class OrderDataFactory implements OrderDataFactoryInterface
      */
     protected $orderPaymentDataFactory;
 
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Order\Item\OrderItemDataFactoryInterface $orderItemDataFactory
+     * @param \Shopsys\FrameworkBundle\Model\Order\Item\OrderTransportDataFactoryInterface $orderTransportDataFactory
+     * @param \Shopsys\FrameworkBundle\Model\Order\Item\OrderPaymentDataFactoryInterface $orderPaymentDataFactory
+     */
     public function __construct(
         OrderItemDataFactoryInterface $orderItemDataFactory,
         OrderTransportDataFactoryInterface $orderTransportDataFactory,

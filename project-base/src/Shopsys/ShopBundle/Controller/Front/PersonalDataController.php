@@ -63,6 +63,17 @@ class PersonalDataController extends FrontBaseController
      */
     private $xmlResponse;
 
+    /**
+     * @param \Shopsys\FrameworkBundle\Component\Setting\Setting $setting
+     * @param \Shopsys\FrameworkBundle\Component\Domain\Domain $domain
+     * @param \Shopsys\FrameworkBundle\Model\Customer\CustomerFacade $customerFacade
+     * @param \Shopsys\FrameworkBundle\Model\Order\OrderFacade $orderFacade
+     * @param \Shopsys\FrameworkBundle\Model\Newsletter\NewsletterFacade $newsletterFacade
+     * @param \Shopsys\FrameworkBundle\Model\PersonalData\Mail\PersonalDataAccessMailFacade $personalDataAccessMailFacade
+     * @param \Shopsys\FrameworkBundle\Model\PersonalData\PersonalDataAccessRequestFacade $personalDataAccessRequestFacade
+     * @param \Shopsys\FrameworkBundle\Model\PersonalData\PersonalDataAccessRequestDataFactoryInterface $personalDataAccessRequestDataFactory
+     * @param \Shopsys\FrameworkBundle\Component\HttpFoundation\XmlResponse $xmlResponse
+     */
     public function __construct(
         Setting $setting,
         Domain $domain,
@@ -85,6 +96,9 @@ class PersonalDataController extends FrontBaseController
         $this->xmlResponse = $xmlResponse;
     }
 
+    /**
+     * @param \Symfony\Component\HttpFoundation\Request $request
+     */
     public function indexAction(Request $request)
     {
         $form = $this->createForm(
@@ -112,6 +126,9 @@ class PersonalDataController extends FrontBaseController
         ]);
     }
 
+    /**
+     * @param \Symfony\Component\HttpFoundation\Request $request
+     */
     public function exportAction(Request $request)
     {
         $form = $this->createForm(

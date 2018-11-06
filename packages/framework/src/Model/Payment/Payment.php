@@ -3,7 +3,6 @@
 namespace Shopsys\FrameworkBundle\Model\Payment;
 
 use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Prezent\Doctrine\Translatable\Annotation as Prezent;
@@ -53,7 +52,7 @@ class Payment extends AbstractTranslatableEntity implements OrderableEntityInter
     protected $vat;
 
     /**
-     * @var \Shopsys\FrameworkBundle\Model\Transport\Transport[]|Collection
+     * @var \Shopsys\FrameworkBundle\Model\Transport\Transport[]|\Doctrine\Common\Collections\Collection
      *
      * @ORM\ManyToMany(targetEntity="Shopsys\FrameworkBundle\Model\Transport\Transport", inversedBy="payments", cascade={"persist"})
      * @ORM\JoinTable(name="payments_transports")

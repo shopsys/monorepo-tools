@@ -48,6 +48,12 @@ class OrderFormType extends AbstractType
      */
     private $orderStatusFacade;
 
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Payment\PaymentFacade $paymentFacade
+     * @param \Shopsys\FrameworkBundle\Model\Transport\TransportFacade $transportFacade
+     * @param \Shopsys\FrameworkBundle\Model\Country\CountryFacade $countryFacade
+     * @param \Shopsys\FrameworkBundle\Model\Order\Status\OrderStatusFacade $orderStatusFacade
+     */
     public function __construct(
         PaymentFacade $paymentFacade,
         TransportFacade $transportFacade,

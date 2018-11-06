@@ -20,7 +20,7 @@ class FeedExportCreationDataQueue
 
     /**
      * @param string[] $feedNames
-     * @param DomainConfig[] $domains
+     * @param \Shopsys\FrameworkBundle\Component\Domain\Config\DomainConfig[] $domains
      */
     public function __construct(array $feedNames, array $domains)
     {

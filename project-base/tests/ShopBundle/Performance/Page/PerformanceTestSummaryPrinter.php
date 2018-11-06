@@ -11,6 +11,9 @@ class PerformanceTestSummaryPrinter
      */
     private $performanceTestSampleQualifier;
 
+    /**
+     * @param \Tests\ShopBundle\Performance\Page\PerformanceTestSampleQualifier $performanceTestSampleQualifier
+     */
     public function __construct(PerformanceTestSampleQualifier $performanceTestSampleQualifier)
     {
         $this->performanceTestSampleQualifier = $performanceTestSampleQualifier;

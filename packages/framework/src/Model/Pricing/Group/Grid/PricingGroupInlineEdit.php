@@ -31,6 +31,13 @@ class PricingGroupInlineEdit extends AbstractGridInlineEdit
      */
     private $pricingGroupDataFactory;
 
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Pricing\Group\Grid\PricingGroupGridFactory $pricingGroupGridFactory
+     * @param \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroupFacade $pricingGroupFacade
+     * @param \Shopsys\FrameworkBundle\Component\Domain\AdminDomainTabsFacade $adminDomainTabsFacade
+     * @param \Symfony\Component\Form\FormFactoryInterface $formFactory
+     * @param \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroupDataFactoryInterface $pricingGroupDataFactory
+     */
     public function __construct(
         PricingGroupGridFactory $pricingGroupGridFactory,
         PricingGroupFacade $pricingGroupFacade,

@@ -30,6 +30,12 @@ abstract class AbstractAdvancedSearchFormFactory
      */
     protected $advancedSearchOperatorTranslation;
 
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\AdvancedSearch\AdvancedSearchConfig $advancedSearchConfig
+     * @param \Shopsys\FrameworkBundle\Form\Admin\AdvancedSearch\AdvancedSearchFilterTranslation $advancedSearchFilterTranslation
+     * @param \Symfony\Component\Form\FormFactoryInterface $formFactory
+     * @param \Shopsys\FrameworkBundle\Form\Admin\AdvancedSearch\AdvancedSearchOperatorTranslation $advancedSearchOperatorTranslation
+     */
     public function __construct(
         AdvancedSearchConfig $advancedSearchConfig,
         AdvancedSearchFilterTranslation $advancedSearchFilterTranslation,

@@ -14,6 +14,10 @@ class DelayedPricingSetting
      */
     private $inputPriceRecalculationScheduler;
 
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Pricing\PricingSetting $pricingSetting
+     * @param \Shopsys\FrameworkBundle\Model\Pricing\InputPriceRecalculationScheduler $inputPriceRecalculationScheduler
+     */
     public function __construct(
         PricingSetting $pricingSetting,
         InputPriceRecalculationScheduler $inputPriceRecalculationScheduler

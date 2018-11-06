@@ -37,6 +37,10 @@ class ProductRepositoryTest extends TransactionFunctionalTestCase
         $this->getAllListableQueryBuilderTest(148, true);
     }
 
+    /**
+     * @param mixed $productReferenceId
+     * @param mixed $isExpectedInResult
+     */
     private function getAllListableQueryBuilderTest($productReferenceId, $isExpectedInResult)
     {
         /** @var \Shopsys\FrameworkBundle\Model\Product\ProductRepository $productRepository */
@@ -79,6 +83,10 @@ class ProductRepositoryTest extends TransactionFunctionalTestCase
         $this->getAllSellableQueryBuilderTest(148, false);
     }
 
+    /**
+     * @param mixed $productReferenceId
+     * @param mixed $isExpectedInResult
+     */
     private function getAllSellableQueryBuilderTest($productReferenceId, $isExpectedInResult)
     {
         /** @var \Shopsys\FrameworkBundle\Model\Product\ProductRepository $productRepository */
@@ -121,6 +129,10 @@ class ProductRepositoryTest extends TransactionFunctionalTestCase
         $this->getAllOfferedQueryBuilderTest(69, true);
     }
 
+    /**
+     * @param mixed $productReferenceId
+     * @param mixed $isExpectedInResult
+     */
     private function getAllOfferedQueryBuilderTest($productReferenceId, $isExpectedInResult)
     {
         /** @var \Shopsys\FrameworkBundle\Model\Product\ProductRepository $productRepository */

@@ -119,7 +119,7 @@ class OrderFlow extends FormFlow
     }
 
     /**
-     * @return StepInterface|null
+     * @return \Craue\FormFlowBundle\Form\StepInterface|null
      */
     private function getFirstInvalidStep()
     {

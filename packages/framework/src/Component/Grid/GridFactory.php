@@ -29,6 +29,12 @@ class GridFactory
      */
     protected $twig;
 
+    /**
+     * @param \Symfony\Component\HttpFoundation\RequestStack $requestStack
+     * @param \Symfony\Component\Routing\RouterInterface $router
+     * @param \Shopsys\FrameworkBundle\Component\Router\Security\RouteCsrfProtector $routeCsrfProtector
+     * @param \Twig_Environment $twig
+     */
     public function __construct(
         RequestStack $requestStack,
         RouterInterface $router,

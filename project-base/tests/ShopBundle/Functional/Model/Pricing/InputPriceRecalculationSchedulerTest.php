@@ -88,6 +88,9 @@ class InputPriceRecalculationSchedulerTest extends TransactionFunctionalTestCase
 
     /**
      * @dataProvider inputPricesTestDataProvider
+     * @param mixed $inputPriceWithoutVat
+     * @param mixed $inputPriceWithVat
+     * @param mixed $vatPercent
      */
     public function testOnKernelResponseRecalculateInputPricesWithoutVat(
         $inputPriceWithoutVat,
@@ -168,6 +171,9 @@ class InputPriceRecalculationSchedulerTest extends TransactionFunctionalTestCase
 
     /**
      * @dataProvider inputPricesTestDataProvider
+     * @param mixed $inputPriceWithoutVat
+     * @param mixed $inputPriceWithVat
+     * @param mixed $vatPercent
      */
     public function testOnKernelResponseRecalculateInputPricesWithVat(
         $inputPriceWithoutVat,

@@ -18,6 +18,10 @@ class ImageDeleteDoctrineListener
      */
     private $imageFacade;
 
+    /**
+     * @param \Shopsys\FrameworkBundle\Component\Image\Config\ImageConfig $imageConfig
+     * @param \Shopsys\FrameworkBundle\Component\Image\ImageFacade $imageFacade
+     */
     public function __construct(
         ImageConfig $imageConfig,
         ImageFacade $imageFacade

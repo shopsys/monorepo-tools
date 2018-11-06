@@ -74,6 +74,16 @@ class OrderMailService
      */
     private $orderService;
 
+    /**
+     * @param \Shopsys\FrameworkBundle\Component\Setting\Setting $setting
+     * @param \Shopsys\FrameworkBundle\Component\Router\DomainRouterFactory $domainRouterFactory
+     * @param \Twig_Environment $twig
+     * @param \Shopsys\FrameworkBundle\Model\Order\Item\OrderItemPriceCalculation $orderItemPriceCalculation
+     * @param \Shopsys\FrameworkBundle\Component\Domain\Domain $domain
+     * @param \Shopsys\FrameworkBundle\Twig\PriceExtension $priceExtension
+     * @param \Shopsys\FrameworkBundle\Twig\DateTimeFormatterExtension $dateTimeFormatterExtension
+     * @param \Shopsys\FrameworkBundle\Model\Order\OrderService $orderService
+     */
     public function __construct(
         Setting $setting,
         DomainRouterFactory $domainRouterFactory,

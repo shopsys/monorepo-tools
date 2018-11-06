@@ -6,6 +6,9 @@ use Tests\ShopBundle\Test\Codeception\AcceptanceTester;
 
 class ErrorHandlingCest
 {
+    /**
+     * @param \Tests\ShopBundle\Test\Codeception\AcceptanceTester $me
+     */
     public function testDisplayNotice(AcceptanceTester $me)
     {
         $me->wantTo('display notice error page');
@@ -14,6 +17,9 @@ class ErrorHandlingCest
         $me->dontSee('Notice');
     }
 
+    /**
+     * @param \Tests\ShopBundle\Test\Codeception\AcceptanceTester $me
+     */
     public function testAccessUnknownDomain(AcceptanceTester $me)
     {
         $me->wantTo('display error when accessing an unknown domain');

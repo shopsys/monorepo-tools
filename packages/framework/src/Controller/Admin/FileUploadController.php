@@ -21,6 +21,10 @@ class FileUploadController extends AdminBaseController
      */
     protected $fileThumbnailExtension;
 
+    /**
+     * @param \Shopsys\FrameworkBundle\Component\FileUpload\FileUpload $fileUpload
+     * @param \Shopsys\FrameworkBundle\Twig\FileThumbnail\FileThumbnailExtension $fileThumbnailExtension
+     */
     public function __construct(
         FileUpload $fileUpload,
         FileThumbnailExtension $fileThumbnailExtension

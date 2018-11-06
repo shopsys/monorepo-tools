@@ -23,6 +23,10 @@ class HourlyFeedCronModule implements SimpleCronModuleInterface
      */
     private $logger;
 
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Feed\FeedFacade $feedFacade
+     * @param \Shopsys\FrameworkBundle\Component\Domain\Domain $domain
+     */
     public function __construct(FeedFacade $feedFacade, Domain $domain)
     {
         $this->feedFacade = $feedFacade;

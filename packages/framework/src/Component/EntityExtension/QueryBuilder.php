@@ -12,6 +12,10 @@ class QueryBuilder extends BaseQueryBuilder
      */
     private $entityNameResolver;
 
+    /**
+     * @param \Doctrine\ORM\EntityManagerInterface $em
+     * @param \Shopsys\FrameworkBundle\Component\EntityExtension\EntityNameResolver $entityNameResolver
+     */
     public function __construct(EntityManagerInterface $em, EntityNameResolver $entityNameResolver)
     {
         parent::__construct($em);

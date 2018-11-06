@@ -17,6 +17,9 @@ class ProductSearchRepository
      */
     protected $foundProductIdsCache = [];
 
+    /**
+     * @param \Shopsys\FrameworkBundle\Component\Microservice\MicroserviceClient $microserviceProductSearchClient
+     */
     public function __construct(MicroserviceClient $microserviceProductSearchClient)
     {
         $this->microserviceProductSearchClient = $microserviceProductSearchClient;

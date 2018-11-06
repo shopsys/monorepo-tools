@@ -29,6 +29,13 @@ class CountryInlineEdit extends AbstractGridInlineEdit
      */
     private $countryDataFactory;
 
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Country\CountryGridFactory $countryGridFactory
+     * @param \Shopsys\FrameworkBundle\Model\Country\CountryFacade $countryFacade
+     * @param \Shopsys\FrameworkBundle\Component\Domain\AdminDomainTabsFacade $adminDomainTabsFacade
+     * @param \Symfony\Component\Form\FormFactoryInterface $formFactory
+     * @param \Shopsys\FrameworkBundle\Model\Country\CountryDataFactoryInterface $countryDataFactory
+     */
     public function __construct(
         CountryGridFactory $countryGridFactory,
         CountryFacade $countryFacade,

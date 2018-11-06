@@ -34,6 +34,12 @@ class AdministratorFrontSecurityFacade
      */
     protected $authorizationChecker;
 
+    /**
+     * @param \Symfony\Component\HttpFoundation\Session\SessionInterface $session
+     * @param \Shopsys\FrameworkBundle\Model\Administrator\Security\AdministratorUserProvider $administratorUserProvider
+     * @param \Symfony\Component\Security\Core\Authorization\AccessDecisionManagerInterface $accessDecisionManager
+     * @param \Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface $authorizationChecker
+     */
     public function __construct(
         SessionInterface $session,
         AdministratorUserProvider $administratorUserProvider,

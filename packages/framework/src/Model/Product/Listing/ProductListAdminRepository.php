@@ -23,6 +23,10 @@ class ProductListAdminRepository
      */
     private $localization;
 
+    /**
+     * @param \Doctrine\ORM\EntityManagerInterface $em
+     * @param \Shopsys\FrameworkBundle\Model\Localization\Localization $localization
+     */
     public function __construct(EntityManagerInterface $em, Localization $localization)
     {
         $this->em = $em;

@@ -2,12 +2,10 @@
 
 namespace Shopsys\FrameworkBundle\Model\PersonalData;
 
-use DateTime;
-
 class PersonalDataAccessRequestData
 {
     /**
-     * @var DateTime|null
+     * @var \DateTime|null
      */
     public $createAt;
 

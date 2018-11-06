@@ -12,5 +12,5 @@ final class PhpdocRegex
      *
      * @var string
      */
-    public const ARGUMENT_NAME_PATTERN = '#@param(?:.*?)(\$\w+)$#s';
+    public const ARGUMENT_NAME_PATTERN = '#@param(?:.*?)(\$\w+)#s';
 }

@@ -32,6 +32,13 @@ class DomainFacade
      */
     protected $fileUpload;
 
+    /**
+     * @param mixed $domainImagesDirectory
+     * @param \Shopsys\FrameworkBundle\Component\Domain\Domain $domain
+     * @param \Shopsys\FrameworkBundle\Component\Domain\DomainService $domainService
+     * @param \League\Flysystem\FilesystemInterface $fileSystem
+     * @param \Shopsys\FrameworkBundle\Component\FileUpload\FileUpload $fileUpload
+     */
     public function __construct(
         $domainImagesDirectory,
         Domain $domain,

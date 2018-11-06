@@ -19,6 +19,7 @@ class NewProductTest extends FunctionalTestCase
 
     /**
      * @dataProvider createOrEditProductProvider
+     * @param mixed $relativeUrl
      */
     public function testCreateOrEditProduct($relativeUrl)
     {

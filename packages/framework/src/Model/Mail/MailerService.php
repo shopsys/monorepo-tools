@@ -14,7 +14,7 @@ class MailerService
     private $mailer;
 
     /**
-     * @param Swift_Mailer $mailer
+     * @param \Swift_Mailer $mailer
      */
     public function __construct(Swift_Mailer $mailer)
     {

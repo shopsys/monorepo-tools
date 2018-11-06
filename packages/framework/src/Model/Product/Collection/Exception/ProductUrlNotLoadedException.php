@@ -8,6 +8,11 @@ use Shopsys\FrameworkBundle\Model\Product\Product;
 
 class ProductUrlNotLoadedException extends Exception implements ProductCollectionException
 {
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Product\Product $product
+     * @param \Shopsys\FrameworkBundle\Component\Domain\Config\DomainConfig $domainConfig
+     * @param \Exception|null $previous
+     */
     public function __construct(Product $product, DomainConfig $domainConfig, Exception $previous = null)
     {
         $message = sprintf(

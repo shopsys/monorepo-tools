@@ -22,6 +22,11 @@ class HeurekaDeliveryFeedItemFacade
      */
     protected $pricingGroupSettingFacade;
 
+    /**
+     * @param \Shopsys\ProductFeed\HeurekaDeliveryBundle\Model\FeedItem\HeurekaDeliveryDataRepository $heurekaDeliveryDataRepository
+     * @param \Shopsys\ProductFeed\HeurekaDeliveryBundle\Model\FeedItem\HeurekaDeliveryFeedItemFactory $feedItemFactory
+     * @param \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroupSettingFacade $pricingGroupSettingFacade
+     */
     public function __construct(
         HeurekaDeliveryDataRepository $heurekaDeliveryDataRepository,
         HeurekaDeliveryFeedItemFactory $feedItemFactory,

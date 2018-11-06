@@ -18,6 +18,9 @@ final class MissingButtonTypeFixerTest extends AbstractCheckerTestCase
         $this->doTestCorrectFile(__DIR__ . '/correct/correct.html.twig');
     }
 
+    /**
+     * @return string
+     */
     protected function provideConfig(): string
     {
         return __DIR__ . '/config.yml';

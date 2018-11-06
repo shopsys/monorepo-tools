@@ -15,6 +15,11 @@ class TransportImageUploadCest
 
     const TEST_IMAGE_NAME = 'transportTestImage.png';
 
+    /**
+     * @param \Tests\ShopBundle\Test\Codeception\AcceptanceTester $me
+     * @param \Tests\ShopBundle\Acceptance\acceptance\PageObject\Admin\EntityEditPage $entityEditPage
+     * @param \Tests\ShopBundle\Acceptance\acceptance\PageObject\Admin\LoginPage $loginPage
+     */
     public function testSuccessfulImageUpload(AcceptanceTester $me, EntityEditPage $entityEditPage, LoginPage $loginPage)
     {
         $me->wantTo('Upload an image in admin transport edit page');

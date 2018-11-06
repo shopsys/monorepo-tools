@@ -12,6 +12,9 @@ class FriendlyUrlMatcher
      */
     private $friendlyUrlRepository;
 
+    /**
+     * @param \Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\FriendlyUrlRepository $friendlyUrlRepository
+     */
     public function __construct(FriendlyUrlRepository $friendlyUrlRepository)
     {
         $this->friendlyUrlRepository = $friendlyUrlRepository;

@@ -22,6 +22,10 @@ class Bootstrap
 
     private $console;
 
+    /**
+     * @param mixed $console
+     * @param mixed|null $environment
+     */
     public function __construct($console = false, $environment = null)
     {
         if ($environment === null) {

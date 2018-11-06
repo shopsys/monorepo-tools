@@ -23,6 +23,10 @@ class LocalizedRouterFactory
      */
     protected $routersByLocaleAndHost;
 
+    /**
+     * @param mixed $localeRoutersResourcesFilepaths
+     * @param \Symfony\Component\Config\Loader\LoaderInterface $configLoader
+     */
     public function __construct($localeRoutersResourcesFilepaths, LoaderInterface $configLoader)
     {
         $this->configLoader = $configLoader;

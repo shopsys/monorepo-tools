@@ -25,6 +25,12 @@ class PromoCodeInlineEdit extends AbstractGridInlineEdit
      */
     private $promoCodeDataFactory;
 
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Order\PromoCode\Grid\PromoCodeGridFactory $promoCodeGridFactory
+     * @param \Shopsys\FrameworkBundle\Model\Order\PromoCode\PromoCodeFacade $promoCodeFacade
+     * @param \Symfony\Component\Form\FormFactoryInterface $formFactory
+     * @param \Shopsys\FrameworkBundle\Model\Order\PromoCode\PromoCodeDataFactoryInterface $promoCodeDataFactory
+     */
     public function __construct(
         PromoCodeGridFactory $promoCodeGridFactory,
         PromoCodeFacade $promoCodeFacade,

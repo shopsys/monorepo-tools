@@ -23,6 +23,11 @@ class ProductSearchExportExporter
      */
     protected $productSearchExportDataConverter;
 
+    /**
+     * @param \Shopsys\FrameworkBundle\Component\Microservice\MicroserviceClient $client
+     * @param \Shopsys\FrameworkBundle\Model\Product\ProductSearchExport\ProductSearchExportRepository $productSearchExportRepository
+     * @param \Shopsys\FrameworkBundle\Model\Product\ProductSearchExport\ProductSearchExportDataConverter $productSearchExportDataConverter
+     */
     public function __construct(
         MicroserviceClient $client,
         ProductSearchExportRepository $productSearchExportRepository,

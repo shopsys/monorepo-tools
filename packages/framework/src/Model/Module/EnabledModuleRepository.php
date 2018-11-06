@@ -16,6 +16,10 @@ class EnabledModuleRepository
      */
     protected $moduleList;
 
+    /**
+     * @param \Doctrine\ORM\EntityManagerInterface $em
+     * @param \Shopsys\FrameworkBundle\Model\Module\ModuleList $moduleList
+     */
     public function __construct(
         EntityManagerInterface $em,
         ModuleList $moduleList

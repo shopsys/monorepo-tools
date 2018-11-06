@@ -61,6 +61,18 @@ class TransportFacade
      */
     protected $transportPriceFactory;
 
+    /**
+     * @param \Doctrine\ORM\EntityManagerInterface $em
+     * @param \Shopsys\FrameworkBundle\Model\Transport\TransportRepository $transportRepository
+     * @param \Shopsys\FrameworkBundle\Model\Payment\PaymentRepository $paymentRepository
+     * @param \Shopsys\FrameworkBundle\Model\Transport\TransportVisibilityCalculation $transportVisibilityCalculation
+     * @param \Shopsys\FrameworkBundle\Component\Domain\Domain $domain
+     * @param \Shopsys\FrameworkBundle\Component\Image\ImageFacade $imageFacade
+     * @param \Shopsys\FrameworkBundle\Model\Pricing\Currency\CurrencyFacade $currencyFacade
+     * @param \Shopsys\FrameworkBundle\Model\Transport\TransportPriceCalculation $transportPriceCalculation
+     * @param \Shopsys\FrameworkBundle\Model\Transport\TransportFactoryInterface $transportFactory
+     * @param \Shopsys\FrameworkBundle\Model\Transport\TransportPriceFactoryInterface $transportPriceFactory
+     */
     public function __construct(
         EntityManagerInterface $em,
         TransportRepository $transportRepository,

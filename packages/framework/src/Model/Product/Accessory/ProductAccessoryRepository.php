@@ -25,6 +25,11 @@ class ProductAccessoryRepository
      */
     protected $queryBuilderService;
 
+    /**
+     * @param \Doctrine\ORM\EntityManagerInterface $em
+     * @param \Shopsys\FrameworkBundle\Model\Product\ProductRepository $productRepository
+     * @param \Shopsys\FrameworkBundle\Component\Doctrine\QueryBuilderService $queryBuilderService
+     */
     public function __construct(
         EntityManagerInterface $em,
         ProductRepository $productRepository,

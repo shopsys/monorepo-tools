@@ -11,6 +11,9 @@ class FreeTransportAndPaymentFacade
      */
     protected $pricingSetting;
 
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Pricing\PricingSetting $pricingSetting
+     */
     public function __construct(PricingSetting $pricingSetting)
     {
         $this->pricingSetting = $pricingSetting;

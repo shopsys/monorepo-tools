@@ -20,6 +20,10 @@ class CategoryDataFixture extends AbstractReferenceFixture
      */
     private $categoryDataFacade;
 
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Category\CategoryFacade $categoryFacade
+     * @param \Shopsys\FrameworkBundle\Model\Category\CategoryDataFactoryInterface $categoryDataFacade
+     */
     public function __construct(
         CategoryFacade $categoryFacade,
         CategoryDataFactoryInterface $categoryDataFacade

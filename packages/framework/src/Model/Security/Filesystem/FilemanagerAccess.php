@@ -27,6 +27,11 @@ class FilemanagerAccess
      */
     private $filepathComparator;
 
+    /**
+     * @param mixed $filamanagerUploadDir
+     * @param \FM\ElfinderBundle\Configuration\ElFinderConfigurationReader $elFinderConfigurationReader
+     * @param \Shopsys\FrameworkBundle\Component\Filesystem\FilepathComparator $filepathComparator
+     */
     public function __construct(
         $filamanagerUploadDir,
         ElFinderConfigurationReader $elFinderConfigurationReader,

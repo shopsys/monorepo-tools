@@ -23,6 +23,10 @@ class CurrencyDataFixture extends AbstractReferenceFixture
      */
     private $currencyDataFactory;
 
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Pricing\Currency\CurrencyFacade $currencyFacade
+     * @param \Shopsys\FrameworkBundle\Model\Pricing\Currency\CurrencyDataFactoryInterface $currencyDataFactory
+     */
     public function __construct(
         CurrencyFacade $currencyFacade,
         CurrencyDataFactoryInterface $currencyDataFactory

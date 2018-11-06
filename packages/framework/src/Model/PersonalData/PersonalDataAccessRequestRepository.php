@@ -22,7 +22,6 @@ class PersonalDataAccessRequestRepository
 
     /**
      * @param string $hash
-     * @param string $type
      * @param int $domainId
      * @return \Shopsys\FrameworkBundle\Model\PersonalData\PersonalDataAccessRequest|null
      */

@@ -53,6 +53,12 @@ class CategoryFormType extends AbstractType
      */
     private $pluginCrudExtensionFacade;
 
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Category\CategoryFacade $categoryFacade
+     * @param \Shopsys\FrameworkBundle\Component\Domain\Domain $domain
+     * @param \Shopsys\FrameworkBundle\Model\Seo\SeoSettingFacade $seoSettingFacade
+     * @param \Shopsys\FrameworkBundle\Component\Plugin\PluginCrudExtensionFacade $pluginCrudExtensionFacade
+     */
     public function __construct(
         CategoryFacade $categoryFacade,
         Domain $domain,

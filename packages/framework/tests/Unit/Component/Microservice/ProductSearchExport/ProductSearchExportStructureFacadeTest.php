@@ -95,7 +95,7 @@ class ProductSearchExportStructureFacadeTest extends TestCase
 
     /**
      * @param string|null $body
-     * @return ServerException
+     * @return \GuzzleHttp\Exception\ServerException
      */
     protected function createServerException(string $body = null): ServerException
     {

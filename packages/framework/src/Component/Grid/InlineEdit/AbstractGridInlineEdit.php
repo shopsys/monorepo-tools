@@ -12,6 +12,9 @@ abstract class AbstractGridInlineEdit implements GridInlineEditInterface
      */
     private $gridFactory;
 
+    /**
+     * @param \Shopsys\FrameworkBundle\Component\Grid\GridFactoryInterface $gridFactory
+     */
     public function __construct(GridFactoryInterface $gridFactory)
     {
         $this->gridFactory = $gridFactory;

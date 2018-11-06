@@ -13,6 +13,9 @@ class ModuleExtension extends Twig_Extension
      */
     private $moduleFacade;
 
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Module\ModuleFacade $moduleFacade
+     */
     public function __construct(ModuleFacade $moduleFacade)
     {
         $this->moduleFacade = $moduleFacade;

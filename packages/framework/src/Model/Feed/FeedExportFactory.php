@@ -43,6 +43,14 @@ class FeedExportFactory
      */
     private $mountManager;
 
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Feed\FeedRendererFactory $feedRendererFactory
+     * @param \League\Flysystem\FilesystemInterface $filesystem
+     * @param \Doctrine\ORM\EntityManagerInterface $em
+     * @param \Shopsys\FrameworkBundle\Model\Feed\FeedPathProvider $feedPathProvider
+     * @param \Symfony\Component\Filesystem\Filesystem $localFilesystem
+     * @param \League\Flysystem\MountManager $mountManager
+     */
     public function __construct(
         FeedRendererFactory $feedRendererFactory,
         FilesystemInterface $filesystem,

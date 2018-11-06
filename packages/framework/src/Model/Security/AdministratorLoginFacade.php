@@ -44,6 +44,13 @@ class AdministratorLoginFacade
      */
     protected $em;
 
+    /**
+     * @param \Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface $tokenStorage
+     * @param \Symfony\Component\EventDispatcher\EventDispatcherInterface $eventDispatcher
+     * @param \Shopsys\FrameworkBundle\Model\Administrator\AdministratorRepository $administratorRepository
+     * @param \Shopsys\FrameworkBundle\Component\String\HashGenerator $hashGenerator
+     * @param \Doctrine\ORM\EntityManagerInterface $em
+     */
     public function __construct(
         TokenStorageInterface $tokenStorage,
         EventDispatcherInterface $eventDispatcher,

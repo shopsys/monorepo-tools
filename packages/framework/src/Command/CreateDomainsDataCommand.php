@@ -74,6 +74,9 @@ class CreateDomainsDataCommand extends Command
         });
     }
 
+    /**
+     * @param \Symfony\Component\Console\Output\OutputInterface $output
+     */
     private function doExecute(OutputInterface $output)
     {
         $output->writeln('Start of creating new domains data.');

@@ -17,6 +17,10 @@ class ProductInputPriceService
      */
     private $productPriceCalculation;
 
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Pricing\InputPriceCalculation $inputPriceCalculation
+     * @param \Shopsys\FrameworkBundle\Model\Product\Pricing\ProductPriceCalculation $productPriceCalculation
+     */
     public function __construct(
         InputPriceCalculation $inputPriceCalculation,
         ProductPriceCalculation $productPriceCalculation

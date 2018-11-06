@@ -28,6 +28,11 @@ class UnitController extends AdminBaseController
      */
     protected $confirmDeleteResponseFactory;
 
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Product\Unit\UnitFacade $unitFacade
+     * @param \Shopsys\FrameworkBundle\Model\Product\Unit\UnitInlineEdit $unitInlineEdit
+     * @param \Shopsys\FrameworkBundle\Component\ConfirmDelete\ConfirmDeleteResponseFactory $confirmDeleteResponseFactory
+     */
     public function __construct(
         UnitFacade $unitFacade,
         UnitInlineEdit $unitInlineEdit,

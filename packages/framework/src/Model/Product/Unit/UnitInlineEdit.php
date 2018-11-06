@@ -23,6 +23,12 @@ class UnitInlineEdit extends AbstractGridInlineEdit
      */
     private $unitDataFactory;
 
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Product\Unit\UnitGridFactory $unitGridFactory
+     * @param \Shopsys\FrameworkBundle\Model\Product\Unit\UnitFacade $unitFacade
+     * @param \Symfony\Component\Form\FormFactoryInterface $formFactory
+     * @param \Shopsys\FrameworkBundle\Model\Product\Unit\UnitDataFactoryInterface $unitDataFactory
+     */
     public function __construct(
         UnitGridFactory $unitGridFactory,
         UnitFacade $unitFacade,

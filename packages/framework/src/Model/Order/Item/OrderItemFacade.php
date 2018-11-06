@@ -35,6 +35,13 @@ class OrderItemFacade
      */
     protected $orderService;
 
+    /**
+     * @param \Doctrine\ORM\EntityManagerInterface $em
+     * @param \Shopsys\FrameworkBundle\Model\Order\OrderRepository $orderRepository
+     * @param \Shopsys\FrameworkBundle\Model\Product\ProductRepository $productRepository
+     * @param \Shopsys\FrameworkBundle\Model\Product\Pricing\ProductPriceCalculationForUser $productPriceCalculationForUser
+     * @param \Shopsys\FrameworkBundle\Model\Order\OrderService $orderService
+     */
     public function __construct(
         EntityManagerInterface $em,
         OrderRepository $orderRepository,

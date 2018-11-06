@@ -22,6 +22,9 @@ class SlowLogSubscriber implements EventSubscriberInterface
      */
     protected $startTime;
 
+    /**
+     * @param \Symfony\Bridge\Monolog\Logger $logger
+     */
     public function __construct(Logger $logger)
     {
         $this->logger = $logger;

@@ -21,6 +21,7 @@ class PersonalDataAccessRequestDataFixture extends AbstractReferenceFixture
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\PersonalData\PersonalDataAccessRequestFacade $personalDataFacade
+     * @param \Shopsys\FrameworkBundle\Model\PersonalData\PersonalDataAccessRequestDataFactory $personalDataFactory
      */
     public function __construct(PersonalDataAccessRequestFacade $personalDataFacade, PersonalDataAccessRequestDataFactory $personalDataFactory)
     {
@@ -28,6 +29,9 @@ class PersonalDataAccessRequestDataFixture extends AbstractReferenceFixture
         $this->personalDataFactory = $personalDataFactory;
     }
 
+    /**
+     * @param \Doctrine\Common\Persistence\ObjectManager $manager
+     */
     public function load(ObjectManager $manager)
     {
         $personalDataAccessRequestData = $this->personalDataFactory->createForDisplay();

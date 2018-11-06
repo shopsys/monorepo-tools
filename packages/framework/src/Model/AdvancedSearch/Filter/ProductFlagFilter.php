@@ -16,6 +16,9 @@ class ProductFlagFilter implements AdvancedSearchFilterInterface
      */
     private $flagFacade;
 
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Product\Flag\FlagFacade $flagFacade
+     */
     public function __construct(FlagFacade $flagFacade)
     {
         $this->flagFacade = $flagFacade;

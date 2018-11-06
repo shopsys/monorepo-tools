@@ -22,6 +22,11 @@ class ImageLocator
      */
     private $filesystem;
 
+    /**
+     * @param mixed $imageDir
+     * @param \Shopsys\FrameworkBundle\Component\Image\Config\ImageConfig $imageConfig
+     * @param \League\Flysystem\FilesystemInterface $filesystem
+     */
     public function __construct($imageDir, ImageConfig $imageConfig, FilesystemInterface $filesystem)
     {
         $this->imageDir = $imageDir;

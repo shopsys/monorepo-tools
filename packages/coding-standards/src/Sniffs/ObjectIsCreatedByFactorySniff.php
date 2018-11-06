@@ -16,6 +16,9 @@ final class ObjectIsCreatedByFactorySniff implements Sniff
      */
     private $naming;
 
+    /**
+     * @param \Symplify\TokenRunner\Analyzer\SnifferAnalyzer\Naming $naming
+     */
     public function __construct(Naming $naming)
     {
         $this->naming = $naming;

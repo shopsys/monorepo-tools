@@ -24,6 +24,10 @@ class FlagDataFixture extends AbstractReferenceFixture
      */
     private $flagDataFactory;
 
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Product\Flag\FlagFacade $flagFacade
+     * @param \Shopsys\FrameworkBundle\Model\Product\Flag\FlagDataFactoryInterface $flagDataFactory
+     */
     public function __construct(
         FlagFacade $flagFacade,
         FlagDataFactoryInterface $flagDataFactory

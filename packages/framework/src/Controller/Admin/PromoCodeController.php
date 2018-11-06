@@ -25,6 +25,11 @@ class PromoCodeController extends AdminBaseController
      */
     protected $administratorGridFacade;
 
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Order\PromoCode\PromoCodeFacade $promoCodeFacade
+     * @param \Shopsys\FrameworkBundle\Model\Order\PromoCode\Grid\PromoCodeInlineEdit $promoCodeInlineEdit
+     * @param \Shopsys\FrameworkBundle\Model\Administrator\AdministratorGridFacade $administratorGridFacade
+     */
     public function __construct(
         PromoCodeFacade $promoCodeFacade,
         PromoCodeInlineEdit $promoCodeInlineEdit,

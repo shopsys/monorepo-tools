@@ -18,6 +18,9 @@ class ProductParameterValueFormType extends AbstractType
      */
     private $parameterFacade;
 
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Product\Parameter\ParameterFacade $parameterFacade
+     */
     public function __construct(ParameterFacade $parameterFacade)
     {
         $this->parameterFacade = $parameterFacade;

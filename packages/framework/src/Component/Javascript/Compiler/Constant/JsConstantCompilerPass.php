@@ -13,6 +13,9 @@ class JsConstantCompilerPass implements JsCompilerPassInterface
      */
     private $jsConstantCallParser;
 
+    /**
+     * @param \Shopsys\FrameworkBundle\Component\Javascript\Parser\Constant\JsConstantCallParser $jsConstantCallParser
+     */
     public function __construct(
         JsConstantCallParser $jsConstantCallParser
     ) {

@@ -11,6 +11,9 @@ class AdvertController extends FrontBaseController
      */
     private $advertFacade;
 
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Advert\AdvertFacade $advertFacade
+     */
     public function __construct(AdvertFacade $advertFacade)
     {
         $this->advertFacade = $advertFacade;

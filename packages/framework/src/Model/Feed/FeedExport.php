@@ -73,6 +73,18 @@ class FeedExport
      */
     protected $finished = false;
 
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Feed\FeedInterface $feed
+     * @param \Shopsys\FrameworkBundle\Component\Domain\Config\DomainConfig $domainConfig
+     * @param \Shopsys\FrameworkBundle\Model\Feed\FeedRenderer $feedRenderer
+     * @param \League\Flysystem\FilesystemInterface $filesystem
+     * @param \Symfony\Component\Filesystem\Filesystem $localFilesystem
+     * @param \League\Flysystem\MountManager $mountManager
+     * @param \Doctrine\ORM\EntityManagerInterface $em
+     * @param string $feedFilepath
+     * @param string $feedLocalFilepath
+     * @param int|null $lastSeekId
+     */
     public function __construct(
         FeedInterface $feed,
         DomainConfig $domainConfig,

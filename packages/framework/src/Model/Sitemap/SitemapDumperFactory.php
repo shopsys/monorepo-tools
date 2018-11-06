@@ -36,6 +36,13 @@ class SitemapDumperFactory
      */
     protected $filesystem;
 
+    /**
+     * @param \Symfony\Component\EventDispatcher\EventDispatcherInterface $eventDispatcher
+     * @param \Symfony\Component\Filesystem\Filesystem $localFilesystem
+     * @param \League\Flysystem\FilesystemInterface $filesystem
+     * @param \League\Flysystem\MountManager $mountManager
+     * @param \Shopsys\FrameworkBundle\Model\Sitemap\SitemapService $sitemapService
+     */
     public function __construct(
         EventDispatcherInterface $eventDispatcher,
         Filesystem $localFilesystem,

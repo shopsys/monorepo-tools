@@ -27,6 +27,13 @@ class Configuration extends DoctrineConfiguration
      */
     private $migrationVersions = null;
 
+    /**
+     * @param \Shopsys\MigrationBundle\Component\Doctrine\Migrations\MigrationsLock $migrationsLock
+     * @param \Doctrine\DBAL\Connection $connection
+     * @param \Doctrine\DBAL\Migrations\OutputWriter $outputWriter
+     * @param \Doctrine\DBAL\Migrations\Finder\MigrationFinderInterface $finder
+     * @param \Doctrine\DBAL\Migrations\QueryWriter|null $queryWriter
+     */
     public function __construct(
         MigrationsLock $migrationsLock,
         Connection $connection,
@@ -45,7 +52,7 @@ class Configuration extends DoctrineConfiguration
      * Version number is used as an index, because \Doctrine\DBAL\Migrations\Migration::migrate depends on it.
      * The internal parent::$migrations variable contains all registered migrations (even skipped ones) ordered by the timestamp.
      *
-     * @return Version[] $migrations
+     * @return \Doctrine\DBAL\Migrations\Version[] $migrations
      */
     public function getMigrations()
     {
@@ -95,7 +102,7 @@ class Configuration extends DoctrineConfiguration
      * @param string $to the version to migrate to (partial migrations are not allowed)
      *
      * @throws \Shopsys\MigrationBundle\Component\Doctrine\Migrations\Exception\MethodIsNotAllowedException
-     * @return Version[] $migrations the array of migrations we can execute
+     * @return \Doctrine\DBAL\Migrations\Version[] $migrations the array of migrations we can execute
      */
     public function getMigrationsToExecute($direction, $to)
     {

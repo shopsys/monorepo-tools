@@ -20,6 +20,10 @@ class CustomerPasswordService
      */
     private $hashGenerator;
 
+    /**
+     * @param \Symfony\Component\Security\Core\Encoder\EncoderFactoryInterface $encoderFactory
+     * @param \Shopsys\FrameworkBundle\Component\String\HashGenerator $hashGenerator
+     */
     public function __construct(
         EncoderFactoryInterface $encoderFactory,
         HashGenerator $hashGenerator

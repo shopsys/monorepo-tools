@@ -82,6 +82,19 @@ class ProductController extends AdminBaseController
      */
     protected $domain;
 
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Product\MassAction\ProductMassActionFacade $productMassActionFacade
+     * @param \Shopsys\FrameworkBundle\Component\Grid\GridFactory $gridFactory
+     * @param \Shopsys\FrameworkBundle\Model\Product\ProductFacade $productFacade
+     * @param \Shopsys\FrameworkBundle\Model\Product\ProductDataFactoryInterface $productDataFactory
+     * @param \Shopsys\FrameworkBundle\Model\AdminNavigation\BreadcrumbOverrider $breadcrumbOverrider
+     * @param \Shopsys\FrameworkBundle\Model\Administrator\AdministratorGridFacade $administratorGridFacade
+     * @param \Shopsys\FrameworkBundle\Model\Product\Listing\ProductListAdminFacade $productListAdminFacade
+     * @param \Shopsys\FrameworkBundle\Model\AdvancedSearch\AdvancedSearchFacade $advancedSearchFacade
+     * @param \Shopsys\FrameworkBundle\Model\Product\ProductVariantFacade $productVariantFacade
+     * @param \Shopsys\FrameworkBundle\Twig\ProductExtension $productExtension
+     * @param \Shopsys\FrameworkBundle\Component\Domain\Domain $domain
+     */
     public function __construct(
         ProductMassActionFacade $productMassActionFacade,
         GridFactory $gridFactory,
@@ -111,6 +124,7 @@ class ProductController extends AdminBaseController
     /**
      * @Route("/product/edit/{id}", requirements={"id" = "\d+"})
      * @param \Symfony\Component\HttpFoundation\Request $request
+     * @param mixed $id
      */
     public function editAction(Request $request, $id)
     {

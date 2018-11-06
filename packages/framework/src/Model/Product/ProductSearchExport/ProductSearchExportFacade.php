@@ -16,6 +16,10 @@ class ProductSearchExportFacade
      */
     protected $exporter;
 
+    /**
+     * @param \Shopsys\FrameworkBundle\Component\Domain\Domain $domain
+     * @param \Shopsys\FrameworkBundle\Model\Product\ProductSearchExport\ProductSearchExportExporter $exporter
+     */
     public function __construct(Domain $domain, ProductSearchExportExporter $exporter)
     {
         $this->domain = $domain;

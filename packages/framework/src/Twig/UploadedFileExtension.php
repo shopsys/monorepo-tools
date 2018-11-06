@@ -25,6 +25,11 @@ class UploadedFileExtension extends Twig_Extension
      */
     private $fileThumbnailExtension;
 
+    /**
+     * @param \Shopsys\FrameworkBundle\Component\Domain\Domain $domain
+     * @param \Shopsys\FrameworkBundle\Component\UploadedFile\UploadedFileFacade $uploadedFileFacade
+     * @param \Shopsys\FrameworkBundle\Twig\FileThumbnail\FileThumbnailExtension $fileThumbnailExtension
+     */
     public function __construct(
         Domain $domain,
         UploadedFileFacade $uploadedFileFacade,

@@ -19,6 +19,10 @@ class UniqueEmailValidator extends ConstraintValidator
      */
     private $domain;
 
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Customer\CustomerFacade $customerFacade
+     * @param \Shopsys\FrameworkBundle\Component\Domain\Domain $domain
+     */
     public function __construct(
         CustomerFacade $customerFacade,
         Domain $domain

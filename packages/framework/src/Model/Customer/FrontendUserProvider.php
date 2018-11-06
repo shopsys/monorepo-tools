@@ -51,7 +51,7 @@ class FrontendUserProvider implements UserProviderInterface
     }
 
     /**
-     * @param UserInterface $user
+     * @param \Symfony\Component\Security\Core\User\UserInterface $user
      * @return \Shopsys\FrameworkBundle\Model\Customer\User
      */
     public function refreshUser(UserInterface $user)

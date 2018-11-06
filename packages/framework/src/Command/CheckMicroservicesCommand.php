@@ -24,6 +24,10 @@ class CheckMicroservicesCommand extends Command
      */
     protected $microserviceProductSearchExportClient;
 
+    /**
+     * @param \Shopsys\FrameworkBundle\Component\Microservice\MicroserviceClient $microserviceProductSearchClient
+     * @param \Shopsys\FrameworkBundle\Component\Microservice\MicroserviceClient $microserviceProductSearchExportClient
+     */
     public function __construct(
         MicroserviceClient $microserviceProductSearchClient,
         MicroserviceClient $microserviceProductSearchExportClient
@@ -40,12 +44,19 @@ class CheckMicroservicesCommand extends Command
             ->setDescription('Checks availability of microservices');
     }
 
+    /**
+     * @param \Symfony\Component\Console\Input\InputInterface $input
+     * @param \Symfony\Component\Console\Output\OutputInterface $output
+     */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $this->checkAvailabilityOfMicroserviceProductSearch($output);
         $this->checkAvailabilityOfMicroserviceProductSearchExport($output);
     }
 
+    /**
+     * @param \Symfony\Component\Console\Output\OutputInterface $output
+     */
     private function checkAvailabilityOfMicroserviceProductSearch(OutputInterface $output)
     {
         $output->writeln('Checks availability of Microservice Product Search...');
@@ -63,6 +74,9 @@ class CheckMicroservicesCommand extends Command
         $output->writeln('Microservice Product Search is available');
     }
 
+    /**
+     * @param \Symfony\Component\Console\Output\OutputInterface $output
+     */
     private function checkAvailabilityOfMicroserviceProductSearchExport(OutputInterface $output)
     {
         $output->writeln('Checks availability of Microservice Product Search Export...');

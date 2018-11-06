@@ -39,6 +39,11 @@ class DailyFeedCronModule implements IteratedCronModuleInterface
      */
     private $currentFeedExport;
 
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Feed\FeedFacade $feedFacade
+     * @param \Shopsys\FrameworkBundle\Component\Domain\Domain $domain
+     * @param \Shopsys\FrameworkBundle\Component\Setting\Setting $setting
+     */
     public function __construct(FeedFacade $feedFacade, Domain $domain, Setting $setting)
     {
         $this->feedFacade = $feedFacade;

@@ -39,6 +39,9 @@ class PriceCalculationTest extends TestCase
 
     /**
      * @dataProvider applyVatPercentProvider
+     * @param mixed $priceWithoutVat
+     * @param mixed $vatPercent
+     * @param mixed $expectedPriceWithVat
      */
     public function testApplyVatPercent(
         $priceWithoutVat,
@@ -88,6 +91,9 @@ class PriceCalculationTest extends TestCase
 
     /**
      * @dataProvider getVatAmountByPriceWithVatProvider
+     * @param mixed $priceWithVat
+     * @param mixed $vatPercent
+     * @param mixed $expectedVatAmount
      */
     public function testGetVatAmountByPriceWithVat(
         $priceWithVat,

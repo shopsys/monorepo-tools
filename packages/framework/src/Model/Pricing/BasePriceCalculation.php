@@ -43,7 +43,7 @@ class BasePriceCalculation
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\Pricing\Price $price
-     * @param Vat $vat
+     * @param \Shopsys\FrameworkBundle\Model\Pricing\Vat\Vat $vat
      * @param string[] $coefficients
      * @return \Shopsys\FrameworkBundle\Model\Pricing\Price
      */
@@ -63,7 +63,7 @@ class BasePriceCalculation
     /**
      * @param string $inputPrice
      * @param int $inputPriceType
-     * @param Vat $vat
+     * @param \Shopsys\FrameworkBundle\Model\Pricing\Vat\Vat $vat
      * @return string
      */
     private function getBasePriceWithVat($inputPrice, $inputPriceType, Vat $vat)

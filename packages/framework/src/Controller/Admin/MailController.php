@@ -65,6 +65,17 @@ class MailController extends AdminBaseController
      */
     protected $personalDataExportMail;
 
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Customer\Mail\ResetPasswordMail $resetPasswordMail
+     * @param \Shopsys\FrameworkBundle\Model\Order\Mail\OrderMailService $orderMailService
+     * @param \Shopsys\FrameworkBundle\Model\Customer\Mail\RegistrationMailService $registrationMailService
+     * @param \Shopsys\FrameworkBundle\Component\Domain\AdminDomainTabsFacade $adminDomainTabsFacade
+     * @param \Shopsys\FrameworkBundle\Model\Mail\MailTemplateFacade $mailTemplateFacade
+     * @param \Shopsys\FrameworkBundle\Model\Mail\Setting\MailSettingFacade $mailSettingFacade
+     * @param \Shopsys\FrameworkBundle\Model\Order\Status\OrderStatusFacade $orderStatusFacade
+     * @param \Shopsys\FrameworkBundle\Model\PersonalData\Mail\PersonalDataAccessMail $personalDataAccessMail
+     * @param \Shopsys\FrameworkBundle\Model\PersonalData\Mail\PersonalDataExportMail $personalDataExportMail
+     */
     public function __construct(
         ResetPasswordMail $resetPasswordMail,
         OrderMailService $orderMailService,
@@ -226,6 +237,7 @@ class MailController extends AdminBaseController
 
     /**
      * @Route("/mail/template/")
+     * @param \Symfony\Component\HttpFoundation\Request $request
      */
     public function templateAction(Request $request)
     {
@@ -260,6 +272,7 @@ class MailController extends AdminBaseController
 
     /**
      * @Route("/mail/setting/")
+     * @param \Symfony\Component\HttpFoundation\Request $request
      */
     public function settingAction(Request $request)
     {

@@ -30,6 +30,11 @@ class ProductAvailabilityRecalculator
      */
     private $productRowsIterator;
 
+    /**
+     * @param \Doctrine\ORM\EntityManagerInterface $em
+     * @param \Shopsys\FrameworkBundle\Model\Product\Availability\ProductAvailabilityRecalculationScheduler $productAvailabilityRecalculationScheduler
+     * @param \Shopsys\FrameworkBundle\Model\Product\Availability\ProductAvailabilityCalculation $productAvailabilityCalculation
+     */
     public function __construct(
         EntityManagerInterface $em,
         ProductAvailabilityRecalculationScheduler $productAvailabilityRecalculationScheduler,

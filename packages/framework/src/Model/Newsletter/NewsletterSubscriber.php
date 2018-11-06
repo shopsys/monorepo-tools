@@ -37,14 +37,14 @@ class NewsletterSubscriber
     protected $domainId;
 
     /**
-     * @var DateTimeImmutable
+     * @var \DateTimeImmutable
      * @ORM\Column(type="datetime_immutable", options={"default": "1970-01-01 00:00:00"})
      */
     protected $createdAt;
 
     /**
      * @param string $email
-     * @param DateTimeImmutable $createdAt
+     * @param \DateTimeImmutable $createdAt
      * @param int $domainId
      */
     public function __construct(string $email, DateTimeImmutable $createdAt, int $domainId)
@@ -71,7 +71,7 @@ class NewsletterSubscriber
     }
 
     /**
-     * @return DateTimeImmutable
+     * @return \DateTimeImmutable
      */
     public function getCreatedAt(): DateTimeImmutable
     {

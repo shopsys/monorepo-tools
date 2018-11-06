@@ -54,6 +54,16 @@ class ProductCollectionFacade
      */
     protected $parameterRepository;
 
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Product\Collection\ProductCollectionService $productCollectionService
+     * @param \Shopsys\FrameworkBundle\Model\Product\ProductRepository $productRepository
+     * @param \Shopsys\FrameworkBundle\Component\Image\Config\ImageConfig $imageConfig
+     * @param \Shopsys\FrameworkBundle\Component\Image\ImageRepository $imageRepository
+     * @param \Shopsys\FrameworkBundle\Component\Image\ImageFacade $imageFacade
+     * @param \Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\FriendlyUrlRepository $friendlyUrlRepository
+     * @param \Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\FriendlyUrlService $friendlyUrlService
+     * @param \Shopsys\FrameworkBundle\Model\Product\Parameter\ParameterRepository $parameterRepository
+     */
     public function __construct(
         ProductCollectionService $productCollectionService,
         ProductRepository $productRepository,

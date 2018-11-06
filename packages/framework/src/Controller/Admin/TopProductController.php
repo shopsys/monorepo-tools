@@ -20,6 +20,10 @@ class TopProductController extends AdminBaseController
      */
     protected $adminDomainTabsFacade;
 
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Product\TopProduct\TopProductFacade $topProductFacade
+     * @param \Shopsys\FrameworkBundle\Component\Domain\AdminDomainTabsFacade $adminDomainTabsFacade
+     */
     public function __construct(
         TopProductFacade $topProductFacade,
         AdminDomainTabsFacade $adminDomainTabsFacade
@@ -30,6 +34,7 @@ class TopProductController extends AdminBaseController
 
     /**
      * @Route("/product/top-product/list/")
+     * @param \Symfony\Component\HttpFoundation\Request $request
      */
     public function listAction(Request $request)
     {

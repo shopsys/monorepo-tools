@@ -11,6 +11,9 @@ class BreadcrumbController extends FrontBaseController
      */
     private $breadcrumbResolver;
 
+    /**
+     * @param \Shopsys\FrameworkBundle\Component\Breadcrumb\BreadcrumbResolver $breadcrumbResolver
+     */
     public function __construct(
         BreadcrumbResolver $breadcrumbResolver
     ) {

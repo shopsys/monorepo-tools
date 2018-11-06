@@ -30,6 +30,11 @@ class HeurekaProductDataBatchLoader
      */
     protected $loadedProductCpcs = [];
 
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Product\Collection\ProductUrlsBatchLoader $productUrlsBatchLoader
+     * @param \Shopsys\FrameworkBundle\Model\Product\Collection\ProductParametersBatchLoader $productParametersBatchLoader
+     * @param \Shopsys\ProductFeed\HeurekaBundle\Model\Product\HeurekaProductDomainFacade $heurekaProductDomainFacade
+     */
     public function __construct(
         ProductUrlsBatchLoader $productUrlsBatchLoader,
         ProductParametersBatchLoader $productParametersBatchLoader,

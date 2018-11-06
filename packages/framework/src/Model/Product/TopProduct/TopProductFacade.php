@@ -21,6 +21,11 @@ class TopProductFacade
      */
     protected $topProductFactory;
 
+    /**
+     * @param \Doctrine\ORM\EntityManagerInterface $em
+     * @param \Shopsys\FrameworkBundle\Model\Product\TopProduct\TopProductRepository $topProductRepository
+     * @param \Shopsys\FrameworkBundle\Model\Product\TopProduct\TopProductFactoryInterface $topProductFactory
+     */
     public function __construct(
         EntityManagerInterface $em,
         TopProductRepository $topProductRepository,

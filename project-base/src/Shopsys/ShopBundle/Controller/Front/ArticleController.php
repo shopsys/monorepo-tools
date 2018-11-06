@@ -12,6 +12,9 @@ class ArticleController extends FrontBaseController
      */
     private $articleFacade;
 
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Article\ArticleFacade $articleFacade
+     */
     public function __construct(ArticleFacade $articleFacade)
     {
         $this->articleFacade = $articleFacade;

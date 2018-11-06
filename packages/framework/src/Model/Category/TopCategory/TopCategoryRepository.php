@@ -18,6 +18,10 @@ class TopCategoryRepository
      */
     protected $categoryRepository;
 
+    /**
+     * @param \Doctrine\ORM\EntityManagerInterface $entityManager
+     * @param \Shopsys\FrameworkBundle\Model\Category\CategoryRepository $categoryRepository
+     */
     public function __construct(EntityManagerInterface $entityManager, CategoryRepository $categoryRepository)
     {
         $this->em = $entityManager;

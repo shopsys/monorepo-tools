@@ -25,6 +25,11 @@ class ZboziProductCrudExtension implements PluginCrudExtensionInterface
      */
     private $zboziProductDomainDataFactory;
 
+    /**
+     * @param \Symfony\Component\Translation\TranslatorInterface $translator
+     * @param \Shopsys\ProductFeed\ZboziBundle\Model\Product\ZboziProductDomainFacade $zboziProductDomainFacade
+     * @param \Shopsys\ProductFeed\ZboziBundle\Model\Product\ZboziProductDomainDataFactoryInterface $zboziProductDomainDataFactory
+     */
     public function __construct(
         TranslatorInterface $translator,
         ZboziProductDomainFacade $zboziProductDomainFacade,

@@ -43,6 +43,9 @@ class Vat
      */
     protected $replaceWith;
 
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Pricing\Vat\VatData $vatData
+     */
     public function __construct(VatData $vatData)
     {
         $this->name = $vatData->name;

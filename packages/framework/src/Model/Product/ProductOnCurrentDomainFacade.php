@@ -50,6 +50,15 @@ class ProductOnCurrentDomainFacade
      */
     protected $brandRepository;
 
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Product\ProductRepository $productRepository
+     * @param \Shopsys\FrameworkBundle\Component\Domain\Domain $domain
+     * @param \Shopsys\FrameworkBundle\Model\Customer\CurrentCustomer $currentCustomer
+     * @param \Shopsys\FrameworkBundle\Model\Category\CategoryRepository $categoryRepository
+     * @param \Shopsys\FrameworkBundle\Model\Product\Filter\ProductFilterCountRepository $productFilterCountRepository
+     * @param \Shopsys\FrameworkBundle\Model\Product\Accessory\ProductAccessoryRepository $productAccessoryRepository
+     * @param \Shopsys\FrameworkBundle\Model\Product\Brand\BrandRepository $brandRepository
+     */
     public function __construct(
         ProductRepository $productRepository,
         Domain $domain,

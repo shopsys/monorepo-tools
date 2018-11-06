@@ -21,6 +21,10 @@ class OrderPriceCalculation
      */
     private $rounding;
 
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Order\Item\OrderItemPriceCalculation $orderItemPriceCalculation
+     * @param \Shopsys\FrameworkBundle\Model\Pricing\Rounding $rounding
+     */
     public function __construct(
         OrderItemPriceCalculation $orderItemPriceCalculation,
         Rounding $rounding

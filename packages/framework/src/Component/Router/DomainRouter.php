@@ -21,6 +21,13 @@ class DomainRouter extends ChainRouter
      */
     private $friendlyUrlRouter;
 
+    /**
+     * @param \Symfony\Component\Routing\RequestContext $context
+     * @param \Symfony\Component\Routing\RouterInterface $basicRouter
+     * @param \Symfony\Component\Routing\RouterInterface $localizedRouter
+     * @param \Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\FriendlyUrlRouter $friendlyUrlRouter
+     * @param \Psr\Log\LoggerInterface|null $logger
+     */
     public function __construct(
         RequestContext $context,
         RouterInterface $basicRouter,
@@ -49,6 +56,9 @@ class DomainRouter extends ChainRouter
         return $this->friendlyUrlRouter->generateByFriendlyUrl($friendlyUrl, $parameters, $referenceType);
     }
 
+    /**
+     * @param \Symfony\Component\Routing\RequestContext $context
+     */
     public function setContext(RequestContext $context)
     {
         if ($this->freeze) {

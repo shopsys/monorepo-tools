@@ -38,6 +38,13 @@ class RegistrationController extends FrontBaseController
      */
     private $legalConditionsFacade;
 
+    /**
+     * @param \Shopsys\FrameworkBundle\Component\Domain\Domain $domain
+     * @param \Shopsys\FrameworkBundle\Model\Customer\UserDataFactoryInterface $userDataFactory
+     * @param \Shopsys\FrameworkBundle\Model\Customer\CustomerFacade $customerFacade
+     * @param \Shopsys\FrameworkBundle\Model\Security\LoginService $loginService
+     * @param \Shopsys\FrameworkBundle\Model\LegalConditions\LegalConditionsFacade $legalConditionsFacade
+     */
     public function __construct(
         Domain $domain,
         UserDataFactoryInterface $userDataFactory,
@@ -52,6 +59,9 @@ class RegistrationController extends FrontBaseController
         $this->legalConditionsFacade = $legalConditionsFacade;
     }
 
+    /**
+     * @param \Symfony\Component\HttpFoundation\Request $request
+     */
     public function existsEmailAction(Request $request)
     {
         $email = $request->get('email');
@@ -60,6 +70,9 @@ class RegistrationController extends FrontBaseController
         return new JsonResponse($user !== null);
     }
 
+    /**
+     * @param \Symfony\Component\HttpFoundation\Request $request
+     */
     public function registerAction(Request $request)
     {
         $userData = $this->userDataFactory->createForDomainId($this->domain->getId());

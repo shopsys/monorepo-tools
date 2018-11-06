@@ -35,6 +35,12 @@ class ScriptController extends AdminBaseController
      */
     protected $scriptDataFactory;
 
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Script\ScriptFacade $scriptFacade
+     * @param \Shopsys\FrameworkBundle\Component\Grid\GridFactory $gridFactory
+     * @param \Shopsys\FrameworkBundle\Component\Domain\AdminDomainTabsFacade $adminDomainTabsFacade
+     * @param \Shopsys\FrameworkBundle\Model\Script\ScriptDataFactoryInterface $scriptDataFactory
+     */
     public function __construct(
         ScriptFacade $scriptFacade,
         GridFactory $gridFactory,

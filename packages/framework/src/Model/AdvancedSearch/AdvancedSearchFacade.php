@@ -24,6 +24,11 @@ class AdvancedSearchFacade
      */
     protected $productListAdminFacade;
 
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\AdvancedSearch\ProductAdvancedSearchFormFactory $advancedSearchFormFactory
+     * @param \Shopsys\FrameworkBundle\Model\AdvancedSearch\AdvancedSearchService $advancedSearchService
+     * @param \Shopsys\FrameworkBundle\Model\Product\Listing\ProductListAdminFacade $productListAdminFacade
+     */
     public function __construct(
         ProductAdvancedSearchFormFactory $advancedSearchFormFactory,
         AdvancedSearchService $advancedSearchService,

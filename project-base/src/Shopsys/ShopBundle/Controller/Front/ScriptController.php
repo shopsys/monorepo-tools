@@ -19,6 +19,10 @@ class ScriptController extends FrontBaseController
      */
     private $domain;
 
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Script\ScriptFacade $scriptFacade
+     * @param \Shopsys\FrameworkBundle\Component\Domain\Domain $domain
+     */
     public function __construct(
         ScriptFacade $scriptFacade,
         Domain $domain

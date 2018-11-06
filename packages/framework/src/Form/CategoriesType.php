@@ -18,6 +18,9 @@ class CategoriesType extends AbstractType
      */
     private $categoriesTypeTransformer;
 
+    /**
+     * @param \Shopsys\FrameworkBundle\Form\Transformers\CategoriesTypeTransformer $categoryTransformer
+     */
     public function __construct(CategoriesTypeTransformer $categoryTransformer)
     {
         $this->categoriesTypeTransformer = $categoryTransformer;

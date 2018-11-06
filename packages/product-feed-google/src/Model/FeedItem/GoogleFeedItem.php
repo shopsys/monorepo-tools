@@ -69,6 +69,19 @@ class GoogleFeedItem implements FeedItemInterface
      */
     protected $currency;
 
+    /**
+     * @param int $id
+     * @param string $name
+     * @param string|null $brandName
+     * @param string|null $description
+     * @param string|null $ean
+     * @param string|null $partno
+     * @param string $url
+     * @param string|null $imgUrl
+     * @param bool $sellingDenied
+     * @param \Shopsys\FrameworkBundle\Model\Pricing\Price $price
+     * @param \Shopsys\FrameworkBundle\Model\Pricing\Currency\Currency $currency
+     */
     public function __construct(
         int $id,
         string $name,

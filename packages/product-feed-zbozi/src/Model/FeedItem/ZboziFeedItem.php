@@ -84,6 +84,23 @@ class ZboziFeedItem implements FeedItemInterface
      */
     protected $cpcSearch;
 
+    /**
+     * @param int $id
+     * @param int|null $mainVariantId
+     * @param string $name
+     * @param string|null $description
+     * @param string $url
+     * @param string|null $imgUrl
+     * @param string|null $brandName
+     * @param string|null $ean
+     * @param string|null $partno
+     * @param int|null $availabilityDispatchTime
+     * @param \Shopsys\FrameworkBundle\Model\Pricing\Price $price
+     * @param array $pathToMainCategory
+     * @param array $parametersByName
+     * @param float|null $cpc
+     * @param float|null $cpcSearch
+     */
     public function __construct(
         int $id,
         ?int $mainVariantId,

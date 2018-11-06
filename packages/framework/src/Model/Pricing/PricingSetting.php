@@ -31,6 +31,10 @@ class PricingSetting
      */
     private $productPriceRecalculationScheduler;
 
+    /**
+     * @param \Shopsys\FrameworkBundle\Component\Setting\Setting $setting
+     * @param \Shopsys\FrameworkBundle\Model\Product\Pricing\ProductPriceRecalculationScheduler $productPriceRecalculationScheduler
+     */
     public function __construct(
         Setting $setting,
         ProductPriceRecalculationScheduler $productPriceRecalculationScheduler

@@ -21,6 +21,8 @@ class ScriptPlacementToBooleanTransformerTest extends TestCase
 
     /**
      * @dataProvider reverseTransformDataProvider
+     * @param mixed $scriptHasOrderPlacement
+     * @param mixed $scriptPlacement
      */
     public function testReverseTransform($scriptHasOrderPlacement, $scriptPlacement)
     {
@@ -31,6 +33,7 @@ class ScriptPlacementToBooleanTransformerTest extends TestCase
 
     /**
      * @dataProvider reverseTransformExceptionDataProvider
+     * @param mixed $param
      */
     public function testReverseTransformException($param)
     {

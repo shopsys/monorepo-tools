@@ -66,7 +66,7 @@ SAMPLE
     public function fix(SplFileInfo $file, Tokens $tokens): void
     {
         foreach ($tokens->findGivenKind(T_DOC_COMMENT) as $token) {
-            /** @var Token $token */
+            /** @var \PhpCsFixer\Tokenizer\Token $token */
             $doc = new DocBlock($token->getContent());
             foreach ($doc->getAnnotations() as $annotation) {
                 if ($this->isRelationAnnotation($annotation)) {
@@ -103,6 +103,7 @@ SAMPLE
 
     /**
      * @param \PhpCsFixer\DocBlock\Annotation $annotation
+     * @return bool
      */
     private function isRelationAnnotation(Annotation $annotation): bool
     {
@@ -125,6 +126,7 @@ SAMPLE
 
     /**
      * @param \PhpCsFixer\DocBlock\DocBlock $doc
+     * @return \PhpCsFixer\DocBlock\Annotation|null
      */
     private function findJoinColumnAnnotation(DocBlock $doc): ?Annotation
     {

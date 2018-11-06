@@ -19,12 +19,22 @@ class ImageController extends FrontBaseController
      */
     private $filesystem;
 
+    /**
+     * @param \Shopsys\FrameworkBundle\Component\Image\Processing\ImageGeneratorFacade $imageGeneratorFacade
+     * @param \League\Flysystem\FilesystemInterface $filesystem
+     */
     public function __construct(ImageGeneratorFacade $imageGeneratorFacade, FilesystemInterface $filesystem)
     {
         $this->imageGeneratorFacade = $imageGeneratorFacade;
         $this->filesystem = $filesystem;
     }
 
+    /**
+     * @param mixed $entityName
+     * @param mixed $type
+     * @param mixed $sizeName
+     * @param mixed $imageId
+     */
     public function getImageAction($entityName, $type, $sizeName, $imageId)
     {
         if ($sizeName === ImageConfig::DEFAULT_SIZE_NAME) {

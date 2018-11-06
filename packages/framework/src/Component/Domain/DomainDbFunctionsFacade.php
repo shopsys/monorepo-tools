@@ -17,6 +17,10 @@ class DomainDbFunctionsFacade
      */
     protected $domain;
 
+    /**
+     * @param \Doctrine\ORM\EntityManagerInterface $em
+     * @param \Shopsys\FrameworkBundle\Component\Domain\Domain $domain
+     */
     public function __construct(EntityManagerInterface $em, Domain $domain)
     {
         $this->em = $em;

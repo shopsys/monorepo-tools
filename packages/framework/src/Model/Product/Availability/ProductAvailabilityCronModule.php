@@ -17,6 +17,9 @@ class ProductAvailabilityCronModule implements IteratedCronModuleInterface
      */
     private $productAvailabilityRecalculator;
 
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Product\Availability\ProductAvailabilityRecalculator $productAvailabilityRecalculator
+     */
     public function __construct(ProductAvailabilityRecalculator $productAvailabilityRecalculator)
     {
         $this->productAvailabilityRecalculator = $productAvailabilityRecalculator;

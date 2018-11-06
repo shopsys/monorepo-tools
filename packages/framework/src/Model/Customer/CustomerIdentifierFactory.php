@@ -16,6 +16,10 @@ class CustomerIdentifierFactory
      */
     protected $session;
 
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Customer\CurrentCustomer $currentCustomer
+     * @param \Symfony\Component\HttpFoundation\Session\SessionInterface $session
+     */
     public function __construct(CurrentCustomer $currentCustomer, SessionInterface $session)
     {
         $this->currentCustomer = $currentCustomer;

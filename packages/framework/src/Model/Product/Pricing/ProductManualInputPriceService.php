@@ -12,6 +12,9 @@ class ProductManualInputPriceService
      */
     protected $productManualInputPriceFactory;
 
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Product\Pricing\ProductManualInputPriceFactoryInterface $productManualInputPriceFactory
+     */
     public function __construct(ProductManualInputPriceFactoryInterface $productManualInputPriceFactory)
     {
         $this->productManualInputPriceFactory = $productManualInputPriceFactory;

@@ -13,6 +13,9 @@ class InputPriceLabelExtension extends Twig_Extension
      */
     private $pricingSetting;
 
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Pricing\PricingSetting $pricingSetting
+     */
     public function __construct(
         PricingSetting $pricingSetting
     ) {

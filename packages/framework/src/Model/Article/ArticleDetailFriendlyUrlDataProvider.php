@@ -23,6 +23,10 @@ class ArticleDetailFriendlyUrlDataProvider implements FriendlyUrlDataProviderInt
      */
     private $friendlyUrlDataFactory;
 
+    /**
+     * @param \Doctrine\ORM\EntityManagerInterface $em
+     * @param \Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\FriendlyUrlDataFactoryInterface $friendlyUrlDataFactory
+     */
     public function __construct(
         EntityManagerInterface $em,
         FriendlyUrlDataFactoryInterface $friendlyUrlDataFactory

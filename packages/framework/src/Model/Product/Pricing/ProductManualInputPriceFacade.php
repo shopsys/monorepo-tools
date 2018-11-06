@@ -23,6 +23,11 @@ class ProductManualInputPriceFacade
      */
     protected $productManualInputPriceService;
 
+    /**
+     * @param \Doctrine\ORM\EntityManagerInterface $em
+     * @param \Shopsys\FrameworkBundle\Model\Product\Pricing\ProductManualInputPriceRepository $productManualInputPriceRepository
+     * @param \Shopsys\FrameworkBundle\Model\Product\Pricing\ProductManualInputPriceService $productManualInputPriceService
+     */
     public function __construct(
         EntityManagerInterface $em,
         ProductManualInputPriceRepository $productManualInputPriceRepository,

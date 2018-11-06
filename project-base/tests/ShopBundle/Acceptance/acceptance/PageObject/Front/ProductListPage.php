@@ -15,6 +15,11 @@ class ProductListPage extends AbstractPage
      */
     private $productListComponent;
 
+    /**
+     * @param \Tests\ShopBundle\Test\Codeception\Module\StrictWebDriver $strictWebDriver
+     * @param \Tests\ShopBundle\Test\Codeception\AcceptanceTester $tester
+     * @param \Tests\ShopBundle\Acceptance\acceptance\PageObject\Front\ProductListComponent $productListComponent
+     */
     public function __construct(
         StrictWebDriver $strictWebDriver,
         AcceptanceTester $tester,

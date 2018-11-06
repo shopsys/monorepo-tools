@@ -30,7 +30,7 @@ class JsFormValidatorFactory extends BaseJsFormValidatorFactory
     }
 
     /**
-     * @param FormInterface $form
+     * @param \Symfony\Component\Form\FormInterface $form
      * @param array $viewTransformers
      *
      * @return array

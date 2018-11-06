@@ -12,6 +12,9 @@ class CssExtension extends \Twig_Extension
      */
     private $cssFacade;
 
+    /**
+     * @param \Shopsys\FrameworkBundle\Component\Css\CssFacade $cssFacade
+     */
     public function __construct(CssFacade $cssFacade)
     {
         $this->cssFacade = $cssFacade;

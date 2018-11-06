@@ -9,6 +9,9 @@ class ProductParameterValueDataFactory implements ProductParameterValueDataFacto
      */
     protected $parameterValueDataFactory;
 
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Product\Parameter\ParameterValueDataFactoryInterface $parameterValueDataFactory
+     */
     public function __construct(ParameterValueDataFactoryInterface $parameterValueDataFactory)
     {
         $this->parameterValueDataFactory = $parameterValueDataFactory;

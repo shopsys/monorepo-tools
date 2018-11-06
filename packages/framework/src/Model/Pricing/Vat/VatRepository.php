@@ -126,6 +126,9 @@ class VatRepository
         return $query->getResult();
     }
 
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Pricing\Vat\Vat $vat
+     */
     public function isVatUsed(Vat $vat)
     {
         return $this->existsPaymentWithVat($vat)

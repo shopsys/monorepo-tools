@@ -17,6 +17,10 @@ class UploadedFileService
      */
     protected $uploadedFileFactory;
 
+    /**
+     * @param \Shopsys\FrameworkBundle\Component\FileUpload\FileUpload $fileUpload
+     * @param \Shopsys\FrameworkBundle\Component\UploadedFile\UploadedFileFactoryInterface $uploadedFileFactory
+     */
     public function __construct(
         FileUpload $fileUpload,
         UploadedFileFactoryInterface $uploadedFileFactory

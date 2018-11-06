@@ -24,6 +24,11 @@ class LegalConditionsFacade
      */
     protected $domain;
 
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Article\ArticleFacade $articleFacade
+     * @param \Shopsys\FrameworkBundle\Component\Setting\Setting $setting
+     * @param \Shopsys\FrameworkBundle\Component\Domain\Domain $domain
+     */
     public function __construct(
         ArticleFacade $articleFacade,
         Setting $setting,

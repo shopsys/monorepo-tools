@@ -36,6 +36,13 @@ class CategoryController extends FrontBaseController
      */
     private $currentCustomer;
 
+    /**
+     * @param \Shopsys\FrameworkBundle\Component\Domain\Domain $domain
+     * @param \Shopsys\FrameworkBundle\Model\Category\CategoryFacade $categoryFacade
+     * @param \Shopsys\ShopBundle\Model\Category\CurrentCategoryResolver $currentCategoryResolver
+     * @param \Shopsys\FrameworkBundle\Model\Category\TopCategory\TopCategoryFacade $topCategoryFacade
+     * @param \Shopsys\FrameworkBundle\Model\Customer\CurrentCustomer $currentCustomer
+     */
     public function __construct(
         Domain $domain,
         CategoryFacade $categoryFacade,

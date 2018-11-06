@@ -10,6 +10,8 @@ class PricingServiceTest extends TestCase
 {
     /**
      * @dataProvider getMinimumPriceProvider
+     * @param array $prices
+     * @param mixed $minimumPrice
      */
     public function testGetMinimumPrice(array $prices, $minimumPrice)
     {
@@ -55,6 +57,8 @@ class PricingServiceTest extends TestCase
 
     /**
      * @dataProvider getArePricesDifferentProvider
+     * @param array $prices
+     * @param mixed $arePricesDifferent
      */
     public function testArePricesDifferent(array $prices, $arePricesDifferent)
     {

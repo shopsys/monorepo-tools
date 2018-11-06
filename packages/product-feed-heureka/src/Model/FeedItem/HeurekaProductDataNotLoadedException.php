@@ -8,6 +8,12 @@ use Shopsys\FrameworkBundle\Model\Product\Product;
 
 class HeurekaProductDataNotLoadedException extends Exception
 {
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Product\Product $product
+     * @param \Shopsys\FrameworkBundle\Component\Domain\Config\DomainConfig $domainConfig
+     * @param string $attribute
+     * @param \Exception|null $previous
+     */
     public function __construct(Product $product, DomainConfig $domainConfig, string $attribute, Exception $previous = null)
     {
         $message = sprintf(

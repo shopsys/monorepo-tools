@@ -8,6 +8,11 @@ use Tests\ShopBundle\Test\Codeception\AcceptanceTester;
 
 class ProductFilterCest
 {
+    /**
+     * @param \Tests\ShopBundle\Test\Codeception\AcceptanceTester $me
+     * @param \Tests\ShopBundle\Acceptance\acceptance\PageObject\Front\ProductFilterPage $productFilterPage
+     * @param \Tests\ShopBundle\Acceptance\acceptance\PageObject\Front\ProductListPage $productListPage
+     */
     public function testAllProductFilters(
         AcceptanceTester $me,
         ProductFilterPage $productFilterPage,

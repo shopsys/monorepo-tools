@@ -22,6 +22,10 @@ class NumberFormatterExtension extends Twig_Extension
      */
     private $numberFormatRepository;
 
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Localization\Localization $localization
+     * @param \CommerceGuys\Intl\NumberFormat\NumberFormatRepositoryInterface $numberFormatRepository
+     */
     public function __construct(
         Localization $localization,
         NumberFormatRepositoryInterface $numberFormatRepository

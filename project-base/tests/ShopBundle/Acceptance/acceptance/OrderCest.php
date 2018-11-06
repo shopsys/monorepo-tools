@@ -11,6 +11,11 @@ use Tests\ShopBundle\Test\Codeception\Helper\SymfonyHelper;
 
 class OrderCest
 {
+    /**
+     * @param \Tests\ShopBundle\Acceptance\acceptance\PageObject\Front\ProductListPage $productListPage
+     * @param \Tests\ShopBundle\Acceptance\acceptance\PageObject\Front\OrderPage $orderPage
+     * @param \Tests\ShopBundle\Test\Codeception\AcceptanceTester $me
+     */
     public function testFormRemembersPaymentAndTransportWhenClickingBack(
         ProductListPage $productListPage,
         OrderPage $orderPage,
@@ -35,6 +40,11 @@ class OrderCest
         $orderPage->assertPaymentIsSelected('Cash on delivery');
     }
 
+    /**
+     * @param \Tests\ShopBundle\Acceptance\acceptance\PageObject\Front\ProductListPage $productListPage
+     * @param \Tests\ShopBundle\Acceptance\acceptance\PageObject\Front\OrderPage $orderPage
+     * @param \Tests\ShopBundle\Test\Codeception\AcceptanceTester $me
+     */
     public function testFormRemembersPaymentAndTransportWhenGoingDirectlyToUrl(
         ProductListPage $productListPage,
         OrderPage $orderPage,
@@ -59,6 +69,11 @@ class OrderCest
         $orderPage->assertPaymentIsSelected('Cash on delivery');
     }
 
+    /**
+     * @param \Tests\ShopBundle\Acceptance\acceptance\PageObject\Front\ProductListPage $productListPage
+     * @param \Tests\ShopBundle\Acceptance\acceptance\PageObject\Front\OrderPage $orderPage
+     * @param \Tests\ShopBundle\Test\Codeception\AcceptanceTester $me
+     */
     public function testFormRemembersFirstName(ProductListPage $productListPage, OrderPage $orderPage, AcceptanceTester $me)
     {
         $me->wantTo('have my first name remembered by order');
@@ -80,6 +95,12 @@ class OrderCest
         $orderPage->assertFirstNameIsFilled('Jan');
     }
 
+    /**
+     * @param \Tests\ShopBundle\Acceptance\acceptance\PageObject\Front\ProductListPage $productListPage
+     * @param \Tests\ShopBundle\Acceptance\acceptance\PageObject\Front\OrderPage $orderPage
+     * @param \Tests\ShopBundle\Test\Codeception\AcceptanceTester $me
+     * @param \Tests\ShopBundle\Test\Codeception\Helper\SymfonyHelper $symfonyHelper
+     */
     public function testOrderCanBeCompletedAndHasGoogleAnalyticsTrackingIdInSource(
         ProductListPage $productListPage,
         OrderPage $orderPage,
@@ -103,6 +124,11 @@ class OrderCest
         $scriptFacade->setGoogleAnalyticsTrackingId($trackingId, Domain::FIRST_DOMAIN_ID);
     }
 
+    /**
+     * @param \Tests\ShopBundle\Acceptance\acceptance\PageObject\Front\ProductListPage $productListPage
+     * @param \Tests\ShopBundle\Acceptance\acceptance\PageObject\Front\OrderPage $orderPage
+     * @param \Tests\ShopBundle\Test\Codeception\AcceptanceTester $me
+     */
     private function testOrderCanBeCompleted(
         ProductListPage $productListPage,
         OrderPage $orderPage,

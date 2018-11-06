@@ -21,6 +21,10 @@ class SearchController extends FrontBaseController
      */
     private $productOnCurrentDomainFacade;
 
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Category\CategoryFacade $categoryFacade
+     * @param \Shopsys\FrameworkBundle\Model\Product\ProductOnCurrentDomainFacade $productOnCurrentDomainFacade
+     */
     public function __construct(
         CategoryFacade $categoryFacade,
         ProductOnCurrentDomainFacade $productOnCurrentDomainFacade
@@ -29,6 +33,9 @@ class SearchController extends FrontBaseController
         $this->productOnCurrentDomainFacade = $productOnCurrentDomainFacade;
     }
 
+    /**
+     * @param \Symfony\Component\HttpFoundation\Request $request
+     */
     public function autocompleteAction(Request $request)
     {
         $searchText = $request->get('searchText');
@@ -47,6 +54,9 @@ class SearchController extends FrontBaseController
         ]);
     }
 
+    /**
+     * @param \Symfony\Component\HttpFoundation\Request $request
+     */
     public function boxAction(Request $request)
     {
         $searchText = $request->query->get(ProductController::SEARCH_TEXT_PARAMETER);

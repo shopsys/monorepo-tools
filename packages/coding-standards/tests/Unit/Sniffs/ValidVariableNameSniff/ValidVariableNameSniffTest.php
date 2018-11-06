@@ -13,6 +13,9 @@ final class ValidVariableNameSniffTest extends AbstractCheckerTestCase
         $this->doTestWrongFile(__DIR__ . '/wrong/wrong.inc');
     }
 
+    /**
+     * @return string
+     */
     protected function provideConfig(): string
     {
         return __DIR__ . '/config.yml';

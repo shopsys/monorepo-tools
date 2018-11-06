@@ -19,6 +19,10 @@ class OrderHashGeneratorRepository
      */
     private $hashGenerator;
 
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Order\OrderRepository $orderRepository
+     * @param \Shopsys\FrameworkBundle\Component\String\HashGenerator $hashGenerator
+     */
     public function __construct(
         OrderRepository $orderRepository,
         HashGenerator $hashGenerator

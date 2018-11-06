@@ -17,6 +17,9 @@ class ProductPriceCronModule implements IteratedCronModuleInterface
      */
     private $productPriceRecalculator;
 
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Product\Pricing\ProductPriceRecalculator $productPriceRecalculator
+     */
     public function __construct(ProductPriceRecalculator $productPriceRecalculator)
     {
         $this->productPriceRecalculator = $productPriceRecalculator;

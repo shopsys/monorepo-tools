@@ -27,6 +27,11 @@ class BestsellingProductFacade
      */
     protected $bestsellingProductService;
 
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Product\BestsellingProduct\AutomaticBestsellingProductRepository $automaticBestsellingProductRepository
+     * @param \Shopsys\FrameworkBundle\Model\Product\BestsellingProduct\ManualBestsellingProductRepository $manualBestsellingProductRepository
+     * @param \Shopsys\FrameworkBundle\Model\Product\BestsellingProduct\BestsellingProductService $bestsellingProductService
+     */
     public function __construct(
         AutomaticBestsellingProductRepository $automaticBestsellingProductRepository,
         ManualBestsellingProductRepository $manualBestsellingProductRepository,

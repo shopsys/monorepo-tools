@@ -36,6 +36,12 @@ class HeurekaFeedItemFactory
      */
     protected $heurekaCategoryFullNamesCache = [];
 
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Product\Pricing\ProductPriceCalculationForUser $productPriceCalculationForUser
+     * @param \Shopsys\ProductFeed\HeurekaBundle\Model\FeedItem\HeurekaProductDataBatchLoader $heurekaProductDataBatchLoader
+     * @param \Shopsys\ProductFeed\HeurekaBundle\Model\HeurekaCategory\HeurekaCategoryFacade $heurekaCategoryFacade
+     * @param \Shopsys\FrameworkBundle\Model\Category\CategoryFacade $categoryFacade
+     */
     public function __construct(
         ProductPriceCalculationForUser $productPriceCalculationForUser,
         HeurekaProductDataBatchLoader $heurekaProductDataBatchLoader,

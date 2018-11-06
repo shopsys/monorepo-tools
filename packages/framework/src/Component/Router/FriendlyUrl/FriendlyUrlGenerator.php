@@ -12,10 +12,14 @@ use Symfony\Component\Routing\RouteCompiler;
 class FriendlyUrlGenerator extends BaseUrlGenerator
 {
     /**
-     * @var FriendlyUrlRepository
+     * @var \Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\FriendlyUrlRepository
      */
     private $friendlyUrlRepository;
 
+    /**
+     * @param \Symfony\Component\Routing\RequestContext $context
+     * @param \Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\FriendlyUrlRepository $friendlyUrlRepository
+     */
     public function __construct(
         RequestContext $context,
         FriendlyUrlRepository $friendlyUrlRepository
@@ -100,6 +104,9 @@ class FriendlyUrlGenerator extends BaseUrlGenerator
 
     /**
      * Not supported method
+     * @param mixed $routeName
+     * @param mixed $parameters
+     * @param mixed $referenceType
      */
     public function generate($routeName, $parameters = [], $referenceType = self::ABSOLUTE_PATH)
     {

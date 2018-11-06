@@ -29,6 +29,11 @@ class SitemapRepository
      */
     private $articleRepository;
 
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Product\ProductRepository $productRepository
+     * @param \Shopsys\FrameworkBundle\Model\Category\CategoryRepository $categoryRepository
+     * @param \Shopsys\FrameworkBundle\Model\Article\ArticleRepository $articleRepository
+     */
     public function __construct(
         ProductRepository $productRepository,
         CategoryRepository $categoryRepository,

@@ -56,6 +56,16 @@ class JavascriptCompilerService
      */
     private $assetPackages;
 
+    /**
+     * @param string $webPath
+     * @param array $jsSourcePaths
+     * @param string $jsUrlPrefix
+     * @param array $allowedDirectories
+     * @param \Symfony\Component\Filesystem\Filesystem $filesystem
+     * @param \Shopsys\FrameworkBundle\Component\Domain\Domain $domain
+     * @param \Shopsys\FrameworkBundle\Component\Javascript\Compiler\JsCompiler $jsCompiler
+     * @param \Symfony\Component\Asset\Packages $assetPackages
+     */
     public function __construct(
         string $webPath,
         array $jsSourcePaths,

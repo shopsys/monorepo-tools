@@ -41,6 +41,14 @@ class ZboziFeedItemFacade
      */
     protected $zboziProductDomainFacade;
 
+    /**
+     * @param \Shopsys\ProductFeed\ZboziBundle\Model\Product\ZboziProductRepository $zboziProductRepository
+     * @param \Shopsys\ProductFeed\ZboziBundle\Model\FeedItem\ZboziFeedItemFactory $feedItemFactory
+     * @param \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroupSettingFacade $pricingGroupSettingFacade
+     * @param \Shopsys\FrameworkBundle\Model\Product\Collection\ProductUrlsBatchLoader $productUrlsBatchLoader
+     * @param \Shopsys\FrameworkBundle\Model\Product\Collection\ProductParametersBatchLoader $productParametersBatchLoader
+     * @param \Shopsys\ProductFeed\ZboziBundle\Model\Product\ZboziProductDomainFacade $zboziProductDomainFacade
+     */
     public function __construct(
         ZboziProductRepository $zboziProductRepository,
         ZboziFeedItemFactory $feedItemFactory,

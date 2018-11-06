@@ -35,6 +35,12 @@ class Translator implements TranslatorInterface, TranslatorBagInterface
      */
     private $messageIdNormalizer;
 
+    /**
+     * @param \Symfony\Component\Translation\TranslatorInterface $originalTranslator
+     * @param \Symfony\Component\Translation\TranslatorBagInterface $originalTranslatorBag
+     * @param \Symfony\Component\Translation\TranslatorInterface $identityTranslator
+     * @param \Shopsys\FrameworkBundle\Component\Translation\MessageIdNormalizer $messageIdNormalizer
+     */
     public function __construct(
         TranslatorInterface $originalTranslator,
         TranslatorBagInterface $originalTranslatorBag,

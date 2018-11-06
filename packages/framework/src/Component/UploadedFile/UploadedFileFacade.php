@@ -39,6 +39,14 @@ class UploadedFileFacade
      */
     protected $uploadedFileLocator;
 
+    /**
+     * @param \Doctrine\ORM\EntityManagerInterface $em
+     * @param \Shopsys\FrameworkBundle\Component\UploadedFile\Config\UploadedFileConfig $uploadedFileConfig
+     * @param \Shopsys\FrameworkBundle\Component\UploadedFile\UploadedFileRepository $uploadedFileRepository
+     * @param \Shopsys\FrameworkBundle\Component\UploadedFile\UploadedFileService $uploadedFileService
+     * @param \League\Flysystem\FilesystemInterface $filesystem
+     * @param \Shopsys\FrameworkBundle\Component\UploadedFile\UploadedFileLocator $uploadedFileLocator
+     */
     public function __construct(
         EntityManagerInterface $em,
         UploadedFileConfig $uploadedFileConfig,

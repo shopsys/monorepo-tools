@@ -23,6 +23,10 @@ class MoneyTypeExtension extends AbstractTypeExtension
      */
     private $intlCurrencyRepository;
 
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Localization\Localization $localization
+     * @param \CommerceGuys\Intl\Currency\CurrencyRepositoryInterface $intlCurrencyRepository
+     */
     public function __construct(Localization $localization, CurrencyRepositoryInterface $intlCurrencyRepository)
     {
         $this->localization = $localization;

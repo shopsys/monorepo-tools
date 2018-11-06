@@ -16,6 +16,10 @@ class FlashMessageSender
      */
     private $twigEnvironment;
 
+    /**
+     * @param \Shopsys\FrameworkBundle\Component\FlashMessage\Bag $flashMessageBag
+     * @param \Twig_Environment $twigEnvironment
+     */
     public function __construct(
         Bag $flashMessageBag,
         Twig_Environment $twigEnvironment

@@ -27,6 +27,11 @@ class DomainService
      */
     private $filesystem;
 
+    /**
+     * @param \Symfony\Bridge\Monolog\Logger $logger
+     * @param \Shopsys\FrameworkBundle\Component\Image\Processing\ImageProcessingService $imageProcessingService
+     * @param \League\Flysystem\FilesystemInterface $filesystem
+     */
     public function __construct(
         Logger $logger,
         ImageProcessingService $imageProcessingService,

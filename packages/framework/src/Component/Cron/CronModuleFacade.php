@@ -22,6 +22,11 @@ class CronModuleFacade
      */
     protected $cronService;
 
+    /**
+     * @param \Doctrine\ORM\EntityManagerInterface $em
+     * @param \Shopsys\FrameworkBundle\Component\Cron\CronModuleRepository $cronModuleRepository
+     * @param \Shopsys\FrameworkBundle\Component\Cron\CronService $cronService
+     */
     public function __construct(
         EntityManagerInterface $em,
         CronModuleRepository $cronModuleRepository,

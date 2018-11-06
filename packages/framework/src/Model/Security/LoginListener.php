@@ -27,6 +27,11 @@ class LoginListener
      */
     private $administratorActivityFacade;
 
+    /**
+     * @param \Doctrine\ORM\EntityManagerInterface $em
+     * @param \Shopsys\FrameworkBundle\Model\Order\OrderFlowFacade $orderFlowFacade
+     * @param \Shopsys\FrameworkBundle\Model\Administrator\Activity\AdministratorActivityFacade $administratorActivityFacade
+     */
     public function __construct(
         EntityManagerInterface $em,
         OrderFlowFacade $orderFlowFacade,

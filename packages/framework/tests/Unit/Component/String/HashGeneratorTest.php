@@ -18,6 +18,7 @@ class HashGeneratorTest extends TestCase
 
     /**
      * @dataProvider hashLengthProvider
+     * @param mixed $length
      */
     public function testGenerateHash($length)
     {

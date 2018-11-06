@@ -19,6 +19,9 @@ class VatSettingsFormType extends AbstractType
      */
     private $vatFacade;
 
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Pricing\Vat\VatFacade $vatFacade
+     */
     public function __construct(VatFacade $vatFacade)
     {
         $this->vatFacade = $vatFacade;

@@ -24,6 +24,11 @@ class OrderItemPriceCalculation
      */
     private $vatDataFactory;
 
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Pricing\PriceCalculation $priceCalculation
+     * @param \Shopsys\FrameworkBundle\Model\Pricing\Vat\VatFactoryInterface $vatFactory
+     * @param \Shopsys\FrameworkBundle\Model\Pricing\Vat\VatDataFactoryInterface $vatDataFactory
+     */
     public function __construct(
         PriceCalculation $priceCalculation,
         VatFactoryInterface $vatFactory,

@@ -19,6 +19,10 @@ class GoogleFeed implements FeedInterface
      */
     protected $feedItemFacade;
 
+    /**
+     * @param \Shopsys\ProductFeed\GoogleBundle\GoogleFeedInfo $feedInfo
+     * @param \Shopsys\ProductFeed\GoogleBundle\Model\FeedItem\GoogleFeedItemFacade $feedItemFacade
+     */
     public function __construct(
         GoogleFeedInfo $feedInfo,
         GoogleFeedItemFacade $feedItemFacade

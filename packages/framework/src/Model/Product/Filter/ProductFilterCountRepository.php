@@ -21,6 +21,10 @@ class ProductFilterCountRepository
      */
     private $productFilterRepository;
 
+    /**
+     * @param \Doctrine\ORM\EntityManagerInterface $em
+     * @param \Shopsys\FrameworkBundle\Model\Product\Filter\ProductFilterRepository $productFilterRepository
+     */
     public function __construct(
         EntityManagerInterface $em,
         ProductFilterRepository $productFilterRepository

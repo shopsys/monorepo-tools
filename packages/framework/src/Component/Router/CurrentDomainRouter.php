@@ -23,6 +23,10 @@ class CurrentDomainRouter implements RouterInterface
      */
     private $domainRouterFactory;
 
+    /**
+     * @param \Shopsys\FrameworkBundle\Component\Domain\Domain $domain
+     * @param \Shopsys\FrameworkBundle\Component\Router\DomainRouterFactory $domainRouterFactory
+     */
     public function __construct(Domain $domain, DomainRouterFactory $domainRouterFactory)
     {
         $this->domain = $domain;

@@ -51,7 +51,7 @@ class User implements UserInterface, TimelimitLoginInterface, Serializable
     protected $password;
 
     /**
-     * @var DateTime
+     * @var \DateTime
      */
     protected $lastActivity;
 
@@ -201,7 +201,7 @@ class User implements UserInterface, TimelimitLoginInterface, Serializable
     }
 
     /**
-     * @return DateTime
+     * @return \DateTime
      */
     public function getLastActivity()
     {
@@ -209,7 +209,7 @@ class User implements UserInterface, TimelimitLoginInterface, Serializable
     }
 
     /**
-     * @param DateTime $lastActivity
+     * @param \DateTime $lastActivity
      */
     public function setLastActivity($lastActivity)
     {

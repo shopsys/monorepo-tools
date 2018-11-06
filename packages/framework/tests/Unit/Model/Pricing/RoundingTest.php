@@ -52,6 +52,10 @@ class RoundingTest extends TestCase
 
     /**
      * @dataProvider roundingProvider
+     * @param mixed $unroundedPrice
+     * @param mixed $expectedAsPriceWithVat
+     * @param mixed $expectedAsPriceWithoutVat
+     * @param mixed $expectedAsVatAmount
      */
     public function testRounding(
         $unroundedPrice,
@@ -127,6 +131,9 @@ class RoundingTest extends TestCase
 
     /**
      * @dataProvider roundingPriceWithVatProvider
+     * @param mixed $roundingType
+     * @param mixed $inputPrice
+     * @param mixed $outputPrice
      */
     public function testRoundingPriceWithVat(
         $roundingType,

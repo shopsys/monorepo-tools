@@ -20,6 +20,10 @@ class CookiesController extends AdminBaseController
      */
     protected $cookiesFacade;
 
+    /**
+     * @param \Shopsys\FrameworkBundle\Component\Domain\AdminDomainTabsFacade $adminDomainTabsFacade
+     * @param \Shopsys\FrameworkBundle\Model\Cookies\CookiesFacade $cookiesFacade
+     */
     public function __construct(
         AdminDomainTabsFacade $adminDomainTabsFacade,
         CookiesFacade $cookiesFacade
@@ -30,6 +34,7 @@ class CookiesController extends AdminBaseController
 
     /**
      * @Route("/cookies/setting/")
+     * @param \Symfony\Component\HttpFoundation\Request $request
      */
     public function settingAction(Request $request)
     {

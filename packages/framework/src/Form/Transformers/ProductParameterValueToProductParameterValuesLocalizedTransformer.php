@@ -19,6 +19,10 @@ class ProductParameterValueToProductParameterValuesLocalizedTransformer implemen
      */
     private $parameterValueDataFactory;
 
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Product\Parameter\ProductParameterValueDataFactoryInterface $productParameterValueDataFactory
+     * @param \Shopsys\FrameworkBundle\Model\Product\Parameter\ParameterValueDataFactoryInterface $parameterValueDataFactory
+     */
     public function __construct(
         ProductParameterValueDataFactoryInterface $productParameterValueDataFactory,
         ParameterValueDataFactoryInterface $parameterValueDataFactory

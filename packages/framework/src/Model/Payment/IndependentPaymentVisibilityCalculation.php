@@ -11,6 +11,9 @@ class IndependentPaymentVisibilityCalculation
      */
     private $domain;
 
+    /**
+     * @param \Shopsys\FrameworkBundle\Component\Domain\Domain $domain
+     */
     public function __construct(Domain $domain)
     {
         $this->domain = $domain;

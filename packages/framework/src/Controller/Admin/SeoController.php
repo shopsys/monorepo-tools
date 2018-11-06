@@ -20,6 +20,10 @@ class SeoController extends AdminBaseController
      */
     protected $seoSettingFacade;
 
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Seo\SeoSettingFacade $seoSettingFacade
+     * @param \Shopsys\FrameworkBundle\Component\Domain\AdminDomainTabsFacade $adminDomainTabsFacade
+     */
     public function __construct(
         SeoSettingFacade $seoSettingFacade,
         AdminDomainTabsFacade $adminDomainTabsFacade
@@ -30,6 +34,7 @@ class SeoController extends AdminBaseController
 
     /**
      * @Route("/seo/")
+     * @param \Symfony\Component\HttpFoundation\Request $request
      */
     public function indexAction(Request $request)
     {

@@ -28,6 +28,12 @@ class HeurekaFeedItemFacade
      */
     protected $productDataBatchLoader;
 
+    /**
+     * @param \Shopsys\ProductFeed\HeurekaBundle\Model\Product\HeurekaProductRepository $heurekaProductRepository
+     * @param \Shopsys\ProductFeed\HeurekaBundle\Model\FeedItem\HeurekaFeedItemFactory $feedItemFactory
+     * @param \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroupSettingFacade $pricingGroupSettingFacade
+     * @param \Shopsys\ProductFeed\HeurekaBundle\Model\FeedItem\HeurekaProductDataBatchLoader $productDataBatchLoader
+     */
     public function __construct(
         HeurekaProductRepository $heurekaProductRepository,
         HeurekaFeedItemFactory $feedItemFactory,

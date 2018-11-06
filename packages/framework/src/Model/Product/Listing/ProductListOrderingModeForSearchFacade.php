@@ -13,6 +13,9 @@ class ProductListOrderingModeForSearchFacade
      */
     protected $productListOrderingModeService;
 
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Product\Listing\ProductListOrderingModeService $productListOrderingModeService
+     */
     public function __construct(ProductListOrderingModeService $productListOrderingModeService)
     {
         $this->productListOrderingModeService = $productListOrderingModeService;

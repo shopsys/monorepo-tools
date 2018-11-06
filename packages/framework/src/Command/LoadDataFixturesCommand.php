@@ -29,6 +29,9 @@ class LoadDataFixturesCommand extends DoctrineCommand
      */
     private $fixturesLoader;
 
+    /**
+     * @param \Shopsys\FrameworkBundle\Component\DataFixture\FixturesLoader $fixturesLoader
+     */
     public function __construct(FixturesLoader $fixturesLoader)
     {
         parent::__construct();

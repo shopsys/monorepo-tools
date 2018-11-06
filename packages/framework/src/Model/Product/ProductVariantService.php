@@ -9,6 +9,9 @@ class ProductVariantService
      */
     protected $productFactory;
 
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Product\ProductFactoryInterface $productFactory
+     */
     public function __construct(ProductFactoryInterface $productFactory)
     {
         $this->productFactory = $productFactory;

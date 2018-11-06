@@ -15,6 +15,9 @@ class BrandFilterChoiceRepository
      */
     private $productRepository;
 
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Product\ProductRepository $productRepository
+     */
     public function __construct(
         ProductRepository $productRepository
     ) {

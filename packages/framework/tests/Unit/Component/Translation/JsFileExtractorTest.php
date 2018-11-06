@@ -44,6 +44,9 @@ class JsFileExtractorTest extends TestCase
         $this->assertEquals($expected, $catalogue);
     }
 
+    /**
+     * @param mixed $filename
+     */
     private function extract($filename)
     {
         if (!is_file($filename)) {

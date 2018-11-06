@@ -16,7 +16,7 @@ class MicroserviceProductSearchDeleteStructureCommand extends Command
     protected static $defaultName = 'shopsys:microservice:product-search:delete-structure';
 
     /**
-     * @var ProductSearchExportStructureFacade
+     * @var \Shopsys\FrameworkBundle\Component\Microservice\ProductSearchExport\ProductSearchExportStructureFacade
      */
     private $productSearchExportStructureFacade;
 

@@ -50,6 +50,16 @@ class ImageFacade
      */
     protected $imageUrlPrefix;
 
+    /**
+     * @param mixed $imageUrlPrefix
+     * @param \Doctrine\ORM\EntityManagerInterface $em
+     * @param \Shopsys\FrameworkBundle\Component\Image\Config\ImageConfig $imageConfig
+     * @param \Shopsys\FrameworkBundle\Component\Image\ImageRepository $imageRepository
+     * @param \Shopsys\FrameworkBundle\Component\Image\ImageService $imageService
+     * @param \League\Flysystem\FilesystemInterface $filesystem
+     * @param \Shopsys\FrameworkBundle\Component\FileUpload\FileUpload $fileUpload
+     * @param \Shopsys\FrameworkBundle\Component\Image\ImageLocator $imageLocator
+     */
     public function __construct(
         $imageUrlPrefix,
         EntityManagerInterface $em,

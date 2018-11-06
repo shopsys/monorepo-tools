@@ -27,6 +27,12 @@ class FeedPathProvider
      */
     private $projectDir;
 
+    /**
+     * @param string $feedUrlPrefix
+     * @param string $feedDir
+     * @param string $projectDir
+     * @param \Shopsys\FrameworkBundle\Component\Setting\Setting $setting
+     */
     public function __construct(string $feedUrlPrefix, string $feedDir, string $projectDir, Setting $setting)
     {
         $this->feedUrlPrefix = $feedUrlPrefix;

@@ -29,6 +29,7 @@ final class ForbiddenSuperGlobalSniff implements Sniff
     }
 
     /**
+     * @param \PHP_CodeSniffer\Files\File $file
      * @param int $position
      */
     public function process(File $file, $position): void

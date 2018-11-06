@@ -17,6 +17,9 @@ class AdvertPositionRegistry
         ];
     }
 
+    /**
+     * @param string $positionName
+     */
     public function assertPositionNameIsKnown(string $positionName): void
     {
         $knownPositionsNames = array_keys($this->getAllLabelsIndexedByNames());

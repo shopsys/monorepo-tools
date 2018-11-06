@@ -37,6 +37,12 @@ class BasePriceCalculationTest extends TestCase
 
     /**
      * @dataProvider calculateBasePriceProvider
+     * @param mixed $inputPriceType
+     * @param mixed $inputPrice
+     * @param mixed $vatPercent
+     * @param mixed $basePriceWithoutVat
+     * @param mixed $basePriceWithVat
+     * @param mixed $basePriceVatAmount
      */
     public function testCalculateBasePrice(
         $inputPriceType,
@@ -102,6 +108,12 @@ class BasePriceCalculationTest extends TestCase
 
     /**
      * @dataProvider applyCoefficientProvider
+     * @param mixed $priceWithVat
+     * @param mixed $vatPercent
+     * @param mixed $coefficients
+     * @param mixed $resultPriceWithVat
+     * @param mixed $resultPriceWithoutVat
+     * @param mixed $resultVatAmount
      */
     public function testApplyCoefficient(
         $priceWithVat,

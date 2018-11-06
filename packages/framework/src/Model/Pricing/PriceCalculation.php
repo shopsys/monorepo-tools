@@ -11,6 +11,9 @@ class PriceCalculation
      */
     private $rounding;
 
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Pricing\Rounding $rounding
+     */
     public function __construct(Rounding $rounding)
     {
         $this->rounding = $rounding;
@@ -40,6 +43,7 @@ class PriceCalculation
 
     /**
      * @param string $priceWithoutVat
+     * @param \Shopsys\FrameworkBundle\Model\Pricing\Vat\Vat $vat
      * @param \Shopsys\FrameworkBundle\Model\Pricing\Vat\Vat
      * @return string
      */

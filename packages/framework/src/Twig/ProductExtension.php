@@ -20,6 +20,10 @@ class ProductExtension extends \Twig_Extension
      */
     private $productCachedAttributesFacade;
 
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Category\CategoryFacade $categoryFacade
+     * @param \Shopsys\FrameworkBundle\Model\Product\ProductCachedAttributesFacade $productCachedAttributesFacade
+     */
     public function __construct(
         CategoryFacade $categoryFacade,
         ProductCachedAttributesFacade $productCachedAttributesFacade

@@ -21,6 +21,10 @@ class CustomerCommunicationController extends AdminBaseController
      */
     protected $setting;
 
+    /**
+     * @param \Shopsys\FrameworkBundle\Component\Setting\Setting $setting
+     * @param \Shopsys\FrameworkBundle\Component\Domain\AdminDomainTabsFacade $adminDomainTabsFacade
+     */
     public function __construct(
         Setting $setting,
         AdminDomainTabsFacade $adminDomainTabsFacade
@@ -31,6 +35,7 @@ class CustomerCommunicationController extends AdminBaseController
 
     /**
      * @Route("/customer-communication/order-submitted/")
+     * @param \Symfony\Component\HttpFoundation\Request $request
      */
     public function orderSubmittedAction(Request $request)
     {

@@ -350,7 +350,7 @@ class CategoryFacade
     }
 
     /**
-     * @param Product $product
+     * @param \Shopsys\FrameworkBundle\Model\Product\Product $product
      * @param int $domainId
      * @return \Shopsys\FrameworkBundle\Model\Category\Category
      */
@@ -360,7 +360,7 @@ class CategoryFacade
     }
 
     /**
-     * @param Product $product
+     * @param \Shopsys\FrameworkBundle\Model\Product\Product $product
      * @param int $domainId
      * @return \Shopsys\FrameworkBundle\Model\Category\Category|null
      */

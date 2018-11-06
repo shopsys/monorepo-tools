@@ -23,6 +23,11 @@ class FriendlyUrlRouterFactory
      */
     protected $friendlyUrlRouterResourceFilepath;
 
+    /**
+     * @param mixed $friendlyUrlRouterResourceFilepath
+     * @param \Symfony\Component\Config\Loader\LoaderInterface $configLoader
+     * @param \Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\FriendlyUrlRepository $friendlyUrlRepository
+     */
     public function __construct(
         $friendlyUrlRouterResourceFilepath,
         LoaderInterface $configLoader,

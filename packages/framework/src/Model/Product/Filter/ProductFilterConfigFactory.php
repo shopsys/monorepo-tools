@@ -32,6 +32,13 @@ class ProductFilterConfigFactory
      */
     protected $priceRangeRepository;
 
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Product\Filter\ParameterFilterChoiceRepository $parameterFilterChoiceRepository
+     * @param \Shopsys\FrameworkBundle\Model\Product\Filter\FlagFilterChoiceRepository $flagFilterChoiceRepository
+     * @param \Shopsys\FrameworkBundle\Model\Customer\CurrentCustomer $currentCustomer
+     * @param \Shopsys\FrameworkBundle\Model\Product\Filter\BrandFilterChoiceRepository $brandFilterChoiceRepository
+     * @param \Shopsys\FrameworkBundle\Model\Product\Filter\PriceRangeRepository $priceRangeRepository
+     */
     public function __construct(
         ParameterFilterChoiceRepository $parameterFilterChoiceRepository,
         FlagFilterChoiceRepository $flagFilterChoiceRepository,

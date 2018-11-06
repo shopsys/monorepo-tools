@@ -373,7 +373,7 @@ class OrderTransportAndPaymentTest extends TransactionFunctionalTestCase
      * @param \Shopsys\FrameworkBundle\Model\Pricing\Vat\Vat $vat
      * @param bool[] $enabledForDomains
      * @param bool $hidden
-     * @return Payment
+     * @return \Shopsys\ShopBundle\Model\Payment\Payment
      */
     public function getDefaultPayment(Vat $vat, $enabledForDomains, $hidden)
     {

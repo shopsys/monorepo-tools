@@ -38,6 +38,14 @@ class SitemapFacade
      */
     protected $pricingGroupSettingFacade;
 
+    /**
+     * @param mixed $sitemapsDir
+     * @param mixed $sitemapsUrlPrefix
+     * @param \Shopsys\FrameworkBundle\Component\Domain\Domain $domain
+     * @param \Shopsys\FrameworkBundle\Model\Sitemap\SitemapDumperFactory $domainSitemapDumperFactory
+     * @param \Shopsys\FrameworkBundle\Model\Sitemap\SitemapRepository $sitemapRepository
+     * @param \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroupSettingFacade $pricingGroupSettingFacade
+     */
     public function __construct(
         $sitemapsDir,
         $sitemapsUrlPrefix,

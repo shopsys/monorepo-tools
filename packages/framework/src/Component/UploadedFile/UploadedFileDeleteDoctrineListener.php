@@ -17,6 +17,10 @@ class UploadedFileDeleteDoctrineListener
      */
     private $uploadedFileFacade;
 
+    /**
+     * @param \Shopsys\FrameworkBundle\Component\UploadedFile\Config\UploadedFileConfig $uploadedFileConfig
+     * @param \Shopsys\FrameworkBundle\Component\UploadedFile\UploadedFileFacade $uploadedFileFacade
+     */
     public function __construct(
         UploadedFileConfig $uploadedFileConfig,
         UploadedFileFacade $uploadedFileFacade

@@ -24,6 +24,11 @@ class DomainUrlService
      */
     private $sqlQuoter;
 
+    /**
+     * @param \Shopsys\FrameworkBundle\Component\Doctrine\StringColumnsFinder $stringColumnsFinder
+     * @param \Doctrine\ORM\EntityManagerInterface $em
+     * @param \Shopsys\FrameworkBundle\Component\Doctrine\SqlQuoter $sqlQuoter
+     */
     public function __construct(
         StringColumnsFinder $stringColumnsFinder,
         EntityManagerInterface $em,

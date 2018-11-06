@@ -33,6 +33,10 @@ class ArticleFormType extends AbstractType
      */
     private $domain;
 
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Seo\SeoSettingFacade $seoSettingFacade
+     * @param \Shopsys\FrameworkBundle\Component\Domain\Domain $domain
+     */
     public function __construct(
         SeoSettingFacade $seoSettingFacade,
         Domain $domain

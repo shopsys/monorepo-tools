@@ -53,6 +53,15 @@ class ImageDataFixture extends AbstractReferenceFixture implements DependentFixt
      */
     private $em;
 
+    /**
+     * @param mixed $dataFixturesImagesDirectory
+     * @param mixed $targetImagesDirectory
+     * @param mixed $targetDomainImagesDirectory
+     * @param \League\Flysystem\FilesystemInterface $filesystem
+     * @param \Symfony\Component\Filesystem\Filesystem $symfonyFilesystem
+     * @param \League\Flysystem\MountManager $mountManager
+     * @param \Doctrine\ORM\EntityManagerInterface $em
+     */
     public function __construct(
         $dataFixturesImagesDirectory,
         $targetImagesDirectory,

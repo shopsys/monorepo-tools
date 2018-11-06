@@ -32,6 +32,11 @@ class VatDataFixture extends AbstractReferenceFixture
      */
     private $setting;
 
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Pricing\Vat\VatFacade $vatFacade
+     * @param \Shopsys\FrameworkBundle\Model\Pricing\Vat\VatDataFactoryInterface $vatDataFactory
+     * @param \Shopsys\FrameworkBundle\Component\Setting\Setting $setting
+     */
     public function __construct(
         VatFacade $vatFacade,
         VatDataFactoryInterface $vatDataFactory,

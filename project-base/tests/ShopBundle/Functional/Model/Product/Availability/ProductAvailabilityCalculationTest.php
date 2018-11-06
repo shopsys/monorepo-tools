@@ -18,6 +18,13 @@ class ProductAvailabilityCalculationTest extends FunctionalTestCase
 {
     /**
      * @dataProvider getTestCalculateAvailabilityData
+     * @param mixed $usingStock
+     * @param mixed $stockQuantity
+     * @param mixed $outOfStockAction
+     * @param \Shopsys\FrameworkBundle\Model\Product\Availability\Availability|null $availability
+     * @param \Shopsys\FrameworkBundle\Model\Product\Availability\Availability|null $outOfStockAvailability
+     * @param \Shopsys\FrameworkBundle\Model\Product\Availability\Availability|null $defaultInStockAvailability
+     * @param \Shopsys\FrameworkBundle\Model\Product\Availability\Availability|null $expectedCalculatedAvailability
      */
     public function testCalculateAvailability(
         $usingStock,

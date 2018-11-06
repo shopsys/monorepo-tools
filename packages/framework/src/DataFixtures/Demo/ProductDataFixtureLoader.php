@@ -93,6 +93,12 @@ class ProductDataFixtureLoader
      */
     private $pricingGroupFacade;
 
+    /**
+     * @param \Shopsys\FrameworkBundle\DataFixtures\Demo\ProductParametersFixtureLoader $productParametersFixtureLoader
+     * @param \Shopsys\FrameworkBundle\Model\Product\ProductDataFactoryInterface $productDataFactory
+     * @param \Shopsys\FrameworkBundle\Component\Domain\Domain $domain
+     * @param \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroupFacade $pricingGroupFacade
+     */
     public function __construct(
         ProductParametersFixtureLoader $productParametersFixtureLoader,
         ProductDataFactoryInterface $productDataFactory,

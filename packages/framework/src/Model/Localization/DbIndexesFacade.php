@@ -14,6 +14,10 @@ class DbIndexesFacade
      */
     private $dbIndexesRepository;
 
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Localization\Localization $localization
+     * @param \Shopsys\FrameworkBundle\Model\Localization\DbIndexesRepository $dbIndexesRepository
+     */
     public function __construct(Localization $localization, DbIndexesRepository $dbIndexesRepository)
     {
         $this->localization = $localization;

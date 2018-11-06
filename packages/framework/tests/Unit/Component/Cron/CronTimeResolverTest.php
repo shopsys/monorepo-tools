@@ -24,6 +24,9 @@ class CronTimeResolverTest extends TestCase
 
     /**
      * @dataProvider validTimeStringProvider
+     * @param mixed $timeString
+     * @param mixed $maxValue
+     * @param mixed $divisibleBy
      */
     public function testValidateTimeString($timeString, $maxValue, $divisibleBy)
     {
@@ -46,6 +49,9 @@ class CronTimeResolverTest extends TestCase
 
     /**
      * @dataProvider invalidTimeStringProvider
+     * @param mixed $invalidTimeString
+     * @param mixed $maxValue
+     * @param mixed $divisibleBy
      */
     public function testValidateTimeStringInvalidTimeFormatException($invalidTimeString, $maxValue, $divisibleBy)
     {
@@ -77,6 +83,10 @@ class CronTimeResolverTest extends TestCase
 
     /**
      * @dataProvider isValidAtTimeProvider
+     * @param mixed $timeHours
+     * @param mixed $timeMinutes
+     * @param mixed $dateTimeString
+     * @param mixed $isValid
      */
     public function testIsValidAtTime($timeHours, $timeMinutes, $dateTimeString, $isValid)
     {

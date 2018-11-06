@@ -12,6 +12,9 @@ class DateTimeFormatter
      */
     private $customDateTimeFormatPatternRepository;
 
+    /**
+     * @param \Shopsys\FrameworkBundle\Component\Localization\DateTimeFormatPatternRepository $customDateTimeFormatPatternRepository
+     */
     public function __construct(DateTimeFormatPatternRepository $customDateTimeFormatPatternRepository)
     {
         $this->customDateTimeFormatPatternRepository = $customDateTimeFormatPatternRepository;

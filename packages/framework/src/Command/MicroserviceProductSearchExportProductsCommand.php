@@ -16,10 +16,13 @@ class MicroserviceProductSearchExportProductsCommand extends Command
     protected static $defaultName = 'shopsys:microservice:product-search:export-products';
 
     /**
-     * @var ProductSearchExportFacade
+     * @var \Shopsys\FrameworkBundle\Model\Product\ProductSearchExport\ProductSearchExportFacade
      */
     protected $exportFacade;
 
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Product\ProductSearchExport\ProductSearchExportFacade $exportFacade
+     */
     public function __construct(ProductSearchExportFacade $exportFacade)
     {
         parent::__construct();

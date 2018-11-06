@@ -13,6 +13,9 @@ class AdvancedSearchService
      */
     private $advancedSearchConfig;
 
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\AdvancedSearch\ProductAdvancedSearchConfig $advancedSearchConfig
+     */
     public function __construct(ProductAdvancedSearchConfig $advancedSearchConfig)
     {
         $this->advancedSearchConfig = $advancedSearchConfig;

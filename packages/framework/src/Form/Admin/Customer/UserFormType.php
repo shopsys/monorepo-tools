@@ -36,6 +36,10 @@ class UserFormType extends AbstractType
      */
     private $dateTimeFormatterExtension;
 
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroupFacade $pricingGroupFacade
+     * @param \Shopsys\FrameworkBundle\Twig\DateTimeFormatterExtension $dateTimeFormatterExtension
+     */
     public function __construct(
         PricingGroupFacade $pricingGroupFacade,
         DateTimeFormatterExtension $dateTimeFormatterExtension

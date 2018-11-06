@@ -12,6 +12,9 @@ class ImageController extends AdminBaseController
      */
     protected $imageFacade;
 
+    /**
+     * @param \Shopsys\FrameworkBundle\Component\Image\ImageFacade $imageFacade
+     */
     public function __construct(ImageFacade $imageFacade)
     {
         $this->imageFacade = $imageFacade;

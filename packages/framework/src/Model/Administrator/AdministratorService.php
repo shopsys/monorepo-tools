@@ -17,6 +17,10 @@ class AdministratorService
      */
     private $tokenStorage;
 
+    /**
+     * @param \Symfony\Component\Security\Core\Encoder\EncoderFactoryInterface $encoderFactory
+     * @param \Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface $tokenStorage
+     */
     public function __construct(
         EncoderFactoryInterface $encoderFactory,
         TokenStorageInterface $tokenStorage

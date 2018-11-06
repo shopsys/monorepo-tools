@@ -16,6 +16,10 @@ class HeurekaDeliveryFeedItem implements FeedItemInterface
      */
     protected $stockQuantity;
 
+    /**
+     * @param int $id
+     * @param int $stockQuantity
+     */
     public function __construct(int $id, int $stockQuantity)
     {
         $this->id = $id;

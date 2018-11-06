@@ -42,6 +42,13 @@ class CategoryController extends AdminBaseController
      */
     protected $session;
 
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Category\CategoryFacade $categoryFacade
+     * @param \Shopsys\FrameworkBundle\Model\Category\CategoryDataFactoryInterface $categoryDataFactory
+     * @param \Symfony\Component\HttpFoundation\Session\SessionInterface $session
+     * @param \Shopsys\FrameworkBundle\Component\Domain\Domain $domain
+     * @param \Shopsys\FrameworkBundle\Model\AdminNavigation\BreadcrumbOverrider $breadcrumbOverrider
+     */
     public function __construct(
         CategoryFacade $categoryFacade,
         CategoryDataFactoryInterface $categoryDataFactory,
@@ -59,6 +66,7 @@ class CategoryController extends AdminBaseController
     /**
      * @Route("/category/edit/{id}", requirements={"id" = "\d+"})
      * @param \Symfony\Component\HttpFoundation\Request $request
+     * @param mixed $id
      */
     public function editAction(Request $request, $id)
     {

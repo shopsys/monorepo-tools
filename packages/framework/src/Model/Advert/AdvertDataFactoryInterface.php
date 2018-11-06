@@ -10,7 +10,7 @@ interface AdvertDataFactoryInterface
     public function create(): AdvertData;
 
     /**
-     * @param \Shopsys\FrameworkBundle\Model\Advert\Advert
+     * @param \Shopsys\FrameworkBundle\Model\Advert\Advert $advert
      * @return \Shopsys\FrameworkBundle\Model\Advert\AdvertData
      */
     public function createFromAdvert(Advert $advert): AdvertData;

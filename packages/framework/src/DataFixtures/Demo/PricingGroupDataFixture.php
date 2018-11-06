@@ -25,6 +25,10 @@ class PricingGroupDataFixture extends AbstractReferenceFixture
      */
     private $pricingGroupDataFactory;
 
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroupFacade $pricingGroupFacade
+     * @param \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroupDataFactoryInterface $pricingGroupDataFactory
+     */
     public function __construct(
         PricingGroupFacade $pricingGroupFacade,
         PricingGroupDataFactoryInterface $pricingGroupDataFactory
@@ -33,6 +37,9 @@ class PricingGroupDataFixture extends AbstractReferenceFixture
         $this->pricingGroupDataFactory = $pricingGroupDataFactory;
     }
 
+    /**
+     * @param \Doctrine\Common\Persistence\ObjectManager $manager
+     */
     public function load(ObjectManager $manager)
     {
         /**

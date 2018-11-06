@@ -11,6 +11,9 @@ class BrandController extends FrontBaseController
      */
     private $brandFacade;
 
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Product\Brand\BrandFacade $brandFacade
+     */
     public function __construct(
         BrandFacade $brandFacade
     ) {

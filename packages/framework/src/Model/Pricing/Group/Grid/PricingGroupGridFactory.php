@@ -26,6 +26,11 @@ class PricingGroupGridFactory implements GridFactoryInterface
      */
     protected $adminDomainTabsFacade;
 
+    /**
+     * @param \Doctrine\ORM\EntityManagerInterface $em
+     * @param \Shopsys\FrameworkBundle\Component\Grid\GridFactory $gridFactory
+     * @param \Shopsys\FrameworkBundle\Component\Domain\AdminDomainTabsFacade $adminDomainTabsFacade
+     */
     public function __construct(
         EntityManagerInterface $em,
         GridFactory $gridFactory,

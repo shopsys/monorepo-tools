@@ -24,6 +24,10 @@ class OrderRepository
      */
     protected $orderListAdminRepository;
 
+    /**
+     * @param \Doctrine\ORM\EntityManagerInterface $em
+     * @param \Shopsys\FrameworkBundle\Model\Order\Listing\OrderListAdminRepository $orderListAdminRepository
+     */
     public function __construct(
         EntityManagerInterface $em,
         OrderListAdminRepository $orderListAdminRepository
@@ -153,6 +157,7 @@ class OrderRepository
     }
 
     /**
+     * @param \Shopsys\FrameworkBundle\Model\Customer\User $user
      * @param \Shopsys\FrameworkBundle\Model\Customer\User
      * @return \Shopsys\FrameworkBundle\Model\Order\Order[]
      */

@@ -22,6 +22,10 @@ class WysiwygTypeExtension extends AbstractTypeExtension
      */
     private $localization;
 
+    /**
+     * @param \Shopsys\FrameworkBundle\Component\Css\CssFacade $cssFacade
+     * @param \Shopsys\FrameworkBundle\Model\Localization\Localization $localization
+     */
     public function __construct(CssFacade $cssFacade, Localization $localization)
     {
         $this->cssFacade = $cssFacade;

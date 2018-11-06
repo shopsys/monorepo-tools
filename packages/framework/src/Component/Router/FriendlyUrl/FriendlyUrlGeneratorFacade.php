@@ -30,6 +30,12 @@ class FriendlyUrlGeneratorFacade
      */
     protected $friendlyUrlDataProviderConfig;
 
+    /**
+     * @param \Shopsys\FrameworkBundle\Component\Domain\Domain $domain
+     * @param \Shopsys\FrameworkBundle\Component\Router\DomainRouterFactory $domainRouterFactory
+     * @param \Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\FriendlyUrlFacade $friendlyUrlFacade
+     * @param \Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\CompilerPass\FriendlyUrlDataProviderRegistry $friendlyUrlDataProviderConfig
+     */
     public function __construct(
         Domain $domain,
         DomainRouterFactory $domainRouterFactory,

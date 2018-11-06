@@ -23,6 +23,11 @@ class ProductMassActionFacade
      */
     protected $productHiddenRecalculator;
 
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Product\MassAction\ProductMassActionRepository $productMassActionRepository
+     * @param \Shopsys\FrameworkBundle\Model\Product\ProductVisibilityFacade $productVisibilityFacade
+     * @param \Shopsys\FrameworkBundle\Model\Product\ProductHiddenRecalculator $productHiddenRecalculator
+     */
     public function __construct(
         ProductMassActionRepository $productMassActionRepository,
         ProductVisibilityFacade $productVisibilityFacade,

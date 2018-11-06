@@ -41,6 +41,13 @@ class ProductPickerController extends AdminBaseController
      */
     protected $productFacade;
 
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Administrator\AdministratorGridFacade $administratorGridFacade
+     * @param \Shopsys\FrameworkBundle\Component\Grid\GridFactory $gridFactory
+     * @param \Shopsys\FrameworkBundle\Model\Product\Listing\ProductListAdminFacade $productListAdminFacade
+     * @param \Shopsys\FrameworkBundle\Model\AdvancedSearch\AdvancedSearchFacade $advancedSearchFacade
+     * @param \Shopsys\FrameworkBundle\Model\Product\ProductFacade $productFacade
+     */
     public function __construct(
         AdministratorGridFacade $administratorGridFacade,
         GridFactory $gridFactory,

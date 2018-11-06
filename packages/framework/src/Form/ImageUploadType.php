@@ -26,6 +26,10 @@ class ImageUploadType extends AbstractType
      */
     private $imagesIdsToImagesTransformer;
 
+    /**
+     * @param \Shopsys\FrameworkBundle\Component\Image\ImageFacade $imageFacade
+     * @param \Shopsys\FrameworkBundle\Form\Transformers\ImagesIdsToImagesTransformer $imagesIdsToImagesTransformer
+     */
     public function __construct(ImageFacade $imageFacade, ImagesIdsToImagesTransformer $imagesIdsToImagesTransformer)
     {
         $this->imageFacade = $imageFacade;
@@ -43,6 +47,11 @@ class ImageUploadType extends AbstractType
         ]);
     }
 
+    /**
+     * @param \Symfony\Component\Form\FormView $view
+     * @param \Symfony\Component\Form\FormInterface $form
+     * @param array $options
+     */
     public function buildView(FormView $view, FormInterface $form, array $options)
     {
         $view->vars['entity'] = $options['entity'];
@@ -50,6 +59,10 @@ class ImageUploadType extends AbstractType
         $view->vars['images_by_id'] = $this->getImagesIndexedById($options);
     }
 
+    /**
+     * @param \Symfony\Component\Form\FormBuilderInterface $builder
+     * @param array $options
+     */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder->resetModelTransformers();

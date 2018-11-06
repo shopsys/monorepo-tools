@@ -17,6 +17,10 @@ class MigrationsFinder implements MigrationFinderInterface
      */
     private $migrationsLocator;
 
+    /**
+     * @param \Doctrine\DBAL\Migrations\Finder\RecursiveRegexFinder $finder
+     * @param \Shopsys\MigrationBundle\Component\Doctrine\Migrations\MigrationsLocator $locator
+     */
     public function __construct(RecursiveRegexFinder $finder, MigrationsLocator $locator)
     {
         $this->finder = $finder;

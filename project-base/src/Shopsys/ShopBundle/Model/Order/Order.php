@@ -13,6 +13,12 @@ use Shopsys\FrameworkBundle\Model\Order\OrderData as BaseOrderData;
  */
 class Order extends BaseOrder
 {
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Order\OrderData $orderData
+     * @param string $orderNumber
+     * @param string $urlHash
+     * @param \Shopsys\FrameworkBundle\Model\Customer\User|null $user
+     */
     public function __construct(
         BaseOrderData $orderData,
         string $orderNumber,

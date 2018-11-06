@@ -29,6 +29,12 @@ class GoogleFeedItemFacade
      */
     protected $productUrlsBatchLoader;
 
+    /**
+     * @param \Shopsys\ProductFeed\GoogleBundle\Model\Product\GoogleProductRepository $googleProductRepository
+     * @param \Shopsys\ProductFeed\GoogleBundle\Model\FeedItem\GoogleFeedItemFactory $feedItemFactory
+     * @param \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroupSettingFacade $pricingGroupSettingFacade
+     * @param \Shopsys\FrameworkBundle\Model\Product\Collection\ProductUrlsBatchLoader $productUrlsBatchLoader
+     */
     public function __construct(
         GoogleProductRepository $googleProductRepository,
         GoogleFeedItemFactory $feedItemFactory,

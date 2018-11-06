@@ -20,6 +20,10 @@ class PersonalDataController extends AdminBaseController
      */
     protected $setting;
 
+    /**
+     * @param \Shopsys\FrameworkBundle\Component\Domain\AdminDomainTabsFacade $adminDomainTabsFacade
+     * @param \Shopsys\FrameworkBundle\Component\Setting\Setting $setting
+     */
     public function __construct(
         AdminDomainTabsFacade $adminDomainTabsFacade,
         Setting $setting
@@ -30,6 +34,7 @@ class PersonalDataController extends AdminBaseController
 
     /**
      * @Route("/personal-data/setting/")
+     * @param \Symfony\Component\HttpFoundation\Request $request
      */
     public function settingAction(Request $request)
     {

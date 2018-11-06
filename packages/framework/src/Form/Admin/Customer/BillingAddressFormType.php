@@ -25,6 +25,9 @@ class BillingAddressFormType extends AbstractType
      */
     private $countryFacade;
 
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Country\CountryFacade $countryFacade
+     */
     public function __construct(CountryFacade $countryFacade)
     {
         $this->countryFacade = $countryFacade;

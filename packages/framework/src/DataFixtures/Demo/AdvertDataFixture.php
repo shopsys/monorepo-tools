@@ -20,6 +20,10 @@ class AdvertDataFixture extends AbstractReferenceFixture
      */
     private $advertDataFactory;
 
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Advert\AdvertFacade $advertFacade
+     * @param \Shopsys\FrameworkBundle\Model\Advert\AdvertDataFactoryInterface $advertDataFactory
+     */
     public function __construct(AdvertFacade $advertFacade, AdvertDataFactoryInterface $advertDataFactory)
     {
         $this->advertFacade = $advertFacade;

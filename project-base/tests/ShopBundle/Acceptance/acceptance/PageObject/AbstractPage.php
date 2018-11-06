@@ -17,6 +17,10 @@ abstract class AbstractPage
      */
     protected $tester;
 
+    /**
+     * @param \Tests\ShopBundle\Test\Codeception\Module\StrictWebDriver $strictWebDriver
+     * @param \Tests\ShopBundle\Test\Codeception\AcceptanceTester $tester
+     */
     public function __construct(StrictWebDriver $strictWebDriver, AcceptanceTester $tester)
     {
         $this->webDriver = $strictWebDriver->webDriver;

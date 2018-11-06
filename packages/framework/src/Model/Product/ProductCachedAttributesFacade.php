@@ -33,6 +33,11 @@ class ProductCachedAttributesFacade
      */
     protected $parameterValuesByProductId;
 
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Product\Pricing\ProductPriceCalculationForUser $productPriceCalculationForUser
+     * @param \Shopsys\FrameworkBundle\Model\Product\Parameter\ParameterRepository $parameterRepository
+     * @param \Shopsys\FrameworkBundle\Model\Localization\Localization $localization
+     */
     public function __construct(
         ProductPriceCalculationForUser $productPriceCalculationForUser,
         ParameterRepository $parameterRepository,

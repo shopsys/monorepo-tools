@@ -65,6 +65,9 @@ class PhpFileExtractorTest extends TestCase
         return $phpFileExtractorFactory->create();
     }
 
+    /**
+     * @param mixed $filename
+     */
     private function extract($filename)
     {
         if (!is_file($filename)) {

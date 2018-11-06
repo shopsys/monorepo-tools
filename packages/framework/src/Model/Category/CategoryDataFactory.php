@@ -28,6 +28,12 @@ class CategoryDataFactory implements CategoryDataFactoryInterface
      */
     protected $domain;
 
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Category\CategoryRepository $categoryRepository
+     * @param \Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\FriendlyUrlFacade $friendlyUrlFacade
+     * @param \Shopsys\FrameworkBundle\Component\Plugin\PluginCrudExtensionFacade $pluginCrudExtensionFacade
+     * @param \Shopsys\FrameworkBundle\Component\Domain\Domain $domain
+     */
     public function __construct(
         CategoryRepository $categoryRepository,
         FriendlyUrlFacade $friendlyUrlFacade,

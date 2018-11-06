@@ -16,6 +16,10 @@ class ImageGeneratorFacade
      */
     protected $imageGeneratorService;
 
+    /**
+     * @param \Shopsys\FrameworkBundle\Component\Image\ImageRepository $imageRepository
+     * @param \Shopsys\FrameworkBundle\Component\Image\Processing\ImageGeneratorService $imageGeneratorService
+     */
     public function __construct(
         ImageRepository $imageRepository,
         ImageGeneratorService $imageGeneratorService

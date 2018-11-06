@@ -20,6 +20,9 @@ class RoutingExtension implements ExtensionInterface
      */
     protected $generator;
 
+    /**
+     * @param \Symfony\Component\Routing\Generator\UrlGeneratorInterface $generator
+     */
     public function __construct(UrlGeneratorInterface $generator)
     {
         $this->generator = $generator;

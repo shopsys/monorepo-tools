@@ -27,6 +27,10 @@ class InputPriceRecalculationScheduler
      */
     private $recalculateInputPricesWithVat;
 
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Pricing\InputPriceRecalculator $inputPriceRecalculator
+     * @param \Shopsys\FrameworkBundle\Component\Setting\Setting $setting
+     */
     public function __construct(InputPriceRecalculator $inputPriceRecalculator, Setting $setting)
     {
         $this->inputPriceRecalculator = $inputPriceRecalculator;

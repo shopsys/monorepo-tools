@@ -17,6 +17,9 @@ final class ForbiddenDumpSniffTest extends AbstractCheckerTestCase
         $this->doTestWrongFile(__DIR__ . '/wrong/var_export.php.inc');
     }
 
+    /**
+     * @return string
+     */
     protected function provideConfig(): string
     {
         return __DIR__ . '/config.yml';

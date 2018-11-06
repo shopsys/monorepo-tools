@@ -18,6 +18,21 @@ use Shopsys\FrameworkBundle\Model\AdvancedSearchOrder\Filter\OrderStreetFilter;
 
 class OrderAdvancedSearchConfig extends AdvancedSearchConfig
 {
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\AdvancedSearchOrder\Filter\OrderNumberFilter $orderNumberFilter
+     * @param \Shopsys\FrameworkBundle\Model\AdvancedSearchOrder\Filter\OrderCreateDateFilter $orderCreateDateFilter
+     * @param \Shopsys\FrameworkBundle\Model\AdvancedSearchOrder\Filter\OrderPriceFilterWithVatFilter $orderPriceFilterWithVatFilter
+     * @param \Shopsys\FrameworkBundle\Model\AdvancedSearchOrder\Filter\OrderDomainFilter $orderDomainFilter
+     * @param \Shopsys\FrameworkBundle\Model\AdvancedSearchOrder\Filter\OrderStatusFilter $orderStatusFilter
+     * @param \Shopsys\FrameworkBundle\Model\AdvancedSearchOrder\Filter\OrderProductFilter $orderProductFilter
+     * @param \Shopsys\FrameworkBundle\Model\AdvancedSearchOrder\Filter\OrderPhoneNumberFilter $orderPhoneNumberFilter
+     * @param \Shopsys\FrameworkBundle\Model\AdvancedSearchOrder\Filter\OrderStreetFilter $orderStreetFilter
+     * @param \Shopsys\FrameworkBundle\Model\AdvancedSearchOrder\Filter\OrderNameFilter $orderNameFilter
+     * @param \Shopsys\FrameworkBundle\Model\AdvancedSearchOrder\Filter\OrderLastNameFilter $orderLastNameFilter
+     * @param \Shopsys\FrameworkBundle\Model\AdvancedSearchOrder\Filter\OrderEmailFilter $orderEmailFilter
+     * @param \Shopsys\FrameworkBundle\Model\AdvancedSearchOrder\Filter\OrderCityFilter $orderCityFilter
+     * @param \Shopsys\FrameworkBundle\Component\Domain\Domain $domain
+     */
     public function __construct(
         OrderNumberFilter $orderNumberFilter,
         OrderCreateDateFilter $orderCreateDateFilter,

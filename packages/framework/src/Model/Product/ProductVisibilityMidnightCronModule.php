@@ -12,6 +12,9 @@ class ProductVisibilityMidnightCronModule implements SimpleCronModuleInterface
      */
     private $productVisibilityFacade;
 
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Product\ProductVisibilityFacade $productVisibilityFacade
+     */
     public function __construct(ProductVisibilityFacade $productVisibilityFacade)
     {
         $this->productVisibilityFacade = $productVisibilityFacade;

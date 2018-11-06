@@ -28,6 +28,12 @@ class DatabaseSchemaFacade
      */
     protected $schemaTool;
 
+    /**
+     * @param \Doctrine\ORM\EntityManagerInterface $em
+     * @param \Shopsys\MigrationBundle\Component\Doctrine\SchemaDiffFilter $schemaDiffFilter
+     * @param \Doctrine\DBAL\Schema\Comparator $comparator
+     * @param \Doctrine\ORM\Tools\SchemaTool $schemaTool
+     */
     public function __construct(
         EntityManagerInterface $em,
         SchemaDiffFilter $schemaDiffFilter,

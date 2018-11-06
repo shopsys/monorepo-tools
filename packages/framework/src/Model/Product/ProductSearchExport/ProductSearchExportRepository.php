@@ -15,6 +15,9 @@ class ProductSearchExportRepository
      */
     protected $em;
 
+    /**
+     * @param \Doctrine\ORM\EntityManagerInterface $em
+     */
     public function __construct(EntityManagerInterface $em)
     {
         $this->em = $em;
@@ -40,7 +43,7 @@ class ProductSearchExportRepository
     /**
      * @param int $domainId
      * @param string $locale
-     * @return QueryBuilder
+     * @return \Doctrine\ORM\QueryBuilder
      */
     protected function createQueryBuilder(int $domainId, string $locale): QueryBuilder
     {

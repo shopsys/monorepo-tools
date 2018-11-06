@@ -28,6 +28,11 @@ class AvailabilityController extends AdminBaseController
      */
     protected $availabilityInlineEdit;
 
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Product\Availability\AvailabilityFacade $availabilityFacade
+     * @param \Shopsys\FrameworkBundle\Model\Product\Availability\AvailabilityInlineEdit $availabilityInlineEdit
+     * @param \Shopsys\FrameworkBundle\Component\ConfirmDelete\ConfirmDeleteResponseFactory $confirmDeleteResponseFactory
+     */
     public function __construct(
         AvailabilityFacade $availabilityFacade,
         AvailabilityInlineEdit $availabilityInlineEdit,

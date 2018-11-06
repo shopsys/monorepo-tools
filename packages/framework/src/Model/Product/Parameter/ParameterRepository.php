@@ -24,6 +24,11 @@ class ParameterRepository
      */
     private $parameterValueDataFactory;
 
+    /**
+     * @param \Doctrine\ORM\EntityManagerInterface $entityManager
+     * @param \Shopsys\FrameworkBundle\Model\Product\Parameter\ParameterValueFactoryInterface $parameterValueFactory
+     * @param \Shopsys\FrameworkBundle\Model\Product\Parameter\ParameterValueDataFactoryInterface $parameterValueDataFactory
+     */
     public function __construct(
         EntityManagerInterface $entityManager,
         ParameterValueFactoryInterface $parameterValueFactory,

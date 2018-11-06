@@ -27,6 +27,11 @@ class OrderStatusController extends AdminBaseController
      */
     protected $orderStatusFacade;
 
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Order\Status\OrderStatusFacade $orderStatusFacade
+     * @param \Shopsys\FrameworkBundle\Model\Order\Status\Grid\OrderStatusInlineEdit $orderStatusInlineEdit
+     * @param \Shopsys\FrameworkBundle\Component\ConfirmDelete\ConfirmDeleteResponseFactory $confirmDeleteResponseFactory
+     */
     public function __construct(
         OrderStatusFacade $orderStatusFacade,
         OrderStatusInlineEdit $orderStatusInlineEdit,

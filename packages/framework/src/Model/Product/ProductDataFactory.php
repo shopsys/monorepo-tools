@@ -70,6 +70,19 @@ class ProductDataFactory implements ProductDataFactoryInterface
      */
     protected $productParameterValueDataFactory;
 
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Pricing\Vat\VatFacade $vatFacade
+     * @param \Shopsys\FrameworkBundle\Model\Product\Pricing\ProductInputPriceFacade $productInputPriceFacade
+     * @param \Shopsys\FrameworkBundle\Model\Product\Unit\UnitFacade $unitFacade
+     * @param \Shopsys\FrameworkBundle\Component\Domain\Domain $domain
+     * @param \Shopsys\FrameworkBundle\Model\Product\ProductRepository $productRepository
+     * @param \Shopsys\FrameworkBundle\Model\Product\Parameter\ParameterRepository $parameterRepository
+     * @param \Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\FriendlyUrlFacade $friendlyUrlFacade
+     * @param \Shopsys\FrameworkBundle\Model\Product\Accessory\ProductAccessoryRepository $productAccessoryRepository
+     * @param \Shopsys\FrameworkBundle\Component\Image\ImageFacade $imageFacade
+     * @param \Shopsys\FrameworkBundle\Component\Plugin\PluginCrudExtensionFacade $pluginDataFormExtensionFacade
+     * @param \Shopsys\FrameworkBundle\Model\Product\Parameter\ProductParameterValueDataFactoryInterface $productParameterValueDataFactory
+     */
     public function __construct(
         VatFacade $vatFacade,
         ProductInputPriceFacade $productInputPriceFacade,
@@ -108,6 +121,7 @@ class ProductDataFactory implements ProductDataFactoryInterface
     }
 
     /**
+     * @param mixed $productData
      * @param \Shopsys\FrameworkBundle\Model\Product\ProductData
      */
     protected function fillNew($productData)
@@ -214,7 +228,7 @@ class ProductDataFactory implements ProductDataFactoryInterface
     }
 
     /**
-     * @param Product $product
+     * @param \Shopsys\FrameworkBundle\Model\Product\Product $product
      * @return \Shopsys\FrameworkBundle\Model\Product\Parameter\ProductParameterValueData[]
      */
     protected function getParametersData(Product $product)

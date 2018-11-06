@@ -27,6 +27,11 @@ class FeedController extends AdminBaseController
      */
     protected $gridFactory;
 
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Feed\FeedFacade $feedFacade
+     * @param \Shopsys\FrameworkBundle\Component\Grid\GridFactory $gridFactory
+     * @param \Shopsys\FrameworkBundle\Component\Domain\Domain $domain
+     */
     public function __construct(
         FeedFacade $feedFacade,
         GridFactory $gridFactory,

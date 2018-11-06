@@ -35,6 +35,12 @@ class PaymentGridFactory implements GridFactoryInterface
      */
     protected $paymentFacade;
 
+    /**
+     * @param \Shopsys\FrameworkBundle\Component\Grid\GridFactory $gridFactory
+     * @param \Shopsys\FrameworkBundle\Model\Payment\PaymentRepository $paymentRepository
+     * @param \Shopsys\FrameworkBundle\Model\Localization\Localization $localization
+     * @param \Shopsys\FrameworkBundle\Model\Payment\PaymentFacade $paymentFacade
+     */
     public function __construct(
         GridFactory $gridFactory,
         PaymentRepository $paymentRepository,

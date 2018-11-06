@@ -4,6 +4,7 @@ imports:
 parameters:
     exclude_files:
         - '*/tests/ShopBundle/Test/Codeception/_generated/AcceptanceTesterActions.php'
+        - '*/var/cache/*'
 
     skip:
         ObjectCalisthenics\Sniffs\Files\FunctionLengthSniff:

@@ -17,6 +17,10 @@ class OrderStatusMailTemplateService
      */
     private $mailTemplateDataFactory;
 
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Order\Mail\OrderMailService $orderMailService
+     * @param \Shopsys\FrameworkBundle\Model\Mail\MailTemplateDataFactoryInterface $mailTemplateDataFactory
+     */
     public function __construct(
         OrderMailService $orderMailService,
         MailTemplateDataFactoryInterface $mailTemplateDataFactory

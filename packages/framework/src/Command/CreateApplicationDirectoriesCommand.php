@@ -90,6 +90,9 @@ class CreateApplicationDirectoriesCommand extends Command
         $this->createUploadedFileDirectories($output);
     }
 
+    /**
+     * @param \Symfony\Component\Console\Output\OutputInterface $output
+     */
     private function createMiscellaneousDirectories(OutputInterface $output)
     {
         $directories = [

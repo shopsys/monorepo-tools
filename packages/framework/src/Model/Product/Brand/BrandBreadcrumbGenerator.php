@@ -12,6 +12,9 @@ class BrandBreadcrumbGenerator implements BreadcrumbGeneratorInterface
      */
     private $brandRepository;
 
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Product\Brand\BrandRepository $brandRepository
+     */
     public function __construct(BrandRepository $brandRepository)
     {
         $this->brandRepository = $brandRepository;

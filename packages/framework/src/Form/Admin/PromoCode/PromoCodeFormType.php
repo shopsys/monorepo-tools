@@ -24,6 +24,9 @@ class PromoCodeFormType extends AbstractType
      */
     private $promoCode;
 
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Order\PromoCode\PromoCodeFacade $promoCodeFacade
+     */
     public function __construct(PromoCodeFacade $promoCodeFacade)
     {
         $this->promoCodeFacade = $promoCodeFacade;

@@ -14,6 +14,9 @@ class DateTimeFormatPatternRepository
         $this->dateTimeFormatPatterns = [];
     }
 
+    /**
+     * @param \Shopsys\FrameworkBundle\Component\Localization\DateTimeFormatPattern $dateTimePattern
+     */
     public function add(DateTimeFormatPattern $dateTimePattern)
     {
         $this->dateTimeFormatPatterns[] = $dateTimePattern;

@@ -22,6 +22,9 @@ class ProductUrlsBatchLoader
      */
     protected $loadedProductImageUrls = [];
 
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Product\Collection\ProductCollectionFacade $productCollectionFacade
+     */
     public function __construct(ProductCollectionFacade $productCollectionFacade)
     {
         $this->productCollectionFacade = $productCollectionFacade;

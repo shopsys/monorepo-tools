@@ -19,6 +19,10 @@ class ParameterController extends AdminBaseController
      */
     protected $parameterInlineEdit;
 
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Product\Parameter\ParameterFacade $parameterFacade
+     * @param \Shopsys\FrameworkBundle\Model\Product\Parameter\ParameterInlineEdit $parameterInlineEdit
+     */
     public function __construct(
         ParameterFacade $parameterFacade,
         ParameterInlineEdit $parameterInlineEdit

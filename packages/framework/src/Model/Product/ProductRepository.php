@@ -44,6 +44,13 @@ class ProductRepository
      */
     protected $productSearchRepository;
 
+    /**
+     * @param \Doctrine\ORM\EntityManagerInterface $em
+     * @param \Shopsys\FrameworkBundle\Model\Product\Filter\ProductFilterRepository $productFilterRepository
+     * @param \Shopsys\FrameworkBundle\Component\Doctrine\QueryBuilderService $queryBuilderService
+     * @param \Shopsys\FrameworkBundle\Model\Localization\Localization $localization
+     * @param \Shopsys\FrameworkBundle\Model\Product\Search\ProductSearchRepository $productSearchRepository
+     */
     public function __construct(
         EntityManagerInterface $em,
         ProductFilterRepository $productFilterRepository,

@@ -8,6 +8,9 @@ use Shopsys\FrameworkBundle\Model\Order\OrderDataMapper as BaseOrderDataMapper;
 
 class OrderDataMapper extends BaseOrderDataMapper
 {
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Order\OrderDataFactoryInterface $orderDataFactory
+     */
     public function __construct(OrderDataFactoryInterface $orderDataFactory)
     {
         parent::__construct($orderDataFactory);

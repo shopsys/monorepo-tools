@@ -17,6 +17,10 @@ class ConfirmDeleteResponseFactory
      */
     protected $routeCsrfProtector;
 
+    /**
+     * @param \Symfony\Component\Templating\EngineInterface $templating
+     * @param \Shopsys\FrameworkBundle\Component\Router\Security\RouteCsrfProtector $routeCsrfProtector
+     */
     public function __construct(
         EngineInterface $templating,
         RouteCsrfProtector $routeCsrfProtector

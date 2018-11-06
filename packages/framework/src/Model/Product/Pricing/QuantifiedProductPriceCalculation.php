@@ -42,6 +42,11 @@ class QuantifiedProductPriceCalculation
      */
     private $priceCalculation;
 
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Product\Pricing\ProductPriceCalculationForUser $productPriceCalculationForUser
+     * @param \Shopsys\FrameworkBundle\Model\Pricing\Rounding $rounding
+     * @param \Shopsys\FrameworkBundle\Model\Pricing\PriceCalculation $priceCalculation
+     */
     public function __construct(
         ProductPriceCalculationForUser $productPriceCalculationForUser,
         Rounding $rounding,

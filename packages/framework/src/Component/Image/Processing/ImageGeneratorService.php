@@ -29,6 +29,12 @@ class ImageGeneratorService
      */
     private $filesystem;
 
+    /**
+     * @param \Shopsys\FrameworkBundle\Component\Image\Processing\ImageProcessingService $imageProcessingService
+     * @param \Shopsys\FrameworkBundle\Component\Image\ImageLocator $imageLocator
+     * @param \Shopsys\FrameworkBundle\Component\Image\Config\ImageConfig $imageConfig
+     * @param \League\Flysystem\FilesystemInterface $filesystem
+     */
     public function __construct(
         ImageProcessingService $imageProcessingService,
         ImageLocator $imageLocator,

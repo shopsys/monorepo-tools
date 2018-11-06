@@ -16,6 +16,9 @@ class MigrationsLock
      */
     private $parsedMigrationsLock;
 
+    /**
+     * @param string $migrationsLockFilePath
+     */
     public function __construct(string $migrationsLockFilePath)
     {
         $this->migrationsLockFilePath = $migrationsLockFilePath;

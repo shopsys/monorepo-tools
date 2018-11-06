@@ -22,6 +22,10 @@ class MailTemplateDataFixture extends AbstractReferenceFixture
      */
     protected $mailTemplateDataFactory;
 
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Mail\MailTemplateFactoryInterface $mailTemplateFactory
+     * @param \Shopsys\FrameworkBundle\Model\Mail\MailTemplateDataFactoryInterface $mailTemplateDataFactory
+     */
     public function __construct(
         MailTemplateFactoryInterface $mailTemplateFactory,
         MailTemplateDataFactoryInterface $mailTemplateDataFactory
@@ -120,6 +124,11 @@ team of {domain}
         $this->createMailTemplate($manager, MailTemplate::PERSONAL_DATA_EXPORT_NAME, $mailTemplateData);
     }
 
+    /**
+     * @param \Doctrine\Common\Persistence\ObjectManager $manager
+     * @param mixed $name
+     * @param \Shopsys\FrameworkBundle\Model\Mail\MailTemplateData $mailTemplateData
+     */
     private function createMailTemplate(
         ObjectManager $manager,
         $name,

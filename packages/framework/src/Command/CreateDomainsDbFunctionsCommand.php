@@ -54,6 +54,9 @@ class CreateDomainsDbFunctionsCommand extends Command
         });
     }
 
+    /**
+     * @param \Symfony\Component\Console\Output\OutputInterface $output
+     */
     private function doExecute(OutputInterface $output)
     {
         $output->writeln('Start of creating db functions.');

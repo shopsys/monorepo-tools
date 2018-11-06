@@ -18,6 +18,9 @@ class CurrencySettingsFormType extends AbstractType
      */
     private $currencyFacade;
 
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Pricing\Currency\CurrencyFacade $currencyFacade
+     */
     public function __construct(CurrencyFacade $currencyFacade)
     {
         $this->currencyFacade = $currencyFacade;

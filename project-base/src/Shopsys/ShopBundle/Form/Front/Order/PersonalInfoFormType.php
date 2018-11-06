@@ -41,6 +41,11 @@ class PersonalInfoFormType extends AbstractType
      */
     private $domain;
 
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Country\CountryFacade $countryFacade
+     * @param \Shopsys\FrameworkBundle\Model\Heureka\HeurekaFacade $heurekaFacade
+     * @param \Shopsys\FrameworkBundle\Component\Domain\Domain $domain
+     */
     public function __construct(CountryFacade $countryFacade, HeurekaFacade $heurekaFacade, Domain $domain)
     {
         $this->countryFacade = $countryFacade;

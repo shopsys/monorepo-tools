@@ -26,6 +26,11 @@ class ParameterGridFactory implements GridFactoryInterface
      */
     protected $localization;
 
+    /**
+     * @param \Doctrine\ORM\EntityManagerInterface $em
+     * @param \Shopsys\FrameworkBundle\Component\Grid\GridFactory $gridFactory
+     * @param \Shopsys\FrameworkBundle\Model\Localization\Localization $localization
+     */
     public function __construct(
         EntityManagerInterface $em,
         GridFactory $gridFactory,
@@ -84,7 +89,7 @@ class ParameterGridFactory implements GridFactoryInterface
     }
 
     /**
-     * @return QueryBuilderDataSource
+     * @return \Shopsys\FrameworkBundle\Component\Grid\QueryBuilderDataSource
      */
     protected function getParametersDataSource()
     {

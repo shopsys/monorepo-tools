@@ -7,12 +7,20 @@ use Tests\ShopBundle\Test\Codeception\AcceptanceTester;
 
 class AdministratorLoginCest
 {
+    /**
+     * @param \Tests\ShopBundle\Test\Codeception\AcceptanceTester $me
+     * @param \Tests\ShopBundle\Acceptance\acceptance\PageObject\Admin\LoginPage $loginPage
+     */
     public function testSuccessfulLogin(AcceptanceTester $me, LoginPage $loginPage)
     {
         $me->wantTo('login on admin with valid data');
         $loginPage->loginAsAdmin();
     }
 
+    /**
+     * @param \Tests\ShopBundle\Test\Codeception\AcceptanceTester $me
+     * @param \Tests\ShopBundle\Acceptance\acceptance\PageObject\Admin\LoginPage $loginPage
+     */
     public function testLoginWithInvalidUsername(AcceptanceTester $me, LoginPage $loginPage)
     {
         $me->wantTo('login on admin with nonexistent username');
@@ -20,6 +28,10 @@ class AdministratorLoginCest
         $loginPage->assertLoginFailed();
     }
 
+    /**
+     * @param \Tests\ShopBundle\Test\Codeception\AcceptanceTester $me
+     * @param \Tests\ShopBundle\Acceptance\acceptance\PageObject\Admin\LoginPage $loginPage
+     */
     public function testLoginWithInvalidPassword(AcceptanceTester $me, LoginPage $loginPage)
     {
         $me->wantTo('login on admin with invalid password');

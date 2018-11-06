@@ -13,6 +13,9 @@ class JavascriptExtension extends Twig_Extension
      */
     private $javascriptCompilerService;
 
+    /**
+     * @param \Shopsys\FrameworkBundle\Twig\Javascript\JavascriptCompilerService $javascriptCompilerService
+     */
     public function __construct(JavascriptCompilerService $javascriptCompilerService)
     {
         $this->javascriptCompilerService = $javascriptCompilerService;

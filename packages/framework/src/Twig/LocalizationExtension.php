@@ -18,6 +18,10 @@ class LocalizationExtension extends \Twig_Extension
      */
     private $assetPackages;
 
+    /**
+     * @param \Symfony\Component\Asset\Packages $assetPackages
+     * @param \Shopsys\FrameworkBundle\Model\Localization\Localization $localization
+     */
     public function __construct(Packages $assetPackages, Localization $localization)
     {
         $this->assetPackages = $assetPackages;

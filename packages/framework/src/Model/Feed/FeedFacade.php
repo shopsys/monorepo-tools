@@ -36,6 +36,13 @@ class FeedFacade
      */
     protected $filesystem;
 
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Feed\FeedRegistry $feedRegistry
+     * @param \Shopsys\FrameworkBundle\Model\Product\ProductVisibilityFacade $productVisibilityFacade
+     * @param \Shopsys\FrameworkBundle\Model\Feed\FeedExportFactory $feedExportFactory
+     * @param \Shopsys\FrameworkBundle\Model\Feed\FeedPathProvider $feedPathProvider
+     * @param \League\Flysystem\FilesystemInterface $filesystem
+     */
     public function __construct(
         FeedRegistry $feedRegistry,
         ProductVisibilityFacade $productVisibilityFacade,

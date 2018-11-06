@@ -39,6 +39,12 @@ class SitemapListener implements EventSubscriberInterface
      */
     private $domainRouterFactory;
 
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Sitemap\SitemapFacade $sitemapFacade
+     * @param \Shopsys\FrameworkBundle\Component\Domain\Domain $domain
+     * @param \Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\FriendlyUrlService $friendlyUrlService
+     * @param \Shopsys\FrameworkBundle\Component\Router\DomainRouterFactory $domainRouterFactory
+     */
     public function __construct(
         SitemapFacade $sitemapFacade,
         Domain $domain,

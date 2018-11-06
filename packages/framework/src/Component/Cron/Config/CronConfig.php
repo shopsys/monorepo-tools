@@ -19,6 +19,9 @@ class CronConfig
      */
     private $cronModuleConfigs;
 
+    /**
+     * @param \Shopsys\FrameworkBundle\Component\Cron\CronTimeResolver $cronTimeResolver
+     */
     public function __construct(CronTimeResolver $cronTimeResolver)
     {
         $this->cronTimeResolver = $cronTimeResolver;

@@ -21,6 +21,10 @@ class MailTemplateDataFixture extends AbstractReferenceFixture
      */
     private $mailTemplateDataFactory;
 
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Mail\MailTemplateFacade $mailTemplateFacade
+     * @param \Shopsys\FrameworkBundle\Model\Mail\MailTemplateDataFactoryInterface $mailTemplateDataFactory
+     */
     public function __construct(
         MailTemplateFacade $mailTemplateFacade,
         MailTemplateDataFactoryInterface $mailTemplateDataFactory

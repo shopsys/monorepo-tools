@@ -17,7 +17,7 @@ class ParameterFacade
     protected $parameterRepository;
 
     /**
-     * @var ParameterFactoryInterface
+     * @var \Shopsys\FrameworkBundle\Model\Product\Parameter\ParameterFactoryInterface
      */
     protected $parameterFactory;
 

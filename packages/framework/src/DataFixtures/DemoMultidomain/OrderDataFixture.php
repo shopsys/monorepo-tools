@@ -47,6 +47,13 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
      */
     private $orderDataFactory;
 
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Customer\UserRepository $userRepository
+     * @param \Faker\Generator $faker
+     * @param \Shopsys\FrameworkBundle\Model\Order\OrderFacade $orderFacade
+     * @param \Shopsys\FrameworkBundle\Model\Order\Preview\OrderPreviewFactory $orderPreviewFactory
+     * @param \Shopsys\FrameworkBundle\Model\Order\OrderDataFactoryInterface $orderDataFactory
+     */
     public function __construct(
         UserRepository $userRepository,
         Generator $faker,

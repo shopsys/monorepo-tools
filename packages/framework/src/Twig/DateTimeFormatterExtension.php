@@ -21,6 +21,10 @@ class DateTimeFormatterExtension extends Twig_Extension
      */
     private $localization;
 
+    /**
+     * @param \Shopsys\FrameworkBundle\Component\Localization\DateTimeFormatter $dateTimeFormatter
+     * @param \Shopsys\FrameworkBundle\Model\Localization\Localization $localization
+     */
     public function __construct(
         DateTimeFormatter $dateTimeFormatter,
         Localization $localization

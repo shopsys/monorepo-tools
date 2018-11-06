@@ -53,6 +53,15 @@ class SuperadminController extends AdminBaseController
      */
     protected $delayedPricingSetting;
 
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Module\ModuleList $moduleList
+     * @param \Shopsys\FrameworkBundle\Model\Module\ModuleFacade $moduleFacade
+     * @param \Shopsys\FrameworkBundle\Model\Pricing\PricingSetting $pricingSetting
+     * @param \Shopsys\FrameworkBundle\Model\Pricing\DelayedPricingSetting $delayedPricingSetting
+     * @param \Shopsys\FrameworkBundle\Component\Grid\GridFactory $gridFactory
+     * @param \Shopsys\FrameworkBundle\Model\Localization\Localization $localization
+     * @param \Shopsys\FrameworkBundle\Component\Router\LocalizedRouterFactory $localizedRouterFactory
+     */
     public function __construct(
         ModuleList $moduleList,
         ModuleFacade $moduleFacade,
@@ -149,6 +158,7 @@ class SuperadminController extends AdminBaseController
 
     /**
      * @Route("/superadmin/modules/")
+     * @param \Symfony\Component\HttpFoundation\Request $request
      */
     public function modulesAction(Request $request)
     {

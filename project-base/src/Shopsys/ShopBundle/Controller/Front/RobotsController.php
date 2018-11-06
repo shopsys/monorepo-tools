@@ -18,6 +18,10 @@ class RobotsController extends FrontBaseController
      */
     private $sitemapService;
 
+    /**
+     * @param \Shopsys\FrameworkBundle\Component\Domain\Domain $domain
+     * @param \Shopsys\FrameworkBundle\Model\Sitemap\SitemapService $sitemapService
+     */
     public function __construct(
         Domain $domain,
         SitemapService $sitemapService

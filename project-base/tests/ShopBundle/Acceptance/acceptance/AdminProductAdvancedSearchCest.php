@@ -8,6 +8,11 @@ use Tests\ShopBundle\Test\Codeception\AcceptanceTester;
 
 class AdminProductAdvancedSearchCest
 {
+    /**
+     * @param \Tests\ShopBundle\Test\Codeception\AcceptanceTester $me
+     * @param \Tests\ShopBundle\Acceptance\acceptance\PageObject\Admin\LoginPage $loginPage
+     * @param \Tests\ShopBundle\Acceptance\acceptance\PageObject\Admin\ProductAdvancedSearchPage $productAdvancedSearchPage
+     */
     public function testSearchByCatnum(
         AcceptanceTester $me,
         LoginPage $loginPage,

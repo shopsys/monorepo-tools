@@ -25,6 +25,9 @@ final class OrmJoinColumnRequireNullableFixerTest extends AbstractCheckerTestCas
         $this->doTestCorrectFile(__DIR__ . '/correct/one_to_one_missing_nullable_param.php');
     }
 
+    /**
+     * @return string
+     */
     protected function provideConfig(): string
     {
         return __DIR__ . '/config.yml';

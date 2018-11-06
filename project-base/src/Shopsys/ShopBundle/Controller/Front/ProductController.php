@@ -74,6 +74,18 @@ class ProductController extends FrontBaseController
      */
     private $brandFacade;
 
+    /**
+     * @param \Shopsys\FrameworkBundle\Twig\RequestExtension $requestExtension
+     * @param \Shopsys\FrameworkBundle\Model\Category\CategoryFacade $categoryFacade
+     * @param \Shopsys\FrameworkBundle\Component\Domain\Domain $domain
+     * @param \Shopsys\FrameworkBundle\Model\Product\ProductOnCurrentDomainFacade $productOnCurrentDomainFacade
+     * @param \Shopsys\FrameworkBundle\Model\Product\Filter\ProductFilterConfigFactory $productFilterConfigFactory
+     * @param \Shopsys\FrameworkBundle\Model\Product\Listing\ProductListOrderingModeForListFacade $productListOrderingModeForListFacade
+     * @param \Shopsys\FrameworkBundle\Model\Product\Listing\ProductListOrderingModeForBrandFacade $productListOrderingModeForBrandFacade
+     * @param \Shopsys\FrameworkBundle\Model\Product\Listing\ProductListOrderingModeForSearchFacade $productListOrderingModeForSearchFacade
+     * @param \Shopsys\FrameworkBundle\Model\Module\ModuleFacade $moduleFacade
+     * @param \Shopsys\FrameworkBundle\Model\Product\Brand\BrandFacade $brandFacade
+     */
     public function __construct(
         RequestExtension $requestExtension,
         CategoryFacade $categoryFacade,
@@ -317,6 +329,9 @@ class ProductController extends FrontBaseController
         );
     }
 
+    /**
+     * @param \Symfony\Component\HttpFoundation\Request $request
+     */
     public function selectOrderingModeForListAction(Request $request)
     {
         $productListOrderingConfig = $this->productListOrderingModeForListFacade->getProductListOrderingConfig();
@@ -332,6 +347,9 @@ class ProductController extends FrontBaseController
         ]);
     }
 
+    /**
+     * @param \Symfony\Component\HttpFoundation\Request $request
+     */
     public function selectOrderingModeForListByBrandAction(Request $request)
     {
         $productListOrderingConfig = $this->productListOrderingModeForBrandFacade->getProductListOrderingConfig();
@@ -347,6 +365,9 @@ class ProductController extends FrontBaseController
         ]);
     }
 
+    /**
+     * @param \Symfony\Component\HttpFoundation\Request $request
+     */
     public function selectOrderingModeForSearchAction(Request $request)
     {
         $productListOrderingConfig = $this->productListOrderingModeForSearchFacade->getProductListOrderingConfig();

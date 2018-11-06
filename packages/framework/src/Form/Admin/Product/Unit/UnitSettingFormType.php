@@ -17,6 +17,9 @@ class UnitSettingFormType extends AbstractType
      */
     private $unitFacade;
 
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Product\Unit\UnitFacade $unitFacade
+     */
     public function __construct(UnitFacade $unitFacade)
     {
         $this->unitFacade = $unitFacade;

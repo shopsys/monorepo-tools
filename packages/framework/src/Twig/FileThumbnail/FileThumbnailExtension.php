@@ -27,6 +27,10 @@ class FileThumbnailExtension extends Twig_Extension
      */
     private $imageThumbnailFactory;
 
+    /**
+     * @param \Shopsys\FrameworkBundle\Component\FileUpload\FileUpload $fileUpload
+     * @param \Shopsys\FrameworkBundle\Component\Image\Processing\ImageThumbnailFactory $imageThumbnailFactory
+     */
     public function __construct(FileUpload $fileUpload, ImageThumbnailFactory $imageThumbnailFactory)
     {
         $this->fileUpload = $fileUpload;

@@ -27,6 +27,12 @@ class CustomerPasswordFacade
      */
     protected $customerPasswordService;
 
+    /**
+     * @param \Doctrine\ORM\EntityManagerInterface $em
+     * @param \Shopsys\FrameworkBundle\Model\Customer\UserRepository $userRepository
+     * @param \Shopsys\FrameworkBundle\Model\Customer\CustomerPasswordService $customerPasswordService
+     * @param \Shopsys\FrameworkBundle\Model\Customer\Mail\ResetPasswordMailFacade $resetPasswordMailFacade
+     */
     public function __construct(
         EntityManagerInterface $em,
         UserRepository $userRepository,

@@ -15,6 +15,11 @@ class ProductImageUploadCest
 
     const TEST_IMAGE_NAME = 'productTestImage.png';
 
+    /**
+     * @param \Tests\ShopBundle\Test\Codeception\AcceptanceTester $me
+     * @param \Tests\ShopBundle\Acceptance\acceptance\PageObject\Admin\EntityEditPage $entityEditPage
+     * @param \Tests\ShopBundle\Acceptance\acceptance\PageObject\Admin\LoginPage $loginPage
+     */
     public function testSuccessfulImageUpload(AcceptanceTester $me, EntityEditPage $entityEditPage, LoginPage $loginPage)
     {
         $me->wantTo('upload image in admin product edit page');

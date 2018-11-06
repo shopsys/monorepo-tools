@@ -39,6 +39,10 @@ class AdvertFormType extends AbstractType
      */
     private $advertPositionRegistry;
 
+    /**
+     * @param \Shopsys\FrameworkBundle\Component\Domain\Domain $domain
+     * @param \Shopsys\FrameworkBundle\Model\Advert\AdvertPositionRegistry $advertPositionRegistry
+     */
     public function __construct(
         Domain $domain,
         AdvertPositionRegistry $advertPositionRegistry

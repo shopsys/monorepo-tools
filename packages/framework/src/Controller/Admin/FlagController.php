@@ -19,6 +19,10 @@ class FlagController extends AdminBaseController
      */
     protected $flagInlineEdit;
 
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Product\Flag\FlagFacade $flagFacade
+     * @param \Shopsys\FrameworkBundle\Model\Product\Flag\FlagInlineEdit $flagInlineEdit
+     */
     public function __construct(
         FlagFacade $flagFacade,
         FlagInlineEdit $flagInlineEdit

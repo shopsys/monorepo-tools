@@ -20,6 +20,9 @@ class MicroserviceProductSearchCreateStructureCommand extends Command
      */
     private $productSearchExportStructureFacade;
 
+    /**
+     * @param \Shopsys\FrameworkBundle\Component\Microservice\ProductSearchExport\ProductSearchExportStructureFacade $productSearchExportStructureFacade
+     */
     public function __construct(ProductSearchExportStructureFacade $productSearchExportStructureFacade)
     {
         $this->productSearchExportStructureFacade = $productSearchExportStructureFacade;

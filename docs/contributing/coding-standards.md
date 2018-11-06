@@ -75,18 +75,6 @@ Besides the rules that are checked by automatic tools, we have few rules for whi
     ```
 - Database table and column names are underscored. Names must not be PostgreSQL keywords. In order to prevent conflicts, names of the tables are in plural.
 - Everything possible is ordered alphabetically (`.gitignore` content, configuration files, imports, ...)
-- Annotations are not mandatory for constructors of data objects and constructors using autowiring
-- In annotations, we use fully-qualified class names for type names (including leading slash)
-    ```php
-    /**
-     * @return \Shopsys\FrameworkBundle\Model\Category\Category
-     */
-    public function getRootCategory()
-    {
-        // ...
-        return $rootCategory;
-    }
-    ```
 - When annotating an array, it is mandatory to state the type of array's items (including scalar types)
     ```php
     /**

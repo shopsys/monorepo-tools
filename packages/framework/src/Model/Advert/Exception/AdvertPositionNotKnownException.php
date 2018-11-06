@@ -6,6 +6,11 @@ use Exception;
 
 class AdvertPositionNotKnownException extends Exception implements AdvertException
 {
+    /**
+     * @param string $positionName
+     * @param array $knownPositionsNames
+     * @param \Exception|null $previous
+     */
     public function __construct(string $positionName, array $knownPositionsNames, Exception $previous = null)
     {
         $message = sprintf(

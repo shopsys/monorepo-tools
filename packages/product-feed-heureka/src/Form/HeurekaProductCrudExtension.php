@@ -24,6 +24,11 @@ class HeurekaProductCrudExtension implements PluginCrudExtensionInterface
      */
     private $heurekaProductDomainDataFactory;
 
+    /**
+     * @param \Symfony\Component\Translation\TranslatorInterface $translator
+     * @param \Shopsys\ProductFeed\HeurekaBundle\Model\Product\HeurekaProductDomainFacade $heurekaProductDomainFacade
+     * @param \Shopsys\ProductFeed\HeurekaBundle\Model\Product\HeurekaProductDomainDataFactoryInterface $heurekaProductDomainDataFactory
+     */
     public function __construct(
         TranslatorInterface $translator,
         HeurekaProductDomainFacade $heurekaProductDomainFacade,

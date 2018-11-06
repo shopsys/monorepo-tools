@@ -44,6 +44,14 @@ class CustomerController extends FrontBaseController
      */
     private $customerDataFactory;
 
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Customer\CustomerFacade $customerFacade
+     * @param \Shopsys\FrameworkBundle\Model\Order\OrderFacade $orderFacade
+     * @param \Shopsys\FrameworkBundle\Component\Domain\Domain $domain
+     * @param \Shopsys\FrameworkBundle\Model\Order\Item\OrderItemPriceCalculation $orderItemPriceCalculation
+     * @param \Shopsys\FrameworkBundle\Model\Security\LoginAsUserFacade $loginAsUserFacade
+     * @param \Shopsys\FrameworkBundle\Model\Customer\CustomerDataFactoryInterface $customerDataFactory
+     */
     public function __construct(
         CustomerFacade $customerFacade,
         OrderFacade $orderFacade,
@@ -60,6 +68,9 @@ class CustomerController extends FrontBaseController
         $this->customerDataFactory = $customerDataFactory;
     }
 
+    /**
+     * @param \Symfony\Component\HttpFoundation\Request $request
+     */
     public function editAction(Request $request)
     {
         if (!$this->isGranted(Roles::ROLE_LOGGED_CUSTOMER)) {

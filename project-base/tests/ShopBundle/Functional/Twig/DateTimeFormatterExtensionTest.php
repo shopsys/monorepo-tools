@@ -23,6 +23,9 @@ class DateTimeFormatterExtensionTest extends FunctionalTestCase
 
     /**
      * @dataProvider formatDateDataProvider
+     * @param mixed $input
+     * @param mixed $locale
+     * @param mixed $result
      */
     public function testFormatDate($input, $locale, $result)
     {

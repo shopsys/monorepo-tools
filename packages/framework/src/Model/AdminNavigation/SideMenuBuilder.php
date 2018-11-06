@@ -31,6 +31,12 @@ class SideMenuBuilder
      */
     protected $eventDispatcher;
 
+    /**
+     * @param \Knp\Menu\FactoryInterface $menuFactory
+     * @param \Shopsys\FrameworkBundle\Component\Domain\Domain $domain
+     * @param \Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface $authorizationChecker
+     * @param \Symfony\Component\EventDispatcher\EventDispatcherInterface $eventDispatcher
+     */
     public function __construct(
         FactoryInterface $menuFactory,
         Domain $domain,

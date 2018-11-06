@@ -37,7 +37,7 @@ class UserDataFixtureLoader
     const COLUMN_DOMAIN_ID = 22;
 
     /**
-     * @var CsvReader
+     * @var \Shopsys\FrameworkBundle\Component\Csv\CsvReader
      */
     private $csvReader;
 

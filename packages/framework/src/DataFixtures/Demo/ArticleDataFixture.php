@@ -26,6 +26,10 @@ class ArticleDataFixture extends AbstractReferenceFixture
      */
     private $articleDataFactory;
 
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Article\ArticleFacade $articleFacade
+     * @param \Shopsys\FrameworkBundle\Model\Article\ArticleDataFactoryInterface $articleDataFactory
+     */
     public function __construct(ArticleFacade $articleFacade, ArticleDataFactoryInterface $articleDataFactory)
     {
         $this->articleFacade = $articleFacade;

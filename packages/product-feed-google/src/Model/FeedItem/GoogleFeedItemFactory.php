@@ -27,6 +27,11 @@ class GoogleFeedItemFactory
      */
     protected $productUrlsBatchLoader;
 
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Product\Pricing\ProductPriceCalculationForUser $productPriceCalculationForUser
+     * @param \Shopsys\FrameworkBundle\Model\Pricing\Currency\CurrencyFacade $currencyFacade
+     * @param \Shopsys\FrameworkBundle\Model\Product\Collection\ProductUrlsBatchLoader $productUrlsBatchLoader
+     */
     public function __construct(
         ProductPriceCalculationForUser $productPriceCalculationForUser,
         CurrencyFacade $currencyFacade,

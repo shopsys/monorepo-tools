@@ -35,6 +35,13 @@ class ProductAvailabilityCalculation
      */
     private $productRepository;
 
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Product\Availability\AvailabilityFacade $availabilityFacade
+     * @param \Shopsys\FrameworkBundle\Model\Product\ProductSellingDeniedRecalculator $productSellingDeniedRecalculator
+     * @param \Shopsys\FrameworkBundle\Model\Product\ProductVisibilityFacade $productVisibilityFacade
+     * @param \Doctrine\ORM\EntityManagerInterface $em
+     * @param \Shopsys\FrameworkBundle\Model\Product\ProductRepository $productRepository
+     */
     public function __construct(
         AvailabilityFacade $availabilityFacade,
         ProductSellingDeniedRecalculator $productSellingDeniedRecalculator,

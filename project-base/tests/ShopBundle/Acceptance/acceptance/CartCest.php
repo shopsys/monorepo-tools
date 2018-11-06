@@ -12,6 +12,13 @@ use Tests\ShopBundle\Test\Codeception\AcceptanceTester;
 
 class CartCest
 {
+    /**
+     * @param \Tests\ShopBundle\Acceptance\acceptance\PageObject\Front\CartPage $cartPage
+     * @param \Tests\ShopBundle\Acceptance\acceptance\PageObject\Front\ProductDetailPage $productDetailPage
+     * @param \Tests\ShopBundle\Acceptance\acceptance\PageObject\Front\CartBoxPage $cartBoxPage
+     * @param \Tests\ShopBundle\Test\Codeception\AcceptanceTester $me
+     * @param \Tests\ShopBundle\Acceptance\acceptance\PageObject\Front\FloatingWindowPage $floatingWindowPage
+     */
     public function testAddingSameProductToCartMakesSum(
         CartPage $cartPage,
         ProductDetailPage $productDetailPage,
@@ -35,6 +42,13 @@ class CartCest
         $cartPage->assertProductQuantity('22" Sencor SLE 22F46DM4 HELLO KITTY', 6);
     }
 
+    /**
+     * @param \Tests\ShopBundle\Acceptance\acceptance\PageObject\Front\CartPage $cartPage
+     * @param \Tests\ShopBundle\Acceptance\acceptance\PageObject\Front\ProductListPage $productListPage
+     * @param \Tests\ShopBundle\Acceptance\acceptance\PageObject\Front\CartBoxPage $cartBoxPage
+     * @param \Tests\ShopBundle\Test\Codeception\AcceptanceTester $me
+     * @param \Tests\ShopBundle\Acceptance\acceptance\PageObject\Front\FloatingWindowPage $floatingWindowPage
+     */
     public function testAddToCartFromProductListPage(
         CartPage $cartPage,
         ProductListPage $productListPage,
@@ -52,6 +66,13 @@ class CartCest
         $cartPage->assertProductPrice('Defender 2.0 SPK-480', 'CZK119.00');
     }
 
+    /**
+     * @param \Tests\ShopBundle\Acceptance\acceptance\PageObject\Front\CartPage $cartPage
+     * @param \Tests\ShopBundle\Acceptance\acceptance\PageObject\Front\HomepagePage $homepagePage
+     * @param \Tests\ShopBundle\Acceptance\acceptance\PageObject\Front\CartBoxPage $cartBoxPage
+     * @param \Tests\ShopBundle\Test\Codeception\AcceptanceTester $me
+     * @param \Tests\ShopBundle\Acceptance\acceptance\PageObject\Front\FloatingWindowPage $floatingWindowPage
+     */
     public function testAddToCartFromHomepage(
         CartPage $cartPage,
         HomepagePage $homepagePage,
@@ -69,6 +90,12 @@ class CartCest
         $cartPage->assertProductPrice('22" Sencor SLE 22F46DM4 HELLO KITTY', 'CZK3,499.00');
     }
 
+    /**
+     * @param \Tests\ShopBundle\Acceptance\acceptance\PageObject\Front\ProductDetailPage $productDetailPage
+     * @param \Tests\ShopBundle\Acceptance\acceptance\PageObject\Front\CartBoxPage $cartBoxPage
+     * @param \Tests\ShopBundle\Test\Codeception\AcceptanceTester $me
+     * @param \Tests\ShopBundle\Acceptance\acceptance\PageObject\Front\FloatingWindowPage $floatingWindowPage
+     */
     public function testAddToCartFromProductDetail(
         ProductDetailPage $productDetailPage,
         CartBoxPage $cartBoxPage,
@@ -86,6 +113,11 @@ class CartCest
         $me->see('22" Sencor SLE 22F46DM4 HELLO KITTY');
     }
 
+    /**
+     * @param \Tests\ShopBundle\Acceptance\acceptance\PageObject\Front\CartPage $cartPage
+     * @param \Tests\ShopBundle\Acceptance\acceptance\PageObject\Front\ProductDetailPage $productDetailPage
+     * @param \Tests\ShopBundle\Test\Codeception\AcceptanceTester $me
+     */
     public function testChangeCartItemAndRecalculatePrice(
         CartPage $cartPage,
         ProductDetailPage $productDetailPage,
@@ -101,6 +133,11 @@ class CartCest
         $cartPage->assertTotalPriceWithVat('CZK34,990.00');
     }
 
+    /**
+     * @param \Tests\ShopBundle\Acceptance\acceptance\PageObject\Front\CartPage $cartPage
+     * @param \Tests\ShopBundle\Acceptance\acceptance\PageObject\Front\ProductDetailPage $productDetailPage
+     * @param \Tests\ShopBundle\Test\Codeception\AcceptanceTester $me
+     */
     public function testRemovingItemsFromCart(
         CartPage $cartPage,
         ProductDetailPage $productDetailPage,
@@ -124,6 +161,13 @@ class CartCest
         $me->see('Your cart is unfortunately empty.');
     }
 
+    /**
+     * @param \Tests\ShopBundle\Acceptance\acceptance\PageObject\Front\CartPage $cartPage
+     * @param \Tests\ShopBundle\Acceptance\acceptance\PageObject\Front\CartBoxPage $cartBoxPage
+     * @param \Tests\ShopBundle\Acceptance\acceptance\PageObject\Front\ProductDetailPage $productDetailPage
+     * @param \Tests\ShopBundle\Test\Codeception\AcceptanceTester $me
+     * @param \Tests\ShopBundle\Acceptance\acceptance\PageObject\Front\FloatingWindowPage $floatingWindowPage
+     */
     public function testAddingDistinctProductsToCart(
         CartPage $cartPage,
         CartBoxPage $cartBoxPage,
@@ -148,6 +192,11 @@ class CartCest
         $cartPage->assertProductIsInCartByName('Canon PIXMA iP7250');
     }
 
+    /**
+     * @param \Tests\ShopBundle\Acceptance\acceptance\PageObject\Front\CartPage $cartPage
+     * @param \Tests\ShopBundle\Acceptance\acceptance\PageObject\Front\ProductDetailPage $productDetailPage
+     * @param \Tests\ShopBundle\Test\Codeception\AcceptanceTester $me
+     */
     public function testPricingInCart(
         CartPage $cartPage,
         ProductDetailPage $productDetailPage,

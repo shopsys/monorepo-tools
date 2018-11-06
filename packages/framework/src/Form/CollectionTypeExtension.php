@@ -15,7 +15,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 class CollectionTypeExtension extends AbstractTypeExtension
 {
     /**
-     * @param FormBuilderInterface $builder
+     * @param \Symfony\Component\Form\FormBuilderInterface $builder
      * @param array $options
      */
     public function buildForm(FormBuilderInterface $builder, array $options)

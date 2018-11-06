@@ -18,6 +18,9 @@ class CustomerFormType extends AbstractType
      */
     private $customerDataFactory;
 
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Customer\CustomerDataFactoryInterface $customerDataFactory
+     */
     public function __construct(CustomerDataFactoryInterface $customerDataFactory)
     {
         $this->customerDataFactory = $customerDataFactory;

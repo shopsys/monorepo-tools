@@ -18,6 +18,10 @@ class CurrentPromoCodeFacade
      */
     protected $promoCodeFacade;
 
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Order\PromoCode\PromoCodeFacade $promoCodeFacade
+     * @param \Symfony\Component\HttpFoundation\Session\SessionInterface $session
+     */
     public function __construct(PromoCodeFacade $promoCodeFacade, SessionInterface $session)
     {
         $this->promoCodeFacade = $promoCodeFacade;

@@ -24,6 +24,11 @@ class CustomerData
      */
     public $sendRegistrationMail;
 
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Customer\BillingAddressData $billingAddressData
+     * @param \Shopsys\FrameworkBundle\Model\Customer\DeliveryAddressData $deliveryAddressData
+     * @param \Shopsys\FrameworkBundle\Model\Customer\UserData $userData
+     */
     public function __construct(
         BillingAddressData $billingAddressData,
         DeliveryAddressData $deliveryAddressData,

@@ -16,6 +16,9 @@ class ProductAvailabilityFilter implements AdvancedSearchFilterInterface
      */
     private $availabilityFacade;
 
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Product\Availability\AvailabilityFacade $availabilityFacade
+     */
     public function __construct(AvailabilityFacade $availabilityFacade)
     {
         $this->availabilityFacade = $availabilityFacade;

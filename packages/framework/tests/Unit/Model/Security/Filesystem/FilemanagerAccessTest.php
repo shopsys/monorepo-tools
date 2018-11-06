@@ -59,6 +59,10 @@ class FilemanagerAccessTest extends TestCase
 
     /**
      * @dataProvider isPathAccessibleProvider
+     * @param mixed $fileuploadDir
+     * @param mixed $testPath
+     * @param mixed $attr
+     * @param mixed $isAccessible
      */
     public function testIsPathAccessible($fileuploadDir, $testPath, $attr, $isAccessible)
     {
@@ -77,6 +81,10 @@ class FilemanagerAccessTest extends TestCase
 
     /**
      * @dataProvider isPathAccessibleProvider
+     * @param mixed $fileuploadDir
+     * @param mixed $testPath
+     * @param mixed $attr
+     * @param mixed $isAccessible
      */
     public function testIsPathAccessibleStatic($fileuploadDir, $testPath, $attr, $isAccessible)
     {

@@ -34,7 +34,7 @@ class CartMigrationFacade
      * @param \Doctrine\ORM\EntityManagerInterface $em
      * @param \Shopsys\FrameworkBundle\Model\Cart\CartService $cartService
      * @param \Shopsys\FrameworkBundle\Model\Cart\CartFactory $cartFactory
-     * @param \Shopsys\FrameworkBundle\Model\Customer\CustomerIdentifierFactory
+     * @param \Shopsys\FrameworkBundle\Model\Customer\CustomerIdentifierFactory $customerIdentifierFactory
      */
     public function __construct(
         EntityManagerInterface $em,

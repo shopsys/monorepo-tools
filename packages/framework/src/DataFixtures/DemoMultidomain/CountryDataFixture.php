@@ -23,6 +23,10 @@ class CountryDataFixture extends AbstractReferenceFixture
      */
     private $countryDataFactory;
 
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Country\CountryFacade $countryFacade
+     * @param \Shopsys\FrameworkBundle\Model\Country\CountryDataFactoryInterface $countryDataFactory
+     */
     public function __construct(CountryFacade $countryFacade, CountryDataFactoryInterface $countryDataFactory)
     {
         $this->countryFacade = $countryFacade;

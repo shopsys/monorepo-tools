@@ -135,6 +135,12 @@ class ProductPriceCalculationTest extends TestCase
 
     /**
      * @dataProvider calculatePriceProvider
+     * @param mixed $inputPriceType
+     * @param mixed $inputPrice
+     * @param mixed $vatPercent
+     * @param mixed $pricingGroupCoefficient
+     * @param mixed $priceWithoutVat
+     * @param mixed $priceWithVat
      */
     public function testCalculatePriceWithAutoCalculationPriceType(
         $inputPriceType,
@@ -191,6 +197,9 @@ class ProductPriceCalculationTest extends TestCase
 
     /**
      * @dataProvider calculatePriceMainVariantProvider
+     * @param mixed $variants
+     * @param mixed $expectedPriceWithVat
+     * @param mixed $expectedFrom
      */
     public function testCalculatePriceOfMainVariantWithVariantsAndAutoCalculationPriceType(
         $variants,

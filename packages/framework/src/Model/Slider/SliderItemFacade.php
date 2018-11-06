@@ -33,6 +33,13 @@ class SliderItemFacade
      */
     protected $sliderItemFactory;
 
+    /**
+     * @param \Doctrine\ORM\EntityManagerInterface $em
+     * @param \Shopsys\FrameworkBundle\Model\Slider\SliderItemRepository $sliderItemRepository
+     * @param \Shopsys\FrameworkBundle\Component\Image\ImageFacade $imageFacade
+     * @param \Shopsys\FrameworkBundle\Component\Domain\Domain $domain
+     * @param \Shopsys\FrameworkBundle\Model\Slider\SliderItemFactoryInterface $sliderItemFactory
+     */
     public function __construct(
         EntityManagerInterface $em,
         SliderItemRepository $sliderItemRepository,

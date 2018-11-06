@@ -13,6 +13,10 @@ class ProductFilterPage extends AbstractPage
     // Product filter waits for more requests before evaluation
     const PRE_EVALUATION_WAIT = 2;
 
+    /**
+     * @param \Tests\ShopBundle\Test\Codeception\Module\StrictWebDriver $strictWebDriver
+     * @param \Tests\ShopBundle\Test\Codeception\AcceptanceTester $tester
+     */
     public function __construct(StrictWebDriver $strictWebDriver, AcceptanceTester $tester)
     {
         parent::__construct($strictWebDriver, $tester);

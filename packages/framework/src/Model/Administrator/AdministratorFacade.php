@@ -30,6 +30,7 @@ class AdministratorFacade
      * @param \Doctrine\ORM\EntityManagerInterface $em
      * @param \Shopsys\FrameworkBundle\Model\Administrator\AdministratorRepository $administratorRepository
      * @param \Shopsys\FrameworkBundle\Model\Administrator\AdministratorService $administratorService
+     * @param \Shopsys\FrameworkBundle\Model\Administrator\AdministratorFactoryInterface $administratorFactory
      * @param \Shopsys\FrameworkBundle\Model\Administrator\AdministratorFactoryInterface
      */
     public function __construct(

@@ -30,6 +30,11 @@ class AllMailTemplatesFormType extends AbstractType
      */
     private $personalDataExportMail;
 
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Customer\Mail\ResetPasswordMail $resetPasswordMail
+     * @param \Shopsys\FrameworkBundle\Model\PersonalData\Mail\PersonalDataAccessMail $personalDataAccessMail
+     * @param \Shopsys\FrameworkBundle\Model\PersonalData\Mail\PersonalDataExportMail $personalDataExportMail
+     */
     public function __construct(
         ResetPasswordMail $resetPasswordMail,
         PersonalDataAccessMail $personalDataAccessMail,

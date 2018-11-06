@@ -14,6 +14,9 @@ class AdvancedSearchOrderService
      */
     private $orderAdvancedSearchConfig;
 
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\AdvancedSearch\OrderAdvancedSearchConfig $orderAdvancedSearchConfig
+     */
     public function __construct(OrderAdvancedSearchConfig $orderAdvancedSearchConfig)
     {
         $this->orderAdvancedSearchConfig = $orderAdvancedSearchConfig;

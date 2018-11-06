@@ -29,6 +29,9 @@ class JsFileExtractor implements FileVisitorInterface
      */
     private $jsTranslatorCallParser;
 
+    /**
+     * @param \Shopsys\FrameworkBundle\Component\Javascript\Parser\Translator\JsTranslatorCallParser $jsTranslatorCallParser
+     */
     public function __construct(JsTranslatorCallParser $jsTranslatorCallParser)
     {
         $this->jsTranslatorCallParser = $jsTranslatorCallParser;

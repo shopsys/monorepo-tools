@@ -23,6 +23,11 @@ class MultidomainEntityDataCreator
      */
     private $sqlQuoter;
 
+    /**
+     * @param \Shopsys\FrameworkBundle\Component\Domain\Multidomain\MultidomainEntityClassFinderFacade $multidomainEntityClassFinderFacade
+     * @param \Doctrine\ORM\EntityManagerInterface $em
+     * @param \Shopsys\FrameworkBundle\Component\Doctrine\SqlQuoter $sqlQuoter
+     */
     public function __construct(
         MultidomainEntityClassFinderFacade $multidomainEntityClassFinderFacade,
         EntityManagerInterface $em,

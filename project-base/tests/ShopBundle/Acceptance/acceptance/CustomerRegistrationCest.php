@@ -10,6 +10,11 @@ class CustomerRegistrationCest
 {
     const MINIMUM_FORM_SUBMIT_WAIT_TIME = 10;
 
+    /**
+     * @param \Tests\ShopBundle\Acceptance\acceptance\PageObject\Front\RegistrationPage $registrationPage
+     * @param \Tests\ShopBundle\Test\Codeception\AcceptanceTester $me
+     * @param \Tests\ShopBundle\Acceptance\acceptance\PageObject\Front\LayoutPage $layoutPage
+     */
     public function testSuccessfulRegistration(
         RegistrationPage $registrationPage,
         AcceptanceTester $me,
@@ -25,6 +30,10 @@ class CustomerRegistrationCest
         $me->see('Log out');
     }
 
+    /**
+     * @param \Tests\ShopBundle\Acceptance\acceptance\PageObject\Front\RegistrationPage $registrationPage
+     * @param \Tests\ShopBundle\Test\Codeception\AcceptanceTester $me
+     */
     public function testAlreadyUsedEmail(RegistrationPage $registrationPage, AcceptanceTester $me)
     {
         $me->wantTo('use already used email while registration');
@@ -33,6 +42,10 @@ class CustomerRegistrationCest
         $registrationPage->seeEmailError('Email no-reply@shopsys.com is already registered');
     }
 
+    /**
+     * @param \Tests\ShopBundle\Acceptance\acceptance\PageObject\Front\RegistrationPage $registrationPage
+     * @param \Tests\ShopBundle\Test\Codeception\AcceptanceTester $me
+     */
     public function testPasswordMismatch(RegistrationPage $registrationPage, AcceptanceTester $me)
     {
         $me->wantTo('use mismatching passwords while registration');

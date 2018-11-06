@@ -24,6 +24,10 @@ class ParameterFilterChoiceRepository
      */
     private $productRepository;
 
+    /**
+     * @param \Doctrine\ORM\EntityManagerInterface $em
+     * @param \Shopsys\FrameworkBundle\Model\Product\ProductRepository $productRepository
+     */
     public function __construct(
         EntityManagerInterface $em,
         ProductRepository $productRepository

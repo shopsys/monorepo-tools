@@ -43,6 +43,13 @@ class PriceExtension extends Twig_Extension
      */
     private $intlCurrencyRepository;
 
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Pricing\Currency\CurrencyFacade $currencyFacade
+     * @param \Shopsys\FrameworkBundle\Component\Domain\Domain $domain
+     * @param \Shopsys\FrameworkBundle\Model\Localization\Localization $localization
+     * @param \CommerceGuys\Intl\NumberFormat\NumberFormatRepositoryInterface $numberFormatRepository
+     * @param \CommerceGuys\Intl\Currency\CurrencyRepositoryInterface $intlCurrencyRepository
+     */
     public function __construct(
         CurrencyFacade $currencyFacade,
         Domain $domain,
@@ -201,6 +208,10 @@ class PriceExtension extends Twig_Extension
         return $this->formatCurrency($price, $currency);
     }
 
+    /**
+     * @param mixed $price
+     * @param mixed $currencyId
+     */
     public function priceWithCurrencyByCurrencyIdFilter($price, $currencyId)
     {
         $currency = $this->currencyFacade->getById($currencyId);

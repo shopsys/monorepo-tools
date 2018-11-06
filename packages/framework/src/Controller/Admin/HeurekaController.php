@@ -26,6 +26,11 @@ class HeurekaController extends AdminBaseController
      */
     protected $heurekaFacade;
 
+    /**
+     * @param \Shopsys\FrameworkBundle\Component\Domain\AdminDomainTabsFacade $adminDomainTabsFacade
+     * @param \Shopsys\FrameworkBundle\Model\Heureka\HeurekaSetting $heurekaSetting
+     * @param \Shopsys\FrameworkBundle\Model\Heureka\HeurekaFacade $heurekaFacade
+     */
     public function __construct(AdminDomainTabsFacade $adminDomainTabsFacade, HeurekaSetting $heurekaSetting, HeurekaFacade $heurekaFacade)
     {
         $this->adminDomainTabsFacade = $adminDomainTabsFacade;

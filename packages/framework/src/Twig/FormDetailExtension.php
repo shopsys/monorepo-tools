@@ -14,6 +14,9 @@ class FormDetailExtension extends Twig_Extension
      */
     private $twigEnvironment;
 
+    /**
+     * @param \Twig_Environment $twigEnvironment
+     */
     public function __construct(Twig_Environment $twigEnvironment)
     {
         $this->twigEnvironment = $twigEnvironment;

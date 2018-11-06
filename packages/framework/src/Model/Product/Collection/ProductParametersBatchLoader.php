@@ -17,6 +17,9 @@ class ProductParametersBatchLoader
      */
     protected $loadedProductParametersByName = [];
 
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Product\Collection\ProductCollectionFacade $productCollectionFacade
+     */
     public function __construct(ProductCollectionFacade $productCollectionFacade)
     {
         $this->productCollectionFacade = $productCollectionFacade;

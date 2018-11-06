@@ -26,6 +26,11 @@ class CronFacade
      */
     protected $cronModuleFacade;
 
+    /**
+     * @param \Symfony\Bridge\Monolog\Logger $logger
+     * @param \Shopsys\FrameworkBundle\Component\Cron\Config\CronConfig $cronConfig
+     * @param \Shopsys\FrameworkBundle\Component\Cron\CronModuleFacade $cronModuleFacade
+     */
     public function __construct(
         Logger $logger,
         CronConfig $cronConfig,

@@ -93,6 +93,9 @@ class PriceExtensionTest extends FunctionalTestCase
     /**
      * @group singledomain
      * @dataProvider priceFilterDataProviderSingleDomain
+     * @param mixed $input
+     * @param mixed $domainId
+     * @param mixed $result
      */
     public function testPriceFilterForSingleDomain($input, $domainId, $result)
     {
@@ -102,6 +105,9 @@ class PriceExtensionTest extends FunctionalTestCase
     /**
      * @group multidomain
      * @dataProvider priceFilterDataProviderMultiDomain
+     * @param mixed $input
+     * @param mixed $domainId
+     * @param mixed $result
      */
     public function testPriceFilterForMultiDomain($input, $domainId, $result)
     {
@@ -110,6 +116,9 @@ class PriceExtensionTest extends FunctionalTestCase
 
     /**
      * @dataProvider priceFilterDataProvider
+     * @param mixed $input
+     * @param mixed $domainId
+     * @param mixed $result
      */
     private function checkPriceFilter($input, $domainId, $result)
     {

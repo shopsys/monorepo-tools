@@ -16,6 +16,10 @@ class ValueByDateTimeDataPoint
      */
     private $dateTime;
 
+    /**
+     * @param mixed $count
+     * @param \DateTime $dateTime
+     */
     public function __construct($count, DateTime $dateTime)
     {
         $this->value = (int)$count;

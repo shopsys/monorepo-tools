@@ -72,6 +72,21 @@ class HeurekaFeedItem implements FeedItemInterface
      */
     protected $cpc;
 
+    /**
+     * @param int $id
+     * @param int|null $mainVariantId
+     * @param string $name
+     * @param string|null $description
+     * @param string $url
+     * @param string|null $imgUrl
+     * @param string|null $brandName
+     * @param string|null $ean
+     * @param int|null $availabilityDispatchTime
+     * @param \Shopsys\FrameworkBundle\Model\Pricing\Price $price
+     * @param string|null $heurekaCategoryFullName
+     * @param array $parametersByName
+     * @param float|null $cpc
+     */
     public function __construct(
         int $id,
         ?int $mainVariantId,

@@ -22,6 +22,14 @@ class SitemapDumper extends Dumper
      */
     private $mountManager;
 
+    /**
+     * @param \Symfony\Component\EventDispatcher\EventDispatcherInterface $dispatcher
+     * @param \Symfony\Component\Filesystem\Filesystem $filesystem
+     * @param \League\Flysystem\FilesystemInterface $abstractFilesystem
+     * @param \League\Flysystem\MountManager $mountManager
+     * @param mixed $sitemapFilePrefix
+     * @param mixed|null $itemsBySet
+     */
     public function __construct(
         EventDispatcherInterface $dispatcher,
         Filesystem $filesystem,

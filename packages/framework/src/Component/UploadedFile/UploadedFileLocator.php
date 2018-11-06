@@ -25,6 +25,7 @@ class UploadedFileLocator
     /**
      * @param string $uploadedFileDir
      * @param string $uploadedFileUrlPrefix
+     * @param \League\Flysystem\FilesystemInterface $filesystem
      */
     public function __construct($uploadedFileDir, $uploadedFileUrlPrefix, FilesystemInterface $filesystem)
     {

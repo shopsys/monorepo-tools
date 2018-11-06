@@ -17,6 +17,10 @@ class CurrentCustomer
      */
     private $pricingGroupSettingFacade;
 
+    /**
+     * @param \Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface $tokenStorage
+     * @param \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroupSettingFacade $ricingGroupSettingFacade
+     */
     public function __construct(
         TokenStorageInterface $tokenStorage,
         PricingGroupSettingFacade $ricingGroupSettingFacade

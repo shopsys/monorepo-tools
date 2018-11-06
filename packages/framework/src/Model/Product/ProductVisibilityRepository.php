@@ -28,6 +28,11 @@ class ProductVisibilityRepository
      */
     protected $pricingGroupRepository;
 
+    /**
+     * @param \Doctrine\ORM\EntityManagerInterface $em
+     * @param \Shopsys\FrameworkBundle\Component\Domain\Domain $domain
+     * @param \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroupRepository $pricingGroupRepository
+     */
     public function __construct(
         EntityManagerInterface $em,
         Domain $domain,

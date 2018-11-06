@@ -14,6 +14,9 @@ class OrderStatusFilter implements AdvancedSearchFilterInterface
      */
     private $orderStatusFacade;
 
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Order\Status\OrderStatusFacade $orderStatusFacade
+     */
     public function __construct(OrderStatusFacade $orderStatusFacade)
     {
         $this->orderStatusFacade = $orderStatusFacade;

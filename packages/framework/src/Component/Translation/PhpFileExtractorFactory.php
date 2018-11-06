@@ -11,6 +11,9 @@ class PhpFileExtractorFactory
      */
     protected $docParser;
 
+    /**
+     * @param \Doctrine\Common\Annotations\DocParser $docParser
+     */
     public function __construct(DocParser $docParser)
     {
         $this->docParser = $docParser;

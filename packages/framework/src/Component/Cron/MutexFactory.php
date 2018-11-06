@@ -19,6 +19,9 @@ class MutexFactory
      */
     protected $mutexesByName;
 
+    /**
+     * @param \NinjaMutex\Lock\LockInterface $lock
+     */
     public function __construct(LockInterface $lock)
     {
         $this->lock = $lock;

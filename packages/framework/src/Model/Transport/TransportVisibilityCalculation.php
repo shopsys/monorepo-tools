@@ -16,6 +16,10 @@ class TransportVisibilityCalculation
      */
     private $independentPaymentVisibilityCalculation;
 
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Transport\IndependentTransportVisibilityCalculation $independentTransportVisibilityCalculation
+     * @param \Shopsys\FrameworkBundle\Model\Payment\IndependentPaymentVisibilityCalculation $independentPaymentVisibilityCalculation
+     */
     public function __construct(
         IndependentTransportVisibilityCalculation $independentTransportVisibilityCalculation,
         IndependentPaymentVisibilityCalculation $independentPaymentVisibilityCalculation

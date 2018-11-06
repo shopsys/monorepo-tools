@@ -15,11 +15,17 @@ class LoginController extends FrontBaseController
      */
     private $loginService;
 
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Security\LoginService $loginService
+     */
     public function __construct(LoginService $loginService)
     {
         $this->loginService = $loginService;
     }
 
+    /**
+     * @param \Symfony\Component\HttpFoundation\Request $request
+     */
     public function loginAction(Request $request)
     {
         if ($this->isGranted(Roles::ROLE_LOGGED_CUSTOMER)) {

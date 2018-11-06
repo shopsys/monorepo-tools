@@ -25,6 +25,11 @@ class ProductBreadcrumbGenerator implements BreadcrumbGeneratorInterface
      */
     private $domain;
 
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Product\ProductRepository $productRepository
+     * @param \Shopsys\FrameworkBundle\Model\Category\CategoryFacade $categoryFacade
+     * @param \Shopsys\FrameworkBundle\Component\Domain\Domain $domain
+     */
     public function __construct(
         ProductRepository $productRepository,
         CategoryFacade $categoryFacade,

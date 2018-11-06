@@ -13,6 +13,9 @@ use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 class ShopsysFrameworkBundle extends Bundle
 {
+    /**
+     * @param \Symfony\Component\DependencyInjection\ContainerBuilder $container
+     */
     public function build(ContainerBuilder $container)
     {
         parent::build($container);

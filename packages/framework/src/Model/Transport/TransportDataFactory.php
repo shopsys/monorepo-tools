@@ -22,6 +22,11 @@ class TransportDataFactory implements TransportDataFactoryInterface
      */
     protected $domain;
 
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Transport\TransportFacade $transportFacade
+     * @param \Shopsys\FrameworkBundle\Model\Pricing\Vat\VatFacade $vatFacade
+     * @param \Shopsys\FrameworkBundle\Component\Domain\Domain $domain
+     */
     public function __construct(
         TransportFacade $transportFacade,
         VatFacade $vatFacade,

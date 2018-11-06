@@ -21,6 +21,11 @@ class PromoCodeFacade
      */
     protected $promoCodeFactory;
 
+    /**
+     * @param \Doctrine\ORM\EntityManagerInterface $em
+     * @param \Shopsys\FrameworkBundle\Model\Order\PromoCode\PromoCodeRepository $promoCodeRepository
+     * @param \Shopsys\FrameworkBundle\Model\Order\PromoCode\PromoCodeFactoryInterface $promoCodeFactory
+     */
     public function __construct(
         EntityManagerInterface $em,
         PromoCodeRepository $promoCodeRepository,

@@ -38,6 +38,10 @@ class DomainAwareOrderFlowFactory implements OrderFlowFactoryInterface
 
     /**
      * @param \Shopsys\FrameworkBundle\Component\Domain\Domain $domain
+     * @param \Symfony\Component\EventDispatcher\EventDispatcherInterface $eventDispatcher
+     * @param \Symfony\Component\HttpFoundation\RequestStack $requestStack
+     * @param \Symfony\Component\Form\FormFactoryInterface $formFactory
+     * @param \Craue\FormFlowBundle\Storage\DataManager $dataManager
      */
     public function __construct(
         Domain $domain,

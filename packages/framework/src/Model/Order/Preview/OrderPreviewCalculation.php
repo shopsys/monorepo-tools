@@ -40,6 +40,13 @@ class OrderPreviewCalculation
      */
     private $orderPriceCalculation;
 
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Product\Pricing\QuantifiedProductPriceCalculation $quantifiedProductPriceCalculation
+     * @param \Shopsys\FrameworkBundle\Model\Product\Pricing\QuantifiedProductDiscountCalculation $quantifiedProductDiscountCalculation
+     * @param \Shopsys\FrameworkBundle\Model\Transport\TransportPriceCalculation $transportPriceCalculation
+     * @param \Shopsys\FrameworkBundle\Model\Payment\PaymentPriceCalculation $paymentPriceCalculation
+     * @param \Shopsys\FrameworkBundle\Model\Order\OrderPriceCalculation $orderPriceCalculation
+     */
     public function __construct(
         QuantifiedProductPriceCalculation $quantifiedProductPriceCalculation,
         QuantifiedProductDiscountCalculation $quantifiedProductDiscountCalculation,

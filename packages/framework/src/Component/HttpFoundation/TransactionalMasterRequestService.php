@@ -19,6 +19,9 @@ class TransactionalMasterRequestService
      */
     private $inTransaction;
 
+    /**
+     * @param \Doctrine\ORM\EntityManagerInterface $em
+     */
     public function __construct(EntityManagerInterface $em)
     {
         $this->inTransaction = false;

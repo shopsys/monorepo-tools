@@ -13,6 +13,9 @@ class StatisticsService
      */
     private $dateTimeFormatterExtension;
 
+    /**
+     * @param \Shopsys\FrameworkBundle\Twig\DateTimeFormatterExtension $dateTimeFormatterExtension
+     */
     public function __construct(DateTimeFormatterExtension $dateTimeFormatterExtension)
     {
         $this->dateTimeFormatterExtension = $dateTimeFormatterExtension;

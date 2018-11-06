@@ -13,6 +13,9 @@ class PluginCrudExtensionFacade
      */
     protected $pluginCrudExtensionRegistry;
 
+    /**
+     * @param \Shopsys\FrameworkBundle\Component\Plugin\PluginCrudExtensionRegistry $pluginCrudExtensionRegistry
+     */
     public function __construct(PluginCrudExtensionRegistry $pluginCrudExtensionRegistry)
     {
         $this->pluginCrudExtensionRegistry = $pluginCrudExtensionRegistry;

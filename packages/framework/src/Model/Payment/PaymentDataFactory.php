@@ -22,6 +22,11 @@ class PaymentDataFactory implements PaymentDataFactoryInterface
      */
     protected $domain;
 
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Payment\PaymentFacade $paymentFacade
+     * @param \Shopsys\FrameworkBundle\Model\Pricing\Vat\VatFacade $vatFacade
+     * @param \Shopsys\FrameworkBundle\Component\Domain\Domain $domain
+     */
     public function __construct(
         PaymentFacade $paymentFacade,
         VatFacade $vatFacade,
@@ -44,7 +49,7 @@ class PaymentDataFactory implements PaymentDataFactoryInterface
     }
 
     /**
-     * @param \Shopsys\FrameworkBundle\Model\Payment\PaymentData
+     * @param \Shopsys\FrameworkBundle\Model\Payment\PaymentData $paymentData
      */
     protected function fillNew(PaymentData $paymentData): void
     {
@@ -68,7 +73,7 @@ class PaymentDataFactory implements PaymentDataFactoryInterface
     }
 
     /**
-     * @param \Shopsys\FrameworkBundle\Model\Payment\PaymentData
+     * @param \Shopsys\FrameworkBundle\Model\Payment\PaymentData $paymentData
      * @param \Shopsys\FrameworkBundle\Model\Payment\Payment $payment
      */
     protected function fillFromPayment(PaymentData $paymentData, Payment $payment)

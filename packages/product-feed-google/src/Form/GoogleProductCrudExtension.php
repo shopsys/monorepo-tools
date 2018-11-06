@@ -25,6 +25,11 @@ class GoogleProductCrudExtension implements PluginCrudExtensionInterface
      */
     private $googleProductDomainDataFactory;
 
+    /**
+     * @param \Symfony\Component\Translation\TranslatorInterface $translator
+     * @param \Shopsys\ProductFeed\GoogleBundle\Model\Product\GoogleProductDomainFacade $googleProductDomainFacade
+     * @param \Shopsys\ProductFeed\GoogleBundle\Model\Product\GoogleProductDomainDataFactoryInterface $googleProductDomainDataFactory
+     */
     public function __construct(
         TranslatorInterface $translator,
         GoogleProductDomainFacade $googleProductDomainFacade,

@@ -26,6 +26,11 @@ class CustomerPasswordController extends FrontBaseController
      */
     private $loginService;
 
+    /**
+     * @param \Shopsys\FrameworkBundle\Component\Domain\Domain $domain
+     * @param \Shopsys\FrameworkBundle\Model\Customer\CustomerPasswordFacade $customerPasswordFacade
+     * @param \Shopsys\FrameworkBundle\Model\Security\LoginService $loginService
+     */
     public function __construct(
         Domain $domain,
         CustomerPasswordFacade $customerPasswordFacade,
@@ -36,6 +41,9 @@ class CustomerPasswordController extends FrontBaseController
         $this->loginService = $loginService;
     }
 
+    /**
+     * @param \Symfony\Component\HttpFoundation\Request $request
+     */
     public function resetPasswordAction(Request $request)
     {
         $form = $this->createForm(ResetPasswordFormType::class);
@@ -72,6 +80,9 @@ class CustomerPasswordController extends FrontBaseController
         ]);
     }
 
+    /**
+     * @param \Symfony\Component\HttpFoundation\Request $request
+     */
     public function setNewPasswordAction(Request $request)
     {
         $email = $request->query->get('email');

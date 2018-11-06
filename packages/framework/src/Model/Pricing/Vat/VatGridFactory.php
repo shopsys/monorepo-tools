@@ -31,6 +31,12 @@ class VatGridFactory implements GridFactoryInterface
      */
     protected $priceCalculation;
 
+    /**
+     * @param \Doctrine\ORM\EntityManagerInterface $em
+     * @param \Shopsys\FrameworkBundle\Component\Grid\GridFactory $gridFactory
+     * @param \Shopsys\FrameworkBundle\Model\Pricing\Vat\VatFacade $vatFacade
+     * @param \Shopsys\FrameworkBundle\Model\Pricing\PriceCalculation $priceCalculation
+     */
     public function __construct(
         EntityManagerInterface $em,
         GridFactory $gridFactory,

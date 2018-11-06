@@ -11,6 +11,9 @@ class CategoryWithLazyLoadedVisibleChildrenFactory
      */
     protected $categoryRepository;
 
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Category\CategoryRepository $categoryRepository
+     */
     public function __construct(CategoryRepository $categoryRepository)
     {
         $this->categoryRepository = $categoryRepository;

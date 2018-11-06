@@ -20,6 +20,10 @@ class TransportAndPaymentController extends AdminBaseController
      */
     protected $pricingSetting;
 
+    /**
+     * @param \Shopsys\FrameworkBundle\Component\Domain\Domain $domain
+     * @param \Shopsys\FrameworkBundle\Model\Pricing\PricingSetting $pricingSetting
+     */
     public function __construct(
         Domain $domain,
         PricingSetting $pricingSetting

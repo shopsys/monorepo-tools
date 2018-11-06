@@ -23,6 +23,12 @@ class AvailabilityInlineEdit extends AbstractGridInlineEdit
      */
     private $availabilityDataFactory;
 
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Product\Availability\AvailabilityGridFactory $availabilityGridFactory
+     * @param \Shopsys\FrameworkBundle\Model\Product\Availability\AvailabilityFacade $availabilityFacade
+     * @param \Symfony\Component\Form\FormFactoryInterface $formFactory
+     * @param \Shopsys\FrameworkBundle\Model\Product\Availability\AvailabilityDataFactoryInterface $availabilityDataFactory
+     */
     public function __construct(
         AvailabilityGridFactory $availabilityGridFactory,
         AvailabilityFacade $availabilityFacade,

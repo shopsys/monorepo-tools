@@ -8,6 +8,11 @@ use Tests\ShopBundle\Test\Codeception\AcceptanceTester;
 
 class CustomerLoginCest
 {
+    /**
+     * @param \Tests\ShopBundle\Acceptance\acceptance\PageObject\Front\LoginPage $loginPage
+     * @param \Tests\ShopBundle\Test\Codeception\AcceptanceTester $me
+     * @param \Tests\ShopBundle\Acceptance\acceptance\PageObject\Front\LayoutPage $layoutPage
+     */
     public function testLoginAsCustomerFromMainPage(
         LoginPage $loginPage,
         AcceptanceTester $me,
@@ -23,6 +28,11 @@ class CustomerLoginCest
         $me->seeCurrentPageEquals('/');
     }
 
+    /**
+     * @param \Tests\ShopBundle\Acceptance\acceptance\PageObject\Front\LoginPage $loginPage
+     * @param \Tests\ShopBundle\Test\Codeception\AcceptanceTester $me
+     * @param \Tests\ShopBundle\Acceptance\acceptance\PageObject\Front\LayoutPage $layoutPage
+     */
     public function testLoginAsCustomerFromCategoryPage(
         LoginPage $loginPage,
         AcceptanceTester $me,
@@ -38,6 +48,11 @@ class CustomerLoginCest
         $me->seeCurrentPageEquals('/');
     }
 
+    /**
+     * @param \Tests\ShopBundle\Acceptance\acceptance\PageObject\Front\LoginPage $loginPage
+     * @param \Tests\ShopBundle\Test\Codeception\AcceptanceTester $me
+     * @param \Tests\ShopBundle\Acceptance\acceptance\PageObject\Front\LayoutPage $layoutPage
+     */
     public function testLoginAsCustomerFromLoginPage(
         LoginPage $loginPage,
         AcceptanceTester $me,

@@ -41,6 +41,13 @@ class DomainRouterFactory
      */
     protected $routersByDomainId = [];
 
+    /**
+     * @param mixed $routerConfiguration
+     * @param \Symfony\Component\Config\Loader\LoaderInterface $configLoader
+     * @param \Shopsys\FrameworkBundle\Component\Router\LocalizedRouterFactory $localizedRouterFactory
+     * @param \Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\FriendlyUrlRouterFactory $friendlyUrlRouterFactory
+     * @param \Shopsys\FrameworkBundle\Component\Domain\Domain $domain
+     */
     public function __construct(
         $routerConfiguration,
         LoaderInterface $configLoader,

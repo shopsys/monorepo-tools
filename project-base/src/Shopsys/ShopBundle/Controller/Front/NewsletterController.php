@@ -27,6 +27,11 @@ class NewsletterController extends FrontBaseController
      */
     private $domain;
 
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Newsletter\NewsletterFacade $newsletterFacade
+     * @param \Shopsys\FrameworkBundle\Model\LegalConditions\LegalConditionsFacade $legalConditionsFacade
+     * @param \Shopsys\FrameworkBundle\Component\Domain\Domain $domain
+     */
     public function __construct(
         NewsletterFacade $newsletterFacade,
         LegalConditionsFacade $legalConditionsFacade,

@@ -9,6 +9,7 @@ class IntlCurrencyRepositoryTest extends TestCase
 {
     /**
      * @dataProvider getSupportedCurrencyCodes
+     * @param mixed $currencyCode
      */
     public function testGetSupportedCurrencies($currencyCode)
     {

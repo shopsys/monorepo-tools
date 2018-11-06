@@ -11,6 +11,9 @@ class PerformanceResultsCsvExporter
      */
     private $jmeterCsvReporter;
 
+    /**
+     * @param \Tests\ShopBundle\Performance\JmeterCsvReporter $jmeterCsvReporter
+     */
     public function __construct(JmeterCsvReporter $jmeterCsvReporter)
     {
         $this->jmeterCsvReporter = $jmeterCsvReporter;

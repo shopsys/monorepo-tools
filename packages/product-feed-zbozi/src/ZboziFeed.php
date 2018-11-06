@@ -19,6 +19,10 @@ class ZboziFeed implements FeedInterface
      */
     protected $feedItemFacade;
 
+    /**
+     * @param \Shopsys\ProductFeed\ZboziBundle\ZboziFeedInfo $feedInfo
+     * @param \Shopsys\ProductFeed\ZboziBundle\Model\FeedItem\ZboziFeedItemFacade $feedItemFacade
+     */
     public function __construct(ZboziFeedInfo $feedInfo, ZboziFeedItemFacade $feedItemFacade)
     {
         $this->feedInfo = $feedInfo;

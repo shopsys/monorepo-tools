@@ -25,6 +25,11 @@ class BestsellingProductController extends FrontBaseController
      */
     private $currentCustomer;
 
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Product\BestsellingProduct\CachedBestsellingProductFacade $cachedBestsellingProductFacade
+     * @param \Shopsys\FrameworkBundle\Component\Domain\Domain $domain
+     * @param \Shopsys\FrameworkBundle\Model\Customer\CurrentCustomer $currentCustomer
+     */
     public function __construct(
         CachedBestsellingProductFacade $cachedBestsellingProductFacade,
         Domain $domain,
@@ -35,6 +40,9 @@ class BestsellingProductController extends FrontBaseController
         $this->currentCustomer = $currentCustomer;
     }
 
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Category\Category $category
+     */
     public function listAction(Category $category)
     {
         $bestsellingProducts = $this->cachedBestsellingProductFacade->getAllOfferedBestsellingProducts(

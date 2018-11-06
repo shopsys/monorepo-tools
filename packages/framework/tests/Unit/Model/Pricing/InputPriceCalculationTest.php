@@ -10,6 +10,10 @@ class InputPriceCalculationTest extends TestCase
 {
     /**
      * @dataProvider getInputPriceDataProvider
+     * @param mixed $inputPriceType
+     * @param mixed $priceWithVat
+     * @param mixed $vatPercent
+     * @param mixed $expectedResult
      */
     public function testGetInputPrice($inputPriceType, $priceWithVat, $vatPercent, $expectedResult)
     {

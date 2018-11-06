@@ -35,6 +35,12 @@ class TransportGridFactory implements GridFactoryInterface
      */
     protected $transportFacade;
 
+    /**
+     * @param \Shopsys\FrameworkBundle\Component\Grid\GridFactory $gridFactory
+     * @param \Shopsys\FrameworkBundle\Model\Transport\TransportRepository $transportRepository
+     * @param \Shopsys\FrameworkBundle\Model\Localization\Localization $localization
+     * @param \Shopsys\FrameworkBundle\Model\Transport\TransportFacade $transportFacade
+     */
     public function __construct(
         GridFactory $gridFactory,
         TransportRepository $transportRepository,

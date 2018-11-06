@@ -34,6 +34,11 @@ class UrlListType extends AbstractType
      */
     private $domain;
 
+    /**
+     * @param \Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\FriendlyUrlFacade $friendlyUrlFacade
+     * @param \Shopsys\FrameworkBundle\Component\Router\DomainRouterFactory $domainRouterFactory
+     * @param \Shopsys\FrameworkBundle\Component\Domain\Domain $domain
+     */
     public function __construct(
         FriendlyUrlFacade $friendlyUrlFacade,
         DomainRouterFactory $domainRouterFactory,

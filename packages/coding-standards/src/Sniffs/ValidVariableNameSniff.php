@@ -20,6 +20,7 @@ use PHP_CodeSniffer\Util\Common;
 final class ValidVariableNameSniff extends AbstractVariableSniff
 {
     /**
+     * @param \PHP_CodeSniffer\Files\File $file
      * @param int $position
      */
     protected function processVariable(File $file, $position): void
@@ -29,6 +30,7 @@ final class ValidVariableNameSniff extends AbstractVariableSniff
     }
 
     /**
+     * @param \PHP_CodeSniffer\Files\File $file
      * @param int $position
      */
     protected function processVariableInString(File $file, $position): void
@@ -36,6 +38,7 @@ final class ValidVariableNameSniff extends AbstractVariableSniff
     }
 
     /**
+     * @param \PHP_CodeSniffer\Files\File $file
      * @param int $position
      */
     protected function processMemberVar(File $file, $position): void
@@ -44,6 +47,11 @@ final class ValidVariableNameSniff extends AbstractVariableSniff
         $this->checkCamelCaseFormatViolation($file, $position, $errorMessageFormat);
     }
 
+    /**
+     * @param \PHP_CodeSniffer\Files\File $file
+     * @param int $position
+     * @param string $errorMessageFormat
+     */
     private function checkCamelCaseFormatViolation(File $file, int $position, string $errorMessageFormat): void
     {
         $currentToken = $file->getTokens()[$position];

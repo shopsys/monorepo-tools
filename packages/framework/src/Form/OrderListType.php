@@ -17,6 +17,9 @@ class OrderListType extends AbstractType
      */
     private $orderFacade;
 
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Order\OrderFacade $orderFacade
+     */
     public function __construct(OrderFacade $orderFacade)
     {
         $this->orderFacade = $orderFacade;
@@ -34,6 +37,11 @@ class OrderListType extends AbstractType
             ]);
     }
 
+    /**
+     * @param \Symfony\Component\Form\FormView $view
+     * @param \Symfony\Component\Form\FormInterface $form
+     * @param array $options
+     */
     public function buildView(FormView $view, FormInterface $form, array $options)
     {
         parent::buildView($view, $form, $options);

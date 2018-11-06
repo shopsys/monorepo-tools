@@ -23,6 +23,10 @@ class LoginService
      */
     private $traceableEventDispatcher;
 
+    /**
+     * @param \Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage $tokenStorage
+     * @param \Symfony\Component\HttpKernel\Debug\TraceableEventDispatcher $traceableEventDispatcher
+     */
     public function __construct(
         TokenStorage $tokenStorage,
         TraceableEventDispatcher $traceableEventDispatcher

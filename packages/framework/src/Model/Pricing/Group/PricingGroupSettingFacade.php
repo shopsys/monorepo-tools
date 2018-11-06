@@ -28,6 +28,12 @@ class PricingGroupSettingFacade
      */
     protected $setting;
 
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroupRepository $pricingGroupRepository
+     * @param \Shopsys\FrameworkBundle\Component\Domain\Domain $domain
+     * @param \Shopsys\FrameworkBundle\Component\Domain\AdminDomainTabsFacade $adminDomainTabsFacade
+     * @param \Shopsys\FrameworkBundle\Component\Setting\Setting $setting
+     */
     public function __construct(
         PricingGroupRepository $pricingGroupRepository,
         Domain $domain,

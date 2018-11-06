@@ -19,7 +19,7 @@ class DomainFactory
 
     /**
      * @param \Shopsys\FrameworkBundle\Component\Domain\Config\DomainsConfigLoader $domainsConfigLoader
-     * @param \Shopsys\FrameworkBundle\Component\Setting\Setting
+     * @param \Shopsys\FrameworkBundle\Component\Setting\Setting $setting
      */
     public function __construct(DomainsConfigLoader $domainsConfigLoader, Setting $setting)
     {

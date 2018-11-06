@@ -38,6 +38,13 @@ class CachedBestsellingProductFacade
      */
     protected $pricingGroupRepository;
 
+    /**
+     * @param \Doctrine\Common\Cache\CacheProvider $cacheProvider
+     * @param \Shopsys\FrameworkBundle\Model\Product\BestsellingProduct\BestsellingProductFacade $bestsellingProductFacade
+     * @param \Shopsys\FrameworkBundle\Model\Product\ProductRepository $productRepository
+     * @param \Shopsys\FrameworkBundle\Model\Product\ProductService $productService
+     * @param \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroupRepository $pricingGroupRepository
+     */
     public function __construct(
         CacheProvider $cacheProvider,
         BestsellingProductFacade $bestsellingProductFacade,

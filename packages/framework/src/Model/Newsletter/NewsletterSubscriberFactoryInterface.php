@@ -8,7 +8,7 @@ interface NewsletterSubscriberFactoryInterface
 {
     /**
      * @param string $email
-     * @param DateTimeImmutable $createdAt
+     * @param \DateTimeImmutable $createdAt
      * @param int $domainId
      * @return \Shopsys\FrameworkBundle\Model\Newsletter\NewsletterSubscriber
      */

@@ -28,6 +28,10 @@ class MigrateCommand extends AbstractCommand
      */
     private $migrationsLock;
 
+    /**
+     * @param \Doctrine\ORM\EntityManagerInterface $em
+     * @param \Shopsys\MigrationBundle\Component\Doctrine\Migrations\MigrationsLock $migrationsLock
+     */
     public function __construct(
         EntityManagerInterface $em,
         MigrationsLock $migrationsLock
@@ -91,6 +95,9 @@ class MigrateCommand extends AbstractCommand
         }
     }
 
+    /**
+     * @param \Symfony\Component\Console\Output\OutputInterface $output
+     */
     private function executeCheckSchemaCommand(OutputInterface $output)
     {
         $checkSchemaCommand = $this->getApplication()->find('shopsys:migrations:check-schema');

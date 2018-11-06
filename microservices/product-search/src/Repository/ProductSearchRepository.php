@@ -19,6 +19,11 @@ class ProductSearchRepository
         $this->client = $client;
     }
 
+    /**
+     * @param int $domainId
+     * @param string $searchText
+     * @return array
+     */
     public function getProductIdsBySearchText(int $domainId, string $searchText): array
     {
         if (!$searchText) {

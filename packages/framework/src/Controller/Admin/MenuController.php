@@ -11,6 +11,9 @@ class MenuController extends AdminBaseController
      */
     protected $domainFacade;
 
+    /**
+     * @param \Shopsys\FrameworkBundle\Component\Domain\DomainFacade $domainFacade
+     */
     public function __construct(DomainFacade $domainFacade)
     {
         $this->domainFacade = $domainFacade;

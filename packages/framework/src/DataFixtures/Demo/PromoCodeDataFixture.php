@@ -19,6 +19,10 @@ class PromoCodeDataFixture extends AbstractReferenceFixture
      */
     private $promoCodeDataFactory;
 
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Order\PromoCode\PromoCodeFacade $promoCodeFacade
+     * @param \Shopsys\FrameworkBundle\Model\Order\PromoCode\PromoCodeDataFactoryInterface $promoCodeDataFactory
+     */
     public function __construct(
         PromoCodeFacade $promoCodeFacade,
         PromoCodeDataFactoryInterface $promoCodeDataFactory

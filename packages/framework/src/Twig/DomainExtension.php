@@ -29,6 +29,12 @@ class DomainExtension extends \Twig_Extension
      */
     private $domainFacade;
 
+    /**
+     * @param mixed $domainImagesUrlPrefix
+     * @param \Symfony\Component\Asset\Packages $assetPackages
+     * @param \Shopsys\FrameworkBundle\Component\Domain\Domain $domain
+     * @param \Shopsys\FrameworkBundle\Component\Domain\DomainFacade $domainFacade
+     */
     public function __construct(
         $domainImagesUrlPrefix,
         Packages $assetPackages,

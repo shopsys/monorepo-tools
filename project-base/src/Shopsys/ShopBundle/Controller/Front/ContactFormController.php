@@ -27,6 +27,11 @@ class ContactFormController extends FrontBaseController
      */
     private $domain;
 
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\ContactForm\ContactFormFacade $contactFormFacade
+     * @param \Shopsys\FrameworkBundle\Model\LegalConditions\LegalConditionsFacade $legalConditionsFacade
+     * @param \Shopsys\FrameworkBundle\Component\Domain\Domain $domain
+     */
     public function __construct(
         ContactFormFacade $contactFormFacade,
         LegalConditionsFacade $legalConditionsFacade,

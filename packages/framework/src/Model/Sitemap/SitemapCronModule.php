@@ -12,6 +12,9 @@ class SitemapCronModule implements SimpleCronModuleInterface
      */
     private $sitemapFacade;
 
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Sitemap\SitemapFacade $sitemapFacade
+     */
     public function __construct(SitemapFacade $sitemapFacade)
     {
         $this->sitemapFacade = $sitemapFacade;

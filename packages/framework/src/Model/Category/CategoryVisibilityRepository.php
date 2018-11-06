@@ -24,6 +24,11 @@ class CategoryVisibilityRepository
      */
     private $categoryVisibilityRecalculationScheduler;
 
+    /**
+     * @param \Doctrine\ORM\EntityManagerInterface $em
+     * @param \Shopsys\FrameworkBundle\Component\Domain\Domain $domain
+     * @param \Shopsys\FrameworkBundle\Model\Category\CategoryVisibilityRecalculationScheduler $categoryVisibilityRecalculationScheduler
+     */
     public function __construct(
         EntityManagerInterface $em,
         Domain $domain,

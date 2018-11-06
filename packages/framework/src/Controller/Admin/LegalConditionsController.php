@@ -21,6 +21,10 @@ class LegalConditionsController extends AdminBaseController
      */
     protected $legalConditionsFacade;
 
+    /**
+     * @param \Shopsys\FrameworkBundle\Component\Domain\AdminDomainTabsFacade $adminDomainTabsFacade
+     * @param \Shopsys\FrameworkBundle\Model\LegalConditions\LegalConditionsFacade $legalConditionsFacade
+     */
     public function __construct(
         AdminDomainTabsFacade $adminDomainTabsFacade,
         LegalConditionsFacade $legalConditionsFacade
@@ -31,6 +35,7 @@ class LegalConditionsController extends AdminBaseController
 
     /**
      * @Route("/legal-conditions/setting/")
+     * @param \Symfony\Component\HttpFoundation\Request $request
      */
     public function settingAction(Request $request)
     {

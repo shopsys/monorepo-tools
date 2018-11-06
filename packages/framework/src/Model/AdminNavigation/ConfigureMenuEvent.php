@@ -28,6 +28,10 @@ class ConfigureMenuEvent extends Event
      */
     private $menu;
 
+    /**
+     * @param \Knp\Menu\FactoryInterface $menuFactory
+     * @param \Knp\Menu\ItemInterface $menu
+     */
     public function __construct(FactoryInterface $menuFactory, ItemInterface $menu)
     {
         $this->menuFactory = $menuFactory;

@@ -7,6 +7,10 @@ use Tests\ShopBundle\Test\Codeception\AcceptanceTester;
 
 class LoginAsCustomerCest
 {
+    /**
+     * @param \Tests\ShopBundle\Test\Codeception\AcceptanceTester $me
+     * @param \Tests\ShopBundle\Acceptance\acceptance\PageObject\Admin\LoginPage $loginPage
+     */
     public function testLoginAsCustomer(AcceptanceTester $me, LoginPage $loginPage)
     {
         $me->wantTo('login as a customer from admin');

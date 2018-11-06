@@ -19,6 +19,10 @@ class HeurekaFeed implements FeedInterface
      */
     protected $feedItemFacade;
 
+    /**
+     * @param \Shopsys\ProductFeed\HeurekaBundle\HeurekaFeedInfo $feedInfo
+     * @param \Shopsys\ProductFeed\HeurekaBundle\Model\FeedItem\HeurekaFeedItemFacade $feedItemFacade
+     */
     public function __construct(HeurekaFeedInfo $feedInfo, HeurekaFeedItemFacade $feedItemFacade)
     {
         $this->feedInfo = $feedInfo;

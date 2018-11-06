@@ -14,11 +14,19 @@ class SearchController extends Controller
      */
     private $productSearchRepository;
 
+    /**
+     * @param \Shopsys\MicroserviceProductSearch\Repository\ProductSearchRepository $productSearchRepository
+     */
     public function __construct(ProductSearchRepository $productSearchRepository)
     {
         $this->productSearchRepository = $productSearchRepository;
     }
 
+    /**
+     * @param \Symfony\Component\HttpFoundation\Request $request
+     * @param int $domainId
+     * @return \Symfony\Component\HttpFoundation\JsonResponse
+     */
     public function productIdsAction(Request $request, int $domainId): JsonResponse
     {
         $searchText = $request->query->get('searchText', '');

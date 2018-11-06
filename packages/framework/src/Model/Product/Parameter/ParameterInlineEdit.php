@@ -23,6 +23,12 @@ class ParameterInlineEdit extends AbstractGridInlineEdit
      */
     private $parameterDataFactory;
 
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Product\Parameter\ParameterGridFactory $parameterGridFactory
+     * @param \Shopsys\FrameworkBundle\Model\Product\Parameter\ParameterFacade $parameterFacade
+     * @param \Symfony\Component\Form\FormFactoryInterface $formFactory
+     * @param \Shopsys\FrameworkBundle\Model\Product\Parameter\ParameterDataFactoryInterface $parameterDataFactory
+     */
     public function __construct(
         ParameterGridFactory $parameterGridFactory,
         ParameterFacade $parameterFacade,

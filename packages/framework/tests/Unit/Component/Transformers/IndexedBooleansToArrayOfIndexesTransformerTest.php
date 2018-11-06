@@ -20,6 +20,8 @@ class IndexedBooleansToArrayOfIndexesTransformerTest extends TestCase
 
     /**
      * @dataProvider transformValuesProvider
+     * @param mixed $value
+     * @param mixed $expected
      */
     public function testTransform($value, $expected)
     {
@@ -42,6 +44,8 @@ class IndexedBooleansToArrayOfIndexesTransformerTest extends TestCase
 
     /**
      * @dataProvider reverseTransformValuesProvider
+     * @param mixed $value
+     * @param mixed $expected
      */
     public function testReverseTransform($value, $expected)
     {

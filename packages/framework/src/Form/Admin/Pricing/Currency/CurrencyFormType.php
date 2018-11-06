@@ -24,6 +24,10 @@ class CurrencyFormType extends AbstractType
      */
     private $localization;
 
+    /**
+     * @param \CommerceGuys\Intl\Currency\CurrencyRepositoryInterface $intlCurrencyRepository
+     * @param \Shopsys\FrameworkBundle\Model\Localization\Localization $localization
+     */
     public function __construct(
         CurrencyRepositoryInterface $intlCurrencyRepository,
         Localization $localization
