@@ -147,7 +147,7 @@ If you want to switch it to another locale, override the method `getAdminLocale(
 ### 4. Change the url address for an existing domain
 
 #### 4.1 Change the url address
-Change the url address in the configuration of the domain in `app/config/domains.yml`.
+Change the url address in the configuration of the domain in `app/config/domains_urls.yml`.
 
 *Note: When you add a domain with the new url address on the MacOS platform, you need to enable this url address also in the network interface, see [Installation Using Docker for MacOS](https://github.com/shopsys/shopsys/blob/master/docs/installation/installation-using-docker-macos.md#11-enable-second-domain-optional)*
 
