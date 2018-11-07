@@ -19,7 +19,7 @@ The menu template works similarly to the default `knp_menu.html.twig` but it use
 
 ## Javascript
 
-The behavior of the side menu is controlled via the JS component [`Shopsys.sideMenu`](/packages/framework/src/Resources/scripts/admin/sideMenu.js). 
+The behavior of the side menu is controlled via the JS component [`Shopsys.sideMenu`](/packages/framework/src/Resources/scripts/admin/sideMenu.js).
 
 ## Icons
 
@@ -34,7 +34,7 @@ A list of all supported icons can be found in `docs/generated/webfont-admin-svg.
 
 There is an extra boolean attribute `superadmin` supported to allow highlighting of restricted access of the menu.
 
-It's only used for the visual effect, the restriction itself has to be done manually using the method `AuthorizationCheckerInterface::isGranted(Roles::ROLE_SUPER_ADMIN)`. 
+It's only used for the visual effect, the restriction itself has to be done manually using the method `AuthorizationCheckerInterface::isGranted(Roles::ROLE_SUPER_ADMIN)`.
 
 ## Events
 
@@ -42,7 +42,7 @@ After building of the whole menu a `ConfigureMenuEvent::SIDE_MENU_ROOT` event is
 After adding each of the submenus, a different event is dispatched.
 You can take a look at the class [`ConfigureMenuEvent`](/packages/framework/src/Model/AdminNavigation/ConfigureMenuEvent.php) to see all the events and their internals.
 
-These can be used to [extend the menu](https://symfony.com/doc/master/bundles/KnpMenuBundle/events.html), either from the project repository or from modules. 
+These can be used to [extend the menu](https://symfony.com/doc/master/bundles/KnpMenuBundle/events.html), either from the project repository or from modules.
 
 ## Routing extension
 

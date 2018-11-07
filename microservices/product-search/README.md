@@ -13,7 +13,7 @@ This container is configured in [docker-compose.yml](https://github.com/shopsys/
 As the base of the microservice, we used micro-kernel which is made up of [Symfony 4](https://symfony.com/4).
 This leanest Symfony version is highly optimized and it is suitable for this type of project.
 
-For the search process is used a super fast no-SQL database Elasticsearch. For more information about the Elasticsearch on Shopsys Framework, see [Product search via Elasticsearch]((https://github.com/shopsys/shopsys/blob/master/docs/introduction/product-search-via-elasticsearch.md).) 
+For the search process is used a super fast no-SQL database Elasticsearch. For more information about the Elasticsearch on Shopsys Framework, see [Product search via Elasticsearch]((https://github.com/shopsys/shopsys/blob/master/docs/introduction/product-search-via-elasticsearch.md).)
 
 ## Installation
 Microservice is installed by running container from image, during build of image all dependencies gets installed and nginx with php-fpm si configured to allow traffic into microservice.
@@ -26,7 +26,7 @@ If you don't use Docker, please check [Shopsys Framework Native Installation Gui
 
 ### MicroserviceClient component
 To call the microservice from the Shopsys Framework based application, there is an already prepared component [MicroserviceClient](/packages/framework/src/Component/Microservice/MicroserviceClient.php).
-The instance of this component is parametrized with the URL on which the microservice is available. 
+The instance of this component is parametrized with the URL on which the microservice is available.
 
 Instance of `MicroserviceClient` for the Microservice Product Search:
 ```yaml
@@ -43,14 +43,14 @@ Search with the usage of Microservice Product Search is done by calling the meth
 ```php
 public function get(string $resource, array $parameters = [])
 {
-    // ...   
+    // ...  
 }
 ```
 A resource is represented with the specific uri address.
 
 They are two required parameters to call the Microservice Product Search:
 * **searchText** - the search string
-* **domainId** - the e-shop domain to search for. 
+* **domainId** - the e-shop domain to search for.
 Some attributes of a product can be different across the domains.
 
 Example:
@@ -73,7 +73,7 @@ The response is represented as the JSON.
 Microservice Product Search is a Symfony based application that uses [Monolog](https://github.com/Seldaek/monolog) with [symfony/monolog-bundle](https://github.com/symfony/monolog-bundle) as a logging tool.
 By default, the logs are routed into a named pipe `/tmp/log-pipe` (the same way as [Logging in the main application](https://github.com/shopsys/shopsys/blob/master/docs/introduction/logging.md) works).
 
-To see the logs simply run: 
+To see the logs simply run:
 ```
 docker-compose logs | grep 'microservice'
 ```

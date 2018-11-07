@@ -3,7 +3,7 @@
 ## Introduction
 This article describes the architecture of Shopsys Framework from the viewpoint of packages
 (in a contrast to application layers, about which you can read in the [separate article](./basics-about-model-architecture.md)).
-After you finish reading the article, you will know 
+After you finish reading the article, you will know
 how to start an implementation, how to perform upgrades of your own project based on Shopsys Framework
 and you will understand what modules are.
 
@@ -23,9 +23,9 @@ The package is open-box so you will create your own copy of the package and then
 [Glass-box extensibility](https://en.wikipedia.org/wiki/Extensibility#Glass-Box) does not allow any modifications to the original package code and therefore creates
 a clear separation between your code and the code maintained by somebody else (Composer places this code in the vendor directory).
 
-The [`shopsys/framework`](https://github.com/shopsys/framework) 
+The [`shopsys/framework`](https://github.com/shopsys/framework)
 contains business logic of a basic online store, including web admin, and is designed as a glass-box.
-Shopsys Framework modules are glass-box too and are described below. 
+Shopsys Framework modules are glass-box too and are described below.
 
 ### Modules
 In every project, there is a lot of code dedicated to features which are not related to the core of your business,

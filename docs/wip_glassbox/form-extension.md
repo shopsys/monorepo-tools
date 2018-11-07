@@ -1,5 +1,5 @@
 # Form Extension
-In this document we will be explaining the actual state of our forms and their extensions. Right now, 
+In this document we will be explaining the actual state of our forms and their extensions. Right now,
 solution of extending forms is not complete and there will be several tasks that will assure better extending.
 
 At this time we do not have every single form in our application ready for extension, the list of not prepared
@@ -22,7 +22,7 @@ Group type is used for creating groups of containers. It is not mapped onto any 
 so you can work with forms in this group same as you were before. `GroupType` makes sure to render your fields into nicely
 styled `div` wrap.
 
-`GroupType` comes with few options that you can use for even more comfortable work. 
+`GroupType` comes with few options that you can use for even more comfortable work.
 
 #### `label`
 Label is used for displaying heading of section for example in `CustomerFormType` all user data like name, last name or
@@ -37,7 +37,7 @@ Sometimes form needs to only display information but does not need to change and
 there is `DisplayOnlyType` which does not map property onto `entity` and let you to display your own data.
 
 ### [WarningMessageType](../../packages/framework/src/Form/WarningMessageType.php)
-Sometimes the form needs to contain some information that is important for viewer, for this usage there is  `WarningMessageType` 
+Sometimes the form needs to contain some information that is important for viewer, for this usage there is  `WarningMessageType`
 that shows highlighted message with warning icon.
 
 ### [DisplayOnlyUrlType](../../packages/framework/src/Form/DisplayOnlyUrlType.php)
@@ -51,7 +51,7 @@ Imagine that you have added new property into `Product entity` and you want this
 using forms.
 
 For this cases you can use `FormExtensions` which extends `AbstractTypeExtension`, which has function called `getParrent()`,
-implement this function and return `class` of `ProductFormType` and add your fields into form. 
+implement this function and return `class` of `ProductFormType` and add your fields into form.
 
 ## Adding your own form type
 If you want to display form type differently or you just want to create your own form type.
@@ -59,7 +59,7 @@ If you want to display form type differently or you just want to create your own
 ### Changing existing form type
 If you want to change way the form is rendered or if you want to add your own classes you need to follow few steps.
 Many of our forms have their own
-theme which describe on how to render form row. These files are situated in `Resource/views/Form` folder. 
+theme which describe on how to render form row. These files are situated in `Resource/views/Form` folder.
 Copy theme of form type you want to change into `project-base` directory and replace file you want to
 change with your own file in `twig/form_themes` in `app/config/packages/twig.yml` file. Now you can change whatever you want.
 
@@ -72,7 +72,7 @@ rendering default symfony rows
 You can add your own form type if you want. Just create your own FormType, for example `AmazingFormType`, if you want
 to influence how this form type will be displayed you need to create theme for this form type.
 
-Create new file into `Resource/views/Form` directory, Name it for example `amazingFields.html.twig` and register 
+Create new file into `Resource/views/Form` directory, Name it for example `amazingFields.html.twig` and register
 this theme into `twig/form_themes` in `app/config/packages/twig.yml`.
 
 Now you can define how form type will be rendered. There are two options with which you can influence rendering of form type.
@@ -83,6 +83,5 @@ Form row is used for rendering whole row, including the label of form, your icon
 ### `form_widget`
 Form widget defines rendering of actual input.
 
-Just remember that you need to let `Symfony` know which form type you are defining. If i would try to define 
+Just remember that you need to let `Symfony` know which form type you are defining. If i would try to define
 rendering of my `AmazingFormType` my `form_widget` and `form_row` should be named `amazing_widget` and `amazing_row`.
- 

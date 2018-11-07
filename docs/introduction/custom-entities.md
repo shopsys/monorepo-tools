@@ -43,7 +43,7 @@ When the entity is completed, you have to ensure the system registers it properl
 A convinient way is to [generate migration](console-commands-for-application-management-phing-targets.md#db-migrations-generate).
 * Execute console command `php phing db-migrations-generate`
 
-    *Note: In this step you were using Phing target `db-migrations-generate`. 
+    *Note: In this step you were using Phing target `db-migrations-generate`.
     More information about what Phing targets are and how they work can be found in [Console Commands for Application Management (Phing Targets)](/docs/introduction/console-commands-for-application-management-phing-targets.md)*
 
 * We encourage you to check this migration if everything is set as expected.

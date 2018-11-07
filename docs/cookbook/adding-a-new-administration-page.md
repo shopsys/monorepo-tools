@@ -55,11 +55,11 @@ The template should extend `@ShopsysFramework/Admin/Layout/layoutWithPanel.html.
 The content of the page is just a simple [Twitter widget](https://publish.twitter.com/) but you can put any content in your page.
 You can use the controller to pass some parameters to your template.
 Feel free to examine other controllers for inspiration.
- 
+
 If you're new to Twig, you can take a look at [Symfony Templating documentation](http://symfony.com/doc/current/templating.html).
 
 Now the page should load correctly and display the newest tweets of [@ShopsysFW](https://twitter.com/ShopsysFW).
-But to access it, you still need to open a specific URL... 
+But to access it, you still need to open a specific URL...
 
 ## Side menu and breadcrumbs
 The admin side menu is implemented by [KnpMenuBundle](https://symfony.com/doc/master/bundles/KnpMenuBundle/index.html) and to extend it, you can use [events](https://symfony.com/doc/master/bundles/KnpMenuBundle/events.html).

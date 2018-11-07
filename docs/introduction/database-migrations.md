@@ -6,7 +6,7 @@ Our [MigrationsBundle](https://hithub.com/shopsys/migrations) supports the insta
 ## Where to store migrations
 
 Migrations should be saved in a directory `Migrations` in the root of any registered bundle.
- 
+
 Just use the namespace of your bundle with `Migrations` at the end (eg. `\Shopsys\FrameworkBundle\Migrations`) and extend the class `\Shopsys\MigrationBundle\Component\Doctrine\Migrations\AbstractMigration`.
 From now on, the migrations will be automatically registered for installation.
 
@@ -20,7 +20,7 @@ Just run `php phing db-migrations-generate` in your console.
 A new migration will be generated in the correct namespace.
 You should always check the generated migrations, sometimes a minor manual change is required.
 
-*Note: If you are developing more than one bundle you will be prompt to select one as a target.* 
+*Note: If you are developing more than one bundle you will be prompt to select one as a target.*
 
 ## Running migrations
 

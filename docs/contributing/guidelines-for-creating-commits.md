@@ -5,7 +5,7 @@ Underestimating the importance of maintaining a clean git history can lead to ma
 
 ## What makes a good commit
 * **It is atomic** - it contains only related modifications (similar to the Single Responsibility Principle).
-* **It is a functional unit** - it contains all related modifications and tests and it should not break anything (that means, all tests pass). When you follow this rule, you can be sure that your application is functional at any revision point. 
+* **It is a functional unit** - it contains all related modifications and tests and it should not break anything (that means, all tests pass). When you follow this rule, you can be sure that your application is functional at any revision point.
 
 ## Commit messages
 We have agreed on a unified form of commit messages and have written down a few rules, so understanding of commit context is much easier.

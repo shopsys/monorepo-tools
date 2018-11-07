@@ -1,7 +1,7 @@
 # Merging to Master on Github
 
 We use several different approaches to merging commits into master. This article describes when to use which approach.
-All the scenarios presume that there are no conflicts with the base branch (i.e. with `master`). Otherwise, you have to resolve the conflicts locally. 
+All the scenarios presume that there are no conflicts with the base branch (i.e. with `master`). Otherwise, you have to resolve the conflicts locally.
 
 **Scenario 1: I have only one commit in my branch and I want to merge it into `master` branch.**
 - I can use the "Squash and merge" button on PR detail.
@@ -17,7 +17,7 @@ I have to add some suitable commit message that summarizes the whole modificatio
 
 ![Merge pull request](./img/github-merge-pull-request.png)
 
-- When my branch is not rebased on current master, I need to manually rebase and push-force it so I can use the "Merge pull request" button 
+- When my branch is not rebased on current master, I need to manually rebase and push-force it so I can use the "Merge pull request" button
 or I can do the whole merge manually:
 ```
 # checkout my branch that I want to merge

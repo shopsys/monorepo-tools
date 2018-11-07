@@ -15,9 +15,9 @@ If you want to add a new custom position, let us say on the product detail page,
 1. Create a new class that extends `AdvertPositionRegistry` and override `getAllLabelsIndexedByNames()` method where you add a translated description for your new advert position to the existing ones.
     ```php
     namespace Shopsys\ShopBundle\Model\Advert;
-    
+
     use Shopsys\FrameworkBundle\Model\Advert\AdvertPositionRegistry as BaseAdvertPositionRegistry;
-    
+
     class AdvertPositionRegistry extends BaseAdvertPositionRegistry
     {
         /**
@@ -27,7 +27,7 @@ If you want to add a new custom position, let us say on the product detail page,
         {
             $advertPositions = parent::getAllLabelsIndexedByNames();
             $advertPositions['productDetail'] = t('on product detail page');
-            
+
             return $advertPositions;
         }
     }
@@ -35,7 +35,7 @@ If you want to add a new custom position, let us say on the product detail page,
 
 2. In your `services.yml`, set your new class as an alias for the base one.
     ```yaml
-    Shopsys\FrameworkBundle\Model\Advert\AdvertPositionRegistry: 
+    Shopsys\FrameworkBundle\Model\Advert\AdvertPositionRegistry:
         class: Shopsys\ShopBundle\Model\Advert\AdvertPositionRegistry
     ```
 

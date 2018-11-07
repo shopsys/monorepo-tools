@@ -26,7 +26,7 @@ git rebase origin/master
 
 * You have to check your change using the command `php phing standards tests tests-acceptance` as it’s mentioned in [contributing](../../project-base/CONTRIBUTING.md).
 
-    *Note: In this step you were using multiple Phing targets. 
+    *Note: In this step you were using multiple Phing targets.
     More information about what Phing targets are and how they work can be found in [Console Commands for Application Management (Phing Targets)](/docs/introduction/console-commands-for-application-management-phing-targets.md)*
 
 * Please make sure you sign form to agree with the [license agreement](https://www.shopsys-framework.com/license-agreement).
@@ -35,12 +35,12 @@ git rebase origin/master
 * Now just wait for review of your change.
 
 ## 2. Changes after review
-During the review, reviewer will write comments how to improve the solution or fix bugs. CR can end in `Approved` or `RequestChanges` status when further edits are needed. After completing the CR, it is necessary to correct to correct errors encountered by the reviewer. 
+During the review, reviewer will write comments how to improve the solution or fix bugs. CR can end in `Approved` or `RequestChanges` status when further edits are needed. After completing the CR, it is necessary to correct to correct errors encountered by the reviewer.
 It would be good if you could respond to each comment so that we knew you were reading them.
 We use fixup commits for correcting pull request so the reviewer can see what edits were made. Once the changes are done, the branch must be pushed. Comments to commit message should be corrected after the fixup commit squash.
 
 #### Fixup commit usage:
-* Changes which you want to add to previous commits commit independently with ```git commit --fixup=hash```. Commit messages will be automatically completed.     
+* Changes which you want to add to previous commits commit independently with ```git commit --fixup=hash```. Commit messages will be automatically completed.  
 
 #### Hash commit on GitHub (in right):
 

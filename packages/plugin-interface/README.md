@@ -15,8 +15,8 @@ For specific functionality, such as generating product feeds, there are [separat
 For example usage see the `AcmeProductCrudExtension` in the CRUD extension section below.
 
 ### Storing data
-Best way to store your plugin data is to use Doctrine entities. 
-Create a folder (e.g. `src/Entity`) in your plugin and put your entities there. 
+Best way to store your plugin data is to use Doctrine entities.
+Create a folder (e.g. `src/Entity`) in your plugin and put your entities there.
 Then you need to create `DoctrineOrmMappingPass` and add it as `CompilerPass` in your `YourBundleNameBundle` class. This can be done like this:
 
 ```php
@@ -37,7 +37,7 @@ Then you need to create `DoctrineOrmMappingPass` and add it as `CompilerPass` in
             )
         );
     }
-    
+
 // ...
 
 ```
@@ -89,11 +89,11 @@ class AcmeProductCrudExtension implements PluginCrudExtensionInterface
     public function getData($productId)
     {
         $acmeProduct = $this->acmeProductFacade->findByProductId($productId);
-        
+
         $pluginData = [
             'attribute' => $acmeProduct->getAttribute(),
         ];
-        
+
         return $pluginData;
     }
 
@@ -101,7 +101,7 @@ class AcmeProductCrudExtension implements PluginCrudExtensionInterface
     {
         $acmeProductData = new AcmeProductData();
         $acmeProductData->attribute = $data['attribute'];
-        
+
         $this->acmeProductFacade->save($productId, $acmeProductData);
     }
 
@@ -143,14 +143,14 @@ class AcmeDataFixture implements PluginDataFixtureInterface
         $firstAcmeProductData->enableWeightCalculation = true;
         $firstAcmeProductData->weight = 42;
         $firstAcmeProductData->domainId = 1;
-        
+
         $this->acmeProductFacade->save($firstAcmeProductData);
-        
+
         $secondAcmeProductData = new AcmeProductData();
         $secondAcmeProductData->enableWeightCalculation = false;
         $secondAcmeProductData->weight = null;
         $secondAcmeProductData->domainId = 2;
-        
+
         $this->acmeProductFacade->save($secondAcmeProductData);
     }
 
@@ -158,7 +158,7 @@ class AcmeDataFixture implements PluginDataFixtureInterface
 ```
 
 ## CRON modules
-When your plugin needs to execute some task periodically, for example downloading currency exchange rates every six hours, you can use a CRON module. 
+When your plugin needs to execute some task periodically, for example downloading currency exchange rates every six hours, you can use a CRON module.
 
 There are 2 types of CRON module interfaces:
 - [`SimpleCronModuleInterface`](./src/Cron/SimpleCronModuleInterface.php)
@@ -187,12 +187,12 @@ class AcmeDataDownloadCronModule implements SimpleCronModuleInterface
      * @var \Symfony\Bridge\Monolog\Logger
      */
     private $logger;
-    
+
     public function setLogger(Logger $logger)
     {
         $this->logger = $logger;
     }
-    
+
     public function run()
     {
         $data = $this->downloadData();

@@ -40,7 +40,7 @@ include /etc/nginx/conf.d/*.conf;
 This will load every configuration files from `/etc/nginx/conf.d/` folder, in which we will create our new configurations.
 
 #### Allow jenkins to restart nginx service
-Every branch adds its piece of configuration into nginx. 
+Every branch adds its piece of configuration into nginx.
 All builds are run as user jenkins, but jenkins does not
 have permissions to restart services, so we add a piece of code into our `/etc/sudoers` file.
 
@@ -82,7 +82,7 @@ server {
                 proxy_set_header Host $host;
                 proxy_set_header X-Real-IP $remote_addr;
                 proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-                proxy_set_header X-Forwarded-Host $host;   
+                proxy_set_header X-Forwarded-Host $host;  
         }
 
 }
@@ -100,7 +100,7 @@ I don't want to write here full description on how to generate ssh keys, I think
 that [this article](https://help.github.com/articles/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent/) summarize it really well.
 
 Only thing that needs to be change is directory of ssh keys, you must remember that everything executed in jenkins is done by user jenkins.
-So you need to save ssh keys saved in jenkins home directory. If you struggle with where this home directory is, you can execute: 
+So you need to save ssh keys saved in jenkins home directory. If you struggle with where this home directory is, you can execute:
 
 ```
 less /etc/passwd
@@ -160,7 +160,7 @@ First create `docker-compose.yml` from `docker-compose.yml.dist` in `docker/conf
 cp -f $WORKSPACE/docker/conf/docker-compose.yml.dist $WORKSPACE/docker-compose.yml
 ```
 
-Running multiple projects in docker on same machine requires to change docker-compose to configure every project to have 
+Running multiple projects in docker on same machine requires to change docker-compose to configure every project to have
 unique ports and container name, see [docker-troubleshooting: Multiple projects ran in docker](../docker/docker-troubleshooting.md#multiple-projects---long-term-solution).
 
 We need to make this automatic on our CI. This can be done by handling 2 problems, ports and container names.
@@ -224,7 +224,7 @@ sed -i "s/\- \"$PORT_BASE_REDIS_ADMIN\:*/\- \"$PORT_REDIS_ADMIN:/" $WORKSPACE/do
 sed -i "s/\- \"$PORT_BASE_LIVERELOAD_JAVASCRIPT\:*/\- \"$PORT_LIVERELOAD_JAVASCRIPT:/" $WORKSPACE/docker-compose.yml
 ```
 
-Now we need to setup proxy for our job build. 
+Now we need to setup proxy for our job build.
 We need to set `$JOB_NAME` as part of the server name and proxy it into earlier defined container port.
 Then we need to copy our earlier created nginx template into `/etc/nginx/conf.d/` folder and set proxy:
 ```
@@ -280,7 +280,7 @@ cp $WORKSPACE/project-base/app/config/parameters_test.yml.dist $WORKSPACE/projec
 #### Set domains
 Now we just create domain file, in this case, we use branch name for domain name, and we add domain number into beginning of URL,
 that way domain names are related with the git branches, this makes jenkins more organized.
-    
+
 ```
 # Copy domains_urls.yml from the template
 cp $WORKSPACE/project-base/app/config/domains_urls.yml.dist $WORKSPACE/project-base/app/config/domains_urls.yml
@@ -302,7 +302,7 @@ done
 
 #### Create environment file
 During composer install process there also needs to be created environment file.
-We use our CI to test application in `PRODUCTION` mode but you can always change it to `DEVELOPMENT`. 
+We use our CI to test application in `PRODUCTION` mode but you can always change it to `DEVELOPMENT`.
 Development mode show symfony debug tool bar.
 
 ```
@@ -312,9 +312,9 @@ touch $WORKSPACE/PRODUCTION
 #### Composer cache and token
 We need to use composer for installation of application, but there are few pitfalls. Firstly, composer uses cache for already
 downloaded packages, but this cache is worthless since it is saved only into container. This way all of newly started containers
-will not have cache available and because of that, all builds will take way too long to build for no reason. 
+will not have cache available and because of that, all builds will take way too long to build for no reason.
 Secondly, our application does not contain composer lock so your machine will execute too many requests onto packagist server
-and composer will prompt you to generate token from github. 
+and composer will prompt you to generate token from github.
 Again, in default, you would need to set token for each instance individually.
 
 You can prevent all of these problems and make your builds fast and efficient by mounting composer folder onto local computer,
@@ -362,7 +362,7 @@ Install the application:
 /usr/bin/docker exec $JOB_NAME-shopsys-framework-php-fpm php phing db-create test-db-create build-demo-ci
 ```
 
-*Note: In this step you were using multiple Phing targets. 
+*Note: In this step you were using multiple Phing targets.
 More information about what Phing targets are and how they work can be found in [Console Commands for Application Management (Phing Targets)](/docs/introduction/console-commands-for-application-management-phing-targets.md)*
 
 Our template is done, now we just need to create actual jobs from this template.
@@ -373,7 +373,7 @@ These jobs makes jenkins more automatic and helps with keeping jenkins clean and
 These jobs can automatically create jobs using git branches, or properly delete them if they does not exist anymore.
 
 #### Jenkins autojobs
-This special job ensures automatic updating of jobs in Jenkins according to the state of the git repository. 
+This special job ensures automatic updating of jobs in Jenkins according to the state of the git repository.
 Job uses a template, that is created in the previous section of this cookbook.
 
 As first we need to configure the `autojobs-config.yml`, which contains configuration for `Jenkins autojobs`.
@@ -381,13 +381,13 @@ As first we need to configure the `autojobs-config.yml`, which contains configur
 Create `autojobs-config.yml` file into `/var/jenkins-templates/`:
 
 ```
-touch /var/jenkins-templates/autojobs-config.yml 
+touch /var/jenkins-templates/autojobs-config.yml
 ```
 
 Great, now we need to open this file in some editor to be able to write into it:
 
 ```
-jenkins: 'http://your-server-name.com:8080' 
+jenkins: 'http://your-server-name.com:8080'
 username: None
 password: None
 ```
@@ -400,11 +400,11 @@ repo: 'git@github.com:your/repository.git'
 ```
 
 Fill your credentials to your project repository.
- 
+
 ```
 template: 'template'
-``` 
- 
+```
+
 This defines where tool can find template for creation of new jobs, earlier we created our template and named it `template` so now we use it.
 
 This will copy configuration of `template` into every newly created job.
@@ -426,7 +426,7 @@ Keep it on true.
 
 `enable` option just keeps jobs enabled so they can be built.
 
-``` 
+```
 ignore:
   - 'refs/pull/.*'
 ```
@@ -464,7 +464,7 @@ and it cannot delete docker containers for us.
 
 To properly delete jobs that does not have any usage, we must create new tool.
 
-Create new job, name it for example `clear-old-workspaces` and set `Poll SCM` parameter in `Build triggers` section. 
+Create new job, name it for example `clear-old-workspaces` and set `Poll SCM` parameter in `Build triggers` section.
 We recommend to use this tool only at night, deleting of workspaces and containers can be
 pretty difficult operation so you don't want it to run every 5 minutes, just because you don't usually delete branches so often.
 
@@ -489,14 +489,14 @@ for WORKSPACE in $WORKSPACES; do
 
     cd $JENKINS_HOME/workspace/$WORKSPACE
     /usr/local/bin/docker-compose down
-    
+
     rm -f /etc/nginx/conf.d/$WORKSPACE.conf
-    
+
     sudo /opt/bin/wipe_workspace.sh $WORKSPACE
   fi
 done
-``` 
-This script delete each workspace, for which is already missing appropriate job (old job is removed by another process). 
+```
+This script delete each workspace, for which is already missing appropriate job (old job is removed by another process).
 At the same time, containers and volumes associated with removed workspaces are removed.
 
 Script also deletes nginx configuration file and use `wipe_workspace.sh` to delete directories.
@@ -535,7 +535,7 @@ sudo dockerd
 Second thing is that we need to set our composer token. Go to jenkins administration and run `Jenkins autojobs` tool, that will
 start first builds which will fail, on `composer install -o` and it will prompt you to start it manually.
 
-So select one of your jobs names and get into `container` in ssh. For example i will use master, but it does not really matter 
+So select one of your jobs names and get into `container` in ssh. For example i will use master, but it does not really matter
 which job will you choose:
 
 ```
@@ -549,11 +549,11 @@ since our composer folder is mounted on localhost.
 Now just start `Jenkins autojobs` tool again.
 
 ## Troubleshooting
-There are some limitations in number of networks that Docker can create. 
+There are some limitations in number of networks that Docker can create.
 Basically, you can encounter some problems if you have bigger amount of branches on one machine. Solution of this problems is out of scope of this tutorial.
 
 Please keep in mind that this is hardware heavy configuration, we recommend you to use at least 64GB of RAM and at least few hundreds GB of disk memory.
-If you decided to use this solution, please make sure that you create job to clean old workspaces. Remember that every container is 
+If you decided to use this solution, please make sure that you create job to clean old workspaces. Remember that every container is
 something like operating system and if you underestimate cleaning of containers and workspaces, it could fill your disk memory really quick.
 
 To be sure about cleaning more of unnecessary docker files, you can create job that would just execute `docker system prune`

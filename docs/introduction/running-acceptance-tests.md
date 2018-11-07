@@ -12,14 +12,14 @@ docker exec -it shopsys-framework-php-fpm sh
 *This is done via parameter `%overwrite_domain_url%` defined in `parameters_test.yml`.*
 *Everything should be configured for you by default but it is important to keep the domain URL overwriting in mind when dealing with acceptance tests.*
 
-If you are logged into your `php-fpm` container and have the `%overwrite_domain_url%` parameter properly set, 
+If you are logged into your `php-fpm` container and have the `%overwrite_domain_url%` parameter properly set,
 you can run acceptance tests:
 ```
 php phing tests-acceptance
 
 ```
 
-*Note: In this step you were using Phing target `tests-acceptance`. 
+*Note: In this step you were using Phing target `tests-acceptance`.
 More information about what Phing targets are and how they work can be found in [Console Commands for Application Management (Phing Targets)](/docs/introduction/console-commands-for-application-management-phing-targets.md)*
 
 ## Native installation
@@ -29,7 +29,7 @@ You must choose compatible versions of Google Chrome and ChromeDriver.
 As Chrome browser has auto-update enabled by default this may require you to update ChromeDriver from time to time.
 
 When installing Shopsys Framework natively, it is important to update parameters in `parameters_test.yml`:
-* `overwrite_domain_url: ~` (disables domain URL overwriting in `TEST` environment) 
+* `overwrite_domain_url: ~` (disables domain URL overwriting in `TEST` environment)
 * `selenium_server_host: 127.0.0.1`
 
 ### Installing Google Chrome browser

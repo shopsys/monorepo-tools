@@ -31,12 +31,12 @@ class AppKernel extends Kernel
             new Shopsys\ProductFeed\ZboziBundle\ShopsysProductFeedZboziBundle(),
             // ...
         ];
-        
+
         // ...
 
         return $bundles;
     }
-    
+
     // ...
 }
 ```
