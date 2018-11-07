@@ -76,6 +76,8 @@ For more detailed instructions, follow one of the installation guides:
 ## Documentation
 For documentation of Shopsys Framework itself, see [Shopsys Framework Knowledge Base](./docs/index.md).
 
+For the frequently asked questions, see [FAQ and Common Issues](./docs/introduction/faq-and-common-issues.md).
+
 ## Contributing
 If you have some ideas or you want to help to improve Shopsys Framework, let us know!
 We are looking forward to your insights, feedback, and improvements.
