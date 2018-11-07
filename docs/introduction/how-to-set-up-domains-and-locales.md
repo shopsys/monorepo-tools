@@ -40,7 +40,7 @@ Set the url address for the domain in `app/config/domains_urls.yml`.
 
 #### 1.3 Set up the application as "singledomain"
 Modify the value of the parameter `is-multidomain` in `build.xml` to `false`.
-This parameter modifies the behaviour of some phing targets - for example, the import of the demo data is modified in such a way, that the application will not try to import demo data for another domain.
+Based on this parameter, smoke and functional tests are run for a single domain, or multiple domains, respectively.
 
 #### 1.4 Locale settings
 Set up the locale of the domain according to the instructions in the section [Locale settings](#3-locale-settings)
@@ -73,7 +73,7 @@ Set the url address for the domain in `app/config/domains_urls.yml`.
 
 #### 2.3 Set up the application as "multidomain"
 Modify the value of the parameter `is-multidomain` in `build.xml` to `true` (this is the default value).
-This parameter modifies the behaviour of some phing targets - for example, the import of the demo data is modified in such a way, that the application will try to import demo data for another domain if they are available.
+Based on this parameter, smoke and functional tests are run for a single domain, or multiple domains, respectively.
 
 #### 2.4 Locale settings
 Set up the locale of the domain according to the instructions in the section [Locale settings](#3-locale-settings)
