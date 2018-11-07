@@ -10,8 +10,6 @@ It is a common modification when you need your e-commerce application and ERP sy
 
 1. Overwrite constructor for creating `Product` instances.
     ```php
-    <?php
-
     namespace Shopsys\ShopBundle\Model\Product;
 
     use Doctrine\ORM\Mapping as ORM;
@@ -83,8 +81,6 @@ It is a common modification when you need your e-commerce application and ERP sy
 
 1. Add public `extId` field into `Shopsys\ShopBundle\Model\Product\ProductData` class.
     ```php
-    <?php
-
     namespace Shopsys\ShopBundle\Model\Product;
 
     use Shopsys\FrameworkBundle\Model\Product\ProductData as BaseProductData;
@@ -105,8 +101,6 @@ It is a common modification when you need your e-commerce application and ERP sy
 [`Shopsys\FrameworkBundle\Model\Product\ProductDataFactoryInterface`](../../packages/framework/src/Model/Product/ProductDataFactoryInterface.php).*
 
     ```php
-    <?php
-
     namespace Shopsys\ShopBundle\Model\Product;
 
     use Shopsys\FrameworkBundle\Model\Product\Product as BaseProduct;
@@ -152,8 +146,6 @@ Shopsys\FrameworkBundle\Model\Product\ProductDataFactoryInterface: '@Shopsys\Sho
 1. Add your `extId` field into the form by editing `ProductFormTypeExtension` in `Shopsys\ShopBundle\Form\Admin` namespace.
 The original `ProductFormType` is set as the extended type by implementation of `getExtendedType()` method.
     ```php
-    <?php
-
     namespace Shopsys\ShopBundle\Form\Admin;
 
     use Shopsys\FrameworkBundle\Form\Admin\Product\ProductFormType;
@@ -189,8 +181,6 @@ The original `ProductFormType` is set as the extended type by implementation of 
     ```
 1. In your `Product` class, overwrite the `edit()` method.
     ```php
-    <?php
-
     namespace Shopsys\ShopBundle\Model\Product;
 
     use Shopsys\FrameworkBundle\Model\Product\ProductCategoryDomainFactoryInterface;
@@ -212,8 +202,6 @@ The original `ProductFormType` is set as the extended type by implementation of 
 1. In your `ProductDataFactory` class, update the `createFromProduct()` method so it sets your new `extId` field.
 
     ```php
-    <?php
-
     namespace Shopsys\ShopBundle\Model\Product;
 
     use Shopsys\FrameworkBundle\Model\Product\Product;
@@ -254,8 +242,6 @@ You need to fix your tests to reflect new changes:
 instance of `ProductData` is created directly. 
 so you need to use there your class:
 ```php
-<?php
-
 namespace Tests\ShopBundle\Functional\Model\Product;
 
 use Shopsys\ShopBundle\Model\Product\ProductData;

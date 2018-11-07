@@ -9,8 +9,6 @@ The first step to create a new page is creating a controller (for details, see [
 Create a class extending `AdminBaseController` in `src/Shopsys/ShopBundle/Controller/Admin` directory with a single method (action):
 
 ```php
-<?php
-
 namespace Shopsys\ShopBundle\Controller\Admin;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -81,8 +79,6 @@ In the subscriber, you should add a new child to the menu with the route of your
 As the Dashboard menu currently has no children, you can remove the link and add a new child with the original dashboard, so it's still accessible:
 
 ```php
-<?php
-
 namespace Shopsys\ShopBundle\Controller\Admin;
 
 use Knp\Menu\ItemInterface;

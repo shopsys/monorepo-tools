@@ -44,8 +44,6 @@ Even if you implement some way of protecting the application from side-effect (e
 
 ### Example test class
 ```php
-<?php
-
 namespace Tests\AppBundle\Smoke;
 
 use Shopsys\HttpSmokeTesting\Auth\BasicHttpAuth;

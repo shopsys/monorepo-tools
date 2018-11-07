@@ -3,7 +3,7 @@ This is a recommended configuration of PHP for project development using Shopsys
 
 ## Recommended `php.ini` settings
 ```
-; do not recognize code between <? and ?> tags as PHP source 
+; do not recognize code between '<?' and '?>' tags as PHP source 
 short_open_tag = Off
 
 ; some development CLI commands can be memory consuming

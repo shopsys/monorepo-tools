@@ -598,8 +598,6 @@ in your product feed plugin because the instances of `StandardFeedItemInterface`
 ###### Version 3.x and lower
 ```php
 // custom phpcs-fixer.php_cs
-<?php
-
 $originalConfig = include __DIR__ . '/../vendor/shopsys/coding-standards/build/phpcs-fixer.php_cs';
 
 $originalConfig->getFinder()

@@ -67,8 +67,6 @@ services:
 ```
 
 ```php
-<?php
-
 // ...
 class AcmeProductCrudExtension implements PluginCrudExtensionInterface
 {
@@ -132,8 +130,6 @@ services:
 ```
 
 ```php
-<?php
-
 class AcmeDataFixture implements PluginDataFixtureInterface
 {
     private $acmeProductFacade;
@@ -184,8 +180,6 @@ acme.data_download_cron_module:
 ```
 
 ```php
-<?php
-
 // ...
 class AcmeDataDownloadCronModule implements SimpleCronModuleInterface
 {
