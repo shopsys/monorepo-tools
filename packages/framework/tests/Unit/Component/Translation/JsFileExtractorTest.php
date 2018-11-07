@@ -17,7 +17,7 @@ class JsFileExtractorTest extends TestCase
     {
         $fileName = 'test.js';
 
-        $catalogue = $this->extract(__DIR__ . '/' . $fileName);
+        $catalogue = $this->extract(__DIR__ . '/Resources/' . $fileName);
 
         $expected = new MessageCatalogue();
 

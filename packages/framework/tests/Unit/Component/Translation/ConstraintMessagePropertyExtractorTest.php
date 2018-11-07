@@ -16,7 +16,7 @@ class ConstraintMessagePropertyExtractorTest extends TestCase
 {
     public function testMessagesAreExtractedFromConstraintClass(): void
     {
-        $file = new SplFileInfo(__DIR__ . '/ConstraintClass.php');
+        $file = new SplFileInfo(__DIR__ . '/Resources/ConstraintClass.php');
 
         $actualCatalogue = $this->extract($file);
 
@@ -35,7 +35,7 @@ class ConstraintMessagePropertyExtractorTest extends TestCase
 
     public function testNothingIsExtractedFromNonConstraintClass(): void
     {
-        $file = new SplFileInfo(__DIR__ . '/NonConstraintClass.php');
+        $file = new SplFileInfo(__DIR__ . '/Resources/NonConstraintClass.php');
 
         $actualCatalogue = $this->extract($file);
 
