@@ -33,7 +33,7 @@ class MultidomainMailTemplateDataFixture extends AbstractReferenceFixture implem
     /**
      * @param \Shopsys\FrameworkBundle\Model\Mail\MailTemplateFacade $mailTemplateFacade
      * @param \Shopsys\FrameworkBundle\Model\Mail\MailTemplateDataFactoryInterface $mailTemplateDataFactory
-     * @param \Shopsys\FrameworkBundle\Component\Domain\Domain
+     * @param \Shopsys\FrameworkBundle\Component\Domain\Domain $domain
      */
     public function __construct(
         MailTemplateFacade $mailTemplateFacade,

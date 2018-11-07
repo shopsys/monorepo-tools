@@ -22,6 +22,10 @@ class MultidomainNewsletterSubscriberDataFixture extends AbstractReferenceFixtur
      */
     private $domain;
 
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Newsletter\NewsletterFacade $newsletterFacade
+     * @param \Shopsys\FrameworkBundle\Component\Domain\Domain $domain
+     */
     public function __construct(
         NewsletterFacade $newsletterFacade,
         Domain $domain

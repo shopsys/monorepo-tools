@@ -35,7 +35,7 @@ class MultidomainPricingGroupDataFixture extends AbstractReferenceFixture implem
     /**
      * @param \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroupFacade $pricingGroupFacade
      * @param \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroupDataFactoryInterface $pricingGroupDataFactory
-     * @param \Shopsys\FrameworkBundle\Component\Domain\Domain
+     * @param \Shopsys\FrameworkBundle\Component\Domain\Domain $domain
      */
     public function __construct(
         PricingGroupFacade $pricingGroupFacade,

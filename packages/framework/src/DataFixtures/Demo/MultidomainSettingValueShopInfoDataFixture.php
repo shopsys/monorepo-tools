@@ -29,6 +29,10 @@ class MultidomainSettingValueShopInfoDataFixture extends AbstractReferenceFixtur
      */
     private $domain;
 
+    /**
+     * @param \Shopsys\FrameworkBundle\Component\Setting\Setting $setting
+     * @param \Shopsys\FrameworkBundle\Component\Domain\Domain $domain
+     */
     public function __construct(Setting $setting, Domain $domain)
     {
         $this->setting = $setting;

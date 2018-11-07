@@ -32,7 +32,7 @@ class MultidomainCategoryDataFixture extends AbstractReferenceFixture implements
     /**
      * @param \Shopsys\FrameworkBundle\Model\Category\CategoryFacade $categoryFacade
      * @param \Shopsys\FrameworkBundle\Model\Category\CategoryDataFactoryInterface $categoryDataFacade
-     * @param \Shopsys\FrameworkBundle\Component\Domain\Domain
+     * @param \Shopsys\FrameworkBundle\Component\Domain\Domain $domain
      */
     public function __construct(
         CategoryFacade $categoryFacade,

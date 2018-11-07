@@ -33,6 +33,12 @@ class MultidomainUserDataFixture extends AbstractReferenceFixture implements Dep
      */
     private $domain;
 
+    /**
+     * @param \Shopsys\FrameworkBundle\DataFixtures\Demo\UserDataFixtureLoader $loaderService
+     * @param \Shopsys\FrameworkBundle\Model\Customer\CustomerFacade $customerFacade
+     * @param \Faker\Generator $faker
+     * @param \Shopsys\FrameworkBundle\Component\Domain\Domain $domain
+     */
     public function __construct(
         UserDataFixtureLoader $loaderService,
         CustomerFacade $customerFacade,

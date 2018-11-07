@@ -58,7 +58,7 @@ class MultidomainOrderDataFixture extends AbstractReferenceFixture implements De
      * @param \Shopsys\FrameworkBundle\Model\Order\OrderFacade $orderFacade
      * @param \Shopsys\FrameworkBundle\Model\Order\Preview\OrderPreviewFactory $orderPreviewFactory
      * @param \Shopsys\FrameworkBundle\Model\Order\OrderDataFactoryInterface $orderDataFactory
-     * @param \Shopsys\FrameworkBundle\Component\Domain\Domain
+     * @param \Shopsys\FrameworkBundle\Component\Domain\Domain $domain
      */
     public function __construct(
         UserRepository $userRepository,

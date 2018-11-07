@@ -24,6 +24,10 @@ class MultidomainBestsellingProductDataFixture extends AbstractReferenceFixture 
      */
     private $domain;
 
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Product\BestsellingProduct\ManualBestsellingProductFacade $manualBestsellingProductFacade
+     * @param \Shopsys\FrameworkBundle\Component\Domain\Domain $domain
+     */
     public function __construct(ManualBestsellingProductFacade $manualBestsellingProductFacade, Domain $domain)
     {
         $this->manualBestsellingProductFacade = $manualBestsellingProductFacade;
