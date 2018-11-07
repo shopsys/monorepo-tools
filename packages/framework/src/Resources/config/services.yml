@@ -340,6 +340,10 @@ services:
         tags:
             - { name: jms_translation.file_visitor }
 
+    Shopsys\FrameworkBundle\Component\Translation\ConstraintMessagePropertyExtractor:
+        tags:
+            - { name: jms_translation.file_visitor }
+
     Shopsys\FrameworkBundle\Component\Translation\ConstraintViolationExtractor:
       tags:
         - { name: jms_translation.file_visitor }

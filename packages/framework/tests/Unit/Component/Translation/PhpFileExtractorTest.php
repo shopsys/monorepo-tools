@@ -20,7 +20,7 @@ class PhpFileExtractorTest extends TestCase
     {
         $fileName = 'Controller.php';
 
-        $catalogue = $this->extract(__DIR__ . '/' . $fileName);
+        $catalogue = $this->extract(__DIR__ . '/Resources/' . $fileName);
 
         $expected = new MessageCatalogue();
 

@@ -28,7 +28,7 @@ class PoDumperTest extends TestCase
         $poDumper = new PoDumper();
 
         $dump = $poDumper->dump($catalogue);
-        $expectedDump = file_get_contents(__DIR__ . '/' . 'dump.po');
+        $expectedDump = file_get_contents(__DIR__ . '/Resources/dump.po');
 
         $this->assertEquals($expectedDump, $dump);
     }

@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\FrameworkBundle\Unit\Component\Translation;
+namespace Tests\FrameworkBundle\Unit\Component\Translation\Resources;
 
 use JMS\TranslationBundle\Annotation\Ignore;
 use Shopsys\FrameworkBundle\Component\Translation\Translator;

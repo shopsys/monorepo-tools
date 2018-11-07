@@ -4,6 +4,9 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Language: en\n"
 
+msgid "Address {{ url }} already exists."
+msgstr ""
+
 msgid "Availability name cannot be longer than {{ limit }} characters"
 msgstr ""
 
@@ -40,7 +43,19 @@ msgstr ""
 msgid "Email cannot be longer then {{ limit }} characters"
 msgstr ""
 
+msgid "Email {{ email }} is already registered"
+msgstr ""
+
 msgid "Enter date in DD.MM.YYYY format"
+msgstr ""
+
+msgid "Field must contain {{ needle }}."
+msgstr ""
+
+msgid "Fields must not be identical"
+msgstr ""
+
+msgid "File extension {{ value }} is too long. It should have {{ limit }} character or less."
 msgstr ""
 
 msgid "First name cannot be longer then {{ limit }} characters"
@@ -95,6 +110,9 @@ msgid "Parameter name cannot be longer than {{ limit }} characters"
 msgstr ""
 
 msgid "Part number cannot be longer than {{ limit }} characters"
+msgstr ""
+
+msgid "Password cannot be local part of e-mail."
 msgstr ""
 
 msgid "Password cannot be longer then {{ limit }} characters"
@@ -328,6 +346,9 @@ msgstr ""
 msgid "Product name cannot be longer than {{ limit }} characters"
 msgstr ""
 
+msgid "Product parameters are duplicate."
+msgstr ""
+
 msgid "Promo code with this code already exists"
 msgstr ""
 
@@ -358,6 +379,9 @@ msgstr ""
 msgid "This field must be empty"
 msgstr ""
 
+msgid "This value is not a valid email address."
+msgstr ""
+
 msgid "Unit name cannot be longer than {{ limit }} characters"
 msgstr ""
 
@@ -373,6 +397,12 @@ msgstr ""
 msgid "VAT name cannot be longer than {{ limit }} characters"
 msgstr ""
 
+msgid "Value must not be neither of following: {{ array }}"
+msgstr ""
+
+msgid "Values are duplicate."
+msgstr ""
+
 msgid "Variable {{ needle }} is required"
 msgstr ""
 
@@ -380,6 +410,9 @@ msgid "Variant alias cannot be longer then {{ limit }} characters"
 msgstr ""
 
 msgid "You entered same product twice. In list of bestsellers can be product only once. Please correct it and then save form again."
+msgstr ""
+
+msgid "You have to select any domain."
 msgstr ""
 
 msgid "Zip code cannot be longer than {{ limit }} characters"
