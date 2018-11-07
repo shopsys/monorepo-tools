@@ -4,7 +4,7 @@ This section provides only the basic answers to some of the most frequently aske
 For more detailed information about the Shopsys Framework, please see [Shopsys Framework Knowledge Base](../index.md).
 
 ## What are the phing targets?
-Every phing target is a task that can be executed simply by php phing <target-name> command.
+Every phing target is a task that can be executed simply by `php phing <target-name>` command.
 See more about phing targets in [Console Commands for Application Management (Phing Targets)](./console-commands-for-application-management-phing-targets.md).
 
 ## What are the data fixtures good for?
@@ -37,6 +37,7 @@ Modifications are detected via git by comparison against the origin/master versi
 
 ## Is the application https ready or does it need some extra setting?
 Shopsys Framework is fully prepared for HTTPS.
+You can just use `https://<your-domain>` in your `domains_urls.yml` configuration file.
 Of course, an SSL certificate must be installed on your server.
 
 ## How can I easily translate and set up my new language constants?
@@ -64,11 +65,10 @@ See more about calculated attributes in the article [How to Work with Products](
 
 ## How do I change the environment (PRODUCTION/DEVELOPMENT/TEST)?
 The environment is determined by the existence of the files `PRODUCTION`, `DEVELOPMENT`, `TEST` in the root of your project.
-This file is created automatically during the run of a command `composer install`.
-If the command `composer install` is executed, the file `DEVELOPMENT` is created.
-If the command `composer install --no-dev` is executed, the file `PRODUCTION` is created.
+This file is created automatically during the run of a command `composer install` (it will prompt you to decide, default option is `DEVELOPMENT`).
+
 You can change the environment manually by using the command `php bin/console shopsys:environment:change`.
 
 ## Are some periodic tasks part of the Shopsys Framework (cron)?
 Yes, there is some prepared configuration for Shopsys Framework cron commands in a file `src/Resources/config/services/cron.yml` in `FrameworkBundle`.
-Do not forget to set up a cron on your server for every 5 minutes.
+Do not forget to set up a cron on your server to execute [`php phing cron`](/docs/introduction/console-commands-for-application-management-phing-targets.md#cron) every 5 minutes.
