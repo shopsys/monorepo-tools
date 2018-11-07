@@ -68,23 +68,19 @@ There is a list of all the repositories maintained by monorepo, changes in log b
 - *(optional)* [#557 - php-fpm image has standard workdir (/var/www/html) in ci stage](https://github.com/shopsys/shopsys/pull/557)
     - update your `docker/php-fpm/Dockerfile` and `kubernetes/deployments/webserver-php-fpm.yml` according to [the pull request](https://github.com/shopsys/shopsys/pull/557) to simplify the CI build
 - [#580 Removed trailing whitespaces from markdown files ](https://github.com/shopsys/shopsys/pull/580)
-    - run `docker-compose down` to turn off your containers
-    - run `docker-sync clean` so your volumes will be removed
-    - remove excluding of `docs` folder from `docker-sync.yml`
     - remove these lines from `.dockerignore`
         ```
         # ignore the docs (along with .md files in root dir)
         *.md
         docs
-        project-base/*.md
-        project-base/docs
         ```
-    - *(MacOS, Windows only)* 
-        - run `docker-compose down` to turn off your containers
+    - run `docker-compose down` to turn off your containers
+    - *(MacOS, Windows only)*
         - run `docker-sync clean` so your volumes will be removed
         - remove excluding of `docs` folder from `docker-sync.yml`
         - run `docker-sync start` to create volumes
     - run `docker-compose up -d --build --force-recreate` to start application
+    - phing target for checking and fixing standards has changed, update `build-dev.xml` according to the changes
 
 ### [shopsys/shopsys]
 - *(MacOS only)* [#503 updated docker-sync configuration](https://github.com/shopsys/shopsys/pull/503/)
@@ -158,11 +154,10 @@ There is a list of all the repositories maintained by monorepo, changes in log b
     - run `docker-compose down` to turn off your containers
     - *(MacOS, Windows only)*
         - run `docker-sync clean` so your volumes will be removed
-        - run `docker-compose down` to turn off your containers
-        - run `docker-sync clean` so your volumes will be removed
         - remove excluding of `docs` folder from `docker-sync.yml`
         - run `docker-sync start` to create volumes
     - run `docker-compose up -d --build --force-recreate` to start application
+    - phing target for checking and fixing standards has changed, update `build.xml` according to the changes
 
 ### [shopsys/coding-standards]
 - there are a few new standards, i.e. [new fixers enabled](https://github.com/shopsys/shopsys/pull/573/files#diff-709e8469a9fc8c8b45f8b285ac1a4c92) in the `easy-coding-standard.yml` config that enforce using annotations for all your methods:

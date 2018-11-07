@@ -228,6 +228,8 @@
             <arg value="--clear-cache" />
             <arg path="${path.src}" />
             <arg path="${path.tests}" />
+            <arg path="${path.root}/*.md" />
+            <arg path="${path.root}/docs" />
             <arg value="--verbose" />
         </exec>
     </target>
@@ -243,7 +245,8 @@
             <arg value="--clear-cache" />
             <arg value="--fix" />
             <arg path="${path.src}" />
-            <arg path="${path.tests}" />
+            <arg path="${path.root}/*.md" />
+            <arg path="${path.root}/docs" />
             <arg value="--verbose" />
         </exec>
     </target>
@@ -259,6 +262,8 @@
             <arg value="check" />
             <arg path="${path.src}" />
             <arg path="${path.tests}" />
+            <arg path="${path.root}/*.md" />
+            <arg path="${path.root}/docs" />
             <arg value="--verbose" />
         </exec>
     </target>
@@ -274,6 +279,8 @@
             <arg value="--fix" />
             <arg path="${path.src}" />
             <arg path="${path.tests}" />
+            <arg path="${path.root}/*.md" />
+            <arg path="${path.root}/docs" />
             <arg value="--verbose" />
         </exec>
     </target>

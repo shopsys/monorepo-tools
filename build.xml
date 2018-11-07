@@ -76,7 +76,11 @@
             <arg path="./packages/*/src"/>
             <arg path="./microservices/*/src"/>
             <arg path="./packages/*/tests" />
+            <arg path="./packages/*/*.md"/>
             <arg path="./microservices/*/tests"/>
+            <arg path="./microservices/*/*.md"/>
+            <arg path="./*.md"/>
+            <arg path="./docs"/>
         </exec>
         <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
             <arg value="${path.bin-console}" />
@@ -108,7 +112,11 @@
             <arg path="./packages/*/src"/>
             <arg path="./microservices/*/src"/>
             <arg path="./packages/*/tests" />
+            <arg path="./packages/*/*.md"/>
             <arg path="./microservices/*/tests"/>
+            <arg path="./microservices/*/*.md"/>
+            <arg path="./*.md"/>
+            <arg path="./docs"/>
         </exec>
         <exec executable="${path.eslint.executable}" passthru="true" checkreturn="true">
             <arg value="--color" />
@@ -129,7 +137,11 @@
             <arg path="./packages/*/src"/>
             <arg path="./microservices/*/src"/>
             <arg path="./packages/*/tests" />
+            <arg path="./packages/*/*.md"/>
             <arg path="./microservices/*/tests"/>
+            <arg path="./microservices/*/*.md"/>
+            <arg path="./*.md"/>
+            <arg path="./docs"/>
         </exec>
         <exec executable="${path.eslint.executable}" passthru="true" checkreturn="true">
             <arg value="--color" />
