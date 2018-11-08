@@ -26,9 +26,3 @@ docker
 project-base/docker
 !project-base/docker/php-fpm
 project-base/docker/php-fpm/Dockerfile
-
-# ignore the docs (along with .md files in root dir)
-*.md
-docs
-project-base/*.md
-project-base/docs

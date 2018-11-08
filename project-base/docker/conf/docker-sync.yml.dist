@@ -10,7 +10,6 @@ syncs:
             '.docker-sync',
             '.DS_Store',
             'docker',
-            'docs',
             'kubernetes',
             'nbproject',
             'node_modules',
