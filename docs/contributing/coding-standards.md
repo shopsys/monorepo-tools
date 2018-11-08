@@ -8,7 +8,7 @@ You can run all the standards checks by calling
 php phing standards
 ```
 
-*Note: In this step you were using Phing target `standards`. 
+*Note: In this step you were using Phing target `standards`.
 More information about what Phing targets are and how they work can be found in [Console Commands for Application Management (Phing Targets)](/docs/introduction/console-commands-for-application-management-phing-targets.md)*
 
 A lot of the violations of the rules can be fixed automatically by calling

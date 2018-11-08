@@ -21,8 +21,6 @@ composer require shopsys/product-feed-zbozi
 ### Register
 For the bundle to be loaded in your application you need to register it in the `app/AppKernel.php` file of your project:
 ```php
-<?php
-
 // ...
 class AppKernel extends Kernel
 {
@@ -33,12 +31,12 @@ class AppKernel extends Kernel
             new Shopsys\ProductFeed\ZboziBundle\ShopsysProductFeedZboziBundle(),
             // ...
         ];
-        
+
         // ...
 
         return $bundles;
     }
-    
+
     // ...
 }
 ```

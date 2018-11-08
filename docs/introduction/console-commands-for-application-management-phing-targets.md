@@ -54,7 +54,7 @@ Builds the application for production preserving your DB.
 
 Most important build command for production. Cleans cache, installs composer dependencies, installs npm, install assets, installs database migrations and much more.
 
-*Note: More about how to install and deploy your application in production can be found in [Installation Using Docker on Production Server](/docs/installation/installation-using-docker-on-production-server.md)* 
+*Note: More about how to install and deploy your application in production can be found in [Installation Using Docker on Production Server](/docs/installation/installation-using-docker-on-production-server.md)*
 
 #### build-demo-ci
 Most important build command for continuous integration server. Builds the whole application and after that runs all coding standards checks and all tests.
@@ -149,7 +149,7 @@ Runs performance tests on a newly built test database with performance data.
 It may take a few hours as the generation of performance data is very time-consuming. Should be executed on CI server only.
 
 The size of performance data to be generated and asserted limits can be configured via parameters defined in [`parameters_common.yml`](../../project-base/app/config/parameters_common.yml).
-You can easily override the default values in your `parameters.yml` or `parameters_test.yml` configuration files. 
+You can easily override the default values in your `parameters.yml` or `parameters_test.yml` configuration files.
 
 ### Other
 

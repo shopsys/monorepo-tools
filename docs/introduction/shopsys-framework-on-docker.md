@@ -1,4 +1,4 @@
-# Docker 
+# Docker
 
 This document provides basic information about how we leverage Docker on Shopsys
 Framework to make the work with it as easy as possible.
@@ -29,7 +29,7 @@ For details, you can read the [Introduction to Kubernetes](/docs/kubernetes/intr
 #### 3.1 docker-compose.yml
 [Docker-compose.yml](/project-base/docker/conf/docker-compose.yml.dist) file contains the definitions of containers that will be created for the installation
 of the Shopsys framework platform. Containers can communicate with each other. Data need to be saved
-into volumes, otherwise, these data will be lost after the container is closed. 
+into volumes, otherwise, these data will be lost after the container is closed.
 
 ##### Containers
 Examples of containers that we use:

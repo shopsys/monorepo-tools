@@ -10,7 +10,7 @@ This bundle provides commands which can be useful for database migrations:
 * `shopsys:migrations:migrate` executes all database migrations in one transaction.
     * the command supports installing migrations from multiple sources, so every bundle can have its own migrations
     * it creates a `migration-lock.yml` file in the project's root, persisting the order of execution
-    * migrations can be manually reordered or skipped if necessary 
+    * migrations can be manually reordered or skipped if necessary
 * `shopsys:migrations:generate` generates database migrations if the schema was changed
     * the command does not generate migrations that break backwards compatibility - eg. column dropping
     * prompts you to choose the location for migration file if you are developing more than one bundle

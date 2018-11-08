@@ -18,8 +18,8 @@ Then we install docker-compose using [installation guide](https://docs.docker.co
 
 ### Firewall
 
-It is very important to have our containers inaccessible from outside. 
-For that purpose we need to update `firewalld` configuration with these commands, 
+It is very important to have our containers inaccessible from outside.
+For that purpose we need to update `firewalld` configuration with these commands,
 because Docker overrides `firewalld` and publishes ports on the server by default.
 ```
 firewall-cmd --permanent --direct --add-chain ipv4 filter DOCKER
@@ -171,7 +171,7 @@ echo <<EOT | cat >> /usr/lib/firewalld/services/elasticsearch.xml
   <port protocol=""tcp"" port=""9300""/>
   <port protocol=""tcp"" port=""9200""/>
   <destination ipv4=""192.168.0.0/16 ""/>
-</service> 
+</service>
 EOT
 firewall-cmd --permanent --zone=public --add-service=elasticsearch
 firewall-cmd --reload
@@ -228,7 +228,7 @@ docker build \
     .
 ```
 Replace the `PERSONAL_ACCESS_TOKEN_FROM_GITHUB` string by the token generated on [Github -> Settings -> Developer Settings -> Personal access tokens](https://github.com/settings/tokens/new?scopes=repo&description=Composer+API+token).
-With `f` parameter we set path to Dockerfile that builds image. 
+With `f` parameter we set path to Dockerfile that builds image.
 With `t` parameter we set the name of built image.
 
 If we are building the image on different server than production server, we can push built image into docker registry of production server via ssh.
@@ -238,7 +238,7 @@ Before uploading the built image we perform cleanse of old images from the regis
 ```
 ssh -oStrictHostKeyChecking=no -i <PRIVATE_KEY_PATH> root@<YOUR_DOMAIN_HERE> docker image prune -f
 ```
-Then we can upload built image into registry of our server. 
+Then we can upload built image into registry of our server.
 ```
 docker save production-php-fpm | gzip | ssh -oStrictHostKeyChecking=no -i <PRIVATE_KEY_PATH> root@<YOUR_DOMAIN_HERE> 'gunzip | docker load'
 ```
@@ -251,7 +251,7 @@ We log into the server using ssh.
 Now we need to copy [`docker-compose-prod-deploy.yml.dist`](../../project-base/docker/conf/docker-compose.prod.yml.dist) into folder on the production server as `docker-compose.yml`.  
 After the image is in the registry of the production server we create docker containers and build application for production with clean DB and base data.  
 We use parameter `-p` to specify the name of the project and prefix for the volumes so these will be easily accessible.
-There are named volumes created under path `/var/lib/docker/volumes/` and one persisted folder `production-content` for all uploaded images and generated files that should not be removed.    
+There are named volumes created under path `/var/lib/docker/volumes/` and one persisted folder `production-content` for all uploaded images and generated files that should not be removed.  
 We create persisted folder with correct owner id `82` so internal docker `php-fpm` container user has access into the folder.
 ```
 mkdir /var/www/production-content
@@ -270,7 +270,7 @@ Then we create database and build the application.
 ```
 docker-compose -p production exec php-fpm ./phing db-create build-new
 ```
-*Note: In this step you were using multiple Phing targets. 
+*Note: In this step you were using multiple Phing targets.
 More information about what Phing targets are and how they work can be found in [Console Commands for Application Management (Phing Targets)](/docs/introduction/console-commands-for-application-management-phing-targets.md)*
 
 Now the application should be running.
@@ -290,12 +290,12 @@ Now we go to `/admin/dashboard/` and fulfill all requests that are demanding for
 
 We have running production shop project and we want to update it with some changes that were made in the project git repository.
 We need to follow some steps that will change old version of the shop for the new one.
- 
-To preserve created data we need to use phing target `build-deploy-part-2-db-dependent` for building application environment of `php-fpm` container, maintenance page is needed if there exist unapplied database migrations. 
+
+To preserve created data we need to use phing target `build-deploy-part-2-db-dependent` for building application environment of `php-fpm` container, maintenance page is needed if there exist unapplied database migrations.
 
 With each update of master branch in our repository we need to rebuild image based on [Docker Image Building](./installation-using-docker-on-production-server.md#docker-image-building) section.
 
-We log into the server using ssh.    
+We log into the server using ssh.  
 Now we are logged in production server and we start to deploy newly built production image.
 ```
 cd <PROJECT_ROOT_PATH> (e.g. /var/www/html)
@@ -332,6 +332,6 @@ docker rm -f build-php-fpm-container
 
 ## Conclusion
 
-Now we have running project based on [Shopsys Framework](https://github.com/shopsys/project-base) docker containers. 
+Now we have running project based on [Shopsys Framework](https://github.com/shopsys/project-base) docker containers.
 We know how to deploy changes that were made into project git repository.
 We have setup server with natively installed applications for storing persisted data on production server so there is no risk of loosing data with new deploys of the project.

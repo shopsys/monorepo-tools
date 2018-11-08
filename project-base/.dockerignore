@@ -22,7 +22,3 @@ kubernetes
 docker
 !docker/php-fpm
 docker/php-fpm/Dockerfile
-
-# ignore the docs (along with .md files in root dir)
-*.md
-docs

@@ -18,7 +18,7 @@ Details about internal workings of the implemented solution are described in the
 
 Class inheritance is a concept that object-oriented programmers are used to.
 All entity-related work can be done in a PHP class with all the comfort of IDE auto-completion, coding-standards etc.
-New-comers to Shopsys Framework can learn how to extend entities earlier due to this. 
+New-comers to Shopsys Framework can learn how to extend entities earlier due to this.
 
 The greatest disadvantage comes from the fact that in PHP you cannot extend multiple classes at once.
 In a nutshell, this means that a base entity cannot be extended by independent modules.
@@ -32,7 +32,7 @@ It prevents normalization of the database and may lead to lower performance in s
 There are a few Doctrine extensions in Shopsys Framework that manipulate meta-data of entities.
 As entity extension relies on meta-data manipulation as well, there were a few conflicts requiring an extra Doctrine event listener and specific order of execution.
 
-Ensuring compatibility with entity extension mechanism is something to be kept in mind when adding a new Doctrine extension. 
+Ensuring compatibility with entity extension mechanism is something to be kept in mind when adding a new Doctrine extension.
 
 ## Entity generation
 
@@ -71,4 +71,4 @@ If the inability of modules to alter base entities proves to be a problem in the
 Information from the modules could be combined, providing a way for modules to affect base entities.
 The generated entity could be further extended in the project, avoiding the need of regeneration after every single change.
 
-The possibility of mitigating the disadvantages and much easier implementation of entity extension approach convinced us to choose this way. 
+The possibility of mitigating the disadvantages and much easier implementation of entity extension approach convinced us to choose this way.

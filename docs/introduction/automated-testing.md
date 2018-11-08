@@ -9,7 +9,7 @@ For this reason Shopsys Framework comes with 5 types of automated tests:
 * [Performance tests](#performance-tests)
 
 Software testing, in general, is a very broad topic and requires learning and practice.
-The following paragraphs should help you in your path to answering questions like *"What should I test?"*, *"Which type of tests should I use for this particular functionality?"* or *"How many tests is enough?"* 
+The following paragraphs should help you in your path to answering questions like *"What should I test?"*, *"Which type of tests should I use for this particular functionality?"* or *"How many tests is enough?"*
 
 ## The purpose(s) of automated tests
 
@@ -82,7 +82,7 @@ When a test fails it provides detailed feedback to the developer.
 
 You can create similar unit tests anywhere in your directory `tests/Unit/`.
 If they are named with a prefix `Test` and are extending `\PHPUnit\Framework\TestCase` they will be executed during the [`tests` Phing target](./console-commands-for-application-management-phing-targets.md#tests).
-  
+
 ### Functional tests
 Even when all parts are working it is not guaranteed they work well together. Mocking can still be used for isolation when appropriate.
 

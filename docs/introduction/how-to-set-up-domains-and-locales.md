@@ -38,7 +38,7 @@ This configuration file contains informations about the domain ID, the domain id
 #### 1.2 Set up the url address
 Set the url address for the domain in `app/config/domains_urls.yml`.
 
-#### 1.3 Set up the application as "singledomain" 
+#### 1.3 Set up the application as "singledomain"
 Modify the value of the parameter `is-multidomain` in `build.xml` to `false`.
 This parameter modifies the behaviour of some phing targets - for example, the import of the demo data is modified in such a way, that the application will not try to import demo data for another domain.
 
@@ -50,7 +50,7 @@ Start the build, for example using a phing target
 ```
 php phing build-demo-dev
 ```
-*Note: In this step you were using Phing target `build-demo-dev`. 
+*Note: In this step you were using Phing target `build-demo-dev`.
 More information about what Phing targets are and how they work can be found in [Console Commands for Application Management (Phing Targets)](/docs/introduction/console-commands-for-application-management-phing-targets.md)*
 
 After the build is completed, a singledomain application is created.
@@ -71,7 +71,7 @@ Set the url address for the domain in `app/config/domains_urls.yml`.
 
 *Note: When you add a domain with the new url address on the MacOS platform, you need to enable this url address also in the network interface, see [Installation Using Docker for MacOS](https://github.com/shopsys/shopsys/blob/master/docs/installation/installation-using-docker-macos.md#11-enable-second-domain-optional)*
 
-#### 2.3 Set up the application as "multidomain" 
+#### 2.3 Set up the application as "multidomain"
 Modify the value of the parameter `is-multidomain` in `build.xml` to `true` (this is the default value).
 This parameter modifies the behaviour of some phing targets - for example, the import of the demo data is modified in such a way, that the application will try to import demo data for another domain if they are available.
 
@@ -121,8 +121,8 @@ Import the new routes configuration in `app/config/packages/shopsys_shop.yml`
 
 #### 3.3 Translations and messages
 In order to correctly display the labels like *Registration*, *Cart*, ..., create a file with translations of messages in `ShopBundle/Resources/translations/`.
-Modify the phing target `dump-translations-project-base` in `build-dev.xml` by adding the new locale as `<arg value="xx" />` where `xx` replace for the code of added locale. 
-Then run 
+Modify the phing target `dump-translations-project-base` in `build-dev.xml` by adding the new locale as `<arg value="xx" />` where `xx` replace for the code of added locale.
+Then run
 ```
 php phing dump-translations
 ```

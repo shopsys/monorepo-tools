@@ -13,10 +13,10 @@ This solution uses [*docker-sync*](http://docker-sync.io/) (for fast two-way syn
 * [GIT](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
 * [PHP](http://php.net/manual/en/install.windows.php)
 * [Docker for Windows](https://docs.docker.com/docker-for-windows/install/)
-    * Docker for Windows requires at least 4 GB of memory, otherwise, `composer install` can result in `Killed` status (we recommend to set 2 GB RAM, 1 CPU and 2 GB Swap in `Docker -> Preferences… -> Advanced`) 
+    * Docker for Windows requires at least 4 GB of memory, otherwise, `composer install` can result in `Killed` status (we recommend to set 2 GB RAM, 1 CPU and 2 GB Swap in `Docker -> Preferences… -> Advanced`)
 * [Docker-sync](http://docker-sync.io/) (installation guide [see below](./installation-using-docker-windows-10-pro-higher.md/#installation-of-docker-sync-for-windows))
 
-### Installation of Docker-sync for Windows 
+### Installation of Docker-sync for Windows
 
 * In settings of Windows docker check `Expose daemon on localhost:2375` and check drive option in `Shared Drives` tab, where the project will be installed, you will be prompted for your Windows credentials.
 * Enable WSL - Open the `Windows Control Panel`, `Programs and Features`, click on the left on `Turn Windows features on or off` and check `Windows Subsystem for Linux` near the bottom, restart of Windows is required.
@@ -79,7 +79,7 @@ This solution uses [*docker-sync*](http://docker-sync.io/) (for fast two-way syn
     sudo dpkg-reconfigure tzdata
     ```
 
-    Set WSL init script for mounting of computer drives from root path `/` instead of `/mnt` path. 
+    Set WSL init script for mounting of computer drives from root path `/` instead of `/mnt` path.
     ```
     echo -e [automount]\\nenabled = true\\nroot = /\\noptions = \"metadata,umask=22,fmask=11\" | sudo dd of=/etc/wsl.conf
     ```
@@ -109,7 +109,7 @@ composer create-project shopsys/project-base --stability=beta --no-install --kee
 cd project-base
 ```
 
-*Notes:* 
+*Notes:*
 - *The `--no-install` option disables installation of the vendors - this will be done later in the Docker container.*
 - *The `--keep-vcs` option initializes GIT repository in your project folder that is needed for diff commands of the application build and keeps the GIT history of `shopsys/project-base`.*
 - *The `--stability=beta` option enables you to install the project from the last beta release. Default value for the option is `stable` but there is no stable release yet.*

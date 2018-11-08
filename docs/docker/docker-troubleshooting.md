@@ -16,7 +16,7 @@ provides advices that will help you develop Shopsys Framework on docker without 
 ## How to Run Multiple Projects by Docker
 If you are using docker for more than one Shopsys Framework project, you might run into a problem with container names and their ports.
 Docker requires to have unique container name and port for each container and since our `docker-compose` is not dynamically initialized,
-it contains hard coded container names and ports and that makes running more projects in docker on same machine impossible without 
+it contains hard coded container names and ports and that makes running more projects in docker on same machine impossible without
 modifying your configuration.
 
 With that being said we got two options to solve this problem.
@@ -24,12 +24,12 @@ With that being said we got two options to solve this problem.
 ### Multiple Projects - Quick Solution - Only One Project Running at the Time
 This solution is simpler and is used if we only need one project running at the time.
 
-All we really need to do is to properly turn off `docker-compose`. 
+All we really need to do is to properly turn off `docker-compose`.
 
 Usually everyone shut off their `docker-compose` by running `docker-compose stop`, which is not correct way.
 
 This command is used to stop containers, not to delete them. That means that if you now try to start docker compose
-in other project, it will output error that there already are containers with that names. 
+in other project, it will output error that there already are containers with that names.
 That's true because these stopped containers are still registered in memory.
 
 To properly delete your workspace containers, run:
@@ -45,10 +45,10 @@ Now you can use same configuration in other project and it will work.
 This solution is more viable for someone who really needs to have projects ready to run in a few seconds and often end up having
 two or more projects running at the same time. So what if we don't want to always reinstall whole containers and we want our data to persist in volumes?
 
-Earlier we said that Docker needs to have unique container names and ports. 
+Earlier we said that Docker needs to have unique container names and ports.
 
 So how about changing their name?
-We recommend to replace `shopsys-framework` with your project name. For instance, php-fpm conainer that is defaultly named as 
+We recommend to replace `shopsys-framework` with your project name. For instance, php-fpm conainer that is defaultly named as
 `shopsys-framework-php-fpm` would now be named `my-project-name-php-fpm`.
 
 This would actually work only if you always downed `docker-compose` before switching between projects.
@@ -58,9 +58,9 @@ So we need to change the ports of the containers. Containers have their ports de
 
 ```
 8000:8000
-``` 
+```
 
-First one defines port exposed on our local computer, second one is for docker network. Since with every start of 
+First one defines port exposed on our local computer, second one is for docker network. Since with every start of
 docker compose docker creates the new network and that isolates each project from each other, we do not need to care about second port.
 We actually just need to allocate the first port to free port on our local system.
 
@@ -85,13 +85,13 @@ Remember that after changing these you need to do few things differently.
 
 ```
 docker exec -it my-new-project-name-php-fpm sh
-``` 
+```
 
 ## Update of Dockerfile is not Reflected
 Sometimes there is need to change the dockerfile for one of our images.
 If we already had project running once in docker, there is probably cached image for the container.
 
-That means that docker does not really check if there is change in the dockerfile, 
+That means that docker does not really check if there is change in the dockerfile,
 it will always build container by cached image. So what we actually need is to rebuild our containers.
 First we need to stop our containers in `docker-compose` because we cannot update containers that are already in use:
 
@@ -137,7 +137,7 @@ docker-sync start
 ## Application is slow on Mac
 We focus on enhancing the performance of the application on all platforms.
 With Docker for Mac and Docker for Windows there are known some performance issues because of all project files need to be synchronized from host computer to application running in a virtual machine.
-On Mac, we partially solved this by implementing docker-sync. 
+On Mac, we partially solved this by implementing docker-sync.
 Docker-sync has some limits and that is the reason why we use Docker native volumes for syncing PostgreSQL and Elasticsearch data to ensure the data persistence.
 In some cases, performance can be more important than the persistence of the data.
 In this case, you can increase the performance by deleting these volumes in your `docker-compose.yml` file but that will result in loss of persistence, which means that the data will be lost after the removal of the container, e.g. during `docker-compose down`.

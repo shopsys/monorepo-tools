@@ -47,7 +47,7 @@ php phing db-create
 php phing test-db-create
 ```
 
-*Note: In this step you were using multiple Phing targets. 
+*Note: In this step you were using multiple Phing targets.
 More information about what Phing targets are and how they work can be found in [Console Commands for Application Management (Phing Targets)](/docs/introduction/console-commands-for-application-management-phing-targets.md)*
 
 ### 1.5. Build the application

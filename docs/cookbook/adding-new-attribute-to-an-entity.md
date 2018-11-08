@@ -10,8 +10,6 @@ It is a common modification when you need your e-commerce application and ERP sy
 
 1. Overwrite constructor for creating `Product` instances.
     ```php
-    <?php
-
     namespace Shopsys\ShopBundle\Model\Product;
 
     use Doctrine\ORM\Mapping as ORM;
@@ -51,7 +49,7 @@ It is a common modification when you need your e-commerce application and ERP sy
     }
     ```
 
-    Notice that type hints and annotations of the methods do not match. 
+    Notice that type hints and annotations of the methods do not match.
     This is on purpose - extended class must respect interface of its parent while annotation ensures proper IDE autocomplete.
 
 1. Generate a [database migration](../introduction/database-migrations.md) creating a new column for the field by running:
@@ -59,7 +57,7 @@ It is a common modification when you need your e-commerce application and ERP sy
     php phing db-migrations-generate
     ```
 
-    The command prints a file name the migration was generated into: 
+    The command prints a file name the migration was generated into:
     ```text
     Checking database schema...
     Database schema is not satisfying ORM, a new migration was generated!
@@ -72,8 +70,8 @@ It is a common modification when you need your e-commerce application and ERP sy
     $this->sql('ALTER TABLE products ADD ext_id INT NOT NULL DEFAULT 0');
     $this->sql('ALTER TABLE products ALTER ext_id DROP DEFAULT');
     ```
-    
-    *Note: In this step you were using Phing target `db-migrations-generate`. 
+
+    *Note: In this step you were using Phing target `db-migrations-generate`.
     More information about what Phing targets are and how they work can be found in [Console Commands for Application Management (Phing Targets)](/docs/introduction/console-commands-for-application-management-phing-targets.md)*
 
 1. Run the migration to actually create the column in your database:
@@ -83,8 +81,6 @@ It is a common modification when you need your e-commerce application and ERP sy
 
 1. Add public `extId` field into `Shopsys\ShopBundle\Model\Product\ProductData` class.
     ```php
-    <?php
-
     namespace Shopsys\ShopBundle\Model\Product;
 
     use Shopsys\FrameworkBundle\Model\Product\ProductData as BaseProductData;
@@ -97,7 +93,7 @@ It is a common modification when you need your e-commerce application and ERP sy
         public $extId;
     }
     ```
-    In the following steps, we will overwrite all services that are responsible 
+    In the following steps, we will overwrite all services that are responsible
     for `Product` and `ProductData` instantiation to make them return our extended classes.
 
 1. Edit `Shopsys\ShopBundle\Model\Product\ProductDataFactory` - overwrite `create()` and `createFromProduct()` methods.
@@ -105,8 +101,6 @@ It is a common modification when you need your e-commerce application and ERP sy
 [`Shopsys\FrameworkBundle\Model\Product\ProductDataFactoryInterface`](../../packages/framework/src/Model/Product/ProductDataFactoryInterface.php).*
 
     ```php
-    <?php
-
     namespace Shopsys\ShopBundle\Model\Product;
 
     use Shopsys\FrameworkBundle\Model\Product\Product as BaseProduct;
@@ -124,7 +118,7 @@ It is a common modification when you need your e-commerce application and ERP sy
             $productData = new ProductData();
             $this->fillFromProduct($productData, $product);
             $productData->extId = $product->getExtId() ?? 0;
-         
+
             return $productData;
         }
 
@@ -142,7 +136,7 @@ It is a common modification when you need your e-commerce application and ERP sy
     }
     ```
 
-Your `ProductDataFactory` is already registered in [`services.yml`](../../project-base/src/Shopsys/ShopBundle/Resources/config/services.yml) 
+Your `ProductDataFactory` is already registered in [`services.yml`](../../project-base/src/Shopsys/ShopBundle/Resources/config/services.yml)
 as an alias for the original interface.
 ```
 Shopsys\FrameworkBundle\Model\Product\ProductDataFactoryInterface: '@Shopsys\ShopBundle\Model\Product\ProductDataFactory'
@@ -152,8 +146,6 @@ Shopsys\FrameworkBundle\Model\Product\ProductDataFactoryInterface: '@Shopsys\Sho
 1. Add your `extId` field into the form by editing `ProductFormTypeExtension` in `Shopsys\ShopBundle\Form\Admin` namespace.
 The original `ProductFormType` is set as the extended type by implementation of `getExtendedType()` method.
     ```php
-    <?php
-
     namespace Shopsys\ShopBundle\Form\Admin;
 
     use Shopsys\FrameworkBundle\Form\Admin\Product\ProductFormType;
@@ -189,8 +181,6 @@ The original `ProductFormType` is set as the extended type by implementation of 
     ```
 1. In your `Product` class, overwrite the `edit()` method.
     ```php
-    <?php
-
     namespace Shopsys\ShopBundle\Model\Product;
 
     use Shopsys\FrameworkBundle\Model\Product\ProductCategoryDomainFactoryInterface;
@@ -212,8 +202,6 @@ The original `ProductFormType` is set as the extended type by implementation of 
 1. In your `ProductDataFactory` class, update the `createFromProduct()` method so it sets your new `extId` field.
 
     ```php
-    <?php
-
     namespace Shopsys\ShopBundle\Model\Product;
 
     use Shopsys\FrameworkBundle\Model\Product\Product;
@@ -241,7 +229,7 @@ The original `ProductFormType` is set as the extended type by implementation of 
     ```
 
 ## Front-end
-In order to display your new attribute on a front-end page, you can modify the corresponding template directly 
+In order to display your new attribute on a front-end page, you can modify the corresponding template directly
 as it is a part of your open-box, eg. [`detail.html.twig`](../../project-base/src/Shopsys/ShopBundle/Resources/views/Front/Content/Product/detail.html.twig).
 ```
 {{ product.extId }}
@@ -250,12 +238,10 @@ as it is a part of your open-box, eg. [`detail.html.twig`](../../project-base/sr
 ## Tests
 You need to fix your tests to reflect new changes:
 * Instances of `Product` and `ProductData` are often created directly in tests - change all of them to your classes.
-* In [`ProductVisibilityRepositoryTest`](../../project-base/tests/ShopBundle/Functional/Model/Product/ProductVisibilityRepositoryTest.php), 
-instance of `ProductData` is created directly. 
+* In [`ProductVisibilityRepositoryTest`](../../project-base/tests/ShopBundle/Functional/Model/Product/ProductVisibilityRepositoryTest.php),
+instance of `ProductData` is created directly.
 so you need to use there your class:
 ```php
-<?php
-
 namespace Tests\ShopBundle\Functional\Model\Product;
 
 use Shopsys\ShopBundle\Model\Product\ProductData;
@@ -270,13 +256,13 @@ class ProductVisibilityRepositoryTest extends TransactionFunctionalTestCaseTestC
         // ...
 
         $productData = new ProductData();
-        
+
         // ...
     }
 }
 ```
 * You also need to fix smoke test for creating new product as your new `extId` is required attribute.
-In [`NewProductTest`](../../project-base/tests/ShopBundle/Smoke/NewProductTest.php) 
+In [`NewProductTest`](../../project-base/tests/ShopBundle/Smoke/NewProductTest.php)
 add following line to the `fillForm()` method:
 ```php
 $form['product_form[extId]'] = 123456;

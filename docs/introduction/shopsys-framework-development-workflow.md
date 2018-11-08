@@ -8,8 +8,8 @@
 1. Create a new branch from `master` branch e.g. `my-new-feature`
 1. Develop your feature
 1. Check and automatically fix your code standards using `php phing standards-fix-diff`
-    
-    *Note: In this step you were using Phing target `standards-fix-diff`. 
+
+    *Note: In this step you were using Phing target `standards-fix-diff`.
     More information about what Phing targets are and how they work can be found in [Console Commands for Application Management (Phing Targets)](/docs/introduction/console-commands-for-application-management-phing-targets.md)*
 1. Check if all tests are passing using `php phing tests`
 1. Run acceptance tests `php phing tests-acceptance`
@@ -17,7 +17,7 @@
     *Note: We suggest you running acceptance tests on your Continuous Integration server because it takes several minutes to run them.*
 1. [Create commit](https://git-scm.com/docs/git-commit) with descriptive commit message about changes you have made.
 
-    *Note: We have [Guidelines for Creating Commits](/docs/contributing/guidelines-for-creating-commits.md) for contributors to Shopsys Framework. 
+    *Note: We have [Guidelines for Creating Commits](/docs/contributing/guidelines-for-creating-commits.md) for contributors to Shopsys Framework.
     These guidelines suggest some best practices for creating commits that you could adopt on your project.*
 1. [Push changes](https://git-scm.com/docs/git-push) to your remote GIT repository
 1. Let some colleague review your code and fix all reported problems

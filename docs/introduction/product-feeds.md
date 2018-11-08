@@ -15,7 +15,7 @@ Product feeds are usually exported using Cron modules.
 The Cron modules are already implemented and registered, all that's needed is to run the [`cron` phing target](console-commands-for-application-management-phing-targets.md#cron) every 5 minutes on your server and Shopsys Framework takes care of the rest.
 They can be also generated manually in the administration section *Marketing >  XML Feeds*, if you're logged in as *superadministrator*.
 
-There are two types of product feeds: `daily` and `hourly`. 
+There are two types of product feeds: `daily` and `hourly`.
 
 Daily feed usually contain a lot of information about the products are can take a while to export if you have a lot of products.
 For this exact reason, the [`DailyFeedCronModule`](../../packages/framework/src/Model/Feed/DailyFeedCronModule.php) is implemented iteratively and can export the feeds in batches as needed.

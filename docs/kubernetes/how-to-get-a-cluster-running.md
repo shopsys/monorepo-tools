@@ -31,7 +31,7 @@ Enable Kubelet as a service so it starts with the system reboot
 systemctl enable kubelet && systemctl start kubelet
 ```
 
-Kubernetes works with iptables rules for setting up traffic between pods. 
+Kubernetes works with iptables rules for setting up traffic between pods.
 That's why there is a need to turn off some security processes to assure that Kubernetes will work properly.
 
 Disable `setenforce` process that is in conflict with Kubernetes:

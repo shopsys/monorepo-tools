@@ -6,7 +6,7 @@ In Shopsys Framework, database dumps consist of `public` schema only.
 This schema contains all the application data.
 There are other database objects inside `pg_catalog` schema (like collations or extensions) but those are not considered part of the application database and therefore are not included in database dumps.  
 
-## Dumping (exporting) database 
+## Dumping (exporting) database
 The following command will create a SQL file with database dump:
 ```
 php bin/console shopsys:database:dump dump.sql
@@ -19,7 +19,7 @@ phing db-wipe-public-schema
 ```
 **Warning: This command wipes everything in `public` database schema (i.e. you will lose all application data)!**
 
-*Note: In this step you were using Phing target `db-wipe-public-schema`. 
+*Note: In this step you were using Phing target `db-wipe-public-schema`.
 More information about what Phing targets are and how they work can be found in [Console Commands for Application Management (Phing Targets)](/docs/introduction/console-commands-for-application-management-phing-targets.md)*
 
 Then you can import the dump:

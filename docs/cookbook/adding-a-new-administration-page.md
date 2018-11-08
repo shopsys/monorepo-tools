@@ -9,8 +9,6 @@ The first step to create a new page is creating a controller (for details, see [
 Create a class extending `AdminBaseController` in `src/Shopsys/ShopBundle/Controller/Admin` directory with a single method (action):
 
 ```php
-<?php
-
 namespace Shopsys\ShopBundle\Controller\Admin;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -57,11 +55,11 @@ The template should extend `@ShopsysFramework/Admin/Layout/layoutWithPanel.html.
 The content of the page is just a simple [Twitter widget](https://publish.twitter.com/) but you can put any content in your page.
 You can use the controller to pass some parameters to your template.
 Feel free to examine other controllers for inspiration.
- 
+
 If you're new to Twig, you can take a look at [Symfony Templating documentation](http://symfony.com/doc/current/templating.html).
 
 Now the page should load correctly and display the newest tweets of [@ShopsysFW](https://twitter.com/ShopsysFW).
-But to access it, you still need to open a specific URL... 
+But to access it, you still need to open a specific URL...
 
 ## Side menu and breadcrumbs
 The admin side menu is implemented by [KnpMenuBundle](https://symfony.com/doc/master/bundles/KnpMenuBundle/index.html) and to extend it, you can use [events](https://symfony.com/doc/master/bundles/KnpMenuBundle/events.html).
@@ -81,8 +79,6 @@ In the subscriber, you should add a new child to the menu with the route of your
 As the Dashboard menu currently has no children, you can remove the link and add a new child with the original dashboard, so it's still accessible:
 
 ```php
-<?php
-
 namespace Shopsys\ShopBundle\Controller\Admin;
 
 use Knp\Menu\ItemInterface;

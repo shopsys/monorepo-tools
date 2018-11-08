@@ -8,7 +8,7 @@ This solution uses [*docker-sync*](http://docker-sync.io/) (for fast two-way syn
 * [Composer](https://getcomposer.org/doc/00-intro.md#installation-linux-unix-osx)
 * [Docker for Mac](https://docs.docker.com/engine/installation/)
     * Docker-sync suggests ([in known issue](https://github.com/EugenMayer/docker-sync/issues/517)) to use Docker for Mac in version 17.09.1-ce-mac42 (21090)
-    * Docker for Mac requires at least 4 GB of memory, otherwise, `composer install` can result in `Killed` status (we recommend to set 2 GB RAM, 1 CPU and 2 GB Swap in `Docker -> Preferences… -> Advanced`) 
+    * Docker for Mac requires at least 4 GB of memory, otherwise, `composer install` can result in `Killed` status (we recommend to set 2 GB RAM, 1 CPU and 2 GB Swap in `Docker -> Preferences… -> Advanced`)
 * [Docker-sync](http://docker-sync.io/) (install via `sudo gem install docker-sync`)
 
 ## Steps
@@ -18,7 +18,7 @@ composer create-project shopsys/project-base --stability=beta --no-install --kee
 cd project-base
 ```
 
-*Notes:* 
+*Notes:*
 - *The `--no-install` option disables installation of the vendors - this will be done later in the Docker container.*
 - *The `--keep-vcs` option initializes GIT repository in your project folder that is needed for diff commands of the application build and keeps the GIT history of `shopsys/project-base`.*
 - *The `--stability=beta` option enables you to install the project from the last beta release. Default value for the option is `stable` but there is no stable release yet.*

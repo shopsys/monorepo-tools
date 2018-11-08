@@ -13,7 +13,7 @@ In the php-fpm container we used a named pipe as a gateway between the applicati
 This approach prevents logs from being output to console during console commands.
 
 ## How to check the logs
-To see the logs from all containers including the Postgres database, web server etc. simply run: 
+To see the logs from all containers including the Postgres database, web server etc. simply run:
 ```
 docker-compose logs
 ```

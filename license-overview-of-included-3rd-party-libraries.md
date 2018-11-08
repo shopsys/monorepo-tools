@@ -25,7 +25,7 @@ https://github.com/gruntjs/grunt/blob/master/README.md
 License: LGPL-3.0-only  
 https://github.com/phingofficial/phing/blob/master/LICENSE
 
-### Nette Foundation tools 
+### Nette Foundation tools
 License: BSD-2-Clause or GPL-2.0 or GPL-3.0  
 https://nette.org/en/license
 
@@ -122,7 +122,7 @@ License: GPL
 https://pkgs.alpinelinux.org/package/v3.3/main/x86/libpng-dev
 
 ### icu-dev
-License: MIT or ICU or Unicode-TOU    
+License: MIT or ICU or Unicode-TOU  
 https://pkgs.alpinelinux.org/package/edge/main/x86/icu-dev
 
 ### postgresql-dev
@@ -221,7 +221,7 @@ License: MIT
 https://github.com/carhartl/jquery-cookie/blob/master/MIT-LICENSE.txt
 
 ## Libraries dynamically referenced via Composer
-Run `composer license` in your `shopsys-framework-php-fpm` container of your project to get the latest licensing info about all dependencies. 
+Run `composer license` in your `shopsys-framework-php-fpm` container of your project to get the latest licensing info about all dependencies.
 For licensing info about all composer dependencies of microservices, run `composer license` in the container of given microservice.
 
 ## Libraries dynamically referenced via npm
@@ -233,7 +233,7 @@ cd project-base || true
 npm install --no-save license-checker
 
 ./node_modules/.bin/license-checker
-``` 
+```
 ## Sources of information about licenses
 For the packages installed through the composer, the composer.lock file is the source of the information about licenses. In some cases also the package license information directly in the GitHub repository of the given package is used.
 
