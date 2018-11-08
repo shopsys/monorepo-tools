@@ -90,7 +90,7 @@ ARG www_data_gid
 RUN if [ -n "$www_data_uid" ]; then deluser www-data && (addgroup -g $www_data_gid www-data || addgroup -g 82 www-data) && adduser -u $www_data_uid -D -S -G www-data www-data; fi;
 
 # as the UID and GID might have changed, change the ownership of the home directory workdir again
-RUN chown www-data:www-data -R /home/www-data && chown www-data:www-data /var/www/html
+RUN chown -R www-data:www-data /home/www-data /var/www/html
 
 USER www-data
 
