@@ -1,10 +1,12 @@
 services:
-    Shopsys\CodingStandards\CsFixer\Phpdoc\MissingParamAnnotationsFixer: ~
-
-    # helper services
     _defaults:
         autowire: true
 
+    Shopsys\CodingStandards\CsFixer\Phpdoc\MissingParamAnnotationsFixer: ~
+
+    # helper services
     PhpCsFixer\Tokenizer\Analyzer\FunctionsAnalyzer: ~
     Symplify\TokenRunner\Analyzer\FixerAnalyzer\IndentDetector: ~
     Shopsys\CodingStandards\Helper\PhpToDocTypeTransformer: ~
+    Shopsys\CodingStandards\Helper\FqnNameResolver: ~
+    PhpCsFixer\Tokenizer\Analyzer\NamespaceUsesAnalyzer: ~

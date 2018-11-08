@@ -3,6 +3,16 @@ imports:
     - { resource: '%vendor_dir%/symplify/easy-coding-standard/config/psr2.yml' }
 
 services:
+    _defaults:
+        autowire: true
+
+    # helper services ↓
+    PhpCsFixer\Tokenizer\Analyzer\FunctionsAnalyzer: ~
+    Shopsys\CodingStandards\Helper\PhpToDocTypeTransformer: ~
+    Shopsys\CodingStandards\Helper\FqnNameResolver: ~
+    PhpCsFixer\Tokenizer\Analyzer\NamespaceUsesAnalyzer: ~
+    Symplify\TokenRunner\Analyzer\FixerAnalyzer\IndentDetector: ~
+
     # Slevomat Checkers
     SlevomatCodingStandard\Sniffs\Classes\UnusedPrivateElementsSniff: ~
 
@@ -22,12 +32,6 @@ services:
     Shopsys\CodingStandards\CsFixer\Phpdoc\MissingReturnAnnotationFixer: ~
     Shopsys\CodingStandards\CsFixer\Phpdoc\OrderedParamAnnotationsFixer: ~
     SlevomatCodingStandard\Sniffs\Namespaces\FullyQualifiedClassNameInAnnotationSniff: ~
-    # helper services ↓
-    _defaults:
-        autowire: true
-    PhpCsFixer\Tokenizer\Analyzer\FunctionsAnalyzer: ~
-    Shopsys\CodingStandards\Helper\PhpToDocTypeTransformer: ~
-    Symplify\TokenRunner\Analyzer\FixerAnalyzer\IndentDetector: ~
 
     # Custom Shopsys standards
     PHP_CodeSniffer\Standards\Generic\Sniffs\CodeAnalysis\EmptyStatementSniff: ~

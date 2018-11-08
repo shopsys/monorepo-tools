@@ -1,5 +1,8 @@
 services:
-    # helper services
-    PhpCsFixer\Tokenizer\Analyzer\FunctionsAnalyzer: ~
+    _defaults:
+        autowire: true
 
     Shopsys\CodingStandards\CsFixer\Phpdoc\OrderedParamAnnotationsFixer: ~
+
+    # helper services
+    PhpCsFixer\Tokenizer\Analyzer\FunctionsAnalyzer: ~
