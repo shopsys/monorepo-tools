@@ -62,6 +62,19 @@ There is a list of all the repositories maintained by monorepo, changes in log b
     - remove unsupported `syntaxCheck` attribute from your `phpunit.xml` configuration file
 - `Shopsys\FrameworkBundle\Model\Product\ProductFacade::create()` and `Shopsys\FrameworkBundle\Model\Product\ProductFactory` were modified
     - if you extended the classes in your project, please check out the changes in the framework ones (and the reasons for the changes) in [the pull request](https://github.com/shopsys/shopsys/pull/581/files)
+- [#576 OrderFormType in administration is now rendered by default](https://github.com/shopsys/shopsys/pull/576)
+    - DisplayOnlyUrlType has been redesigned to support all possible routes, it now has 1 required (`route`) and 3 optional (`route_params, route_label and domain_id`) parameters
+        - example of usage:
+        ```php
+        $variantGroup->add('mainVariantUrl', DisplayOnlyUrlType::class, [
+            'label' => t('Product is variant'),
+            'route' => 'admin_product_edit',
+            'route_params' => [
+                'id' => $product->getMainVariant()->getId(),
+            ],
+            'route_label' => $product->getMainVariant()->getName(),
+        ]);
+        ```
 - *(optional)* [#540 domains URLs are auto-configured during "composer install"](https://github.com/shopsys/shopsys/pull/540)
     - to simplify installation, add `"Shopsys\\FrameworkBundle\\Command\\ComposerScriptHandler::postInstall"` to `post-install-cmd` and `"Shopsys\\FrameworkBundle\\Command\\ComposerScriptHandler::postUpdate"` to  `post-update-cmd` scripts in your `composer.json`
     - you will not have to copy the `domains_urls.yml.dist` during the installation anymore

@@ -811,11 +811,11 @@ class ProductFormType extends AbstractType
         if ($this->isProductVariant($product)) {
             $variantGroup->add('mainVariantUrl', DisplayOnlyUrlType::class, [
                 'label' => t('Product is variant'),
-                'data' => [
-                    'route_name' => 'admin_product_edit',
+                'route' => 'admin_product_edit',
+                'route_params' => [
                     'id' => $product->getMainVariant()->getId(),
-                    'name' => $product->getMainVariant()->getName(),
                 ],
+                'route_label' => $product->getMainVariant()->getName(),
             ]);
 
             $variantGroup->add('variantAlias', LocalizedType::class, [
