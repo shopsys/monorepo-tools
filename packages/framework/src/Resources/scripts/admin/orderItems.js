@@ -42,7 +42,7 @@
         var $collection = $item.closest('#js-order-items');
         var index = $item.data('index');
 
-        Shopsys.validation.removeItemFromCollection('#order_form_items', index);
+        Shopsys.validation.removeItemFromCollection('#js-order-items', index);
         $item.remove();
 
         Shopsys.order.items.refreshCount($collection);
@@ -76,7 +76,7 @@
         $collection.append($item);
         Shopsys.register.registerNewContent($item);
 
-        Shopsys.validation.addNewItemToCollection('#order_form_items', index);
+        Shopsys.validation.addNewItemToCollection('#js-order-items', index);
         Shopsys.formChangeInfo.showInfo();
         Shopsys.order.items.refreshCount($collection);
     };
@@ -96,8 +96,9 @@
                 var index = $orderItem.data('index');
 
                 $collection.append($orderItem);
-                $($('#order_form_items')).jsFormValidator('addPrototype', index);
+                Shopsys.register.registerNewContent($item);
 
+                Shopsys.validation.addNewItemToCollection('#js-order-items', index);
                 Shopsys.order.items.refreshCount($collection);
 
                 Shopsys.window({content: Shopsys.translator.trans('Product saved in order')});
