@@ -223,8 +223,10 @@ class ProductDataFixtureLoader
         $productData->parameters = $this->productParametersFixtureLoader->getProductParameterValuesDataFromString(
             $row[self::COLUMN_PARAMETERS]
         );
-        $productData->categoriesByDomainId[$domainId] =
-            $this->getValuesByKeyString($row[self::COLUMN_CATEGORIES_1], $this->categories);
+        foreach ($this->domain->getAllIds() as $domainId) {
+            $productData->categoriesByDomainId[$domainId] =
+                $this->getValuesByKeyString($row[self::COLUMN_CATEGORIES_1], $this->categories);
+        }
         $productData->flags = $this->getValuesByKeyString($row[self::COLUMN_FLAGS], $this->flags);
         $productData->sellingDenied = $row[self::COLUMN_SELLING_DENIED];
 
