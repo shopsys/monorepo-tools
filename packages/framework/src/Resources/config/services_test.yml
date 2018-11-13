@@ -176,3 +176,5 @@ services:
     Shopsys\FrameworkBundle\Model\Localization\Localization: ~
 
     Shopsys\FrameworkBundle\Model\Product\ProductSearchExport\ProductSearchExportRepository: ~
+
+    Shopsys\FrameworkBundle\Model\Product\Pricing\ProductManualInputPriceFacade: ~

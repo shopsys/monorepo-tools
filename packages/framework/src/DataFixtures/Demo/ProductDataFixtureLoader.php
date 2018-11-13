@@ -336,32 +336,21 @@ class ProductDataFixtureLoader
      */
     private function setProductDataPricesFromCsv(array $row, ProductData $productData, $domainId)
     {
-        switch ($row[self::COLUMN_PRICE_CALCULATION_TYPE]) {
-            case 'auto':
-                $productData->price = $row[self::COLUMN_MAIN_PRICE];
-                break;
-            case 'manual':
-                if ($domainId === 1) {
-                    $manualPricesColumn = $row[self::COLUMN_MANUAL_PRICES_DOMAIN_1];
-                } elseif ($domainId === 2) {
-                    $manualPricesColumn = $row[self::COLUMN_MANUAL_PRICES_DOMAIN_2];
-                }
-                $manualPricesFromCsv = $this->getProductManualPricesIndexedByPricingGroupFromString($manualPricesColumn);
-                $this->createDefaultManualPriceForAllPricingGroups($productData);
-                foreach ($manualPricesFromCsv as $pricingGroup => $manualPrice) {
-                    $pricingGroup = $this->pricingGroups[$pricingGroup];
-                    $productData->manualInputPricesByPricingGroupId[$pricingGroup->getId()] = $manualPrice;
-                }
-
-                $manualInputPricesFromCsvByPricingGroupId = $productData->manualInputPricesByPricingGroupId;
-                $manualPricesForAllPricingGroups = $this->addZeroPricesForPricingGroupsThatAreMissingInDemoData($manualInputPricesFromCsvByPricingGroupId);
-                $productData->manualInputPricesByPricingGroupId = $manualPricesForAllPricingGroups;
-                break;
-            default:
-                throw new \Shopsys\FrameworkBundle\Model\Product\Exception\InvalidPriceCalculationTypeException(
-                    $row[self::COLUMN_PRICE_CALCULATION_TYPE]
-                );
+        if ($domainId === 1) {
+            $manualPricesColumn = $row[self::COLUMN_MANUAL_PRICES_DOMAIN_1];
+        } elseif ($domainId === 2) {
+            $manualPricesColumn = $row[self::COLUMN_MANUAL_PRICES_DOMAIN_2];
         }
+        $manualPricesFromCsv = $this->getProductManualPricesIndexedByPricingGroupFromString($manualPricesColumn);
+        $this->createDefaultManualPriceForAllPricingGroups($productData);
+        foreach ($manualPricesFromCsv as $pricingGroup => $manualPrice) {
+            $pricingGroup = $this->pricingGroups[$pricingGroup];
+            $productData->manualInputPricesByPricingGroupId[$pricingGroup->getId()] = $manualPrice;
+        }
+
+        $manualInputPricesFromCsvByPricingGroupId = $productData->manualInputPricesByPricingGroupId;
+        $manualPricesForAllPricingGroups = $this->addZeroPricesForPricingGroupsThatAreMissingInDemoData($manualInputPricesFromCsvByPricingGroupId);
+        $productData->manualInputPricesByPricingGroupId = $manualPricesForAllPricingGroups;
     }
 
     /**
