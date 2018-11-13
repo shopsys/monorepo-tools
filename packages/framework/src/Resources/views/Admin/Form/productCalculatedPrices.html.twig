@@ -3,10 +3,6 @@
         <div class="form-price-heading__cell form-price-heading__cell--field">
             {{ inputPriceLabel({ isSimple: true }) }}
         </div>
-        {% if productBasePrice is defined %}
-            <div class="form-price-heading__cell form-price-heading__cell--price">{{ 'Price excluding VAT'|trans }}</div>
-            <div class="form-price-heading__cell form-price-heading__cell--price">{{ 'Price including VAT'|trans }}</div>
-        {% endif %}
     </div>
     <div class="form-line js-input-price-type-auto">
         <div class="form-line__label">
@@ -16,17 +12,10 @@
             <div class="form-line__item">
                 {{ form_widget(form.price, { symbolAfterInput: currencySymbolDefault() }) }}
             </div>
-            {% if productBasePrice is defined %}
-                <div class="form-line__item--right">
-                    <div class="form-line__item__price">{{ productBasePrice.priceWithoutVat|priceWithCurrencyAdmin }}</div>
-                    <div class="form-line__item__price"><strong>{{ productBasePrice.priceWithVat|priceWithCurrencyAdmin }}</strong></div>
-                </div>
-            {% else %}
-                <div class="form-line__item--right">
-                    <div class="form-line__item__price">-</div>
-                    <div class="form-line__item__price"><strong>-</strong></div>
-                </div>
-            {% endif %}
+            <div class="form-line__item--right">
+                <div class="form-line__item__price">-</div>
+                <div class="form-line__item__price"><strong>-</strong></div>
+            </div>
             {{ form_errors(form.price) }}
             {% do form.price.setRendered %}
         </div>
