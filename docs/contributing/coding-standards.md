@@ -92,3 +92,5 @@ Besides the rules that are checked by automatic tools, we have few rules for whi
     - Entities
     - Factories
     - Controllers
+    - Facades
+    - Repositories
