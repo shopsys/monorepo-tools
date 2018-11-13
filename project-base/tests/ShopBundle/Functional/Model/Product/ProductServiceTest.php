@@ -43,7 +43,12 @@ class ProductServiceTest extends TransactionFunctionalTestCase
 
         $productService->recalculateInputPriceForNewVatPercent($product, [$productManualInputPrice], 15);
 
-        $this->assertSame('1052.173913', (string)$product->getPrice());
+        /**
+         * We presume that all products now have automatic price calculation type.
+         * Therefore Product::$price property will always be "0" no matter the value in the data object.
+         * @TODO The assertion should be removed when Product::$price is removed
+         */
+        $this->assertSame('0', (string)$product->getPrice());
         $this->assertSame('1052.173913', (string)$productManualInputPrice->getInputPrice());
     }
 
@@ -74,7 +79,12 @@ class ProductServiceTest extends TransactionFunctionalTestCase
 
         $productService->recalculateInputPriceForNewVatPercent($product, [$productManualInputPrice], 15);
 
-        $this->assertSame('1000', (string)$product->getPrice());
+        /**
+         * We presume that all products now have automatic price calculation type.
+         * Therefore Product::$price property will always be "0" no matter the value in the data object.
+         * @TODO The assertion should be removed when Product::$price is removed
+         */
+        $this->assertSame('0', (string)$product->getPrice());
         $this->assertSame('1000', (string)$productManualInputPrice->getInputPrice());
     }
 }

@@ -181,7 +181,6 @@ class ProductDataFixtureLoader
         $productData->ean = $row[self::COLUMN_EAN];
         $productData->descriptions[$domainId] = $row[$this->getDescriptionColumnForDomain($domainId)];
         $productData->shortDescriptions[$domainId] = $row[$this->getShortDescriptionColumnForDomain($domainId)];
-        $productData->priceCalculationType = $row[self::COLUMN_PRICE_CALCULATION_TYPE];
         $this->setProductDataPricesFromCsv($row, $productData, $domainId);
         switch ($row[self::COLUMN_VAT]) {
             case 'high':

@@ -98,11 +98,6 @@ class ProductData
     public $categoriesByDomainId;
 
     /**
-     * @var string
-     */
-    public $priceCalculationType;
-
-    /**
      * @var \Shopsys\FrameworkBundle\Model\Product\Brand\Brand|null
      */
     public $brand;
@@ -186,7 +181,6 @@ class ProductData
         $this->flags = [];
         $this->usingStock = false;
         $this->categoriesByDomainId = [];
-        $this->priceCalculationType = Product::PRICE_CALCULATION_TYPE_AUTO;
         $this->variantAlias = [];
         $this->orderingPriority = 0;
         $this->parameters = [];

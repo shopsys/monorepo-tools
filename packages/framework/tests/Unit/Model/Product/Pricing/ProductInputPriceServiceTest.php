@@ -25,7 +25,6 @@ class ProductInputPriceServiceTest extends TestCase
         $vatData->name = 'VatName';
         $vatData->percent = '10.0';
         $productData->vat = new Vat($vatData);
-        $productData->priceCalculationType = Product::PRICE_CALCULATION_TYPE_MANUAL;
         $product = Product::create($productData);
 
         $pricingGroupMock1 = $this->getMockBuilder(PricingGroup::class)
@@ -69,7 +68,6 @@ class ProductInputPriceServiceTest extends TestCase
         $vatData->name = 'VatName';
         $vatData->percent = '10.0';
         $productData->vat = new Vat($vatData);
-        $productData->priceCalculationType = Product::PRICE_CALCULATION_TYPE_MANUAL;
         $product = Product::create($productData);
 
         $pricingGroupMock1 = $this->getMockBuilder(PricingGroup::class)

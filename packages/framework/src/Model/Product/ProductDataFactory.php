@@ -206,7 +206,6 @@ class ProductDataFactory implements ProductDataFactoryInterface
 
         $productData->hidden = $product->isHidden();
         $productData->categoriesByDomainId = $product->getCategoriesIndexedByDomainId();
-        $productData->priceCalculationType = $product->getPriceCalculationType();
         $productData->brand = $product->getBrand();
         $productData->orderingPriority = $product->getOrderingPriority();
 

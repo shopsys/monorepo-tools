@@ -301,13 +301,8 @@ class Product extends AbstractTranslatableEntity
         $this->catnum = $productData->catnum;
         $this->partno = $productData->partno;
         $this->ean = $productData->ean;
-        $this->priceCalculationType = $productData->priceCalculationType;
-        if ($this->getPriceCalculationType() === self::PRICE_CALCULATION_TYPE_AUTO) {
-            $this->setPrice($productData->price);
-        } else {
-            $this->setPrice(null);
-        }
-
+        $this->priceCalculationType = self::PRICE_CALCULATION_TYPE_MANUAL;
+        $this->setPrice(null);
         $this->vat = $productData->vat;
         $this->sellingFrom = $productData->sellingFrom;
         $this->sellingTo = $productData->sellingTo;
@@ -394,12 +389,8 @@ class Product extends AbstractTranslatableEntity
             $this->catnum = $productData->catnum;
             $this->partno = $productData->partno;
             $this->ean = $productData->ean;
-            $this->priceCalculationType = $productData->priceCalculationType;
-            if ($this->getPriceCalculationType() === self::PRICE_CALCULATION_TYPE_AUTO) {
-                $this->setPrice($productData->price);
-            } else {
-                $this->setPrice(null);
-            }
+            $this->priceCalculationType = self::PRICE_CALCULATION_TYPE_MANUAL;
+            $this->setPrice(null);
         }
 
         $this->orderingPriority = $productData->orderingPriority;

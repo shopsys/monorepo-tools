@@ -33,7 +33,8 @@ class ProductInputPriceService
      * @param \Shopsys\FrameworkBundle\Model\Product\Pricing\ProductManualInputPrice[] $manualInputPrices
      * @return string[]
      */
-    public function getManualInputPricesDataIndexedByPricingGroupId(array $manualInputPrices) {
+    public function getManualInputPricesDataIndexedByPricingGroupId(array $manualInputPrices)
+    {
         $manualInputPricesDataByPricingGroupId = [];
 
         foreach ($manualInputPrices as $manualInputPrice) {
