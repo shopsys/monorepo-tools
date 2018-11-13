@@ -111,7 +111,7 @@ su - postgres -c "createuser --createdb --superuser --pwprompt root"
 ```
 Now we need to allow connection between docker containers and database via local network and PostgresSQL port.
 ```
-cat <<EOT > /usr/lib/firewalld/services/postgresql.xml
+cat <<EOT > /etc/firewalld/services/postgresql.xml
 <?xml version="1.0" encoding="utf-8"?>
 <service>
   <short>PostgreSQL</short>
@@ -141,7 +141,7 @@ service redis_6379 restart
 ```
 Now we just need to allow communication between docker containers and Redis server.
 ```
-cat <<EOT > /usr/lib/firewalld/services/redis.xml
+cat <<EOT > /etc/firewalld/services/redis.xml
 <?xml version="1.0" encoding="utf-8"?>
 <service>
   <short>Redis</short>
@@ -163,7 +163,7 @@ yum install java-1.8.0-openjdk
 
 Next we [install](https://www.elastic.co/guide/en/elasticsearch/reference/current/rpm.html) elasticsearch and allow connecting to it via local network.
 ```
-cat <<EOT > /usr/lib/firewalld/services/elasticsearch.xml
+cat <<EOT > /etc/firewalld/services/elasticsearch.xml
 <?xml version="1.0" encoding="utf-8"?>
 <service>
   <short>Elasticsearch</short>
