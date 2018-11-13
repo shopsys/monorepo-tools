@@ -116,14 +116,9 @@ class ProductInputPriceFacade
      */
     public function getManualInputPricesDataIndexedByPricingGroupId(Product $product)
     {
-        $pricingGroups = $this->pricingGroupFacade->getAll();
-        $inputPriceType = $this->pricingSetting->getInputPriceType();
         $manualInputPrices = $this->productManualInputPriceRepository->getByProduct($product);
 
         return $this->productInputPriceService->getManualInputPricesDataIndexedByPricingGroupId(
-            $product,
-            $inputPriceType,
-            $pricingGroups,
             $manualInputPrices
         );
     }

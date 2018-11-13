@@ -30,20 +30,12 @@ class ProductInputPriceService
     }
 
     /**
-     * @param \Shopsys\FrameworkBundle\Model\Product\Product $product
-     * @param int $inputPriceType
-     * @param \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroup[] $pricingGroups
      * @param \Shopsys\FrameworkBundle\Model\Product\Pricing\ProductManualInputPrice[] $manualInputPrices
      * @return string[]
      */
-    public function getManualInputPricesDataIndexedByPricingGroupId(
-        Product $product,
-        $inputPriceType,
-        array $pricingGroups,
-        array $manualInputPrices
-    ) {
+    public function getManualInputPricesDataIndexedByPricingGroupId(array $manualInputPrices) {
         $manualInputPricesDataByPricingGroupId = [];
-        
+
         foreach ($manualInputPrices as $manualInputPrice) {
             $pricingGroupId = $manualInputPrice->getPricingGroup()->getId();
             $manualInputPricesDataByPricingGroupId[$pricingGroupId] = $manualInputPrice->getInputPrice();

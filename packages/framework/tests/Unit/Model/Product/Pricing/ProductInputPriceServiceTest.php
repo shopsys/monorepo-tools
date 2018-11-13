@@ -47,8 +47,6 @@ class ProductInputPriceServiceTest extends TestCase
             ->getMock();
         $productPriceCalculationMock->expects($this->never())->method('calculatePrice');
 
-        $inputPriceType = PricingSetting::INPUT_PRICE_TYPE_WITHOUT_VAT;
-
         $manualInputPrices = [
             new ProductManualInputPrice($product, $pricingGroups[0], '1000'),
             new ProductManualInputPrice($product, $pricingGroups[1], '2000'),
@@ -56,9 +54,6 @@ class ProductInputPriceServiceTest extends TestCase
 
         $productInputPriceService = new ProductInputPriceService($inputPriceCalculation, $productPriceCalculationMock);
         $manualInputPricesData = $productInputPriceService->getManualInputPricesDataIndexedByPricingGroupId(
-            $product,
-            $inputPriceType,
-            $pricingGroups,
             $manualInputPrices
         );
 
