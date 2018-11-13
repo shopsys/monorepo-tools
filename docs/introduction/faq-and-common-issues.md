@@ -3,6 +3,21 @@
 This section provides only the basic answers to some of the most frequently asked questions.
 For more detailed information about the Shopsys Framework, please see [Shopsys Framework Knowledge Base](../index.md).
 
+### Index
+- [What are the phing targets?](#what-are-the-phing-targets)
+- [What are the data fixtures good for?](#what-are-the-data-fixtures-good-for)
+- [How to change a domain URL?](#how-to-change-a-domain-url)
+- [How to use database migrations and why the developers should use shopsys:migrations:generate instead of the default Doctrine one?](#how-to-use-database-migrations-and-why-the-developers-should-use-shopsysmigrationsgenerate-instead-of-the-default-doctrine-one)
+- [Do I have to run coding standards check over all files?](#do-i-have-to-run-coding-standards-check-over-all-files)
+- [Is the application https ready or does it need some extra setting?](#is-the-application-https-ready-or-does-it-need-some-extra-setting)
+- [How can I easily translate and set up my new language constants?](#how-can-i-easily-translate-and-set-up-my-new-language-constants)
+- [How to set up deployment and production server?](#how-to-set-up-deployment-and-production-server)
+- [How to set up the administration with a different locale/language (e.g. Czech)?](#how-to-set-up-the-administration-with-a-different-localelanguage-eg-czech)
+- [What are the differences between "listable", "sellable", "offered" and "visible" products?](#what-are-the-differences-between-listable-sellable-offered-and-visible-products)
+- [How calculated attributes work?](#how-calculated-attributes-work)
+- [How do I change the environment (PRODUCTION/DEVELOPMENT/TEST)?](#how-do-i-change-the-environment-productiondevelopmenttest)
+- [Are some periodic tasks part of the Shopsys Framework (cron)?](#are-some-periodic-tasks-part-of-the-shopsys-framework-cron)
+
 ## What are the phing targets?
 Every phing target is a task that can be executed simply by `php phing <target-name>` command.
 See more about phing targets in [Console Commands for Application Management (Phing Targets)](./console-commands-for-application-management-phing-targets.md).
