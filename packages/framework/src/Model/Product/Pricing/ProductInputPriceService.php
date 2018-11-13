@@ -43,27 +43,10 @@ class ProductInputPriceService
         array $manualInputPrices
     ) {
         $manualInputPricesDataByPricingGroupId = [];
-
-        if ($product->getPriceCalculationType() === Product::PRICE_CALCULATION_TYPE_AUTO) {
-            foreach ($pricingGroups as $pricingGroup) {
-                $pricingGroupId = $pricingGroup->getId();
-                $productPrice = $this->productPriceCalculation->calculatePrice(
-                    $product,
-                    $pricingGroup->getDomainId(),
-                    $pricingGroup
-                );
-
-                $manualInputPricesDataByPricingGroupId[$pricingGroupId] = $this->inputPriceCalculation->getInputPrice(
-                    $inputPriceType,
-                    $productPrice->getPriceWithVat(),
-                    $product->getVat()->getPercent()
-                );
-            }
-        } elseif ($product->getPriceCalculationType() === Product::PRICE_CALCULATION_TYPE_MANUAL) {
-            foreach ($manualInputPrices as $manualInputPrice) {
-                $pricingGroupId = $manualInputPrice->getPricingGroup()->getId();
-                $manualInputPricesDataByPricingGroupId[$pricingGroupId] = $manualInputPrice->getInputPrice();
-            }
+        
+        foreach ($manualInputPrices as $manualInputPrice) {
+            $pricingGroupId = $manualInputPrice->getPricingGroup()->getId();
+            $manualInputPricesDataByPricingGroupId[$pricingGroupId] = $manualInputPrice->getInputPrice();
         }
 
         return $manualInputPricesDataByPricingGroupId;
@@ -77,24 +60,20 @@ class ProductInputPriceService
      */
     public function getInputPrice(Product $product, $inputPriceType, array $manualInputPricesInDefaultCurrency)
     {
-        if ($product->getPriceCalculationType() === Product::PRICE_CALCULATION_TYPE_AUTO) {
-            return $product->getPrice();
-        } elseif ($product->getPriceCalculationType() === Product::PRICE_CALCULATION_TYPE_MANUAL) {
-            $maxSellingPriceWithVatInDefaultCurrency = $this->getMaxSellingPriceWithVatInDefaultCurrency(
-                $product,
-                $manualInputPricesInDefaultCurrency
-            );
+        $maxSellingPriceWithVatInDefaultCurrency = $this->getMaxSellingPriceWithVatInDefaultCurrency(
+            $product,
+            $manualInputPricesInDefaultCurrency
+        );
 
-            if ($maxSellingPriceWithVatInDefaultCurrency === null) {
-                return null;
-            }
-
-            return $this->inputPriceCalculation->getInputPrice(
-                $inputPriceType,
-                $maxSellingPriceWithVatInDefaultCurrency,
-                $product->getVat()->getPercent()
-            );
+        if ($maxSellingPriceWithVatInDefaultCurrency === null) {
+            return null;
         }
+
+        return $this->inputPriceCalculation->getInputPrice(
+            $inputPriceType,
+            $maxSellingPriceWithVatInDefaultCurrency,
+            $product->getVat()->getPercent()
+        );
     }
 
     /**
