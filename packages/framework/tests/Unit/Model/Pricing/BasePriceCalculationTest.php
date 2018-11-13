@@ -4,7 +4,6 @@ namespace Tests\FrameworkBundle\Unit\Model\Pricing;
 
 use PHPUnit\Framework\TestCase;
 use Shopsys\FrameworkBundle\Model\Pricing\BasePriceCalculation;
-use Shopsys\FrameworkBundle\Model\Pricing\Price;
 use Shopsys\FrameworkBundle\Model\Pricing\PriceCalculation;
 use Shopsys\FrameworkBundle\Model\Pricing\PricingSetting;
 use Shopsys\FrameworkBundle\Model\Pricing\Rounding;
@@ -74,80 +73,5 @@ class BasePriceCalculationTest extends TestCase
         $this->assertSame(round($basePriceWithoutVat, 6), round($basePrice->getPriceWithoutVat(), 6));
         $this->assertSame(round($basePriceWithVat, 6), round($basePrice->getPriceWithVat(), 6));
         $this->assertSame(round($basePriceVatAmount, 6), round($basePrice->getVatAmount(), 6));
-    }
-
-    public function applyCoefficientProvider()
-    {
-        return [
-            [
-                'priceWithVat' => '100',
-                'vatPercent' => '20',
-                'coefficients' => ['2'],
-                'resultPriceWithVat' => '200',
-                'resultPriceWithoutVat' => '167',
-                'resultVatAmount' => '33',
-            ],
-            [
-                'priceWithVat' => '100',
-                'vatPercent' => '10',
-                'coefficients' => ['1'],
-                'resultPriceWithVat' => '100',
-                'resultPriceWithoutVat' => '91',
-                'resultVatAmount' => '9',
-            ],
-            [
-                'priceWithVat' => '100',
-                'vatPercent' => '20',
-                'coefficients' => ['0.6789'],
-                'resultPriceWithVat' => '68',
-                'resultPriceWithoutVat' => '57',
-                'resultVatAmount' => '11',
-            ],
-        ];
-    }
-
-    /**
-     * @dataProvider applyCoefficientProvider
-     * @param mixed $priceWithVat
-     * @param mixed $vatPercent
-     * @param mixed $coefficients
-     * @param mixed $resultPriceWithVat
-     * @param mixed $resultPriceWithoutVat
-     * @param mixed $resultVatAmount
-     */
-    public function testApplyCoefficient(
-        $priceWithVat,
-        $vatPercent,
-        $coefficients,
-        $resultPriceWithVat,
-        $resultPriceWithoutVat,
-        $resultVatAmount
-    ) {
-        $rounding = $this->getMockBuilder(Rounding::class)
-            ->setMethods(['roundPriceWithVat', 'roundPriceWithoutVat', 'roundVatAmount'])
-            ->disableOriginalConstructor()
-            ->getMock();
-        $rounding->expects($this->any())->method('roundPriceWithVat')->willReturnCallback(function ($value) {
-            return round($value);
-        });
-        $rounding->expects($this->any())->method('roundPriceWithoutVat')->willReturnCallback(function ($value) {
-            return round($value);
-        });
-        $rounding->expects($this->any())->method('roundVatAmount')->willReturnCallback(function ($value) {
-            return round($value);
-        });
-        $priceCalculation = new PriceCalculation($rounding);
-        $basePriceCalculation = new BasePriceCalculation($priceCalculation, $rounding);
-
-        $price = new Price(0, $priceWithVat);
-        $vatData = new VatData();
-        $vatData->name = 'vat';
-        $vatData->percent = $vatPercent;
-        $vat = new Vat($vatData);
-        $resultPrice = $basePriceCalculation->applyCoefficients($price, $vat, $coefficients);
-
-        $this->assertSame(round($resultPriceWithVat, 6), round($resultPrice->getPriceWithVat(), 6));
-        $this->assertSame(round($resultPriceWithoutVat, 6), round($resultPrice->getPriceWithoutVat(), 6));
-        $this->assertSame(round($resultVatAmount, 6), round($resultPrice->getVatAmount(), 6));
     }
 }

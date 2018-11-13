@@ -4,8 +4,6 @@ namespace Tests\FrameworkBundle\Unit\Model\Product\Pricing;
 
 use PHPUnit\Framework\TestCase;
 use Shopsys\FrameworkBundle\Model\Pricing\BasePriceCalculation;
-use Shopsys\FrameworkBundle\Model\Pricing\Currency\Currency;
-use Shopsys\FrameworkBundle\Model\Pricing\Currency\CurrencyFacade;
 use Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroup;
 use Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroupData;
 use Shopsys\FrameworkBundle\Model\Pricing\PriceCalculation;
@@ -45,24 +43,6 @@ class ProductPriceCalculationTest extends TestCase
             ->disableOriginalConstructor()
             ->getMock();
 
-        $currencyFacadeMock = $this->getMockBuilder(CurrencyFacade::class)
-            ->setMethods(['getById'])
-            ->disableOriginalConstructor()
-            ->getMock();
-
-        $currencyMock = $this->getMockBuilder(Currency::class)
-            ->setMethods(['getReversedExchangeRate'])
-            ->disableOriginalConstructor()
-            ->getMock();
-
-        $currencyMock
-            ->expects($this->any())->method('getReversedExchangeRate')
-                ->will($this->returnValue(1));
-
-        $currencyFacadeMock
-            ->expects($this->any())->method('getById')
-            ->will($this->returnValue($currencyMock));
-
         $productRepositoryMock = $this->getMockBuilder(ProductRepository::class)
             ->setMethods(['getAllSellableVariantsByMainVariant'])
             ->disableOriginalConstructor()
@@ -81,7 +61,6 @@ class ProductPriceCalculationTest extends TestCase
             $basePriceCalculation,
             $pricingSettingMock,
             $productManualInputPriceRepositoryMock,
-            $currencyFacadeMock,
             $productRepositoryMock,
             $pricingService
         );
