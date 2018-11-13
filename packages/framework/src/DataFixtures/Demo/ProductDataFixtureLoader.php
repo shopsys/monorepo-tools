@@ -342,7 +342,6 @@ class ProductDataFixtureLoader
             $manualPricesColumn = $row[self::COLUMN_MANUAL_PRICES_DOMAIN_2];
         }
         $manualPricesFromCsv = $this->getProductManualPricesIndexedByPricingGroupFromString($manualPricesColumn);
-        $this->createDefaultManualPriceForAllPricingGroups($productData);
         foreach ($manualPricesFromCsv as $pricingGroup => $manualPrice) {
             $pricingGroup = $this->pricingGroups[$pricingGroup];
             $productData->manualInputPricesByPricingGroupId[$pricingGroup->getId()] = $manualPrice;
@@ -351,18 +350,6 @@ class ProductDataFixtureLoader
         $manualInputPricesFromCsvByPricingGroupId = $productData->manualInputPricesByPricingGroupId;
         $manualPricesForAllPricingGroups = $this->addZeroPricesForPricingGroupsThatAreMissingInDemoData($manualInputPricesFromCsvByPricingGroupId);
         $productData->manualInputPricesByPricingGroupId = $manualPricesForAllPricingGroups;
-    }
-
-    /**
-     * @param \Shopsys\FrameworkBundle\Model\Product\ProductData $productData
-     */
-    private function createDefaultManualPriceForAllPricingGroups(ProductData $productData)
-    {
-        foreach ($this->pricingGroups as $pricingGroupReferenceName => $pricingGroup) {
-            if (!array_key_exists($pricingGroup->getId(), $productData->manualInputPricesByPricingGroupId)) {
-                $productData->manualInputPricesByPricingGroupId[$pricingGroup->getId()] = null;
-            }
-        }
     }
 
     /**
