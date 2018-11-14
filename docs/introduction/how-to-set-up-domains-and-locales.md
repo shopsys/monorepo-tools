@@ -19,7 +19,7 @@ This attribute is the same for each domain.
 
 - **Multilang attribute** - A distinct value of this attribute can be set for each locale.
 An example of a multilang attribute is a name of the product.
-An example of a not multilang attribute is a price of the product.
+An example of a not multilang attribute is an EAN of the product.
 
 - **Difference between multidomain and multilang attribute** - A value of some multilang attribute will be the same for each domain with the same locale.
 For example, when a name of the product is set as *A4tech mouse* for the locale *en* , this name of this product will be the same for each domain with the locale *en*.
