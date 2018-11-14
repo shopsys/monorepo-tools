@@ -1,37 +1,55 @@
 <?php
 
-namespace Shopsys\FrameworkBundle\DataFixtures\DemoMultidomain;
+declare(strict_types=1);
+
+namespace Shopsys\FrameworkBundle\DataFixtures\Demo;
 
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use Shopsys\FrameworkBundle\Component\DataFixture\AbstractReferenceFixture;
 use Shopsys\FrameworkBundle\Component\DataFixture\PersistentReferenceFacade;
-use Shopsys\FrameworkBundle\DataFixtures\Demo\ProductDataFixtureCsvReader;
-use Shopsys\FrameworkBundle\DataFixtures\Demo\ProductDataFixtureLoader;
+use Shopsys\FrameworkBundle\Component\Domain\Domain;
 use Shopsys\FrameworkBundle\DataFixtures\ProductDataFixtureReferenceInjector;
 use Shopsys\FrameworkBundle\Model\Product\Product;
 use Shopsys\FrameworkBundle\Model\Product\ProductDataFactoryInterface;
 use Shopsys\FrameworkBundle\Model\Product\ProductFacade;
 
-class ProductDataFixture extends AbstractReferenceFixture implements DependentFixtureInterface
+class MultidomainProductDataFixture extends AbstractReferenceFixture implements DependentFixtureInterface
 {
-    /** @var \Shopsys\FrameworkBundle\DataFixtures\Demo\ProductDataFixtureLoader */
+    /**
+     * @var \Shopsys\FrameworkBundle\DataFixtures\Demo\ProductDataFixtureLoader
+     */
     private $productDataFixtureLoader;
 
-    /** @var \Shopsys\FrameworkBundle\DataFixtures\ProductDataFixtureReferenceInjector */
+    /**
+     * @var \Shopsys\FrameworkBundle\DataFixtures\ProductDataFixtureReferenceInjector
+     */
     private $referenceInjector;
 
-    /** @var \Shopsys\FrameworkBundle\Component\DataFixture\PersistentReferenceFacade */
+    /**
+     * @var \Shopsys\FrameworkBundle\Component\DataFixture\PersistentReferenceFacade
+     */
     private $persistentReferenceFacade;
 
-    /** @var \Shopsys\FrameworkBundle\DataFixtures\Demo\ProductDataFixtureCsvReader */
+    /**
+     * @var \Shopsys\FrameworkBundle\DataFixtures\Demo\ProductDataFixtureCsvReader
+     */
     private $productDataFixtureCsvReader;
 
-    /** @var \Shopsys\FrameworkBundle\Model\Product\ProductFacade */
+    /**
+     * @var \Shopsys\FrameworkBundle\Model\Product\ProductFacade
+     */
     private $productFacade;
 
-    /** @var \Shopsys\FrameworkBundle\Model\Product\ProductDataFactoryInterface */
+    /**
+     * @var \Shopsys\FrameworkBundle\Model\Product\ProductDataFactoryInterface
+     */
     private $productDataFactory;
+
+    /**
+     * @var \Shopsys\FrameworkBundle\Component\Domain\Domain
+     */
+    private $domain;
 
     /**
      * @param \Shopsys\FrameworkBundle\DataFixtures\Demo\ProductDataFixtureLoader $productDataFixtureLoader
@@ -40,6 +58,7 @@ class ProductDataFixture extends AbstractReferenceFixture implements DependentFi
      * @param \Shopsys\FrameworkBundle\DataFixtures\Demo\ProductDataFixtureCsvReader $productDataFixtureCsvReader
      * @param \Shopsys\FrameworkBundle\Model\Product\ProductFacade $productFacade
      * @param \Shopsys\FrameworkBundle\Model\Product\ProductDataFactoryInterface $productDataFactory
+     * @param \Shopsys\FrameworkBundle\Component\Domain\Domain $domain
      */
     public function __construct(
         ProductDataFixtureLoader $productDataFixtureLoader,
@@ -47,7 +66,8 @@ class ProductDataFixture extends AbstractReferenceFixture implements DependentFi
         PersistentReferenceFacade $persistentReferenceFacade,
         ProductDataFixtureCsvReader $productDataFixtureCsvReader,
         ProductFacade $productFacade,
-        ProductDataFactoryInterface $productDataFactory
+        ProductDataFactoryInterface $productDataFactory,
+        Domain $domain
     ) {
         $this->productDataFixtureLoader = $productDataFixtureLoader;
         $this->referenceInjector = $referenceInjector;
@@ -55,6 +75,7 @@ class ProductDataFixture extends AbstractReferenceFixture implements DependentFi
         $this->productDataFixtureCsvReader = $productDataFixtureCsvReader;
         $this->productFacade = $productFacade;
         $this->productDataFactory = $productDataFactory;
+        $this->domain = $domain;
     }
 
     /**
@@ -62,8 +83,17 @@ class ProductDataFixture extends AbstractReferenceFixture implements DependentFi
      */
     public function load(ObjectManager $manager)
     {
-        $onlyForFirstDomain = false;
-        $this->referenceInjector->loadReferences($this->productDataFixtureLoader, $this->persistentReferenceFacade, $onlyForFirstDomain);
+        foreach ($this->domain->getAllIdsExcludingFirstDomain() as $domainId) {
+            $this->loadForDomain($domainId);
+        }
+    }
+
+    /**
+     * @param int $domainId
+     */
+    private function loadForDomain(int $domainId)
+    {
+        $this->referenceInjector->loadReferences($this->productDataFixtureLoader, $this->persistentReferenceFacade, $domainId);
 
         $csvRows = $this->productDataFixtureCsvReader->getProductDataFixtureCsvRows();
         foreach ($csvRows as $row) {
@@ -93,6 +123,9 @@ class ProductDataFixture extends AbstractReferenceFixture implements DependentFi
      */
     public function getDependencies()
     {
-        return ProductDataFixtureReferenceInjector::getDependenciesForMultidomain();
+        return [
+            MultidomainPricingGroupDataFixture::class,
+            ProductDataFixture::class,
+        ];
     }
 }

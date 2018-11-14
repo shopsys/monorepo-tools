@@ -1,17 +1,21 @@
 <?php
 
-namespace Shopsys\FrameworkBundle\DataFixtures\DemoMultidomain;
+declare(strict_types=1);
 
+namespace Shopsys\FrameworkBundle\DataFixtures\Demo;
+
+use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use Shopsys\FrameworkBundle\Component\DataFixture\AbstractReferenceFixture;
+use Shopsys\FrameworkBundle\Component\Domain\Domain;
 use Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroupData;
 use Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroupDataFactoryInterface;
 use Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroupFacade;
 
-class PricingGroupDataFixture extends AbstractReferenceFixture
+class MultidomainPricingGroupDataFixture extends AbstractReferenceFixture implements DependentFixtureInterface
 {
-    const PRICING_GROUP_ORDINARY_DOMAIN_2 = 'pricing_group_ordinary_domain_2';
-    const PRICING_GROUP_VIP_DOMAIN_2 = 'pricing_group_vip_domain_2';
+    const PRICING_GROUP_ORDINARY_DOMAIN = 'pricing_group_ordinary_domain';
+    const PRICING_GROUP_VIP_DOMAIN = 'pricing_group_vip_domain';
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroupFacade
@@ -24,15 +28,23 @@ class PricingGroupDataFixture extends AbstractReferenceFixture
     private $pricingGroupDataFactory;
 
     /**
+     * @var \Shopsys\FrameworkBundle\Component\Domain\Domain
+     */
+    private $domain;
+
+    /**
      * @param \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroupFacade $pricingGroupFacade
      * @param \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroupDataFactoryInterface $pricingGroupDataFactory
+     * @param \Shopsys\FrameworkBundle\Component\Domain\Domain $domain
      */
     public function __construct(
         PricingGroupFacade $pricingGroupFacade,
-        PricingGroupDataFactoryInterface $pricingGroupDataFactory
+        PricingGroupDataFactoryInterface $pricingGroupDataFactory,
+        Domain $domain
     ) {
         $this->pricingGroupFacade = $pricingGroupFacade;
         $this->pricingGroupDataFactory = $pricingGroupDataFactory;
+        $this->domain = $domain;
     }
 
     /**
@@ -40,22 +52,30 @@ class PricingGroupDataFixture extends AbstractReferenceFixture
      */
     public function load(ObjectManager $manager)
     {
+        foreach ($this->domain->getAllIdsExcludingFirstDomain() as $domainId) {
+            $this->loadForDomain($domainId);
+        }
+    }
+
+    /**
+     * @param int $domainId
+     */
+    private function loadForDomain(int $domainId)
+    {
         $pricingGroupData = $this->pricingGroupDataFactory->create();
 
         $pricingGroupData->name = 'Obyčejný zákazník';
-        $domainId = 2;
 
         $alreadyCreatedDemoPricingGroupsByDomain = $this->pricingGroupFacade->getByDomainId($domainId);
         if (count($alreadyCreatedDemoPricingGroupsByDomain) > 0) {
             $pricingGroup = reset($alreadyCreatedDemoPricingGroupsByDomain);
 
             $this->pricingGroupFacade->edit($pricingGroup->getId(), $pricingGroupData);
-            $this->addReference(self::PRICING_GROUP_ORDINARY_DOMAIN_2, $pricingGroup);
+            $this->addReferenceForDomain(self::PRICING_GROUP_ORDINARY_DOMAIN, $pricingGroup, $domainId);
         }
 
         $pricingGroupData->name = 'VIP zákazník';
-        $domainId1 = 2;
-        $this->createPricingGroup($pricingGroupData, $domainId1, self::PRICING_GROUP_VIP_DOMAIN_2);
+        $this->createPricingGroup($pricingGroupData, $domainId, self::PRICING_GROUP_VIP_DOMAIN);
     }
 
     /**
@@ -69,6 +89,16 @@ class PricingGroupDataFixture extends AbstractReferenceFixture
         $referenceName
     ) {
         $pricingGroup = $this->pricingGroupFacade->create($pricingGroupData, $domainId);
-        $this->addReference($referenceName, $pricingGroup);
+        $this->addReferenceForDomain($referenceName, $pricingGroup, $domainId);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getDependencies()
+    {
+        return [
+            PricingGroupDataFixture::class,
+        ];
     }
 }

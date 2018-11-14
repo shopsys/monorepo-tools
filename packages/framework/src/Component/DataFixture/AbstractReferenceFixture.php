@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Shopsys\FrameworkBundle\Component\DataFixture;
 
 use Doctrine\Common\DataFixtures\FixtureInterface;
@@ -23,25 +25,10 @@ abstract class AbstractReferenceFixture implements FixtureInterface
     /**
      * @param string $name
      * @param object $object
-     * @param bool $persistent
      */
-    public function addReference($name, $object, $persistent = true)
+    public function addReference($name, $object)
     {
-        if ($persistent) {
-            $this->persistentReferenceFacade->persistReference($name, $object);
-        }
-    }
-
-    /**
-     * @param string $name
-     * @param object $object
-     * @param bool $persistent
-     */
-    public function setReference($name, $object, $persistent = true)
-    {
-        if ($persistent) {
-            $this->persistentReferenceFacade->persistReference($name, $object);
-        }
+        $this->persistentReferenceFacade->persistReference($name, $object);
     }
 
     /**
@@ -51,5 +38,25 @@ abstract class AbstractReferenceFixture implements FixtureInterface
     public function getReference($name)
     {
         return $this->persistentReferenceFacade->getReference($name);
+    }
+
+    /**
+     * @param string $name
+     * @param object $object
+     * @param int $domainId
+     */
+    public function addReferenceForDomain(string $name, $object, int $domainId): void
+    {
+        $this->persistentReferenceFacade->persistReferenceForDomain($name, $object, $domainId);
+    }
+
+    /**
+     * @param string $name
+     * @param int $domainId
+     * @return object
+     */
+    public function getReferenceForDomain(string $name, int $domainId)
+    {
+        return $this->persistentReferenceFacade->getReferenceForDomain($name, $domainId);
     }
 }

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Shopsys\FrameworkBundle\Component\DataFixture;
 
 use Doctrine\ORM\EntityManagerInterface;
@@ -83,5 +85,37 @@ class PersistentReferenceFacade
             $message = 'Entity "' . $entityName . '" does not have a method "getId", which is necessary for persistent references.';
             throw new \Shopsys\FrameworkBundle\Component\DataFixture\Exception\MethodGetIdDoesNotExistException($message);
         }
+    }
+
+    /**
+     * @param string $name
+     * @param object $object
+     * @param int $domainId
+     */
+    public function persistReferenceForDomain(string $name, $object, int $domainId): void
+    {
+        $referenceName = $this->createDomainReferenceName($name, $domainId);
+        $this->persistReference($referenceName, $object);
+    }
+
+    /**
+     * @param string $name
+     * @param int $domainId
+     * @return object
+     */
+    public function getReferenceForDomain(string $name, int $domainId)
+    {
+        $referenceName = $this->createDomainReferenceName($name, $domainId);
+        return $this->getReference($referenceName);
+    }
+
+    /**
+     * @param string $name
+     * @param int $domainId
+     * @return string
+     */
+    private function createDomainReferenceName(string $name, int $domainId): string
+    {
+        return sprintf('%s_%s', $name, $domainId);
     }
 }

@@ -8,4 +8,6 @@ after all migrations are executed, necessary data must be created for all the ot
 This is the responsibility of `phing` task `create-domains-data` that executes [`CreateDomainsDataCommand`](./../../packages/framework/src/Command/CreateDomainsDataCommand.php).
 
 All the other data that are not vital (products, customers, etc.) are created afterwards as data fixtures (i.e. demo data)
-using `phing` targets `db-fixtures-demo-singledomain` and (if there is more than one domain) `db-fixtures-demo-multidomain`.  
+using `phing` target `db-fixtures-demo`.
+We have English demo data for first domain and Czech demo data for second domain.
+If you have more domains, the phing target `db-fixtures-demo` will use the same Czech demo data for other domains.

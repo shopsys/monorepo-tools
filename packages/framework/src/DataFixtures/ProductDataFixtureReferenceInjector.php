@@ -3,27 +3,31 @@
 namespace Shopsys\FrameworkBundle\DataFixtures;
 
 use Shopsys\FrameworkBundle\Component\DataFixture\PersistentReferenceFacade;
+use Shopsys\FrameworkBundle\Component\Domain\Domain;
 use Shopsys\FrameworkBundle\DataFixtures\Demo\AvailabilityDataFixture;
 use Shopsys\FrameworkBundle\DataFixtures\Demo\BrandDataFixture;
 use Shopsys\FrameworkBundle\DataFixtures\Demo\CategoryDataFixture;
 use Shopsys\FrameworkBundle\DataFixtures\Demo\FlagDataFixture;
-use Shopsys\FrameworkBundle\DataFixtures\Demo\PricingGroupDataFixture as DemoPricingGroupDataFixture;
+use Shopsys\FrameworkBundle\DataFixtures\Demo\MultidomainPricingGroupDataFixture;
+use Shopsys\FrameworkBundle\DataFixtures\Demo\PricingGroupDataFixture;
 use Shopsys\FrameworkBundle\DataFixtures\Demo\ProductDataFixtureLoader;
 use Shopsys\FrameworkBundle\DataFixtures\Demo\UnitDataFixture;
 use Shopsys\FrameworkBundle\DataFixtures\Demo\VatDataFixture;
-use Shopsys\FrameworkBundle\DataFixtures\DemoMultidomain\PricingGroupDataFixture as MultidomainPricingGroupDataFixture;
 
 class ProductDataFixtureReferenceInjector
 {
     /**
+     * If you pass 2nd domain or higher, references will contain also first domain
+     * If you pass higher domain than 2nd, data will be taken from 2nd CSV domain
+     *
      * @param \Shopsys\FrameworkBundle\DataFixtures\Demo\ProductDataFixtureLoader $productDataFixtureLoader
      * @param \Shopsys\FrameworkBundle\Component\DataFixture\PersistentReferenceFacade $persistentReferenceFacade
-     * @param bool $onlyForFirstDomain
+     * @param int $domainId
      */
     public function loadReferences(
         ProductDataFixtureLoader $productDataFixtureLoader,
         PersistentReferenceFacade $persistentReferenceFacade,
-        $onlyForFirstDomain
+        int $domainId
     ) {
         $vats = $this->getVatReferences($persistentReferenceFacade);
         $availabilities = $this->getAvailabilityReferences($persistentReferenceFacade);
@@ -31,10 +35,10 @@ class ProductDataFixtureReferenceInjector
         $flags = $this->getFlagReferences($persistentReferenceFacade);
         $brands = $this->getBrandReferences($persistentReferenceFacade);
         $units = $this->getUnitReferences($persistentReferenceFacade);
-        if ($onlyForFirstDomain === true) {
+        if ($domainId === Domain::FIRST_DOMAIN_ID) {
             $pricingGroups = $this->getPricingGroupReferencesForFirstDomain($persistentReferenceFacade);
         } else {
-            $pricingGroups = $this->getPricingGroupReferences($persistentReferenceFacade);
+            $pricingGroups = $this->getPricingGroupReferences($persistentReferenceFacade, $domainId);
         }
 
         $productDataFixtureLoader->refreshCachedEntities(
@@ -162,24 +166,25 @@ class ProductDataFixtureReferenceInjector
     private function getPricingGroupReferencesForFirstDomain(PersistentReferenceFacade $persistentReferenceFacade)
     {
         return [
-            'ordinary_domain_1' => $persistentReferenceFacade->getReference(DemoPricingGroupDataFixture::PRICING_GROUP_ORDINARY_DOMAIN_1),
-            'partner_domain_1' => $persistentReferenceFacade->getReference(DemoPricingGroupDataFixture::PRICING_GROUP_PARTNER_DOMAIN_1),
-            'vip_domain_1' => $persistentReferenceFacade->getReference(DemoPricingGroupDataFixture::PRICING_GROUP_VIP_DOMAIN_1),
+            'ordinary_domain_1' => $persistentReferenceFacade->getReference(PricingGroupDataFixture::PRICING_GROUP_ORDINARY_DOMAIN_1),
+            'partner_domain_1' => $persistentReferenceFacade->getReference(PricingGroupDataFixture::PRICING_GROUP_PARTNER_DOMAIN_1),
+            'vip_domain_1' => $persistentReferenceFacade->getReference(PricingGroupDataFixture::PRICING_GROUP_VIP_DOMAIN_1),
         ];
     }
 
     /**
      * @param \Shopsys\FrameworkBundle\Component\DataFixture\PersistentReferenceFacade $persistentReferenceFacade
+     * @param int $domainId
      * @return string[]
      */
-    private function getPricingGroupReferences(PersistentReferenceFacade $persistentReferenceFacade)
+    private function getPricingGroupReferences(PersistentReferenceFacade $persistentReferenceFacade, int $domainId)
     {
         return [
-            'ordinary_domain_1' => $persistentReferenceFacade->getReference(DemoPricingGroupDataFixture::PRICING_GROUP_ORDINARY_DOMAIN_1),
-            'ordinary_domain_2' => $persistentReferenceFacade->getReference(MultidomainPricingGroupDataFixture::PRICING_GROUP_ORDINARY_DOMAIN_2),
-            'partner_domain_1' => $persistentReferenceFacade->getReference(DemoPricingGroupDataFixture::PRICING_GROUP_PARTNER_DOMAIN_1),
-            'vip_domain_1' => $persistentReferenceFacade->getReference(DemoPricingGroupDataFixture::PRICING_GROUP_VIP_DOMAIN_1),
-            'vip_domain_2' => $persistentReferenceFacade->getReference(MultidomainPricingGroupDataFixture::PRICING_GROUP_VIP_DOMAIN_2),
+            'ordinary_domain_1' => $persistentReferenceFacade->getReference(PricingGroupDataFixture::PRICING_GROUP_ORDINARY_DOMAIN_1),
+            'ordinary_domain_2' => $persistentReferenceFacade->getReferenceForDomain(MultidomainPricingGroupDataFixture::PRICING_GROUP_ORDINARY_DOMAIN, $domainId),
+            'partner_domain_1' => $persistentReferenceFacade->getReference(PricingGroupDataFixture::PRICING_GROUP_PARTNER_DOMAIN_1),
+            'vip_domain_1' => $persistentReferenceFacade->getReference(PricingGroupDataFixture::PRICING_GROUP_VIP_DOMAIN_1),
+            'vip_domain_2' => $persistentReferenceFacade->getReferenceForDomain(MultidomainPricingGroupDataFixture::PRICING_GROUP_VIP_DOMAIN, $domainId),
         ];
     }
 
@@ -194,17 +199,7 @@ class ProductDataFixtureReferenceInjector
             CategoryDataFixture::class,
             BrandDataFixture::class,
             UnitDataFixture::class,
-            DemoPricingGroupDataFixture::class,
-        ];
-    }
-
-    /**
-     * @return string[]
-     */
-    public static function getDependenciesForMultidomain()
-    {
-        return [
-            MultidomainPricingGroupDataFixture::class,
+            PricingGroupDataFixture::class,
         ];
     }
 }

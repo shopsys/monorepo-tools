@@ -1,14 +1,17 @@
 <?php
 
-namespace Shopsys\FrameworkBundle\DataFixtures\DemoMultidomain;
+declare(strict_types=1);
+
+namespace Shopsys\FrameworkBundle\DataFixtures\Demo;
 
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use Shopsys\FrameworkBundle\Component\DataFixture\AbstractReferenceFixture;
+use Shopsys\FrameworkBundle\Component\Domain\Domain;
 use Shopsys\FrameworkBundle\DataFixtures\Demo\ProductDataFixture as DemoProductDataFixture;
 use Shopsys\FrameworkBundle\Model\Product\TopProduct\TopProductFacade;
 
-class TopProductDataFixture extends AbstractReferenceFixture implements DependentFixtureInterface
+class MultidomainTopProductDataFixture extends AbstractReferenceFixture implements DependentFixtureInterface
 {
     /**
      * @var \Shopsys\FrameworkBundle\Model\Product\TopProduct\TopProductFacade
@@ -16,11 +19,18 @@ class TopProductDataFixture extends AbstractReferenceFixture implements Dependen
     private $topProductFacade;
 
     /**
-     * @param \Shopsys\FrameworkBundle\Model\Product\TopProduct\TopProductFacade $topProductFacade
+     * @var \Shopsys\FrameworkBundle\Component\Domain\Domain
      */
-    public function __construct(TopProductFacade $topProductFacade)
+    private $domain;
+
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Product\TopProduct\TopProductFacade $topProductFacade
+     * @param \Shopsys\FrameworkBundle\Component\Domain\Domain $domain
+     */
+    public function __construct(TopProductFacade $topProductFacade, Domain $domain)
     {
         $this->topProductFacade = $topProductFacade;
+        $this->domain = $domain;
     }
 
     /**
@@ -28,24 +38,24 @@ class TopProductDataFixture extends AbstractReferenceFixture implements Dependen
      */
     public function load(ObjectManager $manager)
     {
-        $topProductReferenceNamesOnDomain2 = [
+        foreach ($this->domain->getAllIdsExcludingFirstDomain() as $domainId) {
+            $this->loadForDomain($domainId);
+        }
+    }
+
+    /**
+     * @param int $domainId
+     */
+    private function loadForDomain(int $domainId)
+    {
+        $topProductReferenceNamesOnDomain = [
             DemoProductDataFixture::PRODUCT_PREFIX . '14',
             DemoProductDataFixture::PRODUCT_PREFIX . '10',
             DemoProductDataFixture::PRODUCT_PREFIX . '7',
         ];
 
-        $domainId = 2;
-        $this->createTopProducts($topProductReferenceNamesOnDomain2, $domainId);
-    }
-
-    /**
-     * @param string[] $productReferenceNames
-     * @param int $domainId
-     */
-    private function createTopProducts(array $productReferenceNames, $domainId)
-    {
         $products = [];
-        foreach ($productReferenceNames as $productReferenceName) {
+        foreach ($topProductReferenceNamesOnDomain as $productReferenceName) {
             $products[] = $this->getReference($productReferenceName);
         }
 
@@ -58,7 +68,8 @@ class TopProductDataFixture extends AbstractReferenceFixture implements Dependen
     public function getDependencies()
     {
         return [
-            ProductDataFixture::class,
+            MultidomainProductDataFixture::class,
+            TopProductDataFixture::class,
         ];
     }
 }

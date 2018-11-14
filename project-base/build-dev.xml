@@ -16,7 +16,7 @@
     <target name="standards" depends="phplint,ecs,phpstan,twig-lint,yaml-lint,eslint-check" description="Checks coding standards."/>
     <target name="standards-diff" depends="phplint-diff,ecs-diff,phpstan,twig-lint-diff,yaml-lint,eslint-check-diff" description="Checks coding standards on changed files."/>
 
-    <target name="test-db-demo" depends="clean,test-db-wipe-public-schema,test-db-import-basic-structure,test-db-migrations,test-db-fixtures-demo-singledomain,test-create-domains-data,test-generate-friendly-urls,test-db-fixtures-demo-multidomain,test-load-plugin-demo-data,test-replace-domains-urls" description="Drops all data in test database and creates a new one with demo data."/>
+    <target name="test-db-demo" depends="clean,test-db-wipe-public-schema,test-db-import-basic-structure,test-db-migrations,test-create-domains-data,test-db-fixtures-demo,test-generate-friendly-urls,test-load-plugin-demo-data,test-replace-domains-urls" description="Drops all data in test database and creates a new one with demo data."/>
     <target name="test-db-performance" depends="test-db-demo,test-db-fixtures-performance" description="Drops all data in test database and creates a new one with performance data."/>
     <target name="tests-static" depends="tests-unit" description="Runs unit tests."/>
     <target name="tests" depends="test-db-demo,tests-static,tests-functional,tests-smoke" description="Runs unit, functional and smoke tests on a newly built test database."/>
@@ -588,36 +588,11 @@
         </exec>
     </target>
 
-    <target name="test-db-fixtures-demo-multidomain" description="Loads multidomain demo data fixtures excluding first domain into test DB.">
-        <if>
-            <istrue value="${is-multidomain}" />
-            <then>
-                <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
-                    <arg value="${path.bin-console}" />
-                    <arg value="--env=test" />
-                    <arg value="shopsys:fixtures:load" />
-                    <arg value="--fixtures=${path.framework}/src/DataFixtures/DemoMultidomain" />
-                    <arg value="--append" />
-                    <arg value="--no-interaction" />
-                </exec>
-                <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
-                    <arg value="${path.bin-console}" />
-                    <arg value="shopsys:recalculations" />
-                    <arg value="--env=test" />
-                </exec>
-            </then>
-            <else>
-                <echo message="Multidomain demo data creation skipped." />
-            </else>
-        </if>
-    </target>
-
-    <target name="test-db-fixtures-demo-singledomain" description="Loads base and demo data fixtures for the first domain into test DB.">
+    <target name="test-db-fixtures-demo" description="Loads demo data fixtures into test DB.">
         <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
             <arg value="${path.bin-console}" />
             <arg value="--env=test" />
-            <arg value="shopsys:fixtures:load" />
-            <arg value="--fixtures=${path.framework}/src/DataFixtures/Demo" />
+            <arg value="doctrine:fixtures:load" />
             <arg value="--append" />
             <arg value="--no-interaction" />
         </exec>

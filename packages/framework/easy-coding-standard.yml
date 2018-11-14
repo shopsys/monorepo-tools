@@ -10,6 +10,7 @@ parameters:
             - '*/src/Model/AdminNavigation/SideMenuBuilder.php'
             - '*/src/Model/Order/Preview/OrderPreviewCalculation.php'
             - '*/src/Model/Product/ProductVisibilityRepository.php'
+            - '*/src/DataFixtures/Demo/ProductDataFixtureLoader.php'
             - '*/src/Controller/Admin/AdministratorController.php'
             - '*/tests/Unit/Model/Customer/CustomerServiceTest.php'
             - '*/tests/Unit/Component/Domain/DomainDataCreatorTest.php'
@@ -23,10 +24,11 @@ parameters:
         ObjectCalisthenics\Sniffs\Files\ClassTraitAndInterfaceLengthSniff:
             - '*/src/Form/Admin/Product/ProductFormType.php'
             - '*/src/Component/Grid/Grid.php'
-            - '*/src/DataFixtures/Demo/OrderDataFixture.php'
+            - '*/src/DataFixtures/Demo/MultidomainOrderDataFixture.phpFixture.php'
             - '*/src/Model/Order/Order.php'
             - '*/src/Model/Product/Product.php'
             - '*/src/Model/Product/ProductRepository.php'
+            - '*/src/DataFixtures/Demo/OrderDataFixture.php'
 
         PHP_CodeSniffer\Standards\Generic\Sniffs\CodeAnalysis\EmptyStatementSniff.DetectedWhile:
             - '*/src/Model/Product/Availability/ProductAvailabilityRecalculator.php'
