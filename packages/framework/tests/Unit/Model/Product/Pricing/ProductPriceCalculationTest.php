@@ -75,7 +75,6 @@ class ProductPriceCalculationTest extends TestCase
 
         $pricingGroupData = new PricingGroupData();
         $pricingGroupData->name = 'name';
-        $pricingGroupData->coefficient = 1;
         $pricingGroup = new PricingGroup($pricingGroupData, 1);
 
         $variant = Product::create(new ProductData());

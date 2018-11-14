@@ -26,7 +26,6 @@ class PricingGroupFacadeTest extends TransactionFunctionalTestCase
         $productPriceRecalculator = $this->getContainer()->get(ProductPriceRecalculator::class);
         $pricingGroupData = new PricingGroupData();
         $pricingGroupData->name = 'pricing_group_name';
-        $pricingGroupData->coefficient = 1;
         $domainId = 1;
         $pricingGroup = $pricingGroupFacade->create($pricingGroupData, $domainId);
         $productPriceRecalculator->runAllScheduledRecalculations();

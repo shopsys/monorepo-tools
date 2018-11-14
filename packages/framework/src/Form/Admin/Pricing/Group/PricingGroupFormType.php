@@ -4,7 +4,6 @@ namespace Shopsys\FrameworkBundle\Form\Admin\Pricing\Group;
 
 use Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroupData;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -23,15 +22,6 @@ class PricingGroupFormType extends AbstractType
                 'required' => false,
                 'constraints' => [
                     new Constraints\NotBlank(['message' => 'Please enter pricing group name']),
-                ],
-            ])
-            ->add('coefficient', NumberType::class, [
-                'required' => true,
-                'scale' => 4,
-                'invalid_message' => 'Please enter ratio in correct format',
-                'constraints' => [
-                    new Constraints\NotBlank(['message' => 'Please enter pricing group coefficient']),
-                    new Constraints\GreaterThan(['value' => 0, 'message' => 'Coefficient must be greater than 0']),
                 ],
             ]);
     }

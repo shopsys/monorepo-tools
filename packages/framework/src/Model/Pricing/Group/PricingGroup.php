@@ -34,19 +34,11 @@ class PricingGroup
     protected $domainId;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(type="decimal", precision=20, scale=4)
-     */
-    protected $coefficient;
-
-    /**
      * @param \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroupData $pricingGroupData
      * @param int $domainId
      */
     public function __construct(PricingGroupData $pricingGroupData, $domainId)
     {
-        $this->coefficient = $pricingGroupData->coefficient;
         $this->name = $pricingGroupData->name;
         $this->domainId = $domainId;
     }
@@ -76,19 +68,10 @@ class PricingGroup
     }
 
     /**
-     * @return string
-     */
-    public function getCoefficient()
-    {
-        return $this->coefficient;
-    }
-
-    /**
      * @param \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroupData $pricingGroupData
      */
     public function edit(PricingGroupData $pricingGroupData)
     {
         $this->name = $pricingGroupData->name;
-        $this->coefficient = $pricingGroupData->coefficient;
     }
 }
