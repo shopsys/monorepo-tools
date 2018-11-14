@@ -24,8 +24,6 @@ use Shopsys\FrameworkBundle\Model\Product\Exception\ProductDomainNotFoundExcepti
  */
 class Product extends AbstractTranslatableEntity
 {
-    const PRICE_CALCULATION_TYPE_AUTO = 'auto';
-    const PRICE_CALCULATION_TYPE_MANUAL = 'manual';
     const OUT_OF_STOCK_ACTION_SET_ALTERNATE_AVAILABILITY = 'setAlternateAvailability';
     const OUT_OF_STOCK_ACTION_EXCLUDE_FROM_SALE = 'excludeFromSale';
     const OUT_OF_STOCK_ACTION_HIDE = 'hide';
