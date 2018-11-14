@@ -55,25 +55,4 @@ class ProductManualInputPriceFacade
         $this->em->persist($refreshedProductManualInputPrice);
         $this->em->flush($refreshedProductManualInputPrice);
     }
-
-    /**
-     * @param \Shopsys\FrameworkBundle\Model\Product\Product $product
-     * @return \Shopsys\FrameworkBundle\Model\Product\Pricing\ProductManualInputPrice[]
-     */
-    public function getAllByProduct(Product $product)
-    {
-        return $this->productManualInputPriceRepository->getByProduct($product);
-    }
-
-    /**
-     * @param \Shopsys\FrameworkBundle\Model\Product\Product $product
-     */
-    public function deleteByProduct(Product $product)
-    {
-        $manualInputPrices = $this->productManualInputPriceRepository->getByProduct($product);
-        foreach ($manualInputPrices as $manualInputPrice) {
-            $this->em->remove($manualInputPrice);
-        }
-        $this->em->flush($manualInputPrices);
-    }
 }

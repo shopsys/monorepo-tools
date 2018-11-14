@@ -226,13 +226,6 @@ class Product extends AbstractTranslatableEntity
     protected $flags;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(type="string", length=32)
-     */
-    protected $priceCalculationType;
-
-    /**
      * @var bool
      *
      * @ORM\Column(type="boolean", options={"default" = true})
@@ -301,7 +294,6 @@ class Product extends AbstractTranslatableEntity
         $this->catnum = $productData->catnum;
         $this->partno = $productData->partno;
         $this->ean = $productData->ean;
-        $this->priceCalculationType = self::PRICE_CALCULATION_TYPE_MANUAL;
         $this->setPrice(null);
         $this->vat = $productData->vat;
         $this->sellingFrom = $productData->sellingFrom;
@@ -389,7 +381,6 @@ class Product extends AbstractTranslatableEntity
             $this->catnum = $productData->catnum;
             $this->partno = $productData->partno;
             $this->ean = $productData->ean;
-            $this->priceCalculationType = self::PRICE_CALCULATION_TYPE_MANUAL;
             $this->setPrice(null);
         }
 
@@ -729,14 +720,6 @@ class Product extends AbstractTranslatableEntity
         }
 
         return $categoriesByDomainId;
-    }
-
-    /**
-     * @return string
-     */
-    public function getPriceCalculationType()
-    {
-        return $this->priceCalculationType;
     }
 
     /**
