@@ -4,6 +4,9 @@ namespace Tests\FrameworkBundle\Unit\Model\Product;
 
 use PHPUnit\Framework\TestCase;
 use Shopsys\FrameworkBundle\Component\EntityExtension\EntityNameResolver;
+use Shopsys\FrameworkBundle\Model\Product\Availability\Availability;
+use Shopsys\FrameworkBundle\Model\Product\Availability\AvailabilityData;
+use Shopsys\FrameworkBundle\Model\Product\Availability\ProductAvailabilityCalculation;
 use Shopsys\FrameworkBundle\Model\Product\Product;
 use Shopsys\FrameworkBundle\Model\Product\ProductData;
 use Shopsys\FrameworkBundle\Model\Product\ProductFactory;
@@ -11,20 +14,33 @@ use Shopsys\FrameworkBundle\Model\Product\ProductVariantService;
 
 class ProductVariantServiceTest extends TestCase
 {
+    /**
+     * @var \Shopsys\FrameworkBundle\Model\Product\ProductVariantService
+     */
+    protected $productVariantService;
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function setUp()
+    {
+        $productFactory = new ProductFactory(new EntityNameResolver([]), $this->getProductAvailabilityCalculationMock());
+        $this->productVariantService = new ProductVariantService($productFactory);
+        parent::setUp();
+    }
+
     public function testCheckProductIsNotMainVariantException()
     {
-        $productVariantService = new ProductVariantService(new ProductFactory(new EntityNameResolver([])));
         $productData = new ProductData();
         $variant = Product::create($productData);
         $mainVariant = Product::createMainVariant($productData, [$variant]);
 
         $this->expectException(\Shopsys\FrameworkBundle\Model\Product\Exception\ProductIsAlreadyMainVariantException::class);
-        $productVariantService->checkProductIsNotMainVariant($mainVariant);
+        $this->productVariantService->checkProductIsNotMainVariant($mainVariant);
     }
 
     public function testRefreshProductVariants()
     {
-        $productVariantService = new ProductVariantService(new ProductFactory(new EntityNameResolver([])));
         $productData = new ProductData();
         $variant1 = Product::create($productData);
         $variant2 = Product::create($productData);
@@ -32,7 +48,7 @@ class ProductVariantServiceTest extends TestCase
         $mainVariant = Product::createMainVariant($productData, [$variant1, $variant2]);
 
         $currentVariants = [$variant2, $variant3];
-        $productVariantService->refreshProductVariants($mainVariant, $currentVariants);
+        $this->productVariantService->refreshProductVariants($mainVariant, $currentVariants);
 
         $variantsArray = $mainVariant->getVariants();
 
@@ -47,10 +63,27 @@ class ProductVariantServiceTest extends TestCase
         $mainProduct = Product::create(new ProductData());
         $variants = [];
 
-        $productVariantService = new ProductVariantService(new ProductFactory(new EntityNameResolver([])));
-        $mainVariant = $productVariantService->createMainVariant($mainVariantData, $mainProduct, $variants);
+        $mainVariant = $this->productVariantService->createMainVariant($mainVariantData, $mainProduct, $variants);
 
         $this->assertNotSame($mainProduct, $mainVariant);
         $this->assertTrue(in_array($mainProduct, $mainVariant->getVariants(), true));
+    }
+
+    /**
+     * @return \Shopsys\FrameworkBundle\Model\Product\Availability\ProductAvailabilityCalculation|\PHPUnit\Framework\MockObject\MockObject
+     */
+    private function getProductAvailabilityCalculationMock()
+    {
+        $dummyAvailability = new Availability(new AvailabilityData());
+        $productAvailabilityCalculationMock = $this->getMockBuilder(ProductAvailabilityCalculation::class)
+            ->disableOriginalConstructor()
+            ->setMethods(['calculateAvailability'])
+            ->getMock();
+        $productAvailabilityCalculationMock
+            ->expects($this->any())
+            ->method('calculateAvailability')
+            ->willReturn($dummyAvailability);
+
+        return $productAvailabilityCalculationMock;
     }
 }
