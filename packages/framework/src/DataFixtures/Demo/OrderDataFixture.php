@@ -112,6 +112,7 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
         $orderData->domainId = Domain::FIRST_DOMAIN_ID;
         $orderData->currency = $this->getReference(CurrencyDataFixture::CURRENCY_CZK);
         $orderData->createdAt = $this->faker->dateTimeBetween('-1 week', 'now');
+        $orderData->createdAsAdministrator = $this->getReference(AdministratorDataFixture::ADMINISTRATOR);
         $this->createOrder(
             $orderData,
             [
@@ -188,6 +189,7 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
         $orderData->domainId = Domain::FIRST_DOMAIN_ID;
         $orderData->currency = $this->getReference(CurrencyDataFixture::CURRENCY_CZK);
         $orderData->createdAt = $this->faker->dateTimeBetween('-1 week', 'now');
+        $orderData->createdAsAdministrator = $this->getReference(AdministratorDataFixture::SUPERADMINISTRATOR);
         $this->createOrder(
             $orderData,
             [
@@ -268,6 +270,7 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
         $orderData->domainId = Domain::FIRST_DOMAIN_ID;
         $orderData->currency = $this->getReference(CurrencyDataFixture::CURRENCY_CZK);
         $orderData->createdAt = $this->faker->dateTimeBetween('-1 week', 'now');
+        $orderData->createdAsAdministrator = $this->getReference(AdministratorDataFixture::SUPERADMINISTRATOR);
         $this->createOrder(
             $orderData,
             [
@@ -389,6 +392,7 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
         $orderData->domainId = Domain::FIRST_DOMAIN_ID;
         $orderData->currency = $this->getReference(CurrencyDataFixture::CURRENCY_CZK);
         $orderData->createdAt = $this->faker->dateTimeBetween('-1 week', 'now');
+        $orderData->createdAsAdministrator = $this->getReference(AdministratorDataFixture::ADMINISTRATOR);
         $this->createOrder(
             $orderData,
             [
@@ -505,6 +509,7 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
         $orderData->domainId = Domain::FIRST_DOMAIN_ID;
         $orderData->currency = $this->getReference(CurrencyDataFixture::CURRENCY_CZK);
         $orderData->createdAt = $this->faker->dateTimeBetween('-1 week', 'now');
+        $orderData->createdAsAdministrator = $this->getReference(AdministratorDataFixture::ADMINISTRATOR);
         $this->createOrder(
             $orderData,
             [

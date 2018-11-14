@@ -18,8 +18,6 @@ use Shopsys\FrameworkBundle\Model\Order\Item\OrderItemFacade;
 use Shopsys\FrameworkBundle\Model\Order\Item\OrderItemPriceCalculation;
 use Shopsys\FrameworkBundle\Model\Order\OrderDataFactoryInterface;
 use Shopsys\FrameworkBundle\Model\Order\OrderFacade;
-use Shopsys\FrameworkBundle\Model\Payment\PaymentFacade;
-use Shopsys\FrameworkBundle\Model\Transport\TransportFacade;
 use Symfony\Component\HttpFoundation\Request;
 
 class OrderController extends AdminBaseController
@@ -60,16 +58,6 @@ class OrderController extends AdminBaseController
     protected $orderItemFacade;
 
     /**
-     * @var \Shopsys\FrameworkBundle\Model\Transport\TransportFacade
-     */
-    protected $transportFacade;
-
-    /**
-     * @var \Shopsys\FrameworkBundle\Model\Payment\PaymentFacade
-     */
-    protected $paymentFacade;
-
-    /**
      * @var \Shopsys\FrameworkBundle\Component\Domain\Domain
      */
     protected $domain;
@@ -87,8 +75,6 @@ class OrderController extends AdminBaseController
      * @param \Shopsys\FrameworkBundle\Component\Grid\GridFactory $gridFactory
      * @param \Shopsys\FrameworkBundle\Model\AdminNavigation\BreadcrumbOverrider $breadcrumbOverrider
      * @param \Shopsys\FrameworkBundle\Model\Order\Item\OrderItemFacade $orderItemFacade
-     * @param \Shopsys\FrameworkBundle\Model\Transport\TransportFacade $transportFacade
-     * @param \Shopsys\FrameworkBundle\Model\Payment\PaymentFacade $paymentFacade
      * @param \Shopsys\FrameworkBundle\Component\Domain\Domain $domain
      * @param \Shopsys\FrameworkBundle\Model\Order\OrderDataFactoryInterface $orderDataFactory
      */
@@ -100,8 +86,6 @@ class OrderController extends AdminBaseController
         GridFactory $gridFactory,
         BreadcrumbOverrider $breadcrumbOverrider,
         OrderItemFacade $orderItemFacade,
-        TransportFacade $transportFacade,
-        PaymentFacade $paymentFacade,
         Domain $domain,
         OrderDataFactoryInterface $orderDataFactory
     ) {
@@ -112,8 +96,6 @@ class OrderController extends AdminBaseController
         $this->gridFactory = $gridFactory;
         $this->breadcrumbOverrider = $breadcrumbOverrider;
         $this->orderItemFacade = $orderItemFacade;
-        $this->transportFacade = $transportFacade;
-        $this->paymentFacade = $paymentFacade;
         $this->domain = $domain;
         $this->orderDataFactory = $orderDataFactory;
     }
@@ -159,20 +141,9 @@ class OrderController extends AdminBaseController
 
         $this->breadcrumbOverrider->overrideLastItem(t('Editing order - Nr. %number%', ['%number%' => $order->getNumber()]));
 
-        $orderItemTotalPricesById = $this->orderItemPriceCalculation->calculateTotalPricesIndexedById($order->getItems());
-
         return $this->render('@ShopsysFramework/Admin/Content/Order/edit.html.twig', [
             'form' => $form->createView(),
             'order' => $order,
-            'orderItemTotalPricesById' => $orderItemTotalPricesById,
-            'transportPricesWithVatByTransportId' => $this->transportFacade->getTransportPricesWithVatIndexedByTransportId(
-                $order->getCurrency()
-            ),
-            'transportVatPercentsByTransportId' => $this->transportFacade->getTransportVatPercentsIndexedByTransportId(),
-            'paymentPricesWithVatByPaymentId' => $this->paymentFacade->getPaymentPricesWithVatIndexedByPaymentId(
-                $order->getCurrency()
-            ),
-            'paymentVatPercentsByPaymentId' => $this->paymentFacade->getPaymentVatPercentsIndexedByPaymentId(),
         ]);
     }
 

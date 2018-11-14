@@ -1,8 +1,22 @@
 {% block display_only_url_widget %}
     <div class="form-line__side">
         <div class="form-line__item form-line__item--text">
-            <a href="{{ url( data.route_name, {id: data.id}) }}" target="_blank">
-                <i class="svg svg-forward-page in-icon in-icon--link ml5 mr5"></i>{{ data.name }}
+
+            {% if domain_id is not null %}
+                {% set url = findUrlByDomainId(route, route_params, domain_id) %}
+            {% else %}
+                {% set url = url(route, route_params) %}
+            {% endif %}
+
+            <a href="{{ url }}" target="_blank">
+                {% spaceless %}
+                    <i class="svg svg-forward-page in-icon in-icon--link ml5 mr5"></i>
+                    {% if route_label is not empty %}
+                        {{ route_label }}
+                    {% else %}
+                        {{ url }}
+                    {% endif %}
+                {% endspaceless %}
             </a>
         </div>
     </div>
