@@ -34,7 +34,6 @@ class ProductServiceTest extends TransactionFunctionalTestCase
         $pricingGroup = $this->getReference(PricingGroupDataFixture::PRICING_GROUP_ORDINARY_DOMAIN_1);
 
         $productData = $producDataFactory->create();
-        $productData->price = 1000;
         $productData->vat = $vat;
         $productData->unit = $this->getReference(UnitDataFixture::UNIT_PIECES);
         $product = Product::create($productData);
@@ -43,12 +42,6 @@ class ProductServiceTest extends TransactionFunctionalTestCase
 
         $productService->recalculateInputPriceForNewVatPercent($product, [$productManualInputPrice], 15);
 
-        /**
-         * We presume that all products now have automatic price calculation type.
-         * Therefore Product::$price property will always be "0" no matter the value in the data object.
-         * @TODO The assertion should be removed when Product::$price is removed
-         */
-        $this->assertSame('0', (string)$product->getPrice());
         $this->assertSame('1052.173913', (string)$productManualInputPrice->getInputPrice());
     }
 
@@ -70,7 +63,6 @@ class ProductServiceTest extends TransactionFunctionalTestCase
         $pricingGroup = $this->getReference(PricingGroupDataFixture::PRICING_GROUP_ORDINARY_DOMAIN_1);
 
         $productData = $productDataFactory->create();
-        $productData->price = 1000;
         $productData->vat = $vat;
         $productData->unit = $this->getReference(UnitDataFixture::UNIT_PIECES);
         $product = Product::create($productData);
@@ -79,12 +71,6 @@ class ProductServiceTest extends TransactionFunctionalTestCase
 
         $productService->recalculateInputPriceForNewVatPercent($product, [$productManualInputPrice], 15);
 
-        /**
-         * We presume that all products now have automatic price calculation type.
-         * Therefore Product::$price property will always be "0" no matter the value in the data object.
-         * @TODO The assertion should be removed when Product::$price is removed
-         */
-        $this->assertSame('0', (string)$product->getPrice());
         $this->assertSame('1000', (string)$productManualInputPrice->getInputPrice());
     }
 }

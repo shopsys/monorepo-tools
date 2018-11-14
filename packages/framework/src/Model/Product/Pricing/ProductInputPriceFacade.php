@@ -96,22 +96,6 @@ class ProductInputPriceFacade
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\Product\Product $product
-     * @return string|null
-     */
-    public function getInputPrice(Product $product)
-    {
-        $inputPriceType = $this->pricingSetting->getInputPriceType();
-        $defaultCurrency = $this->currencyFacade->getDefaultCurrency();
-        $manualInputPricesInDefaultCurrency = $this->productManualInputPriceRepository->getByProductAndDomainConfigs(
-            $product,
-            $this->currencyFacade->getDomainConfigsByCurrency($defaultCurrency)
-        );
-
-        return $this->productInputPriceService->getInputPrice($product, $inputPriceType, $manualInputPricesInDefaultCurrency);
-    }
-
-    /**
-     * @param \Shopsys\FrameworkBundle\Model\Product\Product $product
      * @return string[]
      */
     public function getManualInputPricesDataIndexedByPricingGroupId(Product $product)

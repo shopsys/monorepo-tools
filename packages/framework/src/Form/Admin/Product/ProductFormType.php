@@ -636,18 +636,6 @@ class ProductFormType extends AbstractType
         ]);
 
         $builderPricesGroup->add($productCalculatedPricesGroup);
-        $productCalculatedPricesGroup
-            /**
-             * The "price" attribute will be removed in the next commit,
-             * so now the form field is just marked as optional
-             */
-            ->add('price', MoneyType::class, [
-                'currency' => false,
-                'scale' => 6,
-                'required' => false,
-                'disabled' => $this->isProductMainVariant($product),
-                'label' => t('Base price'),
-            ]);
         $manualInputPricesByPricingGroup = $builder->create('manualInputPricesByPricingGroupId', FormType::class, [
             'compound' => true,
             'render_form_row' => false,

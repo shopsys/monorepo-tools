@@ -28,11 +28,6 @@ class ProductData
     public $ean;
 
     /**
-     * @var string
-     */
-    public $price;
-
-    /**
      * @var \Shopsys\FrameworkBundle\Model\Pricing\Vat\Vat|null
      */
     public $vat;
@@ -175,7 +170,6 @@ class ProductData
     public function __construct()
     {
         $this->name = [];
-        $this->price = 0;
         $this->sellingDenied = false;
         $this->hidden = false;
         $this->flags = [];

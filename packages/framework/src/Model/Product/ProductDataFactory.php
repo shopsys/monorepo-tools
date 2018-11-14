@@ -191,7 +191,6 @@ class ProductDataFactory implements ProductDataFactoryInterface
         $productData->catnum = $product->getCatnum();
         $productData->partno = $product->getPartno();
         $productData->ean = $product->getEan();
-        $productData->price = $this->productInputPriceFacade->getInputPrice($product);
         $productData->vat = $product->getVat();
         $productData->sellingFrom = $product->getSellingFrom();
         $productData->sellingTo = $product->getSellingTo();

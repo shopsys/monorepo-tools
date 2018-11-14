@@ -30,13 +30,11 @@ class CartTest extends TestCase
         $vat = new Vat($vatData);
         $productData1 = new ProductData();
         $productData1->name = ['cs' => 'Product 1'];
-        $productData1->price = 100;
         $productData1->vat = $vat;
         $product1 = Product::create($productData1);
 
         $productData2 = new ProductData();
         $productData2->name = ['cs' => 'Product 2'];
-        $productData2->price = 200;
         $productData2->vat = $vat;
         $product2 = Product::create($productData2);
 
@@ -61,14 +59,12 @@ class CartTest extends TestCase
     {
         $customerIdentifier = new CustomerIdentifier('randomString');
 
-        $price = 100;
         $vatData = new VatData();
         $vatData->name = 'vat';
         $vatData->percent = 21;
         $vat = new Vat($vatData);
         $productData = new ProductData();
         $productData->name = ['cs' => 'Product 1'];
-        $productData->price = $price;
         $productData->vat = $vat;
         $product = Product::create($productData);
 
@@ -89,13 +85,11 @@ class CartTest extends TestCase
         $vat = new Vat($vatData);
         $productData1 = new ProductData();
         $productData1->name = ['cs' => 'Product 1'];
-        $productData1->price = 100;
         $productData1->vat = $vat;
         $product1 = Product::create($productData1);
 
         $productData2 = new ProductData();
         $productData2->name = ['cs' => 'Product 2'];
-        $productData2->price = 200;
         $productData2->vat = $vat;
         $product2 = Product::create($productData2);
 

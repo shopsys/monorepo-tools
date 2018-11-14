@@ -7,8 +7,6 @@ use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Query;
 use Shopsys\FrameworkBundle\Model\Payment\Payment;
 use Shopsys\FrameworkBundle\Model\Payment\PaymentPriceCalculation;
-use Shopsys\FrameworkBundle\Model\Product\Product;
-use Shopsys\FrameworkBundle\Model\Product\ProductService;
 use Shopsys\FrameworkBundle\Model\Transport\Transport;
 use Shopsys\FrameworkBundle\Model\Transport\TransportPriceCalculation;
 
@@ -27,11 +25,6 @@ class InputPriceRecalculator
     private $inputPriceCalculation;
 
     /**
-     * @var \Shopsys\FrameworkBundle\Model\Pricing\BasePriceCalculation
-     */
-    private $basePriceCalculation;
-
-    /**
      * @var \Shopsys\FrameworkBundle\Model\Payment\PaymentPriceCalculation
      */
     private $paymentPriceCalculation;
@@ -42,40 +35,21 @@ class InputPriceRecalculator
     private $transportPriceCalculation;
 
     /**
-     * @var \Shopsys\FrameworkBundle\Model\Product\ProductService
-     */
-    private $productService;
-
-    /**
-     * @var \Shopsys\FrameworkBundle\Model\Pricing\PricingSetting
-     */
-    private $pricingSetting;
-
-    /**
      * @param \Doctrine\ORM\EntityManagerInterface $em
      * @param \Shopsys\FrameworkBundle\Model\Pricing\InputPriceCalculation $inputPriceCalculation
-     * @param \Shopsys\FrameworkBundle\Model\Pricing\BasePriceCalculation $basePriceCalculation
      * @param \Shopsys\FrameworkBundle\Model\Payment\PaymentPriceCalculation $paymentPriceCalculation
      * @param \Shopsys\FrameworkBundle\Model\Transport\TransportPriceCalculation $transportPriceCalculation
-     * @param \Shopsys\FrameworkBundle\Model\Product\ProductService $productService
-     * @param \Shopsys\FrameworkBundle\Model\Pricing\PricingSetting $pricingSetting
      */
     public function __construct(
         EntityManagerInterface $em,
         InputPriceCalculation $inputPriceCalculation,
-        BasePriceCalculation $basePriceCalculation,
         PaymentPriceCalculation $paymentPriceCalculation,
-        TransportPriceCalculation $transportPriceCalculation,
-        ProductService $productService,
-        PricingSetting $pricingSetting
+        TransportPriceCalculation $transportPriceCalculation
     ) {
         $this->em = $em;
         $this->inputPriceCalculation = $inputPriceCalculation;
-        $this->basePriceCalculation = $basePriceCalculation;
         $this->paymentPriceCalculation = $paymentPriceCalculation;
         $this->transportPriceCalculation = $transportPriceCalculation;
-        $this->productService = $productService;
-        $this->pricingSetting = $pricingSetting;
     }
 
     public function recalculateToInputPricesWithoutVat()
@@ -93,36 +67,8 @@ class InputPriceRecalculator
      */
     private function recalculateInputPriceForNewType($newInputPriceType)
     {
-        $this->recalculateProductsInputPriceForNewType($newInputPriceType);
         $this->recalculateTransportsInputPriceForNewType($newInputPriceType);
         $this->recalculatePaymentsInputPriceForNewType($newInputPriceType);
-    }
-
-    /**
-     * @param string $toInputPriceType
-     */
-    private function recalculateProductsInputPriceForNewType($toInputPriceType)
-    {
-        $query = $this->em->createQueryBuilder()
-            ->select('p')
-            ->from(Product::class, 'p')
-            ->getQuery();
-
-        $this->batchProcessQuery($query, function (Product $product) use ($toInputPriceType) {
-            $productPrice = $this->basePriceCalculation->calculateBasePrice(
-                $product->getPrice(),
-                $this->pricingSetting->getInputPriceType(),
-                $product->getVat()
-            );
-
-            $newInputPrice = $this->inputPriceCalculation->getInputPrice(
-                $toInputPriceType,
-                $productPrice->getPriceWithVat(),
-                $product->getVat()->getPercent()
-            );
-
-            $this->productService->setInputPrice($product, $newInputPrice);
-        });
     }
 
     /**

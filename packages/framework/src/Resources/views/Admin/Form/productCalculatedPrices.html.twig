@@ -4,22 +4,6 @@
             {{ inputPriceLabel({ isSimple: true }) }}
         </div>
     </div>
-    <div class="form-line js-input-price-type-auto">
-        <div class="form-line__label">
-            {{ form_label(form.price, 'Base price'|trans, { isSimple: true, compulsoryClass: 'form-line__compulsory' } ) }}
-        </div>
-        <div class="form-line__side">
-            <div class="form-line__item">
-                {{ form_widget(form.price, { symbolAfterInput: currencySymbolDefault() }) }}
-            </div>
-            <div class="form-line__item--right">
-                <div class="form-line__item__price">-</div>
-                <div class="form-line__item__price"><strong>-</strong></div>
-            </div>
-            {{ form_errors(form.price) }}
-            {% do form.price.setRendered %}
-        </div>
-    </div>
     {% if productSellingPricesIndexedByDomainId is defined %}
         {% for domainId, productSellingPrices in productSellingPricesIndexedByDomainId %}
             {% if isMultidomain() %}
