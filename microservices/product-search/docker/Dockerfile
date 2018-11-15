@@ -206,10 +206,6 @@ USER www-data
 # hirak/prestissimo makes the install of Composer dependencies faster by parallel downloading
 RUN composer global require hirak/prestissimo
 
-# allow configuring the GitHub OAuth token
-ARG github_oauth_token
-RUN composer config -g github-oauth.github.com $github_oauth_token
-
 ########################################################################################################################
 
 FROM php:7.2-fpm-alpine as production-builder
@@ -222,10 +218,6 @@ RUN chmod +x /usr/local/bin/docker-install-composer && docker-install-composer
 
 # hirak/prestissimo makes the install of Composer dependencies faster by parallel downloading
 RUN composer global require hirak/prestissimo
-
-# allow configuring the GitHub OAuth token
-ARG github_oauth_token
-RUN composer config -g github-oauth.github.com $github_oauth_token
 
 # copy source code to the container
 COPY --chown=www-data:www-data / /var/www/html

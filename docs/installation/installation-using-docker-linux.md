@@ -38,6 +38,8 @@ This token can be generated on [Github -> Settings -> Developer Settings -> Pers
 Save your token into the `docker-compose.yml` file.
 Token is located in `services -> php-fpm -> build -> args -> github_oauth_token`.
 
+<!--- TODO When releasing new version, remove the step "Set the Github token in your docker-compose.yml file" as (in current master)  docker-compose.yml and dockerfiles don't contain or operate with such attribute -->
+
 ### 5. Compose Docker container
 ```
 docker-compose up -d --build

@@ -37,7 +37,7 @@ DOCKER_IMAGE_TAG=ci-commit-${GIT_COMMIT}
 ## Docker image for application php-fpm container
 docker image pull ${DOCKER_USERNAME}/php-fpm:${DOCKER_IMAGE_TAG} || (
     echo "Image not found (see warning above), building it instead..." &&
-    docker image build --build-arg github_oauth_token=${GITHUB_OAUTH_TOKEN} \
+    docker image build \
         --build-arg project_root=project-base \
         --tag ${DOCKER_USERNAME}/php-fpm:${DOCKER_IMAGE_TAG} \
         --target ci \
@@ -49,7 +49,7 @@ docker image pull ${DOCKER_USERNAME}/php-fpm:${DOCKER_IMAGE_TAG} || (
 ## Docker image for microservice product-search
 docker image pull ${DOCKER_USERNAME}/microservice-product-search:${DOCKER_IMAGE_TAG} || (
     echo "Image not found (see warning above), building it instead..." &&
-    docker image build --build-arg github_oauth_token=${GITHUB_OAUTH_TOKEN} \
+    docker image build \
         --tag ${DOCKER_USERNAME}/microservice-product-search:${DOCKER_IMAGE_TAG} \
         --target production \
         -f microservices/product-search/docker/Dockerfile \
@@ -60,7 +60,7 @@ docker image pull ${DOCKER_USERNAME}/microservice-product-search:${DOCKER_IMAGE_
 ## Docker image for microservice product-search-export
 docker image pull ${DOCKER_USERNAME}/microservice-product-search-export:${DOCKER_IMAGE_TAG} || (
     echo "Image not found (see warning above), building it instead..." &&
-    docker image build --build-arg github_oauth_token=${GITHUB_OAUTH_TOKEN} \
+    docker image build \
         --tag ${DOCKER_USERNAME}/microservice-product-search-export:${DOCKER_IMAGE_TAG} \
         --target production \
         -f microservices/product-search-export/docker/Dockerfile \

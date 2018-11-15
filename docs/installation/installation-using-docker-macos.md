@@ -59,6 +59,8 @@ This token can be generated on [Github -> Settings -> Developer Settings -> Pers
 Save your token into the `docker-compose.yml` file.
 Token is located in `services -> php-fpm -> build -> args -> github_oauth_token`.
 
+<!--- TODO When releasing new version, remove the section "Set the Github token in your docker-compose.yml file" as (in current master)  docker-compose.yml and dockerfiles don't contain or operate with such attribute -->
+
 ### 3. Compose Docker container
 On MacOS you need to synchronize folders using docker-sync.
 Before starting synchronization you need to create a directory for persisting Postgres and Elasticsearch data so you won't lose it when the container is shut down.

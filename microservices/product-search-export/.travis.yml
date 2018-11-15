@@ -8,9 +8,6 @@ cache:
     directories:
         - ~/.composer/cache
 
-before_install:
-    - composer config github-oauth.github.com $GITHUB_TOKEN
-
 install:
     - composer install
 

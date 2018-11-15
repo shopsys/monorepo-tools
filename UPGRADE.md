@@ -119,6 +119,9 @@ There is a list of all the repositories maintained by monorepo, changes in log b
 - *(optional)* [#566 - Set development docker build target before production and CI targets](https://github.com/shopsys/shopsys/pull/566)
     - move `development` stage build before `production` stage in `docker/php-fpm/Dockerfile` to make your dev build faster
     - make the `www_data_uid` and `www_data_gid` arguments optional using an if condition (for building ci and production stage)
+- *(optional)* [#551 - github token erase](https://github.com/shopsys/shopsys/pull/551)
+    - remove the lines mentioning `github_oauth_token` from your `docker/php-fpm/Dockerfile` and `docker-compose.yml`
+    - rebuild `php-fpm` container
 
 ### [shopsys/shopsys]
 - *(MacOS only)* [#503 updated docker-sync configuration](https://github.com/shopsys/shopsys/pull/503/)
@@ -196,6 +199,8 @@ There is a list of all the repositories maintained by monorepo, changes in log b
         - run `docker-sync start` to create volumes
     - run `docker-compose up -d --build --force-recreate` to start application
     - phing target for checking and fixing standards has changed, update `build.xml` according to the changes
+- *(optional)* [#551 - github token erase](https://github.com/shopsys/shopsys/pull/551)
+    - you can stop providing the `github_oauth_token` in your `docker-compose.yml`
 
 ### [shopsys/coding-standards]
 - there are a few new standards, i.e. [new fixers enabled](https://github.com/shopsys/shopsys/pull/573/files#diff-709e8469a9fc8c8b45f8b285ac1a4c92) in the `easy-coding-standard.yml` config that enforce using annotations for all your methods:

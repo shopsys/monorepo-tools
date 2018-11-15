@@ -71,7 +71,6 @@ You must provide the following environment variables:
 | **$DEVELOPMENT_SERVER_DOMAIN**          | domain name of your server where your application will be running
 | **$DOCKER_USERNAME**                    | your user name on Docker Hub
 | **$DOCKER_PASSWORD**                    | your password to Docker Hub
-| **$GITHUB_OAUTH_TOKEN**                 | authorization token for GitHub, required by Composer
 | **$GIT_COMMIT**                         | hash of the built commit, used for tagging images
 | **$JOB_NAME**                           | branch name used for domain names and build process
 | **$NGINX_INGRESS_CONTROLLER_HOST_PORT** | port used in the ingress controller running on node, don't use 80 (for details, see [How to Get a Cluster Running](/docs/kubernetes/how-to-get-a-cluster-running.md))
@@ -90,7 +89,6 @@ docker run \
     -e DEVELOPMENT_SERVER_DOMAIN \
     -e DOCKER_USERNAME \
     -e DOCKER_PASSWORD \
-    -e GITHUB_OAUTH_TOKEN \
     -e GIT_COMMIT \
     -e JOB_NAME \
     -e NGINX_INGRESS_CONTROLLER_HOST_PORT \

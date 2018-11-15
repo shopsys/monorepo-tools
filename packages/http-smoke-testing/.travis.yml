@@ -17,9 +17,6 @@ matrix:
         -   php: 7.1
             env: DEPENDENCIES="--prefer-lowest --prefer-stable"
 
-before_install:
-    - composer config github-oauth.github.com $GITHUB_TOKEN
-
 install:
     - travis_retry composer update $DEPENDENCIES
 

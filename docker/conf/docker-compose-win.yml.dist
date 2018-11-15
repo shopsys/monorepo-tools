@@ -4,7 +4,6 @@ x-variables:
     common_build_args: &common_build_args
         www_data_uid: 1000
         www_data_gid: 1000
-        github_oauth_token: place-your-token-here
 
 services:
     postgres:
