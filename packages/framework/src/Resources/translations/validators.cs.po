@@ -19,9 +19,6 @@ msgstr "Vyberte obrázek"
 msgid "City name cannot be longer than {{ limit }} characters"
 msgstr "Název města nesmí být delší než {{ limit }} znaků"
 
-msgid "Coefficient must be greater than 0"
-msgstr "Koeficient musí být větší než 0"
-
 msgid "Company name cannot be longer than {{ limit }} characters"
 msgstr "Název firmy nesmí být delší než {{ limit }} znaků"
 
@@ -283,17 +280,11 @@ msgstr "Prosím vyplňte cenu"
 msgid "Please enter price in correct format (positive number with decimal separator)"
 msgstr "Prosím zadejte cenu v platném formátu (kladné číslo s desetinnou čárkou nebo tečkou)"
 
-msgid "Please enter pricing group coefficient"
-msgstr "Vyplňte prosím koeficient cenové skupiny"
-
 msgid "Please enter pricing group name"
 msgstr "Vyplňte prosím název cenové skupiny"
 
 msgid "Please enter quantity"
 msgstr "Vyplňte prosím množství"
-
-msgid "Please enter ratio in correct format"
-msgstr "Prosím zadejte koeficient v platném formátu"
 
 msgid "Please enter script code"
 msgstr "Vyplňte prosím kód skriptu"
