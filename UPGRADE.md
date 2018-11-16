@@ -74,7 +74,6 @@ There is a list of all the repositories maintained by monorepo, changes in log b
         - `ProductFormType::VALIDATION_GROUP_AUTO_PRICE_CALCULATION`
         - `ProductFormType::VALIDATION_GROUP_MANUAL_PRICE_CALCULATION`
         - `ProductInputPriceFacade::getInputPrice()`
-        - `ProductInputPriceService::getInputPrice()`
         - `ProductManualInputPriceFacade::getAllByProduct()`
         - `ProductManualInputPriceFacade::deleteByProduct()`
         - `ProductService::setInputPrice()`
@@ -82,8 +81,6 @@ There is a list of all the repositories maintained by monorepo, changes in log b
         - `InputPriceRecalculator::__construct()`
         - `ProductDataFactory::__construct()`
         - `ProductCalculatedPricesType::_construct()`
-        - `ProductInputPriceService::__construct()`
-        - `ProductInputPriceService::getManualInputPricesDataIndexedByPricingGroupId()`
         - `ProductPriceCalculation::__construct()`
     - following classes have been removed:
         - `AdminProductPriceCalculationFacade`

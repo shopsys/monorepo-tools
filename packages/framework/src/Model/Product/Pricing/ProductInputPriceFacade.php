@@ -20,11 +20,6 @@ class ProductInputPriceFacade
     protected $em;
 
     /**
-     * @var \Shopsys\FrameworkBundle\Model\Product\Pricing\ProductInputPriceService
-     */
-    protected $productInputPriceService;
-
-    /**
      * @var \Shopsys\FrameworkBundle\Model\Pricing\Currency\CurrencyFacade
      */
     protected $currencyFacade;
@@ -66,7 +61,6 @@ class ProductInputPriceFacade
 
     /**
      * @param \Doctrine\ORM\EntityManagerInterface $em
-     * @param \Shopsys\FrameworkBundle\Model\Product\Pricing\ProductInputPriceService $productInputPriceService
      * @param \Shopsys\FrameworkBundle\Model\Pricing\Currency\CurrencyFacade $currencyFacade
      * @param \Shopsys\FrameworkBundle\Model\Pricing\PricingSetting $pricingSetting
      * @param \Shopsys\FrameworkBundle\Model\Product\Pricing\ProductManualInputPriceRepository $productManualInputPriceRepository
@@ -76,7 +70,6 @@ class ProductInputPriceFacade
      */
     public function __construct(
         EntityManagerInterface $em,
-        ProductInputPriceService $productInputPriceService,
         CurrencyFacade $currencyFacade,
         PricingSetting $pricingSetting,
         ProductManualInputPriceRepository $productManualInputPriceRepository,
@@ -85,7 +78,6 @@ class ProductInputPriceFacade
         ProductService $productService
     ) {
         $this->em = $em;
-        $this->productInputPriceService = $productInputPriceService;
         $this->currencyFacade = $currencyFacade;
         $this->pricingSetting = $pricingSetting;
         $this->productManualInputPriceRepository = $productManualInputPriceRepository;
@@ -100,11 +92,16 @@ class ProductInputPriceFacade
      */
     public function getManualInputPricesDataIndexedByPricingGroupId(Product $product)
     {
+        $manualInputPricesDataByPricingGroupId = [];
+
         $manualInputPrices = $this->productManualInputPriceRepository->getByProduct($product);
 
-        return $this->productInputPriceService->getManualInputPricesDataIndexedByPricingGroupId(
-            $manualInputPrices
-        );
+        foreach ($manualInputPrices as $manualInputPrice) {
+            $pricingGroupId = $manualInputPrice->getPricingGroup()->getId();
+            $manualInputPricesDataByPricingGroupId[$pricingGroupId] = $manualInputPrice->getInputPrice();
+        }
+
+        return $manualInputPricesDataByPricingGroupId;
     }
 
     /**
