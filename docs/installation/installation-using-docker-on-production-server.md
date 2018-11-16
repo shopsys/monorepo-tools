@@ -332,6 +332,10 @@ docker-compose -p production up -d --force-recreate webserver
 docker rm -f build-php-fpm-container
 ```
 
+## Logging
+If you need to inspect your application logs, use `docker-compose logs` command.
+For more information about logging see [the separate article](/docs/introduction/logging.md).
+
 ## Conclusion
 
 Now we have running project based on [Shopsys Framework](https://github.com/shopsys/project-base) docker containers.

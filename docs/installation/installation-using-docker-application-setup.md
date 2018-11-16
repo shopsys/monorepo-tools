@@ -68,3 +68,6 @@ and Redis storage using [Redis admin](https://github.com/ErikDubbelboer/phpRedis
 
 Elasticsearch API is available on the address [http://127.0.0.1:9200](http://127.0.0.1:9200).
 You can use e.g. [Postman](https://www.getpostman.com/apps) or [Kibana](https://www.elastic.co/downloads/kibana) for Elasticseacrh management.
+
+If you need to inspect your application logs, use `docker-compose logs` command.
+For more information about logging see [the separate article](/docs/introduction/logging.md).

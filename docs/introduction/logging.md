@@ -29,4 +29,5 @@ shopsys-framework-php-fpm | [2018-07-23 11:42:41] slow.NOTICE: 3.14159265359 Sho
 ## Conclusion
 Logging into streams is one of the prerequisites for scalable application.
 With implementation of orchestration tool like [Kubernetes](https://kubernetes.io/) we will be able to store logs in a centralized way.
-This will help us find problems faster and also monitor the production environment.
+This will help us find problems faster and also monitor the production environment. At the moment, we are using [a simple workaround](/docs/kubernetes/logging-on-continuous-integration-server-running-kubernetes.md)
+for persisting logs to local storage on our CI server that uses Kubernetes.
