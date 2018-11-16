@@ -71,6 +71,8 @@ There is a list of all the repositories maintained by monorepo, changes in log b
         - `Product::getPriceCalculationType()`
         - `ProductData::$priceCalculationType`
         - `ProductData::$price`
+        - `ProductDataFixtureLoader::COLUMN_MAIN_PRICE`
+        - `ProductDataFixtureLoader::COLUMN_PRICE_CALCULATION_TYPE`
         - `ProductFormType::VALIDATION_GROUP_AUTO_PRICE_CALCULATION`
         - `ProductFormType::VALIDATION_GROUP_MANUAL_PRICE_CALCULATION`
         - `ProductInputPriceFacade::getInputPrice()`
