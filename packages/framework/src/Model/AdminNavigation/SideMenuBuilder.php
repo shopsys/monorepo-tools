@@ -214,12 +214,12 @@ class SideMenuBuilder
         $menu = $this->menuFactory->createItem('settings', ['label' => t('Settings')]);
         $menu->setExtra('icon', 'gear');
 
+        $identificationMenu = $menu->addChild('identification', ['label' => t('E-shop identification')]);
         if ($this->domain->isMultidomain()) {
-            $identificationMenu = $menu->addChild('identification', ['label' => t('E-shop identification')]);
             $domainsMenu = $identificationMenu->addChild('domains', ['route' => 'admin_domain_list', 'label' => t('E-shop identification')]);
             $domainsMenu->addChild('edit', ['route' => 'admin_domain_edit', 'label' => t('Editing domain'), 'display' => false]);
-            $identificationMenu->addChild('shop_info', ['route' => 'admin_shopinfo_setting', 'label' => t('Operator information')]);
         }
+        $identificationMenu->addChild('shop_info', ['route' => 'admin_shopinfo_setting', 'label' => t('Operator information')]);
 
         $legalMenu = $menu->addChild('legal', ['label' => t('Legal conditions')]);
         $legalMenu->addChild('legal_conditions', ['route' => 'admin_legalconditions_setting', 'label' => t('Legal conditions')]);
