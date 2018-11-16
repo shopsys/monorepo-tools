@@ -1,0 +1,14 @@
+{
+    "name": "shopsys/releaser",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Shopsys\\Releaser\\": "src/"
+        }
+    },
+    "require": {
+        "php": "^7.1"
+    },
+
+
+}

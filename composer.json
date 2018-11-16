@@ -138,7 +138,8 @@
     "codeception/phpunit-wrapper": "^7.0",
     "phpstan/phpstan": "^0.7",
     "symplify/easy-coding-standard-tester": "^4.4",
-    "symplify/changelog-linker": "^4.8"
+    "symplify/changelog-linker": "^4.8",
+    "symplify/monorepo-builder": "^5.2"
   },
   "conflict": {
     "symfony/dependency-injection": "3.4.15|3.4.16"

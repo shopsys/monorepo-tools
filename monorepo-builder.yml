@@ -1,0 +1,6 @@
+parameters:
+    enable_default_release_workers: false
+
+services:
+    Shopsys\Releaser\CheckReleaseBlogPostReleaseWorker: ~
+    # @todo: put them in raw order
