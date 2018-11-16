@@ -53,8 +53,8 @@ There is a list of all the repositories maintained by monorepo, changes in log b
 ### [shopsys/framework]
 - [#595 automatic product price calculation has been removed along with pricing group coefficients](https://github.com/shopsys/shopsys/pull/595)
     - after running database migrations, all your products will be using manual pricing and will have set prices for all pricing groups in a fashion that will keep the final price as same as before
-        - we strongly recommend to review `Version20181114134959` migration before executing it on your real data, especially if there were any modifications in your product pricing implementation on the project.
-        If the migration does not suit you, there is an option to skip it, see [our Database Migrations docs](https://github.com/shopsys/shopsys/blob/master/docs/introduction/database-migrations.md#reordering-and-skipping-migrations)
+        - we strongly recommend to review `Version20181114134959` and `Version20181114145250` migrations before executing them on your real data, especially if there were any modifications in your product pricing implementation on the project.
+        If any of the migrations does not suit you, there is an option to skip it, see [our Database Migrations docs](https://github.com/shopsys/shopsys/blob/master/docs/introduction/database-migrations.md#reordering-and-skipping-migrations)
     - `ProductPriceCalculation::calculatePrice()` is still available, however, it always uses the manual price calculation
     - following (public and protected) constants, properties and methods are not available anymore:
         - `BasePriceCalculation::applyCoefficients()`
