@@ -6,7 +6,6 @@ use Shopsys\FrameworkBundle\Model\Pricing\BasePriceCalculation;
 use Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroup;
 use Shopsys\FrameworkBundle\Model\Pricing\PricingService;
 use Shopsys\FrameworkBundle\Model\Pricing\PricingSetting;
-use Shopsys\FrameworkBundle\Model\Pricing\Vat\Vat;
 use Shopsys\FrameworkBundle\Model\Product\Product;
 use Shopsys\FrameworkBundle\Model\Product\ProductRepository;
 
@@ -69,7 +68,8 @@ class ProductPriceCalculation
         if ($product->isMainVariant()) {
             return $this->calculateMainVariantPrice($product, $domainId, $pricingGroup);
         }
-        return $this->calculateProductPriceForPricingGroupManual($product, $pricingGroup);
+
+        return $this->calculateProductPriceForPricingGroup($product, $pricingGroup);
     }
 
     /**
@@ -102,25 +102,11 @@ class ProductPriceCalculation
     }
 
     /**
-     * @param string $inputPrice
-     * @param \Shopsys\FrameworkBundle\Model\Pricing\Vat\Vat $vat
-     * @return \Shopsys\FrameworkBundle\Model\Pricing\Price
-     */
-    private function calculateBasePrice($inputPrice, Vat $vat)
-    {
-        return $this->basePriceCalculation->calculateBasePrice(
-            $inputPrice,
-            $this->pricingSetting->getInputPriceType(),
-            $vat
-        );
-    }
-
-    /**
      * @param \Shopsys\FrameworkBundle\Model\Product\Product $product
      * @param \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroup $pricingGroup
      * @return \Shopsys\FrameworkBundle\Model\Product\Pricing\ProductPrice
      */
-    private function calculateProductPriceForPricingGroupManual(Product $product, PricingGroup $pricingGroup)
+    private function calculateProductPriceForPricingGroup(Product $product, PricingGroup $pricingGroup)
     {
         $manualInputPrice = $this->productManualInputPriceRepository->findByProductAndPricingGroup($product, $pricingGroup);
         if ($manualInputPrice !== null) {
@@ -128,7 +114,12 @@ class ProductPriceCalculation
         } else {
             $inputPrice = 0;
         }
-        $basePrice = $this->calculateBasePrice($inputPrice, $product->getVat());
+
+        $basePrice = $this->basePriceCalculation->calculateBasePrice(
+            $inputPrice,
+            $this->pricingSetting->getInputPriceType(),
+            $product->getVat()
+        );
 
         return new ProductPrice($basePrice, false);
     }
