@@ -118,7 +118,7 @@ class ProductData
     public $images;
 
     /**
-     * @var string[]
+     * @var string[]|null[]
      */
     public $manualInputPricesByPricingGroupId;
 
