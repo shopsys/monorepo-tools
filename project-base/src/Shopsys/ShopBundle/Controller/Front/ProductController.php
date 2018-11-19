@@ -159,7 +159,7 @@ class ProductController extends FrontBaseController
         ]);
         $filterForm->handleRequest($request);
 
-        $paginationResult = $this->productOnCurrentDomainFacade->getPaginatedProductsInCategory(
+        $paginationResult = $this->productOnCurrentDomainFacade->getPaginatedProductDetailsInCategory(
             $productFilterData,
             $orderingModeId,
             $page,
@@ -209,7 +209,7 @@ class ProductController extends FrontBaseController
             $request
         );
 
-        $paginationResult = $this->productOnCurrentDomainFacade->getPaginatedProductsForBrand(
+        $paginationResult = $this->productOnCurrentDomainFacade->getPaginatedProductDetailsForBrand(
             $orderingModeId,
             $page,
             self::PRODUCTS_PER_PAGE,
@@ -255,7 +255,7 @@ class ProductController extends FrontBaseController
         ]);
         $filterForm->handleRequest($request);
 
-        $paginationResult = $this->productOnCurrentDomainFacade->getPaginatedProductsForSearch(
+        $paginationResult = $this->productOnCurrentDomainFacade->getPaginatedProductDetailsForSearch(
             $searchText,
             $productFilterData,
             $orderingModeId,

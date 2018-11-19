@@ -124,7 +124,7 @@ class ProductOnCurrentDomainFacade
      * @param int $categoryId
      * @return \Shopsys\FrameworkBundle\Component\Paginator\PaginationResult
      */
-    public function getPaginatedProductsInCategory(
+    public function getPaginatedProductDetailsInCategory(
         ProductFilterData $productFilterData,
         $orderingModeId,
         $page,
@@ -160,7 +160,7 @@ class ProductOnCurrentDomainFacade
      * @param int $brandId
      * @return \Shopsys\FrameworkBundle\Component\Paginator\PaginationResult
      */
-    public function getPaginatedProductsForBrand(
+    public function getPaginatedProductDetailsForBrand(
         $orderingModeId,
         $page,
         $limit,
@@ -195,7 +195,7 @@ class ProductOnCurrentDomainFacade
      * @param int $limit
      * @return \Shopsys\FrameworkBundle\Component\Paginator\PaginationResult
      */
-    public function getPaginatedProductsForSearch(
+    public function getPaginatedProductDetailsForSearch(
         $searchText,
         ProductFilterData $productFilterData,
         $orderingModeId,

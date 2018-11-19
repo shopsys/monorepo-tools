@@ -206,7 +206,7 @@ class ProductOnCurrentDomainFacadeTest extends TransactionFunctionalTestCase
         $page = 1;
         $limit = PHP_INT_MAX;
 
-        return $productOnCurrentDomainFacade->getPaginatedProductsInCategory(
+        return $productOnCurrentDomainFacade->getPaginatedProductDetailsInCategory(
             $productFilterData,
             ProductListOrderingModeService::ORDER_BY_NAME_ASC,
             $page,
