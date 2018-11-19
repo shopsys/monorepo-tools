@@ -79,6 +79,7 @@ There is a list of all the repositories maintained by monorepo, changes in log b
         - `ProductInputPriceFacade::getInputPrice()`
         - `ProductManualInputPriceFacade::getAllByProduct()`
         - `ProductManualInputPriceFacade::deleteByProduct()`
+        - `ProductManualInputPriceRepository::getByProductAndDomainConfigs()`
         - `ProductService::setInputPrice()`
     - interfaces of following (public and protected) methods have changed:
         - `InputPriceRecalculator::__construct()`
