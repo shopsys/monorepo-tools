@@ -59,6 +59,7 @@ There is a list of all the repositories maintained by monorepo, changes in log b
     - following (public and protected) constants, properties and methods are not available anymore:
         - `BasePriceCalculation::applyCoefficients()`
         - `Currency::getReversedExchangeRate()`
+        - `CurrencyFacade::getDomainConfigsByCurrency()`
         - `PricingGroup::$coefficient`
         - `PricingGroup::getCoefficient()`
         - `PricingGroupData::$coefficient`
