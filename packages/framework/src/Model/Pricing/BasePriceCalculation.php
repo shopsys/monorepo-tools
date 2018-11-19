@@ -42,6 +42,25 @@ class BasePriceCalculation
     }
 
     /**
+     * @param \Shopsys\FrameworkBundle\Model\Pricing\Price $price
+     * @param \Shopsys\FrameworkBundle\Model\Pricing\Vat\Vat $vat
+     * @param string[] $coefficients
+     * @return \Shopsys\FrameworkBundle\Model\Pricing\Price
+     */
+    public function applyCoefficients(Price $price, Vat $vat, array $coefficients)
+    {
+        $priceWithVatBeforeRounding = $price->getPriceWithVat();
+        foreach ($coefficients as $coefficient) {
+            $priceWithVatBeforeRounding *= $coefficient;
+        }
+        $priceWithVat = $this->rounding->roundPriceWithVat($priceWithVatBeforeRounding);
+        $vatAmount = $this->priceCalculation->getVatAmountByPriceWithVat($priceWithVat, $vat);
+        $priceWithoutVat = $this->rounding->roundPriceWithoutVat($priceWithVat - $vatAmount);
+
+        return new Price($priceWithoutVat, $priceWithVat);
+    }
+
+    /**
      * @param string $inputPrice
      * @param int $inputPriceType
      * @param \Shopsys\FrameworkBundle\Model\Pricing\Vat\Vat $vat

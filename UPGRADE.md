@@ -57,7 +57,6 @@ There is a list of all the repositories maintained by monorepo, changes in log b
         If any of the migrations does not suit you, there is an option to skip it, see [our Database Migrations docs](https://github.com/shopsys/shopsys/blob/master/docs/introduction/database-migrations.md#reordering-and-skipping-migrations)
     - `ProductPriceCalculation::calculatePrice()` is still available, however, it always uses the manual price calculation
     - following (public and protected) constants, properties and methods are not available anymore:
-        - `BasePriceCalculation::applyCoefficients()`
         - `Currency::getReversedExchangeRate()`
         - `CurrencyFacade::getDomainConfigsByCurrency()`
         - `PricingGroup::$coefficient`
