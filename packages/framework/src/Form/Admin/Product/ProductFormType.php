@@ -646,12 +646,9 @@ class ProductFormType extends AbstractType
                 ->add($pricingGroup->getId(), MoneyType::class, [
                     'currency' => false,
                     'scale' => 6,
-                    'required' => true,
+                    'required' => false,
                     'invalid_message' => 'Please enter price in correct format (positive number with decimal separator)',
                     'constraints' => [
-                        new Constraints\NotBlank([
-                            'message' => 'Please enter price',
-                        ]),
                         new Constraints\GreaterThanOrEqual([
                             'value' => 0,
                             'message' => 'Price must be greater or equal to {{ compared_value }}',
