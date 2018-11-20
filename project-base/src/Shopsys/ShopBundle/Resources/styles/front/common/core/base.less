@@ -69,17 +69,40 @@ h1, h2, h3, h4, h5, h6 {
 h1 {
     margin: 0 0 10px 0;
 
-    font-size: 20px;
+    font-size: 29px;
     font-weight: normal;
 
     @media @query-md {
-        font-size: 24px;
+        font-size: 31px;
     }
 
     @media @query-lg {
         margin-bottom: 15px;
 
-        font-size: 28px;
+        font-size: 34px;
+    }
+
+    @media @query-vl {
+        margin-bottom: 20px;
+
+        font-size: 36px;
+    }
+}
+
+h2 {
+    margin: 0 0 10px 0;
+
+    font-size: 28px;
+    font-weight: normal;
+
+    @media @query-md {
+        font-size: 29px;
+    }
+
+    @media @query-lg {
+        margin-bottom: 15px;
+
+        font-size: 29px;
     }
 
     @media @query-vl {
@@ -89,104 +112,81 @@ h1 {
     }
 }
 
-h2 {
-    margin: 0 0 10px 0;
-
-    font-size: 16px;
-    font-weight: normal;
-
-    @media @query-md {
-        font-size: 18px;
-    }
-
-    @media @query-lg {
-        margin-bottom: 15px;
-
-        font-size: 20px;
-    }
-
-    @media @query-vl {
-        margin-bottom: 20px;
-
-        font-size: 22px;
-    }
-}
-
 h3 {
     margin: 0 0 10px 0;
 
-    font-size: 14px;
+    font-size: 20px;
     font-weight: normal;
 
     @media @query-md {
-        font-size: 15px;
+        font-size: 20px;
     }
 
     @media @query-lg {
         margin-bottom: 15px;
 
-        font-size: 16px;
+        font-size: 23px;
     }
 
     @media @query-vl {
         margin-bottom: 20px;
 
-        font-size: 18px;
+        font-size: 24px;
     }
 }
 
 h4 {
     margin: 0 0 10px 0;
 
-    font-size: 10px;
+    font-size: 19px;
     font-weight: bold;
 
     @media @query-md {
-        font-size: 11px;
+        font-size: 20px;
     }
 
     @media @query-lg {
         margin-bottom: 15px;
 
-        font-size: 12px;
+        font-size: 21px;
     }
 
     @media @query-vl {
         margin-bottom: 20px;
 
-        font-size: 14px;
+        font-size: 21px;
     }
 }
 
 h5 {
     margin: 0 0 10px 0;
 
-    font-size: 9px;
+    font-size: @font-size-mobile;
     text-transform: uppercase;
     font-weight: bold;
-
-    @media @query-md {
-        font-size: 10px;
-    }
 
     @media @query-lg {
         margin-bottom: 15px;
 
-        font-size: 11px;
+        font-size: 15px;
     }
 
     @media @query-vl {
         margin-bottom: 20px;
 
-        font-size: 12px;
+        font-size: 16px;
     }
 }
 
 h6 {
     margin: 0 0 10px 0;
 
-    font-size: 12px;
+    font-size: @font-size-mobile;
     font-weight: bold;
+
+    @media @query-lg {
+        font-size: @font-size;
+    }
 }
 
 a {
