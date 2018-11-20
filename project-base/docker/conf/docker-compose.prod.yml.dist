@@ -46,6 +46,7 @@ services:
             - shopsys-network
 
     smtp-server:
+        restart: always
         image: namshi/smtp:latest
         container_name: shopsys-framework-smtp-server
         networks:
