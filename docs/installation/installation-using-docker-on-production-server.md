@@ -111,13 +111,13 @@ su - postgres -c "createuser --createdb --superuser --pwprompt root"
 ```
 Now we need to allow connection between docker containers and database via local network and PostgresSQL port.
 ```
-echo <<EOT | cat >> /usr/lib/firewalld/services/postgresql.xml
-<?xml version=""1.0"" encoding=""utf-8""?>
+cat <<EOT > /etc/firewalld/services/postgresql.xml
+<?xml version="1.0" encoding="utf-8"?>
 <service>
   <short>PostgreSQL</short>
   <description>PostgreSQL Database Server</description>
-  <port protocol=""tcp"" port=""5432""/>
-  <destination ipv4=""192.168.0.1/16""/>
+  <port protocol="tcp" port="5432"/>
+  <destination ipv4="192.168.0.1/16"/>
 </service>
 EOT
 firewall-cmd --permanent --zone=public --add-service=postgresql
@@ -141,15 +141,15 @@ service redis_6379 restart
 ```
 Now we just need to allow communication between docker containers and Redis server.
 ```
-"echo <<EOT | cat >> /usr/lib/firewalld/services/redis.xml
-<?xml version=""1.0"" encoding=""utf-8""?>
+cat <<EOT > /etc/firewalld/services/redis.xml
+<?xml version="1.0" encoding="utf-8"?>
 <service>
   <short>Redis</short>
   <description>Cache tool.</description>
-  <port protocol=""tcp"" port=""6379""/>
-  <destination ipv4=""192.168.0.1/16""/>
+  <port protocol="tcp" port="6379"/>
+  <destination ipv4="192.168.0.1/16"/>
 </service>
-EOT"
+EOT
 firewall-cmd --permanent --zone=public --add-service=redis
 firewall-cmd --reload
 ```
@@ -163,14 +163,14 @@ yum install java-1.8.0-openjdk
 
 Next we [install](https://www.elastic.co/guide/en/elasticsearch/reference/current/rpm.html) elasticsearch and allow connecting to it via local network.
 ```
-echo <<EOT | cat >> /usr/lib/firewalld/services/elasticsearch.xml
-<?xml version=""1.0"" encoding=""utf-8""?>
+cat <<EOT > /etc/firewalld/services/elasticsearch.xml
+<?xml version="1.0" encoding="utf-8"?>
 <service>
   <short>Elasticsearch</short>
   <description>Elasticsearch is a distributed, open source search and analytics engine, designed for horizontal scalability, reliability, and easy management.</description>
-  <port protocol=""tcp"" port=""9300""/>
-  <port protocol=""tcp"" port=""9200""/>
-  <destination ipv4=""192.168.0.0/16 ""/>
+  <port protocol="tcp" port="9300"/>
+  <port protocol="tcp" port="9200"/>
+  <destination ipv4="192.168.0.0/16"/>
 </service>
 EOT
 firewall-cmd --permanent --zone=public --add-service=elasticsearch
