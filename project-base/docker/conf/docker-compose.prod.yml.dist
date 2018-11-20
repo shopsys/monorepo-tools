@@ -4,6 +4,8 @@ services:
         restart: always
         image: nginx:1.13-alpine
         container_name: production-webserver
+        depends_on:
+            - php-fpm
         volumes:
             - /var/www/production-content:/var/www/html/web/content
             - web-volume:/var/www/html/web

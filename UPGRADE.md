@@ -84,6 +84,7 @@ There is a list of all the repositories maintained by monorepo, changes in log b
     - you can also remove the now redundant Phing target `domains-urls-check` from your `build.xml` and `build-dev.xml`
 - *(optional)* [#428 Removed depends_on and links from docker-compose.yml files](https://github.com/shopsys/shopsys/pull/528)
     - remove all `depends_on` and `links` from your docker-compose files because they are unnecessary
+    - the only exception is the `webserver` container that should depend on `php-fpm` in the production configuration `docker-compose.prod.yml.dist`, otherwise a volume will not mount properly (see [PR #598](https://github.com/shopsys/shopsys/pull/598))
 - [#538 - phing targets: create-domains-data is now dependent on create-domains-db-functions](https://github.com/shopsys/shopsys/pull/538)
     - in your `build.xml`, make your `create-domains-data` task dependent on `create-domains-db-functions` task
     - in your `build-dev.xml`, make your `test-create-domains-data` task dependent on `test-create-domains-db-functions` task
