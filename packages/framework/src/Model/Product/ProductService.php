@@ -88,19 +88,6 @@ class ProductService
             );
             $productManualInputPrice->setInputPrice($inputPriceForPricingGroup);
         }
-
-        $productBasePrice = $this->basePriceCalculation->calculateBasePrice(
-            $product->getPrice(),
-            $inputPriceType,
-            $product->getVat()
-        );
-        $inputPrice = $this->inputPriceCalculation->getInputPrice(
-            $inputPriceType,
-            $productBasePrice->getPriceWithVat(),
-            $newVatPercent
-        );
-
-        $this->setInputPrice($product, $inputPrice);
     }
 
     /**
@@ -112,16 +99,6 @@ class ProductService
         $product->edit($this->productCategoryDomainFactory, $productData);
         $this->productPriceRecalculationScheduler->scheduleProductForImmediateRecalculation($product);
         $this->markProductForVisibilityRecalculation($product);
-    }
-
-    /**
-     * @param \Shopsys\FrameworkBundle\Model\Product\Product $product
-     * @param string $inputPrice
-     */
-    public function setInputPrice(Product $product, $inputPrice)
-    {
-        $product->setPrice($inputPrice);
-        $this->productPriceRecalculationScheduler->scheduleProductForImmediateRecalculation($product);
     }
 
     /**

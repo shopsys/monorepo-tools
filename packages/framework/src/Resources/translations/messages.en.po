@@ -223,9 +223,6 @@ msgstr ""
 msgid "Automatic stock calculation"
 msgstr ""
 
-msgid "Automatically"
-msgstr ""
-
 msgid "Availabilities overview"
 msgstr ""
 
@@ -254,9 +251,6 @@ msgid "Available shipping methods"
 msgstr ""
 
 msgid "Back to overview"
-msgstr ""
-
-msgid "Base price"
 msgstr ""
 
 msgid "Base price in %currencyCode%"
@@ -1228,9 +1222,6 @@ msgstr ""
 msgid "Make modification"
 msgstr ""
 
-msgid "Manually"
-msgstr ""
-
 msgid "Marketing"
 msgstr ""
 
@@ -1736,9 +1727,6 @@ msgid "SEO attributes settings"
 msgstr ""
 
 msgid "SEO attributes settings modified"
-msgstr ""
-
-msgid "Sale prices calculation"
 msgstr ""
 
 msgid "Sales including/excluding VAT settings"

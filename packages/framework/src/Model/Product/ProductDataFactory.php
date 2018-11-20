@@ -6,6 +6,7 @@ use Shopsys\FrameworkBundle\Component\Domain\Domain;
 use Shopsys\FrameworkBundle\Component\Image\ImageFacade;
 use Shopsys\FrameworkBundle\Component\Plugin\PluginCrudExtensionFacade;
 use Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\FriendlyUrlFacade;
+use Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroupFacade;
 use Shopsys\FrameworkBundle\Model\Pricing\Vat\VatFacade;
 use Shopsys\FrameworkBundle\Model\Product\Accessory\ProductAccessoryRepository;
 use Shopsys\FrameworkBundle\Model\Product\Parameter\ParameterRepository;
@@ -71,6 +72,11 @@ class ProductDataFactory implements ProductDataFactoryInterface
     protected $productParameterValueDataFactory;
 
     /**
+     * @var \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroupFacade
+     */
+    protected $pricingGroupFacade;
+
+    /**
      * @param \Shopsys\FrameworkBundle\Model\Pricing\Vat\VatFacade $vatFacade
      * @param \Shopsys\FrameworkBundle\Model\Product\Pricing\ProductInputPriceFacade $productInputPriceFacade
      * @param \Shopsys\FrameworkBundle\Model\Product\Unit\UnitFacade $unitFacade
@@ -82,6 +88,7 @@ class ProductDataFactory implements ProductDataFactoryInterface
      * @param \Shopsys\FrameworkBundle\Component\Image\ImageFacade $imageFacade
      * @param \Shopsys\FrameworkBundle\Component\Plugin\PluginCrudExtensionFacade $pluginDataFormExtensionFacade
      * @param \Shopsys\FrameworkBundle\Model\Product\Parameter\ProductParameterValueDataFactoryInterface $productParameterValueDataFactory
+     * @param \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroupFacade $pricingGroupFacade
      */
     public function __construct(
         VatFacade $vatFacade,
@@ -94,7 +101,8 @@ class ProductDataFactory implements ProductDataFactoryInterface
         ProductAccessoryRepository $productAccessoryRepository,
         ImageFacade $imageFacade,
         PluginCrudExtensionFacade $pluginDataFormExtensionFacade,
-        ProductParameterValueDataFactoryInterface $productParameterValueDataFactory
+        ProductParameterValueDataFactoryInterface $productParameterValueDataFactory,
+        PricingGroupFacade $pricingGroupFacade
     ) {
         $this->vatFacade = $vatFacade;
         $this->productInputPriceFacade = $productInputPriceFacade;
@@ -107,6 +115,7 @@ class ProductDataFactory implements ProductDataFactoryInterface
         $this->imageFacade = $imageFacade;
         $this->pluginDataFormExtensionFacade = $pluginDataFormExtensionFacade;
         $this->productParameterValueDataFactory = $productParameterValueDataFactory;
+        $this->pricingGroupFacade = $pricingGroupFacade;
     }
 
     /**
@@ -134,7 +143,7 @@ class ProductDataFactory implements ProductDataFactoryInterface
 
         $nullForAllDomains = $this->getNullForAllDomains();
 
-        $productData->manualInputPricesByPricingGroupId = [];
+        $productData->manualInputPricesByPricingGroupId = $this->getNullForAllPricingGroups();
         $productData->seoTitles = $nullForAllDomains;
         $productData->seoH1s = $nullForAllDomains;
         $productData->seoMetaDescriptions = $nullForAllDomains;
@@ -182,7 +191,6 @@ class ProductDataFactory implements ProductDataFactoryInterface
         $productData->catnum = $product->getCatnum();
         $productData->partno = $product->getPartno();
         $productData->ean = $product->getEan();
-        $productData->price = $this->productInputPriceFacade->getInputPrice($product);
         $productData->vat = $product->getVat();
         $productData->sellingFrom = $product->getSellingFrom();
         $productData->sellingTo = $product->getSellingTo();
@@ -197,7 +205,6 @@ class ProductDataFactory implements ProductDataFactoryInterface
 
         $productData->hidden = $product->isHidden();
         $productData->categoriesByDomainId = $product->getCategoriesIndexedByDomainId();
-        $productData->priceCalculationType = $product->getPriceCalculationType();
         $productData->brand = $product->getBrand();
         $productData->orderingPriority = $product->getOrderingPriority();
 
@@ -205,7 +212,7 @@ class ProductDataFactory implements ProductDataFactoryInterface
         try {
             $productData->manualInputPricesByPricingGroupId = $this->productInputPriceFacade->getManualInputPricesDataIndexedByPricingGroupId($product);
         } catch (\Shopsys\FrameworkBundle\Model\Product\Pricing\Exception\MainVariantPriceCalculationException $ex) {
-            $productData->manualInputPricesByPricingGroupId = null;
+            $productData->manualInputPricesByPricingGroupId = $this->getNullForAllPricingGroups();
         }
         $productData->accessories = $this->getAccessoriesData($product);
         $productData->images->orderedImages = $this->imageFacade->getImagesByEntityIndexedById($product, null);
@@ -253,5 +260,17 @@ class ProductDataFactory implements ProductDataFactoryInterface
         }
 
         return $nullForAllDomains;
+    }
+
+    /**
+     * @return null[]
+     */
+    protected function getNullForAllPricingGroups()
+    {
+        $inputPrices = [];
+        foreach ($this->pricingGroupFacade->getAll() as $pricingGroup) {
+            $inputPrices[$pricingGroup->getId()] = null;
+        }
+        return $inputPrices;
     }
 }

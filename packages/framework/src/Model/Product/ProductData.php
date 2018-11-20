@@ -28,11 +28,6 @@ class ProductData
     public $ean;
 
     /**
-     * @var string
-     */
-    public $price;
-
-    /**
      * @var \Shopsys\FrameworkBundle\Model\Pricing\Vat\Vat|null
      */
     public $vat;
@@ -98,11 +93,6 @@ class ProductData
     public $categoriesByDomainId;
 
     /**
-     * @var string
-     */
-    public $priceCalculationType;
-
-    /**
      * @var \Shopsys\FrameworkBundle\Model\Product\Brand\Brand|null
      */
     public $brand;
@@ -128,7 +118,7 @@ class ProductData
     public $images;
 
     /**
-     * @var string[]
+     * @var string[]|null[]
      */
     public $manualInputPricesByPricingGroupId;
 
@@ -180,13 +170,11 @@ class ProductData
     public function __construct()
     {
         $this->name = [];
-        $this->price = 0;
         $this->sellingDenied = false;
         $this->hidden = false;
         $this->flags = [];
         $this->usingStock = false;
         $this->categoriesByDomainId = [];
-        $this->priceCalculationType = Product::PRICE_CALCULATION_TYPE_AUTO;
         $this->variantAlias = [];
         $this->orderingPriority = 0;
         $this->parameters = [];

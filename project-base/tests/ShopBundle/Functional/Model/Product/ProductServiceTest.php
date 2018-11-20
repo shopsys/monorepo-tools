@@ -34,7 +34,6 @@ class ProductServiceTest extends TransactionFunctionalTestCase
         $pricingGroup = $this->getReference(PricingGroupDataFixture::PRICING_GROUP_ORDINARY_DOMAIN_1);
 
         $productData = $producDataFactory->create();
-        $productData->price = 1000;
         $productData->vat = $vat;
         $productData->unit = $this->getReference(UnitDataFixture::UNIT_PIECES);
         $product = Product::create($productData);
@@ -43,7 +42,6 @@ class ProductServiceTest extends TransactionFunctionalTestCase
 
         $productService->recalculateInputPriceForNewVatPercent($product, [$productManualInputPrice], 15);
 
-        $this->assertSame('1052.173913', (string)$product->getPrice());
         $this->assertSame('1052.173913', (string)$productManualInputPrice->getInputPrice());
     }
 
@@ -65,7 +63,6 @@ class ProductServiceTest extends TransactionFunctionalTestCase
         $pricingGroup = $this->getReference(PricingGroupDataFixture::PRICING_GROUP_ORDINARY_DOMAIN_1);
 
         $productData = $productDataFactory->create();
-        $productData->price = 1000;
         $productData->vat = $vat;
         $productData->unit = $this->getReference(UnitDataFixture::UNIT_PIECES);
         $product = Product::create($productData);
@@ -74,7 +71,6 @@ class ProductServiceTest extends TransactionFunctionalTestCase
 
         $productService->recalculateInputPriceForNewVatPercent($product, [$productManualInputPrice], 15);
 
-        $this->assertSame('1000', (string)$product->getPrice());
         $this->assertSame('1000', (string)$productManualInputPrice->getInputPrice());
     }
 }

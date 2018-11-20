@@ -19,9 +19,6 @@ msgstr ""
 msgid "City name cannot be longer than {{ limit }} characters"
 msgstr ""
 
-msgid "Coefficient must be greater than 0"
-msgstr ""
-
 msgid "Company name cannot be longer than {{ limit }} characters"
 msgstr ""
 
@@ -283,16 +280,10 @@ msgstr ""
 msgid "Please enter price in correct format (positive number with decimal separator)"
 msgstr ""
 
-msgid "Please enter pricing group coefficient"
-msgstr ""
-
 msgid "Please enter pricing group name"
 msgstr ""
 
 msgid "Please enter quantity"
-msgstr ""
-
-msgid "Please enter ratio in correct format"
 msgstr ""
 
 msgid "Please enter script code"

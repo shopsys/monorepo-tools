@@ -20,23 +20,21 @@ class ProductDataFixtureLoader
     const COLUMN_DESCRIPTION_EN = 6;
     const COLUMN_SHORT_DESCRIPTION_CS = 7;
     const COLUMN_SHORT_DESCRIPTION_EN = 8;
-    const COLUMN_PRICE_CALCULATION_TYPE = 9;
-    const COLUMN_MAIN_PRICE = 10;
-    const COLUMN_MANUAL_PRICES_DOMAIN_1 = 11;
-    const COLUMN_MANUAL_PRICES_DOMAIN_2 = 12;
-    const COLUMN_VAT = 13;
-    const COLUMN_SELLING_FROM = 14;
-    const COLUMN_SELLING_TO = 15;
-    const COLUMN_STOCK_QUANTITY = 16;
-    const COLUMN_UNIT = 17;
-    const COLUMN_AVAILABILITY = 18;
-    const COLUMN_PARAMETERS = 19;
-    const COLUMN_CATEGORIES_1 = 20;
-    const COLUMN_CATEGORIES_2 = 21;
-    const COLUMN_FLAGS = 22;
-    const COLUMN_SELLING_DENIED = 23;
-    const COLUMN_BRAND = 24;
-    const COLUMN_MAIN_VARIANT_CATNUM = 25;
+    const COLUMN_MANUAL_PRICES_DOMAIN_1 = 9;
+    const COLUMN_MANUAL_PRICES_DOMAIN_2 = 10;
+    const COLUMN_VAT = 11;
+    const COLUMN_SELLING_FROM = 12;
+    const COLUMN_SELLING_TO = 13;
+    const COLUMN_STOCK_QUANTITY = 14;
+    const COLUMN_UNIT = 15;
+    const COLUMN_AVAILABILITY = 16;
+    const COLUMN_PARAMETERS = 17;
+    const COLUMN_CATEGORIES_1 = 18;
+    const COLUMN_CATEGORIES_2 = 19;
+    const COLUMN_FLAGS = 20;
+    const COLUMN_SELLING_DENIED = 21;
+    const COLUMN_BRAND = 22;
+    const COLUMN_MAIN_VARIANT_CATNUM = 23;
 
     /**
      * @var \Shopsys\FrameworkBundle\DataFixtures\Demo\ProductParametersFixtureLoader
@@ -181,7 +179,6 @@ class ProductDataFixtureLoader
         $productData->ean = $row[self::COLUMN_EAN];
         $productData->descriptions[$domainId] = $row[$this->getDescriptionColumnForDomain($domainId)];
         $productData->shortDescriptions[$domainId] = $row[$this->getShortDescriptionColumnForDomain($domainId)];
-        $productData->priceCalculationType = $row[self::COLUMN_PRICE_CALCULATION_TYPE];
         $this->setProductDataPricesFromCsv($row, $productData, $domainId);
         switch ($row[self::COLUMN_VAT]) {
             case 'high':
@@ -336,44 +333,20 @@ class ProductDataFixtureLoader
      */
     private function setProductDataPricesFromCsv(array $row, ProductData $productData, $domainId)
     {
-        switch ($row[self::COLUMN_PRICE_CALCULATION_TYPE]) {
-            case 'auto':
-                $productData->price = $row[self::COLUMN_MAIN_PRICE];
-                break;
-            case 'manual':
-                if ($domainId === 1) {
-                    $manualPricesColumn = $row[self::COLUMN_MANUAL_PRICES_DOMAIN_1];
-                } elseif ($domainId === 2) {
-                    $manualPricesColumn = $row[self::COLUMN_MANUAL_PRICES_DOMAIN_2];
-                }
-                $manualPricesFromCsv = $this->getProductManualPricesIndexedByPricingGroupFromString($manualPricesColumn);
-                $this->createDefaultManualPriceForAllPricingGroups($productData);
-                foreach ($manualPricesFromCsv as $pricingGroup => $manualPrice) {
-                    $pricingGroup = $this->pricingGroups[$pricingGroup];
-                    $productData->manualInputPricesByPricingGroupId[$pricingGroup->getId()] = $manualPrice;
-                }
-
-                $manualInputPricesFromCsvByPricingGroupId = $productData->manualInputPricesByPricingGroupId;
-                $manualPricesForAllPricingGroups = $this->addZeroPricesForPricingGroupsThatAreMissingInDemoData($manualInputPricesFromCsvByPricingGroupId);
-                $productData->manualInputPricesByPricingGroupId = $manualPricesForAllPricingGroups;
-                break;
-            default:
-                throw new \Shopsys\FrameworkBundle\Model\Product\Exception\InvalidPriceCalculationTypeException(
-                    $row[self::COLUMN_PRICE_CALCULATION_TYPE]
-                );
+        if ($domainId === 1) {
+            $manualPricesColumn = $row[self::COLUMN_MANUAL_PRICES_DOMAIN_1];
+        } elseif ($domainId === 2) {
+            $manualPricesColumn = $row[self::COLUMN_MANUAL_PRICES_DOMAIN_2];
         }
-    }
-
-    /**
-     * @param \Shopsys\FrameworkBundle\Model\Product\ProductData $productData
-     */
-    private function createDefaultManualPriceForAllPricingGroups(ProductData $productData)
-    {
-        foreach ($this->pricingGroups as $pricingGroupReferenceName => $pricingGroup) {
-            if (!array_key_exists($pricingGroup->getId(), $productData->manualInputPricesByPricingGroupId)) {
-                $productData->manualInputPricesByPricingGroupId[$pricingGroup->getId()] = null;
-            }
+        $manualPricesFromCsv = $this->getProductManualPricesIndexedByPricingGroupFromString($manualPricesColumn);
+        foreach ($manualPricesFromCsv as $pricingGroup => $manualPrice) {
+            $pricingGroup = $this->pricingGroups[$pricingGroup];
+            $productData->manualInputPricesByPricingGroupId[$pricingGroup->getId()] = $manualPrice;
         }
+
+        $manualInputPricesFromCsvByPricingGroupId = $productData->manualInputPricesByPricingGroupId;
+        $manualPricesForAllPricingGroups = $this->addZeroPricesForPricingGroupsThatAreMissingInDemoData($manualInputPricesFromCsvByPricingGroupId);
+        $productData->manualInputPricesByPricingGroupId = $manualPricesForAllPricingGroups;
     }
 
     /**

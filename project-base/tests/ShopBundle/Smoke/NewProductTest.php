@@ -6,6 +6,7 @@ use Shopsys\FrameworkBundle\DataFixtures\Demo\AvailabilityDataFixture;
 use Shopsys\FrameworkBundle\DataFixtures\Demo\UnitDataFixture;
 use Shopsys\FrameworkBundle\DataFixtures\Demo\VatDataFixture;
 use Shopsys\FrameworkBundle\Form\Admin\Product\ProductFormType;
+use Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroupFacade;
 use Symfony\Component\DomCrawler\Form;
 use Symfony\Component\Security\Csrf\CsrfToken;
 use Tests\ShopBundle\Test\FunctionalTestCase;
@@ -75,7 +76,7 @@ class NewProductTest extends FunctionalTestCase
         $form['product_form[basicInformationGroup][partno]'] = '123456';
         $form['product_form[basicInformationGroup][ean]'] = '123456';
         $form['product_form[descriptionsGroup][descriptions][1]'] = 'test description';
-        $form['product_form[pricesGroup][productCalculatedPricesGroup][price]'] = '10000';
+        $this->fillManualInputPrices($form);
         $form['product_form[pricesGroup][vat]']->select($vat->getId());
         $form['product_form[displayAvailabilityGroup][sellingFrom]'] = '1.1.1990';
         $form['product_form[displayAvailabilityGroup][sellingTo]'] = '1.1.2000';
@@ -91,5 +92,20 @@ class NewProductTest extends FunctionalTestCase
     private function setFormCsrfToken(Form $form, CsrfToken $token)
     {
         $form['product_form[_token]'] = $token->getValue();
+    }
+
+    /**
+     * @param \Symfony\Component\DomCrawler\Form $form
+     */
+    private function fillManualInputPrices(Form $form)
+    {
+        $pricingGroupFacade = $this->getContainer()->get(PricingGroupFacade::class);
+        foreach ($pricingGroupFacade->getAll() as $pricingGroup) {
+            $inputName = sprintf(
+                'product_form[pricesGroup][productCalculatedPricesGroup][manualInputPricesByPricingGroupId][%s]',
+                $pricingGroup->getId()
+            );
+            $form[$inputName] = '10000';
+        }
     }
 }

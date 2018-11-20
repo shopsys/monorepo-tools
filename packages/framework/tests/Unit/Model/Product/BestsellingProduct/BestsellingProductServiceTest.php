@@ -17,14 +17,12 @@ class BestsellingProductServiceTest extends TestCase
 
         $maxResults = 4;
 
-        $price = 100;
         $vatData = new VatData();
         $vatData->name = 'vat';
         $vatData->percent = 21;
         $vat = new Vat($vatData);
         $productData = new ProductData();
         $productData->name = ['cs' => 'Product 1'];
-        $productData->price = $price;
         $productData->vat = $vat;
         $product1 = Product::create($productData);
         $product2 = Product::create($productData);

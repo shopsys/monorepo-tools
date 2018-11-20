@@ -12,6 +12,7 @@ use Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroupFacade;
 use Shopsys\FrameworkBundle\Model\Pricing\Vat\Vat;
 use Shopsys\FrameworkBundle\Model\Pricing\Vat\VatData;
 use Shopsys\FrameworkBundle\Model\Product\Pricing\ProductPriceRecalculator;
+use Shopsys\FrameworkBundle\Model\Product\ProductData;
 use Shopsys\FrameworkBundle\Model\Product\ProductDataFactoryInterface;
 use Shopsys\FrameworkBundle\Model\Product\ProductFacade;
 use Shopsys\FrameworkBundle\Model\Product\ProductVisibility;
@@ -41,13 +42,29 @@ class ProductVisibilityRepositoryTest extends TransactionFunctionalTestCase
         $productData = $productDataFactory->create();
         $productData->name = ['cs' => 'Name', 'en' => 'Name'];
         $productData->vat = $vat;
-        $productData->price = 100;
-        $productData->priceCalculationType = Product::PRICE_CALCULATION_TYPE_AUTO;
         $productData->categoriesByDomainId = [1 => [$category]];
         $productData->availability = $this->getReference(AvailabilityDataFixture::AVAILABILITY_IN_STOCK);
         $productData->unit = $this->getReference(UnitDataFixture::UNIT_PIECES);
+        $this->setPriceForAllDomains($productData, 100);
 
         return $productData;
+    }
+
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Product\ProductData $productData
+     * @param $price
+     */
+    private function setPriceForAllDomains(ProductData $productData, $price)
+    {
+        /** @var \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroupFacade $pricingGroupFacade */
+        $pricingGroupFacade = $this->getContainer()->get(PricingGroupFacade::class);
+
+        $manualInputPrices = [];
+        foreach ($pricingGroupFacade->getAll() as $pricingGroup) {
+            $manualInputPrices[$pricingGroup->getId()] = $price;
+        }
+
+        $productData->manualInputPricesByPricingGroupId = $manualInputPrices;
     }
 
     public function testIsVisibleOnAnyDomainWhenHidden()
@@ -221,10 +238,10 @@ class ProductVisibilityRepositoryTest extends TransactionFunctionalTestCase
         $productPriceRecalculator = $this->getContainer()->get(ProductPriceRecalculator::class);
 
         $productData = $this->getDefaultProductData();
-        $productData->price = 0;
+        $this->setPriceForAllDomains($productData, 0);
         $product1 = $productFacade->create($productData);
 
-        $productData->price = null;
+        $this->setPriceForAllDomains($productData, null);
         $product2 = $productFacade->create($productData);
         $productPriceRecalculator->runImmediateRecalculations();
 
@@ -381,16 +398,9 @@ class ProductVisibilityRepositoryTest extends TransactionFunctionalTestCase
         $productFacade = $this->getContainer()->get(ProductFacade::class);
         /** @var \Shopsys\FrameworkBundle\Model\Product\Pricing\ProductPriceRecalculator $productPriceRecalculator */
         $productPriceRecalculator = $this->getContainer()->get(ProductPriceRecalculator::class);
-        /** @var \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroupFacade $pricingGroupFacade */
-        $pricingGroupFacade = $this->getContainer()->get(PricingGroupFacade::class);
 
         $productData = $this->getDefaultProductData();
-        $productData->priceCalculationType = Product::PRICE_CALCULATION_TYPE_MANUAL;
-
-        $allPricingGroups = $pricingGroupFacade->getAll();
-        foreach ($allPricingGroups as $pricingGroup) {
-            $productData->manualInputPricesByPricingGroupId[$pricingGroup->getId()] = 10;
-        }
+        $this->setPriceForAllDomains($productData, 10);
 
         /** @var \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroup $pricingGroup */
         $pricingGroup = $this->getReference(PricingGroupDataFixture::PRICING_GROUP_ORDINARY_DOMAIN_1);
@@ -428,7 +438,6 @@ class ProductVisibilityRepositoryTest extends TransactionFunctionalTestCase
         $pricingGroupFacade = $this->getContainer()->get(PricingGroupFacade::class);
 
         $productData = $this->getDefaultProductData();
-        $productData->priceCalculationType = Product::PRICE_CALCULATION_TYPE_MANUAL;
 
         $allPricingGroups = $pricingGroupFacade->getAll();
         foreach ($allPricingGroups as $pricingGroup) {

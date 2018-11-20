@@ -19,7 +19,6 @@ class CurrentCustomerTest extends TestCase
     {
         $pricingGroupData = new PricingGroupData();
         $pricingGroupData->name = 'name';
-        $pricingGroupData->coefficient = 1;
         $expectedPricingGroup = new PricingGroup($pricingGroupData, 1);
 
         $tokenStorageMock = $this->createMock(TokenStorage::class);
@@ -35,7 +34,6 @@ class CurrentCustomerTest extends TestCase
     {
         $pricingGroupData = new PricingGroupData();
         $pricingGroupData->name = 'name';
-        $pricingGroupData->coefficient = 1;
         $expectedPricingGroup = new PricingGroup($pricingGroupData, 1);
         $user = $this->getUserWithPricingGroup($expectedPricingGroup);
 

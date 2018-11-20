@@ -5,7 +5,6 @@ namespace Shopsys\FrameworkBundle\Model\Product;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Prezent\Doctrine\Translatable\Annotation as Prezent;
-use Shopsys\FrameworkBundle\Component\Utils\Utils;
 use Shopsys\FrameworkBundle\Model\Localization\AbstractTranslatableEntity;
 use Shopsys\FrameworkBundle\Model\Pricing\Vat\Vat;
 use Shopsys\FrameworkBundle\Model\Product\Availability\Availability;
@@ -24,8 +23,6 @@ use Shopsys\FrameworkBundle\Model\Product\Exception\ProductDomainNotFoundExcepti
  */
 class Product extends AbstractTranslatableEntity
 {
-    const PRICE_CALCULATION_TYPE_AUTO = 'auto';
-    const PRICE_CALCULATION_TYPE_MANUAL = 'manual';
     const OUT_OF_STOCK_ACTION_SET_ALTERNATE_AVAILABILITY = 'setAlternateAvailability';
     const OUT_OF_STOCK_ACTION_EXCLUDE_FROM_SALE = 'excludeFromSale';
     const OUT_OF_STOCK_ACTION_HIDE = 'hide';
@@ -83,13 +80,6 @@ class Product extends AbstractTranslatableEntity
      * @ORM\Column(type="string", length=100, nullable=true)
      */
     protected $ean;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(type="decimal", precision=20, scale=6)
-     */
-    protected $price;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Pricing\Vat\Vat
@@ -226,13 +216,6 @@ class Product extends AbstractTranslatableEntity
     protected $flags;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(type="string", length=32)
-     */
-    protected $priceCalculationType;
-
-    /**
      * @var bool
      *
      * @ORM\Column(type="boolean", options={"default" = true})
@@ -301,13 +284,6 @@ class Product extends AbstractTranslatableEntity
         $this->catnum = $productData->catnum;
         $this->partno = $productData->partno;
         $this->ean = $productData->ean;
-        $this->priceCalculationType = $productData->priceCalculationType;
-        if ($this->getPriceCalculationType() === self::PRICE_CALCULATION_TYPE_AUTO) {
-            $this->setPrice($productData->price);
-        } else {
-            $this->setPrice(null);
-        }
-
         $this->vat = $productData->vat;
         $this->sellingFrom = $productData->sellingFrom;
         $this->sellingTo = $productData->sellingTo;
@@ -394,12 +370,6 @@ class Product extends AbstractTranslatableEntity
             $this->catnum = $productData->catnum;
             $this->partno = $productData->partno;
             $this->ean = $productData->ean;
-            $this->priceCalculationType = $productData->priceCalculationType;
-            if ($this->getPriceCalculationType() === self::PRICE_CALCULATION_TYPE_AUTO) {
-                $this->setPrice($productData->price);
-            } else {
-                $this->setPrice(null);
-            }
         }
 
         $this->orderingPriority = $productData->orderingPriority;
@@ -423,14 +393,6 @@ class Product extends AbstractTranslatableEntity
     {
         $this->vat = $vat;
         $this->recalculatePrice = true;
-    }
-
-    /**
-     * @param string|null $price
-     */
-    public function setPrice($price)
-    {
-        $this->price = Utils::ifNull($price, 0);
     }
 
     /**
@@ -495,14 +457,6 @@ class Product extends AbstractTranslatableEntity
     public function getEan()
     {
         return $this->ean;
-    }
-
-    /**
-     * @return string
-     */
-    public function getPrice()
-    {
-        return $this->price;
     }
 
     /**
@@ -738,14 +692,6 @@ class Product extends AbstractTranslatableEntity
         }
 
         return $categoriesByDomainId;
-    }
-
-    /**
-     * @return string
-     */
-    public function getPriceCalculationType()
-    {
-        return $this->priceCalculationType;
     }
 
     /**

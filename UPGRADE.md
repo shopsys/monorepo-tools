@@ -51,6 +51,48 @@ There is a list of all the repositories maintained by monorepo, changes in log b
 
 ## [From 7.0.0-beta2 to Unreleased]
 ### [shopsys/framework]
+- [#595 automatic product price calculation has been removed along with pricing group coefficients](https://github.com/shopsys/shopsys/pull/595)
+    - after running database migrations, all your products will be using manual pricing and will have set prices for all pricing groups in a fashion that will keep the final price as same as before
+        - we strongly recommend to review `Version20181114134959` and `Version20181114145250` migrations before executing them on your real data, especially if there were any modifications in your product pricing implementation on the project.
+        If any of the migrations does not suit you, there is an option to skip it, see [our Database Migrations docs](https://github.com/shopsys/shopsys/blob/master/docs/introduction/database-migrations.md#reordering-and-skipping-migrations)
+    - `ProductPriceCalculation::calculatePrice()` is still available, however, it always uses the manual price calculation
+    - following (public and protected) constants, properties and methods are not available anymore:
+        - `Currency::getReversedExchangeRate()`
+        - `CurrencyFacade::getDomainConfigsByCurrency()`
+        - `PricingGroup::$coefficient`
+        - `PricingGroup::getCoefficient()`
+        - `PricingGroupData::$coefficient`
+        - `Product::PRICE_CALCULATION_TYPE_AUTO`
+        - `Product::PRICE_CALCULATION_TYPE_MANUAL`
+        - `Product::$price`
+        - `Product::$priceCalculationType`
+        - `Product::setPrice()`
+        - `Product::getPrice()`
+        - `Product::getPriceCalculationType()`
+        - `ProductData::$priceCalculationType`
+        - `ProductData::$price`
+        - `ProductDataFixtureLoader::COLUMN_MAIN_PRICE`
+        - `ProductDataFixtureLoader::COLUMN_PRICE_CALCULATION_TYPE`
+        - `ProductFormType::VALIDATION_GROUP_AUTO_PRICE_CALCULATION`
+        - `ProductFormType::VALIDATION_GROUP_MANUAL_PRICE_CALCULATION`
+        - `ProductInputPriceFacade::getInputPrice()`
+        - `ProductManualInputPriceFacade::getAllByProduct()`
+        - `ProductManualInputPriceFacade::deleteByProduct()`
+        - `ProductManualInputPriceRepository::getByProductAndDomainConfigs()`
+        - `ProductService::setInputPrice()`
+    - interfaces of following (public and protected) methods have changed:
+        - `InputPriceRecalculator::__construct()`
+        - `ProductDataFactory::__construct()`
+        - `ProductCalculatedPricesType::_construct()`
+        - `ProductPriceCalculation::__construct()`
+    - following classes have been removed:
+        - `AdminProductPriceCalculationFacade`
+        - `InvalidPriceCalculationTypeException`
+        - `ProductBasePriceCalculationException`
+        - `ProductInputPriceService`
+    - due to the removal of `Product::$price` and `PricingGroup::$coefficient` you have to fix your tests
+        - we cannot provide exact instruction for fixing tests as we don't know what do you test
+        - please find hints in tests that we fixed during [#595](https://github.com/shopsys/shopsys/pull/595/files)
 - remove all usages of `\Shopsys\FrameworkBundle\Command\LoadDataFixturesCommand` and `\Shopsys\FrameworkBundle\Component\DataFixture\FixturesLoader` as we no longer support data fixtures in multiple directories
 - we moved multidomain data fixtures in namespace `\Shopsys\FrameworkBundle\DataFixtures\DemoMultidomain` to `\Shopsys\FrameworkBundle\DataFixtures\Demo`
     - check for their usage in your code and change the namespace appropriately

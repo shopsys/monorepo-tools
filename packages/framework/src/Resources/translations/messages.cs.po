@@ -223,9 +223,6 @@ msgstr "Příloha"
 msgid "Automatic stock calculation"
 msgstr "Automatické výpočty skladových zásob"
 
-msgid "Automatically"
-msgstr "Automaticky"
-
 msgid "Availabilities overview"
 msgstr "Přehled dostupností"
 
@@ -255,9 +252,6 @@ msgstr "Dostupné dopravy"
 
 msgid "Back to overview"
 msgstr "Zpět na přehled"
-
-msgid "Base price"
-msgstr "Základní cena"
 
 msgid "Base price in %currencyCode%"
 msgstr "Základní cena v %currencyCode%"
@@ -1228,9 +1222,6 @@ msgstr "Hlavní varianta"
 msgid "Make modification"
 msgstr "Provést úpravu"
 
-msgid "Manually"
-msgstr "Ručně"
-
 msgid "Marketing"
 msgstr "Marketing"
 
@@ -1737,9 +1728,6 @@ msgstr "Nastavení SEO atributů"
 
 msgid "SEO attributes settings modified"
 msgstr "Natavení SEO atributů bylo upraveno"
-
-msgid "Sale prices calculation"
-msgstr "Výpočet prodejních cen"
 
 msgid "Sales including/excluding VAT settings"
 msgstr "Nastavení prodeje s/bez DPH"

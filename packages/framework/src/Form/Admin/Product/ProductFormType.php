@@ -51,13 +51,11 @@ use Symfony\Component\Validator\Constraints;
 
 class ProductFormType extends AbstractType
 {
-    const VALIDATION_GROUP_AUTO_PRICE_CALCULATION = 'autoPriceCalculation';
     const VALIDATION_GROUP_USING_STOCK = 'usingStock';
     const VALIDATION_GROUP_USING_STOCK_AND_ALTERNATE_AVAILABILITY = 'usingStockAndAlternateAvailability';
     const VALIDATION_GROUP_NOT_USING_STOCK = 'notUsingStock';
 
     const CSRF_TOKEN_ID = 'product_edit_type';
-    const VALIDATION_GROUP_MANUAL_PRICE_CALCULATION = 'manualPriceCalculation';
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Pricing\Vat\VatFacade
@@ -231,14 +229,6 @@ class ProductFormType extends AbstractType
                         }
                     } else {
                         $validationGroups[] = self::VALIDATION_GROUP_NOT_USING_STOCK;
-                    }
-
-                    if ($productData->priceCalculationType === Product::PRICE_CALCULATION_TYPE_AUTO) {
-                        $validationGroups[] = self::VALIDATION_GROUP_AUTO_PRICE_CALCULATION;
-                    }
-
-                    if ($productData->priceCalculationType === Product::PRICE_CALCULATION_TYPE_MANUAL) {
-                        $validationGroups[] = self::VALIDATION_GROUP_MANUAL_PRICE_CALCULATION;
                     }
 
                     return $validationGroups;
@@ -627,16 +617,6 @@ class ProductFormType extends AbstractType
         ]);
 
         $builderPricesGroup
-            ->add('priceCalculationType', ChoiceType::class, [
-                'required' => true,
-                'expanded' => true,
-                'choices' => [
-                    t('Automatically') => Product::PRICE_CALCULATION_TYPE_AUTO,
-                    t('Manually') => Product::PRICE_CALCULATION_TYPE_MANUAL,
-                ],
-                'disabled' => $this->isProductMainVariant($product),
-                'label' => t('Sale prices calculation'),
-            ])
             ->add('vat', ChoiceType::class, [
                 'required' => true,
                 'choices' => $this->vatFacade->getAllIncludingMarkedForDeletion(),
@@ -656,26 +636,6 @@ class ProductFormType extends AbstractType
         ]);
 
         $builderPricesGroup->add($productCalculatedPricesGroup);
-        $productCalculatedPricesGroup
-            ->add('price', MoneyType::class, [
-                'currency' => false,
-                'scale' => 6,
-                'required' => true,
-                'invalid_message' => 'Please enter price in correct format (positive number with decimal separator)',
-                'constraints' => [
-                    new Constraints\NotBlank([
-                        'message' => 'Please enter price',
-                        'groups' => self::VALIDATION_GROUP_AUTO_PRICE_CALCULATION,
-                    ]),
-                    new Constraints\GreaterThanOrEqual([
-                        'value' => 0,
-                        'message' => 'Price must be greater or equal to {{ compared_value }}',
-                        'groups' => self::VALIDATION_GROUP_AUTO_PRICE_CALCULATION,
-                    ]),
-                ],
-                'disabled' => $this->isProductMainVariant($product),
-                'label' => t('Base price'),
-            ]);
         $manualInputPricesByPricingGroup = $builder->create('manualInputPricesByPricingGroupId', FormType::class, [
             'compound' => true,
             'render_form_row' => false,
@@ -686,17 +646,12 @@ class ProductFormType extends AbstractType
                 ->add($pricingGroup->getId(), MoneyType::class, [
                     'currency' => false,
                     'scale' => 6,
-                    'required' => true,
+                    'required' => false,
                     'invalid_message' => 'Please enter price in correct format (positive number with decimal separator)',
                     'constraints' => [
-                        new Constraints\NotBlank([
-                            'message' => 'Please enter price',
-                            'groups' => [self::VALIDATION_GROUP_MANUAL_PRICE_CALCULATION],
-                        ]),
                         new Constraints\GreaterThanOrEqual([
                             'value' => 0,
                             'message' => 'Price must be greater or equal to {{ compared_value }}',
-                            'groups' => [self::VALIDATION_GROUP_MANUAL_PRICE_CALCULATION],
                         ]),
                     ],
                     'label' => $pricingGroup->getName(),
@@ -707,7 +662,6 @@ class ProductFormType extends AbstractType
 
         if ($this->isProductMainVariant($product)) {
             $builderPricesGroup->remove('vat');
-            $builderPricesGroup->remove('priceCalculationType');
             $builderPricesGroup->remove('productCalculatedPricesGroup');
             $builderPricesGroup->add('disabledPricesOnMainVariant', DisplayOnlyType::class, [
                 'mapped' => false,

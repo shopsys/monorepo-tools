@@ -47,7 +47,7 @@ class BasePriceCalculation
      * @param string[] $coefficients
      * @return \Shopsys\FrameworkBundle\Model\Pricing\Price
      */
-    public function applyCoefficients(Price $price, Vat $vat, $coefficients)
+    public function applyCoefficients(Price $price, Vat $vat, array $coefficients)
     {
         $priceWithVatBeforeRounding = $price->getPriceWithVat();
         foreach ($coefficients as $coefficient) {

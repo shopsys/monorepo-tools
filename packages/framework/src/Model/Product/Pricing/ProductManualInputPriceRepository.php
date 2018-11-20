@@ -40,30 +40,6 @@ class ProductManualInputPriceRepository
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\Product\Product $product
-     * @param \Shopsys\FrameworkBundle\Component\Domain\Config\DomainConfig[] $domainConfigs
-     * @return \Shopsys\FrameworkBundle\Model\Product\Pricing\ProductManualInputPrice[]
-     */
-    public function getByProductAndDomainConfigs(Product $product, array $domainConfigs)
-    {
-        if (count($domainConfigs) === 0) {
-            return [];
-        }
-
-        $domainIds = [];
-        foreach ($domainConfigs as $domainConfig) {
-            $domainIds[] = $domainConfig->getId();
-        }
-
-        $queryBuilder = $this->getProductManualInputPriceRepository()->createQueryBuilder('pmp')
-            ->join('pmp.pricingGroup', 'pg')
-            ->andWhere('pmp.product = :product')->setParameter('product', $product)
-            ->andWhere('pg.domainId IN (:domainsIds)')->setParameter('domainsIds', $domainIds);
-
-        return $queryBuilder->getQuery()->getResult();
-    }
-
-    /**
-     * @param \Shopsys\FrameworkBundle\Model\Product\Product $product
      * @param \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroup $pricingGroup
      * @return \Shopsys\FrameworkBundle\Model\Product\Pricing\ProductManualInputPrice|null
      */
