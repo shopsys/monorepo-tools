@@ -307,7 +307,7 @@ docker rm -f build-php-fpm-container
 
 # launch container for building the application image
 docker run --detach --name build-php-fpm-container \
-    --add-host redis:192.168.0.1 --add-host postgres:192.168.0.1 --add-host elasticsearch:192.168.0.1 --add-host smpt-server:192.168.0.1 \
+    --add-host redis:192.168.0.1 --add-host postgres:192.168.0.1 --add-host elasticsearch:192.168.0.1 --add-host smtp-server:192.168.0.1 \
     --network production_shopsys-network \
     production-php-fpm \
     docker-php-entrypoint php-fpm
