@@ -7,14 +7,14 @@ namespace Shopsys\Releaser\ReleaseWorker;
 use PharIo\Version\Version;
 use Symplify\MonorepoBuilder\Release\Contract\ReleaseWorker\ReleaseWorkerInterface;
 
-final class CheckReleaseBlogPostReleaseWorker implements ReleaseWorkerInterface
+final class StopMergingToMasterReleaseWorker implements ReleaseWorkerInterface
 {
     /**
      * @return string
      */
     public function getDescription(): string
     {
-        return '[Manual] Prepare "Release highlights" post on https://blog.shopsys.com';
+        return '[Manual] Tell team to stop mergin to `master` branch';
     }
 
     /**
@@ -23,7 +23,7 @@ final class CheckReleaseBlogPostReleaseWorker implements ReleaseWorkerInterface
      */
     public function getPriority(): int
     {
-        return 960;
+        return 940;
     }
 
     /**

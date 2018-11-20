@@ -1,0 +1,25 @@
+parameters:
+    monorepo_package_name: "shopsys/shopsys"
+
+    travis_packages:
+        - "shopsys/framework"
+        - "shopsys/product-feed-zbozi"
+        - "shopsys/product-feed-google"
+        - "shopsys/product-feed-heureka"
+        - "shopsys/product-feed-heureka-delivery"
+        - "shopsys/product-feed-interface"
+        - "shopsys/plugin-interface"
+        - "shopsys/coding-standards"
+        - "shopsys/http-smoke-testing"
+        - "shopsys/form-types-bundle"
+
+    lock_version_allowed_packages: []
+
+services:
+    _defaults:
+        autowire: true
+
+    Shopsys\Releaser\:
+        resource: "../src"
+
+    GuzzleHttp\Client: ~

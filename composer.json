@@ -42,7 +42,9 @@
       "Tests\\ProductFeed\\GoogleBundle\\": "packages/product-feed-google/tests/",
       "Tests\\ProductFeed\\HeurekaBundle\\": "packages/product-feed-heureka/tests/",
       "Tests\\ProductFeed\\HeurekaDeliveryBundle\\": "packages/product-feed-heureka-delivery/tests/",
-      "Shopsys\\MicroserviceProductSearchExport\\": "microservices/product-search-export/src/"
+      "Shopsys\\MicroserviceProductSearchExport\\": "microservices/product-search-export/src/",
+      "Shopsys\\Releaser\\": "packages/releaser/src/",
+      "Shopsys\\Releaser\\Tests\\": "packages/releaser/tests"
     }
   },
   "require": {
@@ -118,7 +120,7 @@
     "snc/redis-bundle": "2.1.4",
     "squizlabs/php_codesniffer": "^3.2.0",
     "stof/doctrine-extensions-bundle": "^1.3.0",
-    "symplify/easy-coding-standard": "^5.2.0",
+    "symplify/easy-coding-standard": "^5.2.7",
     "swiftmailer/swiftmailer": "^6.0",
     "symfony/assetic-bundle": "^2.8.2",
     "symfony-cmf/routing": "^2.0.3",
@@ -137,9 +139,9 @@
     "codeception/codeception": "^2.4.0",
     "codeception/phpunit-wrapper": "^7.0",
     "phpstan/phpstan": "^0.7",
-    "symplify/easy-coding-standard-tester": "^5.2",
-    "symplify/changelog-linker": "^5.2",
-    "symplify/monorepo-builder": "^5.2"
+    "symplify/easy-coding-standard-tester": "^5.2.7",
+    "symplify/changelog-linker": "^5.2.7",
+    "symplify/monorepo-builder": "^5.2.7"
   },
   "conflict": {
     "symfony/dependency-injection": "3.4.15|3.4.16"

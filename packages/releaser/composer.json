@@ -1,14 +1,19 @@
 {
     "name": "shopsys/releaser",
     "license": "MIT",
+    "require": {
+        "php": "^7.1",
+        "nette/utils": "^2.5",
+        "guzzlehttp/guzzle": "^6.3"
+    },
     "autoload": {
         "psr-4": {
-            "Shopsys\\Releaser\\": "src/"
+            "Shopsys\\Releaser\\": "src"
         }
     },
-    "require": {
-        "php": "^7.1"
-    },
-
-
+    "autoload-dev": {
+        "psr-4": {
+            "Shopsys\\Releaser\\Tests\\": "tests"
+        }
+    }
 }
