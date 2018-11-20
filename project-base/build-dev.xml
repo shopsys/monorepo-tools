@@ -230,7 +230,6 @@
             <arg path="${path.tests}" />
             <arg path="${path.root}/*.md" />
             <arg path="${path.root}/docs" />
-            <arg value="--verbose" />
         </exec>
     </target>
 
