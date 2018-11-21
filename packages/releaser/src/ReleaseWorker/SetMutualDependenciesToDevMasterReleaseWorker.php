@@ -81,5 +81,6 @@ final class SetMutualDependenciesToDevMasterReleaseWorker implements ReleaseWork
         );
 
         $this->symfonyStyle->success(sprintf('Mutual dependencies for all packages were set to "%s"', self::DEV_MASTER));
+        $this->symfonyStyle->note('[Manual] Commit changes of composer.json files');
     }
 }

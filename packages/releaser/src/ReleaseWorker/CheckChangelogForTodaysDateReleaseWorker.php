@@ -7,6 +7,7 @@ namespace Shopsys\Releaser\ReleaseWorker;
 use Nette\Utils\DateTime;
 use Nette\Utils\Strings;
 use PharIo\Version\Version;
+use Shopsys\Releaser\Message;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Symplify\MonorepoBuilder\Release\Contract\ReleaseWorker\ReleaseWorkerInterface;
 use Symplify\PackageBuilder\FileSystem\SmartFileInfo;
@@ -31,7 +32,7 @@ final class CheckChangelogForTodaysDateReleaseWorker implements ReleaseWorkerInt
      */
     public function getDescription(): string
     {
-        return 'Check this version date CHANGELOG.md is today';
+        return 'Check the release date of the currently released version is today in CHANGELOG.md';
     }
 
     /**
@@ -52,12 +53,14 @@ final class CheckChangelogForTodaysDateReleaseWorker implements ReleaseWorkerInt
 
         $fileContent = $smartFileInfo->getContents();
 
-        $pattern = '#\#\# ' . preg_quote($version->getVersionString(), '#') . ' - ' . (new DateTime())->format('Y-m-d') . '#';
+        $todayInString = (new DateTime())->format('Y-m-d');
+
+        $pattern = '#\#\# ' . preg_quote($version->getVersionString(), '#') . ' - ' . $todayInString . '#';
 
         if (Strings::match($fileContent, $pattern)) {
-            $this->symfonyStyle->success('CHANGELOG.md has today date in this version');
+            $this->symfonyStyle->success(Message::SUCCESS);
         } else {
-            $this->symfonyStyle->error('CHANGELOG.md has old date, update it.');
+            $this->symfonyStyle->error(sprintf('CHANGELOG.md has old date for "%s" version, update it to "%s".', $version->getVersionString(), $todayInString));
         }
     }
 }

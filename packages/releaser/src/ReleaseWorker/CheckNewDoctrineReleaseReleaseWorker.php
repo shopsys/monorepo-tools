@@ -47,7 +47,11 @@ final class CheckNewDoctrineReleaseReleaseWorker implements ReleaseWorkerInterfa
      */
     public function getDescription(): string
     {
-        return 'Check new release of "doctrine/doctrine2" package and use it instead of fork if there is';
+        return sprintf(
+            'Check new release of "%s" package and propose upgrade of our fork ("%s") if necessary',
+            self::ORIGIN_DOCTINE,
+            self::FORKED_DOCTINE
+        );
     }
 
     /**

@@ -14,7 +14,7 @@ final class StopMergingToMasterReleaseWorker implements ReleaseWorkerInterface
      */
     public function getDescription(): string
     {
-        return '[Manual] Tell team to stop mergin to `master` branch';
+        return '[Manual] Tell team to stop merging to `master` branch';
     }
 
     /**

@@ -6,6 +6,7 @@ namespace Shopsys\Releaser\ReleaseWorker;
 
 use PharIo\Version\Version;
 use Shopsys\Releaser\IntervalEvaluator;
+use Shopsys\Releaser\Message;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Symplify\MonorepoBuilder\FileSystem\ComposerJsonProvider;
 use Symplify\MonorepoBuilder\FileSystem\JsonFileManager;
@@ -66,7 +67,7 @@ final class ValidateConflictsInComposerJsonReleaseWorker implements ReleaseWorke
      */
     public function getDescription(): string
     {
-        return 'Validate "require" and "require-dev" for missing "^version" formats';
+        return 'Make sure that "conflict" versions in all composer.json files are closed interval';
     }
 
     /**
@@ -108,7 +109,7 @@ final class ValidateConflictsInComposerJsonReleaseWorker implements ReleaseWorke
         }
 
         if ($this->isSuccessful) {
-            $this->symfonyStyle->success('All versions in "conflicts" are in correct closed format');
+            $this->symfonyStyle->success(Message::SUCCESS);
         }
     }
 }

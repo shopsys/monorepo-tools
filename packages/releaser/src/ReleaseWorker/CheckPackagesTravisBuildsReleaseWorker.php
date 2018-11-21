@@ -24,11 +24,6 @@ final class CheckPackagesTravisBuildsReleaseWorker implements ReleaseWorkerInter
     /**
      * @var string[]
      */
-    private $passesPackages = [];
-
-    /**
-     * @var string[]
-     */
     private $failedPackages = [];
 
     /**
@@ -99,9 +94,7 @@ final class CheckPackagesTravisBuildsReleaseWorker implements ReleaseWorkerInter
             $status = (string)$projectXmlElement->attributes()->lastBuildStatus;
             $packageName = (string)$projectXmlElement->attributes()->name;
 
-            if ($status === self::SUCCESS_STATUS) {
-                $this->passesPackages[] = $packageName;
-            } else {
+            if ($status !== self::SUCCESS_STATUS) {
                 $this->failedPackages[] = $packageName;
             }
         }

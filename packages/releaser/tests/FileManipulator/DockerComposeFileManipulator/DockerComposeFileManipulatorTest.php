@@ -2,18 +2,18 @@
 
 declare(strict_types=1);
 
-namespace Shopsys\Releaser\Tests\FileManipulator\DockerComposerFileManipulator;
+namespace Shopsys\Releaser\Tests\FileManipulator\DockerComposeFileManipulator;
 
 use PharIo\Version\Version;
 use PHPUnit\Framework\TestCase;
-use Shopsys\Releaser\FileManipulator\DockerComposerFileManipulator;
+use Shopsys\Releaser\FileManipulator\DockerComposeFileManipulator;
 use Symplify\PackageBuilder\FileSystem\SmartFileInfo;
 
-final class DockerComposerFileManipulatorTest extends TestCase
+final class DockerComposeFileManipulatorTest extends TestCase
 {
     public function test(): void
     {
-        $dockerComposerFileManipulator = new DockerComposerFileManipulator();
+        $dockerComposerFileManipulator = new DockerComposeFileManipulator();
 
         $changedContent = $dockerComposerFileManipulator->processFileToString(
             new SmartFileInfo(__DIR__ . '/Source/docker-compose-before.yml.dist'),

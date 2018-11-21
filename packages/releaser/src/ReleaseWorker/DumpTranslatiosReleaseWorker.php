@@ -59,7 +59,7 @@ final class DumpTranslatiosReleaseWorker implements ReleaseWorkerInterface
         $this->processRunner->run('php phing dump-translations');
 
         if ($this->hasNewTranslations()) {
-            $this->symfonyStyle->note('[Manual] There new translations. Check files, complete missing ones and then commit');
+            $this->symfonyStyle->note('[Manual] There are new translations. Check files, complete missing ones and then commit');
         } else {
             $this->symfonyStyle->success('There are no new translations');
         }

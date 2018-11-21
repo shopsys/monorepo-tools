@@ -35,7 +35,7 @@ final class ResolveDocsTodoReleaseWorker implements ReleaseWorkerInterface
      */
     public function getDescription(): string
     {
-        return 'Check new release of "doctrine/doctrine2" package and use it instead of fork if there is';
+        return 'Resolve TODO comments in *.md files';
     }
 
     /**
@@ -60,7 +60,7 @@ final class ResolveDocsTodoReleaseWorker implements ReleaseWorkerInterface
             ->in(getcwd())
             ->exclude('vendor');
 
-        $this->symfonyStyle->section(sprintf('Checkind %d files for "%s"', count($finder->getIterator()), self::TODO_PLACEHOLDER));
+        $this->symfonyStyle->section(sprintf('Checking %d files for "%s"', count($finder->getIterator()), self::TODO_PLACEHOLDER));
 
         /** @var \Symfony\Component\Finder\SplFileInfo $fileInfo */
         foreach ($finder as $fileInfo) {

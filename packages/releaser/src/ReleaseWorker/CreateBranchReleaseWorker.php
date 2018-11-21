@@ -14,7 +14,7 @@ final class CreateBranchReleaseWorker implements ReleaseWorkerInterface
      */
     public function getDescription(): string
     {
-        return '[Manual] Create branch "rc-beta-16"';
+        return '[Manual] Create branch "rc-<version-number>"';
     }
 
     /**

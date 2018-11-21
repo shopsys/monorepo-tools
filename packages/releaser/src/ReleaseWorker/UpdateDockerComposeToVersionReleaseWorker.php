@@ -6,12 +6,13 @@ namespace Shopsys\Releaser\ReleaseWorker;
 
 use Nette\Utils\FileSystem;
 use PharIo\Version\Version;
-use Shopsys\Releaser\FileManipulator\DockerComposerFileManipulator;
+use Shopsys\Releaser\FileManipulator\DockerComposeFileManipulator;
+use Shopsys\Releaser\Finder\DockerComposeFilesProvider;
+use Shopsys\Releaser\Message;
 use Symfony\Component\Console\Style\SymfonyStyle;
-use Symfony\Component\Finder\Finder;
 use Symplify\MonorepoBuilder\Release\Contract\ReleaseWorker\ReleaseWorkerInterface;
 
-final class UpdateDockerComposesReleaseWorker implements ReleaseWorkerInterface
+final class UpdateDockerComposeToVersionReleaseWorker implements ReleaseWorkerInterface
 {
     /**
      * @var \Symfony\Component\Console\Style\SymfonyStyle
@@ -19,20 +20,28 @@ final class UpdateDockerComposesReleaseWorker implements ReleaseWorkerInterface
     private $symfonyStyle;
 
     /**
-     * @var \Shopsys\Releaser\FileManipulator\DockerComposerFileManipulator
+     * @var \Shopsys\Releaser\FileManipulator\DockerComposeFileManipulator
      */
     private $dockerComposerFileManipulator;
 
     /**
+     * @var \Shopsys\Releaser\Finder\DockerComposeFilesProvider
+     */
+    private $dockerComposeFilesProvider;
+
+    /**
      * @param \Symfony\Component\Console\Style\SymfonyStyle $symfonyStyle
-     * @param \Shopsys\Releaser\FileManipulator\DockerComposerFileManipulator $dockerComposerFileManipulator
+     * @param \Shopsys\Releaser\FileManipulator\DockerComposeFileManipulator $dockerComposerFileManipulator
+     * @param \Shopsys\Releaser\ReleaseWorker\Shopsys\Releaser\Finder\DockerComposeFilesProvider $dockerComposeFilesProvider
      */
     public function __construct(
         SymfonyStyle $symfonyStyle,
-        DockerComposerFileManipulator $dockerComposerFileManipulator
+        DockerComposeFileManipulator $dockerComposerFileManipulator,
+        DockerComposeFilesProvider $dockerComposeFilesProvider
     ) {
         $this->symfonyStyle = $symfonyStyle;
         $this->dockerComposerFileManipulator = $dockerComposerFileManipulator;
+        $this->dockerComposeFilesProvider = $dockerComposeFilesProvider;
     }
 
     /**
@@ -59,20 +68,13 @@ final class UpdateDockerComposesReleaseWorker implements ReleaseWorkerInterface
     {
         return;
 
-        $finder = Finder::create()
-            ->in(getcwd())
-            ->exclude('vendor')
-            ->files()
-            ->name('#\.yml\.dist$#');
-
-        /** @var \Symfony\Component\Finder\SplFileInfo $fileInfo */
-        foreach ($finder as $fileInfo) {
-            $newContent = $this->dockerComposerFileManipulator->processFileToString($fileInfo, $version);
+        foreach ($this->dockerComposeFilesProvider->provide() as $fileInfo) {
+            $newContent = $this->dockerComposerFileManipulator->processFileToString($fileInfo, 'latest', $version->getVersionString());
 
             // save
             FileSystem::write($fileInfo->getPathname(), $newContent);
         }
 
-        $this->symfonyStyle->success('Ok');
+        $this->symfonyStyle->success(Message::SUCCESS);
     }
 }

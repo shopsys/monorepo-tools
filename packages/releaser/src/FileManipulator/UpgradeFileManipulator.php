@@ -17,13 +17,13 @@ final class UpgradeFileManipulator
      * @var string
      * @see https://regex101.com/r/cHAbva/1
      */
-    private const FROM_TO_UNRELEASED_PATTERN = '#^(\#\# \[?From [\w\d.-]+ to )Unreleased(]?\n)#ms';
+    private const FROM_TO_UNRELEASED_PATTERN = '#^(\#\# \[?From [\w.-]+ to )Unreleased(]?\n)#ms';
 
     /**
      * @var string
      * @see https://regex101.com/r/izBgtv/3
      */
-    private const FROM_TO_UNRELEASED_LINK_PATTERN = '#(^\[From [\w\d.-]+ to )Unreleased(.*?\.\.\.).*?\n#m';
+    private const FROM_TO_UNRELEASED_LINK_PATTERN = '#(^\[From [\w.-]+ to )Unreleased(.*?\.\.\.).*?\n#m';
 
     /**
      * @var string

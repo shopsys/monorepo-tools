@@ -3,8 +3,9 @@
     "license": "MIT",
     "require": {
         "php": "^7.1",
+        "guzzlehttp/guzzle": "^6.3",
         "nette/utils": "^2.5",
-        "guzzlehttp/guzzle": "^6.3"
+        "symplify/monorepo-builder": "^5.2.7"
     },
     "autoload": {
         "psr-4": {
