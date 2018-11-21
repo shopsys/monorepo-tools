@@ -96,8 +96,6 @@ FROM base as production
 
 COPY --chown=www-data:www-data / /var/www/html
 
-RUN touch /var/www/html/PRODUCTION
-
 RUN composer install --optimize-autoloader --no-interaction --no-progress --no-dev
 
 RUN php phing composer npm dirs-create assets
