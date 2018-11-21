@@ -153,6 +153,8 @@ For development choose `n` when asked `Build in production environment? (Y/n)`.
 
 It will set the environment in your application to `dev` (this will, for example, show Symfony Web Debug Toolbar).
 
+<!--- TODO Remove this section as the environment is set depending on whether it's installed by "composer install" or "composer install --no-dev"  -->
+
 ### 4. Configure domains
 Create `domains_urls.yml` from `domains_urls.yml.dist`.
 

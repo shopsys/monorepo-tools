@@ -28,6 +28,8 @@ The default parameters suggested by composer are currently set for application r
 Only exception is the `secret` parameter - you should input a random string to be used for security purposes.
 It is not necessary for development though.
 
+<!--- TODO Remove the following paragraphs as the environment is set depending on whether it's installed by "composer install" or "composer install --no-dev"  -->
+
 For development choose `n` when asked `Build in production environment? (Y/n)`.
 
 It will set the environment in your application to `dev` (this will, for example, show Symfony Web Debug Toolbar).

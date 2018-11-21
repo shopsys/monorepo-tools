@@ -78,7 +78,9 @@ See more about calculated attributes in the article [How to Work with Products](
 
 ## How do I change the environment (PRODUCTION/DEVELOPMENT/TEST)?
 The environment is determined by the existence of the files `PRODUCTION`, `DEVELOPMENT`, `TEST` in the root of your project.
-This file is created automatically during the run of a command `composer install` (it will prompt you to decide, default option is `DEVELOPMENT`).
+This file is created automatically during the run of a command `composer install`.
+If the command `composer install` is executed, the file `DEVELOPMENT` is created.
+If the command `composer install --no-dev` is executed, the file `PRODUCTION` is created.
 
 You can change the environment manually by using the command `php bin/console shopsys:environment:change`.
 

@@ -96,8 +96,6 @@ FROM base as production
 
 COPY --chown=www-data:www-data / /var/www/html
 
-RUN touch /var/www/html/PRODUCTION
-
 RUN composer install --optimize-autoloader --no-interaction --no-progress --no-dev
 
 RUN php phing composer npm dirs-create assets
@@ -111,3 +109,5 @@ COPY --chown=www-data:www-data / /var/www/html
 RUN composer install --optimize-autoloader --no-interaction --no-progress
 
 RUN php phing composer-dev npm dirs-create test-dirs-create assets standards tests-static tests-acceptance-build
+
+RUN ./bin/console shopsys:environment:change prod
