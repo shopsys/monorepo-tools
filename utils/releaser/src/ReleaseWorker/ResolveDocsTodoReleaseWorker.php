@@ -31,9 +31,10 @@ final class ResolveDocsTodoReleaseWorker implements ReleaseWorkerInterface
     }
 
     /**
+     * @param \PharIo\Version\Version $version
      * @return string
      */
-    public function getDescription(): string
+    public function getDescription(Version $version): string
     {
         return 'Resolve TODO comments in *.md files';
     }

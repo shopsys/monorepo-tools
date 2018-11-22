@@ -13,9 +13,9 @@ final class DockerComposeFileManipulatorTest extends TestCase
 {
     public function test(): void
     {
-        $dockerComposerFileManipulator = new DockerComposeFileManipulator();
+        $dockerComposeFileManipulator = new DockerComposeFileManipulator();
 
-        $changedContent = $dockerComposerFileManipulator->processFileToString(
+        $changedContent = $dockerComposeFileManipulator->processFileToString(
             new SmartFileInfo(__DIR__ . '/Source/docker-compose-before.yml.dist'),
             new Version('v1.0.0')
         );

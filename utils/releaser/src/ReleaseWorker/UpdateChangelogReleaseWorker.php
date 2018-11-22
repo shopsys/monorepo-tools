@@ -44,9 +44,10 @@ final class UpdateChangelogReleaseWorker implements ReleaseWorkerInterface
     }
 
     /**
+     * @param \PharIo\Version\Version $version
      * @return string
      */
-    public function getDescription(): string
+    public function getDescription(Version $version): string
     {
         return 'Dump new features to CHANGELOG.md, clean from placeholders and manually check everything is ok';
     }

@@ -10,9 +10,10 @@ use Symplify\MonorepoBuilder\Release\Contract\ReleaseWorker\ReleaseWorkerInterfa
 final class CheckReleaseBlogPostReleaseWorker implements ReleaseWorkerInterface
 {
     /**
+     * @param \PharIo\Version\Version $version
      * @return string
      */
-    public function getDescription(): string
+    public function getDescription(Version $version): string
     {
         return '[Manual] Prepare "Release highlights" post on https://blog.shopsys.com';
     }

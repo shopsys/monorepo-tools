@@ -7,9 +7,9 @@ namespace Shopsys\Releaser\ReleaseWorker;
 use Nette\Utils\DateTime;
 use Nette\Utils\Strings;
 use PharIo\Version\Version;
-use Shopsys\Releaser\Message;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Symplify\MonorepoBuilder\Release\Contract\ReleaseWorker\ReleaseWorkerInterface;
+use Symplify\MonorepoBuilder\Release\Message;
 use Symplify\PackageBuilder\FileSystem\SmartFileInfo;
 
 final class CheckChangelogForTodaysDateReleaseWorker implements ReleaseWorkerInterface
@@ -28,11 +28,16 @@ final class CheckChangelogForTodaysDateReleaseWorker implements ReleaseWorkerInt
     }
 
     /**
+     * @param \PharIo\Version\Version $version
      * @return string
      */
-    public function getDescription(): string
+    public function getDescription(Version $version): string
     {
-        return 'Check the release date of the currently released version is today in CHANGELOG.md';
+        return sprintf(
+            'Check the release date of "%s" version is "%s" in CHANGELOG.md',
+            $version->getVersionString(),
+            $this->getTodayAsString()
+        );
     }
 
     /**
@@ -53,7 +58,7 @@ final class CheckChangelogForTodaysDateReleaseWorker implements ReleaseWorkerInt
 
         $fileContent = $smartFileInfo->getContents();
 
-        $todayInString = (new DateTime())->format('Y-m-d');
+        $todayInString = $this->getTodayAsString();
 
         $pattern = '#\#\# ' . preg_quote($version->getVersionString(), '#') . ' - ' . $todayInString . '#';
 
@@ -62,5 +67,13 @@ final class CheckChangelogForTodaysDateReleaseWorker implements ReleaseWorkerInt
         } else {
             $this->symfonyStyle->error(sprintf('CHANGELOG.md has old date for "%s" version, update it to "%s".', $version->getVersionString(), $todayInString));
         }
+    }
+
+    /**
+     * @return string
+     */
+    private function getTodayAsString(): string
+    {
+        return (new DateTime())->format('Y-m-d');
     }
 }

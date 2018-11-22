@@ -7,14 +7,15 @@ namespace Shopsys\Releaser\ReleaseWorker;
 use PharIo\Version\Version;
 use Symplify\MonorepoBuilder\Release\Contract\ReleaseWorker\ReleaseWorkerInterface;
 
-final class CreateBranchReleaseWorker implements ReleaseWorkerInterface
+final class StopMergingToMasterReleaseWorker implements ReleaseWorkerInterface
 {
     /**
+     * @param \PharIo\Version\Version $version
      * @return string
      */
-    public function getDescription(): string
+    public function getDescription(Version $version): string
     {
-        return '[Manual] Create branch "rc-<version-number>"';
+        return '[Manual] Tell team to stop merging to `master` branch';
     }
 
     /**
@@ -23,7 +24,7 @@ final class CreateBranchReleaseWorker implements ReleaseWorkerInterface
      */
     public function getPriority(): int
     {
-        return 980;
+        return 940;
     }
 
     /**

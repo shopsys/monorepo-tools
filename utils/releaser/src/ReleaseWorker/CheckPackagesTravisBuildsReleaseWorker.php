@@ -54,9 +54,10 @@ final class CheckPackagesTravisBuildsReleaseWorker implements ReleaseWorkerInter
     }
 
     /**
+     * @param \PharIo\Version\Version $version
      * @return string
      */
-    public function getDescription(): string
+    public function getDescription(Version $version): string
     {
         return 'Check Travis build status for all packages';
     }

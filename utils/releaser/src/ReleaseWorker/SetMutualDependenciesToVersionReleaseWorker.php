@@ -10,8 +10,10 @@ use Symplify\MonorepoBuilder\FileSystem\ComposerJsonProvider;
 use Symplify\MonorepoBuilder\InterdependencyUpdater;
 use Symplify\MonorepoBuilder\Package\PackageNamesProvider;
 use Symplify\MonorepoBuilder\Release\Contract\ReleaseWorker\ReleaseWorkerInterface;
+use Symplify\MonorepoBuilder\Release\Message;
+use Symplify\MonorepoBuilder\Utils\Utils;
 
-final class SetMutualDependenciesToDevMasterReleaseWorker implements ReleaseWorkerInterface
+final class SetMutualDependenciesToVersionReleaseWorker implements ReleaseWorkerInterface
 {
     /**
      * @var \Symfony\Component\Console\Style\SymfonyStyle
@@ -29,35 +31,40 @@ final class SetMutualDependenciesToDevMasterReleaseWorker implements ReleaseWork
     private $interdependencyUpdater;
 
     /**
+     * @var \Symplify\MonorepoBuilder\Utils\Utils
+     */
+    private $utils;
+
+    /**
      * @var \Symplify\MonorepoBuilder\Package\PackageNamesProvider
      */
     private $packageNamesProvider;
 
     /**
-     * @var string
-     */
-    private const DEV_MASTER = 'dev-master';
-
-    /**
      * @param \Symfony\Component\Console\Style\SymfonyStyle $symfonyStyle
      * @param \Symplify\MonorepoBuilder\FileSystem\ComposerJsonProvider $composerJsonProvider
      * @param \Symplify\MonorepoBuilder\InterdependencyUpdater $interdependencyUpdater
+     * @param \Symplify\MonorepoBuilder\Utils\Utils $utils
      * @param \Symplify\MonorepoBuilder\Package\PackageNamesProvider $packageNamesProvider
      */
-    public function __construct(SymfonyStyle $symfonyStyle, ComposerJsonProvider $composerJsonProvider, InterdependencyUpdater $interdependencyUpdater, PackageNamesProvider $packageNamesProvider)
+    public function __construct(SymfonyStyle $symfonyStyle, ComposerJsonProvider $composerJsonProvider, InterdependencyUpdater $interdependencyUpdater, Utils $utils, PackageNamesProvider $packageNamesProvider)
     {
         $this->symfonyStyle = $symfonyStyle;
         $this->composerJsonProvider = $composerJsonProvider;
         $this->interdependencyUpdater = $interdependencyUpdater;
+        $this->utils = $utils;
         $this->packageNamesProvider = $packageNamesProvider;
     }
 
     /**
+     * @param \PharIo\Version\Version $version
      * @return string
      */
-    public function getDescription(): string
+    public function getDescription(Version $version): string
     {
-        return 'Set mutual package dependencies to released version';
+        $requiredVersionInString = $this->utils->getRequiredFormat($version);
+
+        return sprintf('Set mutual package dependencies to "%s" version', $requiredVersionInString);
     }
 
     /**
@@ -66,7 +73,7 @@ final class SetMutualDependenciesToDevMasterReleaseWorker implements ReleaseWork
      */
     public function getPriority(): int
     {
-        return 560;
+        return 760;
     }
 
     /**
@@ -74,13 +81,14 @@ final class SetMutualDependenciesToDevMasterReleaseWorker implements ReleaseWork
      */
     public function work(Version $version): void
     {
+        $requiredVersionInString = $this->utils->getRequiredFormat($version);
+
         $this->interdependencyUpdater->updateFileInfosWithPackagesAndVersion(
             $this->composerJsonProvider->getPackagesFileInfos(),
             $this->packageNamesProvider->provide(),
-            self::DEV_MASTER
+            $requiredVersionInString
         );
 
-        $this->symfonyStyle->success(sprintf('Mutual dependencies for all packages were set to "%s"', self::DEV_MASTER));
-        $this->symfonyStyle->note('[Manual] Commit changes of composer.json files');
+        $this->symfonyStyle->success(Message::SUCCESS);
     }
 }

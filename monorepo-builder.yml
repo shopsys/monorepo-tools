@@ -1,5 +1,8 @@
+# setup for MonorepoBuilder: https://github.com/symplify/monorepobuilder
 imports:
-    - { resource: "packages/releaser/config/services.yaml" }
+    # release workers for "release" command, run:
+    # e.g. "vendor/bin/monorepo-builder release vX.Y --dry-run -v"
+    - { resource: "utils/releaser/config/services.yaml" }
 
 parameters:
     enable_default_release_workers: false

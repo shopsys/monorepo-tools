@@ -6,12 +6,12 @@ namespace Shopsys\Releaser\ReleaseWorker;
 
 use Nette\Utils\Strings;
 use PharIo\Version\Version;
-use Shopsys\Releaser\Message;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\Finder\SplFileInfo;
 use Symplify\MonorepoBuilder\FileSystem\ComposerJsonProvider;
 use Symplify\MonorepoBuilder\FileSystem\JsonFileManager;
 use Symplify\MonorepoBuilder\Release\Contract\ReleaseWorker\ReleaseWorkerInterface;
+use Symplify\MonorepoBuilder\Release\Message;
 
 final class ValidateRequireFormatInComposerJsonReleaseWorker implements ReleaseWorkerInterface
 {
@@ -59,9 +59,10 @@ final class ValidateRequireFormatInComposerJsonReleaseWorker implements ReleaseW
     }
 
     /**
+     * @param \PharIo\Version\Version $version
      * @return string
      */
-    public function getDescription(): string
+    public function getDescription(Version $version): string
     {
         return 'Validate "require" and "require-dev" version format for all packages';
     }

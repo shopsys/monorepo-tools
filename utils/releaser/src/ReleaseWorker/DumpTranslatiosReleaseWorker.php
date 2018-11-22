@@ -33,9 +33,10 @@ final class DumpTranslatiosReleaseWorker implements ReleaseWorkerInterface
     }
 
     /**
+     * @param \PharIo\Version\Version $version
      * @return string
      */
-    public function getDescription(): string
+    public function getDescription(Version $version): string
     {
         return 'Dump new translations with "php phing dump-translations" and commit them';
     }

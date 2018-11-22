@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Shopsys\Releaser\FileManipulator;
 
 use Nette\Utils\Strings;
-use PharIo\Version\Version;
 use Symfony\Component\Finder\SplFileInfo;
 
 /**

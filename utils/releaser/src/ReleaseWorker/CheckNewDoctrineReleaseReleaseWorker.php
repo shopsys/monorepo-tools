@@ -43,9 +43,10 @@ final class CheckNewDoctrineReleaseReleaseWorker implements ReleaseWorkerInterfa
     }
 
     /**
+     * @param \PharIo\Version\Version $version
      * @return string
      */
-    public function getDescription(): string
+    public function getDescription(Version $version): string
     {
         return sprintf(
             'Check new release of "%s" package and propose upgrade of our fork ("%s") if necessary',

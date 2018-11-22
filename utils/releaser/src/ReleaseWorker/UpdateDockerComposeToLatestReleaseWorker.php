@@ -7,9 +7,10 @@ namespace Shopsys\Releaser\ReleaseWorker;
 use Nette\Utils\FileSystem;
 use PharIo\Version\Version;
 use Shopsys\Releaser\FileManipulator\DockerComposeFileManipulator;
-use Shopsys\Releaser\Finder\DockerComposeFilesProvider;
+use Shopsys\Releaser\FilesProvider\DockerComposeFilesProvider;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Symplify\MonorepoBuilder\Release\Contract\ReleaseWorker\ReleaseWorkerInterface;
+use Symplify\MonorepoBuilder\Release\Message;
 
 final class UpdateDockerComposeToLatestReleaseWorker implements ReleaseWorkerInterface
 {
@@ -21,34 +22,38 @@ final class UpdateDockerComposeToLatestReleaseWorker implements ReleaseWorkerInt
     /**
      * @var \Shopsys\Releaser\FileManipulator\DockerComposeFileManipulator
      */
-    private $dockerComposerFileManipulator;
+    private $dockerComposeFileManipulator;
 
     /**
-     * @var \Shopsys\Releaser\Finder\DockerComposeFilesProvider
+     * @var \Shopsys\Releaser\FilesProvider\DockerComposeFilesProvider
      */
     private $dockerComposeFilesProvider;
 
     /**
      * @param \Symfony\Component\Console\Style\SymfonyStyle $symfonyStyle
-     * @param \Shopsys\Releaser\FileManipulator\DockerComposeFileManipulator $dockerComposerFileManipulator
-     * @param \Shopsys\Releaser\ReleaseWorker\Shopsys\Releaser\Finder\DockerComposeFilesProvider $dockerComposeFilesProvider
+     * @param \Shopsys\Releaser\FileManipulator\DockerComposeFileManipulator $dockerComposeFileManipulator
+     * @param \Shopsys\Releaser\FilesProvider\DockerComposeFilesProvider $dockerComposeFilesProvider
      */
     public function __construct(
         SymfonyStyle $symfonyStyle,
-        DockerComposeFileManipulator $dockerComposerFileManipulator,
+        DockerComposeFileManipulator $dockerComposeFileManipulator,
         DockerComposeFilesProvider $dockerComposeFilesProvider
     ) {
         $this->symfonyStyle = $symfonyStyle;
-        $this->dockerComposerFileManipulator = $dockerComposerFileManipulator;
+        $this->dockerComposeFileManipulator = $dockerComposeFileManipulator;
         $this->dockerComposeFilesProvider = $dockerComposeFilesProvider;
     }
 
     /**
+     * @param \PharIo\Version\Version $version
      * @return string
      */
-    public function getDescription(): string
+    public function getDescription(Version $version): string
     {
-        return 'Update micro-service references in all docker-composer.yml.dist from released version to "latest"';
+        return sprintf(
+            'Update micro-service references in all docker-composer.yml.dist from "%s" version to "latest"',
+            $version->getVersionString()
+        );
     }
 
     /**
@@ -57,7 +62,7 @@ final class UpdateDockerComposeToLatestReleaseWorker implements ReleaseWorkerInt
      */
     public function getPriority(): int
     {
-        return 660;
+        return 640;
     }
 
     /**
@@ -68,12 +73,12 @@ final class UpdateDockerComposeToLatestReleaseWorker implements ReleaseWorkerInt
         return;
 
         foreach ($this->dockerComposeFilesProvider->provide() as $fileInfo) {
-            $newContent = $this->dockerComposerFileManipulator->processFileToString($fileInfo, $version->getVersionString(), 'latest');
+            $newContent = $this->dockerComposeFileManipulator->processFileToString($fileInfo, $version->getVersionString(), 'latest');
 
             // save
             FileSystem::write($fileInfo->getPathname(), $newContent);
         }
 
-        $this->symfonyStyle->success('Ok');
+        $this->symfonyStyle->success(Message::SUCCESS);
     }
 }

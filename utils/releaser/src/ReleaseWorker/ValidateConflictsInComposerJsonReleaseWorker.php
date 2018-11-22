@@ -6,11 +6,11 @@ namespace Shopsys\Releaser\ReleaseWorker;
 
 use PharIo\Version\Version;
 use Shopsys\Releaser\IntervalEvaluator;
-use Shopsys\Releaser\Message;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Symplify\MonorepoBuilder\FileSystem\ComposerJsonProvider;
 use Symplify\MonorepoBuilder\FileSystem\JsonFileManager;
 use Symplify\MonorepoBuilder\Release\Contract\ReleaseWorker\ReleaseWorkerInterface;
+use Symplify\MonorepoBuilder\Release\Message;
 
 final class ValidateConflictsInComposerJsonReleaseWorker implements ReleaseWorkerInterface
 {
@@ -63,9 +63,10 @@ final class ValidateConflictsInComposerJsonReleaseWorker implements ReleaseWorke
     }
 
     /**
+     * @param \PharIo\Version\Version $version
      * @return string
      */
-    public function getDescription(): string
+    public function getDescription(Version $version): string
     {
         return 'Make sure that "conflict" versions in all composer.json files are closed interval';
     }

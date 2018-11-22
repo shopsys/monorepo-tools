@@ -9,6 +9,7 @@ use PharIo\Version\Version;
 use Shopsys\Releaser\FileManipulator\UpgradeFileManipulator;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Symplify\MonorepoBuilder\Release\Contract\ReleaseWorker\ReleaseWorkerInterface;
+use Symplify\MonorepoBuilder\Release\Message;
 
 final class UpdateUpgradeReleaseWorker implements ReleaseWorkerInterface
 {
@@ -33,11 +34,12 @@ final class UpdateUpgradeReleaseWorker implements ReleaseWorkerInterface
     }
 
     /**
+     * @param \PharIo\Version\Version $version
      * @return string
      */
-    public function getDescription(): string
+    public function getDescription(Version $version): string
     {
-        return 'Update UPGRADE.md from/to headline with new version';
+        return sprintf('Update UPGRADE.md from/to headline with "%s" version', $version->getVersionString());
     }
 
     /**
@@ -65,6 +67,6 @@ final class UpdateUpgradeReleaseWorker implements ReleaseWorkerInterface
         // save
         FileSystem::write($changelogFilePath, $newChangelogContent);
 
-        $this->symfonyStyle->success(sprintf('Headlines of "%s" file were updated', realpath($changelogFilePath)));
+        $this->symfonyStyle->success(Message::SUCCESS);
     }
 }
