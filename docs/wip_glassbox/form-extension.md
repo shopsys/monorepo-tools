@@ -39,7 +39,7 @@ If there is no customer set, `unregistered customer` text will be displayed inst
 Sometimes form needs to only display information but does not need to change and persist this data, for this usages
 there is `DisplayOnlyType` which does not map property onto `entity` and let you to display your own data.
 
-### [DisplayOnlyUrlType](../../packages/framework/src/Form/DisplayOnlyUrlType.php)
+### [DisplayOnlyUrlType](../../packages/framework/src/Form/DisplayOnlyUrlType.php)
 For displaying custom URL based on routing system, there can be used `DisplayOnlyUrlType`.
 
 ### [LocalizedFullWidthType](../../packages/framework/src/Form/LocalizedFullWidthType.php)
@@ -48,7 +48,7 @@ For displaying localized field in vertical order of full-width label and inputs,
 ### [OrderItemsType](../../packages/framework/src/Form/OrderItemsType.php)
 Displays editable table of OrderItems from provided Order.
 
-### [WarningMessageType](../../packages/framework/src/Form/WarningMessageType.php)
+### [WarningMessageType](../../packages/framework/src/Form/WarningMessageType.php)
 Sometimes the form needs to contain some information that is important for viewer, for this usage there is  `WarningMessageType`
 that shows highlighted message with warning icon.
 
