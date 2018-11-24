@@ -4,10 +4,13 @@ declare(strict_types=1);
 
 namespace Shopsys\Releaser\ReleaseWorker;
 
+use Nette\Utils\Strings;
 use PharIo\Version\Version;
+use Shopsys\Releaser\Stage;
 use Symplify\MonorepoBuilder\Release\Contract\ReleaseWorker\ReleaseWorkerInterface;
+use Symplify\MonorepoBuilder\Release\Contract\ReleaseWorker\StageAwareReleaseWorkerInterface;
 
-final class StopMergingToMasterReleaseWorker implements ReleaseWorkerInterface
+final class CreateBranchReleaseWorker implements ReleaseWorkerInterface, StageAwareReleaseWorkerInterface
 {
     /**
      * @param \PharIo\Version\Version $version
@@ -15,7 +18,7 @@ final class StopMergingToMasterReleaseWorker implements ReleaseWorkerInterface
      */
     public function getDescription(Version $version): string
     {
-        return '[Manual] Tell team to stop merging to `master` branch';
+        return sprintf('[Manual] Create branch "rc-%s"', Strings::webalize($version->getVersionString()));
     }
 
     /**
@@ -24,7 +27,7 @@ final class StopMergingToMasterReleaseWorker implements ReleaseWorkerInterface
      */
     public function getPriority(): int
     {
-        return 940;
+        return 980;
     }
 
     /**
@@ -32,5 +35,13 @@ final class StopMergingToMasterReleaseWorker implements ReleaseWorkerInterface
      */
     public function work(Version $version): void
     {
+    }
+
+    /**
+     * @return string
+     */
+    public function getStage(): string
+    {
+        return Stage::RELEASE_CANDIDATE;
     }
 }

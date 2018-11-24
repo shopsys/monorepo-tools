@@ -7,11 +7,13 @@ namespace Shopsys\Releaser\ReleaseWorker;
 use Nette\Utils\FileSystem;
 use PharIo\Version\Version;
 use Shopsys\Releaser\FileManipulator\UpgradeFileManipulator;
+use Shopsys\Releaser\Stage;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Symplify\MonorepoBuilder\Release\Contract\ReleaseWorker\ReleaseWorkerInterface;
+use Symplify\MonorepoBuilder\Release\Contract\ReleaseWorker\StageAwareReleaseWorkerInterface;
 use Symplify\MonorepoBuilder\Release\Message;
 
-final class UpdateUpgradeReleaseWorker implements ReleaseWorkerInterface
+final class UpdateUpgradeReleaseWorker implements ReleaseWorkerInterface, StageAwareReleaseWorkerInterface
 {
     /**
      * @var \Symfony\Component\Console\Style\SymfonyStyle
@@ -68,5 +70,13 @@ final class UpdateUpgradeReleaseWorker implements ReleaseWorkerInterface
         FileSystem::write($changelogFilePath, $newChangelogContent);
 
         $this->symfonyStyle->success(Message::SUCCESS);
+    }
+
+    /**
+     * @return string
+     */
+    public function getStage(): string
+    {
+        return Stage::RELEASE_CANDIDATE;
     }
 }

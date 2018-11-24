@@ -6,11 +6,12 @@ namespace Shopsys\Releaser\ReleaseWorker;
 
 use Nette\Utils\Strings;
 use PharIo\Version\Version;
+use Shopsys\Releaser\Stage;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Symplify\MonorepoBuilder\Release\Contract\ReleaseWorker\ReleaseWorkerInterface;
 use Symplify\MonorepoBuilder\Release\Process\ProcessRunner;
 
-final class DumpTranslatiosReleaseWorker implements ReleaseWorkerInterface
+final class DumpTranslatiosReleaseWorker implements ReleaseWorkerInterface, StageAwareReleaseWorkerInterface
 {
     /**
      * @var \Symfony\Component\Console\Style\SymfonyStyle
@@ -74,5 +75,13 @@ final class DumpTranslatiosReleaseWorker implements ReleaseWorkerInterface
         $status = $this->processRunner->run('git status');
 
         return !Strings::contains($status, 'nothing to commit');
+    }
+
+    /**
+     * @return string
+     */
+    public function getStage(): string
+    {
+        return Stage::RELEASE_CANDIDATE;
     }
 }

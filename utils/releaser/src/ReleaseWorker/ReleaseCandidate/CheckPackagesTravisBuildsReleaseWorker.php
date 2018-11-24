@@ -5,15 +5,17 @@ declare(strict_types=1);
 namespace Shopsys\Releaser\ReleaseWorker;
 
 use PharIo\Version\Version;
+use Shopsys\Releaser\Stage;
 use Shopsys\Releaser\Travis\TravisStatusReporter;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Symplify\MonorepoBuilder\Release\Contract\ReleaseWorker\ReleaseWorkerInterface;
+use Symplify\MonorepoBuilder\Release\Contract\ReleaseWorker\StageAwareReleaseWorkerInterface;
 
 /**
  * @see https://stackoverflow.com/questions/34277366/how-to-list-all-builds-of-a-given-project-through-travis-api
  * @see http://docs.guzzlephp.org/en/stable/quickstart.html#concurrent-requests
  */
-final class CheckPackagesTravisBuildsReleaseWorker implements ReleaseWorkerInterface
+final class CheckPackagesTravisBuildsReleaseWorker implements ReleaseWorkerInterface, StageAwareReleaseWorkerInterface
 {
     /**
      * @var string
@@ -79,5 +81,13 @@ final class CheckPackagesTravisBuildsReleaseWorker implements ReleaseWorkerInter
         }
 
         die;
+    }
+
+    /**
+     * @return string
+     */
+    public function getStage(): string
+    {
+        return Stage::RELEASE_CANDIDATE;
     }
 }

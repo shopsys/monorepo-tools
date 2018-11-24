@@ -2,17 +2,19 @@
 
 declare(strict_types=1);
 
-namespace Shopsys\Releaser\ReleaseWorker;
+namespace Shopsys\Releaser\ReleaseWorker\Release;
 
 use Nette\Utils\DateTime;
 use Nette\Utils\Strings;
 use PharIo\Version\Version;
+use Shopsys\Releaser\Stage;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Symplify\MonorepoBuilder\Release\Contract\ReleaseWorker\ReleaseWorkerInterface;
+use Symplify\MonorepoBuilder\Release\Contract\ReleaseWorker\StageAwareReleaseWorkerInterface;
 use Symplify\MonorepoBuilder\Release\Message;
 use Symplify\PackageBuilder\FileSystem\SmartFileInfo;
 
-final class CheckChangelogForTodaysDateReleaseWorker implements ReleaseWorkerInterface
+final class CheckChangelogForTodaysDateReleaseWorker implements ReleaseWorkerInterface, StageAwareReleaseWorkerInterface
 {
     /**
      * @var \Symfony\Component\Console\Style\SymfonyStyle
@@ -75,5 +77,13 @@ final class CheckChangelogForTodaysDateReleaseWorker implements ReleaseWorkerInt
     private function getTodayAsString(): string
     {
         return (new DateTime())->format('Y-m-d');
+    }
+
+    /**
+     * @return string
+     */
+    public function getStage(): string
+    {
+        return Stage::RELEASE;
     }
 }

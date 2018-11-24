@@ -13,7 +13,7 @@ use Symplify\MonorepoBuilder\FileSystem\JsonFileManager;
 use Symplify\MonorepoBuilder\Release\Contract\ReleaseWorker\ReleaseWorkerInterface;
 use Symplify\MonorepoBuilder\Release\Message;
 
-final class ValidateRequireFormatInComposerJsonReleaseWorker implements ReleaseWorkerInterface
+final class ValidateRequireFormatInComposerJsonReleaseWorker implements ReleaseWorkerInterface, StageAwareReleaseWorkerInterface
 {
     /**
      * @var \Symplify\MonorepoBuilder\FileSystem\ComposerJsonProvider
@@ -145,5 +145,13 @@ final class ValidateRequireFormatInComposerJsonReleaseWorker implements ReleaseW
         }
 
         return false;
+    }
+
+    /**
+     * @return string
+     */
+    public function getStage(): string
+    {
+        return Stage::RELEASE_CANDIDATE;
     }
 }

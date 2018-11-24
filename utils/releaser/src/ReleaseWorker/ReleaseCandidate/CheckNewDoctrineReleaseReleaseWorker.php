@@ -7,10 +7,13 @@ namespace Shopsys\Releaser\ReleaseWorker;
 use Nette\Utils\Strings;
 use PharIo\Version\Version;
 use Shopsys\Releaser\Guzzle\ApiCaller;
+use Shopsys\Releaser\Stage;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Symplify\MonorepoBuilder\Release\Contract\ReleaseWorker\ReleaseWorkerInterface;
+use Symplify\MonorepoBuilder\Release\Contract\ReleaseWorker\StageAwareReleaseWorkerInterface;
+use Symplify\MonorepoBuilder\Release\Message;
 
-final class CheckNewDoctrineReleaseReleaseWorker implements ReleaseWorkerInterface
+final class CheckNewDoctrineReleaseReleaseWorker implements ReleaseWorkerInterface, StageAwareReleaseWorkerInterface
 {
     /**
      * @var \Symfony\Component\Console\Style\SymfonyStyle
@@ -75,18 +78,15 @@ final class CheckNewDoctrineReleaseReleaseWorker implements ReleaseWorkerInterfa
         $originDoctrineVersion = $this->getMostRecentStableVersionForPackage(self::ORIGIN_DOCTINE);
 
         if ($forkedDoctrineVersion === $originDoctrineVersion) {
-            $this->symfonyStyle->success(sprintf(
-                '"%s" is up to date with origin "%s"',
-                self::FORKED_DOCTINE,
-                self::ORIGIN_DOCTINE
-            ));
-        } else {
-            $this->symfonyStyle->error(sprintf(
-                'There is new version of "%s". Update the fork "%s" and release new version for it."',
-                self::ORIGIN_DOCTINE,
-                self::FORKED_DOCTINE
-            ));
+            $this->symfonyStyle->success(Message::SUCCESS);
+            return;
         }
+
+        $this->symfonyStyle->error(sprintf(
+            'There is new version of "%s". Update the fork "%s" and release new version for it."',
+            self::ORIGIN_DOCTINE,
+            self::FORKED_DOCTINE
+        ));
     }
 
     /**
@@ -113,5 +113,13 @@ final class CheckNewDoctrineReleaseReleaseWorker implements ReleaseWorkerInterfa
         }
 
         return null;
+    }
+
+    /**
+     * @return string
+     */
+    public function getStage(): string
+    {
+        return Stage::RELEASE_CANDIDATE;
     }
 }

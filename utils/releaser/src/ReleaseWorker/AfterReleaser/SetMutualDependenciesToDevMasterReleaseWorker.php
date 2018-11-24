@@ -2,18 +2,19 @@
 
 declare(strict_types=1);
 
-namespace Shopsys\Releaser\ReleaseWorker;
+namespace Shopsys\Releaser\ReleaseWorker\AfterRelease;
 
 use PharIo\Version\Version;
+use Shopsys\Releaser\Stage;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Symplify\MonorepoBuilder\FileSystem\ComposerJsonProvider;
 use Symplify\MonorepoBuilder\InterdependencyUpdater;
 use Symplify\MonorepoBuilder\Package\PackageNamesProvider;
 use Symplify\MonorepoBuilder\Release\Contract\ReleaseWorker\ReleaseWorkerInterface;
+use Symplify\MonorepoBuilder\Release\Contract\ReleaseWorker\StageAwareReleaseWorkerInterface;
 use Symplify\MonorepoBuilder\Release\Message;
-use Symplify\MonorepoBuilder\Utils\Utils;
 
-final class SetMutualDependenciesToVersionReleaseWorker implements ReleaseWorkerInterface
+final class SetMutualDependenciesToDevMasterReleaseWorker implements ReleaseWorkerInterface, StageAwareReleaseWorkerInterface
 {
     /**
      * @var \Symfony\Component\Console\Style\SymfonyStyle
@@ -31,28 +32,26 @@ final class SetMutualDependenciesToVersionReleaseWorker implements ReleaseWorker
     private $interdependencyUpdater;
 
     /**
-     * @var \Symplify\MonorepoBuilder\Utils\Utils
-     */
-    private $utils;
-
-    /**
      * @var \Symplify\MonorepoBuilder\Package\PackageNamesProvider
      */
     private $packageNamesProvider;
 
     /**
+     * @var string
+     */
+    private const DEV_MASTER = 'dev-master';
+
+    /**
      * @param \Symfony\Component\Console\Style\SymfonyStyle $symfonyStyle
      * @param \Symplify\MonorepoBuilder\FileSystem\ComposerJsonProvider $composerJsonProvider
      * @param \Symplify\MonorepoBuilder\InterdependencyUpdater $interdependencyUpdater
-     * @param \Symplify\MonorepoBuilder\Utils\Utils $utils
      * @param \Symplify\MonorepoBuilder\Package\PackageNamesProvider $packageNamesProvider
      */
-    public function __construct(SymfonyStyle $symfonyStyle, ComposerJsonProvider $composerJsonProvider, InterdependencyUpdater $interdependencyUpdater, Utils $utils, PackageNamesProvider $packageNamesProvider)
+    public function __construct(SymfonyStyle $symfonyStyle, ComposerJsonProvider $composerJsonProvider, InterdependencyUpdater $interdependencyUpdater, PackageNamesProvider $packageNamesProvider)
     {
         $this->symfonyStyle = $symfonyStyle;
         $this->composerJsonProvider = $composerJsonProvider;
         $this->interdependencyUpdater = $interdependencyUpdater;
-        $this->utils = $utils;
         $this->packageNamesProvider = $packageNamesProvider;
     }
 
@@ -62,9 +61,7 @@ final class SetMutualDependenciesToVersionReleaseWorker implements ReleaseWorker
      */
     public function getDescription(Version $version): string
     {
-        $requiredVersionInString = $this->utils->getRequiredFormat($version);
-
-        return sprintf('Set mutual package dependencies to "%s" version', $requiredVersionInString);
+        return sprintf('Set mutual package dependencies to "%s" version', self::DEV_MASTER);
     }
 
     /**
@@ -73,7 +70,7 @@ final class SetMutualDependenciesToVersionReleaseWorker implements ReleaseWorker
      */
     public function getPriority(): int
     {
-        return 760;
+        return 560;
     }
 
     /**
@@ -81,14 +78,21 @@ final class SetMutualDependenciesToVersionReleaseWorker implements ReleaseWorker
      */
     public function work(Version $version): void
     {
-        $requiredVersionInString = $this->utils->getRequiredFormat($version);
-
         $this->interdependencyUpdater->updateFileInfosWithPackagesAndVersion(
             $this->composerJsonProvider->getPackagesFileInfos(),
             $this->packageNamesProvider->provide(),
-            $requiredVersionInString
+            self::DEV_MASTER
         );
 
         $this->symfonyStyle->success(Message::SUCCESS);
+        $this->symfonyStyle->note('[Manual] Commit changes of composer.json files');
+    }
+
+    /**
+     * @return string
+     */
+    public function getStage(): string
+    {
+        return Stage::AFTER_RELEASE;
     }
 }

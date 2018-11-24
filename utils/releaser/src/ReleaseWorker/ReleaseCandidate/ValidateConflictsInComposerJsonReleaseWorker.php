@@ -6,13 +6,15 @@ namespace Shopsys\Releaser\ReleaseWorker;
 
 use PharIo\Version\Version;
 use Shopsys\Releaser\IntervalEvaluator;
+use Shopsys\Releaser\Stage;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Symplify\MonorepoBuilder\FileSystem\ComposerJsonProvider;
 use Symplify\MonorepoBuilder\FileSystem\JsonFileManager;
 use Symplify\MonorepoBuilder\Release\Contract\ReleaseWorker\ReleaseWorkerInterface;
+use Symplify\MonorepoBuilder\Release\Contract\ReleaseWorker\StageAwareReleaseWorkerInterface;
 use Symplify\MonorepoBuilder\Release\Message;
 
-final class ValidateConflictsInComposerJsonReleaseWorker implements ReleaseWorkerInterface
+final class ValidateConflictsInComposerJsonReleaseWorker implements ReleaseWorkerInterface, StageAwareReleaseWorkerInterface
 {
     /**
      * @var \Symplify\MonorepoBuilder\FileSystem\ComposerJsonProvider
@@ -112,5 +114,13 @@ final class ValidateConflictsInComposerJsonReleaseWorker implements ReleaseWorke
         if ($this->isSuccessful) {
             $this->symfonyStyle->success(Message::SUCCESS);
         }
+    }
+
+    /**
+     * @return string
+     */
+    public function getStage(): string
+    {
+        return Stage::RELEASE_CANDIDATE;
     }
 }

@@ -8,11 +8,13 @@ use Nette\Utils\FileSystem;
 use PharIo\Version\Version;
 use Shopsys\Releaser\FileManipulator\DockerComposeFileManipulator;
 use Shopsys\Releaser\FilesProvider\DockerComposeFilesProvider;
+use Shopsys\Releaser\Stage;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Symplify\MonorepoBuilder\Release\Contract\ReleaseWorker\ReleaseWorkerInterface;
+use Symplify\MonorepoBuilder\Release\Contract\ReleaseWorker\StageAwareReleaseWorkerInterface;
 use Symplify\MonorepoBuilder\Release\Message;
 
-final class UpdateDockerComposeToVersionReleaseWorker implements ReleaseWorkerInterface
+final class UpdateDockerComposeToVersionReleaseWorker implements ReleaseWorkerInterface, StageAwareReleaseWorkerInterface
 {
     /**
      * @var \Symfony\Component\Console\Style\SymfonyStyle
@@ -80,5 +82,13 @@ final class UpdateDockerComposeToVersionReleaseWorker implements ReleaseWorkerIn
         }
 
         $this->symfonyStyle->success(Message::SUCCESS);
+    }
+
+    /**
+     * @return string
+     */
+    public function getStage(): string
+    {
+        return Stage::RELEASE_CANDIDATE;
     }
 }

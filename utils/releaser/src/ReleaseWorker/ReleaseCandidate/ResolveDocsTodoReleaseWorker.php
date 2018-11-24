@@ -6,11 +6,13 @@ namespace Shopsys\Releaser\ReleaseWorker;
 
 use Nette\Utils\Strings;
 use PharIo\Version\Version;
+use Shopsys\Releaser\Stage;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\Finder\Finder;
 use Symplify\MonorepoBuilder\Release\Contract\ReleaseWorker\ReleaseWorkerInterface;
+use Symplify\MonorepoBuilder\Release\Contract\ReleaseWorker\StageAwareReleaseWorkerInterface;
 
-final class ResolveDocsTodoReleaseWorker implements ReleaseWorkerInterface
+final class ResolveDocsTodoReleaseWorker implements ReleaseWorkerInterface, StageAwareReleaseWorkerInterface
 {
     /**
      * @var \Symfony\Component\Console\Style\SymfonyStyle
@@ -78,5 +80,13 @@ final class ResolveDocsTodoReleaseWorker implements ReleaseWorkerInterface
                 $todoFound > 1 ? 's' : ''
             ));
         }
+    }
+
+    /**
+     * @return string
+     */
+    public function getStage(): string
+    {
+        return Stage::RELEASE_CANDIDATE;
     }
 }
