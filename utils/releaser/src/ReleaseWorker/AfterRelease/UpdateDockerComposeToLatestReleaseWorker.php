@@ -2,25 +2,17 @@
 
 declare(strict_types=1);
 
-namespace Shopsys\Releaser\ReleaseWorker\AfterReleaser;
+namespace Shopsys\Releaser\ReleaseWorker\AfterRelease;
 
 use Nette\Utils\FileSystem;
 use PharIo\Version\Version;
 use Shopsys\Releaser\FileManipulator\DockerComposeFileManipulator;
 use Shopsys\Releaser\FilesProvider\DockerComposeFilesProvider;
+use Shopsys\Releaser\ReleaseWorker\AbstractShopsysReleaseWorker;
 use Shopsys\Releaser\Stage;
-use Symfony\Component\Console\Style\SymfonyStyle;
-use Symplify\MonorepoBuilder\Release\Contract\ReleaseWorker\ReleaseWorkerInterface;
-use Symplify\MonorepoBuilder\Release\Contract\ReleaseWorker\StageAwareReleaseWorkerInterface;
-use Symplify\MonorepoBuilder\Release\Message;
 
-final class UpdateDockerComposeToLatestReleaseWorker implements ReleaseWorkerInterface, StageAwareReleaseWorkerInterface
+final class UpdateDockerComposeToLatestReleaseWorker extends AbstractShopsysReleaseWorker
 {
-    /**
-     * @var \Symfony\Component\Console\Style\SymfonyStyle
-     */
-    private $symfonyStyle;
-
     /**
      * @var \Shopsys\Releaser\FileManipulator\DockerComposeFileManipulator
      */
@@ -32,16 +24,13 @@ final class UpdateDockerComposeToLatestReleaseWorker implements ReleaseWorkerInt
     private $dockerComposeFilesProvider;
 
     /**
-     * @param \Symfony\Component\Console\Style\SymfonyStyle $symfonyStyle
      * @param \Shopsys\Releaser\FileManipulator\DockerComposeFileManipulator $dockerComposeFileManipulator
      * @param \Shopsys\Releaser\FilesProvider\DockerComposeFilesProvider $dockerComposeFilesProvider
      */
     public function __construct(
-        SymfonyStyle $symfonyStyle,
         DockerComposeFileManipulator $dockerComposeFileManipulator,
         DockerComposeFilesProvider $dockerComposeFilesProvider
     ) {
-        $this->symfonyStyle = $symfonyStyle;
         $this->dockerComposeFileManipulator = $dockerComposeFileManipulator;
         $this->dockerComposeFilesProvider = $dockerComposeFilesProvider;
     }
@@ -64,7 +53,7 @@ final class UpdateDockerComposeToLatestReleaseWorker implements ReleaseWorkerInt
      */
     public function getPriority(): int
     {
-        return 640;
+        return 180;
     }
 
     /**
@@ -72,8 +61,6 @@ final class UpdateDockerComposeToLatestReleaseWorker implements ReleaseWorkerInt
      */
     public function work(Version $version): void
     {
-        return;
-
         foreach ($this->dockerComposeFilesProvider->provide() as $fileInfo) {
             $newContent = $this->dockerComposeFileManipulator->processFileToString($fileInfo, $version->getVersionString(), 'latest');
 
@@ -81,7 +68,8 @@ final class UpdateDockerComposeToLatestReleaseWorker implements ReleaseWorkerInt
             FileSystem::write($fileInfo->getPathname(), $newContent);
         }
 
-        $this->symfonyStyle->success(Message::SUCCESS);
+        // @todo 'git commit -m "all shopsys Docker images are now used in latest version" && git push
+        $this->symfonyStyle->confirm('Confirm the docker images were committed');
     }
 
     /**

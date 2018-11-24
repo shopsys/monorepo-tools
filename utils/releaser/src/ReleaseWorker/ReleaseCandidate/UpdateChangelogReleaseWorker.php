@@ -2,24 +2,18 @@
 
 declare(strict_types=1);
 
-namespace Shopsys\Releaser\ReleaseWorker;
+namespace Shopsys\Releaser\ReleaseWorker\ReleaseCandidate;
 
 use Nette\Utils\FileSystem;
 use PharIo\Version\Version;
 use Shopsys\Releaser\FileManipulator\ChangelogFileManipulator;
+use Shopsys\Releaser\ReleaseWorker\AbstractShopsysReleaseWorker;
 use Shopsys\Releaser\Stage;
-use Symfony\Component\Console\Style\SymfonyStyle;
-use Symplify\MonorepoBuilder\Release\Contract\ReleaseWorker\ReleaseWorkerInterface;
-use Symplify\MonorepoBuilder\Release\Contract\ReleaseWorker\StageAwareReleaseWorkerInterface;
 use Symplify\MonorepoBuilder\Release\Process\ProcessRunner;
+use Symplify\PackageBuilder\FileSystem\SmartFileInfo;
 
-final class UpdateChangelogReleaseWorker implements ReleaseWorkerInterface, StageAwareReleaseWorkerInterface
+final class UpdateChangelogReleaseWorker extends AbstractShopsysReleaseWorker
 {
-    /**
-     * @var \Symfony\Component\Console\Style\SymfonyStyle
-     */
-    private $symfonyStyle;
-
     /**
      * @var \Symplify\MonorepoBuilder\Release\Process\ProcessRunner
      */
@@ -31,16 +25,13 @@ final class UpdateChangelogReleaseWorker implements ReleaseWorkerInterface, Stag
     private $changelogFileManipulator;
 
     /**
-     * @param \Symfony\Component\Console\Style\SymfonyStyle $symfonyStyle
      * @param \Symplify\MonorepoBuilder\Release\Process\ProcessRunner $processRunner
      * @param \Shopsys\Releaser\FileManipulator\ChangelogFileManipulator $changelogFileManipulator
      */
     public function __construct(
-        SymfonyStyle $symfonyStyle,
         ProcessRunner $processRunner,
         ChangelogFileManipulator $changelogFileManipulator
     ) {
-        $this->symfonyStyle = $symfonyStyle;
         $this->processRunner = $processRunner;
         $this->changelogFileManipulator = $changelogFileManipulator;
     }
@@ -68,19 +59,20 @@ final class UpdateChangelogReleaseWorker implements ReleaseWorkerInterface, Stag
      */
     public function work(Version $version): void
     {
-        return;
-
         $this->symfonyStyle->note('Dumping new items to CHANGELOG.md, this might take ~10 seconds');
         $this->processRunner->run('vendor/bin/changelog-linker dump-merges --in-packages --in-categories');
 
         // load
         $changelogFilePath = getcwd() . '/CHANGELOG.md';
+        $changelogFileInfo = new SmartFileInfo($changelogFilePath);
 
         // change
-        $newChangelogContent = $this->changelogFileManipulator->processFileToString($changelogFilePath, $version);
+        $newChangelogContent = $this->changelogFileManipulator->processFileToString($changelogFileInfo, $version);
 
         // save
         FileSystem::write($changelogFilePath, $newChangelogContent);
+
+        $this->symfonyStyle->confirm('Confirm you have manually checked CHANGELOG.md and it is final');
     }
 
     /**

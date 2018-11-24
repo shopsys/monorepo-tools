@@ -8,7 +8,7 @@ use PharIo\Version\Version;
 use Shopsys\Releaser\ReleaseWorker\AbstractShopsysReleaseWorker;
 use Shopsys\Releaser\Stage;
 
-final class StopMergingToMasterReleaseWorker extends AbstractShopsysReleaseWorker
+final class SendBranchForReviewAndTestsReleaseWorker extends AbstractShopsysReleaseWorker
 {
     /**
      * @param \PharIo\Version\Version $version
@@ -16,7 +16,7 @@ final class StopMergingToMasterReleaseWorker extends AbstractShopsysReleaseWorke
      */
     public function getDescription(Version $version): string
     {
-        return 'Tell team to stop merging to `master` branch';
+        return 'Send the branch for review and tests';
     }
 
     /**
@@ -25,7 +25,7 @@ final class StopMergingToMasterReleaseWorker extends AbstractShopsysReleaseWorke
      */
     public function getPriority(): int
     {
-        return 940;
+        return 740;
     }
 
     /**
@@ -33,7 +33,7 @@ final class StopMergingToMasterReleaseWorker extends AbstractShopsysReleaseWorke
      */
     public function work(Version $version): void
     {
-        $this->symfonyStyle->confirm('Confirm the merging is stopped');
+        $this->symfonyStyle->confirm('Confirm the branch is sent to code-review');
     }
 
     /**

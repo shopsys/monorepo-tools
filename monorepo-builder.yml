@@ -6,3 +6,5 @@ imports:
 
 parameters:
     enable_default_release_workers: false
+    # require "--stage <name>" when release command is run
+    is_stage_required: true

@@ -246,7 +246,6 @@
             <arg path="${path.src}" />
             <arg path="${path.root}/*.md" />
             <arg path="${path.root}/docs" />
-            <arg value="--verbose" />
         </exec>
     </target>
 
@@ -263,7 +262,6 @@
             <arg path="${path.tests}" />
             <arg path="${path.root}/*.md" />
             <arg path="${path.root}/docs" />
-            <arg value="--verbose" />
         </exec>
     </target>
 
@@ -280,7 +278,6 @@
             <arg path="${path.tests}" />
             <arg path="${path.root}/*.md" />
             <arg path="${path.root}/docs" />
-            <arg value="--verbose" />
         </exec>
     </target>
 

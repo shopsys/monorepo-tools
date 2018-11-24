@@ -2,35 +2,21 @@
 
 declare(strict_types=1);
 
-namespace Shopsys\Releaser\ReleaseWorker;
+namespace Shopsys\Releaser\ReleaseWorker\ReleaseCandidate;
 
 use Nette\Utils\Strings;
 use PharIo\Version\Version;
+use Shopsys\Releaser\ReleaseWorker\AbstractShopsysReleaseWorker;
 use Shopsys\Releaser\Stage;
-use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\Finder\Finder;
-use Symplify\MonorepoBuilder\Release\Contract\ReleaseWorker\ReleaseWorkerInterface;
-use Symplify\MonorepoBuilder\Release\Contract\ReleaseWorker\StageAwareReleaseWorkerInterface;
+use Symplify\MonorepoBuilder\Release\Message;
 
-final class ResolveDocsTodoReleaseWorker implements ReleaseWorkerInterface, StageAwareReleaseWorkerInterface
+final class ResolveDocsTodoReleaseWorker extends AbstractShopsysReleaseWorker
 {
-    /**
-     * @var \Symfony\Component\Console\Style\SymfonyStyle
-     */
-    private $symfonyStyle;
-
     /**
      * @var string
      */
     private const TODO_PLACEHOLDER = '<!--- TODO';
-
-    /**
-     * @param \Symfony\Component\Console\Style\SymfonyStyle $symfonyStyle
-     */
-    public function __construct(SymfonyStyle $symfonyStyle)
-    {
-        $this->symfonyStyle = $symfonyStyle;
-    }
 
     /**
      * @param \PharIo\Version\Version $version
@@ -55,15 +41,15 @@ final class ResolveDocsTodoReleaseWorker implements ReleaseWorkerInterface, Stag
      */
     public function work(Version $version): void
     {
-        // @todo for fast development
-        return;
-
         $finder = Finder::create()->files()
             ->name('*.md')
             ->in(getcwd())
-            ->exclude('vendor');
+            ->exclude('vendor')
+            ->exclude('project-base/var');
 
         $this->symfonyStyle->section(sprintf('Checking %d files for "%s"', count($finder->getIterator()), self::TODO_PLACEHOLDER));
+
+        $isPassing = true;
 
         /** @var \Symfony\Component\Finder\SplFileInfo $fileInfo */
         foreach ($finder as $fileInfo) {
@@ -72,13 +58,21 @@ final class ResolveDocsTodoReleaseWorker implements ReleaseWorkerInterface, Stag
                 continue;
             }
 
+            $isPassing = false;
+
             // @todo add clickable file links later: https://github.com/symfony/symfony/pull/29168/files
             $this->symfonyStyle->note(sprintf(
-                '[Manual] File "%s" has %d todo%s to resolve. Fix them manually.',
+                'File "%s" has %d todo%s to resolve. Fix them manually.',
                 $fileInfo->getPathname(),
                 count($todoFound),
                 $todoFound > 1 ? 's' : ''
             ));
+        }
+
+        if ($isPassing) {
+            $this->symfonyStyle->success(Message::SUCCESS);
+        } else {
+            $this->symfonyStyle->confirm('Confirm all todos in .md files are resolved');
         }
     }
 

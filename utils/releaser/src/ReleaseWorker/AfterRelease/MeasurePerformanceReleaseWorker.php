@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Shopsys\Releaser\ReleaseWorker\ReleaseCandidate;
+namespace Shopsys\Releaser\ReleaseWorker\AfterRelease;
 
 use PharIo\Version\Version;
 use Shopsys\Releaser\ReleaseWorker\AbstractShopsysReleaseWorker;
 use Shopsys\Releaser\Stage;
 
-final class StopMergingToMasterReleaseWorker extends AbstractShopsysReleaseWorker
+final class MeasurePerformanceReleaseWorker extends AbstractShopsysReleaseWorker
 {
     /**
      * @param \PharIo\Version\Version $version
@@ -16,7 +16,7 @@ final class StopMergingToMasterReleaseWorker extends AbstractShopsysReleaseWorke
      */
     public function getDescription(Version $version): string
     {
-        return 'Tell team to stop merging to `master` branch';
+        return 'Measure the performance on performator';
     }
 
     /**
@@ -25,7 +25,7 @@ final class StopMergingToMasterReleaseWorker extends AbstractShopsysReleaseWorke
      */
     public function getPriority(): int
     {
-        return 940;
+        return 120;
     }
 
     /**
@@ -33,7 +33,8 @@ final class StopMergingToMasterReleaseWorker extends AbstractShopsysReleaseWorke
      */
     public function work(Version $version): void
     {
-        $this->symfonyStyle->confirm('Confirm the merging is stopped');
+        $this->symfonyStyle->note('See https://docs.google.com/document/d/1VRQOl_c2KkDekMUkLPwencUVhE3UPtvkQQSywNtjyX8/edit#heading=h.2h92hrp89r2b');
+        $this->symfonyStyle->confirm('Confirm the performance test is finished');
     }
 
     /**
@@ -41,6 +42,6 @@ final class StopMergingToMasterReleaseWorker extends AbstractShopsysReleaseWorke
      */
     public function getStage(): string
     {
-        return Stage::RELEASE_CANDIDATE;
+        return Stage::AFTER_RELEASE;
     }
 }

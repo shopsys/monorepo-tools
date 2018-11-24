@@ -2,22 +2,17 @@
 
 declare(strict_types=1);
 
-namespace Shopsys\Releaser\ReleaseWorker;
+namespace Shopsys\Releaser\ReleaseWorker\ReleaseCandidate;
 
 use Nette\Utils\Strings;
 use PharIo\Version\Version;
+use Shopsys\Releaser\ReleaseWorker\AbstractShopsysReleaseWorker;
 use Shopsys\Releaser\Stage;
 use Symfony\Component\Console\Style\SymfonyStyle;
-use Symplify\MonorepoBuilder\Release\Contract\ReleaseWorker\ReleaseWorkerInterface;
 use Symplify\MonorepoBuilder\Release\Process\ProcessRunner;
 
-final class DumpTranslatiosReleaseWorker implements ReleaseWorkerInterface, StageAwareReleaseWorkerInterface
+final class DumpTranslationsReleaseWorker extends AbstractShopsysReleaseWorker
 {
-    /**
-     * @var \Symfony\Component\Console\Style\SymfonyStyle
-     */
-    private $symfonyStyle;
-
     /**
      * @var \Symplify\MonorepoBuilder\Release\Process\ProcessRunner
      */
@@ -56,12 +51,14 @@ final class DumpTranslatiosReleaseWorker implements ReleaseWorkerInterface, Stag
      */
     public function work(Version $version): void
     {
-        return;
-
         $this->processRunner->run('php phing dump-translations');
 
         if ($this->hasNewTranslations()) {
-            $this->symfonyStyle->note('[Manual] There are new translations. Check files, complete missing ones and then commit');
+            // @todo there are only deleted files?
+            // 'git commit -m "dump translations" && git push
+            // @todo there are also added lines?
+            $this->symfonyStyle->note('There are new translations');
+            $this->symfonyStyle->confirm('Confirm files are checked and missing translations completed');
         } else {
             $this->symfonyStyle->success('There are no new translations');
         }

@@ -2,25 +2,19 @@
 
 declare(strict_types=1);
 
-namespace Shopsys\Releaser\ReleaseWorker;
+namespace Shopsys\Releaser\ReleaseWorker\ReleaseCandidate;
 
 use Nette\Utils\FileSystem;
 use PharIo\Version\Version;
 use Shopsys\Releaser\FileManipulator\DockerComposeFileManipulator;
 use Shopsys\Releaser\FilesProvider\DockerComposeFilesProvider;
+use Shopsys\Releaser\ReleaseWorker\AbstractShopsysReleaseWorker;
 use Shopsys\Releaser\Stage;
 use Symfony\Component\Console\Style\SymfonyStyle;
-use Symplify\MonorepoBuilder\Release\Contract\ReleaseWorker\ReleaseWorkerInterface;
-use Symplify\MonorepoBuilder\Release\Contract\ReleaseWorker\StageAwareReleaseWorkerInterface;
 use Symplify\MonorepoBuilder\Release\Message;
 
-final class UpdateDockerComposeToVersionReleaseWorker implements ReleaseWorkerInterface, StageAwareReleaseWorkerInterface
+final class UpdateDockerComposeToVersionReleaseWorker extends AbstractShopsysReleaseWorker
 {
-    /**
-     * @var \Symfony\Component\Console\Style\SymfonyStyle
-     */
-    private $symfonyStyle;
-
     /**
      * @var \Shopsys\Releaser\FileManipulator\DockerComposeFileManipulator
      */
@@ -72,14 +66,14 @@ final class UpdateDockerComposeToVersionReleaseWorker implements ReleaseWorkerIn
      */
     public function work(Version $version): void
     {
-        return;
-
         foreach ($this->dockerComposeFilesProvider->provide() as $fileInfo) {
             $newContent = $this->dockerComposeFileManipulator->processFileToString($fileInfo, 'latest', $version->getVersionString());
 
             // save
             FileSystem::write($fileInfo->getPathname(), $newContent);
         }
+
+        // @todo 'git commit -m "all shopsys Docker images are now used in X.X version instead of the latest" && git push
 
         $this->symfonyStyle->success(Message::SUCCESS);
     }

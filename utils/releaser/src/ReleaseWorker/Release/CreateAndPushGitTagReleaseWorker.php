@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Shopsys\Releaser\ReleaseWorker\ReleaseCandidate;
+namespace Shopsys\Releaser\ReleaseWorker\Release;
 
 use PharIo\Version\Version;
 use Shopsys\Releaser\ReleaseWorker\AbstractShopsysReleaseWorker;
 use Shopsys\Releaser\Stage;
 
-final class StopMergingToMasterReleaseWorker extends AbstractShopsysReleaseWorker
+final class CreateAndPushGitTagReleaseWorker extends AbstractShopsysReleaseWorker
 {
     /**
      * @param \PharIo\Version\Version $version
@@ -16,7 +16,7 @@ final class StopMergingToMasterReleaseWorker extends AbstractShopsysReleaseWorke
      */
     public function getDescription(Version $version): string
     {
-        return 'Tell team to stop merging to `master` branch';
+        return 'Create and push a git tag';
     }
 
     /**
@@ -25,7 +25,7 @@ final class StopMergingToMasterReleaseWorker extends AbstractShopsysReleaseWorke
      */
     public function getPriority(): int
     {
-        return 940;
+        return 630;
     }
 
     /**
@@ -33,7 +33,11 @@ final class StopMergingToMasterReleaseWorker extends AbstractShopsysReleaseWorke
      */
     public function work(Version $version): void
     {
-        $this->symfonyStyle->confirm('Confirm the merging is stopped');
+        // @todo
+        // 'git checkout master'
+        // 'git pull origin master'
+        // 'git tag <tag>'
+        // 'git push --tags'
     }
 
     /**
@@ -41,6 +45,6 @@ final class StopMergingToMasterReleaseWorker extends AbstractShopsysReleaseWorke
      */
     public function getStage(): string
     {
-        return Stage::RELEASE_CANDIDATE;
+        return Stage::RELEASE;
     }
 }

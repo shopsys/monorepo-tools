@@ -2,14 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Shopsys\Releaser\ReleaseWorker;
+namespace Shopsys\Releaser\ReleaseWorker\ReleaseCandidate;
 
 use PharIo\Version\Version;
+use Shopsys\Releaser\ReleaseWorker\AbstractShopsysReleaseWorker;
 use Shopsys\Releaser\Stage;
-use Symplify\MonorepoBuilder\Release\Contract\ReleaseWorker\ReleaseWorkerInterface;
-use Symplify\MonorepoBuilder\Release\Contract\ReleaseWorker\StageAwareReleaseWorkerInterface;
 
-final class CheckReleaseBlogPostReleaseWorker implements ReleaseWorkerInterface, StageAwareReleaseWorkerInterface
+final class CheckReleaseBlogPostReleaseWorker extends AbstractShopsysReleaseWorker
 {
     /**
      * @param \PharIo\Version\Version $version
@@ -17,7 +16,7 @@ final class CheckReleaseBlogPostReleaseWorker implements ReleaseWorkerInterface,
      */
     public function getDescription(Version $version): string
     {
-        return '[Manual] Prepare "Release highlights" post on https://blog.shopsys.com';
+        return 'Prepare "Release highlights" post on https://blog.shopsys.com';
     }
 
     /**
@@ -34,6 +33,7 @@ final class CheckReleaseBlogPostReleaseWorker implements ReleaseWorkerInterface,
      */
     public function work(Version $version): void
     {
+        $this->symfonyStyle->confirm('Confirm the post is prepared');
     }
 
     /**

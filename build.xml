@@ -72,7 +72,6 @@
         </exec>
         <exec executable="${path.ecs.executable}" logoutput="true" passthru="true" checkreturn="true">
             <arg value="check" />
-            <arg value="--verbose" />
             <arg path="./packages/*/src"/>
             <arg path="./microservices/*/src"/>
             <arg path="./packages/*/tests" />
@@ -108,7 +107,6 @@
             <arg value="check" />
             <arg value="--clear-cache" />
             <arg value="--fix" />
-            <arg value="--verbose" />
             <arg path="./packages/*/src"/>
             <arg path="./microservices/*/src"/>
             <arg path="./packages/*/tests" />
@@ -133,7 +131,6 @@
         <exec executable="${path.ecs.executable}" logoutput="true" passthru="true" checkreturn="true">
             <arg value="check" />
             <arg value="--fix" />
-            <arg value="--verbose" />
             <arg path="./packages/*/src"/>
             <arg path="./microservices/*/src"/>
             <arg path="./packages/*/tests" />

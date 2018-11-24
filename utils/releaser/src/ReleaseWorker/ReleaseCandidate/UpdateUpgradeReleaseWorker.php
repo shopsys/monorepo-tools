@@ -2,36 +2,28 @@
 
 declare(strict_types=1);
 
-namespace Shopsys\Releaser\ReleaseWorker;
+namespace Shopsys\Releaser\ReleaseWorker\ReleaseCandidate;
 
 use Nette\Utils\FileSystem;
 use PharIo\Version\Version;
 use Shopsys\Releaser\FileManipulator\UpgradeFileManipulator;
+use Shopsys\Releaser\ReleaseWorker\AbstractShopsysReleaseWorker;
 use Shopsys\Releaser\Stage;
-use Symfony\Component\Console\Style\SymfonyStyle;
-use Symplify\MonorepoBuilder\Release\Contract\ReleaseWorker\ReleaseWorkerInterface;
-use Symplify\MonorepoBuilder\Release\Contract\ReleaseWorker\StageAwareReleaseWorkerInterface;
 use Symplify\MonorepoBuilder\Release\Message;
+use Symplify\PackageBuilder\FileSystem\SmartFileInfo;
 
-final class UpdateUpgradeReleaseWorker implements ReleaseWorkerInterface, StageAwareReleaseWorkerInterface
+final class UpdateUpgradeReleaseWorker extends AbstractShopsysReleaseWorker
 {
-    /**
-     * @var \Symfony\Component\Console\Style\SymfonyStyle
-     */
-    private $symfonyStyle;
-
     /**
      * @var \Shopsys\Releaser\FileManipulator\UpgradeFileManipulator
      */
     private $upgradeFileManipulator;
 
     /**
-     * @param \Symfony\Component\Console\Style\SymfonyStyle $symfonyStyle
      * @param \Shopsys\Releaser\FileManipulator\UpgradeFileManipulator $upgradeFileManipulator
      */
-    public function __construct(SymfonyStyle $symfonyStyle, UpgradeFileManipulator $upgradeFileManipulator)
+    public function __construct(UpgradeFileManipulator $upgradeFileManipulator)
     {
-        $this->symfonyStyle = $symfonyStyle;
         $this->upgradeFileManipulator = $upgradeFileManipulator;
     }
 
@@ -58,18 +50,19 @@ final class UpdateUpgradeReleaseWorker implements ReleaseWorkerInterface, StageA
      */
     public function work(Version $version): void
     {
-        return;
-
         // load
-        $changelogFilePath = getcwd() . '/UPGRADE.md';
+        $upgradeFilePath = getcwd() . '/UPGRADE.md';
+        $upgradeFileInfo = new SmartFileInfo($upgradeFilePath);
 
         // change
-        $newChangelogContent = $this->upgradeFileManipulator->processFileToString($changelogFilePath, $version);
+        $newChangelogContent = $this->upgradeFileManipulator->processFileToString($upgradeFileInfo, $version);
 
         // save
-        FileSystem::write($changelogFilePath, $newChangelogContent);
+        FileSystem::write($upgradeFilePath, $newChangelogContent);
 
         $this->symfonyStyle->success(Message::SUCCESS);
+
+        $this->symfonyStyle->confirm('Confirm UPGRADE.md notes are ready');
     }
 
     /**

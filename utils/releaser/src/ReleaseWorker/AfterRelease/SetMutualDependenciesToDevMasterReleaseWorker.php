@@ -5,22 +5,14 @@ declare(strict_types=1);
 namespace Shopsys\Releaser\ReleaseWorker\AfterRelease;
 
 use PharIo\Version\Version;
+use Shopsys\Releaser\ReleaseWorker\AbstractShopsysReleaseWorker;
 use Shopsys\Releaser\Stage;
-use Symfony\Component\Console\Style\SymfonyStyle;
 use Symplify\MonorepoBuilder\FileSystem\ComposerJsonProvider;
 use Symplify\MonorepoBuilder\InterdependencyUpdater;
 use Symplify\MonorepoBuilder\Package\PackageNamesProvider;
-use Symplify\MonorepoBuilder\Release\Contract\ReleaseWorker\ReleaseWorkerInterface;
-use Symplify\MonorepoBuilder\Release\Contract\ReleaseWorker\StageAwareReleaseWorkerInterface;
-use Symplify\MonorepoBuilder\Release\Message;
 
-final class SetMutualDependenciesToDevMasterReleaseWorker implements ReleaseWorkerInterface, StageAwareReleaseWorkerInterface
+final class SetMutualDependenciesToDevMasterReleaseWorker extends AbstractShopsysReleaseWorker
 {
-    /**
-     * @var \Symfony\Component\Console\Style\SymfonyStyle
-     */
-    private $symfonyStyle;
-
     /**
      * @var \Symplify\MonorepoBuilder\FileSystem\ComposerJsonProvider
      */
@@ -42,14 +34,12 @@ final class SetMutualDependenciesToDevMasterReleaseWorker implements ReleaseWork
     private const DEV_MASTER = 'dev-master';
 
     /**
-     * @param \Symfony\Component\Console\Style\SymfonyStyle $symfonyStyle
      * @param \Symplify\MonorepoBuilder\FileSystem\ComposerJsonProvider $composerJsonProvider
      * @param \Symplify\MonorepoBuilder\InterdependencyUpdater $interdependencyUpdater
      * @param \Symplify\MonorepoBuilder\Package\PackageNamesProvider $packageNamesProvider
      */
-    public function __construct(SymfonyStyle $symfonyStyle, ComposerJsonProvider $composerJsonProvider, InterdependencyUpdater $interdependencyUpdater, PackageNamesProvider $packageNamesProvider)
+    public function __construct(ComposerJsonProvider $composerJsonProvider, InterdependencyUpdater $interdependencyUpdater, PackageNamesProvider $packageNamesProvider)
     {
-        $this->symfonyStyle = $symfonyStyle;
         $this->composerJsonProvider = $composerJsonProvider;
         $this->interdependencyUpdater = $interdependencyUpdater;
         $this->packageNamesProvider = $packageNamesProvider;
@@ -70,7 +60,7 @@ final class SetMutualDependenciesToDevMasterReleaseWorker implements ReleaseWork
      */
     public function getPriority(): int
     {
-        return 560;
+        return 160;
     }
 
     /**
@@ -84,8 +74,8 @@ final class SetMutualDependenciesToDevMasterReleaseWorker implements ReleaseWork
             self::DEV_MASTER
         );
 
-        $this->symfonyStyle->success(Message::SUCCESS);
-        $this->symfonyStyle->note('[Manual] Commit changes of composer.json files');
+        // @todo 'git commit -m "all shopsys Docker images are now used in latest version" && git push
+        $this->symfonyStyle->confirm('Confirm the composer versions were committed');
     }
 
     /**

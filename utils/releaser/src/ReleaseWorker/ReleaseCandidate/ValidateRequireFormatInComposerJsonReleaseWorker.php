@@ -2,18 +2,19 @@
 
 declare(strict_types=1);
 
-namespace Shopsys\Releaser\ReleaseWorker;
+namespace Shopsys\Releaser\ReleaseWorker\ReleaseCandidate;
 
 use Nette\Utils\Strings;
 use PharIo\Version\Version;
-use Symfony\Component\Console\Style\SymfonyStyle;
+use Shopsys\Releaser\ReleaseWorker\AbstractShopsysReleaseWorker;
+use Shopsys\Releaser\Stage;
 use Symfony\Component\Finder\SplFileInfo;
 use Symplify\MonorepoBuilder\FileSystem\ComposerJsonProvider;
 use Symplify\MonorepoBuilder\FileSystem\JsonFileManager;
-use Symplify\MonorepoBuilder\Release\Contract\ReleaseWorker\ReleaseWorkerInterface;
+use Symplify\MonorepoBuilder\Package\PackageNamesProvider;
 use Symplify\MonorepoBuilder\Release\Message;
 
-final class ValidateRequireFormatInComposerJsonReleaseWorker implements ReleaseWorkerInterface, StageAwareReleaseWorkerInterface
+final class ValidateRequireFormatInComposerJsonReleaseWorker extends AbstractShopsysReleaseWorker
 {
     /**
      * @var \Symplify\MonorepoBuilder\FileSystem\ComposerJsonProvider
@@ -26,36 +27,28 @@ final class ValidateRequireFormatInComposerJsonReleaseWorker implements ReleaseW
     private $jsonFileManager;
 
     /**
-     * @var \Symfony\Component\Console\Style\SymfonyStyle
-     */
-    private $symfonyStyle;
-
-    /**
      * @var bool
      */
     private $isSuccessful = false;
 
     /**
-     * @var string[]
+     * @var \Symplify\MonorepoBuilder\Package\PackageNamesProvider
      */
-    private $lockVersionAllowedPackages = [];
+    private $packageNamesProvider;
 
     /**
      * @param \Symplify\MonorepoBuilder\FileSystem\ComposerJsonProvider $composerJsonProvider
      * @param \Symplify\MonorepoBuilder\FileSystem\JsonFileManager $jsonFileManager
-     * @param \Symfony\Component\Console\Style\SymfonyStyle $symfonyStyle
-     * @param string[] $lockVersionAllowedPackages
+     * @param \Symplify\MonorepoBuilder\Package\PackageNamesProvider $packageNamesProvider
      */
     public function __construct(
         ComposerJsonProvider $composerJsonProvider,
         JsonFileManager $jsonFileManager,
-        SymfonyStyle $symfonyStyle,
-        array $lockVersionAllowedPackages
+        PackageNamesProvider $packageNamesProvider
     ) {
         $this->composerJsonProvider = $composerJsonProvider;
         $this->jsonFileManager = $jsonFileManager;
-        $this->symfonyStyle = $symfonyStyle;
-        $this->lockVersionAllowedPackages = $lockVersionAllowedPackages;
+        $this->packageNamesProvider = $packageNamesProvider;
     }
 
     /**
@@ -81,15 +74,17 @@ final class ValidateRequireFormatInComposerJsonReleaseWorker implements ReleaseW
      */
     public function work(Version $version): void
     {
-        foreach ($this->composerJsonProvider->getRootAndPackageFileInfos() as $fileInfo) {
-            $jsonContent = $this->jsonFileManager->loadFromFileInfo($fileInfo);
+        foreach ($this->composerJsonProvider->getRootAndPackageFileInfos() as $smartFileInfo) {
+            $jsonContent = $this->jsonFileManager->loadFromFileInfo($smartFileInfo);
 
-            $this->validateVersions($jsonContent, 'require', $fileInfo);
-            $this->validateVersions($jsonContent, 'require-dev', $fileInfo);
+            $this->validateVersions($jsonContent, 'require', $smartFileInfo);
+            $this->validateVersions($jsonContent, 'require-dev', $smartFileInfo);
         }
 
         if ($this->isSuccessful) {
             $this->symfonyStyle->success(Message::SUCCESS);
+        } else {
+            $this->symfonyStyle->confirm('Confirm all the requires are in the valid format');
         }
     }
 
@@ -135,12 +130,8 @@ final class ValidateRequireFormatInComposerJsonReleaseWorker implements ReleaseW
             return true;
         }
 
-        // skip shopsys packages mutual dependencies
-        if (Strings::startsWith($packageName, 'shopsys')) {
-            return true;
-        }
-
-        if (in_array($packageName, $this->lockVersionAllowedPackages, true)) {
+        // skip shopsys packages mutual dependencies in monorepo
+        if (in_array($packageName, $this->packageNamesProvider->provide(), true)) {
             return true;
         }
 

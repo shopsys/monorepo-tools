@@ -2,15 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Shopsys\Releaser\ReleaseWorker;
+namespace Shopsys\Releaser\ReleaseWorker\ReleaseCandidate;
 
 use Nette\Utils\Strings;
 use PharIo\Version\Version;
+use Shopsys\Releaser\ReleaseWorker\AbstractShopsysReleaseWorker;
 use Shopsys\Releaser\Stage;
-use Symplify\MonorepoBuilder\Release\Contract\ReleaseWorker\ReleaseWorkerInterface;
-use Symplify\MonorepoBuilder\Release\Contract\ReleaseWorker\StageAwareReleaseWorkerInterface;
 
-final class CreateBranchReleaseWorker implements ReleaseWorkerInterface, StageAwareReleaseWorkerInterface
+final class CreateBranchReleaseWorker extends AbstractShopsysReleaseWorker
 {
     /**
      * @param \PharIo\Version\Version $version
@@ -18,7 +17,7 @@ final class CreateBranchReleaseWorker implements ReleaseWorkerInterface, StageAw
      */
     public function getDescription(Version $version): string
     {
-        return sprintf('[Manual] Create branch "rc-%s"', Strings::webalize($version->getVersionString()));
+        return sprintf('Create branch "rc-%s"', Strings::webalize($version->getVersionString()));
     }
 
     /**

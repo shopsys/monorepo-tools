@@ -7,28 +7,13 @@ namespace Shopsys\Releaser\ReleaseWorker\Release;
 use Nette\Utils\DateTime;
 use Nette\Utils\Strings;
 use PharIo\Version\Version;
+use Shopsys\Releaser\ReleaseWorker\AbstractShopsysReleaseWorker;
 use Shopsys\Releaser\Stage;
-use Symfony\Component\Console\Style\SymfonyStyle;
-use Symplify\MonorepoBuilder\Release\Contract\ReleaseWorker\ReleaseWorkerInterface;
-use Symplify\MonorepoBuilder\Release\Contract\ReleaseWorker\StageAwareReleaseWorkerInterface;
 use Symplify\MonorepoBuilder\Release\Message;
 use Symplify\PackageBuilder\FileSystem\SmartFileInfo;
 
-final class CheckChangelogForTodaysDateReleaseWorker implements ReleaseWorkerInterface, StageAwareReleaseWorkerInterface
+final class CheckChangelogForTodaysDateReleaseWorker extends AbstractShopsysReleaseWorker
 {
-    /**
-     * @var \Symfony\Component\Console\Style\SymfonyStyle
-     */
-    private $symfonyStyle;
-
-    /**
-     * @param \Symfony\Component\Console\Style\SymfonyStyle $symfonyStyle
-     */
-    public function __construct(SymfonyStyle $symfonyStyle)
-    {
-        $this->symfonyStyle = $symfonyStyle;
-    }
-
     /**
      * @param \PharIo\Version\Version $version
      * @return string
@@ -68,6 +53,11 @@ final class CheckChangelogForTodaysDateReleaseWorker implements ReleaseWorkerInt
             $this->symfonyStyle->success(Message::SUCCESS);
         } else {
             $this->symfonyStyle->error(sprintf('CHANGELOG.md has old date for "%s" version, update it to "%s".', $version->getVersionString(), $todayInString));
+
+            // @todo update automatically and commit
+            // 'git commit -m "CHANGELOG.md date update to today" && git push'
+
+            $this->symfonyStyle->confirm('Confirm the date was updated');
         }
     }
 
