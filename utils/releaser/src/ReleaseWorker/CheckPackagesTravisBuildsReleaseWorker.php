@@ -5,8 +5,7 @@ declare(strict_types=1);
 namespace Shopsys\Releaser\ReleaseWorker;
 
 use PharIo\Version\Version;
-use Safe\simplexml_load_string;
-use Shopsys\Releaser\Guzzle\ApiCaller;
+use Shopsys\Releaser\Travis\TravisStatusReporter;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Symplify\MonorepoBuilder\Release\Contract\ReleaseWorker\ReleaseWorkerInterface;
 
@@ -17,14 +16,9 @@ use Symplify\MonorepoBuilder\Release\Contract\ReleaseWorker\ReleaseWorkerInterfa
 final class CheckPackagesTravisBuildsReleaseWorker implements ReleaseWorkerInterface
 {
     /**
-     * @var string[]
+     * @var string
      */
-    private $travisPackages = [];
-
-    /**
-     * @var string[]
-     */
-    private $failedPackages = [];
+    private const STATUS_SUCCESS = 'Success';
 
     /**
      * @var \Symfony\Component\Console\Style\SymfonyStyle
@@ -32,25 +26,18 @@ final class CheckPackagesTravisBuildsReleaseWorker implements ReleaseWorkerInter
     private $symfonyStyle;
 
     /**
-     * @var string
+     * @var \Shopsys\Releaser\Travis\TravisStatusReporter
      */
-    private const SUCCESS_STATUS = 'Success';
-
-    /**
-     * @var \Shopsys\Releaser\Guzzle\ApiCaller
-     */
-    private $apiCaller;
+    private $travisStatusReporter;
 
     /**
      * @param \Symfony\Component\Console\Style\SymfonyStyle $symfonyStyle
-     * @param string[] $travisPackages
-     * @param \Shopsys\Releaser\Guzzle\ApiCaller $apiCaller
+     * @param \Shopsys\Releaser\Travis\TravisStatusReporter $travisStatusReporter
      */
-    public function __construct(SymfonyStyle $symfonyStyle, array $travisPackages, ApiCaller $apiCaller)
+    public function __construct(SymfonyStyle $symfonyStyle, TravisStatusReporter $travisStatusReporter)
     {
-        $this->travisPackages = $travisPackages;
         $this->symfonyStyle = $symfonyStyle;
-        $this->apiCaller = $apiCaller;
+        $this->travisStatusReporter = $travisStatusReporter;
     }
 
     /**
@@ -76,46 +63,21 @@ final class CheckPackagesTravisBuildsReleaseWorker implements ReleaseWorkerInter
      */
     public function work(Version $version): void
     {
-        // @todo for fast development
-        return;
+        $statusForPackages = $this->travisStatusReporter->getStatusForPackagesByOrganization('shopsys');
 
-        $urls = [];
-        foreach ($this->travisPackages as $travisPackage) {
-            $urls[] = $this->createUrlWithMasterBranchStatusInXml($travisPackage);
-        }
-
-        $responses = $this->apiCaller->sendGetsAsyncToStrings($urls);
-
-        foreach ($responses as $response) {
-            $xmlResponse = simplexml_load_string($response);
-
-            $projectXmlElements = $xmlResponse->xpath('Project');
-            $projectXmlElement = $projectXmlElements[0];
-
-            $status = (string)$projectXmlElement->attributes()->lastBuildStatus;
-            $packageName = (string)$projectXmlElement->attributes()->name;
-
-            if ($status !== self::SUCCESS_STATUS) {
-                $this->failedPackages[] = $packageName;
+        foreach ($statusForPackages as $package => $status) {
+            if ($status === self::STATUS_SUCCESS) {
+                $this->symfonyStyle->note(sprintf('"%s" package is passing', $package));
+            } else {
+                $this->symfonyStyle->error(sprintf(
+                    '"%s" package is failing. Go check why:%s%s',
+                    $package,
+                    PHP_EOL,
+                    sprintf('https://travis-ci.org/%s/branches', $package)
+                ));
             }
         }
 
-        if ($this->failedPackages === []) {
-            $this->symfonyStyle->success('All packages are passing!');
-        } else {
-            $this->symfonyStyle->error('Some packages are failing');
-            $this->symfonyStyle->listing($this->failedPackages);
-        }
-
         die;
-    }
-
-    /**
-     * @param string $travisPackage
-     * @return string
-     */
-    private function createUrlWithMasterBranchStatusInXml(string $travisPackage): string
-    {
-        return 'https://api.travis-ci.org/repos/' . $travisPackage . '/cc.xml?branch=master';
     }
 }

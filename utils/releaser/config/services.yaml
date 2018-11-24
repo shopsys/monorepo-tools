@@ -2,19 +2,6 @@ parameters:
     # name of the monorepo package, for UPGRADE.md and CHANGELOG.md links
     monorepo_package_name: "shopsys/shopsys"
 
-    # name of travis packages to check for passing during release
-    travis_packages:
-        - "shopsys/framework"
-        - "shopsys/product-feed-zbozi"
-        - "shopsys/product-feed-google"
-        - "shopsys/product-feed-heureka"
-        - "shopsys/product-feed-heureka-delivery"
-        - "shopsys/product-feed-interface"
-        - "shopsys/plugin-interface"
-        - "shopsys/coding-standards"
-        - "shopsys/http-smoke-testing"
-        - "shopsys/form-types-bundle"
-
     # @todo this might not be needed
     # list of packages to allow in specific "require" version (without ^ in like "^5.6")
     lock_version_allowed_packages: []
@@ -25,5 +12,6 @@ services:
 
     Shopsys\Releaser\:
         resource: "../src"
+        exclude: "../src/Exception"
 
     GuzzleHttp\Client: ~
