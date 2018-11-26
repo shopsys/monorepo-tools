@@ -111,7 +111,7 @@
     "sensio/distribution-bundle": "^5.0.21",
     "sensio/framework-extra-bundle": "^3.0.29",
     "sensio/generator-bundle": "^3.1.7",
-    "shopsys/doctrine-orm": "2.6.2",
+    "shopsys/doctrine-orm": "^2.6.2",
     "shopsys/jparser": "0.1",
     "shopsys/postgres-search-bundle": "0.1",
     "slevomat/coding-standard": "^4.6.0",

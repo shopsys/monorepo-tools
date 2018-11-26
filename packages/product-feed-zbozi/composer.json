@@ -26,7 +26,7 @@
         "ext-json": "*",
         "doctrine/dbal": "^2.7",
         "doctrine/doctrine-bundle": "^1.8",
-        "shopsys/doctrine-orm": "2.6.2",
+        "shopsys/doctrine-orm": "^2.6.2",
         "shopsys/form-types-bundle": "dev-master",
         "shopsys/framework": "dev-master",
         "shopsys/migrations": "dev-master",
