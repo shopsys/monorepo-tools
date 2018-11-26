@@ -94,32 +94,6 @@ class CustomerService
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\Customer\User $user
-     * @param \Shopsys\FrameworkBundle\Model\Customer\DeliveryAddressData $deliveryAddressData
-     * @param \Shopsys\FrameworkBundle\Model\Customer\DeliveryAddress|null $deliveryAddress
-     * @return \Shopsys\FrameworkBundle\Model\Customer\DeliveryAddress|null
-     */
-    public function editDeliveryAddress(
-        User $user,
-        DeliveryAddressData $deliveryAddressData,
-        DeliveryAddress $deliveryAddress = null
-    ) {
-        if ($deliveryAddressData->addressFilled) {
-            if ($deliveryAddress instanceof DeliveryAddress) {
-                $deliveryAddress->edit($deliveryAddressData);
-            } else {
-                $deliveryAddress = $this->deliveryAddressFactory->create($deliveryAddressData);
-                $user->setDeliveryAddress($deliveryAddress);
-            }
-        } else {
-            $user->setDeliveryAddress(null);
-            $deliveryAddress = null;
-        }
-
-        return $deliveryAddress;
-    }
-
-    /**
-     * @param \Shopsys\FrameworkBundle\Model\Customer\User $user
      * @param string $email
      * @param \Shopsys\FrameworkBundle\Model\Customer\User|null $userByEmail
      */

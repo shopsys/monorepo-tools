@@ -177,20 +177,10 @@ class CustomerFacade
 
         $user->getBillingAddress()->edit($customerData->billingAddressData);
 
-        $oldDeliveryAddress = $user->getDeliveryAddress();
-        $deliveryAddress = $this->customerService->editDeliveryAddress(
-            $user,
+        $user->editDeliveryAddress(
             $customerData->deliveryAddressData,
-            $oldDeliveryAddress
+            $this->deliveryAddressFactory
         );
-
-        if ($deliveryAddress !== null) {
-            $this->em->persist($deliveryAddress);
-        } else {
-            if ($oldDeliveryAddress !== null) {
-                $this->em->remove($oldDeliveryAddress);
-            }
-        }
 
         return $user;
     }

@@ -64,7 +64,7 @@ class User implements UserInterface, TimelimitLoginInterface, Serializable
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Customer\DeliveryAddress|null
-     * @ORM\OneToOne(targetEntity="Shopsys\FrameworkBundle\Model\Customer\DeliveryAddress")
+     * @ORM\OneToOne(targetEntity="Shopsys\FrameworkBundle\Model\Customer\DeliveryAddress", cascade={"persist"}, orphanRemoval=true)
      * @ORM\JoinColumn(nullable=true)
      */
     protected $deliveryAddress;
@@ -179,14 +179,6 @@ class User implements UserInterface, TimelimitLoginInterface, Serializable
     {
         $this->resetPasswordHash = $hash;
         $this->resetPasswordHashValidThrough = new DateTime('+48 hours');
-    }
-
-    /**
-     * @param \Shopsys\FrameworkBundle\Model\Customer\DeliveryAddress|null $deliveryAddress
-     */
-    public function setDeliveryAddress(DeliveryAddress $deliveryAddress = null)
-    {
-        $this->deliveryAddress = $deliveryAddress;
     }
 
     /**
@@ -403,5 +395,25 @@ class User implements UserInterface, TimelimitLoginInterface, Serializable
     public function getTelephone()
     {
         return $this->telephone;
+    }
+
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Customer\DeliveryAddressData $deliveryAddressData
+     * @param \Shopsys\FrameworkBundle\Model\Customer\DeliveryAddressFactoryInterface $deliveryAddressFactory
+     */
+    public function editDeliveryAddress(
+        DeliveryAddressData $deliveryAddressData,
+        DeliveryAddressFactoryInterface $deliveryAddressFactory
+    ) {
+        if (!$deliveryAddressData->addressFilled) {
+            $this->deliveryAddress = null;
+            return;
+        }
+
+        if ($this->deliveryAddress instanceof DeliveryAddress) {
+            $this->deliveryAddress->edit($deliveryAddressData);
+        } else {
+            $this->deliveryAddress = $deliveryAddressFactory->create($deliveryAddressData);
+        }
     }
 }
