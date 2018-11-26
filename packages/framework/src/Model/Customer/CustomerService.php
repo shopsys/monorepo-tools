@@ -8,19 +8,9 @@ use Shopsys\FrameworkBundle\Model\Order\Order;
 class CustomerService
 {
     /**
-     * @var \Shopsys\FrameworkBundle\Model\Customer\CustomerPasswordService
-     */
-    private $customerPasswordService;
-
-    /**
      * @var \Shopsys\FrameworkBundle\Model\Customer\DeliveryAddressFactoryInterface
      */
     protected $deliveryAddressFactory;
-
-    /**
-     * @var \Shopsys\FrameworkBundle\Model\Customer\UserFactoryInterface
-     */
-    protected $userFactory;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Customer\CustomerDataFactoryInterface
@@ -38,58 +28,21 @@ class CustomerService
     private $deliveryAddressDataFactory;
 
     /**
-     * @param \Shopsys\FrameworkBundle\Model\Customer\CustomerPasswordService $customerPasswordService
      * @param \Shopsys\FrameworkBundle\Model\Customer\DeliveryAddressFactoryInterface $deliveryAddressFactory
-     * @param \Shopsys\FrameworkBundle\Model\Customer\UserFactoryInterface $userFactory
      * @param \Shopsys\FrameworkBundle\Model\Customer\CustomerDataFactoryInterface $customerDataFactory
      * @param \Shopsys\FrameworkBundle\Model\Customer\BillingAddressDataFactoryInterface $billingAddressDataFactory
      * @param \Shopsys\FrameworkBundle\Model\Customer\DeliveryAddressDataFactoryInterface $deliveryAddressDataFactory
      */
     public function __construct(
-        CustomerPasswordService $customerPasswordService,
         DeliveryAddressFactoryInterface $deliveryAddressFactory,
-        UserFactoryInterface $userFactory,
         CustomerDataFactoryInterface $customerDataFactory,
         BillingAddressDataFactoryInterface $billingAddressDataFactory,
         DeliveryAddressDataFactoryInterface $deliveryAddressDataFactory
     ) {
-        $this->customerPasswordService = $customerPasswordService;
         $this->deliveryAddressFactory = $deliveryAddressFactory;
-        $this->userFactory = $userFactory;
         $this->customerDataFactory = $customerDataFactory;
         $this->billingAddressDataFactory = $billingAddressDataFactory;
         $this->deliveryAddressDataFactory = $deliveryAddressDataFactory;
-    }
-
-    /**
-     * @param \Shopsys\FrameworkBundle\Model\Customer\UserData $userData
-     * @param \Shopsys\FrameworkBundle\Model\Customer\BillingAddress $billingAddress
-     * @param \Shopsys\FrameworkBundle\Model\Customer\DeliveryAddress|null $deliveryAddress
-     * @param \Shopsys\FrameworkBundle\Model\Customer\User|null $userByEmail
-     * @return \Shopsys\FrameworkBundle\Model\Customer\User
-     */
-    public function create(
-        UserData $userData,
-        BillingAddress $billingAddress,
-        DeliveryAddress $deliveryAddress = null,
-        User $userByEmail = null
-    ) {
-        if ($userByEmail instanceof User) {
-            $isSameEmail = (mb_strtolower($userByEmail->getEmail()) === mb_strtolower($userData->email));
-            $isSameDomain = ($userByEmail->getDomainId() === $userData->domainId);
-            if ($isSameEmail && $isSameDomain) {
-                throw new \Shopsys\FrameworkBundle\Model\Customer\Exception\DuplicateEmailException($userData->email);
-            }
-        }
-
-        $user = $this->userFactory->create(
-            $userData,
-            $billingAddress,
-            $deliveryAddress
-        );
-        $this->customerPasswordService->changePassword($user, $userData->password);
-
-        return $user;
     }
 
     /**

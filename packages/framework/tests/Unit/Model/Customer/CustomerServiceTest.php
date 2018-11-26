@@ -11,7 +11,6 @@ use Shopsys\FrameworkBundle\Model\Customer\BillingAddress;
 use Shopsys\FrameworkBundle\Model\Customer\BillingAddressData;
 use Shopsys\FrameworkBundle\Model\Customer\BillingAddressDataFactory;
 use Shopsys\FrameworkBundle\Model\Customer\CustomerDataFactory;
-use Shopsys\FrameworkBundle\Model\Customer\CustomerPasswordService;
 use Shopsys\FrameworkBundle\Model\Customer\CustomerService;
 use Shopsys\FrameworkBundle\Model\Customer\DeliveryAddress;
 use Shopsys\FrameworkBundle\Model\Customer\DeliveryAddressData;
@@ -20,7 +19,6 @@ use Shopsys\FrameworkBundle\Model\Customer\DeliveryAddressFactory;
 use Shopsys\FrameworkBundle\Model\Customer\User;
 use Shopsys\FrameworkBundle\Model\Customer\UserData;
 use Shopsys\FrameworkBundle\Model\Customer\UserDataFactory;
-use Shopsys\FrameworkBundle\Model\Customer\UserFactory;
 use Shopsys\FrameworkBundle\Model\Order\Order;
 use Shopsys\FrameworkBundle\Model\Order\OrderData;
 use Shopsys\FrameworkBundle\Model\Order\Status\OrderStatus;
@@ -33,141 +31,6 @@ use Shopsys\FrameworkBundle\Model\Transport\TransportData;
 
 class CustomerServiceTest extends TestCase
 {
-    public function testCreate()
-    {
-        $customerService = $this->getCustomerService();
-
-        $billingAddress = $this->createBillingAddress();
-        $deliveryAddress = $this->createDeliveryAddress();
-        $userByEmail = null;
-        $userData = new UserData();
-        $userData->firstName = 'firstName';
-        $userData->lastName = 'lastName';
-        $userData->email = 'no-reply@shopsys.com';
-        $userData->password = 'pa55w0rd';
-
-        $user = $customerService->create(
-            $userData,
-            $billingAddress,
-            $deliveryAddress,
-            $userByEmail
-        );
-
-        $this->assertInstanceOf(User::class, $user);
-    }
-
-    public function testCreateNotDuplicateEmail()
-    {
-        $customerService = $this->getCustomerService();
-
-        $billingAddress1 = $this->createBillingAddress();
-        $deliveryAddress1 = $this->createDeliveryAddress();
-        $userByEmail = null;
-        $userData1 = new UserData();
-        $userData1->firstName = 'firstName1';
-        $userData1->lastName = 'lastName1';
-        $userData1->email = 'no-reply@shopsys.com';
-        $userData1->password = 'pa55w0rd';
-
-        $user1 = $customerService->create(
-            $userData1,
-            $billingAddress1,
-            $deliveryAddress1,
-            $userByEmail
-        );
-        $this->assertInstanceOf(User::class, $user1);
-
-        $billingAddress2 = $this->createBillingAddress();
-        $deliveryAddress2 = $this->createDeliveryAddress();
-        $userData2 = new UserData();
-        $userData2->firstName = 'firstName2';
-        $userData2->lastName = 'lastName2';
-        $userData2->email = 'no-reply2@shopsys.com';
-        $userData2->password = 'pa55w0rd';
-
-        $user2 = $customerService->create(
-            $userData2,
-            $billingAddress2,
-            $deliveryAddress2,
-            $user1
-        );
-        $this->assertInstanceOf(User::class, $user2);
-    }
-
-    public function testCreateDuplicateEmail()
-    {
-        $customerService = $this->getCustomerService();
-
-        $billingAddress1 = $this->createBillingAddress();
-        $deliveryAddress1 = $this->createDeliveryAddress();
-        $userByEmail = null;
-        $userData1 = new UserData();
-        $userData1->firstName = 'firstName1';
-        $userData1->lastName = 'lastName1';
-        $userData1->email = 'no-reply@shopsys.com';
-        $userData1->password = 'pa55w0rd';
-
-        $user1 = $customerService->create(
-            $userData1,
-            $billingAddress1,
-            $deliveryAddress1,
-            $userByEmail
-        );
-
-        $billingAddress2 = $this->createBillingAddress();
-        $deliveryAddress2 = $this->createDeliveryAddress();
-        $userData2 = new UserData();
-        $userData2->firstName = 'firstName2';
-        $userData2->lastName = 'lastName2';
-        $userData2->email = 'no-reply@shopsys.com';
-        $userData2->password = 'pa55w0rd';
-
-        $this->expectException(\Shopsys\FrameworkBundle\Model\Customer\Exception\DuplicateEmailException::class);
-        $customerService->create(
-            $userData2,
-            $billingAddress2,
-            $deliveryAddress2,
-            $user1
-        );
-    }
-
-    public function testCreateDuplicateEmailCaseInsentitive()
-    {
-        $customerService = $this->getCustomerService();
-
-        $billingAddress1 = $this->createBillingAddress();
-        $deliveryAddress1 = $this->createDeliveryAddress();
-        $userByEmail = null;
-        $userData1 = new UserData();
-        $userData1->firstName = 'firstName1';
-        $userData1->lastName = 'lastName1';
-        $userData1->email = 'no-reply@shopsys.com';
-        $userData1->password = 'pa55w0rd';
-
-        $user1 = $customerService->create(
-            $userData1,
-            $billingAddress1,
-            $deliveryAddress1,
-            $userByEmail
-        );
-
-        $billingAddress2 = $this->createBillingAddress();
-        $deliveryAddress2 = $this->createDeliveryAddress();
-        $userData2 = new UserData();
-        $userData2->firstName = 'firstName2';
-        $userData2->lastName = 'lastName2';
-        $userData2->email = 'NO-reply@shopsys.com';
-        $userData2->password = 'pa55w0rd';
-
-        $this->expectException(\Shopsys\FrameworkBundle\Model\Customer\Exception\DuplicateEmailException::class);
-        $customerService->create(
-            $userData2,
-            $billingAddress2,
-            $deliveryAddress2,
-            $user1
-        );
-    }
-
     const DOMAIN_ID = 1;
 
     public function testGetAmendedCustomerDataByOrderWithoutChanges()
@@ -352,18 +215,14 @@ class CustomerServiceTest extends TestCase
      */
     private function getCustomerService()
     {
-        $customerPasswordServiceMock = $this->createMock(CustomerPasswordService::class);
         $deliveryAddressFactory = new DeliveryAddressFactory(new EntityNameResolver([]));
-        $userFactory = new UserFactory(new EntityNameResolver([]));
         $billingAddressDataFactory = new BillingAddressDataFactory();
         $deliveryAddressDataFactory = new DeliveryAddressDataFactory();
         $userDataFactory = new UserDataFactory($this->createMock(PricingGroupSettingFacade::class));
         $customerDataFactory = new CustomerDataFactory($billingAddressDataFactory, $deliveryAddressDataFactory, $userDataFactory);
 
         return new CustomerService(
-            $customerPasswordServiceMock,
             $deliveryAddressFactory,
-            $userFactory,
             $customerDataFactory,
             $billingAddressDataFactory,
             $deliveryAddressDataFactory

@@ -49,6 +49,11 @@ class CustomerFacade
     protected $billingAddressDataFactory;
 
     /**
+     * @var \Shopsys\FrameworkBundle\Model\Customer\UserFactoryInterface
+     */
+    protected $userFactory;
+
+    /**
      * @param \Doctrine\ORM\EntityManagerInterface $em
      * @param \Shopsys\FrameworkBundle\Model\Customer\UserRepository $userRepository
      * @param \Shopsys\FrameworkBundle\Model\Customer\CustomerService $customerService
@@ -57,6 +62,7 @@ class CustomerFacade
      * @param \Shopsys\FrameworkBundle\Model\Customer\BillingAddressFactoryInterface $billingAddressFactory
      * @param \Shopsys\FrameworkBundle\Model\Customer\DeliveryAddressFactoryInterface $deliveryAddressFactory
      * @param \Shopsys\FrameworkBundle\Model\Customer\BillingAddressDataFactoryInterface $billingAddressDataFactory
+     * @param \Shopsys\FrameworkBundle\Model\Customer\UserFactoryInterface $userFactory
      */
     public function __construct(
         EntityManagerInterface $em,
@@ -66,7 +72,8 @@ class CustomerFacade
         CustomerMailFacade $customerMailFacade,
         BillingAddressFactoryInterface $billingAddressFactory,
         DeliveryAddressFactoryInterface $deliveryAddressFactory,
-        BillingAddressDataFactoryInterface $billingAddressDataFactory
+        BillingAddressDataFactoryInterface $billingAddressDataFactory,
+        UserFactoryInterface $userFactory
     ) {
         $this->em = $em;
         $this->userRepository = $userRepository;
@@ -76,6 +83,7 @@ class CustomerFacade
         $this->billingAddressFactory = $billingAddressFactory;
         $this->deliveryAddressFactory = $deliveryAddressFactory;
         $this->billingAddressDataFactory = $billingAddressDataFactory;
+        $this->userFactory = $userFactory;
     }
 
     /**
@@ -108,7 +116,7 @@ class CustomerFacade
         $billingAddressData = $this->billingAddressDataFactory->create();
         $billingAddress = $this->billingAddressFactory->create($billingAddressData);
 
-        $user = $this->customerService->create(
+        $user = $this->userFactory->create(
             $userData,
             $billingAddress,
             null,
@@ -146,7 +154,7 @@ class CustomerFacade
             $customerData->userData->domainId
         );
 
-        $user = $this->customerService->create(
+        $user = $this->userFactory->create(
             $customerData->userData,
             $billingAddress,
             $deliveryAddress,
