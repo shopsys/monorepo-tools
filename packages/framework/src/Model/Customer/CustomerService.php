@@ -93,20 +93,6 @@ class CustomerService
     }
 
     /**
-     * @param \Shopsys\FrameworkBundle\Model\Customer\User $user
-     * @param \Shopsys\FrameworkBundle\Model\Customer\UserData $userData
-     * @param \Shopsys\FrameworkBundle\Model\Customer\UserData
-     */
-    public function edit(User $user, UserData $userData)
-    {
-        $user->edit($userData);
-
-        if ($userData->password !== null) {
-            $this->customerPasswordService->changePassword($user, $userData->password);
-        }
-    }
-
-    /**
      * @param \Shopsys\FrameworkBundle\Model\Customer\DeliveryAddressData $deliveryAddressData
      * @return \Shopsys\FrameworkBundle\Model\Customer\DeliveryAddress|null
      */

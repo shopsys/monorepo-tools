@@ -24,6 +24,11 @@ class CustomerFacade
     protected $customerService;
 
     /**
+     * @var \Shopsys\FrameworkBundle\Model\Customer\CustomerPasswordService
+     */
+    protected $customerPasswordService;
+
+    /**
      * @var \Shopsys\FrameworkBundle\Model\Customer\Mail\CustomerMailFacade
      */
     protected $customerMailFacade;
@@ -42,6 +47,7 @@ class CustomerFacade
      * @param \Doctrine\ORM\EntityManagerInterface $em
      * @param \Shopsys\FrameworkBundle\Model\Customer\UserRepository $userRepository
      * @param \Shopsys\FrameworkBundle\Model\Customer\CustomerService $customerService
+     * @param \Shopsys\FrameworkBundle\Model\Customer\CustomerPasswordService $customerPasswordServiceService
      * @param \Shopsys\FrameworkBundle\Model\Customer\Mail\CustomerMailFacade $customerMailFacade
      * @param \Shopsys\FrameworkBundle\Model\Customer\BillingAddressFactoryInterface $billingAddressFactory
      * @param \Shopsys\FrameworkBundle\Model\Customer\BillingAddressDataFactoryInterface $billingAddressDataFactory
@@ -50,6 +56,7 @@ class CustomerFacade
         EntityManagerInterface $em,
         UserRepository $userRepository,
         CustomerService $customerService,
+        CustomerPasswordService $customerPasswordServiceService,
         CustomerMailFacade $customerMailFacade,
         BillingAddressFactoryInterface $billingAddressFactory,
         BillingAddressDataFactoryInterface $billingAddressDataFactory
@@ -57,6 +64,7 @@ class CustomerFacade
         $this->em = $em;
         $this->userRepository = $userRepository;
         $this->customerService = $customerService;
+        $this->customerPasswordService = $customerPasswordServiceService;
         $this->customerMailFacade = $customerMailFacade;
         $this->billingAddressFactory = $billingAddressFactory;
         $this->billingAddressDataFactory = $billingAddressDataFactory;
@@ -157,7 +165,7 @@ class CustomerFacade
     {
         $user = $this->getUserById($userId);
 
-        $this->customerService->edit($user, $customerData->userData);
+        $user->edit($customerData->userData, $this->customerPasswordService);
 
         $user->getBillingAddress()->edit($customerData->billingAddressData);
 

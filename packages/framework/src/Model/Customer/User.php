@@ -140,13 +140,18 @@ class User implements UserInterface, TimelimitLoginInterface, Serializable
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\Customer\UserData $userData
+     * @param \Shopsys\FrameworkBundle\Model\Customer\CustomerPasswordService $customerPasswordService
      */
-    public function edit(UserData $userData)
+    public function edit(UserData $userData, CustomerPasswordService $customerPasswordService)
     {
         $this->firstName = $userData->firstName;
         $this->lastName = $userData->lastName;
         $this->pricingGroup = $userData->pricingGroup;
         $this->telephone = $userData->telephone;
+
+        if ($userData->password !== null) {
+            $customerPasswordService->changePassword($this, $userData->password);
+        }
     }
 
     /**
