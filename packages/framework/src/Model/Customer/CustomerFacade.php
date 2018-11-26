@@ -198,7 +198,7 @@ class CustomerFacade
             $customerData->userData->email,
             $customerData->userData->domainId
         );
-        $this->customerService->changeEmail($user, $customerData->userData->email, $userByEmailAndDomain);
+        $user->changeEmail($customerData->userData->email, $userByEmailAndDomain);
 
         $this->em->flush();
 

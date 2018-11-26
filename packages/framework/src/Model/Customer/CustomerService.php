@@ -94,26 +94,6 @@ class CustomerService
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\Customer\User $user
-     * @param string $email
-     * @param \Shopsys\FrameworkBundle\Model\Customer\User|null $userByEmail
-     */
-    public function changeEmail(User $user, $email, User $userByEmail = null)
-    {
-        if ($email !== null) {
-            $email = mb_strtolower($email);
-        }
-
-        if ($userByEmail instanceof User) {
-            if (mb_strtolower($userByEmail->getEmail()) === $email && $user !== $userByEmail) {
-                throw new \Shopsys\FrameworkBundle\Model\Customer\Exception\DuplicateEmailException($email);
-            }
-        }
-
-        $user->changeEmail($email);
-    }
-
-    /**
-     * @param \Shopsys\FrameworkBundle\Model\Customer\User $user
      * @param \Shopsys\FrameworkBundle\Model\Order\Order $order
      * @return \Shopsys\FrameworkBundle\Model\Customer\CustomerData
      */

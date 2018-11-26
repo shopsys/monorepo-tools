@@ -156,9 +156,18 @@ class User implements UserInterface, TimelimitLoginInterface, Serializable
 
     /**
      * @param string $email
+     * @param \Shopsys\FrameworkBundle\Model\Customer\User|null $userByEmail
      */
-    public function changeEmail($email)
+    public function changeEmail(string $email, ?self $userByEmail)
     {
+        $email = mb_strtolower($email);
+
+        if ($userByEmail instanceof self) {
+            if (mb_strtolower($userByEmail->getEmail()) === $email && $this !== $userByEmail) {
+                throw new \Shopsys\FrameworkBundle\Model\Customer\Exception\DuplicateEmailException($email);
+            }
+        }
+
         $this->email = $email;
     }
 
