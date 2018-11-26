@@ -39,6 +39,11 @@ class CustomerFacade
     protected $billingAddressFactory;
 
     /**
+     * @var \Shopsys\FrameworkBundle\Model\Customer\DeliveryAddressFactoryInterface
+     */
+    protected $deliveryAddressFactory;
+
+    /**
      * @var \Shopsys\FrameworkBundle\Model\Customer\BillingAddressDataFactoryInterface
      */
     protected $billingAddressDataFactory;
@@ -50,6 +55,7 @@ class CustomerFacade
      * @param \Shopsys\FrameworkBundle\Model\Customer\CustomerPasswordService $customerPasswordServiceService
      * @param \Shopsys\FrameworkBundle\Model\Customer\Mail\CustomerMailFacade $customerMailFacade
      * @param \Shopsys\FrameworkBundle\Model\Customer\BillingAddressFactoryInterface $billingAddressFactory
+     * @param \Shopsys\FrameworkBundle\Model\Customer\DeliveryAddressFactoryInterface $deliveryAddressFactory
      * @param \Shopsys\FrameworkBundle\Model\Customer\BillingAddressDataFactoryInterface $billingAddressDataFactory
      */
     public function __construct(
@@ -59,6 +65,7 @@ class CustomerFacade
         CustomerPasswordService $customerPasswordServiceService,
         CustomerMailFacade $customerMailFacade,
         BillingAddressFactoryInterface $billingAddressFactory,
+        DeliveryAddressFactoryInterface $deliveryAddressFactory,
         BillingAddressDataFactoryInterface $billingAddressDataFactory
     ) {
         $this->em = $em;
@@ -67,6 +74,7 @@ class CustomerFacade
         $this->customerPasswordService = $customerPasswordServiceService;
         $this->customerMailFacade = $customerMailFacade;
         $this->billingAddressFactory = $billingAddressFactory;
+        $this->deliveryAddressFactory = $deliveryAddressFactory;
         $this->billingAddressDataFactory = $billingAddressDataFactory;
     }
 
@@ -127,7 +135,7 @@ class CustomerFacade
         $this->em->persist($billingAddress);
         $toFlush[] = $billingAddress;
 
-        $deliveryAddress = $this->customerService->createDeliveryAddress($customerData->deliveryAddressData);
+        $deliveryAddress = $this->deliveryAddressFactory->create($customerData->deliveryAddressData);
         if ($deliveryAddress !== null) {
             $this->em->persist($deliveryAddress);
             $toFlush[] = $deliveryAddress;

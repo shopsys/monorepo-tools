@@ -93,21 +93,6 @@ class CustomerService
     }
 
     /**
-     * @param \Shopsys\FrameworkBundle\Model\Customer\DeliveryAddressData $deliveryAddressData
-     * @return \Shopsys\FrameworkBundle\Model\Customer\DeliveryAddress|null
-     */
-    public function createDeliveryAddress(DeliveryAddressData $deliveryAddressData)
-    {
-        if ($deliveryAddressData->addressFilled) {
-            $deliveryAddress = $this->deliveryAddressFactory->create($deliveryAddressData);
-        } else {
-            $deliveryAddress = null;
-        }
-
-        return $deliveryAddress;
-    }
-
-    /**
      * @param \Shopsys\FrameworkBundle\Model\Customer\User $user
      * @param \Shopsys\FrameworkBundle\Model\Customer\DeliveryAddressData $deliveryAddressData
      * @param \Shopsys\FrameworkBundle\Model\Customer\DeliveryAddress|null $deliveryAddress
