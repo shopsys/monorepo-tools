@@ -31,19 +31,10 @@ This can be achieved by build arguments `www_data_uid` and `www_data_gid` that s
 
 You can find out your UID by running `id -u` and your GID by running `id -g`.
 
-### 4. Set the Github token in your docker-compose.yml file
-Shopsys Framework includes a lot of dependencies installed via Composer.
-During `composer install` the GitHub API Rate Limit is reached and it is necessary to provide GitHub OAuth token to overcome this limit.
-This token can be generated on [Github -> Settings -> Developer Settings -> Personal access tokens](https://github.com/settings/tokens/new?scopes=repo&description=Composer+API+token)
-Save your token into the `docker-compose.yml` file.
-Token is located in `services -> php-fpm -> build -> args -> github_oauth_token`.
-
-<!--- TODO When releasing new version, remove the step "Set the Github token in your docker-compose.yml file" as (in current master)  docker-compose.yml and dockerfiles don't contain or operate with such attribute -->
-
-### 5. Compose Docker container
+### 4. Compose Docker container
 ```
 docker-compose up -d --build
 ```
 
-### 6. Setup the application
+### 5. Setup the application
 [Application setup guide](installation-using-docker-application-setup.md)

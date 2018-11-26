@@ -224,14 +224,10 @@ docker build \
     --target production \
     -t production-php-fpm \
     --compress \
-    --build-arg github_oauth_token=PERSONAL_ACCESS_TOKEN_FROM_GITHUB \
     .
 ```
-Replace the `PERSONAL_ACCESS_TOKEN_FROM_GITHUB` string by the token generated on [Github -> Settings -> Developer Settings -> Personal access tokens](https://github.com/settings/tokens/new?scopes=repo&description=Composer+API+token).
 With `f` parameter we set path to Dockerfile that builds image.
 With `t` parameter we set the name of built image.
-
-<!--- TODO When releasing new version, remove all notices about "github_oauth_token" as (in current master) docker-compose.yml and dockerfiles don't contain or operate with such attribute -->
 
 If we are building the image on different server than production server, we can push built image into docker registry of production server via ssh.
 We use `-oStrictHostKeyChecking=no` argument to have ssh connection without the prompt that asks about adding target server record into `known_hosts` ssh configuration.

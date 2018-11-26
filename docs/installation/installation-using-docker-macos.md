@@ -52,15 +52,6 @@ Once you get these values, set these values into your `docker-compose.yml` into 
 
 Also you need to insert your UID into `docker-sync.yml` into value `sync_userid`.
 
-#### Set the Github token in your docker-compose.yml file
-Shopsys Framework includes a lot of dependencies installed via Composer.
-During `composer install` the GitHub API Rate Limit is reached and it is necessary to provide GitHub OAuth token to overcome this limit.
-This token can be generated on [Github -> Settings -> Developer Settings -> Personal access tokens](https://github.com/settings/tokens/new?scopes=repo&description=Composer+API+token)
-Save your token into the `docker-compose.yml` file.
-Token is located in `services -> php-fpm -> build -> args -> github_oauth_token`.
-
-<!--- TODO When releasing new version, remove the section "Set the Github token in your docker-compose.yml file" as (in current master)  docker-compose.yml and dockerfiles don't contain or operate with such attribute -->
-
 ### 3. Compose Docker container
 On MacOS you need to synchronize folders using docker-sync.
 Before starting synchronization you need to create a directory for persisting Postgres and Elasticsearch data so you won't lose it when the container is shut down.

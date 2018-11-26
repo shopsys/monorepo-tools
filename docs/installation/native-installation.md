@@ -148,29 +148,8 @@ Composer will then prompt you to set parameters for testing environment (`app/co
 | `test_mailer_password`            | ...                                                                           | ...           |
 | `shopsys.content_dir_name`        | web/content-test/ directory is used instead of web/content/ during the tests  | content-test  |
 
-#### Choose environment type
-For development choose `n` when asked `Build in production environment? (Y/n)`.
 
-It will set the environment in your application to `dev` (this will, for example, show Symfony Web Debug Toolbar).
-
-<!--- TODO Remove this section as the environment is set depending on whether it's installed by "composer install" or "composer install --no-dev"  -->
-
-### 4. Configure domains
-Create `domains_urls.yml` from `domains_urls.yml.dist`.
-
-#### Linux / MacOS
-```
-cp app/config/domains_urls.yml.dist app/config/domains_urls.yml
-```
-
-#### Windows
-```
-copy app\config\domains_urls.yml.dist app\config\domains_urls.yml
-```
-
-<!--- TODO When releasing new version, remove the step "Configure domains" as (in current master) the default config is automatically copied during "composer install"-->
-
-### 5. Create databases
+### 4. Create databases
 ```
 php phing db-create
 php phing test-db-create
@@ -179,18 +158,18 @@ php phing test-db-create
 *Note: In this step you were using multiple Phing targets.
 More information about what Phing targets are and how they work can be found in [Console Commands for Application Management (Phing Targets)](/docs/introduction/console-commands-for-application-management-phing-targets.md)*
 
-### 6. Build application
+### 5. Build application
 ```
 php phing build-demo-dev
 ```
 **For solutions to commonly encountered problems during build see section [Troubleshooting](#troubleshooting) below or you might want to check [Required PHP Configuration](../introduction/required-php-configuration.md).**
 
-### 7. Run integrated HTTP server
+### 6. Run integrated HTTP server
 ```
 php bin/console server:run
 ```
 
-### 8. See it in your browser!
+### 7. See it in your browser!
 Open [http://127.0.0.1:8000/](http://127.0.0.1:8000/) to see running application.
 
 You can also login into the administration section on [http://127.0.0.1:8000/admin/](http://127.0.0.1:8000/admin/) with default credentials:
