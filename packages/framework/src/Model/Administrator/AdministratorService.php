@@ -31,17 +31,6 @@ class AdministratorService
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\Administrator\Administrator $administrator
-     * @param string $password
-     */
-    public function setPassword(Administrator $administrator, $password)
-    {
-        $encoder = $this->encoderFactory->getEncoder($administrator);
-        $passwordHash = $encoder->encodePassword($password, $administrator->getSalt());
-        $administrator->setPassword($passwordHash);
-    }
-
-    /**
-     * @param \Shopsys\FrameworkBundle\Model\Administrator\Administrator $administrator
      * @param int $adminCountExcludingSuperadmin
      */
     public function delete(Administrator $administrator, $adminCountExcludingSuperadmin)
@@ -76,7 +65,7 @@ class AdministratorService
         }
         $administrator->edit($administratorData);
         if ($administratorData->password !== null) {
-            $this->setPassword($administrator, $administratorData->password);
+            $administrator->setPassword($administratorData->password, $this->encoderFactory);
         }
 
         return $administrator;

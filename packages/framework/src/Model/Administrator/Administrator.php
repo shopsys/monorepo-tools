@@ -10,6 +10,7 @@ use Shopsys\FrameworkBundle\Component\Grid\Grid;
 use Shopsys\FrameworkBundle\Model\Security\Roles;
 use Shopsys\FrameworkBundle\Model\Security\TimelimitLoginInterface;
 use Shopsys\FrameworkBundle\Model\Security\UniqueLoginInterface;
+use Symfony\Component\Security\Core\Encoder\EncoderFactoryInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
@@ -228,10 +229,13 @@ class Administrator implements UserInterface, Serializable, UniqueLoginInterface
 
     /**
      * @param string $password
+     * @param \Symfony\Component\Security\Core\Encoder\EncoderFactoryInterface $encoderFactory
      */
-    public function setPassword($password)
+    public function setPassword(string $password, EncoderFactoryInterface $encoderFactory)
     {
-        $this->password = $password;
+        $encoder = $encoderFactory->getEncoder($this);
+        $passwordHash = $encoder->encodePassword($password, $this->getSalt());
+        $this->password = $passwordHash;
     }
 
     /**
