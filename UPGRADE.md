@@ -49,7 +49,9 @@ There is a list of all the repositories maintained by monorepo, changes in log b
 * [shopsys/microservice-product-search]
 * [shopsys/microservice-product-search-export]
 
-## [From 7.0.0-beta2 to Unreleased]
+## [From v7.0.0-beta3 to Unreleased]
+
+## [From 7.0.0-beta2 to v7.0.0-beta3]
 ### [shopsys/framework]
 - [#595 automatic product price calculation has been removed along with pricing group coefficients](https://github.com/shopsys/shopsys/pull/595)
     - after running database migrations, all your products will be using manual pricing and will have set prices for all pricing groups in a fashion that will keep the final price as same as before
@@ -704,7 +706,8 @@ parameters:
         - *_generated/*
 
 ```
-[From 7.0.0-beta2 to Unreleased]: https://github.com/shopsys/shopsys/compare/v7.0.0-beta2...HEAD
+[From v7.0.0-beta3 to Unreleased]: https://github.com/shopsys/shopsys/compare/v7.0.0-beta3...HEAD
+[From 7.0.0-beta2 to v7.0.0-beta3]: https://github.com/shopsys/shopsys/compare/v7.0.0-beta2...v7.0.0-beta3
 [From 7.0.0-beta1 to 7.0.0-beta2]: https://github.com/shopsys/shopsys/compare/v7.0.0-beta1...v7.0.0-beta2
 [From 7.0.0-alpha6 to 7.0.0-beta1]: https://github.com/shopsys/shopsys/compare/v7.0.0-alpha6...v7.0.0-beta1
 [From 7.0.0-alpha5 to 7.0.0-alpha6]: https://github.com/shopsys/shopsys/compare/v7.0.0-alpha5...v7.0.0-alpha6

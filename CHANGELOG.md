@@ -28,6 +28,80 @@ The changelog is generated during the release process using [ChangelogLinker](ht
 
 <!-- changelog-linker -->
 
+## v7.0.0-beta3 - 2018-11-27
+
+### [shopsys/coding-standards]
+
+#### Added
+
+- [#554] Add fixers to autocomplete missing return and param annotations, Thanks to [@TomasVotruba]
+
+### [shopsys/framework]
+
+#### Added
+
+- [#564] added a new translation extractor for properties of Constraints
+- [#546] added new Symfony command "shopsys:environment:change"
+- [#544] eased adding JS to admin
+
+#### Changed
+
+- [#576] `OrderFormType` in administration is now rendered by default
+
+#### Fixed
+
+- [#581] Product creation: calculated availability is set additionally if necessary
+- [#568] Unified demo multidomain data with demo data
+
+#### Removed
+
+- [#595] removal of automatic price calculation
+
+### [shopsys/project-base]
+
+#### Changed
+
+- [#541] Rename database tests to functional tests
+- [#566] Set development docker build target before production and CI targets
+- [#543] the environment setting during "composer install" is not interactive
+- [#557] php-fpm image has standard workdir (`/var/www/html`) in ci stage
+- [#613] restart smtp server after crash on production, Thanks to [@henzigo]
+- [#547] `content-test` directory is used instead of `content` during the tests
+
+#### Fixed
+
+- [#598] fix folder sharing for production docker-compose, Thanks to [@henzigo]
+- [#524] fixes of annotations issues (PHPStan upgrade preparation), Thanks to [@ondrejmirtes]
+- [#600] Fixing heading sizes in frontend
+- [#618] maintenance page fix
+
+### [shopsys/shopsys]
+
+#### Added
+
+- [#556] Updated documentation about phing targets and added article about development on Shopsys Framework
+- [#559] Docs: added `cookbook/modifying-a-template-in-administration.md`
+- [#553] docs: added `introduction/faq.md` with frequently asked questions
+- [#527] Added script for exporting logs into jenkins workspace
+- [#573] add FQN @param, @return and @var everywhere, Thanks to [@TomasVotruba]
+- [#535] added .dockerignore files
+- [#563] Open Source License Acknowledgements and Third-Party Copyrights
+
+#### Changed
+
+- [#560] monorepo: `tests-packages` now include tests of `coding-standards` package
+- [#601] docs: information about logging are more discoverable now
+- [#545] Part of the application build is now contained in the build of the image
+- [#533] main php-fpm container now uses multi-stage build feature
+- [#620] generate error pages in `restart_kubernetes.sh`
+- [#540] domains URLs are auto-configured during "composer install"
+- [#606] Stale bot for GitHub issues delayed
+
+#### Removed
+
+- [#528] Removed `depends_on` and `links` from `docker-compose.yml` files
+- [#551] github token erase
+
 ## [7.0.0-beta2] - 2018-10-19
 
 ### [shopsys/framework]
@@ -1644,3 +1718,63 @@ That's why is this section formatted differently.
 [#487]: https://github.com/shopsys/shopsys/pull/487
 [#486]: https://github.com/shopsys/shopsys/pull/486
 [@thirdknown]: https://github.com/thirdknown
+[#625]: https://github.com/shopsys/shopsys/pull/625
+[#620]: https://github.com/shopsys/shopsys/pull/620
+[#618]: https://github.com/shopsys/shopsys/pull/618
+[#617]: https://github.com/shopsys/shopsys/pull/617
+[#614]: https://github.com/shopsys/shopsys/pull/614
+[#613]: https://github.com/shopsys/shopsys/pull/613
+[#608]: https://github.com/shopsys/shopsys/pull/608
+[#606]: https://github.com/shopsys/shopsys/pull/606
+[#605]: https://github.com/shopsys/shopsys/pull/605
+[#602]: https://github.com/shopsys/shopsys/pull/602
+[#601]: https://github.com/shopsys/shopsys/pull/601
+[#600]: https://github.com/shopsys/shopsys/pull/600
+[#598]: https://github.com/shopsys/shopsys/pull/598
+[#595]: https://github.com/shopsys/shopsys/pull/595
+[#593]: https://github.com/shopsys/shopsys/pull/593
+[#592]: https://github.com/shopsys/shopsys/pull/592
+[#587]: https://github.com/shopsys/shopsys/pull/587
+[#582]: https://github.com/shopsys/shopsys/pull/582
+[#581]: https://github.com/shopsys/shopsys/pull/581
+[#580]: https://github.com/shopsys/shopsys/pull/580
+[#578]: https://github.com/shopsys/shopsys/pull/578
+[#576]: https://github.com/shopsys/shopsys/pull/576
+[#575]: https://github.com/shopsys/shopsys/pull/575
+[#574]: https://github.com/shopsys/shopsys/pull/574
+[#573]: https://github.com/shopsys/shopsys/pull/573
+[#570]: https://github.com/shopsys/shopsys/pull/570
+[#568]: https://github.com/shopsys/shopsys/pull/568
+[#566]: https://github.com/shopsys/shopsys/pull/566
+[#564]: https://github.com/shopsys/shopsys/pull/564
+[#563]: https://github.com/shopsys/shopsys/pull/563
+[#560]: https://github.com/shopsys/shopsys/pull/560
+[#559]: https://github.com/shopsys/shopsys/pull/559
+[#558]: https://github.com/shopsys/shopsys/pull/558
+[#557]: https://github.com/shopsys/shopsys/pull/557
+[#556]: https://github.com/shopsys/shopsys/pull/556
+[#554]: https://github.com/shopsys/shopsys/pull/554
+[#553]: https://github.com/shopsys/shopsys/pull/553
+[#552]: https://github.com/shopsys/shopsys/pull/552
+[#551]: https://github.com/shopsys/shopsys/pull/551
+[#547]: https://github.com/shopsys/shopsys/pull/547
+[#546]: https://github.com/shopsys/shopsys/pull/546
+[#545]: https://github.com/shopsys/shopsys/pull/545
+[#544]: https://github.com/shopsys/shopsys/pull/544
+[#543]: https://github.com/shopsys/shopsys/pull/543
+[#542]: https://github.com/shopsys/shopsys/pull/542
+[#541]: https://github.com/shopsys/shopsys/pull/541
+[#540]: https://github.com/shopsys/shopsys/pull/540
+[#538]: https://github.com/shopsys/shopsys/pull/538
+[#535]: https://github.com/shopsys/shopsys/pull/535
+[#534]: https://github.com/shopsys/shopsys/pull/534
+[#533]: https://github.com/shopsys/shopsys/pull/533
+[#530]: https://github.com/shopsys/shopsys/pull/530
+[#528]: https://github.com/shopsys/shopsys/pull/528
+[#527]: https://github.com/shopsys/shopsys/pull/527
+[#524]: https://github.com/shopsys/shopsys/pull/524
+[#522]: https://github.com/shopsys/shopsys/pull/522
+[#503]: https://github.com/shopsys/shopsys/pull/503
+[v7.0.0-beta2]: https://github.com/shopsys/shopsys/compare/v7.0.0-beta2...v7.0.0-beta2
+[@ondrejmirtes]: https://github.com/ondrejmirtes
+[@henzigo]: https://github.com/henzigo

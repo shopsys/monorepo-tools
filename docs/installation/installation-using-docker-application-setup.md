@@ -28,22 +28,7 @@ The default parameters suggested by composer are currently set for application r
 Only exception is the `secret` parameter - you should input a random string to be used for security purposes.
 It is not necessary for development though.
 
-<!--- TODO Remove the following paragraphs as the environment is set depending on whether it's installed by "composer install" or "composer install --no-dev"  -->
-
-For development choose `n` when asked `Build in production environment? (Y/n)`.
-
-It will set the environment in your application to `dev` (this will, for example, show Symfony Web Debug Toolbar).
-
-### 1.3. Configure domains
-Create `domains_urls.yml` from `domains_urls.yml.dist`.
-
-```
-cp app/config/domains_urls.yml.dist app/config/domains_urls.yml
-```
-
-<!--- TODO When releasing new version, remove the step "Configure domains" as (in current master) the default config is automatically copied during "composer install" -->
-
-### 1.4. Create databases
+### 1.3. Create databases
 ```
 php phing db-create
 php phing test-db-create
@@ -52,7 +37,7 @@ php phing test-db-create
 *Note: In this step you were using multiple Phing targets.
 More information about what Phing targets are and how they work can be found in [Console Commands for Application Management (Phing Targets)](/docs/introduction/console-commands-for-application-management-phing-targets.md)*
 
-### 1.5. Build the application
+### 1.4. Build the application
 ```
 php phing build-demo-dev
 ```

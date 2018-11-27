@@ -81,11 +81,11 @@ services:
             - discovery.type=single-node
 
     microservice-product-search:
-        image: shopsys/microservice-product-search:latest
+        image: shopsys/microservice-product-search:v7.0.0-beta3
         container_name: shopsys-framework-microservice-product-search
 
     microservice-product-search-export:
-        image: shopsys/microservice-product-search-export:latest
+        image: shopsys/microservice-product-search-export:v7.0.0-beta3
         container_name: shopsys-framework-microservice-product-search-export
 
 volumes:
