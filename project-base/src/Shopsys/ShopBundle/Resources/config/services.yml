@@ -13,7 +13,7 @@ services:
         tags: ['controller.service_arguments']
 
     Shopsys\ShopBundle\Model\:
-        resource: '../../Model/**/*{Facade,Factory}.php'
+        resource: '../../Model/**/*{Facade,Factory,Repository}.php'
 
     League\Flysystem\MountManager:
         arguments:
