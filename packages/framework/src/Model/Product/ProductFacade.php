@@ -15,7 +15,9 @@ use Shopsys\FrameworkBundle\Model\Product\Availability\ProductAvailabilityRecalc
 use Shopsys\FrameworkBundle\Model\Product\Parameter\ParameterRepository;
 use Shopsys\FrameworkBundle\Model\Product\Parameter\ProductParameterValueFactoryInterface;
 use Shopsys\FrameworkBundle\Model\Product\Pricing\ProductManualInputPriceFacade;
+use Shopsys\FrameworkBundle\Model\Product\Pricing\ProductPriceCalculation;
 use Shopsys\FrameworkBundle\Model\Product\Pricing\ProductPriceRecalculationScheduler;
+use Shopsys\FrameworkBundle\Model\Product\Pricing\ProductSellingPrice;
 
 class ProductFacade
 {
@@ -135,6 +137,11 @@ class ProductFacade
     protected $productVisibilityFactory;
 
     /**
+     * @var \Shopsys\FrameworkBundle\Model\Product\Pricing\ProductPriceCalculation
+     */
+    private $productPriceCalculation;
+
+    /**
      * @param \Doctrine\ORM\EntityManagerInterface $em
      * @param \Shopsys\FrameworkBundle\Model\Product\ProductRepository $productRepository
      * @param \Shopsys\FrameworkBundle\Model\Product\ProductVisibilityFacade $productVisibilityFacade
@@ -158,6 +165,7 @@ class ProductFacade
      * @param \Shopsys\FrameworkBundle\Model\Product\ProductCategoryDomainFactoryInterface $productCategoryDomainFactory
      * @param \Shopsys\FrameworkBundle\Model\Product\Parameter\ProductParameterValueFactoryInterface $productParameterValueFactory
      * @param \Shopsys\FrameworkBundle\Model\Product\ProductVisibilityFactoryInterface $productVisibilityFactory
+     * @param \Shopsys\FrameworkBundle\Model\Product\Pricing\ProductPriceCalculation $productPriceCalculation
      */
     public function __construct(
         EntityManagerInterface $em,
@@ -182,7 +190,8 @@ class ProductFacade
         ProductAccessoryFactoryInterface $productAccessoryFactory,
         ProductCategoryDomainFactoryInterface $productCategoryDomainFactory,
         ProductParameterValueFactoryInterface $productParameterValueFactory,
-        ProductVisibilityFactoryInterface $productVisibilityFactory
+        ProductVisibilityFactoryInterface $productVisibilityFactory,
+        ProductPriceCalculation $productPriceCalculation
     ) {
         $this->em = $em;
         $this->productRepository = $productRepository;
@@ -207,6 +216,7 @@ class ProductFacade
         $this->productCategoryDomainFactory = $productCategoryDomainFactory;
         $this->productParameterValueFactory = $productParameterValueFactory;
         $this->productVisibilityFactory = $productVisibilityFactory;
+        $this->productPriceCalculation = $productPriceCalculation;
     }
 
     /**
@@ -357,10 +367,16 @@ class ProductFacade
      */
     public function getAllProductSellingPricesIndexedByDomainId(Product $product)
     {
-        return $this->productService->getProductSellingPricesIndexedByDomainIdAndPricingGroupId(
-            $product,
-            $this->pricingGroupRepository->getAll()
-        );
+        $productSellingPrices = [];
+
+        foreach ($this->pricingGroupRepository->getAll() as $pricingGroup) {
+            $productSellingPrices[$pricingGroup->getDomainId()][$pricingGroup->getId()] = new ProductSellingPrice(
+                $pricingGroup,
+                $this->productPriceCalculation->calculatePrice($product, $pricingGroup->getDomainId(), $pricingGroup)
+            );
+        }
+
+        return $productSellingPrices;
     }
 
     /**

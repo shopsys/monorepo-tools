@@ -6,17 +6,10 @@ use Shopsys\FrameworkBundle\Model\Pricing\BasePriceCalculation;
 use Shopsys\FrameworkBundle\Model\Pricing\InputPriceCalculation;
 use Shopsys\FrameworkBundle\Model\Pricing\PricingSetting;
 use Shopsys\FrameworkBundle\Model\Pricing\Vat\Vat;
-use Shopsys\FrameworkBundle\Model\Product\Pricing\ProductPriceCalculation;
 use Shopsys\FrameworkBundle\Model\Product\Pricing\ProductPriceRecalculationScheduler;
-use Shopsys\FrameworkBundle\Model\Product\Pricing\ProductSellingPrice;
 
 class ProductService
 {
-    /**
-     * @var \Shopsys\FrameworkBundle\Model\Product\Pricing\ProductPriceCalculation
-     */
-    private $productPriceCalculation;
-
     /**
      * @var \Shopsys\FrameworkBundle\Model\Pricing\InputPriceCalculation
      */
@@ -43,7 +36,6 @@ class ProductService
     protected $productCategoryDomainFactory;
 
     /**
-     * @param \Shopsys\FrameworkBundle\Model\Product\Pricing\ProductPriceCalculation $productPriceCalculation
      * @param \Shopsys\FrameworkBundle\Model\Pricing\InputPriceCalculation $inputPriceCalculation
      * @param \Shopsys\FrameworkBundle\Model\Pricing\BasePriceCalculation $basePriceCalculation
      * @param \Shopsys\FrameworkBundle\Model\Pricing\PricingSetting $pricingSetting
@@ -51,14 +43,12 @@ class ProductService
      * @param \Shopsys\FrameworkBundle\Model\Product\ProductCategoryDomainFactoryInterface $productCategoryDomainFactory
      */
     public function __construct(
-        ProductPriceCalculation $productPriceCalculation,
         InputPriceCalculation $inputPriceCalculation,
         BasePriceCalculation $basePriceCalculation,
         PricingSetting $pricingSetting,
         ProductPriceRecalculationScheduler $productPriceRecalculationScheduler,
         ProductCategoryDomainFactoryInterface $productCategoryDomainFactory
     ) {
-        $this->productPriceCalculation = $productPriceCalculation;
         $this->inputPriceCalculation = $inputPriceCalculation;
         $this->basePriceCalculation = $basePriceCalculation;
         $this->pricingSetting = $pricingSetting;
@@ -109,24 +99,6 @@ class ProductService
     {
         $product->changeVat($vat);
         $this->productPriceRecalculationScheduler->scheduleProductForImmediateRecalculation($product);
-    }
-
-    /**
-     * @param \Shopsys\FrameworkBundle\Model\Product\Product $product
-     * @param \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroup[] $pricingGroups
-     * @return \Shopsys\FrameworkBundle\Model\Product\Pricing\ProductSellingPrice[]
-     */
-    public function getProductSellingPricesIndexedByDomainIdAndPricingGroupId(Product $product, array $pricingGroups)
-    {
-        $productSellingPrices = [];
-        foreach ($pricingGroups as $pricingGroup) {
-            $productSellingPrices[$pricingGroup->getDomainId()][$pricingGroup->getId()] = new ProductSellingPrice(
-                $pricingGroup,
-                $this->productPriceCalculation->calculatePrice($product, $pricingGroup->getDomainId(), $pricingGroup)
-            );
-        }
-
-        return $productSellingPrices;
     }
 
     /**
