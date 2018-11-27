@@ -20,9 +20,11 @@
     {% if grid.rows is not empty or grid.inlineEdit or grid.multipleDragAndDrop %}
         <div class="js-inline-edit-data-container{% if grid.rows is empty and grid.inlineEdit %} hidden{% endif %}">
             <div class="">
-            {% if grid.enabledPaging %}
-                {{ gridView.renderBlock('grid_pager') }}
-            {% endif %}
+                {% if grid.enabledPaging %}
+                    <div class="margin-bottom-25">
+                        {{ gridView.renderBlock('grid_pager') }}
+                    </div>
+                {% endif %}
             </div>
             <div class="table-touch">
                 <table class="table-grid">
@@ -32,10 +34,14 @@
             </div>
             <div class="">
                 {% if grid.enabledPaging %}
-                    {{ gridView.renderBlock('grid_pager') }}
+                    <div class="margin-top-25">
+                        {{ gridView.renderBlock('grid_pager') }}
+                    </div>
                 {% endif %}
                 {% if grid.dragAndDrop %}
-                    <button class="js-drag-and-drop-grid-submit btn btn--disabled" type="button">{{ 'Save changes in order'|trans }}</button>
+                    <div class="margin-top-25">
+                        <button class="js-drag-and-drop-grid-submit btn btn--disabled" type="button">{{ 'Save changes in order'|trans }}</button>
+                    </div>
                 {% endif %}
             </div>
         </div>

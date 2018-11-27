@@ -4,16 +4,18 @@
 {% block h1 %}{{ 'Administrator'|trans }}{% endblock %}
 
 {% block main_content %}
-    {{ form_start(form) }}
-        {{ form_errors(form) }}
+    <div class="wrap-divider">
+        {{ form_start(form) }}
+            {{ form_errors(form) }}
 
-        {% embed '@ShopsysFramework/Admin/Inline/FixedBar/fixedBar.html.twig' %}
-            {% block fixed_bar_content %}
-                <a href="{{ url('admin_administrator_list') }}" class="btn-link-style">{{ 'Back to overview'|trans }}</a>
-                {{ form_save(administrator|default(null), form) }}
-            {% endblock %}
-        {% endembed %}
-    {{ form_end(form) }}
+            {% embed '@ShopsysFramework/Admin/Inline/FixedBar/fixedBar.html.twig' %}
+                {% block fixed_bar_content %}
+                    <a href="{{ url('admin_administrator_list') }}" class="btn-link-style">{{ 'Back to overview'|trans }}</a>
+                    {{ form_save(administrator|default(null), form) }}
+                {% endblock %}
+            {% endembed %}
+        {{ form_end(form) }}
+    </div>
 
     {% block admin_log %}{% endblock %}
 {% endblock %}

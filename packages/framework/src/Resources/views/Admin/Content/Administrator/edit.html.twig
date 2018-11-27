@@ -5,36 +5,38 @@
 
 {% block admin_log %}
     {% if lastAdminActivities|length > 0 %}
-        <h2>{{ 'Administrator activities history'|trans }}</h2>
-        <table class="table-main">
-            <thead>
-                <tr>
-                    <th>
-                        {{ 'Login time'|trans }}
-                    </th>
-                    <th>
-                        {{ 'Last action time'|trans }}
-                    </th>
-                    <th>
-                        {{ 'IP address'|trans }}
-                    </th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for adminActivity in lastAdminActivities %}
+        <div class="wrap-divider">
+            <h2>{{ 'Administrator activities history'|trans }}</h2>
+            <table class="table-main">
+                <thead>
                     <tr>
-                        <td>
-                            {{ adminActivity.loginTime|formatDateTime }}
-                        </td>
-                        <td>
-                            {{ adminActivity.lastActionTime|formatDateTime }}
-                        </td>
-                        <td>
-                            {{ adminActivity.ipAddress }}
-                        </td>
+                        <th>
+                            {{ 'Login time'|trans }}
+                        </th>
+                        <th>
+                            {{ 'Last action time'|trans }}
+                        </th>
+                        <th>
+                            {{ 'IP address'|trans }}
+                        </th>
                     </tr>
-                {% endfor %}
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                    {% for adminActivity in lastAdminActivities %}
+                        <tr>
+                            <td>
+                                {{ adminActivity.loginTime|formatDateTime }}
+                            </td>
+                            <td>
+                                {{ adminActivity.lastActionTime|formatDateTime }}
+                            </td>
+                            <td>
+                                {{ adminActivity.ipAddress }}
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
     {% endif %}
 {% endblock %}

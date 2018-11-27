@@ -6,60 +6,64 @@
 {% block main_content %}
     {{ render(controller('ShopsysFrameworkBundle:Admin/Domain:domainTabs')) }}
         {{ form_start(form) }}
-    <div class="form-group wrap-border">
-        <div class="form-group margin-bottom-20">
-            <h2 class="form-group__title">
-                {{ 'Link to the personal information overview'|trans }}
-            </h2>
-            <div class="form-line">
-                <div class="form-line__line">
-                    <div class="form-line__label">
-                        {{ getDomainName(domainId) }}
-                        {% if isMultidomain() %}
-                            {{ domainIcon(domainId) }}
-                        {% endif %}
-                    </div>
-                    <div class="form-line__item form-line__item--text">
-                        <a href="{{ findUrlByDomainId('front_personal_data', {}, domainId) }}" target="_blank">
-                            {{ findUrlByDomainId('front_personal_data', {}, domainId) }}
-                        </a>
+    <div class="wrap-divider">
+        <div class="form-group">
+            <div class="form-group margin-bottom-20">
+                <h2 class="form-group__title">
+                    {{ 'Link to the personal information overview'|trans }}
+                </h2>
+                <div class="form-line">
+                    <div class="form-line__line">
+                        <div class="form-line__label">
+                            {{ getDomainName(domainId) }}
+                            {% if isMultidomain() %}
+                                {{ domainIcon(domainId) }}
+                            {% endif %}
+                        </div>
+                        <div class="form-line__item form-line__item--text">
+                            <a href="{{ findUrlByDomainId('front_personal_data', {}, domainId) }}" target="_blank">
+                                {{ findUrlByDomainId('front_personal_data', {}, domainId) }}
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
 
-        <div class="form-group__title">
-            {{ 'Personal information overview'|trans }}
+            <div class="form-group__title">
+                {{ 'Personal information overview'|trans }}
+            </div>
+            {{ form_widget(form.personalDataDisplaySiteContent) }}
         </div>
-        {{ form_widget(form.personalDataDisplaySiteContent) }}
     </div>
-    <div class="form-group wrap-border">
-        <div class="form-group margin-bottom-20">
-            <h2 class="form-group__title">
-                {{ 'Link to the personal information export'|trans }}
-            </h2>
-            <div class="form-line">
-                <div class="form-line__line">
-                    <div class="form-line__label">
-                        {{ getDomainName(domainId) }}
-                        {% if isMultidomain() %}
-                            {{ domainIcon(domainId) }}
-                        {% endif %}
-                    </div>
-                    <div class="form-line__item form-line__item--text">
-                        <a href="{{ findUrlByDomainId('front_personal_data_export', {}, domainId) }}" target="_blank">
-                            {{ findUrlByDomainId('front_personal_data_export', {}, domainId) }}
-                        </a>
+    <div class="wrap-divider">
+        <div class="form-group">
+            <div class="form-group margin-bottom-20">
+                <h2 class="form-group__title">
+                    {{ 'Link to the personal information export'|trans }}
+                </h2>
+                <div class="form-line">
+                    <div class="form-line__line">
+                        <div class="form-line__label">
+                            {{ getDomainName(domainId) }}
+                            {% if isMultidomain() %}
+                                {{ domainIcon(domainId) }}
+                            {% endif %}
+                        </div>
+                        <div class="form-line__item form-line__item--text">
+                            <a href="{{ findUrlByDomainId('front_personal_data_export', {}, domainId) }}" target="_blank">
+                                {{ findUrlByDomainId('front_personal_data_export', {}, domainId) }}
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
 
-        <div class="form-group__title">
-            {{ 'Personal information export'|trans }}
-        </div>
+            <div class="form-group__title">
+                {{ 'Personal information export'|trans }}
+            </div>
 
-        {{ form_widget(form.personalDataExportSiteContent ) }}
+            {{ form_widget(form.personalDataExportSiteContent ) }}
+        </div>
     </div>
             {% embed '@ShopsysFramework/Admin/Inline/FixedBar/fixedBar.html.twig' %}
                 {% block fixed_bar_content %}
