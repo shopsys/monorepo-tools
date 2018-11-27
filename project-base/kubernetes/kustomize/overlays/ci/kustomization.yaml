@@ -1,0 +1,13 @@
+bases:
+-   ../../base
+resources:
+-   ../../../deployments/adminer.yml
+-   ../../../deployments/redis-admin.yml
+-   ../../../deployments/selenium-server.yml
+-   ../../../services/adminer.yml
+-   ../../../services/redis-admin.yml
+-   ../../../services/selenium-server.yml
+configMapGenerator:
+-   name: nginx-configuration
+    files:
+    - ../../../../../docker/nginx/nginx.conf
