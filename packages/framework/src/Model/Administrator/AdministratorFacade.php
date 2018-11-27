@@ -81,15 +81,15 @@ class AdministratorFacade
     {
         $administrator = $this->administratorRepository->getById($administratorId);
         $administratorByUserName = $this->administratorRepository->findByUserName($administratorData->username);
-        $administratorEdited = $this->administratorService->edit(
+        $administrator->edit(
             $administratorData,
-            $administrator,
+            $this->encoderFactory,
             $administratorByUserName
         );
 
         $this->em->flush();
 
-        return $administratorEdited;
+        return $administrator;
     }
 
     /**
