@@ -3,6 +3,7 @@
 namespace Shopsys\FrameworkBundle\Model\Administrator;
 
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Security\Core\Encoder\EncoderFactoryInterface;
 
 class AdministratorFacade
@@ -18,11 +19,6 @@ class AdministratorFacade
     protected $administratorRepository;
 
     /**
-     * @var \Shopsys\FrameworkBundle\Model\Administrator\AdministratorService
-     */
-    protected $administratorService;
-
-    /**
      * @var \Shopsys\FrameworkBundle\Model\Administrator\AdministratorFactoryInterface
      */
     protected $administratorFactory;
@@ -33,24 +29,29 @@ class AdministratorFacade
     protected $encoderFactory;
 
     /**
+     * @var \Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface
+     */
+    protected $tokenStorage;
+
+    /**
      * @param \Doctrine\ORM\EntityManagerInterface $em
      * @param \Shopsys\FrameworkBundle\Model\Administrator\AdministratorRepository $administratorRepository
-     * @param \Shopsys\FrameworkBundle\Model\Administrator\AdministratorService $administratorService
      * @param \Shopsys\FrameworkBundle\Model\Administrator\AdministratorFactoryInterface $administratorFactory
      * @param \Symfony\Component\Security\Core\Encoder\EncoderFactoryInterface $encoderFactory
+     * @param \Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface $tokenStorage
      */
     public function __construct(
         EntityManagerInterface $em,
         AdministratorRepository $administratorRepository,
-        AdministratorService $administratorService,
         AdministratorFactoryInterface $administratorFactory,
-        EncoderFactoryInterface $encoderFactory
+        EncoderFactoryInterface $encoderFactory,
+        TokenStorageInterface $tokenStorage
     ) {
         $this->administratorRepository = $administratorRepository;
-        $this->administratorService = $administratorService;
         $this->em = $em;
         $this->administratorFactory = $administratorFactory;
         $this->encoderFactory = $encoderFactory;
+        $this->tokenStorage = $tokenStorage;
     }
 
     /**
@@ -99,7 +100,7 @@ class AdministratorFacade
     {
         $administrator = $this->administratorRepository->getById($administratorId);
         $adminCountExcludingSuperadmin = $this->administratorRepository->getCountExcludingSuperadmin();
-        $this->administratorService->delete($administrator, $adminCountExcludingSuperadmin);
+        $administrator->checkForDelete($this->tokenStorage, $adminCountExcludingSuperadmin);
         $this->em->remove($administrator);
         $this->em->flush();
     }

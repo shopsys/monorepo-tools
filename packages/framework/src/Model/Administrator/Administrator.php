@@ -10,6 +10,7 @@ use Shopsys\FrameworkBundle\Component\Grid\Grid;
 use Shopsys\FrameworkBundle\Model\Security\Roles;
 use Shopsys\FrameworkBundle\Model\Security\TimelimitLoginInterface;
 use Shopsys\FrameworkBundle\Model\Security\UniqueLoginInterface;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Security\Core\Encoder\EncoderFactoryInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
@@ -396,6 +397,23 @@ class Administrator implements UserInterface, Serializable, UniqueLoginInterface
         $gridLimit = $this->getGridLimit($grid->getId());
         if ($gridLimit !== null) {
             $grid->setDefaultLimit($gridLimit->getLimit());
+        }
+    }
+
+    /**
+     * @param \Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface $tokenStorage
+     * @param int $adminCountExcludingSuperadmin
+     */
+    public function checkForDelete(TokenStorageInterface $tokenStorage, int $adminCountExcludingSuperadmin)
+    {
+        if ($adminCountExcludingSuperadmin === 1) {
+            throw new \Shopsys\FrameworkBundle\Model\Administrator\Exception\DeletingLastAdministratorException();
+        }
+        if ($tokenStorage->getToken()->getUser() === $this) {
+            throw new \Shopsys\FrameworkBundle\Model\Administrator\Exception\DeletingSelfException();
+        }
+        if ($this->isSuperadmin()) {
+            throw new \Shopsys\FrameworkBundle\Model\Administrator\Exception\DeletingSuperadminException();
         }
     }
 }
