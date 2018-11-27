@@ -21,10 +21,7 @@
 * [Administration Menu](./introduction/administration-menu.md)
 * [Logging](./introduction/logging.md)
 * [Product Searching via Elasticsearch](./introduction/product-search-via-elasticsearch.md)
-* [Introduction to Kubernetes](/docs/kubernetes/introduction-to-kubernetes.md)
-* [Continuous Integration Using Kubernetes](/docs/kubernetes/continuous-integration-using-kubernetes.md)
 * [How to Set Up Domains and Locales (Languages)](./introduction/how-to-set-up-domains-and-locales.md)
-* [Logging on Continuous Integration server running Kubernetes](/docs/kubernetes/logging-on-continuous-integration-server-running-kubernetes.md)
 * [Shopsys Framework Development Workflow](introduction/shopsys-framework-development-workflow.md)
 * [How to Work with Products](./introduction/how-to-work-with-products.md)
 
@@ -41,6 +38,13 @@
 ## Frontend
 * [Introduction to LESS](./frontend/introduction-to-less.md)
 * [Frontend Troubleshooting](./frontend/frontend-troubleshooting.md)
+
+## Orchestration
+* [Introduction to Kubernetes](/docs/kubernetes/introduction-to-kubernetes.md)
+* [Continuous Integration Using Kubernetes](/docs/kubernetes/continuous-integration-using-kubernetes.md)
+* [Logging on Continuous Integration server running Kubernetes](/docs/kubernetes/logging-on-continuous-integration-server-running-kubernetes.md)
+* [How to deploy SSFW to Google Cloud platform](/docs/kubernetes/how-to-deploy-ssfw-to-google-cloud-platform.md)
+* [Deploy Your Application to Google Cloud on your CI/CD](/docs/kubernetes/deploy-your-application-to-google-cloud-on-your-ci-cd.md)
 
 ## Microservices
 One of the explored ideas of Shopsys Framework is the idea of a product, that some of its parts are designed as the microservices.
