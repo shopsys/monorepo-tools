@@ -107,7 +107,7 @@ class OrderService
             $orderItemsToCreate[] = $newOrderItem;
         }
 
-        $this->calculateTotalPrice($order);
+        $order->calculateTotalPrice($this->orderPriceCalculation);
 
         return new OrderEditResult($orderItemsToCreate, $orderItemsToDelete, $statusChanged);
     }
@@ -134,18 +134,9 @@ class OrderService
         );
 
         $order->addItem($orderProduct);
-        $this->calculateTotalPrice($order);
+        $order->calculateTotalPrice($this->orderPriceCalculation);
 
         return $orderProduct;
-    }
-
-    /**
-     * @param \Shopsys\FrameworkBundle\Model\Order\Order $order
-     */
-    public function calculateTotalPrice(Order $order)
-    {
-        $orderTotalPrice = $this->orderPriceCalculation->getOrderTotalPrice($order);
-        $order->setTotalPrice($orderTotalPrice);
     }
 
     /**

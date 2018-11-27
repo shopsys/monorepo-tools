@@ -22,6 +22,7 @@ use Shopsys\FrameworkBundle\Model\Order\OrderFacade;
 use Shopsys\FrameworkBundle\Model\Order\OrderFactoryInterface;
 use Shopsys\FrameworkBundle\Model\Order\OrderHashGeneratorRepository;
 use Shopsys\FrameworkBundle\Model\Order\OrderNumberSequenceRepository;
+use Shopsys\FrameworkBundle\Model\Order\OrderPriceCalculation;
 use Shopsys\FrameworkBundle\Model\Order\OrderRepository;
 use Shopsys\FrameworkBundle\Model\Order\OrderService;
 use Shopsys\FrameworkBundle\Model\Order\Preview\OrderPreviewFactory;
@@ -99,7 +100,8 @@ class OrderFacadeHeurekaTest extends TestCase
             $this->createMock(OrderProductFacade::class),
             $heurekaFacade,
             $this->createDomain(),
-            $this->createMock(OrderFactoryInterface::class)
+            $this->createMock(OrderFactoryInterface::class),
+            $this->createMock(OrderPriceCalculation::class)
         );
         return $orderFacade;
     }

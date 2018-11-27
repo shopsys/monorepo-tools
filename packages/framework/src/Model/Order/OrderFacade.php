@@ -129,6 +129,11 @@ class OrderFacade
     protected $orderFactory;
 
     /**
+     * @var \Shopsys\FrameworkBundle\Model\Order\OrderPriceCalculation
+     */
+    protected $orderPriceCalculation;
+
+    /**
      * @param \Doctrine\ORM\EntityManagerInterface $em
      * @param \Shopsys\FrameworkBundle\Model\Order\OrderNumberSequenceRepository $orderNumberSequenceRepository
      * @param \Shopsys\FrameworkBundle\Model\Order\OrderRepository $orderRepository
@@ -149,6 +154,7 @@ class OrderFacade
      * @param \Shopsys\FrameworkBundle\Model\Heureka\HeurekaFacade $heurekaFacade
      * @param \Shopsys\FrameworkBundle\Component\Domain\Domain $domain
      * @param \Shopsys\FrameworkBundle\Model\Order\OrderFactoryInterface $orderFactory
+     * @param \Shopsys\FrameworkBundle\Model\Order\OrderPriceCalculation $orderPriceCalculation
      */
     public function __construct(
         EntityManagerInterface $em,
@@ -170,7 +176,8 @@ class OrderFacade
         OrderProductFacade $orderProductFacade,
         HeurekaFacade $heurekaFacade,
         Domain $domain,
-        OrderFactoryInterface $orderFactory
+        OrderFactoryInterface $orderFactory,
+        OrderPriceCalculation $orderPriceCalculation
     ) {
         $this->em = $em;
         $this->orderNumberSequenceRepository = $orderNumberSequenceRepository;
@@ -192,6 +199,7 @@ class OrderFacade
         $this->heurekaFacade = $heurekaFacade;
         $this->domain = $domain;
         $this->orderFactory = $orderFactory;
+        $this->orderPriceCalculation = $orderPriceCalculation;
     }
 
     /**
@@ -223,7 +231,7 @@ class OrderFacade
             $toFlush[] = $orderItem;
         }
 
-        $this->orderService->calculateTotalPrice($order);
+        $order->calculateTotalPrice($this->orderPriceCalculation);
         $this->em->persist($order);
         $this->em->flush($toFlush);
 

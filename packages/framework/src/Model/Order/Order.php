@@ -573,7 +573,7 @@ class Order
     /**
      * @param \Shopsys\FrameworkBundle\Model\Order\OrderTotalPrice $orderTotalPrice
      */
-    public function setTotalPrice(OrderTotalPrice $orderTotalPrice)
+    protected function setTotalPrice(OrderTotalPrice $orderTotalPrice)
     {
         $this->totalPriceWithVat = $orderTotalPrice->getPriceWithVat();
         $this->totalPriceWithoutVat = $orderTotalPrice->getPriceWithoutVat();
@@ -922,5 +922,14 @@ class Order
     public function isCancelled()
     {
         return $this->status === OrderStatus::TYPE_CANCELED;
+    }
+
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Order\OrderPriceCalculation $orderPriceCalculation
+     */
+    public function calculateTotalPrice(OrderPriceCalculation $orderPriceCalculation)
+    {
+        $orderTotalPrice = $orderPriceCalculation->getOrderTotalPrice($this);
+        $this->setTotalPrice($orderTotalPrice);
     }
 }
