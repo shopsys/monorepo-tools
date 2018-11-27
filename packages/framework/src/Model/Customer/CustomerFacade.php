@@ -19,9 +19,9 @@ class CustomerFacade
     protected $userRepository;
 
     /**
-     * @var \Shopsys\FrameworkBundle\Model\Customer\CustomerService
+     * @var \Shopsys\FrameworkBundle\Model\Customer\CustomerDataFactoryInterface
      */
-    protected $customerService;
+    protected $customerDataFactory;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Customer\CustomerPasswordService
@@ -56,7 +56,7 @@ class CustomerFacade
     /**
      * @param \Doctrine\ORM\EntityManagerInterface $em
      * @param \Shopsys\FrameworkBundle\Model\Customer\UserRepository $userRepository
-     * @param \Shopsys\FrameworkBundle\Model\Customer\CustomerService $customerService
+     * @param \Shopsys\FrameworkBundle\Model\Customer\CustomerDataFactoryInterface $customerDataFactory
      * @param \Shopsys\FrameworkBundle\Model\Customer\CustomerPasswordService $customerPasswordServiceService
      * @param \Shopsys\FrameworkBundle\Model\Customer\Mail\CustomerMailFacade $customerMailFacade
      * @param \Shopsys\FrameworkBundle\Model\Customer\BillingAddressFactoryInterface $billingAddressFactory
@@ -67,7 +67,7 @@ class CustomerFacade
     public function __construct(
         EntityManagerInterface $em,
         UserRepository $userRepository,
-        CustomerService $customerService,
+        CustomerDataFactoryInterface $customerDataFactory,
         CustomerPasswordService $customerPasswordServiceService,
         CustomerMailFacade $customerMailFacade,
         BillingAddressFactoryInterface $billingAddressFactory,
@@ -77,7 +77,7 @@ class CustomerFacade
     ) {
         $this->em = $em;
         $this->userRepository = $userRepository;
-        $this->customerService = $customerService;
+        $this->customerDataFactory = $customerDataFactory;
         $this->customerPasswordService = $customerPasswordServiceService;
         $this->customerMailFacade = $customerMailFacade;
         $this->billingAddressFactory = $billingAddressFactory;
@@ -246,7 +246,7 @@ class CustomerFacade
     {
         $this->edit(
             $user->getId(),
-            $this->customerService->getAmendedCustomerDataByOrder($user, $order)
+            $this->customerDataFactory->createAmendedByOrder($user, $order)
         );
 
         $this->em->flush();

@@ -4,18 +4,15 @@ namespace Tests\FrameworkBundle\Unit\Model\Customer;
 
 use DateTime;
 use PHPUnit\Framework\TestCase;
-use Shopsys\FrameworkBundle\Component\EntityExtension\EntityNameResolver;
 use Shopsys\FrameworkBundle\Model\Country\Country;
 use Shopsys\FrameworkBundle\Model\Country\CountryData;
 use Shopsys\FrameworkBundle\Model\Customer\BillingAddress;
 use Shopsys\FrameworkBundle\Model\Customer\BillingAddressData;
 use Shopsys\FrameworkBundle\Model\Customer\BillingAddressDataFactory;
 use Shopsys\FrameworkBundle\Model\Customer\CustomerDataFactory;
-use Shopsys\FrameworkBundle\Model\Customer\CustomerService;
 use Shopsys\FrameworkBundle\Model\Customer\DeliveryAddress;
 use Shopsys\FrameworkBundle\Model\Customer\DeliveryAddressData;
 use Shopsys\FrameworkBundle\Model\Customer\DeliveryAddressDataFactory;
-use Shopsys\FrameworkBundle\Model\Customer\DeliveryAddressFactory;
 use Shopsys\FrameworkBundle\Model\Customer\User;
 use Shopsys\FrameworkBundle\Model\Customer\UserData;
 use Shopsys\FrameworkBundle\Model\Customer\UserDataFactory;
@@ -29,13 +26,13 @@ use Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroupSettingFacade;
 use Shopsys\FrameworkBundle\Model\Transport\Transport;
 use Shopsys\FrameworkBundle\Model\Transport\TransportData;
 
-class CustomerServiceTest extends TestCase
+class CustomerDataFactoryTest extends TestCase
 {
     const DOMAIN_ID = 1;
 
     public function testGetAmendedCustomerDataByOrderWithoutChanges()
     {
-        $customerService = $this->getCustomerService();
+        $customerDataFactory = $this->getCustomerDataFactory();
 
         $userData = new UserData();
         $userData->firstName = 'firstName';
@@ -116,7 +113,7 @@ class CustomerServiceTest extends TestCase
             'companyTaxNumber'
         );
 
-        $customerData = $customerService->getAmendedCustomerDataByOrder($user, $order);
+        $customerData = $customerDataFactory->createAmendedByOrder($user, $order);
 
         $this->assertEquals($userData, $customerData->userData);
         $this->assertEquals($billingAddressData, $customerData->billingAddressData);
@@ -125,7 +122,7 @@ class CustomerServiceTest extends TestCase
 
     public function testGetAmendedCustomerDataByOrder()
     {
-        $customerService = $this->getCustomerService();
+        $customerDataFactory = $this->getCustomerDataFactory();
 
         $billingCountryData = new CountryData();
         $billingCountryData->name = 'Česká republika';
@@ -196,7 +193,7 @@ class CustomerServiceTest extends TestCase
         $deliveryAddressData->telephone = $order->getDeliveryTelephone();
         $deliveryAddressData->country = $deliveryCountry;
 
-        $customerData = $customerService->getAmendedCustomerDataByOrder($user, $order);
+        $customerData = $customerDataFactory->createAmendedByOrder($user, $order);
 
         $this->assertEquals($userData, $customerData->userData);
         $this->assertEquals($deliveryAddressData, $customerData->deliveryAddressData);
@@ -211,22 +208,16 @@ class CustomerServiceTest extends TestCase
     }
 
     /**
-     * @return \Shopsys\FrameworkBundle\Model\Customer\CustomerService
+     * @return \Shopsys\FrameworkBundle\Model\Customer\CustomerDataFactory
      */
-    private function getCustomerService()
+    private function getCustomerDataFactory(): CustomerDataFactory
     {
-        $deliveryAddressFactory = new DeliveryAddressFactory(new EntityNameResolver([]));
         $billingAddressDataFactory = new BillingAddressDataFactory();
         $deliveryAddressDataFactory = new DeliveryAddressDataFactory();
         $userDataFactory = new UserDataFactory($this->createMock(PricingGroupSettingFacade::class));
         $customerDataFactory = new CustomerDataFactory($billingAddressDataFactory, $deliveryAddressDataFactory, $userDataFactory);
 
-        return new CustomerService(
-            $deliveryAddressFactory,
-            $customerDataFactory,
-            $billingAddressDataFactory,
-            $deliveryAddressDataFactory
-        );
+        return $customerDataFactory;
     }
 
     /**

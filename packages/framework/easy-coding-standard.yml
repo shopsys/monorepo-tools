@@ -12,7 +12,7 @@ parameters:
             - '*/src/Model/Product/ProductVisibilityRepository.php'
             - '*/src/DataFixtures/Demo/ProductDataFixtureLoader.php'
             - '*/src/Controller/Admin/AdministratorController.php'
-            - '*/tests/Unit/Model/Customer/CustomerServiceTest.php'
+            - '*/tests/Unit/Model/Customer/CustomerDataFactoryTest.php'
             - '*/tests/Unit/Component/Domain/DomainDataCreatorTest.php'
 
         ObjectCalisthenics\Sniffs\Metrics\PropertyPerClassLimitSniff:
