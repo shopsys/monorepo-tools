@@ -28,6 +28,12 @@ spec:
             volumes:
                 -   name: source-codes
                     emptyDir: {}
+                -   name: domains-urls
+                    configMap:
+                        name: domains-urls
+                -   name: parameters
+                    configMap:
+                        name: parameters
                 -   name: nginx-configuration
                     configMap:
                         name: nginx-configuration
