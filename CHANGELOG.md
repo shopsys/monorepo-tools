@@ -37,7 +37,7 @@ The changelog is generated during the release process using [ChangelogLinker](ht
 - [#635] allow composer unlimited memory
 - [#616] services.yml: automatic registration of classes with suffix "Repository" in namespace `ShopBundle\Model\`
 
-## v7.0.0-beta3 - 2018-11-27
+## [v7.0.0-beta3] - 2018-11-27
 
 ### [shopsys/coding-standards]
 
@@ -1624,6 +1624,7 @@ That's why is this section formatted differently.
 - `.travis.yml` file with Travis CI configuration
 
 [7.0.0-beta4]: https://github.com/shopsys/shopsys/compare/v7.0.0-beta3...v7.0.0-beta4
+[7.0.0-beta3]: https://github.com/shopsys/shopsys/compare/v7.0.0-beta2...v7.0.0-beta3
 [7.0.0-beta2]: https://github.com/shopsys/shopsys/compare/v7.0.0-beta1...v7.0.0-beta2
 [7.0.0-beta1]: https://github.com/shopsys/shopsys/compare/v7.0.0-alpha6...v7.0.0-beta1
 [7.0.0-alpha6]: https://github.com/shopsys/shopsys/compare/v7.0.0-alpha5...v7.0.0-alpha6
