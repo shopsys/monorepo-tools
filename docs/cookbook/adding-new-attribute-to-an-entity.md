@@ -185,17 +185,22 @@ The original `ProductFormType` is set as the extended type by implementation of 
 
     use Shopsys\FrameworkBundle\Model\Product\ProductCategoryDomainFactoryInterface;
     use Shopsys\FrameworkBundle\Model\Product\ProductData as BaseProductData;
+    use Shopsys\FrameworkBundle\Model\Product\Pricing\ProductPriceRecalculationScheduler;
 
     // ...
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\Product\ProductCategoryDomainFactoryInterface $productCategoryDomainFactory
      * @param \Shopsys\ShopBundle\Model\Product\ProductData $productData
+     * @param \Shopsys\FrameworkBundle\Model\Product\Pricing\ProductPriceRecalculationScheduler $productPriceRecalculationScheduler
      */
-    public function edit(ProductCategoryDomainFactoryInterface $productCategoryDomainFactory, BaseProductData $productData)
-    {
+    public function edit(
+        ProductCategoryDomainFactoryInterface $productCategoryDomainFactory,
+        BaseProductData $productData,
+        ProductPriceRecalculationScheduler $productPriceRecalculationScheduler
+    ) {
         $this->extId = $productData->extId;
-        parent::edit($productCategoryDomainFactory, $productData);
+        parent::edit($productCategoryDomainFactory, $productData, $productPriceRecalculationScheduler);
     }
     ```
 

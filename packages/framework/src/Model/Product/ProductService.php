@@ -82,17 +82,6 @@ class ProductService
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\Product\Product $product
-     * @param \Shopsys\FrameworkBundle\Model\Product\ProductData $productData
-     */
-    public function edit(Product $product, ProductData $productData)
-    {
-        $product->edit($this->productCategoryDomainFactory, $productData);
-        $this->productPriceRecalculationScheduler->scheduleProductForImmediateRecalculation($product);
-        $product->markForVisibilityRecalculation();
-    }
-
-    /**
-     * @param \Shopsys\FrameworkBundle\Model\Product\Product $product
      * @param \Shopsys\FrameworkBundle\Model\Pricing\Vat\Vat $vat
      */
     public function changeVat(Product $product, Vat $vat)

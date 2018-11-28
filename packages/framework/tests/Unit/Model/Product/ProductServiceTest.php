@@ -18,32 +18,15 @@ class ProductServiceTest extends TestCase
 {
     public function testEditSchedulesPriceRecalculation()
     {
-        $inputPriceCalculationMock = $this->getMockBuilder(InputPriceCalculation::class)
-            ->disableOriginalConstructor()
-            ->getMock();
-        $basePriceCalculationMock = $this->getMockBuilder(BasePriceCalculation::class)
-            ->disableOriginalConstructor()
-            ->getMock();
-        $pricingSettingMock = $this->getMockBuilder(PricingSetting::class)
-            ->disableOriginalConstructor()
-            ->getMock();
         $productPriceRecalculationSchedulerMock = $this->getMockBuilder(ProductPriceRecalculationScheduler::class)
             ->disableOriginalConstructor()
             ->getMock();
         $productPriceRecalculationSchedulerMock->expects($this->once())->method('scheduleProductForImmediateRecalculation');
 
-        $productService = new ProductService(
-            $inputPriceCalculationMock,
-            $basePriceCalculationMock,
-            $pricingSettingMock,
-            $productPriceRecalculationSchedulerMock,
-            new ProductCategoryDomainFactory()
-        );
-
         $productData = new ProductData();
         $product = Product::create($productData);
 
-        $productService->edit($product, $productData);
+        $product->edit(new ProductCategoryDomainFactory(), $productData, $productPriceRecalculationSchedulerMock);
     }
 
     public function testChangeVatSchedulesPriceRecalculation()

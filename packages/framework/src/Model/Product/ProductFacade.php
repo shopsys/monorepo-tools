@@ -280,7 +280,7 @@ class ProductFacade
     {
         $product = $this->productRepository->getById($productId);
 
-        $this->productService->edit($product, $productData);
+        $product->edit($this->productCategoryDomainFactory, $productData, $this->productPriceRecalculationScheduler);
 
         $this->saveParameters($product, $productData->parameters);
         if (!$product->isMainVariant()) {

@@ -9,6 +9,7 @@ use Shopsys\FrameworkBundle\Model\Localization\AbstractTranslatableEntity;
 use Shopsys\FrameworkBundle\Model\Pricing\Vat\Vat;
 use Shopsys\FrameworkBundle\Model\Product\Availability\Availability;
 use Shopsys\FrameworkBundle\Model\Product\Exception\ProductDomainNotFoundException;
+use Shopsys\FrameworkBundle\Model\Product\Pricing\ProductPriceRecalculationScheduler;
 
 /**
  * Product
@@ -340,11 +341,12 @@ class Product extends AbstractTranslatableEntity
     /**
      * @param \Shopsys\FrameworkBundle\Model\Product\ProductCategoryDomainFactoryInterface $productCategoryDomainFactory
      * @param \Shopsys\FrameworkBundle\Model\Product\ProductData $productData
-     * @param \Shopsys\FrameworkBundle\Model\Product\ProductData
+     * @param \Shopsys\FrameworkBundle\Model\Product\Pricing\ProductPriceRecalculationScheduler $productPriceRecalculationScheduler
      */
     public function edit(
         ProductCategoryDomainFactoryInterface $productCategoryDomainFactory,
-        ProductData $productData
+        ProductData $productData,
+        ProductPriceRecalculationScheduler $productPriceRecalculationScheduler
     ) {
         $this->vat = $productData->vat;
         $this->sellingFrom = $productData->sellingFrom;
@@ -373,6 +375,9 @@ class Product extends AbstractTranslatableEntity
         }
 
         $this->orderingPriority = $productData->orderingPriority;
+
+        $productPriceRecalculationScheduler->scheduleProductForImmediateRecalculation($this);
+        $this->markForVisibilityRecalculation();
     }
 
     /**
