@@ -113,7 +113,8 @@
           "fields": {
             "edge_ngram": {
               "type": "text",
-              "analyzer": "edge_ngram_unanalyzed"
+              "analyzer": "edge_ngram_unanalyzed",
+              "search_analyzer": "keyword"
             }
           }
         },
@@ -123,7 +124,8 @@
           "fields": {
             "edge_ngram": {
               "type": "text",
-              "analyzer": "edge_ngram_unanalyzed"
+              "analyzer": "edge_ngram_unanalyzed",
+              "search_analyzer": "keyword"
             }
           }
         },
@@ -133,7 +135,8 @@
           "fields": {
             "edge_ngram": {
               "type": "text",
-              "analyzer": "edge_ngram_unanalyzed"
+              "analyzer": "edge_ngram_unanalyzed",
+              "search_analyzer": "keyword"
             }
           }
         },

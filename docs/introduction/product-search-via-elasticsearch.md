@@ -53,9 +53,9 @@ But if we simplify, we can say that the search term is searched in attributes an
 * partno - exact match
 * name - match in first couple of letters of any word
 * name - match in first couple of letters of any word ignoring diacritics
-* ean - match in first couple of letters
-* catnum - match in first couple of letters
-* partno - match in first couple of letters
+* ean - exact match in first characters
+* catnum - exact match in first characters
+* partno - exact match in first characters
 * short description - match anywhere
 * description - match anywhere
 
