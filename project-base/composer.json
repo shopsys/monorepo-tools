@@ -68,14 +68,14 @@
         "sensio/generator-bundle": "^3.1.7",
         "shopsys/doctrine-orm": "^2.6.2",
         "shopsys/postgres-search-bundle": "0.1",
-        "shopsys/migrations": "dev-master",
-        "shopsys/form-types-bundle": "dev-master",
-        "shopsys/framework": "dev-master",
-        "shopsys/plugin-interface": "dev-master",
-        "shopsys/product-feed-heureka": "dev-master",
-        "shopsys/product-feed-heureka-delivery": "dev-master",
-        "shopsys/product-feed-zbozi": "dev-master",
-        "shopsys/product-feed-google": "dev-master",
+        "shopsys/migrations": "7.0.0-beta4",
+        "shopsys/form-types-bundle": "7.0.0-beta4",
+        "shopsys/framework": "7.0.0-beta4",
+        "shopsys/plugin-interface": "7.0.0-beta4",
+        "shopsys/product-feed-heureka": "7.0.0-beta4",
+        "shopsys/product-feed-heureka-delivery": "7.0.0-beta4",
+        "shopsys/product-feed-zbozi": "7.0.0-beta4",
+        "shopsys/product-feed-google": "7.0.0-beta4",
         "snc/redis-bundle": "2.1.4",
         "stof/doctrine-extensions-bundle": "^1.3.0",
         "symfony/assetic-bundle": "^2.8.2",
@@ -95,8 +95,8 @@
         "codeception/codeception": "^2.4.0",
         "phpstan/phpstan": "^0.7",
         "phpunit/phpunit": "^7.0",
-        "shopsys/coding-standards": "dev-master",
-        "shopsys/http-smoke-testing": "dev-master"
+        "shopsys/coding-standards": "7.0.0-beta4",
+        "shopsys/http-smoke-testing": "7.0.0-beta4"
     },
     "conflict": {
         "symfony/dependency-injection": "3.4.15|3.4.16"
