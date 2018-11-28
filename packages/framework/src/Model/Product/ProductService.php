@@ -133,23 +133,4 @@ class ProductService
             $product->getMainVariant()->markForVisibilityRecalculation();
         }
     }
-
-    /**
-     * @param \Shopsys\FrameworkBundle\Model\Product\Product[] $products
-     * @param int[] $orderedProductIds
-     * @return \Shopsys\FrameworkBundle\Model\Product\Product[]
-     */
-    public function sortProductsByProductIds(array $products, array $orderedProductIds)
-    {
-        $orderedProductIds = array_values($orderedProductIds);
-
-        usort($products, function (Product $product1, Product $product2) use ($orderedProductIds) {
-            $product1Priority = array_search($product1->getId(), $orderedProductIds, true);
-            $product2Priority = array_search($product2->getId(), $orderedProductIds, true);
-
-            return $product1Priority < $product2Priority ? -1 : 1;
-        });
-
-        return $products;
-    }
 }
