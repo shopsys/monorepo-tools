@@ -1786,7 +1786,6 @@ That's why is this section formatted differently.
 [#524]: https://github.com/shopsys/shopsys/pull/524
 [#522]: https://github.com/shopsys/shopsys/pull/522
 [#503]: https://github.com/shopsys/shopsys/pull/503
-[v7.0.0-beta2]: https://github.com/shopsys/shopsys/compare/v7.0.0-beta2...v7.0.0-beta2
 [@ondrejmirtes]: https://github.com/ondrejmirtes
 [@henzigo]: https://github.com/henzigo
 [#635]: https://github.com/shopsys/shopsys/pull/635
