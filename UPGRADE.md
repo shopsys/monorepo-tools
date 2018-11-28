@@ -49,7 +49,9 @@ There is a list of all the repositories maintained by monorepo, changes in log b
 * [shopsys/microservice-product-search]
 * [shopsys/microservice-product-search-export]
 
-## [From v7.0.0-beta3 to Unreleased]
+## [From v7.0.0-beta4 to Unreleased]
+
+## [From v7.0.0-beta3 to v7.0.0-beta4]
 ### [shopsys/project-base]
 - [#616 - services.yml: automatic registration of classes with suffix "Repository" in namespace ShopBundle\Model\ ](https://github.com/shopsys/shopsys/pull/616)
     - modify your `src/Shopsys/ShopBundle/Resources/config/services.yml`, change the resource for automatic registration of Model services from `resource: '../../Model/**/*{Facade,Factory}.php'` to `resource: '../../Model/**/*{Facade,Factory,Repository}.php'`
@@ -711,7 +713,8 @@ parameters:
         - *_generated/*
 
 ```
-[From v7.0.0-beta3 to Unreleased]: https://github.com/shopsys/shopsys/compare/v7.0.0-beta3...HEAD
+[From v7.0.0-beta4 to Unreleased]: https://github.com/shopsys/shopsys/compare/v7.0.0-beta4...HEAD
+[From v7.0.0-beta3 to v7.0.0-beta4]: https://github.com/shopsys/shopsys/compare/v7.0.0-beta3...v7.0.0-beta4
 [From 7.0.0-beta2 to v7.0.0-beta3]: https://github.com/shopsys/shopsys/compare/v7.0.0-beta2...v7.0.0-beta3
 [From 7.0.0-beta1 to 7.0.0-beta2]: https://github.com/shopsys/shopsys/compare/v7.0.0-beta1...v7.0.0-beta2
 [From 7.0.0-alpha6 to 7.0.0-beta1]: https://github.com/shopsys/shopsys/compare/v7.0.0-alpha6...v7.0.0-beta1
