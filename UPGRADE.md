@@ -53,6 +53,8 @@ There is a list of all the repositories maintained by monorepo, changes in log b
 ### [shopsys/project-base]
 - [#616 - services.yml: automatic registration of classes with suffix "Repository" in namespace ShopBundle\Model\ ](https://github.com/shopsys/shopsys/pull/616)
     - modify your `src/Shopsys/ShopBundle/Resources/config/services.yml`, change the resource for automatic registration of Model services from `resource: '../../Model/**/*{Facade,Factory}.php'` to `resource: '../../Model/**/*{Facade,Factory,Repository}.php'`
+- set `ENV COMPOSER_MEMORY_LIMIT=-1` in base stage in your `docker/php-fpm/Dockerfile` as composer consumes huge amount of memory during dependencies installation
+    - see [#635 - allow composer unlimited memory](https://github.com/shopsys/shopsys/pull/635/files)
 
 ## [From 7.0.0-beta2 to v7.0.0-beta3]
 ### [shopsys/framework]
