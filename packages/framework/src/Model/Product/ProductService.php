@@ -88,7 +88,7 @@ class ProductService
     {
         $product->edit($this->productCategoryDomainFactory, $productData);
         $this->productPriceRecalculationScheduler->scheduleProductForImmediateRecalculation($product);
-        $this->markProductForVisibilityRecalculation($product);
+        $product->markForVisibilityRecalculation();
     }
 
     /**
@@ -117,20 +117,5 @@ class ProductService
         }
 
         return new ProductDeleteResult();
-    }
-
-    /**
-     * @param \Shopsys\FrameworkBundle\Model\Product\Product $product
-     */
-    public function markProductForVisibilityRecalculation(Product $product)
-    {
-        $product->markForVisibilityRecalculation();
-        if ($product->isMainVariant()) {
-            foreach ($product->getVariants() as $variant) {
-                $variant->markForVisibilityRecalculation();
-            }
-        } elseif ($product->isVariant()) {
-            $product->getMainVariant()->markForVisibilityRecalculation();
-        }
     }
 }
