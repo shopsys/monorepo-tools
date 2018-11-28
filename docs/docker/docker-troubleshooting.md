@@ -7,6 +7,7 @@
 1. [Update of Docker-compose is not Reflected](#update-of-docker-compose-is-not-reflected)
 1. [Docker Sync does not Synchronize File Consistently](#docker-sync-does-not-synchronize-file-consistently)
 1. [A docker container is not running](#a-docker-container-is-not-running)
+1. [Composer dependencies installation fails on memory limit](#composer-dependencies-installation-fails-on-memory-limit)
 
 If you are developing on Shopsys Framework using docker, you might run into some problems during the process.
 
@@ -144,3 +145,9 @@ In this case, you can increase the performance by deleting these volumes in your
 
 ## A docker container is not running
 You can inspect what is wrong by using `docker logs <container-name>` command.
+
+## Composer dependencies installation fails on memory limit
+When `composer install` or `composer update` fails on an error with exceeding the allowed memory size, you can increase the memory limit by setting `COMPOSER_MEMORY_LIMIT` environment variable in your `docker/php-fpm/Dockerfile` or `docker-compose.yml`.
+
+*Note: Since `7.0.0-beta4` we have set the Composer memory limit to `-1` (which means unlimited) in the php-fpm's `Dockerfile`.*
+*If you still encounter memory issues while using Docker for Windows (or Mac), try increasing the limits in `Docker -> Preferences… -> Advanced`.*
