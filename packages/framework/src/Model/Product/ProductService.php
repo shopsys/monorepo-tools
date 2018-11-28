@@ -5,8 +5,6 @@ namespace Shopsys\FrameworkBundle\Model\Product;
 use Shopsys\FrameworkBundle\Model\Pricing\BasePriceCalculation;
 use Shopsys\FrameworkBundle\Model\Pricing\InputPriceCalculation;
 use Shopsys\FrameworkBundle\Model\Pricing\PricingSetting;
-use Shopsys\FrameworkBundle\Model\Pricing\Vat\Vat;
-use Shopsys\FrameworkBundle\Model\Product\Pricing\ProductPriceRecalculationScheduler;
 
 class ProductService
 {
@@ -26,11 +24,6 @@ class ProductService
     private $pricingSetting;
 
     /**
-     * @var \Shopsys\FrameworkBundle\Model\Product\Pricing\ProductPriceRecalculationScheduler
-     */
-    private $productPriceRecalculationScheduler;
-
-    /**
      * @var \Shopsys\FrameworkBundle\Model\Product\ProductCategoryDomainFactoryInterface
      */
     protected $productCategoryDomainFactory;
@@ -39,20 +32,17 @@ class ProductService
      * @param \Shopsys\FrameworkBundle\Model\Pricing\InputPriceCalculation $inputPriceCalculation
      * @param \Shopsys\FrameworkBundle\Model\Pricing\BasePriceCalculation $basePriceCalculation
      * @param \Shopsys\FrameworkBundle\Model\Pricing\PricingSetting $pricingSetting
-     * @param \Shopsys\FrameworkBundle\Model\Product\Pricing\ProductPriceRecalculationScheduler $productPriceRecalculationScheduler
      * @param \Shopsys\FrameworkBundle\Model\Product\ProductCategoryDomainFactoryInterface $productCategoryDomainFactory
      */
     public function __construct(
         InputPriceCalculation $inputPriceCalculation,
         BasePriceCalculation $basePriceCalculation,
         PricingSetting $pricingSetting,
-        ProductPriceRecalculationScheduler $productPriceRecalculationScheduler,
         ProductCategoryDomainFactoryInterface $productCategoryDomainFactory
     ) {
         $this->inputPriceCalculation = $inputPriceCalculation;
         $this->basePriceCalculation = $basePriceCalculation;
         $this->pricingSetting = $pricingSetting;
-        $this->productPriceRecalculationScheduler = $productPriceRecalculationScheduler;
         $this->productCategoryDomainFactory = $productCategoryDomainFactory;
     }
 
@@ -78,16 +68,6 @@ class ProductService
             );
             $productManualInputPrice->setInputPrice($inputPriceForPricingGroup);
         }
-    }
-
-    /**
-     * @param \Shopsys\FrameworkBundle\Model\Product\Product $product
-     * @param \Shopsys\FrameworkBundle\Model\Pricing\Vat\Vat $vat
-     */
-    public function changeVat(Product $product, Vat $vat)
-    {
-        $product->changeVat($vat);
-        $this->productPriceRecalculationScheduler->scheduleProductForImmediateRecalculation($product);
     }
 
     /**
