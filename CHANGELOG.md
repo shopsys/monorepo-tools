@@ -28,7 +28,7 @@ The changelog is generated during the release process using [ChangelogLinker](ht
 
 <!-- changelog-linker -->
 
-## [v7.0.0-beta4] - 2018-11-28
+## [7.0.0-beta4] - 2018-11-28
 
 ### [shopsys/project-base]
 
@@ -37,7 +37,7 @@ The changelog is generated during the release process using [ChangelogLinker](ht
 - [#635] allow composer unlimited memory
 - [#616] services.yml: automatic registration of classes with suffix "Repository" in namespace `ShopBundle\Model\`
 
-## [v7.0.0-beta3] - 2018-11-27
+## [7.0.0-beta3] - 2018-11-27
 
 ### [shopsys/coding-standards]
 
