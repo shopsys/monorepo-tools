@@ -20,3 +20,5 @@ parameters:
     microservice_product_search_export_url: 'http://microservice-product-search-export'
 
     secret: ThisTokenIsNotSoSecretChangeIt
+    trusted_proxies:
+        - "127.0.0.1"

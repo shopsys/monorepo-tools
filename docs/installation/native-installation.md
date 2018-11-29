@@ -130,6 +130,7 @@ Composer will prompt you to set main parameters (`app/config/parameters.yml`):
 | `microservice_product_search_url`        | URL of the product search microservice                                        | http://127.0.0.1:8001 |
 | `microservice_product_search_export_url` | URL of the product search export microservice                                 | http://127.0.0.1:8002 |
 | `secret`                                 | randomly generated secret token                                               | ...           |
+| `trusted_proxies`                        | proxies that are trusted to pass traffic, used mainly for production          | [127.0.0.1] |
 
 Composer will then prompt you to set parameters for testing environment (`app/config/parameters_test.yml`):
 

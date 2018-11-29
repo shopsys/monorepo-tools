@@ -50,6 +50,9 @@ There is a list of all the repositories maintained by monorepo, changes in log b
 * [shopsys/microservice-product-search-export]
 
 ## [From v7.0.0-beta4 to Unreleased]
+### [shopsys/project-base]
+- *(optional)* [#596 Trusted proxies are now configurable in parameters.yml file](https://github.com/shopsys/shopsys/pull/596)
+    - for easier deployment to production, make the trusted proxies in `Shopsys\Boostrap` class loaded from DIC parameter `trusted_proxies` instead of being hard-coded
 
 ## [From v7.0.0-beta3 to v7.0.0-beta4]
 ### [shopsys/project-base]
