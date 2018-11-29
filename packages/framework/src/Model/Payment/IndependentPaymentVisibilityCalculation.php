@@ -35,11 +35,6 @@ class IndependentPaymentVisibilityCalculation
         if ($payment->isHidden()) {
             return false;
         }
-
-        if (!$payment->isEnabled($domainId)) {
-            return false;
-        }
-
-        return true;
+        return $payment->isEnabled($domainId);
     }
 }

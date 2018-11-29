@@ -35,11 +35,6 @@ class IndependentTransportVisibilityCalculation
         if ($transport->isHidden()) {
             return false;
         }
-
-        if (!$transport->isEnabled($domainId)) {
-            return false;
-        }
-
-        return true;
+        return $transport->isEnabled($domainId);
     }
 }
