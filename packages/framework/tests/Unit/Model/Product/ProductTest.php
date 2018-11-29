@@ -129,4 +129,31 @@ class ProductTest extends TestCase
         $this->assertTrue($variant->isMarkedForVisibilityRecalculation());
         $this->assertTrue($mainVariant->isMarkedForVisibilityRecalculation());
     }
+
+    public function testDeleteResultNotVariant()
+    {
+        $productData = new ProductData();
+        $product = Product::create($productData);
+
+        $this->assertEmpty($product->getProductDeleteResult()->getProductsForRecalculations());
+    }
+
+    public function testDeleteResultVariant()
+    {
+        $productData = new ProductData();
+        $variant = Product::create($productData);
+        $mainVariant = Product::createMainVariant($productData, [$variant]);
+
+        $this->assertSame([$mainVariant], $variant->getProductDeleteResult()->getProductsForRecalculations());
+    }
+
+    public function testDeleteResultMainVariant()
+    {
+        $productData = new ProductData();
+        $variant = Product::create($productData);
+        $mainVariant = Product::createMainVariant($productData, [$variant]);
+
+        $this->assertEmpty($mainVariant->getProductDeleteResult()->getProductsForRecalculations());
+        $this->assertFalse($variant->isVariant());
+    }
 }

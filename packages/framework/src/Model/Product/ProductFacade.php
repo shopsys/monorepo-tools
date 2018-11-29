@@ -47,11 +47,6 @@ class ProductFacade
     protected $domain;
 
     /**
-     * @var \Shopsys\FrameworkBundle\Model\Product\ProductService
-     */
-    protected $productService;
-
-    /**
      * @var \Shopsys\FrameworkBundle\Component\Image\ImageFacade
      */
     protected $imageFacade;
@@ -147,7 +142,6 @@ class ProductFacade
      * @param \Shopsys\FrameworkBundle\Model\Product\ProductVisibilityFacade $productVisibilityFacade
      * @param \Shopsys\FrameworkBundle\Model\Product\Parameter\ParameterRepository $parameterRepository
      * @param \Shopsys\FrameworkBundle\Component\Domain\Domain $domain
-     * @param \Shopsys\FrameworkBundle\Model\Product\ProductService $productService
      * @param \Shopsys\FrameworkBundle\Component\Image\ImageFacade $imageFacade
      * @param \Shopsys\FrameworkBundle\Model\Product\Pricing\ProductPriceRecalculationScheduler $productPriceRecalculationScheduler
      * @param \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroupRepository $pricingGroupRepository
@@ -173,7 +167,6 @@ class ProductFacade
         ProductVisibilityFacade $productVisibilityFacade,
         ParameterRepository $parameterRepository,
         Domain $domain,
-        ProductService $productService,
         ImageFacade $imageFacade,
         ProductPriceRecalculationScheduler $productPriceRecalculationScheduler,
         PricingGroupRepository $pricingGroupRepository,
@@ -198,7 +191,6 @@ class ProductFacade
         $this->productVisibilityFacade = $productVisibilityFacade;
         $this->parameterRepository = $parameterRepository;
         $this->domain = $domain;
-        $this->productService = $productService;
         $this->imageFacade = $imageFacade;
         $this->productPriceRecalculationScheduler = $productPriceRecalculationScheduler;
         $this->pricingGroupRepository = $pricingGroupRepository;
@@ -313,7 +305,7 @@ class ProductFacade
     public function delete($productId)
     {
         $product = $this->productRepository->getById($productId);
-        $productDeleteResult = $this->productService->delete($product);
+        $productDeleteResult = $product->getProductDeleteResult();
         $productsForRecalculations = $productDeleteResult->getProductsForRecalculations();
         foreach ($productsForRecalculations as $productForRecalculations) {
             $this->productPriceRecalculationScheduler->scheduleProductForImmediateRecalculation($productForRecalculations);

@@ -69,22 +69,4 @@ class ProductService
             $productManualInputPrice->setInputPrice($inputPriceForPricingGroup);
         }
     }
-
-    /**
-     * @param \Shopsys\FrameworkBundle\Model\Product\Product $product
-     * @return \Shopsys\FrameworkBundle\Model\Product\ProductDeleteResult
-     */
-    public function delete(Product $product)
-    {
-        if ($product->isMainVariant()) {
-            foreach ($product->getVariants() as $variantProduct) {
-                $variantProduct->unsetMainVariant();
-            }
-        }
-        if ($product->isVariant()) {
-            return new ProductDeleteResult([$product->getMainVariant()]);
-        }
-
-        return new ProductDeleteResult();
-    }
 }

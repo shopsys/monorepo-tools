@@ -989,4 +989,21 @@ class Product extends AbstractTranslatableEntity
 
         $this->setDomains($productData);
     }
+
+    /**
+     * @return \Shopsys\FrameworkBundle\Model\Product\ProductDeleteResult
+     */
+    public function getProductDeleteResult()
+    {
+        if ($this->isMainVariant()) {
+            foreach ($this->getVariants() as $variantProduct) {
+                $variantProduct->unsetMainVariant();
+            }
+        }
+        if ($this->isVariant()) {
+            return new ProductDeleteResult([$this->getMainVariant()]);
+        }
+
+        return new ProductDeleteResult();
+    }
 }
