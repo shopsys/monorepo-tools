@@ -3,12 +3,13 @@
 namespace Shopsys\FrameworkBundle\Model\Product\Pricing;
 
 use Doctrine\ORM\EntityManagerInterface;
+use Shopsys\FrameworkBundle\Model\Pricing\BasePriceCalculation;
 use Shopsys\FrameworkBundle\Model\Pricing\Currency\CurrencyFacade;
 use Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroupFacade;
+use Shopsys\FrameworkBundle\Model\Pricing\InputPriceCalculation;
 use Shopsys\FrameworkBundle\Model\Pricing\PricingSetting;
 use Shopsys\FrameworkBundle\Model\Product\Product;
 use Shopsys\FrameworkBundle\Model\Product\ProductRepository;
-use Shopsys\FrameworkBundle\Model\Product\ProductService;
 
 class ProductInputPriceFacade
 {
@@ -50,14 +51,19 @@ class ProductInputPriceFacade
     protected $productRepository;
 
     /**
-     * @var \Shopsys\FrameworkBundle\Model\Product\ProductService
-     */
-    protected $productService;
-
-    /**
      * @var \Doctrine\ORM\Internal\Hydration\IterableResult|\Shopsys\FrameworkBundle\Model\Product\Product[][]|null
      */
     protected $productRowsIterator;
+
+    /**
+     * @var \Shopsys\FrameworkBundle\Model\Pricing\BasePriceCalculation
+     */
+    protected $basePriceCalculation;
+
+    /**
+     * @var \Shopsys\FrameworkBundle\Model\Pricing\InputPriceCalculation
+     */
+    protected $inputPriceCalculation;
 
     /**
      * @param \Doctrine\ORM\EntityManagerInterface $em
@@ -66,7 +72,8 @@ class ProductInputPriceFacade
      * @param \Shopsys\FrameworkBundle\Model\Product\Pricing\ProductManualInputPriceRepository $productManualInputPriceRepository
      * @param \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroupFacade $pricingGroupFacade
      * @param \Shopsys\FrameworkBundle\Model\Product\ProductRepository $productRepository
-     * @param \Shopsys\FrameworkBundle\Model\Product\ProductService $productService
+     * @param \Shopsys\FrameworkBundle\Model\Pricing\BasePriceCalculation $basePriceCalculation
+     * @param \Shopsys\FrameworkBundle\Model\Pricing\InputPriceCalculation $inputPriceCalculation
      */
     public function __construct(
         EntityManagerInterface $em,
@@ -75,7 +82,8 @@ class ProductInputPriceFacade
         ProductManualInputPriceRepository $productManualInputPriceRepository,
         PricingGroupFacade $pricingGroupFacade,
         ProductRepository $productRepository,
-        ProductService $productService
+        BasePriceCalculation $basePriceCalculation,
+        InputPriceCalculation $inputPriceCalculation
     ) {
         $this->em = $em;
         $this->currencyFacade = $currencyFacade;
@@ -83,7 +91,8 @@ class ProductInputPriceFacade
         $this->productManualInputPriceRepository = $productManualInputPriceRepository;
         $this->pricingGroupFacade = $pricingGroupFacade;
         $this->productRepository = $productRepository;
-        $this->productService = $productService;
+        $this->basePriceCalculation = $basePriceCalculation;
+        $this->inputPriceCalculation = $inputPriceCalculation;
     }
 
     /**
@@ -124,7 +133,15 @@ class ProductInputPriceFacade
             $product = $row[0];
             $newVat = $product->getVat()->getReplaceWith();
             $productManualInputPrices = $this->productManualInputPriceRepository->getByProduct($product);
-            $this->productService->recalculateInputPriceForNewVatPercent($product, $productManualInputPrices, $newVat->getPercent());
+            $inputPriceType = $this->pricingSetting->getInputPriceType();
+            foreach ($productManualInputPrices as $productManualInputPrice) {
+                $productManualInputPrice->recalculateInputPriceForNewVatPercent(
+                    $inputPriceType,
+                    $newVat->getPercent(),
+                    $this->basePriceCalculation,
+                    $this->inputPriceCalculation
+                );
+            }
             $product->changeVat($newVat);
         }
 
