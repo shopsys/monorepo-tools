@@ -10,7 +10,7 @@ use Shopsys\FrameworkBundle\Model\Mail\MessageData;
 use Shopsys\FrameworkBundle\Model\Mail\Setting\MailSetting;
 use Shopsys\FrameworkBundle\Model\Order\Item\OrderItemPriceCalculation;
 use Shopsys\FrameworkBundle\Model\Order\Order;
-use Shopsys\FrameworkBundle\Model\Order\OrderService;
+use Shopsys\FrameworkBundle\Model\Order\OrderUrlGenerator;
 use Shopsys\FrameworkBundle\Model\Order\Status\OrderStatus;
 use Shopsys\FrameworkBundle\Twig\DateTimeFormatterExtension;
 use Shopsys\FrameworkBundle\Twig\PriceExtension;
@@ -70,9 +70,9 @@ class OrderMailService
     private $dateTimeFormatterExtension;
 
     /**
-     * @var \Shopsys\FrameworkBundle\Model\Order\OrderService
+     * @var \Shopsys\FrameworkBundle\Model\Order\OrderUrlGenerator
      */
-    private $orderService;
+    private $orderUrlGenerator;
 
     /**
      * @param \Shopsys\FrameworkBundle\Component\Setting\Setting $setting
@@ -82,7 +82,7 @@ class OrderMailService
      * @param \Shopsys\FrameworkBundle\Component\Domain\Domain $domain
      * @param \Shopsys\FrameworkBundle\Twig\PriceExtension $priceExtension
      * @param \Shopsys\FrameworkBundle\Twig\DateTimeFormatterExtension $dateTimeFormatterExtension
-     * @param \Shopsys\FrameworkBundle\Model\Order\OrderService $orderService
+     * @param \Shopsys\FrameworkBundle\Model\Order\OrderUrlGenerator $orderUrlGenerator
      */
     public function __construct(
         Setting $setting,
@@ -92,7 +92,7 @@ class OrderMailService
         Domain $domain,
         PriceExtension $priceExtension,
         DateTimeFormatterExtension $dateTimeFormatterExtension,
-        OrderService $orderService
+        OrderUrlGenerator $orderUrlGenerator
     ) {
         $this->setting = $setting;
         $this->domainRouterFactory = $domainRouterFactory;
@@ -101,7 +101,7 @@ class OrderMailService
         $this->domain = $domain;
         $this->priceExtension = $priceExtension;
         $this->dateTimeFormatterExtension = $dateTimeFormatterExtension;
-        $this->orderService = $orderService;
+        $this->orderUrlGenerator = $orderUrlGenerator;
     }
 
     /**
@@ -158,7 +158,7 @@ class OrderMailService
             self::VARIABLE_DELIVERY_ADDRESS => $this->getDeliveryAddressHtmlTable($order),
             self::VARIABLE_NOTE => $order->getNote(),
             self::VARIABLE_PRODUCTS => $this->getProductsHtmlTable($order),
-            self::VARIABLE_ORDER_DETAIL_URL => $this->orderService->getOrderDetailUrl($order),
+            self::VARIABLE_ORDER_DETAIL_URL => $this->orderUrlGenerator->getOrderDetailUrl($order),
             self::VARIABLE_TRANSPORT_INSTRUCTIONS => $transportInstructions,
             self::VARIABLE_PAYMENT_INSTRUCTIONS => $paymentInstructions,
         ];

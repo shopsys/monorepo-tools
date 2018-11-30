@@ -49,6 +49,11 @@ class OrderFacade
     protected $orderService;
 
     /**
+     * @var \Shopsys\FrameworkBundle\Model\Order\OrderUrlGenerator
+     */
+    protected $orderUrlGenerator;
+
+    /**
      * @var \Shopsys\FrameworkBundle\Model\Order\OrderCreationService
      */
     protected $orderCreationService;
@@ -138,6 +143,7 @@ class OrderFacade
      * @param \Shopsys\FrameworkBundle\Model\Order\OrderNumberSequenceRepository $orderNumberSequenceRepository
      * @param \Shopsys\FrameworkBundle\Model\Order\OrderRepository $orderRepository
      * @param \Shopsys\FrameworkBundle\Model\Order\OrderService $orderService
+     * @param \Shopsys\FrameworkBundle\Model\Order\OrderUrlGenerator $orderUrlGenerator
      * @param \Shopsys\FrameworkBundle\Model\Order\OrderCreationService $orderCreationService
      * @param \Shopsys\FrameworkBundle\Model\Order\Status\OrderStatusRepository $orderStatusRepository
      * @param \Shopsys\FrameworkBundle\Model\Order\Mail\OrderMailFacade $orderMailFacade
@@ -161,6 +167,7 @@ class OrderFacade
         OrderNumberSequenceRepository $orderNumberSequenceRepository,
         OrderRepository $orderRepository,
         OrderService $orderService,
+        OrderUrlGenerator $orderUrlGenerator,
         OrderCreationService $orderCreationService,
         OrderStatusRepository $orderStatusRepository,
         OrderMailFacade $orderMailFacade,
@@ -200,6 +207,7 @@ class OrderFacade
         $this->domain = $domain;
         $this->orderFactory = $orderFactory;
         $this->orderPriceCalculation = $orderPriceCalculation;
+        $this->orderUrlGenerator = $orderUrlGenerator;
     }
 
     /**
@@ -320,7 +328,7 @@ class OrderFacade
     public function getOrderSentPageContent($orderId)
     {
         $order = $this->getById($orderId);
-        $orderDetailUrl = $this->orderService->getOrderDetailUrl($order);
+        $orderDetailUrl = $this->orderUrlGenerator->getOrderDetailUrl($order);
         $orderSentPageContent = $this->setting->getForDomain(Setting::ORDER_SENT_PAGE_CONTENT, $order->getDomainId());
 
         $variables = [

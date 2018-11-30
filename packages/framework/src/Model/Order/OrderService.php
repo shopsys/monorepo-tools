@@ -3,12 +3,10 @@
 namespace Shopsys\FrameworkBundle\Model\Order;
 
 use Shopsys\FrameworkBundle\Component\Domain\Domain;
-use Shopsys\FrameworkBundle\Component\Router\DomainRouterFactory;
 use Shopsys\FrameworkBundle\Model\Order\Item\OrderItemPriceCalculation;
 use Shopsys\FrameworkBundle\Model\Order\Item\OrderProductFactoryInterface;
 use Shopsys\FrameworkBundle\Model\Pricing\Price;
 use Shopsys\FrameworkBundle\Model\Product\Product;
-use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 class OrderService
 {
@@ -30,11 +28,6 @@ class OrderService
     private $orderPriceCalculation;
 
     /**
-     * @var \Shopsys\FrameworkBundle\Component\Router\DomainRouterFactory
-     */
-    private $domainRouterFactory;
-
-    /**
      * @var \Shopsys\FrameworkBundle\Model\Order\Item\OrderProductFactoryInterface
      */
     protected $orderProductFactory;
@@ -43,20 +36,17 @@ class OrderService
      * @param \Shopsys\FrameworkBundle\Component\Domain\Domain $domain
      * @param \Shopsys\FrameworkBundle\Model\Order\Item\OrderItemPriceCalculation $orderItemPriceCalculation
      * @param \Shopsys\FrameworkBundle\Model\Order\OrderPriceCalculation $orderPriceCalculation
-     * @param \Shopsys\FrameworkBundle\Component\Router\DomainRouterFactory $domainRouterFactory
      * @param \Shopsys\FrameworkBundle\Model\Order\Item\OrderProductFactoryInterface $orderProductFactory
      */
     public function __construct(
         Domain $domain,
         OrderItemPriceCalculation $orderItemPriceCalculation,
         OrderPriceCalculation $orderPriceCalculation,
-        DomainRouterFactory $domainRouterFactory,
         OrderProductFactoryInterface $orderProductFactory
     ) {
         $this->domain = $domain;
         $this->orderItemPriceCalculation = $orderItemPriceCalculation;
         $this->orderPriceCalculation = $orderPriceCalculation;
-        $this->domainRouterFactory = $domainRouterFactory;
         $this->orderProductFactory = $orderProductFactory;
     }
 
@@ -137,18 +127,5 @@ class OrderService
         $order->calculateTotalPrice($this->orderPriceCalculation);
 
         return $orderProduct;
-    }
-
-    /**
-     * @param \Shopsys\FrameworkBundle\Model\Order\Order $order
-     * @return string
-     */
-    public function getOrderDetailUrl(Order $order)
-    {
-        return $this->domainRouterFactory->getRouter($order->getDomainId())->generate(
-            'front_customer_order_detail_unregistered',
-            ['urlHash' => $order->getUrlHash()],
-            UrlGeneratorInterface::ABSOLUTE_URL
-        );
     }
 }

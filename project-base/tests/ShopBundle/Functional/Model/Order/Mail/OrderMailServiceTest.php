@@ -11,7 +11,7 @@ use Shopsys\FrameworkBundle\Model\Mail\MailTemplateData;
 use Shopsys\FrameworkBundle\Model\Mail\MessageData;
 use Shopsys\FrameworkBundle\Model\Order\Item\OrderItemPriceCalculation;
 use Shopsys\FrameworkBundle\Model\Order\Mail\OrderMailService;
-use Shopsys\FrameworkBundle\Model\Order\OrderService;
+use Shopsys\FrameworkBundle\Model\Order\OrderUrlGenerator;
 use Shopsys\FrameworkBundle\Model\Order\Status\OrderStatus;
 use Shopsys\FrameworkBundle\Twig\DateTimeFormatterExtension;
 use Shopsys\FrameworkBundle\Twig\PriceExtension;
@@ -39,7 +39,7 @@ class OrderMailServiceTest extends FunctionalTestCase
         $domainMock = $this->getMockBuilder(Domain::class)->disableOriginalConstructor()->getMock();
         $priceExtensionMock = $this->getMockBuilder(PriceExtension::class)->disableOriginalConstructor()->getMock();
         $dateTimeFormatterExtensionMock = $this->getMockBuilder(DateTimeFormatterExtension::class)->disableOriginalConstructor()->getMock();
-        $orderServiceMock = $this->getMockBuilder(OrderService::class)->disableOriginalConstructor()->getMock();
+        $orderUrlGeneratorMock = $this->getMockBuilder(OrderUrlGenerator::class)->disableOriginalConstructor()->getMock();
 
         $orderMailService = new OrderMailService(
             $settingMock,
@@ -49,7 +49,7 @@ class OrderMailServiceTest extends FunctionalTestCase
             $domainMock,
             $priceExtensionMock,
             $dateTimeFormatterExtensionMock,
-            $orderServiceMock
+            $orderUrlGeneratorMock
         );
 
         $orderStatus1 = $this->getMockBuilder(OrderStatus::class)
@@ -92,7 +92,7 @@ class OrderMailServiceTest extends FunctionalTestCase
         $settingMock = $this->getMockBuilder(Setting::class)->disableOriginalConstructor()->getMock();
         $priceExtensionMock = $this->getMockBuilder(PriceExtension::class)->disableOriginalConstructor()->getMock();
         $dateTimeFormatterExtensionMock = $this->getMockBuilder(DateTimeFormatterExtension::class)->disableOriginalConstructor()->getMock();
-        $orderServiceMock = $this->getMockBuilder(OrderService::class)->disableOriginalConstructor()->getMock();
+        $orderUrlGeneratorMock = $this->getMockBuilder(OrderUrlGenerator::class)->disableOriginalConstructor()->getMock();
 
         $domainConfig = new DomainConfig(1, 'http://example.com:8080', 'example', 'cs');
         $domain = new Domain([$domainConfig], $settingMock);
@@ -105,7 +105,7 @@ class OrderMailServiceTest extends FunctionalTestCase
             $domain,
             $priceExtensionMock,
             $dateTimeFormatterExtensionMock,
-            $orderServiceMock
+            $orderUrlGeneratorMock
         );
 
         $order = $this->getReference('order_1');
