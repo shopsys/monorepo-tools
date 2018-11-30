@@ -2,6 +2,7 @@
 .git
 
 # ignore directories with meta-data
+.ci
 .idea
 nbproject
 
@@ -15,7 +16,8 @@ web/components
 web/content
 vendor
 
-# ignore kubernetes manifests
+# ignore kubernetes manifests and infrastructure definitions
+infrastructure
 kubernetes
 
 # ignore docker configs for other images than php-fpm, and the php-fpm's Dockerfile itself
