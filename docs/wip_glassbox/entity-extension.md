@@ -105,6 +105,9 @@ In Dream project, the descendants (DreamOrderPayment etc.) must extend DreamOrde
 so they have to contain duplicated code from the original descendant entities.
 DiscriminatorMap must always contain descendants' FQN because LoadORMMetadataSubscriber reads raw original annotations.
 
+**Warning: Extending `OrderItem` and its descendants is a problematic issue that may cause [some problems](https://github.com/shopsys/shopsys/issues/621#issuecomment-442098935).**
+**We are planning to solve this as soon as possible, until then, we do not recommend extending order items. Otherwise, you might be forced to use dirty hacks to make your application work.**
+
 ## How can I extend an entity?
 
 * Create a new entity in your `src/Shopsys/ShopBundle/Model` directory that extends already existing framework entity
