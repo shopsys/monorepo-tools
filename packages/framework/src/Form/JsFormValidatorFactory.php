@@ -5,6 +5,7 @@ namespace Shopsys\FrameworkBundle\Form;
 use Fp\JsFormValidatorBundle\Factory\JsFormValidatorFactory as BaseJsFormValidatorFactory;
 use Shopsys\FrameworkBundle\Model\Product\Parameter\ParameterValue;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Form;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Validator\Constraints;
 
@@ -63,5 +64,20 @@ class JsFormValidatorFactory extends BaseJsFormValidatorFactory
         }
 
         return $viewTransformers;
+    }
+
+    /**
+     * @param \Symfony\Component\Form\Form $form
+     * @return \Fp\JsFormValidatorBundle\Model\JsFormElement|null
+     */
+    public function createJsModel(Form $form)
+    {
+        /** @var \Symfony\Component\Form\Form|null $prototype */
+        $prototype = $form->getConfig()->getAttribute('prototype');
+        if ($prototype !== null && $prototype->getParent() === null) {
+            $prototype->setParent($form);
+        }
+
+        return parent::createJsModel($form);
     }
 }
