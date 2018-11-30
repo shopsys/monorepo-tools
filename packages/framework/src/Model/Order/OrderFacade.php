@@ -311,13 +311,6 @@ class OrderFacade
             $this->orderPriceCalculation
         );
 
-        foreach ($orderEditResult->getOrderItemsToCreate() as $orderItem) {
-            $this->em->persist($orderItem);
-        }
-        foreach ($orderEditResult->getOrderItemsToDelete() as $orderItem) {
-            $this->em->remove($orderItem);
-        }
-
         $this->em->flush();
         if ($orderEditResult->isStatusChanged()) {
             $mailTemplate = $this->orderMailFacade

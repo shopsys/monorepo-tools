@@ -1001,7 +1001,6 @@ class Order
 
         $orderItemsWithoutTransportAndPaymentData = $orderData->itemsWithoutTransportAndPayment;
 
-        $orderItemsToDelete = [];
         foreach ($this->getItemsWithoutTransportAndPayment() as $orderItem) {
             if (array_key_exists($orderItem->getId(), $orderItemsWithoutTransportAndPaymentData)) {
                 $orderItemData = $orderItemsWithoutTransportAndPaymentData[$orderItem->getId()];
@@ -1009,14 +1008,12 @@ class Order
                 $orderItem->edit($orderItemData);
             } else {
                 $this->removeItem($orderItem);
-                $orderItemsToDelete[] = $orderItem;
             }
         }
 
-        $orderItemsToCreate = [];
         foreach ($orderData->getNewItemsWithoutTransportAndPayment() as $newOrderItemData) {
             $newOrderItemData->priceWithoutVat = $orderItemPriceCalculation->calculatePriceWithoutVat($newOrderItemData);
-            $newOrderItem = $orderProductFactory->create(
+            $orderProductFactory->create(
                 $this,
                 $newOrderItemData->name,
                 new Price(
@@ -1028,11 +1025,10 @@ class Order
                 $newOrderItemData->unitName,
                 $newOrderItemData->catnum
             );
-            $orderItemsToCreate[] = $newOrderItem;
         }
 
         $this->calculateTotalPrice($orderPriceCalculation);
 
-        return new OrderEditResult($orderItemsToCreate, $orderItemsToDelete, $statusChanged);
+        return new OrderEditResult($statusChanged);
     }
 }
