@@ -37,14 +37,23 @@ class CustomerFormType extends AbstractType
                 'user' => $options['user'],
                 'domain_id' => $options['domain_id'],
                 'render_form_row' => false,
+                'attr' => [
+                    'class' => 'wrap-divider',
+                ],
             ])
             ->add('billingAddressData', BillingAddressFormType::class, [
                 'domain_id' => $options['domain_id'],
                 'render_form_row' => false,
+                'attr' => [
+                    'class' => 'wrap-divider',
+                ],
             ])
             ->add('deliveryAddressData', DeliveryAddressFormType::class, [
                 'domain_id' => $options['domain_id'],
                 'render_form_row' => false,
+                'attr' => [
+                    'class' => 'wrap-divider',
+                ],
             ])
             ->add('save', SubmitType::class);
 

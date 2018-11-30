@@ -54,13 +54,15 @@
             {% do form.pluginData.setRendered %}
         {% else %}
             {% for pluginForm in form.pluginData %}
-                <div class="form-group {% if not loop.last %}wrap-border{% endif %}">
-                    <div class="form-group__title">
-                        {{ pluginForm.vars.label }}
-                    </div>
+                <div class="wrap-divider">
+                    <div class="form-group">
+                        <div class="form-group__title">
+                            {{ pluginForm.vars.label }}
+                        </div>
 
-                    {{ form_widget(pluginForm) }}
-                    {{ form_errors(pluginForm) }}
+                        {{ form_widget(pluginForm) }}
+                        {{ form_errors(pluginForm) }}
+                    </div>
                 </div>
             {% endfor %}
         {% endif %}
@@ -527,15 +529,17 @@
     {% if top_info_title is not empty %}
         <strong>{{ top_info_title }}</strong>
     {% endif %}
-    <div class="form-group">
-        <div class="form-group__title">
-            {{- form_label(form) -}}
+    <div class="wrap-divider">
+        <div class="form-group">
+            <div class="form-group__title">
+                {{- form_label(form) -}}
 
-            <div class="form-group__error">
-                {{- form_errors(form) -}}
+                <div class="form-group__error">
+                    {{- form_errors(form) -}}
+                </div>
             </div>
+            {{- form_widget(form) -}}
         </div>
-        {{- form_widget(form) -}}
     </div>
 {%- endblock %}
 
@@ -1045,12 +1049,13 @@
     {% if js_container is not null %}
         <div class="{{ js_container.container_class }}" data-type="{{ js_container.data_type }}">
     {% endif %}
-
-    <div class="form-group{% if is_group_container_to_render_as_the_last_one != true %} wrap-border{% endif %}">
-        <div class="form-group__title">
-            {{ form.vars.label }}
+    <div class="wrap-divider">
+        <div class="form-group">
+            <div class="form-group__title">
+                {{ form.vars.label }}
+            </div>
+            {{ form_widget(form) }}
         </div>
-        {{ form_widget(form) }}
     </div>
 
     {% if js_container is not null %}

@@ -1,66 +1,67 @@
 {% block order_items_widget %}
 
     {% import '@ShopsysFramework/Admin/Content/Order/orderItem.html.twig' as orderItemMacro %}
-
-    <h2>{{ 'Order items'|trans }}</h2>
-    <fieldset>
-        <div class="table-touch-always">
-            {{ form_errors(form.itemsWithoutTransportAndPayment) }}
-            <div class="table-touch-always__in">
-                <table class="table-main">
-                    <thead>
-                        <tr>
-                            <th class="table-col-30">{{ 'Name'|trans }}</th>
-                            <th class="table-col-5">{{ 'Catalogue number'|trans }}</th>
-                            <th class="table-col-15 text-right">{{ 'Unit price including VAT'|trans }}</th>
-                            <th class="table-col-10 text-right">{{ 'Amount'|trans }}</th>
-                            <th class="table-col-10 text-right">{{ 'Unit'|trans }}</th>
-                            <th class="table-col-10 text-right">{{ 'VAT rate (%)'|trans }}</th>
-                            <th class="table-col-15 text-right text-no-wrap">{{ 'Total including VAT'|trans }}</th>
-                            <th class="table-col-15 text-right text-no-wrap">{{ 'Total excluding VAT'|trans }}</th>
-                            <th ></th>
-                    </tr>
-                    </thead>
-                    <tbody
-                        id="js-order-items"
-                        data-prototype="{{ orderItemMacro.orderItem(form.itemsWithoutTransportAndPayment.vars.prototype)|escape }}"
-                        data-order-product-add-url="{{ url('admin_order_addproduct', { orderId: order.id }) }}"
-                    >
-                        {% for productItem in order.productItems %}
-                            {{ orderItemMacro.orderItem(form.itemsWithoutTransportAndPayment[productItem.id], productItem.id, orderItemTotalPricesById, order.currency, productItem) }}
-                        {% endfor %}
-
-                        {% for orderItemId, orderItemForm in form.itemsWithoutTransportAndPayment %}
-                            {% if not orderItemForm.rendered %}
-                                {{ orderItemMacro.orderItem(orderItemForm, orderItemId, orderItemTotalPricesById, order.currency, null) }}
-                            {% endif %}
-                        {% endfor %}
-
-                        {{ orderItemMacro.orderTransport(form.orderTransport, order, transportPricesWithVatByTransportId, transportVatPercentsByTransportId) }}
-                        {{ orderItemMacro.orderPayment(form.orderPayment, order, paymentPricesWithVatByPaymentId, paymentVatPercentsByPaymentId) }}
-                    </tbody>
-                    <tfoot>
-                        <tr>
-                            <td colspan="9">
-                                <a id="js-order-item-add" href="#" class="btn btn--plus">
-                                    <i class="btn__icon">+</i>
-                                    {{ 'Add item'|trans }}
-                                </a>
-                                <a id="js-order-item-add-product" href="#" class="btn btn--plus" data-product-picker-url="{{ url('admin_productpicker_picksingle', {allowMainVariants: false}) }}">
-                                    <i class="btn__icon">+</i>
-                                    {{ 'Add product'|trans }}
-                                </a>
-                            </td>
+    <div class="wrap-divider">
+        <h2>{{ 'Order items'|trans }}</h2>
+        <fieldset>
+            <div class="table-touch-always">
+                {{ form_errors(form.itemsWithoutTransportAndPayment) }}
+                <div class="table-touch-always__in">
+                    <table class="table-main">
+                        <thead>
+                            <tr>
+                                <th class="table-col-30">{{ 'Name'|trans }}</th>
+                                <th class="table-col-5">{{ 'Catalogue number'|trans }}</th>
+                                <th class="table-col-15 text-right">{{ 'Unit price including VAT'|trans }}</th>
+                                <th class="table-col-10 text-right">{{ 'Amount'|trans }}</th>
+                                <th class="table-col-10 text-right">{{ 'Unit'|trans }}</th>
+                                <th class="table-col-10 text-right">{{ 'VAT rate (%)'|trans }}</th>
+                                <th class="table-col-15 text-right text-no-wrap">{{ 'Total including VAT'|trans }}</th>
+                                <th class="table-col-15 text-right text-no-wrap">{{ 'Total excluding VAT'|trans }}</th>
+                                <th ></th>
                         </tr>
-                        <tr>
-                            <th colspan="6">{{ 'Total'|trans }}:</th>
-                            <th class="text-right">{{ order.totalPriceWithVat|priceWithCurrency(order.currency) }}</th>
-                            <th class="text-right">{{ order.totalPriceWithoutVat|priceWithCurrency(order.currency) }}</th>
-                            <th></th>
-                        </tr>
-                    </tfoot>
-                </table>
+                        </thead>
+                        <tbody
+                            id="js-order-items"
+                            data-prototype="{{ orderItemMacro.orderItem(form.itemsWithoutTransportAndPayment.vars.prototype)|escape }}"
+                            data-order-product-add-url="{{ url('admin_order_addproduct', { orderId: order.id }) }}"
+                        >
+                            {% for productItem in order.productItems %}
+                                {{ orderItemMacro.orderItem(form.itemsWithoutTransportAndPayment[productItem.id], productItem.id, orderItemTotalPricesById, order.currency, productItem) }}
+                            {% endfor %}
+
+                            {% for orderItemId, orderItemForm in form.itemsWithoutTransportAndPayment %}
+                                {% if not orderItemForm.rendered %}
+                                    {{ orderItemMacro.orderItem(orderItemForm, orderItemId, orderItemTotalPricesById, order.currency, null) }}
+                                {% endif %}
+                            {% endfor %}
+
+                            {{ orderItemMacro.orderTransport(form.orderTransport, order, transportPricesWithVatByTransportId, transportVatPercentsByTransportId) }}
+                            {{ orderItemMacro.orderPayment(form.orderPayment, order, paymentPricesWithVatByPaymentId, paymentVatPercentsByPaymentId) }}
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td colspan="9">
+                                    <a id="js-order-item-add" href="#" class="btn btn--plus">
+                                        <i class="btn__icon">+</i>
+                                        {{ 'Add item'|trans }}
+                                    </a>
+                                    <a id="js-order-item-add-product" href="#" class="btn btn--plus" data-product-picker-url="{{ url('admin_productpicker_picksingle', {allowMainVariants: false}) }}">
+                                        <i class="btn__icon">+</i>
+                                        {{ 'Add product'|trans }}
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th colspan="6">{{ 'Total'|trans }}:</th>
+                                <th class="text-right">{{ order.totalPriceWithVat|priceWithCurrency(order.currency) }}</th>
+                                <th class="text-right">{{ order.totalPriceWithoutVat|priceWithCurrency(order.currency) }}</th>
+                                <th></th>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
             </div>
-        </div>
-    </fieldset>
+        </fieldset>
+    </div>
 {% endblock order_items_widget %}

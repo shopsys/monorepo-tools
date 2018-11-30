@@ -15,14 +15,20 @@
         {{ render(controller('ShopsysFrameworkBundle:Admin/Domain:domainTabs')) }}
 
         {% if articlesCountOnSelectedDomain > 0 %}
-            <h2>{{ 'Articles in upper menu'|trans }}</h2>
-            {{ gridViewTop.render() }}
+            <div class="wrap-divider wrap-divider--no-border">
+                <h2>{{ 'Articles in upper menu'|trans }}</h2>
+                {{ gridViewTop.render() }}
+            </div>
 
-            <h2>{{ 'Articles in footer'|trans }}</h2>
-            {{ gridViewFooter.render() }}
+            <div class="wrap-divider wrap-divider--no-border">
+                <h2>{{ 'Articles in footer'|trans }}</h2>
+                {{ gridViewFooter.render() }}
+            </div>
 
-            <h2>{{ 'Articles without positioning'|trans }}</h2>
-            {{ gridViewNone.render() }}
+            <div class="wrap-divider wrap-divider--no-border">
+                <h2>{{ 'Articles without positioning'|trans }}</h2>
+                {{ gridViewNone.render() }}
+            </div>
 
             {% embed '@ShopsysFramework/Admin/Inline/FixedBar/fixedBar.html.twig' %}
                 {% block fixed_bar_content %}

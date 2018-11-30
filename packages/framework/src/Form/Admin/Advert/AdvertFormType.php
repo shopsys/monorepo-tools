@@ -144,7 +144,7 @@ class AdvertFormType extends AbstractType
         $builderImageGroup = $builder->create('image_group', GroupType::class, [
             'label' => t('Images'),
             'js_container' => [
-                'container_class' => 'js-advert-type-content',
+                'container_class' => 'js-advert-type-content wrap-divider--top',
                 'data_type' => 'image',
             ],
         ]);

@@ -7,9 +7,11 @@
     {{ render(controller('ShopsysFrameworkBundle:Admin/Domain:domainTabs')) }}
 
     {{ form_start(quickSearchForm) }}
-    <div class="wrap-border form-inline">
-        {{ form_widget(quickSearchForm.text) }}
-        {{ form_widget(quickSearchForm.submit, { label: 'Search [verb]'|trans, full_name: ''}) }}
+    <div class="wrap-divider wrap-divider--bottom">
+        <div class="form-inline">
+            {{ form_widget(quickSearchForm.text) }}
+            {{ form_widget(quickSearchForm.submit, { label: 'Search [verb]'|trans, full_name: ''}) }}
+        </div>
     </div>
     {{ form_end(quickSearchForm) }}
 
