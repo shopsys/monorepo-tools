@@ -6,7 +6,7 @@
     Selectize.prototype.positionDropdown = function () {
         var $control = this.$control;
         var offset = this.settings.dropdownParent === 'body' ? $control.offset() : $control.position();
-        var bottomOffset = $('.js-window-fixed-bar').height() || 0;
+        var bottomOffset = Shopsys.view.getBottomOffset();
         offset.top += $control.outerHeight(true);
 
         var css = {
