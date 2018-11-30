@@ -14,7 +14,9 @@ use Shopsys\FrameworkBundle\Model\Customer\CurrentCustomer;
 use Shopsys\FrameworkBundle\Model\Customer\CustomerFacade;
 use Shopsys\FrameworkBundle\Model\Heureka\HeurekaFacade;
 use Shopsys\FrameworkBundle\Model\Localization\Localization;
+use Shopsys\FrameworkBundle\Model\Order\Item\OrderItemPriceCalculation;
 use Shopsys\FrameworkBundle\Model\Order\Item\OrderProductFacade;
+use Shopsys\FrameworkBundle\Model\Order\Item\OrderProductFactoryInterface;
 use Shopsys\FrameworkBundle\Model\Order\Mail\OrderMailFacade;
 use Shopsys\FrameworkBundle\Model\Order\Order;
 use Shopsys\FrameworkBundle\Model\Order\OrderCreationService;
@@ -24,7 +26,6 @@ use Shopsys\FrameworkBundle\Model\Order\OrderHashGeneratorRepository;
 use Shopsys\FrameworkBundle\Model\Order\OrderNumberSequenceRepository;
 use Shopsys\FrameworkBundle\Model\Order\OrderPriceCalculation;
 use Shopsys\FrameworkBundle\Model\Order\OrderRepository;
-use Shopsys\FrameworkBundle\Model\Order\OrderService;
 use Shopsys\FrameworkBundle\Model\Order\OrderUrlGenerator;
 use Shopsys\FrameworkBundle\Model\Order\Preview\OrderPreviewFactory;
 use Shopsys\FrameworkBundle\Model\Order\PromoCode\CurrentPromoCodeFacade;
@@ -85,7 +86,6 @@ class OrderFacadeHeurekaTest extends TestCase
             $this->createMock(EntityManagerInterface::class),
             $this->createMock(OrderNumberSequenceRepository::class),
             $this->createMock(OrderRepository::class),
-            $this->createMock(OrderService::class),
             $this->createMock(OrderUrlGenerator::class),
             $this->createMock(OrderCreationService::class),
             $this->createMock(OrderStatusRepository::class),
@@ -103,7 +103,9 @@ class OrderFacadeHeurekaTest extends TestCase
             $heurekaFacade,
             $this->createDomain(),
             $this->createMock(OrderFactoryInterface::class),
-            $this->createMock(OrderPriceCalculation::class)
+            $this->createMock(OrderPriceCalculation::class),
+            $this->createMock(OrderItemPriceCalculation::class),
+            $this->createMock(OrderProductFactoryInterface::class)
         );
         return $orderFacade;
     }

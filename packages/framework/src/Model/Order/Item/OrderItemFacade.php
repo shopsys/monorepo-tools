@@ -6,7 +6,6 @@ use Doctrine\ORM\EntityManagerInterface;
 use Shopsys\FrameworkBundle\Component\Domain\Domain;
 use Shopsys\FrameworkBundle\Model\Order\OrderPriceCalculation;
 use Shopsys\FrameworkBundle\Model\Order\OrderRepository;
-use Shopsys\FrameworkBundle\Model\Order\OrderService;
 use Shopsys\FrameworkBundle\Model\Product\Pricing\ProductPriceCalculationForUser;
 use Shopsys\FrameworkBundle\Model\Product\ProductRepository;
 
@@ -33,11 +32,6 @@ class OrderItemFacade
     protected $productPriceCalculationForUser;
 
     /**
-     * @var \Shopsys\FrameworkBundle\Model\Order\OrderService
-     */
-    protected $orderService;
-
-    /**
      * @var \Shopsys\FrameworkBundle\Component\Domain\Domain
      */
     protected $domain;
@@ -57,7 +51,6 @@ class OrderItemFacade
      * @param \Shopsys\FrameworkBundle\Model\Order\OrderRepository $orderRepository
      * @param \Shopsys\FrameworkBundle\Model\Product\ProductRepository $productRepository
      * @param \Shopsys\FrameworkBundle\Model\Product\Pricing\ProductPriceCalculationForUser $productPriceCalculationForUser
-     * @param \Shopsys\FrameworkBundle\Model\Order\OrderService $orderService
      * @param \Shopsys\FrameworkBundle\Component\Domain\Domain $domain
      * @param \Shopsys\FrameworkBundle\Model\Order\OrderPriceCalculation $orderPriceCalculation
      * @param \Shopsys\FrameworkBundle\Model\Order\Item\OrderProductFactoryInterface $orderProductFactory
@@ -67,7 +60,6 @@ class OrderItemFacade
         OrderRepository $orderRepository,
         ProductRepository $productRepository,
         ProductPriceCalculationForUser $productPriceCalculationForUser,
-        OrderService $orderService,
         Domain $domain,
         OrderPriceCalculation $orderPriceCalculation,
         OrderProductFactoryInterface $orderProductFactory
@@ -76,7 +68,6 @@ class OrderItemFacade
         $this->orderRepository = $orderRepository;
         $this->productRepository = $productRepository;
         $this->productPriceCalculationForUser = $productPriceCalculationForUser;
-        $this->orderService = $orderService;
         $this->domain = $domain;
         $this->orderPriceCalculation = $orderPriceCalculation;
         $this->orderProductFactory = $orderProductFactory;
