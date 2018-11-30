@@ -2,21 +2,12 @@
 
 namespace Shopsys\FrameworkBundle\Model\Order;
 
-use Shopsys\FrameworkBundle\Component\Domain\Domain;
 use Shopsys\FrameworkBundle\Model\Order\Item\OrderItemPriceCalculation;
 use Shopsys\FrameworkBundle\Model\Order\Item\OrderProductFactoryInterface;
 use Shopsys\FrameworkBundle\Model\Pricing\Price;
-use Shopsys\FrameworkBundle\Model\Product\Product;
 
 class OrderService
 {
-    const DEFAULT_QUANTITY = 1;
-
-    /**
-     * @var \Shopsys\FrameworkBundle\Component\Domain\Domain
-     */
-    private $domain;
-
     /**
      * @var \Shopsys\FrameworkBundle\Model\Order\Item\OrderItemPriceCalculation
      */
@@ -33,18 +24,15 @@ class OrderService
     protected $orderProductFactory;
 
     /**
-     * @param \Shopsys\FrameworkBundle\Component\Domain\Domain $domain
      * @param \Shopsys\FrameworkBundle\Model\Order\Item\OrderItemPriceCalculation $orderItemPriceCalculation
      * @param \Shopsys\FrameworkBundle\Model\Order\OrderPriceCalculation $orderPriceCalculation
      * @param \Shopsys\FrameworkBundle\Model\Order\Item\OrderProductFactoryInterface $orderProductFactory
      */
     public function __construct(
-        Domain $domain,
         OrderItemPriceCalculation $orderItemPriceCalculation,
         OrderPriceCalculation $orderPriceCalculation,
         OrderProductFactoryInterface $orderProductFactory
     ) {
-        $this->domain = $domain;
         $this->orderItemPriceCalculation = $orderItemPriceCalculation;
         $this->orderPriceCalculation = $orderPriceCalculation;
         $this->orderProductFactory = $orderProductFactory;
@@ -100,32 +88,5 @@ class OrderService
         $order->calculateTotalPrice($this->orderPriceCalculation);
 
         return new OrderEditResult($orderItemsToCreate, $orderItemsToDelete, $statusChanged);
-    }
-
-    /**
-     * @param \Shopsys\FrameworkBundle\Model\Order\Order $order
-     * @param \Shopsys\FrameworkBundle\Model\Product\Product $product
-     * @param \Shopsys\FrameworkBundle\Model\Pricing\Price $productPrice
-     * @return \Shopsys\FrameworkBundle\Model\Order\Item\OrderProduct
-     */
-    public function createOrderProductInOrder(Order $order, Product $product, Price $productPrice)
-    {
-        $orderDomainConfig = $this->domain->getDomainConfigById($order->getDomainId());
-
-        $orderProduct = $this->orderProductFactory->create(
-            $order,
-            $product->getName($orderDomainConfig->getLocale()),
-            $productPrice,
-            $product->getVat()->getPercent(),
-            self::DEFAULT_QUANTITY,
-            $product->getUnit()->getName($orderDomainConfig->getLocale()),
-            $product->getCatnum(),
-            $product
-        );
-
-        $order->addItem($orderProduct);
-        $order->calculateTotalPrice($this->orderPriceCalculation);
-
-        return $orderProduct;
     }
 }
