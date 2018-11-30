@@ -17,10 +17,6 @@ yq write --inplace project-base/kubernetes/ingress.yml spec.rules[1].host ${SECO
 yq write --inplace project-base/kubernetes/deployments/webserver-php-fpm.yml spec.template.spec.hostAliases[0].hostnames[+] ${FIRST_DOMAIN_HOSTNAME}
 yq write --inplace project-base/kubernetes/deployments/webserver-php-fpm.yml spec.template.spec.hostAliases[0].hostnames[+] ${SECOND_DOMAIN_HOSTNAME}
 
-# Create configmaps for configuration files used by pods
-kubectl create configmap nginx-configuration --from-file docker/nginx/nginx.conf --dry-run --output=yaml > project-base/kubernetes/nginx-configuration.yml
-kubectl create configmap postgres-configuration --from-file project-base/docker/postgres/postgres.conf --dry-run --output=yaml > project-base/kubernetes/postgres-configuration.yml
-
 # Set parameters.yml file and domains_urls
 cp project-base/app/config/domains_urls.yml.dist project-base/app/config/domains_urls.yml
 cp project-base/app/config/parameters_test.yml.dist project-base/app/config/parameters_test.yml
@@ -71,13 +67,28 @@ docker image pull ${DOCKER_USERNAME}/microservice-product-search-export:${DOCKER
 # Replace docker images for php-fpm of application and microservices
 yq write --inplace project-base/kubernetes/deployments/webserver-php-fpm.yml spec.template.spec.containers[0].image ${DOCKER_USERNAME}/php-fpm:${DOCKER_IMAGE_TAG}
 yq write --inplace project-base/kubernetes/deployments/webserver-php-fpm.yml spec.template.spec.initContainers[0].image ${DOCKER_USERNAME}/php-fpm:${DOCKER_IMAGE_TAG}
+yq write --inplace project-base/kubernetes/deployments/webserver-php-fpm.yml spec.template.spec.initContainers[1].image ${DOCKER_USERNAME}/php-fpm:${DOCKER_IMAGE_TAG}
 yq write --inplace project-base/kubernetes/deployments/microservice-product-search.yml spec.template.spec.containers[0].image ${DOCKER_USERNAME}/microservice-product-search:${DOCKER_IMAGE_TAG}
 yq write --inplace project-base/kubernetes/deployments/microservice-product-search-export.yml spec.template.spec.containers[0].image ${DOCKER_USERNAME}/microservice-product-search-export:${DOCKER_IMAGE_TAG}
+
+# Set different path to parameters and domain configmap paths, as default context is that root of the project is project-base, here it is monorepo so we need to check it
+yq write --inplace project-base/kubernetes/deployments/webserver-php-fpm.yml spec.template.spec.initContainers[0].volumeMounts[1].mountPath /var/www/html/project-base/app/config/domains_urls.yml
+yq write --inplace project-base/kubernetes/deployments/webserver-php-fpm.yml spec.template.spec.initContainers[0].volumeMounts[2].mountPath /var/www/html/project-base/app/config/parameters.yml
+yq write --inplace project-base/kubernetes/deployments/webserver-php-fpm.yml spec.template.spec.initContainers[1].volumeMounts[1].mountPath /var/www/html/project-base/app/config/domains_urls.yml
+yq write --inplace project-base/kubernetes/deployments/webserver-php-fpm.yml spec.template.spec.initContainers[1].volumeMounts[2].mountPath /var/www/html/project-base/app/config/parameters.yml
+yq write --inplace project-base/kubernetes/deployments/webserver-php-fpm.yml spec.template.spec.containers[0].volumeMounts[1].mountPath /var/www/html/project-base/app/config/domains_urls.yml
+yq write --inplace project-base/kubernetes/deployments/webserver-php-fpm.yml spec.template.spec.containers[0].volumeMounts[2].mountPath /var/www/html/project-base/app/config/parameters.yml
 
 # Deploy application using kubectl
 kubectl delete namespace ${JOB_NAME} || true
 kubectl create namespace ${JOB_NAME}
-kubectl apply --namespace=${JOB_NAME} --recursive -f project-base/kubernetes
+cd project-base/kubernetes/kustomize
+
+# Echo Kustomize build for debugging
+kustomize build overlays/ci
+
+# Apply kubernetes manifests by output of Kustomize Build
+kustomize build overlays/ci | kubectl apply -f - --namespace=${JOB_NAME}
 
 # Wait for containers to rollout
 kubectl rollout status --namespace=${JOB_NAME} deployment/adminer --watch
@@ -95,4 +106,4 @@ kubectl rollout status --namespace=${JOB_NAME} deployment/microservice-product-s
 PHP_FPM_POD=$(kubectl get pods --namespace=${JOB_NAME} -l app=webserver-php-fpm -o=jsonpath='{.items[0].metadata.name}')
 
 # Run phing build targets for build of the application
-kubectl exec ${PHP_FPM_POD} --namespace=${JOB_NAME} ./phing db-create test-db-create build-demo-ci
+kubectl exec ${PHP_FPM_POD} --namespace=${JOB_NAME} ./phing test-db-create test-db-demo test-dirs-create checks-ci
