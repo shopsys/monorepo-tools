@@ -35,7 +35,7 @@ final class BuildProjectBaseOnHeimdallReleaseWorker extends AbstractShopsysRelea
     {
         $this->symfonyStyle->note('use test-rc-project-base on Heimdall');
 
-        $this->symfonyStyle->confirm('Confirm the build is ok');
+        $this->confirm('Confirm the build is ok');
     }
 
     /**

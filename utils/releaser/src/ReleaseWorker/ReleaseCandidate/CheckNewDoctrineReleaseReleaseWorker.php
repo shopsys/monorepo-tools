@@ -79,7 +79,7 @@ final class CheckNewDoctrineReleaseReleaseWorker extends AbstractShopsysReleaseW
             self::FORKED_DOCTINE
         ));
 
-        $this->symfonyStyle->confirm('Confirm that you have created an issue for updating the fork');
+        $this->confirm('Confirm that you have created an issue for updating the fork');
     }
 
     /**

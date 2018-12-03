@@ -72,7 +72,7 @@ final class CheckPackagesOnPackagistReleaseWorker extends AbstractShopsysRelease
             $this->symfonyStyle->error(sprintf('Some packages on packagist do not have "%s" version', $versionsAsString));
             $this->symfonyStyle->listing($packageWithoutVersion);
 
-            $this->symfonyStyle->confirm('Confirm the missing versions are fixed');
+            $this->confirm('Confirm the missing versions are fixed');
         } else {
             $this->symfonyStyle->success(Message::SUCCESS);
         }

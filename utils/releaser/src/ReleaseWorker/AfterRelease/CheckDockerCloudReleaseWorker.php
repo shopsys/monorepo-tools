@@ -41,6 +41,6 @@ final class CheckDockerCloudReleaseWorker extends AbstractShopsysReleaseWorker
      */
     public function work(Version $version): void
     {
-        $this->symfonyStyle->confirm('Confirm Docker images are on DockerCloud');
+        $this->confirm('Confirm Docker images are on DockerCloud');
     }
 }

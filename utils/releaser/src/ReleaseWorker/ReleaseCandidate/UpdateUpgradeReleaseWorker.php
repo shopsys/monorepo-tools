@@ -62,7 +62,7 @@ final class UpdateUpgradeReleaseWorker extends AbstractShopsysReleaseWorker
 
         $this->symfonyStyle->success(Message::SUCCESS);
 
-        $this->symfonyStyle->confirm('Confirm UPGRADE.md notes are ready');
+        $this->confirm('Confirm UPGRADE.md notes are ready');
     }
 
     /**

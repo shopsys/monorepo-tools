@@ -33,7 +33,7 @@ final class EnsureReleaseHighlightsPostIsReleasedReleaseWorker extends AbstractS
      */
     public function work(Version $version): void
     {
-        $this->symfonyStyle->confirm('Confirm the post is released');
+        $this->confirm('Confirm the post is released');
     }
 
     /**

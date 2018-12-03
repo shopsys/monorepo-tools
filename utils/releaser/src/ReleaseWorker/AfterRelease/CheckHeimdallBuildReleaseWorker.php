@@ -41,6 +41,6 @@ final class CheckHeimdallBuildReleaseWorker extends AbstractShopsysReleaseWorker
      */
     public function work(Version $version): void
     {
-        $this->symfonyStyle->confirm('Confirm heimdall build passes');
+        $this->confirm('Confirm heimdall build passes');
     }
 }

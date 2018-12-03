@@ -52,7 +52,7 @@ final class DumpTranslationsReleaseWorker extends AbstractShopsysReleaseWorker
                 $this->symfonyStyle->success('Translations were dumped and only deleted were found and commited');
             } else {
                 $this->symfonyStyle->note('There are new translations');
-                $this->symfonyStyle->confirm('Confirm files are checked and missing translations completed');
+                $this->confirm('Confirm files are checked and missing translations completed');
             }
         } else {
             $this->symfonyStyle->success('There are no new translations');

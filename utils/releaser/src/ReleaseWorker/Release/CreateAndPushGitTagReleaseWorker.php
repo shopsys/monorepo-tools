@@ -35,7 +35,7 @@ final class CreateAndPushGitTagReleaseWorker extends AbstractShopsysReleaseWorke
     {
         $this->processRunner->run('git tag ' . $version->getVersionString());
 
-        $this->symfonyStyle->confirm(sprintf('Confirm that tag "%s" is pushed', $version->getVersionString()));
+        $this->confirm(sprintf('Confirm that tag "%s" is pushed', $version->getVersionString()));
     }
 
     /**

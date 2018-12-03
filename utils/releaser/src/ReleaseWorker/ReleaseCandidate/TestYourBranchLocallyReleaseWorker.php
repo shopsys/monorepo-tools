@@ -37,7 +37,7 @@ final class TestYourBranchLocallyReleaseWorker extends AbstractShopsysReleaseWor
         $this->processRunner->run('php phing standards');
         $this->processRunner->run('php phing tests');
 
-        $this->symfonyStyle->confirm('Confirm standards and tests are passing');
+        $this->confirm('Confirm standards and tests are passing');
     }
 
     /**

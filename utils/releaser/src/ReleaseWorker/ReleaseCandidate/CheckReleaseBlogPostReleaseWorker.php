@@ -33,7 +33,7 @@ final class CheckReleaseBlogPostReleaseWorker extends AbstractShopsysReleaseWork
      */
     public function work(Version $version): void
     {
-        $this->symfonyStyle->confirm('Confirm the post is prepared');
+        $this->confirm('Confirm the post is prepared');
     }
 
     /**

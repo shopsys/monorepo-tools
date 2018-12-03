@@ -64,7 +64,7 @@ abstract class AbstractCheckPackagesTravisBuildsReleaseWorker extends AbstractSh
         }
 
         if ($isPassing === false) {
-            $this->symfonyStyle->confirm('Continue after packages are resolved');
+            $this->confirm('Continue after packages are resolved');
         }
     }
 }

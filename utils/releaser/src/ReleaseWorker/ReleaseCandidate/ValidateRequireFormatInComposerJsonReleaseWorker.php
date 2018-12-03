@@ -84,7 +84,7 @@ final class ValidateRequireFormatInComposerJsonReleaseWorker extends AbstractSho
         if ($this->isSuccessful) {
             $this->symfonyStyle->success(Message::SUCCESS);
         } else {
-            $this->symfonyStyle->confirm('Confirm all the requires are in the valid format');
+            $this->confirm('Confirm all the requires are in the valid format');
         }
     }
 

@@ -33,7 +33,7 @@ final class CreateReleaseNotesReleaseWorker extends AbstractShopsysReleaseWorker
      */
     public function work(Version $version): void
     {
-        $this->symfonyStyle->confirm('Confirm release notes are published on Github');
+        $this->confirm('Confirm release notes are published on Github');
     }
 
     /**

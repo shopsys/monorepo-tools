@@ -41,6 +41,6 @@ final class CheckShopsysInstallReleaseWorker extends AbstractShopsysReleaseWorke
      */
     public function work(Version $version): void
     {
-        $this->symfonyStyle->confirm('Confirm Shopsys project-base install works');
+        $this->confirm('Confirm Shopsys project-base install works');
     }
 }

@@ -101,7 +101,7 @@ final class ValidateConflictsInComposerJsonReleaseWorker extends AbstractShopsys
         if ($isPassing) {
             $this->symfonyStyle->success(Message::SUCCESS);
         } else {
-            $this->symfonyStyle->confirm('Confirm conflict versions are changed to specific versions or closed interval');
+            $this->confirm('Confirm conflict versions are changed to specific versions or closed interval');
         }
     }
 

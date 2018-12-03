@@ -15,3 +15,4 @@ services:
         exclude: "../src/Exception"
 
     GuzzleHttp\Client: ~
+    Symfony\Component\Console\Helper\QuestionHelper: ~
