@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Shopsys\Releaser\ReleaseWorker\Release;
+namespace Shopsys\Releaser\ReleaseWorker\ReleaseCandidate;
 
 use PharIo\Version\Version;
 use Shopsys\Releaser\ReleaseWorker\AbstractShopsysReleaseWorker;
 use Shopsys\Releaser\Stage;
 
-final class CreateAndPushGitTagReleaseWorker extends AbstractShopsysReleaseWorker
+final class ForceYourBranchSplitReleaseWorker extends AbstractShopsysReleaseWorker
 {
     /**
      * @param \PharIo\Version\Version $version
@@ -16,7 +16,7 @@ final class CreateAndPushGitTagReleaseWorker extends AbstractShopsysReleaseWorke
      */
     public function getDescription(Version $version): string
     {
-        return 'Create and push a git tag';
+        return 'Force split your branch';
     }
 
     /**
@@ -25,7 +25,7 @@ final class CreateAndPushGitTagReleaseWorker extends AbstractShopsysReleaseWorke
      */
     public function getPriority(): int
     {
-        return 630;
+        return 740;
     }
 
     /**
@@ -33,9 +33,7 @@ final class CreateAndPushGitTagReleaseWorker extends AbstractShopsysReleaseWorke
      */
     public function work(Version $version): void
     {
-        $this->processRunner->run('git tag ' . $version->getVersionString());
-
-        $this->symfonyStyle->confirm(sprintf('Confirm that tag "%s" is pushed', $version->getVersionString()));
+        $this->symfonyStyle->note('use tool-monorepo-force-split-branch on Heimdall');
     }
 
     /**
@@ -43,6 +41,6 @@ final class CreateAndPushGitTagReleaseWorker extends AbstractShopsysReleaseWorke
      */
     public function getStage(): string
     {
-        return Stage::RELEASE;
+        return Stage::RELEASE_CANDIDATE;
     }
 }

@@ -17,7 +17,7 @@ final class CreateBranchReleaseWorker extends AbstractShopsysReleaseWorker
      */
     public function getDescription(Version $version): string
     {
-        return sprintf('Create branch "rc-%s"', Strings::webalize($version->getVersionString()));
+        return sprintf('Create branch "%s"', $this->createBranchName($version));
     }
 
     /**
@@ -34,6 +34,7 @@ final class CreateBranchReleaseWorker extends AbstractShopsysReleaseWorker
      */
     public function work(Version $version): void
     {
+        $this->processRunner->run('git checkout -b ' . $this->createBranchName($version));
     }
 
     /**
@@ -42,5 +43,14 @@ final class CreateBranchReleaseWorker extends AbstractShopsysReleaseWorker
     public function getStage(): string
     {
         return Stage::RELEASE_CANDIDATE;
+    }
+
+    /**
+     * @param \PharIo\Version\Version $version
+     * @return string
+     */
+    private function createBranchName(Version $version): string
+    {
+        return 'rc-' . Strings::webalize($version->getVersionString());
     }
 }

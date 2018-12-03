@@ -68,8 +68,7 @@ final class UpdateDockerComposeToLatestReleaseWorker extends AbstractShopsysRele
             FileSystem::write($fileInfo->getPathname(), $newContent);
         }
 
-        // @todo 'git commit -m "all shopsys Docker images are now used in latest version" && git push
-        $this->symfonyStyle->confirm('Confirm the docker images were committed');
+        $this->commit('all shopsys Docker images are now used in latest version');
     }
 
     /**

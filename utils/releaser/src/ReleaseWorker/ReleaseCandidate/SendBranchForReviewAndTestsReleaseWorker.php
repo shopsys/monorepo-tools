@@ -25,7 +25,7 @@ final class SendBranchForReviewAndTestsReleaseWorker extends AbstractShopsysRele
      */
     public function getPriority(): int
     {
-        return 740;
+        return 735;
     }
 
     /**

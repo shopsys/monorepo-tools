@@ -60,7 +60,6 @@ final class ResolveDocsTodoReleaseWorker extends AbstractShopsysReleaseWorker
 
             $isPassing = false;
 
-            // @todo add clickable file links later: https://github.com/symfony/symfony/pull/29168/files
             $this->symfonyStyle->note(sprintf(
                 'File "%s" has %d todo%s to resolve. Fix them manually.',
                 $fileInfo->getPathname(),

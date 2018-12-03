@@ -9,23 +9,16 @@ use PharIo\Version\Version;
 use Shopsys\Releaser\ReleaseWorker\AbstractShopsysReleaseWorker;
 use Shopsys\Releaser\Stage;
 use Symfony\Component\Console\Style\SymfonyStyle;
-use Symplify\MonorepoBuilder\Release\Process\ProcessRunner;
+use Symfony\Component\Process\Process;
 
 final class DumpTranslationsReleaseWorker extends AbstractShopsysReleaseWorker
 {
     /**
-     * @var \Symplify\MonorepoBuilder\Release\Process\ProcessRunner
-     */
-    private $processRunner;
-
-    /**
      * @param \Symfony\Component\Console\Style\SymfonyStyle $symfonyStyle
-     * @param \Symplify\MonorepoBuilder\Release\Process\ProcessRunner $processRunner
      */
-    public function __construct(SymfonyStyle $symfonyStyle, ProcessRunner $processRunner)
+    public function __construct(SymfonyStyle $symfonyStyle)
     {
         $this->symfonyStyle = $symfonyStyle;
-        $this->processRunner = $processRunner;
     }
 
     /**
@@ -54,11 +47,13 @@ final class DumpTranslationsReleaseWorker extends AbstractShopsysReleaseWorker
         $this->processRunner->run('php phing dump-translations');
 
         if ($this->hasNewTranslations()) {
-            // @todo there are only deleted files?
-            // 'git commit -m "dump translations" && git push
-            // @todo there are also added lines?
-            $this->symfonyStyle->note('There are new translations');
-            $this->symfonyStyle->confirm('Confirm files are checked and missing translations completed');
+            if ($this->hasOnlyDeletedFiles()) {
+                $this->commit('dump translations');
+                $this->symfonyStyle->success('Translations were dumped and only deleted were found and commited');
+            } else {
+                $this->symfonyStyle->note('There are new translations');
+                $this->symfonyStyle->confirm('Confirm files are checked and missing translations completed');
+            }
         } else {
             $this->symfonyStyle->success('There are no new translations');
         }
@@ -69,7 +64,7 @@ final class DumpTranslationsReleaseWorker extends AbstractShopsysReleaseWorker
      */
     private function hasNewTranslations(): bool
     {
-        $status = $this->processRunner->run('git status');
+        $status = $this->getProcessResult(['git', 'status']);
 
         return !Strings::contains($status, 'nothing to commit');
     }
@@ -80,5 +75,50 @@ final class DumpTranslationsReleaseWorker extends AbstractShopsysReleaseWorker
     public function getStage(): string
     {
         return Stage::RELEASE_CANDIDATE;
+    }
+
+    /**
+     * @return bool
+     */
+    private function hasOnlyDeletedFiles(): bool
+    {
+        $allFilesStatus = $this->getProcessResult(['git', 'status', '-s']);
+        $allFilesCount = $this->countFilesInStatus($allFilesStatus);
+
+        $deletedFilesStatus = $this->getProcessResult(['git', 'ls-files', '-d']);
+        $deletedFilesCount = $this->countFilesInStatus($deletedFilesStatus);
+
+        // has only deleted files
+        if ($deletedFilesCount === $allFilesCount) {
+            return true;
+        }
+
+        // has also some modified or added files
+        return false;
+    }
+
+    /**
+     * @param string[] $commandLine
+     * @return string
+     */
+    private function getProcessResult(array $commandLine): string
+    {
+        $process = new Process($commandLine);
+        $process->run();
+
+        return trim($process->getOutput());
+    }
+
+    /**
+     * @param string $filesStatus
+     * @return int
+     */
+    private function countFilesInStatus(string $filesStatus): int
+    {
+        if (empty($filesStatus)) {
+            return 0;
+        }
+
+        return substr_count($filesStatus, "\n") + 1;
     }
 }

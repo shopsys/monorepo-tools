@@ -2,6 +2,10 @@ parameters:
     # name of the monorepo package, for UPGRADE.md and CHANGELOG.md links
     monorepo_package_name: "shopsys/shopsys"
 
+    # these stages can use already existing tag; never version than the last one is required in all other stages by default
+    stages_to_allow_existing_tag:
+        - "after-release"
+
 services:
     _defaults:
         autowire: true

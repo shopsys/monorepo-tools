@@ -7,23 +7,9 @@ namespace Shopsys\Releaser\ReleaseWorker\ReleaseCandidate;
 use PharIo\Version\Version;
 use Shopsys\Releaser\ReleaseWorker\AbstractShopsysReleaseWorker;
 use Shopsys\Releaser\Stage;
-use Symplify\MonorepoBuilder\Release\Process\ProcessRunner;
 
 final class TestYourBranchLocallyReleaseWorker extends AbstractShopsysReleaseWorker
 {
-    /**
-     * @var \Symplify\MonorepoBuilder\Release\Process\ProcessRunner
-     */
-    private $processRunner;
-
-    /**
-     * @param \Symplify\MonorepoBuilder\Release\Process\ProcessRunner $processRunner
-     */
-    public function __construct(ProcessRunner $processRunner)
-    {
-        $this->processRunner = $processRunner;
-    }
-
     /**
      * @param \PharIo\Version\Version $version
      * @return string

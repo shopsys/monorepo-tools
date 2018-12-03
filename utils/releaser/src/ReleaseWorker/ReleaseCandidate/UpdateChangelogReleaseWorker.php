@@ -9,30 +9,20 @@ use PharIo\Version\Version;
 use Shopsys\Releaser\FileManipulator\ChangelogFileManipulator;
 use Shopsys\Releaser\ReleaseWorker\AbstractShopsysReleaseWorker;
 use Shopsys\Releaser\Stage;
-use Symplify\MonorepoBuilder\Release\Process\ProcessRunner;
 use Symplify\PackageBuilder\FileSystem\SmartFileInfo;
 
 final class UpdateChangelogReleaseWorker extends AbstractShopsysReleaseWorker
 {
-    /**
-     * @var \Symplify\MonorepoBuilder\Release\Process\ProcessRunner
-     */
-    private $processRunner;
-
     /**
      * @var \Shopsys\Releaser\FileManipulator\ChangelogFileManipulator
      */
     private $changelogFileManipulator;
 
     /**
-     * @param \Symplify\MonorepoBuilder\Release\Process\ProcessRunner $processRunner
      * @param \Shopsys\Releaser\FileManipulator\ChangelogFileManipulator $changelogFileManipulator
      */
-    public function __construct(
-        ProcessRunner $processRunner,
-        ChangelogFileManipulator $changelogFileManipulator
-    ) {
-        $this->processRunner = $processRunner;
+    public function __construct(ChangelogFileManipulator $changelogFileManipulator)
+    {
         $this->changelogFileManipulator = $changelogFileManipulator;
     }
 

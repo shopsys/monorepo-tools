@@ -32,7 +32,6 @@ final class PackageProvider
         }
 
         $url = 'https://packagist.org/packages/list.json?vendor=' . $organization;
-
         $remoteContent = FileSystem::read($url);
         $json = Json::decode($remoteContent, Json::FORCE_ARRAY);
 
@@ -43,6 +42,21 @@ final class PackageProvider
         $this->packagesByOrganization[$organization] = $packagesByOrganization;
 
         return $packagesByOrganization;
+    }
+
+    /**
+     * @param string $organization
+     * @return mixed[]
+     */
+    public function getPackagesWithsVersionsByOrganization(string $organization): array
+    {
+        $packages = $this->getPackagesByOrganization($organization);
+        $packagesWithVersions = [];
+        foreach ($packages as $package) {
+            $packagesWithVersions[$package] = $this->getPackageVersions($package);
+        }
+
+        return $packagesWithVersions;
     }
 
     /**
@@ -58,6 +72,23 @@ final class PackageProvider
         throw new ShouldNotHappenException(
             'Packagist API failed to list package names for url request:' . PHP_EOL . $url
         );
+    }
+
+    /**
+     * @param string $package
+     * @return string[]
+     */
+    private function getPackageVersions(string $package): array
+    {
+        $url = 'https://repo.packagist.org/p/' . $package . '.json';
+        $remoteContent = FileSystem::read($url);
+        $json = Json::decode($remoteContent, Json::FORCE_ARRAY);
+
+        if (!isset($json['packages'][$package])) {
+            return [];
+        }
+
+        return array_keys($json['packages'][$package]);
     }
 
     /**

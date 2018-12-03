@@ -74,8 +74,7 @@ final class SetMutualDependenciesToDevMasterReleaseWorker extends AbstractShopsy
             self::DEV_MASTER
         );
 
-        // @todo 'git commit -m "all shopsys Docker images are now used in latest version" && git push
-        $this->symfonyStyle->confirm('Confirm the composer versions were committed');
+        $this->commit('composer.json in all packages now use latest shopsys version');
     }
 
     /**
