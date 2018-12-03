@@ -9,16 +9,16 @@ use Twig_SimpleFunction;
 class JavascriptExtension extends Twig_Extension
 {
     /**
-     * @var \Shopsys\FrameworkBundle\Twig\Javascript\JavascriptCompilerService
+     * @var \Shopsys\FrameworkBundle\Twig\Javascript\JavascriptCompiler
      */
-    private $javascriptCompilerService;
+    private $javascriptCompiler;
 
     /**
-     * @param \Shopsys\FrameworkBundle\Twig\Javascript\JavascriptCompilerService $javascriptCompilerService
+     * @param \Shopsys\FrameworkBundle\Twig\Javascript\JavascriptCompiler $javascriptCompiler
      */
-    public function __construct(JavascriptCompilerService $javascriptCompilerService)
+    public function __construct(JavascriptCompiler $javascriptCompiler)
     {
-        $this->javascriptCompilerService = $javascriptCompilerService;
+        $this->javascriptCompiler = $javascriptCompiler;
     }
 
     /**
@@ -39,7 +39,7 @@ class JavascriptExtension extends Twig_Extension
     {
         $javascriptsArray = Utils::mixedToArray($javascripts);
 
-        $javascriptLinks = $this->javascriptCompilerService->generateCompiledFiles($javascriptsArray);
+        $javascriptLinks = $this->javascriptCompiler->compile($javascriptsArray);
 
         return $this->getHtmlJavascriptImports($javascriptLinks);
     }
