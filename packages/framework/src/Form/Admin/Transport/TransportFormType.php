@@ -164,7 +164,6 @@ class TransportFormType extends AbstractType
 
         $builderPricesGroup = $builder->create('prices', GroupType::class, [
             'label' => t('Prices'),
-            'is_group_container_to_render_as_the_last_one' => true,
         ]);
         $builderPricesGroup
             ->add('pricesByCurrencyId', PriceTableType::class, [

@@ -110,7 +110,6 @@ class ArticleFormType extends AbstractType
 
         $builderSeoData = $builder->create('seo', GroupType::class, [
             'label' => t('SEO'),
-            'is_group_container_to_render_as_the_last_one' => true,
         ]);
 
         $builderSeoData

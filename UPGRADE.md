@@ -50,6 +50,10 @@ There is a list of all the repositories maintained by monorepo, changes in log b
 * [shopsys/microservice-product-search-export]
 
 ## [From v7.0.0-beta4 to Unreleased]
+### [shopsys/framework]
+- stop providing the option `is_group_container_to_render_as_the_last_one` to the `FormGroup` in your forms, the option was removed
+    - the separators are rendered automatically since [PR #619](https://github.com/shopsys/shopsys/pull/619) was merged and the option hasn't been used anymore
+
 ### [shopsys/project-base]
 - *(optional)* [#596 Trusted proxies are now configurable in parameters.yml file](https://github.com/shopsys/shopsys/pull/596)
     - for easier deployment to production, make the trusted proxies in `Shopsys\Boostrap` class loaded from DIC parameter `trusted_proxies` instead of being hard-coded

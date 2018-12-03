@@ -37,7 +37,6 @@ class PluginCrudExtensionFacade
         foreach ($crudExtensions as $key => $crudExtension) {
             $builderExtensionGroup = $builder->create($key . 'Group', GroupType::class, [
                 'label' => $crudExtension->getFormLabel(),
-                'is_group_container_to_render_as_the_last_one' => end($crudExtensions) === $crudExtension,
             ]);
 
             $builderExtensionGroup->add($key, $crudExtension->getFormTypeClass(), [

@@ -149,7 +149,6 @@ class BrandFormType extends AbstractType
 
         $builderImageGroup = $builder->create('image', GroupType::class, [
             'label' => t('Image'),
-            'is_group_container_to_render_as_the_last_one' => true,
         ]);
         $builderImageGroup
             ->add('image', ImageUploadType::class, [

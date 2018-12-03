@@ -511,7 +511,6 @@ class ProductFormType extends AbstractType
         $builderStockGroup = $builder->create('stockGroup', FormType::class, [
             'render_form_row' => false,
             'inherit_data' => true,
-            'is_group_container_to_render_as_the_last_one' => false,
             'attr' => [
                 'class' => 'js-product-using-stock form-line__js',
             ],
@@ -835,7 +834,6 @@ class ProductFormType extends AbstractType
     {
         $builderParametersGroup = $builder->create('parametersGroup', GroupType::class, [
             'label' => t('Parameters'),
-            'is_group_container_to_render_as_the_last_one' => true,
         ]);
 
         $builderParametersGroup

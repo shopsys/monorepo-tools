@@ -27,10 +27,6 @@ styled `div` wrap.
 Label is used for displaying heading of section for example in `CustomerFormType` all user data like name, last name or
 email address are all in section with label 'Personal Data'
 
-#### `is_group_container_to_render_as_the_last_one`
-Right now we need to tell form type which GroupType is the last one to render form correctly, just remember to add this
-option if it is last group of fields.
-
 ### [DisplayOnlyCustomerType](../../packages/framework/src/Form/DisplayOnlyCustomerType.php)
 Displays name of a registered customer along with a link to his/her detail.
 If there is no customer set, `unregistered customer` text will be displayed instead.

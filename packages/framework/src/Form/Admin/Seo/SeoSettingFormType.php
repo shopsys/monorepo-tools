@@ -56,7 +56,6 @@ class SeoSettingFormType extends AbstractType
 
         $builderSettingsGroup = $builder->create('settings', GroupType::class, [
             'required' => false,
-            'is_group_container_to_render_as_the_last_one' => true,
             'label' => t('Settings'),
         ]);
 

@@ -18,7 +18,6 @@ class ShopInfoSettingFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builderPublishedDataGroup = $builder->create('publishedData', GroupType::class, [
-            'is_group_container_to_render_as_the_last_one' => true,
             'label' => t('Published data'),
         ]);
 

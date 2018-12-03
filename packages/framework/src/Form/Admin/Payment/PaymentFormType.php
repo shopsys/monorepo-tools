@@ -167,7 +167,6 @@ class PaymentFormType extends AbstractType
 
         $builderPriceGroup = $builder->create('prices', GroupType::class, [
             'label' => t('Prices'),
-            'is_group_container_to_render_as_the_last_one' => true,
         ]);
         $builderPriceGroup
             ->add('pricesByCurrencyId', PriceTableType::class, [
