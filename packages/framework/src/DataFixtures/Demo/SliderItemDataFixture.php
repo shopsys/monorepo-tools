@@ -47,7 +47,7 @@ class SliderItemDataFixture extends AbstractReferenceFixture
         $this->sliderItemFacade->create($sliderItemData);
 
         $sliderItemData->name = 'Twitter';
-        $sliderItemData->link = 'https://twitter.com/shopsys';
+        $sliderItemData->link = 'https://twitter.com/ShopsysFW';
 
         $this->sliderItemFacade->create($sliderItemData);
 
