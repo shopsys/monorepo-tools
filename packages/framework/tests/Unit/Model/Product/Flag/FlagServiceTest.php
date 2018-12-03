@@ -3,33 +3,16 @@
 namespace Tests\FrameworkBundle\Unit\Model\Product\Flag;
 
 use PHPUnit\Framework\TestCase;
-use Shopsys\FrameworkBundle\Component\EntityExtension\EntityNameResolver;
 use Shopsys\FrameworkBundle\Model\Product\Flag\Flag;
 use Shopsys\FrameworkBundle\Model\Product\Flag\FlagData;
 use Shopsys\FrameworkBundle\Model\Product\Flag\FlagDataFactory;
-use Shopsys\FrameworkBundle\Model\Product\Flag\FlagFactory;
 use Shopsys\FrameworkBundle\Model\Product\Flag\FlagService;
 
 class FlagServiceTest extends TestCase
 {
-    public function testCreate()
-    {
-        $flagService = new FlagService(new FlagFactory(new EntityNameResolver([])));
-
-        $flagDataOriginal = new FlagData();
-        $flagDataOriginal->name = ['cs' => 'flagNameCs', 'en' => 'flagNameEn'];
-        $flagDataOriginal->rgbColor = '#336699';
-        $flag = $flagService->create($flagDataOriginal);
-
-        $flagDataFactory = new FlagDataFactory();
-        $flagDataNew = $flagDataFactory->createFromFlag($flag);
-
-        $this->assertEquals($flagDataOriginal, $flagDataNew);
-    }
-
     public function testEdit()
     {
-        $flagService = new FlagService(new FlagFactory(new EntityNameResolver([])));
+        $flagService = new FlagService();
 
         $flagDataOld = new FlagData();
         $flagDataOld->name = ['cs' => 'flagNameCs', 'en' => 'flagNameEn'];

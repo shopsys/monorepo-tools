@@ -22,18 +22,26 @@ class FlagFacade
     protected $flagService;
 
     /**
+     * @var \Shopsys\FrameworkBundle\Model\Product\Flag\FlagFactory
+     */
+    protected $flagFactory;
+
+    /**
      * @param \Doctrine\ORM\EntityManagerInterface $em
      * @param \Shopsys\FrameworkBundle\Model\Product\Flag\FlagRepository $flagRepository
+     * @param \Shopsys\FrameworkBundle\Model\Product\Flag\FlagFactory $flagFactory
      * @param \Shopsys\FrameworkBundle\Model\Product\Flag\FlagService $flagService
      */
     public function __construct(
         EntityManagerInterface $em,
         FlagRepository $flagRepository,
+        FlagFactory $flagFactory,
         FlagService $flagService
     ) {
         $this->em = $em;
         $this->flagRepository = $flagRepository;
         $this->flagService = $flagService;
+        $this->flagFactory = $flagFactory;
     }
 
     /**
@@ -51,7 +59,7 @@ class FlagFacade
      */
     public function create(FlagData $flagData)
     {
-        $flag = $this->flagService->create($flagData);
+        $flag = $this->flagFactory->create($flagData);
         $this->em->persist($flag);
         $this->em->flush();
 
