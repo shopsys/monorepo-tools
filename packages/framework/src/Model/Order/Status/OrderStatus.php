@@ -119,4 +119,11 @@ class OrderStatus extends AbstractTranslatableEntity
     {
         $this->setTranslations($orderStatusData);
     }
+
+    public function checkForDelete()
+    {
+        if ($this->type !== self::TYPE_IN_PROGRESS) {
+            throw new \Shopsys\FrameworkBundle\Model\Order\Status\Exception\OrderStatusDeletionForbiddenException($this);
+        }
+    }
 }

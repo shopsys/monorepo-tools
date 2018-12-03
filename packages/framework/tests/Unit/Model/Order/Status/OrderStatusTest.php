@@ -6,9 +6,8 @@ use PHPUnit\Framework\TestCase;
 use Shopsys\FrameworkBundle\Model\Order\Status\Exception\OrderStatusDeletionForbiddenException;
 use Shopsys\FrameworkBundle\Model\Order\Status\OrderStatus;
 use Shopsys\FrameworkBundle\Model\Order\Status\OrderStatusData;
-use Shopsys\FrameworkBundle\Model\Order\Status\OrderStatusService;
 
-class OrderStatusServiceTest extends TestCase
+class OrderStatusTest extends TestCase
 {
     public function checkForDeleteProvider()
     {
@@ -27,13 +26,12 @@ class OrderStatusServiceTest extends TestCase
      */
     public function testCheckForDelete($statusType, $expectedException = null)
     {
-        $orderStatusService = new OrderStatusService();
         $orderStatusData = new OrderStatusData();
         $orderStatusData->name = ['en' => 'orderStatusName'];
         $orderStatus = new OrderStatus($orderStatusData, $statusType);
         if ($expectedException !== null) {
             $this->expectException($expectedException);
         }
-        $orderStatusService->checkForDelete($orderStatus);
+        $orderStatus->checkForDelete();
     }
 }

@@ -101,7 +101,7 @@ class OrderStatusFacade
     public function deleteById($orderStatusId, $newOrderStatusId = null)
     {
         $orderStatus = $this->orderStatusRepository->getById($orderStatusId);
-        $this->orderStatusService->checkForDelete($orderStatus);
+        $orderStatus->checkForDelete();
         if ($newOrderStatusId !== null) {
             $newOrderStatus = $this->orderStatusRepository->findById($newOrderStatusId);
             $this->orderStatusRepository->replaceOrderStatus($orderStatus, $newOrderStatus);
