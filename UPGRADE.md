@@ -55,6 +55,8 @@ There is a list of all the repositories maintained by monorepo, changes in log b
 ### [shopsys/framework]
 - stop providing the option `is_group_container_to_render_as_the_last_one` to the `FormGroup` in your forms, the option was removed
     - the separators are rendered automatically since [PR #619](https://github.com/shopsys/shopsys/pull/619) was merged and the option hasn't been used anymore
+- [#627 model service layer removal](https://github.com/shopsys/shopsys/pull/627)
+    - please read upgrade instructions in [separate article](docs/upgrade/services_removal.md)
 
 ### [shopsys/project-base]
 - *(optional)* [#596 Trusted proxies are now configurable in parameters.yml file](https://github.com/shopsys/shopsys/pull/596)
