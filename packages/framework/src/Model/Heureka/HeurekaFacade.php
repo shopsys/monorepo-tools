@@ -19,9 +19,9 @@ class HeurekaFacade
     protected $heurekaShopCertificationFactory;
 
     /**
-     * @var \Shopsys\FrameworkBundle\Model\Heureka\HeurekaShopCertificationService
+     * @var \Shopsys\FrameworkBundle\Model\Heureka\HeurekaShopCertificationLocaleHelper
      */
-    protected $heurekaShopCertificationService;
+    protected $heurekaShopCertificationLocaleHelper;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Heureka\HeurekaSetting
@@ -31,18 +31,18 @@ class HeurekaFacade
     /**
      * @param \Symfony\Bridge\Monolog\Logger $logger
      * @param \Shopsys\FrameworkBundle\Model\Heureka\HeurekaShopCertificationFactory $heurekaShopCertificationFactory
-     * @param \Shopsys\FrameworkBundle\Model\Heureka\HeurekaShopCertificationService $heurekaShopCertificationService
+     * @param \Shopsys\FrameworkBundle\Model\Heureka\HeurekaShopCertificationLocaleHelper $heurekaShopCertificationLocaleHelper
      * @param \Shopsys\FrameworkBundle\Model\Heureka\HeurekaSetting $heurekaSetting
      */
     public function __construct(
         Logger $logger,
         HeurekaShopCertificationFactory $heurekaShopCertificationFactory,
-        HeurekaShopCertificationService $heurekaShopCertificationService,
+        HeurekaShopCertificationLocaleHelper $heurekaShopCertificationLocaleHelper,
         HeurekaSetting $heurekaSetting
     ) {
         $this->logger = $logger;
         $this->heurekaShopCertificationFactory = $heurekaShopCertificationFactory;
-        $this->heurekaShopCertificationService = $heurekaShopCertificationService;
+        $this->heurekaShopCertificationLocaleHelper = $heurekaShopCertificationLocaleHelper;
         $this->heurekaSetting = $heurekaSetting;
     }
 
@@ -85,7 +85,7 @@ class HeurekaFacade
      */
     public function isDomainLocaleSupported($locale)
     {
-        return $this->heurekaShopCertificationService->isDomainLocaleSupported($locale);
+        return $this->heurekaShopCertificationLocaleHelper->isDomainLocaleSupported($locale);
     }
 
     /**
@@ -94,7 +94,7 @@ class HeurekaFacade
      */
     public function getServerNameByLocale($locale)
     {
-        return $this->heurekaShopCertificationService->getServerNameByLocale($locale);
+        return $this->heurekaShopCertificationLocaleHelper->getServerNameByLocale($locale);
     }
 
     /**

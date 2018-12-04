@@ -965,3 +965,5 @@ services:
     Shopsys\FrameworkBundle\Model\Cart\Watcher\CartWatcher: ~
 
     Shopsys\FrameworkBundle\Model\Statistics\ValueByDateTimeDataPointFormatter: ~
+
+    Shopsys\FrameworkBundle\Model\Heureka\HeurekaShopCertificationLocaleHelper: ~
