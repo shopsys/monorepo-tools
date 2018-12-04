@@ -2,7 +2,7 @@
 
 namespace Shopsys\FrameworkBundle\Model\Sitemap;
 
-class SitemapService
+class SitemapFilePrefixer
 {
     /**
      * @param int $domainId

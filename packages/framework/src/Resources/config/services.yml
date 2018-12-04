@@ -955,3 +955,5 @@ services:
         factory: 'Shopsys\FrameworkBundle\Component\Microservice\MicroserviceClientFactory:create'
         arguments:
             $microserviceUrl: '%microservice_product_search_export_url%'
+
+    Shopsys\FrameworkBundle\Model\Sitemap\SitemapFilePrefixer: ~

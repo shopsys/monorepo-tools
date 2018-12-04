@@ -3,7 +3,7 @@
 namespace Shopsys\ShopBundle\Controller\Front;
 
 use Shopsys\FrameworkBundle\Component\Domain\Domain;
-use Shopsys\FrameworkBundle\Model\Sitemap\SitemapService;
+use Shopsys\FrameworkBundle\Model\Sitemap\SitemapFilePrefixer;
 use Symfony\Component\HttpFoundation\Response;
 
 class RobotsController extends FrontBaseController
@@ -14,26 +14,26 @@ class RobotsController extends FrontBaseController
     private $domain;
 
     /**
-     * @var \Shopsys\FrameworkBundle\Model\Sitemap\SitemapService
+     * @var \Shopsys\FrameworkBundle\Model\Sitemap\SitemapFilePrefixer
      */
-    private $sitemapService;
+    private $sitemapFilePrefixer;
 
     /**
      * @param \Shopsys\FrameworkBundle\Component\Domain\Domain $domain
-     * @param \Shopsys\FrameworkBundle\Model\Sitemap\SitemapService $sitemapService
+     * @param \Shopsys\FrameworkBundle\Model\Sitemap\SitemapFilePrefixer $sitemapFilePrefixer
      */
     public function __construct(
         Domain $domain,
-        SitemapService $sitemapService
+        SitemapFilePrefixer $sitemapFilePrefixer
     ) {
         $this->domain = $domain;
-        $this->sitemapService = $sitemapService;
+        $this->sitemapFilePrefixer = $sitemapFilePrefixer;
     }
 
     public function indexAction()
     {
         $sitemapsUrlPrefix = $this->get('service_container')->getParameter('shopsys.sitemaps_url_prefix');
-        $sitemapFilePrefix = $this->sitemapService->getSitemapFilePrefixForDomain($this->domain->getId());
+        $sitemapFilePrefix = $this->sitemapFilePrefixer->getSitemapFilePrefixForDomain($this->domain->getId());
 
         $sitemapUrl = $this->domain->getUrl() . $sitemapsUrlPrefix . '/' . $sitemapFilePrefix . '.xml';
 
