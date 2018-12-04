@@ -7,6 +7,7 @@ use Shopsys\FrameworkBundle\Component\Router\DomainRouterFactory;
 use Shopsys\FrameworkBundle\Component\Setting\Setting;
 use Shopsys\FrameworkBundle\Model\Mail\MailTemplate;
 use Shopsys\FrameworkBundle\Model\Mail\MessageData;
+use Shopsys\FrameworkBundle\Model\Mail\MessageFactoryInterface;
 use Shopsys\FrameworkBundle\Model\Mail\Setting\MailSetting;
 use Shopsys\FrameworkBundle\Model\Order\Item\OrderItemPriceCalculation;
 use Shopsys\FrameworkBundle\Model\Order\Order;
@@ -17,7 +18,7 @@ use Shopsys\FrameworkBundle\Twig\PriceExtension;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Twig_Environment;
 
-class OrderMailService
+class OrderMail implements MessageFactoryInterface
 {
     const MAIL_TEMPLATE_NAME_PREFIX = 'order_status_';
     const VARIABLE_NUMBER = '{number}';
@@ -105,11 +106,11 @@ class OrderMailService
     }
 
     /**
-     * @param \Shopsys\FrameworkBundle\Model\Order\Order $order
      * @param \Shopsys\FrameworkBundle\Model\Mail\MailTemplate $mailTemplate
+     * @param \Shopsys\FrameworkBundle\Model\Order\Order $order
      * @return \Shopsys\FrameworkBundle\Model\Mail\MessageData
      */
-    public function getMessageDataByOrder(Order $order, MailTemplate $mailTemplate)
+    public function createMessage(MailTemplate $mailTemplate, $order)
     {
         return new MessageData(
             $order->getEmail(),

@@ -981,3 +981,5 @@ services:
     Shopsys\FrameworkBundle\Component\FlashMessage\ErrorExtractor: ~
 
     Shopsys\FrameworkBundle\Model\Customer\Mail\RegistrationMail: ~
+
+    Shopsys\FrameworkBundle\Model\Order\Mail\OrderMail: ~

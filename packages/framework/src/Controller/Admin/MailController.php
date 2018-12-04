@@ -11,7 +11,7 @@ use Shopsys\FrameworkBundle\Model\Customer\Mail\ResetPasswordMail;
 use Shopsys\FrameworkBundle\Model\Mail\MailTemplate;
 use Shopsys\FrameworkBundle\Model\Mail\MailTemplateFacade;
 use Shopsys\FrameworkBundle\Model\Mail\Setting\MailSettingFacade;
-use Shopsys\FrameworkBundle\Model\Order\Mail\OrderMailService;
+use Shopsys\FrameworkBundle\Model\Order\Mail\OrderMail;
 use Shopsys\FrameworkBundle\Model\Order\Status\OrderStatus;
 use Shopsys\FrameworkBundle\Model\Order\Status\OrderStatusFacade;
 use Shopsys\FrameworkBundle\Model\PersonalData\Mail\PersonalDataAccessMail;
@@ -46,9 +46,9 @@ class MailController extends AdminBaseController
     protected $mailSettingFacade;
 
     /**
-     * @var \Shopsys\FrameworkBundle\Model\Order\Mail\OrderMailService
+     * @var \Shopsys\FrameworkBundle\Model\Order\Mail\OrderMail
      */
-    protected $orderMailService;
+    protected $orderMail;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Order\Status\OrderStatusFacade
@@ -67,7 +67,7 @@ class MailController extends AdminBaseController
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\Customer\Mail\ResetPasswordMail $resetPasswordMail
-     * @param \Shopsys\FrameworkBundle\Model\Order\Mail\OrderMailService $orderMailService
+     * @param \Shopsys\FrameworkBundle\Model\Order\Mail\OrderMail $orderMail
      * @param \Shopsys\FrameworkBundle\Model\Customer\Mail\RegistrationMail $registrationMail
      * @param \Shopsys\FrameworkBundle\Component\Domain\AdminDomainTabsFacade $adminDomainTabsFacade
      * @param \Shopsys\FrameworkBundle\Model\Mail\MailTemplateFacade $mailTemplateFacade
@@ -78,7 +78,7 @@ class MailController extends AdminBaseController
      */
     public function __construct(
         ResetPasswordMail $resetPasswordMail,
-        OrderMailService $orderMailService,
+        OrderMail $orderMail,
         RegistrationMail $registrationMail,
         AdminDomainTabsFacade $adminDomainTabsFacade,
         MailTemplateFacade $mailTemplateFacade,
@@ -88,7 +88,7 @@ class MailController extends AdminBaseController
         PersonalDataExportMail $personalDataExportMail
     ) {
         $this->resetPasswordMail = $resetPasswordMail;
-        $this->orderMailService = $orderMailService;
+        $this->orderMail = $orderMail;
         $this->registrationMail = $registrationMail;
         $this->adminDomainTabsFacade = $adminDomainTabsFacade;
         $this->mailTemplateFacade = $mailTemplateFacade;
@@ -104,23 +104,23 @@ class MailController extends AdminBaseController
     protected function getOrderStatusVariablesLabels()
     {
         return [
-            OrderMailService::VARIABLE_NUMBER => t('Order number'),
-            OrderMailService::VARIABLE_DATE => t('Date and time of order creation'),
-            OrderMailService::VARIABLE_URL => t('E-shop URL address'),
-            OrderMailService::VARIABLE_TRANSPORT => t('Chosen shipping name'),
-            OrderMailService::VARIABLE_PAYMENT => t('Chosen payment name'),
-            OrderMailService::VARIABLE_TOTAL_PRICE => t('Total order price (including VAT)'),
-            OrderMailService::VARIABLE_BILLING_ADDRESS => t(
+            OrderMail::VARIABLE_NUMBER => t('Order number'),
+            OrderMail::VARIABLE_DATE => t('Date and time of order creation'),
+            OrderMail::VARIABLE_URL => t('E-shop URL address'),
+            OrderMail::VARIABLE_TRANSPORT => t('Chosen shipping name'),
+            OrderMail::VARIABLE_PAYMENT => t('Chosen payment name'),
+            OrderMail::VARIABLE_TOTAL_PRICE => t('Total order price (including VAT)'),
+            OrderMail::VARIABLE_BILLING_ADDRESS => t(
                 'Billing address - name, last name, company, company number, tax number and billing address'
             ),
-            OrderMailService::VARIABLE_DELIVERY_ADDRESS => t('Delivery address'),
-            OrderMailService::VARIABLE_NOTE => t('Note'),
-            OrderMailService::VARIABLE_PRODUCTS => t(
+            OrderMail::VARIABLE_DELIVERY_ADDRESS => t('Delivery address'),
+            OrderMail::VARIABLE_NOTE => t('Note'),
+            OrderMail::VARIABLE_PRODUCTS => t(
                 'List of products in order (name, quantity, price per unit including VAT, total price per item including VAT)'
             ),
-            OrderMailService::VARIABLE_ORDER_DETAIL_URL => t('Order detail URL address'),
-            OrderMailService::VARIABLE_TRANSPORT_INSTRUCTIONS => t('Shipping instructions'),
-            OrderMailService::VARIABLE_PAYMENT_INSTRUCTIONS => t('Payment instructions'),
+            OrderMail::VARIABLE_ORDER_DETAIL_URL => t('Order detail URL address'),
+            OrderMail::VARIABLE_TRANSPORT_INSTRUCTIONS => t('Shipping instructions'),
+            OrderMail::VARIABLE_PAYMENT_INSTRUCTIONS => t('Payment instructions'),
         ];
     }
 
@@ -178,7 +178,7 @@ class MailController extends AdminBaseController
      */
     protected function getTemplateParameters()
     {
-        $orderStatusesTemplateVariables = $this->orderMailService->getTemplateVariables();
+        $orderStatusesTemplateVariables = $this->orderMail->getTemplateVariables();
         $registrationTemplateVariables = $this->registrationMail->getTemplateVariables();
         $resetPasswordTemplateVariables = array_unique(array_merge(
             $this->resetPasswordMail->getBodyVariables(),
