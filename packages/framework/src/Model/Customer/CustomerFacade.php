@@ -36,7 +36,7 @@ class CustomerFacade
     /**
      * @var \Shopsys\FrameworkBundle\Model\Customer\BillingAddressDataFactoryInterface
      */
-    private $billingAddressDataFactory;
+    protected $billingAddressDataFactory;
 
     /**
      * @param \Doctrine\ORM\EntityManagerInterface $em
