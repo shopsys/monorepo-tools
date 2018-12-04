@@ -18,7 +18,7 @@ use Shopsys\FrameworkBundle\Model\Transport\Transport;
  */
 class Payment extends AbstractTranslatableEntity implements OrderableEntityInterface
 {
-    private const GEDMO_SORTABLE_LAST_POSITION = -1;
+    protected const GEDMO_SORTABLE_LAST_POSITION = -1;
 
     /**
      * @var int
