@@ -4,10 +4,10 @@ namespace Tests\FrameworkBundle\Unit\Component\Cron;
 
 use PHPUnit\Framework\TestCase;
 use Shopsys\FrameworkBundle\Component\Cron\Config\CronModuleConfig;
-use Shopsys\FrameworkBundle\Component\Cron\CronService;
+use Shopsys\FrameworkBundle\Component\Cron\CronFilter;
 use Shopsys\Plugin\Cron\SimpleCronModuleInterface;
 
-class CronServiceTest extends TestCase
+class CronFilterTest extends TestCase
 {
     public function testFilterScheduledCronModuleConfigs()
     {
@@ -24,8 +24,8 @@ class CronServiceTest extends TestCase
 
         $scheduledCronModuleIds = ['scheduled1', 'scheduled2'];
 
-        $cronService = new CronService();
-        $scheduledCronModuleConfigs = $cronService->filterScheduledCronModuleConfigs(
+        $cronFilter = new CronFilter();
+        $scheduledCronModuleConfigs = $cronFilter->filterScheduledCronModuleConfigs(
             $cronModuleConfigs,
             $scheduledCronModuleIds
         );

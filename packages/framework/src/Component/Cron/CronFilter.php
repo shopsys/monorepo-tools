@@ -2,7 +2,7 @@
 
 namespace Shopsys\FrameworkBundle\Component\Cron;
 
-class CronService
+class CronFilter
 {
     /**
      * @param \Shopsys\FrameworkBundle\Component\Cron\Config\CronModuleConfig[] $cronModuleConfigs
