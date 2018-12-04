@@ -552,7 +552,7 @@ services:
     Shopsys\FrameworkBundle\Model\Script\ScriptFacade:
         public: true
 
-    Shopsys\FrameworkBundle\Model\Security\LoginService:
+    Shopsys\FrameworkBundle\Model\Security\Authenticator:
         arguments:
             - '@security.token_storage'
             - '@Symfony\Component\HttpKernel\Debug\TraceableEventDispatcher'

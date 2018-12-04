@@ -3,18 +3,18 @@
 namespace Tests\ShopBundle\Functional\Model\Security;
 
 use Shopsys\FrameworkBundle\Model\Customer\CustomerFacade;
-use Shopsys\FrameworkBundle\Model\Security\LoginService;
+use Shopsys\FrameworkBundle\Model\Security\Authenticator;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\HttpFoundation\Session\Storage\MockArraySessionStorage;
 use Tests\ShopBundle\Test\FunctionalTestCase;
 
-class LoginServiceTest extends FunctionalTestCase
+class AuthenticatorTest extends FunctionalTestCase
 {
     public function testSessionIdIsChangedAfterLogin(): void
     {
-        /** @var \Shopsys\FrameworkBundle\Model\Security\LoginService $loginService */
-        $loginService = $this->getContainer()->get(LoginService::class);
+        /** @var \Shopsys\FrameworkBundle\Model\Security\Authenticator $authenticator */
+        $authenticator = $this->getContainer()->get(Authenticator::class);
         /** @var \Shopsys\FrameworkBundle\Model\Customer\CustomerFacade $customerFacade */
         $customerFacade = $this->getContainer()->get(CustomerFacade::class);
 
@@ -23,7 +23,7 @@ class LoginServiceTest extends FunctionalTestCase
 
         $beforeLoginSessionId = $mockedRequest->getSession()->getId();
 
-        $loginService->loginUser($user, $mockedRequest);
+        $authenticator->loginUser($user, $mockedRequest);
 
         $afterLoginSessionId = $mockedRequest->getSession()->getId();
 

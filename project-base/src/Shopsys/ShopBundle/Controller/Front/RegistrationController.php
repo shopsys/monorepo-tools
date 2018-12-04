@@ -6,7 +6,7 @@ use Shopsys\FrameworkBundle\Component\Domain\Domain;
 use Shopsys\FrameworkBundle\Model\Customer\CustomerFacade;
 use Shopsys\FrameworkBundle\Model\Customer\UserDataFactoryInterface;
 use Shopsys\FrameworkBundle\Model\LegalConditions\LegalConditionsFacade;
-use Shopsys\FrameworkBundle\Model\Security\LoginService;
+use Shopsys\FrameworkBundle\Model\Security\Authenticator;
 use Shopsys\ShopBundle\Form\Front\Registration\RegistrationFormType;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -29,9 +29,9 @@ class RegistrationController extends FrontBaseController
     private $domain;
 
     /**
-     * @var \Shopsys\FrameworkBundle\Model\Security\LoginService
+     * @var \Shopsys\FrameworkBundle\Model\Security\Authenticator
      */
-    private $loginService;
+    private $authenticator;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\LegalConditions\LegalConditionsFacade
@@ -42,20 +42,20 @@ class RegistrationController extends FrontBaseController
      * @param \Shopsys\FrameworkBundle\Component\Domain\Domain $domain
      * @param \Shopsys\FrameworkBundle\Model\Customer\UserDataFactoryInterface $userDataFactory
      * @param \Shopsys\FrameworkBundle\Model\Customer\CustomerFacade $customerFacade
-     * @param \Shopsys\FrameworkBundle\Model\Security\LoginService $loginService
+     * @param \Shopsys\FrameworkBundle\Model\Security\Authenticator $authenticator
      * @param \Shopsys\FrameworkBundle\Model\LegalConditions\LegalConditionsFacade $legalConditionsFacade
      */
     public function __construct(
         Domain $domain,
         UserDataFactoryInterface $userDataFactory,
         CustomerFacade $customerFacade,
-        LoginService $loginService,
+        Authenticator $authenticator,
         LegalConditionsFacade $legalConditionsFacade
     ) {
         $this->domain = $domain;
         $this->userDataFactory = $userDataFactory;
         $this->customerFacade = $customerFacade;
-        $this->loginService = $loginService;
+        $this->authenticator = $authenticator;
         $this->legalConditionsFacade = $legalConditionsFacade;
     }
 
@@ -85,7 +85,7 @@ class RegistrationController extends FrontBaseController
             $userData->domainId = $this->domain->getId();
 
             $user = $this->customerFacade->register($userData);
-            $this->loginService->loginUser($user, $request);
+            $this->authenticator->loginUser($user, $request);
 
             $this->getFlashMessageSender()->addSuccessFlash(t('You have been successfully registered.'));
             return $this->redirectToRoute('front_homepage');

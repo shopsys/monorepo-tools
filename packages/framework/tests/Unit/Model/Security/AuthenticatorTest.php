@@ -3,16 +3,16 @@
 namespace Tests\FrameworkBundle\Unit\Model\Security;
 
 use PHPUnit\Framework\TestCase;
-use Shopsys\FrameworkBundle\Model\Security\LoginService;
+use Shopsys\FrameworkBundle\Model\Security\Authenticator;
 use StdClass;
 use Symfony\Component\HttpKernel\Debug\TraceableEventDispatcher;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
 
-class LoginServiceTest extends TestCase
+class AuthenticatorTest extends TestCase
 {
     public function testCheckLoginProcessWithRequestError()
     {
-        $loginService = $this->getLoginService();
+        $authenticator = $this->getAuthenticator();
 
         $requestMock = $this->createMock('\Symfony\Component\HttpFoundation\Request');
         /* @var $requestMock \Symfony\Component\HttpFoundation\Request|\PHPUnit\Framework\MockObject\MockObject */
@@ -23,12 +23,12 @@ class LoginServiceTest extends TestCase
         $requestMock->attributes->expects($this->once())->method('get')->will($this->returnValue(new StdClass()));
 
         $this->expectException('Shopsys\FrameworkBundle\Model\Security\Exception\LoginFailedException');
-        $loginService->checkLoginProcess($requestMock);
+        $authenticator->checkLoginProcess($requestMock);
     }
 
     public function testCheckLoginProcessWithSessionError()
     {
-        $loginService = $this->getLoginService();
+        $authenticator = $this->getAuthenticator();
 
         $sessionMock = $this->createMock('\Symfony\Component\HttpFoundation\Session\SessionInterface');
         $sessionMock->expects($this->atLeastOnce())->method('get')->will($this->returnValue(new StdClass()));
@@ -43,12 +43,12 @@ class LoginServiceTest extends TestCase
         $requestMock->attributes->expects($this->never())->method('get');
 
         $this->expectException('Shopsys\FrameworkBundle\Model\Security\Exception\LoginFailedException');
-        $loginService->checkLoginProcess($requestMock);
+        $authenticator->checkLoginProcess($requestMock);
     }
 
     public function testCheckLoginProcessWithoutSessionError()
     {
-        $loginService = $this->getLoginService();
+        $authenticator = $this->getAuthenticator();
 
         $sessionMock = $this->createMock('\Symfony\Component\HttpFoundation\Session\SessionInterface');
         $sessionMock->expects($this->once())->method('get')->will($this->returnValue(null));
@@ -62,17 +62,17 @@ class LoginServiceTest extends TestCase
         $requestMock->attributes->expects($this->once())->method('has')->will($this->returnValue(false));
         $requestMock->attributes->expects($this->never())->method('get');
 
-        $this->assertSame(true, $loginService->checkLoginProcess($requestMock));
+        $this->assertSame(true, $authenticator->checkLoginProcess($requestMock));
     }
 
     /**
-     * @return \Shopsys\FrameworkBundle\Model\Security\LoginService
+     * @return \Shopsys\FrameworkBundle\Model\Security\Authenticator
      */
-    private function getLoginService()
+    private function getAuthenticator()
     {
         $tokenStorageMock = $this->createMock(TokenStorage::class);
         $traceableEventDispatcherMock = $this->createMock(TraceableEventDispatcher::class);
 
-        return new LoginService($tokenStorageMock, $traceableEventDispatcherMock);
+        return new Authenticator($tokenStorageMock, $traceableEventDispatcherMock);
     }
 }

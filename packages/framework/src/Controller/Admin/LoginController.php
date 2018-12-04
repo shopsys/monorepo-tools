@@ -7,7 +7,7 @@ use Shopsys\FrameworkBundle\Component\Domain\Domain;
 use Shopsys\FrameworkBundle\Component\Router\DomainRouterFactory;
 use Shopsys\FrameworkBundle\Form\Admin\Login\LoginFormType;
 use Shopsys\FrameworkBundle\Model\Security\AdministratorLoginFacade;
-use Shopsys\FrameworkBundle\Model\Security\LoginService;
+use Shopsys\FrameworkBundle\Model\Security\Authenticator;
 use Shopsys\FrameworkBundle\Model\Security\Roles;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
@@ -19,9 +19,9 @@ class LoginController extends AdminBaseController
     const ORIGINAL_REFERER_PARAMETER_NAME = 'originalReferer';
 
     /**
-     * @var \Shopsys\FrameworkBundle\Model\Security\LoginService
+     * @var \Shopsys\FrameworkBundle\Model\Security\Authenticator
      */
-    protected $loginService;
+    protected $authenticator;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\Domain\Domain
@@ -39,18 +39,18 @@ class LoginController extends AdminBaseController
     protected $administratorLoginFacade;
 
     /**
-     * @param \Shopsys\FrameworkBundle\Model\Security\LoginService $loginService
+     * @param \Shopsys\FrameworkBundle\Model\Security\Authenticator $authenticator
      * @param \Shopsys\FrameworkBundle\Component\Domain\Domain $domain
      * @param \Shopsys\FrameworkBundle\Component\Router\DomainRouterFactory $domainRouterFactory
      * @param \Shopsys\FrameworkBundle\Model\Security\AdministratorLoginFacade $administratorLoginFacade
      */
     public function __construct(
-        LoginService $loginService,
+        Authenticator $authenticator,
         Domain $domain,
         DomainRouterFactory $domainRouterFactory,
         AdministratorLoginFacade $administratorLoginFacade
     ) {
-        $this->loginService = $loginService;
+        $this->authenticator = $authenticator;
         $this->domain = $domain;
         $this->domainRouterFactory = $domainRouterFactory;
         $this->administratorLoginFacade = $administratorLoginFacade;
@@ -89,7 +89,7 @@ class LoginController extends AdminBaseController
         ]);
 
         try {
-            $this->loginService->checkLoginProcess($request);
+            $this->authenticator->checkLoginProcess($request);
         } catch (\Shopsys\FrameworkBundle\Model\Security\Exception\LoginFailedException $e) {
             $error = t('Log in failed.');
         }
