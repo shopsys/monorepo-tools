@@ -36,12 +36,12 @@ class FeedExportFactory
     /**
      * @var \Symfony\Component\Filesystem\Filesystem
      */
-    private $localFilesystem;
+    protected $localFilesystem;
 
     /**
      * @var \League\Flysystem\MountManager
      */
-    private $mountManager;
+    protected $mountManager;
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\Feed\FeedRendererFactory $feedRendererFactory
