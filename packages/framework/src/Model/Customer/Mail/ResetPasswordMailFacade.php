@@ -3,14 +3,14 @@
 namespace Shopsys\FrameworkBundle\Model\Customer\Mail;
 
 use Shopsys\FrameworkBundle\Model\Customer\User;
-use Shopsys\FrameworkBundle\Model\Mail\MailerService;
+use Shopsys\FrameworkBundle\Model\Mail\Mailer;
 use Shopsys\FrameworkBundle\Model\Mail\MailTemplate;
 use Shopsys\FrameworkBundle\Model\Mail\MailTemplateFacade;
 
 class ResetPasswordMailFacade
 {
     /**
-     * @var \Shopsys\FrameworkBundle\Model\Mail\MailerService
+     * @var \Shopsys\FrameworkBundle\Model\Mail\Mailer
      */
     protected $mailer;
 
@@ -25,12 +25,12 @@ class ResetPasswordMailFacade
     protected $resetPasswordMail;
 
     /**
-     * @param \Shopsys\FrameworkBundle\Model\Mail\MailerService $mailer
+     * @param \Shopsys\FrameworkBundle\Model\Mail\Mailer $mailer
      * @param \Shopsys\FrameworkBundle\Model\Mail\MailTemplateFacade $mailTemplateFacade
      * @param \Shopsys\FrameworkBundle\Model\Customer\Mail\ResetPasswordMail $resetPasswordMail
      */
     public function __construct(
-        MailerService $mailer,
+        Mailer $mailer,
         MailTemplateFacade $mailTemplateFacade,
         ResetPasswordMail $resetPasswordMail
     ) {

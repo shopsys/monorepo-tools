@@ -2,7 +2,7 @@
 
 namespace Shopsys\FrameworkBundle\Model\PersonalData\Mail;
 
-use Shopsys\FrameworkBundle\Model\Mail\MailerService;
+use Shopsys\FrameworkBundle\Model\Mail\Mailer;
 use Shopsys\FrameworkBundle\Model\Mail\MailTemplate;
 use Shopsys\FrameworkBundle\Model\Mail\MailTemplateFacade;
 use Shopsys\FrameworkBundle\Model\PersonalData\PersonalDataAccessRequest;
@@ -10,7 +10,7 @@ use Shopsys\FrameworkBundle\Model\PersonalData\PersonalDataAccessRequest;
 class PersonalDataAccessMailFacade
 {
     /**
-     * @var \Shopsys\FrameworkBundle\Model\Mail\MailerService
+     * @var \Shopsys\FrameworkBundle\Model\Mail\Mailer
      */
     protected $mailer;
 
@@ -30,13 +30,13 @@ class PersonalDataAccessMailFacade
     protected $personalDataExportMail;
 
     /**
-     * @param \Shopsys\FrameworkBundle\Model\Mail\MailerService $mailer
+     * @param \Shopsys\FrameworkBundle\Model\Mail\Mailer $mailer
      * @param \Shopsys\FrameworkBundle\Model\Mail\MailTemplateFacade $mailTemplateFacade
      * @param \Shopsys\FrameworkBundle\Model\PersonalData\Mail\PersonalDataAccessMail $personalDataAccessMail
      * @param \Shopsys\FrameworkBundle\Model\PersonalData\Mail\PersonalDataExportMail $personalDataExportMail
      */
     public function __construct(
-        MailerService $mailer,
+        Mailer $mailer,
         MailTemplateFacade $mailTemplateFacade,
         PersonalDataAccessMail $personalDataAccessMail,
         PersonalDataExportMail $personalDataExportMail

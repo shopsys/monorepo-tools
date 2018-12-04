@@ -2,7 +2,7 @@
 
 namespace Shopsys\FrameworkBundle\Model\Order\Mail;
 
-use Shopsys\FrameworkBundle\Model\Mail\MailerService;
+use Shopsys\FrameworkBundle\Model\Mail\Mailer;
 use Shopsys\FrameworkBundle\Model\Mail\MailTemplateFacade;
 use Shopsys\FrameworkBundle\Model\Order\Order;
 use Shopsys\FrameworkBundle\Model\Order\Status\OrderStatus;
@@ -10,7 +10,7 @@ use Shopsys\FrameworkBundle\Model\Order\Status\OrderStatus;
 class OrderMailFacade
 {
     /**
-     * @var \Shopsys\FrameworkBundle\Model\Mail\MailerService
+     * @var \Shopsys\FrameworkBundle\Model\Mail\Mailer
      */
     protected $mailer;
 
@@ -25,12 +25,12 @@ class OrderMailFacade
     protected $orderMailService;
 
     /**
-     * @param \Shopsys\FrameworkBundle\Model\Mail\MailerService $mailer
+     * @param \Shopsys\FrameworkBundle\Model\Mail\Mailer $mailer
      * @param \Shopsys\FrameworkBundle\Model\Mail\MailTemplateFacade $mailTemplateFacade
      * @param \Shopsys\FrameworkBundle\Model\Order\Mail\OrderMailService $orderMailService
      */
     public function __construct(
-        MailerService $mailer,
+        Mailer $mailer,
         MailTemplateFacade $mailTemplateFacade,
         OrderMailService $orderMailService
     ) {

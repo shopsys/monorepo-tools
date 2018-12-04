@@ -477,7 +477,7 @@ services:
     CommerceGuys\Intl\Currency\CurrencyRepositoryInterface:
         class: Shopsys\FrameworkBundle\Model\Localization\IntlCurrencyRepository
 
-    Shopsys\FrameworkBundle\Model\Mail\MailerService:
+    Shopsys\FrameworkBundle\Model\Mail\Mailer:
         arguments: ['@mailer']
 
     Shopsys\FrameworkBundle\Model\Heureka\HeurekaSetting: ~

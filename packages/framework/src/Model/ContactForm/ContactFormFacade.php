@@ -3,7 +3,7 @@
 namespace Shopsys\FrameworkBundle\Model\ContactForm;
 
 use Shopsys\FrameworkBundle\Component\Domain\Domain;
-use Shopsys\FrameworkBundle\Model\Mail\MailerService;
+use Shopsys\FrameworkBundle\Model\Mail\Mailer;
 use Shopsys\FrameworkBundle\Model\Mail\MessageData;
 use Shopsys\FrameworkBundle\Model\Mail\Setting\MailSettingFacade;
 use Twig_Environment;
@@ -21,9 +21,9 @@ class ContactFormFacade
     protected $domain;
 
     /**
-     * @var \Shopsys\FrameworkBundle\Model\Mail\MailerService
+     * @var \Shopsys\FrameworkBundle\Model\Mail\Mailer
      */
-    protected $mailerService;
+    protected $mailer;
 
     /**
      * @var \Twig_Environment
@@ -33,18 +33,18 @@ class ContactFormFacade
     /**
      * @param \Shopsys\FrameworkBundle\Model\Mail\Setting\MailSettingFacade $mailSettingFacade
      * @param \Shopsys\FrameworkBundle\Component\Domain\Domain $domain
-     * @param \Shopsys\FrameworkBundle\Model\Mail\MailerService $mailerService
+     * @param \Shopsys\FrameworkBundle\Model\Mail\Mailer $mailer
      * @param \Twig_Environment $twig
      */
     public function __construct(
         MailSettingFacade $mailSettingFacade,
         Domain $domain,
-        MailerService $mailerService,
+        Mailer $mailer,
         Twig_Environment $twig
     ) {
         $this->mailSettingFacade = $mailSettingFacade;
         $this->domain = $domain;
-        $this->mailerService = $mailerService;
+        $this->mailer = $mailer;
         $this->twig = $twig;
     }
 
@@ -61,7 +61,7 @@ class ContactFormFacade
             $contactFormData->email,
             $contactFormData->name
         );
-        $this->mailerService->send($messageData);
+        $this->mailer->send($messageData);
     }
 
     /**

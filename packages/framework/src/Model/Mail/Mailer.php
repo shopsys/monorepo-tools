@@ -6,19 +6,19 @@ use Swift_Attachment;
 use Swift_Mailer;
 use Swift_Message;
 
-class MailerService
+class Mailer
 {
     /**
      * @var \Swift_Mailer
      */
-    private $mailer;
+    private $swiftMailer;
 
     /**
-     * @param \Swift_Mailer $mailer
+     * @param \Swift_Mailer $swiftMailer
      */
-    public function __construct(Swift_Mailer $mailer)
+    public function __construct(Swift_Mailer $swiftMailer)
     {
-        $this->mailer = $mailer;
+        $this->swiftMailer = $swiftMailer;
     }
 
     /**
@@ -33,7 +33,7 @@ class MailerService
             throw new \Shopsys\FrameworkBundle\Model\Mail\Exception\EmptyMailException();
         }
 
-        $successSend = $this->mailer->send($message, $failedRecipients);
+        $successSend = $this->swiftMailer->send($message, $failedRecipients);
         if (!$successSend && count($failedRecipients) > 0) {
             throw new \Shopsys\FrameworkBundle\Model\Mail\Exception\SendMailFailedException($failedRecipients);
         }
