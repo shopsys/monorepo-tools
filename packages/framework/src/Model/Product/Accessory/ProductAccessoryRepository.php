@@ -3,7 +3,7 @@
 namespace Shopsys\FrameworkBundle\Model\Product\Accessory;
 
 use Doctrine\ORM\EntityManagerInterface;
-use Shopsys\FrameworkBundle\Component\Doctrine\QueryBuilderService;
+use Shopsys\FrameworkBundle\Component\Doctrine\QueryBuilderExtender;
 use Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroup;
 use Shopsys\FrameworkBundle\Model\Product\Product;
 use Shopsys\FrameworkBundle\Model\Product\ProductRepository;
@@ -21,23 +21,23 @@ class ProductAccessoryRepository
     protected $productRepository;
 
     /**
-     * @var \Shopsys\FrameworkBundle\Component\Doctrine\QueryBuilderService
+     * @var \Shopsys\FrameworkBundle\Component\Doctrine\QueryBuilderExtender
      */
-    protected $queryBuilderService;
+    protected $queryBuilderExtender;
 
     /**
      * @param \Doctrine\ORM\EntityManagerInterface $em
      * @param \Shopsys\FrameworkBundle\Model\Product\ProductRepository $productRepository
-     * @param \Shopsys\FrameworkBundle\Component\Doctrine\QueryBuilderService $queryBuilderService
+     * @param \Shopsys\FrameworkBundle\Component\Doctrine\QueryBuilderExtender $queryBuilderExtender
      */
     public function __construct(
         EntityManagerInterface $em,
         ProductRepository $productRepository,
-        QueryBuilderService $queryBuilderService
+        QueryBuilderExtender $queryBuilderExtender
     ) {
         $this->em = $em;
         $this->productRepository = $productRepository;
-        $this->queryBuilderService = $queryBuilderService;
+        $this->queryBuilderExtender = $queryBuilderExtender;
     }
 
     /**
@@ -94,7 +94,7 @@ class ProductAccessoryRepository
     protected function getAllOfferedAccessoriesByProductQueryBuilder(Product $product, $domainId, PricingGroup $pricingGroup)
     {
         $queryBuilder = $this->productRepository->getAllOfferedQueryBuilder($domainId, $pricingGroup);
-        $this->queryBuilderService->addOrExtendJoin(
+        $this->queryBuilderExtender->addOrExtendJoin(
             $queryBuilder,
             ProductAccessory::class,
             'pa',

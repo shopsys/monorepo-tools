@@ -967,3 +967,5 @@ services:
     Shopsys\FrameworkBundle\Model\Statistics\ValueByDateTimeDataPointFormatter: ~
 
     Shopsys\FrameworkBundle\Model\Heureka\HeurekaShopCertificationLocaleHelper: ~
+
+    Shopsys\FrameworkBundle\Component\Doctrine\QueryBuilderExtender: ~

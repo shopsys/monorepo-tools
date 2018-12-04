@@ -5,7 +5,7 @@ namespace Shopsys\FrameworkBundle\Model\Product;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Query\Expr\Join;
 use Doctrine\ORM\QueryBuilder;
-use Shopsys\FrameworkBundle\Component\Doctrine\QueryBuilderService;
+use Shopsys\FrameworkBundle\Component\Doctrine\QueryBuilderExtender;
 use Shopsys\FrameworkBundle\Component\Paginator\QueryPaginator;
 use Shopsys\FrameworkBundle\Model\Category\Category;
 use Shopsys\FrameworkBundle\Model\Localization\Localization;
@@ -30,9 +30,9 @@ class ProductRepository
     protected $productFilterRepository;
 
     /**
-     * @var \Shopsys\FrameworkBundle\Component\Doctrine\QueryBuilderService
+     * @var \Shopsys\FrameworkBundle\Component\Doctrine\QueryBuilderExtender
      */
-    protected $queryBuilderService;
+    protected $queryBuilderExtender;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Localization\Localization
@@ -47,20 +47,20 @@ class ProductRepository
     /**
      * @param \Doctrine\ORM\EntityManagerInterface $em
      * @param \Shopsys\FrameworkBundle\Model\Product\Filter\ProductFilterRepository $productFilterRepository
-     * @param \Shopsys\FrameworkBundle\Component\Doctrine\QueryBuilderService $queryBuilderService
+     * @param \Shopsys\FrameworkBundle\Component\Doctrine\QueryBuilderExtender $queryBuilderExtender
      * @param \Shopsys\FrameworkBundle\Model\Localization\Localization $localization
      * @param \Shopsys\FrameworkBundle\Model\Product\Search\ProductSearchRepository $productSearchRepository
      */
     public function __construct(
         EntityManagerInterface $em,
         ProductFilterRepository $productFilterRepository,
-        QueryBuilderService $queryBuilderService,
+        QueryBuilderExtender $queryBuilderExtender,
         Localization $localization,
         ProductSearchRepository $productSearchRepository
     ) {
         $this->em = $em;
         $this->productFilterRepository = $productFilterRepository;
-        $this->queryBuilderService = $queryBuilderService;
+        $this->queryBuilderExtender = $queryBuilderExtender;
         $this->localization = $localization;
         $this->productSearchRepository = $productSearchRepository;
     }
@@ -473,7 +473,7 @@ class ProductRepository
                 break;
 
             case ProductListOrderingConfig::ORDER_BY_PRICE_ASC:
-                $this->queryBuilderService->addOrExtendJoin(
+                $this->queryBuilderExtender->addOrExtendJoin(
                     $queryBuilder,
                     ProductCalculatedPrice::class,
                     'pcp',
@@ -484,7 +484,7 @@ class ProductRepository
                 break;
 
             case ProductListOrderingConfig::ORDER_BY_PRICE_DESC:
-                $this->queryBuilderService->addOrExtendJoin(
+                $this->queryBuilderExtender->addOrExtendJoin(
                     $queryBuilder,
                     ProductCalculatedPrice::class,
                     'pcp',
