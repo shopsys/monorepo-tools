@@ -3,7 +3,6 @@
 namespace Shopsys\ProductFeed\HeurekaBundle\Model\HeurekaCategory;
 
 use Doctrine\ORM\EntityManagerInterface;
-use Shopsys\FrameworkBundle\Component\Doctrine\QueryBuilderService;
 
 class HeurekaCategoryRepository
 {
@@ -13,20 +12,11 @@ class HeurekaCategoryRepository
     protected $em;
 
     /**
-     * @var \Shopsys\FrameworkBundle\Component\Doctrine\QueryBuilderService
-     */
-    protected $queryBuilderService;
-
-    /**
      * @param \Doctrine\ORM\EntityManagerInterface $em
-     * @param \Shopsys\FrameworkBundle\Component\Doctrine\QueryBuilderService $queryBuilderService
      */
-    public function __construct(
-        EntityManagerInterface $em,
-        QueryBuilderService $queryBuilderService
-    ) {
+    public function __construct(EntityManagerInterface $em)
+    {
         $this->em = $em;
-        $this->queryBuilderService = $queryBuilderService;
     }
 
     /**
