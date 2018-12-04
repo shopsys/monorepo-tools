@@ -12,12 +12,12 @@ class OrderHashGeneratorRepository
     /**
      * @var \Shopsys\FrameworkBundle\Model\Order\OrderRepository
      */
-    private $orderRepository;
+    protected $orderRepository;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\String\HashGenerator
      */
-    private $hashGenerator;
+    protected $hashGenerator;
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\Order\OrderRepository $orderRepository

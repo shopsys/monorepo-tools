@@ -17,17 +17,17 @@ class SitemapRepository
     /**
      * @var \Shopsys\FrameworkBundle\Model\Product\ProductRepository
      */
-    private $productRepository;
+    protected $productRepository;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Category\CategoryRepository
      */
-    private $categoryRepository;
+    protected $categoryRepository;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Article\ArticleRepository
      */
-    private $articleRepository;
+    protected $articleRepository;
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\Product\ProductRepository $productRepository
@@ -121,7 +121,7 @@ class SitemapRepository
      * @param \Doctrine\ORM\QueryBuilder $queryBuilder
      * @return \Shopsys\FrameworkBundle\Model\Sitemap\SitemapItem[]
      */
-    private function getSitemapItemsFromQueryBuilderWithSlugField(QueryBuilder $queryBuilder)
+    protected function getSitemapItemsFromQueryBuilderWithSlugField(QueryBuilder $queryBuilder)
     {
         $rows = $queryBuilder->getQuery()->execute(null, AbstractQuery::HYDRATE_SCALAR);
         $sitemapItems = [];

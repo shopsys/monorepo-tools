@@ -17,12 +17,12 @@ class ParameterFilterChoiceRepository
     /**
      * @var \Doctrine\ORM\EntityManagerInterface
      */
-    private $em;
+    protected $em;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Product\ProductRepository
      */
-    private $productRepository;
+    protected $productRepository;
 
     /**
      * @param \Doctrine\ORM\EntityManagerInterface $em
@@ -87,7 +87,7 @@ class ParameterFilterChoiceRepository
      * @param string $locale
      * @return \Shopsys\FrameworkBundle\Model\Product\Parameter\Parameter[]
      */
-    private function getVisibleParametersIndexedByIdOrderedByName(array $rows, $locale)
+    protected function getVisibleParametersIndexedByIdOrderedByName(array $rows, $locale)
     {
         $parameterIds = [];
         foreach ($rows as $row) {
@@ -119,7 +119,7 @@ class ParameterFilterChoiceRepository
      * @param string $locale
      * @return \Shopsys\FrameworkBundle\Model\Product\Parameter\ParameterValue[][]
      */
-    private function getParameterValuesIndexedByParameterIdOrderedByValueText(array $rows, $locale)
+    protected function getParameterValuesIndexedByParameterIdOrderedByValueText(array $rows, $locale)
     {
         $parameterIdsByValueId = [];
         foreach ($rows as $row) {
@@ -145,7 +145,7 @@ class ParameterFilterChoiceRepository
      * @param string $locale
      * @return \Shopsys\FrameworkBundle\Model\Product\Parameter\ParameterValue[]
      */
-    private function getParameterValuesIndexedByIdOrderedByText(array $rows, $locale)
+    protected function getParameterValuesIndexedByIdOrderedByText(array $rows, $locale)
     {
         $valueIds = [];
         foreach ($rows as $row) {

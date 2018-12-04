@@ -14,7 +14,7 @@ class FlagFilterChoiceRepository
     /**
      * @var \Shopsys\FrameworkBundle\Model\Product\ProductRepository
      */
-    private $productRepository;
+    protected $productRepository;
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\Product\ProductRepository $productRepository
@@ -63,7 +63,7 @@ class FlagFilterChoiceRepository
      * @param string $locale
      * @return \Shopsys\FrameworkBundle\Model\Product\Flag\Flag[]
      */
-    private function getVisibleFlagsByProductsQueryBuilder(QueryBuilder $productsQueryBuilder, $locale)
+    protected function getVisibleFlagsByProductsQueryBuilder(QueryBuilder $productsQueryBuilder, $locale)
     {
         $clonedProductsQueryBuilder = clone $productsQueryBuilder;
 
