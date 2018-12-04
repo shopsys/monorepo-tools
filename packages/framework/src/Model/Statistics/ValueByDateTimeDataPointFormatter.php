@@ -6,7 +6,7 @@ use DateInterval;
 use DateTime;
 use Shopsys\FrameworkBundle\Twig\DateTimeFormatterExtension;
 
-class StatisticsService
+class ValueByDateTimeDataPointFormatter
 {
     /**
      * @var \Shopsys\FrameworkBundle\Twig\DateTimeFormatterExtension

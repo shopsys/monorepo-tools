@@ -13,20 +13,20 @@ class StatisticsFacade
     protected $statisticsRepository;
 
     /**
-     * @var \Shopsys\FrameworkBundle\Model\Statistics\StatisticsService
+     * @var \Shopsys\FrameworkBundle\Model\Statistics\ValueByDateTimeDataPointFormatter
      */
-    protected $statisticsService;
+    protected $valueByDateTimeDataPointFormatter;
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\Statistics\StatisticsRepository $statisticsRepository
-     * @param \Shopsys\FrameworkBundle\Model\Statistics\StatisticsService $statisticsService
+     * @param \Shopsys\FrameworkBundle\Model\Statistics\ValueByDateTimeDataPointFormatter $valueByDateTimeDataPointFormatter
      */
     public function __construct(
         StatisticsRepository $statisticsRepository,
-        StatisticsService $statisticsService
+        ValueByDateTimeDataPointFormatter $valueByDateTimeDataPointFormatter
     ) {
         $this->statisticsRepository = $statisticsRepository;
-        $this->statisticsService = $statisticsService;
+        $this->valueByDateTimeDataPointFormatter = $valueByDateTimeDataPointFormatter;
     }
 
     /**
@@ -42,7 +42,7 @@ class StatisticsFacade
             $tomorrowDateTime
         );
 
-        $valueByDateTimeDataPoints = $this->statisticsService->normalizeDataPointsByDateTimeIntervals(
+        $valueByDateTimeDataPoints = $this->valueByDateTimeDataPointFormatter->normalizeDataPointsByDateTimeIntervals(
             $valueByDateTimeDataPoints,
             $startDataTime,
             $tomorrowDateTime,
@@ -65,7 +65,7 @@ class StatisticsFacade
             $tomorrowDateTime
         );
 
-        $valueByDateTimeDataPoints = $this->statisticsService->normalizeDataPointsByDateTimeIntervals(
+        $valueByDateTimeDataPoints = $this->valueByDateTimeDataPointFormatter->normalizeDataPointsByDateTimeIntervals(
             $valueByDateTimeDataPoints,
             $startDataTime,
             $tomorrowDateTime,

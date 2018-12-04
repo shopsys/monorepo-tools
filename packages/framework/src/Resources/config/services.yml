@@ -963,3 +963,5 @@ services:
     Shopsys\FrameworkBundle\Model\Order\Watcher\TransportAndPaymentWatcher: ~
 
     Shopsys\FrameworkBundle\Model\Cart\Watcher\CartWatcher: ~
+
+    Shopsys\FrameworkBundle\Model\Statistics\ValueByDateTimeDataPointFormatter: ~
