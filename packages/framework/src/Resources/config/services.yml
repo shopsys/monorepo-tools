@@ -961,3 +961,5 @@ services:
     Shopsys\FrameworkBundle\Model\Product\BestsellingProduct\BestsellingProductCombinator: ~
 
     Shopsys\FrameworkBundle\Model\Order\Watcher\TransportAndPaymentWatcher: ~
+
+    Shopsys\FrameworkBundle\Model\Cart\Watcher\CartWatcher: ~
