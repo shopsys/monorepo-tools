@@ -4,7 +4,7 @@ namespace Shopsys\FrameworkBundle\Model\Product\Listing;
 
 use Symfony\Component\HttpFoundation\Request;
 
-class ProductListOrderingModeService
+class RequestToOrderingModeIdConverter
 {
     /**
      * @param \Symfony\Component\HttpFoundation\Request $request

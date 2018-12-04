@@ -983,3 +983,5 @@ services:
     Shopsys\FrameworkBundle\Model\Customer\Mail\RegistrationMail: ~
 
     Shopsys\FrameworkBundle\Model\Order\Mail\OrderMail: ~
+
+    Shopsys\FrameworkBundle\Model\Product\Listing\RequestToOrderingModeIdConverter: ~

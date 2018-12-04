@@ -9,16 +9,16 @@ class ProductListOrderingModeForListFacade
     const COOKIE_NAME = 'productListOrderingMode';
 
     /**
-     * @var \Shopsys\FrameworkBundle\Model\Product\Listing\ProductListOrderingModeService
+     * @var \Shopsys\FrameworkBundle\Model\Product\Listing\RequestToOrderingModeIdConverter
      */
-    protected $productListOrderingModeService;
+    protected $requestToOrderingModeIdConverter;
 
     /**
-     * @param \Shopsys\FrameworkBundle\Model\Product\Listing\ProductListOrderingModeService $productListOrderingModeService
+     * @param \Shopsys\FrameworkBundle\Model\Product\Listing\RequestToOrderingModeIdConverter $requestToOrderingModeIdConverter
      */
-    public function __construct(ProductListOrderingModeService $productListOrderingModeService)
+    public function __construct(RequestToOrderingModeIdConverter $requestToOrderingModeIdConverter)
     {
-        $this->productListOrderingModeService = $productListOrderingModeService;
+        $this->requestToOrderingModeIdConverter = $requestToOrderingModeIdConverter;
     }
 
     /**
@@ -45,7 +45,7 @@ class ProductListOrderingModeForListFacade
      */
     public function getOrderingModeIdFromRequest(Request $request)
     {
-        return $this->productListOrderingModeService->getOrderingModeIdFromRequest(
+        return $this->requestToOrderingModeIdConverter->getOrderingModeIdFromRequest(
             $request,
             $this->getProductListOrderingConfig()
         );
