@@ -3,7 +3,7 @@
 namespace Shopsys\FrameworkBundle\Controller\Admin;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Shopsys\FrameworkBundle\Component\Grid\InlineEdit\InlineEditService;
+use Shopsys\FrameworkBundle\Component\Grid\InlineEdit\InlineEditFacade;
 use Shopsys\FrameworkBundle\Component\Grid\Ordering\GridOrderingFacade;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -11,9 +11,9 @@ use Symfony\Component\HttpFoundation\Request;
 class GridController extends AdminBaseController
 {
     /**
-     * @var \Shopsys\FrameworkBundle\Component\Grid\InlineEdit\InlineEditService
+     * @var \Shopsys\FrameworkBundle\Component\Grid\InlineEdit\InlineEditFacade
      */
-    protected $inlineEditService;
+    protected $inlineEditFacade;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\Grid\Ordering\GridOrderingFacade
@@ -22,14 +22,14 @@ class GridController extends AdminBaseController
 
     /**
      * @param \Shopsys\FrameworkBundle\Component\Grid\Ordering\GridOrderingFacade $gridOrderingFacade
-     * @param \Shopsys\FrameworkBundle\Component\Grid\InlineEdit\InlineEditService $inlineEditService
+     * @param \Shopsys\FrameworkBundle\Component\Grid\InlineEdit\InlineEditFacade $inlineEditFacade
      */
     public function __construct(
         GridOrderingFacade $gridOrderingFacade,
-        InlineEditService $inlineEditService
+        InlineEditFacade $inlineEditFacade
     ) {
         $this->gridOrderingFacade = $gridOrderingFacade;
-        $this->inlineEditService = $inlineEditService;
+        $this->inlineEditFacade = $inlineEditFacade;
     }
 
     /**
@@ -38,7 +38,7 @@ class GridController extends AdminBaseController
      */
     public function getFormAction(Request $request)
     {
-        $renderedFormRow = $this->inlineEditService->getRenderedFormRow(
+        $renderedFormRow = $this->inlineEditFacade->getRenderedFormRow(
             $request->get('serviceName'),
             json_decode($request->get('rowId'))
         );
@@ -56,10 +56,10 @@ class GridController extends AdminBaseController
         $rowId = json_decode($request->get('rowId'));
 
         try {
-            $rowId = $this->inlineEditService->saveFormData($request->get('serviceName'), $request, $rowId);
+            $rowId = $this->inlineEditFacade->saveFormData($request->get('serviceName'), $request, $rowId);
 
             $responseData['success'] = true;
-            $responseData['rowHtml'] = $this->inlineEditService->getRenderedRowHtml($request->get('serviceName'), $rowId);
+            $responseData['rowHtml'] = $this->inlineEditFacade->getRenderedRowHtml($request->get('serviceName'), $rowId);
         } catch (\Shopsys\FrameworkBundle\Component\Grid\InlineEdit\Exception\InvalidFormDataException $e) {
             $responseData['success'] = false;
             // reset array keys for array representation in JSON, otherwise it could be treated as an object
