@@ -6,7 +6,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Shopsys\FrameworkBundle\Component\Domain\AdminDomainTabsFacade;
 use Shopsys\FrameworkBundle\Form\Admin\Mail\AllMailTemplatesFormType;
 use Shopsys\FrameworkBundle\Form\Admin\Mail\MailSettingFormType;
-use Shopsys\FrameworkBundle\Model\Customer\Mail\RegistrationMailService;
+use Shopsys\FrameworkBundle\Model\Customer\Mail\RegistrationMail;
 use Shopsys\FrameworkBundle\Model\Customer\Mail\ResetPasswordMail;
 use Shopsys\FrameworkBundle\Model\Mail\MailTemplate;
 use Shopsys\FrameworkBundle\Model\Mail\MailTemplateFacade;
@@ -21,9 +21,9 @@ use Symfony\Component\HttpFoundation\Request;
 class MailController extends AdminBaseController
 {
     /**
-     * @var \Shopsys\FrameworkBundle\Model\Customer\Mail\RegistrationMailService
+     * @var \Shopsys\FrameworkBundle\Model\Customer\Mail\RegistrationMail
      */
-    protected $registrationMailService;
+    protected $registrationMail;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Customer\Mail\ResetPasswordMail
@@ -68,7 +68,7 @@ class MailController extends AdminBaseController
     /**
      * @param \Shopsys\FrameworkBundle\Model\Customer\Mail\ResetPasswordMail $resetPasswordMail
      * @param \Shopsys\FrameworkBundle\Model\Order\Mail\OrderMailService $orderMailService
-     * @param \Shopsys\FrameworkBundle\Model\Customer\Mail\RegistrationMailService $registrationMailService
+     * @param \Shopsys\FrameworkBundle\Model\Customer\Mail\RegistrationMail $registrationMail
      * @param \Shopsys\FrameworkBundle\Component\Domain\AdminDomainTabsFacade $adminDomainTabsFacade
      * @param \Shopsys\FrameworkBundle\Model\Mail\MailTemplateFacade $mailTemplateFacade
      * @param \Shopsys\FrameworkBundle\Model\Mail\Setting\MailSettingFacade $mailSettingFacade
@@ -79,7 +79,7 @@ class MailController extends AdminBaseController
     public function __construct(
         ResetPasswordMail $resetPasswordMail,
         OrderMailService $orderMailService,
-        RegistrationMailService $registrationMailService,
+        RegistrationMail $registrationMail,
         AdminDomainTabsFacade $adminDomainTabsFacade,
         MailTemplateFacade $mailTemplateFacade,
         MailSettingFacade $mailSettingFacade,
@@ -89,7 +89,7 @@ class MailController extends AdminBaseController
     ) {
         $this->resetPasswordMail = $resetPasswordMail;
         $this->orderMailService = $orderMailService;
-        $this->registrationMailService = $registrationMailService;
+        $this->registrationMail = $registrationMail;
         $this->adminDomainTabsFacade = $adminDomainTabsFacade;
         $this->mailTemplateFacade = $mailTemplateFacade;
         $this->mailSettingFacade = $mailSettingFacade;
@@ -130,11 +130,11 @@ class MailController extends AdminBaseController
     protected function getRegistrationVariablesLabels()
     {
         return [
-            RegistrationMailService::VARIABLE_FIRST_NAME => t('First name'),
-            RegistrationMailService::VARIABLE_LAST_NAME => t('Last name'),
-            RegistrationMailService::VARIABLE_EMAIL => t('E-mail'),
-            RegistrationMailService::VARIABLE_URL => t('E-shop URL address'),
-            RegistrationMailService::VARIABLE_LOGIN_PAGE => t('Link to the log in page'),
+            RegistrationMail::VARIABLE_FIRST_NAME => t('First name'),
+            RegistrationMail::VARIABLE_LAST_NAME => t('Last name'),
+            RegistrationMail::VARIABLE_EMAIL => t('E-mail'),
+            RegistrationMail::VARIABLE_URL => t('E-shop URL address'),
+            RegistrationMail::VARIABLE_LOGIN_PAGE => t('Link to the log in page'),
         ];
     }
 
@@ -179,7 +179,7 @@ class MailController extends AdminBaseController
     protected function getTemplateParameters()
     {
         $orderStatusesTemplateVariables = $this->orderMailService->getTemplateVariables();
-        $registrationTemplateVariables = $this->registrationMailService->getTemplateVariables();
+        $registrationTemplateVariables = $this->registrationMail->getTemplateVariables();
         $resetPasswordTemplateVariables = array_unique(array_merge(
             $this->resetPasswordMail->getBodyVariables(),
             $this->resetPasswordMail->getSubjectVariables()

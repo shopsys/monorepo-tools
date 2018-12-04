@@ -7,10 +7,11 @@ use Shopsys\FrameworkBundle\Component\Setting\Setting;
 use Shopsys\FrameworkBundle\Model\Customer\User;
 use Shopsys\FrameworkBundle\Model\Mail\MailTemplate;
 use Shopsys\FrameworkBundle\Model\Mail\MessageData;
+use Shopsys\FrameworkBundle\Model\Mail\MessageFactoryInterface;
 use Shopsys\FrameworkBundle\Model\Mail\Setting\MailSetting;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
-class RegistrationMailService
+class RegistrationMail implements MessageFactoryInterface
 {
     const VARIABLE_FIRST_NAME = '{first_name}';
     const VARIABLE_LAST_NAME = '{last_name}';
@@ -39,11 +40,11 @@ class RegistrationMailService
     }
 
     /**
-     * @param \Shopsys\FrameworkBundle\Model\Customer\User $user
      * @param \Shopsys\FrameworkBundle\Model\Mail\MailTemplate $mailTemplate
+     * @param \Shopsys\FrameworkBundle\Model\Customer\User $user
      * @return \Shopsys\FrameworkBundle\Model\Mail\MessageData
      */
-    public function getMessageDataByUser(User $user, MailTemplate $mailTemplate)
+    public function createMessage(MailTemplate $mailTemplate, $user)
     {
         return new MessageData(
             $user->getEmail(),
