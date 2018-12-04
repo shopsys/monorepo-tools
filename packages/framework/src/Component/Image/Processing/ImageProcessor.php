@@ -9,7 +9,7 @@ use League\Flysystem\FilesystemInterface;
 use Shopsys\FrameworkBundle\Component\Image\Config\ImageSizeConfig;
 use Symfony\Component\Filesystem\Filesystem;
 
-class ImageProcessingService
+class ImageProcessor
 {
     const EXTENSION_JPEG = 'jpeg';
     const EXTENSION_JPG = 'jpg';

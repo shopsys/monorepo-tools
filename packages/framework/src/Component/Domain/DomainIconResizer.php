@@ -3,7 +3,7 @@
 namespace Shopsys\FrameworkBundle\Component\Domain;
 
 use League\Flysystem\FilesystemInterface;
-use Shopsys\FrameworkBundle\Component\Image\Processing\ImageProcessingService;
+use Shopsys\FrameworkBundle\Component\Image\Processing\ImageProcessor;
 use Symfony\Bridge\Monolog\Logger;
 
 class DomainIconResizer
@@ -13,9 +13,9 @@ class DomainIconResizer
     const DOMAIN_ICON_CROP = false;
 
     /**
-     * @var \Shopsys\FrameworkBundle\Component\Image\Processing\ImageProcessingService
+     * @var \Shopsys\FrameworkBundle\Component\Image\Processing\ImageProcessor
      */
-    private $imageProcessingService;
+    private $imageProcessor;
 
     /**
      * @var \Symfony\Bridge\Monolog\Logger
@@ -29,16 +29,16 @@ class DomainIconResizer
 
     /**
      * @param \Symfony\Bridge\Monolog\Logger $logger
-     * @param \Shopsys\FrameworkBundle\Component\Image\Processing\ImageProcessingService $imageProcessingService
+     * @param \Shopsys\FrameworkBundle\Component\Image\Processing\ImageProcessor $imageProcessor
      * @param \League\Flysystem\FilesystemInterface $filesystem
      */
     public function __construct(
         Logger $logger,
-        ImageProcessingService $imageProcessingService,
+        ImageProcessor $imageProcessor,
         FilesystemInterface $filesystem
     ) {
         $this->logger = $logger;
-        $this->imageProcessingService = $imageProcessingService;
+        $this->imageProcessor = $imageProcessor;
         $this->filesystem = $filesystem;
     }
 
@@ -49,15 +49,15 @@ class DomainIconResizer
      */
     public function convertToDomainIconFormatAndSave($domainId, $filepath, $domainImagesDirectory)
     {
-        $resizedImage = $this->imageProcessingService->resize(
-            $this->imageProcessingService->createInterventionImage($filepath),
+        $resizedImage = $this->imageProcessor->resize(
+            $this->imageProcessor->createInterventionImage($filepath),
             self::DOMAIN_ICON_WIDTH,
             self::DOMAIN_ICON_HEIGHT,
             self::DOMAIN_ICON_CROP
         );
-        $resizedImage->encode(ImageProcessingService::EXTENSION_PNG);
+        $resizedImage->encode(ImageProcessor::EXTENSION_PNG);
 
-        $targetFilePath = $domainImagesDirectory . '/' . $domainId . '.' . ImageProcessingService::EXTENSION_PNG;
+        $targetFilePath = $domainImagesDirectory . '/' . $domainId . '.' . ImageProcessor::EXTENSION_PNG;
 
         try {
             $this->filesystem->put($targetFilePath, $resizedImage);

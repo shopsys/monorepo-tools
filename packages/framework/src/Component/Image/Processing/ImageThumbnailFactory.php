@@ -8,16 +8,16 @@ class ImageThumbnailFactory
     const THUMBNAIL_HEIGHT = 200;
 
     /**
-     * @var \Shopsys\FrameworkBundle\Component\Image\Processing\ImageProcessingService
+     * @var \Shopsys\FrameworkBundle\Component\Image\Processing\ImageProcessor
      */
-    protected $imageProcessingService;
+    protected $imageProcessor;
 
     /**
-     * @param \Shopsys\FrameworkBundle\Component\Image\Processing\ImageProcessingService $imageProcessingService
+     * @param \Shopsys\FrameworkBundle\Component\Image\Processing\ImageProcessor $imageProcessor
      */
-    public function __construct(ImageProcessingService $imageProcessingService)
+    public function __construct(ImageProcessor $imageProcessor)
     {
-        $this->imageProcessingService = $imageProcessingService;
+        $this->imageProcessor = $imageProcessor;
     }
 
     /**
@@ -26,8 +26,8 @@ class ImageThumbnailFactory
      */
     public function getImageThumbnail($filepath)
     {
-        $image = $this->imageProcessingService->createInterventionImage($filepath);
-        $this->imageProcessingService->resize($image, self::THUMBNAIL_WIDTH, self::THUMBNAIL_HEIGHT);
+        $image = $this->imageProcessor->createInterventionImage($filepath);
+        $this->imageProcessor->resize($image, self::THUMBNAIL_WIDTH, self::THUMBNAIL_HEIGHT);
 
         return $image;
     }

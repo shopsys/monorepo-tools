@@ -4,14 +4,14 @@ namespace Shopsys\FrameworkBundle\Component\Image;
 
 use Shopsys\FrameworkBundle\Component\FileUpload\FileUpload;
 use Shopsys\FrameworkBundle\Component\Image\Config\ImageEntityConfig;
-use Shopsys\FrameworkBundle\Component\Image\Processing\ImageProcessingService;
+use Shopsys\FrameworkBundle\Component\Image\Processing\ImageProcessor;
 
 class ImageService
 {
     /**
-     * @var \Shopsys\FrameworkBundle\Component\Image\Processing\ImageProcessingService
+     * @var \Shopsys\FrameworkBundle\Component\Image\Processing\ImageProcessor
      */
-    private $imageProcessingService;
+    private $imageProcessor;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\FileUpload\FileUpload
@@ -24,16 +24,16 @@ class ImageService
     protected $imageFactory;
 
     /**
-     * @param \Shopsys\FrameworkBundle\Component\Image\Processing\ImageProcessingService $imageProcessingService
+     * @param \Shopsys\FrameworkBundle\Component\Image\Processing\ImageProcessor $imageProcessor
      * @param \Shopsys\FrameworkBundle\Component\FileUpload\FileUpload $fileUpload
      * @param \Shopsys\FrameworkBundle\Component\Image\ImageFactoryInterface $imageFactory
      */
     public function __construct(
-        ImageProcessingService $imageProcessingService,
+        ImageProcessor $imageProcessor,
         FileUpload $fileUpload,
         ImageFactoryInterface $imageFactory
     ) {
-        $this->imageProcessingService = $imageProcessingService;
+        $this->imageProcessor = $imageProcessor;
         $this->fileUpload = $fileUpload;
         $this->imageFactory = $imageFactory;
     }
@@ -80,7 +80,7 @@ class ImageService
             $imageEntityConfig->getEntityName(),
             $entityId,
             $type,
-            $this->imageProcessingService->convertToShopFormatAndGetNewFilename($temporaryFilepath)
+            $this->imageProcessor->convertToShopFormatAndGetNewFilename($temporaryFilepath)
         );
 
         return $image;

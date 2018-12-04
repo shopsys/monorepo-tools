@@ -973,3 +973,5 @@ services:
     Shopsys\FrameworkBundle\Component\Domain\DomainUrlReplacer: ~
 
     Shopsys\FrameworkBundle\Component\Image\Processing\ImageGenerator: ~
+
+    Shopsys\FrameworkBundle\Component\Image\Processing\ImageProcessor: ~
