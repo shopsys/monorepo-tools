@@ -7,7 +7,7 @@ use Doctrine\ORM\Query\ResultSetMapping;
 use Shopsys\FrameworkBundle\Component\Doctrine\SqlQuoter;
 use Shopsys\FrameworkBundle\Component\Doctrine\StringColumnsFinder;
 
-class DomainUrlService
+class DomainUrlReplacer
 {
     /**
      * @var \Shopsys\FrameworkBundle\Component\Doctrine\StringColumnsFinder

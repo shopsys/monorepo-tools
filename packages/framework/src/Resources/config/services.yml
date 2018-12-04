@@ -969,3 +969,5 @@ services:
     Shopsys\FrameworkBundle\Model\Heureka\HeurekaShopCertificationLocaleHelper: ~
 
     Shopsys\FrameworkBundle\Component\Doctrine\QueryBuilderExtender: ~
+
+    Shopsys\FrameworkBundle\Component\Domain\DomainUrlReplacer: ~

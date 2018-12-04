@@ -3,7 +3,7 @@
 namespace Shopsys\FrameworkBundle\Command;
 
 use Shopsys\FrameworkBundle\Component\Domain\Domain;
-use Shopsys\FrameworkBundle\Component\Domain\DomainUrlService;
+use Shopsys\FrameworkBundle\Component\Domain\DomainUrlReplacer;
 use Shopsys\FrameworkBundle\Component\Setting\Setting;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
@@ -22,9 +22,9 @@ class ReplaceDomainsUrlsCommand extends Command
     private $domain;
 
     /**
-     * @var \Shopsys\FrameworkBundle\Component\Domain\DomainUrlService
+     * @var \Shopsys\FrameworkBundle\Component\Domain\DomainUrlReplacer
      */
-    private $domainUrlService;
+    private $domainUrlReplacer;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\Setting\Setting
@@ -33,16 +33,16 @@ class ReplaceDomainsUrlsCommand extends Command
 
     /**
      * @param \Shopsys\FrameworkBundle\Component\Domain\Domain $domain
-     * @param \Shopsys\FrameworkBundle\Component\Domain\DomainUrlService $domainUrlService
+     * @param \Shopsys\FrameworkBundle\Component\Domain\DomainUrlReplacer $domainUrlReplacer
      * @param \Shopsys\FrameworkBundle\Component\Setting\Setting $setting
      */
     public function __construct(
         Domain $domain,
-        DomainUrlService $domainUrlService,
+        DomainUrlReplacer $domainUrlReplacer,
         Setting $setting
     ) {
         $this->domain = $domain;
-        $this->domainUrlService = $domainUrlService;
+        $this->domainUrlReplacer = $domainUrlReplacer;
         $this->setting = $setting;
 
         parent::__construct();
@@ -69,7 +69,7 @@ class ReplaceDomainsUrlsCommand extends Command
                     'Domain ' . $domainConfig->getId() . ' URL is not matching URL stored in database.'
                 );
                 $output->writeln('Replacing domain URL in all string columns...');
-                $this->domainUrlService->replaceUrlInStringColumns($domainConfigUrl, $domainSettingUrl);
+                $this->domainUrlReplacer->replaceUrlInStringColumns($domainConfigUrl, $domainSettingUrl);
                 $output->writeln('<fg=green>URL successfully replaced.</fg=green>');
             } else {
                 $output->writeln('Domain ' . $domainConfig->getId() . ' URL is matching URL stored in database.');
