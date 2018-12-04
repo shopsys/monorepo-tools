@@ -971,3 +971,5 @@ services:
     Shopsys\FrameworkBundle\Component\Doctrine\QueryBuilderExtender: ~
 
     Shopsys\FrameworkBundle\Component\Domain\DomainUrlReplacer: ~
+
+    Shopsys\FrameworkBundle\Component\Image\Processing\ImageGenerator: ~

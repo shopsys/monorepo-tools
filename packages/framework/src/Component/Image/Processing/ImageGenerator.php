@@ -7,7 +7,7 @@ use Shopsys\FrameworkBundle\Component\Image\Config\ImageConfig;
 use Shopsys\FrameworkBundle\Component\Image\Image;
 use Shopsys\FrameworkBundle\Component\Image\ImageLocator;
 
-class ImageGeneratorService
+class ImageGenerator
 {
     /**
      * @var \Shopsys\FrameworkBundle\Component\Image\Processing\ImageProcessingService
