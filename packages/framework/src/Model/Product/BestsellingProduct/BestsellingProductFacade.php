@@ -23,23 +23,23 @@ class BestsellingProductFacade
     protected $manualBestsellingProductRepository;
 
     /**
-     * @var \Shopsys\FrameworkBundle\Model\Product\BestsellingProduct\BestsellingProductService
+     * @var \Shopsys\FrameworkBundle\Model\Product\BestsellingProduct\BestsellingProductCombinator
      */
-    protected $bestsellingProductService;
+    protected $bestsellingProductCombinator;
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\Product\BestsellingProduct\AutomaticBestsellingProductRepository $automaticBestsellingProductRepository
      * @param \Shopsys\FrameworkBundle\Model\Product\BestsellingProduct\ManualBestsellingProductRepository $manualBestsellingProductRepository
-     * @param \Shopsys\FrameworkBundle\Model\Product\BestsellingProduct\BestsellingProductService $bestsellingProductService
+     * @param \Shopsys\FrameworkBundle\Model\Product\BestsellingProduct\BestsellingProductCombinator $bestsellingProductCombinator
      */
     public function __construct(
         AutomaticBestsellingProductRepository $automaticBestsellingProductRepository,
         ManualBestsellingProductRepository $manualBestsellingProductRepository,
-        BestsellingProductService $bestsellingProductService
+        BestsellingProductCombinator $bestsellingProductCombinator
     ) {
         $this->automaticBestsellingProductRepository = $automaticBestsellingProductRepository;
         $this->manualBestsellingProductRepository = $manualBestsellingProductRepository;
-        $this->bestsellingProductService = $bestsellingProductService;
+        $this->bestsellingProductCombinator = $bestsellingProductCombinator;
     }
 
     /**
@@ -69,7 +69,7 @@ class BestsellingProductFacade
             self::MAX_RESULTS
         );
 
-        return $this->bestsellingProductService->combineManualAndAutomaticProducts(
+        return $this->bestsellingProductCombinator->combineManualAndAutomaticProducts(
             $manualProductsIndexedByPosition,
             $automaticProducts,
             self::MAX_RESULTS

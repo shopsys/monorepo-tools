@@ -957,3 +957,5 @@ services:
             $microserviceUrl: '%microservice_product_search_export_url%'
 
     Shopsys\FrameworkBundle\Model\Sitemap\SitemapFilePrefixer: ~
+
+    Shopsys\FrameworkBundle\Model\Product\BestsellingProduct\BestsellingProductCombinator: ~
