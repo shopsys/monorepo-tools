@@ -977,3 +977,5 @@ services:
     Shopsys\FrameworkBundle\Component\Image\Processing\ImageProcessor: ~
 
     Shopsys\FrameworkBundle\Component\Cron\CronFilter: ~
+
+    Shopsys\FrameworkBundle\Component\FlashMessage\ErrorExtractor: ~

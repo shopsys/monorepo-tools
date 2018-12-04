@@ -6,7 +6,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Shopsys\FrameworkBundle\Component\Domain\AdminDomainTabsFacade;
 use Shopsys\FrameworkBundle\Component\Domain\Domain;
 use Shopsys\FrameworkBundle\Component\Domain\DomainFacade;
-use Shopsys\FrameworkBundle\Component\FlashMessage\ErrorService;
+use Shopsys\FrameworkBundle\Component\FlashMessage\ErrorExtractor;
 use Shopsys\FrameworkBundle\Component\Grid\ArrayDataSource;
 use Shopsys\FrameworkBundle\Component\Grid\GridFactory;
 use Shopsys\FrameworkBundle\Form\Admin\Domain\DomainFormType;
@@ -36,29 +36,29 @@ class DomainController extends AdminBaseController
     protected $domainFacade;
 
     /**
-     * @var \Shopsys\FrameworkBundle\Component\FlashMessage\ErrorService
+     * @var \Shopsys\FrameworkBundle\Component\FlashMessage\ErrorExtractor
      */
-    protected $errorService;
+    protected $errorExtractor;
 
     /**
      * @param \Shopsys\FrameworkBundle\Component\Domain\Domain $domain
      * @param \Shopsys\FrameworkBundle\Component\Domain\AdminDomainTabsFacade $adminDomainTabsFacade
      * @param \Shopsys\FrameworkBundle\Component\Grid\GridFactory $gridFactory
      * @param \Shopsys\FrameworkBundle\Component\Domain\DomainFacade $domainFacade
-     * @param \Shopsys\FrameworkBundle\Component\FlashMessage\ErrorService $errorService
+     * @param \Shopsys\FrameworkBundle\Component\FlashMessage\ErrorExtractor $errorExtractor
      */
     public function __construct(
         Domain $domain,
         AdminDomainTabsFacade $adminDomainTabsFacade,
         GridFactory $gridFactory,
         DomainFacade $domainFacade,
-        ErrorService $errorService
+        ErrorExtractor $errorExtractor
     ) {
         $this->domain = $domain;
         $this->adminDomainTabsFacade = $adminDomainTabsFacade;
         $this->gridFactory = $gridFactory;
         $this->domainFacade = $domainFacade;
-        $this->errorService = $errorService;
+        $this->errorExtractor = $errorExtractor;
     }
 
     public function domainTabsAction()
@@ -149,7 +149,7 @@ class DomainController extends AdminBaseController
             $flashMessageBag = $this->get('shopsys.shop.component.flash_message.bag.admin');
             return new JsonResponse([
                 'result' => 'invalid',
-                'errors' => $this->errorService->getAllErrorsAsArray($form, $flashMessageBag),
+                'errors' => $this->errorExtractor->getAllErrorsAsArray($form, $flashMessageBag),
             ]);
         }
 
