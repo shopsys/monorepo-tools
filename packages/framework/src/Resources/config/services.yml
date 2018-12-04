@@ -183,7 +183,7 @@ services:
         arguments:
             - '%shopsys.domain_images_dir%'
 
-    Shopsys\FrameworkBundle\Component\Domain\DomainService:
+    Shopsys\FrameworkBundle\Component\Domain\DomainIconResizer:
         arguments:
             - '@monolog.logger'
 

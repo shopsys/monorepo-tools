@@ -6,7 +6,7 @@ use League\Flysystem\FilesystemInterface;
 use Shopsys\FrameworkBundle\Component\Image\Processing\ImageProcessingService;
 use Symfony\Bridge\Monolog\Logger;
 
-class DomainService
+class DomainIconResizer
 {
     const DOMAIN_ICON_WIDTH = 48;
     const DOMAIN_ICON_HEIGHT = 33;

@@ -13,9 +13,9 @@ class DomainFacade
     protected $domain;
 
     /**
-     * @var \Shopsys\FrameworkBundle\Component\Domain\DomainService
+     * @var \Shopsys\FrameworkBundle\Component\Domain\DomainIconResizer
      */
-    protected $domainService;
+    protected $domainIconResizer;
 
     /**
      * @var \League\Flysystem\FilesystemInterface
@@ -35,20 +35,20 @@ class DomainFacade
     /**
      * @param mixed $domainImagesDirectory
      * @param \Shopsys\FrameworkBundle\Component\Domain\Domain $domain
-     * @param \Shopsys\FrameworkBundle\Component\Domain\DomainService $domainService
+     * @param \Shopsys\FrameworkBundle\Component\Domain\DomainIconResizer $domainIconResizer
      * @param \League\Flysystem\FilesystemInterface $fileSystem
      * @param \Shopsys\FrameworkBundle\Component\FileUpload\FileUpload $fileUpload
      */
     public function __construct(
         $domainImagesDirectory,
         Domain $domain,
-        DomainService $domainService,
+        DomainIconResizer $domainIconResizer,
         FilesystemInterface $fileSystem,
         FileUpload $fileUpload
     ) {
         $this->domainImagesDirectory = $domainImagesDirectory;
         $this->domain = $domain;
-        $this->domainService = $domainService;
+        $this->domainIconResizer = $domainIconResizer;
         $this->filesystem = $fileSystem;
         $this->fileUpload = $fileUpload;
     }
@@ -68,7 +68,7 @@ class DomainFacade
     public function editIcon($domainId, $iconName)
     {
         $temporaryFilepath = $this->fileUpload->getTemporaryFilepath($iconName);
-        $this->domainService->convertToDomainIconFormatAndSave($domainId, $temporaryFilepath, $this->domainImagesDirectory);
+        $this->domainIconResizer->convertToDomainIconFormatAndSave($domainId, $temporaryFilepath, $this->domainImagesDirectory);
     }
 
     /**
