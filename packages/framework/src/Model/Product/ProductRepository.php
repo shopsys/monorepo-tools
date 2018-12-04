@@ -13,7 +13,7 @@ use Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroup;
 use Shopsys\FrameworkBundle\Model\Product\Brand\Brand;
 use Shopsys\FrameworkBundle\Model\Product\Filter\ProductFilterData;
 use Shopsys\FrameworkBundle\Model\Product\Filter\ProductFilterRepository;
-use Shopsys\FrameworkBundle\Model\Product\Listing\ProductListOrderingModeService;
+use Shopsys\FrameworkBundle\Model\Product\Listing\ProductListOrderingConfig;
 use Shopsys\FrameworkBundle\Model\Product\Pricing\ProductCalculatedPrice;
 use Shopsys\FrameworkBundle\Model\Product\Search\ProductSearchRepository;
 
@@ -462,17 +462,17 @@ class ProductRepository
         $locale
     ) {
         switch ($orderingModeId) {
-            case ProductListOrderingModeService::ORDER_BY_NAME_ASC:
+            case ProductListOrderingConfig::ORDER_BY_NAME_ASC:
                 $collation = $this->localization->getCollationByLocale($locale);
                 $queryBuilder->orderBy("COLLATE(pt.name, '" . $collation . "')", 'asc');
                 break;
 
-            case ProductListOrderingModeService::ORDER_BY_NAME_DESC:
+            case ProductListOrderingConfig::ORDER_BY_NAME_DESC:
                 $collation = $this->localization->getCollationByLocale($locale);
                 $queryBuilder->orderBy("COLLATE(pt.name, '" . $collation . "')", 'desc');
                 break;
 
-            case ProductListOrderingModeService::ORDER_BY_PRICE_ASC:
+            case ProductListOrderingConfig::ORDER_BY_PRICE_ASC:
                 $this->queryBuilderService->addOrExtendJoin(
                     $queryBuilder,
                     ProductCalculatedPrice::class,
@@ -483,7 +483,7 @@ class ProductRepository
                 $queryBuilder->setParameter('pricingGroup', $pricingGroup);
                 break;
 
-            case ProductListOrderingModeService::ORDER_BY_PRICE_DESC:
+            case ProductListOrderingConfig::ORDER_BY_PRICE_DESC:
                 $this->queryBuilderService->addOrExtendJoin(
                     $queryBuilder,
                     ProductCalculatedPrice::class,
@@ -494,11 +494,11 @@ class ProductRepository
                 $queryBuilder->setParameter('pricingGroup', $pricingGroup);
                 break;
 
-            case ProductListOrderingModeService::ORDER_BY_RELEVANCE:
+            case ProductListOrderingConfig::ORDER_BY_RELEVANCE:
                 $queryBuilder->orderBy('relevance', 'asc');
                 break;
 
-            case ProductListOrderingModeService::ORDER_BY_PRIORITY:
+            case ProductListOrderingConfig::ORDER_BY_PRIORITY:
                 $queryBuilder->orderBy('p.orderingPriority', 'desc');
                 $collation = $this->localization->getCollationByLocale($locale);
                 $queryBuilder->addOrderBy("COLLATE(pt.name, '" . $collation . "')", 'asc');

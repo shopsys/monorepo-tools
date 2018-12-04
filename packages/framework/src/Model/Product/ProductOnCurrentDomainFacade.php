@@ -10,7 +10,7 @@ use Shopsys\FrameworkBundle\Model\Product\Brand\BrandRepository;
 use Shopsys\FrameworkBundle\Model\Product\Filter\ProductFilterConfig;
 use Shopsys\FrameworkBundle\Model\Product\Filter\ProductFilterCountRepository;
 use Shopsys\FrameworkBundle\Model\Product\Filter\ProductFilterData;
-use Shopsys\FrameworkBundle\Model\Product\Listing\ProductListOrderingModeService;
+use Shopsys\FrameworkBundle\Model\Product\Listing\ProductListOrderingConfig;
 
 class ProductOnCurrentDomainFacade
 {
@@ -213,7 +213,7 @@ class ProductOnCurrentDomainFacade
             $this->domain->getId(),
             $this->domain->getLocale(),
             $emptyProductFilterData,
-            ProductListOrderingModeService::ORDER_BY_RELEVANCE,
+            ProductListOrderingConfig::ORDER_BY_RELEVANCE,
             $this->currentCustomer->getPricingGroup(),
             $page,
             $limit

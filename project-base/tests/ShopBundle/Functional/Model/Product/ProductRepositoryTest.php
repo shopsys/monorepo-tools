@@ -7,7 +7,7 @@ use Shopsys\FrameworkBundle\DataFixtures\Demo\CategoryDataFixture;
 use Shopsys\FrameworkBundle\DataFixtures\Demo\PricingGroupDataFixture;
 use Shopsys\FrameworkBundle\DataFixtures\Demo\ProductDataFixture;
 use Shopsys\FrameworkBundle\Model\Product\Filter\ProductFilterData;
-use Shopsys\FrameworkBundle\Model\Product\Listing\ProductListOrderingModeService;
+use Shopsys\FrameworkBundle\Model\Product\Listing\ProductListOrderingConfig;
 use Shopsys\FrameworkBundle\Model\Product\ProductDataFactoryInterface;
 use Shopsys\FrameworkBundle\Model\Product\ProductFacade;
 use Shopsys\FrameworkBundle\Model\Product\ProductRepository;
@@ -262,7 +262,7 @@ class ProductRepositoryTest extends TransactionFunctionalTestCase
             1,
             $domain->getDomainConfigById(1)->getLocale(),
             new ProductFilterData(),
-            ProductListOrderingModeService::ORDER_BY_PRIORITY,
+            ProductListOrderingConfig::ORDER_BY_PRIORITY,
             $pricingGroup,
             1,
             PHP_INT_MAX
@@ -289,7 +289,7 @@ class ProductRepositoryTest extends TransactionFunctionalTestCase
             1,
             $domain->getDomainConfigById(1)->getLocale(),
             new ProductFilterData(),
-            ProductListOrderingModeService::ORDER_BY_PRIORITY,
+            ProductListOrderingConfig::ORDER_BY_PRIORITY,
             $pricingGroup,
             1,
             PHP_INT_MAX
