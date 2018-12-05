@@ -37,6 +37,9 @@
 * [Adding an Icon into a Button](./cookbook/adding-an-icon-into-a-button.md)
 * [Modifying a Template in Administration](./cookbook/modifying-a-template-in-administration.md)
 
+## Frontend
+* [Introduction to LESS](./frontend/introduction-to-less.md)
+
 ## Microservices
 One of the explored ideas of Shopsys Framework is the idea of a product, that some of its parts are designed as the microservices.
 Microservice acts as a fully independent unit and all of its parts are located in a separate Docker container.
