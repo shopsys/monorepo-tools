@@ -2,7 +2,7 @@
     {% import '@ShopsysShop/Front/Inline/Product/productFlagsMacro.html.twig' as productFlags %}
     {% set domain = getDomain() %}
 
-    <ul class="list-products js-product-list {{ listCssClass|default('') }}">
+    <ul class="list-products js-list js-product-list {{ listCssClass|default('') }}">
         {% for product in products %}
             <li class="list-products__item js-list-products-item">
                 <div class="list-products__item__in">

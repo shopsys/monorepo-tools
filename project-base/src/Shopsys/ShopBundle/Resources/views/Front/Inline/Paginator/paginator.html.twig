@@ -1,4 +1,4 @@
-{% macro paginatorNavigation(paginationResult, entityName) %}
+{% macro paginatorNavigation(paginationResult, entityName, pageQueryParameter = 'page') %}
     <div class="in-paging">
         {% set route = getRoute() %}
         {% set routeParams = getAllRequestParams() %}
@@ -17,10 +17,10 @@
                     {% if page == 1 %}
                         {% set page = null %}
                     {% endif %}
-                    {% set routeParams = routeParams|merge({'page': page}) %}
+                    {% set routeParams = routeParams|merge({(pageQueryParameter): page}) %}
                     <a class="in-paging__control__item in-paging__control__item--arrow" href="{{ path(route, routeParams) }}" rel ="prev">&lt;</a>
 
-                    {% set routeParams = routeParams|merge({'page': null}) %}
+                    {% set routeParams = routeParams|merge({(pageQueryParameter): null}) %}
                     {% if paginationResult.page == 2 %}
                         <a class="in-paging__control__item in-paging__control__item--num" href="{{ path(route, routeParams) }}" rel="prev">1</a>
                     {% else %}
@@ -37,7 +37,7 @@
                 {% endif %}
 
                 {% for page in (paginationResult.page - pagerExpand)..(paginationResult.page) if page > 1 and page < paginationResult.page %}
-                    {% set routeParams = routeParams|merge({'page': page}) %}
+                    {% set routeParams = routeParams|merge({(pageQueryParameter): page}) %}
                     {% if page == (paginationResult.page - 1) %}
                         <a class='in-paging__control__item in-paging__control__item--num' href="{{ path(route, routeParams) }}" rel="prev">{{ page }}</a>
                     {% else %}
@@ -48,7 +48,7 @@
                 <span class="in-paging__control__item in-paging__control__item--num in-paging__control__item in-paging__control__item--num--active">{{ paginationResult.page }}</span>
 
                 {% for page in (paginationResult.page + 1)..(paginationResult.page + pagerExpand) if page > paginationResult.page and page < pageCount %}
-                    {% set routeParams = routeParams|merge({'page': page}) %}
+                    {% set routeParams = routeParams|merge({(pageQueryParameter): page}) %}
                     {% if page == (paginationResult.page + 1) %}
                         <a class="in-paging__control__item in-paging__control__item--num" href="{{ path(route, routeParams) }}" rel="next">{{ page }}</a>
                     {% else %}
@@ -61,14 +61,14 @@
                 {% endif %}
 
                 {% if paginationResult.page < pageCount %}
-                    {% set routeParams = routeParams|merge({'page': pageCount}) %}
+                    {% set routeParams = routeParams|merge({(pageQueryParameter): pageCount}) %}
                     {% if paginationResult.page == (pageCount - 1) %}
                         <a class="in-paging__control__item in-paging__control__item--num" href="{{ path(route, routeParams) }}" rel="next">{{ pageCount }}</a>
                     {% else %}
                         <a class="in-paging__control__item in-paging__control__item--num" href="{{ path(route, routeParams) }}">{{ pageCount }}</a>
                     {% endif %}
 
-                    {% set routeParams = routeParams|merge({'page': paginationResult.page + 1}) %}
+                    {% set routeParams = routeParams|merge({(pageQueryParameter): paginationResult.page + 1}) %}
                     <a class="in-paging__control__item in-paging__control__item--arrow in-paging__control__item in-paging__control__item--arrow" href="{{ path(route, routeParams) }}" rel="next">&gt;</a>
                 {% else %}
                     <span class="in-paging__control__item in-paging__control__item--arrow in-paging__control__item--arrow--inactive">&gt;</span>
@@ -82,4 +82,15 @@
     {% if paginationResult.page != 1 %}
         <meta name="robots" content="noindex, follow">
     {% endif %}
+{% endmacro %}
+
+{% macro loadMoreButton(paginationResult, url = '', pageQueryParameter = 'page') %}
+    <input type="button" class="js-load-more-button btn"
+           data-page="{{ paginationResult.page }}"
+           data-page-size="{{ paginationResult.pageSize }}"
+           data-pagination-to-item="{{ paginationResult.toItem }}"
+           data-total-count="{{ paginationResult.totalCount }}"
+           data-url="{{ url }}"
+           data-page-query-parameter="{{ pageQueryParameter }}"
+    />
 {% endmacro %}

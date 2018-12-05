@@ -16,10 +16,21 @@
     });
 
     $(document).ready(function () {
-        var ajaxMoreLoader = new Shopsys.productList.AjaxMoreLoader();
-        ajaxMoreLoader.init();
-        var ajaxFilter = new Shopsys.productList.AjaxFilter(ajaxMoreLoader);
-        ajaxFilter.init();
+        $('.js-product-list-with-paginator').each(function () {
+            var ajaxMoreLoader = new Shopsys.AjaxMoreLoader($(this), {
+                buttonTextCallback: function (loadNextCount) {
+                    return Shopsys.translator.transChoice(
+                        '{1}Load next %loadNextCount% product|[2,Inf]Load next %loadNextCount% products',
+                        loadNextCount,
+                        {'%loadNextCount%': loadNextCount}
+                    );
+                }
+            });
+            ajaxMoreLoader.init();
+
+            var ajaxFilter = new Shopsys.productList.AjaxFilter(ajaxMoreLoader);
+            ajaxFilter.init();
+        });
     });
 
 })(jQuery);
