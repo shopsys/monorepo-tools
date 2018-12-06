@@ -72,6 +72,8 @@ If you use these methods, change their calling appropriately:
   -> `CurrencyFacade::getNotAllowedToDeleteCurrencyIds()`
 - `PricingService::getMinimumPriceByPriceWithoutVat(array $prices)`
   -> `ProductPriceCalculation::getMinimumPriceByPriceWithoutVat(array $prices)`
+- `PricingService::arePricesDifferent(array $prices)`
+  -> `ProductPriceCalculation::arePricesDifferent(array $prices)`
 
 Following classes have been removed:
 - `AdministratorService`
@@ -85,6 +87,7 @@ Following classes have been removed:
 - `ProductCollectionService`
 - `CategoryService`
 - `CurrencyService`
+- `PricingService`
 
 Following methods have been removed:
 - `User::setDeliveryAddress()`, use `User::editDeliveryAddress()` instead
@@ -115,6 +118,7 @@ Following classes changed constructors:
 - `ProductCollectionFacade`
 - `CategoryFacade`
 - `CurrencyFacade`
+- `ProductPriceCalculation`
 
 Following functions visibility was changed to `protected` as there is no need to use them from outside of objects:
 - `Administrator::getGridLimit()`

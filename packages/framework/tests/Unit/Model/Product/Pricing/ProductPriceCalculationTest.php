@@ -8,7 +8,6 @@ use Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroup;
 use Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroupData;
 use Shopsys\FrameworkBundle\Model\Pricing\Price;
 use Shopsys\FrameworkBundle\Model\Pricing\PriceCalculation;
-use Shopsys\FrameworkBundle\Model\Pricing\PricingService;
 use Shopsys\FrameworkBundle\Model\Pricing\PricingSetting;
 use Shopsys\FrameworkBundle\Model\Pricing\Rounding;
 use Shopsys\FrameworkBundle\Model\Product\Pricing\ProductManualInputPriceRepository;
@@ -52,7 +51,6 @@ class ProductPriceCalculationTest extends TestCase
             ->expects($this->any())->method('getAllSellableVariantsByMainVariant')
             ->will($this->returnValue($variants));
 
-        $pricingService = new PricingService();
 
         $rounding = new Rounding($pricingSettingMock);
         $priceCalculation = new PriceCalculation($rounding);
@@ -62,8 +60,7 @@ class ProductPriceCalculationTest extends TestCase
             $basePriceCalculation,
             $pricingSettingMock,
             $productManualInputPriceRepositoryMock,
-            $productRepositoryMock,
-            $pricingService
+            $productRepositoryMock
         );
     }
 
@@ -137,5 +134,64 @@ class ProductPriceCalculationTest extends TestCase
                 'minimumPrice' => new Price(10, 15),
             ],
         ];
+    }
+
+    /**
+     * @dataProvider getArePricesDifferentProvider
+     * @param array $prices
+     * @param mixed $arePricesDifferent
+     */
+    public function testArePricesDifferent(array $prices, $arePricesDifferent)
+    {
+        $productPriceCalculation = $this->getProductPriceCalculationWithInputPriceTypeAndVariants(
+            PricingSetting::INPUT_PRICE_TYPE_WITHOUT_VAT,
+            []
+        );
+
+        $this->assertSame($arePricesDifferent, $productPriceCalculation->arePricesDifferent($prices));
+    }
+
+    public function getArePricesDifferentProvider()
+    {
+        return [
+            [
+                'prices' => [
+                    new Price(100, 120),
+                    new Price(100, 120),
+                ],
+                'arePricesDifferent' => false,
+            ],
+            [
+                'prices' => [
+                    new Price(100, 120),
+                ],
+                'arePricesDifferent' => false,
+            ],
+            [
+                'prices' => [
+                    new Price(100, 120),
+                    new Price('100', '120'),
+                ],
+                'arePricesDifferent' => true,
+            ],
+            [
+                'prices' => [
+                    new Price(200, 240),
+                    new Price(100, 120),
+                ],
+                'arePricesDifferent' => true,
+            ],
+        ];
+    }
+
+    public function testArePricesDifferentEmptyArray()
+    {
+        $productPriceCalculation = $this->getProductPriceCalculationWithInputPriceTypeAndVariants(
+            PricingSetting::INPUT_PRICE_TYPE_WITHOUT_VAT,
+            []
+        );
+
+        $this->expectException(\Shopsys\FrameworkBundle\Model\Pricing\Exception\InvalidArgumentException::class);
+        $productPriceCalculation->arePricesDifferent([]);
     }
 }

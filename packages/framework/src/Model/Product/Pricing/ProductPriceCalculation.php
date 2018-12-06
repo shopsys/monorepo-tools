@@ -4,7 +4,6 @@ namespace Shopsys\FrameworkBundle\Model\Product\Pricing;
 
 use Shopsys\FrameworkBundle\Model\Pricing\BasePriceCalculation;
 use Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroup;
-use Shopsys\FrameworkBundle\Model\Pricing\PricingService;
 use Shopsys\FrameworkBundle\Model\Pricing\PricingSetting;
 use Shopsys\FrameworkBundle\Model\Product\Product;
 use Shopsys\FrameworkBundle\Model\Product\ProductRepository;
@@ -32,29 +31,21 @@ class ProductPriceCalculation
     private $productRepository;
 
     /**
-     * @var \Shopsys\FrameworkBundle\Model\Pricing\PricingService
-     */
-    private $pricingService;
-
-    /**
      * @param \Shopsys\FrameworkBundle\Model\Pricing\BasePriceCalculation $basePriceCalculation
      * @param \Shopsys\FrameworkBundle\Model\Pricing\PricingSetting $pricingSetting
      * @param \Shopsys\FrameworkBundle\Model\Product\Pricing\ProductManualInputPriceRepository $productManualInputPriceRepository
      * @param \Shopsys\FrameworkBundle\Model\Product\ProductRepository $productRepository
-     * @param \Shopsys\FrameworkBundle\Model\Pricing\PricingService $pricingService
      */
     public function __construct(
         BasePriceCalculation $basePriceCalculation,
         PricingSetting $pricingSetting,
         ProductManualInputPriceRepository $productManualInputPriceRepository,
-        ProductRepository $productRepository,
-        PricingService $pricingService
+        ProductRepository $productRepository
     ) {
         $this->pricingSetting = $pricingSetting;
         $this->basePriceCalculation = $basePriceCalculation;
         $this->productManualInputPriceRepository = $productManualInputPriceRepository;
         $this->productRepository = $productRepository;
-        $this->pricingService = $pricingService;
     }
 
     /**
@@ -96,7 +87,7 @@ class ProductPriceCalculation
         }
 
         $minVariantPrice = $this->getMinimumPriceByPriceWithoutVat($variantPrices);
-        $from = $this->pricingService->arePricesDifferent($variantPrices);
+        $from = $this->arePricesDifferent($variantPrices);
 
         return new ProductPrice($minVariantPrice, $from);
     }
@@ -142,5 +133,28 @@ class ProductPriceCalculation
         }
 
         return $minimumPrice;
+    }
+
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Pricing\Price[] $prices
+     * @return bool
+     */
+    public function arePricesDifferent(array $prices)
+    {
+        if (count($prices) === 0) {
+            throw new \Shopsys\FrameworkBundle\Model\Pricing\Exception\InvalidArgumentException('Array can not be empty.');
+        }
+
+        $firstPrice = array_pop($prices);
+        /* @var $firstPrice \Shopsys\FrameworkBundle\Model\Pricing\Price */
+        foreach ($prices as $price) {
+            if ($price->getPriceWithoutVat() !== $firstPrice->getPriceWithoutVat()
+                || $price->getPriceWithVat() !== $firstPrice->getPriceWithVat()
+            ) {
+                return true;
+            }
+        }
+
+        return false;
     }
 }
