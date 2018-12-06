@@ -70,6 +70,8 @@ If you use these methods, change their calling appropriately:
   -> `CurrencyFacade::edit($currencyId, CurrencyData $currencyData)`
 - `CurrencyService::getNotAllowedToDeleteCurrencyIds($defaultCurrencyId, array $currenciesUsedInOrders, PricingSetting $pricingSetting, Domain $domain)`
   -> `CurrencyFacade::getNotAllowedToDeleteCurrencyIds()`
+- `PricingService::getMinimumPriceByPriceWithoutVat(array $prices)`
+  -> `ProductPriceCalculation::getMinimumPriceByPriceWithoutVat(array $prices)`
 
 Following classes have been removed:
 - `AdministratorService`

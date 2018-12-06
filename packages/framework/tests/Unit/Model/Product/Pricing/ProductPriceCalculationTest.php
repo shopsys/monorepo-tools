@@ -6,6 +6,7 @@ use PHPUnit\Framework\TestCase;
 use Shopsys\FrameworkBundle\Model\Pricing\BasePriceCalculation;
 use Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroup;
 use Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroupData;
+use Shopsys\FrameworkBundle\Model\Pricing\Price;
 use Shopsys\FrameworkBundle\Model\Pricing\PriceCalculation;
 use Shopsys\FrameworkBundle\Model\Pricing\PricingService;
 use Shopsys\FrameworkBundle\Model\Pricing\PricingSetting;
@@ -83,5 +84,58 @@ class ProductPriceCalculationTest extends TestCase
         $this->expectException(\Shopsys\FrameworkBundle\Model\Product\Pricing\Exception\MainVariantPriceCalculationException::class);
 
         $productPriceCalculation->calculatePrice($product, $pricingGroup->getDomainId(), $pricingGroup);
+    }
+
+    public function testGetMinimumPriceEmptyArray()
+    {
+        $productPriceCalculation = $this->getProductPriceCalculationWithInputPriceTypeAndVariants(
+            PricingSetting::INPUT_PRICE_TYPE_WITHOUT_VAT,
+            []
+        );
+
+        $this->expectException(\Shopsys\FrameworkBundle\Model\Pricing\Exception\InvalidArgumentException::class);
+        $productPriceCalculation->getMinimumPriceByPriceWithoutVat([]);
+    }
+
+    /**
+     * @dataProvider getMinimumPriceProvider
+     * @param array $prices
+     * @param mixed $minimumPrice
+     */
+    public function testGetMinimumPrice(array $prices, $minimumPrice)
+    {
+        $productPriceCalculation = $this->getProductPriceCalculationWithInputPriceTypeAndVariants(
+            PricingSetting::INPUT_PRICE_TYPE_WITHOUT_VAT,
+            []
+        );
+
+        $this->assertEquals($minimumPrice, $productPriceCalculation->getMinimumPriceByPriceWithoutVat($prices));
+    }
+
+    public function getMinimumPriceProvider()
+    {
+        return [
+            [
+                'prices' => [
+                    new Price(20, 30),
+                    new Price(10, 15),
+                    new Price(100, 120),
+                ],
+                'minimumPrice' => new Price(10, 15),
+            ],
+            [
+                'prices' => [
+                    new Price(10, 15),
+                ],
+                'minimumPrice' => new Price(10, 15),
+            ],
+            [
+                'prices' => [
+                    new Price(10, 15),
+                    new Price(10, 15),
+                ],
+                'minimumPrice' => new Price(10, 15),
+            ],
+        ];
     }
 }

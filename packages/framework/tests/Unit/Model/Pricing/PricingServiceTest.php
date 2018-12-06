@@ -9,53 +9,6 @@ use Shopsys\FrameworkBundle\Model\Pricing\PricingService;
 class PricingServiceTest extends TestCase
 {
     /**
-     * @dataProvider getMinimumPriceProvider
-     * @param array $prices
-     * @param mixed $minimumPrice
-     */
-    public function testGetMinimumPrice(array $prices, $minimumPrice)
-    {
-        $pricingService = new PricingService();
-
-        $this->assertEquals($minimumPrice, $pricingService->getMinimumPriceByPriceWithoutVat($prices));
-    }
-
-    public function getMinimumPriceProvider()
-    {
-        return [
-            [
-                'prices' => [
-                    new Price(20, 30),
-                    new Price(10, 15),
-                    new Price(100, 120),
-                ],
-                'minimumPrice' => new Price(10, 15),
-            ],
-            [
-                'prices' => [
-                    new Price(10, 15),
-                ],
-                'minimumPrice' => new Price(10, 15),
-            ],
-            [
-                'prices' => [
-                    new Price(10, 15),
-                    new Price(10, 15),
-                ],
-                'minimumPrice' => new Price(10, 15),
-            ],
-        ];
-    }
-
-    public function testGetMinimumPriceEmptyArray()
-    {
-        $pricingService = new PricingService();
-
-        $this->expectException(\Shopsys\FrameworkBundle\Model\Pricing\Exception\InvalidArgumentException::class);
-        $pricingService->getMinimumPriceByPriceWithoutVat([]);
-    }
-
-    /**
      * @dataProvider getArePricesDifferentProvider
      * @param array $prices
      * @param mixed $arePricesDifferent
