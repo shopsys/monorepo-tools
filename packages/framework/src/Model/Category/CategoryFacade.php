@@ -145,7 +145,10 @@ class CategoryFacade
     {
         $rootCategory = $this->getRootCategory();
         $category = $this->categoryRepository->getById($categoryId);
-        $category = $this->categoryService->edit($category, $categoryData, $rootCategory);
+        $category->edit($categoryData);
+        if ($category->getParent() === null) {
+            $category->setParent($rootCategory);
+        }
         $this->em->flush();
         $this->friendlyUrlFacade->saveUrlListFormData('front_product_list', $category->getId(), $categoryData->urls);
         $this->friendlyUrlFacade->createFriendlyUrls('front_product_list', $category->getId(), $category->getNames());

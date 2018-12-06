@@ -64,6 +64,8 @@ If you use these methods, change their calling appropriately:
   -> `ProductCollectionFacade::getMainImagesIndexedByProductId(array $products)`
 - `CategoryService::create(CategoryData $categoryData, Category $rootCategory)`
   -> `CategoryFactory::create(CategoryData $data, Category $rootCategory)`
+- `CategoryService::edit(Category $category, CategoryData $categoryData, Category $rootCategory)`
+  -> `CategoryFacade::edit($categoryId, CategoryData $categoryData)`
 
 Following classes have been removed:
 - `AdministratorService`
