@@ -74,6 +74,8 @@ If you use these methods, change their calling appropriately:
   -> `ProductPriceCalculation::getMinimumPriceByPriceWithoutVat(array $prices)`
 - `PricingService::arePricesDifferent(array $prices)`
   -> `ProductPriceCalculation::arePricesDifferent(array $prices)`
+- `GridOrderingService::setPosition($entity, $position)`
+  -> `GridOrderingFacade::saveOrdering($entityClass, array $rowIds)`
 
 Following classes have been removed:
 - `AdministratorService`
@@ -89,6 +91,7 @@ Following classes have been removed:
 - `CurrencyService`
 - `PricingService`
 - `VatService`
+- `GridOrderingService`
 
 Following methods have been removed:
 - `User::setDeliveryAddress()`, use `User::editDeliveryAddress()` instead
@@ -122,6 +125,7 @@ Following classes changed constructors:
 - `CurrencyFacade`
 - `ProductPriceCalculation`
 - `VatFacade`
+- `GridOrderingFacade`
 
 Following functions visibility was changed to `protected` as there is no need to use them from outside of objects:
 - `Administrator::getGridLimit()`
