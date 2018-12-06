@@ -40,8 +40,6 @@
 
 ## Frontend
 * [Introduction to LESS](./frontend/introduction-to-less.md)
-
-## Frontend
 * [Frontend Troubleshooting](./frontend/frontend-troubleshooting.md)
 
 ## Microservices
