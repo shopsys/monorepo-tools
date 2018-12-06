@@ -25,11 +25,6 @@ class CurrencyFacade
     protected $currencyRepository;
 
     /**
-     * @var \Shopsys\FrameworkBundle\Model\Pricing\Currency\CurrencyService
-     */
-    protected $currencyService;
-
-    /**
      * @var \Shopsys\FrameworkBundle\Model\Pricing\PricingSetting
      */
     protected $pricingSetting;
@@ -77,7 +72,6 @@ class CurrencyFacade
     /**
      * @param \Doctrine\ORM\EntityManagerInterface $em
      * @param \Shopsys\FrameworkBundle\Model\Pricing\Currency\CurrencyRepository $currencyRepository
-     * @param \Shopsys\FrameworkBundle\Model\Pricing\Currency\CurrencyService $currencyService
      * @param \Shopsys\FrameworkBundle\Model\Pricing\PricingSetting $pricingSetting
      * @param \Shopsys\FrameworkBundle\Model\Order\OrderRepository $orderRepository
      * @param \Shopsys\FrameworkBundle\Component\Domain\Domain $domain
@@ -91,7 +85,6 @@ class CurrencyFacade
     public function __construct(
         EntityManagerInterface $em,
         CurrencyRepository $currencyRepository,
-        CurrencyService $currencyService,
         PricingSetting $pricingSetting,
         OrderRepository $orderRepository,
         Domain $domain,
@@ -104,7 +97,6 @@ class CurrencyFacade
     ) {
         $this->em = $em;
         $this->currencyRepository = $currencyRepository;
-        $this->currencyService = $currencyService;
         $this->pricingSetting = $pricingSetting;
         $this->orderRepository = $orderRepository;
         $this->domain = $domain;
@@ -222,12 +214,15 @@ class CurrencyFacade
      */
     public function getNotAllowedToDeleteCurrencyIds()
     {
-        return $this->currencyService->getNotAllowedToDeleteCurrencyIds(
-            $this->getDefaultCurrency()->getId(),
-            $this->getCurrenciesUsedInOrders(),
-            $this->pricingSetting,
-            $this->domain
-        );
+        $notAllowedToDeleteCurrencyIds = [$this->getDefaultCurrency()->getId()];
+        foreach ($this->domain->getAll() as $domainConfig) {
+            $notAllowedToDeleteCurrencyIds[] = $this->pricingSetting->getDomainDefaultCurrencyIdByDomainId($domainConfig->getId());
+        }
+        foreach ($this->getCurrenciesUsedInOrders() as $currency) {
+            $notAllowedToDeleteCurrencyIds[] = $currency->getId();
+        }
+
+        return array_unique($notAllowedToDeleteCurrencyIds);
     }
 
     /**

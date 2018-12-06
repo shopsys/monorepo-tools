@@ -68,6 +68,8 @@ If you use these methods, change their calling appropriately:
   -> `CategoryFacade::edit($categoryId, CategoryData $categoryData)`
 - `CurrencyService::edit(Currency $currency, CurrencyData $currencyData, $isDefaultCurrency)`
   -> `CurrencyFacade::edit($currencyId, CurrencyData $currencyData)`
+- `CurrencyService::getNotAllowedToDeleteCurrencyIds($defaultCurrencyId, array $currenciesUsedInOrders, PricingSetting $pricingSetting, Domain $domain)`
+  -> `CurrencyFacade::getNotAllowedToDeleteCurrencyIds()`
 
 Following classes have been removed:
 - `AdministratorService`
@@ -80,6 +82,7 @@ Following classes have been removed:
 - `ProductManualInputPriceService`
 - `ProductCollectionService`
 - `CategoryService`
+- `CurrencyService`
 
 Following methods have been removed:
 - `User::setDeliveryAddress()`, use `User::editDeliveryAddress()` instead
