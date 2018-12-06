@@ -147,7 +147,12 @@ class CurrencyFacade
     public function edit($currencyId, CurrencyData $currencyData)
     {
         $currency = $this->currencyRepository->getById($currencyId);
-        $this->currencyService->edit($currency, $currencyData, $this->isDefaultCurrency($currency));
+        $currency->edit($currencyData);
+        if ($this->isDefaultCurrency($currency)) {
+            $currency->setExchangeRate(Currency::DEFAULT_EXCHANGE_RATE);
+        } else {
+            $currency->setExchangeRate($currencyData->exchangeRate);
+        }
         $this->em->flush();
         $this->productPriceRecalculationScheduler->scheduleAllProductsForDelayedRecalculation();
 

@@ -66,6 +66,8 @@ If you use these methods, change their calling appropriately:
   -> `CategoryFactory::create(CategoryData $data, Category $rootCategory)`
 - `CategoryService::edit(Category $category, CategoryData $categoryData, Category $rootCategory)`
   -> `CategoryFacade::edit($categoryId, CategoryData $categoryData)`
+- `CurrencyService::edit(Currency $currency, CurrencyData $currencyData, $isDefaultCurrency)`
+  -> `CurrencyFacade::edit($currencyId, CurrencyData $currencyData)`
 
 Following classes have been removed:
 - `AdministratorService`

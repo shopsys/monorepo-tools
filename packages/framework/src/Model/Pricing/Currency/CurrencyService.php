@@ -8,24 +8,6 @@ use Shopsys\FrameworkBundle\Model\Pricing\PricingSetting;
 class CurrencyService
 {
     /**
-     * @param \Shopsys\FrameworkBundle\Model\Pricing\Currency\Currency $currency
-     * @param \Shopsys\FrameworkBundle\Model\Pricing\Currency\CurrencyData $currencyData
-     * @param bool $isDefaultCurrency
-     * @return \Shopsys\FrameworkBundle\Model\Pricing\Currency\Currency
-     */
-    public function edit(Currency $currency, CurrencyData $currencyData, $isDefaultCurrency)
-    {
-        $currency->edit($currencyData);
-        if ($isDefaultCurrency) {
-            $currency->setExchangeRate(Currency::DEFAULT_EXCHANGE_RATE);
-        } else {
-            $currency->setExchangeRate($currencyData->exchangeRate);
-        }
-
-        return $currency;
-    }
-
-    /**
      * @param int $defaultCurrencyId
      * @param \Shopsys\FrameworkBundle\Model\Pricing\Currency\Currency[] $currenciesUsedInOrders
      * @param \Shopsys\FrameworkBundle\Model\Pricing\PricingSetting $pricingSetting
