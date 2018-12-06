@@ -21,6 +21,8 @@ Follow instructions in the section `shopsys/shopsys`.
 * typical upgrade sequence should be:
     * `docker-compose down`
     * follow upgrade notes for `docker-compose.yml`, `Dockerfile`, docker containers, `nginx.conf`, `php.ini`
+    * change all the microservices image versions in your `docker-compose.yml` to version you are upgrading to
+        eg. `image: shopsys/microservice-product-search:v7.0.0-beta1`
     * `docker-compose up -d`
     * update shopsys framework dependencies in `composer.json` to version you are upgrading to
         eg. `"shopsys/framework": "v7.0.0-beta1"`

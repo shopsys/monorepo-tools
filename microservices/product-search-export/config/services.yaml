@@ -31,3 +31,4 @@ services:
     Shopsys\MicroserviceProductSearchExport\Structure\StructureManager:
         arguments:
             - '%structure_dir%'
+            - '%env(ELASTIC_SEARCH_INDEX_PREFIX)%'

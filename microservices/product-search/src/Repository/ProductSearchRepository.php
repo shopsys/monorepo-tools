@@ -7,16 +7,32 @@ use Elasticsearch\Client;
 class ProductSearchRepository
 {
     /**
+     * @var string
+     */
+    private $indexPrefix;
+
+    /**
      * @var \Elasticsearch\Client
      */
     private $client;
 
     /**
+     * @param string $indexPrefix
      * @param \Elasticsearch\Client $client
      */
-    public function __construct(Client $client)
+    public function __construct(string $indexPrefix, Client $client)
     {
+        $this->indexPrefix = $indexPrefix;
         $this->client = $client;
+    }
+
+    /**
+     * @param int $domainId
+     * @return string
+     */
+    protected function getIndexName(int $domainId): string
+    {
+        return $this->indexPrefix . $domainId;
     }
 
     /**
@@ -29,22 +45,21 @@ class ProductSearchRepository
         if (!$searchText) {
             return [];
         }
-
-        $parameters = $this->createQuery($domainId, $searchText);
+        $parameters = $this->createQuery($this->getIndexName($domainId), $searchText);
         $result = $this->client->search($parameters);
         return $this->extractIds($result);
     }
 
     /**
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-body.html
-     * @param int $domainId
+     * @param string $indexName
      * @param string $searchText
      * @return array
      */
-    protected function createQuery(int $domainId, string $searchText): array
+    protected function createQuery(string $indexName, string $searchText): array
     {
         return [
-            'index' => $domainId,
+            'index' => $indexName,
             'type' => '_doc',
             'size' => 1000,
             'body' => [

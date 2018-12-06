@@ -3,6 +3,7 @@
 namespace Shopsys\MicroserviceProductSearchExport\Repository;
 
 use Elasticsearch\Client;
+use Shopsys\MicroserviceProductSearchExport\Structure\StructureManager;
 
 class ProductRepository
 {
@@ -17,13 +18,20 @@ class ProductRepository
     protected $client;
 
     /**
+     * @var \Shopsys\MicroserviceProductSearchExport\Structure\StructureManager
+     */
+    protected $structureManager;
+
+    /**
      * @param \Shopsys\MicroserviceProductSearchExport\Repository\ElasticsearchProductConverter $converter
      * @param \Elasticsearch\Client $client
+     * @param \Shopsys\MicroserviceProductSearchExport\Structure\StructureManager $structureManager
      */
-    public function __construct(ElasticsearchProductConverter $converter, Client $client)
+    public function __construct(ElasticsearchProductConverter $converter, Client $client, StructureManager $structureManager)
     {
         $this->converter = $converter;
         $this->client = $client;
+        $this->structureManager = $structureManager;
     }
 
     /**
@@ -32,7 +40,7 @@ class ProductRepository
      */
     public function bulkUpdate(int $domainId, array $data): void
     {
-        $body = $this->converter->convertBulk($domainId, $data);
+        $body = $this->converter->convertBulk($this->structureManager->getIndexName($domainId), $data);
 
         $params = [
             'body' => $body,
@@ -47,7 +55,7 @@ class ProductRepository
     public function deleteNotPresent(int $domainId, array $keepIds): void
     {
         $this->client->deleteByQuery([
-            'index' => $domainId,
+            'index' => $this->structureManager->getIndexName($domainId),
             'type' => '_doc',
             'body' => [
                 'query' => [

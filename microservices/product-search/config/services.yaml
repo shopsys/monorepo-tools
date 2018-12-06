@@ -26,3 +26,7 @@ services:
     Shopsys\MicroserviceProductSearch\Controller\:
         resource: '../src/Controller'
         tags: ['controller.service_arguments']
+
+    Shopsys\MicroserviceProductSearch\Repository\ProductSearchRepository:
+        arguments:
+            - '%env(ELASTIC_SEARCH_INDEX_PREFIX)%'

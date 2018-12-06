@@ -35,6 +35,7 @@ services:
         container_name: shopsys-framework-microservice-product-search
         environment:
             - ELASTICSEARCH_HOSTS_STRING=192.168.0.1:9200
+            - ELASTIC_SEARCH_INDEX_PREFIX=production_
         networks:
             - shopsys-network
 
@@ -44,6 +45,7 @@ services:
         container_name: shopsys-framework-microservice-product-search-export
         environment:
             - ELASTICSEARCH_HOSTS_STRING=192.168.0.1:9200
+            - ELASTIC_SEARCH_INDEX_PREFIX=production_
         networks:
             - shopsys-network
 

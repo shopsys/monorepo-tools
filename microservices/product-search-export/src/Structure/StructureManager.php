@@ -13,18 +13,34 @@ class StructureManager
     protected $definitionDirectory;
 
     /**
+     * @var string
+     */
+    protected $indexPrefix;
+
+    /**
      * @var \Elasticsearch\Client
      */
     protected $client;
 
     /**
      * @param string $definitionDirectory
+     * @param string $indexPrefix
      * @param \Elasticsearch\Client $client
      */
-    public function __construct(string $definitionDirectory, Client $client)
+    public function __construct(string $definitionDirectory, string $indexPrefix, Client $client)
     {
         $this->definitionDirectory = $definitionDirectory;
+        $this->indexPrefix = $indexPrefix;
         $this->client = $client;
+    }
+
+    /**
+     * @param int $domainId
+     * @return string
+     */
+    public function getIndexName(int $domainId): string
+    {
+        return $this->indexPrefix . $domainId;
     }
 
     /**
@@ -34,11 +50,12 @@ class StructureManager
     {
         $definition = $this->getDefinition($domainId);
         $indexes = $this->client->indices();
-        if ($indexes->exists(['index' => (string)$domainId])) {
-            throw new StructureException(sprintf('Index %s already exists', $domainId));
+        $indexName = $this->getIndexName($domainId);
+        if ($indexes->exists(['index' => $indexName])) {
+            throw new StructureException(sprintf('Index %s already exists', $indexName));
         }
         $indexes->create([
-            'index' => (string)$domainId,
+            'index' => $indexName,
             'body' => $definition,
         ]);
     }
@@ -49,8 +66,9 @@ class StructureManager
     public function deleteIndex(int $domainId)
     {
         $indexes = $this->client->indices();
-        if ($indexes->exists(['index' => (string)$domainId])) {
-            $indexes->delete(['index' => (string)$domainId]);
+        $indexName = $this->getIndexName($domainId);
+        if ($indexes->exists(['index' => $indexName])) {
+            $indexes->delete(['index' => $indexName]);
         }
     }
 

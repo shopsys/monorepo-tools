@@ -31,7 +31,7 @@ class StructureManagerTest extends TestCase
         $this->client = $this->createMock(Client::class);
         $this->indices = $this->createMock(IndicesNamespace::class);
         $this->client->method('indices')->willReturn($this->indices);
-        $this->structureManager = new StructureManager($definitionDirectory, $this->client);
+        $this->structureManager = new StructureManager($definitionDirectory, '', $this->client);
     }
 
     public function testCreateSuccessIndex(): void
