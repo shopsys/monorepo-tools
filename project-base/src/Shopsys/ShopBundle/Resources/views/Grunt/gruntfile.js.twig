@@ -190,6 +190,8 @@ module.exports = function(grunt) {
                     fontHeight: '512',
                     descent: '0',
                     destHtml: 'docs/generated',
+                    htmlDemo: true,
+                    htmlDemoTemplate: '{{ customResourcesDirectory|raw }}/views/Grunt/htmlDocumentTemplate.html',
                     htmlDemoFilename: 'webfont-admin-svg',
                     templateOptions: {
                         baseClass: 'svg',
@@ -213,6 +215,8 @@ module.exports = function(grunt) {
                     fontHeight: '512',
                     descent: '0',
                     destHtml: 'docs/generated',
+                    htmlDemo: true,
+                    htmlDemoTemplate: '{{ customResourcesDirectory|raw }}/views/Grunt/htmlDocumentTemplate.html',
                     htmlDemoFilename: 'webfont-frontend-svg',
                     templateOptions: {
                         baseClass: 'svg',

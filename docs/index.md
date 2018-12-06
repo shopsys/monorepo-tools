@@ -41,6 +41,9 @@
 ## Frontend
 * [Introduction to LESS](./frontend/introduction-to-less.md)
 
+## Frontend
+* [Frontend Troubleshooting](./frontend/frontend-troubleshooting.md)
+
 ## Microservices
 One of the explored ideas of Shopsys Framework is the idea of a product, that some of its parts are designed as the microservices.
 Microservice acts as a fully independent unit and all of its parts are located in a separate Docker container.

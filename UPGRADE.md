@@ -59,6 +59,8 @@ There is a list of all the repositories maintained by monorepo, changes in log b
     - for easier deployment to production, make the trusted proxies in `Shopsys\Boostrap` class loaded from DIC parameter `trusted_proxies` instead of being hard-coded
 - [#579 - ajaxMoreLoader is generalized](https://github.com/shopsys/shopsys/pull/579)
     - new macro `loadMoreButton` is integrated into `@ShopsysShop/Front/Inline/Paginator/paginator.html.twig`, update files based on commit from [`ajaxMoreLoader is updated and generalized`](https://github.com/shopsys/shopsys/pull/579/files)
+- *(optional)* [#645 SVG icons in generated document](https://github.com/shopsys/shopsys/pull/645)
+    - to display svg icons collection correctly in grunt generated document for all browsers please add `src/Shopsys/ShopBundle/Resources/views/Grunt/htmlDocumentTemplate.html` file and update `src/Shopsys/ShopBundle/Resources/views/Grunt/gruntfile.js.twig` based on changes in this pull request
 
 ## [From v7.0.0-beta3 to v7.0.0-beta4]
 ### [shopsys/project-base]
