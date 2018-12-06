@@ -19,11 +19,6 @@ class VatFacade
     protected $vatRepository;
 
     /**
-     * @var \Shopsys\FrameworkBundle\Model\Pricing\Vat\VatService
-     */
-    protected $vatService;
-
-    /**
      * @var \Shopsys\FrameworkBundle\Component\Setting\Setting
      */
     protected $setting;
@@ -41,7 +36,6 @@ class VatFacade
     /**
      * @param \Doctrine\ORM\EntityManagerInterface $em
      * @param \Shopsys\FrameworkBundle\Model\Pricing\Vat\VatRepository $vatRepository
-     * @param \Shopsys\FrameworkBundle\Model\Pricing\Vat\VatService $vatService
      * @param \Shopsys\FrameworkBundle\Component\Setting\Setting $setting
      * @param \Shopsys\FrameworkBundle\Model\Product\Pricing\ProductPriceRecalculationScheduler $productPriceRecalculationScheduler
      * @param \Shopsys\FrameworkBundle\Model\Pricing\Vat\VatFactoryInterface $vatFactory
@@ -49,14 +43,12 @@ class VatFacade
     public function __construct(
         EntityManagerInterface $em,
         VatRepository $vatRepository,
-        VatService $vatService,
         Setting $setting,
         ProductPriceRecalculationScheduler $productPriceRecalculationScheduler,
         VatFactoryInterface $vatFactory
     ) {
         $this->em = $em;
         $this->vatRepository = $vatRepository;
-        $this->vatService = $vatService;
         $this->setting = $setting;
         $this->productPriceRecalculationScheduler = $productPriceRecalculationScheduler;
         $this->vatFactory = $vatFactory;
@@ -134,11 +126,11 @@ class VatFacade
         }
 
         if ($newVat !== null) {
-            $newDefaultVat = $this->vatService->getNewDefaultVat(
-                $this->getDefaultVat(),
-                $oldVat,
-                $newVat
-            );
+            $newDefaultVat = $this->getDefaultVat();
+            if ($newDefaultVat->getId() === $oldVat->getId()) {
+                $newDefaultVat = $newVat;
+            }
+
             $this->setDefaultVat($newDefaultVat);
 
             $this->vatRepository->replaceVat($oldVat, $newVat);

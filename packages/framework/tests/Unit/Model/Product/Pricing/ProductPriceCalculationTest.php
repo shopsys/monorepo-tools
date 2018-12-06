@@ -51,7 +51,6 @@ class ProductPriceCalculationTest extends TestCase
             ->expects($this->any())->method('getAllSellableVariantsByMainVariant')
             ->will($this->returnValue($variants));
 
-
         $rounding = new Rounding($pricingSettingMock);
         $priceCalculation = new PriceCalculation($rounding);
         $basePriceCalculation = new BasePriceCalculation($priceCalculation, $rounding);

@@ -88,6 +88,7 @@ Following classes have been removed:
 - `CategoryService`
 - `CurrencyService`
 - `PricingService`
+- `VatService`
 
 Following methods have been removed:
 - `User::setDeliveryAddress()`, use `User::editDeliveryAddress()` instead
@@ -98,6 +99,7 @@ Following methods have been removed:
 - `FlagService::edit()`, use `Flag::edit()` instead
 - `CategoryService::setChildrenAsSiblings()`
 - `CurrencyService::create()`, use `CurrencyFactory::create()` instead
+- `VatService::getNewDefaultVat()`
 
 Following classes changed constructors:
 - `AdministratorFacade`
@@ -119,6 +121,7 @@ Following classes changed constructors:
 - `CategoryFacade`
 - `CurrencyFacade`
 - `ProductPriceCalculation`
+- `VatFacade`
 
 Following functions visibility was changed to `protected` as there is no need to use them from outside of objects:
 - `Administrator::getGridLimit()`
