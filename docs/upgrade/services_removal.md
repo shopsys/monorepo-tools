@@ -76,6 +76,10 @@ If you use these methods, change their calling appropriately:
   -> `ProductPriceCalculation::arePricesDifferent(array $prices)`
 - `GridOrderingService::setPosition($entity, $position)`
   -> `GridOrderingFacade::saveOrdering($entityClass, array $rowIds)`
+- `UploadedFileFactoryInterface::create(string $entityName, int $entityId, ?string $temporaryFilename)`
+  -> `UploadedFileFactoryInterface::create(string $entityName, int $entityId, array $temporaryFilenames)`
+- `UploadedFileService::createUploadedFile(UploadedFileEntityConfig $uploadedFileEntityConfig, $entityId, array $temporaryFilenames)`
+  -> `UploadedFileFactoryInterface::create(string $entityName, int $entityId, array $temporaryFilenames)`
 
 Following classes have been removed:
 - `AdministratorService`
@@ -92,6 +96,7 @@ Following classes have been removed:
 - `PricingService`
 - `VatService`
 - `GridOrderingService`
+- `UploadedFileService`
 
 Following methods have been removed:
 - `User::setDeliveryAddress()`, use `User::editDeliveryAddress()` instead
@@ -126,6 +131,8 @@ Following classes changed constructors:
 - `ProductPriceCalculation`
 - `VatFacade`
 - `GridOrderingFacade`
+- `UploadedFileFacade`
+- `UploadedFileFactory`
 
 Following functions visibility was changed to `protected` as there is no need to use them from outside of objects:
 - `Administrator::getGridLimit()`

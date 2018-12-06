@@ -4,20 +4,17 @@ namespace Tests\FrameworkBundle\Unit\Component\UploadedFile;
 
 use PHPUnit\Framework\TestCase;
 use Shopsys\FrameworkBundle\Component\FileUpload\FileUpload;
-use Shopsys\FrameworkBundle\Component\UploadedFile\Config\UploadedFileEntityConfig;
 use Shopsys\FrameworkBundle\Component\UploadedFile\UploadedFileFactory;
-use Shopsys\FrameworkBundle\Component\UploadedFile\UploadedFileService;
 
-class UploadedFileServiceTest extends TestCase
+class UploadedFileFactoryTest extends TestCase
 {
-    public function testCreateUploadedFile()
+    public function testCreate()
     {
         $temporaryFilename = 'temporaryFilename.tmp';
         $temporaryFilenames = [$temporaryFilename];
         $temporaryFilepath = 'path/' . $temporaryFilename;
         $entityId = 1;
         $entityName = 'entityName';
-        $entityClass = 'entityClass';
 
         $fileUploadMock = $this->getMockBuilder(FileUpload::class)
             ->setMethods(['getTemporaryFilePath'])
@@ -29,10 +26,8 @@ class UploadedFileServiceTest extends TestCase
             ->with($this->equalTo($temporaryFilename))
             ->willReturn($temporaryFilepath);
 
-        $uploadedFileEntityConfig = new UploadedFileEntityConfig($entityName, $entityClass);
-
-        $uploadedFileService = new UploadedFileService($fileUploadMock, new UploadedFileFactory());
-        $uploadedFile = $uploadedFileService->createUploadedFile($uploadedFileEntityConfig, $entityId, $temporaryFilenames);
+        $uploadedFileFactory = new UploadedFileFactory($fileUploadMock);
+        $uploadedFile = $uploadedFileFactory->create($entityName, $entityId, $temporaryFilenames);
         $filesForUpload = $uploadedFile->getTemporaryFilesForUpload();
         $fileForUpload = array_pop($filesForUpload);
         /* @var $fileForUpload \Shopsys\FrameworkBundle\Component\FileUpload\FileForUpload */

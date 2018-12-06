@@ -25,11 +25,6 @@ class UploadedFileFacade
     protected $uploadedFileRepository;
 
     /**
-     * @var \Shopsys\FrameworkBundle\Component\UploadedFile\UploadedFileService
-     */
-    protected $uploadedFileService;
-
-    /**
      * @var \League\Flysystem\FilesystemInterface
      */
     protected $filesystem;
@@ -40,27 +35,32 @@ class UploadedFileFacade
     protected $uploadedFileLocator;
 
     /**
+     * @var \Shopsys\FrameworkBundle\Component\UploadedFile\UploadedFileFactoryInterface
+     */
+    protected $uploadedFileFactory;
+
+    /**
      * @param \Doctrine\ORM\EntityManagerInterface $em
      * @param \Shopsys\FrameworkBundle\Component\UploadedFile\Config\UploadedFileConfig $uploadedFileConfig
      * @param \Shopsys\FrameworkBundle\Component\UploadedFile\UploadedFileRepository $uploadedFileRepository
-     * @param \Shopsys\FrameworkBundle\Component\UploadedFile\UploadedFileService $uploadedFileService
      * @param \League\Flysystem\FilesystemInterface $filesystem
      * @param \Shopsys\FrameworkBundle\Component\UploadedFile\UploadedFileLocator $uploadedFileLocator
+     * @param \Shopsys\FrameworkBundle\Component\UploadedFile\UploadedFileFactoryInterface $uploadedFileFactory
      */
     public function __construct(
         EntityManagerInterface $em,
         UploadedFileConfig $uploadedFileConfig,
         UploadedFileRepository $uploadedFileRepository,
-        UploadedFileService $uploadedFileService,
         FilesystemInterface $filesystem,
-        UploadedFileLocator $uploadedFileLocator
+        UploadedFileLocator $uploadedFileLocator,
+        UploadedFileFactoryInterface $uploadedFileFactory
     ) {
         $this->em = $em;
         $this->uploadedFileConfig = $uploadedFileConfig;
         $this->uploadedFileRepository = $uploadedFileRepository;
-        $this->uploadedFileService = $uploadedFileService;
         $this->filesystem = $filesystem;
         $this->uploadedFileLocator = $uploadedFileLocator;
+        $this->uploadedFileFactory = $uploadedFileFactory;
     }
 
     /**
@@ -83,8 +83,8 @@ class UploadedFileFacade
                 $entitiesForFlush[] = $oldUploadedFile;
             }
 
-            $newUploadedFile = $this->uploadedFileService->createUploadedFile(
-                $uploadedFileEntityConfig,
+            $newUploadedFile = $this->uploadedFileFactory->create(
+                $uploadedFileEntityConfig->getEntityName(),
                 $entityId,
                 $temporaryFilenames
             );
