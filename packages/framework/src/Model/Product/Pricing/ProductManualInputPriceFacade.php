@@ -19,23 +19,23 @@ class ProductManualInputPriceFacade
     protected $productManualInputPriceRepository;
 
     /**
-     * @var \Shopsys\FrameworkBundle\Model\Product\Pricing\ProductManualInputPriceService
+     * @var \Shopsys\FrameworkBundle\Model\Product\Pricing\ProductManualInputPriceFactoryInterface
      */
-    protected $productManualInputPriceService;
+    protected $productManualInputPriceFactory;
 
     /**
      * @param \Doctrine\ORM\EntityManagerInterface $em
      * @param \Shopsys\FrameworkBundle\Model\Product\Pricing\ProductManualInputPriceRepository $productManualInputPriceRepository
-     * @param \Shopsys\FrameworkBundle\Model\Product\Pricing\ProductManualInputPriceService $productManualInputPriceService
+     * @param \Shopsys\FrameworkBundle\Model\Product\Pricing\ProductManualInputPriceFactoryInterface $productManualInputPriceFactory
      */
     public function __construct(
         EntityManagerInterface $em,
         ProductManualInputPriceRepository $productManualInputPriceRepository,
-        ProductManualInputPriceService $productManualInputPriceService
+        ProductManualInputPriceFactoryInterface $productManualInputPriceFactory
     ) {
         $this->em = $em;
         $this->productManualInputPriceRepository = $productManualInputPriceRepository;
-        $this->productManualInputPriceService = $productManualInputPriceService;
+        $this->productManualInputPriceFactory = $productManualInputPriceFactory;
     }
 
     /**
@@ -46,13 +46,12 @@ class ProductManualInputPriceFacade
     public function refresh(Product $product, PricingGroup $pricingGroup, $inputPrice)
     {
         $manualInputPrice = $this->productManualInputPriceRepository->findByProductAndPricingGroup($product, $pricingGroup);
-        $refreshedProductManualInputPrice = $this->productManualInputPriceService->refresh(
-            $product,
-            $pricingGroup,
-            $inputPrice,
-            $manualInputPrice
-        );
-        $this->em->persist($refreshedProductManualInputPrice);
-        $this->em->flush($refreshedProductManualInputPrice);
+        if ($manualInputPrice === null) {
+            $manualInputPrice = $this->productManualInputPriceFactory->create($product, $pricingGroup, $inputPrice);
+        } else {
+            $manualInputPrice->setInputPrice($inputPrice);
+        }
+        $this->em->persist($manualInputPrice);
+        $this->em->flush($manualInputPrice);
     }
 }

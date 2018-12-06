@@ -58,6 +58,8 @@ If you use these methods, change their calling appropriately:
   -> `RegistrationMail::createMessage(MailTemplate $mailTemplate, $user)`
 - `OrderMailService::getMessageDataByOrder(Order $order, MailTemplate $mailTemplate)`  
   -> `OrderMail::createMessage(MailTemplate $mailTemplate, $order)`
+- `ProductManualInputPriceService::refresh(Product $product, PricingGroup $pricingGroup, $inputPrice, $productManualInputPrice)`  
+  -> `ProductManualInputPriceFacade::refresh(Product $product, PricingGroup $pricingGroup, $inputPrice)`
 
 Following classes have been removed:
 - `AdministratorService`
@@ -67,6 +69,7 @@ Following classes have been removed:
 - `OrderService`
 - `OrderStatusService`
 - `FlagService`
+- `ProductManualInputPriceService`
 
 Following methods have been removed:
 - `User::setDeliveryAddress()`, use `User::editDeliveryAddress()` instead
@@ -91,6 +94,7 @@ Following classes changed constructors:
 - `ProductPriceRecalculator`
 - `ProductFacade`
 - `UserFactory`
+- `ProductManualInputPriceFacade`
 
 Following functions visibility was changed to `protected` as there is no need to use them from outside of objects:
 - `Administrator::getGridLimit()`
