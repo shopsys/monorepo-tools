@@ -3,34 +3,33 @@
 namespace Tests\FrameworkBundle\Unit\Model\Category;
 
 use PHPUnit\Framework\TestCase;
+use Shopsys\FrameworkBundle\Component\EntityExtension\EntityNameResolver;
 use Shopsys\FrameworkBundle\Model\Category\Category;
 use Shopsys\FrameworkBundle\Model\Category\CategoryData;
-use Shopsys\FrameworkBundle\Model\Category\CategoryService;
+use Shopsys\FrameworkBundle\Model\Category\CategoryFactory;
 
-class CategoryServiceTest extends TestCase
+class CategoryFactoryTest extends TestCase
 {
-    public function testEditSetRoot()
+    public function testCreateSetRoot()
     {
         $categoryData = new CategoryData();
         $rootCategory = new Category($categoryData);
-        $category = new Category(new CategoryData());
 
-        $categoryService = new CategoryService();
-        $categoryService->edit($category, $categoryData, $rootCategory);
+        $categoryFactory = new CategoryFactory(new EntityNameResolver([]));
+        $category = $categoryFactory->create($categoryData, $rootCategory);
 
         $this->assertSame($rootCategory, $category->getParent());
     }
 
-    public function testEdit()
+    public function testCreate()
     {
         $rootCategory = new Category(new CategoryData());
         $parentCategory = new Category(new CategoryData());
         $categoryData = new CategoryData();
         $categoryData->parent = $parentCategory;
-        $category = new Category(new CategoryData());
 
-        $categoryService = new CategoryService();
-        $categoryService->edit($category, $categoryData, $rootCategory);
+        $categoryFactory = new CategoryFactory(new EntityNameResolver([]));
+        $category = $categoryFactory->create($categoryData, $rootCategory);
 
         $this->assertSame($parentCategory, $category->getParent());
     }

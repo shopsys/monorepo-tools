@@ -64,6 +64,11 @@ class CategoryFacade
     protected $categoryWithLazyLoadedVisibleChildrenFactory;
 
     /**
+     * @var \Shopsys\FrameworkBundle\Model\Category\CategoryFactoryInterface
+     */
+    protected $categoryFactory;
+
+    /**
      * @param \Doctrine\ORM\EntityManagerInterface $em
      * @param \Shopsys\FrameworkBundle\Model\Category\CategoryRepository $categoryRepository
      * @param \Shopsys\FrameworkBundle\Model\Category\CategoryService $categoryService
@@ -74,6 +79,7 @@ class CategoryFacade
      * @param \Shopsys\FrameworkBundle\Component\Plugin\PluginCrudExtensionFacade $pluginCrudExtensionFacade
      * @param \Shopsys\FrameworkBundle\Model\Category\CategoryWithPreloadedChildrenFactory $categoryWithPreloadedChildrenFactory
      * @param \Shopsys\FrameworkBundle\Model\Category\CategoryWithLazyLoadedVisibleChildrenFactory $categoryWithLazyLoadedVisibleChildrenFactory
+     * @param \Shopsys\FrameworkBundle\Model\Category\CategoryFactoryInterface $categoryFactory
      */
     public function __construct(
         EntityManagerInterface $em,
@@ -85,7 +91,8 @@ class CategoryFacade
         ImageFacade $imageFacade,
         PluginCrudExtensionFacade $pluginCrudExtensionFacade,
         CategoryWithPreloadedChildrenFactory $categoryWithPreloadedChildrenFactory,
-        CategoryWithLazyLoadedVisibleChildrenFactory $categoryWithLazyLoadedVisibleChildrenFactory
+        CategoryWithLazyLoadedVisibleChildrenFactory $categoryWithLazyLoadedVisibleChildrenFactory,
+        CategoryFactoryInterface $categoryFactory
     ) {
         $this->em = $em;
         $this->categoryRepository = $categoryRepository;
@@ -97,6 +104,7 @@ class CategoryFacade
         $this->pluginCrudExtensionFacade = $pluginCrudExtensionFacade;
         $this->categoryWithPreloadedChildrenFactory = $categoryWithPreloadedChildrenFactory;
         $this->categoryWithLazyLoadedVisibleChildrenFactory = $categoryWithLazyLoadedVisibleChildrenFactory;
+        $this->categoryFactory = $categoryFactory;
     }
 
     /**
@@ -115,7 +123,7 @@ class CategoryFacade
     public function create(CategoryData $categoryData)
     {
         $rootCategory = $this->getRootCategory();
-        $category = $this->categoryService->create($categoryData, $rootCategory);
+        $category = $this->categoryFactory->create($categoryData, $rootCategory);
         $this->em->persist($category);
         $this->em->flush($category);
         $this->friendlyUrlFacade->createFriendlyUrls('front_product_list', $category->getId(), $category->getNames());

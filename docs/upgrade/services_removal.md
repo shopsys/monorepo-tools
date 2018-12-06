@@ -62,6 +62,8 @@ If you use these methods, change their calling appropriately:
   -> `ProductManualInputPriceFacade::refresh(Product $product, PricingGroup $pricingGroup, $inputPrice)`
 - `ProductCollectionService::getImagesIndexedByProductId(array $products, array $imagesByProductId)`  
   -> `ProductCollectionFacade::getMainImagesIndexedByProductId(array $products)`
+- `CategoryService::create(CategoryData $categoryData, Category $rootCategory)`
+  -> `CategoryFactory::create(CategoryData $data, Category $rootCategory)`
 
 Following classes have been removed:
 - `AdministratorService`
@@ -99,6 +101,7 @@ Following classes changed constructors:
 - `UserFactory`
 - `ProductManualInputPriceFacade`
 - `ProductCollectionFacade`
+- `CategoryFacade`
 
 Following functions visibility was changed to `protected` as there is no need to use them from outside of objects:
 - `Administrator::getGridLimit()`
