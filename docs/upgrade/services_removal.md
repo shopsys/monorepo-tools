@@ -77,6 +77,7 @@ Following classes have been removed:
 - `FlagService`
 - `ProductManualInputPriceService`
 - `ProductCollectionService`
+- `CategoryService`
 
 Following methods have been removed:
 - `User::setDeliveryAddress()`, use `User::editDeliveryAddress()` instead
@@ -85,6 +86,7 @@ Following methods have been removed:
 - `Administrator::getLimitByGridId()` as it was not used anywhere
 - `FlagService::create()`, use `FlagFactory::create()` instead
 - `FlagService::edit()`, use `Flag::edit()` instead
+- `CategoryService::setChildrenAsSiblings()`
 
 Following classes changed constructors:
 - `AdministratorFacade`

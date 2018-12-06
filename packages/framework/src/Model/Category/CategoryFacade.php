@@ -24,11 +24,6 @@ class CategoryFacade
     protected $categoryRepository;
 
     /**
-     * @var \Shopsys\FrameworkBundle\Model\Category\CategoryService
-     */
-    protected $categoryService;
-
-    /**
      * @var \Shopsys\FrameworkBundle\Component\Domain\Domain
      */
     protected $domain;
@@ -71,7 +66,6 @@ class CategoryFacade
     /**
      * @param \Doctrine\ORM\EntityManagerInterface $em
      * @param \Shopsys\FrameworkBundle\Model\Category\CategoryRepository $categoryRepository
-     * @param \Shopsys\FrameworkBundle\Model\Category\CategoryService $categoryService
      * @param \Shopsys\FrameworkBundle\Component\Domain\Domain $domain
      * @param \Shopsys\FrameworkBundle\Model\Category\CategoryVisibilityRecalculationScheduler $categoryVisibilityRecalculationScheduler
      * @param \Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\FriendlyUrlFacade $friendlyUrlFacade
@@ -84,7 +78,6 @@ class CategoryFacade
     public function __construct(
         EntityManagerInterface $em,
         CategoryRepository $categoryRepository,
-        CategoryService $categoryService,
         Domain $domain,
         CategoryVisibilityRecalculationScheduler $categoryVisibilityRecalculationScheduler,
         FriendlyUrlFacade $friendlyUrlFacade,
@@ -96,7 +89,6 @@ class CategoryFacade
     ) {
         $this->em = $em;
         $this->categoryRepository = $categoryRepository;
-        $this->categoryService = $categoryService;
         $this->domain = $domain;
         $this->categoryVisibilityRecalculationScheduler = $categoryVisibilityRecalculationScheduler;
         $this->friendlyUrlFacade = $friendlyUrlFacade;
@@ -167,7 +159,9 @@ class CategoryFacade
     public function deleteById($categoryId)
     {
         $category = $this->categoryRepository->getById($categoryId);
-        $this->categoryService->setChildrenAsSiblings($category);
+        foreach ($category->getChildren() as $child) {
+            $child->setParent($category->getParent());
+        }
         // Normally, UnitOfWork performs UPDATEs on children after DELETE of main entity.
         // We need to update `parent` attribute of children first.
         $this->em->flush();
