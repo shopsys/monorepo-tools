@@ -70,6 +70,11 @@ class CurrencyFacade
     protected $transportPriceFactory;
 
     /**
+     * @var \Shopsys\FrameworkBundle\Model\Pricing\Currency\CurrencyFactoryInterface
+     */
+    protected $currencyFactory;
+
+    /**
      * @param \Doctrine\ORM\EntityManagerInterface $em
      * @param \Shopsys\FrameworkBundle\Model\Pricing\Currency\CurrencyRepository $currencyRepository
      * @param \Shopsys\FrameworkBundle\Model\Pricing\Currency\CurrencyService $currencyService
@@ -81,6 +86,7 @@ class CurrencyFacade
      * @param \Shopsys\FrameworkBundle\Model\Transport\TransportRepository $transportRepository
      * @param \Shopsys\FrameworkBundle\Model\Payment\PaymentPriceFactoryInterface $paymentPriceFactory
      * @param \Shopsys\FrameworkBundle\Model\Transport\TransportPriceFactoryInterface $transportPriceFactory
+     * @param \Shopsys\FrameworkBundle\Model\Pricing\Currency\CurrencyFactoryInterface $currencyFactory
      */
     public function __construct(
         EntityManagerInterface $em,
@@ -93,7 +99,8 @@ class CurrencyFacade
         PaymentRepository $paymentRepository,
         TransportRepository $transportRepository,
         PaymentPriceFactoryInterface $paymentPriceFactory,
-        TransportPriceFactoryInterface $transportPriceFactory
+        TransportPriceFactoryInterface $transportPriceFactory,
+        CurrencyFactoryInterface $currencyFactory
     ) {
         $this->em = $em;
         $this->currencyRepository = $currencyRepository;
@@ -106,6 +113,7 @@ class CurrencyFacade
         $this->transportRepository = $transportRepository;
         $this->paymentPriceFactory = $paymentPriceFactory;
         $this->transportPriceFactory = $transportPriceFactory;
+        $this->currencyFactory = $currencyFactory;
     }
 
     /**
@@ -123,7 +131,7 @@ class CurrencyFacade
      */
     public function create(CurrencyData $currencyData)
     {
-        $currency = $this->currencyService->create($currencyData);
+        $currency = $this->currencyFactory->create($currencyData);
         $this->em->persist($currency);
         $this->em->flush($currency);
         $this->createTransportAndPaymentPrices($currency);

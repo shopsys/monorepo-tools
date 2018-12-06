@@ -87,6 +87,7 @@ Following methods have been removed:
 - `FlagService::create()`, use `FlagFactory::create()` instead
 - `FlagService::edit()`, use `Flag::edit()` instead
 - `CategoryService::setChildrenAsSiblings()`
+- `CurrencyService::create()`, use `CurrencyFactory::create()` instead
 
 Following classes changed constructors:
 - `AdministratorFacade`
@@ -106,6 +107,7 @@ Following classes changed constructors:
 - `ProductManualInputPriceFacade`
 - `ProductCollectionFacade`
 - `CategoryFacade`
+- `CurrencyFacade`
 
 Following functions visibility was changed to `protected` as there is no need to use them from outside of objects:
 - `Administrator::getGridLimit()`
