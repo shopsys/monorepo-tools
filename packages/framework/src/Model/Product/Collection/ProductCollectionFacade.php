@@ -15,11 +15,6 @@ use Shopsys\FrameworkBundle\Model\Product\ProductRepository;
 class ProductCollectionFacade
 {
     /**
-     * @var \Shopsys\FrameworkBundle\Model\Product\Collection\ProductCollectionService
-     */
-    protected $productCollectionService;
-
-    /**
      * @var \Shopsys\FrameworkBundle\Model\Product\ProductRepository
      */
     protected $productRepository;
@@ -55,7 +50,6 @@ class ProductCollectionFacade
     protected $parameterRepository;
 
     /**
-     * @param \Shopsys\FrameworkBundle\Model\Product\Collection\ProductCollectionService $productCollectionService
      * @param \Shopsys\FrameworkBundle\Model\Product\ProductRepository $productRepository
      * @param \Shopsys\FrameworkBundle\Component\Image\Config\ImageConfig $imageConfig
      * @param \Shopsys\FrameworkBundle\Component\Image\ImageRepository $imageRepository
@@ -65,7 +59,6 @@ class ProductCollectionFacade
      * @param \Shopsys\FrameworkBundle\Model\Product\Parameter\ParameterRepository $parameterRepository
      */
     public function __construct(
-        ProductCollectionService $productCollectionService,
         ProductRepository $productRepository,
         ImageConfig $imageConfig,
         ImageRepository $imageRepository,
@@ -74,7 +67,6 @@ class ProductCollectionFacade
         FriendlyUrlService $friendlyUrlService,
         ParameterRepository $parameterRepository
     ) {
-        $this->productCollectionService = $productCollectionService;
         $this->imageConfig = $imageConfig;
         $this->imageRepository = $imageRepository;
         $this->imageFacade = $imageFacade;
@@ -117,7 +109,17 @@ class ProductCollectionFacade
         $productEntityName = $this->imageConfig->getImageEntityConfigByClass(Product::class)->getEntityName();
         $imagesByProductId = $this->imageRepository->getMainImagesByEntitiesIndexedByEntityId($products, $productEntityName);
 
-        return $this->productCollectionService->getImagesIndexedByProductId($products, $imagesByProductId);
+        $imagesOrNullByProductId = [];
+
+        foreach ($products as $product) {
+            if (array_key_exists($product->getId(), $imagesByProductId)) {
+                $imagesOrNullByProductId[$product->getId()] = $imagesByProductId[$product->getId()];
+            } else {
+                $imagesOrNullByProductId[$product->getId()] = null;
+            }
+        }
+
+        return $imagesOrNullByProductId;
     }
 
     /**
