@@ -57,7 +57,7 @@ class User implements UserInterface, TimelimitLoginInterface, Serializable
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Customer\BillingAddress
-     * @ORM\OneToOne(targetEntity="Shopsys\FrameworkBundle\Model\Customer\BillingAddress")
+     * @ORM\OneToOne(targetEntity="Shopsys\FrameworkBundle\Model\Customer\BillingAddress", cascade={"persist"})
      * @ORM\JoinColumn(name="billing_address_id", referencedColumnName="id", nullable=false)
      */
     protected $billingAddress;

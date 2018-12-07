@@ -138,16 +138,8 @@ class CustomerFacade
      */
     public function create(CustomerData $customerData)
     {
-        $toFlush = [];
         $billingAddress = $this->billingAddressFactory->create($customerData->billingAddressData);
-        $this->em->persist($billingAddress);
-        $toFlush[] = $billingAddress;
-
         $deliveryAddress = $this->deliveryAddressFactory->create($customerData->deliveryAddressData);
-        if ($deliveryAddress !== null) {
-            $this->em->persist($deliveryAddress);
-            $toFlush[] = $deliveryAddress;
-        }
 
         $userByEmailAndDomain = $this->findUserByEmailAndDomain(
             $customerData->userData->email,
@@ -160,10 +152,9 @@ class CustomerFacade
             $deliveryAddress,
             $userByEmailAndDomain
         );
-        $this->em->persist($user);
-        $toFlush[] = $user;
 
-        $this->em->flush($toFlush);
+        $this->em->persist($user);
+        $this->em->flush($user);
 
         if ($customerData->sendRegistrationMail) {
             $this->customerMailFacade->sendRegistrationMail($user);
