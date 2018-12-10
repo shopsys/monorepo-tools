@@ -4,6 +4,7 @@ You can take part in making Shopsys Framework better.
 
 * [Create a pull request](https://github.com/shopsys/shopsys/compare)
 * [Report an issue](https://github.com/shopsys/shopsys/issues/new)
+* [Guidelines for Working with Monorepo](./docs/introduction/monorepo.md)
 * [Guidelines for Creating Commits](./docs/contributing/guidelines-for-creating-commits.md)
 * [Guidelines for Writing Documentation](./docs/contributing/guidelines-for-writing-documentation.md)
 * [Guidelines for Pull Request](./docs/contributing/guidelines-for-pull-request.md)

@@ -2,6 +2,11 @@
 
 **Expected installation time:** 3 hours.
 
+This guide covers building new projects based on Shopsys Framework.
+If you want to contribute to the framework itself,
+you need to install the whole [shopsys/shopsys](https://github.com/shopsys/shopsys) monorepo.
+Take a look at the article about [Monorepo](../introduction/monorepo.md) for more information.
+
 This solution uses [*docker-sync*](http://docker-sync.io/) (for fast two-way synchronization of the application files between the host machine and Docker volume).
 
 ## Supported systems

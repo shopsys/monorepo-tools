@@ -1,4 +1,10 @@
 # Native Installation
+
+This guide covers building new projects based on Shopsys Framework.
+If you want to contribute to the framework itself,
+you need to install the whole [shopsys/shopsys](https://github.com/shopsys/shopsys) monorepo.
+Take a look at the article about [Monorepo](../introduction/monorepo.md) for more information.
+
 This guide provides instructions how to install Shopsys Framework on your local machine as a server.
 If you would like to use a prepared Docker container instead go to [Installation Using Docker](installation-using-docker.md).
 
