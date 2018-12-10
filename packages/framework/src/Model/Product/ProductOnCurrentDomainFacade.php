@@ -3,7 +3,6 @@
 namespace Shopsys\FrameworkBundle\Model\Product;
 
 use Shopsys\FrameworkBundle\Component\Domain\Domain;
-use Shopsys\FrameworkBundle\Component\Paginator\PaginationResult;
 use Shopsys\FrameworkBundle\Model\Category\CategoryRepository;
 use Shopsys\FrameworkBundle\Model\Customer\CurrentCustomer;
 use Shopsys\FrameworkBundle\Model\Product\Accessory\ProductAccessoryRepository;
@@ -133,7 +132,7 @@ class ProductOnCurrentDomainFacade
     ) {
         $category = $this->categoryRepository->getById($categoryId);
 
-        $paginationResult = $this->productRepository->getPaginationResultForListableInCategory(
+        return $this->productRepository->getPaginationResultForListableInCategory(
             $category,
             $this->domain->getId(),
             $this->domain->getLocale(),
@@ -142,14 +141,6 @@ class ProductOnCurrentDomainFacade
             $this->currentCustomer->getPricingGroup(),
             $page,
             $limit
-        );
-        $products = $paginationResult->getResults();
-
-        return new PaginationResult(
-            $paginationResult->getPage(),
-            $paginationResult->getPageSize(),
-            $paginationResult->getTotalCount(),
-            $products
         );
     }
 
@@ -168,7 +159,7 @@ class ProductOnCurrentDomainFacade
     ) {
         $brand = $this->brandRepository->getById($brandId);
 
-        $paginationResult = $this->productRepository->getPaginationResultForListableForBrand(
+        return $this->productRepository->getPaginationResultForListableForBrand(
             $brand,
             $this->domain->getId(),
             $this->domain->getLocale(),
@@ -176,14 +167,6 @@ class ProductOnCurrentDomainFacade
             $this->currentCustomer->getPricingGroup(),
             $page,
             $limit
-        );
-        $products = $paginationResult->getResults();
-
-        return new PaginationResult(
-            $paginationResult->getPage(),
-            $paginationResult->getPageSize(),
-            $paginationResult->getTotalCount(),
-            $products
         );
     }
 
@@ -202,7 +185,7 @@ class ProductOnCurrentDomainFacade
         $page,
         $limit
     ) {
-        $paginationResult = $this->productRepository->getPaginationResultForSearchListable(
+        return $this->productRepository->getPaginationResultForSearchListable(
             $searchText,
             $this->domain->getId(),
             $this->domain->getLocale(),
@@ -211,14 +194,6 @@ class ProductOnCurrentDomainFacade
             $this->currentCustomer->getPricingGroup(),
             $page,
             $limit
-        );
-        $products = $paginationResult->getResults();
-
-        return new PaginationResult(
-            $paginationResult->getPage(),
-            $paginationResult->getPageSize(),
-            $paginationResult->getTotalCount(),
-            $products
         );
     }
 
