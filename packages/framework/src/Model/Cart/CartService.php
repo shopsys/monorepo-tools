@@ -108,7 +108,7 @@ class CartService
         foreach ($mergedCart->getItems() as $cartItem) {
             $similarCartItem = $this->findSimilarCartItemByCartItem($resultingCart, $cartItem);
             if ($similarCartItem instanceof CartItem) {
-                $similarCartItem->changeQuantity($cartItem->getQuantity());
+                $similarCartItem->changeQuantity($similarCartItem->getQuantity() + $cartItem->getQuantity());
             } else {
                 $newCartItem = $this->cartItemFactory->create(
                     $customerIdentifier,
