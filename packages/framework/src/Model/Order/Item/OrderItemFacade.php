@@ -78,7 +78,7 @@ class OrderItemFacade
      * @param int $productId
      * @return \Shopsys\FrameworkBundle\Model\Order\Item\OrderProduct
      */
-    public function createOrderProductInOrder($orderId, $productId)
+    public function addProductToOrder($orderId, $productId)
     {
         $order = $this->orderRepository->getById($orderId);
         $product = $this->productRepository->getById($productId);

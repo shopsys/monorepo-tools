@@ -155,7 +155,7 @@ class OrderController extends AdminBaseController
     public function addProductAction(Request $request, $orderId)
     {
         $productId = $request->get('productId');
-        $orderItem = $this->orderItemFacade->createOrderProductInOrder($orderId, $productId);
+        $orderItem = $this->orderItemFacade->addProductToOrder($orderId, $productId);
 
         $order = $this->orderFacade->getById($orderId);
 
