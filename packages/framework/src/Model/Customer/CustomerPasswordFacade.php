@@ -3,6 +3,7 @@
 namespace Shopsys\FrameworkBundle\Model\Customer;
 
 use Doctrine\ORM\EntityManagerInterface;
+use Shopsys\FrameworkBundle\Component\String\HashGenerator;
 use Shopsys\FrameworkBundle\Model\Customer\Mail\ResetPasswordMailFacade;
 
 class CustomerPasswordFacade
@@ -28,21 +29,29 @@ class CustomerPasswordFacade
     protected $customerPasswordService;
 
     /**
+     * @var \Shopsys\FrameworkBundle\Component\String\HashGenerator
+     */
+    protected $hashGenerator;
+
+    /**
      * @param \Doctrine\ORM\EntityManagerInterface $em
      * @param \Shopsys\FrameworkBundle\Model\Customer\UserRepository $userRepository
      * @param \Shopsys\FrameworkBundle\Model\Customer\CustomerPasswordService $customerPasswordService
      * @param \Shopsys\FrameworkBundle\Model\Customer\Mail\ResetPasswordMailFacade $resetPasswordMailFacade
+     * @param \Shopsys\FrameworkBundle\Component\String\HashGenerator $hashGenerator
      */
     public function __construct(
         EntityManagerInterface $em,
         UserRepository $userRepository,
         CustomerPasswordService $customerPasswordService,
-        ResetPasswordMailFacade $resetPasswordMailFacade
+        ResetPasswordMailFacade $resetPasswordMailFacade,
+        HashGenerator $hashGenerator
     ) {
         $this->em = $em;
         $this->userRepository = $userRepository;
         $this->customerPasswordService = $customerPasswordService;
         $this->resetPasswordMailFacade = $resetPasswordMailFacade;
+        $this->hashGenerator = $hashGenerator;
     }
 
     /**
@@ -53,7 +62,7 @@ class CustomerPasswordFacade
     {
         $user = $this->userRepository->getUserByEmailAndDomain($email, $domainId);
 
-        $this->customerPasswordService->resetPassword($user);
+        $user->resetPassword($this->hashGenerator);
         $this->em->flush($user);
         $this->resetPasswordMailFacade->sendMail($user);
     }
@@ -68,7 +77,7 @@ class CustomerPasswordFacade
     {
         $user = $this->userRepository->getUserByEmailAndDomain($email, $domainId);
 
-        return $this->customerPasswordService->isResetPasswordHashValid($user, $hash);
+        return $user->isResetPasswordHashValid($hash);
     }
 
     /**

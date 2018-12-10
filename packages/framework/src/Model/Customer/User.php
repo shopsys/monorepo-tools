@@ -5,6 +5,7 @@ namespace Shopsys\FrameworkBundle\Model\Customer;
 use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 use Serializable;
+use Shopsys\FrameworkBundle\Component\String\HashGenerator;
 use Shopsys\FrameworkBundle\Model\Security\Roles;
 use Shopsys\FrameworkBundle\Model\Security\TimelimitLoginInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -23,6 +24,8 @@ use Symfony\Component\Security\Core\User\UserInterface;
  */
 class User implements UserInterface, TimelimitLoginInterface, Serializable
 {
+    const RESET_PASSWORD_HASH_LENGTH = 50;
+
     /**
      * @ORM\Column(type="integer")
      * @ORM\Id
@@ -182,15 +185,6 @@ class User implements UserInterface, TimelimitLoginInterface, Serializable
     }
 
     /**
-     * @param string $hash
-     */
-    public function setResetPasswordHash($hash)
-    {
-        $this->resetPasswordHash = $hash;
-        $this->resetPasswordHashValidThrough = new DateTime('+48 hours');
-    }
-
-    /**
      * @return int
      */
     public function getId()
@@ -336,14 +330,6 @@ class User implements UserInterface, TimelimitLoginInterface, Serializable
     }
 
     /**
-     * @return \DateTime|null
-     */
-    public function getResetPasswordHashValidThrough()
-    {
-        return $this->resetPasswordHashValidThrough;
-    }
-
-    /**
      * @inheritDoc
      */
     public function serialize()
@@ -424,5 +410,30 @@ class User implements UserInterface, TimelimitLoginInterface, Serializable
         } else {
             $this->deliveryAddress = $deliveryAddressFactory->create($deliveryAddressData);
         }
+    }
+
+    /**
+     * @param \Shopsys\FrameworkBundle\Component\String\HashGenerator $hashGenerator
+     */
+    public function resetPassword(HashGenerator $hashGenerator): void
+    {
+        $hash = $hashGenerator->generateHash(self::RESET_PASSWORD_HASH_LENGTH);
+        $this->resetPasswordHash = $hash;
+        $this->resetPasswordHashValidThrough = new DateTime('+48 hours');
+    }
+
+    /**
+     * @param string|null $hash
+     * @return bool
+     */
+    public function isResetPasswordHashValid(?string $hash): bool
+    {
+        if ($hash === null || $this->resetPasswordHash !== $hash) {
+            return false;
+        }
+
+        $now = new DateTime();
+
+        return $this->resetPasswordHashValidThrough !== null && $this->resetPasswordHashValidThrough >= $now;
     }
 }

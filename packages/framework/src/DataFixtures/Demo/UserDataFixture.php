@@ -8,8 +8,8 @@ use Doctrine\ORM\EntityManagerInterface;
 use Faker\Generator;
 use Shopsys\FrameworkBundle\Component\DataFixture\AbstractReferenceFixture;
 use Shopsys\FrameworkBundle\Component\Domain\Domain;
+use Shopsys\FrameworkBundle\Component\String\HashGenerator;
 use Shopsys\FrameworkBundle\Model\Customer\CustomerFacade;
-use Shopsys\FrameworkBundle\Model\Customer\CustomerPasswordService;
 use Shopsys\FrameworkBundle\Model\Customer\User;
 
 class UserDataFixture extends AbstractReferenceFixture implements DependentFixtureInterface
@@ -25,32 +25,31 @@ class UserDataFixture extends AbstractReferenceFixture implements DependentFixtu
     /** @var \Faker\Generator */
     private $faker;
 
-    /** @var \Shopsys\FrameworkBundle\Model\Customer\CustomerPasswordService */
-    private $customerPasswordService;
-
     /** @var \Doctrine\ORM\EntityManagerInterface */
     private $em;
+
+    /** @var \Shopsys\FrameworkBundle\Component\String\HashGenerator */
+    private $hashGenerator;
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\Customer\CustomerFacade $customerFacade
      * @param \Shopsys\FrameworkBundle\DataFixtures\Demo\UserDataFixtureLoader $loaderService
      * @param \Faker\Generator $faker
-     * @param \Shopsys\FrameworkBundle\Model\Customer\CustomerPasswordService $customerPasswordService
      * @param \Doctrine\ORM\EntityManagerInterface $em
-     * @param \Shopsys\FrameworkBundle\Component\DataFixture\PersistentReferenceFacade $persistentReferenceFacade
+     * @param \Shopsys\FrameworkBundle\Component\String\HashGenerator $hashGenerator
      */
     public function __construct(
         CustomerFacade $customerFacade,
         UserDataFixtureLoader $loaderService,
         Generator $faker,
-        CustomerPasswordService $customerPasswordService,
-        EntityManagerInterface $em
+        EntityManagerInterface $em,
+        HashGenerator $hashGenerator
     ) {
         $this->customerFacade = $customerFacade;
         $this->loaderService = $loaderService;
         $this->faker = $faker;
-        $this->customerPasswordService = $customerPasswordService;
         $this->em = $em;
+        $this->hashGenerator = $hashGenerator;
     }
 
     /**
@@ -93,7 +92,7 @@ class UserDataFixture extends AbstractReferenceFixture implements DependentFixtu
      */
     private function resetPassword(User $customer)
     {
-        $this->customerPasswordService->resetPassword($customer);
+        $customer->resetPassword($this->hashGenerator);
         $this->em->flush($customer);
     }
 }

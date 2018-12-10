@@ -2,8 +2,6 @@
 
 namespace Shopsys\FrameworkBundle\Model\Customer;
 
-use DateTime;
-use Shopsys\FrameworkBundle\Component\String\HashGenerator;
 use Symfony\Component\Security\Core\Encoder\EncoderFactoryInterface;
 
 class CustomerPasswordService
@@ -16,20 +14,12 @@ class CustomerPasswordService
     private $encoderFactory;
 
     /**
-     * @var \Shopsys\FrameworkBundle\Component\String\HashGenerator
-     */
-    private $hashGenerator;
-
-    /**
      * @param \Symfony\Component\Security\Core\Encoder\EncoderFactoryInterface $encoderFactory
-     * @param \Shopsys\FrameworkBundle\Component\String\HashGenerator $hashGenerator
      */
     public function __construct(
-        EncoderFactoryInterface $encoderFactory,
-        HashGenerator $hashGenerator
+        EncoderFactoryInterface $encoderFactory
     ) {
         $this->encoderFactory = $encoderFactory;
-        $this->hashGenerator = $hashGenerator;
     }
 
     /**
@@ -45,37 +35,12 @@ class CustomerPasswordService
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\Customer\User $user
-     */
-    public function resetPassword(User $user)
-    {
-        $hash = $this->hashGenerator->generateHash(self::RESET_PASSWORD_HASH_LENGTH);
-        $user->setResetPasswordHash($hash);
-    }
-
-    /**
-     * @param \Shopsys\FrameworkBundle\Model\Customer\User $user
-     * @param string|null $hash
-     * @return bool
-     */
-    public function isResetPasswordHashValid(User $user, $hash)
-    {
-        if ($hash === null || $user->getResetPasswordHash() !== $hash) {
-            return false;
-        }
-
-        $now = new DateTime();
-
-        return $user->getResetPasswordHashValidThrough() !== null && $user->getResetPasswordHashValidThrough() >= $now;
-    }
-
-    /**
-     * @param \Shopsys\FrameworkBundle\Model\Customer\User $user
      * @param string|null $hash
      * @param string $newPassword
      */
     public function setNewPassword(User $user, $hash, $newPassword)
     {
-        if (!$this->isResetPasswordHashValid($user, $hash)) {
+        if (!$user->isResetPasswordHashValid($hash)) {
             throw new \Shopsys\FrameworkBundle\Model\Customer\Exception\InvalidResetPasswordHashException();
         }
 

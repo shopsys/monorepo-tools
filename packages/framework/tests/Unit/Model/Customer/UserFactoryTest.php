@@ -4,7 +4,6 @@ namespace Tests\FrameworkBundle\Unit\Model\Customer;
 
 use PHPUnit\Framework\TestCase;
 use Shopsys\FrameworkBundle\Component\EntityExtension\EntityNameResolver;
-use Shopsys\FrameworkBundle\Component\String\HashGenerator;
 use Shopsys\FrameworkBundle\Model\Customer\BillingAddress;
 use Shopsys\FrameworkBundle\Model\Customer\BillingAddressData;
 use Shopsys\FrameworkBundle\Model\Customer\CustomerPasswordService;
@@ -170,9 +169,8 @@ class UserFactoryTest extends TestCase
     {
         $encoder = new BCryptPasswordEncoder(12);
         $encoderFactory = new EncoderFactory([User::class => $encoder]);
-        $hashGenerator = new HashGenerator();
 
-        return new CustomerPasswordService($encoderFactory, $hashGenerator);
+        return new CustomerPasswordService($encoderFactory);
     }
 
     /**
