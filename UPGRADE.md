@@ -59,6 +59,7 @@ There is a list of all the repositories maintained by monorepo, changes in log b
 ### [shopsys/project-base]
 - *(optional)* [#596 Trusted proxies are now configurable in parameters.yml file](https://github.com/shopsys/shopsys/pull/596)
     - for easier deployment to production, make the trusted proxies in `Shopsys\Boostrap` class loaded from DIC parameter `trusted_proxies` instead of being hard-coded
+    - in your `Shopsys\Boostrap`, move the `Request::setTrustedProxies(...)` call along with `Kernel::boot()` so it's not run in console environment, like in [the PR #660](https://github.com/shopsys/shopsys/pull/660/files), otherwise console commands will trigger excessive logging
 - [#579 - ajaxMoreLoader is generalized](https://github.com/shopsys/shopsys/pull/579)
     - new macro `loadMoreButton` is integrated into `@ShopsysShop/Front/Inline/Paginator/paginator.html.twig`, update files based on commit from [`ajaxMoreLoader is updated and generalized`](https://github.com/shopsys/shopsys/pull/579/files)
 - *(optional)* [#645 SVG icons in generated document](https://github.com/shopsys/shopsys/pull/645)
