@@ -51,6 +51,11 @@ class ImageFacade
     protected $imageUrlPrefix;
 
     /**
+     * @var \Shopsys\FrameworkBundle\Component\Image\ImageFactoryInterface
+     */
+    protected $imageFactory;
+
+    /**
      * @param mixed $imageUrlPrefix
      * @param \Doctrine\ORM\EntityManagerInterface $em
      * @param \Shopsys\FrameworkBundle\Component\Image\Config\ImageConfig $imageConfig
@@ -59,6 +64,7 @@ class ImageFacade
      * @param \League\Flysystem\FilesystemInterface $filesystem
      * @param \Shopsys\FrameworkBundle\Component\FileUpload\FileUpload $fileUpload
      * @param \Shopsys\FrameworkBundle\Component\Image\ImageLocator $imageLocator
+     * @param \Shopsys\FrameworkBundle\Component\Image\ImageFactoryInterface $imageFactory
      */
     public function __construct(
         $imageUrlPrefix,
@@ -68,7 +74,8 @@ class ImageFacade
         ImageService $imageService,
         FilesystemInterface $filesystem,
         FileUpload $fileUpload,
-        ImageLocator $imageLocator
+        ImageLocator $imageLocator,
+        ImageFactoryInterface $imageFactory
     ) {
         $this->imageUrlPrefix = $imageUrlPrefix;
         $this->em = $em;
@@ -78,6 +85,7 @@ class ImageFacade
         $this->filesystem = $filesystem;
         $this->fileUpload = $fileUpload;
         $this->imageLocator = $imageLocator;
+        $this->imageFactory = $imageFactory;
     }
 
     /**
@@ -98,11 +106,11 @@ class ImageFacade
                 $entitiesForFlush[] = $oldImage;
             }
 
-            $newImage = $this->imageService->createImage(
-                $imageEntityConfig,
+            $newImage = $this->imageFactory->create(
+                $imageEntityConfig->getEntityName(),
                 $entityId,
-                array_pop($temporaryFilenames),
-                $type
+                $type,
+                array_pop($temporaryFilenames)
             );
             $this->em->persist($newImage);
             $entitiesForFlush[] = $newImage;
@@ -294,11 +302,11 @@ class ImageFacade
                 $this->fileUpload->getTemporaryFilepath($sourceImage->getFilename())
             );
 
-            $targetImage = $this->imageService->createImage(
-                $this->imageConfig->getImageEntityConfig($targetEntity),
+            $targetImage = $this->imageFactory->create(
+                $this->imageConfig->getImageEntityConfig($targetEntity)->getEntityName(),
                 $this->getEntityId($targetEntity),
-                $sourceImage->getFilename(),
-                $sourceImage->getType()
+                $sourceImage->getType(),
+                $sourceImage->getFilename()
             );
 
             $this->em->persist($targetImage);
