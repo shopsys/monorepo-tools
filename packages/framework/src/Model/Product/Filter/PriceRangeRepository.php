@@ -14,12 +14,12 @@ class PriceRangeRepository
     /**
      * @var \Shopsys\FrameworkBundle\Model\Product\ProductRepository
      */
-    private $productRepository;
+    protected $productRepository;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\Doctrine\QueryBuilderService
      */
-    private $queryBuilderService;
+    protected $queryBuilderService;
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\Product\ProductRepository $productRepository
@@ -68,7 +68,7 @@ class PriceRangeRepository
      * @param \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroup $pricingGroup
      * @return \Shopsys\FrameworkBundle\Model\Product\Filter\PriceRange
      */
-    private function getPriceRangeByProductsQueryBuilder(QueryBuilder $productsQueryBuilder, PricingGroup $pricingGroup)
+    protected function getPriceRangeByProductsQueryBuilder(QueryBuilder $productsQueryBuilder, PricingGroup $pricingGroup)
     {
         $queryBuilder = clone $productsQueryBuilder;
 

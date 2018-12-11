@@ -16,12 +16,12 @@ class ProductListAdminRepository
     /**
      * @var \Doctrine\ORM\EntityManagerInterface
      */
-    private $em;
+    protected $em;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Localization\Localization
      */
-    private $localization;
+    protected $localization;
 
     /**
      * @param \Doctrine\ORM\EntityManagerInterface $em

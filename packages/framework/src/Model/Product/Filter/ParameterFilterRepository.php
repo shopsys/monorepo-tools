@@ -47,7 +47,7 @@ class ParameterFilterRepository
      * @param int $valueIndex
      * @return \Doctrine\ORM\QueryBuilder
      */
-    private function getParameterQueryBuilder(
+    protected function getParameterQueryBuilder(
         ParameterFilterData $parameterFilterData,
         EntityManagerInterface $em,
         $parameterIndex,
@@ -87,7 +87,7 @@ class ParameterFilterRepository
      * @param int $valueIndex
      * @return \Doctrine\ORM\Query\Expr
      */
-    private function getValuesExpr(
+    protected function getValuesExpr(
         array $parameterValues,
         QueryBuilder $parameterQueryBuilder,
         $ppvAlias,

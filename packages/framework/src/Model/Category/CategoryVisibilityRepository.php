@@ -12,17 +12,17 @@ class CategoryVisibilityRepository
     /**
      * @var \Doctrine\ORM\EntityManagerInterface
      */
-    private $em;
+    protected $em;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\Domain\Domain
      */
-    private $domain;
+    protected $domain;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Category\CategoryVisibilityRecalculationScheduler
      */
-    private $categoryVisibilityRecalculationScheduler;
+    protected $categoryVisibilityRecalculationScheduler;
 
     /**
      * @param \Doctrine\ORM\EntityManagerInterface $em
@@ -50,7 +50,7 @@ class CategoryVisibilityRepository
     /**
      * @param \Shopsys\FrameworkBundle\Component\Domain\Config\DomainConfig $domainConfig
      */
-    private function refreshCategoriesVisibilityOnDomain(DomainConfig $domainConfig)
+    protected function refreshCategoriesVisibilityOnDomain(DomainConfig $domainConfig)
     {
         $this->setRootCategoryVisibleOnDomain($domainConfig);
 
@@ -64,7 +64,7 @@ class CategoryVisibilityRepository
     /**
      * @param \Shopsys\FrameworkBundle\Component\Domain\Config\DomainConfig $domainConfig
      */
-    private function setRootCategoryVisibleOnDomain(DomainConfig $domainConfig)
+    protected function setRootCategoryVisibleOnDomain(DomainConfig $domainConfig)
     {
         $this->em->getConnection()->executeUpdate(
             'UPDATE category_domains AS cd
@@ -85,7 +85,7 @@ class CategoryVisibilityRepository
      * @param \Shopsys\FrameworkBundle\Component\Domain\Config\DomainConfig $domainConfig
      * @return int
      */
-    private function getMaxLevelOnDomain(DomainConfig $domainConfig)
+    protected function getMaxLevelOnDomain(DomainConfig $domainConfig)
     {
         return $this->em->getConnection()->fetchColumn(
             'SELECT MAX(c.level)
@@ -102,7 +102,7 @@ class CategoryVisibilityRepository
      * @param \Shopsys\FrameworkBundle\Component\Domain\Config\DomainConfig $domainConfig
      * @param int $level
      */
-    private function refreshCategoriesVisibilityOnDomainAndLevel(DomainConfig $domainConfig, $level)
+    protected function refreshCategoriesVisibilityOnDomainAndLevel(DomainConfig $domainConfig, $level)
     {
         $this->em->getConnection()->executeUpdate(
             'UPDATE category_domains AS cd

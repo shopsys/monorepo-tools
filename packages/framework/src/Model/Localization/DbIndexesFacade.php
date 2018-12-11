@@ -7,12 +7,12 @@ class DbIndexesFacade
     /**
      * @var \Shopsys\FrameworkBundle\Model\Localization\Localization
      */
-    private $localization;
+    protected $localization;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Localization\DbIndexesRepository
      */
-    private $dbIndexesRepository;
+    protected $dbIndexesRepository;
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\Localization\Localization $localization

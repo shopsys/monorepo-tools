@@ -16,7 +16,7 @@ class Article implements OrderableEntityInterface
     const PLACEMENT_FOOTER = 'footer';
     const PLACEMENT_NONE = 'none';
 
-    private const GEDMO_SORTABLE_LAST_POSITION = -1;
+    protected const GEDMO_SORTABLE_LAST_POSITION = -1;
 
     /**
      * @var int

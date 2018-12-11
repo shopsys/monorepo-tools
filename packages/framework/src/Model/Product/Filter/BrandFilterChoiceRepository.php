@@ -13,7 +13,7 @@ class BrandFilterChoiceRepository
     /**
      * @var \Shopsys\FrameworkBundle\Model\Product\ProductRepository
      */
-    private $productRepository;
+    protected $productRepository;
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\Product\ProductRepository $productRepository
@@ -60,7 +60,7 @@ class BrandFilterChoiceRepository
      * @param \Doctrine\ORM\QueryBuilder $productsQueryBuilder
      * @return \Shopsys\FrameworkBundle\Model\Product\Brand\Brand[]
      */
-    private function getBrandsByProductsQueryBuilder(QueryBuilder $productsQueryBuilder)
+    protected function getBrandsByProductsQueryBuilder(QueryBuilder $productsQueryBuilder)
     {
         $clonedProductsQueryBuilder = clone $productsQueryBuilder;
 

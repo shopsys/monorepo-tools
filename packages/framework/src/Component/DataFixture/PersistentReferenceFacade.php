@@ -114,7 +114,7 @@ class PersistentReferenceFacade
      * @param int $domainId
      * @return string
      */
-    private function createDomainReferenceName(string $name, int $domainId): string
+    protected function createDomainReferenceName(string $name, int $domainId): string
     {
         return sprintf('%s_%s', $name, $domainId);
     }

@@ -17,12 +17,12 @@ class ProductFilterRepository
     /**
      * @var \Shopsys\FrameworkBundle\Component\Doctrine\QueryBuilderService
      */
-    private $queryBuilderService;
+    protected $queryBuilderService;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Product\Filter\ParameterFilterRepository
      */
-    private $parameterFilterRepository;
+    protected $parameterFilterRepository;
 
     /**
      * @param \Shopsys\FrameworkBundle\Component\Doctrine\QueryBuilderService $queryBuilderService
@@ -76,7 +76,7 @@ class ProductFilterRepository
      * @param string $maximalPrice
      * @param \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroup $pricingGroup
      */
-    private function filterByPrice(
+    protected function filterByPrice(
         QueryBuilder $productsQueryBuilder,
         $minimalPrice,
         $maximalPrice,
@@ -124,7 +124,7 @@ class ProductFilterRepository
      * @param \Doctrine\ORM\QueryBuilder $productsQueryBuilder
      * @param \Shopsys\FrameworkBundle\Model\Product\Flag\Flag[] $flags
      */
-    private function filterByFlags(QueryBuilder $productsQueryBuilder, array $flags)
+    protected function filterByFlags(QueryBuilder $productsQueryBuilder, array $flags)
     {
         $flagsCount = count($flags);
         if ($flagsCount !== 0) {
@@ -141,7 +141,7 @@ class ProductFilterRepository
      * @param \Doctrine\ORM\QueryBuilder $productsQueryBuilder
      * @param \Shopsys\FrameworkBundle\Model\Product\Brand\Brand[] $brands
      */
-    private function filterByBrands(QueryBuilder $productsQueryBuilder, array $brands)
+    protected function filterByBrands(QueryBuilder $productsQueryBuilder, array $brands)
     {
         $brandsCount = count($brands);
         if ($brandsCount !== 0) {
@@ -159,7 +159,7 @@ class ProductFilterRepository
      * @param \Doctrine\ORM\EntityManagerInterface $em
      * @return \Doctrine\ORM\QueryBuilder
      */
-    private function getFlagsQueryBuilder(array $flags, EntityManagerInterface $em)
+    protected function getFlagsQueryBuilder(array $flags, EntityManagerInterface $em)
     {
         $flagsQueryBuilder = $em->createQueryBuilder();
 
@@ -178,7 +178,7 @@ class ProductFilterRepository
      * @param \Doctrine\ORM\EntityManagerInterface $em
      * @return \Doctrine\ORM\QueryBuilder
      */
-    private function getBrandsQueryBuilder(array $brands, EntityManagerInterface $em)
+    protected function getBrandsQueryBuilder(array $brands, EntityManagerInterface $em)
     {
         $brandsQueryBuilder = $em->createQueryBuilder();
 

@@ -14,12 +14,12 @@ class ProductFilterCountRepository
     /**
      * @var \Doctrine\ORM\EntityManagerInterface
      */
-    private $em;
+    protected $em;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Product\Filter\ProductFilterRepository
      */
-    private $productFilterRepository;
+    protected $productFilterRepository;
 
     /**
      * @param \Doctrine\ORM\EntityManagerInterface $em
@@ -83,7 +83,7 @@ class ProductFilterCountRepository
      * @param \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroup $pricingGroup
      * @return int
      */
-    private function getCountInStock(
+    protected function getCountInStock(
         QueryBuilder $productsQueryBuilder,
         ProductFilterData $productFilterData,
         PricingGroup $pricingGroup
@@ -113,7 +113,7 @@ class ProductFilterCountRepository
      * @param \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroup $pricingGroup
      * @return int[]
      */
-    private function getCountIndexedByBrandId(
+    protected function getCountIndexedByBrandId(
         QueryBuilder $productsQueryBuilder,
         array $brandFilterChoices,
         ProductFilterData $productFilterData,
@@ -166,7 +166,7 @@ class ProductFilterCountRepository
      * @param \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroup $pricingGroup
      * @return int[]
      */
-    private function getCountIndexedByFlagId(
+    protected function getCountIndexedByFlagId(
         QueryBuilder $productsQueryBuilder,
         array $flagFilterChoices,
         ProductFilterData $productFilterData,
@@ -230,7 +230,7 @@ class ProductFilterCountRepository
      * @param string $locale
      * @return int[][]
      */
-    private function getCountIndexedByParameterIdAndValueId(
+    protected function getCountIndexedByParameterIdAndValueId(
         QueryBuilder $productsQueryBuilder,
         array $parameterFilterChoices,
         ProductFilterData $productFilterData,

@@ -22,7 +22,7 @@ class ParameterRepository
     /**
      * @var \Shopsys\FrameworkBundle\Model\Product\Parameter\ParameterValueDataFactoryInterface
      */
-    private $parameterValueDataFactory;
+    protected $parameterValueDataFactory;
 
     /**
      * @param \Doctrine\ORM\EntityManagerInterface $entityManager

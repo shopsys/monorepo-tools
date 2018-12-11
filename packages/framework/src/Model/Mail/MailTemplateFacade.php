@@ -48,7 +48,7 @@ class MailTemplateFacade
     /**
      * @var \Shopsys\FrameworkBundle\Model\Mail\MailTemplateDataFactoryInterface
      */
-    private $mailTemplateDataFactory;
+    protected $mailTemplateDataFactory;
 
     /**
      * @param \Doctrine\ORM\EntityManagerInterface $em

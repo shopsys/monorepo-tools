@@ -7,7 +7,7 @@ class DateTimeFormatPatternRepository
     /**
      * @var \Shopsys\FrameworkBundle\Component\Localization\DateTimeFormatPattern[]
      */
-    private $dateTimeFormatPatterns;
+    protected $dateTimeFormatPatterns;
 
     public function __construct()
     {
@@ -46,7 +46,7 @@ class DateTimeFormatPatternRepository
      * @param int|null $timeType
      * @return bool
      */
-    private function isMatching(DateTimeFormatPattern $dateTimePattern, $locale, $dateType, $timeType)
+    protected function isMatching(DateTimeFormatPattern $dateTimePattern, $locale, $dateType, $timeType)
     {
         if ($dateTimePattern->getLocale() !== $locale) {
             return false;
