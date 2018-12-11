@@ -43,13 +43,15 @@ class ProductHiddenRecalculator
             ->set('p.calculatedHidden', '
                 CASE
                     WHEN p.usingStock = TRUE
+                        AND p.variantType <> :mainType
                         AND p.stockQuantity <= 0
                         AND p.outOfStockAction = :outOfStockActionHide
                     THEN TRUE
                     ELSE p.hidden
                 END
                 ')
-            ->setParameter('outOfStockActionHide', Product::OUT_OF_STOCK_ACTION_HIDE);
+            ->setParameter('outOfStockActionHide', Product::OUT_OF_STOCK_ACTION_HIDE)
+            ->setParameter('mainType', Product::VARIANT_TYPE_MAIN);
 
         if ($product !== null) {
             $qb->where('p = :product')->setParameter('product', $product);
