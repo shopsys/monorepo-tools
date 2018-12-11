@@ -116,7 +116,7 @@ class ImageFacade
      */
     public function saveImageOrdering($orderedImages)
     {
-        $this->imageService->setImagePositionsByOrder($orderedImages);
+        $this->setImagePositionsByOrder($orderedImages);
         $this->em->flush($orderedImages);
     }
 
@@ -305,5 +305,17 @@ class ImageFacade
             $targetImages[] = $targetImage;
         }
         $this->em->flush($targetImages);
+    }
+
+    /**
+     * @param \Shopsys\FrameworkBundle\Component\Image\Image[] $orderedImages
+     */
+    protected function setImagePositionsByOrder($orderedImages)
+    {
+        $position = 0;
+        foreach ($orderedImages as $image) {
+            $image->setPosition($position);
+            $position++;
+        }
     }
 }
