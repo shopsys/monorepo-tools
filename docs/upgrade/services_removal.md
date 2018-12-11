@@ -9,7 +9,7 @@ Following instructions tell you which method was moved where, so you can upgrade
 
 If you use these methods, change their calling appropriately:
 - `CustomerService::edit(User $user, UserData $userData)`  
-  -> `User::edit(UserData $userData, CustomerPasswordService $customerPasswordService)`
+  -> `User::edit(UserData $userData, EncoderFactoryInterface $encoderFactory)`
 - `CustomerService::createDeliveryAddress(DeliveryAddressData $deliveryAddressData)`  
   -> `DeliveryAddressFactory::create(DeliveryAddressData $data)`
 - `CustomerService::editDeliveryAddress(User $user, DeliveryAddressData $deliveryAddressData, DeliveryAddress $deliveryAddress = null)`  
@@ -117,6 +117,36 @@ If you use these methods, change their calling appropriately:
   -> `Cart::mergeWithCart(Cart $cartToMerge, CartItemFactoryInterface $cartItemFactory, CustomerIdentifier $customerIdentifier)`
 - `CartService::addProductToCart(Cart $cart, CustomerIdentifier $customerIdentifier, Product $product, $quantity)`
   -> `Cart::addProduct(CustomerIdentifier $customerIdentifier, Product $product, $quantity, ProductPriceCalculation $productPriceCalculation, CartItemFactoryInterface $cartItemFactory`
+- `CustomerPasswordService::resetPassword(User $user)`  
+  -> `User::resetPassword(HashGenerator $hashGenerator)`
+- `CustomerPasswordService::isResetPasswordHashValid(User $user, $hash)`  
+  -> `User::isResetPasswordHashValid(?string $hash)`
+- `CustomerPasswordService::changePassword(User $user, $password)`  
+  -> `User::changePassword(EncoderFactoryInterface $encoderFactory, $password)`
+- `CustomerPasswordService::setNewPassword(User $user, $hash, $newPassword)`  
+  -> `User::setNewPassword(EncoderFactoryInterface $encoderFactory, ?string $hash, string $newPassword)`
+- `ProductVariantService::checkProductIsNotMainVariant(Product $product)`  
+  -> `Product::checkIsNotMainVariant()`
+- `ProductVariantService::refreshProductVariants(Product $mainProduct, array $currentVariants)`  
+  -> `Product::refreshVariants(array $currentVariants)`
+- `ProductVariantService::createMainVariant(ProductData $mainVariantData, Product $mainProduct, array $variants)`  
+  -> `ProductFactoryInterface::createMainVariant(ProductData $mainVariantData, Product $mainProduct, array $variants)`
+- `ProductFactoryInterface::createMainVariant(ProductData $mainVariantData, array $variants)`  
+  -> `ProductFactoryInterface::createMainVariant(ProductData $mainVariantData, Product $mainProduct, array $variants)`
+- `ImageService::deleteImages($entityName, $entityId, array $images)`  
+  -> `Image::checkForDelete(string $entityName, int $entityId)`
+- `ImageService::getUploadedImages(ImageEntityConfig $imageEntityConfig, $entityId, array $temporaryFilenames, $type)`  
+  -> `ImageFactoryInterface::createMultiple(ImageEntityConfig $imageEntityConfig, int $entityId, ?string $type, array $temporaryFilenames)`
+- `FriendlyUrlService::createFriendlyUrlIfValid($routeName, $entityId, $entityName, $domainId, $indexPostfix = null)`  
+  -> `FriendlyUrlFactory::createIfValid(string $routeName, int $entityId, string $entityName, int $domainId, int $indexPostfix = null)`
+- `FriendlyUrlService::createFriendlyUrls($routeName, $entityId, $namesByLocale)`  
+  -> `FriendlyUrlFactoryInterface::createForAllDomains(string $routeName, int $entityId, array $namesByLocale)`
+- `FriendlyUrlService::getAbsoluteUrlByFriendlyUrl(FriendlyUrl $friendlyUrl)`  
+  -> `FriendlyUrl::getAbsoluteUrl(Domain $domain)`
+- `FriendlyUrlService::getFriendlyUrlUniqueResult($attempt, FriendlyUrl $friendlyUrl, $entityName, array $matchedRouteData = null)`  
+  -> `FriendlyUrlUniqueResultFactory::create(int $attempt, FriendlyUrl $friendlyUrl, string $entityName, array $matchedRouteData = null)`
+- `OrderStatusMailTemplateService::getOrderStatusMailTemplatesData(array $orderStatuses, array $mailTemplates)`  
+  -> `MailTemplateDataFactoryInterface::createFromOrderStatuses(array $orderStatuses, array $mailTemplates)`
 
 Following classes have been removed:
 - `AdministratorService`
@@ -139,6 +169,10 @@ Following classes have been removed:
 - `OrderProductService`
 - `OrderCreationService`
 - `CartService`
+- `CustomerPasswordService`
+- `ImageService`
+- `FriendlyUrlService`
+- `OrderStatusMailTemplateService`
 
 Following methods have been removed:
 - `User::setDeliveryAddress()`, use `User::editDeliveryAddress()` instead
@@ -152,6 +186,12 @@ Following methods have been removed:
 - `VatService::getNewDefaultVat()`
 - `OrderProductService::getProductsUsingStockFromOrderProducts()`
 - `CartService::cleanCart()` use `Cart::clean()` instead
+- `User::setResetPasswordHash()`, use `User::resetPassword()` instead
+- `User::getResetPasswordHashValidThrough()` as it was not used anywhere
+- `ImageService::setImagePositionsByOrder()` as it was moved to private method of `ImageFacade`
+- `ImageService::createImage()`, use `ImageFactory::create()` instead
+- `FriendlyUrlService::getAbsoluteUrlByDomainConfigAndSlug()` as it was moved to private method of `SitemapListener`
+- `MailTemplateService::getFilteredOrderStatusMailTemplatesIndexedByOrderStatusId()` as it was moved to protected method of `MailTemplateFacade`
 
 Following classes changed constructors:
 - `AdministratorFacade`
@@ -183,6 +223,14 @@ Following classes changed constructors:
 - `OrderFacade`
 - `CartMigrationFacade`
 - `CartFacade`
+- `CustomerPasswordFacade`
+- `ProductVariantFacade`
+- `ImageFacade`
+- `ImageFactory`
+- `SitemapListener`
+- `FriendlyUrlFactory`
+- `ProductCollectionFacade`
+- `UserDataFixture`
 
 Following functions visibility was changed to `protected` as there is no need to use them from outside of objects:
 - `Administrator::getGridLimit()`
@@ -191,6 +239,7 @@ Following functions visibility was changed to `protected` as there is no need to
 Follow also additional upgrade instructions:
 - Change return type of `DeliveryAddressFactory::create()` to `?DeliveryAddress` as it now returns `null` when `addressFilled` is `false`
 - Change usage of `ProductListOrderingModeService::` constants to `ProductListOrderingConfig::` as they were moved to the Config class
+- Change calling of `OrderMail::getMailTemplateNameByStatus()` to static calling as the method is static now
 
 Following classes were renamed, so change their usage appropriately:
 - `JavascriptCompilerService` -> `JavascriptCompiler`
