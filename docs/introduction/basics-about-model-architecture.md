@@ -1,6 +1,6 @@
 # Basics About Model Architecture
 
-In this article you will learn about [entities](#entity), [facades](#facade), [repositories](#repository), and [services](#service) and their mutual relations.
+In this article you will learn about [entities](#entity), [facades](#facade), [repositories](#repository) and their mutual relations.
 
 ## Basics about the model
 
@@ -13,14 +13,14 @@ Domain model of Shopsys Framework is located in [`FrameworkBundle/Model`](https:
 
 Code belonging to the same feature is grouped together (eg. `Cart` and `CartItem`). Names of classes and methods are based on real world vocabulary to be more intuitive (eg. `OrderHashGenerator` or `getSellableProductsInCategory()`).
 
-Model is divided into four parts: Entity, Repository, Service, and Facade. There is `EntityManager` to access the database.
+Model is divided into three parts: Entity, Repository and Facade. There is `EntityManager` to access the database.
 
 ![model architecture schema](img/model-architecture.png 'model architecture schema')
 
 ## Entity
 Is class encapsulating data. All entities are persisted by Doctrine ORM. One entity class usually represents one table in the database and one instance of the entity represents one row in the table. The entity is composed of fields, which can be mapped to columns in the table. Doctrine ORM annotations are used to define the details about the database mapping (types of columns, relations, etc.).
 
-Entities are inspired by Rich Domain Model. That means entity contains not only getters and setters, but also some use case methods with basic domain logic (e.g. `Product::changeVat()` sets vat and marks product for price recalculation). The entity cannot depend on any other class.
+Entities are inspired by Rich Domain Model. That means entity is the place where domain logic belongs (e.g. `Product::changeVat()` sets vat and marks product for price recalculation). The entity cannot depend on any other class.
 
 Entities can be used by all layers of the model and even outside of model (eg. controller or templates).
 
@@ -141,7 +141,7 @@ class CartItemRepository
 *Note: Repositories in Shopsys Framework wrap Doctrine repositories. This is done in order to provide only useful methods with understandable names instead of generic API of Doctrine repositories.*
 
 ## Facade
-Facades are a single entry-point into the model. That means you can use the same method in your controller, CLI command, REST API, etc. with the same results. All methods in facade should have single responsibility without any complex logic. Every method has a single use case and does not contain any business logic only sequence of calls of repositories and services methods.
+Facades are a single entry-point into the model. That means you can use the same method in your controller, CLI command, REST API, etc. with the same results. All methods in facade should have single responsibility without any complex logic. Every method has a single use case and does not contain any business logic only sequence of calls of entities and repositories methods.
 
 Facades as entry-point of the model can be used anywhere outside of the model.
 
@@ -162,11 +162,6 @@ class CartFacade
      * @var \Doctrine\ORM\EntityManager
      */
     protected $em;
-
-    /**
-     * @var \Shopsys\FrameworkBundle\Model\Cart\CartService
-     */
-    protected $cartService;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Cart\CartFactory
@@ -204,6 +199,7 @@ class CartFacade
         );
         $customerIdentifier = $this->customerIdentifierFactory->get();
         $cart = $this->cartFactory->get($customerIdentifier);
+        // TODO the service will be removed during pahse 4
         $result = $this->cartService->addProductToCart($cart, $customerIdentifier, $product, $quantity);
 
         $this->em->persist($result->getCartItem());
@@ -217,65 +213,7 @@ class CartFacade
 }
 ```
 
-## Service
-Not to be confused with services in Dependency Injection Container. Services are used for operations that do not conceptually belong to any entity. Service should not have any state, should not access any external or global state and neither call methods of other layers (ie. Controller, Facade, Repository, Entity Manager). That means that output of the method will be always same. Services are easy to test and debug thanks to those principles. Any complex business logic should be put into services.
-
-Services should be used only by facades and other services.
-
-### Example
-```php
-// FrameworkBundle/Model/Cart/CartService.php
-
-namespace Shopsys\FrameworkBundle\Model\Cart;
-
-// ...
-
-class CartService
-{
-    /**
-     * @var \Shopsys\FrameworkBundle\Model\Product\Pricing\ProductPriceCalculationForUser
-     */
-    protected $productPriceCalculation;
-
-    /**
-     * @var \Shopsys\FrameworkBundle\Model\Cart\Item\CartItemFactoryInterface
-     */
-    protected $cartItemFactory;
-
-    // ...
-
-    /**
-     * @param \Shopsys\FrameworkBundle\Model\Cart\Cart $cart
-     * @param \Shopsys\FrameworkBundle\Model\Customer\CustomerIdentifier $customerIdentifier
-     * @param \Shopsys\FrameworkBundle\Model\Product\Product $product
-     * @param int $quantity
-     * @return \Shopsys\FrameworkBundle\Model\Cart\AddProductResult
-     */
-    public function addProductToCart(Cart $cart, CustomerIdentifier $customerIdentifier, Product $product, $quantity)
-    {
-        if (!is_int($quantity) || $quantity <= 0) {
-            throw new \Shopsys\FrameworkBundle\Model\Cart\Exception\InvalidQuantityException($quantity);
-        }
-
-        foreach ($cart->getItems() as $cartItem) {
-            if ($cartItem->getProduct() === $product) {
-                $cartItem->changeQuantity($cartItem->getQuantity() + $quantity);
-                $cartItem->changeAddedAt(new DateTime());
-                return new AddProductResult($cartItem, false, $quantity);
-            }
-        }
-
-        $productPrice = $this->productPriceCalculation->calculatePriceForCurrentUser($product);
-        $newCartItem = $this->cartItemFactory->create($customerIdentifier, $product, $quantity, $productPrice->getPriceWithVat());
-        $cart->addItem($newCartItem);
-        return new AddProductResult($newCartItem, true, $quantity);
-    }
-
-    // ...
-
-}
-```
-
 ## Cooperation of layers
-The controller handles the request (eg. saved data from form) and passes data to the facade. The facade receives data from the controller, requests appropriate entities from the repository and (if needed) passes all those data to the service for processing. Service processes data and returns output to the facade, that persist it by entity manager.
-
+The controller handles the request (eg. saved data from form) and passes data to the facade.
+The facade receives data from the controller and requests appropriate entities from the repository.
+Entities and supporting classes (like recalculators, schedulers) processes data and returns output to the facade, that persist it by entity manager.

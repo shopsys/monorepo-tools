@@ -3,8 +3,9 @@
 namespace Shopsys\FrameworkBundle\Model\Order\Item;
 
 use Doctrine\ORM\EntityManagerInterface;
+use Shopsys\FrameworkBundle\Component\Domain\Domain;
+use Shopsys\FrameworkBundle\Model\Order\OrderPriceCalculation;
 use Shopsys\FrameworkBundle\Model\Order\OrderRepository;
-use Shopsys\FrameworkBundle\Model\Order\OrderService;
 use Shopsys\FrameworkBundle\Model\Product\Pricing\ProductPriceCalculationForUser;
 use Shopsys\FrameworkBundle\Model\Product\ProductRepository;
 
@@ -31,29 +32,45 @@ class OrderItemFacade
     protected $productPriceCalculationForUser;
 
     /**
-     * @var \Shopsys\FrameworkBundle\Model\Order\OrderService
+     * @var \Shopsys\FrameworkBundle\Component\Domain\Domain
      */
-    protected $orderService;
+    protected $domain;
+
+    /**
+     * @var \Shopsys\FrameworkBundle\Model\Order\OrderPriceCalculation
+     */
+    protected $orderPriceCalculation;
+
+    /**
+     * @var \Shopsys\FrameworkBundle\Model\Order\Item\OrderProductFactoryInterface
+     */
+    protected $orderProductFactory;
 
     /**
      * @param \Doctrine\ORM\EntityManagerInterface $em
      * @param \Shopsys\FrameworkBundle\Model\Order\OrderRepository $orderRepository
      * @param \Shopsys\FrameworkBundle\Model\Product\ProductRepository $productRepository
      * @param \Shopsys\FrameworkBundle\Model\Product\Pricing\ProductPriceCalculationForUser $productPriceCalculationForUser
-     * @param \Shopsys\FrameworkBundle\Model\Order\OrderService $orderService
+     * @param \Shopsys\FrameworkBundle\Component\Domain\Domain $domain
+     * @param \Shopsys\FrameworkBundle\Model\Order\OrderPriceCalculation $orderPriceCalculation
+     * @param \Shopsys\FrameworkBundle\Model\Order\Item\OrderProductFactoryInterface $orderProductFactory
      */
     public function __construct(
         EntityManagerInterface $em,
         OrderRepository $orderRepository,
         ProductRepository $productRepository,
         ProductPriceCalculationForUser $productPriceCalculationForUser,
-        OrderService $orderService
+        Domain $domain,
+        OrderPriceCalculation $orderPriceCalculation,
+        OrderProductFactoryInterface $orderProductFactory
     ) {
         $this->em = $em;
         $this->orderRepository = $orderRepository;
         $this->productRepository = $productRepository;
         $this->productPriceCalculationForUser = $productPriceCalculationForUser;
-        $this->orderService = $orderService;
+        $this->domain = $domain;
+        $this->orderPriceCalculation = $orderPriceCalculation;
+        $this->orderProductFactory = $orderProductFactory;
     }
 
     /**
@@ -61,7 +78,7 @@ class OrderItemFacade
      * @param int $productId
      * @return \Shopsys\FrameworkBundle\Model\Order\Item\OrderProduct
      */
-    public function createOrderProductInOrder($orderId, $productId)
+    public function addProductToOrder($orderId, $productId)
     {
         $order = $this->orderRepository->getById($orderId);
         $product = $this->productRepository->getById($productId);
@@ -72,13 +89,15 @@ class OrderItemFacade
             $order->getCustomer()
         );
 
-        $orderProduct = $this->orderService->createOrderProductInOrder($order, $product, $productPrice);
+        $orderProduct = $order->addProduct(
+            $product,
+            $productPrice,
+            $this->orderProductFactory,
+            $this->domain,
+            $this->orderPriceCalculation
+        );
 
-        $this->em->persist($orderProduct);
-        $this->em->flush([
-            $order,
-            $orderProduct,
-        ]);
+        $this->em->flush($order);
 
         return $orderProduct;
     }

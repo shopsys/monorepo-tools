@@ -3,7 +3,9 @@
 namespace Tests\FrameworkBundle\Unit\Model\Product;
 
 use PHPUnit\Framework\TestCase;
+use Shopsys\FrameworkBundle\Model\Product\Pricing\ProductPriceRecalculationScheduler;
 use Shopsys\FrameworkBundle\Model\Product\Product;
+use Shopsys\FrameworkBundle\Model\Product\ProductCategoryDomainFactory;
 use Shopsys\FrameworkBundle\Model\Product\ProductData;
 
 class ProductTest extends TestCase
@@ -100,5 +102,73 @@ class ProductTest extends TestCase
 
         $this->expectException(\Shopsys\FrameworkBundle\Model\Product\Exception\MainVariantCannotBeVariantException::class);
         $mainVariant->addVariant($mainVariant);
+    }
+
+    public function testMarkForVisibilityRecalculation()
+    {
+        $productData = new ProductData();
+        $product = Product::create($productData);
+        $product->markForVisibilityRecalculation();
+        $this->assertTrue($product->isMarkedForVisibilityRecalculation());
+    }
+
+    public function testMarkForVisibilityRecalculationMainVariant()
+    {
+        $productData = new ProductData();
+        $variant = Product::create($productData);
+        $mainVariant = Product::createMainVariant($productData, [$variant]);
+        $mainVariant->markForVisibilityRecalculation();
+        $this->assertTrue($mainVariant->isMarkedForVisibilityRecalculation());
+        $this->assertTrue($variant->isMarkedForVisibilityRecalculation());
+    }
+
+    public function testMarkForVisibilityRecalculationVariant()
+    {
+        $productData = new ProductData();
+        $variant = Product::create($productData);
+        $mainVariant = Product::createMainVariant($productData, [$variant]);
+        $variant->markForVisibilityRecalculation();
+        $this->assertTrue($variant->isMarkedForVisibilityRecalculation());
+        $this->assertTrue($mainVariant->isMarkedForVisibilityRecalculation());
+    }
+
+    public function testDeleteResultNotVariant()
+    {
+        $productData = new ProductData();
+        $product = Product::create($productData);
+
+        $this->assertEmpty($product->getProductDeleteResult()->getProductsForRecalculations());
+    }
+
+    public function testDeleteResultVariant()
+    {
+        $productData = new ProductData();
+        $variant = Product::create($productData);
+        $mainVariant = Product::createMainVariant($productData, [$variant]);
+
+        $this->assertSame([$mainVariant], $variant->getProductDeleteResult()->getProductsForRecalculations());
+    }
+
+    public function testDeleteResultMainVariant()
+    {
+        $productData = new ProductData();
+        $variant = Product::create($productData);
+        $mainVariant = Product::createMainVariant($productData, [$variant]);
+
+        $this->assertEmpty($mainVariant->getProductDeleteResult()->getProductsForRecalculations());
+        $this->assertFalse($variant->isVariant());
+    }
+
+    public function testEditSchedulesPriceRecalculation()
+    {
+        $productPriceRecalculationSchedulerMock = $this->getMockBuilder(ProductPriceRecalculationScheduler::class)
+            ->disableOriginalConstructor()
+            ->getMock();
+        $productPriceRecalculationSchedulerMock->expects($this->once())->method('scheduleProductForImmediateRecalculation');
+
+        $productData = new ProductData();
+        $product = Product::create($productData);
+
+        $product->edit(new ProductCategoryDomainFactory(), $productData, $productPriceRecalculationSchedulerMock);
     }
 }

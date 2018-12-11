@@ -689,17 +689,21 @@ class ProductRepository
     /**
      * @param int $domainId
      * @param \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroup $pricingGroup
-     * @param int[] $productIds
+     * @param int[] $sortedProductIds
      * @return \Shopsys\FrameworkBundle\Model\Product\Product[]
      */
-    public function getOfferedByIds($domainId, PricingGroup $pricingGroup, array $productIds)
+    public function getOfferedByIds($domainId, PricingGroup $pricingGroup, array $sortedProductIds)
     {
-        if (count($productIds) === 0) {
+        if (count($sortedProductIds) === 0) {
             return [];
         }
 
         $queryBuilder = $this->getAllOfferedQueryBuilder($domainId, $pricingGroup);
-        $queryBuilder->andWhere('p.id IN (:productIds)')->setParameter('productIds', $productIds);
+        $queryBuilder
+            ->andWhere('p.id IN (:productIds)')
+            ->setParameter('productIds', $sortedProductIds)
+            ->addSelect('field(p.id, ' . implode(',', $sortedProductIds) . ') AS HIDDEN relevance')
+            ->orderBy('relevance');
 
         return $queryBuilder->getQuery()->execute();
     }

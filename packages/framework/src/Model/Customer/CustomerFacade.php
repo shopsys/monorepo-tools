@@ -19,9 +19,14 @@ class CustomerFacade
     protected $userRepository;
 
     /**
-     * @var \Shopsys\FrameworkBundle\Model\Customer\CustomerService
+     * @var \Shopsys\FrameworkBundle\Model\Customer\CustomerDataFactoryInterface
      */
-    protected $customerService;
+    protected $customerDataFactory;
+
+    /**
+     * @var \Shopsys\FrameworkBundle\Model\Customer\CustomerPasswordService
+     */
+    protected $customerPasswordService;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Customer\Mail\CustomerMailFacade
@@ -34,32 +39,51 @@ class CustomerFacade
     protected $billingAddressFactory;
 
     /**
+     * @var \Shopsys\FrameworkBundle\Model\Customer\DeliveryAddressFactoryInterface
+     */
+    protected $deliveryAddressFactory;
+
+    /**
      * @var \Shopsys\FrameworkBundle\Model\Customer\BillingAddressDataFactoryInterface
      */
     protected $billingAddressDataFactory;
 
     /**
+     * @var \Shopsys\FrameworkBundle\Model\Customer\UserFactoryInterface
+     */
+    protected $userFactory;
+
+    /**
      * @param \Doctrine\ORM\EntityManagerInterface $em
      * @param \Shopsys\FrameworkBundle\Model\Customer\UserRepository $userRepository
-     * @param \Shopsys\FrameworkBundle\Model\Customer\CustomerService $customerService
+     * @param \Shopsys\FrameworkBundle\Model\Customer\CustomerDataFactoryInterface $customerDataFactory
+     * @param \Shopsys\FrameworkBundle\Model\Customer\CustomerPasswordService $customerPasswordServiceService
      * @param \Shopsys\FrameworkBundle\Model\Customer\Mail\CustomerMailFacade $customerMailFacade
      * @param \Shopsys\FrameworkBundle\Model\Customer\BillingAddressFactoryInterface $billingAddressFactory
+     * @param \Shopsys\FrameworkBundle\Model\Customer\DeliveryAddressFactoryInterface $deliveryAddressFactory
      * @param \Shopsys\FrameworkBundle\Model\Customer\BillingAddressDataFactoryInterface $billingAddressDataFactory
+     * @param \Shopsys\FrameworkBundle\Model\Customer\UserFactoryInterface $userFactory
      */
     public function __construct(
         EntityManagerInterface $em,
         UserRepository $userRepository,
-        CustomerService $customerService,
+        CustomerDataFactoryInterface $customerDataFactory,
+        CustomerPasswordService $customerPasswordServiceService,
         CustomerMailFacade $customerMailFacade,
         BillingAddressFactoryInterface $billingAddressFactory,
-        BillingAddressDataFactoryInterface $billingAddressDataFactory
+        DeliveryAddressFactoryInterface $deliveryAddressFactory,
+        BillingAddressDataFactoryInterface $billingAddressDataFactory,
+        UserFactoryInterface $userFactory
     ) {
         $this->em = $em;
         $this->userRepository = $userRepository;
-        $this->customerService = $customerService;
+        $this->customerDataFactory = $customerDataFactory;
+        $this->customerPasswordService = $customerPasswordServiceService;
         $this->customerMailFacade = $customerMailFacade;
         $this->billingAddressFactory = $billingAddressFactory;
+        $this->deliveryAddressFactory = $deliveryAddressFactory;
         $this->billingAddressDataFactory = $billingAddressDataFactory;
+        $this->userFactory = $userFactory;
     }
 
     /**
@@ -92,7 +116,7 @@ class CustomerFacade
         $billingAddressData = $this->billingAddressDataFactory->create();
         $billingAddress = $this->billingAddressFactory->create($billingAddressData);
 
-        $user = $this->customerService->create(
+        $user = $this->userFactory->create(
             $userData,
             $billingAddress,
             null,
@@ -114,32 +138,23 @@ class CustomerFacade
      */
     public function create(CustomerData $customerData)
     {
-        $toFlush = [];
         $billingAddress = $this->billingAddressFactory->create($customerData->billingAddressData);
-        $this->em->persist($billingAddress);
-        $toFlush[] = $billingAddress;
-
-        $deliveryAddress = $this->customerService->createDeliveryAddress($customerData->deliveryAddressData);
-        if ($deliveryAddress !== null) {
-            $this->em->persist($deliveryAddress);
-            $toFlush[] = $deliveryAddress;
-        }
+        $deliveryAddress = $this->deliveryAddressFactory->create($customerData->deliveryAddressData);
 
         $userByEmailAndDomain = $this->findUserByEmailAndDomain(
             $customerData->userData->email,
             $customerData->userData->domainId
         );
 
-        $user = $this->customerService->create(
+        $user = $this->userFactory->create(
             $customerData->userData,
             $billingAddress,
             $deliveryAddress,
             $userByEmailAndDomain
         );
-        $this->em->persist($user);
-        $toFlush[] = $user;
 
-        $this->em->flush($toFlush);
+        $this->em->persist($user);
+        $this->em->flush($user);
 
         if ($customerData->sendRegistrationMail) {
             $this->customerMailFacade->sendRegistrationMail($user);
@@ -157,24 +172,14 @@ class CustomerFacade
     {
         $user = $this->getUserById($userId);
 
-        $this->customerService->edit($user, $customerData->userData);
+        $user->edit($customerData->userData, $this->customerPasswordService);
 
         $user->getBillingAddress()->edit($customerData->billingAddressData);
 
-        $oldDeliveryAddress = $user->getDeliveryAddress();
-        $deliveryAddress = $this->customerService->editDeliveryAddress(
-            $user,
+        $user->editDeliveryAddress(
             $customerData->deliveryAddressData,
-            $oldDeliveryAddress
+            $this->deliveryAddressFactory
         );
-
-        if ($deliveryAddress !== null) {
-            $this->em->persist($deliveryAddress);
-        } else {
-            if ($oldDeliveryAddress !== null) {
-                $this->em->remove($oldDeliveryAddress);
-            }
-        }
 
         return $user;
     }
@@ -192,7 +197,7 @@ class CustomerFacade
             $customerData->userData->email,
             $customerData->userData->domainId
         );
-        $this->customerService->changeEmail($user, $customerData->userData->email, $userByEmailAndDomain);
+        $user->changeEmail($customerData->userData->email, $userByEmailAndDomain);
 
         $this->em->flush();
 
@@ -232,7 +237,7 @@ class CustomerFacade
     {
         $this->edit(
             $user->getId(),
-            $this->customerService->getAmendedCustomerDataByOrder($user, $order)
+            $this->customerDataFactory->createAmendedByOrder($user, $order)
         );
 
         $this->em->flush();

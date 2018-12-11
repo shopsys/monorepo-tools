@@ -5,13 +5,17 @@ namespace Shopsys\FrameworkBundle\Model\Order;
 use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Shopsys\FrameworkBundle\Component\Domain\Domain;
 use Shopsys\FrameworkBundle\Model\Customer\User;
 use Shopsys\FrameworkBundle\Model\Order\Item\OrderItem;
+use Shopsys\FrameworkBundle\Model\Order\Item\OrderItemPriceCalculation;
 use Shopsys\FrameworkBundle\Model\Order\Item\OrderPayment;
 use Shopsys\FrameworkBundle\Model\Order\Item\OrderProduct;
+use Shopsys\FrameworkBundle\Model\Order\Item\OrderProductFactoryInterface;
 use Shopsys\FrameworkBundle\Model\Order\Item\OrderTransport;
 use Shopsys\FrameworkBundle\Model\Order\Status\OrderStatus;
 use Shopsys\FrameworkBundle\Model\Pricing\Price;
+use Shopsys\FrameworkBundle\Model\Product\Product;
 
 /**
  * @ORM\Table(name="orders")
@@ -19,6 +23,8 @@ use Shopsys\FrameworkBundle\Model\Pricing\Price;
  */
 class Order
 {
+    const DEFAULT_PRODUCT_QUANTITY = 1;
+
     /**
      * @var int
      *
@@ -53,7 +59,12 @@ class Order
     /**
      * @var \Shopsys\FrameworkBundle\Model\Order\Item\OrderItem[]
      *
-     * @ORM\OneToMany(targetEntity="Shopsys\FrameworkBundle\Model\Order\Item\OrderItem", mappedBy="order", orphanRemoval=true)
+     * @ORM\OneToMany(
+     *     targetEntity="Shopsys\FrameworkBundle\Model\Order\Item\OrderItem",
+     *     mappedBy="order",
+     *     cascade={"persist"},
+     *     orphanRemoval=true
+     * )
      * @ORM\OrderBy({"id" = "ASC"})
      */
     protected $items;
@@ -343,7 +354,7 @@ class Order
     /**
      * @param \Shopsys\FrameworkBundle\Model\Order\OrderData $orderData
      */
-    public function edit(OrderData $orderData)
+    protected function editData(OrderData $orderData)
     {
         $this->firstName = $orderData->firstName;
         $this->lastName = $orderData->lastName;
@@ -573,7 +584,7 @@ class Order
     /**
      * @param \Shopsys\FrameworkBundle\Model\Order\OrderTotalPrice $orderTotalPrice
      */
-    public function setTotalPrice(OrderTotalPrice $orderTotalPrice)
+    protected function setTotalPrice(OrderTotalPrice $orderTotalPrice)
     {
         $this->totalPriceWithVat = $orderTotalPrice->getPriceWithVat();
         $this->totalPriceWithoutVat = $orderTotalPrice->getPriceWithoutVat();
@@ -922,5 +933,102 @@ class Order
     public function isCancelled()
     {
         return $this->status === OrderStatus::TYPE_CANCELED;
+    }
+
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Order\OrderPriceCalculation $orderPriceCalculation
+     */
+    public function calculateTotalPrice(OrderPriceCalculation $orderPriceCalculation)
+    {
+        $orderTotalPrice = $orderPriceCalculation->getOrderTotalPrice($this);
+        $this->setTotalPrice($orderTotalPrice);
+    }
+
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Product\Product $product
+     * @param \Shopsys\FrameworkBundle\Model\Pricing\Price $productPrice
+     * @param \Shopsys\FrameworkBundle\Model\Order\Item\OrderProductFactoryInterface $orderProductFactory
+     * @param \Shopsys\FrameworkBundle\Component\Domain\Domain $domain
+     * @param \Shopsys\FrameworkBundle\Model\Order\OrderPriceCalculation $orderPriceCalculation
+     * @return \Shopsys\FrameworkBundle\Model\Order\Item\OrderProduct
+     */
+    public function addProduct(
+        Product $product,
+        Price $productPrice,
+        OrderProductFactoryInterface $orderProductFactory,
+        Domain $domain,
+        OrderPriceCalculation $orderPriceCalculation
+    ): OrderProduct {
+        $orderDomainConfig = $domain->getDomainConfigById($this->getDomainId());
+
+        $orderProduct = $orderProductFactory->create(
+            $this,
+            $product->getName($orderDomainConfig->getLocale()),
+            $productPrice,
+            $product->getVat()->getPercent(),
+            self::DEFAULT_PRODUCT_QUANTITY,
+            $product->getUnit()->getName($orderDomainConfig->getLocale()),
+            $product->getCatnum(),
+            $product
+        );
+
+        $this->addItem($orderProduct);
+        $this->calculateTotalPrice($orderPriceCalculation);
+
+        return $orderProduct;
+    }
+
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Order\OrderData $orderData
+     * @param \Shopsys\FrameworkBundle\Model\Order\Item\OrderItemPriceCalculation $orderItemPriceCalculation
+     * @param \Shopsys\FrameworkBundle\Model\Order\Item\OrderProductFactoryInterface $orderProductFactory
+     * @param \Shopsys\FrameworkBundle\Model\Order\OrderPriceCalculation $orderPriceCalculation
+     * @return \Shopsys\FrameworkBundle\Model\Order\OrderEditResult
+     */
+    public function edit(
+        OrderData $orderData,
+        OrderItemPriceCalculation $orderItemPriceCalculation,
+        OrderProductFactoryInterface $orderProductFactory,
+        OrderPriceCalculation $orderPriceCalculation
+    ): OrderEditResult {
+        $orderTransportData = $orderData->orderTransport;
+        $orderTransportData->priceWithoutVat = $orderItemPriceCalculation->calculatePriceWithoutVat($orderTransportData);
+        $orderPaymentData = $orderData->orderPayment;
+        $orderPaymentData->priceWithoutVat = $orderItemPriceCalculation->calculatePriceWithoutVat($orderPaymentData);
+
+        $statusChanged = $this->getStatus() !== $orderData->status;
+        $this->editData($orderData);
+
+        $orderItemsWithoutTransportAndPaymentData = $orderData->itemsWithoutTransportAndPayment;
+
+        foreach ($this->getItemsWithoutTransportAndPayment() as $orderItem) {
+            if (array_key_exists($orderItem->getId(), $orderItemsWithoutTransportAndPaymentData)) {
+                $orderItemData = $orderItemsWithoutTransportAndPaymentData[$orderItem->getId()];
+                $orderItemData->priceWithoutVat = $orderItemPriceCalculation->calculatePriceWithoutVat($orderItemData);
+                $orderItem->edit($orderItemData);
+            } else {
+                $this->removeItem($orderItem);
+            }
+        }
+
+        foreach ($orderData->getNewItemsWithoutTransportAndPayment() as $newOrderItemData) {
+            $newOrderItemData->priceWithoutVat = $orderItemPriceCalculation->calculatePriceWithoutVat($newOrderItemData);
+            $orderProductFactory->create(
+                $this,
+                $newOrderItemData->name,
+                new Price(
+                    $newOrderItemData->priceWithoutVat,
+                    $newOrderItemData->priceWithVat
+                ),
+                $newOrderItemData->vatPercent,
+                $newOrderItemData->quantity,
+                $newOrderItemData->unitName,
+                $newOrderItemData->catnum
+            );
+        }
+
+        $this->calculateTotalPrice($orderPriceCalculation);
+
+        return new OrderEditResult($statusChanged);
     }
 }

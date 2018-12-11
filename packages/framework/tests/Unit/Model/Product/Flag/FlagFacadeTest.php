@@ -8,18 +8,17 @@ use Shopsys\FrameworkBundle\Model\Product\Flag\Flag;
 use Shopsys\FrameworkBundle\Model\Product\Flag\FlagData;
 use Shopsys\FrameworkBundle\Model\Product\Flag\FlagDataFactory;
 use Shopsys\FrameworkBundle\Model\Product\Flag\FlagFactory;
-use Shopsys\FrameworkBundle\Model\Product\Flag\FlagService;
 
-class FlagServiceTest extends TestCase
+class FlagFacadeTest extends TestCase
 {
     public function testCreate()
     {
-        $flagService = new FlagService(new FlagFactory(new EntityNameResolver([])));
+        $flagFactory = new FlagFactory(new EntityNameResolver([]));
 
         $flagDataOriginal = new FlagData();
         $flagDataOriginal->name = ['cs' => 'flagNameCs', 'en' => 'flagNameEn'];
         $flagDataOriginal->rgbColor = '#336699';
-        $flag = $flagService->create($flagDataOriginal);
+        $flag = $flagFactory->create($flagDataOriginal);
 
         $flagDataFactory = new FlagDataFactory();
         $flagDataNew = $flagDataFactory->createFromFlag($flag);
@@ -29,8 +28,6 @@ class FlagServiceTest extends TestCase
 
     public function testEdit()
     {
-        $flagService = new FlagService(new FlagFactory(new EntityNameResolver([])));
-
         $flagDataOld = new FlagData();
         $flagDataOld->name = ['cs' => 'flagNameCs', 'en' => 'flagNameEn'];
         $flagDataOld->rgbColor = '#336699';
@@ -39,7 +36,7 @@ class FlagServiceTest extends TestCase
         $flagDataEdit->rgbColor = '#00CCFF';
         $flag = new Flag($flagDataOld);
 
-        $flagService->edit($flag, $flagDataEdit);
+        $flag->edit($flagDataEdit);
 
         $flagDataFactory = new FlagDataFactory();
         $flagDataNew = $flagDataFactory->createFromFlag($flag);

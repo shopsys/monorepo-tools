@@ -13,7 +13,9 @@ use Shopsys\FrameworkBundle\Model\Customer\CustomerFacade;
 use Shopsys\FrameworkBundle\Model\Customer\User;
 use Shopsys\FrameworkBundle\Model\Heureka\HeurekaFacade;
 use Shopsys\FrameworkBundle\Model\Localization\Localization;
+use Shopsys\FrameworkBundle\Model\Order\Item\OrderItemPriceCalculation;
 use Shopsys\FrameworkBundle\Model\Order\Item\OrderProductFacade;
+use Shopsys\FrameworkBundle\Model\Order\Item\OrderProductFactoryInterface;
 use Shopsys\FrameworkBundle\Model\Order\Mail\OrderMailFacade;
 use Shopsys\FrameworkBundle\Model\Order\Preview\OrderPreview;
 use Shopsys\FrameworkBundle\Model\Order\Preview\OrderPreviewFactory;
@@ -44,9 +46,9 @@ class OrderFacade
     protected $orderRepository;
 
     /**
-     * @var \Shopsys\FrameworkBundle\Model\Order\OrderService
+     * @var \Shopsys\FrameworkBundle\Model\Order\OrderUrlGenerator
      */
-    protected $orderService;
+    protected $orderUrlGenerator;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Order\OrderCreationService
@@ -129,10 +131,25 @@ class OrderFacade
     protected $orderFactory;
 
     /**
+     * @var \Shopsys\FrameworkBundle\Model\Order\OrderPriceCalculation
+     */
+    protected $orderPriceCalculation;
+
+    /**
+     * @var \Shopsys\FrameworkBundle\Model\Order\Item\OrderItemPriceCalculation
+     */
+    protected $orderItemPriceCalculation;
+
+    /**
+     * @var \Shopsys\FrameworkBundle\Model\Order\Item\OrderProductFactoryInterface
+     */
+    protected $orderProductFactory;
+
+    /**
      * @param \Doctrine\ORM\EntityManagerInterface $em
      * @param \Shopsys\FrameworkBundle\Model\Order\OrderNumberSequenceRepository $orderNumberSequenceRepository
      * @param \Shopsys\FrameworkBundle\Model\Order\OrderRepository $orderRepository
-     * @param \Shopsys\FrameworkBundle\Model\Order\OrderService $orderService
+     * @param \Shopsys\FrameworkBundle\Model\Order\OrderUrlGenerator $orderUrlGenerator
      * @param \Shopsys\FrameworkBundle\Model\Order\OrderCreationService $orderCreationService
      * @param \Shopsys\FrameworkBundle\Model\Order\Status\OrderStatusRepository $orderStatusRepository
      * @param \Shopsys\FrameworkBundle\Model\Order\Mail\OrderMailFacade $orderMailFacade
@@ -149,12 +166,15 @@ class OrderFacade
      * @param \Shopsys\FrameworkBundle\Model\Heureka\HeurekaFacade $heurekaFacade
      * @param \Shopsys\FrameworkBundle\Component\Domain\Domain $domain
      * @param \Shopsys\FrameworkBundle\Model\Order\OrderFactoryInterface $orderFactory
+     * @param \Shopsys\FrameworkBundle\Model\Order\OrderPriceCalculation $orderPriceCalculation
+     * @param \Shopsys\FrameworkBundle\Model\Order\Item\OrderItemPriceCalculation $orderItemPriceCalculation
+     * @param \Shopsys\FrameworkBundle\Model\Order\Item\OrderProductFactoryInterface $orderProductFactory
      */
     public function __construct(
         EntityManagerInterface $em,
         OrderNumberSequenceRepository $orderNumberSequenceRepository,
         OrderRepository $orderRepository,
-        OrderService $orderService,
+        OrderUrlGenerator $orderUrlGenerator,
         OrderCreationService $orderCreationService,
         OrderStatusRepository $orderStatusRepository,
         OrderMailFacade $orderMailFacade,
@@ -170,12 +190,14 @@ class OrderFacade
         OrderProductFacade $orderProductFacade,
         HeurekaFacade $heurekaFacade,
         Domain $domain,
-        OrderFactoryInterface $orderFactory
+        OrderFactoryInterface $orderFactory,
+        OrderPriceCalculation $orderPriceCalculation,
+        OrderItemPriceCalculation $orderItemPriceCalculation,
+        OrderProductFactoryInterface $orderProductFactory
     ) {
         $this->em = $em;
         $this->orderNumberSequenceRepository = $orderNumberSequenceRepository;
         $this->orderRepository = $orderRepository;
-        $this->orderService = $orderService;
         $this->orderCreationService = $orderCreationService;
         $this->orderStatusRepository = $orderStatusRepository;
         $this->orderMailFacade = $orderMailFacade;
@@ -192,6 +214,10 @@ class OrderFacade
         $this->heurekaFacade = $heurekaFacade;
         $this->domain = $domain;
         $this->orderFactory = $orderFactory;
+        $this->orderPriceCalculation = $orderPriceCalculation;
+        $this->orderUrlGenerator = $orderUrlGenerator;
+        $this->orderItemPriceCalculation = $orderItemPriceCalculation;
+        $this->orderProductFactory = $orderProductFactory;
     }
 
     /**
@@ -223,7 +249,7 @@ class OrderFacade
             $toFlush[] = $orderItem;
         }
 
-        $this->orderService->calculateTotalPrice($order);
+        $order->calculateTotalPrice($this->orderPriceCalculation);
         $this->em->persist($order);
         $this->em->flush($toFlush);
 
@@ -278,14 +304,12 @@ class OrderFacade
     {
         $order = $this->orderRepository->getById($orderId);
         $originalOrderStatus = $order->getStatus();
-        $orderEditResult = $this->orderService->editOrder($order, $orderData);
-
-        foreach ($orderEditResult->getOrderItemsToCreate() as $orderItem) {
-            $this->em->persist($orderItem);
-        }
-        foreach ($orderEditResult->getOrderItemsToDelete() as $orderItem) {
-            $this->em->remove($orderItem);
-        }
+        $orderEditResult = $order->edit(
+            $orderData,
+            $this->orderItemPriceCalculation,
+            $this->orderProductFactory,
+            $this->orderPriceCalculation
+        );
 
         $this->em->flush();
         if ($orderEditResult->isStatusChanged()) {
@@ -312,7 +336,7 @@ class OrderFacade
     public function getOrderSentPageContent($orderId)
     {
         $order = $this->getById($orderId);
-        $orderDetailUrl = $this->orderService->getOrderDetailUrl($order);
+        $orderDetailUrl = $this->orderUrlGenerator->getOrderDetailUrl($order);
         $orderSentPageContent = $this->setting->getForDomain(Setting::ORDER_SENT_PAGE_CONTENT, $order->getDomainId());
 
         $variables = [

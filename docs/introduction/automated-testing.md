@@ -76,7 +76,7 @@ Unit tests in Shopsys Framework are built on [PHPUnit testing framework](https:/
 * test driven development
 
 #### Example:
-See test class `\Tests\FrameworkBundle\Unit\Model\Cart\CartServiceTest` in the `shopsys/framework` package.
+See test class `\Tests\FrameworkBundle\Unit\Model\Cart\CartTest` in the `shopsys/framework` package.
 Notice that test method names describe the tested scenario. Also, notice that each test case focuses just on one specific behavior of the class.
 When a test fails it provides detailed feedback to the developer.
 

@@ -15,7 +15,9 @@ use Shopsys\FrameworkBundle\Model\Product\Availability\ProductAvailabilityRecalc
 use Shopsys\FrameworkBundle\Model\Product\Parameter\ParameterRepository;
 use Shopsys\FrameworkBundle\Model\Product\Parameter\ProductParameterValueFactoryInterface;
 use Shopsys\FrameworkBundle\Model\Product\Pricing\ProductManualInputPriceFacade;
+use Shopsys\FrameworkBundle\Model\Product\Pricing\ProductPriceCalculation;
 use Shopsys\FrameworkBundle\Model\Product\Pricing\ProductPriceRecalculationScheduler;
+use Shopsys\FrameworkBundle\Model\Product\Pricing\ProductSellingPrice;
 
 class ProductFacade
 {
@@ -43,11 +45,6 @@ class ProductFacade
      * @var \Shopsys\FrameworkBundle\Component\Domain\Domain
      */
     protected $domain;
-
-    /**
-     * @var \Shopsys\FrameworkBundle\Model\Product\ProductService
-     */
-    protected $productService;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\Image\ImageFacade
@@ -135,12 +132,16 @@ class ProductFacade
     protected $productVisibilityFactory;
 
     /**
+     * @var \Shopsys\FrameworkBundle\Model\Product\Pricing\ProductPriceCalculation
+     */
+    private $productPriceCalculation;
+
+    /**
      * @param \Doctrine\ORM\EntityManagerInterface $em
      * @param \Shopsys\FrameworkBundle\Model\Product\ProductRepository $productRepository
      * @param \Shopsys\FrameworkBundle\Model\Product\ProductVisibilityFacade $productVisibilityFacade
      * @param \Shopsys\FrameworkBundle\Model\Product\Parameter\ParameterRepository $parameterRepository
      * @param \Shopsys\FrameworkBundle\Component\Domain\Domain $domain
-     * @param \Shopsys\FrameworkBundle\Model\Product\ProductService $productService
      * @param \Shopsys\FrameworkBundle\Component\Image\ImageFacade $imageFacade
      * @param \Shopsys\FrameworkBundle\Model\Product\Pricing\ProductPriceRecalculationScheduler $productPriceRecalculationScheduler
      * @param \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroupRepository $pricingGroupRepository
@@ -158,6 +159,7 @@ class ProductFacade
      * @param \Shopsys\FrameworkBundle\Model\Product\ProductCategoryDomainFactoryInterface $productCategoryDomainFactory
      * @param \Shopsys\FrameworkBundle\Model\Product\Parameter\ProductParameterValueFactoryInterface $productParameterValueFactory
      * @param \Shopsys\FrameworkBundle\Model\Product\ProductVisibilityFactoryInterface $productVisibilityFactory
+     * @param \Shopsys\FrameworkBundle\Model\Product\Pricing\ProductPriceCalculation $productPriceCalculation
      */
     public function __construct(
         EntityManagerInterface $em,
@@ -165,7 +167,6 @@ class ProductFacade
         ProductVisibilityFacade $productVisibilityFacade,
         ParameterRepository $parameterRepository,
         Domain $domain,
-        ProductService $productService,
         ImageFacade $imageFacade,
         ProductPriceRecalculationScheduler $productPriceRecalculationScheduler,
         PricingGroupRepository $pricingGroupRepository,
@@ -182,14 +183,14 @@ class ProductFacade
         ProductAccessoryFactoryInterface $productAccessoryFactory,
         ProductCategoryDomainFactoryInterface $productCategoryDomainFactory,
         ProductParameterValueFactoryInterface $productParameterValueFactory,
-        ProductVisibilityFactoryInterface $productVisibilityFactory
+        ProductVisibilityFactoryInterface $productVisibilityFactory,
+        ProductPriceCalculation $productPriceCalculation
     ) {
         $this->em = $em;
         $this->productRepository = $productRepository;
         $this->productVisibilityFacade = $productVisibilityFacade;
         $this->parameterRepository = $parameterRepository;
         $this->domain = $domain;
-        $this->productService = $productService;
         $this->imageFacade = $imageFacade;
         $this->productPriceRecalculationScheduler = $productPriceRecalculationScheduler;
         $this->pricingGroupRepository = $pricingGroupRepository;
@@ -207,6 +208,7 @@ class ProductFacade
         $this->productCategoryDomainFactory = $productCategoryDomainFactory;
         $this->productParameterValueFactory = $productParameterValueFactory;
         $this->productVisibilityFactory = $productVisibilityFactory;
+        $this->productPriceCalculation = $productPriceCalculation;
     }
 
     /**
@@ -270,7 +272,7 @@ class ProductFacade
     {
         $product = $this->productRepository->getById($productId);
 
-        $this->productService->edit($product, $productData);
+        $product->edit($this->productCategoryDomainFactory, $productData, $this->productPriceRecalculationScheduler);
 
         $this->saveParameters($product, $productData->parameters);
         if (!$product->isMainVariant()) {
@@ -303,11 +305,11 @@ class ProductFacade
     public function delete($productId)
     {
         $product = $this->productRepository->getById($productId);
-        $productDeleteResult = $this->productService->delete($product);
+        $productDeleteResult = $product->getProductDeleteResult();
         $productsForRecalculations = $productDeleteResult->getProductsForRecalculations();
         foreach ($productsForRecalculations as $productForRecalculations) {
             $this->productPriceRecalculationScheduler->scheduleProductForImmediateRecalculation($productForRecalculations);
-            $this->productService->markProductForVisibilityRecalculation($productForRecalculations);
+            $productForRecalculations->markForVisibilityRecalculation();
             $this->productAvailabilityRecalculationScheduler->scheduleProductForImmediateRecalculation($productForRecalculations);
         }
         $this->em->remove($product);
@@ -357,10 +359,16 @@ class ProductFacade
      */
     public function getAllProductSellingPricesIndexedByDomainId(Product $product)
     {
-        return $this->productService->getProductSellingPricesIndexedByDomainIdAndPricingGroupId(
-            $product,
-            $this->pricingGroupRepository->getAll()
-        );
+        $productSellingPrices = [];
+
+        foreach ($this->pricingGroupRepository->getAll() as $pricingGroup) {
+            $productSellingPrices[$pricingGroup->getDomainId()][$pricingGroup->getId()] = new ProductSellingPrice(
+                $pricingGroup,
+                $this->productPriceCalculation->calculatePrice($product, $pricingGroup->getDomainId(), $pricingGroup)
+            );
+        }
+
+        return $productSellingPrices;
     }
 
     /**

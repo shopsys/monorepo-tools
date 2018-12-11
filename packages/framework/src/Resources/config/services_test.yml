@@ -151,8 +151,6 @@ services:
 
     Shopsys\FrameworkBundle\Model\Product\ProductRepository: ~
 
-    Shopsys\FrameworkBundle\Model\Product\ProductService: ~
-
     Shopsys\FrameworkBundle\DataFixtures\ProductDataFixtureReferenceInjector: ~
 
     Shopsys\FrameworkBundle\Model\Script\ScriptFacade: ~

@@ -5,7 +5,6 @@ namespace Shopsys\FrameworkBundle\Model\Product\Pricing;
 use Doctrine\ORM\EntityManagerInterface;
 use Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroupFacade;
 use Shopsys\FrameworkBundle\Model\Product\Product;
-use Shopsys\FrameworkBundle\Model\Product\ProductService;
 use Symfony\Component\HttpKernel\Event\FilterResponseEvent;
 
 class ProductPriceRecalculator
@@ -43,11 +42,6 @@ class ProductPriceRecalculator
     private $allPricingGroups;
 
     /**
-     * @var \Shopsys\FrameworkBundle\Model\Product\ProductService
-     */
-    private $productService;
-
-    /**
      * @var \Doctrine\ORM\Internal\Hydration\IterableResult|\Shopsys\FrameworkBundle\Model\Product\Product[][]|null
      */
     private $productRowsIterator;
@@ -58,22 +52,19 @@ class ProductPriceRecalculator
      * @param \Shopsys\FrameworkBundle\Model\Product\Pricing\ProductCalculatedPriceRepository $productCalculatedPriceRepository
      * @param \Shopsys\FrameworkBundle\Model\Product\Pricing\ProductPriceRecalculationScheduler $productPriceRecalculationScheduler
      * @param \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroupFacade $pricingGroupFacade
-     * @param \Shopsys\FrameworkBundle\Model\Product\ProductService $productService
      */
     public function __construct(
         EntityManagerInterface $em,
         ProductPriceCalculation $productPriceCalculation,
         ProductCalculatedPriceRepository $productCalculatedPriceRepository,
         ProductPriceRecalculationScheduler $productPriceRecalculationScheduler,
-        PricingGroupFacade $pricingGroupFacade,
-        ProductService $productService
+        PricingGroupFacade $pricingGroupFacade
     ) {
         $this->em = $em;
         $this->productPriceCalculation = $productPriceCalculation;
         $this->productCalculatedPriceRepository = $productCalculatedPriceRepository;
         $this->productPriceRecalculationScheduler = $productPriceRecalculationScheduler;
         $this->pricingGroupFacade = $pricingGroupFacade;
-        $this->productService = $productService;
     }
 
     /**
@@ -152,7 +143,7 @@ class ProductPriceRecalculator
             $this->productCalculatedPriceRepository->saveCalculatedPrice($product, $pricingGroup, $priceWithVat);
         }
         $product->markPriceAsRecalculated();
-        $this->productService->markProductForVisibilityRecalculation($product);
+        $product->markForVisibilityRecalculation();
         $this->em->flush($product);
     }
 

@@ -9,6 +9,7 @@ use Shopsys\FrameworkBundle\Model\Localization\AbstractTranslatableEntity;
 use Shopsys\FrameworkBundle\Model\Pricing\Vat\Vat;
 use Shopsys\FrameworkBundle\Model\Product\Availability\Availability;
 use Shopsys\FrameworkBundle\Model\Product\Exception\ProductDomainNotFoundException;
+use Shopsys\FrameworkBundle\Model\Product\Pricing\ProductPriceRecalculationScheduler;
 
 /**
  * Product
@@ -340,11 +341,12 @@ class Product extends AbstractTranslatableEntity
     /**
      * @param \Shopsys\FrameworkBundle\Model\Product\ProductCategoryDomainFactoryInterface $productCategoryDomainFactory
      * @param \Shopsys\FrameworkBundle\Model\Product\ProductData $productData
-     * @param \Shopsys\FrameworkBundle\Model\Product\ProductData
+     * @param \Shopsys\FrameworkBundle\Model\Product\Pricing\ProductPriceRecalculationScheduler $productPriceRecalculationScheduler
      */
     public function edit(
         ProductCategoryDomainFactoryInterface $productCategoryDomainFactory,
-        ProductData $productData
+        ProductData $productData,
+        ProductPriceRecalculationScheduler $productPriceRecalculationScheduler
     ) {
         $this->vat = $productData->vat;
         $this->sellingFrom = $productData->sellingFrom;
@@ -373,6 +375,9 @@ class Product extends AbstractTranslatableEntity
         }
 
         $this->orderingPriority = $productData->orderingPriority;
+
+        $productPriceRecalculationScheduler->scheduleProductForImmediateRecalculation($this);
+        $this->markForVisibilityRecalculation();
     }
 
     /**
@@ -723,9 +728,37 @@ class Product extends AbstractTranslatableEntity
         $this->recalculatePrice = false;
     }
 
+    /**
+     * @param bool $recalculateVisibility
+     */
+    protected function setRecalculateVisibility($recalculateVisibility)
+    {
+        $this->recalculateVisibility = $recalculateVisibility;
+    }
+
     public function markForVisibilityRecalculation()
     {
-        $this->recalculateVisibility = true;
+        $this->setRecalculateVisibility(true);
+        if ($this->isMainVariant()) {
+            foreach ($this->getVariants() as $variant) {
+                $variant->setRecalculateVisibility(true);
+            }
+        } elseif ($this->isVariant()) {
+            $mainVariant = $this->getMainVariant();
+            /**
+             * When the product is fetched from persistence, the mainVariant is only a proxy object,
+             * when we call something on this proxy object, Doctrine fetches it from persistence too.
+             *
+             * The problem is the Doctrine seems to not fetch the main variant when we only write something into it,
+             * but when we read something first, Doctrine fetches the object, and the use-case works correctly.
+             *
+             * If you think this is strange and it shouldn't work even before the code was moved to Product, you are right, this is strange.
+             * When the code is outside of Product, Doctrine does the job correctly, but once the code is inside of Product,
+             * Doctrine seems to not fetching the main variant.
+             */
+            $mainVariant->isMarkedForVisibilityRecalculation();
+            $mainVariant->setRecalculateVisibility(true);
+        }
     }
 
     public function markForAvailabilityRecalculation()
@@ -927,6 +960,14 @@ class Product extends AbstractTranslatableEntity
     }
 
     /**
+     * @return bool
+     */
+    public function isMarkedForVisibilityRecalculation()
+    {
+        return $this->recalculateVisibility;
+    }
+
+    /**
      * @return \Shopsys\FrameworkBundle\Model\Product\ProductTranslation
      */
     protected function createTranslation()
@@ -947,5 +988,22 @@ class Product extends AbstractTranslatableEntity
         }
 
         $this->setDomains($productData);
+    }
+
+    /**
+     * @return \Shopsys\FrameworkBundle\Model\Product\ProductDeleteResult
+     */
+    public function getProductDeleteResult()
+    {
+        if ($this->isMainVariant()) {
+            foreach ($this->getVariants() as $variantProduct) {
+                $variantProduct->unsetMainVariant();
+            }
+        }
+        if ($this->isVariant()) {
+            return new ProductDeleteResult([$this->getMainVariant()]);
+        }
+
+        return new ProductDeleteResult();
     }
 }

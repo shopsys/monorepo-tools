@@ -57,14 +57,14 @@ class User implements UserInterface, TimelimitLoginInterface, Serializable
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Customer\BillingAddress
-     * @ORM\OneToOne(targetEntity="Shopsys\FrameworkBundle\Model\Customer\BillingAddress")
+     * @ORM\OneToOne(targetEntity="Shopsys\FrameworkBundle\Model\Customer\BillingAddress", cascade={"persist"})
      * @ORM\JoinColumn(name="billing_address_id", referencedColumnName="id", nullable=false)
      */
     protected $billingAddress;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Customer\DeliveryAddress|null
-     * @ORM\OneToOne(targetEntity="Shopsys\FrameworkBundle\Model\Customer\DeliveryAddress")
+     * @ORM\OneToOne(targetEntity="Shopsys\FrameworkBundle\Model\Customer\DeliveryAddress", cascade={"persist"}, orphanRemoval=true)
      * @ORM\JoinColumn(nullable=true)
      */
     protected $deliveryAddress;
@@ -140,20 +140,34 @@ class User implements UserInterface, TimelimitLoginInterface, Serializable
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\Customer\UserData $userData
+     * @param \Shopsys\FrameworkBundle\Model\Customer\CustomerPasswordService $customerPasswordService
      */
-    public function edit(UserData $userData)
+    public function edit(UserData $userData, CustomerPasswordService $customerPasswordService)
     {
         $this->firstName = $userData->firstName;
         $this->lastName = $userData->lastName;
         $this->pricingGroup = $userData->pricingGroup;
         $this->telephone = $userData->telephone;
+
+        if ($userData->password !== null) {
+            $customerPasswordService->changePassword($this, $userData->password);
+        }
     }
 
     /**
      * @param string $email
+     * @param \Shopsys\FrameworkBundle\Model\Customer\User|null $userByEmail
      */
-    public function changeEmail($email)
+    public function changeEmail(string $email, ?self $userByEmail)
     {
+        $email = mb_strtolower($email);
+
+        if ($userByEmail instanceof self) {
+            if (mb_strtolower($userByEmail->getEmail()) === $email && $this !== $userByEmail) {
+                throw new \Shopsys\FrameworkBundle\Model\Customer\Exception\DuplicateEmailException($email);
+            }
+        }
+
         $this->email = $email;
     }
 
@@ -174,14 +188,6 @@ class User implements UserInterface, TimelimitLoginInterface, Serializable
     {
         $this->resetPasswordHash = $hash;
         $this->resetPasswordHashValidThrough = new DateTime('+48 hours');
-    }
-
-    /**
-     * @param \Shopsys\FrameworkBundle\Model\Customer\DeliveryAddress|null $deliveryAddress
-     */
-    public function setDeliveryAddress(DeliveryAddress $deliveryAddress = null)
-    {
-        $this->deliveryAddress = $deliveryAddress;
     }
 
     /**
@@ -398,5 +404,25 @@ class User implements UserInterface, TimelimitLoginInterface, Serializable
     public function getTelephone()
     {
         return $this->telephone;
+    }
+
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Customer\DeliveryAddressData $deliveryAddressData
+     * @param \Shopsys\FrameworkBundle\Model\Customer\DeliveryAddressFactoryInterface $deliveryAddressFactory
+     */
+    public function editDeliveryAddress(
+        DeliveryAddressData $deliveryAddressData,
+        DeliveryAddressFactoryInterface $deliveryAddressFactory
+    ) {
+        if (!$deliveryAddressData->addressFilled) {
+            $this->deliveryAddress = null;
+            return;
+        }
+
+        if ($this->deliveryAddress instanceof DeliveryAddress) {
+            $this->deliveryAddress->edit($deliveryAddressData);
+        } else {
+            $this->deliveryAddress = $deliveryAddressFactory->create($deliveryAddressData);
+        }
     }
 }
