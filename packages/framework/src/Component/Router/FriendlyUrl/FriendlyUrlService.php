@@ -2,7 +2,6 @@
 
 namespace Shopsys\FrameworkBundle\Component\Router\FriendlyUrl;
 
-use Shopsys\FrameworkBundle\Component\Domain\Config\DomainConfig;
 use Shopsys\FrameworkBundle\Component\Domain\Domain;
 use Shopsys\FrameworkBundle\Component\String\TransformString;
 
@@ -125,15 +124,5 @@ class FriendlyUrlService
         $domainConfig = $this->domain->getDomainConfigById($friendlyUrl->getDomainId());
 
         return $domainConfig->getUrl() . '/' . $friendlyUrl->getSlug();
-    }
-
-    /**
-     * @param \Shopsys\FrameworkBundle\Component\Domain\Config\DomainConfig $domainConfig
-     * @param string $slug
-     * @return string
-     */
-    public function getAbsoluteUrlByDomainConfigAndSlug(DomainConfig $domainConfig, $slug)
-    {
-        return $domainConfig->getUrl() . '/' . $slug;
     }
 }

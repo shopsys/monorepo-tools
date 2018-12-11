@@ -8,7 +8,6 @@ use Presta\SitemapBundle\Sitemap\Url\UrlConcrete;
 use Shopsys\FrameworkBundle\Component\Domain\Config\DomainConfig;
 use Shopsys\FrameworkBundle\Component\Domain\Domain;
 use Shopsys\FrameworkBundle\Component\Router\DomainRouterFactory;
-use Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\FriendlyUrlService;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
@@ -30,11 +29,6 @@ class SitemapListener implements EventSubscriberInterface
     private $domain;
 
     /**
-     * @var \Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\FriendlyUrlService
-     */
-    private $friendlyUrlService;
-
-    /**
      * @var \Shopsys\FrameworkBundle\Component\Router\DomainRouterFactory
      */
     private $domainRouterFactory;
@@ -42,18 +36,15 @@ class SitemapListener implements EventSubscriberInterface
     /**
      * @param \Shopsys\FrameworkBundle\Model\Sitemap\SitemapFacade $sitemapFacade
      * @param \Shopsys\FrameworkBundle\Component\Domain\Domain $domain
-     * @param \Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\FriendlyUrlService $friendlyUrlService
      * @param \Shopsys\FrameworkBundle\Component\Router\DomainRouterFactory $domainRouterFactory
      */
     public function __construct(
         SitemapFacade $sitemapFacade,
         Domain $domain,
-        FriendlyUrlService $friendlyUrlService,
         DomainRouterFactory $domainRouterFactory
     ) {
         $this->sitemapFacade = $sitemapFacade;
         $this->domain = $domain;
-        $this->friendlyUrlService = $friendlyUrlService;
         $this->domainRouterFactory = $domainRouterFactory;
     }
 
@@ -105,7 +96,7 @@ class SitemapListener implements EventSubscriberInterface
         $elementPriority
     ) {
         foreach ($sitemapItems as $sitemapItem) {
-            $absoluteUrl = $this->friendlyUrlService->getAbsoluteUrlByDomainConfigAndSlug($domainConfig, $sitemapItem->slug);
+            $absoluteUrl = $this->getAbsoluteUrlByDomainConfigAndSlug($domainConfig, $sitemapItem->slug);
             $urlConcrete = new UrlConcrete($absoluteUrl, null, null, $elementPriority);
             $generator->addUrl($urlConcrete, $section);
         }
@@ -127,5 +118,15 @@ class SitemapListener implements EventSubscriberInterface
         $absoluteUrl = $domainRouter->generate('front_homepage', [], UrlGeneratorInterface::ABSOLUTE_URL);
         $urlConcrete = new UrlConcrete($absoluteUrl, null, null, $elementPriority);
         $generator->addUrl($urlConcrete, $section);
+    }
+
+    /**
+     * @param \Shopsys\FrameworkBundle\Component\Domain\Config\DomainConfig $domainConfig
+     * @param string $slug
+     * @return string
+     */
+    private function getAbsoluteUrlByDomainConfigAndSlug(DomainConfig $domainConfig, $slug)
+    {
+        return $domainConfig->getUrl() . '/' . $slug;
     }
 }
