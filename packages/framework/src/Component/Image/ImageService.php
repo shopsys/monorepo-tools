@@ -87,39 +87,6 @@ class ImageService
     }
 
     /**
-     * @param string $entityName
-     * @param int $entityId
-     * @param \Shopsys\FrameworkBundle\Component\Image\Image[] $images
-     */
-    public function deleteImages($entityName, $entityId, array $images)
-    {
-        foreach ($images as $image) {
-            $this->deleteImage($entityName, $entityId, $image);
-        }
-    }
-
-    /**
-     * @param string $entityName
-     * @param int $entityId
-     * @param \Shopsys\FrameworkBundle\Component\Image\Image $image
-     */
-    private function deleteImage($entityName, $entityId, Image $image)
-    {
-        if ($image->getEntityName() !== $entityName
-            || $image->getEntityId() !== $entityId
-        ) {
-            throw new \Shopsys\FrameworkBundle\Component\Image\Exception\ImageNotFoundException(
-                sprintf(
-                    'Entity %s with ID %s does not own image with ID %s',
-                    $entityName,
-                    $entityId,
-                    $image->getId()
-                )
-            );
-        }
-    }
-
-    /**
      * @param \Shopsys\FrameworkBundle\Component\Image\Image[] $orderedImages
      */
     public function setImagePositionsByOrder($orderedImages)

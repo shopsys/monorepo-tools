@@ -149,7 +149,9 @@ class ImageFacade
         $entityId = $this->getEntityId($entity);
 
         // files will be deleted in doctrine listener
-        $this->imageService->deleteImages($entityName, $entityId, $images);
+        foreach ($images as $image) {
+            $image->checkForDelete($entityName, $entityId);
+        }
 
         foreach ($images as $image) {
             $this->em->remove($image);
