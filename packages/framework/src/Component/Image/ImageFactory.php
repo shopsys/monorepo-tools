@@ -3,6 +3,7 @@
 namespace Shopsys\FrameworkBundle\Component\Image;
 
 use Shopsys\FrameworkBundle\Component\FileUpload\FileUpload;
+use Shopsys\FrameworkBundle\Component\Image\Config\ImageEntityConfig;
 use Shopsys\FrameworkBundle\Component\Image\Processing\ImageProcessor;
 
 class ImageFactory implements ImageFactoryInterface
@@ -44,5 +45,32 @@ class ImageFactory implements ImageFactoryInterface
         $convertedFilePath = $this->imageProcessor->convertToShopFormatAndGetNewFilename($temporaryFilePath);
 
         return new Image($entityName, $entityId, $type, $convertedFilePath);
+    }
+
+    /**
+     * @param \Shopsys\FrameworkBundle\Component\Image\Config\ImageEntityConfig $imageEntityConfig
+     * @param int $entityId
+     * @param string|null $type
+     * @param array $temporaryFilenames
+     * @return \Shopsys\FrameworkBundle\Component\Image\Image[]
+     */
+    public function createMultiple(
+        ImageEntityConfig $imageEntityConfig,
+        int $entityId,
+        ?string $type,
+        array $temporaryFilenames
+    ): array {
+        if (!$imageEntityConfig->isMultiple($type)) {
+            $message = 'Entity ' . $imageEntityConfig->getEntityClass()
+                . ' is not allowed to have multiple images for type ' . ($type ?: 'NULL');
+            throw new \Shopsys\FrameworkBundle\Component\Image\Exception\EntityMultipleImageException($message);
+        }
+
+        $images = [];
+        foreach ($temporaryFilenames as $temporaryFilename) {
+            $images[] = $this->create($imageEntityConfig->getEntityName(), $entityId, $type, $temporaryFilename);
+        }
+
+        return $images;
     }
 }

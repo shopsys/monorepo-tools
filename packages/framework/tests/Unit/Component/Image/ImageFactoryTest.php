@@ -17,6 +17,46 @@ use Symfony\Component\Filesystem\Filesystem;
 
 class ImageFactoryTest extends TestCase
 {
+    public function testCreateMultipleException()
+    {
+        $imageEntityConfig = new ImageEntityConfig('entityName', 'entityClass', [], [], ['type' => false]);
+
+        $imageProcessorMock = $this->getMockBuilder(ImageProcessor::class)
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $imageFactory = new ImageFactory($imageProcessorMock, $this->getFileUpload());
+
+        $this->expectException(\Shopsys\FrameworkBundle\Component\Image\Exception\EntityMultipleImageException::class);
+        $imageFactory->createMultiple($imageEntityConfig, 1, 'type', []);
+    }
+
+    public function testCreateMultiple()
+    {
+        $imageEntityConfig = new ImageEntityConfig('entityName', 'entityClass', [], [], ['type' => true]);
+        $filenames = ['filename1.jpg', 'filename2.png'];
+
+        $imageProcessorMock = $this->getMockBuilder(ImageProcessor::class)
+            ->disableOriginalConstructor()
+            ->setMethods(['convertToShopFormatAndGetNewFilename'])
+            ->getMock();
+        $imageProcessorMock->expects($this->any())->method('convertToShopFormatAndGetNewFilename')
+            ->willReturnCallback(function ($filepath) {
+                return pathinfo($filepath, PATHINFO_BASENAME);
+            });
+
+        $imageFactory = new ImageFactory($imageProcessorMock, $this->getFileUpload());
+        $images = $imageFactory->createMultiple($imageEntityConfig, 1, 'type', $filenames);
+
+        $this->assertCount(2, $images);
+        foreach ($images as $image) {
+            $temporaryFiles = $image->getTemporaryFilesForUpload();
+            $this->assertSame(1, $image->getEntityId());
+            $this->assertSame('entityName', $image->getEntityName());
+            $this->assertContains(array_pop($temporaryFiles)->getTemporaryFilename(), $filenames);
+        }
+    }
+
     public function testCreate()
     {
         $imageEntityConfig = new ImageEntityConfig('entityName', 'entityClass', [], [], ['type' => true]);

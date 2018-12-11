@@ -26,11 +26,6 @@ class ImageFacade
     protected $imageRepository;
 
     /**
-     * @var \Shopsys\FrameworkBundle\Component\Image\ImageService
-     */
-    protected $imageService;
-
-    /**
      * @var \League\Flysystem\FilesystemInterface
      */
     protected $filesystem;
@@ -60,7 +55,6 @@ class ImageFacade
      * @param \Doctrine\ORM\EntityManagerInterface $em
      * @param \Shopsys\FrameworkBundle\Component\Image\Config\ImageConfig $imageConfig
      * @param \Shopsys\FrameworkBundle\Component\Image\ImageRepository $imageRepository
-     * @param \Shopsys\FrameworkBundle\Component\Image\ImageService $imageService
      * @param \League\Flysystem\FilesystemInterface $filesystem
      * @param \Shopsys\FrameworkBundle\Component\FileUpload\FileUpload $fileUpload
      * @param \Shopsys\FrameworkBundle\Component\Image\ImageLocator $imageLocator
@@ -71,7 +65,6 @@ class ImageFacade
         EntityManagerInterface $em,
         ImageConfig $imageConfig,
         ImageRepository $imageRepository,
-        ImageService $imageService,
         FilesystemInterface $filesystem,
         FileUpload $fileUpload,
         ImageLocator $imageLocator,
@@ -81,7 +74,6 @@ class ImageFacade
         $this->em = $em;
         $this->imageConfig = $imageConfig;
         $this->imageRepository = $imageRepository;
-        $this->imageService = $imageService;
         $this->filesystem = $filesystem;
         $this->fileUpload = $fileUpload;
         $this->imageLocator = $imageLocator;
@@ -139,7 +131,7 @@ class ImageFacade
             $imageEntityConfig = $this->imageConfig->getImageEntityConfig($entity);
             $entityId = $this->getEntityId($entity);
 
-            $images = $this->imageService->getUploadedImages($imageEntityConfig, $entityId, $temporaryFilenames, $type);
+            $images = $this->imageFactory->createMultiple($imageEntityConfig, $entityId, $type, $temporaryFilenames);
             foreach ($images as $image) {
                 $this->em->persist($image);
             }
