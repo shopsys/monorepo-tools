@@ -4,10 +4,10 @@ namespace Shopsys\ShopBundle\Model\Customer;
 
 use Doctrine\ORM\Mapping as ORM;
 use Shopsys\FrameworkBundle\Model\Customer\BillingAddress;
-use Shopsys\FrameworkBundle\Model\Customer\CustomerPasswordService;
 use Shopsys\FrameworkBundle\Model\Customer\DeliveryAddress;
 use Shopsys\FrameworkBundle\Model\Customer\User as BaseUser;
 use Shopsys\FrameworkBundle\Model\Customer\UserData as BaseUserData;
+use Symfony\Component\Security\Core\Encoder\EncoderFactoryInterface;
 
 /**
  * @ORM\Table(
@@ -38,10 +38,10 @@ class User extends BaseUser
 
     /**
      * @param \Shopsys\ShopBundle\Model\Customer\UserData $userData
-     * @param \Shopsys\FrameworkBundle\Model\Customer\CustomerPasswordService $customerPasswordService
+     * @param \Symfony\Component\Security\Core\Encoder\EncoderFactoryInterface $encoderFactory
      */
-    public function edit(BaseUserData $userData, CustomerPasswordService $customerPasswordService)
+    public function edit(BaseUserData $userData, EncoderFactoryInterface $encoderFactory)
     {
-        parent::edit($userData, $customerPasswordService);
+        parent::edit($userData, $encoderFactory);
     }
 }

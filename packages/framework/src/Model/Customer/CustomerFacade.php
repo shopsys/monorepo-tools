@@ -5,6 +5,7 @@ namespace Shopsys\FrameworkBundle\Model\Customer;
 use Doctrine\ORM\EntityManagerInterface;
 use Shopsys\FrameworkBundle\Model\Customer\Mail\CustomerMailFacade;
 use Shopsys\FrameworkBundle\Model\Order\Order;
+use Symfony\Component\Security\Core\Encoder\EncoderFactoryInterface;
 
 class CustomerFacade
 {
@@ -24,9 +25,9 @@ class CustomerFacade
     protected $customerDataFactory;
 
     /**
-     * @var \Shopsys\FrameworkBundle\Model\Customer\CustomerPasswordService
+     * @var \Symfony\Component\Security\Core\Encoder\EncoderFactoryInterface
      */
-    protected $customerPasswordService;
+    protected $encoderFactory;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Customer\Mail\CustomerMailFacade
@@ -57,7 +58,7 @@ class CustomerFacade
      * @param \Doctrine\ORM\EntityManagerInterface $em
      * @param \Shopsys\FrameworkBundle\Model\Customer\UserRepository $userRepository
      * @param \Shopsys\FrameworkBundle\Model\Customer\CustomerDataFactoryInterface $customerDataFactory
-     * @param \Shopsys\FrameworkBundle\Model\Customer\CustomerPasswordService $customerPasswordServiceService
+     * @param \Symfony\Component\Security\Core\Encoder\EncoderFactoryInterface $encoderFactory
      * @param \Shopsys\FrameworkBundle\Model\Customer\Mail\CustomerMailFacade $customerMailFacade
      * @param \Shopsys\FrameworkBundle\Model\Customer\BillingAddressFactoryInterface $billingAddressFactory
      * @param \Shopsys\FrameworkBundle\Model\Customer\DeliveryAddressFactoryInterface $deliveryAddressFactory
@@ -68,7 +69,7 @@ class CustomerFacade
         EntityManagerInterface $em,
         UserRepository $userRepository,
         CustomerDataFactoryInterface $customerDataFactory,
-        CustomerPasswordService $customerPasswordServiceService,
+        EncoderFactoryInterface $encoderFactory,
         CustomerMailFacade $customerMailFacade,
         BillingAddressFactoryInterface $billingAddressFactory,
         DeliveryAddressFactoryInterface $deliveryAddressFactory,
@@ -78,7 +79,7 @@ class CustomerFacade
         $this->em = $em;
         $this->userRepository = $userRepository;
         $this->customerDataFactory = $customerDataFactory;
-        $this->customerPasswordService = $customerPasswordServiceService;
+        $this->encoderFactory = $encoderFactory;
         $this->customerMailFacade = $customerMailFacade;
         $this->billingAddressFactory = $billingAddressFactory;
         $this->deliveryAddressFactory = $deliveryAddressFactory;
@@ -172,7 +173,7 @@ class CustomerFacade
     {
         $user = $this->getUserById($userId);
 
-        $user->edit($customerData->userData, $this->customerPasswordService);
+        $user->edit($customerData->userData, $this->encoderFactory);
 
         $user->getBillingAddress()->edit($customerData->billingAddressData);
 
