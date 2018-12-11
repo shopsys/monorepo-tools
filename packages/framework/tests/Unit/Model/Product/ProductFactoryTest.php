@@ -10,51 +10,21 @@ use Shopsys\FrameworkBundle\Model\Product\Availability\ProductAvailabilityCalcul
 use Shopsys\FrameworkBundle\Model\Product\Product;
 use Shopsys\FrameworkBundle\Model\Product\ProductData;
 use Shopsys\FrameworkBundle\Model\Product\ProductFactory;
-use Shopsys\FrameworkBundle\Model\Product\ProductVariantService;
 
-class ProductVariantServiceTest extends TestCase
+class ProductFactoryTest extends TestCase
 {
     /**
-     * @var \Shopsys\FrameworkBundle\Model\Product\ProductVariantService
+     * @var \Shopsys\FrameworkBundle\Model\Product\ProductFactory
      */
-    protected $productVariantService;
+    protected $productFactory;
 
     /**
      * {@inheritdoc}
      */
     protected function setUp()
     {
-        $productFactory = new ProductFactory(new EntityNameResolver([]), $this->getProductAvailabilityCalculationMock());
-        $this->productVariantService = new ProductVariantService($productFactory);
+        $this->productFactory = new ProductFactory(new EntityNameResolver([]), $this->getProductAvailabilityCalculationMock());
         parent::setUp();
-    }
-
-    public function testCheckProductIsNotMainVariantException()
-    {
-        $productData = new ProductData();
-        $variant = Product::create($productData);
-        $mainVariant = Product::createMainVariant($productData, [$variant]);
-
-        $this->expectException(\Shopsys\FrameworkBundle\Model\Product\Exception\ProductIsAlreadyMainVariantException::class);
-        $this->productVariantService->checkProductIsNotMainVariant($mainVariant);
-    }
-
-    public function testRefreshProductVariants()
-    {
-        $productData = new ProductData();
-        $variant1 = Product::create($productData);
-        $variant2 = Product::create($productData);
-        $variant3 = Product::create($productData);
-        $mainVariant = Product::createMainVariant($productData, [$variant1, $variant2]);
-
-        $currentVariants = [$variant2, $variant3];
-        $this->productVariantService->refreshProductVariants($mainVariant, $currentVariants);
-
-        $variantsArray = $mainVariant->getVariants();
-
-        $this->assertNotContains($variant1, $variantsArray);
-        $this->assertContains($variant2, $variantsArray);
-        $this->assertContains($variant3, $variantsArray);
     }
 
     public function testCreateVariant()
@@ -63,7 +33,7 @@ class ProductVariantServiceTest extends TestCase
         $mainProduct = Product::create(new ProductData());
         $variants = [];
 
-        $mainVariant = $this->productVariantService->createMainVariant($mainVariantData, $mainProduct, $variants);
+        $mainVariant = $this->productFactory->createMainVariant($mainVariantData, $mainProduct, $variants);
 
         $this->assertNotSame($mainProduct, $mainVariant);
         $this->assertTrue(in_array($mainProduct, $mainVariant->getVariants(), true));

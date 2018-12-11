@@ -45,11 +45,14 @@ class ProductFactory implements ProductFactoryInterface
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\Product\ProductData $data
+     * @param \Shopsys\FrameworkBundle\Model\Product\Product $mainProduct
      * @param \Shopsys\FrameworkBundle\Model\Product\Product[] $variants
      * @return \Shopsys\FrameworkBundle\Model\Product\Product
      */
-    public function createMainVariant(ProductData $data, array $variants): Product
+    public function createMainVariant(ProductData $data, Product $mainProduct, array $variants): Product
     {
+        $variants[] = $mainProduct;
+
         $classData = $this->entityNameResolver->resolve(Product::class);
 
         $mainVariant = $classData::createMainVariant($data, $variants);

@@ -1006,4 +1006,44 @@ class Product extends AbstractTranslatableEntity
 
         return new ProductDeleteResult();
     }
+
+    public function checkIsNotMainVariant(): void
+    {
+        if ($this->isMainVariant()) {
+            throw new \Shopsys\FrameworkBundle\Model\Product\Exception\ProductIsAlreadyMainVariantException($this->id);
+        }
+    }
+
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Product\Product[] $currentVariants
+     */
+    public function refreshVariants(array $currentVariants): void
+    {
+        $this->unsetRemovedVariants($currentVariants);
+        $this->addNewVariants($currentVariants);
+    }
+
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Product\Product[] $currentVariants
+     */
+    protected function addNewVariants(array $currentVariants): void
+    {
+        foreach ($currentVariants as $currentVariant) {
+            if (!in_array($currentVariant, $this->getVariants(), true)) {
+                $this->addVariant($currentVariant);
+            }
+        }
+    }
+
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Product\Product[] $currentVariants
+     */
+    protected function unsetRemovedVariants(array $currentVariants)
+    {
+        foreach ($this->getVariants() as $originalVariant) {
+            if (!in_array($originalVariant, $currentVariants, true)) {
+                $originalVariant->unsetMainVariant();
+            }
+        }
+    }
 }

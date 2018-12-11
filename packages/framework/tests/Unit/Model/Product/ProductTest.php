@@ -171,4 +171,32 @@ class ProductTest extends TestCase
 
         $product->edit(new ProductCategoryDomainFactory(), $productData, $productPriceRecalculationSchedulerMock);
     }
+
+    public function testCheckIsNotMainVariantException()
+    {
+        $productData = new ProductData();
+        $variant = Product::create($productData);
+        $mainVariant = Product::createMainVariant($productData, [$variant]);
+
+        $this->expectException(\Shopsys\FrameworkBundle\Model\Product\Exception\ProductIsAlreadyMainVariantException::class);
+        $mainVariant->checkIsNotMainVariant();
+    }
+
+    public function testRefreshVariants()
+    {
+        $productData = new ProductData();
+        $variant1 = Product::create($productData);
+        $variant2 = Product::create($productData);
+        $variant3 = Product::create($productData);
+        $mainVariant = Product::createMainVariant($productData, [$variant1, $variant2]);
+
+        $currentVariants = [$variant2, $variant3];
+        $mainVariant->refreshVariants($currentVariants);
+
+        $variantsArray = $mainVariant->getVariants();
+
+        $this->assertNotContains($variant1, $variantsArray);
+        $this->assertContains($variant2, $variantsArray);
+        $this->assertContains($variant3, $variantsArray);
+    }
 }
