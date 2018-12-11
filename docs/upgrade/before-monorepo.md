@@ -63,7 +63,7 @@ in your product feed plugin because the instances of `StandardFeedItemInterface`
 - all implementations of `DataStorageInterface` now must have implemented method `getAll()` for getting all saved data indexed by keys
 
 ## [shopsys/project-base]
-### From 2.0.0-beta.21.0 to 7.0.0-alpha1  
+### From 2.0.0-beta.21.0 to v7.0.0-alpha1  
 - manual upgrade from this version will be very hard because of BC-breaking extraction of [shopsys/framework](https://github.com/shopsys/framework)  
     - at this moment the core is not easily extensible by your individual functionality  
     - before upgrading to the new architecture you should upgrade to Dockerized architecture of `2.0.0-beta.21.0`  

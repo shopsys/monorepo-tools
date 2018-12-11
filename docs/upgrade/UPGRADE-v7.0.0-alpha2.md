@@ -1,6 +1,6 @@
-# [Upgrade from 7.0.0-alpha1 to 7.0.0-alpha2](https://github.com/shopsys/shopsys/compare/v7.0.0-alpha1...v7.0.0-alpha2)
+# [Upgrade from v7.0.0-alpha1 to v7.0.0-alpha2](https://github.com/shopsys/shopsys/compare/v7.0.0-alpha1...v7.0.0-alpha2)
 
-This guide contains instructions to upgrade from version 7.0.0-alpha1 to 7.0.0-alpha2.
+This guide contains instructions to upgrade from version v7.0.0-alpha1 to v7.0.0-alpha2.
 
 **Before you start, don't forget to take a look at [general instructions](/UPGRADE.md) about upgrading.**
 There you can find links to upgrade notes for other versions too.

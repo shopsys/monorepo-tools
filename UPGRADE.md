@@ -42,15 +42,15 @@ Follow instructions in a [monorepo upgrade guide](docs/contributing/upgrading-mo
 
 ## Upgrade
 * ### [From v7.0.0-beta4 to Unreleased](./docs/upgrade/UPGRADE-unreleased.md)
-* ### [From v7.0.0-beta3 to v7.0.0-beta4](./docs/upgrade/UPGRADE-7.0.0-beta4.md)
-* ### [From 7.0.0-beta2 to v7.0.0-beta3](./docs/upgrade/UPGRADE-7.0.0-beta3.md)
-* ### [From 7.0.0-beta1 to 7.0.0-beta2](./docs/upgrade/UPGRADE-7.0.0-beta2.md)
-* ### [From 7.0.0-alpha6 to 7.0.0-beta1](./docs/upgrade/UPGRADE-7.0.0-beta1.md)
-* ### [From 7.0.0-alpha5 to 7.0.0-alpha6](./docs/upgrade/UPGRADE-7.0.0-alpha6.md)
-* ### [From 7.0.0-alpha4 to 7.0.0-alpha5](./docs/upgrade/UPGRADE-7.0.0-alpha5.md)
-* ### [From 7.0.0-alpha3 to 7.0.0-alpha4](./docs/upgrade/UPGRADE-7.0.0-alpha4.md)
-* ### [From 7.0.0-alpha2 to 7.0.0-alpha3](./docs/upgrade/UPGRADE-7.0.0-alpha3.md)
-* ### [From 7.0.0-alpha1 to 7.0.0-alpha2](./docs/upgrade/UPGRADE-7.0.0-alpha2.md)
+* ### [From v7.0.0-beta3 to v7.0.0-beta4](docs/upgrade/UPGRADE-v7.0.0-beta4.md)
+* ### [From v7.0.0-beta2 to v7.0.0-beta3](docs/upgrade/UPGRADE-v7.0.0-beta3.md)
+* ### [From v7.0.0-beta1 to v7.0.0-beta2](docs/upgrade/UPGRADE-v7.0.0-beta2.md)
+* ### [From v7.0.0-alpha6 to v7.0.0-beta1](docs/upgrade/UPGRADE-v7.0.0-beta1.md)
+* ### [From v7.0.0-alpha5 to v7.0.0-alpha6](docs/upgrade/UPGRADE-v7.0.0-alpha6.md)
+* ### [From v7.0.0-alpha4 to v7.0.0-alpha5](docs/upgrade/UPGRADE-v7.0.0-alpha5.md)
+* ### [From v7.0.0-alpha3 to v7.0.0-alpha4](docs/upgrade/UPGRADE-v7.0.0-alpha4.md)
+* ### [From v7.0.0-alpha2 to v7.0.0-alpha3](docs/upgrade/UPGRADE-v7.0.0-alpha3.md)
+* ### [From v7.0.0-alpha1 to v7.0.0-alpha2](docs/upgrade/UPGRADE-v7.0.0-alpha2.md)
 * ### [Before monorepo](docs/upgrade/before-monorepo.md)
 
 [shopsys/shopsys]: https://github.com/shopsys/shopsys

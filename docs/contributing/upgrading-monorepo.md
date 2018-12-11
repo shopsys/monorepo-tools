@@ -12,7 +12,7 @@ Typical upgrade sequence should be:
 - [#679 webserver container starts after php-fpm is started](https://github.com/shopsys/shopsys/pull/679)
     - add `depends_on: [php-fpm]` into `webserver` service of your `docker-compose.yml` file so webserver will not fail on error `host not found in upstream php-fpm:9000`
 
-## [From 7.0.0-beta2 to v7.0.0-beta3](https://github.com/shopsys/shopsys/compare/v7.0.0-beta2...v7.0.0-beta3)
+## [From v7.0.0-beta2 to v7.0.0-beta3](https://github.com/shopsys/shopsys/compare/v7.0.0-beta2...v7.0.0-beta3)
 - *(MacOS only)* [#503 updated docker-sync configuration](https://github.com/shopsys/shopsys/pull/503/)
     - run `docker-compose down` to turn off your containers
     - run `docker-sync clean` so your volumes will be removed
@@ -64,7 +64,7 @@ Typical upgrade sequence should be:
 - *(optional)* [#551 - github token erase](https://github.com/shopsys/shopsys/pull/551)
     - you can stop providing the `github_oauth_token` in your `docker-compose.yml`
 
-## [From 7.0.0-alpha5 to 7.0.0-alpha6](https://github.com/shopsys/shopsys/compare/v7.0.0-alpha5...v7.0.0-alpha6)
+## [From v7.0.0-alpha5 to v7.0.0-alpha6](https://github.com/shopsys/shopsys/compare/v7.0.0-alpha5...v7.0.0-alpha6)
 - when upgrading your installed [monorepo](/docs/introduction/monorepo.md), you'll have to change the build context for the images of the microservices in `docker-compose.yml`
     - `build.context` should be the root of the microservice (eg. `microservices/product-search-export`)
     - `build.dockerfile` should be `docker/Dockerfile`
