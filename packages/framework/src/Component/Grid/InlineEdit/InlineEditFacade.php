@@ -6,7 +6,7 @@ use Shopsys\FrameworkBundle\Component\Grid\Grid;
 use Symfony\Component\Form\Form;
 use Symfony\Component\HttpFoundation\Request;
 
-class InlineEditService
+class InlineEditFacade
 {
     /**
      * @var \Shopsys\FrameworkBundle\Component\Grid\InlineEdit\GridInlineEditRegistry

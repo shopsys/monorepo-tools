@@ -15,9 +15,9 @@ class CartWatcherFacade
     protected $em;
 
     /**
-     * @var \Shopsys\FrameworkBundle\Model\Cart\Watcher\CartWatcherService
+     * @var \Shopsys\FrameworkBundle\Model\Cart\Watcher\CartWatcher
      */
-    protected $cartWatcherService;
+    protected $cartWatcher;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\FlashMessage\FlashMessageSender
@@ -32,18 +32,18 @@ class CartWatcherFacade
     /**
      * @param \Shopsys\FrameworkBundle\Component\FlashMessage\FlashMessageSender $flashMessageSender
      * @param \Doctrine\ORM\EntityManagerInterface $em
-     * @param \Shopsys\FrameworkBundle\Model\Cart\Watcher\CartWatcherService $cartWatcherService
+     * @param \Shopsys\FrameworkBundle\Model\Cart\Watcher\CartWatcher $cartWatcher
      * @param \Shopsys\FrameworkBundle\Model\Customer\CurrentCustomer $currentCustomer
      */
     public function __construct(
         FlashMessageSender $flashMessageSender,
         EntityManagerInterface $em,
-        CartWatcherService $cartWatcherService,
+        CartWatcher $cartWatcher,
         CurrentCustomer $currentCustomer
     ) {
         $this->flashMessageSender = $flashMessageSender;
         $this->em = $em;
-        $this->cartWatcherService = $cartWatcherService;
+        $this->cartWatcher = $cartWatcher;
         $this->currentCustomer = $currentCustomer;
     }
 
@@ -61,7 +61,7 @@ class CartWatcherFacade
      */
     protected function checkModifiedPrices(Cart $cart)
     {
-        $modifiedItems = $this->cartWatcherService->getModifiedPriceItemsAndUpdatePrices($cart);
+        $modifiedItems = $this->cartWatcher->getModifiedPriceItemsAndUpdatePrices($cart);
 
         foreach ($modifiedItems as $cartItem) {
             $this->flashMessageSender->addInfoFlashTwig(
@@ -80,7 +80,7 @@ class CartWatcherFacade
      */
     protected function checkNotListableItems(Cart $cart)
     {
-        $notVisibleItems = $this->cartWatcherService->getNotListableItems($cart, $this->currentCustomer);
+        $notVisibleItems = $this->cartWatcher->getNotListableItems($cart, $this->currentCustomer);
 
         $toFlush = [];
         foreach ($notVisibleItems as $cartItem) {

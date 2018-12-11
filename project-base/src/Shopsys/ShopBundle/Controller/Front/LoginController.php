@@ -2,7 +2,7 @@
 
 namespace Shopsys\ShopBundle\Controller\Front;
 
-use Shopsys\FrameworkBundle\Model\Security\LoginService;
+use Shopsys\FrameworkBundle\Model\Security\Authenticator;
 use Shopsys\FrameworkBundle\Model\Security\Roles;
 use Shopsys\ShopBundle\Form\Front\Login\LoginFormType;
 use Symfony\Component\Form\FormError;
@@ -11,16 +11,16 @@ use Symfony\Component\HttpFoundation\Request;
 class LoginController extends FrontBaseController
 {
     /**
-     * @var \Shopsys\FrameworkBundle\Model\Security\LoginService
+     * @var \Shopsys\FrameworkBundle\Model\Security\Authenticator
      */
-    private $loginService;
+    private $authenticator;
 
     /**
-     * @param \Shopsys\FrameworkBundle\Model\Security\LoginService $loginService
+     * @param \Shopsys\FrameworkBundle\Model\Security\Authenticator $authenticator
      */
-    public function __construct(LoginService $loginService)
+    public function __construct(Authenticator $authenticator)
     {
-        $this->loginService = $loginService;
+        $this->authenticator = $authenticator;
     }
 
     /**
@@ -35,7 +35,7 @@ class LoginController extends FrontBaseController
         $form = $this->getLoginForm();
 
         try {
-            $this->loginService->checkLoginProcess($request);
+            $this->authenticator->checkLoginProcess($request);
         } catch (\Shopsys\FrameworkBundle\Model\Security\Exception\LoginFailedException $e) {
             $form->addError(new FormError(t('Invalid login')));
         }

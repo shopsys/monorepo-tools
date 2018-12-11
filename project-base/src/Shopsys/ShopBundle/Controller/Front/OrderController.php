@@ -12,7 +12,7 @@ use Shopsys\FrameworkBundle\Model\Order\Mail\OrderMailFacade;
 use Shopsys\FrameworkBundle\Model\Order\OrderFacade;
 use Shopsys\FrameworkBundle\Model\Order\Preview\OrderPreview;
 use Shopsys\FrameworkBundle\Model\Order\Preview\OrderPreviewFactory;
-use Shopsys\FrameworkBundle\Model\Order\Watcher\TransportAndPaymentWatcherService;
+use Shopsys\FrameworkBundle\Model\Order\Watcher\TransportAndPaymentWatcher;
 use Shopsys\FrameworkBundle\Model\Payment\PaymentFacade;
 use Shopsys\FrameworkBundle\Model\Payment\PaymentPriceCalculation;
 use Shopsys\FrameworkBundle\Model\Pricing\Currency\CurrencyFacade;
@@ -67,9 +67,9 @@ class OrderController extends FrontBaseController
     private $orderPreviewFactory;
 
     /**
-     * @var \Shopsys\FrameworkBundle\Model\Order\Watcher\TransportAndPaymentWatcherService
+     * @var \Shopsys\FrameworkBundle\Model\Order\Watcher\TransportAndPaymentWatcher
      */
-    private $transportAndPaymentWatcherService;
+    private $transportAndPaymentWatcher;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Payment\PaymentFacade
@@ -124,7 +124,7 @@ class OrderController extends FrontBaseController
      * @param \Shopsys\ShopBundle\Model\Order\OrderDataMapper $orderDataMapper
      * @param \Shopsys\ShopBundle\Form\Front\Order\DomainAwareOrderFlowFactory $domainAwareOrderFlowFactory
      * @param \Symfony\Component\HttpFoundation\Session\SessionInterface $session
-     * @param \Shopsys\FrameworkBundle\Model\Order\Watcher\TransportAndPaymentWatcherService $transportAndPaymentWatcherService
+     * @param \Shopsys\FrameworkBundle\Model\Order\Watcher\TransportAndPaymentWatcher $transportAndPaymentWatcher
      * @param \Shopsys\FrameworkBundle\Model\Order\Mail\OrderMailFacade $orderMailFacade
      * @param \Shopsys\FrameworkBundle\Model\LegalConditions\LegalConditionsFacade $legalConditionsFacade
      * @param \Shopsys\FrameworkBundle\Model\Newsletter\NewsletterFacade $newsletterFacade
@@ -142,7 +142,7 @@ class OrderController extends FrontBaseController
         OrderDataMapper $orderDataMapper,
         DomainAwareOrderFlowFactory $domainAwareOrderFlowFactory,
         SessionInterface $session,
-        TransportAndPaymentWatcherService $transportAndPaymentWatcherService,
+        TransportAndPaymentWatcher $transportAndPaymentWatcher,
         OrderMailFacade $orderMailFacade,
         LegalConditionsFacade $legalConditionsFacade,
         NewsletterFacade $newsletterFacade
@@ -159,7 +159,7 @@ class OrderController extends FrontBaseController
         $this->orderDataMapper = $orderDataMapper;
         $this->domainAwareOrderFlowFactory = $domainAwareOrderFlowFactory;
         $this->session = $session;
-        $this->transportAndPaymentWatcherService = $transportAndPaymentWatcherService;
+        $this->transportAndPaymentWatcher = $transportAndPaymentWatcher;
         $this->orderMailFacade = $orderMailFacade;
         $this->legalConditionsFacade = $legalConditionsFacade;
         $this->newsletterFacade = $newsletterFacade;
@@ -303,7 +303,7 @@ class OrderController extends FrontBaseController
         array $transports,
         array $payments
     ) {
-        $transportAndPaymentCheckResult = $this->transportAndPaymentWatcherService->checkTransportAndPayment(
+        $transportAndPaymentCheckResult = $this->transportAndPaymentWatcher->checkTransportAndPayment(
             $orderData,
             $orderPreview,
             $transports,

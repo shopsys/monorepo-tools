@@ -4,7 +4,7 @@ namespace Shopsys\ShopBundle\Controller\Front;
 
 use Shopsys\FrameworkBundle\Component\Domain\Domain;
 use Shopsys\FrameworkBundle\Model\Customer\CustomerPasswordFacade;
-use Shopsys\FrameworkBundle\Model\Security\LoginService;
+use Shopsys\FrameworkBundle\Model\Security\Authenticator;
 use Shopsys\ShopBundle\Form\Front\Customer\Password\NewPasswordFormType;
 use Shopsys\ShopBundle\Form\Front\Customer\Password\ResetPasswordFormType;
 use Symfony\Component\HttpFoundation\Request;
@@ -22,23 +22,23 @@ class CustomerPasswordController extends FrontBaseController
     private $domain;
 
     /**
-     * @var \Shopsys\FrameworkBundle\Model\Security\LoginService
+     * @var \Shopsys\FrameworkBundle\Model\Security\Authenticator
      */
-    private $loginService;
+    private $authenticator;
 
     /**
      * @param \Shopsys\FrameworkBundle\Component\Domain\Domain $domain
      * @param \Shopsys\FrameworkBundle\Model\Customer\CustomerPasswordFacade $customerPasswordFacade
-     * @param \Shopsys\FrameworkBundle\Model\Security\LoginService $loginService
+     * @param \Shopsys\FrameworkBundle\Model\Security\Authenticator $authenticator
      */
     public function __construct(
         Domain $domain,
         CustomerPasswordFacade $customerPasswordFacade,
-        LoginService $loginService
+        Authenticator $authenticator
     ) {
         $this->domain = $domain;
         $this->customerPasswordFacade = $customerPasswordFacade;
-        $this->loginService = $loginService;
+        $this->authenticator = $authenticator;
     }
 
     /**
@@ -104,7 +104,7 @@ class CustomerPasswordController extends FrontBaseController
             try {
                 $user = $this->customerPasswordFacade->setNewPassword($email, $this->domain->getId(), $hash, $newPassword);
 
-                $this->loginService->loginUser($user, $request);
+                $this->authenticator->loginUser($user, $request);
             } catch (\Shopsys\FrameworkBundle\Model\Customer\Exception\UserNotFoundByEmailAndDomainException $ex) {
                 $this->getFlashMessageSender()->addErrorFlashTwig(
                     t('Customer with e-mail address <strong>{{ email }}</strong> doesn\'t exist. '

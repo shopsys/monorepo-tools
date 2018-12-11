@@ -11,7 +11,7 @@ use Shopsys\FrameworkBundle\Model\Transport\Transport;
 use Shopsys\FrameworkBundle\Model\Transport\TransportPriceCalculation;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
-class TransportAndPaymentWatcherService
+class TransportAndPaymentWatcher
 {
     const SESSION_ROOT = 'transport_and_payment_watcher';
     const SESSION_TRANSPORT_PRICES = 'transport_prices';

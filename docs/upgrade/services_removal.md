@@ -54,6 +54,10 @@ If you use these methods, change their calling appropriately:
   -> `OrderStatus::checkForDelete`
 - `OrderStatusService::createOrderProductInOrder`  
   -> `OrderStatus::addProductToOrder`
+- `RegistrationMailService::getMessageDataByUser(User $user, MailTemplate $mailTemplate)`  
+  -> `RegistrationMail::createMessage(MailTemplate $mailTemplate, $user)`
+- `OrderMailService::getMessageDataByOrder(Order $order, MailTemplate $mailTemplate)`  
+  -> `OrderMail::createMessage(MailTemplate $mailTemplate, $order)`
 
 Following classes have been removed:
 - `AdministratorService`
@@ -94,3 +98,28 @@ Following functions visibility was changed to `protected` as there is no need to
 
 Follow also additional upgrade instructions:
 - Change return type of `DeliveryAddressFactory::create()` to `?DeliveryAddress` as it now returns `null` when `addressFilled` is `false`
+- Change usage of `ProductListOrderingModeService::` constants to `ProductListOrderingConfig::` as they were moved to the Config class
+
+Following classes were renamed, so change their usage appropriately:
+- `JavascriptCompilerService` -> `JavascriptCompiler`
+    - and also it's method `generateCompiledFiles()` -> `compile()`
+- `SitemapService` -> `SitemapFilePrefixer`
+- `BestsellingProductService` -> `BestsellingProductCombinator`
+- `TransportAndPaymentWatcherService` -> `TransportAndPaymentWatcher`
+- `CartWatcherService` -> `CartWatcher`
+- `MailerService` -> `Mailer`
+- `StatisticsService` -> `ValueByDateTimeDataPointFormatter`
+- `HeurekaShopCertificationService` -> `HeurekaShopCertificationLocaleHelper`
+- `LoginService` -> `Authenticator`
+- `QueryBuilderService` -> `QueryBuilderExtender`
+- `DomainUrlService` -> `DomainUrlReplacer`
+- `DomainService` -> `DomainIconResizer`
+- `TransactionalMasterRequestService` -> `TransactionalMasterRequestListener`
+- `ImageGeneratorService` -> `ImageGenerator`
+- `ImageProcessingService` -> `ImageProcessor`
+- `InlineEditService` -> `InlineEditFacade`
+- `CronService` -> `CronFilter`
+- `ErrorService` -> `ErrorExtractor`
+- `RegistrationMailService` -> `RegistrationMail`
+- `OrderMailService` -> `OrderMail`
+- `ProductListOrderingModeService` -> `RequestToOrderingModeIdConverter`

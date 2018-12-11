@@ -5,16 +5,16 @@ namespace Shopsys\FrameworkBundle\Model\Statistics;
 class StatisticsProcessingFacade
 {
     /**
-     * @var \Shopsys\FrameworkBundle\Model\Statistics\StatisticsService
+     * @var \Shopsys\FrameworkBundle\Model\Statistics\ValueByDateTimeDataPointFormatter
      */
-    protected $statisticsService;
+    protected $valueByDateTimeDataPointFormatter;
 
     /**
-     * @param \Shopsys\FrameworkBundle\Model\Statistics\StatisticsService $statisticsService
+     * @param \Shopsys\FrameworkBundle\Model\Statistics\ValueByDateTimeDataPointFormatter $valueByDateTimeDataPointFormatter
      */
-    public function __construct(StatisticsService $statisticsService)
+    public function __construct(ValueByDateTimeDataPointFormatter $valueByDateTimeDataPointFormatter)
     {
-        $this->statisticsService = $statisticsService;
+        $this->valueByDateTimeDataPointFormatter = $valueByDateTimeDataPointFormatter;
     }
 
     /**
@@ -23,7 +23,7 @@ class StatisticsProcessingFacade
      */
     public function getDateTimesFormattedToLocaleFormat(array $valueByDateTimeDataPoints)
     {
-        return $this->statisticsService->getDateTimesFormattedToLocaleFormat($valueByDateTimeDataPoints);
+        return $this->valueByDateTimeDataPointFormatter->getDateTimesFormattedToLocaleFormat($valueByDateTimeDataPoints);
     }
 
     /**
@@ -32,6 +32,6 @@ class StatisticsProcessingFacade
      */
     public function getCounts(array $valueByDateTimeDataPoints)
     {
-        return $this->statisticsService->getCounts($valueByDateTimeDataPoints);
+        return $this->valueByDateTimeDataPointFormatter->getCounts($valueByDateTimeDataPoints);
     }
 }

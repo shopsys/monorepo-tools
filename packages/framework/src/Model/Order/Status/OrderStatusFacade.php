@@ -4,7 +4,7 @@ namespace Shopsys\FrameworkBundle\Model\Order\Status;
 
 use Doctrine\ORM\EntityManagerInterface;
 use Shopsys\FrameworkBundle\Model\Mail\MailTemplateFacade;
-use Shopsys\FrameworkBundle\Model\Order\Mail\OrderMailService;
+use Shopsys\FrameworkBundle\Model\Order\Mail\OrderMail;
 use Shopsys\FrameworkBundle\Model\Order\OrderRepository;
 
 class OrderStatusFacade
@@ -74,7 +74,7 @@ class OrderStatusFacade
         $this->em->flush();
 
         $this->mailTemplateFacade->createMailTemplateForAllDomains(
-            OrderMailService::MAIL_TEMPLATE_NAME_PREFIX . $orderStatus->getId()
+            OrderMail::MAIL_TEMPLATE_NAME_PREFIX . $orderStatus->getId()
         );
 
         return $orderStatus;

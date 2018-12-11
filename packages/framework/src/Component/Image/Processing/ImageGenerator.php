@@ -7,12 +7,12 @@ use Shopsys\FrameworkBundle\Component\Image\Config\ImageConfig;
 use Shopsys\FrameworkBundle\Component\Image\Image;
 use Shopsys\FrameworkBundle\Component\Image\ImageLocator;
 
-class ImageGeneratorService
+class ImageGenerator
 {
     /**
-     * @var \Shopsys\FrameworkBundle\Component\Image\Processing\ImageProcessingService
+     * @var \Shopsys\FrameworkBundle\Component\Image\Processing\ImageProcessor
      */
-    private $imageProcessingService;
+    private $imageProcessor;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\Image\ImageLocator
@@ -30,18 +30,18 @@ class ImageGeneratorService
     private $filesystem;
 
     /**
-     * @param \Shopsys\FrameworkBundle\Component\Image\Processing\ImageProcessingService $imageProcessingService
+     * @param \Shopsys\FrameworkBundle\Component\Image\Processing\ImageProcessor $imageProcessor
      * @param \Shopsys\FrameworkBundle\Component\Image\ImageLocator $imageLocator
      * @param \Shopsys\FrameworkBundle\Component\Image\Config\ImageConfig $imageConfig
      * @param \League\Flysystem\FilesystemInterface $filesystem
      */
     public function __construct(
-        ImageProcessingService $imageProcessingService,
+        ImageProcessor $imageProcessor,
         ImageLocator $imageLocator,
         ImageConfig $imageConfig,
         FilesystemInterface $filesystem
     ) {
-        $this->imageProcessingService = $imageProcessingService;
+        $this->imageProcessor = $imageProcessor;
         $this->imageLocator = $imageLocator;
         $this->imageConfig = $imageConfig;
         $this->filesystem = $filesystem;
@@ -64,8 +64,8 @@ class ImageGeneratorService
         $targetImageFilepath = $this->imageLocator->getAbsoluteImageFilepath($image, $sizeName);
         $sizeConfig = $this->imageConfig->getImageSizeConfigByImage($image, $sizeName);
 
-        $interventionImage = $this->imageProcessingService->createInterventionImage($sourceImageFilepath);
-        $this->imageProcessingService->resizeBySizeConfig($interventionImage, $sizeConfig);
+        $interventionImage = $this->imageProcessor->createInterventionImage($sourceImageFilepath);
+        $this->imageProcessor->resizeBySizeConfig($interventionImage, $sizeConfig);
 
         $interventionImage->encode();
 

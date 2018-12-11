@@ -2,7 +2,7 @@
 
 namespace Shopsys\FrameworkBundle\Model\Order\Mail;
 
-use Shopsys\FrameworkBundle\Model\Mail\MailerService;
+use Shopsys\FrameworkBundle\Model\Mail\Mailer;
 use Shopsys\FrameworkBundle\Model\Mail\MailTemplateFacade;
 use Shopsys\FrameworkBundle\Model\Order\Order;
 use Shopsys\FrameworkBundle\Model\Order\Status\OrderStatus;
@@ -10,7 +10,7 @@ use Shopsys\FrameworkBundle\Model\Order\Status\OrderStatus;
 class OrderMailFacade
 {
     /**
-     * @var \Shopsys\FrameworkBundle\Model\Mail\MailerService
+     * @var \Shopsys\FrameworkBundle\Model\Mail\Mailer
      */
     protected $mailer;
 
@@ -20,23 +20,23 @@ class OrderMailFacade
     protected $mailTemplateFacade;
 
     /**
-     * @var \Shopsys\FrameworkBundle\Model\Order\Mail\OrderMailService
+     * @var \Shopsys\FrameworkBundle\Model\Order\Mail\OrderMail
      */
-    protected $orderMailService;
+    protected $orderMail;
 
     /**
-     * @param \Shopsys\FrameworkBundle\Model\Mail\MailerService $mailer
+     * @param \Shopsys\FrameworkBundle\Model\Mail\Mailer $mailer
      * @param \Shopsys\FrameworkBundle\Model\Mail\MailTemplateFacade $mailTemplateFacade
-     * @param \Shopsys\FrameworkBundle\Model\Order\Mail\OrderMailService $orderMailService
+     * @param \Shopsys\FrameworkBundle\Model\Order\Mail\OrderMail $orderMail
      */
     public function __construct(
-        MailerService $mailer,
+        Mailer $mailer,
         MailTemplateFacade $mailTemplateFacade,
-        OrderMailService $orderMailService
+        OrderMail $orderMail
     ) {
         $this->mailer = $mailer;
         $this->mailTemplateFacade = $mailTemplateFacade;
-        $this->orderMailService = $orderMailService;
+        $this->orderMail = $orderMail;
     }
 
     /**
@@ -45,7 +45,7 @@ class OrderMailFacade
     public function sendEmail(Order $order)
     {
         $mailTemplate = $this->getMailTemplateByStatusAndDomainId($order->getStatus(), $order->getDomainId());
-        $messageData = $this->orderMailService->getMessageDataByOrder($order, $mailTemplate);
+        $messageData = $this->orderMail->createMessage($mailTemplate, $order);
         $messageData->attachmentsFilepaths = $this->mailTemplateFacade->getMailTemplateAttachmentsFilepaths($mailTemplate);
         $this->mailer->send($messageData);
     }
@@ -57,7 +57,7 @@ class OrderMailFacade
      */
     public function getMailTemplateByStatusAndDomainId(OrderStatus $orderStatus, $domainId)
     {
-        $templateName = $this->orderMailService->getMailTemplateNameByStatus($orderStatus);
+        $templateName = $this->orderMail->getMailTemplateNameByStatus($orderStatus);
 
         return $this->mailTemplateFacade->get($templateName, $domainId);
     }

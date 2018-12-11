@@ -5,15 +5,15 @@ namespace Tests\FrameworkBundle\Unit\Model\Product\BestsellingProduct;
 use PHPUnit\Framework\TestCase;
 use Shopsys\FrameworkBundle\Model\Pricing\Vat\Vat;
 use Shopsys\FrameworkBundle\Model\Pricing\Vat\VatData;
-use Shopsys\FrameworkBundle\Model\Product\BestsellingProduct\BestsellingProductService;
+use Shopsys\FrameworkBundle\Model\Product\BestsellingProduct\BestsellingProductCombinator;
 use Shopsys\FrameworkBundle\Model\Product\Product;
 use Shopsys\FrameworkBundle\Model\Product\ProductData;
 
-class BestsellingProductServiceTest extends TestCase
+class BestsellingProductCombinatorTest extends TestCase
 {
     public function testCombineManualAndAutomaticBestsellingProducts()
     {
-        $bestsellingProductService = new BestsellingProductService();
+        $bestsellingProductCombinator = new BestsellingProductCombinator();
 
         $maxResults = 4;
 
@@ -42,7 +42,7 @@ class BestsellingProductServiceTest extends TestCase
             $product5,
         ];
 
-        $combinedProducts = $bestsellingProductService->combineManualAndAutomaticProducts(
+        $combinedProducts = $bestsellingProductCombinator->combineManualAndAutomaticProducts(
             $manualProductsIndexedByPosition,
             $automaticProducts,
             $maxResults

@@ -18,23 +18,23 @@ class CronModuleFacade
     protected $cronModuleRepository;
 
     /**
-     * @var \Shopsys\FrameworkBundle\Component\Cron\CronService
+     * @var \Shopsys\FrameworkBundle\Component\Cron\CronFilter
      */
-    protected $cronService;
+    protected $cronFilter;
 
     /**
      * @param \Doctrine\ORM\EntityManagerInterface $em
      * @param \Shopsys\FrameworkBundle\Component\Cron\CronModuleRepository $cronModuleRepository
-     * @param \Shopsys\FrameworkBundle\Component\Cron\CronService $cronService
+     * @param \Shopsys\FrameworkBundle\Component\Cron\CronFilter $cronFilter
      */
     public function __construct(
         EntityManagerInterface $em,
         CronModuleRepository $cronModuleRepository,
-        CronService $cronService
+        CronFilter $cronFilter
     ) {
         $this->em = $em;
         $this->cronModuleRepository = $cronModuleRepository;
-        $this->cronService = $cronService;
+        $this->cronFilter = $cronFilter;
     }
 
     /**
@@ -57,7 +57,7 @@ class CronModuleFacade
     {
         $scheduledServiceIds = $this->cronModuleRepository->getAllScheduledCronModuleServiceIds();
 
-        return $this->cronService->filterScheduledCronModuleConfigs($cronModuleConfigs, $scheduledServiceIds);
+        return $this->cronFilter->filterScheduledCronModuleConfigs($cronModuleConfigs, $scheduledServiceIds);
     }
 
     /**

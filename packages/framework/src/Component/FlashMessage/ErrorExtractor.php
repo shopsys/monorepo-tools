@@ -4,7 +4,7 @@ namespace Shopsys\FrameworkBundle\Component\FlashMessage;
 
 use Symfony\Component\Form\Form;
 
-class ErrorService
+class ErrorExtractor
 {
     /**
      * @param \Symfony\Component\Form\Form $form

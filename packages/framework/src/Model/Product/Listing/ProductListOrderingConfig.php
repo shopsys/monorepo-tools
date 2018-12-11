@@ -4,6 +4,13 @@ namespace Shopsys\FrameworkBundle\Model\Product\Listing;
 
 class ProductListOrderingConfig
 {
+    public const ORDER_BY_PRIORITY = 'priority';
+    public const ORDER_BY_PRICE_DESC = 'price_desc';
+    public const ORDER_BY_PRICE_ASC = 'price_asc';
+    public const ORDER_BY_NAME_DESC = 'name_desc';
+    public const ORDER_BY_RELEVANCE = 'relevance';
+    public const ORDER_BY_NAME_ASC = 'name_asc';
+
     /**
      * @var string[]
      */
@@ -53,5 +60,13 @@ class ProductListOrderingConfig
     public function getDefaultOrderingModeId()
     {
         return $this->defaultOrderingModeId;
+    }
+
+    /**
+     * @return string[]
+     */
+    public function getSupportedOrderingModeIds()
+    {
+        return array_keys($this->supportedOrderingModesNamesById);
     }
 }

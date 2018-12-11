@@ -4,7 +4,7 @@ namespace Shopsys\FrameworkBundle\Model\Product\Filter;
 
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\QueryBuilder;
-use Shopsys\FrameworkBundle\Component\Doctrine\QueryBuilderService;
+use Shopsys\FrameworkBundle\Component\Doctrine\QueryBuilderExtender;
 use Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroup;
 use Shopsys\FrameworkBundle\Model\Product\Availability\Availability;
 use Shopsys\FrameworkBundle\Model\Product\Pricing\ProductCalculatedPrice;
@@ -15,9 +15,9 @@ class ProductFilterRepository
     const DAYS_FOR_STOCK_FILTER = 0;
 
     /**
-     * @var \Shopsys\FrameworkBundle\Component\Doctrine\QueryBuilderService
+     * @var \Shopsys\FrameworkBundle\Component\Doctrine\QueryBuilderExtender
      */
-    protected $queryBuilderService;
+    protected $queryBuilderExtender;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Product\Filter\ParameterFilterRepository
@@ -25,14 +25,14 @@ class ProductFilterRepository
     protected $parameterFilterRepository;
 
     /**
-     * @param \Shopsys\FrameworkBundle\Component\Doctrine\QueryBuilderService $queryBuilderService
+     * @param \Shopsys\FrameworkBundle\Component\Doctrine\QueryBuilderExtender $queryBuilderExtender
      * @param \Shopsys\FrameworkBundle\Model\Product\Filter\ParameterFilterRepository $parameterFilterRepository
      */
     public function __construct(
-        QueryBuilderService $queryBuilderService,
+        QueryBuilderExtender $queryBuilderExtender,
         ParameterFilterRepository $parameterFilterRepository
     ) {
-        $this->queryBuilderService = $queryBuilderService;
+        $this->queryBuilderExtender = $queryBuilderExtender;
         $this->parameterFilterRepository = $parameterFilterRepository;
     }
 
@@ -92,7 +92,7 @@ class ProductFilterRepository
                 $priceLimits .= ' AND pcp.priceWithVat <= :maximalPrice';
                 $productsQueryBuilder->setParameter('maximalPrice', $maximalPrice);
             }
-            $this->queryBuilderService->addOrExtendJoin(
+            $this->queryBuilderExtender->addOrExtendJoin(
                 $productsQueryBuilder,
                 ProductCalculatedPrice::class,
                 'pcp',
@@ -109,7 +109,7 @@ class ProductFilterRepository
     public function filterByStock(QueryBuilder $productsQueryBuilder, $filterByStock)
     {
         if ($filterByStock) {
-            $this->queryBuilderService->addOrExtendJoin(
+            $this->queryBuilderExtender->addOrExtendJoin(
                 $productsQueryBuilder,
                 Availability::class,
                 'a',

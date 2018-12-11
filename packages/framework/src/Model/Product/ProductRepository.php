@@ -5,7 +5,7 @@ namespace Shopsys\FrameworkBundle\Model\Product;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Query\Expr\Join;
 use Doctrine\ORM\QueryBuilder;
-use Shopsys\FrameworkBundle\Component\Doctrine\QueryBuilderService;
+use Shopsys\FrameworkBundle\Component\Doctrine\QueryBuilderExtender;
 use Shopsys\FrameworkBundle\Component\Paginator\QueryPaginator;
 use Shopsys\FrameworkBundle\Model\Category\Category;
 use Shopsys\FrameworkBundle\Model\Localization\Localization;
@@ -13,7 +13,7 @@ use Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroup;
 use Shopsys\FrameworkBundle\Model\Product\Brand\Brand;
 use Shopsys\FrameworkBundle\Model\Product\Filter\ProductFilterData;
 use Shopsys\FrameworkBundle\Model\Product\Filter\ProductFilterRepository;
-use Shopsys\FrameworkBundle\Model\Product\Listing\ProductListOrderingModeService;
+use Shopsys\FrameworkBundle\Model\Product\Listing\ProductListOrderingConfig;
 use Shopsys\FrameworkBundle\Model\Product\Pricing\ProductCalculatedPrice;
 use Shopsys\FrameworkBundle\Model\Product\Search\ProductSearchRepository;
 
@@ -30,9 +30,9 @@ class ProductRepository
     protected $productFilterRepository;
 
     /**
-     * @var \Shopsys\FrameworkBundle\Component\Doctrine\QueryBuilderService
+     * @var \Shopsys\FrameworkBundle\Component\Doctrine\QueryBuilderExtender
      */
-    protected $queryBuilderService;
+    protected $queryBuilderExtender;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Localization\Localization
@@ -47,20 +47,20 @@ class ProductRepository
     /**
      * @param \Doctrine\ORM\EntityManagerInterface $em
      * @param \Shopsys\FrameworkBundle\Model\Product\Filter\ProductFilterRepository $productFilterRepository
-     * @param \Shopsys\FrameworkBundle\Component\Doctrine\QueryBuilderService $queryBuilderService
+     * @param \Shopsys\FrameworkBundle\Component\Doctrine\QueryBuilderExtender $queryBuilderExtender
      * @param \Shopsys\FrameworkBundle\Model\Localization\Localization $localization
      * @param \Shopsys\FrameworkBundle\Model\Product\Search\ProductSearchRepository $productSearchRepository
      */
     public function __construct(
         EntityManagerInterface $em,
         ProductFilterRepository $productFilterRepository,
-        QueryBuilderService $queryBuilderService,
+        QueryBuilderExtender $queryBuilderExtender,
         Localization $localization,
         ProductSearchRepository $productSearchRepository
     ) {
         $this->em = $em;
         $this->productFilterRepository = $productFilterRepository;
-        $this->queryBuilderService = $queryBuilderService;
+        $this->queryBuilderExtender = $queryBuilderExtender;
         $this->localization = $localization;
         $this->productSearchRepository = $productSearchRepository;
     }
@@ -462,18 +462,18 @@ class ProductRepository
         $locale
     ) {
         switch ($orderingModeId) {
-            case ProductListOrderingModeService::ORDER_BY_NAME_ASC:
+            case ProductListOrderingConfig::ORDER_BY_NAME_ASC:
                 $collation = $this->localization->getCollationByLocale($locale);
                 $queryBuilder->orderBy("COLLATE(pt.name, '" . $collation . "')", 'asc');
                 break;
 
-            case ProductListOrderingModeService::ORDER_BY_NAME_DESC:
+            case ProductListOrderingConfig::ORDER_BY_NAME_DESC:
                 $collation = $this->localization->getCollationByLocale($locale);
                 $queryBuilder->orderBy("COLLATE(pt.name, '" . $collation . "')", 'desc');
                 break;
 
-            case ProductListOrderingModeService::ORDER_BY_PRICE_ASC:
-                $this->queryBuilderService->addOrExtendJoin(
+            case ProductListOrderingConfig::ORDER_BY_PRICE_ASC:
+                $this->queryBuilderExtender->addOrExtendJoin(
                     $queryBuilder,
                     ProductCalculatedPrice::class,
                     'pcp',
@@ -483,8 +483,8 @@ class ProductRepository
                 $queryBuilder->setParameter('pricingGroup', $pricingGroup);
                 break;
 
-            case ProductListOrderingModeService::ORDER_BY_PRICE_DESC:
-                $this->queryBuilderService->addOrExtendJoin(
+            case ProductListOrderingConfig::ORDER_BY_PRICE_DESC:
+                $this->queryBuilderExtender->addOrExtendJoin(
                     $queryBuilder,
                     ProductCalculatedPrice::class,
                     'pcp',
@@ -494,11 +494,11 @@ class ProductRepository
                 $queryBuilder->setParameter('pricingGroup', $pricingGroup);
                 break;
 
-            case ProductListOrderingModeService::ORDER_BY_RELEVANCE:
+            case ProductListOrderingConfig::ORDER_BY_RELEVANCE:
                 $queryBuilder->orderBy('relevance', 'asc');
                 break;
 
-            case ProductListOrderingModeService::ORDER_BY_PRIORITY:
+            case ProductListOrderingConfig::ORDER_BY_PRIORITY:
                 $queryBuilder->orderBy('p.orderingPriority', 'desc');
                 $collation = $this->localization->getCollationByLocale($locale);
                 $queryBuilder->addOrderBy("COLLATE(pt.name, '" . $collation . "')", 'asc');

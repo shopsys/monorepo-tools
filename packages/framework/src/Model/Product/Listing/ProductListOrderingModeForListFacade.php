@@ -9,16 +9,16 @@ class ProductListOrderingModeForListFacade
     const COOKIE_NAME = 'productListOrderingMode';
 
     /**
-     * @var \Shopsys\FrameworkBundle\Model\Product\Listing\ProductListOrderingModeService
+     * @var \Shopsys\FrameworkBundle\Model\Product\Listing\RequestToOrderingModeIdConverter
      */
-    protected $productListOrderingModeService;
+    protected $requestToOrderingModeIdConverter;
 
     /**
-     * @param \Shopsys\FrameworkBundle\Model\Product\Listing\ProductListOrderingModeService $productListOrderingModeService
+     * @param \Shopsys\FrameworkBundle\Model\Product\Listing\RequestToOrderingModeIdConverter $requestToOrderingModeIdConverter
      */
-    public function __construct(ProductListOrderingModeService $productListOrderingModeService)
+    public function __construct(RequestToOrderingModeIdConverter $requestToOrderingModeIdConverter)
     {
-        $this->productListOrderingModeService = $productListOrderingModeService;
+        $this->requestToOrderingModeIdConverter = $requestToOrderingModeIdConverter;
     }
 
     /**
@@ -28,13 +28,13 @@ class ProductListOrderingModeForListFacade
     {
         return new ProductListOrderingConfig(
             [
-                ProductListOrderingModeService::ORDER_BY_PRIORITY => t('TOP'),
-                ProductListOrderingModeService::ORDER_BY_NAME_ASC => t('alphabetically A -> Z'),
-                ProductListOrderingModeService::ORDER_BY_NAME_DESC => t('alphabetically Z -> A'),
-                ProductListOrderingModeService::ORDER_BY_PRICE_ASC => t('from the cheapest'),
-                ProductListOrderingModeService::ORDER_BY_PRICE_DESC => t('from most expensive'),
+                ProductListOrderingConfig::ORDER_BY_PRIORITY => t('TOP'),
+                ProductListOrderingConfig::ORDER_BY_NAME_ASC => t('alphabetically A -> Z'),
+                ProductListOrderingConfig::ORDER_BY_NAME_DESC => t('alphabetically Z -> A'),
+                ProductListOrderingConfig::ORDER_BY_PRICE_ASC => t('from the cheapest'),
+                ProductListOrderingConfig::ORDER_BY_PRICE_DESC => t('from most expensive'),
             ],
-            ProductListOrderingModeService::ORDER_BY_PRIORITY,
+            ProductListOrderingConfig::ORDER_BY_PRIORITY,
             self::COOKIE_NAME
         );
     }
@@ -45,7 +45,7 @@ class ProductListOrderingModeForListFacade
      */
     public function getOrderingModeIdFromRequest(Request $request)
     {
-        return $this->productListOrderingModeService->getOrderingModeIdFromRequest(
+        return $this->requestToOrderingModeIdConverter->getOrderingModeIdFromRequest(
             $request,
             $this->getProductListOrderingConfig()
         );

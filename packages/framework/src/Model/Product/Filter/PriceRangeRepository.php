@@ -3,7 +3,7 @@
 namespace Shopsys\FrameworkBundle\Model\Product\Filter;
 
 use Doctrine\ORM\QueryBuilder;
-use Shopsys\FrameworkBundle\Component\Doctrine\QueryBuilderService;
+use Shopsys\FrameworkBundle\Component\Doctrine\QueryBuilderExtender;
 use Shopsys\FrameworkBundle\Model\Category\Category;
 use Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroup;
 use Shopsys\FrameworkBundle\Model\Product\Pricing\ProductCalculatedPrice;
@@ -17,18 +17,18 @@ class PriceRangeRepository
     protected $productRepository;
 
     /**
-     * @var \Shopsys\FrameworkBundle\Component\Doctrine\QueryBuilderService
+     * @var \Shopsys\FrameworkBundle\Component\Doctrine\QueryBuilderExtender
      */
-    protected $queryBuilderService;
+    protected $queryBuilderExtender;
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\Product\ProductRepository $productRepository
-     * @param \Shopsys\FrameworkBundle\Component\Doctrine\QueryBuilderService $queryBuilderService
+     * @param \Shopsys\FrameworkBundle\Component\Doctrine\QueryBuilderExtender $queryBuilderExtender
      */
-    public function __construct(ProductRepository $productRepository, QueryBuilderService $queryBuilderService)
+    public function __construct(ProductRepository $productRepository, QueryBuilderExtender $queryBuilderExtender)
     {
         $this->productRepository = $productRepository;
-        $this->queryBuilderService = $queryBuilderService;
+        $this->queryBuilderExtender = $queryBuilderExtender;
     }
 
     /**
@@ -72,7 +72,7 @@ class PriceRangeRepository
     {
         $queryBuilder = clone $productsQueryBuilder;
 
-        $this->queryBuilderService
+        $this->queryBuilderExtender
             ->addOrExtendJoin($queryBuilder, ProductCalculatedPrice::class, 'pcp', 'pcp.product = p')
             ->andWhere('pcp.pricingGroup = :pricingGroup')
             ->setParameter('pricingGroup', $pricingGroup)

@@ -10,7 +10,7 @@ use Shopsys\FrameworkBundle\Model\Mail\MailTemplate;
 use Shopsys\FrameworkBundle\Model\Mail\MailTemplateData;
 use Shopsys\FrameworkBundle\Model\Mail\MessageData;
 use Shopsys\FrameworkBundle\Model\Order\Item\OrderItemPriceCalculation;
-use Shopsys\FrameworkBundle\Model\Order\Mail\OrderMailService;
+use Shopsys\FrameworkBundle\Model\Order\Mail\OrderMail;
 use Shopsys\FrameworkBundle\Model\Order\OrderUrlGenerator;
 use Shopsys\FrameworkBundle\Model\Order\Status\OrderStatus;
 use Shopsys\FrameworkBundle\Twig\DateTimeFormatterExtension;
@@ -19,7 +19,7 @@ use Symfony\Component\Routing\RouterInterface;
 use Tests\ShopBundle\Test\FunctionalTestCase;
 use Twig_Environment;
 
-class OrderMailServiceTest extends FunctionalTestCase
+class OrderMailTest extends FunctionalTestCase
 {
     public function testGetMailTemplateNameByStatus()
     {
@@ -41,7 +41,7 @@ class OrderMailServiceTest extends FunctionalTestCase
         $dateTimeFormatterExtensionMock = $this->getMockBuilder(DateTimeFormatterExtension::class)->disableOriginalConstructor()->getMock();
         $orderUrlGeneratorMock = $this->getMockBuilder(OrderUrlGenerator::class)->disableOriginalConstructor()->getMock();
 
-        $orderMailService = new OrderMailService(
+        $orderMail = new OrderMail(
             $settingMock,
             $domainRouterFactoryMock,
             $twigMock,
@@ -64,8 +64,8 @@ class OrderMailServiceTest extends FunctionalTestCase
             ->getMock();
         $orderStatus2->expects($this->atLeastOnce())->method('getId')->willReturn(2);
 
-        $mailTempleteName1 = $orderMailService->getMailTemplateNameByStatus($orderStatus1);
-        $mailTempleteName2 = $orderMailService->getMailTemplateNameByStatus($orderStatus2);
+        $mailTempleteName1 = $orderMail->getMailTemplateNameByStatus($orderStatus1);
+        $mailTempleteName2 = $orderMail->getMailTemplateNameByStatus($orderStatus2);
 
         $this->assertNotEmpty($mailTempleteName1);
         $this->assertInternalType('string', $mailTempleteName1);
@@ -97,7 +97,7 @@ class OrderMailServiceTest extends FunctionalTestCase
         $domainConfig = new DomainConfig(1, 'http://example.com:8080', 'example', 'cs');
         $domain = new Domain([$domainConfig], $settingMock);
 
-        $orderMailService = new OrderMailService(
+        $orderMail = new OrderMail(
             $settingMock,
             $domainRouterFactoryMock,
             $twigMock,
@@ -115,7 +115,7 @@ class OrderMailServiceTest extends FunctionalTestCase
         $mailTemplateData->body = 'body';
         $mailTemplate = new MailTemplate('templateName', 1, $mailTemplateData);
 
-        $messageData = $orderMailService->getMessageDataByOrder($order, $mailTemplate);
+        $messageData = $orderMail->createMessage($mailTemplate, $order);
 
         $this->assertInstanceOf(MessageData::class, $messageData);
         $this->assertSame($mailTemplate->getSubject(), $messageData->subject);

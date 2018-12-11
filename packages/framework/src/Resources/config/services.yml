@@ -183,7 +183,7 @@ services:
         arguments:
             - '%shopsys.domain_images_dir%'
 
-    Shopsys\FrameworkBundle\Component\Domain\DomainService:
+    Shopsys\FrameworkBundle\Component\Domain\DomainIconResizer:
         arguments:
             - '@monolog.logger'
 
@@ -288,7 +288,7 @@ services:
         tags:
             - { name: kernel.event_subscriber }
 
-    Shopsys\FrameworkBundle\Component\HttpFoundation\TransactionalMasterRequestService:
+    Shopsys\FrameworkBundle\Component\HttpFoundation\TransactionalMasterRequestListener:
         tags:
             - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest }
             - { name: kernel.event_listener, event: kernel.response, method: onKernelResponse }
@@ -477,7 +477,7 @@ services:
     CommerceGuys\Intl\Currency\CurrencyRepositoryInterface:
         class: Shopsys\FrameworkBundle\Model\Localization\IntlCurrencyRepository
 
-    Shopsys\FrameworkBundle\Model\Mail\MailerService:
+    Shopsys\FrameworkBundle\Model\Mail\Mailer:
         arguments: ['@mailer']
 
     Shopsys\FrameworkBundle\Model\Heureka\HeurekaSetting: ~
@@ -552,7 +552,7 @@ services:
     Shopsys\FrameworkBundle\Model\Script\ScriptFacade:
         public: true
 
-    Shopsys\FrameworkBundle\Model\Security\LoginService:
+    Shopsys\FrameworkBundle\Model\Security\Authenticator:
         arguments:
             - '@security.token_storage'
             - '@Symfony\Component\HttpKernel\Debug\TraceableEventDispatcher'
@@ -577,7 +577,7 @@ services:
         tags:
             - { name: kernel.event_listener, event: security.interactive_login, method: onSecurityInteractiveLogin }
 
-    Shopsys\FrameworkBundle\Twig\Javascript\JavascriptCompilerService:
+    Shopsys\FrameworkBundle\Twig\Javascript\JavascriptCompiler:
         arguments:
             - '%shopsys.web_dir%'
             - ['%shopsys.javascript_sources_dir%', '%shopsys.framework.javascript_sources_dir%']
@@ -955,3 +955,33 @@ services:
         factory: 'Shopsys\FrameworkBundle\Component\Microservice\MicroserviceClientFactory:create'
         arguments:
             $microserviceUrl: '%microservice_product_search_export_url%'
+
+    Shopsys\FrameworkBundle\Model\Sitemap\SitemapFilePrefixer: ~
+
+    Shopsys\FrameworkBundle\Model\Product\BestsellingProduct\BestsellingProductCombinator: ~
+
+    Shopsys\FrameworkBundle\Model\Order\Watcher\TransportAndPaymentWatcher: ~
+
+    Shopsys\FrameworkBundle\Model\Cart\Watcher\CartWatcher: ~
+
+    Shopsys\FrameworkBundle\Model\Statistics\ValueByDateTimeDataPointFormatter: ~
+
+    Shopsys\FrameworkBundle\Model\Heureka\HeurekaShopCertificationLocaleHelper: ~
+
+    Shopsys\FrameworkBundle\Component\Doctrine\QueryBuilderExtender: ~
+
+    Shopsys\FrameworkBundle\Component\Domain\DomainUrlReplacer: ~
+
+    Shopsys\FrameworkBundle\Component\Image\Processing\ImageGenerator: ~
+
+    Shopsys\FrameworkBundle\Component\Image\Processing\ImageProcessor: ~
+
+    Shopsys\FrameworkBundle\Component\Cron\CronFilter: ~
+
+    Shopsys\FrameworkBundle\Component\FlashMessage\ErrorExtractor: ~
+
+    Shopsys\FrameworkBundle\Model\Customer\Mail\RegistrationMail: ~
+
+    Shopsys\FrameworkBundle\Model\Order\Mail\OrderMail: ~
+
+    Shopsys\FrameworkBundle\Model\Product\Listing\RequestToOrderingModeIdConverter: ~

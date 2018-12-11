@@ -12,20 +12,20 @@ class ImageGeneratorFacade
     protected $imageRepository;
 
     /**
-     * @var \Shopsys\FrameworkBundle\Component\Image\Processing\ImageGeneratorService
+     * @var \Shopsys\FrameworkBundle\Component\Image\Processing\ImageGenerator
      */
-    protected $imageGeneratorService;
+    protected $imageGenerator;
 
     /**
      * @param \Shopsys\FrameworkBundle\Component\Image\ImageRepository $imageRepository
-     * @param \Shopsys\FrameworkBundle\Component\Image\Processing\ImageGeneratorService $imageGeneratorService
+     * @param \Shopsys\FrameworkBundle\Component\Image\Processing\ImageGenerator $imageGenerator
      */
     public function __construct(
         ImageRepository $imageRepository,
-        ImageGeneratorService $imageGeneratorService
+        ImageGenerator $imageGenerator
     ) {
         $this->imageRepository = $imageRepository;
-        $this->imageGeneratorService = $imageGeneratorService;
+        $this->imageGenerator = $imageGenerator;
     }
 
     /**
@@ -49,6 +49,6 @@ class ImageGeneratorFacade
             throw new \Shopsys\FrameworkBundle\Component\Image\Exception\ImageNotFoundException($message);
         }
 
-        return $this->imageGeneratorService->generateImageSizeAndGetFilepath($image, $sizeName);
+        return $this->imageGenerator->generateImageSizeAndGetFilepath($image, $sizeName);
     }
 }

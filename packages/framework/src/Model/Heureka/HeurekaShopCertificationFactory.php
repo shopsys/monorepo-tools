@@ -19,23 +19,23 @@ class HeurekaShopCertificationFactory
     protected $heurekaSetting;
 
     /**
-     * @var \Shopsys\FrameworkBundle\Model\Heureka\HeurekaShopCertificationService
+     * @var \Shopsys\FrameworkBundle\Model\Heureka\HeurekaShopCertificationLocaleHelper
      */
-    protected $heurekaShopCertificationService;
+    protected $heurekaShopCertificationLocaleHelper;
 
     /**
      * @param \Shopsys\FrameworkBundle\Component\Domain\Domain $domain
      * @param \Shopsys\FrameworkBundle\Model\Heureka\HeurekaSetting $heurekaSetting
-     * @param \Shopsys\FrameworkBundle\Model\Heureka\HeurekaShopCertificationService $heurekaShopCertificationService
+     * @param \Shopsys\FrameworkBundle\Model\Heureka\HeurekaShopCertificationLocaleHelper $heurekaShopCertificationLocaleHelper
      */
     public function __construct(
         Domain $domain,
         HeurekaSetting $heurekaSetting,
-        HeurekaShopCertificationService $heurekaShopCertificationService
+        HeurekaShopCertificationLocaleHelper $heurekaShopCertificationLocaleHelper
     ) {
         $this->domain = $domain;
         $this->heurekaSetting = $heurekaSetting;
-        $this->heurekaShopCertificationService = $heurekaShopCertificationService;
+        $this->heurekaShopCertificationLocaleHelper = $heurekaShopCertificationLocaleHelper;
     }
 
     /**
@@ -46,7 +46,7 @@ class HeurekaShopCertificationFactory
     {
         $domainConfig = $this->domain->getDomainConfigById($order->getDomainId());
 
-        $languageId = $this->heurekaShopCertificationService->getLanguageIdByLocale($domainConfig->getLocale());
+        $languageId = $this->heurekaShopCertificationLocaleHelper->getLanguageIdByLocale($domainConfig->getLocale());
         $heurekaApiKey = $this->heurekaSetting->getApiKeyByDomainId($domainConfig->getId());
         $options = ['service' => $languageId];
 

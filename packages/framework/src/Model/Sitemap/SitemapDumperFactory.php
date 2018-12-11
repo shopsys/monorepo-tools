@@ -22,9 +22,9 @@ class SitemapDumperFactory
     protected $localFilesystem;
 
     /**
-     * @var \Shopsys\FrameworkBundle\Model\Sitemap\SitemapService
+     * @var \Shopsys\FrameworkBundle\Model\Sitemap\SitemapFilePrefixer
      */
-    protected $sitemapService;
+    protected $sitemapFilePrefixer;
 
     /**
      * @var \League\Flysystem\MountManager
@@ -41,18 +41,18 @@ class SitemapDumperFactory
      * @param \Symfony\Component\Filesystem\Filesystem $localFilesystem
      * @param \League\Flysystem\FilesystemInterface $filesystem
      * @param \League\Flysystem\MountManager $mountManager
-     * @param \Shopsys\FrameworkBundle\Model\Sitemap\SitemapService $sitemapService
+     * @param \Shopsys\FrameworkBundle\Model\Sitemap\SitemapFilePrefixer $sitemapFilePrefixer
      */
     public function __construct(
         EventDispatcherInterface $eventDispatcher,
         Filesystem $localFilesystem,
         FilesystemInterface $filesystem,
         MountManager $mountManager,
-        SitemapService $sitemapService
+        SitemapFilePrefixer $sitemapFilePrefixer
     ) {
         $this->eventDispatcher = $eventDispatcher;
         $this->localFilesystem = $localFilesystem;
-        $this->sitemapService = $sitemapService;
+        $this->sitemapFilePrefixer = $sitemapFilePrefixer;
         $this->mountManager = $mountManager;
         $this->filesystem = $filesystem;
     }
@@ -68,7 +68,7 @@ class SitemapDumperFactory
             $this->localFilesystem,
             $this->filesystem,
             $this->mountManager,
-            $this->sitemapService->getSitemapFilePrefixForDomain($domainId),
+            $this->sitemapFilePrefixer->getSitemapFilePrefixForDomain($domainId),
             self::MAX_ITEMS_IN_FILE
         );
     }

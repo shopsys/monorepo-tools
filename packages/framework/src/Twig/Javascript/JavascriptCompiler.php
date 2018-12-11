@@ -7,7 +7,7 @@ use Shopsys\FrameworkBundle\Component\Javascript\Compiler\JsCompiler;
 use Symfony\Component\Asset\Packages;
 use Symfony\Component\Filesystem\Filesystem;
 
-class JavascriptCompilerService
+class JavascriptCompiler
 {
     const NOT_COMPILED_FOLDER = '/plugins/';
 
@@ -90,7 +90,7 @@ class JavascriptCompilerService
      * @param string[] $javascripts
      * @return string[] URLs of compiled JS files
      */
-    public function generateCompiledFiles(array $javascripts)
+    public function compile(array $javascripts)
     {
         $this->javascriptLinks = [];
 

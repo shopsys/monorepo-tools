@@ -3,7 +3,7 @@
 namespace Shopsys\ShopBundle\Controller\Front;
 
 use Shopsys\FrameworkBundle\Component\Domain\Domain;
-use Shopsys\FrameworkBundle\Component\FlashMessage\ErrorService;
+use Shopsys\FrameworkBundle\Component\FlashMessage\ErrorExtractor;
 use Shopsys\FrameworkBundle\Model\Cart\AddProductResult;
 use Shopsys\FrameworkBundle\Model\Cart\CartFacade;
 use Shopsys\FrameworkBundle\Model\Customer\CurrentCustomer;
@@ -54,9 +54,9 @@ class CartController extends FrontBaseController
     private $orderPreviewFactory;
 
     /**
-     * @var \Shopsys\FrameworkBundle\Component\FlashMessage\ErrorService
+     * @var \Shopsys\FrameworkBundle\Component\FlashMessage\ErrorExtractor
      */
-    private $errorService;
+    private $errorExtractor;
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\Product\Accessory\ProductAccessoryFacade $productAccessoryFacade
@@ -65,7 +65,7 @@ class CartController extends FrontBaseController
      * @param \Shopsys\FrameworkBundle\Component\Domain\Domain $domain
      * @param \Shopsys\FrameworkBundle\Model\TransportAndPayment\FreeTransportAndPaymentFacade $freeTransportAndPaymentFacade
      * @param \Shopsys\FrameworkBundle\Model\Order\Preview\OrderPreviewFactory $orderPreviewFactory
-     * @param \Shopsys\FrameworkBundle\Component\FlashMessage\ErrorService $errorService
+     * @param \Shopsys\FrameworkBundle\Component\FlashMessage\ErrorExtractor $errorExtractor
      */
     public function __construct(
         ProductAccessoryFacade $productAccessoryFacade,
@@ -74,7 +74,7 @@ class CartController extends FrontBaseController
         Domain $domain,
         FreeTransportAndPaymentFacade $freeTransportAndPaymentFacade,
         OrderPreviewFactory $orderPreviewFactory,
-        ErrorService $errorService
+        ErrorExtractor $errorExtractor
     ) {
         $this->productAccessoryFacade = $productAccessoryFacade;
         $this->cartFacade = $cartFacade;
@@ -82,7 +82,7 @@ class CartController extends FrontBaseController
         $this->domain = $domain;
         $this->freeTransportAndPaymentFacade = $freeTransportAndPaymentFacade;
         $this->orderPreviewFactory = $orderPreviewFactory;
-        $this->errorService = $errorService;
+        $this->errorExtractor = $errorExtractor;
     }
 
     /**
@@ -201,7 +201,7 @@ class CartController extends FrontBaseController
             // Form errors list in flash message is temporary solution.
             // We need to determine couse of error when adding product to cart.
             $flashMessageBag = $this->get('shopsys.shop.component.flash_message.bag.front');
-            $formErrors = $this->errorService->getAllErrorsAsArray($form, $flashMessageBag);
+            $formErrors = $this->errorExtractor->getAllErrorsAsArray($form, $flashMessageBag);
             $this->getFlashMessageSender()->addErrorFlashTwig(
                 t('Unable to add product to cart:<br/><ul><li>{{ errors|raw }}</li></ul>'),
                 [
@@ -257,7 +257,7 @@ class CartController extends FrontBaseController
             // Form errors list in flash message is temporary solution.
             // We need to determine couse of error when adding product to cart.
             $flashMessageBag = $this->get('shopsys.shop.component.flash_message.bag.front');
-            $formErrors = $this->errorService->getAllErrorsAsArray($form, $flashMessageBag);
+            $formErrors = $this->errorExtractor->getAllErrorsAsArray($form, $flashMessageBag);
             $this->getFlashMessageSender()->addErrorFlashTwig(
                 t('Unable to add product to cart:<br/><ul><li>{{ errors|raw }}</li></ul>'),
                 [
