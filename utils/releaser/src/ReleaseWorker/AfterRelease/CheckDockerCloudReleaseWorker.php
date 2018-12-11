@@ -33,7 +33,7 @@ final class CheckDockerCloudReleaseWorker extends AbstractShopsysReleaseWorker
      */
     public function getDescription(Version $version): string
     {
-        return 'Check builds of Docker images on DockerCloud - they must include the tag';
+        return 'Check builds of Docker images on DockerCloud (https://cloud.docker.com/u/shopsys/) - they must include the tag';
     }
 
     /**

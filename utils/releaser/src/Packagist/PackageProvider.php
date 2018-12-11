@@ -48,7 +48,7 @@ final class PackageProvider
      * @param string $organization
      * @return mixed[]
      */
-    public function getPackagesWithsVersionsByOrganization(string $organization): array
+    public function getPackagesWithVersionsByOrganization(string $organization): array
     {
         $packages = $this->getPackagesByOrganization($organization);
         $packagesWithVersions = [];

@@ -71,7 +71,7 @@ final class SetMutualDependenciesToVersionReleaseWorker extends AbstractShopsysR
         );
 
         $this->commit(sprintf(
-            'all Shopsys packages have now dependency on "%s" version of all other Shopsys packages instead of dev-master',
+            'all Shopsys packages are now dependent on "%s" version of all other Shopsys packages instead of dev-master',
             $version->getVersionString()
         ));
 
