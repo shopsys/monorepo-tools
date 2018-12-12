@@ -3,7 +3,6 @@
 namespace Shopsys\FrameworkBundle\Model\Cart;
 
 use DateTime;
-use Shopsys\FrameworkBundle\Model\Cart\Item\CartItem;
 use Shopsys\FrameworkBundle\Model\Cart\Item\CartItemFactoryInterface;
 use Shopsys\FrameworkBundle\Model\Customer\CustomerIdentifier;
 use Shopsys\FrameworkBundle\Model\Product\Pricing\ProductPriceCalculationForUser;
@@ -58,44 +57,5 @@ class CartService
         $newCartItem = $this->cartItemFactory->create($customerIdentifier, $product, $quantity, $productPrice->getPriceWithVat());
         $cart->addItem($newCartItem);
         return new AddProductResult($newCartItem, true, $quantity);
-    }
-
-    /**
-     * @param \Shopsys\FrameworkBundle\Model\Cart\Cart $resultingCart
-     * @param \Shopsys\FrameworkBundle\Model\Cart\Cart $mergedCart
-     * @param \Shopsys\FrameworkBundle\Model\Customer\CustomerIdentifier $customerIdentifier
-     */
-    public function mergeCarts(Cart $resultingCart, Cart $mergedCart, CustomerIdentifier $customerIdentifier)
-    {
-        foreach ($mergedCart->getItems() as $cartItem) {
-            $similarCartItem = $this->findSimilarCartItemByCartItem($resultingCart, $cartItem);
-            if ($similarCartItem instanceof CartItem) {
-                $similarCartItem->changeQuantity($similarCartItem->getQuantity() + $cartItem->getQuantity());
-            } else {
-                $newCartItem = $this->cartItemFactory->create(
-                    $customerIdentifier,
-                    $cartItem->getProduct(),
-                    $cartItem->getQuantity(),
-                    $cartItem->getWatchedPrice()
-                );
-                $resultingCart->addItem($newCartItem);
-            }
-        }
-    }
-
-    /**
-     * @param \Shopsys\FrameworkBundle\Model\Cart\Cart $cart
-     * @param \Shopsys\FrameworkBundle\Model\Cart\Item\CartItem $cartItem
-     * @return \Shopsys\FrameworkBundle\Model\Cart\Item\CartItem|null
-     */
-    private function findSimilarCartItemByCartItem(Cart $cart, CartItem $cartItem)
-    {
-        foreach ($cart->getItems() as $similarCartItem) {
-            if ($similarCartItem->isSimilarItemAs($cartItem)) {
-                return $similarCartItem;
-            }
-        }
-
-        return null;
     }
 }

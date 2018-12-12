@@ -176,3 +176,5 @@ services:
     Shopsys\FrameworkBundle\Model\Product\ProductSearchExport\ProductSearchExportRepository: ~
 
     Shopsys\FrameworkBundle\Model\Product\Pricing\ProductManualInputPriceFacade: ~
+
+    Shopsys\FrameworkBundle\Model\Cart\Item\CartItemFactory: ~

@@ -2,7 +2,6 @@
 
 namespace Tests\ShopBundle\Functional\Model\Cart;
 
-use ReflectionClass;
 use Shopsys\FrameworkBundle\Model\Cart\Cart;
 use Shopsys\FrameworkBundle\Model\Cart\CartService;
 use Shopsys\FrameworkBundle\Model\Cart\Item\CartItem;
@@ -121,48 +120,6 @@ class CartServiceTest extends FunctionalTestCase
 
         $result = $cartService->addProductToCart($cart, $customerIdentifier, $product, $quantity);
         $this->assertSame($quantity, $result->getAddedQuantity());
-    }
-
-    public function testMergeCartsReturnsCartWithSummedProducts()
-    {
-        $cartService = $this->getCartService();
-
-        $product1 = $this->createProduct();
-        $product2 = $this->createProduct();
-
-        // Cart merging is bound to Product Id
-        $productReflectionClass = new ReflectionClass(Product::class);
-        $idProperty = $productReflectionClass->getProperty('id');
-        $idProperty->setAccessible(true);
-        $idProperty->setValue($product1, 1);
-        $idProperty->setValue($product2, 2);
-
-        $cartIdentifier1 = 'abc123';
-        $cartIdentifier2 = 'def456';
-        $customerIdentifier1 = new CustomerIdentifier($cartIdentifier1);
-        $customerIdentifier2 = new CustomerIdentifier($cartIdentifier2);
-
-        $cartItem = new CartItem($customerIdentifier1, $product1, 2, '0.0');
-        $cartItems = [$cartItem];
-        $mainCart = new Cart($cartItems);
-
-        $cartItem1 = new CartItem($customerIdentifier2, $product1, 3, '0.0');
-        $cartItem2 = new CartItem($customerIdentifier2, $product2, 1, '0.0');
-        $cartItems = [$cartItem1, $cartItem2];
-        $mergingCart = new Cart($cartItems);
-
-        $cartService->mergeCarts($mainCart, $mergingCart, $customerIdentifier1);
-
-        foreach ($mainCart->getItems() as $item) {
-            if ($item->getCartIdentifier() !== $customerIdentifier1->getCartIdentifier()) {
-                $this->fail('Merged cart contain cartItem with wrong cartIdentifier');
-            }
-        }
-
-        $this->assertSame(2, $mainCart->getItemsCount());
-
-        $this->assertSame(5, $mainCart->getItems()[0]->getQuantity());
-        $this->assertSame(1, $mainCart->getItems()[1]->getQuantity());
     }
 
     /**

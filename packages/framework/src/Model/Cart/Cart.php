@@ -3,6 +3,8 @@
 namespace Shopsys\FrameworkBundle\Model\Cart;
 
 use Shopsys\FrameworkBundle\Model\Cart\Item\CartItem;
+use Shopsys\FrameworkBundle\Model\Cart\Item\CartItemFactoryInterface;
+use Shopsys\FrameworkBundle\Model\Customer\CustomerIdentifier;
 use Shopsys\FrameworkBundle\Model\Order\Item\QuantifiedProduct;
 
 class Cart
@@ -110,5 +112,43 @@ class Cart
         }
 
         return $quantifiedProductsByCartItemId;
+    }
+
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Cart\Cart $cartToMerge
+     * @param \Shopsys\FrameworkBundle\Model\Cart\Item\CartItemFactoryInterface $cartItemFactory
+     * @param \Shopsys\FrameworkBundle\Model\Customer\CustomerIdentifier $customerIdentifier
+     */
+    public function mergeWithCart(self $cartToMerge, CartItemFactoryInterface $cartItemFactory, CustomerIdentifier $customerIdentifier)
+    {
+        foreach ($cartToMerge->getItems() as $cartItemToMerge) {
+            $similarCartItem = $this->findSimilarCartItemByCartItem($cartItemToMerge);
+            if ($similarCartItem instanceof CartItem) {
+                $similarCartItem->changeQuantity($similarCartItem->getQuantity() + $cartItemToMerge->getQuantity());
+            } else {
+                $newCartItem = $cartItemFactory->create(
+                    $customerIdentifier,
+                    $cartItemToMerge->getProduct(),
+                    $cartItemToMerge->getQuantity(),
+                    $cartItemToMerge->getWatchedPrice()
+                );
+                $this->addItem($newCartItem);
+            }
+        }
+    }
+
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Cart\Item\CartItem $cartItem
+     * @return \Shopsys\FrameworkBundle\Model\Cart\Item\CartItem|null
+     */
+    protected function findSimilarCartItemByCartItem(CartItem $cartItem)
+    {
+        foreach ($this->cartItems as $similarCartItem) {
+            if ($similarCartItem->isSimilarItemAs($cartItem)) {
+                return $similarCartItem;
+            }
+        }
+
+        return null;
     }
 }
