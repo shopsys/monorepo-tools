@@ -120,6 +120,7 @@ Following methods have been removed:
 - `CategoryService::setChildrenAsSiblings()`
 - `CurrencyService::create()`, use `CurrencyFactory::create()` instead
 - `VatService::getNewDefaultVat()`
+- `OrderProductService::getProductsUsingStockFromOrderProducts()`
 
 Following classes changed constructors:
 - `AdministratorFacade`

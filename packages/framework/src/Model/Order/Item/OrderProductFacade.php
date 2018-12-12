@@ -111,7 +111,12 @@ class OrderProductFacade
      */
     protected function runRecalculationsAfterStockQuantityChange(array $orderProducts)
     {
-        $relevantProducts = $this->orderProductService->getProductsUsingStockFromOrderProducts($orderProducts);
+        $orderProductsUsingStock = $this->orderProductService->getOrderProductsUsingStockFromOrderProducts($orderProducts);
+        $relevantProducts = [];
+        foreach ($orderProductsUsingStock as $orderProductUsingStock) {
+            $relevantProducts[] = $orderProductUsingStock->getProduct();
+        }
+
         foreach ($relevantProducts as $relevantProduct) {
             $this->productSellingDeniedRecalculator->calculateSellingDeniedForProduct($relevantProduct);
             $this->productHiddenRecalculator->calculateHiddenForProduct($relevantProduct);
