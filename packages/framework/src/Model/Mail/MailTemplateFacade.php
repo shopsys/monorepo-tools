@@ -6,7 +6,6 @@ use Doctrine\ORM\EntityManagerInterface;
 use Shopsys\FrameworkBundle\Component\Domain\Domain;
 use Shopsys\FrameworkBundle\Component\UploadedFile\UploadedFileFacade;
 use Shopsys\FrameworkBundle\Model\Order\Mail\OrderMail;
-use Shopsys\FrameworkBundle\Model\Order\Status\OrderStatusMailTemplateService;
 use Shopsys\FrameworkBundle\Model\Order\Status\OrderStatusRepository;
 
 class MailTemplateFacade
@@ -25,11 +24,6 @@ class MailTemplateFacade
      * @var \Shopsys\FrameworkBundle\Model\Order\Status\OrderStatusRepository
      */
     protected $orderStatusRepository;
-
-    /**
-     * @var \Shopsys\FrameworkBundle\Model\Order\Status\OrderStatusMailTemplateService
-     */
-    protected $orderStatusMailTemplateService;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\Domain\Domain
@@ -55,7 +49,6 @@ class MailTemplateFacade
      * @param \Doctrine\ORM\EntityManagerInterface $em
      * @param \Shopsys\FrameworkBundle\Model\Mail\MailTemplateRepository $mailTemplateRepository
      * @param \Shopsys\FrameworkBundle\Model\Order\Status\OrderStatusRepository $orderStatusRepository
-     * @param \Shopsys\FrameworkBundle\Model\Order\Status\OrderStatusMailTemplateService $orderStatusMailTemplateService
      * @param \Shopsys\FrameworkBundle\Component\Domain\Domain $domain
      * @param \Shopsys\FrameworkBundle\Component\UploadedFile\UploadedFileFacade $uploadedFileFacade
      * @param \Shopsys\FrameworkBundle\Model\Mail\MailTemplateFactoryInterface $mailTemplateFactory
@@ -65,7 +58,6 @@ class MailTemplateFacade
         EntityManagerInterface $em,
         MailTemplateRepository $mailTemplateRepository,
         OrderStatusRepository $orderStatusRepository,
-        OrderStatusMailTemplateService $orderStatusMailTemplateService,
         Domain $domain,
         UploadedFileFacade $uploadedFileFacade,
         MailTemplateFactoryInterface $mailTemplateFactory,
@@ -74,7 +66,6 @@ class MailTemplateFacade
         $this->em = $em;
         $this->mailTemplateRepository = $mailTemplateRepository;
         $this->orderStatusRepository = $orderStatusRepository;
-        $this->orderStatusMailTemplateService = $orderStatusMailTemplateService;
         $this->domain = $domain;
         $this->uploadedFileFacade = $uploadedFileFacade;
         $this->mailTemplateFactory = $mailTemplateFactory;
@@ -172,7 +163,7 @@ class MailTemplateFacade
         $allMailTemplatesData->resetPasswordTemplate = $resetPasswordMailTemplateData;
 
         $allMailTemplatesData->orderStatusTemplates =
-            $this->orderStatusMailTemplateService->getOrderStatusMailTemplatesData($orderStatuses, $mailTemplates);
+            $this->mailTemplateDataFactory->createFromOrderStatuses($orderStatuses, $mailTemplates);
 
         $personaAccessTemplate = $this->mailTemplateRepository
             ->findByNameAndDomainId(MailTemplate::PERSONAL_DATA_ACCESS_NAME, $domainId);
