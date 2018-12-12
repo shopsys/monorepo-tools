@@ -40,4 +40,14 @@ final class UpgradeFileManipulatorTest extends TestCase
 
         $this->assertStringMatchesFormatFile(__DIR__ . '/Source/UPGRADE-after.md', $changedContent);
     }
+
+    public function testVersionWithoutV(): void
+    {
+        $changedContent = $this->upgradeFileManipulator->processFileToString(
+            new SmartFileInfo(__DIR__ . '/Source/UPGRADE-vless-before.md'),
+            new Version('1.0.0')
+        );
+
+        $this->assertStringMatchesFormatFile(__DIR__ . '/Source/UPGRADE-vless-after.md', $changedContent);
+    }
 }

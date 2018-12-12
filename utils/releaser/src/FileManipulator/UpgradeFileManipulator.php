@@ -17,13 +17,13 @@ final class UpgradeFileManipulator
      * @var string
      * @see https://regex101.com/r/cHAbva/1
      */
-    private const FROM_TO_UNRELEASED_PATTERN = '#^(\#\# \[?From [\w.-]+ to )Unreleased(]?\n)#ms';
+    private const FROM_TO_UNRELEASED_PATTERN = '#^(?<start>\#\# \[?From [\w.-]+ to )Unreleased(?<end>]?)$#m';
 
     /**
      * @var string
      * @see https://regex101.com/r/izBgtv/3
      */
-    private const FROM_TO_UNRELEASED_LINK_PATTERN = '#(^\[From [\w.-]+ to )Unreleased(.*?\.\.\.).*?\n#m';
+    private const FROM_TO_UNRELEASED_LINK_PATTERN = '#^(?<start>\[From [\w.-]+ to )Unreleased(?<middle>.*?\.\.\.).*?\n#m';
 
     /**
      * @var string
@@ -75,7 +75,9 @@ final class UpgradeFileManipulator
         return Strings::replace(
             $content,
             self::FROM_TO_UNRELEASED_PATTERN,
-            $newHeadline . sprintf('$1%s$2', $version->getVersionString())
+            function ($match) use ($version, $newHeadline) {
+                return $newHeadline . $match['start'] . $version->getVersionString() . $match['end'];
+            }
         );
     }
 
@@ -103,7 +105,9 @@ final class UpgradeFileManipulator
         return Strings::replace(
             $content,
             self::FROM_TO_UNRELEASED_LINK_PATTERN,
-            sprintf($newFooterLink . '$1%s$2%s' . PHP_EOL, $version->getVersionString(), $version->getVersionString())
+            function (array $match) use ($newFooterLink, $version) {
+                return $newFooterLink . $match['start'] . $version->getVersionString() . $match['middle'] . $version->getVersionString() . PHP_EOL;
+            }
         );
     }
 
