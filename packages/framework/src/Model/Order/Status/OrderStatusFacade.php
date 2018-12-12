@@ -74,7 +74,7 @@ class OrderStatusFacade
         $this->em->flush();
 
         $this->mailTemplateFacade->createMailTemplateForAllDomains(
-            OrderMail::MAIL_TEMPLATE_NAME_PREFIX . $orderStatus->getId()
+            OrderMail::getMailTemplateNameByStatus($orderStatus)
         );
 
         return $orderStatus;

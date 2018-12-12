@@ -8,24 +8,16 @@ use Shopsys\FrameworkBundle\Model\Order\Mail\OrderMail;
 class OrderStatusMailTemplateService
 {
     /**
-     * @var \Shopsys\FrameworkBundle\Model\Order\Mail\OrderMail
-     */
-    private $orderMail;
-
-    /**
      * @var \Shopsys\FrameworkBundle\Model\Mail\MailTemplateDataFactoryInterface
      */
     private $mailTemplateDataFactory;
 
     /**
-     * @param \Shopsys\FrameworkBundle\Model\Order\Mail\OrderMail $orderMail
      * @param \Shopsys\FrameworkBundle\Model\Mail\MailTemplateDataFactoryInterface $mailTemplateDataFactory
      */
     public function __construct(
-        OrderMail $orderMail,
         MailTemplateDataFactoryInterface $mailTemplateDataFactory
     ) {
-        $this->orderMail = $orderMail;
         $this->mailTemplateDataFactory = $mailTemplateDataFactory;
     }
 
@@ -37,7 +29,7 @@ class OrderStatusMailTemplateService
     private function getMailTemplateByOrderStatus(array $mailTemplates, OrderStatus $orderStatus)
     {
         foreach ($mailTemplates as $mailTemplate) {
-            if ($mailTemplate->getName() === $this->orderMail->getMailTemplateNameByStatus($orderStatus)) {
+            if ($mailTemplate->getName() === OrderMail::getMailTemplateNameByStatus($orderStatus)) {
                 return $mailTemplate;
             }
         }
@@ -60,7 +52,7 @@ class OrderStatusMailTemplateService
             } else {
                 $orderStatusMailTemplateData = $this->mailTemplateDataFactory->create();
             }
-            $orderStatusMailTemplateData->name = $this->orderMail->getMailTemplateNameByStatus($orderStatus);
+            $orderStatusMailTemplateData->name = OrderMail::getMailTemplateNameByStatus($orderStatus);
 
             $orderStatusMailTemplatesData[$orderStatus->getId()] = $orderStatusMailTemplateData;
         }

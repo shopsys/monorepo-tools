@@ -128,7 +128,7 @@ class OrderMail implements MessageFactoryInterface
      * @param \Shopsys\FrameworkBundle\Model\Order\Status\OrderStatus $orderStatus
      * @return string
      */
-    public function getMailTemplateNameByStatus(OrderStatus $orderStatus)
+    public static function getMailTemplateNameByStatus(OrderStatus $orderStatus)
     {
         return self::MAIL_TEMPLATE_NAME_PREFIX . $orderStatus->getId();
     }
