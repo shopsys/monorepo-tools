@@ -105,6 +105,8 @@ If you use these methods, change their calling appropriately:
   -> `Order::fillOrderProducts(OrderPreview $orderPreview, OrderProductFactoryInterface $orderProductFactory, NumberFormatterExtension $numberFormatterExtension, $locale`
 - `OrderCreationService::fillOrderRounding(Order $order, OrderPreview $orderPreview, $locale)`
   -> `Order::fillOrderRounding(OrderProductFactoryInterface $orderProductFactory, ?Price $roundingPrice, $locale)`
+- `OrderCreationService::fillOrderItems(Order $order, OrderPreview $orderPreview)`
+  -> `OrderFacade::fillOrderItems(Order $order, OrderPreview $orderPreview)`
 
 Following classes have been removed:
 - `AdministratorService`
@@ -125,6 +127,7 @@ Following classes have been removed:
 - `AdvancedSearchService`
 - `AdvancedSearchOrderService`
 - `OrderProductService`
+- `OrderCreationService`
 
 Following methods have been removed:
 - `User::setDeliveryAddress()`, use `User::editDeliveryAddress()` instead
