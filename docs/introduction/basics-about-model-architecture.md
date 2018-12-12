@@ -183,6 +183,16 @@ class CartFacade
      */
     protected $currentCustomer;
 
+    /**
+     * @var \Shopsys\FrameworkBundle\Model\Product\Pricing\ProductPriceCalculationForUser
+     */
+    protected $productPriceCalculation;
+
+    /**
+     * @var \Shopsys\FrameworkBundle\Model\Cart\Item\CartItemFactoryInterface
+     */
+    protected $cartItemFactory;
+
     // ...
 
     /**
@@ -199,8 +209,8 @@ class CartFacade
         );
         $customerIdentifier = $this->customerIdentifierFactory->get();
         $cart = $this->cartFactory->get($customerIdentifier);
-        // TODO the service will be removed during pahse 4
-        $result = $this->cartService->addProductToCart($cart, $customerIdentifier, $product, $quantity);
+
+        $result = $cart->addProduct($customerIdentifier, $product, $quantity, $this->productPriceCalculation, $this->cartItemFactory);
 
         $this->em->persist($result->getCartItem());
         $this->em->flush();
