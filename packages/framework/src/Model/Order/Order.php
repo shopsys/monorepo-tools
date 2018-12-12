@@ -10,12 +10,16 @@ use Shopsys\FrameworkBundle\Model\Customer\User;
 use Shopsys\FrameworkBundle\Model\Order\Item\OrderItem;
 use Shopsys\FrameworkBundle\Model\Order\Item\OrderItemPriceCalculation;
 use Shopsys\FrameworkBundle\Model\Order\Item\OrderPayment;
+use Shopsys\FrameworkBundle\Model\Order\Item\OrderPaymentFactoryInterface;
 use Shopsys\FrameworkBundle\Model\Order\Item\OrderProduct;
 use Shopsys\FrameworkBundle\Model\Order\Item\OrderProductFactoryInterface;
 use Shopsys\FrameworkBundle\Model\Order\Item\OrderTransport;
+use Shopsys\FrameworkBundle\Model\Order\Item\OrderTransportFactoryInterface;
 use Shopsys\FrameworkBundle\Model\Order\Status\OrderStatus;
+use Shopsys\FrameworkBundle\Model\Payment\PaymentPriceCalculation;
 use Shopsys\FrameworkBundle\Model\Pricing\Price;
 use Shopsys\FrameworkBundle\Model\Product\Product;
+use Shopsys\FrameworkBundle\Model\Transport\TransportPriceCalculation;
 
 /**
  * @ORM\Table(name="orders")
@@ -1030,5 +1034,65 @@ class Order
         $this->calculateTotalPrice($orderPriceCalculation);
 
         return new OrderEditResult($statusChanged);
+    }
+
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Payment\PaymentPriceCalculation $paymentPriceCalculation
+     * @param \Shopsys\FrameworkBundle\Model\Order\Item\OrderPaymentFactoryInterface $orderPaymentFactory
+     * @param \Shopsys\FrameworkBundle\Model\Pricing\Price $productsPrice
+     * @param string $locale
+     */
+    public function fillOrderPayment(
+        PaymentPriceCalculation $paymentPriceCalculation,
+        OrderPaymentFactoryInterface $orderPaymentFactory,
+        Price $productsPrice,
+        $locale
+    ) {
+        $payment = $this->getPayment();
+        $paymentPrice = $paymentPriceCalculation->calculatePrice(
+            $payment,
+            $this->getCurrency(),
+            $productsPrice,
+            $this->getDomainId()
+        );
+        $orderPayment = $orderPaymentFactory->create(
+            $this,
+            $payment->getName($locale),
+            $paymentPrice,
+            $payment->getVat()->getPercent(),
+            1,
+            $payment
+        );
+        $this->addItem($orderPayment);
+    }
+
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Transport\TransportPriceCalculation $transportPriceCalculation
+     * @param \Shopsys\FrameworkBundle\Model\Order\Item\OrderTransportFactoryInterface $orderTransportFactory
+     * @param \Shopsys\FrameworkBundle\Model\Pricing\Price $productsPrice
+     * @param string $locale
+     */
+    public function fillOrderTransport(
+        TransportPriceCalculation $transportPriceCalculation,
+        OrderTransportFactoryInterface $orderTransportFactory,
+        Price $productsPrice,
+        $locale
+    ) {
+        $transport = $this->getTransport();
+        $transportPrice = $transportPriceCalculation->calculatePrice(
+            $transport,
+            $this->getCurrency(),
+            $productsPrice,
+            $this->getDomainId()
+        );
+        $orderTransport = $orderTransportFactory->create(
+            $this,
+            $transport->getName($locale),
+            $transportPrice,
+            $transport->getVat()->getPercent(),
+            1,
+            $transport
+        );
+        $this->addItem($orderTransport);
     }
 }

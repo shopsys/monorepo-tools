@@ -87,50 +87,9 @@ class OrderCreationService
         $locale = $this->domain->getDomainConfigById($order->getDomainId())->getLocale();
 
         $this->fillOrderProducts($order, $orderPreview, $locale);
-        $this->fillOrderTransportAndPayment($order, $orderPreview, $locale);
+        $order->fillOrderPayment($this->paymentPriceCalculation, $this->orderPaymentFactory, $orderPreview->getProductsPrice(), $locale);
+        $order->fillOrderTransport($this->transportPriceCalculation, $this->orderTransportFactory, $orderPreview->getProductsPrice(), $locale);
         $this->fillOrderRounding($order, $orderPreview, $locale);
-    }
-
-    /**
-     * @param \Shopsys\FrameworkBundle\Model\Order\Order $order
-     * @param \Shopsys\FrameworkBundle\Model\Order\Preview\OrderPreview $orderPreview
-     * @param string $locale
-     */
-    private function fillOrderTransportAndPayment(Order $order, OrderPreview $orderPreview, $locale)
-    {
-        $payment = $order->getPayment();
-        $paymentPrice = $this->paymentPriceCalculation->calculatePrice(
-            $payment,
-            $order->getCurrency(),
-            $orderPreview->getProductsPrice(),
-            $order->getDomainId()
-        );
-        $orderPayment = $this->orderPaymentFactory->create(
-            $order,
-            $payment->getName($locale),
-            $paymentPrice,
-            $payment->getVat()->getPercent(),
-            1,
-            $payment
-        );
-        $order->addItem($orderPayment);
-
-        $transport = $order->getTransport();
-        $transportPrice = $this->transportPriceCalculation->calculatePrice(
-            $transport,
-            $order->getCurrency(),
-            $orderPreview->getProductsPrice(),
-            $order->getDomainId()
-        );
-        $orderTransport = $this->orderTransportFactory->create(
-            $order,
-            $transport->getName($locale),
-            $transportPrice,
-            $transport->getVat()->getPercent(),
-            1,
-            $transport
-        );
-        $order->addItem($orderTransport);
     }
 
     /**
