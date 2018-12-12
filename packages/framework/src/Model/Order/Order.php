@@ -15,11 +15,13 @@ use Shopsys\FrameworkBundle\Model\Order\Item\OrderProduct;
 use Shopsys\FrameworkBundle\Model\Order\Item\OrderProductFactoryInterface;
 use Shopsys\FrameworkBundle\Model\Order\Item\OrderTransport;
 use Shopsys\FrameworkBundle\Model\Order\Item\OrderTransportFactoryInterface;
+use Shopsys\FrameworkBundle\Model\Order\Preview\OrderPreview;
 use Shopsys\FrameworkBundle\Model\Order\Status\OrderStatus;
 use Shopsys\FrameworkBundle\Model\Payment\PaymentPriceCalculation;
 use Shopsys\FrameworkBundle\Model\Pricing\Price;
 use Shopsys\FrameworkBundle\Model\Product\Product;
 use Shopsys\FrameworkBundle\Model\Transport\TransportPriceCalculation;
+use Shopsys\FrameworkBundle\Twig\NumberFormatterExtension;
 
 /**
  * @ORM\Table(name="orders")
@@ -1094,5 +1096,87 @@ class Order
             $transport
         );
         $this->addItem($orderTransport);
+    }
+
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Order\Preview\OrderPreview $orderPreview
+     * @param \Shopsys\FrameworkBundle\Model\Order\Item\OrderProductFactoryInterface $orderProductFactory
+     * @param \Shopsys\FrameworkBundle\Twig\NumberFormatterExtension $numberFormatterExtension
+     * @param string $locale
+     */
+    public function fillOrderProducts(
+        OrderPreview $orderPreview,
+        OrderProductFactoryInterface $orderProductFactory,
+        NumberFormatterExtension $numberFormatterExtension,
+        $locale
+    ) {
+        $quantifiedItemPrices = $orderPreview->getQuantifiedItemsPrices();
+        $quantifiedItemDiscounts = $orderPreview->getQuantifiedItemsDiscounts();
+
+        foreach ($orderPreview->getQuantifiedProducts() as $index => $quantifiedProduct) {
+            $product = $quantifiedProduct->getProduct();
+            if (!$product instanceof Product) {
+                $message = 'Object "' . get_class($product) . '" is not valid for order creation.';
+                throw new \Shopsys\FrameworkBundle\Model\Order\Item\Exception\InvalidQuantifiedProductException($message);
+            }
+
+            $quantifiedItemPrice = $quantifiedItemPrices[$index];
+            /* @var $quantifiedItemPrice \Shopsys\FrameworkBundle\Model\Order\Item\QuantifiedItemPrice */
+            $quantifiedItemDiscount = $quantifiedItemDiscounts[$index];
+            /* @var $quantifiedItemDiscount \Shopsys\FrameworkBundle\Model\Pricing\Price|null */
+
+            $orderItem = $orderProductFactory->create(
+                $this,
+                $product->getName($locale),
+                $quantifiedItemPrice->getUnitPrice(),
+                $product->getVat()->getPercent(),
+                $quantifiedProduct->getQuantity(),
+                $product->getUnit()->getName($locale),
+                $product->getCatnum(),
+                $product
+            );
+
+            if ($quantifiedItemDiscount !== null) {
+                $this->addOrderItemDiscount($numberFormatterExtension, $orderPreview, $orderProductFactory, $quantifiedItemDiscount, $orderItem, $locale);
+            }
+        }
+    }
+
+    /**
+     * @param \Shopsys\FrameworkBundle\Twig\NumberFormatterExtension $numberFormatterExtension
+     * @param \Shopsys\FrameworkBundle\Model\Order\Preview\OrderPreview $orderPreview
+     * @param \Shopsys\FrameworkBundle\Model\Order\Item\OrderProductFactoryInterface $orderProductFactory
+     * @param \Shopsys\FrameworkBundle\Model\Pricing\Price $quantifiedItemDiscount
+     * @param \Shopsys\FrameworkBundle\Model\Order\Item\OrderItem $orderItem
+     * @param string $locale
+     */
+    protected function addOrderItemDiscount(
+        NumberFormatterExtension $numberFormatterExtension,
+        OrderPreview $orderPreview,
+        OrderProductFactoryInterface $orderProductFactory,
+        Price $quantifiedItemDiscount,
+        OrderItem $orderItem,
+        $locale
+    ) {
+        $name = sprintf(
+            '%s %s - %s',
+            t('Promo code', [], 'messages', $locale),
+            $numberFormatterExtension->formatPercent(-$orderPreview->getPromoCodeDiscountPercent(), $locale),
+            $orderItem->getName()
+        );
+
+        $orderProductFactory->create(
+            $orderItem->getOrder(),
+            $name,
+            new Price(
+                -$quantifiedItemDiscount->getPriceWithoutVat(),
+                -$quantifiedItemDiscount->getPriceWithVat()
+            ),
+            $orderItem->getVatPercent(),
+            1,
+            null,
+            null,
+            null
+        );
     }
 }

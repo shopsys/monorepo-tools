@@ -101,6 +101,8 @@ If you use these methods, change their calling appropriately:
 - `OrderCreationService::fillOrderTransportAndPayment(Order $order, OrderPreview $orderPreview, $locale)`
   -> `Order::fillOrderPayment(PaymentPriceCalculation $paymentPriceCalculation, OrderPaymentFactoryInterface $orderPaymentFactory, Price $productsPrice, $locale)`
   -> `Order::fillOrderTransport(TransportPriceCalculation $transportPriceCalculation, OrderTransportFactoryInterface $orderTransportFactory, Price $productsPrice, $locale)`
+- `OrderCreationService::fillOrderProducts(Order $order, OrderPreview $orderPreview, $locale)`
+  -> `Order::fillOrderProducts(OrderPreview $orderPreview, OrderProductFactoryInterface $orderProductFactory, NumberFormatterExtension $numberFormatterExtension, $locale`
 
 Following classes have been removed:
 - `AdministratorService`
