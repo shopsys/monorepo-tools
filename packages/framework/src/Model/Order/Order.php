@@ -1179,4 +1179,25 @@ class Order
             null
         );
     }
+
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Order\Item\OrderProductFactoryInterface $orderProductFactory
+     * @param \Shopsys\FrameworkBundle\Model\Pricing\Price|null $roundingPrice
+     * @param string $locale
+     */
+    public function fillOrderRounding(OrderProductFactoryInterface $orderProductFactory, ?Price $roundingPrice, $locale)
+    {
+        if ($roundingPrice !== null) {
+            $orderProductFactory->create(
+                $this,
+                t('Rounding', [], 'messages', $locale),
+                $roundingPrice,
+                0,
+                1,
+                null,
+                null,
+                null
+            );
+        }
+    }
 }

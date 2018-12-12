@@ -103,6 +103,8 @@ If you use these methods, change their calling appropriately:
   -> `Order::fillOrderTransport(TransportPriceCalculation $transportPriceCalculation, OrderTransportFactoryInterface $orderTransportFactory, Price $productsPrice, $locale)`
 - `OrderCreationService::fillOrderProducts(Order $order, OrderPreview $orderPreview, $locale)`
   -> `Order::fillOrderProducts(OrderPreview $orderPreview, OrderProductFactoryInterface $orderProductFactory, NumberFormatterExtension $numberFormatterExtension, $locale`
+- `OrderCreationService::fillOrderRounding(Order $order, OrderPreview $orderPreview, $locale)`
+  -> `Order::fillOrderRounding(OrderProductFactoryInterface $orderProductFactory, ?Price $roundingPrice, $locale)`
 
 Following classes have been removed:
 - `AdministratorService`

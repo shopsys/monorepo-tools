@@ -86,27 +86,6 @@ class OrderCreationService
         $order->fillOrderProducts($orderPreview, $this->orderProductFactory, $this->numberFormatterExtension, $locale);
         $order->fillOrderPayment($this->paymentPriceCalculation, $this->orderPaymentFactory, $orderPreview->getProductsPrice(), $locale);
         $order->fillOrderTransport($this->transportPriceCalculation, $this->orderTransportFactory, $orderPreview->getProductsPrice(), $locale);
-        $this->fillOrderRounding($order, $orderPreview, $locale);
-    }
-
-    /**
-     * @param \Shopsys\FrameworkBundle\Model\Order\Order $order
-     * @param \Shopsys\FrameworkBundle\Model\Order\Preview\OrderPreview $orderPreview
-     * @param string $locale
-     */
-    private function fillOrderRounding(Order $order, OrderPreview $orderPreview, $locale)
-    {
-        if ($orderPreview->getRoundingPrice() !== null) {
-            $this->orderProductFactory->create(
-                $order,
-                t('Rounding', [], 'messages', $locale),
-                $orderPreview->getRoundingPrice(),
-                0,
-                1,
-                null,
-                null,
-                null
-            );
-        }
+        $order->fillOrderRounding($this->orderProductFactory, $orderPreview->getRoundingPrice(), $locale);
     }
 }
