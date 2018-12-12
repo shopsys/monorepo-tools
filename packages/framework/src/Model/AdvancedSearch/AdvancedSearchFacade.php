@@ -15,9 +15,9 @@ class AdvancedSearchFacade
     protected $advancedSearchFormFactory;
 
     /**
-     * @var \Shopsys\FrameworkBundle\Model\AdvancedSearch\AdvancedSearchService
+     * @var \Shopsys\FrameworkBundle\Model\AdvancedSearch\AdvancedSearchQueryBuilderExtender
      */
-    protected $advancedSearchService;
+    protected $advancedSearchQueryBuilderExtender;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Product\Listing\ProductListAdminFacade
@@ -31,18 +31,18 @@ class AdvancedSearchFacade
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\AdvancedSearch\ProductAdvancedSearchFormFactory $advancedSearchFormFactory
-     * @param \Shopsys\FrameworkBundle\Model\AdvancedSearch\AdvancedSearchService $advancedSearchService
+     * @param \Shopsys\FrameworkBundle\Model\AdvancedSearch\AdvancedSearchQueryBuilderExtender $advancedSearchQueryBuilderExtender
      * @param \Shopsys\FrameworkBundle\Model\Product\Listing\ProductListAdminFacade $productListAdminFacade
      * @param \Shopsys\FrameworkBundle\Model\AdvancedSearch\RuleFormViewDataFactory $ruleFormViewDataFactory
      */
     public function __construct(
         ProductAdvancedSearchFormFactory $advancedSearchFormFactory,
-        AdvancedSearchService $advancedSearchService,
+        AdvancedSearchQueryBuilderExtender $advancedSearchQueryBuilderExtender,
         ProductListAdminFacade $productListAdminFacade,
         RuleFormViewDataFactory $ruleFormViewDataFactory
     ) {
         $this->advancedSearchFormFactory = $advancedSearchFormFactory;
-        $this->advancedSearchService = $advancedSearchService;
+        $this->advancedSearchQueryBuilderExtender = $advancedSearchQueryBuilderExtender;
         $this->productListAdminFacade = $productListAdminFacade;
         $this->ruleFormViewDataFactory = $ruleFormViewDataFactory;
     }
@@ -80,7 +80,7 @@ class AdvancedSearchFacade
     public function getQueryBuilderByAdvancedSearchData($advancedSearchData)
     {
         $queryBuilder = $this->productListAdminFacade->getProductListQueryBuilder();
-        $this->advancedSearchService->extendQueryBuilderByAdvancedSearchData($queryBuilder, $advancedSearchData);
+        $this->advancedSearchQueryBuilderExtender->extendByAdvancedSearchData($queryBuilder, $advancedSearchData);
 
         return $queryBuilder;
     }

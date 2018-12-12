@@ -2,6 +2,7 @@
 
 namespace Shopsys\FrameworkBundle\Model\AdvancedSearchOrder;
 
+use Shopsys\FrameworkBundle\Model\AdvancedSearch\AdvancedSearchQueryBuilderExtender;
 use Shopsys\FrameworkBundle\Model\AdvancedSearch\OrderAdvancedSearchFormFactory;
 use Shopsys\FrameworkBundle\Model\AdvancedSearch\RuleFormViewDataFactory;
 use Shopsys\FrameworkBundle\Model\Order\Listing\OrderListAdminFacade;
@@ -17,9 +18,9 @@ class AdvancedSearchOrderFacade
     protected $orderAdvancedSearchFormFactory;
 
     /**
-     * @var \Shopsys\FrameworkBundle\Model\AdvancedSearchOrder\AdvancedSearchOrderService
+     * @var \Shopsys\FrameworkBundle\Model\AdvancedSearch\AdvancedSearchQueryBuilderExtender
      */
-    protected $advancedSearchOrderService;
+    protected $advancedSearchQueryBuilderExtender;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Order\Listing\OrderListAdminFacade
@@ -33,18 +34,18 @@ class AdvancedSearchOrderFacade
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\AdvancedSearch\OrderAdvancedSearchFormFactory $orderAdvancedSearchFormFactory
-     * @param \Shopsys\FrameworkBundle\Model\AdvancedSearchOrder\AdvancedSearchOrderService $advancedSearchOrderService
+     * @param \Shopsys\FrameworkBundle\Model\AdvancedSearch\AdvancedSearchQueryBuilderExtender $advancedSearchQueryBuilderExtender
      * @param \Shopsys\FrameworkBundle\Model\Order\Listing\OrderListAdminFacade $orderListAdminFacade
      * @param \Shopsys\FrameworkBundle\Model\AdvancedSearch\RuleFormViewDataFactory $ruleFormViewDataFactory
      */
     public function __construct(
         OrderAdvancedSearchFormFactory $orderAdvancedSearchFormFactory,
-        AdvancedSearchOrderService $advancedSearchOrderService,
+        AdvancedSearchQueryBuilderExtender $advancedSearchQueryBuilderExtender,
         OrderListAdminFacade $orderListAdminFacade,
         RuleFormViewDataFactory $ruleFormViewDataFactory
     ) {
         $this->orderAdvancedSearchFormFactory = $orderAdvancedSearchFormFactory;
-        $this->advancedSearchOrderService = $advancedSearchOrderService;
+        $this->advancedSearchQueryBuilderExtender = $advancedSearchQueryBuilderExtender;
         $this->orderListAdminFacade = $orderListAdminFacade;
         $this->ruleFormViewDataFactory = $ruleFormViewDataFactory;
     }
@@ -82,7 +83,7 @@ class AdvancedSearchOrderFacade
     public function getQueryBuilderByAdvancedSearchOrderData($advancedSearchOrderData)
     {
         $queryBuilder = $this->orderListAdminFacade->getOrderListQueryBuilder();
-        $this->advancedSearchOrderService->extendQueryBuilderByAdvancedSearchOrderData($queryBuilder, $advancedSearchOrderData);
+        $this->advancedSearchQueryBuilderExtender->extendByAdvancedSearchData($queryBuilder, $advancedSearchOrderData);
 
         return $queryBuilder;
     }

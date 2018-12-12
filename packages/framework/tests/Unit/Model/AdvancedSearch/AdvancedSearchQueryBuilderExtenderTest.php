@@ -5,13 +5,14 @@ namespace Tests\FrameworkBundle\Unit\Model\AdvancedSearch;
 use Doctrine\ORM\QueryBuilder;
 use PHPUnit\Framework\TestCase;
 use Shopsys\FrameworkBundle\Model\AdvancedSearch\AdvancedSearchFilterInterface;
+use Shopsys\FrameworkBundle\Model\AdvancedSearch\AdvancedSearchQueryBuilderExtender;
 use Shopsys\FrameworkBundle\Model\AdvancedSearch\AdvancedSearchRuleData;
-use Shopsys\FrameworkBundle\Model\AdvancedSearch\AdvancedSearchService;
 use Shopsys\FrameworkBundle\Model\AdvancedSearch\ProductAdvancedSearchConfig;
+use Shopsys\FrameworkBundle\Model\AdvancedSearch\RuleFormViewDataFactory;
 
-class AdvancedSearchServiceTest extends TestCase
+class AdvancedSearchQueryBuilderExtenderTest extends TestCase
 {
-    public function testExtendQueryBuilderByAdvancedSearchData()
+    public function testExtendByAdvancedSearchData()
     {
         $ruleData = new AdvancedSearchRuleData();
         $ruleData->subject = 'testSubject';
@@ -19,7 +20,7 @@ class AdvancedSearchServiceTest extends TestCase
         $ruleData->value = 'testValue';
 
         $advancedSearchData = [
-            AdvancedSearchService::TEMPLATE_RULE_FORM_KEY => null,
+            RuleFormViewDataFactory::TEMPLATE_RULE_FORM_KEY => null,
             0 => $ruleData,
         ];
 
@@ -42,8 +43,8 @@ class AdvancedSearchServiceTest extends TestCase
             ->disableOriginalConstructor()
             ->getMock();
 
-        $advancedSearchService = new AdvancedSearchService($advancedSearchConfigMock);
+        $advancedSearchQueryBuilderExtender = new AdvancedSearchQueryBuilderExtender($advancedSearchConfigMock);
 
-        $advancedSearchService->extendQueryBuilderByAdvancedSearchData($queryBuilderMock, $advancedSearchData);
+        $advancedSearchQueryBuilderExtender->extendByAdvancedSearchData($queryBuilderMock, $advancedSearchData);
     }
 }

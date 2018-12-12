@@ -1,22 +1,22 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Shopsys\FrameworkBundle\Model\AdvancedSearch;
 
 use Doctrine\ORM\QueryBuilder;
 
-class AdvancedSearchService
+class AdvancedSearchQueryBuilderExtender
 {
-    const TEMPLATE_RULE_FORM_KEY = '__template__';
-
     /**
-     * @var \Shopsys\FrameworkBundle\Model\AdvancedSearch\ProductAdvancedSearchConfig
+     * @var \Shopsys\FrameworkBundle\Model\AdvancedSearch\AdvancedSearchConfig
      */
     private $advancedSearchConfig;
 
     /**
-     * @param \Shopsys\FrameworkBundle\Model\AdvancedSearch\ProductAdvancedSearchConfig $advancedSearchConfig
+     * @param \Shopsys\FrameworkBundle\Model\AdvancedSearch\AdvancedSearchConfig $advancedSearchConfig
      */
-    public function __construct(ProductAdvancedSearchConfig $advancedSearchConfig)
+    public function __construct(AdvancedSearchConfig $advancedSearchConfig)
     {
         $this->advancedSearchConfig = $advancedSearchConfig;
     }
@@ -25,11 +25,11 @@ class AdvancedSearchService
      * @param \Doctrine\ORM\QueryBuilder $queryBuilder
      * @param \Shopsys\FrameworkBundle\Model\AdvancedSearch\AdvancedSearchRuleData[] $advancedSearchData
      */
-    public function extendQueryBuilderByAdvancedSearchData(QueryBuilder $queryBuilder, array $advancedSearchData)
+    public function extendByAdvancedSearchData(QueryBuilder $queryBuilder, array $advancedSearchData)
     {
         $rulesDataByFilterName = [];
         foreach ($advancedSearchData as $key => $ruleData) {
-            if ($key === self::TEMPLATE_RULE_FORM_KEY || $ruleData->operator === null) {
+            if ($key === RuleFormViewDataFactory::TEMPLATE_RULE_FORM_KEY || $ruleData->operator === null) {
                 continue;
             }
             $rulesDataByFilterName[$ruleData->subject][] = $ruleData;
