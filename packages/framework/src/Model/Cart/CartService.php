@@ -63,19 +63,6 @@ class CartService
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\Cart\Cart $cart
-     * @param array $quantitiesByCartItemId
-     */
-    public function changeQuantities(Cart $cart, array $quantitiesByCartItemId)
-    {
-        foreach ($cart->getItems() as $cartItem) {
-            if (array_key_exists($cartItem->getId(), $quantitiesByCartItemId)) {
-                $cartItem->changeQuantity($quantitiesByCartItemId[$cartItem->getId()]);
-            }
-        }
-    }
-
-    /**
-     * @param \Shopsys\FrameworkBundle\Model\Cart\Cart $cart
      * @param int $cartItemId
      * @return \Shopsys\FrameworkBundle\Model\Cart\Item\CartItem
      */

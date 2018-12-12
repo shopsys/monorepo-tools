@@ -122,7 +122,7 @@ class CartFacade
     public function changeQuantities(array $quantitiesByCartItemId)
     {
         $cart = $this->getCartOfCurrentCustomer();
-        $this->cartService->changeQuantities($cart, $quantitiesByCartItemId);
+        $cart->changeQuantities($quantitiesByCartItemId);
         $this->em->flush();
     }
 

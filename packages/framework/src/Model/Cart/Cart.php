@@ -70,4 +70,16 @@ class Cart
     {
         return $this->getItemsCount() === 0;
     }
+
+    /**
+     * @param array $quantitiesByCartItemId
+     */
+    public function changeQuantities(array $quantitiesByCartItemId)
+    {
+        foreach ($this->cartItems as $cartItem) {
+            if (array_key_exists($cartItem->getId(), $quantitiesByCartItemId)) {
+                $cartItem->changeQuantity($quantitiesByCartItemId[$cartItem->getId()]);
+            }
+        }
+    }
 }

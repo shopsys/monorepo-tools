@@ -107,6 +107,8 @@ If you use these methods, change their calling appropriately:
   -> `Order::fillOrderRounding(OrderProductFactoryInterface $orderProductFactory, ?Price $roundingPrice, $locale)`
 - `OrderCreationService::fillOrderItems(Order $order, OrderPreview $orderPreview)`
   -> `OrderFacade::fillOrderItems(Order $order, OrderPreview $orderPreview)`
+- `CartService::changeQuantities(Cart $cart, array $quantitiesByCartItemId)`
+  -> `Cart::changeQuantities(array $quantitiesByCartItemId)`
 
 Following classes have been removed:
 - `AdministratorService`
