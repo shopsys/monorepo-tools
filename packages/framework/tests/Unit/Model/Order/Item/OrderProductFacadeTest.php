@@ -7,7 +7,6 @@ use PHPUnit\Framework\TestCase;
 use Shopsys\FrameworkBundle\Model\Module\ModuleFacade;
 use Shopsys\FrameworkBundle\Model\Order\Item\OrderProduct;
 use Shopsys\FrameworkBundle\Model\Order\Item\OrderProductFacade;
-use Shopsys\FrameworkBundle\Model\Order\Item\OrderProductService;
 use Shopsys\FrameworkBundle\Model\Order\Order;
 use Shopsys\FrameworkBundle\Model\Pricing\Price;
 use Shopsys\FrameworkBundle\Model\Product\Availability\ProductAvailabilityRecalculationScheduler;
@@ -120,7 +119,6 @@ class OrderProductFacadeTest extends TestCase
             $this->createMock(ProductSellingDeniedRecalculator::class),
             $this->createMock(ProductAvailabilityRecalculationScheduler::class),
             $this->createMock(ProductVisibilityFacade::class),
-            new OrderProductService(),
             $moduleFacadeMock
         );
     }

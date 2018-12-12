@@ -90,6 +90,8 @@ If you use these methods, change their calling appropriately:
   -> `OrderProductFacade::subtractOrderProductsFromStock(array $orderProducts)`
 - `OrderProductService::returnOrderProductsToStock(array $orderProducts)`
   -> `OrderProductFacade::addOrderProductsToStock(array $orderProducts)`
+- `OrderProductService::getOrderProductsUsingStockFromOrderProducts(array $orderProducts)`
+  -> `OrderProductFacade::getOrderProductsUsingStockFromOrderProducts(array $orderProducts)`
 
 Following classes have been removed:
 - `AdministratorService`
@@ -109,6 +111,7 @@ Following classes have been removed:
 - `UploadedFileService`
 - `AdvancedSearchService`
 - `AdvancedSearchOrderService`
+- `OrderProductService`
 
 Following methods have been removed:
 - `User::setDeliveryAddress()`, use `User::editDeliveryAddress()` instead
@@ -148,6 +151,7 @@ Following classes changed constructors:
 - `UploadedFileFactory`
 - `AdvancedSearchFacade`
 - `AdvancedSearchOrderFacade`
+- `OrderProductFacade`
 
 Following functions visibility was changed to `protected` as there is no need to use them from outside of objects:
 - `Administrator::getGridLimit()`
