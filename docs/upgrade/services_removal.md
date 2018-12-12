@@ -88,6 +88,8 @@ If you use these methods, change their calling appropriately:
   -> `AdvancedSearchQueryBuilderExtender::extendByAdvancedSearchData(QueryBuilder $queryBuilder, array $advancedSearchData)`
 - `OrderProductService::subtractOrderProductsFromStock(array $orderProducts)`
   -> `OrderProductFacade::subtractOrderProductsFromStock(array $orderProducts)`
+- `OrderProductService::returnOrderProductsToStock(array $orderProducts)`
+  -> `OrderProductFacade::addOrderProductsToStock(array $orderProducts)`
 
 Following classes have been removed:
 - `AdministratorService`

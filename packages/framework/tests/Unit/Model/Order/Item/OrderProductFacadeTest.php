@@ -61,6 +61,48 @@ class OrderProductFacadeTest extends TestCase
         $this->assertSame($productStockQuantity, $product->getStockQuantity());
     }
 
+    public function testAddOrderProductsToStockUsingStock()
+    {
+        $productStockQuantity = 15;
+        $orderProductQuantity = 10;
+
+        $orderMock = $this->createMock(Order::class);
+
+        $productData = new ProductData();
+        $productData->usingStock = true;
+        $productData->stockQuantity = $productStockQuantity;
+        $product = Product::create($productData);
+        $productPrice = new Price(0, 0);
+
+        $orderProduct = new OrderProduct($orderMock, 'productName', $productPrice, 0, $orderProductQuantity, null, null, $product);
+
+        $orderProductFacade = $this->createOrderProductFacade();
+        $orderProductFacade->addOrderProductsToStock([$orderProduct]);
+
+        $this->assertSame($productStockQuantity + $orderProductQuantity, $product->getStockQuantity());
+    }
+
+    public function testAddOrderProductsToStockNotUsingStock()
+    {
+        $productStockQuantity = 15;
+        $orderProductQuantity = 10;
+
+        $orderMock = $this->createMock(Order::class);
+
+        $productData = new ProductData();
+        $productData->usingStock = false;
+        $productData->stockQuantity = $productStockQuantity;
+        $product = Product::create($productData);
+        $productPrice = new Price(0, 0);
+
+        $orderProduct = new OrderProduct($orderMock, 'productName', $productPrice, 0, $orderProductQuantity, null, null, $product);
+
+        $orderProductFacade = $this->createOrderProductFacade();
+        $orderProductFacade->addOrderProductsToStock([$orderProduct]);
+
+        $this->assertSame($productStockQuantity, $product->getStockQuantity());
+    }
+
     /**
      * @return \Shopsys\FrameworkBundle\Model\Order\Item\OrderProductFacade
      */
