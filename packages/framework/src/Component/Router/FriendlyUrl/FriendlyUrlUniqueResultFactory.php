@@ -2,7 +2,7 @@
 
 namespace Shopsys\FrameworkBundle\Component\Router\FriendlyUrl;
 
-class FriendlyUrlService
+class FriendlyUrlUniqueResultFactory
 {
     /**
      * @var \Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\FriendlyUrlFactoryInterface
@@ -24,10 +24,10 @@ class FriendlyUrlService
      * @param array|null $matchedRouteData
      * @return \Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\FriendlyUrlUniqueResult
      */
-    public function getFriendlyUrlUniqueResult(
-        $attempt,
+    public function create(
+        int $attempt,
         FriendlyUrl $friendlyUrl,
-        $entityName,
+        string $entityName,
         array $matchedRouteData = null
     ) {
         if ($matchedRouteData === null) {

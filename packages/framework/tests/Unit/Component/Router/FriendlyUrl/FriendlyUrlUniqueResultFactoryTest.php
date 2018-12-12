@@ -7,12 +7,12 @@ use Shopsys\FrameworkBundle\Component\Domain\Config\DomainConfig;
 use Shopsys\FrameworkBundle\Component\Domain\Domain;
 use Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\FriendlyUrl;
 use Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\FriendlyUrlFactory;
-use Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\FriendlyUrlService;
+use Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\FriendlyUrlUniqueResultFactory;
 use Shopsys\FrameworkBundle\Component\Setting\Setting;
 
-class FriendlyUrlServiceTest extends TestCase
+class FriendlyUrlUniqueResultFactoryTest extends TestCase
 {
-    public function testGetFriendlyUrlUniqueResultNewUnique()
+    public function testCreateNewUnique()
     {
         $domainConfigs = [
             new DomainConfig(1, 'http://example.com', 'example.com', 'en'),
@@ -20,12 +20,12 @@ class FriendlyUrlServiceTest extends TestCase
         $settingMock = $this->createMock(Setting::class);
         $domain = new Domain($domainConfigs, $settingMock);
 
-        $friendlyUrlService = new FriendlyUrlService(new FriendlyUrlFactory($domain));
+        $friendlyUrlUniqueResultFactory = new FriendlyUrlUniqueResultFactory(new FriendlyUrlFactory($domain));
 
         $attempt = 1;
         $friendlyUrl = new FriendlyUrl('route_name', 7, 1, 'name');
         $matchedRouteData = null;
-        $friendlyUrlUniqueResult = $friendlyUrlService->getFriendlyUrlUniqueResult(
+        $friendlyUrlUniqueResult = $friendlyUrlUniqueResultFactory->create(
             $attempt,
             $friendlyUrl,
             'name',
@@ -36,7 +36,7 @@ class FriendlyUrlServiceTest extends TestCase
         $this->assertSame($friendlyUrl, $friendlyUrlUniqueResult->getFriendlyUrlForPersist());
     }
 
-    public function testGetFriendlyUrlUniqueResultOldUnique()
+    public function testCreateOldUnique()
     {
         $domainConfigs = [
             new DomainConfig(1, 'http://example.com', 'example.com', 'en'),
@@ -44,7 +44,7 @@ class FriendlyUrlServiceTest extends TestCase
         $settingMock = $this->createMock(Setting::class);
         $domain = new Domain($domainConfigs, $settingMock);
 
-        $friendlyUrlService = new FriendlyUrlService(new FriendlyUrlFactory($domain));
+        $friendlyUrlUniqueResultFactory = new FriendlyUrlUniqueResultFactory(new FriendlyUrlFactory($domain));
 
         $attempt = 1;
         $friendlyUrl = new FriendlyUrl('route_name', 7, 1, 'name');
@@ -52,7 +52,7 @@ class FriendlyUrlServiceTest extends TestCase
             '_route' => $friendlyUrl->getRouteName(),
             'id' => $friendlyUrl->getEntityId(),
         ];
-        $friendlyUrlUniqueResult = $friendlyUrlService->getFriendlyUrlUniqueResult(
+        $friendlyUrlUniqueResult = $friendlyUrlUniqueResultFactory->create(
             $attempt,
             $friendlyUrl,
             'name',
@@ -63,7 +63,7 @@ class FriendlyUrlServiceTest extends TestCase
         $this->assertNull($friendlyUrlUniqueResult->getFriendlyUrlForPersist());
     }
 
-    public function testGetFriendlyUrlUniqueResultNotUnique()
+    public function testCreateNotUnique()
     {
         $domainConfigs = [
             new DomainConfig(1, 'http://example.com', 'example.com', 'en'),
@@ -71,7 +71,7 @@ class FriendlyUrlServiceTest extends TestCase
         $settingMock = $this->createMock(Setting::class);
         $domain = new Domain($domainConfigs, $settingMock);
 
-        $friendlyUrlService = new FriendlyUrlService(new FriendlyUrlFactory($domain));
+        $friendlyUrlUniqueResultFactory = new FriendlyUrlUniqueResultFactory(new FriendlyUrlFactory($domain));
 
         $attempt = 3;
         $friendlyUrl = new FriendlyUrl('route_name', 7, 1, 'name');
@@ -79,7 +79,7 @@ class FriendlyUrlServiceTest extends TestCase
             '_route' => 'another_route_name',
             'id' => 7,
         ];
-        $friendlyUrlUniqueResult = $friendlyUrlService->getFriendlyUrlUniqueResult(
+        $friendlyUrlUniqueResult = $friendlyUrlUniqueResultFactory->create(
             $attempt,
             $friendlyUrl,
             'name',
