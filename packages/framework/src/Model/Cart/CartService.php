@@ -6,7 +6,6 @@ use DateTime;
 use Shopsys\FrameworkBundle\Model\Cart\Item\CartItem;
 use Shopsys\FrameworkBundle\Model\Cart\Item\CartItemFactoryInterface;
 use Shopsys\FrameworkBundle\Model\Customer\CustomerIdentifier;
-use Shopsys\FrameworkBundle\Model\Order\Item\QuantifiedProduct;
 use Shopsys\FrameworkBundle\Model\Product\Pricing\ProductPriceCalculationForUser;
 use Shopsys\FrameworkBundle\Model\Product\Product;
 
@@ -98,19 +97,5 @@ class CartService
         }
 
         return null;
-    }
-
-    /**
-     * @param \Shopsys\FrameworkBundle\Model\Cart\Cart $cart
-     * @return \Shopsys\FrameworkBundle\Model\Order\Item\QuantifiedProduct[]
-     */
-    public function getQuantifiedProductsIndexedByCartItemId(Cart $cart)
-    {
-        $quantifiedProductsByCartItemId = [];
-        foreach ($cart->getItems() as $cartItem) {
-            $quantifiedProductsByCartItemId[$cartItem->getId()] = new QuantifiedProduct($cartItem->getProduct(), $cartItem->getQuantity());
-        }
-
-        return $quantifiedProductsByCartItemId;
     }
 }

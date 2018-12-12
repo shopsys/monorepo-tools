@@ -186,7 +186,7 @@ class CartFacade
     {
         $cart = $this->getCartOfCurrentCustomer();
 
-        return $this->cartService->getQuantifiedProductsIndexedByCartItemId($cart);
+        return $cart->getQuantifiedProductsIndexedByCartItemId();
     }
 
     public function deleteOldCarts()

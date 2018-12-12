@@ -111,6 +111,8 @@ If you use these methods, change their calling appropriately:
   -> `Cart::changeQuantities(array $quantitiesByCartItemId)`
 - `CartService::getCartItemById(Cart $cart, $cartItemId)`
   -> `Cart::getCartItemById($cartItemId)`
+- `CartService::getQuantifiedProductsIndexedByCartItemId(Cart $cart)`
+  -> `Cart::getQuantifiedProductsIndexedByCartItemId()`
 
 Following classes have been removed:
 - `AdministratorService`

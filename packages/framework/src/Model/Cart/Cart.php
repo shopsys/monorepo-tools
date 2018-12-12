@@ -3,6 +3,7 @@
 namespace Shopsys\FrameworkBundle\Model\Cart;
 
 use Shopsys\FrameworkBundle\Model\Cart\Item\CartItem;
+use Shopsys\FrameworkBundle\Model\Order\Item\QuantifiedProduct;
 
 class Cart
 {
@@ -96,5 +97,18 @@ class Cart
         }
         $message = 'CartItem with id = ' . $cartItemId . ' not found in cart.';
         throw new \Shopsys\FrameworkBundle\Model\Cart\Exception\InvalidCartItemException($message);
+    }
+
+    /**
+     * @return \Shopsys\FrameworkBundle\Model\Order\Item\QuantifiedProduct[]
+     */
+    public function getQuantifiedProductsIndexedByCartItemId()
+    {
+        $quantifiedProductsByCartItemId = [];
+        foreach ($this->cartItems as $cartItem) {
+            $quantifiedProductsByCartItemId[$cartItem->getId()] = new QuantifiedProduct($cartItem->getProduct(), $cartItem->getQuantity());
+        }
+
+        return $quantifiedProductsByCartItemId;
     }
 }
