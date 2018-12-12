@@ -80,7 +80,11 @@ class OrderProductFacade
     public function subtractOrderProductsFromStock(array $orderProducts)
     {
         if ($this->moduleFacade->isEnabled(ModuleList::PRODUCT_STOCK_CALCULATIONS)) {
-            $this->orderProductService->subtractOrderProductsFromStock($orderProducts);
+            $orderProductsUsingStock = $this->orderProductService->getOrderProductsUsingStockFromOrderProducts($orderProducts);
+            foreach ($orderProductsUsingStock as $orderProductUsingStock) {
+                $product = $orderProductUsingStock->getProduct();
+                $product->subtractStockQuantity($orderProductUsingStock->getQuantity());
+            }
             $this->em->flush();
             $this->runRecalculationsAfterStockQuantityChange($orderProducts);
         }

@@ -86,6 +86,8 @@ If you use these methods, change their calling appropriately:
   -> `RuleFormViewDataFactory::createFromRequestData(string $defaultFilterName, array $requestData = null)`
 - `AdvancedSearchOrderService::extendQueryBuilderByAdvancedSearchData(QueryBuilder $queryBuilder, array $advancedSearchData)` and `AdvancedSearchService::extendQueryBuilderByAdvancedSearchData(QueryBuilder $queryBuilder, array $advancedSearchData)`
   -> `AdvancedSearchQueryBuilderExtender::extendByAdvancedSearchData(QueryBuilder $queryBuilder, array $advancedSearchData)`
+- `OrderProductService::subtractOrderProductsFromStock(array $orderProducts)`
+  -> `OrderProductFacade::subtractOrderProductsFromStock(array $orderProducts)`
 
 Following classes have been removed:
 - `AdministratorService`
