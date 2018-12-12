@@ -71,7 +71,7 @@ class FriendlyUrlFacade
      */
     public function createFriendlyUrls($routeName, $entityId, array $namesByLocale)
     {
-        $friendlyUrls = $this->friendlyUrlService->createFriendlyUrls($routeName, $entityId, $namesByLocale);
+        $friendlyUrls = $this->friendlyUrlFactory->createForAllDomains($routeName, $entityId, $namesByLocale);
         foreach ($friendlyUrls as $friendlyUrl) {
             $locale = $this->domain->getDomainConfigById($friendlyUrl->getDomainId())->getLocale();
             $this->resolveUniquenessOfFriendlyUrlAndFlush($friendlyUrl, $namesByLocale[$locale]);

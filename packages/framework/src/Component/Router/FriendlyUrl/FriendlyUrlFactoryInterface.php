@@ -33,4 +33,16 @@ interface FriendlyUrlFactoryInterface
         int $domainId,
         int $indexPostfix = null
     ): ?FriendlyUrl;
+
+    /**
+     * @param string $routeName
+     * @param int $entityId
+     * @param string[] $namesByLocale
+     * @return \Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\FriendlyUrl[]
+     */
+    public function createForAllDomains(
+        string $routeName,
+        int $entityId,
+        array $namesByLocale
+    ): array;
 }

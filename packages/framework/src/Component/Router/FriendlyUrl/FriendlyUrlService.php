@@ -27,33 +27,6 @@ class FriendlyUrlService
     }
 
     /**
-     * @param string $routeName
-     * @param int $entityId
-     * @param string[] $namesByLocale
-     * @return \Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\FriendlyUrl[]
-     */
-    public function createFriendlyUrls($routeName, $entityId, $namesByLocale)
-    {
-        $friendlyUrls = [];
-        foreach ($this->domain->getAll() as $domainConfig) {
-            if (array_key_exists($domainConfig->getLocale(), $namesByLocale)) {
-                $friendlyUrl = $this->friendlyUrlFactory->createIfValid(
-                    $routeName,
-                    $entityId,
-                    (string)$namesByLocale[$domainConfig->getLocale()],
-                    $domainConfig->getId()
-                );
-
-                if ($friendlyUrl !== null) {
-                    $friendlyUrls[] = $friendlyUrl;
-                }
-            }
-        }
-
-        return $friendlyUrls;
-    }
-
-    /**
      * @param int $attempt
      * @param \Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\FriendlyUrl $friendlyUrl
      * @param string $entityName
