@@ -14,6 +14,7 @@ use Shopsys\FrameworkBundle\Model\Customer\CurrentCustomer;
 use Shopsys\FrameworkBundle\Model\Customer\CustomerFacade;
 use Shopsys\FrameworkBundle\Model\Heureka\HeurekaFacade;
 use Shopsys\FrameworkBundle\Model\Localization\Localization;
+use Shopsys\FrameworkBundle\Model\Order\FrontOrderDataMapper;
 use Shopsys\FrameworkBundle\Model\Order\Item\OrderItemPriceCalculation;
 use Shopsys\FrameworkBundle\Model\Order\Item\OrderProductFacade;
 use Shopsys\FrameworkBundle\Model\Order\Item\OrderProductFactoryInterface;
@@ -105,7 +106,8 @@ class OrderFacadeHeurekaTest extends TestCase
             $this->createMock(OrderFactoryInterface::class),
             $this->createMock(OrderPriceCalculation::class),
             $this->createMock(OrderItemPriceCalculation::class),
-            $this->createMock(OrderProductFactoryInterface::class)
+            $this->createMock(OrderProductFactoryInterface::class),
+            $this->createMock(FrontOrderDataMapper::class)
         );
         return $orderFacade;
     }

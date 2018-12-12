@@ -146,6 +146,11 @@ class OrderFacade
     protected $orderProductFactory;
 
     /**
+     * @var \Shopsys\FrameworkBundle\Model\Order\FrontOrderDataMapper
+     */
+    protected $frontOrderDataMapper;
+
+    /**
      * @param \Doctrine\ORM\EntityManagerInterface $em
      * @param \Shopsys\FrameworkBundle\Model\Order\OrderNumberSequenceRepository $orderNumberSequenceRepository
      * @param \Shopsys\FrameworkBundle\Model\Order\OrderRepository $orderRepository
@@ -169,6 +174,7 @@ class OrderFacade
      * @param \Shopsys\FrameworkBundle\Model\Order\OrderPriceCalculation $orderPriceCalculation
      * @param \Shopsys\FrameworkBundle\Model\Order\Item\OrderItemPriceCalculation $orderItemPriceCalculation
      * @param \Shopsys\FrameworkBundle\Model\Order\Item\OrderProductFactoryInterface $orderProductFactory
+     * @param \Shopsys\FrameworkBundle\Model\Order\FrontOrderDataMapper $frontOrderDataMapper
      */
     public function __construct(
         EntityManagerInterface $em,
@@ -193,7 +199,8 @@ class OrderFacade
         OrderFactoryInterface $orderFactory,
         OrderPriceCalculation $orderPriceCalculation,
         OrderItemPriceCalculation $orderItemPriceCalculation,
-        OrderProductFactoryInterface $orderProductFactory
+        OrderProductFactoryInterface $orderProductFactory,
+        FrontOrderDataMapper $frontOrderDataMapper
     ) {
         $this->em = $em;
         $this->orderNumberSequenceRepository = $orderNumberSequenceRepository;
@@ -218,6 +225,7 @@ class OrderFacade
         $this->orderUrlGenerator = $orderUrlGenerator;
         $this->orderItemPriceCalculation = $orderItemPriceCalculation;
         $this->orderProductFactory = $orderProductFactory;
+        $this->frontOrderDataMapper = $frontOrderDataMapper;
     }
 
     /**
@@ -356,7 +364,7 @@ class OrderFacade
     public function prefillFrontOrderData(FrontOrderData $orderData, User $user)
     {
         $order = $this->orderRepository->findLastByUserId($user->getId());
-        $this->orderCreationService->prefillFrontFormData($orderData, $user, $order);
+        $this->frontOrderDataMapper->prefillFrontFormData($orderData, $user, $order);
     }
 
     /**

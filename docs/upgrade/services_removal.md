@@ -92,6 +92,12 @@ If you use these methods, change their calling appropriately:
   -> `OrderProductFacade::addOrderProductsToStock(array $orderProducts)`
 - `OrderProductService::getOrderProductsUsingStockFromOrderProducts(array $orderProducts)`
   -> `OrderProductFacade::getOrderProductsUsingStockFromOrderProducts(array $orderProducts)`
+- `OrderCreationService::prefillFrontFormData(FrontOrderData $frontOrderData, User $user, Order $order = null)`
+  -> `FrontOrderDataMapper::prefillFrontFormData(FrontOrderData $frontOrderData, User $user, ?Order $order)`
+- `OrderCreationService::prefillTransportAndPaymentFromOrder(FrontOrderData $frontOrderData, Order $order)`
+  -> `FrontOrderDataMapper::prefillTransportAndPaymentFromOrder(FrontOrderData $frontOrderData, Order $order)`
+- `OrderCreationService::prefillFrontFormDataFromCustomer(FrontOrderData $frontOrderData, User $user)`
+  -> `FrontOrderDataMapper::prefillFrontFormDataFromCustomer(FrontOrderData $frontOrderData, User $user)`
 
 Following classes have been removed:
 - `AdministratorService`
@@ -152,6 +158,7 @@ Following classes changed constructors:
 - `AdvancedSearchFacade`
 - `AdvancedSearchOrderFacade`
 - `OrderProductFacade`
+- `OrderFacade`
 
 Following functions visibility was changed to `protected` as there is no need to use them from outside of objects:
 - `Administrator::getGridLimit()`
