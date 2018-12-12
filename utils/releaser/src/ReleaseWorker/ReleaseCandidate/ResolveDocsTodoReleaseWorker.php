@@ -41,18 +41,13 @@ final class ResolveDocsTodoReleaseWorker extends AbstractShopsysReleaseWorker
      */
     public function work(Version $version): void
     {
-        $finder = Finder::create()->files()
-            ->name('*.md')
-            ->in(getcwd())
-            ->exclude('vendor')
-            ->exclude('project-base/var');
+        $fileInfos = $this->findMdFileInfos();
 
-        $this->symfonyStyle->section(sprintf('Checking %d files for "%s"', count($finder->getIterator()), self::TODO_PLACEHOLDER));
+        $this->symfonyStyle->section(sprintf('Checking %d files for "%s"', count($fileInfos), self::TODO_PLACEHOLDER));
 
         $isPassing = true;
 
-        /** @var \Symfony\Component\Finder\SplFileInfo $fileInfo */
-        foreach ($finder as $fileInfo) {
+        foreach ($fileInfos as $fileInfo) {
             $todoFound = Strings::matchAll($fileInfo->getContents(), '#' . preg_quote(self::TODO_PLACEHOLDER) . '#');
             if ($todoFound === []) {
                 continue;
@@ -81,5 +76,19 @@ final class ResolveDocsTodoReleaseWorker extends AbstractShopsysReleaseWorker
     public function getStage(): string
     {
         return Stage::RELEASE_CANDIDATE;
+    }
+
+    /**
+     * @return \Symfony\Component\Finder\SplFileInfo[]
+     */
+    private function findMdFileInfos(): array
+    {
+        $finder = Finder::create()->files()
+            ->name('*.md')
+            ->in(getcwd())
+            ->exclude('vendor')
+            ->exclude('project-base/var');
+
+        return iterator_to_array($finder->getIterator());
     }
 }
