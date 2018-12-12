@@ -231,6 +231,7 @@ Following classes changed constructors:
 - `FriendlyUrlFactory`
 - `ProductCollectionFacade`
 - `UserDataFixture`
+- `OrderStatusFacade`
 
 Following functions visibility was changed to `protected` as there is no need to use them from outside of objects:
 - `Administrator::getGridLimit()`

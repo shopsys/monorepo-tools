@@ -20,11 +20,6 @@ class OrderStatusFacade
     protected $orderStatusRepository;
 
     /**
-     * @var \Shopsys\FrameworkBundle\Model\Order\Status\OrderStatusService
-     */
-    protected $orderStatusService;
-
-    /**
      * @var \Shopsys\FrameworkBundle\Model\Order\OrderRepository
      */
     protected $orderRepository;
@@ -42,7 +37,6 @@ class OrderStatusFacade
     /**
      * @param \Doctrine\ORM\EntityManagerInterface $em
      * @param \Shopsys\FrameworkBundle\Model\Order\Status\OrderStatusRepository $orderStatusRepository
-     * @param \Shopsys\FrameworkBundle\Model\Order\Status\OrderStatusService $orderStatusService
      * @param \Shopsys\FrameworkBundle\Model\Order\OrderRepository $orderRepository
      * @param \Shopsys\FrameworkBundle\Model\Mail\MailTemplateFacade $mailTemplateFacade
      * @param \Shopsys\FrameworkBundle\Model\Order\Status\OrderStatusFactoryInterface $orderStatusFactory
@@ -50,14 +44,12 @@ class OrderStatusFacade
     public function __construct(
         EntityManagerInterface $em,
         OrderStatusRepository $orderStatusRepository,
-        OrderStatusService $orderStatusService,
         OrderRepository $orderRepository,
         MailTemplateFacade $mailTemplateFacade,
         OrderStatusFactoryInterface $orderStatusFactory
     ) {
         $this->em = $em;
         $this->orderStatusRepository = $orderStatusRepository;
-        $this->orderStatusService = $orderStatusService;
         $this->orderRepository = $orderRepository;
         $this->mailTemplateFacade = $mailTemplateFacade;
         $this->orderStatusFactory = $orderStatusFactory;
