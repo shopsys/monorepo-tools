@@ -17,4 +17,20 @@ interface FriendlyUrlFactoryInterface
         int $domainId,
         string $slug
     ): FriendlyUrl;
+
+    /**
+     * @param string $routeName
+     * @param int $entityId
+     * @param string $entityName
+     * @param int $domainId
+     * @param int|null $indexPostfix
+     * @return \Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\FriendlyUrl|null
+     */
+    public function createIfValid(
+        string $routeName,
+        int $entityId,
+        string $entityName,
+        int $domainId,
+        int $indexPostfix = null
+    ): ?FriendlyUrl;
 }

@@ -86,7 +86,7 @@ class FriendlyUrlFacade
      */
     public function createFriendlyUrlForDomain($routeName, $entityId, $entityName, $domainId)
     {
-        $friendlyUrl = $this->friendlyUrlService->createFriendlyUrlIfValid($routeName, $entityId, $entityName, $domainId);
+        $friendlyUrl = $this->friendlyUrlFactory->createIfValid($routeName, $entityId, (string)$entityName, $domainId);
         if ($friendlyUrl !== null) {
             $this->resolveUniquenessOfFriendlyUrlAndFlush($friendlyUrl, $entityName);
         }
