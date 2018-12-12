@@ -3,11 +3,11 @@
 namespace Shopsys\FrameworkBundle\Model\Product\Collection;
 
 use Shopsys\FrameworkBundle\Component\Domain\Config\DomainConfig;
+use Shopsys\FrameworkBundle\Component\Domain\Domain;
 use Shopsys\FrameworkBundle\Component\Image\Config\ImageConfig;
 use Shopsys\FrameworkBundle\Component\Image\ImageFacade;
 use Shopsys\FrameworkBundle\Component\Image\ImageRepository;
 use Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\FriendlyUrlRepository;
-use Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\FriendlyUrlService;
 use Shopsys\FrameworkBundle\Model\Product\Parameter\ParameterRepository;
 use Shopsys\FrameworkBundle\Model\Product\Product;
 use Shopsys\FrameworkBundle\Model\Product\ProductRepository;
@@ -40,14 +40,14 @@ class ProductCollectionFacade
     protected $friendlyUrlRepository;
 
     /**
-     * @var \Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\FriendlyUrlService
-     */
-    protected $friendlyUrlService;
-
-    /**
      * @var \Shopsys\FrameworkBundle\Model\Product\Parameter\ParameterRepository
      */
     protected $parameterRepository;
+
+    /**
+     * @var \Shopsys\FrameworkBundle\Component\Domain\Domain
+     */
+    protected $domain;
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\Product\ProductRepository $productRepository
@@ -55,8 +55,8 @@ class ProductCollectionFacade
      * @param \Shopsys\FrameworkBundle\Component\Image\ImageRepository $imageRepository
      * @param \Shopsys\FrameworkBundle\Component\Image\ImageFacade $imageFacade
      * @param \Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\FriendlyUrlRepository $friendlyUrlRepository
-     * @param \Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\FriendlyUrlService $friendlyUrlService
      * @param \Shopsys\FrameworkBundle\Model\Product\Parameter\ParameterRepository $parameterRepository
+     * @param \Shopsys\FrameworkBundle\Component\Domain\Domain $domain
      */
     public function __construct(
         ProductRepository $productRepository,
@@ -64,16 +64,16 @@ class ProductCollectionFacade
         ImageRepository $imageRepository,
         ImageFacade $imageFacade,
         FriendlyUrlRepository $friendlyUrlRepository,
-        FriendlyUrlService $friendlyUrlService,
-        ParameterRepository $parameterRepository
+        ParameterRepository $parameterRepository,
+        Domain $domain
     ) {
         $this->imageConfig = $imageConfig;
         $this->imageRepository = $imageRepository;
         $this->imageFacade = $imageFacade;
         $this->friendlyUrlRepository = $friendlyUrlRepository;
-        $this->friendlyUrlService = $friendlyUrlService;
         $this->productRepository = $productRepository;
         $this->parameterRepository = $parameterRepository;
+        $this->domain = $domain;
     }
 
     /**
@@ -137,7 +137,7 @@ class ProductCollectionFacade
 
         $absoluteUrlsByProductId = [];
         foreach ($mainFriendlyUrlsByProductId as $productId => $friendlyUrl) {
-            $absoluteUrlsByProductId[$productId] = $this->friendlyUrlService->getAbsoluteUrlByFriendlyUrl($friendlyUrl);
+            $absoluteUrlsByProductId[$productId] = $friendlyUrl->getAbsoluteUrl($this->domain);
         }
 
         return $absoluteUrlsByProductId;

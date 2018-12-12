@@ -2,27 +2,18 @@
 
 namespace Shopsys\FrameworkBundle\Component\Router\FriendlyUrl;
 
-use Shopsys\FrameworkBundle\Component\Domain\Domain;
-
 class FriendlyUrlService
 {
-    /**
-     * @var \Shopsys\FrameworkBundle\Component\Domain\Domain
-     */
-    private $domain;
-
     /**
      * @var \Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\FriendlyUrlFactoryInterface
      */
     protected $friendlyUrlFactory;
 
     /**
-     * @param \Shopsys\FrameworkBundle\Component\Domain\Domain $domain
      * @param \Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\FriendlyUrlFactoryInterface $friendlyUrlFactory
      */
-    public function __construct(Domain $domain, FriendlyUrlFactoryInterface $friendlyUrlFactory)
+    public function __construct(FriendlyUrlFactoryInterface $friendlyUrlFactory)
     {
-        $this->domain = $domain;
         $this->friendlyUrlFactory = $friendlyUrlFactory;
     }
 
@@ -58,16 +49,5 @@ class FriendlyUrlService
         );
 
         return new FriendlyUrlUniqueResult(false, $newIndexedFriendlyUrl);
-    }
-
-    /**
-     * @param \Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\FriendlyUrl $friendlyUrl
-     * @return string
-     */
-    public function getAbsoluteUrlByFriendlyUrl(FriendlyUrl $friendlyUrl)
-    {
-        $domainConfig = $this->domain->getDomainConfigById($friendlyUrl->getDomainId());
-
-        return $domainConfig->getUrl() . '/' . $friendlyUrl->getSlug();
     }
 }

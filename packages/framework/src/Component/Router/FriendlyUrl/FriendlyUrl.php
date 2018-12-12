@@ -3,6 +3,7 @@
 namespace Shopsys\FrameworkBundle\Component\Router\FriendlyUrl;
 
 use Doctrine\ORM\Mapping as ORM;
+use Shopsys\FrameworkBundle\Component\Domain\Domain;
 
 /**
  * @ORM\Table(
@@ -113,5 +114,16 @@ class FriendlyUrl
     public function setMain($main)
     {
         $this->main = $main;
+    }
+
+    /**
+     * @param \Shopsys\FrameworkBundle\Component\Domain\Domain $domain
+     * @return string
+     */
+    public function getAbsoluteUrl(Domain $domain): string
+    {
+        $domainConfig = $domain->getDomainConfigById($this->domainId);
+
+        return $domainConfig->getUrl() . '/' . $this->slug;
     }
 }

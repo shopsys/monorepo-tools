@@ -20,7 +20,7 @@ class FriendlyUrlServiceTest extends TestCase
         $settingMock = $this->createMock(Setting::class);
         $domain = new Domain($domainConfigs, $settingMock);
 
-        $friendlyUrlService = new FriendlyUrlService($domain, new FriendlyUrlFactory($domain));
+        $friendlyUrlService = new FriendlyUrlService(new FriendlyUrlFactory($domain));
 
         $attempt = 1;
         $friendlyUrl = new FriendlyUrl('route_name', 7, 1, 'name');
@@ -44,7 +44,7 @@ class FriendlyUrlServiceTest extends TestCase
         $settingMock = $this->createMock(Setting::class);
         $domain = new Domain($domainConfigs, $settingMock);
 
-        $friendlyUrlService = new FriendlyUrlService($domain, new FriendlyUrlFactory($domain));
+        $friendlyUrlService = new FriendlyUrlService(new FriendlyUrlFactory($domain));
 
         $attempt = 1;
         $friendlyUrl = new FriendlyUrl('route_name', 7, 1, 'name');
@@ -71,7 +71,7 @@ class FriendlyUrlServiceTest extends TestCase
         $settingMock = $this->createMock(Setting::class);
         $domain = new Domain($domainConfigs, $settingMock);
 
-        $friendlyUrlService = new FriendlyUrlService($domain, new FriendlyUrlFactory($domain));
+        $friendlyUrlService = new FriendlyUrlService(new FriendlyUrlFactory($domain));
 
         $attempt = 3;
         $friendlyUrl = new FriendlyUrl('route_name', 7, 1, 'name');
@@ -92,20 +92,5 @@ class FriendlyUrlServiceTest extends TestCase
         $this->assertSame($friendlyUrl->getEntityId(), $friendlyUrlForPersist->getEntityId());
         $this->assertSame($friendlyUrl->getDomainId(), $friendlyUrlForPersist->getDomainId());
         $this->assertSame('name-4/', $friendlyUrlForPersist->getSlug());
-    }
-
-    public function testGetAbsoluteUrlByFriendlyUrl()
-    {
-        $domainConfigs = [
-            new DomainConfig(1, 'http://example.cz', 'example.cz', 'cs'),
-        ];
-        $settingMock = $this->createMock(Setting::class);
-        $domain = new Domain($domainConfigs, $settingMock);
-
-        $friendlyUrlService = new FriendlyUrlService($domain, new FriendlyUrlFactory($domain));
-        $friendlyUrl = new FriendlyUrl('routeName', 1, 1, 'slug/');
-        $absoluteUrl = $friendlyUrlService->getAbsoluteUrlByFriendlyUrl($friendlyUrl);
-
-        $this->assertSame('http://example.cz/slug/', $absoluteUrl);
     }
 }
