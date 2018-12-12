@@ -80,6 +80,12 @@ If you use these methods, change their calling appropriately:
   -> `UploadedFileFactoryInterface::create(string $entityName, int $entityId, array $temporaryFilenames)`
 - `UploadedFileService::createUploadedFile(UploadedFileEntityConfig $uploadedFileEntityConfig, $entityId, array $temporaryFilenames)`
   -> `UploadedFileFactoryInterface::create(string $entityName, int $entityId, array $temporaryFilenames)`
+- `AdvancedSearchOrderService::createDefaultRuleFormViewData($filterName)` and `AdvancedSearchService::createDefaultRuleFormViewData($filterName)`
+  -> `RuleFormViewDataFactory::createDefault(string $filterName)`
+- `AdvancedSearchOrderService::getRulesFormViewDataByRequestData(array $requestData = null)` and `AdvancedSearchService::getRulesFormViewDataByRequestData(array $requestData = null)`
+  -> `RuleFormViewDataFactory::createFromRequestData(string $defaultFilterName, array $requestData = null)`
+- `AdvancedSearchOrderService::extendQueryBuilderByAdvancedSearchData(QueryBuilder $queryBuilder, array $advancedSearchData)` and `AdvancedSearchService::extendQueryBuilderByAdvancedSearchData(QueryBuilder $queryBuilder, array $advancedSearchData)`
+  -> `AdvancedSearchQueryBuilderExtender::extendByAdvancedSearchData(QueryBuilder $queryBuilder, array $advancedSearchData)`
 
 Following classes have been removed:
 - `AdministratorService`
@@ -97,6 +103,8 @@ Following classes have been removed:
 - `VatService`
 - `GridOrderingService`
 - `UploadedFileService`
+- `AdvancedSearchService`
+- `AdvancedSearchOrderService`
 
 Following methods have been removed:
 - `User::setDeliveryAddress()`, use `User::editDeliveryAddress()` instead
@@ -133,6 +141,8 @@ Following classes changed constructors:
 - `GridOrderingFacade`
 - `UploadedFileFacade`
 - `UploadedFileFactory`
+- `AdvancedSearchFacade`
+- `AdvancedSearchOrderFacade`
 
 Following functions visibility was changed to `protected` as there is no need to use them from outside of objects:
 - `Administrator::getGridLimit()`
