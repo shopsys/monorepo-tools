@@ -3,6 +3,7 @@
 namespace Shopsys\FrameworkBundle\Model\AdvancedSearchOrder;
 
 use Shopsys\FrameworkBundle\Model\AdvancedSearch\OrderAdvancedSearchFormFactory;
+use Shopsys\FrameworkBundle\Model\AdvancedSearch\RuleFormViewDataFactory;
 use Shopsys\FrameworkBundle\Model\Order\Listing\OrderListAdminFacade;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -26,18 +27,26 @@ class AdvancedSearchOrderFacade
     protected $orderListAdminFacade;
 
     /**
+     * @var \Shopsys\FrameworkBundle\Model\AdvancedSearch\RuleFormViewDataFactory
+     */
+    protected $ruleFormViewDataFactory;
+
+    /**
      * @param \Shopsys\FrameworkBundle\Model\AdvancedSearch\OrderAdvancedSearchFormFactory $orderAdvancedSearchFormFactory
      * @param \Shopsys\FrameworkBundle\Model\AdvancedSearchOrder\AdvancedSearchOrderService $advancedSearchOrderService
      * @param \Shopsys\FrameworkBundle\Model\Order\Listing\OrderListAdminFacade $orderListAdminFacade
+     * @param \Shopsys\FrameworkBundle\Model\AdvancedSearch\RuleFormViewDataFactory $ruleFormViewDataFactory
      */
     public function __construct(
         OrderAdvancedSearchFormFactory $orderAdvancedSearchFormFactory,
         AdvancedSearchOrderService $advancedSearchOrderService,
-        OrderListAdminFacade $orderListAdminFacade
+        OrderListAdminFacade $orderListAdminFacade,
+        RuleFormViewDataFactory $ruleFormViewDataFactory
     ) {
         $this->orderAdvancedSearchFormFactory = $orderAdvancedSearchFormFactory;
         $this->advancedSearchOrderService = $advancedSearchOrderService;
         $this->orderListAdminFacade = $orderListAdminFacade;
+        $this->ruleFormViewDataFactory = $ruleFormViewDataFactory;
     }
 
     /**
@@ -47,7 +56,7 @@ class AdvancedSearchOrderFacade
     public function createAdvancedSearchOrderForm(Request $request)
     {
         $rulesData = (array)$request->get(self::RULES_FORM_NAME);
-        $rulesFormData = $this->advancedSearchOrderService->getRulesFormViewDataByRequestData($rulesData);
+        $rulesFormData = $this->ruleFormViewDataFactory->createFromRequestData('orderTotalPriceWithVat', $rulesData);
 
         return $this->orderAdvancedSearchFormFactory->createRulesForm(self::RULES_FORM_NAME, $rulesFormData);
     }
@@ -60,7 +69,7 @@ class AdvancedSearchOrderFacade
     public function createRuleForm($filterName, $index)
     {
         $rulesData = [
-            $index => $this->advancedSearchOrderService->createDefaultRuleFormViewData($filterName),
+            $index => $this->ruleFormViewDataFactory->createDefault($filterName),
         ];
 
         return $this->orderAdvancedSearchFormFactory->createRulesForm(self::RULES_FORM_NAME, $rulesData);

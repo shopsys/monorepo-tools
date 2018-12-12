@@ -25,18 +25,26 @@ class AdvancedSearchFacade
     protected $productListAdminFacade;
 
     /**
+     * @var \Shopsys\FrameworkBundle\Model\AdvancedSearch\RuleFormViewDataFactory
+     */
+    protected $ruleFormViewDataFactory;
+
+    /**
      * @param \Shopsys\FrameworkBundle\Model\AdvancedSearch\ProductAdvancedSearchFormFactory $advancedSearchFormFactory
      * @param \Shopsys\FrameworkBundle\Model\AdvancedSearch\AdvancedSearchService $advancedSearchService
      * @param \Shopsys\FrameworkBundle\Model\Product\Listing\ProductListAdminFacade $productListAdminFacade
+     * @param \Shopsys\FrameworkBundle\Model\AdvancedSearch\RuleFormViewDataFactory $ruleFormViewDataFactory
      */
     public function __construct(
         ProductAdvancedSearchFormFactory $advancedSearchFormFactory,
         AdvancedSearchService $advancedSearchService,
-        ProductListAdminFacade $productListAdminFacade
+        ProductListAdminFacade $productListAdminFacade,
+        RuleFormViewDataFactory $ruleFormViewDataFactory
     ) {
         $this->advancedSearchFormFactory = $advancedSearchFormFactory;
         $this->advancedSearchService = $advancedSearchService;
         $this->productListAdminFacade = $productListAdminFacade;
+        $this->ruleFormViewDataFactory = $ruleFormViewDataFactory;
     }
 
     /**
@@ -46,7 +54,7 @@ class AdvancedSearchFacade
     public function createAdvancedSearchForm(Request $request)
     {
         $rulesData = (array)$request->get(self::RULES_FORM_NAME);
-        $rulesFormData = $this->advancedSearchService->getRulesFormViewDataByRequestData($rulesData);
+        $rulesFormData = $this->ruleFormViewDataFactory->createFromRequestData('productName', $rulesData);
 
         return $this->advancedSearchFormFactory->createRulesForm(self::RULES_FORM_NAME, $rulesFormData);
     }
@@ -59,7 +67,7 @@ class AdvancedSearchFacade
     public function createRuleForm($filterName, $index)
     {
         $rulesData = [
-            $index => $this->advancedSearchService->createDefaultRuleFormViewData($filterName),
+            $index => $this->ruleFormViewDataFactory->createDefault($filterName),
         ];
 
         return $this->advancedSearchFormFactory->createRulesForm(self::RULES_FORM_NAME, $rulesData);

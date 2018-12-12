@@ -22,40 +22,6 @@ class AdvancedSearchService
     }
 
     /**
-     * @param array|null $requestData
-     * @return array
-     */
-    public function getRulesFormViewDataByRequestData(array $requestData = null)
-    {
-        if ($requestData === null) {
-            $searchRulesViewData = [];
-        } else {
-            $searchRulesViewData = array_values($requestData);
-        }
-
-        if (count($searchRulesViewData) === 0) {
-            $searchRulesViewData[] = $this->createDefaultRuleFormViewData('productName');
-        }
-
-        $searchRulesViewData[self::TEMPLATE_RULE_FORM_KEY] = $this->createDefaultRuleFormViewData('productName');
-
-        return $searchRulesViewData;
-    }
-
-    /**
-     * @param string $filterName
-     * @return array
-     */
-    public function createDefaultRuleFormViewData($filterName)
-    {
-        return [
-            'subject' => $filterName,
-            'operator' => null,
-            'value' => null,
-        ];
-    }
-
-    /**
      * @param \Doctrine\ORM\QueryBuilder $queryBuilder
      * @param \Shopsys\FrameworkBundle\Model\AdvancedSearch\AdvancedSearchRuleData[] $advancedSearchData
      */
