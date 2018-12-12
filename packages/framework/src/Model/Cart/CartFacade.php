@@ -132,7 +132,7 @@ class CartFacade
     public function deleteCartItem($cartItemId)
     {
         $cart = $this->getCartOfCurrentCustomer();
-        $cartItemToDelete = $this->cartService->getCartItemById($cart, $cartItemId);
+        $cartItemToDelete = $cart->getCartItemById($cartItemId);
         $cart->removeItemById($cartItemId);
         $this->em->remove($cartItemToDelete);
         $this->em->flush();
@@ -161,7 +161,7 @@ class CartFacade
     {
         $cart = $this->getCartOfCurrentCustomer();
 
-        return $this->cartService->getCartItemById($cart, $cartItemId)->getProduct();
+        return $cart->getCartItemById($cartItemId)->getProduct();
     }
 
     public function cleanAdditionalData()

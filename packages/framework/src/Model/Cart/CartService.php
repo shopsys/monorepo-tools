@@ -62,22 +62,6 @@ class CartService
     }
 
     /**
-     * @param \Shopsys\FrameworkBundle\Model\Cart\Cart $cart
-     * @param int $cartItemId
-     * @return \Shopsys\FrameworkBundle\Model\Cart\Item\CartItem
-     */
-    public function getCartItemById(Cart $cart, $cartItemId)
-    {
-        foreach ($cart->getItems() as $cartItem) {
-            if ($cartItem->getId() === $cartItemId) {
-                return $cartItem;
-            }
-        }
-        $message = 'CartItem with id = ' . $cartItemId . ' not found in cart.';
-        throw new \Shopsys\FrameworkBundle\Model\Cart\Exception\InvalidCartItemException($message);
-    }
-
-    /**
      * @param \Shopsys\FrameworkBundle\Model\Cart\Cart $resultingCart
      * @param \Shopsys\FrameworkBundle\Model\Cart\Cart $mergedCart
      * @param \Shopsys\FrameworkBundle\Model\Customer\CustomerIdentifier $customerIdentifier

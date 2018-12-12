@@ -82,4 +82,19 @@ class Cart
             }
         }
     }
+
+    /**
+     * @param int $cartItemId
+     * @return \Shopsys\FrameworkBundle\Model\Cart\Item\CartItem
+     */
+    public function getCartItemById($cartItemId)
+    {
+        foreach ($this->cartItems as $cartItem) {
+            if ($cartItem->getId() === $cartItemId) {
+                return $cartItem;
+            }
+        }
+        $message = 'CartItem with id = ' . $cartItemId . ' not found in cart.';
+        throw new \Shopsys\FrameworkBundle\Model\Cart\Exception\InvalidCartItemException($message);
+    }
 }

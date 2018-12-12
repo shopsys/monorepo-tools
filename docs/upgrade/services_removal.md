@@ -109,6 +109,8 @@ If you use these methods, change their calling appropriately:
   -> `OrderFacade::fillOrderItems(Order $order, OrderPreview $orderPreview)`
 - `CartService::changeQuantities(Cart $cart, array $quantitiesByCartItemId)`
   -> `Cart::changeQuantities(array $quantitiesByCartItemId)`
+- `CartService::getCartItemById(Cart $cart, $cartItemId)`
+  -> `Cart::getCartItemById($cartItemId)`
 
 Following classes have been removed:
 - `AdministratorService`
