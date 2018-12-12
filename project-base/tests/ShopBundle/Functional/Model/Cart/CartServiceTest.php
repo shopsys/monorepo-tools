@@ -123,22 +123,6 @@ class CartServiceTest extends FunctionalTestCase
         $this->assertSame($quantity, $result->getAddedQuantity());
     }
 
-    public function testCleanCartMakesCartEmpty()
-    {
-        $cartService = $this->getCartService();
-        $product = $this->createProduct();
-
-        $customerIdentifier = new CustomerIdentifier('randomString');
-
-        $cartItem = new CartItem($customerIdentifier, $product, 1, '0.0');
-        $cartItems = [$cartItem];
-        $cart = new Cart($cartItems);
-
-        $cartService->cleanCart($cart);
-
-        $this->assertTrue($cart->isEmpty());
-    }
-
     public function testMergeCartsReturnsCartWithSummedProducts()
     {
         $cartService = $this->getCartService();

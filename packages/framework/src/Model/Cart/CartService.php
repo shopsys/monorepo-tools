@@ -78,14 +78,6 @@ class CartService
     }
 
     /**
-     * @param \Shopsys\FrameworkBundle\Model\Cart\Cart $cart
-     */
-    public function cleanCart(Cart $cart)
-    {
-        $cart->clean();
-    }
-
-    /**
      * @param \Shopsys\FrameworkBundle\Model\Cart\Cart $resultingCart
      * @param \Shopsys\FrameworkBundle\Model\Cart\Cart $mergedCart
      * @param \Shopsys\FrameworkBundle\Model\Customer\CustomerIdentifier $customerIdentifier

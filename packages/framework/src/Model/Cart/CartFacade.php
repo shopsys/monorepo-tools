@@ -142,7 +142,7 @@ class CartFacade
     {
         $cart = $this->getCartOfCurrentCustomer();
         $cartItemsToDelete = $cart->getItems();
-        $this->cartService->cleanCart($cart);
+        $cart->clean();
 
         foreach ($cartItemsToDelete as $cartItemToDelete) {
             $this->em->remove($cartItemToDelete);

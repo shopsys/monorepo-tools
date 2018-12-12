@@ -142,6 +142,7 @@ Following methods have been removed:
 - `CurrencyService::create()`, use `CurrencyFactory::create()` instead
 - `VatService::getNewDefaultVat()`
 - `OrderProductService::getProductsUsingStockFromOrderProducts()`
+- `CartService::cleanCart()` use `Cart::clean()` instead
 
 Following classes changed constructors:
 - `AdministratorFacade`

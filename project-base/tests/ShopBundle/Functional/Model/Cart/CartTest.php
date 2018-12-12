@@ -56,4 +56,31 @@ class CartTest extends TransactionFunctionalTestCase
         $cart->removeItemById($cartItem1->getId());
         $this->assertSame(1, $cart->getItemsCount());
     }
+
+    public function testCleanMakesCartEmpty()
+    {
+        $productDataFactory = $this->getContainer()->get(ProductDataFactoryInterface::class);
+
+        $price = 100;
+        $vatData = new VatData();
+        $vatData->name = 'vat';
+        $vatData->percent = 21;
+        $vat = new Vat($vatData);
+
+        $productData = $productDataFactory->create();
+        $productData->name = ['cs' => 'Any name'];
+        $productData->price = $price;
+        $productData->vat = $vat;
+        $product = Product::create($productData);
+
+        $customerIdentifier = new CustomerIdentifier('randomString');
+
+        $cartItem = new CartItem($customerIdentifier, $product, 1, '0.0');
+        $cartItems = [$cartItem];
+        $cart = new Cart($cartItems);
+
+        $cart->clean();
+
+        $this->assertTrue($cart->isEmpty());
+    }
 }
