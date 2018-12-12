@@ -115,6 +115,8 @@ If you use these methods, change their calling appropriately:
   -> `Cart::getQuantifiedProductsIndexedByCartItemId()`
 - `CartService::mergeCarts(Cart $resultingCart, Cart $mergedCart, CustomerIdentifier $customerIdentifier)`
   -> `Cart::mergeWithCart(Cart $cartToMerge, CartItemFactoryInterface $cartItemFactory, CustomerIdentifier $customerIdentifier)`
+- `CartService::addProductToCart(Cart $cart, CustomerIdentifier $customerIdentifier, Product $product, $quantity)`
+  -> `Cart::addProduct(CustomerIdentifier $customerIdentifier, Product $product, $quantity, ProductPriceCalculation $productPriceCalculation, CartItemFactoryInterface $cartItemFactory`
 
 Following classes have been removed:
 - `AdministratorService`
@@ -136,6 +138,7 @@ Following classes have been removed:
 - `AdvancedSearchOrderService`
 - `OrderProductService`
 - `OrderCreationService`
+- `CartService`
 
 Following methods have been removed:
 - `User::setDeliveryAddress()`, use `User::editDeliveryAddress()` instead
@@ -179,6 +182,7 @@ Following classes changed constructors:
 - `OrderProductFacade`
 - `OrderFacade`
 - `CartMigrationFacade`
+- `CartFacade`
 
 Following functions visibility was changed to `protected` as there is no need to use them from outside of objects:
 - `Administrator::getGridLimit()`

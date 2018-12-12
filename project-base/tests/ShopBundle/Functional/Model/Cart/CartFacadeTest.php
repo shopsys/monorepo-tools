@@ -6,13 +6,14 @@ use Shopsys\FrameworkBundle\Component\Domain\Domain;
 use Shopsys\FrameworkBundle\DataFixtures\Demo\ProductDataFixture;
 use Shopsys\FrameworkBundle\Model\Cart\CartFacade;
 use Shopsys\FrameworkBundle\Model\Cart\CartFactory;
-use Shopsys\FrameworkBundle\Model\Cart\CartService;
+use Shopsys\FrameworkBundle\Model\Cart\Item\CartItemFactory;
 use Shopsys\FrameworkBundle\Model\Cart\Item\CartItemRepository;
 use Shopsys\FrameworkBundle\Model\Customer\CurrentCustomer;
 use Shopsys\FrameworkBundle\Model\Customer\CustomerIdentifier;
 use Shopsys\FrameworkBundle\Model\Customer\CustomerIdentifierFactory;
 use Shopsys\FrameworkBundle\Model\Localization\TranslatableListener;
 use Shopsys\FrameworkBundle\Model\Order\PromoCode\CurrentPromoCodeFacade;
+use Shopsys\FrameworkBundle\Model\Product\Pricing\ProductPriceCalculationForUser;
 use Shopsys\FrameworkBundle\Model\Product\ProductRepository;
 use Tests\ShopBundle\Test\TransactionFunctionalTestCase;
 
@@ -145,14 +146,15 @@ class CartFacadeTest extends TransactionFunctionalTestCase
     {
         return new CartFacade(
             $this->getEntityManager(),
-            $this->getContainer()->get(CartService::class),
             $this->getContainer()->get(CartFactory::class),
             $this->getContainer()->get(ProductRepository::class),
             $this->getCustomerIdentifierFactoryMock($customerIdentifier),
             $this->getContainer()->get(Domain::class),
             $this->getContainer()->get(CurrentCustomer::class),
             $this->getContainer()->get(CurrentPromoCodeFacade::class),
-            $this->getContainer()->get(CartItemRepository::class)
+            $this->getContainer()->get(CartItemRepository::class),
+            $this->getContainer()->get(ProductPriceCalculationForUser::class),
+            $this->getContainer()->get(CartItemFactory::class)
         );
     }
 

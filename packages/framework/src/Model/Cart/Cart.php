@@ -6,6 +6,8 @@ use Shopsys\FrameworkBundle\Model\Cart\Item\CartItem;
 use Shopsys\FrameworkBundle\Model\Cart\Item\CartItemFactoryInterface;
 use Shopsys\FrameworkBundle\Model\Customer\CustomerIdentifier;
 use Shopsys\FrameworkBundle\Model\Order\Item\QuantifiedProduct;
+use Shopsys\FrameworkBundle\Model\Product\Pricing\ProductPriceCalculationForUser;
+use Shopsys\FrameworkBundle\Model\Product\Product;
 
 class Cart
 {
@@ -150,5 +152,38 @@ class Cart
         }
 
         return null;
+    }
+
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Customer\CustomerIdentifier $customerIdentifier
+     * @param \Shopsys\FrameworkBundle\Model\Product\Product $product
+     * @param int $quantity
+     * @param \Shopsys\FrameworkBundle\Model\Product\Pricing\ProductPriceCalculationForUser $productPriceCalculation
+     * @param \Shopsys\FrameworkBundle\Model\Cart\Item\CartItemFactoryInterface $cartItemFactory
+     * @return \Shopsys\FrameworkBundle\Model\Cart\AddProductResult
+     */
+    public function addProduct(
+        CustomerIdentifier $customerIdentifier,
+        Product $product,
+        $quantity,
+        ProductPriceCalculationForUser $productPriceCalculation,
+        CartItemFactoryInterface $cartItemFactory
+    ) {
+        if (!is_int($quantity) || $quantity <= 0) {
+            throw new \Shopsys\FrameworkBundle\Model\Cart\Exception\InvalidQuantityException($quantity);
+        }
+
+        foreach ($this->cartItems as $cartItem) {
+            if ($cartItem->getProduct() === $product) {
+                $cartItem->changeQuantity($cartItem->getQuantity() + $quantity);
+                $cartItem->changeAddedAt(new \DateTime());
+                return new AddProductResult($cartItem, false, $quantity);
+            }
+        }
+
+        $productPrice = $productPriceCalculation->calculatePriceForCurrentUser($product);
+        $newCartItem = $cartItemFactory->create($customerIdentifier, $product, $quantity, $productPrice->getPriceWithVat());
+        $this->addItem($newCartItem);
+        return new AddProductResult($newCartItem, true, $quantity);
     }
 }

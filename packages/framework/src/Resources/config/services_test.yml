@@ -35,8 +35,6 @@ services:
 
     Shopsys\FrameworkBundle\Model\Pricing\Currency\Grid\CurrencyInlineEdit: ~
 
-    Shopsys\FrameworkBundle\Model\Cart\CartService: ~
-
     Shopsys\FrameworkBundle\Model\Cart\CartFactory: ~
 
     Shopsys\FrameworkBundle\Model\Category\CategoryFacade: ~

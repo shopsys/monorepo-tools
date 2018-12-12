@@ -12,6 +12,7 @@ use Shopsys\FrameworkBundle\Model\Pricing\Vat\Vat;
 use Shopsys\FrameworkBundle\Model\Pricing\Vat\VatData;
 use Shopsys\FrameworkBundle\Model\Product\Availability\Availability;
 use Shopsys\FrameworkBundle\Model\Product\Availability\AvailabilityData;
+use Shopsys\FrameworkBundle\Model\Product\Pricing\ProductPriceCalculationForUser;
 use Shopsys\FrameworkBundle\Model\Product\ProductDataFactoryInterface;
 use Shopsys\ShopBundle\Model\Product\Product;
 use Tests\ShopBundle\Test\TransactionFunctionalTestCase;
@@ -76,8 +77,7 @@ class CartTest extends TransactionFunctionalTestCase
 
     public function testMergeWithCartReturnsCartWithSummedProducts()
     {
-        /** @var \Shopsys\FrameworkBundle\Model\Cart\Item\CartItemFactory $cartItemFactory */
-        $cartItemFactory = $this->getContainer()->get(CartItemFactory::class);
+        $cartItemFactory = $this->getCartItemFactory();
 
         $product1 = $this->createProduct();
         $product2 = $this->createProduct();
@@ -137,5 +137,136 @@ class CartTest extends TransactionFunctionalTestCase
         $product = Product::create($productData);
 
         return $product;
+    }
+
+    public function testCannotAddProductFloatQuantityToCart()
+    {
+        $productPriceCalculation = $this->getProductPriceCalculation();
+        $cartItemFactory = $this->getCartItemFactory();
+        $product = $this->createProduct();
+
+        $customerIdentifier = new CustomerIdentifier('randomString');
+
+        $cartItems = [];
+        $cart = new Cart($cartItems);
+
+        $this->expectException('Shopsys\FrameworkBundle\Model\Cart\Exception\InvalidQuantityException');
+        $cart->addProduct($customerIdentifier, $product, 1.1, $productPriceCalculation, $cartItemFactory);
+    }
+
+    public function testCannotAddProductZeroQuantityToCart()
+    {
+        $productPriceCalculation = $this->getProductPriceCalculation();
+        $cartItemFactory = $this->getCartItemFactory();
+        $product = $this->createProduct();
+
+        $customerIdentifier = new CustomerIdentifier('randomString');
+
+        $cartItems = [];
+        $cart = new Cart($cartItems);
+
+        $this->expectException('Shopsys\FrameworkBundle\Model\Cart\Exception\InvalidQuantityException');
+        $cart->addProduct($customerIdentifier, $product, 0, $productPriceCalculation, $cartItemFactory);
+    }
+
+    public function testCannotAddProductNegativeQuantityToCart()
+    {
+        $productPriceCalculation = $this->getProductPriceCalculation();
+        $cartItemFactory = $this->getCartItemFactory();
+        $product = $this->createProduct();
+
+        $customerIdentifier = new CustomerIdentifier('randomString');
+
+        $cartItems = [];
+        $cart = new Cart($cartItems);
+
+        $this->expectException('Shopsys\FrameworkBundle\Model\Cart\Exception\InvalidQuantityException');
+        $cart->addProduct($customerIdentifier, $product, -10, $productPriceCalculation, $cartItemFactory);
+    }
+
+    public function testAddProductToCartMarksAddedProductAsNew()
+    {
+        $productPriceCalculation = $this->getProductPriceCalculation();
+        $cartItemFactory = $this->getCartItemFactory();
+        $product = $this->createProduct();
+
+        $customerIdentifier = new CustomerIdentifier('randomString');
+
+        $cartItems = [];
+        $cart = new Cart($cartItems);
+
+        $quantity = 2;
+
+        $result = $cart->addProduct($customerIdentifier, $product, $quantity, $productPriceCalculation, $cartItemFactory);
+        $this->assertTrue($result->getIsNew());
+    }
+
+    public function testAddProductToCartMarksRepeatedlyAddedProductAsNotNew()
+    {
+        $productPriceCalculation = $this->getProductPriceCalculation();
+        $cartItemFactory = $this->getCartItemFactory();
+        $product = $this->createProduct();
+
+        $customerIdentifier = new CustomerIdentifier('randomString');
+
+        $cartItem = new CartItem($customerIdentifier, $product, 1, '0.0');
+        $cartItems = [$cartItem];
+        $cart = new Cart($cartItems);
+
+        $quantity = 2;
+
+        $result = $cart->addProduct($customerIdentifier, $product, $quantity, $productPriceCalculation, $cartItemFactory);
+        $this->assertFalse($result->getIsNew());
+    }
+
+    public function testAddProductResultContainsAddedProductQuantity()
+    {
+        $productPriceCalculation = $this->getProductPriceCalculation();
+        $cartItemFactory = $this->getCartItemFactory();
+        $product = $this->createProduct();
+
+        $customerIdentifier = new CustomerIdentifier('randomString');
+
+        $cartItems = [];
+        $cart = new Cart($cartItems);
+
+        $quantity = 2;
+
+        $result = $cart->addProduct($customerIdentifier, $product, $quantity, $productPriceCalculation, $cartItemFactory);
+        $this->assertSame($quantity, $result->getAddedQuantity());
+    }
+
+    public function testAddProductResultDoesNotContainPreviouslyAddedProductQuantity()
+    {
+        $productPriceCalculation = $this->getProductPriceCalculation();
+        $cartItemFactory = $this->getCartItemFactory();
+        $product = $this->createProduct();
+
+        $customerIdentifier = new CustomerIdentifier('randomString');
+
+        $cartItem = new CartItem($customerIdentifier, $product, 1, '0.0');
+        $cartItems = [$cartItem];
+        $cart = new Cart($cartItems);
+
+        $quantity = 2;
+
+        $result = $cart->addProduct($customerIdentifier, $product, $quantity, $productPriceCalculation, $cartItemFactory);
+        $this->assertSame($quantity, $result->getAddedQuantity());
+    }
+
+    /**
+     * @return \Shopsys\FrameworkBundle\Model\Cart\Item\CartItemFactory
+     */
+    private function getCartItemFactory()
+    {
+        return $this->getContainer()->get(CartItemFactory::class);
+    }
+
+    /**
+     * @return \Shopsys\FrameworkBundle\Model\Product\Pricing\ProductPriceCalculationForUser
+     */
+    private function getProductPriceCalculation()
+    {
+        return $this->getContainer()->get(ProductPriceCalculationForUser::class);
     }
 }
