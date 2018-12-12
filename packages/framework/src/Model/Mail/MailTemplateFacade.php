@@ -5,6 +5,7 @@ namespace Shopsys\FrameworkBundle\Model\Mail;
 use Doctrine\ORM\EntityManagerInterface;
 use Shopsys\FrameworkBundle\Component\Domain\Domain;
 use Shopsys\FrameworkBundle\Component\UploadedFile\UploadedFileFacade;
+use Shopsys\FrameworkBundle\Model\Order\Mail\OrderMail;
 use Shopsys\FrameworkBundle\Model\Order\Status\OrderStatusMailTemplateService;
 use Shopsys\FrameworkBundle\Model\Order\Status\OrderStatusRepository;
 
@@ -99,10 +100,25 @@ class MailTemplateFacade
         $orderStatuses = $this->orderStatusRepository->getAll();
         $mailTemplates = $this->mailTemplateRepository->getAllByDomainId($domainId);
 
-        return $this->orderStatusMailTemplateService->getFilteredOrderStatusMailTemplatesIndexedByOrderStatusId(
+        return $this->getFilteredOrderStatusMailTemplatesIndexedByOrderStatusId(
             $orderStatuses,
             $mailTemplates
         );
+    }
+
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Order\Status\OrderStatus[] $orderStatuses
+     * @param \Shopsys\FrameworkBundle\Model\Mail\MailTemplate[] $mailTemplates
+     * @return \Shopsys\FrameworkBundle\Model\Mail\MailTemplate[]
+     */
+    protected function getFilteredOrderStatusMailTemplatesIndexedByOrderStatusId(array $orderStatuses, array $mailTemplates)
+    {
+        $orderStatusMailTemplates = [];
+        foreach ($orderStatuses as $orderStatus) {
+            $orderStatusMailTemplates[$orderStatus->getId()] = OrderMail::findMailTemplateForOrderStatus($mailTemplates, $orderStatus);
+        }
+
+        return $orderStatusMailTemplates;
     }
 
     /**

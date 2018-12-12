@@ -43,19 +43,4 @@ class OrderStatusMailTemplateService
 
         return $orderStatusMailTemplatesData;
     }
-
-    /**
-     * @param \Shopsys\FrameworkBundle\Model\Order\Status\OrderStatus[] $orderStatuses
-     * @param \Shopsys\FrameworkBundle\Model\Mail\MailTemplate[] $mailTemplates
-     * @return \Shopsys\FrameworkBundle\Model\Mail\MailTemplate[]
-     */
-    public function getFilteredOrderStatusMailTemplatesIndexedByOrderStatusId(array $orderStatuses, array $mailTemplates)
-    {
-        $orderStatusMailTemplates = [];
-        foreach ($orderStatuses as $orderStatus) {
-            $orderStatusMailTemplates[$orderStatus->getId()] = OrderMail::findMailTemplateForOrderStatus($mailTemplates, $orderStatus);
-        }
-
-        return $orderStatusMailTemplates;
-    }
 }
