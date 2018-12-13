@@ -25,11 +25,6 @@ class CurrencyFacade
     protected $currencyRepository;
 
     /**
-     * @var \Shopsys\FrameworkBundle\Model\Pricing\Currency\CurrencyService
-     */
-    protected $currencyService;
-
-    /**
      * @var \Shopsys\FrameworkBundle\Model\Pricing\PricingSetting
      */
     protected $pricingSetting;
@@ -70,9 +65,13 @@ class CurrencyFacade
     protected $transportPriceFactory;
 
     /**
+     * @var \Shopsys\FrameworkBundle\Model\Pricing\Currency\CurrencyFactoryInterface
+     */
+    protected $currencyFactory;
+
+    /**
      * @param \Doctrine\ORM\EntityManagerInterface $em
      * @param \Shopsys\FrameworkBundle\Model\Pricing\Currency\CurrencyRepository $currencyRepository
-     * @param \Shopsys\FrameworkBundle\Model\Pricing\Currency\CurrencyService $currencyService
      * @param \Shopsys\FrameworkBundle\Model\Pricing\PricingSetting $pricingSetting
      * @param \Shopsys\FrameworkBundle\Model\Order\OrderRepository $orderRepository
      * @param \Shopsys\FrameworkBundle\Component\Domain\Domain $domain
@@ -81,11 +80,11 @@ class CurrencyFacade
      * @param \Shopsys\FrameworkBundle\Model\Transport\TransportRepository $transportRepository
      * @param \Shopsys\FrameworkBundle\Model\Payment\PaymentPriceFactoryInterface $paymentPriceFactory
      * @param \Shopsys\FrameworkBundle\Model\Transport\TransportPriceFactoryInterface $transportPriceFactory
+     * @param \Shopsys\FrameworkBundle\Model\Pricing\Currency\CurrencyFactoryInterface $currencyFactory
      */
     public function __construct(
         EntityManagerInterface $em,
         CurrencyRepository $currencyRepository,
-        CurrencyService $currencyService,
         PricingSetting $pricingSetting,
         OrderRepository $orderRepository,
         Domain $domain,
@@ -93,11 +92,11 @@ class CurrencyFacade
         PaymentRepository $paymentRepository,
         TransportRepository $transportRepository,
         PaymentPriceFactoryInterface $paymentPriceFactory,
-        TransportPriceFactoryInterface $transportPriceFactory
+        TransportPriceFactoryInterface $transportPriceFactory,
+        CurrencyFactoryInterface $currencyFactory
     ) {
         $this->em = $em;
         $this->currencyRepository = $currencyRepository;
-        $this->currencyService = $currencyService;
         $this->pricingSetting = $pricingSetting;
         $this->orderRepository = $orderRepository;
         $this->domain = $domain;
@@ -106,6 +105,7 @@ class CurrencyFacade
         $this->transportRepository = $transportRepository;
         $this->paymentPriceFactory = $paymentPriceFactory;
         $this->transportPriceFactory = $transportPriceFactory;
+        $this->currencyFactory = $currencyFactory;
     }
 
     /**
@@ -123,7 +123,7 @@ class CurrencyFacade
      */
     public function create(CurrencyData $currencyData)
     {
-        $currency = $this->currencyService->create($currencyData);
+        $currency = $this->currencyFactory->create($currencyData);
         $this->em->persist($currency);
         $this->em->flush($currency);
         $this->createTransportAndPaymentPrices($currency);
@@ -139,7 +139,12 @@ class CurrencyFacade
     public function edit($currencyId, CurrencyData $currencyData)
     {
         $currency = $this->currencyRepository->getById($currencyId);
-        $this->currencyService->edit($currency, $currencyData, $this->isDefaultCurrency($currency));
+        $currency->edit($currencyData);
+        if ($this->isDefaultCurrency($currency)) {
+            $currency->setExchangeRate(Currency::DEFAULT_EXCHANGE_RATE);
+        } else {
+            $currency->setExchangeRate($currencyData->exchangeRate);
+        }
         $this->em->flush();
         $this->productPriceRecalculationScheduler->scheduleAllProductsForDelayedRecalculation();
 
@@ -209,12 +214,15 @@ class CurrencyFacade
      */
     public function getNotAllowedToDeleteCurrencyIds()
     {
-        return $this->currencyService->getNotAllowedToDeleteCurrencyIds(
-            $this->getDefaultCurrency()->getId(),
-            $this->getCurrenciesUsedInOrders(),
-            $this->pricingSetting,
-            $this->domain
-        );
+        $notAllowedToDeleteCurrencyIds = [$this->getDefaultCurrency()->getId()];
+        foreach ($this->domain->getAll() as $domainConfig) {
+            $notAllowedToDeleteCurrencyIds[] = $this->pricingSetting->getDomainDefaultCurrencyIdByDomainId($domainConfig->getId());
+        }
+        foreach ($this->getCurrenciesUsedInOrders() as $currency) {
+            $notAllowedToDeleteCurrencyIds[] = $currency->getId();
+        }
+
+        return array_unique($notAllowedToDeleteCurrencyIds);
     }
 
     /**

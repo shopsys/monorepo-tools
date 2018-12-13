@@ -58,6 +58,28 @@ If you use these methods, change their calling appropriately:
   -> `RegistrationMail::createMessage(MailTemplate $mailTemplate, $user)`
 - `OrderMailService::getMessageDataByOrder(Order $order, MailTemplate $mailTemplate)`  
   -> `OrderMail::createMessage(MailTemplate $mailTemplate, $order)`
+- `ProductManualInputPriceService::refresh(Product $product, PricingGroup $pricingGroup, $inputPrice, $productManualInputPrice)`  
+  -> `ProductManualInputPriceFacade::refresh(Product $product, PricingGroup $pricingGroup, $inputPrice)`
+- `ProductCollectionService::getImagesIndexedByProductId(array $products, array $imagesByProductId)`  
+  -> `ProductCollectionFacade::getMainImagesIndexedByProductId(array $products)`
+- `CategoryService::create(CategoryData $categoryData, Category $rootCategory)`
+  -> `CategoryFactory::create(CategoryData $data, Category $rootCategory)`
+- `CategoryService::edit(Category $category, CategoryData $categoryData, Category $rootCategory)`
+  -> `CategoryFacade::edit($categoryId, CategoryData $categoryData)`
+- `CurrencyService::edit(Currency $currency, CurrencyData $currencyData, $isDefaultCurrency)`
+  -> `CurrencyFacade::edit($currencyId, CurrencyData $currencyData)`
+- `CurrencyService::getNotAllowedToDeleteCurrencyIds($defaultCurrencyId, array $currenciesUsedInOrders, PricingSetting $pricingSetting, Domain $domain)`
+  -> `CurrencyFacade::getNotAllowedToDeleteCurrencyIds()`
+- `PricingService::getMinimumPriceByPriceWithoutVat(array $prices)`
+  -> `ProductPriceCalculation::getMinimumPriceByPriceWithoutVat(array $prices)`
+- `PricingService::arePricesDifferent(array $prices)`
+  -> `ProductPriceCalculation::arePricesDifferent(array $prices)`
+- `GridOrderingService::setPosition($entity, $position)`
+  -> `GridOrderingFacade::saveOrdering($entityClass, array $rowIds)`
+- `UploadedFileFactoryInterface::create(string $entityName, int $entityId, ?string $temporaryFilename)`
+  -> `UploadedFileFactoryInterface::create(string $entityName, int $entityId, array $temporaryFilenames)`
+- `UploadedFileService::createUploadedFile(UploadedFileEntityConfig $uploadedFileEntityConfig, $entityId, array $temporaryFilenames)`
+  -> `UploadedFileFactoryInterface::create(string $entityName, int $entityId, array $temporaryFilenames)`
 
 Following classes have been removed:
 - `AdministratorService`
@@ -67,6 +89,14 @@ Following classes have been removed:
 - `OrderService`
 - `OrderStatusService`
 - `FlagService`
+- `ProductManualInputPriceService`
+- `ProductCollectionService`
+- `CategoryService`
+- `CurrencyService`
+- `PricingService`
+- `VatService`
+- `GridOrderingService`
+- `UploadedFileService`
 
 Following methods have been removed:
 - `User::setDeliveryAddress()`, use `User::editDeliveryAddress()` instead
@@ -75,6 +105,9 @@ Following methods have been removed:
 - `Administrator::getLimitByGridId()` as it was not used anywhere
 - `FlagService::create()`, use `FlagFactory::create()` instead
 - `FlagService::edit()`, use `Flag::edit()` instead
+- `CategoryService::setChildrenAsSiblings()`
+- `CurrencyService::create()`, use `CurrencyFactory::create()` instead
+- `VatService::getNewDefaultVat()`
 
 Following classes changed constructors:
 - `AdministratorFacade`
@@ -91,6 +124,15 @@ Following classes changed constructors:
 - `ProductPriceRecalculator`
 - `ProductFacade`
 - `UserFactory`
+- `ProductManualInputPriceFacade`
+- `ProductCollectionFacade`
+- `CategoryFacade`
+- `CurrencyFacade`
+- `ProductPriceCalculation`
+- `VatFacade`
+- `GridOrderingFacade`
+- `UploadedFileFacade`
+- `UploadedFileFactory`
 
 Following functions visibility was changed to `protected` as there is no need to use them from outside of objects:
 - `Administrator::getGridLimit()`

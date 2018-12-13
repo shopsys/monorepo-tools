@@ -24,11 +24,6 @@ class CategoryFacade
     protected $categoryRepository;
 
     /**
-     * @var \Shopsys\FrameworkBundle\Model\Category\CategoryService
-     */
-    protected $categoryService;
-
-    /**
      * @var \Shopsys\FrameworkBundle\Component\Domain\Domain
      */
     protected $domain;
@@ -64,9 +59,13 @@ class CategoryFacade
     protected $categoryWithLazyLoadedVisibleChildrenFactory;
 
     /**
+     * @var \Shopsys\FrameworkBundle\Model\Category\CategoryFactoryInterface
+     */
+    protected $categoryFactory;
+
+    /**
      * @param \Doctrine\ORM\EntityManagerInterface $em
      * @param \Shopsys\FrameworkBundle\Model\Category\CategoryRepository $categoryRepository
-     * @param \Shopsys\FrameworkBundle\Model\Category\CategoryService $categoryService
      * @param \Shopsys\FrameworkBundle\Component\Domain\Domain $domain
      * @param \Shopsys\FrameworkBundle\Model\Category\CategoryVisibilityRecalculationScheduler $categoryVisibilityRecalculationScheduler
      * @param \Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\FriendlyUrlFacade $friendlyUrlFacade
@@ -74,22 +73,22 @@ class CategoryFacade
      * @param \Shopsys\FrameworkBundle\Component\Plugin\PluginCrudExtensionFacade $pluginCrudExtensionFacade
      * @param \Shopsys\FrameworkBundle\Model\Category\CategoryWithPreloadedChildrenFactory $categoryWithPreloadedChildrenFactory
      * @param \Shopsys\FrameworkBundle\Model\Category\CategoryWithLazyLoadedVisibleChildrenFactory $categoryWithLazyLoadedVisibleChildrenFactory
+     * @param \Shopsys\FrameworkBundle\Model\Category\CategoryFactoryInterface $categoryFactory
      */
     public function __construct(
         EntityManagerInterface $em,
         CategoryRepository $categoryRepository,
-        CategoryService $categoryService,
         Domain $domain,
         CategoryVisibilityRecalculationScheduler $categoryVisibilityRecalculationScheduler,
         FriendlyUrlFacade $friendlyUrlFacade,
         ImageFacade $imageFacade,
         PluginCrudExtensionFacade $pluginCrudExtensionFacade,
         CategoryWithPreloadedChildrenFactory $categoryWithPreloadedChildrenFactory,
-        CategoryWithLazyLoadedVisibleChildrenFactory $categoryWithLazyLoadedVisibleChildrenFactory
+        CategoryWithLazyLoadedVisibleChildrenFactory $categoryWithLazyLoadedVisibleChildrenFactory,
+        CategoryFactoryInterface $categoryFactory
     ) {
         $this->em = $em;
         $this->categoryRepository = $categoryRepository;
-        $this->categoryService = $categoryService;
         $this->domain = $domain;
         $this->categoryVisibilityRecalculationScheduler = $categoryVisibilityRecalculationScheduler;
         $this->friendlyUrlFacade = $friendlyUrlFacade;
@@ -97,6 +96,7 @@ class CategoryFacade
         $this->pluginCrudExtensionFacade = $pluginCrudExtensionFacade;
         $this->categoryWithPreloadedChildrenFactory = $categoryWithPreloadedChildrenFactory;
         $this->categoryWithLazyLoadedVisibleChildrenFactory = $categoryWithLazyLoadedVisibleChildrenFactory;
+        $this->categoryFactory = $categoryFactory;
     }
 
     /**
@@ -115,7 +115,7 @@ class CategoryFacade
     public function create(CategoryData $categoryData)
     {
         $rootCategory = $this->getRootCategory();
-        $category = $this->categoryService->create($categoryData, $rootCategory);
+        $category = $this->categoryFactory->create($categoryData, $rootCategory);
         $this->em->persist($category);
         $this->em->flush($category);
         $this->friendlyUrlFacade->createFriendlyUrls('front_product_list', $category->getId(), $category->getNames());
@@ -137,7 +137,10 @@ class CategoryFacade
     {
         $rootCategory = $this->getRootCategory();
         $category = $this->categoryRepository->getById($categoryId);
-        $category = $this->categoryService->edit($category, $categoryData, $rootCategory);
+        $category->edit($categoryData);
+        if ($category->getParent() === null) {
+            $category->setParent($rootCategory);
+        }
         $this->em->flush();
         $this->friendlyUrlFacade->saveUrlListFormData('front_product_list', $category->getId(), $categoryData->urls);
         $this->friendlyUrlFacade->createFriendlyUrls('front_product_list', $category->getId(), $category->getNames());
@@ -156,7 +159,9 @@ class CategoryFacade
     public function deleteById($categoryId)
     {
         $category = $this->categoryRepository->getById($categoryId);
-        $this->categoryService->setChildrenAsSiblings($category);
+        foreach ($category->getChildren() as $child) {
+            $child->setParent($category->getParent());
+        }
         // Normally, UnitOfWork performs UPDATEs on children after DELETE of main entity.
         // We need to update `parent` attribute of children first.
         $this->em->flush();

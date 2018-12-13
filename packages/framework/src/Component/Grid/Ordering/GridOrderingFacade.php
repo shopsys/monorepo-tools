@@ -12,18 +12,11 @@ class GridOrderingFacade
     protected $em;
 
     /**
-     * @var \Shopsys\FrameworkBundle\Component\Grid\Ordering\GridOrderingService
-     */
-    protected $gridOrderingService;
-
-    /**
      * @param \Doctrine\ORM\EntityManagerInterface $em
-     * @param \Shopsys\FrameworkBundle\Component\Grid\Ordering\GridOrderingService $gridOrderingService
      */
-    public function __construct(EntityManagerInterface $em, GridOrderingService $gridOrderingService)
+    public function __construct(EntityManagerInterface $em)
     {
         $this->em = $em;
-        $this->gridOrderingService = $gridOrderingService;
     }
 
     /**
@@ -37,7 +30,7 @@ class GridOrderingFacade
 
         foreach ($rowIds as $rowId) {
             $entity = $entityRepository->find($rowId);
-            $this->gridOrderingService->setPosition($entity, $position++);
+            $entity->setPosition($position++);
         }
 
         $this->em->flush();
