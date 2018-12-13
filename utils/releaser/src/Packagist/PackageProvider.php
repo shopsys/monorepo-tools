@@ -16,32 +16,19 @@ final class PackageProvider
     private const PACKAGE_NAMES = 'packageNames';
 
     /**
-     * @var string[][]
-     */
-    private $packagesByOrganization = [];
-
-    /**
      * @param string $organization
      * @param string[] $excludePackages
      * @return string[]
      */
     public function getPackagesByOrganization(string $organization, array $excludePackages = []): array
     {
-        if (isset($this->packagesByOrganization[$organization])) {
-            return $this->packagesByOrganization[$organization];
-        }
-
         $url = 'https://packagist.org/packages/list.json?vendor=' . $organization;
         $remoteContent = FileSystem::read($url);
         $json = Json::decode($remoteContent, Json::FORCE_ARRAY);
 
         $this->ensureIsValidResponse($json, $url);
 
-        $packagesByOrganization = $this->filterOutExcludedPackages($json[self::PACKAGE_NAMES], $excludePackages);
-
-        $this->packagesByOrganization[$organization] = $packagesByOrganization;
-
-        return $packagesByOrganization;
+        return $this->filterOutExcludedPackages($json[self::PACKAGE_NAMES], $excludePackages);
     }
 
     /**
