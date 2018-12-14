@@ -8,7 +8,7 @@ use PharIo\Version\Version;
 use Shopsys\Releaser\ReleaseWorker\AbstractShopsysReleaseWorker;
 use Shopsys\Releaser\Stage;
 use Symplify\MonorepoBuilder\FileSystem\ComposerJsonProvider;
-use Symplify\MonorepoBuilder\InterdependencyUpdater;
+use Symplify\MonorepoBuilder\DependencyUpdater;
 use Symplify\MonorepoBuilder\Package\PackageNamesProvider;
 
 final class SetMutualDependenciesToDevMasterReleaseWorker extends AbstractShopsysReleaseWorker
@@ -19,9 +19,9 @@ final class SetMutualDependenciesToDevMasterReleaseWorker extends AbstractShopsy
     private $composerJsonProvider;
 
     /**
-     * @var \Symplify\MonorepoBuilder\InterdependencyUpdater
+     * @var \Symplify\MonorepoBuilder\DependencyUpdater
      */
-    private $interdependencyUpdater;
+    private $dependencyUpdater;
 
     /**
      * @var \Symplify\MonorepoBuilder\Package\PackageNamesProvider
@@ -35,13 +35,13 @@ final class SetMutualDependenciesToDevMasterReleaseWorker extends AbstractShopsy
 
     /**
      * @param \Symplify\MonorepoBuilder\FileSystem\ComposerJsonProvider $composerJsonProvider
-     * @param \Symplify\MonorepoBuilder\InterdependencyUpdater $interdependencyUpdater
+     * @param \Symplify\MonorepoBuilder\DependencyUpdater $dependencyUpdater
      * @param \Symplify\MonorepoBuilder\Package\PackageNamesProvider $packageNamesProvider
      */
-    public function __construct(ComposerJsonProvider $composerJsonProvider, InterdependencyUpdater $interdependencyUpdater, PackageNamesProvider $packageNamesProvider)
+    public function __construct(ComposerJsonProvider $composerJsonProvider, DependencyUpdater $dependencyUpdater, PackageNamesProvider $packageNamesProvider)
     {
         $this->composerJsonProvider = $composerJsonProvider;
-        $this->interdependencyUpdater = $interdependencyUpdater;
+        $this->dependencyUpdater = $dependencyUpdater;
         $this->packageNamesProvider = $packageNamesProvider;
     }
 
@@ -68,7 +68,7 @@ final class SetMutualDependenciesToDevMasterReleaseWorker extends AbstractShopsy
      */
     public function work(Version $version): void
     {
-        $this->interdependencyUpdater->updateFileInfosWithPackagesAndVersion(
+        $this->dependencyUpdater->updateFileInfosWithPackagesAndVersion(
             $this->composerJsonProvider->getPackagesFileInfos(),
             $this->packageNamesProvider->provide(),
             self::DEV_MASTER
