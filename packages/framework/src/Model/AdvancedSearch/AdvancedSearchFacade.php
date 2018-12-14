@@ -2,6 +2,7 @@
 
 namespace Shopsys\FrameworkBundle\Model\AdvancedSearch;
 
+use Shopsys\FrameworkBundle\Model\AdvancedSearch\Filter\ProductNameFilter;
 use Shopsys\FrameworkBundle\Model\Product\Listing\ProductListAdminFacade;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -54,7 +55,7 @@ class AdvancedSearchFacade
     public function createAdvancedSearchForm(Request $request)
     {
         $rulesData = (array)$request->get(self::RULES_FORM_NAME);
-        $rulesFormData = $this->ruleFormViewDataFactory->createFromRequestData('productName', $rulesData);
+        $rulesFormData = $this->ruleFormViewDataFactory->createFromRequestData(ProductNameFilter::NAME, $rulesData);
 
         return $this->advancedSearchFormFactory->createRulesForm(self::RULES_FORM_NAME, $rulesFormData);
     }

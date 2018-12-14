@@ -5,6 +5,7 @@ namespace Shopsys\FrameworkBundle\Model\AdvancedSearchOrder;
 use Shopsys\FrameworkBundle\Model\AdvancedSearch\AdvancedSearchQueryBuilderExtender;
 use Shopsys\FrameworkBundle\Model\AdvancedSearch\OrderAdvancedSearchFormFactory;
 use Shopsys\FrameworkBundle\Model\AdvancedSearch\RuleFormViewDataFactory;
+use Shopsys\FrameworkBundle\Model\AdvancedSearchOrder\Filter\OrderPriceFilterWithVatFilter;
 use Shopsys\FrameworkBundle\Model\Order\Listing\OrderListAdminFacade;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -57,7 +58,7 @@ class AdvancedSearchOrderFacade
     public function createAdvancedSearchOrderForm(Request $request)
     {
         $rulesData = (array)$request->get(self::RULES_FORM_NAME);
-        $rulesFormData = $this->ruleFormViewDataFactory->createFromRequestData('orderTotalPriceWithVat', $rulesData);
+        $rulesFormData = $this->ruleFormViewDataFactory->createFromRequestData(OrderPriceFilterWithVatFilter::NAME, $rulesData);
 
         return $this->orderAdvancedSearchFormFactory->createRulesForm(self::RULES_FORM_NAME, $rulesFormData);
     }
