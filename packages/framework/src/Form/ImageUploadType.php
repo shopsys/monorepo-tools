@@ -44,6 +44,7 @@ class ImageUploadType extends AbstractType
         $resolver->setDefaults([
             'data_class' => ImageUploadData::class,
             'entity' => null,
+            'image_type' => null,
         ]);
     }
 
@@ -57,6 +58,7 @@ class ImageUploadType extends AbstractType
         $view->vars['entity'] = $options['entity'];
         $view->vars['multiple'] = $options['multiple'];
         $view->vars['images_by_id'] = $this->getImagesIndexedById($options);
+        $view->vars['image_type'] = $options['image_type'];
     }
 
     /**
@@ -95,7 +97,7 @@ class ImageUploadType extends AbstractType
             return [];
         }
 
-        return $this->imageFacade->getImagesByEntityIndexedById($options['entity'], null);
+        return $this->imageFacade->getImagesByEntityIndexedById($options['entity'], $options['image_type']);
     }
 
     /**
