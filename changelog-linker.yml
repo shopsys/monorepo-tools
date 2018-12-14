@@ -12,6 +12,8 @@ parameters:
         - topolanekmartin
         - tomshopsys
         - petrsvob
+        - grossmannmartin
+        - DavidOstrozlik
     names_to_urls:
         'shopsys/shopsys': 'https://github.com/shopsys/shopsys'
         'shopsys/project-base': 'https://github.com/shopsys/project-base'
