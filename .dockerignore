@@ -23,6 +23,8 @@ project-base/kubernetes
 
 # ignore docker configs for other images than php-fpm, and the php-fpm's Dockerfile itself
 docker
+!docker/nginx
 project-base/docker
 !project-base/docker/php-fpm
+!project-base/docker/nginx
 project-base/docker/php-fpm/Dockerfile

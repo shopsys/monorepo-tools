@@ -20,5 +20,6 @@ kubernetes
 
 # ignore docker configs for other images than php-fpm, and the php-fpm's Dockerfile itself
 docker
+!docker/nginx
 !docker/php-fpm
 docker/php-fpm/Dockerfile
