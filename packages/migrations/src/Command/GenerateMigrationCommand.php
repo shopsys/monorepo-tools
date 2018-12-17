@@ -4,7 +4,7 @@ namespace Shopsys\MigrationBundle\Command;
 
 use Shopsys\MigrationBundle\Component\Doctrine\DatabaseSchemaFacade;
 use Shopsys\MigrationBundle\Component\Doctrine\Migrations\MigrationsLocator;
-use Shopsys\MigrationBundle\Component\Generator\GenerateMigrationsService;
+use Shopsys\MigrationBundle\Component\Generator\MigrationsGenerator;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
@@ -27,9 +27,9 @@ class GenerateMigrationCommand extends AbstractCommand
     private $databaseSchemaFacade;
 
     /**
-     * @var \Shopsys\MigrationBundle\Component\Generator\GenerateMigrationsService
+     * @var \Shopsys\MigrationBundle\Component\Generator\MigrationsGenerator
      */
-    private $generateMigrationsService;
+    private $migrationsGenerator;
 
     /**
      * @var \Shopsys\MigrationBundle\Component\Doctrine\Migrations\MigrationsLocator
@@ -49,19 +49,19 @@ class GenerateMigrationCommand extends AbstractCommand
     /**
      * @param string $vendorDirectoryPath
      * @param \Shopsys\MigrationBundle\Component\Doctrine\DatabaseSchemaFacade $databaseSchemaFacade
-     * @param \Shopsys\MigrationBundle\Component\Generator\GenerateMigrationsService $generateMigrationsService
+     * @param \Shopsys\MigrationBundle\Component\Generator\MigrationsGenerator $migrationsGenerator
      * @param \Shopsys\MigrationBundle\Component\Doctrine\Migrations\MigrationsLocator $migrationsLocator
      * @param \Symfony\Component\HttpKernel\KernelInterface $kernel
      */
     public function __construct(
         $vendorDirectoryPath,
         DatabaseSchemaFacade $databaseSchemaFacade,
-        GenerateMigrationsService $generateMigrationsService,
+        MigrationsGenerator $migrationsGenerator,
         MigrationsLocator $migrationsLocator,
         KernelInterface $kernel
     ) {
         $this->databaseSchemaFacade = $databaseSchemaFacade;
-        $this->generateMigrationsService = $generateMigrationsService;
+        $this->migrationsGenerator = $migrationsGenerator;
         $this->migrationsLocator = $migrationsLocator;
         $this->kernel = $kernel;
         $this->vendorDirectoryPath = $vendorDirectoryPath;
@@ -94,7 +94,7 @@ class GenerateMigrationCommand extends AbstractCommand
 
         $migrationsLocation = $this->chooseMigrationLocation($io);
 
-        $generatorResult = $this->generateMigrationsService->generate(
+        $generatorResult = $this->migrationsGenerator->generate(
             $filteredSchemaDiffSqlCommands,
             $migrationsLocation
         );

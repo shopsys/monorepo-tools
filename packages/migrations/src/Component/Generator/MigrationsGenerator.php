@@ -7,7 +7,7 @@ use SqlFormatter;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Templating\EngineInterface;
 
-class GenerateMigrationsService
+class MigrationsGenerator
 {
     const LINE_LENGTH_LIMIT = 100;
     const HIGHLIGHT_OFF = false;

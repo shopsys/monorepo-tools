@@ -246,6 +246,7 @@ Following classes were renamed, so change their usage appropriately:
 - `DomainUrlService` -> `DomainUrlReplacer`
 - `DomainService` -> `DomainIconResizer`
 - `ErrorService` -> `ErrorExtractor`
+- `GenerateMigrationsService` -> `MigrationsGenerator`
 - `HeurekaShopCertificationService` -> `HeurekaShopCertificationLocaleHelper`
 - `InlineEditService` -> `InlineEditFacade`
 - `ImageGeneratorService` -> `ImageGenerator`
