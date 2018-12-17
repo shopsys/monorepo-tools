@@ -544,7 +544,7 @@ msgstr ""
 msgid "The link to change your password expired."
 msgstr ""
 
-msgid "The price of payment {{ transportName }} changed during ordering process. Check your order, please."
+msgid "The price of payment {{ paymentName }} changed during ordering process. Check your order, please."
 msgstr ""
 
 msgid "The price of shipping {{ transportName }} changed during ordering process. Check your order, please."

@@ -544,7 +544,7 @@ msgstr "Děkujeme, váš vzkaz byl odeslán."
 msgid "The link to change your password expired."
 msgstr "Platnost odkazu pro změnu hesla vypršela."
 
-msgid "The price of payment {{ transportName }} changed during ordering process. Check your order, please."
+msgid "The price of payment {{ paymentName }} changed during ordering process. Check your order, please."
 msgstr "V průběhu objednávkového procesu byla změněna cena platby {{ paymentName }}. Prosím, překontrolujte si objednávku."
 
 msgid "The price of shipping {{ transportName }} changed during ordering process. Check your order, please."

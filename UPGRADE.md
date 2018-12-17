@@ -68,6 +68,9 @@ There is a list of all the repositories maintained by monorepo, changes in log b
     - to display svg icons collection correctly in grunt generated document for all browsers please add `src/Shopsys/ShopBundle/Resources/views/Grunt/htmlDocumentTemplate.html` file and update `src/Shopsys/ShopBundle/Resources/views/Grunt/gruntfile.js.twig` based on changes in this pull request
 - [#674 - Dockerignore needs to accept nginx configuration for production on docker](https://github.com/shopsys/shopsys/pull/674)
     - add `!docker/nginx` line into `.dockerignore` file so `docker/nginx` directory is not excluded during building `php-fpm` image
+- [#685 - fix wrong variable name in flash message](https://github.com/shopsys/shopsys/pull/685)
+    - in `Front/OrderController::checkTransportAndPaymentChanges()`, fix the variable name in the flash message in `$transportAndPaymentCheckResult->isPaymentPriceChanged()` condition 
+    - dump translations using `php phing dump-translations` and fill in your translations for the new message ID 
 
 ### [shopsys/shopsys]
 - [#651 It's possible to add index prefix to elastic search](https://github.com/shopsys/shopsys/pull/651)
