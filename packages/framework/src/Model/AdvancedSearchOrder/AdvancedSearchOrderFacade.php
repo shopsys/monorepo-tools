@@ -2,7 +2,10 @@
 
 namespace Shopsys\FrameworkBundle\Model\AdvancedSearchOrder;
 
+use Shopsys\FrameworkBundle\Model\AdvancedSearch\AdvancedSearchQueryBuilderExtender;
 use Shopsys\FrameworkBundle\Model\AdvancedSearch\OrderAdvancedSearchFormFactory;
+use Shopsys\FrameworkBundle\Model\AdvancedSearch\RuleFormViewDataFactory;
+use Shopsys\FrameworkBundle\Model\AdvancedSearchOrder\Filter\OrderPriceFilterWithVatFilter;
 use Shopsys\FrameworkBundle\Model\Order\Listing\OrderListAdminFacade;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -16,9 +19,9 @@ class AdvancedSearchOrderFacade
     protected $orderAdvancedSearchFormFactory;
 
     /**
-     * @var \Shopsys\FrameworkBundle\Model\AdvancedSearchOrder\AdvancedSearchOrderService
+     * @var \Shopsys\FrameworkBundle\Model\AdvancedSearch\AdvancedSearchQueryBuilderExtender
      */
-    protected $advancedSearchOrderService;
+    protected $advancedSearchQueryBuilderExtender;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Order\Listing\OrderListAdminFacade
@@ -26,18 +29,26 @@ class AdvancedSearchOrderFacade
     protected $orderListAdminFacade;
 
     /**
+     * @var \Shopsys\FrameworkBundle\Model\AdvancedSearch\RuleFormViewDataFactory
+     */
+    protected $ruleFormViewDataFactory;
+
+    /**
      * @param \Shopsys\FrameworkBundle\Model\AdvancedSearch\OrderAdvancedSearchFormFactory $orderAdvancedSearchFormFactory
-     * @param \Shopsys\FrameworkBundle\Model\AdvancedSearchOrder\AdvancedSearchOrderService $advancedSearchOrderService
+     * @param \Shopsys\FrameworkBundle\Model\AdvancedSearch\AdvancedSearchQueryBuilderExtender $advancedSearchQueryBuilderExtender
      * @param \Shopsys\FrameworkBundle\Model\Order\Listing\OrderListAdminFacade $orderListAdminFacade
+     * @param \Shopsys\FrameworkBundle\Model\AdvancedSearch\RuleFormViewDataFactory $ruleFormViewDataFactory
      */
     public function __construct(
         OrderAdvancedSearchFormFactory $orderAdvancedSearchFormFactory,
-        AdvancedSearchOrderService $advancedSearchOrderService,
-        OrderListAdminFacade $orderListAdminFacade
+        AdvancedSearchQueryBuilderExtender $advancedSearchQueryBuilderExtender,
+        OrderListAdminFacade $orderListAdminFacade,
+        RuleFormViewDataFactory $ruleFormViewDataFactory
     ) {
         $this->orderAdvancedSearchFormFactory = $orderAdvancedSearchFormFactory;
-        $this->advancedSearchOrderService = $advancedSearchOrderService;
+        $this->advancedSearchQueryBuilderExtender = $advancedSearchQueryBuilderExtender;
         $this->orderListAdminFacade = $orderListAdminFacade;
+        $this->ruleFormViewDataFactory = $ruleFormViewDataFactory;
     }
 
     /**
@@ -47,7 +58,7 @@ class AdvancedSearchOrderFacade
     public function createAdvancedSearchOrderForm(Request $request)
     {
         $rulesData = (array)$request->get(self::RULES_FORM_NAME);
-        $rulesFormData = $this->advancedSearchOrderService->getRulesFormViewDataByRequestData($rulesData);
+        $rulesFormData = $this->ruleFormViewDataFactory->createFromRequestData(OrderPriceFilterWithVatFilter::NAME, $rulesData);
 
         return $this->orderAdvancedSearchFormFactory->createRulesForm(self::RULES_FORM_NAME, $rulesFormData);
     }
@@ -60,7 +71,7 @@ class AdvancedSearchOrderFacade
     public function createRuleForm($filterName, $index)
     {
         $rulesData = [
-            $index => $this->advancedSearchOrderService->createDefaultRuleFormViewData($filterName),
+            $index => $this->ruleFormViewDataFactory->createDefault($filterName),
         ];
 
         return $this->orderAdvancedSearchFormFactory->createRulesForm(self::RULES_FORM_NAME, $rulesData);
@@ -73,7 +84,7 @@ class AdvancedSearchOrderFacade
     public function getQueryBuilderByAdvancedSearchOrderData($advancedSearchOrderData)
     {
         $queryBuilder = $this->orderListAdminFacade->getOrderListQueryBuilder();
-        $this->advancedSearchOrderService->extendQueryBuilderByAdvancedSearchOrderData($queryBuilder, $advancedSearchOrderData);
+        $this->advancedSearchQueryBuilderExtender->extendByAdvancedSearchData($queryBuilder, $advancedSearchOrderData);
 
         return $queryBuilder;
     }

@@ -2,6 +2,7 @@
 
 namespace Shopsys\FrameworkBundle\Model\AdvancedSearch;
 
+use Shopsys\FrameworkBundle\Model\AdvancedSearch\Filter\ProductNameFilter;
 use Shopsys\FrameworkBundle\Model\Product\Listing\ProductListAdminFacade;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -15,9 +16,9 @@ class AdvancedSearchFacade
     protected $advancedSearchFormFactory;
 
     /**
-     * @var \Shopsys\FrameworkBundle\Model\AdvancedSearch\AdvancedSearchService
+     * @var \Shopsys\FrameworkBundle\Model\AdvancedSearch\AdvancedSearchQueryBuilderExtender
      */
-    protected $advancedSearchService;
+    protected $advancedSearchQueryBuilderExtender;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Product\Listing\ProductListAdminFacade
@@ -25,18 +26,26 @@ class AdvancedSearchFacade
     protected $productListAdminFacade;
 
     /**
+     * @var \Shopsys\FrameworkBundle\Model\AdvancedSearch\RuleFormViewDataFactory
+     */
+    protected $ruleFormViewDataFactory;
+
+    /**
      * @param \Shopsys\FrameworkBundle\Model\AdvancedSearch\ProductAdvancedSearchFormFactory $advancedSearchFormFactory
-     * @param \Shopsys\FrameworkBundle\Model\AdvancedSearch\AdvancedSearchService $advancedSearchService
+     * @param \Shopsys\FrameworkBundle\Model\AdvancedSearch\AdvancedSearchQueryBuilderExtender $advancedSearchQueryBuilderExtender
      * @param \Shopsys\FrameworkBundle\Model\Product\Listing\ProductListAdminFacade $productListAdminFacade
+     * @param \Shopsys\FrameworkBundle\Model\AdvancedSearch\RuleFormViewDataFactory $ruleFormViewDataFactory
      */
     public function __construct(
         ProductAdvancedSearchFormFactory $advancedSearchFormFactory,
-        AdvancedSearchService $advancedSearchService,
-        ProductListAdminFacade $productListAdminFacade
+        AdvancedSearchQueryBuilderExtender $advancedSearchQueryBuilderExtender,
+        ProductListAdminFacade $productListAdminFacade,
+        RuleFormViewDataFactory $ruleFormViewDataFactory
     ) {
         $this->advancedSearchFormFactory = $advancedSearchFormFactory;
-        $this->advancedSearchService = $advancedSearchService;
+        $this->advancedSearchQueryBuilderExtender = $advancedSearchQueryBuilderExtender;
         $this->productListAdminFacade = $productListAdminFacade;
+        $this->ruleFormViewDataFactory = $ruleFormViewDataFactory;
     }
 
     /**
@@ -46,7 +55,7 @@ class AdvancedSearchFacade
     public function createAdvancedSearchForm(Request $request)
     {
         $rulesData = (array)$request->get(self::RULES_FORM_NAME);
-        $rulesFormData = $this->advancedSearchService->getRulesFormViewDataByRequestData($rulesData);
+        $rulesFormData = $this->ruleFormViewDataFactory->createFromRequestData(ProductNameFilter::NAME, $rulesData);
 
         return $this->advancedSearchFormFactory->createRulesForm(self::RULES_FORM_NAME, $rulesFormData);
     }
@@ -59,7 +68,7 @@ class AdvancedSearchFacade
     public function createRuleForm($filterName, $index)
     {
         $rulesData = [
-            $index => $this->advancedSearchService->createDefaultRuleFormViewData($filterName),
+            $index => $this->ruleFormViewDataFactory->createDefault($filterName),
         ];
 
         return $this->advancedSearchFormFactory->createRulesForm(self::RULES_FORM_NAME, $rulesData);
@@ -72,7 +81,7 @@ class AdvancedSearchFacade
     public function getQueryBuilderByAdvancedSearchData($advancedSearchData)
     {
         $queryBuilder = $this->productListAdminFacade->getProductListQueryBuilder();
-        $this->advancedSearchService->extendQueryBuilderByAdvancedSearchData($queryBuilder, $advancedSearchData);
+        $this->advancedSearchQueryBuilderExtender->extendByAdvancedSearchData($queryBuilder, $advancedSearchData);
 
         return $queryBuilder;
     }

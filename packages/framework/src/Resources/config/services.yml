@@ -985,3 +985,21 @@ services:
     Shopsys\FrameworkBundle\Model\Order\Mail\OrderMail: ~
 
     Shopsys\FrameworkBundle\Model\Product\Listing\RequestToOrderingModeIdConverter: ~
+
+    shopsys.shop.model.advanced_search.advanced_search_query_builder_extender.product:
+        class: Shopsys\FrameworkBundle\Model\AdvancedSearch\AdvancedSearchQueryBuilderExtender
+        arguments:
+            $advancedSearchConfig: '@Shopsys\FrameworkBundle\Model\AdvancedSearch\ProductAdvancedSearchConfig'
+
+    Shopsys\FrameworkBundle\Model\AdvancedSearch\AdvancedSearchFacade:
+        arguments:
+            $advancedSearchQueryBuilderExtender: '@shopsys.shop.model.advanced_search.advanced_search_query_builder_extender.product'
+
+    shopsys.shop.model.advanced_search.advanced_search_query_builder_extender.order:
+        class: Shopsys\FrameworkBundle\Model\AdvancedSearch\AdvancedSearchQueryBuilderExtender
+        arguments:
+            $advancedSearchConfig: '@Shopsys\FrameworkBundle\Model\AdvancedSearch\OrderAdvancedSearchConfig'
+
+    Shopsys\FrameworkBundle\Model\AdvancedSearchOrder\AdvancedSearchOrderFacade:
+        arguments:
+            $advancedSearchQueryBuilderExtender: '@shopsys.shop.model.advanced_search.advanced_search_query_builder_extender.order'
