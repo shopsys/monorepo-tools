@@ -4,10 +4,8 @@ namespace Tests\FrameworkBundle\Unit\Model\Customer;
 
 use PHPUnit\Framework\TestCase;
 use Shopsys\FrameworkBundle\Component\EntityExtension\EntityNameResolver;
-use Shopsys\FrameworkBundle\Component\String\HashGenerator;
 use Shopsys\FrameworkBundle\Model\Customer\BillingAddress;
 use Shopsys\FrameworkBundle\Model\Customer\BillingAddressData;
-use Shopsys\FrameworkBundle\Model\Customer\CustomerPasswordService;
 use Shopsys\FrameworkBundle\Model\Customer\DeliveryAddress;
 use Shopsys\FrameworkBundle\Model\Customer\DeliveryAddressData;
 use Shopsys\FrameworkBundle\Model\Customer\User;
@@ -158,21 +156,19 @@ class UserFactoryTest extends TestCase
      */
     private function getUserFactory(): UserFactory
     {
-        $customerPasswordService = $this->getCustomerPaswordService();
+        $encoderFactory = $this->getEncoderFactory();
 
-        return new UserFactory(new EntityNameResolver([]), $customerPasswordService);
+        return new UserFactory(new EntityNameResolver([]), $encoderFactory);
     }
 
     /**
-     * @return \Shopsys\FrameworkBundle\Model\Customer\CustomerPasswordService
+     * @return \Symfony\Component\Security\Core\Encoder\EncoderFactory
      */
-    private function getCustomerPaswordService(): CustomerPasswordService
+    private function getEncoderFactory(): EncoderFactory
     {
         $encoder = new BCryptPasswordEncoder(12);
-        $encoderFactory = new EncoderFactory([User::class => $encoder]);
-        $hashGenerator = new HashGenerator();
 
-        return new CustomerPasswordService($encoderFactory, $hashGenerator);
+        return new EncoderFactory([User::class => $encoder]);
     }
 
     /**

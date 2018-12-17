@@ -30,9 +30,9 @@ class ProductVariantFacade
     protected $imageFacade;
 
     /**
-     * @var \Shopsys\FrameworkBundle\Model\Product\ProductVariantService
+     * @var \Shopsys\FrameworkBundle\Model\Product\ProductFactoryInterface
      */
-    protected $productVariantService;
+    protected $productFactory;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Product\Pricing\ProductPriceRecalculationScheduler
@@ -49,7 +49,7 @@ class ProductVariantFacade
      * @param \Shopsys\FrameworkBundle\Model\Product\ProductFacade $productFacade
      * @param \Shopsys\FrameworkBundle\Model\Product\ProductDataFactoryInterface $productDataFactory
      * @param \Shopsys\FrameworkBundle\Component\Image\ImageFacade $imageFacade
-     * @param \Shopsys\FrameworkBundle\Model\Product\ProductVariantService $productVariantService
+     * @param \Shopsys\FrameworkBundle\Model\Product\ProductFactoryInterface $productFactory
      * @param \Shopsys\FrameworkBundle\Model\Product\Pricing\ProductPriceRecalculationScheduler $productPriceRecalculationScheduler
      * @param \Shopsys\FrameworkBundle\Model\Product\Availability\ProductAvailabilityRecalculationScheduler $productAvailabilityRecalculationScheduler
      */
@@ -58,7 +58,7 @@ class ProductVariantFacade
         ProductFacade $productFacade,
         ProductDataFactoryInterface $productDataFactory,
         ImageFacade $imageFacade,
-        ProductVariantService $productVariantService,
+        ProductFactoryInterface $productFactory,
         ProductPriceRecalculationScheduler $productPriceRecalculationScheduler,
         ProductAvailabilityRecalculationScheduler $productAvailabilityRecalculationScheduler
     ) {
@@ -66,7 +66,7 @@ class ProductVariantFacade
         $this->productFacade = $productFacade;
         $this->productDataFactory = $productDataFactory;
         $this->imageFacade = $imageFacade;
-        $this->productVariantService = $productVariantService;
+        $this->productFactory = $productFactory;
         $this->productPriceRecalculationScheduler = $productPriceRecalculationScheduler;
         $this->productAvailabilityRecalculationScheduler = $productAvailabilityRecalculationScheduler;
     }
@@ -78,10 +78,10 @@ class ProductVariantFacade
      */
     public function createVariant(Product $mainProduct, array $variants)
     {
-        $this->productVariantService->checkProductIsNotMainVariant($mainProduct);
+        $mainProduct->checkIsNotMainVariant();
 
         $mainVariantData = $this->productDataFactory->createFromProduct($mainProduct);
-        $mainVariant = $this->productVariantService->createMainVariant($mainVariantData, $mainProduct, $variants);
+        $mainVariant = $this->productFactory->createMainVariant($mainVariantData, $mainProduct, $variants);
         $this->em->persist($mainVariant);
 
         try {

@@ -26,11 +26,6 @@ class ImageFacade
     protected $imageRepository;
 
     /**
-     * @var \Shopsys\FrameworkBundle\Component\Image\ImageService
-     */
-    protected $imageService;
-
-    /**
      * @var \League\Flysystem\FilesystemInterface
      */
     protected $filesystem;
@@ -51,33 +46,38 @@ class ImageFacade
     protected $imageUrlPrefix;
 
     /**
+     * @var \Shopsys\FrameworkBundle\Component\Image\ImageFactoryInterface
+     */
+    protected $imageFactory;
+
+    /**
      * @param mixed $imageUrlPrefix
      * @param \Doctrine\ORM\EntityManagerInterface $em
      * @param \Shopsys\FrameworkBundle\Component\Image\Config\ImageConfig $imageConfig
      * @param \Shopsys\FrameworkBundle\Component\Image\ImageRepository $imageRepository
-     * @param \Shopsys\FrameworkBundle\Component\Image\ImageService $imageService
      * @param \League\Flysystem\FilesystemInterface $filesystem
      * @param \Shopsys\FrameworkBundle\Component\FileUpload\FileUpload $fileUpload
      * @param \Shopsys\FrameworkBundle\Component\Image\ImageLocator $imageLocator
+     * @param \Shopsys\FrameworkBundle\Component\Image\ImageFactoryInterface $imageFactory
      */
     public function __construct(
         $imageUrlPrefix,
         EntityManagerInterface $em,
         ImageConfig $imageConfig,
         ImageRepository $imageRepository,
-        ImageService $imageService,
         FilesystemInterface $filesystem,
         FileUpload $fileUpload,
-        ImageLocator $imageLocator
+        ImageLocator $imageLocator,
+        ImageFactoryInterface $imageFactory
     ) {
         $this->imageUrlPrefix = $imageUrlPrefix;
         $this->em = $em;
         $this->imageConfig = $imageConfig;
         $this->imageRepository = $imageRepository;
-        $this->imageService = $imageService;
         $this->filesystem = $filesystem;
         $this->fileUpload = $fileUpload;
         $this->imageLocator = $imageLocator;
+        $this->imageFactory = $imageFactory;
     }
 
     /**
@@ -98,11 +98,11 @@ class ImageFacade
                 $entitiesForFlush[] = $oldImage;
             }
 
-            $newImage = $this->imageService->createImage(
-                $imageEntityConfig,
+            $newImage = $this->imageFactory->create(
+                $imageEntityConfig->getEntityName(),
                 $entityId,
-                array_pop($temporaryFilenames),
-                $type
+                $type,
+                array_pop($temporaryFilenames)
             );
             $this->em->persist($newImage);
             $entitiesForFlush[] = $newImage;
@@ -116,7 +116,7 @@ class ImageFacade
      */
     public function saveImageOrdering($orderedImages)
     {
-        $this->imageService->setImagePositionsByOrder($orderedImages);
+        $this->setImagePositionsByOrder($orderedImages);
         $this->em->flush($orderedImages);
     }
 
@@ -131,7 +131,7 @@ class ImageFacade
             $imageEntityConfig = $this->imageConfig->getImageEntityConfig($entity);
             $entityId = $this->getEntityId($entity);
 
-            $images = $this->imageService->getUploadedImages($imageEntityConfig, $entityId, $temporaryFilenames, $type);
+            $images = $this->imageFactory->createMultiple($imageEntityConfig, $entityId, $type, $temporaryFilenames);
             foreach ($images as $image) {
                 $this->em->persist($image);
             }
@@ -149,7 +149,9 @@ class ImageFacade
         $entityId = $this->getEntityId($entity);
 
         // files will be deleted in doctrine listener
-        $this->imageService->deleteImages($entityName, $entityId, $images);
+        foreach ($images as $image) {
+            $image->checkForDelete($entityName, $entityId);
+        }
 
         foreach ($images as $image) {
             $this->em->remove($image);
@@ -292,16 +294,28 @@ class ImageFacade
                 $this->fileUpload->getTemporaryFilepath($sourceImage->getFilename())
             );
 
-            $targetImage = $this->imageService->createImage(
-                $this->imageConfig->getImageEntityConfig($targetEntity),
+            $targetImage = $this->imageFactory->create(
+                $this->imageConfig->getImageEntityConfig($targetEntity)->getEntityName(),
                 $this->getEntityId($targetEntity),
-                $sourceImage->getFilename(),
-                $sourceImage->getType()
+                $sourceImage->getType(),
+                $sourceImage->getFilename()
             );
 
             $this->em->persist($targetImage);
             $targetImages[] = $targetImage;
         }
         $this->em->flush($targetImages);
+    }
+
+    /**
+     * @param \Shopsys\FrameworkBundle\Component\Image\Image[] $orderedImages
+     */
+    protected function setImagePositionsByOrder($orderedImages)
+    {
+        $position = 0;
+        foreach ($orderedImages as $image) {
+            $image->setPosition($position);
+            $position++;
+        }
     }
 }

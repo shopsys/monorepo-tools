@@ -51,8 +51,6 @@ services:
 
     Shopsys\FrameworkBundle\Model\Country\CountryFacade: ~
 
-    Shopsys\FrameworkBundle\Model\Customer\CustomerPasswordService: ~
-
     Shopsys\FrameworkBundle\Model\Customer\CurrentCustomer: ~
 
     Shopsys\FrameworkBundle\Model\Order\PromoCode\CurrentPromoCodeFacade: ~

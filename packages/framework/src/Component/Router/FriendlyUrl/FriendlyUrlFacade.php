@@ -21,9 +21,9 @@ class FriendlyUrlFacade
     protected $domainRouterFactory;
 
     /**
-     * @var \Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\FriendlyUrlService
+     * @var \Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\FriendlyUrlUniqueResultFactory
      */
-    protected $friendlyUrlService;
+    protected $friendlyUrlUniqueResultFactory;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\FriendlyUrlRepository
@@ -43,7 +43,7 @@ class FriendlyUrlFacade
     /**
      * @param \Doctrine\ORM\EntityManagerInterface $em
      * @param \Shopsys\FrameworkBundle\Component\Router\DomainRouterFactory $domainRouterFactory
-     * @param \Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\FriendlyUrlService $friendlyUrlService
+     * @param \Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\FriendlyUrlUniqueResultFactory $friendlyUrlUniqueResultFactory
      * @param \Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\FriendlyUrlRepository $friendlyUrlRepository
      * @param \Shopsys\FrameworkBundle\Component\Domain\Domain $domain
      * @param \Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\FriendlyUrlFactoryInterface $friendlyUrlFactory
@@ -51,14 +51,14 @@ class FriendlyUrlFacade
     public function __construct(
         EntityManagerInterface $em,
         DomainRouterFactory $domainRouterFactory,
-        FriendlyUrlService $friendlyUrlService,
+        FriendlyUrlUniqueResultFactory $friendlyUrlUniqueResultFactory,
         FriendlyUrlRepository $friendlyUrlRepository,
         Domain $domain,
         FriendlyUrlFactoryInterface $friendlyUrlFactory
     ) {
         $this->em = $em;
         $this->domainRouterFactory = $domainRouterFactory;
-        $this->friendlyUrlService = $friendlyUrlService;
+        $this->friendlyUrlUniqueResultFactory = $friendlyUrlUniqueResultFactory;
         $this->friendlyUrlRepository = $friendlyUrlRepository;
         $this->domain = $domain;
         $this->friendlyUrlFactory = $friendlyUrlFactory;
@@ -71,7 +71,7 @@ class FriendlyUrlFacade
      */
     public function createFriendlyUrls($routeName, $entityId, array $namesByLocale)
     {
-        $friendlyUrls = $this->friendlyUrlService->createFriendlyUrls($routeName, $entityId, $namesByLocale);
+        $friendlyUrls = $this->friendlyUrlFactory->createForAllDomains($routeName, $entityId, $namesByLocale);
         foreach ($friendlyUrls as $friendlyUrl) {
             $locale = $this->domain->getDomainConfigById($friendlyUrl->getDomainId())->getLocale();
             $this->resolveUniquenessOfFriendlyUrlAndFlush($friendlyUrl, $namesByLocale[$locale]);
@@ -86,7 +86,7 @@ class FriendlyUrlFacade
      */
     public function createFriendlyUrlForDomain($routeName, $entityId, $entityName, $domainId)
     {
-        $friendlyUrl = $this->friendlyUrlService->createFriendlyUrlIfValid($routeName, $entityId, $entityName, $domainId);
+        $friendlyUrl = $this->friendlyUrlFactory->createIfValid($routeName, $entityId, (string)$entityName, $domainId);
         if ($friendlyUrl !== null) {
             $this->resolveUniquenessOfFriendlyUrlAndFlush($friendlyUrl, $entityName);
         }
@@ -115,10 +115,10 @@ class FriendlyUrlFacade
                 $matchedRouteData = null;
             }
 
-            $friendlyUrlUniqueResult = $this->friendlyUrlService->getFriendlyUrlUniqueResult(
+            $friendlyUrlUniqueResult = $this->friendlyUrlUniqueResultFactory->create(
                 $attempt,
                 $friendlyUrl,
-                $entityName,
+                (string)$entityName,
                 $matchedRouteData
             );
             $friendlyUrl = $friendlyUrlUniqueResult->getFriendlyUrlForPersist();

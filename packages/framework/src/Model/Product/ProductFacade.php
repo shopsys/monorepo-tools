@@ -92,11 +92,6 @@ class ProductFacade
     protected $productAccessoryRepository;
 
     /**
-     * @var \Shopsys\FrameworkBundle\Model\Product\ProductVariantService
-     */
-    protected $productVariantService;
-
-    /**
      * @var \Shopsys\FrameworkBundle\Model\Product\Availability\AvailabilityFacade
      */
     protected $availabilityFacade;
@@ -151,7 +146,6 @@ class ProductFacade
      * @param \Shopsys\FrameworkBundle\Model\Product\ProductHiddenRecalculator $productHiddenRecalculator
      * @param \Shopsys\FrameworkBundle\Model\Product\ProductSellingDeniedRecalculator $productSellingDeniedRecalculator
      * @param \Shopsys\FrameworkBundle\Model\Product\Accessory\ProductAccessoryRepository $productAccessoryRepository
-     * @param \Shopsys\FrameworkBundle\Model\Product\ProductVariantService $productVariantService
      * @param \Shopsys\FrameworkBundle\Model\Product\Availability\AvailabilityFacade $availabilityFacade
      * @param \Shopsys\FrameworkBundle\Component\Plugin\PluginCrudExtensionFacade $pluginCrudExtensionFacade
      * @param \Shopsys\FrameworkBundle\Model\Product\ProductFactoryInterface $productFactory
@@ -176,7 +170,6 @@ class ProductFacade
         ProductHiddenRecalculator $productHiddenRecalculator,
         ProductSellingDeniedRecalculator $productSellingDeniedRecalculator,
         ProductAccessoryRepository $productAccessoryRepository,
-        ProductVariantService $productVariantService,
         AvailabilityFacade $availabilityFacade,
         PluginCrudExtensionFacade $pluginCrudExtensionFacade,
         ProductFactoryInterface $productFactory,
@@ -200,7 +193,6 @@ class ProductFacade
         $this->productHiddenRecalculator = $productHiddenRecalculator;
         $this->productSellingDeniedRecalculator = $productSellingDeniedRecalculator;
         $this->productAccessoryRepository = $productAccessoryRepository;
-        $this->productVariantService = $productVariantService;
         $this->availabilityFacade = $availabilityFacade;
         $this->pluginCrudExtensionFacade = $pluginCrudExtensionFacade;
         $this->productFactory = $productFactory;
@@ -278,7 +270,7 @@ class ProductFacade
         if (!$product->isMainVariant()) {
             $this->refreshProductManualInputPrices($product, $productData->manualInputPricesByPricingGroupId);
         } else {
-            $this->productVariantService->refreshProductVariants($product, $productData->variants);
+            $product->refreshVariants($productData->variants);
         }
         $this->refreshProductAccessories($product, $productData->accessories);
         $this->em->flush();

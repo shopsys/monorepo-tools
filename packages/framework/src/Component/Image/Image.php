@@ -191,4 +191,22 @@ class Image implements EntityFileUploadInterface
     {
         return $this->modifiedAt;
     }
+
+    /**
+     * @param string $entityName
+     * @param int $entityId
+     */
+    public function checkForDelete(string $entityName, int $entityId)
+    {
+        if ($this->entityName !== $entityName || $this->entityId !== $entityId) {
+            throw new \Shopsys\FrameworkBundle\Component\Image\Exception\ImageNotFoundException(
+                sprintf(
+                    'Entity %s with ID %s does not own image with ID %s',
+                    $entityName,
+                    $entityId,
+                    $this->id
+                )
+            );
+        }
+    }
 }

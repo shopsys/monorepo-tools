@@ -3,7 +3,9 @@
 namespace Shopsys\FrameworkBundle\Model\Customer;
 
 use Doctrine\ORM\EntityManagerInterface;
+use Shopsys\FrameworkBundle\Component\String\HashGenerator;
 use Shopsys\FrameworkBundle\Model\Customer\Mail\ResetPasswordMailFacade;
+use Symfony\Component\Security\Core\Encoder\EncoderFactoryInterface;
 
 class CustomerPasswordFacade
 {
@@ -23,26 +25,34 @@ class CustomerPasswordFacade
     protected $resetPasswordMailFacade;
 
     /**
-     * @var \Shopsys\FrameworkBundle\Model\Customer\CustomerPasswordService
+     * @var \Symfony\Component\Security\Core\Encoder\EncoderFactoryInterface
      */
-    protected $customerPasswordService;
+    protected $encoderFactory;
+
+    /**
+     * @var \Shopsys\FrameworkBundle\Component\String\HashGenerator
+     */
+    protected $hashGenerator;
 
     /**
      * @param \Doctrine\ORM\EntityManagerInterface $em
      * @param \Shopsys\FrameworkBundle\Model\Customer\UserRepository $userRepository
-     * @param \Shopsys\FrameworkBundle\Model\Customer\CustomerPasswordService $customerPasswordService
+     * @param \Symfony\Component\Security\Core\Encoder\EncoderFactoryInterface $encoderFactory
      * @param \Shopsys\FrameworkBundle\Model\Customer\Mail\ResetPasswordMailFacade $resetPasswordMailFacade
+     * @param \Shopsys\FrameworkBundle\Component\String\HashGenerator $hashGenerator
      */
     public function __construct(
         EntityManagerInterface $em,
         UserRepository $userRepository,
-        CustomerPasswordService $customerPasswordService,
-        ResetPasswordMailFacade $resetPasswordMailFacade
+        EncoderFactoryInterface $encoderFactory,
+        ResetPasswordMailFacade $resetPasswordMailFacade,
+        HashGenerator $hashGenerator
     ) {
         $this->em = $em;
         $this->userRepository = $userRepository;
-        $this->customerPasswordService = $customerPasswordService;
+        $this->encoderFactory = $encoderFactory;
         $this->resetPasswordMailFacade = $resetPasswordMailFacade;
+        $this->hashGenerator = $hashGenerator;
     }
 
     /**
@@ -53,7 +63,7 @@ class CustomerPasswordFacade
     {
         $user = $this->userRepository->getUserByEmailAndDomain($email, $domainId);
 
-        $this->customerPasswordService->resetPassword($user);
+        $user->resetPassword($this->hashGenerator);
         $this->em->flush($user);
         $this->resetPasswordMailFacade->sendMail($user);
     }
@@ -68,7 +78,7 @@ class CustomerPasswordFacade
     {
         $user = $this->userRepository->getUserByEmailAndDomain($email, $domainId);
 
-        return $this->customerPasswordService->isResetPasswordHashValid($user, $hash);
+        return $user->isResetPasswordHashValid($hash);
     }
 
     /**
@@ -82,7 +92,7 @@ class CustomerPasswordFacade
     {
         $user = $this->userRepository->getUserByEmailAndDomain($email, $domainId);
 
-        $this->customerPasswordService->setNewPassword($user, $hash, $newPassword);
+        $user->setNewPassword($this->encoderFactory, $hash, $newPassword);
 
         return $user;
     }

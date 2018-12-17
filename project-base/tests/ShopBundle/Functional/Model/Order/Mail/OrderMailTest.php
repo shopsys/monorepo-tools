@@ -23,35 +23,6 @@ class OrderMailTest extends FunctionalTestCase
 {
     public function testGetMailTemplateNameByStatus()
     {
-        $routerMock = $this->getMockBuilder(RouterInterface::class)->setMethods(['generate'])->getMockForAbstractClass();
-        $routerMock->expects($this->any())->method('generate')->willReturn('generatedUrl');
-
-        $domainRouterFactoryMock = $this->getMockBuilder(DomainRouterFactory::class)
-            ->setMethods(['getRouter'])
-            ->disableOriginalConstructor()
-            ->getMock();
-        $domainRouterFactoryMock->expects($this->any())->method('getRouter')->willReturn($routerMock);
-
-        $twigMock = $this->getMockBuilder(Twig_Environment::class)->disableOriginalConstructor()->getMock();
-        $orderItemPriceCalculationMock = $this->getMockBuilder(OrderItemPriceCalculation::class)->disableOriginalConstructor()->getMock();
-        $settingMock = $this->getMockBuilder(Setting::class)->disableOriginalConstructor()->getMock();
-
-        $domainMock = $this->getMockBuilder(Domain::class)->disableOriginalConstructor()->getMock();
-        $priceExtensionMock = $this->getMockBuilder(PriceExtension::class)->disableOriginalConstructor()->getMock();
-        $dateTimeFormatterExtensionMock = $this->getMockBuilder(DateTimeFormatterExtension::class)->disableOriginalConstructor()->getMock();
-        $orderUrlGeneratorMock = $this->getMockBuilder(OrderUrlGenerator::class)->disableOriginalConstructor()->getMock();
-
-        $orderMail = new OrderMail(
-            $settingMock,
-            $domainRouterFactoryMock,
-            $twigMock,
-            $orderItemPriceCalculationMock,
-            $domainMock,
-            $priceExtensionMock,
-            $dateTimeFormatterExtensionMock,
-            $orderUrlGeneratorMock
-        );
-
         $orderStatus1 = $this->getMockBuilder(OrderStatus::class)
             ->setMethods(['getId'])
             ->disableOriginalConstructor()
@@ -64,8 +35,8 @@ class OrderMailTest extends FunctionalTestCase
             ->getMock();
         $orderStatus2->expects($this->atLeastOnce())->method('getId')->willReturn(2);
 
-        $mailTempleteName1 = $orderMail->getMailTemplateNameByStatus($orderStatus1);
-        $mailTempleteName2 = $orderMail->getMailTemplateNameByStatus($orderStatus2);
+        $mailTempleteName1 = OrderMail::getMailTemplateNameByStatus($orderStatus1);
+        $mailTempleteName2 = OrderMail::getMailTemplateNameByStatus($orderStatus2);
 
         $this->assertNotEmpty($mailTempleteName1);
         $this->assertInternalType('string', $mailTempleteName1);

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Tests\FrameworkBundle\Unit\Component\Image;
 
 use League\Flysystem\FilesystemInterface;
@@ -10,13 +12,12 @@ use Shopsys\FrameworkBundle\Component\FileUpload\FileUpload;
 use Shopsys\FrameworkBundle\Component\Image\Config\ImageEntityConfig;
 use Shopsys\FrameworkBundle\Component\Image\Image;
 use Shopsys\FrameworkBundle\Component\Image\ImageFactory;
-use Shopsys\FrameworkBundle\Component\Image\ImageService;
 use Shopsys\FrameworkBundle\Component\Image\Processing\ImageProcessor;
 use Symfony\Component\Filesystem\Filesystem;
 
-class ImageServiceTest extends TestCase
+class ImageFactoryTest extends TestCase
 {
-    public function testGetUploadedImagesException()
+    public function testCreateMultipleException()
     {
         $imageEntityConfig = new ImageEntityConfig('entityName', 'entityClass', [], [], ['type' => false]);
 
@@ -24,13 +25,13 @@ class ImageServiceTest extends TestCase
             ->disableOriginalConstructor()
             ->getMock();
 
-        $imageService = new ImageService($imageProcessorMock, $this->getFileUpload(), new ImageFactory());
+        $imageFactory = new ImageFactory($imageProcessorMock, $this->getFileUpload());
 
         $this->expectException(\Shopsys\FrameworkBundle\Component\Image\Exception\EntityMultipleImageException::class);
-        $imageService->getUploadedImages($imageEntityConfig, 1, [], 'type');
+        $imageFactory->createMultiple($imageEntityConfig, 1, 'type', []);
     }
 
-    public function testGetUploadedImages()
+    public function testCreateMultiple()
     {
         $imageEntityConfig = new ImageEntityConfig('entityName', 'entityClass', [], [], ['type' => true]);
         $filenames = ['filename1.jpg', 'filename2.png'];
@@ -44,8 +45,8 @@ class ImageServiceTest extends TestCase
                 return pathinfo($filepath, PATHINFO_BASENAME);
             });
 
-        $imageService = new ImageService($imageProcessorMock, $this->getFileUpload(), new ImageFactory());
-        $images = $imageService->getUploadedImages($imageEntityConfig, 1, $filenames, 'type');
+        $imageFactory = new ImageFactory($imageProcessorMock, $this->getFileUpload());
+        $images = $imageFactory->createMultiple($imageEntityConfig, 1, 'type', $filenames);
 
         $this->assertCount(2, $images);
         foreach ($images as $image) {
@@ -56,7 +57,7 @@ class ImageServiceTest extends TestCase
         }
     }
 
-    public function testCreateImage()
+    public function testCreate()
     {
         $imageEntityConfig = new ImageEntityConfig('entityName', 'entityClass', [], [], ['type' => true]);
         $filename = 'filename.jpg';
@@ -67,8 +68,8 @@ class ImageServiceTest extends TestCase
             ->getMock();
         $imageProcessorMock->expects($this->any())->method('convertToShopFormatAndGetNewFilename')->willReturn($filename);
 
-        $imageService = new ImageService($imageProcessorMock, $this->getFileUpload(), new ImageFactory());
-        $image = $imageService->createImage($imageEntityConfig, 1, $filename, 'type');
+        $imageFactory = new ImageFactory($imageProcessorMock, $this->getFileUpload());
+        $image = $imageFactory->create($imageEntityConfig->getEntityName(), 1, 'type', $filename);
         $temporaryFiles = $image->getTemporaryFilesForUpload();
 
         $this->assertInstanceOf(Image::class, $image);
@@ -78,7 +79,7 @@ class ImageServiceTest extends TestCase
     /**
      * @return \Shopsys\FrameworkBundle\Component\FileUpload\FileUpload
      */
-    private function getFileUpload()
+    private function getFileUpload(): FileUpload
     {
         $fileNamingConvention = new FileNamingConvention();
         $filesystem = new Filesystem();

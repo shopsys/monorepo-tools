@@ -57,7 +57,7 @@ class OrderMailFacade
      */
     public function getMailTemplateByStatusAndDomainId(OrderStatus $orderStatus, $domainId)
     {
-        $templateName = $this->orderMail->getMailTemplateNameByStatus($orderStatus);
+        $templateName = OrderMail::getMailTemplateNameByStatus($orderStatus);
 
         return $this->mailTemplateFacade->get($templateName, $domainId);
     }

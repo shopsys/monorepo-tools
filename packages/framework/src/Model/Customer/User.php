@@ -5,8 +5,10 @@ namespace Shopsys\FrameworkBundle\Model\Customer;
 use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 use Serializable;
+use Shopsys\FrameworkBundle\Component\String\HashGenerator;
 use Shopsys\FrameworkBundle\Model\Security\Roles;
 use Shopsys\FrameworkBundle\Model\Security\TimelimitLoginInterface;
+use Symfony\Component\Security\Core\Encoder\EncoderFactoryInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
@@ -23,6 +25,8 @@ use Symfony\Component\Security\Core\User\UserInterface;
  */
 class User implements UserInterface, TimelimitLoginInterface, Serializable
 {
+    const RESET_PASSWORD_HASH_LENGTH = 50;
+
     /**
      * @ORM\Column(type="integer")
      * @ORM\Id
@@ -140,9 +144,9 @@ class User implements UserInterface, TimelimitLoginInterface, Serializable
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\Customer\UserData $userData
-     * @param \Shopsys\FrameworkBundle\Model\Customer\CustomerPasswordService $customerPasswordService
+     * @param \Symfony\Component\Security\Core\Encoder\EncoderFactoryInterface $encoderFactory
      */
-    public function edit(UserData $userData, CustomerPasswordService $customerPasswordService)
+    public function edit(UserData $userData, EncoderFactoryInterface $encoderFactory)
     {
         $this->firstName = $userData->firstName;
         $this->lastName = $userData->lastName;
@@ -150,7 +154,7 @@ class User implements UserInterface, TimelimitLoginInterface, Serializable
         $this->telephone = $userData->telephone;
 
         if ($userData->password !== null) {
-            $customerPasswordService->changePassword($this, $userData->password);
+            $this->changePassword($encoderFactory, $userData->password);
         }
     }
 
@@ -172,22 +176,16 @@ class User implements UserInterface, TimelimitLoginInterface, Serializable
     }
 
     /**
+     * @param \Symfony\Component\Security\Core\Encoder\EncoderFactoryInterface $encoderFactory
      * @param string $password
      */
-    public function changePassword($password)
+    public function changePassword(EncoderFactoryInterface $encoderFactory, $password)
     {
-        $this->password = $password;
+        $encoder = $encoderFactory->getEncoder($this);
+        $passwordHash = $encoder->encodePassword($password, null);
+        $this->password = $passwordHash;
         $this->resetPasswordHash = null;
         $this->resetPasswordHashValidThrough = null;
-    }
-
-    /**
-     * @param string $hash
-     */
-    public function setResetPasswordHash($hash)
-    {
-        $this->resetPasswordHash = $hash;
-        $this->resetPasswordHashValidThrough = new DateTime('+48 hours');
     }
 
     /**
@@ -336,14 +334,6 @@ class User implements UserInterface, TimelimitLoginInterface, Serializable
     }
 
     /**
-     * @return \DateTime|null
-     */
-    public function getResetPasswordHashValidThrough()
-    {
-        return $this->resetPasswordHashValidThrough;
-    }
-
-    /**
      * @inheritDoc
      */
     public function serialize()
@@ -424,5 +414,44 @@ class User implements UserInterface, TimelimitLoginInterface, Serializable
         } else {
             $this->deliveryAddress = $deliveryAddressFactory->create($deliveryAddressData);
         }
+    }
+
+    /**
+     * @param \Shopsys\FrameworkBundle\Component\String\HashGenerator $hashGenerator
+     */
+    public function resetPassword(HashGenerator $hashGenerator): void
+    {
+        $hash = $hashGenerator->generateHash(self::RESET_PASSWORD_HASH_LENGTH);
+        $this->resetPasswordHash = $hash;
+        $this->resetPasswordHashValidThrough = new DateTime('+48 hours');
+    }
+
+    /**
+     * @param string|null $hash
+     * @return bool
+     */
+    public function isResetPasswordHashValid(?string $hash): bool
+    {
+        if ($hash === null || $this->resetPasswordHash !== $hash) {
+            return false;
+        }
+
+        $now = new DateTime();
+
+        return $this->resetPasswordHashValidThrough !== null && $this->resetPasswordHashValidThrough >= $now;
+    }
+
+    /**
+     * @param \Symfony\Component\Security\Core\Encoder\EncoderFactoryInterface $encoderFactory
+     * @param string|null $hash
+     * @param string $newPassword
+     */
+    public function setNewPassword(EncoderFactoryInterface $encoderFactory, ?string $hash, string $newPassword)
+    {
+        if (!$this->isResetPasswordHashValid($hash)) {
+            throw new \Shopsys\FrameworkBundle\Model\Customer\Exception\InvalidResetPasswordHashException();
+        }
+
+        $this->changePassword($encoderFactory, $newPassword);
     }
 }
