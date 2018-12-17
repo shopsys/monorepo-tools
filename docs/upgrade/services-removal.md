@@ -1,0 +1,265 @@
+# Upgrade Instructions for Services Removal
+
+This article describes upgrade instructions for [#627 model service layer removal](https://github.com/shopsys/shopsys/pull/627).
+Upgrade instructions are in a separate article because there is a lot of instructions and we don't want to jam UPGRADE.md.
+Follow these instructions only if you upgrade from `v7.0.0-beta4` to `v7.0.0-beta5`.
+
+We removed services (i.e. *Service classes - not to be interchanged with Symfony services) from our model and moved logic into more suitable places.
+Following instructions tell you which method was moved where, so you can upgrade your code and also tests.
+
+If you use these methods, change their calling appropriately:
+- `AdministratorGridService::rememberGridLimit(Administrator $administrator, Grid $grid)`  
+  -> `Administrator::rememberGridLimit(Grid $grid, AdministratorGridLimitFactoryInterface $administratorGridLimitFactory)`
+- `AdministratorGridService::restoreGridLimit(Administrator $administrator, Grid $grid)`  
+  -> `Administrator::restoreGridLimit(Grid $grid)`
+- `AdministratorService::delete(Administrator $administrator, $adminCountExcludingSuperadmin)`  
+  -> `Administrator::checkForDelete(TokenStorageInterface $tokenStorage, int $adminCountExcludingSuperadmin)`
+- `AdministratorService::edit(AdministratorData $administratorData, Administrator $administrator, Administrator $administratorByUserName = null)`  
+  -> `Administrator::edit(AdministratorData $administratorData, EncoderFactoryInterface $encoderFactory, ?self $administratorByUserName)`
+- `AdministratorService::setPassword(Administrator $administrator, $password)`  
+  -> `Administrator::setPassword(string $password, EncoderFactoryInterface $encoderFactory)`
+- `AdvancedSearchOrderService::createDefaultRuleFormViewData($filterName)` and `AdvancedSearchService::createDefaultRuleFormViewData($filterName)`
+  -> `RuleFormViewDataFactory::createDefault(string $filterName)`
+- `AdvancedSearchOrderService::extendQueryBuilderByAdvancedSearchData(QueryBuilder $queryBuilder, array $advancedSearchData)` and `AdvancedSearchService::extendQueryBuilderByAdvancedSearchData(QueryBuilder $queryBuilder, array $advancedSearchData)`
+  -> `AdvancedSearchQueryBuilderExtender::extendByAdvancedSearchData(QueryBuilder $queryBuilder, array $advancedSearchData)`
+- `AdvancedSearchOrderService::getRulesFormViewDataByRequestData(array $requestData = null)` and `AdvancedSearchService::getRulesFormViewDataByRequestData(array $requestData = null)`
+  -> `RuleFormViewDataFactory::createFromRequestData(string $defaultFilterName, array $requestData = null)`
+- `CartService::addProductToCart(Cart $cart, CustomerIdentifier $customerIdentifier, Product $product, $quantity)`
+  -> `Cart::addProduct(CustomerIdentifier $customerIdentifier, Product $product, $quantity, ProductPriceCalculation $productPriceCalculation, CartItemFactoryInterface $cartItemFactory`
+- `CartService::changeQuantities(Cart $cart, array $quantitiesByCartItemId)`
+  -> `Cart::changeQuantities(array $quantitiesByCartItemId)`
+- `CartService::getCartItemById(Cart $cart, $cartItemId)`
+  -> `Cart::getCartItemById($cartItemId)`
+- `CartService::getQuantifiedProductsIndexedByCartItemId(Cart $cart)`
+  -> `Cart::getQuantifiedProductsIndexedByCartItemId()`
+- `CartService::mergeCarts(Cart $resultingCart, Cart $mergedCart, CustomerIdentifier $customerIdentifier)`
+  -> `Cart::mergeWithCart(Cart $cartToMerge, CartItemFactoryInterface $cartItemFactory, CustomerIdentifier $customerIdentifier)`
+- `CategoryService::create(CategoryData $categoryData, Category $rootCategory)`
+  -> `CategoryFactory::create(CategoryData $data, Category $rootCategory)`
+- `CategoryService::edit(Category $category, CategoryData $categoryData, Category $rootCategory)`
+  -> `CategoryFacade::edit($categoryId, CategoryData $categoryData)`
+- `CurrencyService::edit(Currency $currency, CurrencyData $currencyData, $isDefaultCurrency)`
+  -> `CurrencyFacade::edit($currencyId, CurrencyData $currencyData)`
+- `CurrencyService::getNotAllowedToDeleteCurrencyIds($defaultCurrencyId, array $currenciesUsedInOrders, PricingSetting $pricingSetting, Domain $domain)`
+  -> `CurrencyFacade::getNotAllowedToDeleteCurrencyIds()`
+- `CustomerService::changeEmail(User $user, $email, User $userByEmail = null)`  
+  -> `User::changeEmail(string $email, ?self $userByEmail)`
+- `CustomerService::create(UserData $userData, BillingAddress $billingAddress, DeliveryAddress $deliveryAddress = null, User $userByEmail = null)`  
+  -> `UserFactory::create(UserData $userData, BillingAddress $billingAddress, ?DeliveryAddress $deliveryAddress, ?User $userByEmail)`
+- `CustomerService::createDeliveryAddress(DeliveryAddressData $deliveryAddressData)`  
+  -> `DeliveryAddressFactory::create(DeliveryAddressData $data)`
+- `CustomerService::edit(User $user, UserData $userData)`  
+  -> `User::edit(UserData $userData, EncoderFactoryInterface $encoderFactory)`
+- `CustomerService::editDeliveryAddress(User $user, DeliveryAddressData $deliveryAddressData, DeliveryAddress $deliveryAddress = null)`  
+  -> `User::editDeliveryAddress(DeliveryAddressData $deliveryAddressData, DeliveryAddressFactoryInterface $deliveryAddressFactory)`
+- `CustomerService::getAmendedByOrder(User $user, Order $order)`  
+  -> `CustomerDataFactoryInterface::createAmendedCustomerDataByOrder(User $user, Order $order)`
+- `CustomerPasswordService::changePassword(User $user, $password)`  
+  -> `User::changePassword(EncoderFactoryInterface $encoderFactory, $password)`
+- `CustomerPasswordService::isResetPasswordHashValid(User $user, $hash)`  
+  -> `User::isResetPasswordHashValid(?string $hash)`
+- `CustomerPasswordService::resetPassword(User $user)`  
+  -> `User::resetPassword(HashGenerator $hashGenerator)`
+- `CustomerPasswordService::setNewPassword(User $user, $hash, $newPassword)`  
+  -> `User::setNewPassword(EncoderFactoryInterface $encoderFactory, ?string $hash, string $newPassword)`
+- `FriendlyUrlService::createFriendlyUrls($routeName, $entityId, $namesByLocale)`  
+  -> `FriendlyUrlFactoryInterface::createForAllDomains(string $routeName, int $entityId, array $namesByLocale)`
+- `FriendlyUrlService::createFriendlyUrlIfValid($routeName, $entityId, $entityName, $domainId, $indexPostfix = null)`  
+  -> `FriendlyUrlFactory::createIfValid(string $routeName, int $entityId, string $entityName, int $domainId, int $indexPostfix = null)`
+- `FriendlyUrlService::getAbsoluteUrlByFriendlyUrl(FriendlyUrl $friendlyUrl)`  
+  -> `FriendlyUrl::getAbsoluteUrl(Domain $domain)`
+- `FriendlyUrlService::getFriendlyUrlUniqueResult($attempt, FriendlyUrl $friendlyUrl, $entityName, array $matchedRouteData = null)`  
+  -> `FriendlyUrlUniqueResultFactory::create(int $attempt, FriendlyUrl $friendlyUrl, string $entityName, array $matchedRouteData = null)`
+- `GridOrderingService::setPosition($entity, $position)`
+  -> `GridOrderingFacade::saveOrdering($entityClass, array $rowIds)`
+- `ImageService::deleteImages($entityName, $entityId, array $images)`  
+  -> `Image::checkForDelete(string $entityName, int $entityId)`
+- `ImageService::getUploadedImages(ImageEntityConfig $imageEntityConfig, $entityId, array $temporaryFilenames, $type)`  
+  -> `ImageFactoryInterface::createMultiple(ImageEntityConfig $imageEntityConfig, int $entityId, ?string $type, array $temporaryFilenames)`
+- `OrderCreationService::fillOrderItems(Order $order, OrderPreview $orderPreview)`
+  -> `OrderFacade::fillOrderItems(Order $order, OrderPreview $orderPreview)`
+- `OrderCreationService::fillOrderProducts(Order $order, OrderPreview $orderPreview, $locale)`
+  -> `Order::fillOrderProducts(OrderPreview $orderPreview, OrderProductFactoryInterface $orderProductFactory, NumberFormatterExtension $numberFormatterExtension, $locale`
+- `OrderCreationService::fillOrderRounding(Order $order, OrderPreview $orderPreview, $locale)`
+  -> `Order::fillOrderRounding(OrderProductFactoryInterface $orderProductFactory, ?Price $roundingPrice, $locale)`
+- `OrderCreationService::fillOrderTransportAndPayment(Order $order, OrderPreview $orderPreview, $locale)`
+  -> `Order::fillOrderPayment(PaymentPriceCalculation $paymentPriceCalculation, OrderPaymentFactoryInterface $orderPaymentFactory, Price $productsPrice, $locale)`
+  -> `Order::fillOrderTransport(TransportPriceCalculation $transportPriceCalculation, OrderTransportFactoryInterface $orderTransportFactory, Price $productsPrice, $locale)`
+- `OrderCreationService::prefillFrontFormData(FrontOrderData $frontOrderData, User $user, Order $order = null)`
+  -> `FrontOrderDataMapper::prefillFrontFormData(FrontOrderData $frontOrderData, User $user, ?Order $order)`
+- `OrderCreationService::prefillFrontFormDataFromCustomer(FrontOrderData $frontOrderData, User $user)`
+  -> `FrontOrderDataMapper::prefillFrontFormDataFromCustomer(FrontOrderData $frontOrderData, User $user)`
+- `OrderCreationService::prefillTransportAndPaymentFromOrder(FrontOrderData $frontOrderData, Order $order)`
+  -> `FrontOrderDataMapper::prefillTransportAndPaymentFromOrder(FrontOrderData $frontOrderData, Order $order)`
+- `OrderMailService::getMessageDataByOrder(Order $order, MailTemplate $mailTemplate)`  
+  -> `OrderMail::createMessage(MailTemplate $mailTemplate, $order)`
+- `OrderProductService::getOrderProductsUsingStockFromOrderProducts(array $orderProducts)`
+  -> `OrderProductFacade::getOrderProductsUsingStockFromOrderProducts(array $orderProducts)`
+- `OrderProductService::returnOrderProductsToStock(array $orderProducts)`
+  -> `OrderProductFacade::addOrderProductsToStock(array $orderProducts)`
+- `OrderProductService::subtractOrderProductsFromStock(array $orderProducts)`
+  -> `OrderProductFacade::subtractOrderProductsFromStock(array $orderProducts)`
+- `OrderService::calculateTotalPrice(Order $order)`  
+  -> `Order::calculateTotalPrice(OrderPriceCalculation $orderPriceCalculation)`
+- `OrderService::createOrderProductInOrder(Order $order, Product $product, Price $productPrice)`  
+  -> `Order::addProduct(Product $product, Price $productPrice, OrderProductFactoryInterface $orderProductFactory, Domain $domain, OrderPriceCalculation $orderPriceCalculation)`
+- `OrderService::editOrder(Order $order, OrderData $orderData)`  
+  -> `Order::edit(OrderData $orderData, OrderItemPriceCalculation $orderItemPriceCalculation, OrderProductFactoryInterface $orderProductFactory, OrderPriceCalculation $orderPriceCalculation)`
+- `OrderService::getOrderDetailUrl(Order $order)`  
+  -> `OrderUrlGenerator::getOrderDetailUrl(Order $order)`
+- `OrderStatusMailTemplateService::getOrderStatusMailTemplatesData(array $orderStatuses, array $mailTemplates)`  
+  -> `MailTemplateDataFactoryInterface::createFromOrderStatuses(array $orderStatuses, array $mailTemplates)`
+- `OrderStatusService::checkForDelete`  
+  -> `OrderStatus::checkForDelete`
+- `OrderStatusService::createOrderProductInOrder`  
+  -> `OrderStatus::addProductToOrder`
+- `PricingService::arePricesDifferent(array $prices)`
+  -> `ProductPriceCalculation::arePricesDifferent(array $prices)`
+- `PricingService::getMinimumPriceByPriceWithoutVat(array $prices)`
+  -> `ProductPriceCalculation::getMinimumPriceByPriceWithoutVat(array $prices)`
+- `ProductCollectionService::getImagesIndexedByProductId(array $products, array $imagesByProductId)`  
+  -> `ProductCollectionFacade::getMainImagesIndexedByProductId(array $products)`
+- `ProductFactoryInterface::createMainVariant(ProductData $mainVariantData, array $variants)`  
+  -> `ProductFactoryInterface::createMainVariant(ProductData $mainVariantData, Product $mainProduct, array $variants)`
+- `ProductManualInputPriceService::refresh(Product $product, PricingGroup $pricingGroup, $inputPrice, $productManualInputPrice)`  
+  -> `ProductManualInputPriceFacade::refresh(Product $product, PricingGroup $pricingGroup, $inputPrice)`
+- `ProductService::delete(Product $product)`  
+  -> `Product::getProductDeleteResult()`
+- `ProductService::edit(Product $product, ProductData $productData)`  
+  -> `Product::edit(ProductCategoryDomainFactoryInterface $productCategoryDomainFactory, ProductData $productData, ProductPriceRecalculationScheduler $productPriceRecalculationScheduler)`
+- `ProductService::getProductSellingPricesIndexedByDomainIdAndPricingGroupId(Product $product, array $pricingGroups)`  
+  -> `ProductFacade::getAllProductSellingPricesIndexedByDomainId(Product $product)`
+- `ProductService::markProductForVisibilityRecalculation(Product $product)`  
+  -> `Product::markForVisibilityRecalculation()`
+- `ProductService::recalculateInputPriceForNewVatPercent(Product $product, $productManualInputPrices, $newVatPercent)`  
+  -> `ProductManualInputPrice::recalculateInputPriceForNewVatPercent($inputPriceType, $newVatPercent, BasePriceCalculation $basePriceCalculation, InputPriceCalculation $inputPriceCalculation)`
+- `ProductService::sortProductsByProductIds(array $products, array $orderedProductIds)`  
+  -> `ProductRepository::getSortedProductsByIds($domainId, PricingGroup $pricingGroup, array $sortedProductIds)`
+- `ProductVariantService::checkProductIsNotMainVariant(Product $product)`  
+  -> `Product::checkIsNotMainVariant()`
+- `ProductVariantService::createMainVariant(ProductData $mainVariantData, Product $mainProduct, array $variants)`  
+  -> `ProductFactoryInterface::createMainVariant(ProductData $mainVariantData, Product $mainProduct, array $variants)`
+- `ProductVariantService::refreshProductVariants(Product $mainProduct, array $currentVariants)`  
+  -> `Product::refreshVariants(array $currentVariants)`
+- `RegistrationMailService::getMessageDataByUser(User $user, MailTemplate $mailTemplate)`  
+  -> `RegistrationMail::createMessage(MailTemplate $mailTemplate, $user)`
+- `UploadedFileService::createUploadedFile(UploadedFileEntityConfig $uploadedFileEntityConfig, $entityId, array $temporaryFilenames)`
+  -> `UploadedFileFactoryInterface::create(string $entityName, int $entityId, array $temporaryFilenames)`
+- `UploadedFileFactoryInterface::create(string $entityName, int $entityId, ?string $temporaryFilename)`
+  -> `UploadedFileFactoryInterface::create(string $entityName, int $entityId, array $temporaryFilenames)`
+
+Following classes have been removed:
+- `AdministratorService`
+- `AdministratorGridService`
+- `AdvancedSearchService`
+- `AdvancedSearchOrderService`
+- `CartService`
+- `CategoryService`
+- `CurrencyService`
+- `CustomerService`
+- `CustomerPasswordService`
+- `FlagService`
+- `FriendlyUrlService`
+- `GridOrderingService`
+- `ImageService`
+- `OrderCreationService`
+- `OrderProductService`
+- `OrderService`
+- `OrderStatusMailTemplateService`
+- `OrderStatusService`
+- `PricingService`
+- `ProductCollectionService`
+- `ProductManualInputPriceService`
+- `ProductService`
+- `UploadedFileService`
+- `VatService`
+
+Following methods have been removed:
+- `User::setDeliveryAddress()`, use `User::editDeliveryAddress()` instead
+- `Administrator::addGridLimit()`, use `Administrator::rememberGridLimit()` instead
+- `Administrator::removeGridLimit()` as it was not used anywhere
+- `Administrator::getLimitByGridId()` as it was not used anywhere
+- `FlagService::create()`, use `FlagFactory::create()` instead
+- `FlagService::edit()`, use `Flag::edit()` instead
+- `CategoryService::setChildrenAsSiblings()`
+- `CurrencyService::create()`, use `CurrencyFactory::create()` instead
+- `VatService::getNewDefaultVat()`
+- `OrderProductService::getProductsUsingStockFromOrderProducts()`
+- `CartService::cleanCart()` use `Cart::clean()` instead
+- `User::setResetPasswordHash()`, use `User::resetPassword()` instead
+- `User::getResetPasswordHashValidThrough()` as it was not used anywhere
+- `ImageService::setImagePositionsByOrder()` as it was moved to private method of `ImageFacade`
+- `ImageService::createImage()`, use `ImageFactory::create()` instead
+- `FriendlyUrlService::getAbsoluteUrlByDomainConfigAndSlug()` as it was moved to private method of `SitemapListener`
+- `MailTemplateService::getFilteredOrderStatusMailTemplatesIndexedByOrderStatusId()` as it was moved to protected method of `MailTemplateFacade`
+
+Following classes changed constructors:
+- `AdministratorGridFacade`
+- `AdministratorFacade`
+- `AdvancedSearchFacade`
+- `AdvancedSearchOrderFacade`
+- `CachedBestsellingProductFacade`
+- `CartFacade`
+- `CartMigrationFacade`
+- `CategoryFacade`
+- `CurrencyFacade`
+- `CustomerFacade`
+- `CustomerPasswordFacade`
+- `FlagFacade`
+- `FriendlyUrlFactory`
+- `GridOrderingFacade`
+- `ImageFacade`
+- `ImageFactory`
+- `OrderEditResult`
+- `OrderFacade`
+- `OrderItemFacade`
+- `OrderMailService`
+- `OrderProductFacade`
+- `OrderStatusFacade`
+- `ProductCollectionFacade`
+- `ProductFacade`
+- `ProductInputPriceFacade`
+- `ProductManualInputPriceFacade`
+- `ProductPriceCalculation`
+- `ProductPriceRecalculator`
+- `ProductVariantFacade`
+- `SitemapListener`
+- `UploadedFileFacade`
+- `UploadedFileFactory`
+- `UserDataFixture`
+- `UserFactory`
+- `VatFacade`
+
+Following functions visibility was changed to `protected` as there is no need to use them from outside of objects:
+- `Administrator::getGridLimit()`
+- `Order::setTotalPrice()`
+
+Follow also additional upgrade instructions:
+- Change return type of `DeliveryAddressFactory::create()` to `?DeliveryAddress` as it now returns `null` when `addressFilled` is `false`
+- Change usage of `ProductListOrderingModeService::` constants to `ProductListOrderingConfig::` as they were moved to the Config class
+- Change calling of `OrderMail::getMailTemplateNameByStatus()` to static calling as the method is static now
+
+Following classes were renamed, so change their usage appropriately:
+- `BestsellingProductService` -> `BestsellingProductCombinator`
+- `CartWatcherService` -> `CartWatcher`
+- `CronService` -> `CronFilter`
+- `DomainUrlService` -> `DomainUrlReplacer`
+- `DomainService` -> `DomainIconResizer`
+- `ErrorService` -> `ErrorExtractor`
+- `GenerateMigrationsService` -> `MigrationsGenerator`
+- `HeurekaShopCertificationService` -> `HeurekaShopCertificationLocaleHelper`
+- `InlineEditService` -> `InlineEditFacade`
+- `ImageGeneratorService` -> `ImageGenerator`
+- `ImageProcessingService` -> `ImageProcessor`
+- `JavascriptCompilerService` -> `JavascriptCompiler`
+    - and also it's method `generateCompiledFiles()` -> `compile()`
+- `LoginService` -> `Authenticator`
+- `MailerService` -> `Mailer`
+- `OrderMailService` -> `OrderMail`
+- `ProductListOrderingModeService` -> `RequestToOrderingModeIdConverter`
+- `QueryBuilderService` -> `QueryBuilderExtender`
+- `RegistrationMailService` -> `RegistrationMail`
+- `SitemapService` -> `SitemapFilePrefixer`
+- `StatisticsService` -> `ValueByDateTimeDataPointFormatter`
+- `TransportAndPaymentWatcherService` -> `TransportAndPaymentWatcher`
+- `TransactionalMasterRequestService` -> `TransactionalMasterRequestListener`
