@@ -5,7 +5,9 @@
 
     Shopsys.validation.addNewItemToCollection = function (collectionSelector, itemIndex) {
         $($(collectionSelector)).jsFormValidator('addPrototype', itemIndex);
-        Shopsys.formChangeInfo.showInfo();
+        if (Shopsys.formChangeInfo !== undefined) {
+            Shopsys.formChangeInfo.showInfo();
+        }
     };
 
     Shopsys.validation.removeItemFromCollection = function (collectionSelector, itemIndex) {
@@ -16,7 +18,9 @@
         $($collection).jsFormValidator('delPrototype', itemIndex);
         Shopsys.validation.highlightSubmitButtons($collection.closest('form'));
         $collection.jsFormValidator('validate');
-        Shopsys.formChangeInfo.showInfo();
+        if (Shopsys.formChangeInfo !== undefined) {
+            Shopsys.formChangeInfo.showInfo();
+        }
     };
 
     Shopsys.validation.isFormValid = function (form) {
