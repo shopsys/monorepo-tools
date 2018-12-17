@@ -28,6 +28,12 @@ spec:
             volumes:
                 -   name: source-codes
                     emptyDir: {}
+                -   name: domains-urls
+                    configMap:
+                        name: domains-urls
+                -   name: parameters
+                    configMap:
+                        name: parameters
                 -   name: nginx-configuration
                     configMap:
                         name: nginx-configuration
@@ -35,31 +41,55 @@ spec:
                         -   key: nginx.conf
                             path: default.conf
             initContainers:
-                -   name: copy-source-codes-to-volume
-                    image: $PHP_FPM_IMAGE
-                    command: ["sh", "-c", "cp -r /var/www/html/. /tmp/source-codes"]
-                    volumeMounts:
-                    -       name: source-codes
-                            mountPath: /tmp/source-codes
+            -   name: copy-source-codes-to-volume
+                image: ~
+                command: ["sh", "-c", "cp -r /var/www/html/. /tmp/source-codes"]
+                volumeMounts:
+                -   name: source-codes
+                    mountPath: /tmp/source-codes
+                -   name: domains-urls
+                    mountPath: /var/www/html/app/config/domains_urls.yml
+                    subPath: domains_urls.yml
+                -   name: parameters
+                    mountPath: /var/www/html/app/config/parameters.yml
+                    subPath: parameters.yml
+            -   name: initialize-database
+                image: ~
+                command: ["sh", "-c", "cd /var/www/html && ./phing db-create db-demo microservice-product-search-recreate-structure microservice-product-search-export-products grunt error-pages-generate warmup"]
+                volumeMounts:
+                -   name: source-codes
+                    mountPath: /var/www/html
+                -   name: domains-urls
+                    mountPath: /var/www/html/app/config/domains_urls.yml
+                    subPath: domains_urls.yml
+                -   name: parameters
+                    mountPath: /var/www/html/app/config/parameters.yml
+                    subPath: parameters.yml
             containers:
-            -   image: $PHP_FPM_IMAGE
+            -   image: ~
                 name: php-fpm
                 securityContext:
-                        runAsUser: 82
+                    runAsUser: 82
                 workingDir: /var/www/html
                 volumeMounts:
-                    -   name: source-codes
-                        mountPath: /var/www/html
+                -   name: source-codes
+                    mountPath: /var/www/html
+                -   name: domains-urls
+                    mountPath: /var/www/html/app/config/domains_urls.yml
+                    subPath: domains_urls.yml
+                -   name: parameters
+                    mountPath: /var/www/html/app/config/parameters.yml
+                    subPath: parameters.yml
             -   image: nginx:1.13.10-alpine
                 name: webserver
                 ports:
-                    -   containerPort: 8080
-                        name: http
+                -   containerPort: 8080
+                    name: http
                 volumeMounts:
-                    -   name: nginx-configuration
-                        mountPath: /etc/nginx/conf.d
-                    -   name: source-codes
-                        mountPath: /var/www/html
+                -   name: nginx-configuration
+                    mountPath: /etc/nginx/conf.d
+                -   name: source-codes
+                    mountPath: /var/www/html
                 lifecycle:
                     preStop:
                         exec:

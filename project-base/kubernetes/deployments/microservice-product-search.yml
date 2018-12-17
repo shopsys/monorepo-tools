@@ -20,5 +20,5 @@ spec:
                 app: microservice-product-search
         spec:
             containers:
-            -   image: $MICROSERVICE_PRODUCT_SEARCH_PHP_FPM_IMAGE
+            -   image: shopsys/microservice-product-search:latest
                 name: microservice-product-search

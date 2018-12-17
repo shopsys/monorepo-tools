@@ -59,6 +59,10 @@ There is a list of all the repositories maintained by monorepo, changes in log b
     - please read upgrade instructions in [separate article](docs/upgrade/services_removal.md)
 
 ### [shopsys/project-base]
+- [#633 Google Cloud deploy using Terraform, Kustomize and Kubernetes](https://github.com/shopsys/shopsys/pull/633)
+    - update your `.dockerignore` to ignore infrastructure files, follow [changes](https://github.com/shopsys/shopsys/pull/633/commits/5e507aa0aff44cb689b8d65fba58da53a8fafd1f)
+    - use specific images instead of variables, follow [changes](https://github.com/shopsys/shopsys/pull/633/commits/84dee757f62f5ff7b9581d9a1dcccc4e496cf7eb)
+    - *(optional)* If you are using Kubernetes manifests for CI or deployment, follow changes done in manifests and ci `build_kubernetes.sh` script. 
 - *(optional)* [#596 Trusted proxies are now configurable in parameters.yml file](https://github.com/shopsys/shopsys/pull/596)
     - for easier deployment to production, make the trusted proxies in `Shopsys\Boostrap` class loaded from DIC parameter `trusted_proxies` instead of being hard-coded
     - in your `Shopsys\Boostrap`, move the `Request::setTrustedProxies(...)` call along with `Kernel::boot()` so it's not run in console environment, like in [the PR #660](https://github.com/shopsys/shopsys/pull/660/files), otherwise console commands will trigger excessive logging

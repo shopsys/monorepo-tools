@@ -1,0 +1,22 @@
+bases:
+- ../../base
+resources:
+- ./namespace.yaml
+patches:
+- ./ingress-patch.yaml
+namespace: production
+secretGenerator:
+    -   name: domain-1-ssl-certificates
+        commands:
+            tls.key: "cat ${FIRST_DOMAIN_SSL_DIRECTORY}/tls.key"
+            tls.crt: "cat ${FIRST_DOMAIN_SSL_DIRECTORY}/tls.crt"
+            ca.crt: "cat ${FIRST_DOMAIN_SSL_DIRECTORY}/ca.crt"
+    -   name: domain-2-ssl-certificates
+        commands:
+            tls.key: "cat ${SECOND_DOMAIN_SSL_DIRECTORY}/tls.key"
+            tls.crt: "cat ${SECOND_DOMAIN_SSL_DIRECTORY}/tls.crt"
+            ca.crt: "cat ${SECOND_DOMAIN_SSL_DIRECTORY}/ca.crt"
+configMapGenerator:
+    -   name: nginx-configuration
+        files:
+        -   ../../../../docker/nginx/nginx.conf

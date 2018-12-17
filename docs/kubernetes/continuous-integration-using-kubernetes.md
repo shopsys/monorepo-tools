@@ -59,6 +59,11 @@ For example, on Jenkins CI the builds are ran as a user `jenkins` so the configu
 
 For more about the cluster configuration, see [How to Get a Cluster Running](/docs/kubernetes/how-to-get-a-cluster-running.md).
 
+#### Kustomize
+In `.ci/build_kubernetes.sh` we use Kustomize to generate Kubernetes manifests for our environment, which is CI. Kustomize can distinguish manifests used for each environment by selecting resources used by each environment.
+
+You can read more about what Kustomize does [here](./how-to-deploy-ssfw-to-google-cloud-platform.md#kustomize), or you can read their [official documenation](https://github.com/kubernetes-sigs/kustomize/tree/master/docs)
+
 #### Provide Environment Variables
 Build cannot be performed without providing some environment variables.
 During build process, CI performs operations such as pushing Docker images into Docker Hub or setting the domain names which are different for each project.
