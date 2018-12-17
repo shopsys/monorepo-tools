@@ -4,10 +4,12 @@ namespace Shopsys\FrameworkBundle\Model\Cart;
 
 use Doctrine\ORM\EntityManagerInterface;
 use Shopsys\FrameworkBundle\Component\Domain\Domain;
+use Shopsys\FrameworkBundle\Model\Cart\Item\CartItemFactoryInterface;
 use Shopsys\FrameworkBundle\Model\Cart\Item\CartItemRepository;
 use Shopsys\FrameworkBundle\Model\Customer\CurrentCustomer;
 use Shopsys\FrameworkBundle\Model\Customer\CustomerIdentifierFactory;
 use Shopsys\FrameworkBundle\Model\Order\PromoCode\CurrentPromoCodeFacade;
+use Shopsys\FrameworkBundle\Model\Product\Pricing\ProductPriceCalculationForUser;
 use Shopsys\FrameworkBundle\Model\Product\ProductRepository;
 
 class CartFacade
@@ -19,11 +21,6 @@ class CartFacade
      * @var \Doctrine\ORM\EntityManagerInterface
      */
     protected $em;
-
-    /**
-     * @var \Shopsys\FrameworkBundle\Model\Cart\CartService
-     */
-    protected $cartService;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Cart\CartFactory
@@ -61,8 +58,17 @@ class CartFacade
     protected $cartItemRepository;
 
     /**
+     * @var \Shopsys\FrameworkBundle\Model\Product\Pricing\ProductPriceCalculationForUser
+     */
+    protected $productPriceCalculation;
+
+    /**
+     * @var \Shopsys\FrameworkBundle\Model\Cart\Item\CartItemFactoryInterface
+     */
+    protected $cartItemFactory;
+
+    /**
      * @param \Doctrine\ORM\EntityManagerInterface $em
-     * @param \Shopsys\FrameworkBundle\Model\Cart\CartService $cartService
      * @param \Shopsys\FrameworkBundle\Model\Cart\CartFactory $cartFactory
      * @param \Shopsys\FrameworkBundle\Model\Product\ProductRepository $productRepository
      * @param \Shopsys\FrameworkBundle\Model\Customer\CustomerIdentifierFactory $customerIdentifierFactory
@@ -70,20 +76,22 @@ class CartFacade
      * @param \Shopsys\FrameworkBundle\Model\Customer\CurrentCustomer $currentCustomer
      * @param \Shopsys\FrameworkBundle\Model\Order\PromoCode\CurrentPromoCodeFacade $currentPromoCodeFacade
      * @param \Shopsys\FrameworkBundle\Model\Cart\Item\CartItemRepository $cartItemRepository
+     * @param \Shopsys\FrameworkBundle\Model\Product\Pricing\ProductPriceCalculationForUser $productPriceCalculation
+     * @param \Shopsys\FrameworkBundle\Model\Cart\Item\CartItemFactoryInterface $cartItemFactory
      */
     public function __construct(
         EntityManagerInterface $em,
-        CartService $cartService,
         CartFactory $cartFactory,
         ProductRepository $productRepository,
         CustomerIdentifierFactory $customerIdentifierFactory,
         Domain $domain,
         CurrentCustomer $currentCustomer,
         CurrentPromoCodeFacade $currentPromoCodeFacade,
-        CartItemRepository $cartItemRepository
+        CartItemRepository $cartItemRepository,
+        ProductPriceCalculationForUser $productPriceCalculation,
+        CartItemFactoryInterface $cartItemFactory
     ) {
         $this->em = $em;
-        $this->cartService = $cartService;
         $this->cartFactory = $cartFactory;
         $this->productRepository = $productRepository;
         $this->customerIdentifierFactory = $customerIdentifierFactory;
@@ -91,6 +99,8 @@ class CartFacade
         $this->currentCustomer = $currentCustomer;
         $this->currentPromoCodeFacade = $currentPromoCodeFacade;
         $this->cartItemRepository = $cartItemRepository;
+        $this->productPriceCalculation = $productPriceCalculation;
+        $this->cartItemFactory = $cartItemFactory;
     }
 
     /**
@@ -107,7 +117,7 @@ class CartFacade
         );
         $customerIdentifier = $this->customerIdentifierFactory->get();
         $cart = $this->cartFactory->get($customerIdentifier);
-        $result = $this->cartService->addProductToCart($cart, $customerIdentifier, $product, $quantity);
+        $result = $cart->addProduct($customerIdentifier, $product, $quantity, $this->productPriceCalculation, $this->cartItemFactory);
         /* @var $result \Shopsys\FrameworkBundle\Model\Cart\AddProductResult */
 
         $this->em->persist($result->getCartItem());
@@ -122,7 +132,7 @@ class CartFacade
     public function changeQuantities(array $quantitiesByCartItemId)
     {
         $cart = $this->getCartOfCurrentCustomer();
-        $this->cartService->changeQuantities($cart, $quantitiesByCartItemId);
+        $cart->changeQuantities($quantitiesByCartItemId);
         $this->em->flush();
     }
 
@@ -132,7 +142,7 @@ class CartFacade
     public function deleteCartItem($cartItemId)
     {
         $cart = $this->getCartOfCurrentCustomer();
-        $cartItemToDelete = $this->cartService->getCartItemById($cart, $cartItemId);
+        $cartItemToDelete = $cart->getCartItemById($cartItemId);
         $cart->removeItemById($cartItemId);
         $this->em->remove($cartItemToDelete);
         $this->em->flush();
@@ -142,7 +152,7 @@ class CartFacade
     {
         $cart = $this->getCartOfCurrentCustomer();
         $cartItemsToDelete = $cart->getItems();
-        $this->cartService->cleanCart($cart);
+        $cart->clean();
 
         foreach ($cartItemsToDelete as $cartItemToDelete) {
             $this->em->remove($cartItemToDelete);
@@ -161,7 +171,7 @@ class CartFacade
     {
         $cart = $this->getCartOfCurrentCustomer();
 
-        return $this->cartService->getCartItemById($cart, $cartItemId)->getProduct();
+        return $cart->getCartItemById($cartItemId)->getProduct();
     }
 
     public function cleanAdditionalData()
@@ -186,7 +196,7 @@ class CartFacade
     {
         $cart = $this->getCartOfCurrentCustomer();
 
-        return $this->cartService->getQuantifiedProductsIndexedByCartItemId($cart);
+        return $cart->getQuantifiedProductsIndexedByCartItemId();
     }
 
     public function deleteOldCarts()

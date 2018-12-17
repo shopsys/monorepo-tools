@@ -14,14 +14,19 @@ use Shopsys\FrameworkBundle\Model\Customer\User;
 use Shopsys\FrameworkBundle\Model\Heureka\HeurekaFacade;
 use Shopsys\FrameworkBundle\Model\Localization\Localization;
 use Shopsys\FrameworkBundle\Model\Order\Item\OrderItemPriceCalculation;
+use Shopsys\FrameworkBundle\Model\Order\Item\OrderPaymentFactoryInterface;
 use Shopsys\FrameworkBundle\Model\Order\Item\OrderProductFacade;
 use Shopsys\FrameworkBundle\Model\Order\Item\OrderProductFactoryInterface;
+use Shopsys\FrameworkBundle\Model\Order\Item\OrderTransportFactoryInterface;
 use Shopsys\FrameworkBundle\Model\Order\Mail\OrderMailFacade;
 use Shopsys\FrameworkBundle\Model\Order\Preview\OrderPreview;
 use Shopsys\FrameworkBundle\Model\Order\Preview\OrderPreviewFactory;
 use Shopsys\FrameworkBundle\Model\Order\PromoCode\CurrentPromoCodeFacade;
 use Shopsys\FrameworkBundle\Model\Order\Status\OrderStatus;
 use Shopsys\FrameworkBundle\Model\Order\Status\OrderStatusRepository;
+use Shopsys\FrameworkBundle\Model\Payment\PaymentPriceCalculation;
+use Shopsys\FrameworkBundle\Model\Transport\TransportPriceCalculation;
+use Shopsys\FrameworkBundle\Twig\NumberFormatterExtension;
 
 class OrderFacade
 {
@@ -49,11 +54,6 @@ class OrderFacade
      * @var \Shopsys\FrameworkBundle\Model\Order\OrderUrlGenerator
      */
     protected $orderUrlGenerator;
-
-    /**
-     * @var \Shopsys\FrameworkBundle\Model\Order\OrderCreationService
-     */
-    protected $orderCreationService;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Order\Status\OrderStatusRepository
@@ -146,11 +146,40 @@ class OrderFacade
     protected $orderProductFactory;
 
     /**
+     * @var \Shopsys\FrameworkBundle\Model\Order\FrontOrderDataMapper
+     */
+    protected $frontOrderDataMapper;
+
+    /**
+     * @var \Shopsys\FrameworkBundle\Twig\NumberFormatterExtension
+     */
+    protected $numberFormatterExtension;
+
+    /**
+     * @var \Shopsys\FrameworkBundle\Model\Payment\PaymentPriceCalculation
+     */
+    protected $paymentPriceCalculation;
+
+    /**
+     * @var \Shopsys\FrameworkBundle\Model\Order\Item\OrderPaymentFactoryInterface
+     */
+    protected $orderPaymentFactory;
+
+    /**
+     * @var \Shopsys\FrameworkBundle\Model\Transport\TransportPriceCalculation
+     */
+    protected $transportPriceCalculation;
+
+    /**
+     * @var \Shopsys\FrameworkBundle\Model\Order\Item\OrderTransportFactoryInterface
+     */
+    protected $orderTransportFactory;
+
+    /**
      * @param \Doctrine\ORM\EntityManagerInterface $em
      * @param \Shopsys\FrameworkBundle\Model\Order\OrderNumberSequenceRepository $orderNumberSequenceRepository
      * @param \Shopsys\FrameworkBundle\Model\Order\OrderRepository $orderRepository
      * @param \Shopsys\FrameworkBundle\Model\Order\OrderUrlGenerator $orderUrlGenerator
-     * @param \Shopsys\FrameworkBundle\Model\Order\OrderCreationService $orderCreationService
      * @param \Shopsys\FrameworkBundle\Model\Order\Status\OrderStatusRepository $orderStatusRepository
      * @param \Shopsys\FrameworkBundle\Model\Order\Mail\OrderMailFacade $orderMailFacade
      * @param \Shopsys\FrameworkBundle\Model\Order\OrderHashGeneratorRepository $orderHashGeneratorRepository
@@ -169,13 +198,18 @@ class OrderFacade
      * @param \Shopsys\FrameworkBundle\Model\Order\OrderPriceCalculation $orderPriceCalculation
      * @param \Shopsys\FrameworkBundle\Model\Order\Item\OrderItemPriceCalculation $orderItemPriceCalculation
      * @param \Shopsys\FrameworkBundle\Model\Order\Item\OrderProductFactoryInterface $orderProductFactory
+     * @param \Shopsys\FrameworkBundle\Model\Order\FrontOrderDataMapper $frontOrderDataMapper
+     * @param \Shopsys\FrameworkBundle\Twig\NumberFormatterExtension $numberFormatterExtension
+     * @param \Shopsys\FrameworkBundle\Model\Payment\PaymentPriceCalculation $paymentPriceCalculation
+     * @param \Shopsys\FrameworkBundle\Model\Order\Item\OrderPaymentFactoryInterface $orderPaymentFactory
+     * @param \Shopsys\FrameworkBundle\Model\Transport\TransportPriceCalculation $transportPriceCalculation
+     * @param \Shopsys\FrameworkBundle\Model\Order\Item\OrderTransportFactoryInterface $orderTransportFactory
      */
     public function __construct(
         EntityManagerInterface $em,
         OrderNumberSequenceRepository $orderNumberSequenceRepository,
         OrderRepository $orderRepository,
         OrderUrlGenerator $orderUrlGenerator,
-        OrderCreationService $orderCreationService,
         OrderStatusRepository $orderStatusRepository,
         OrderMailFacade $orderMailFacade,
         OrderHashGeneratorRepository $orderHashGeneratorRepository,
@@ -193,12 +227,17 @@ class OrderFacade
         OrderFactoryInterface $orderFactory,
         OrderPriceCalculation $orderPriceCalculation,
         OrderItemPriceCalculation $orderItemPriceCalculation,
-        OrderProductFactoryInterface $orderProductFactory
+        OrderProductFactoryInterface $orderProductFactory,
+        FrontOrderDataMapper $frontOrderDataMapper,
+        NumberFormatterExtension $numberFormatterExtension,
+        PaymentPriceCalculation $paymentPriceCalculation,
+        OrderPaymentFactoryInterface $orderPaymentFactory,
+        TransportPriceCalculation $transportPriceCalculation,
+        OrderTransportFactoryInterface $orderTransportFactory
     ) {
         $this->em = $em;
         $this->orderNumberSequenceRepository = $orderNumberSequenceRepository;
         $this->orderRepository = $orderRepository;
-        $this->orderCreationService = $orderCreationService;
         $this->orderStatusRepository = $orderStatusRepository;
         $this->orderMailFacade = $orderMailFacade;
         $this->orderHashGeneratorRepository = $orderHashGeneratorRepository;
@@ -218,6 +257,12 @@ class OrderFacade
         $this->orderUrlGenerator = $orderUrlGenerator;
         $this->orderItemPriceCalculation = $orderItemPriceCalculation;
         $this->orderProductFactory = $orderProductFactory;
+        $this->frontOrderDataMapper = $frontOrderDataMapper;
+        $this->numberFormatterExtension = $numberFormatterExtension;
+        $this->paymentPriceCalculation = $paymentPriceCalculation;
+        $this->orderPaymentFactory = $orderPaymentFactory;
+        $this->transportPriceCalculation = $transportPriceCalculation;
+        $this->orderTransportFactory = $orderTransportFactory;
     }
 
     /**
@@ -242,7 +287,7 @@ class OrderFacade
         );
         $toFlush[] = $order;
 
-        $this->orderCreationService->fillOrderItems($order, $orderPreview);
+        $this->fillOrderItems($order, $orderPreview);
 
         foreach ($order->getItems() as $orderItem) {
             $this->em->persist($orderItem);
@@ -356,7 +401,7 @@ class OrderFacade
     public function prefillFrontOrderData(FrontOrderData $orderData, User $user)
     {
         $order = $this->orderRepository->findLastByUserId($user->getId());
-        $this->orderCreationService->prefillFrontFormData($orderData, $user, $order);
+        $this->frontOrderDataMapper->prefillFrontFormData($orderData, $user, $order);
     }
 
     /**
@@ -454,5 +499,19 @@ class OrderFacade
     public function getOrdersCountByEmailAndDomainId($email, $domainId)
     {
         return $this->orderRepository->getOrdersCountByEmailAndDomainId($email, $domainId);
+    }
+
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Order\Order $order
+     * @param \Shopsys\FrameworkBundle\Model\Order\Preview\OrderPreview $orderPreview
+     */
+    protected function fillOrderItems(Order $order, OrderPreview $orderPreview)
+    {
+        $locale = $this->domain->getDomainConfigById($order->getDomainId())->getLocale();
+
+        $order->fillOrderProducts($orderPreview, $this->orderProductFactory, $this->numberFormatterExtension, $locale);
+        $order->fillOrderPayment($this->paymentPriceCalculation, $this->orderPaymentFactory, $orderPreview->getProductsPrice(), $locale);
+        $order->fillOrderTransport($this->transportPriceCalculation, $this->orderTransportFactory, $orderPreview->getProductsPrice(), $locale);
+        $order->fillOrderRounding($this->orderProductFactory, $orderPreview->getRoundingPrice(), $locale);
     }
 }

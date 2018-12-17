@@ -14,12 +14,14 @@ use Shopsys\FrameworkBundle\Model\Customer\CurrentCustomer;
 use Shopsys\FrameworkBundle\Model\Customer\CustomerFacade;
 use Shopsys\FrameworkBundle\Model\Heureka\HeurekaFacade;
 use Shopsys\FrameworkBundle\Model\Localization\Localization;
+use Shopsys\FrameworkBundle\Model\Order\FrontOrderDataMapper;
 use Shopsys\FrameworkBundle\Model\Order\Item\OrderItemPriceCalculation;
+use Shopsys\FrameworkBundle\Model\Order\Item\OrderPaymentFactoryInterface;
 use Shopsys\FrameworkBundle\Model\Order\Item\OrderProductFacade;
 use Shopsys\FrameworkBundle\Model\Order\Item\OrderProductFactoryInterface;
+use Shopsys\FrameworkBundle\Model\Order\Item\OrderTransportFactoryInterface;
 use Shopsys\FrameworkBundle\Model\Order\Mail\OrderMailFacade;
 use Shopsys\FrameworkBundle\Model\Order\Order;
-use Shopsys\FrameworkBundle\Model\Order\OrderCreationService;
 use Shopsys\FrameworkBundle\Model\Order\OrderFacade;
 use Shopsys\FrameworkBundle\Model\Order\OrderFactoryInterface;
 use Shopsys\FrameworkBundle\Model\Order\OrderHashGeneratorRepository;
@@ -30,6 +32,9 @@ use Shopsys\FrameworkBundle\Model\Order\OrderUrlGenerator;
 use Shopsys\FrameworkBundle\Model\Order\Preview\OrderPreviewFactory;
 use Shopsys\FrameworkBundle\Model\Order\PromoCode\CurrentPromoCodeFacade;
 use Shopsys\FrameworkBundle\Model\Order\Status\OrderStatusRepository;
+use Shopsys\FrameworkBundle\Model\Payment\PaymentPriceCalculation;
+use Shopsys\FrameworkBundle\Model\Transport\TransportPriceCalculation;
+use Shopsys\FrameworkBundle\Twig\NumberFormatterExtension;
 
 class OrderFacadeHeurekaTest extends TestCase
 {
@@ -87,7 +92,6 @@ class OrderFacadeHeurekaTest extends TestCase
             $this->createMock(OrderNumberSequenceRepository::class),
             $this->createMock(OrderRepository::class),
             $this->createMock(OrderUrlGenerator::class),
-            $this->createMock(OrderCreationService::class),
             $this->createMock(OrderStatusRepository::class),
             $this->createMock(OrderMailFacade::class),
             $this->createMock(OrderHashGeneratorRepository::class),
@@ -105,7 +109,13 @@ class OrderFacadeHeurekaTest extends TestCase
             $this->createMock(OrderFactoryInterface::class),
             $this->createMock(OrderPriceCalculation::class),
             $this->createMock(OrderItemPriceCalculation::class),
-            $this->createMock(OrderProductFactoryInterface::class)
+            $this->createMock(OrderProductFactoryInterface::class),
+            $this->createMock(FrontOrderDataMapper::class),
+            $this->createMock(NumberFormatterExtension::class),
+            $this->createMock(PaymentPriceCalculation::class),
+            $this->createMock(OrderPaymentFactoryInterface::class),
+            $this->createMock(TransportPriceCalculation::class),
+            $this->createMock(OrderTransportFactoryInterface::class)
         );
         return $orderFacade;
     }

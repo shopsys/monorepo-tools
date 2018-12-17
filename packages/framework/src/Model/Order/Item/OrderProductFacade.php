@@ -38,11 +38,6 @@ class OrderProductFacade
     protected $productVisibilityFacade;
 
     /**
-     * @var \Shopsys\FrameworkBundle\Model\Order\Item\OrderProductService
-     */
-    protected $orderProductService;
-
-    /**
      * @var \Shopsys\FrameworkBundle\Model\Module\ModuleFacade
      */
     protected $moduleFacade;
@@ -53,7 +48,6 @@ class OrderProductFacade
      * @param \Shopsys\FrameworkBundle\Model\Product\ProductSellingDeniedRecalculator $productSellingDeniedRecalculator
      * @param \Shopsys\FrameworkBundle\Model\Product\Availability\ProductAvailabilityRecalculationScheduler $productAvailabilityRecalculationScheduler
      * @param \Shopsys\FrameworkBundle\Model\Product\ProductVisibilityFacade $productVisibilityFacade
-     * @param \Shopsys\FrameworkBundle\Model\Order\Item\OrderProductService $orderProductService
      * @param \Shopsys\FrameworkBundle\Model\Module\ModuleFacade $moduleFacade
      */
     public function __construct(
@@ -62,7 +56,6 @@ class OrderProductFacade
         ProductSellingDeniedRecalculator $productSellingDeniedRecalculator,
         ProductAvailabilityRecalculationScheduler $productAvailabilityRecalculationScheduler,
         ProductVisibilityFacade $productVisibilityFacade,
-        OrderProductService $orderProductService,
         ModuleFacade $moduleFacade
     ) {
         $this->em = $em;
@@ -70,7 +63,6 @@ class OrderProductFacade
         $this->productSellingDeniedRecalculator = $productSellingDeniedRecalculator;
         $this->productAvailabilityRecalculationScheduler = $productAvailabilityRecalculationScheduler;
         $this->productVisibilityFacade = $productVisibilityFacade;
-        $this->orderProductService = $orderProductService;
         $this->moduleFacade = $moduleFacade;
     }
 
@@ -80,7 +72,11 @@ class OrderProductFacade
     public function subtractOrderProductsFromStock(array $orderProducts)
     {
         if ($this->moduleFacade->isEnabled(ModuleList::PRODUCT_STOCK_CALCULATIONS)) {
-            $this->orderProductService->subtractOrderProductsFromStock($orderProducts);
+            $orderProductsUsingStock = $this->getOrderProductsUsingStockFromOrderProducts($orderProducts);
+            foreach ($orderProductsUsingStock as $orderProductUsingStock) {
+                $product = $orderProductUsingStock->getProduct();
+                $product->subtractStockQuantity($orderProductUsingStock->getQuantity());
+            }
             $this->em->flush();
             $this->runRecalculationsAfterStockQuantityChange($orderProducts);
         }
@@ -92,7 +88,11 @@ class OrderProductFacade
     public function addOrderProductsToStock(array $orderProducts)
     {
         if ($this->moduleFacade->isEnabled(ModuleList::PRODUCT_STOCK_CALCULATIONS)) {
-            $this->orderProductService->returnOrderProductsToStock($orderProducts);
+            $orderProductsUsingStock = $this->getOrderProductsUsingStockFromOrderProducts($orderProducts);
+            foreach ($orderProductsUsingStock as $orderProductUsingStock) {
+                $product = $orderProductUsingStock->getProduct();
+                $product->addStockQuantity($orderProductUsingStock->getQuantity());
+            }
             $this->em->flush();
             $this->runRecalculationsAfterStockQuantityChange($orderProducts);
         }
@@ -103,7 +103,12 @@ class OrderProductFacade
      */
     protected function runRecalculationsAfterStockQuantityChange(array $orderProducts)
     {
-        $relevantProducts = $this->orderProductService->getProductsUsingStockFromOrderProducts($orderProducts);
+        $orderProductsUsingStock = $this->getOrderProductsUsingStockFromOrderProducts($orderProducts);
+        $relevantProducts = [];
+        foreach ($orderProductsUsingStock as $orderProductUsingStock) {
+            $relevantProducts[] = $orderProductUsingStock->getProduct();
+        }
+
         foreach ($relevantProducts as $relevantProduct) {
             $this->productSellingDeniedRecalculator->calculateSellingDeniedForProduct($relevantProduct);
             $this->productHiddenRecalculator->calculateHiddenForProduct($relevantProduct);
@@ -113,5 +118,22 @@ class OrderProductFacade
         $this->em->flush($relevantProducts);
 
         $this->productVisibilityFacade->refreshProductsVisibilityForMarked();
+    }
+
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Order\Item\OrderProduct[] $orderProducts
+     * @return \Shopsys\FrameworkBundle\Model\Order\Item\OrderProduct[]
+     */
+    protected function getOrderProductsUsingStockFromOrderProducts(array $orderProducts)
+    {
+        $orderProductsUsingStock = [];
+        foreach ($orderProducts as $orderProduct) {
+            $product = $orderProduct->getProduct();
+            if ($product !== null && $product->isUsingStock()) {
+                $orderProductsUsingStock[] = $orderProduct;
+            }
+        }
+
+        return $orderProductsUsingStock;
     }
 }

@@ -3,6 +3,7 @@
 namespace Shopsys\FrameworkBundle\Model\Cart;
 
 use Doctrine\ORM\EntityManagerInterface;
+use Shopsys\FrameworkBundle\Model\Cart\Item\CartItemFactoryInterface;
 use Shopsys\FrameworkBundle\Model\Customer\CustomerIdentifierFactory;
 use Symfony\Component\HttpKernel\Event\FilterControllerEvent;
 
@@ -16,11 +17,6 @@ class CartMigrationFacade
     protected $em;
 
     /**
-     * @var \Shopsys\FrameworkBundle\Model\Cart\CartService
-     */
-    protected $cartService;
-
-    /**
      * @var \Shopsys\FrameworkBundle\Model\Cart\CartFactory
      */
     protected $cartFactory;
@@ -31,21 +27,26 @@ class CartMigrationFacade
     protected $customerIdentifierFactory;
 
     /**
+     * @var \Shopsys\FrameworkBundle\Model\Cart\Item\CartItemFactoryInterface
+     */
+    protected $cartItemFactory;
+
+    /**
      * @param \Doctrine\ORM\EntityManagerInterface $em
-     * @param \Shopsys\FrameworkBundle\Model\Cart\CartService $cartService
      * @param \Shopsys\FrameworkBundle\Model\Cart\CartFactory $cartFactory
      * @param \Shopsys\FrameworkBundle\Model\Customer\CustomerIdentifierFactory $customerIdentifierFactory
+     * @param \Shopsys\FrameworkBundle\Model\Cart\Item\CartItemFactoryInterface $cartItemFactory
      */
     public function __construct(
         EntityManagerInterface $em,
-        CartService $cartService,
         CartFactory $cartFactory,
-        CustomerIdentifierFactory $customerIdentifierFactory
+        CustomerIdentifierFactory $customerIdentifierFactory,
+        CartItemFactoryInterface $cartItemFactory
     ) {
         $this->em = $em;
-        $this->cartService = $cartService;
         $this->cartFactory = $cartFactory;
         $this->customerIdentifierFactory = $customerIdentifierFactory;
+        $this->cartItemFactory = $cartItemFactory;
     }
 
     /**
@@ -55,7 +56,7 @@ class CartMigrationFacade
     {
         $customerIdentifier = $this->customerIdentifierFactory->get();
         $currentCart = $this->cartFactory->get($customerIdentifier);
-        $this->cartService->mergeCarts($currentCart, $cart, $customerIdentifier);
+        $currentCart->mergeWithCart($cart, $this->cartItemFactory, $customerIdentifier);
 
         foreach ($cart->getItems() as $itemToRemove) {
             $this->em->remove($itemToRemove);

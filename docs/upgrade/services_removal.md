@@ -86,6 +86,37 @@ If you use these methods, change their calling appropriately:
   -> `RuleFormViewDataFactory::createFromRequestData(string $defaultFilterName, array $requestData = null)`
 - `AdvancedSearchOrderService::extendQueryBuilderByAdvancedSearchData(QueryBuilder $queryBuilder, array $advancedSearchData)` and `AdvancedSearchService::extendQueryBuilderByAdvancedSearchData(QueryBuilder $queryBuilder, array $advancedSearchData)`
   -> `AdvancedSearchQueryBuilderExtender::extendByAdvancedSearchData(QueryBuilder $queryBuilder, array $advancedSearchData)`
+- `OrderProductService::subtractOrderProductsFromStock(array $orderProducts)`
+  -> `OrderProductFacade::subtractOrderProductsFromStock(array $orderProducts)`
+- `OrderProductService::returnOrderProductsToStock(array $orderProducts)`
+  -> `OrderProductFacade::addOrderProductsToStock(array $orderProducts)`
+- `OrderProductService::getOrderProductsUsingStockFromOrderProducts(array $orderProducts)`
+  -> `OrderProductFacade::getOrderProductsUsingStockFromOrderProducts(array $orderProducts)`
+- `OrderCreationService::prefillFrontFormData(FrontOrderData $frontOrderData, User $user, Order $order = null)`
+  -> `FrontOrderDataMapper::prefillFrontFormData(FrontOrderData $frontOrderData, User $user, ?Order $order)`
+- `OrderCreationService::prefillTransportAndPaymentFromOrder(FrontOrderData $frontOrderData, Order $order)`
+  -> `FrontOrderDataMapper::prefillTransportAndPaymentFromOrder(FrontOrderData $frontOrderData, Order $order)`
+- `OrderCreationService::prefillFrontFormDataFromCustomer(FrontOrderData $frontOrderData, User $user)`
+  -> `FrontOrderDataMapper::prefillFrontFormDataFromCustomer(FrontOrderData $frontOrderData, User $user)`
+- `OrderCreationService::fillOrderTransportAndPayment(Order $order, OrderPreview $orderPreview, $locale)`
+  -> `Order::fillOrderPayment(PaymentPriceCalculation $paymentPriceCalculation, OrderPaymentFactoryInterface $orderPaymentFactory, Price $productsPrice, $locale)`
+  -> `Order::fillOrderTransport(TransportPriceCalculation $transportPriceCalculation, OrderTransportFactoryInterface $orderTransportFactory, Price $productsPrice, $locale)`
+- `OrderCreationService::fillOrderProducts(Order $order, OrderPreview $orderPreview, $locale)`
+  -> `Order::fillOrderProducts(OrderPreview $orderPreview, OrderProductFactoryInterface $orderProductFactory, NumberFormatterExtension $numberFormatterExtension, $locale`
+- `OrderCreationService::fillOrderRounding(Order $order, OrderPreview $orderPreview, $locale)`
+  -> `Order::fillOrderRounding(OrderProductFactoryInterface $orderProductFactory, ?Price $roundingPrice, $locale)`
+- `OrderCreationService::fillOrderItems(Order $order, OrderPreview $orderPreview)`
+  -> `OrderFacade::fillOrderItems(Order $order, OrderPreview $orderPreview)`
+- `CartService::changeQuantities(Cart $cart, array $quantitiesByCartItemId)`
+  -> `Cart::changeQuantities(array $quantitiesByCartItemId)`
+- `CartService::getCartItemById(Cart $cart, $cartItemId)`
+  -> `Cart::getCartItemById($cartItemId)`
+- `CartService::getQuantifiedProductsIndexedByCartItemId(Cart $cart)`
+  -> `Cart::getQuantifiedProductsIndexedByCartItemId()`
+- `CartService::mergeCarts(Cart $resultingCart, Cart $mergedCart, CustomerIdentifier $customerIdentifier)`
+  -> `Cart::mergeWithCart(Cart $cartToMerge, CartItemFactoryInterface $cartItemFactory, CustomerIdentifier $customerIdentifier)`
+- `CartService::addProductToCart(Cart $cart, CustomerIdentifier $customerIdentifier, Product $product, $quantity)`
+  -> `Cart::addProduct(CustomerIdentifier $customerIdentifier, Product $product, $quantity, ProductPriceCalculation $productPriceCalculation, CartItemFactoryInterface $cartItemFactory`
 
 Following classes have been removed:
 - `AdministratorService`
@@ -105,6 +136,9 @@ Following classes have been removed:
 - `UploadedFileService`
 - `AdvancedSearchService`
 - `AdvancedSearchOrderService`
+- `OrderProductService`
+- `OrderCreationService`
+- `CartService`
 
 Following methods have been removed:
 - `User::setDeliveryAddress()`, use `User::editDeliveryAddress()` instead
@@ -116,6 +150,8 @@ Following methods have been removed:
 - `CategoryService::setChildrenAsSiblings()`
 - `CurrencyService::create()`, use `CurrencyFactory::create()` instead
 - `VatService::getNewDefaultVat()`
+- `OrderProductService::getProductsUsingStockFromOrderProducts()`
+- `CartService::cleanCart()` use `Cart::clean()` instead
 
 Following classes changed constructors:
 - `AdministratorFacade`
@@ -143,6 +179,10 @@ Following classes changed constructors:
 - `UploadedFileFactory`
 - `AdvancedSearchFacade`
 - `AdvancedSearchOrderFacade`
+- `OrderProductFacade`
+- `OrderFacade`
+- `CartMigrationFacade`
+- `CartFacade`
 
 Following functions visibility was changed to `protected` as there is no need to use them from outside of objects:
 - `Administrator::getGridLimit()`

@@ -10,12 +10,18 @@ use Shopsys\FrameworkBundle\Model\Customer\User;
 use Shopsys\FrameworkBundle\Model\Order\Item\OrderItem;
 use Shopsys\FrameworkBundle\Model\Order\Item\OrderItemPriceCalculation;
 use Shopsys\FrameworkBundle\Model\Order\Item\OrderPayment;
+use Shopsys\FrameworkBundle\Model\Order\Item\OrderPaymentFactoryInterface;
 use Shopsys\FrameworkBundle\Model\Order\Item\OrderProduct;
 use Shopsys\FrameworkBundle\Model\Order\Item\OrderProductFactoryInterface;
 use Shopsys\FrameworkBundle\Model\Order\Item\OrderTransport;
+use Shopsys\FrameworkBundle\Model\Order\Item\OrderTransportFactoryInterface;
+use Shopsys\FrameworkBundle\Model\Order\Preview\OrderPreview;
 use Shopsys\FrameworkBundle\Model\Order\Status\OrderStatus;
+use Shopsys\FrameworkBundle\Model\Payment\PaymentPriceCalculation;
 use Shopsys\FrameworkBundle\Model\Pricing\Price;
 use Shopsys\FrameworkBundle\Model\Product\Product;
+use Shopsys\FrameworkBundle\Model\Transport\TransportPriceCalculation;
+use Shopsys\FrameworkBundle\Twig\NumberFormatterExtension;
 
 /**
  * @ORM\Table(name="orders")
@@ -1030,5 +1036,168 @@ class Order
         $this->calculateTotalPrice($orderPriceCalculation);
 
         return new OrderEditResult($statusChanged);
+    }
+
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Payment\PaymentPriceCalculation $paymentPriceCalculation
+     * @param \Shopsys\FrameworkBundle\Model\Order\Item\OrderPaymentFactoryInterface $orderPaymentFactory
+     * @param \Shopsys\FrameworkBundle\Model\Pricing\Price $productsPrice
+     * @param string $locale
+     */
+    public function fillOrderPayment(
+        PaymentPriceCalculation $paymentPriceCalculation,
+        OrderPaymentFactoryInterface $orderPaymentFactory,
+        Price $productsPrice,
+        $locale
+    ) {
+        $payment = $this->getPayment();
+        $paymentPrice = $paymentPriceCalculation->calculatePrice(
+            $payment,
+            $this->getCurrency(),
+            $productsPrice,
+            $this->getDomainId()
+        );
+        $orderPayment = $orderPaymentFactory->create(
+            $this,
+            $payment->getName($locale),
+            $paymentPrice,
+            $payment->getVat()->getPercent(),
+            1,
+            $payment
+        );
+        $this->addItem($orderPayment);
+    }
+
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Transport\TransportPriceCalculation $transportPriceCalculation
+     * @param \Shopsys\FrameworkBundle\Model\Order\Item\OrderTransportFactoryInterface $orderTransportFactory
+     * @param \Shopsys\FrameworkBundle\Model\Pricing\Price $productsPrice
+     * @param string $locale
+     */
+    public function fillOrderTransport(
+        TransportPriceCalculation $transportPriceCalculation,
+        OrderTransportFactoryInterface $orderTransportFactory,
+        Price $productsPrice,
+        $locale
+    ) {
+        $transport = $this->getTransport();
+        $transportPrice = $transportPriceCalculation->calculatePrice(
+            $transport,
+            $this->getCurrency(),
+            $productsPrice,
+            $this->getDomainId()
+        );
+        $orderTransport = $orderTransportFactory->create(
+            $this,
+            $transport->getName($locale),
+            $transportPrice,
+            $transport->getVat()->getPercent(),
+            1,
+            $transport
+        );
+        $this->addItem($orderTransport);
+    }
+
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Order\Preview\OrderPreview $orderPreview
+     * @param \Shopsys\FrameworkBundle\Model\Order\Item\OrderProductFactoryInterface $orderProductFactory
+     * @param \Shopsys\FrameworkBundle\Twig\NumberFormatterExtension $numberFormatterExtension
+     * @param string $locale
+     */
+    public function fillOrderProducts(
+        OrderPreview $orderPreview,
+        OrderProductFactoryInterface $orderProductFactory,
+        NumberFormatterExtension $numberFormatterExtension,
+        $locale
+    ) {
+        $quantifiedItemPrices = $orderPreview->getQuantifiedItemsPrices();
+        $quantifiedItemDiscounts = $orderPreview->getQuantifiedItemsDiscounts();
+
+        foreach ($orderPreview->getQuantifiedProducts() as $index => $quantifiedProduct) {
+            $product = $quantifiedProduct->getProduct();
+            if (!$product instanceof Product) {
+                $message = 'Object "' . get_class($product) . '" is not valid for order creation.';
+                throw new \Shopsys\FrameworkBundle\Model\Order\Item\Exception\InvalidQuantifiedProductException($message);
+            }
+
+            $quantifiedItemPrice = $quantifiedItemPrices[$index];
+            /* @var $quantifiedItemPrice \Shopsys\FrameworkBundle\Model\Order\Item\QuantifiedItemPrice */
+            $quantifiedItemDiscount = $quantifiedItemDiscounts[$index];
+            /* @var $quantifiedItemDiscount \Shopsys\FrameworkBundle\Model\Pricing\Price|null */
+
+            $orderItem = $orderProductFactory->create(
+                $this,
+                $product->getName($locale),
+                $quantifiedItemPrice->getUnitPrice(),
+                $product->getVat()->getPercent(),
+                $quantifiedProduct->getQuantity(),
+                $product->getUnit()->getName($locale),
+                $product->getCatnum(),
+                $product
+            );
+
+            if ($quantifiedItemDiscount !== null) {
+                $this->addOrderItemDiscount($numberFormatterExtension, $orderPreview, $orderProductFactory, $quantifiedItemDiscount, $orderItem, $locale);
+            }
+        }
+    }
+
+    /**
+     * @param \Shopsys\FrameworkBundle\Twig\NumberFormatterExtension $numberFormatterExtension
+     * @param \Shopsys\FrameworkBundle\Model\Order\Preview\OrderPreview $orderPreview
+     * @param \Shopsys\FrameworkBundle\Model\Order\Item\OrderProductFactoryInterface $orderProductFactory
+     * @param \Shopsys\FrameworkBundle\Model\Pricing\Price $quantifiedItemDiscount
+     * @param \Shopsys\FrameworkBundle\Model\Order\Item\OrderItem $orderItem
+     * @param string $locale
+     */
+    protected function addOrderItemDiscount(
+        NumberFormatterExtension $numberFormatterExtension,
+        OrderPreview $orderPreview,
+        OrderProductFactoryInterface $orderProductFactory,
+        Price $quantifiedItemDiscount,
+        OrderItem $orderItem,
+        $locale
+    ) {
+        $name = sprintf(
+            '%s %s - %s',
+            t('Promo code', [], 'messages', $locale),
+            $numberFormatterExtension->formatPercent(-$orderPreview->getPromoCodeDiscountPercent(), $locale),
+            $orderItem->getName()
+        );
+
+        $orderProductFactory->create(
+            $orderItem->getOrder(),
+            $name,
+            new Price(
+                -$quantifiedItemDiscount->getPriceWithoutVat(),
+                -$quantifiedItemDiscount->getPriceWithVat()
+            ),
+            $orderItem->getVatPercent(),
+            1,
+            null,
+            null,
+            null
+        );
+    }
+
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Order\Item\OrderProductFactoryInterface $orderProductFactory
+     * @param \Shopsys\FrameworkBundle\Model\Pricing\Price|null $roundingPrice
+     * @param string $locale
+     */
+    public function fillOrderRounding(OrderProductFactoryInterface $orderProductFactory, ?Price $roundingPrice, $locale)
+    {
+        if ($roundingPrice !== null) {
+            $orderProductFactory->create(
+                $this,
+                t('Rounding', [], 'messages', $locale),
+                $roundingPrice,
+                0,
+                1,
+                null,
+                null,
+                null
+            );
+        }
     }
 }

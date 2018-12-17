@@ -7,7 +7,7 @@ use Shopsys\FrameworkBundle\DataFixtures\Demo\CountryDataFixture;
 use Shopsys\FrameworkBundle\DataFixtures\Demo\CurrencyDataFixture;
 use Shopsys\FrameworkBundle\DataFixtures\Demo\OrderStatusDataFixture;
 use Shopsys\FrameworkBundle\Model\Cart\CartFacade;
-use Shopsys\FrameworkBundle\Model\Cart\CartService;
+use Shopsys\FrameworkBundle\Model\Cart\Item\CartItemFactory;
 use Shopsys\FrameworkBundle\Model\Customer\CustomerIdentifier;
 use Shopsys\FrameworkBundle\Model\Order\Item\OrderItemData;
 use Shopsys\FrameworkBundle\Model\Order\OrderDataFactoryInterface;
@@ -15,6 +15,7 @@ use Shopsys\FrameworkBundle\Model\Order\OrderFacade;
 use Shopsys\FrameworkBundle\Model\Order\OrderRepository;
 use Shopsys\FrameworkBundle\Model\Order\Preview\OrderPreviewFactory;
 use Shopsys\FrameworkBundle\Model\Payment\PaymentRepository;
+use Shopsys\FrameworkBundle\Model\Product\Pricing\ProductPriceCalculationForUser;
 use Shopsys\FrameworkBundle\Model\Product\ProductRepository;
 use Shopsys\FrameworkBundle\Model\Transport\TransportRepository;
 use Shopsys\ShopBundle\Model\Order\OrderData;
@@ -26,8 +27,6 @@ class OrderFacadeTest extends TransactionFunctionalTestCase
     {
         /** @var \Shopsys\FrameworkBundle\Model\Cart\CartFacade $cartFacade */
         $cartFacade = $this->getContainer()->get(CartFacade::class);
-        /** @var \Shopsys\FrameworkBundle\Model\Cart\CartService $cartService */
-        $cartService = $this->getContainer()->get(CartService::class);
         /** @var \Shopsys\FrameworkBundle\Model\Order\OrderFacade $orderFacade */
         $orderFacade = $this->getContainer()->get(OrderFacade::class);
         /** @var \Shopsys\FrameworkBundle\Model\Order\Preview\OrderPreviewFactory $orderPreviewFactory */
@@ -42,6 +41,10 @@ class OrderFacadeTest extends TransactionFunctionalTestCase
         $paymentRepository = $this->getContainer()->get(PaymentRepository::class);
         /** @var \Shopsys\FrameworkBundle\Component\DataFixture\PersistentReferenceFacade $persistentReferenceFacade */
         $persistentReferenceFacade = $this->getContainer()->get(PersistentReferenceFacade::class);
+        /** @var \Shopsys\FrameworkBundle\Model\Product\Pricing\ProductPriceCalculationForUser $productPriceCalculation */
+        $productPriceCalculation = $this->getContainer()->get(ProductPriceCalculationForUser::class);
+        /** @var \Shopsys\FrameworkBundle\Model\Cart\Item\CartItemFactory $cartItemFactory */
+        $cartItemFactory = $this->getContainer()->get(CartItemFactory::class);
 
         $cart = $cartFacade->getCartOfCurrentCustomer();
 
@@ -49,7 +52,7 @@ class OrderFacadeTest extends TransactionFunctionalTestCase
 
         $product = $productRepository->getById(1);
 
-        $cartService->addProductToCart($cart, $customerIdentifier, $product, 1);
+        $cart->addProduct($customerIdentifier, $product, 1, $productPriceCalculation, $cartItemFactory);
 
         $transport = $transportRepository->getById(1);
         $payment = $paymentRepository->getById(1);
