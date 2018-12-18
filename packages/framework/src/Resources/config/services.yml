@@ -991,7 +991,7 @@ services:
         arguments:
             $advancedSearchConfig: '@Shopsys\FrameworkBundle\Model\AdvancedSearch\ProductAdvancedSearchConfig'
 
-    Shopsys\FrameworkBundle\Model\AdvancedSearch\AdvancedSearchFacade:
+    Shopsys\FrameworkBundle\Model\AdvancedSearch\AdvancedSearchProductFacade:
         arguments:
             $advancedSearchQueryBuilderExtender: '@shopsys.shop.model.advanced_search.advanced_search_query_builder_extender.product'
 

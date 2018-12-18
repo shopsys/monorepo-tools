@@ -57,6 +57,8 @@ There is a list of all the repositories maintained by monorepo, changes in log b
     - the separators are rendered automatically since [PR #619](https://github.com/shopsys/shopsys/pull/619) was merged and the option hasn't been used anymore
 - [#627 model service layer removal](https://github.com/shopsys/shopsys/pull/627)
     - please read upgrade instructions in [separate article](docs/upgrade/services-removal.md)
+- [#688 renamed AdvancedSearchFacade to AdvancedSearchProductFacade](https://github.com/shopsys/shopsys/pull/688)
+    - change usages of `AdvancedSearchFacade` to `AdvancedSearchProductFacade`
 
 ### [shopsys/project-base]
 - [#633 Google Cloud deploy using Terraform, Kustomize and Kubernetes](https://github.com/shopsys/shopsys/pull/633)

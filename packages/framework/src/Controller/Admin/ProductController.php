@@ -15,7 +15,7 @@ use Shopsys\FrameworkBundle\Form\Admin\QuickSearch\QuickSearchFormData;
 use Shopsys\FrameworkBundle\Form\Admin\QuickSearch\QuickSearchFormType;
 use Shopsys\FrameworkBundle\Model\Administrator\AdministratorGridFacade;
 use Shopsys\FrameworkBundle\Model\AdminNavigation\BreadcrumbOverrider;
-use Shopsys\FrameworkBundle\Model\AdvancedSearch\AdvancedSearchFacade;
+use Shopsys\FrameworkBundle\Model\AdvancedSearch\AdvancedSearchProductFacade;
 use Shopsys\FrameworkBundle\Model\Product\Listing\ProductListAdminFacade;
 use Shopsys\FrameworkBundle\Model\Product\MassAction\ProductMassActionFacade;
 use Shopsys\FrameworkBundle\Model\Product\Product;
@@ -63,9 +63,9 @@ class ProductController extends AdminBaseController
     protected $productListAdminFacade;
 
     /**
-     * @var \Shopsys\FrameworkBundle\Model\AdvancedSearch\AdvancedSearchFacade
+     * @var \Shopsys\FrameworkBundle\Model\AdvancedSearch\AdvancedSearchProductFacade
      */
-    protected $advancedSearchFacade;
+    protected $advancedSearchProductFacade;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Product\ProductVariantFacade
@@ -90,7 +90,7 @@ class ProductController extends AdminBaseController
      * @param \Shopsys\FrameworkBundle\Model\AdminNavigation\BreadcrumbOverrider $breadcrumbOverrider
      * @param \Shopsys\FrameworkBundle\Model\Administrator\AdministratorGridFacade $administratorGridFacade
      * @param \Shopsys\FrameworkBundle\Model\Product\Listing\ProductListAdminFacade $productListAdminFacade
-     * @param \Shopsys\FrameworkBundle\Model\AdvancedSearch\AdvancedSearchFacade $advancedSearchFacade
+     * @param \Shopsys\FrameworkBundle\Model\AdvancedSearch\AdvancedSearchProductFacade $advancedSearchProductFacade
      * @param \Shopsys\FrameworkBundle\Model\Product\ProductVariantFacade $productVariantFacade
      * @param \Shopsys\FrameworkBundle\Twig\ProductExtension $productExtension
      * @param \Shopsys\FrameworkBundle\Component\Domain\Domain $domain
@@ -103,7 +103,7 @@ class ProductController extends AdminBaseController
         BreadcrumbOverrider $breadcrumbOverrider,
         AdministratorGridFacade $administratorGridFacade,
         ProductListAdminFacade $productListAdminFacade,
-        AdvancedSearchFacade $advancedSearchFacade,
+        AdvancedSearchProductFacade $advancedSearchProductFacade,
         ProductVariantFacade $productVariantFacade,
         ProductExtension $productExtension,
         Domain $domain
@@ -115,7 +115,7 @@ class ProductController extends AdminBaseController
         $this->breadcrumbOverrider = $breadcrumbOverrider;
         $this->administratorGridFacade = $administratorGridFacade;
         $this->productListAdminFacade = $productListAdminFacade;
-        $this->advancedSearchFacade = $advancedSearchFacade;
+        $this->advancedSearchProductFacade = $advancedSearchProductFacade;
         $this->productVariantFacade = $productVariantFacade;
         $this->productExtension = $productExtension;
         $this->domain = $domain;
@@ -202,7 +202,7 @@ class ProductController extends AdminBaseController
         $administrator = $this->getUser();
         /* @var $administrator \Shopsys\FrameworkBundle\Model\Administrator\Administrator */
 
-        $advancedSearchForm = $this->advancedSearchFacade->createAdvancedSearchForm($request);
+        $advancedSearchForm = $this->advancedSearchProductFacade->createAdvancedSearchForm($request);
         $advancedSearchData = $advancedSearchForm->getData();
         $quickSearchData = new QuickSearchFormData();
 
@@ -215,9 +215,9 @@ class ProductController extends AdminBaseController
         $massActionForm = $this->createForm(ProductMassActionFormType::class);
         $massActionForm->handleRequest($request);
 
-        $isAdvancedSearchFormSubmitted = $this->advancedSearchFacade->isAdvancedSearchFormSubmitted($request);
+        $isAdvancedSearchFormSubmitted = $this->advancedSearchProductFacade->isAdvancedSearchFormSubmitted($request);
         if ($isAdvancedSearchFormSubmitted) {
-            $queryBuilder = $this->advancedSearchFacade->getQueryBuilderByAdvancedSearchData($advancedSearchData);
+            $queryBuilder = $this->advancedSearchProductFacade->getQueryBuilderByAdvancedSearchData($advancedSearchData);
         } else {
             $queryBuilder = $this->productListAdminFacade->getQueryBuilderByQuickSearchData($quickSearchData);
         }
@@ -243,7 +243,7 @@ class ProductController extends AdminBaseController
             'quickSearchForm' => $quickSearchForm->createView(),
             'advancedSearchForm' => $advancedSearchForm->createView(),
             'massActionForm' => $massActionForm->createView(),
-            'isAdvancedSearchFormSubmitted' => $this->advancedSearchFacade->isAdvancedSearchFormSubmitted($request),
+            'isAdvancedSearchFormSubmitted' => $this->advancedSearchProductFacade->isAdvancedSearchFormSubmitted($request),
         ]);
     }
 
@@ -278,7 +278,7 @@ class ProductController extends AdminBaseController
      */
     public function getRuleFormAction(Request $request)
     {
-        $ruleForm = $this->advancedSearchFacade->createRuleForm($request->get('filterName'), $request->get('newIndex'));
+        $ruleForm = $this->advancedSearchProductFacade->createRuleForm($request->get('filterName'), $request->get('newIndex'));
 
         return $this->render('@ShopsysFramework/Admin/Content/Product/AdvancedSearch/ruleForm.html.twig', [
             'rulesForm' => $ruleForm->createView(),

@@ -8,7 +8,7 @@ use Shopsys\FrameworkBundle\Component\Grid\QueryBuilderWithRowManipulatorDataSou
 use Shopsys\FrameworkBundle\Form\Admin\QuickSearch\QuickSearchFormData;
 use Shopsys\FrameworkBundle\Form\Admin\QuickSearch\QuickSearchFormType;
 use Shopsys\FrameworkBundle\Model\Administrator\AdministratorGridFacade;
-use Shopsys\FrameworkBundle\Model\AdvancedSearch\AdvancedSearchFacade;
+use Shopsys\FrameworkBundle\Model\AdvancedSearch\AdvancedSearchProductFacade;
 use Shopsys\FrameworkBundle\Model\Product\Listing\ProductListAdminFacade;
 use Shopsys\FrameworkBundle\Model\Product\Product;
 use Shopsys\FrameworkBundle\Model\Product\ProductFacade;
@@ -22,9 +22,9 @@ class ProductPickerController extends AdminBaseController
     protected $administratorGridFacade;
 
     /**
-     * @var \Shopsys\FrameworkBundle\Model\AdvancedSearch\AdvancedSearchFacade
+     * @var \Shopsys\FrameworkBundle\Model\AdvancedSearch\AdvancedSearchProductFacade
      */
-    protected $advancedSearchFacade;
+    protected $advancedSearchProductFacade;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\Grid\GridFactory
@@ -45,20 +45,20 @@ class ProductPickerController extends AdminBaseController
      * @param \Shopsys\FrameworkBundle\Model\Administrator\AdministratorGridFacade $administratorGridFacade
      * @param \Shopsys\FrameworkBundle\Component\Grid\GridFactory $gridFactory
      * @param \Shopsys\FrameworkBundle\Model\Product\Listing\ProductListAdminFacade $productListAdminFacade
-     * @param \Shopsys\FrameworkBundle\Model\AdvancedSearch\AdvancedSearchFacade $advancedSearchFacade
+     * @param \Shopsys\FrameworkBundle\Model\AdvancedSearch\AdvancedSearchProductFacade $advancedSearchProductFacade
      * @param \Shopsys\FrameworkBundle\Model\Product\ProductFacade $productFacade
      */
     public function __construct(
         AdministratorGridFacade $administratorGridFacade,
         GridFactory $gridFactory,
         ProductListAdminFacade $productListAdminFacade,
-        AdvancedSearchFacade $advancedSearchFacade,
+        AdvancedSearchProductFacade $advancedSearchProductFacade,
         ProductFacade $productFacade
     ) {
         $this->administratorGridFacade = $administratorGridFacade;
         $this->gridFactory = $gridFactory;
         $this->productListAdminFacade = $productListAdminFacade;
-        $this->advancedSearchFacade = $advancedSearchFacade;
+        $this->advancedSearchProductFacade = $advancedSearchProductFacade;
         $this->productFacade = $productFacade;
     }
 
@@ -114,16 +114,16 @@ class ProductPickerController extends AdminBaseController
         $administrator = $this->getUser();
         /* @var $administrator \Shopsys\FrameworkBundle\Model\Administrator\Administrator */
 
-        $advancedSearchForm = $this->advancedSearchFacade->createAdvancedSearchForm($request);
+        $advancedSearchForm = $this->advancedSearchProductFacade->createAdvancedSearchForm($request);
         $advancedSearchData = $advancedSearchForm->getData();
         $quickSearchData = new QuickSearchFormData();
 
         $quickSearchForm = $this->createForm(QuickSearchFormType::class, $quickSearchData);
         $quickSearchForm->handleRequest($request);
 
-        $isAdvancedSearchFormSubmitted = $this->advancedSearchFacade->isAdvancedSearchFormSubmitted($request);
+        $isAdvancedSearchFormSubmitted = $this->advancedSearchProductFacade->isAdvancedSearchFormSubmitted($request);
         if ($isAdvancedSearchFormSubmitted) {
-            $queryBuilder = $this->advancedSearchFacade->getQueryBuilderByAdvancedSearchData($advancedSearchData);
+            $queryBuilder = $this->advancedSearchProductFacade->getQueryBuilderByAdvancedSearchData($advancedSearchData);
         } else {
             $queryBuilder = $this->productListAdminFacade->getQueryBuilderByQuickSearchData($quickSearchData);
         }
@@ -157,7 +157,7 @@ class ProductPickerController extends AdminBaseController
         $viewParameters['gridView'] = $grid->createView();
         $viewParameters['quickSearchForm'] = $quickSearchForm->createView();
         $viewParameters['advancedSearchForm'] = $advancedSearchForm->createView();
-        $viewParameters['isAdvancedSearchFormSubmitted'] = $this->advancedSearchFacade->isAdvancedSearchFormSubmitted($request);
+        $viewParameters['isAdvancedSearchFormSubmitted'] = $this->advancedSearchProductFacade->isAdvancedSearchFormSubmitted($request);
 
         return $this->render('@ShopsysFramework/Admin/Content/ProductPicker/list.html.twig', $viewParameters);
     }

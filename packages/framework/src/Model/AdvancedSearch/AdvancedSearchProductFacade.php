@@ -6,7 +6,7 @@ use Shopsys\FrameworkBundle\Model\AdvancedSearch\Filter\ProductNameFilter;
 use Shopsys\FrameworkBundle\Model\Product\Listing\ProductListAdminFacade;
 use Symfony\Component\HttpFoundation\Request;
 
-class AdvancedSearchFacade
+class AdvancedSearchProductFacade
 {
     const RULES_FORM_NAME = 'as';
 
