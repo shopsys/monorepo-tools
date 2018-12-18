@@ -9,12 +9,14 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 class OrderLastNameFilter implements AdvancedSearchFilterInterface
 {
+    const NAME = 'customerLastName';
+
     /**
      * {@inheritdoc}
      */
     public function getName()
     {
-        return 'customerLastName';
+        return self::NAME;
     }
 
     /**

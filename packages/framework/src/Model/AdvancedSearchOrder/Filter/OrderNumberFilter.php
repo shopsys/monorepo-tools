@@ -9,12 +9,14 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 class OrderNumberFilter implements AdvancedSearchFilterInterface
 {
+    const NAME = 'orderNumber';
+
     /**
      * {@inheritdoc}
      */
     public function getName()
     {
-        return 'orderNumber';
+        return self::NAME;
     }
 
     /**

@@ -8,12 +8,14 @@ use Shopsys\FrameworkBundle\Model\AdvancedSearch\AdvancedSearchFilterInterface;
 
 class OrderDomainFilter implements AdvancedSearchFilterInterface
 {
+    const NAME = 'orderDomain';
+
     /**
      * {@inheritdoc}
      */
     public function getName()
     {
-        return 'orderDomain';
+        return self::NAME;
     }
 
     /**

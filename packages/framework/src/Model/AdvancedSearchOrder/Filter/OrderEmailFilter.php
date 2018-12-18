@@ -9,12 +9,14 @@ use Symfony\Component\Form\Extension\Core\Type\EmailType;
 
 class OrderEmailFilter implements AdvancedSearchFilterInterface
 {
+    const NAME = 'customerEmail';
+
     /**
      * {@inheritdoc}
      */
     public function getName()
     {
-        return 'customerEmail';
+        return self::NAME;
     }
 
     /**

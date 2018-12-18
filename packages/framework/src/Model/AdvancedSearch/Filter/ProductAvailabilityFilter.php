@@ -11,6 +11,8 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
 class ProductAvailabilityFilter implements AdvancedSearchFilterInterface
 {
+    const NAME = 'productAvailability';
+
     /**
      * @var \Shopsys\FrameworkBundle\Model\Product\Availability\AvailabilityFacade
      */
@@ -40,7 +42,7 @@ class ProductAvailabilityFilter implements AdvancedSearchFilterInterface
      */
     public function getName()
     {
-        return 'productAvailability';
+        return self::NAME;
     }
 
     /**

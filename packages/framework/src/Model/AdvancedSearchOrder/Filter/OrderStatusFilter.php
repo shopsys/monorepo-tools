@@ -9,6 +9,8 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
 class OrderStatusFilter implements AdvancedSearchFilterInterface
 {
+    const NAME = 'orderStatus';
+
     /**
      * @var \Shopsys\FrameworkBundle\Model\Order\Status\OrderStatusFacade
      */
@@ -27,7 +29,7 @@ class OrderStatusFilter implements AdvancedSearchFilterInterface
      */
     public function getName()
     {
-        return 'orderStatus';
+        return self::NAME;
     }
 
     /**

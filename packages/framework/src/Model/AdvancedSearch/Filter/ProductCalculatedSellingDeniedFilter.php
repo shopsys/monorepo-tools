@@ -8,12 +8,14 @@ use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 
 class ProductCalculatedSellingDeniedFilter implements AdvancedSearchFilterInterface
 {
+    const NAME = 'productCalculatedSellingDenied';
+
     /**
      * {@inheritdoc}
      */
     public function getName()
     {
-        return 'productCalculatedSellingDenied';
+        return self::NAME;
     }
 
     /**
