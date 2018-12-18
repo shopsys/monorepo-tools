@@ -154,6 +154,9 @@ firewall-cmd --permanent --zone=public --add-service=redis
 firewall-cmd --reload
 ```
 
+If you are using multiple Shopsys Framework instances on same machine, you might want to prefix your entries names in Redis.
+You can do that by setting environment variable `REDIS_PREFIX` in `docker-compose.yml` file for `php-fpm` service.
+
 ### Elasticsearch
 
 First we need to install Java SDK environment.

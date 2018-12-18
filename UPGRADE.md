@@ -75,6 +75,9 @@ There is a list of all the repositories maintained by monorepo, changes in log b
 - [#685 - fix wrong variable name in flash message](https://github.com/shopsys/shopsys/pull/685)
     - in `Front/OrderController::checkTransportAndPaymentChanges()`, fix the variable name in the flash message in `$transportAndPaymentCheckResult->isPaymentPriceChanged()` condition 
     - dump translations using `php phing dump-translations` and fill in your translations for the new message ID 
+- *(optional)* [#673 added support for custom prefixing in redis](https://github.com/shopsys/shopsys/pull/673)
+    - add default value (e.g. empty string) for `REDIS_PREFIX` env variable to your `app/config/parameters.yml.dist`, `app/config/parameters.yml` (if you already have your parameters file), and to your `docker/php-fpm/Dockerfile`
+    - modify your Redis configuration (`app/config/packages/snc_redis.yml`) by prefixing all the prefix values with the value of the env variable (`%env(REDIS_PREFIX)%`)
 
 ### [shopsys/shopsys]
 - [#651 It's possible to add index prefix to elastic search](https://github.com/shopsys/shopsys/pull/651)
