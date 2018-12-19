@@ -61,6 +61,8 @@ There is a list of all the repositories maintained by monorepo, changes in log b
     - change usages of `AdvancedSearchFacade` to `AdvancedSearchProductFacade`
 
 ### [shopsys/project-base]
+- [#697 fix unnecessary log error after login as admin on second PC](https://github.com/shopsys/shopsys/pull/697)
+    - deleted `AdministratorRepository::findByIdAndLoginToken()` method, if you were using it, please implement it to your `project-base` by yourself.
 - [#633 Google Cloud deploy using Terraform, Kustomize and Kubernetes](https://github.com/shopsys/shopsys/pull/633)
     - update your `.dockerignore` to ignore infrastructure files, follow [changes](https://github.com/shopsys/shopsys/pull/633/commits/5e507aa0aff44cb689b8d65fba58da53a8fafd1f)
     - use specific images instead of variables, follow [changes](https://github.com/shopsys/shopsys/pull/633/commits/84dee757f62f5ff7b9581d9a1dcccc4e496cf7eb)
