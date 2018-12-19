@@ -1,4 +1,4 @@
-FROM php:7.2-fpm-alpine as base
+FROM php:7.3-fpm-alpine as base
 
 # install nginx as in nginx:stable-alpine
 # https://hub.docker.com/r/library/nginx/tags/stable-alpine/
@@ -209,7 +209,7 @@ RUN composer global require hirak/prestissimo
 
 ########################################################################################################################
 
-FROM php:7.2-fpm-alpine as production-builder
+FROM php:7.3-fpm-alpine as production-builder
 
 ENV APP_ENV prod
 
