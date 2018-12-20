@@ -10,7 +10,10 @@ Follow instructions in the section `shopsys/shopsys`.
 
 ### You are developing a project based on project-base
 * upgrade only your composer dependencies and follow instructions
-* if you want update your project with the changes from [shopsys/project-base], you can follow the *(optional)* instructions or cherry-pick from the repository whatever is relevant for you but we do not recommend rebasing or merging everything because the changes might not be compatible with your project as it probably evolves in time
+* if you want update your project with the changes from [shopsys/project-base],
+    you can follow the *(optional)* instructions or cherry-pick from the repository whatever is relevant for you but we do not recommend rebasing or merging everything because the changes might not be compatible with your project as it probably evolves in time
+* instructions marked as *(optional)* are not vital, but could be helpful,
+    so we recommend to perform them as well during upgrading as it might ease your work in the future
 * check all instructions in all sections, any of them could be relevant for you
 * upgrade locally first. After you fix all issues caused by the upgrade, commit your changes and then continue with upgrading application on a server
 * upgrade one version at a time:
