@@ -64,8 +64,8 @@ There is a list of all the repositories maintained by monorepo, changes in log b
 - [#697 fix unnecessary log error after login as admin on second PC](https://github.com/shopsys/shopsys/pull/697)
     - deleted `AdministratorRepository::findByIdAndLoginToken()` method, if you were using it, please implement it to your `project-base` by yourself.
 - [#633 Google Cloud deploy using Terraform, Kustomize and Kubernetes](https://github.com/shopsys/shopsys/pull/633)
-    - update your `.dockerignore` to ignore infrastructure files, follow [changes](https://github.com/shopsys/shopsys/pull/633/commits/5e507aa0aff44cb689b8d65fba58da53a8fafd1f)
-    - use specific images instead of variables, follow [changes](https://github.com/shopsys/shopsys/pull/633/commits/84dee757f62f5ff7b9581d9a1dcccc4e496cf7eb)
+    - update your `.dockerignore` to ignore infrastructure files, follow [changes](https://github.com/shopsys/shopsys/pull/633/commits/eb9356a8fa01d8972931d0ffd66d30f578a00b57)
+    - use specific images instead of variables, follow [changes](https://github.com/shopsys/shopsys/pull/633/commits/d7e5e617656af01168f40980e9f491873dfe6328)
     - *(optional)* If you are using Kubernetes manifests for CI or deployment, follow changes done in manifests and ci `build_kubernetes.sh` script. 
 - *(optional)* [#596 Trusted proxies are now configurable in parameters.yml file](https://github.com/shopsys/shopsys/pull/596)
     - for easier deployment to production, make the trusted proxies in `Shopsys\Boostrap` class loaded from DIC parameter `trusted_proxies` instead of being hard-coded
