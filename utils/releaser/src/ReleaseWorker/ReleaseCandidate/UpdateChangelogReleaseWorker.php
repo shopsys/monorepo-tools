@@ -49,8 +49,11 @@ final class UpdateChangelogReleaseWorker extends AbstractShopsysReleaseWorker
      */
     public function work(Version $version): void
     {
+        $this->symfonyStyle->note('It is necessary to set Github token before the changelog content is generated');
+        $githubToken = $this->symfonyStyle->ask('Please enter no-scope Github token (https://github.com/settings/tokens/new)');
+
         $this->symfonyStyle->note('Dumping new items to CHANGELOG.md, this might take ~10 seconds');
-        $this->processRunner->run('vendor/bin/changelog-linker dump-merges --in-packages --in-categories');
+        $this->processRunner->run(sprintf('GITHUB_TOKEN=%s vendor/bin/changelog-linker dump-merges --in-packages --in-categories', $githubToken), true);
 
         // load
         $changelogFilePath = getcwd() . '/CHANGELOG.md';
