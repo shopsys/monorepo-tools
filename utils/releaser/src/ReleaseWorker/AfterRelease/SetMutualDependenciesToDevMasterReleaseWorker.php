@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Shopsys\Releaser\ReleaseWorker\AfterRelease;
 
 use PharIo\Version\Version;
+use Shopsys\Releaser\FilesProvider\ComposerJsonFilesProvider;
 use Shopsys\Releaser\ReleaseWorker\AbstractShopsysReleaseWorker;
 use Shopsys\Releaser\Stage;
 use Symplify\MonorepoBuilder\FileSystem\ComposerJsonProvider;
@@ -14,9 +15,9 @@ use Symplify\MonorepoBuilder\Package\PackageNamesProvider;
 final class SetMutualDependenciesToDevMasterReleaseWorker extends AbstractShopsysReleaseWorker
 {
     /**
-     * @var \Symplify\MonorepoBuilder\FileSystem\ComposerJsonProvider
+     * @var \Shopsys\Releaser\FilesProvider\ComposerJsonFilesProvider
      */
-    private $composerJsonProvider;
+    private $composerJsonFilesProvider;
 
     /**
      * @var \Symplify\MonorepoBuilder\DependencyUpdater
@@ -34,13 +35,13 @@ final class SetMutualDependenciesToDevMasterReleaseWorker extends AbstractShopsy
     private const DEV_MASTER = 'dev-master';
 
     /**
-     * @param \Symplify\MonorepoBuilder\FileSystem\ComposerJsonProvider $composerJsonProvider
+     * @param \Shopsys\Releaser\FilesProvider\ComposerJsonFilesProvider $composerJsonFilesProvider
      * @param \Symplify\MonorepoBuilder\DependencyUpdater $dependencyUpdater
      * @param \Symplify\MonorepoBuilder\Package\PackageNamesProvider $packageNamesProvider
      */
-    public function __construct(ComposerJsonProvider $composerJsonProvider, DependencyUpdater $dependencyUpdater, PackageNamesProvider $packageNamesProvider)
+    public function __construct(ComposerJsonFilesProvider $composerJsonFilesProvider, DependencyUpdater $dependencyUpdater, PackageNamesProvider $packageNamesProvider)
     {
-        $this->composerJsonProvider = $composerJsonProvider;
+        $this->composerJsonFilesProvider = $composerJsonFilesProvider;
         $this->dependencyUpdater = $dependencyUpdater;
         $this->packageNamesProvider = $packageNamesProvider;
     }
@@ -69,7 +70,7 @@ final class SetMutualDependenciesToDevMasterReleaseWorker extends AbstractShopsy
     public function work(Version $version): void
     {
         $this->dependencyUpdater->updateFileInfosWithPackagesAndVersion(
-            $this->composerJsonProvider->getPackagesFileInfos(),
+            $this->composerJsonFilesProvider->provideExcludingMonorepoComposerJson(),
             $this->packageNamesProvider->provide(),
             self::DEV_MASTER
         );

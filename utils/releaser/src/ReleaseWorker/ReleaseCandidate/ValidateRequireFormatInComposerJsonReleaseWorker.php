@@ -6,10 +6,10 @@ namespace Shopsys\Releaser\ReleaseWorker\ReleaseCandidate;
 
 use Nette\Utils\Strings;
 use PharIo\Version\Version;
+use Shopsys\Releaser\FilesProvider\ComposerJsonFilesProvider;
 use Shopsys\Releaser\ReleaseWorker\AbstractShopsysReleaseWorker;
 use Shopsys\Releaser\Stage;
 use Symfony\Component\Finder\SplFileInfo;
-use Symplify\MonorepoBuilder\FileSystem\ComposerJsonProvider;
 use Symplify\MonorepoBuilder\FileSystem\JsonFileManager;
 use Symplify\MonorepoBuilder\Package\PackageNamesProvider;
 use Symplify\MonorepoBuilder\Release\Message;
@@ -17,9 +17,9 @@ use Symplify\MonorepoBuilder\Release\Message;
 final class ValidateRequireFormatInComposerJsonReleaseWorker extends AbstractShopsysReleaseWorker
 {
     /**
-     * @var \Symplify\MonorepoBuilder\FileSystem\ComposerJsonProvider
+     * @var \Shopsys\Releaser\FilesProvider\ComposerJsonFilesProvider
      */
-    private $composerJsonProvider;
+    private $composerJsonFilesProvider;
 
     /**
      * @var \Symplify\MonorepoBuilder\FileSystem\JsonFileManager
@@ -37,16 +37,16 @@ final class ValidateRequireFormatInComposerJsonReleaseWorker extends AbstractSho
     private $packageNamesProvider;
 
     /**
-     * @param \Symplify\MonorepoBuilder\FileSystem\ComposerJsonProvider $composerJsonProvider
+     * @param \Shopsys\Releaser\FilesProvider\ComposerJsonFilesProvider $composerJsonFilesProvider
      * @param \Symplify\MonorepoBuilder\FileSystem\JsonFileManager $jsonFileManager
      * @param \Symplify\MonorepoBuilder\Package\PackageNamesProvider $packageNamesProvider
      */
     public function __construct(
-        ComposerJsonProvider $composerJsonProvider,
+        ComposerJsonFilesProvider $composerJsonFilesProvider,
         JsonFileManager $jsonFileManager,
         PackageNamesProvider $packageNamesProvider
     ) {
-        $this->composerJsonProvider = $composerJsonProvider;
+        $this->composerJsonFilesProvider = $composerJsonFilesProvider;
         $this->jsonFileManager = $jsonFileManager;
         $this->packageNamesProvider = $packageNamesProvider;
     }
@@ -74,7 +74,7 @@ final class ValidateRequireFormatInComposerJsonReleaseWorker extends AbstractSho
      */
     public function work(Version $version): void
     {
-        foreach ($this->composerJsonProvider->getRootAndPackageFileInfos() as $smartFileInfo) {
+        foreach ($this->composerJsonFilesProvider->provideAll() as $smartFileInfo) {
             $jsonContent = $this->jsonFileManager->loadFromFileInfo($smartFileInfo);
 
             $this->validateVersions($jsonContent, 'require', $smartFileInfo);

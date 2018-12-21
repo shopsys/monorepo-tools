@@ -16,3 +16,7 @@ services:
 
     GuzzleHttp\Client: ~
     Symfony\Component\Console\Helper\QuestionHelper: ~
+
+    Shopsys\Releaser\FilesProvider\ComposerJsonFilesProvider:
+        arguments:
+            - ['packages', 'microservices', 'project-base']

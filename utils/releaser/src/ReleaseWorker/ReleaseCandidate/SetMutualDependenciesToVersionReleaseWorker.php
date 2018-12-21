@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Shopsys\Releaser\ReleaseWorker\ReleaseCandidate;
 
 use PharIo\Version\Version;
+use Shopsys\Releaser\FilesProvider\ComposerJsonFilesProvider;
 use Shopsys\Releaser\ReleaseWorker\AbstractShopsysReleaseWorker;
 use Shopsys\Releaser\Stage;
 use Symplify\MonorepoBuilder\DependencyUpdater;
@@ -15,9 +16,9 @@ use Symplify\MonorepoBuilder\Release\Message;
 final class SetMutualDependenciesToVersionReleaseWorker extends AbstractShopsysReleaseWorker
 {
     /**
-     * @var \Symplify\MonorepoBuilder\FileSystem\ComposerJsonProvider
+     * @var \Shopsys\Releaser\FilesProvider\ComposerJsonFilesProvider
      */
-    private $composerJsonProvider;
+    private $composerJsonFilesProvider;
 
     /**
      * @var \Symplify\MonorepoBuilder\DependencyUpdater
@@ -30,13 +31,13 @@ final class SetMutualDependenciesToVersionReleaseWorker extends AbstractShopsysR
     private $packageNamesProvider;
 
     /**
-     * @param \Symplify\MonorepoBuilder\FileSystem\ComposerJsonProvider $composerJsonProvider
+     * @param \Shopsys\Releaser\FilesProvider\ComposerJsonFilesProvider $composerJsonFilesProvider
      * @param \Symplify\MonorepoBuilder\DependencyUpdater $dependencyUpdater
      * @param \Symplify\MonorepoBuilder\Package\PackageNamesProvider $packageNamesProvider
      */
-    public function __construct(ComposerJsonProvider $composerJsonProvider, DependencyUpdater $dependencyUpdater, PackageNamesProvider $packageNamesProvider)
+    public function __construct(ComposerJsonFilesProvider $composerJsonFilesProvider, DependencyUpdater $dependencyUpdater, PackageNamesProvider $packageNamesProvider)
     {
-        $this->composerJsonProvider = $composerJsonProvider;
+        $this->composerJsonFilesProvider = $composerJsonFilesProvider;
         $this->dependencyUpdater = $dependencyUpdater;
         $this->packageNamesProvider = $packageNamesProvider;
     }
@@ -65,7 +66,7 @@ final class SetMutualDependenciesToVersionReleaseWorker extends AbstractShopsysR
     public function work(Version $version): void
     {
         $this->dependencyUpdater->updateFileInfosWithPackagesAndVersion(
-            $this->composerJsonProvider->getPackagesFileInfos(),
+            $this->composerJsonFilesProvider->provideExcludingMonorepoComposerJson(),
             $this->packageNamesProvider->provide(),
             $version->getVersionString()
         );

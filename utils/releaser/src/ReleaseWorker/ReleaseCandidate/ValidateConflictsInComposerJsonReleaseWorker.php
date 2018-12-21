@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Shopsys\Releaser\ReleaseWorker\ReleaseCandidate;
 
 use PharIo\Version\Version;
+use Shopsys\Releaser\FilesProvider\ComposerJsonFilesProvider;
 use Shopsys\Releaser\IntervalEvaluator;
 use Shopsys\Releaser\ReleaseWorker\AbstractShopsysReleaseWorker;
 use Shopsys\Releaser\Stage;
@@ -15,9 +16,9 @@ use Symplify\MonorepoBuilder\Release\Message;
 final class ValidateConflictsInComposerJsonReleaseWorker extends AbstractShopsysReleaseWorker
 {
     /**
-     * @var \Symplify\MonorepoBuilder\FileSystem\ComposerJsonProvider
+     * @var \Shopsys\Releaser\FilesProvider\ComposerJsonFilesProvider
      */
-    private $composerJsonProvider;
+    private $composerJsonFilesProvider;
 
     /**
      * @var \Symplify\MonorepoBuilder\FileSystem\JsonFileManager
@@ -35,16 +36,16 @@ final class ValidateConflictsInComposerJsonReleaseWorker extends AbstractShopsys
     private $intervalEvaluator;
 
     /**
-     * @param \Symplify\MonorepoBuilder\FileSystem\ComposerJsonProvider $composerJsonProvider
+     * @param \Shopsys\Releaser\FilesProvider\ComposerJsonFilesProvider $composerJsonFilesProvider
      * @param \Symplify\MonorepoBuilder\FileSystem\JsonFileManager $jsonFileManager
      * @param \Shopsys\Releaser\IntervalEvaluator $intervalEvaluator
      */
     public function __construct(
-        ComposerJsonProvider $composerJsonProvider,
+        ComposerJsonFilesProvider $composerJsonFilesProvider,
         JsonFileManager $jsonFileManager,
         IntervalEvaluator $intervalEvaluator
     ) {
-        $this->composerJsonProvider = $composerJsonProvider;
+        $this->composerJsonFilesProvider = $composerJsonFilesProvider;
         $this->jsonFileManager = $jsonFileManager;
         $this->intervalEvaluator = $intervalEvaluator;
     }
@@ -74,7 +75,7 @@ final class ValidateConflictsInComposerJsonReleaseWorker extends AbstractShopsys
     {
         $isPassing = true;
 
-        foreach ($this->composerJsonProvider->getRootAndPackageFileInfos() as $fileInfo) {
+        foreach ($this->composerJsonFilesProvider->provideAll() as $fileInfo) {
             $jsonContent = $this->jsonFileManager->loadFromFileInfo($fileInfo);
             if (!isset($jsonContent[self::CONFLICT_SECTION])) {
                 continue;
