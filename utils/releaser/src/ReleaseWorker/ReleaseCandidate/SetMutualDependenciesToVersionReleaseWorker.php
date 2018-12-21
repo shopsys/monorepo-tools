@@ -8,7 +8,7 @@ use PharIo\Version\Version;
 use Shopsys\Releaser\FilesProvider\ComposerJsonFilesProvider;
 use Shopsys\Releaser\ReleaseWorker\AbstractShopsysReleaseWorker;
 use Shopsys\Releaser\Stage;
-use Symplify\MonorepoBuilder\DependencyUpdater;
+use Shopsys\Releaser\DependencyUpdater;
 use Symplify\MonorepoBuilder\FileSystem\ComposerJsonProvider;
 use Symplify\MonorepoBuilder\Package\PackageNamesProvider;
 use Symplify\MonorepoBuilder\Release\Message;
@@ -21,7 +21,7 @@ final class SetMutualDependenciesToVersionReleaseWorker extends AbstractShopsysR
     private $composerJsonFilesProvider;
 
     /**
-     * @var \Symplify\MonorepoBuilder\DependencyUpdater
+     * @var \Shopsys\Releaser\DependencyUpdater
      */
     private $dependencyUpdater;
 
@@ -32,7 +32,7 @@ final class SetMutualDependenciesToVersionReleaseWorker extends AbstractShopsysR
 
     /**
      * @param \Shopsys\Releaser\FilesProvider\ComposerJsonFilesProvider $composerJsonFilesProvider
-     * @param \Symplify\MonorepoBuilder\DependencyUpdater $dependencyUpdater
+     * @param \Shopsys\Releaser\DependencyUpdater $dependencyUpdater
      * @param \Symplify\MonorepoBuilder\Package\PackageNamesProvider $packageNamesProvider
      */
     public function __construct(ComposerJsonFilesProvider $composerJsonFilesProvider, DependencyUpdater $dependencyUpdater, PackageNamesProvider $packageNamesProvider)

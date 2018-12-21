@@ -9,7 +9,7 @@ use Shopsys\Releaser\FilesProvider\ComposerJsonFilesProvider;
 use Shopsys\Releaser\ReleaseWorker\AbstractShopsysReleaseWorker;
 use Shopsys\Releaser\Stage;
 use Symplify\MonorepoBuilder\FileSystem\ComposerJsonProvider;
-use Symplify\MonorepoBuilder\DependencyUpdater;
+use Shopsys\Releaser\DependencyUpdater;
 use Symplify\MonorepoBuilder\Package\PackageNamesProvider;
 
 final class SetMutualDependenciesToDevMasterReleaseWorker extends AbstractShopsysReleaseWorker
@@ -20,7 +20,7 @@ final class SetMutualDependenciesToDevMasterReleaseWorker extends AbstractShopsy
     private $composerJsonFilesProvider;
 
     /**
-     * @var \Symplify\MonorepoBuilder\DependencyUpdater
+     * @var \Shopsys\Releaser\DependencyUpdater
      */
     private $dependencyUpdater;
 
@@ -36,7 +36,7 @@ final class SetMutualDependenciesToDevMasterReleaseWorker extends AbstractShopsy
 
     /**
      * @param \Shopsys\Releaser\FilesProvider\ComposerJsonFilesProvider $composerJsonFilesProvider
-     * @param \Symplify\MonorepoBuilder\DependencyUpdater $dependencyUpdater
+     * @param \Shopsys\Releaser\DependencyUpdater $dependencyUpdater
      * @param \Symplify\MonorepoBuilder\Package\PackageNamesProvider $packageNamesProvider
      */
     public function __construct(ComposerJsonFilesProvider $composerJsonFilesProvider, DependencyUpdater $dependencyUpdater, PackageNamesProvider $packageNamesProvider)
