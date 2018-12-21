@@ -21,6 +21,8 @@ services:
     webserver:
         image: nginx:1.13-alpine
         container_name: shopsys-framework-webserver
+        depends_on:
+            - php-fpm
         volumes:
             - shopsys-framework-web-sync:/var/www/html/project-base/web
             - ./docker/nginx/nginx.conf:/etc/nginx/conf.d/default.conf:delegated

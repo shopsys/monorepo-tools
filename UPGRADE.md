@@ -82,10 +82,14 @@ There is a list of all the repositories maintained by monorepo, changes in log b
 - *(optional)* [#673 added support for custom prefixing in redis](https://github.com/shopsys/shopsys/pull/673)
     - add default value (e.g. empty string) for `REDIS_PREFIX` env variable to your `app/config/parameters.yml.dist`, `app/config/parameters.yml` (if you already have your parameters file), and to your `docker/php-fpm/Dockerfile`
     - modify your Redis configuration (`app/config/packages/snc_redis.yml`) by prefixing all the prefix values with the value of the env variable (`%env(REDIS_PREFIX)%`)
+- [#679 webserver container starts after php-fpm is started](https://github.com/shopsys/shopsys/pull/679)
+    - add `depends_on: php-fpm` into `webserver` service of your `docker-compose.yml` file so webserver will not fail on error `host not found in upstream php-fpm:9000`
 
 ### [shopsys/shopsys]
 - [#651 It's possible to add index prefix to elastic search](https://github.com/shopsys/shopsys/pull/651)
     - either rebuild your Docker images with `docker-compose up -d --build` or add `ELASTIC_SEARCH_INDEX_PREFIX=''` to your `.env` files in the microservice root directories, otherwise all requests to the microservices will throw `EnvNotFoundException` 
+- [#679 webserver container starts after php-fpm is started](https://github.com/shopsys/shopsys/pull/679)
+    - add `depends_on: php-fpm` into `webserver` service of your `docker-compose.yml` file so webserver will not fail on error `host not found in upstream php-fpm:9000`
 
 ### [shopsys/migrations]
  - [#627 model service layer removal](https://github.com/shopsys/shopsys/pull/627)
