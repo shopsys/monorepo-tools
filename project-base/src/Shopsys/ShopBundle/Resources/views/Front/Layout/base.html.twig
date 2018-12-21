@@ -19,24 +19,7 @@
         {{ importJavascripts([
             'bundles/bmatznerjquery/js/jquery.min.js',
             'bundles/bmatznerjquery/js/jquery-migrate.js',
-            'bundles/bmatznerjqueryui/js/minified/jquery-ui.min.js',
-            'common/components/escape.js',
-            'common/components/keyCodes.js',
-            'common/register.js',
             'bundles/fpjsformvalidator/js/fp_js_validator.js',
-            'common/bootstrap/tooltip.js',
-            'common/bootstrap/popover.js',
-            'common/plugins/*.js',
-            'frontend/plugins/*.js',
-            'frontend/validation/form/*.js',
-            'common/validation/*.js',
-            'frontend/cart/*.js',
-            'frontend/order/*.js',
-            'frontend/product/*.js',
-            'common/*.js',
-            'frontend/*.js',
-            'common/components/*.js',
-            'frontend/components/*.js',
         ]) }}
         {{ js_validator_config() }}
         {{ init_js_validation() }}
@@ -59,5 +42,24 @@
             <script async src="//localhost:35729/livereload.js"></script>
         {% endif %}
 
+
+        {{ importJavascripts([
+            'frontend/plugins/*.js',
+            'common/components/escape.js',
+            'common/components/keyCodes.js',
+            'common/register.js',
+            'common/bootstrap/tooltip.js',
+            'common/bootstrap/popover.js',
+            'common/plugins/*.js',
+            'frontend/validation/form/*.js',
+            'common/validation/*.js',
+            'frontend/cart/*.js',
+            'frontend/order/*.js',
+            'frontend/product/*.js',
+            'common/*.js',
+            'frontend/*.js',
+            'common/components/*.js',
+            'frontend/components/*.js',
+        ]) }}
     </body>
 </html>
