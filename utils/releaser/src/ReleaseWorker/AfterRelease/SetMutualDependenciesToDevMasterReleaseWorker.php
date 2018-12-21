@@ -5,11 +5,10 @@ declare(strict_types=1);
 namespace Shopsys\Releaser\ReleaseWorker\AfterRelease;
 
 use PharIo\Version\Version;
+use Shopsys\Releaser\DependencyUpdater;
 use Shopsys\Releaser\FilesProvider\ComposerJsonFilesProvider;
 use Shopsys\Releaser\ReleaseWorker\AbstractShopsysReleaseWorker;
 use Shopsys\Releaser\Stage;
-use Symplify\MonorepoBuilder\FileSystem\ComposerJsonProvider;
-use Shopsys\Releaser\DependencyUpdater;
 use Symplify\MonorepoBuilder\Package\PackageNamesProvider;
 
 final class SetMutualDependenciesToDevMasterReleaseWorker extends AbstractShopsysReleaseWorker

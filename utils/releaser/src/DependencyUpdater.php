@@ -1,11 +1,11 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Shopsys\Releaser;
 
-use Nette\Utils\Strings;
 use Symplify\MonorepoBuilder\Composer\Section;
 use Symplify\MonorepoBuilder\FileSystem\JsonFileManager;
-use Symplify\PackageBuilder\FileSystem\SmartFileInfo;
 
 /**
  * Copy-pasted from @see \Symplify\MonorepoBuilder\DependencyUpdater
@@ -14,17 +14,20 @@ use Symplify\PackageBuilder\FileSystem\SmartFileInfo;
 class DependencyUpdater
 {
     /**
-     * @var JsonFileManager
+     * @var \Symplify\MonorepoBuilder\FileSystem\JsonFileManager
      */
     private $jsonFileManager;
 
+    /**
+     * @param \Symplify\MonorepoBuilder\FileSystem\JsonFileManager $jsonFileManager
+     */
     public function __construct(JsonFileManager $jsonFileManager)
     {
         $this->jsonFileManager = $jsonFileManager;
     }
 
     /**
-     * @param SmartFileInfo[] $smartFileInfos
+     * @param \Symplify\PackageBuilder\FileSystem\SmartFileInfo[] $smartFileInfos
      * @param string[] $packageNames
      * @param string $version
      */
@@ -86,5 +89,4 @@ class DependencyUpdater
     {
         return strpos((string)$filepathname, 'http-smoke-testing') !== false && $packageName === 'shopsys/coding-standards';
     }
-
 }

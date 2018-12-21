@@ -9,7 +9,6 @@ use PharIo\Version\Version;
 use Shopsys\Releaser\Guzzle\ApiCaller;
 use Shopsys\Releaser\ReleaseWorker\AbstractShopsysReleaseWorker;
 use Shopsys\Releaser\Stage;
-use Symfony\Component\Console\Style\SymfonyStyle;
 use Symplify\MonorepoBuilder\Release\Message;
 
 final class CheckNewDoctrineReleaseReleaseWorker extends AbstractShopsysReleaseWorker
@@ -30,10 +29,9 @@ final class CheckNewDoctrineReleaseReleaseWorker extends AbstractShopsysReleaseW
     private const ORIGIN_DOCTINE = 'doctrine/orm';
 
     /**
-     * @param \Symfony\Component\Console\Style\SymfonyStyle $symfonyStyle
      * @param \Shopsys\Releaser\Guzzle\ApiCaller $apiCaller
      */
-    public function __construct(SymfonyStyle $symfonyStyle, ApiCaller $apiCaller)
+    public function __construct(ApiCaller $apiCaller)
     {
         $this->apiCaller = $apiCaller;
     }
