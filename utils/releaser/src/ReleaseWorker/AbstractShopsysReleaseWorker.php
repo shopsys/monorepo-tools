@@ -68,7 +68,7 @@ abstract class AbstractShopsysReleaseWorker implements ReleaseWorkerInterface, S
         }
 
         $this->processRunner->run('git add .');
-        $this->processRunner->run('git commit -m ' . $message);
+        $this->processRunner->run('git commit --message="' . addslashes($message) . '"');
     }
 
     /**
@@ -81,6 +81,6 @@ abstract class AbstractShopsysReleaseWorker implements ReleaseWorkerInterface, S
 
         $output = $process->getOutput();
 
-        return (bool)empty($output);
+        return !(bool)empty($output);
     }
 }

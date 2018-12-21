@@ -24,6 +24,13 @@ The whole release process is divided into 3 stages that are run separately:
 
 ## Release command
 
+**Important note:** Before you start releasing, you need to mount your `.gitconfig` to `php-fpm` docker container
+to be able to perform automated commits within the container.
+Add following line into your `docker-compose.yml` in `services -> php-fpm -> volumes` path:
+```yaml
+- ~/.gitconfig:/home/www-data/.gitconfig
+```
+
 To perform a desired stage, run the following command in the `php-fpm` docker container and follow instructions that you'll be asked in console.
 ```
 vendor/bin/monorepo-builder release <release-number> --stage <stage> -v
