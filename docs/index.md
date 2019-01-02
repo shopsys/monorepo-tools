@@ -34,6 +34,7 @@
 * [Adding an Icon into a Button](./cookbook/adding-an-icon-into-a-button.md)
 * [Modifying a Template in Administration](./cookbook/modifying-a-template-in-administration.md)
 * [Adding Ajax Load More Button into Pagination](./cookbook/adding-ajax-load-more-button-into-pagination.md)
+* [Implementing a basic data import](./cookbook/basic-data-import.md)
 
 ## Frontend
 * [Introduction to LESS](./frontend/introduction-to-less.md)

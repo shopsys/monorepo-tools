@@ -16,6 +16,8 @@ as well as a list of customizations that are not (and will not be) possible at a
     * *Note: This is now achievable as the configuration class is located in the open box project-base.
     However, that makes the upgrading of the component harder so the configuration is planned to be re-worked.*
 * [Implementing custom product feed or modifying an existing one](/docs/introduction/product-feeds.md)
+* [Implementing a basic data import](/docs/cookbook/basic-data-import.md) to import data to you e-shop from an external source
+    * adding a new cron module and configuring it
 * [Extending the application using standard Symfony techniques](https://symfony.com/doc/current/bundles/override.html)
     * e.g. overriding Twig templates, routes, services, ...
 * [Adding a new advert position](/docs/cookbook/adding-a-new-advert-position.md) to be used in the administration section *Marketing > Advertising system*

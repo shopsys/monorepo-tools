@@ -4,7 +4,7 @@ It is a common modification when you need your e-commerce application and ERP sy
 
 ## Extend framework `Product` entity
 
-*Note: How does the entity extension work? Find it out in the [separate article](../wip_glassbox/entity-extension.md). Most common entitties (including `Product`) are already extended in `project-base` to ease your development. However, when extending any other entity, there are [few more steps](../wip_glassbox/entity-extension.md#how-can-i-extend-an-entity) that need to be done.*
+*Note: How does the entity extension work? Find it out in the [separate article](../wip_glassbox/entity-extension.md). Most common entities (including `Product`) are already extended in `project-base` to ease your development. However, when extending any other entity, there are [few more steps](../wip_glassbox/entity-extension.md#how-can-i-extend-an-entity) that need to be done.*
 
 1. Add new `extId` field with Doctrine ORM annotations and a getter for the field into `Shopsys\ShopBundle\Model\Product\Product` class.
 
