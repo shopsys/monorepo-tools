@@ -171,6 +171,8 @@ Extracts translatable messages from the whole project including back-end.
 
 Great tool when you want to translate your application into another language.
 
+For more information about translations, see [the separate article](/docs/introduction/translations.md).
+
 ## Customize Phing properties (paths etc.)
 You can customize any property defined in `build.xml` via configuration file `build/build.local.properties` (use `build/build.local.properties.dist` as a template).
 

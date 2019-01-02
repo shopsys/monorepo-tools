@@ -57,6 +57,7 @@ Of course, an SSL certificate must be installed on your server.
 To set up the user translations of labels and messages, use the files `messages.en.po` and `validators.en.po`, where `en` represents the locale.
 These files are generated for each locale you use, and you can find them in the `ShopBundle/Resources/translations/` directory.
 Language settings are described more in detail in the tutorial [How to Set Up Domains and Locales (Languages)](./how-to-set-up-domains-and-locales.md#3-locale-settings).
+For more information about translations, see [the separate article](/docs/introduction/translations.md).
 
 ## How to set up deployment and production server?
 We recommend installation using the Docker for production.

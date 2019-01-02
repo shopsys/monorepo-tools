@@ -128,6 +128,8 @@ php phing dump-translations
 ```
 There will be created files for translations of messages for the new locale in `ShopBundle/Resources/translations/`.
 
+For more information about translations, see [the separate article](/docs/introduction/translations.md).
+
 #### 3.4 Generate database functions for the locale use
 Within the database functions, it is necessary to regenerate the default database functions for the locale use that are already created for the `en` locale as default.
 Regenerate database functions by running a phing target

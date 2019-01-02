@@ -24,6 +24,7 @@
 * [How to Set Up Domains and Locales (Languages)](./introduction/how-to-set-up-domains-and-locales.md)
 * [Shopsys Framework Development Workflow](introduction/shopsys-framework-development-workflow.md)
 * [How to Work with Products](./introduction/how-to-work-with-products.md)
+* [Translations](./introduction/translations.md)
 
 ## Cookbook
 * [Dumping and Importing the Database](./cookbook/dumping-and-importing-the-database.md)
