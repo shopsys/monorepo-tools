@@ -36,26 +36,7 @@ Follow instructions in a [monorepo upgrade guide](./docs/contributing/UPGRADE.md
     * commit your changes
 * even we care a lot about these instructions, it is possible we miss something. In case something doesn't work after the upgrade, you'll find more information in the [CHANGELOG](CHANGELOG.md)
 
-There is a list of all the repositories maintained by monorepo, changes in log below are ordered as this list:
-
-* [shopsys/framework]
-* [shopsys/project-base]
-* [shopsys/shopsys]
-* [shopsys/coding-standards]
-* [shopsys/form-types-bundle]
-* [shopsys/http-smoke-testing]
-* [shopsys/migrations]
-* [shopsys/monorepo-tools]
-* [shopsys/plugin-interface]
-* [shopsys/product-feed-google]
-* [shopsys/product-feed-heureka]
-* [shopsys/product-feed-heureka-delivery]
-* [shopsys/product-feed-zbozi]
-* [shopsys/microservice-product-search]
-* [shopsys/microservice-product-search-export]
-
-
-## Upgrade 
+## Upgrade
 * ### [From v7.0.0-beta4 to Unreleased](./docs/upgrade/UPGRADE-unreleased.md)
 * ### [From v7.0.0-beta3 to v7.0.0-beta4](./docs/upgrade/UPGRADE-7.0.0-beta4.md)
 * ### [From 7.0.0-beta2 to v7.0.0-beta3](./docs/upgrade/UPGRADE-7.0.0-beta3.md)
