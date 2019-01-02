@@ -107,7 +107,12 @@ services:
     PhpCsFixer\Fixer\Basic\NonPrintableCharacterFixer: ~
     PhpCsFixer\Fixer\ArrayNotation\NormalizeIndexBraceFixer: ~
     PhpCsFixer\Fixer\Operator\ObjectOperatorWithoutWhitespaceFixer: ~
-    PhpCsFixer\Fixer\Import\OrderedImportsFixer: ~
+    PhpCsFixer\Fixer\Import\OrderedImportsFixer:
+        sort_algorithm: alpha
+        imports_order:
+            - class
+            - function
+            - const
     PhpCsFixer\Fixer\Phpdoc\PhpdocAnnotationWithoutDotFixer: ~
     PhpCsFixer\Fixer\Phpdoc\PhpdocIndentFixer: ~
     PhpCsFixer\Fixer\Phpdoc\PhpdocNoUselessInheritdocFixer: ~
