@@ -6,13 +6,13 @@ Typical upgrade sequence should be:
 * run `php phing composer-dev clean db-migrations` in `php-fpm` container
 * if you're experiencing some errors, you can always rebuild application and load demo data with `php phing build-demo-dev`
 
-## [From v7.0.0-beta4 to Unreleased](https://github.com/shopsys/shopsys/compare/v7.0.0-beta4...HEAD)
+## [From v7.0.0-beta4 to Unreleased]
 - [#651 It's possible to add index prefix to elastic search](https://github.com/shopsys/shopsys/pull/651)
     - either rebuild your Docker images with `docker-compose up -d --build` or add `ELASTIC_SEARCH_INDEX_PREFIX=''` to your `.env` files in the microservice root directories, otherwise all requests to the microservices will throw `EnvNotFoundException`
 - [#679 webserver container starts after php-fpm is started](https://github.com/shopsys/shopsys/pull/679)
     - add `depends_on: [php-fpm]` into `webserver` service of your `docker-compose.yml` file so webserver will not fail on error `host not found in upstream php-fpm:9000`
 
-## [From v7.0.0-beta2 to v7.0.0-beta3](https://github.com/shopsys/shopsys/compare/v7.0.0-beta2...v7.0.0-beta3)
+## [From v7.0.0-beta2 to v7.0.0-beta3]
 - *(MacOS only)* [#503 updated docker-sync configuration](https://github.com/shopsys/shopsys/pull/503/)
     - run `docker-compose down` to turn off your containers
     - run `docker-sync clean` so your volumes will be removed
@@ -64,8 +64,12 @@ Typical upgrade sequence should be:
 - *(optional)* [#551 - github token erase](https://github.com/shopsys/shopsys/pull/551)
     - you can stop providing the `github_oauth_token` in your `docker-compose.yml`
 
-## [From v7.0.0-alpha5 to v7.0.0-alpha6](https://github.com/shopsys/shopsys/compare/v7.0.0-alpha5...v7.0.0-alpha6)
+## [From v7.0.0-alpha5 to v7.0.0-alpha6]
 - when upgrading your installed [monorepo](/docs/introduction/monorepo.md), you'll have to change the build context for the images of the microservices in `docker-compose.yml`
     - `build.context` should be the root of the microservice (eg. `microservices/product-search-export`)
     - `build.dockerfile` should be `docker/Dockerfile`
     - execute `docker-compose up -d --build`, microservices should be up and running
+
+[From v7.0.0-beta4 to Unreleased]: https://github.com/shopsys/shopsys/compare/v7.0.0-beta4...HEAD
+[From v7.0.0-beta2 to v7.0.0-beta3]: https://github.com/shopsys/shopsys/compare/v7.0.0-beta2...v7.0.0-beta3
+[From v7.0.0-alpha5 to v7.0.0-alpha6]: https://github.com/shopsys/shopsys/compare/v7.0.0-alpha5...v7.0.0-alpha6
