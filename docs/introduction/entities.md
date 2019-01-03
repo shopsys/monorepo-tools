@@ -186,6 +186,8 @@ The entity data can be also created from an entity, and propagated to controller
 
 Entity data have all attributes public and is mutable.
 Entity data have a constructor without parameters and all parameters are initialized in the constructor.
+Entity data can contain methods for getting part of it's data
+(eg. [`OrderData`](/packages/framework/src/Model/Order/OrderData.php), method `getNewItemsWithoutTransportAndPayment`).
 
 ### Example
 
@@ -252,6 +254,9 @@ class BrandData
 Is the only place where entity data is created.
 The framework must allow using extended entity data and this problem is solved, as same as with entities, by factories.
 We enforce using factories by our coding standard sniff [`ObjectIsCreatedByFactorySniff`](../../packages/coding-standards/src/Sniffs/ObjectIsCreatedByFactorySniff.php).
+
+Data factory can also fill default values
+(e.g. [`PaymentDataFactory`](/packages/framework/src/Model/Payment/PaymentDataFactory.php) fills default VAT for new payment objects).
 
 ### Example
 

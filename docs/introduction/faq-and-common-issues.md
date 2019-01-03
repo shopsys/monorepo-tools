@@ -17,6 +17,7 @@ For more detailed information about the Shopsys Framework, please see [Shopsys F
 - [How calculated attributes work?](#how-calculated-attributes-work)
 - [How do I change the environment (PRODUCTION/DEVELOPMENT/TEST)?](#how-do-i-change-the-environment-productiondevelopmenttest)
 - [Are some periodic tasks part of the Shopsys Framework (cron)?](#are-some-periodic-tasks-part-of-the-shopsys-framework-cron)
+- [Why are you using entity data instead of entities for Symfony forms?](#why-are-you-using-entity-data-instead-of-entities-for-symfony-forms)
 
 ## What are the phing targets?
 Every phing target is a task that can be executed simply by `php phing <target-name>` command.
@@ -88,3 +89,7 @@ You can change the environment manually by using the command `php bin/console sh
 ## Are some periodic tasks part of the Shopsys Framework (cron)?
 Yes, there is some prepared configuration for Shopsys Framework cron commands in a file `src/Resources/config/services/cron.yml` in `FrameworkBundle`.
 Do not forget to set up a cron on your server to execute [`php phing cron`](/docs/introduction/console-commands-for-application-management-phing-targets.md#cron) every 5 minutes.
+
+## Why are you using entity data instead of entities for Symfony forms?
+We are using [entity data objects](entities.md#entity-data) instead of [entities](basics-about-model-architecture.md#entity)
+because Symfony forms need setters for all fields and we don't want to mess entities with them.

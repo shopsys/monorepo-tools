@@ -224,6 +224,6 @@ class CartFacade
 ```
 
 ## Cooperation of layers
-The controller handles the request (eg. saved data from form) and passes data to the facade.
+The controller handles the request (eg. [saved data](entities.md#entity-data) from form) and passes data to the facade.
 The facade receives data from the controller and requests appropriate entities from the repository.
 Entities and supporting classes (like recalculators, schedulers) processes data and returns output to the facade, that persist it by entity manager.
