@@ -4,8 +4,6 @@ This guide contain instructions to upgrade from version 7.0.0-beta4 to Unrelease
 Before you start, don't forget to take a look at [general instructions](/UPGRADE.md) about upgrading.
 There you can find links to upgrade notes for other versions too.
 
-## [shopsys/migrations]
-- `GenerateMigrationsService` class was renamed to `MigrationsGenerator`, so change it's usage appropriately ([#627](https://github.com/shopsys/shopsys/pull/627))
 
 ## [shopsys/framework]
 ### Infrastructure
@@ -39,6 +37,9 @@ There you can find links to upgrade notes for other versions too.
 - *(optional)* display svg icons collection correctly in grunt generated document for all browsers ([#645](https://github.com/shopsys/shopsys/pull/645))
     - add [`src/Shopsys/ShopBundle/Resources/views/Grunt/htmlDocumentTemplate.html`](https://github.com/shopsys/shopsys/pull/645/files#diff-2fa69709c5ba35cd2ad6c5de640d56f9) file from GitHub
     - update `src/Shopsys/ShopBundle/Resources/views/Grunt/gruntfile.js.twig` based on changes in [pull request #645](https://github.com/shopsys/shopsys/pull/645/files#diff-ff210e4f423be8bd6c88818d2bb2a8cd)
+
+## [shopsys/migrations]
+- `GenerateMigrationsService` class was renamed to `MigrationsGenerator`, so change it's usage appropriately ([#627](https://github.com/shopsys/shopsys/pull/627))
 
 [shopsys/shopsys]: https://github.com/shopsys/shopsys
 [shopsys/project-base]: https://github.com/shopsys/project-base

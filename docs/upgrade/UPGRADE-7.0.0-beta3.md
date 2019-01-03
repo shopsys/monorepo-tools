@@ -4,12 +4,6 @@ This guide contain instructions to upgrade from version 7.0.0-beta2 to 7.0.0-bet
 Before you start, don't forget to take a look at [general instructions](/UPGRADE.md) about upgrading.
 There you can find links to upgrade notes for other versions too.
 
-## [shopsys/coding-standards]
-- there are a few new standards, i.e. [new fixers enabled](https://github.com/shopsys/shopsys/pull/573/files#diff-709e8469a9fc8c8b45f8b285ac1a4c92) in the `easy-coding-standard.yml` config that enforce using annotations for all your methods:
-    - if you want to use the standards as well, let the fixers check and fix your code
-        - on projects built from `shopsys/project-base` just run `php phing standards-fix`
-        - on any other projects, where you do not have our phing targets available, run `vendor/bin/ecs check path/to/your/source-codes --fix`
-    - if you do not want to use these standards, disable them in your custom configuration (`easy-coding-standard.yml` by default)
 
 ## [shopsys/framework]
 ### Infrastructure
@@ -252,6 +246,13 @@ If any of the migrations does not suit you, there is an option to skip it, see [
     - you can follow [#541 Rename database tests to functional tests](https://github.com/shopsys/shopsys/pull/541) or [#27 Upgrade demoshop to beta4 version](https://github.com/shopsys/demoshop/pull/27/commits/b0c404e73ea3f4210cfb71faeb94720fe71d72b7#diff-63d5b035284107155c7becd538ca5009)
 - *(optional)* you can change your `Shopsys\Environment` class for consistent env setting during `composer install` ([see diff](https://github.com/shopsys/project-base/commit/eedcf2ea9eaaef6c4f53a83fedbbd3c34428af83))
     - in `docker/php-fpm/Dockerfile` in a `ci` stage should be a command to change the environment to keep building in `prod` environment, otherwise its built in `dev` ([see diff](https://github.com/shopsys/project-base/commit/c974597237992b3083ed48f0937715de9cf5981d))
+
+## [shopsys/coding-standards]
+- there are a few new standards, i.e. [new fixers enabled](https://github.com/shopsys/shopsys/pull/573/files#diff-709e8469a9fc8c8b45f8b285ac1a4c92) in the `easy-coding-standard.yml` config that enforce using annotations for all your methods:
+    - if you want to use the standards as well, let the fixers check and fix your code
+        - on projects built from `shopsys/project-base` just run `php phing standards-fix`
+        - on any other projects, where you do not have our phing targets available, run `vendor/bin/ecs check path/to/your/source-codes --fix`
+    - if you do not want to use these standards, disable them in your custom configuration (`easy-coding-standard.yml` by default)
 
 [shopsys/framework]: https://github.com/shopsys/framework
 [shopsys/coding-standards]: https://github.com/shopsys/coding-standards
