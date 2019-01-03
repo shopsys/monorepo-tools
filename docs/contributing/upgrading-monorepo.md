@@ -1,18 +1,16 @@
 # Upgrading monorepo
 
 Typical upgrade sequence should be:
-* when you are updating your docker-compose, you need to rebuild your containers then by using command `docker-compose down` followed by `docker-compose up -d --build`
+* when you update your `docker-compose.yml`, you need to apply the changes by using command `docker-compose up -d`
 * *(Windows, MacOS only)* any changes in `docker-sync.yml` file should follow with `docker-sync stop`, `docker-sync clean` and `docker-sync start` to restart synchronization
-* `composer update`
-* `php phing clean`
-* `php phing db-migrations`
+* run `php phing composer-dev clean db-migrations` in `php-fpm` container
 * if you're experiencing some errors, you can always rebuild application and load demo data with `php phing build-demo-dev`
 
 ## [From v7.0.0-beta4 to Unreleased](https://github.com/shopsys/shopsys/compare/v7.0.0-beta4...HEAD)
 - [#651 It's possible to add index prefix to elastic search](https://github.com/shopsys/shopsys/pull/651)
     - either rebuild your Docker images with `docker-compose up -d --build` or add `ELASTIC_SEARCH_INDEX_PREFIX=''` to your `.env` files in the microservice root directories, otherwise all requests to the microservices will throw `EnvNotFoundException`
 - [#679 webserver container starts after php-fpm is started](https://github.com/shopsys/shopsys/pull/679)
-    - add `depends_on: php-fpm` into `webserver` service of your `docker-compose.yml` file so webserver will not fail on error `host not found in upstream php-fpm:9000`
+    - add `depends_on: [php-fpm]` into `webserver` service of your `docker-compose.yml` file so webserver will not fail on error `host not found in upstream php-fpm:9000`
 
 ## [From 7.0.0-beta2 to v7.0.0-beta3](https://github.com/shopsys/shopsys/compare/v7.0.0-beta2...v7.0.0-beta3)
 - *(MacOS only)* [#503 updated docker-sync configuration](https://github.com/shopsys/shopsys/pull/503/)
