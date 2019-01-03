@@ -6,7 +6,7 @@ Since these are 3 possible scenarios how you can use shopsys, instructions are d
 Follow instructions in relevant sections, eg. `shopsys/coding-standards`, `shopsys/microservice-product-search`.
 
 ### You are using monorepo
-Follow instructions in a [monorepo upgrade guide](./docs/contributing/UPGRADE.md)
+Follow instructions in a [monorepo upgrade guide](docs/contributing/upgrading-monorepo.md)
 
 ### You are developing a project based on project-base
 * upgrade only your composer dependencies and follow instructions
