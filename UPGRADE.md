@@ -10,11 +10,11 @@ Follow instructions in a [monorepo upgrade guide](docs/contributing/upgrading-mo
 
 ### You are developing a project based on project-base
 * upgrade only your composer dependencies and follow instructions
+* check all instructions in all sections, any of them could be relevant for you
 * if you want update your project with the changes from [shopsys/project-base],
     you can follow the *(optional)* instructions or cherry-pick from the repository whatever is relevant for you but we do not recommend rebasing or merging everything because the changes might not be compatible with your project as it probably evolves in time
 * instructions marked as *(optional)* are not vital, but could be helpful,
     so we recommend to perform them as well during upgrading as it might ease your work in the future
-* check all instructions in all sections, any of them could be relevant for you
 * upgrade locally first. After you fix all issues caused by the upgrade, commit your changes and then continue with upgrading application on a server
 * upgrade one version at a time:
     * Start with a working application
@@ -22,18 +22,22 @@ Follow instructions in a [monorepo upgrade guide](docs/contributing/upgrading-mo
     * Fix all issues
     * Repeat
 * typical upgrade sequence should be:
-    * `docker-compose down`
-    * follow upgrade notes for `docker-compose.yml`, `Dockerfile`, docker containers, `nginx.conf`, `php.ini`
+    * run `docker-compose down` to turn off your containers
+    * *(MacOS, Windows only)* run `docker-sync stop`
+    * *(MacOS, Windows only)* run `docker-sync clean` so your volumes will be removed
+    * follow upgrade notes in a *Infrastructure* section (related with `docker-compose.yml`, `Dockerfile`, docker containers, `nginx.conf`, `php.ini`, etc.)
     * change all the microservices image versions in your `docker-compose.yml` to version you are upgrading to
         eg. `image: shopsys/microservice-product-search:v7.0.0-beta1`
-    * `docker-compose up -d`
+    * *(MacOS, Windows only)* run `docker-sync start` to create volumes  
+    * run `docker-compose up -d --build --force-recreate` to start application again
     * update shopsys framework dependencies in `composer.json` to version you are upgrading to
         eg. `"shopsys/framework": "v7.0.0-beta1"`
     * `composer update`
     * follow all upgrade notes you have not done yet
     * `php phing clean`
-    * `php phing db-migrations`
+    * run `php phing db-migrations` to run database migrations
     * commit your changes
+* if any of the database migrations does not suit you, there is an option to skip it, see [our Database Migrations docs](https://github.com/shopsys/shopsys/blob/master/docs/introduction/database-migrations.md#reordering-and-skipping-migrations)
 * even we care a lot about these instructions, it is possible we miss something. In case something doesn't work after the upgrade, you'll find more information in the [CHANGELOG](CHANGELOG.md)
 
 ## Upgrade

@@ -1,9 +1,9 @@
 # [Upgrade from v7.0.0-beta4 to Unreleased](https://github.com/shopsys/shopsys/compare/v7.0.0-beta4...HEAD)
 
-This guide contain instructions to upgrade from version 7.0.0-beta4 to Unreleased.
-Before you start, don't forget to take a look at [general instructions](/UPGRADE.md) about upgrading.
-There you can find links to upgrade notes for other versions too.
+This guide contain instructions to upgrade from version 7.0.0-beta2 to 7.0.0-beta3.
 
+**Before you start, don't forget to take a look at [general instructions](/UPGRADE.md) about upgrading.**
+There you can find links to upgrade notes for other versions too.
 
 ## [shopsys/framework]
 ### Infrastructure
@@ -13,7 +13,6 @@ There you can find links to upgrade notes for other versions too.
     - *(optional)* If you are using Kubernetes manifests for CI or deployment, follow changes done in manifests and ci `build_kubernetes.sh` script.
 - add `!docker/nginx` line into `.dockerignore` file so `docker/nginx` directory is not excluded during building `php-fpm` image ([#674](https://github.com/shopsys/shopsys/pull/674))
 - make sure your `webserver` service depends on `php-fpm` in your `docker-compose.yml` file so webserver will not fail on error `host not found in upstream php-fpm:9000` ([#679](https://github.com/shopsys/shopsys/pull/679))
-
 
 ### Configuration
 - *(optional)* for easier deployment to production, make the trusted proxies in `Shopsys\Boostrap` class loaded from DIC parameter `trusted_proxies` instead of being hard-coded ([#596](https://github.com/shopsys/shopsys/pull/596))

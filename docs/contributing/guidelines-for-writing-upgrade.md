@@ -37,7 +37,7 @@ These versions should be placed in a [`docs/upgrade/`](../../docs/upgrade) folde
 
 ## Structure of upgrade files
 
-Each upgrade file must have link to main UPGRADE.md file with general informations about upgrade and may contain one or more of following main sections:
+Each upgrade file must have link to main UPGRADE.md file with general information about upgrade and may contain one or more of following main sections:
 
 * shopsys/framework
 * shopsys/coding-standards

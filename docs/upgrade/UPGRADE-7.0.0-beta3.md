@@ -1,15 +1,12 @@
 # [Upgrade from 7.0.0-beta2 to v7.0.0-beta3](https://github.com/shopsys/shopsys/compare/v7.0.0-beta2...v7.0.0-beta3)
 
 This guide contain instructions to upgrade from version 7.0.0-beta2 to 7.0.0-beta3.
-Before you start, don't forget to take a look at [general instructions](/UPGRADE.md) about upgrading.
-There you can find links to upgrade notes for other versions too.
 
+**Before you start, don't forget to take a look at [general instructions](/UPGRADE.md) about upgrading.**
+There you can find links to upgrade notes for other versions too.
 
 ## [shopsys/framework]
 ### Infrastructure
-- run `docker-compose down` to turn off your containers
-- *(MacOS, Windows only)* run `docker-sync stop`
-- *(MacOS, Windows only)* run `docker-sync clean` so your volumes will be removed
 - replace your `docker/php-fpm/Dockerfile` file with [version from GitHub](https://github.com/shopsys/shopsys/blob/v7.0.0-beta3/project-base/docker/php-fpm/Dockerfile), with following changes
     - main php-fpm container now uses multi-stage build feature ([#533](https://github.com/shopsys/shopsys/pull/533))
     - github token is removed ([#551](https://github.com/shopsys/shopsys/pull/551))
@@ -91,8 +88,6 @@ There you can find links to upgrade notes for other versions too.
         'kubernetes',
         'nbproject',
         ```
-- *(MacOS, Windows only)* run `docker-sync start` to create volumes  
-- run `docker-compose up -d --build --force-recreate` to start application again
 
 ### Tools
 - Phing
@@ -163,8 +158,6 @@ There you can find links to upgrade notes for other versions too.
     - we strongly recommend to review [`Version20181114134959`](https://github.com/shopsys/shopsys/blob/v7.0.0-beta3/packages/framework/src/Migrations/Version20181114134959.php)
     and [`Version20181114145250`](https://github.com/shopsys/shopsys/blob/v7.0.0-beta3/packages/framework/src/Migrations/Version20181114145250.php) migrations before executing them on your real data,
     especially if there were any modifications in your product pricing implementation on the project. ([#595](https://github.com/shopsys/shopsys/pull/595))
-
-If any of the migrations does not suit you, there is an option to skip it, see [our Database Migrations docs](https://github.com/shopsys/shopsys/blob/master/docs/introduction/database-migrations.md#reordering-and-skipping-migrations)
 
 ### Application
 - remove dependencies on automatic product price calculation and pricing group coefficients ([#595](https://github.com/shopsys/shopsys/pull/595))
