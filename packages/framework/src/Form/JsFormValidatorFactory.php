@@ -7,6 +7,7 @@ use Shopsys\FrameworkBundle\Model\Product\Parameter\ParameterValue;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Form;
 use Symfony\Component\Form\FormInterface;
+use Symfony\Component\Routing\Exception\RouteNotFoundException;
 use Symfony\Component\Validator\Constraints;
 
 class JsFormValidatorFactory extends BaseJsFormValidatorFactory
@@ -79,5 +80,19 @@ class JsFormValidatorFactory extends BaseJsFormValidatorFactory
         }
 
         return parent::createJsModel($form);
+    }
+
+    /**
+     * @param string $route
+     * @return string
+     */
+    protected function generateUrl($route)
+    {
+        if ($route === 'fp_js_form_validator.check_unique_entity') {
+            $message = 'Unable to generate a URL for the named route "' . $route . '" as such route was removed as unsafe.';
+            throw new RouteNotFoundException($message);
+        }
+
+        return parent::generateUrl($route);
     }
 }
