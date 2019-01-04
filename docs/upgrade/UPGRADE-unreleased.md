@@ -36,6 +36,10 @@ There you can find links to upgrade notes for other versions too.
 - *(optional)* display svg icons collection correctly in grunt generated document for all browsers ([#645](https://github.com/shopsys/shopsys/pull/645))
     - add [`src/Shopsys/ShopBundle/Resources/views/Grunt/htmlDocumentTemplate.html`](https://github.com/shopsys/shopsys/pull/645/files#diff-2fa69709c5ba35cd2ad6c5de640d56f9) file from GitHub
     - update `src/Shopsys/ShopBundle/Resources/views/Grunt/gruntfile.js.twig` based on changes in [pull request #645](https://github.com/shopsys/shopsys/pull/645/files#diff-ff210e4f423be8bd6c88818d2bb2a8cd)
+- change usages of the renamed methods of `ProductOnCurrentDomainFacade` ([#610](https://github.com/shopsys/shopsys/pull/610))
+    - from `getPaginatedProductDetailsInCategory` to `getPaginatedProductsInCategory`
+    - from `getPaginatedProductDetailsForBrand` to `getPaginatedProductsForBrand`
+    - from `getPaginatedProductDetailsForSearch` to `getPaginatedProductsForSearch`
 
 ## [shopsys/migrations]
 - `GenerateMigrationsService` class was renamed to `MigrationsGenerator`, so change it's usage appropriately ([#627](https://github.com/shopsys/shopsys/pull/627))
