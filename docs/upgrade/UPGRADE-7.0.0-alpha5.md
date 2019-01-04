@@ -1,6 +1,6 @@
 # [Upgrade from 7.0.0-alpha4 to 7.0.0-alpha5](https://github.com/shopsys/shopsys/compare/v7.0.0-alpha4...v7.0.0-alpha5)
 
-This guide contain instructions to upgrade from version 7.0.0-beta2 to 7.0.0-beta3.
+This guide contains instructions to upgrade from version 7.0.0-alpha4 to 7.0.0-alpha5.
 
 **Before you start, don't forget to take a look at [general instructions](/UPGRADE.md) about upgrading.**
 There you can find links to upgrade notes for other versions too.

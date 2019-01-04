@@ -2,8 +2,9 @@
 Before we managed to implement monorepo for our packages, we had slightly different versions for each of our package,
 that's why is this section formatted differently from the other upgrading guides.  
 
-This guide contain instructions to upgrade packages before monorepo was introduced.
-Before you start, don't forget to take a look at [general instructions](/UPGRADE.md) about upgrading.
+This guide contains instructions to upgrade packages before monorepo was introduced.
+
+**Before you start, don't forget to take a look at [general instructions](/UPGRADE.md) about upgrading.**
 There you can find links to upgrade notes for other versions too.
 
 ## [shopsys/product-feed-heureka]
