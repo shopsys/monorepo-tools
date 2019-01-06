@@ -205,7 +205,13 @@
         </exec>
     </target>
 
-    <target name="tests-static" depends="tests-unit,tests-packages" description="Runs unit tests and tests of all packages."/>
+    <target name="tests-static" depends="tests-unit,tests-packages,tests-utils" description="Runs unit tests and tests of all packages and utils."/>
+
+    <target name="tests-utils">
+        <exec executable="${path.vendor}/bin/phpunit" logoutput="true" passthru="true" checkreturn="true">
+            <arg value="./utils/releaser/tests/"/>
+        </exec>
+    </target>
 
     <target name="tests-packages" description="Runs tests of packages.">
         <exec executable="${path.vendor}/bin/phpunit" logoutput="true" passthru="true" checkreturn="true">
