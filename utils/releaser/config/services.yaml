@@ -20,3 +20,11 @@ services:
     Shopsys\Releaser\FilesProvider\ComposerJsonFilesProvider:
         arguments:
             - ['packages', 'microservices', 'project-base']
+
+    Twig_Environment:
+        class: Twig_Environment
+
+    Twig_LoaderInterface:
+        class: Twig_Loader_Filesystem
+        arguments:
+            - ['docs/upgrade/template']

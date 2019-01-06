@@ -6,25 +6,53 @@ namespace Shopsys\Releaser\ReleaseWorker\ReleaseCandidate;
 
 use Nette\Utils\FileSystem;
 use PharIo\Version\Version;
-use Shopsys\Releaser\FileManipulator\UpgradeFileManipulator;
+use Shopsys\Releaser\FileManipulator\GeneralUpgradeFileManipulator;
+use Shopsys\Releaser\FileManipulator\MonorepoUpgradeFileManipulator;
+use Shopsys\Releaser\FileManipulator\VersionUpgradeFileManipulator;
 use Shopsys\Releaser\ReleaseWorker\AbstractShopsysReleaseWorker;
 use Shopsys\Releaser\Stage;
 use Symplify\MonorepoBuilder\Release\Message;
 use Symplify\PackageBuilder\FileSystem\SmartFileInfo;
+use Twig_Environment;
 
 final class UpdateUpgradeReleaseWorker extends AbstractShopsysReleaseWorker
 {
     /**
-     * @var \Shopsys\Releaser\FileManipulator\UpgradeFileManipulator
+     * @var \Shopsys\Releaser\FileManipulator\MonorepoUpgradeFileManipulator
      */
-    private $upgradeFileManipulator;
+    private $monorepoUpgradeFileManipulator;
 
     /**
-     * @param \Shopsys\Releaser\FileManipulator\UpgradeFileManipulator $upgradeFileManipulator
+     * @var \Shopsys\Releaser\FileManipulator\GeneralUpgradeFileManipulator
      */
-    public function __construct(UpgradeFileManipulator $upgradeFileManipulator)
-    {
-        $this->upgradeFileManipulator = $upgradeFileManipulator;
+    private $generalUpgradeFileManipulator;
+
+    /**
+     * @var \Shopsys\Releaser\FileManipulator\VersionUpgradeFileManipulator
+     */
+    private $versionUpgradeFileManipulator;
+
+    /**
+     * @var \Twig_Environment
+     */
+    private $twigEnvironment;
+
+    /**
+     * @param \Shopsys\Releaser\FileManipulator\MonorepoUpgradeFileManipulator $monorepoUpgradeFileManipulator
+     * @param \Shopsys\Releaser\FileManipulator\GeneralUpgradeFileManipulator $generalUpgradeFileManipulator
+     * @param \Shopsys\Releaser\FileManipulator\VersionUpgradeFileManipulator $versionUpgradeFileManipulator
+     * @param \Twig_Environment $twigEnvironment
+     */
+    public function __construct(
+        MonorepoUpgradeFileManipulator $monorepoUpgradeFileManipulator,
+        GeneralUpgradeFileManipulator $generalUpgradeFileManipulator,
+        VersionUpgradeFileManipulator $versionUpgradeFileManipulator,
+        Twig_Environment $twigEnvironment
+    ) {
+        $this->monorepoUpgradeFileManipulator = $monorepoUpgradeFileManipulator;
+        $this->generalUpgradeFileManipulator = $generalUpgradeFileManipulator;
+        $this->versionUpgradeFileManipulator = $versionUpgradeFileManipulator;
+        $this->twigEnvironment = $twigEnvironment;
     }
 
     /**
@@ -33,7 +61,7 @@ final class UpdateUpgradeReleaseWorker extends AbstractShopsysReleaseWorker
      */
     public function getDescription(Version $version): string
     {
-        return sprintf('Update UPGRADE.md from/to headline with "%s" version', $version->getVersionString());
+        return 'Prepare all upgrading files for the release.';
     }
 
     /**
@@ -50,19 +78,14 @@ final class UpdateUpgradeReleaseWorker extends AbstractShopsysReleaseWorker
      */
     public function work(Version $version): void
     {
-        // load
-        $upgradeFilePath = getcwd() . '/UPGRADE.md';
-        $upgradeFileInfo = new SmartFileInfo($upgradeFilePath);
-
-        // change
-        $newChangelogContent = $this->upgradeFileManipulator->processFileToString($upgradeFileInfo, $version);
-
-        // save
-        FileSystem::write($upgradeFilePath, $newChangelogContent);
+        $this->updateUpgradeFileForMonorepo($version);
+        $this->createUpgradeFileForNewVersionFromUnreleased($version);
+        $this->createUpgradeFileForUnreleased($version);
+        $this->updateGeneralUpgradeFile($version);
 
         $this->symfonyStyle->success(Message::SUCCESS);
 
-        $this->confirm('Confirm UPGRADE.md notes are ready');
+        $this->confirm('Confirm all upgrading files are ready for the release and the changes are committed');
     }
 
     /**
@@ -71,5 +94,59 @@ final class UpdateUpgradeReleaseWorker extends AbstractShopsysReleaseWorker
     public function getStage(): string
     {
         return Stage::RELEASE_CANDIDATE;
+    }
+
+    /**
+     * @param \PharIo\Version\Version $version
+     */
+    private function updateUpgradeFileForMonorepo(Version $version)
+    {
+        $upgradeFilePath = getcwd() . '/docs/contributing/upgrading-monorepo.md';
+        $upgradeFileInfo = new SmartFileInfo($upgradeFilePath);
+
+        $newUpgradeContent = $this->monorepoUpgradeFileManipulator->processFileToString($upgradeFileInfo, $version);
+
+        FileSystem::write($upgradeFilePath, $newUpgradeContent);
+    }
+
+    /**
+     * @param \PharIo\Version\Version $version
+     */
+    private function createUpgradeFileForNewVersionFromUnreleased(Version $version)
+    {
+        $upgradeFilePath = getcwd() . '/docs/upgrade/UPGRADE-unreleased.md';
+        $upgradeFileInfo = new SmartFileInfo($upgradeFilePath);
+
+        $newUpgradeContent = $this->versionUpgradeFileManipulator->processFileToString($upgradeFileInfo, $version);
+
+        FileSystem::write($upgradeFilePath, $newUpgradeContent);
+        FileSystem::rename($upgradeFilePath, getcwd() . '/docs/upgrade/UPGRADE-' . $version->getVersionString() . '.md');
+    }
+
+    /**
+     * @param \PharIo\Version\Version $version
+     */
+    private function updateGeneralUpgradeFile(Version $version)
+    {
+        $upgradeFilePath = getcwd() . '/UPGRADE.md';
+        $upgradeFileInfo = new SmartFileInfo($upgradeFilePath);
+
+        $newUpgradeContent = $this->generalUpgradeFileManipulator->updateLinks($upgradeFileInfo, $version);
+
+        FileSystem::write($upgradeFilePath, $newUpgradeContent);
+    }
+
+    /**
+     * @param \PharIo\Version\Version $version
+     */
+    private function createUpgradeFileForUnreleased(Version $version)
+    {
+        $content = $this->twigEnvironment->render(
+            'UPGRADE-unreleased.md.twig',
+            [
+                'versionString' => $version->getVersionString(),
+            ]
+        );
+        FileSystem::write(getcwd() . '/docs/upgrade/UPGRADE-unreleased.md', $content);
     }
 }

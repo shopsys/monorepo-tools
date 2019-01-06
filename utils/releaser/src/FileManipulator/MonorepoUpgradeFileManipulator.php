@@ -11,7 +11,7 @@ use Symfony\Component\Finder\SplFileInfo;
 /**
  * @see https://github.com/shopsys/shopsys/pull/470/commits/f92e5fe531be771323ee142579117b47bfac1d4e
  */
-final class UpgradeFileManipulator
+final class MonorepoUpgradeFileManipulator
 {
     /**
      * @var string
