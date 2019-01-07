@@ -3,7 +3,6 @@
 namespace Shopsys\FrameworkBundle\Model\Order;
 
 use Shopsys\FrameworkBundle\Model\Order\Item\OrderItemPriceCalculation;
-use Shopsys\FrameworkBundle\Model\Order\Item\OrderProduct;
 use Shopsys\FrameworkBundle\Model\Payment\Payment;
 use Shopsys\FrameworkBundle\Model\Pricing\Currency\Currency;
 use Shopsys\FrameworkBundle\Model\Pricing\Price;
@@ -49,7 +48,7 @@ class OrderPriceCalculation
             $priceWithVat += $itemTotalPrice->getPriceWithVat();
             $priceWithoutVat += $itemTotalPrice->getPriceWithoutVat();
 
-            if ($orderItem instanceof OrderProduct) {
+            if ($orderItem->isTypeProduct()) {
                 $productPriceWithVat += $itemTotalPrice->getPriceWithVat();
             }
         }

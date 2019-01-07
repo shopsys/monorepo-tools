@@ -9,11 +9,9 @@ use Shopsys\FrameworkBundle\Component\Domain\Domain;
 use Shopsys\FrameworkBundle\Model\Customer\User;
 use Shopsys\FrameworkBundle\Model\Order\Item\OrderItem;
 use Shopsys\FrameworkBundle\Model\Order\Item\OrderItemPriceCalculation;
-use Shopsys\FrameworkBundle\Model\Order\Item\OrderPayment;
 use Shopsys\FrameworkBundle\Model\Order\Item\OrderPaymentFactoryInterface;
 use Shopsys\FrameworkBundle\Model\Order\Item\OrderProduct;
 use Shopsys\FrameworkBundle\Model\Order\Item\OrderProductFactoryInterface;
-use Shopsys\FrameworkBundle\Model\Order\Item\OrderTransport;
 use Shopsys\FrameworkBundle\Model\Order\Item\OrderTransportFactoryInterface;
 use Shopsys\FrameworkBundle\Model\Order\Preview\OrderPreview;
 use Shopsys\FrameworkBundle\Model\Order\Status\OrderStatus;
@@ -446,10 +444,10 @@ class Order
      */
     public function removeItem(OrderItem $item)
     {
-        if ($item instanceof OrderTransport) {
+        if ($item->isTypeTransport()) {
             $this->transport = null;
         }
-        if ($item instanceof OrderPayment) {
+        if ($item->isTypePayment()) {
             $this->payment = null;
         }
         $this->items->removeElement($item);
@@ -505,7 +503,7 @@ class Order
     public function getOrderPayment()
     {
         foreach ($this->items as $item) {
-            if ($item instanceof OrderPayment) {
+            if ($item->isTypePayment()) {
                 return $item;
             }
         }
@@ -533,7 +531,7 @@ class Order
     public function getOrderTransport()
     {
         foreach ($this->items as $item) {
-            if ($item instanceof OrderTransport) {
+            if ($item->isTypeTransport()) {
                 return $item;
             }
         }
@@ -657,7 +655,7 @@ class Order
     {
         $itemsWithoutTransportAndPayment = [];
         foreach ($this->getItems() as $orderItem) {
-            if (!($orderItem instanceof OrderTransport || $orderItem instanceof OrderPayment)) {
+            if (!($orderItem->isTypeTransport() || $orderItem->isTypePayment())) {
                 $itemsWithoutTransportAndPayment[] = $orderItem;
             }
         }
@@ -672,7 +670,7 @@ class Order
     {
         $transportAndPaymentItems = [];
         foreach ($this->getItems() as $orderItem) {
-            if ($orderItem instanceof OrderTransport || $orderItem instanceof OrderPayment) {
+            if ($orderItem->isTypeTransport() || $orderItem->isTypePayment()) {
                 $transportAndPaymentItems[] = $orderItem;
             }
         }
@@ -909,7 +907,7 @@ class Order
     {
         $productItems = [];
         foreach ($this->items as $item) {
-            if ($item instanceof OrderProduct) {
+            if ($item->isTypeProduct()) {
                 $productItems[] = $item;
             }
         }

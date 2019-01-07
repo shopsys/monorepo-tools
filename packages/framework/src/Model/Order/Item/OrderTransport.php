@@ -42,6 +42,7 @@ class OrderTransport extends OrderItem
             $price,
             $vatPercent,
             $quantity,
+            OrderItem::TYPE_TRANSPORT,
             null,
             null
         );

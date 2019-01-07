@@ -58,6 +58,7 @@ class ExtendedOrderProduct extends ExtendedOrderItem
             $price,
             $vatPercent,
             $quantity,
+            ExtendedOrderItem::TYPE_PRODUCT,
             $unitName,
             $catnum
         );

@@ -56,6 +56,7 @@ class ExtendedOrderTransport extends ExtendedOrderItem
             $price,
             $vatPercent,
             $quantity,
+            ExtendedOrderItem::TYPE_TRANSPORT,
             null,
             null
         );

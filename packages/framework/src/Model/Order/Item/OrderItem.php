@@ -19,6 +19,11 @@ use Shopsys\FrameworkBundle\Model\Pricing\Price;
  */
 abstract class OrderItem
 {
+    public const
+        TYPE_PAYMENT = 'payment',
+        TYPE_PRODUCT = 'product',
+        TYPE_TRANSPORT = 'transport';
+
     /**
      * @var int
      *
@@ -27,6 +32,13 @@ abstract class OrderItem
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     protected $id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(type="string", length=10)
+     */
+    protected $itemType;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Order\Order
@@ -91,6 +103,7 @@ abstract class OrderItem
      * @param \Shopsys\FrameworkBundle\Model\Pricing\Price $price
      * @param string $vatPercent
      * @param int $quantity
+     * @param string $type
      * @param string|null $unitName
      * @param string|null $catnum
      */
@@ -100,6 +113,7 @@ abstract class OrderItem
         Price $price,
         $vatPercent,
         $quantity,
+        $type,
         $unitName,
         $catnum
     ) {
@@ -112,6 +126,7 @@ abstract class OrderItem
         $this->unitName = $unitName;
         $this->catnum = $catnum;
         $this->order->addItem($this); // call after setting attrs for recalc total price
+        $this->itemType = $type;
     }
 
     /**
@@ -206,5 +221,29 @@ abstract class OrderItem
         $this->quantity = $orderItemData->quantity;
         $this->unitName = $orderItemData->unitName;
         $this->catnum = $orderItemData->catnum;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isTypeProduct(): bool
+    {
+        return $this->itemType === self::TYPE_PRODUCT;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isTypePayment(): bool
+    {
+        return $this->itemType === self::TYPE_PAYMENT;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isTypeTransport(): bool
+    {
+        return $this->itemType === self::TYPE_TRANSPORT;
     }
 }

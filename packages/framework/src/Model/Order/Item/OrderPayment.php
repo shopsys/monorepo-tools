@@ -42,6 +42,7 @@ class OrderPayment extends OrderItem
             $price,
             $vatPercent,
             $quantity,
+            OrderItem::TYPE_PAYMENT,
             null,
             null
         );

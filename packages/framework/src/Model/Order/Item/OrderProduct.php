@@ -46,6 +46,7 @@ class OrderProduct extends OrderItem
             $price,
             $vatPercent,
             $quantity,
+            OrderItem::TYPE_PRODUCT,
             $unitName,
             $catnum
         );

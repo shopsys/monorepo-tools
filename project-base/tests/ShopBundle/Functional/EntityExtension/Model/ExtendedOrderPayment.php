@@ -56,6 +56,7 @@ class ExtendedOrderPayment extends ExtendedOrderItem
             $price,
             $vatPercent,
             $quantity,
+            ExtendedOrderItem::TYPE_PAYMENT,
             null,
             null
         );
