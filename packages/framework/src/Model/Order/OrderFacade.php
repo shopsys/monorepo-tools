@@ -13,8 +13,8 @@ use Shopsys\FrameworkBundle\Model\Customer\CustomerFacade;
 use Shopsys\FrameworkBundle\Model\Customer\User;
 use Shopsys\FrameworkBundle\Model\Heureka\HeurekaFacade;
 use Shopsys\FrameworkBundle\Model\Localization\Localization;
+use Shopsys\FrameworkBundle\Model\Order\Item\OrderItemFactoryInterface;
 use Shopsys\FrameworkBundle\Model\Order\Item\OrderItemPriceCalculation;
-use Shopsys\FrameworkBundle\Model\Order\Item\OrderPaymentFactoryInterface;
 use Shopsys\FrameworkBundle\Model\Order\Item\OrderProductFacade;
 use Shopsys\FrameworkBundle\Model\Order\Item\OrderProductFactoryInterface;
 use Shopsys\FrameworkBundle\Model\Order\Item\OrderTransportFactoryInterface;
@@ -161,11 +161,6 @@ class OrderFacade
     protected $paymentPriceCalculation;
 
     /**
-     * @var \Shopsys\FrameworkBundle\Model\Order\Item\OrderPaymentFactoryInterface
-     */
-    protected $orderPaymentFactory;
-
-    /**
      * @var \Shopsys\FrameworkBundle\Model\Transport\TransportPriceCalculation
      */
     protected $transportPriceCalculation;
@@ -174,6 +169,11 @@ class OrderFacade
      * @var \Shopsys\FrameworkBundle\Model\Order\Item\OrderTransportFactoryInterface
      */
     protected $orderTransportFactory;
+
+    /**
+     * @var \Shopsys\FrameworkBundle\Model\Order\Item\OrderItemFactoryInterface
+     */
+    protected $orderItemFactory;
 
     /**
      * @param \Doctrine\ORM\EntityManagerInterface $em
@@ -201,9 +201,9 @@ class OrderFacade
      * @param \Shopsys\FrameworkBundle\Model\Order\FrontOrderDataMapper $frontOrderDataMapper
      * @param \Shopsys\FrameworkBundle\Twig\NumberFormatterExtension $numberFormatterExtension
      * @param \Shopsys\FrameworkBundle\Model\Payment\PaymentPriceCalculation $paymentPriceCalculation
-     * @param \Shopsys\FrameworkBundle\Model\Order\Item\OrderPaymentFactoryInterface $orderPaymentFactory
      * @param \Shopsys\FrameworkBundle\Model\Transport\TransportPriceCalculation $transportPriceCalculation
      * @param \Shopsys\FrameworkBundle\Model\Order\Item\OrderTransportFactoryInterface $orderTransportFactory
+     * @param \Shopsys\FrameworkBundle\Model\Order\Item\OrderItemFactoryInterface $orderItemFactory
      */
     public function __construct(
         EntityManagerInterface $em,
@@ -231,9 +231,9 @@ class OrderFacade
         FrontOrderDataMapper $frontOrderDataMapper,
         NumberFormatterExtension $numberFormatterExtension,
         PaymentPriceCalculation $paymentPriceCalculation,
-        OrderPaymentFactoryInterface $orderPaymentFactory,
         TransportPriceCalculation $transportPriceCalculation,
-        OrderTransportFactoryInterface $orderTransportFactory
+        OrderTransportFactoryInterface $orderTransportFactory,
+        OrderItemFactoryInterface $orderItemFactory
     ) {
         $this->em = $em;
         $this->orderNumberSequenceRepository = $orderNumberSequenceRepository;
@@ -260,9 +260,9 @@ class OrderFacade
         $this->frontOrderDataMapper = $frontOrderDataMapper;
         $this->numberFormatterExtension = $numberFormatterExtension;
         $this->paymentPriceCalculation = $paymentPriceCalculation;
-        $this->orderPaymentFactory = $orderPaymentFactory;
         $this->transportPriceCalculation = $transportPriceCalculation;
         $this->orderTransportFactory = $orderTransportFactory;
+        $this->orderItemFactory = $orderItemFactory;
     }
 
     /**
@@ -510,7 +510,7 @@ class OrderFacade
         $locale = $this->domain->getDomainConfigById($order->getDomainId())->getLocale();
 
         $order->fillOrderProducts($orderPreview, $this->orderProductFactory, $this->numberFormatterExtension, $locale);
-        $order->fillOrderPayment($this->paymentPriceCalculation, $this->orderPaymentFactory, $orderPreview->getProductsPrice(), $locale);
+        $order->fillOrderPayment($this->paymentPriceCalculation, $this->orderItemFactory, $orderPreview->getProductsPrice(), $locale);
         $order->fillOrderTransport($this->transportPriceCalculation, $this->orderTransportFactory, $orderPreview->getProductsPrice(), $locale);
         $order->fillOrderRounding($this->orderProductFactory, $orderPreview->getRoundingPrice(), $locale);
     }

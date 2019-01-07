@@ -740,8 +740,8 @@ services:
     Shopsys\FrameworkBundle\Model\Order\OrderNumberSequenceFactoryInterface:
         alias: Shopsys\FrameworkBundle\Model\Order\OrderNumberSequenceFactory
 
-    Shopsys\FrameworkBundle\Model\Order\Item\OrderPaymentFactoryInterface:
-        alias: Shopsys\FrameworkBundle\Model\Order\Item\OrderPaymentFactory
+    Shopsys\FrameworkBundle\Model\Order\Item\OrderItemFactoryInterface:
+        alias: Shopsys\FrameworkBundle\Model\Order\Item\OrderItemFactory
 
     Shopsys\FrameworkBundle\Model\Order\Item\OrderProductFactoryInterface:
         alias: Shopsys\FrameworkBundle\Model\Order\Item\OrderProductFactory

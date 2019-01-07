@@ -8,8 +8,8 @@ use Doctrine\ORM\Mapping as ORM;
 use Shopsys\FrameworkBundle\Component\Domain\Domain;
 use Shopsys\FrameworkBundle\Model\Customer\User;
 use Shopsys\FrameworkBundle\Model\Order\Item\OrderItem;
+use Shopsys\FrameworkBundle\Model\Order\Item\OrderItemFactoryInterface;
 use Shopsys\FrameworkBundle\Model\Order\Item\OrderItemPriceCalculation;
-use Shopsys\FrameworkBundle\Model\Order\Item\OrderPaymentFactoryInterface;
 use Shopsys\FrameworkBundle\Model\Order\Item\OrderProduct;
 use Shopsys\FrameworkBundle\Model\Order\Item\OrderProductFactoryInterface;
 use Shopsys\FrameworkBundle\Model\Order\Item\OrderTransportFactoryInterface;
@@ -1038,13 +1038,13 @@ class Order
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\Payment\PaymentPriceCalculation $paymentPriceCalculation
-     * @param \Shopsys\FrameworkBundle\Model\Order\Item\OrderPaymentFactoryInterface $orderPaymentFactory
+     * @param \Shopsys\FrameworkBundle\Model\Order\Item\OrderItemFactoryInterface $orderItemFactory
      * @param \Shopsys\FrameworkBundle\Model\Pricing\Price $productsPrice
      * @param string $locale
      */
     public function fillOrderPayment(
         PaymentPriceCalculation $paymentPriceCalculation,
-        OrderPaymentFactoryInterface $orderPaymentFactory,
+        OrderItemFactoryInterface $orderItemFactory,
         Price $productsPrice,
         $locale
     ) {
@@ -1055,7 +1055,7 @@ class Order
             $productsPrice,
             $this->getDomainId()
         );
-        $orderPayment = $orderPaymentFactory->create(
+        $orderPayment = $orderItemFactory->createPayment(
             $this,
             $payment->getName($locale),
             $paymentPrice,
