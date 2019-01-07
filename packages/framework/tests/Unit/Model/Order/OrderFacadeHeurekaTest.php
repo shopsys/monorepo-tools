@@ -19,7 +19,6 @@ use Shopsys\FrameworkBundle\Model\Order\Item\OrderItemFactoryInterface;
 use Shopsys\FrameworkBundle\Model\Order\Item\OrderItemPriceCalculation;
 use Shopsys\FrameworkBundle\Model\Order\Item\OrderProductFacade;
 use Shopsys\FrameworkBundle\Model\Order\Item\OrderProductFactoryInterface;
-use Shopsys\FrameworkBundle\Model\Order\Item\OrderTransportFactoryInterface;
 use Shopsys\FrameworkBundle\Model\Order\Mail\OrderMailFacade;
 use Shopsys\FrameworkBundle\Model\Order\Order;
 use Shopsys\FrameworkBundle\Model\Order\OrderFacade;
@@ -114,7 +113,6 @@ class OrderFacadeHeurekaTest extends TestCase
             $this->createMock(NumberFormatterExtension::class),
             $this->createMock(PaymentPriceCalculation::class),
             $this->createMock(TransportPriceCalculation::class),
-            $this->createMock(OrderTransportFactoryInterface::class),
             $this->createMock(OrderItemFactoryInterface::class)
         );
         return $orderFacade;

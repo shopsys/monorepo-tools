@@ -96,7 +96,6 @@ class OrderItemFactory implements OrderItemFactoryInterface
      * @param string $vatPercent
      * @param int $quantity
      * @param \Shopsys\FrameworkBundle\Model\Transport\Transport $transport
-     *
      * @return \Shopsys\FrameworkBundle\Model\Order\Item\OrderTransport
      */
     public function createTransport(

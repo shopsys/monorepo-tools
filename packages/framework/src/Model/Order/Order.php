@@ -12,7 +12,6 @@ use Shopsys\FrameworkBundle\Model\Order\Item\OrderItemFactoryInterface;
 use Shopsys\FrameworkBundle\Model\Order\Item\OrderItemPriceCalculation;
 use Shopsys\FrameworkBundle\Model\Order\Item\OrderProduct;
 use Shopsys\FrameworkBundle\Model\Order\Item\OrderProductFactoryInterface;
-use Shopsys\FrameworkBundle\Model\Order\Item\OrderTransportFactoryInterface;
 use Shopsys\FrameworkBundle\Model\Order\Preview\OrderPreview;
 use Shopsys\FrameworkBundle\Model\Order\Status\OrderStatus;
 use Shopsys\FrameworkBundle\Model\Payment\PaymentPriceCalculation;
@@ -1068,13 +1067,13 @@ class Order
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\Transport\TransportPriceCalculation $transportPriceCalculation
-     * @param \Shopsys\FrameworkBundle\Model\Order\Item\OrderTransportFactoryInterface $orderTransportFactory
+     * @param \Shopsys\FrameworkBundle\Model\Order\Item\OrderItemFactoryInterface $orderItemFactory
      * @param \Shopsys\FrameworkBundle\Model\Pricing\Price $productsPrice
      * @param string $locale
      */
     public function fillOrderTransport(
         TransportPriceCalculation $transportPriceCalculation,
-        OrderTransportFactoryInterface $orderTransportFactory,
+        OrderItemFactoryInterface $orderItemFactory,
         Price $productsPrice,
         $locale
     ) {
@@ -1085,7 +1084,7 @@ class Order
             $productsPrice,
             $this->getDomainId()
         );
-        $orderTransport = $orderTransportFactory->create(
+        $orderTransport = $orderItemFactory->createTransport(
             $this,
             $transport->getName($locale),
             $transportPrice,

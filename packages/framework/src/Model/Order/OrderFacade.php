@@ -17,7 +17,6 @@ use Shopsys\FrameworkBundle\Model\Order\Item\OrderItemFactoryInterface;
 use Shopsys\FrameworkBundle\Model\Order\Item\OrderItemPriceCalculation;
 use Shopsys\FrameworkBundle\Model\Order\Item\OrderProductFacade;
 use Shopsys\FrameworkBundle\Model\Order\Item\OrderProductFactoryInterface;
-use Shopsys\FrameworkBundle\Model\Order\Item\OrderTransportFactoryInterface;
 use Shopsys\FrameworkBundle\Model\Order\Mail\OrderMailFacade;
 use Shopsys\FrameworkBundle\Model\Order\Preview\OrderPreview;
 use Shopsys\FrameworkBundle\Model\Order\Preview\OrderPreviewFactory;
@@ -166,11 +165,6 @@ class OrderFacade
     protected $transportPriceCalculation;
 
     /**
-     * @var \Shopsys\FrameworkBundle\Model\Order\Item\OrderTransportFactoryInterface
-     */
-    protected $orderTransportFactory;
-
-    /**
      * @var \Shopsys\FrameworkBundle\Model\Order\Item\OrderItemFactoryInterface
      */
     protected $orderItemFactory;
@@ -202,7 +196,6 @@ class OrderFacade
      * @param \Shopsys\FrameworkBundle\Twig\NumberFormatterExtension $numberFormatterExtension
      * @param \Shopsys\FrameworkBundle\Model\Payment\PaymentPriceCalculation $paymentPriceCalculation
      * @param \Shopsys\FrameworkBundle\Model\Transport\TransportPriceCalculation $transportPriceCalculation
-     * @param \Shopsys\FrameworkBundle\Model\Order\Item\OrderTransportFactoryInterface $orderTransportFactory
      * @param \Shopsys\FrameworkBundle\Model\Order\Item\OrderItemFactoryInterface $orderItemFactory
      */
     public function __construct(
@@ -232,7 +225,6 @@ class OrderFacade
         NumberFormatterExtension $numberFormatterExtension,
         PaymentPriceCalculation $paymentPriceCalculation,
         TransportPriceCalculation $transportPriceCalculation,
-        OrderTransportFactoryInterface $orderTransportFactory,
         OrderItemFactoryInterface $orderItemFactory
     ) {
         $this->em = $em;
@@ -261,7 +253,6 @@ class OrderFacade
         $this->numberFormatterExtension = $numberFormatterExtension;
         $this->paymentPriceCalculation = $paymentPriceCalculation;
         $this->transportPriceCalculation = $transportPriceCalculation;
-        $this->orderTransportFactory = $orderTransportFactory;
         $this->orderItemFactory = $orderItemFactory;
     }
 
@@ -511,7 +502,7 @@ class OrderFacade
 
         $order->fillOrderProducts($orderPreview, $this->orderProductFactory, $this->numberFormatterExtension, $locale);
         $order->fillOrderPayment($this->paymentPriceCalculation, $this->orderItemFactory, $orderPreview->getProductsPrice(), $locale);
-        $order->fillOrderTransport($this->transportPriceCalculation, $this->orderTransportFactory, $orderPreview->getProductsPrice(), $locale);
+        $order->fillOrderTransport($this->transportPriceCalculation, $this->orderItemFactory, $orderPreview->getProductsPrice(), $locale);
         $order->fillOrderRounding($this->orderProductFactory, $orderPreview->getRoundingPrice(), $locale);
     }
 }
