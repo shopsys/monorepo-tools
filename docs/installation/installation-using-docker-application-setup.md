@@ -8,7 +8,7 @@ Now that the Docker environment is prepared we can setup the application itself.
 
 ### 1.1. Connect into terminal of the Docker container
 ```
-docker exec -it shopsys-framework-php-fpm sh
+docker exec -it shopsys-framework-php-fpm bash
 ```
 
 ### 1.2. Install dependencies and configure parameters

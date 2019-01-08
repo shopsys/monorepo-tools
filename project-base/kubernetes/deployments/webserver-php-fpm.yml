@@ -69,7 +69,7 @@ spec:
             -   image: ~
                 name: php-fpm
                 securityContext:
-                    runAsUser: 82
+                    runAsUser: 33
                 workingDir: /var/www/html
                 volumeMounts:
                 -   name: source-codes
