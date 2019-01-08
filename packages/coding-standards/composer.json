@@ -18,7 +18,7 @@
     "require": {
         "php": "^7.1",
         "ext-tokenizer": "*",
-        "friendsofphp/php-cs-fixer": "^2.11.1",
+        "friendsofphp/php-cs-fixer": "^2.14.0",
         "jakub-onderka/php-parallel-lint": "^0.9",
         "object-calisthenics/phpcs-calisthenics-rules": "^3.1",
         "slevomat/coding-standard": "^4.6.0",
