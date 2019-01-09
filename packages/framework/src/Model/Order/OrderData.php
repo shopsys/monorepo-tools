@@ -162,7 +162,7 @@ class OrderData
     public $createdAsAdministratorName;
 
     /**
-     * @var \Shopsys\FrameworkBundle\Model\Order\Item\OrderPaymentData|null
+     * @var \Shopsys\FrameworkBundle\Model\Order\Item\OrderItemData|null
      */
     public $orderPayment;
 
