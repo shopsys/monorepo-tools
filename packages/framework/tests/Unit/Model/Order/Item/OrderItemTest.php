@@ -6,6 +6,7 @@ namespace Tests\FrameworkBundle\Unit\Model\Order\Item;
 
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
+use Shopsys\FrameworkBundle\Model\Order\Item\Exception\MainVariantCannotBeOrderedException;
 use Shopsys\FrameworkBundle\Model\Order\Item\Exception\WrongItemTypeException;
 use Shopsys\FrameworkBundle\Model\Order\Item\OrderItem;
 use Shopsys\FrameworkBundle\Model\Order\Item\OrderItemData;
@@ -16,6 +17,8 @@ use Shopsys\FrameworkBundle\Model\Order\Order;
 use Shopsys\FrameworkBundle\Model\Payment\Payment;
 use Shopsys\FrameworkBundle\Model\Pricing\Price;
 use Shopsys\FrameworkBundle\Model\Product\Product;
+use Shopsys\FrameworkBundle\Model\Product\ProductCategoryDomainFactory;
+use Shopsys\FrameworkBundle\Model\Product\ProductData;
 use Shopsys\FrameworkBundle\Model\Transport\Transport;
 
 class OrderItemTest extends TestCase
@@ -76,6 +79,54 @@ class OrderItemTest extends TestCase
         $this->assertSame($payment, $orderItem->getPayment());
     }
 
+    public function testEditProductTypeWithProduct()
+    {
+        $orderItemData = new OrderItemData();
+        $orderItemData->name = 'newName';
+        $orderItemData->priceWithVat = 20;
+        $orderItemData->priceWithoutVat = 30;
+        $orderItemData->quantity = 2;
+        $orderItemData->vatPercent = 10;
+
+        $orderItem = $this->createOrderProduct($this->createProductMock());
+        $orderItem->edit($orderItemData);
+
+        $this->assertSame('newName', $orderItem->getName());
+        $this->assertSame(20, $orderItem->getPriceWithVat());
+        $this->assertSame(30, $orderItem->getPriceWithoutVat());
+        $this->assertSame(2, $orderItem->getQuantity());
+        $this->assertSame(10, $orderItem->getvatPercent());
+    }
+
+    public function testEditProductTypeWithoutProduct()
+    {
+        $orderItemData = new OrderItemData();
+        $orderItemData->name = 'newName';
+        $orderItemData->priceWithVat = 20;
+        $orderItemData->priceWithoutVat = 30;
+        $orderItemData->quantity = 2;
+        $orderItemData->vatPercent = 10;
+
+        $orderItem = $this->createOrderProduct();
+        $orderItem->edit($orderItemData);
+
+        $this->assertSame('newName', $orderItem->getName());
+        $this->assertSame(20, $orderItem->getPriceWithVat());
+        $this->assertSame(30, $orderItem->getPriceWithoutVat());
+        $this->assertSame(2, $orderItem->getQuantity());
+        $this->assertSame(10, $orderItem->getvatPercent());
+    }
+
+    public function testConstructWithMainVariantThrowsException()
+    {
+        $variant = Product::create(new ProductData(), new ProductCategoryDomainFactory());
+        $mainVariant = Product::createMainVariant(new ProductData(), new ProductCategoryDomainFactory(), [$variant]);
+
+        $this->expectException(MainVariantCannotBeOrderedException::class);
+
+        $this->createOrderProduct($mainVariant);
+    }
+
     /**
      * @return \Shopsys\FrameworkBundle\Model\Order\Item\OrderItem
      */
@@ -107,9 +158,10 @@ class OrderItemTest extends TestCase
     }
 
     /**
+     * @param \Shopsys\FrameworkBundle\Model\Product\Product|null $product
      * @return \Shopsys\FrameworkBundle\Model\Order\Item\OrderItem
      */
-    private function createOrderProduct(): OrderItem
+    private function createOrderProduct(Product $product = null): OrderItem
     {
         return new OrderProduct(
             $this->createOrderMock(),
@@ -119,7 +171,7 @@ class OrderItemTest extends TestCase
             1,
             null,
             null,
-            $this->createProductMock()
+            $product
         );
     }
 
