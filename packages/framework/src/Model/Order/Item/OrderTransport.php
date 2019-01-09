@@ -13,14 +13,6 @@ use Shopsys\FrameworkBundle\Model\Transport\Transport;
 class OrderTransport extends OrderItem
 {
     /**
-     * @var \Shopsys\FrameworkBundle\Model\Transport\Transport
-     *
-     * @ORM\ManyToOne(targetEntity="Shopsys\FrameworkBundle\Model\Transport\Transport")
-     * @ORM\JoinColumn(nullable=true)
-     */
-    protected $transport;
-
-    /**
      * @param \Shopsys\FrameworkBundle\Model\Order\Order $order
      * @param string $name
      * @param \Shopsys\FrameworkBundle\Model\Pricing\Price $price
@@ -47,28 +39,5 @@ class OrderTransport extends OrderItem
             null
         );
         $this->transport = $transport;
-    }
-
-    /**
-     * @return \Shopsys\FrameworkBundle\Model\Transport\Transport
-     */
-    public function getTransport()
-    {
-        return $this->transport;
-    }
-
-    /**
-     * @param \Shopsys\FrameworkBundle\Model\Order\Item\OrderItemData $orderTransportData
-     */
-    public function edit(OrderItemData $orderTransportData)
-    {
-        if ($orderTransportData instanceof OrderTransportData) {
-            $this->transport = $orderTransportData->transport;
-            parent::edit($orderTransportData);
-        } else {
-            throw new \Shopsys\FrameworkBundle\Model\Order\Item\Exception\InvalidArgumentException(
-                'Instance of ' . OrderTransportData::class . ' is required as argument.'
-            );
-        }
     }
 }

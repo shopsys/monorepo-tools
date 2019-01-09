@@ -38,4 +38,9 @@ class OrderItemData
      * @var string|null
      */
     public $catnum;
+
+    /**
+     * @var \Shopsys\FrameworkBundle\Model\Transport\Transport|null
+     */
+    public $transport;
 }

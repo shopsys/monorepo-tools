@@ -3,8 +3,6 @@
 namespace Tests\ShopBundle\Functional\EntityExtension\Model;
 
 use Doctrine\ORM\Mapping as ORM;
-use Shopsys\FrameworkBundle\Model\Order\Item\OrderItemData;
-use Shopsys\FrameworkBundle\Model\Order\Item\OrderTransportData;
 use Shopsys\FrameworkBundle\Model\Pricing\Price;
 use Shopsys\ShopBundle\Model\Order\Order;
 use Shopsys\ShopBundle\Model\Transport\Transport;
@@ -19,14 +17,6 @@ use Shopsys\ShopBundle\Model\Transport\Transport;
  */
 class ExtendedOrderTransport extends ExtendedOrderItem
 {
-    /**
-     * @var \Shopsys\ShopBundle\Model\Transport\Transport
-     *
-     * @ORM\ManyToOne(targetEntity="Shopsys\ShopBundle\Model\Transport\Transport")
-     * @ORM\JoinColumn(nullable=true)
-     */
-    protected $transport;
-
     /**
      * @var string|null
      *
@@ -61,29 +51,6 @@ class ExtendedOrderTransport extends ExtendedOrderItem
             null
         );
         $this->transport = $transport;
-    }
-
-    /**
-     * @return \Shopsys\FrameworkBundle\Model\Transport\Transport
-     */
-    public function getTransport()
-    {
-        return $this->transport;
-    }
-
-    /**
-     * @param \Shopsys\FrameworkBundle\Model\Order\Item\OrderItemData $orderTransportData
-     */
-    public function edit(OrderItemData $orderTransportData)
-    {
-        if ($orderTransportData instanceof OrderTransportData) {
-            $this->transport = $orderTransportData->transport;
-            parent::edit($orderTransportData);
-        } else {
-            throw new \Shopsys\FrameworkBundle\Model\Order\Item\Exception\InvalidArgumentException(
-                'Instance of ' . OrderTransportData::class . ' is required as argument.'
-            );
-        }
     }
 
     /**

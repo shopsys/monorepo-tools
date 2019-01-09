@@ -3,8 +3,10 @@
 namespace Shopsys\FrameworkBundle\Model\Order\Item;
 
 use Doctrine\ORM\Mapping as ORM;
+use Shopsys\FrameworkBundle\Model\Order\Item\Exception\WrongItemTypeException;
 use Shopsys\FrameworkBundle\Model\Order\Order;
 use Shopsys\FrameworkBundle\Model\Pricing\Price;
+use Shopsys\FrameworkBundle\Model\Transport\Transport;
 
 /**
  * @ORM\Table(name="order_items")
@@ -96,6 +98,14 @@ abstract class OrderItem
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     protected $catnum;
+
+    /**
+     * @var \Shopsys\FrameworkBundle\Model\Transport\Transport|null
+     *
+     * @ORM\ManyToOne(targetEntity="Shopsys\FrameworkBundle\Model\Transport\Transport")
+     * @ORM\JoinColumn(nullable=true)
+     */
+    protected $transport;
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\Order\Order $order
@@ -221,6 +231,28 @@ abstract class OrderItem
         $this->quantity = $orderItemData->quantity;
         $this->unitName = $orderItemData->unitName;
         $this->catnum = $orderItemData->catnum;
+
+        if ($this->isTypeTransport()) {
+            $this->transport = $orderItemData->transport;
+        }
+    }
+
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Transport\Transport $transport
+     */
+    public function setTransport(Transport $transport): void
+    {
+        $this->checkTypeTransport();
+        $this->transport = $transport;
+    }
+
+    /**
+     * @return \Shopsys\FrameworkBundle\Model\Transport\Transport
+     */
+    public function getTransport(): Transport
+    {
+        $this->checkTypeTransport();
+        return $this->transport;
     }
 
     /**
@@ -245,5 +277,12 @@ abstract class OrderItem
     public function isTypeTransport(): bool
     {
         return $this->itemType === self::TYPE_TRANSPORT;
+    }
+
+    protected function checkTypeTransport(): void
+    {
+        if (!$this->isTypeTransport()) {
+            throw WrongItemTypeException::create(self::TYPE_TRANSPORT, $this->itemType);
+        }
     }
 }
