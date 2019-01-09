@@ -7,7 +7,7 @@ namespace Shopsys\FrameworkBundle\Component\Domain\Multidomain;
  * @see \Shopsys\FrameworkBundle\Component\Domain\Multidomain\MultidomainEntityClassFinderFacade.
  *
  * Now, in framework, yet another implementation is used. *
- * @see \Shopsys\FrameworkBundle\Model\MultiDomainEntityClassProvider
+ * @see \Shopsys\FrameworkBundle\Model\MultidomainEntityClassProvider
  */
 class DefaultMultidomainEntityClassProvider implements MultidomainEntityClassProviderInterface
 {

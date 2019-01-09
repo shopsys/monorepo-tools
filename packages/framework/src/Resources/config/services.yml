@@ -167,10 +167,10 @@ services:
             - '%shopsys.domain_urls_config_filepath%'
         lazy: true
 
-    Shopsys\FrameworkBundle\Component\Domain\Multidomain\MultiDomainEntityClassProvider: ~
+    Shopsys\FrameworkBundle\Component\Domain\Multidomain\MultidomainEntityClassProvider: ~
 
-    Shopsys\FrameworkBundle\Component\Domain\Multidomain\MultiDomainEntityClassProviderInterface:
-        alias: Shopsys\FrameworkBundle\Model\MultiDomainEntityClassProvider
+    Shopsys\FrameworkBundle\Component\Domain\Multidomain\MultidomainEntityClassProviderInterface:
+        alias: Shopsys\FrameworkBundle\Model\MultidomainEntityClassProvider
 
     Shopsys\FrameworkBundle\Component\Domain\DomainAwareSecurityHeadersSetter:
         tags:
@@ -949,11 +949,13 @@ services:
     Shopsys\FrameworkBundle\Model\Product\ProductSearchExport\ProductSearchExportDataConverter: ~
 
     shopsys.microservice_client.product_search:
+        class: 'Shopsys\FrameworkBundle\Component\Microservice\MicroserviceClient'
         factory: 'Shopsys\FrameworkBundle\Component\Microservice\MicroserviceClientFactory:create'
         arguments:
             $microserviceUrl: '%microservice_product_search_url%'
 
     shopsys.microservice_client.product_search_export:
+        class: 'Shopsys\FrameworkBundle\Component\Microservice\MicroserviceClient'
         factory: 'Shopsys\FrameworkBundle\Component\Microservice\MicroserviceClientFactory:create'
         arguments:
             $microserviceUrl: '%microservice_product_search_export_url%'
