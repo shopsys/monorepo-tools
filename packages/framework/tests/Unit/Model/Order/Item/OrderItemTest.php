@@ -10,10 +10,12 @@ use Shopsys\FrameworkBundle\Model\Order\Item\Exception\WrongItemTypeException;
 use Shopsys\FrameworkBundle\Model\Order\Item\OrderItem;
 use Shopsys\FrameworkBundle\Model\Order\Item\OrderItemData;
 use Shopsys\FrameworkBundle\Model\Order\Item\OrderPayment;
+use Shopsys\FrameworkBundle\Model\Order\Item\OrderProduct;
 use Shopsys\FrameworkBundle\Model\Order\Item\OrderTransport;
 use Shopsys\FrameworkBundle\Model\Order\Order;
-use Shopsys\FrameworkBundle\Model\Pricing\Price;
 use Shopsys\FrameworkBundle\Model\Payment\Payment;
+use Shopsys\FrameworkBundle\Model\Pricing\Price;
+use Shopsys\FrameworkBundle\Model\Product\Product;
 use Shopsys\FrameworkBundle\Model\Transport\Transport;
 
 class OrderItemTest extends TestCase
@@ -44,6 +46,34 @@ class OrderItemTest extends TestCase
         $orderItem->edit($orderItemData);
 
         $this->assertSame($transport, $orderItem->getTransport());
+    }
+
+    public function testPaymentCannotBeSetForWrongType(): void
+    {
+        $orderItem = $this->createOrderProduct();
+
+        $this->expectException(WrongItemTypeException::class);
+        $orderItem->setPayment($this->createPaymentMock());
+    }
+
+    public function testPaymentCannotBeGottenFromWrongType(): void
+    {
+        $orderItem = $this->createOrderProduct();
+
+        $this->expectException(WrongItemTypeException::class);
+        $orderItem->getPayment();
+    }
+
+    public function testEditPaymentTypeEditsPayment(): void
+    {
+        $orderItem = $this->createOrderPayment();
+
+        $orderItemData = new OrderItemData();
+        $payment = $this->createPaymentMock();
+        $orderItemData->payment = $payment;
+        $orderItem->edit($orderItemData);
+
+        $this->assertSame($payment, $orderItem->getPayment());
     }
 
     /**
@@ -77,6 +107,23 @@ class OrderItemTest extends TestCase
     }
 
     /**
+     * @return \Shopsys\FrameworkBundle\Model\Order\Item\OrderItem
+     */
+    private function createOrderProduct(): OrderItem
+    {
+        return new OrderProduct(
+            $this->createOrderMock(),
+            '',
+            new Price(10, 12),
+            0.2,
+            1,
+            null,
+            null,
+            $this->createProductMock()
+        );
+    }
+
+    /**
      * @return \Shopsys\FrameworkBundle\Model\Order\Order|\PHPUnit\Framework\MockObject\MockObject
      */
     private function createOrderMock(): MockObject
@@ -98,5 +145,13 @@ class OrderItemTest extends TestCase
     private function createPaymentMock(): MockObject
     {
         return $this->createMock(Payment::class);
+    }
+
+    /**
+     * @return \Shopsys\FrameworkBundle\Model\Product\Product|\PHPUnit\Framework\MockObject\MockObject
+     */
+    private function createProductMock(): MockObject
+    {
+        return $this->createMock(Product::class);
     }
 }

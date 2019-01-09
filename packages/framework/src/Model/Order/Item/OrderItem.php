@@ -5,6 +5,7 @@ namespace Shopsys\FrameworkBundle\Model\Order\Item;
 use Doctrine\ORM\Mapping as ORM;
 use Shopsys\FrameworkBundle\Model\Order\Item\Exception\WrongItemTypeException;
 use Shopsys\FrameworkBundle\Model\Order\Order;
+use Shopsys\FrameworkBundle\Model\Payment\Payment;
 use Shopsys\FrameworkBundle\Model\Pricing\Price;
 use Shopsys\FrameworkBundle\Model\Transport\Transport;
 
@@ -106,6 +107,14 @@ abstract class OrderItem
      * @ORM\JoinColumn(nullable=true)
      */
     protected $transport;
+
+    /**
+     * @var \Shopsys\FrameworkBundle\Model\Payment\Payment|null
+     *
+     * @ORM\ManyToOne(targetEntity="Shopsys\FrameworkBundle\Model\Payment\Payment")
+     * @ORM\JoinColumn(nullable=true)
+     */
+    protected $payment;
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\Order\Order $order
@@ -235,6 +244,10 @@ abstract class OrderItem
         if ($this->isTypeTransport()) {
             $this->transport = $orderItemData->transport;
         }
+
+        if ($this->isTypePayment()) {
+            $this->payment = $orderItemData->payment;
+        }
     }
 
     /**
@@ -253,6 +266,24 @@ abstract class OrderItem
     {
         $this->checkTypeTransport();
         return $this->transport;
+    }
+
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Payment\Payment $payment
+     */
+    public function setPayment(Payment $payment): void
+    {
+        $this->checkTypePayment();
+        $this->payment = $payment;
+    }
+
+    /**
+     * @return \Shopsys\FrameworkBundle\Model\Payment\Payment
+     */
+    public function getPayment(): Payment
+    {
+        $this->checkTypePayment();
+        return $this->payment;
     }
 
     /**
@@ -283,6 +314,13 @@ abstract class OrderItem
     {
         if (!$this->isTypeTransport()) {
             throw WrongItemTypeException::create(self::TYPE_TRANSPORT, $this->itemType);
+        }
+    }
+
+    protected function checkTypePayment(): void
+    {
+        if (!$this->isTypePayment()) {
+            throw WrongItemTypeException::create(self::TYPE_PAYMENT, $this->itemType);
         }
     }
 }

@@ -43,4 +43,9 @@ class OrderItemData
      * @var \Shopsys\FrameworkBundle\Model\Transport\Transport|null
      */
     public $transport;
+
+    /**
+     * @var \Shopsys\FrameworkBundle\Model\Payment\Payment|null
+     */
+    public $payment;
 }

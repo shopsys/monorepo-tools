@@ -3,8 +3,6 @@
 namespace Tests\ShopBundle\Functional\EntityExtension\Model;
 
 use Doctrine\ORM\Mapping as ORM;
-use Shopsys\FrameworkBundle\Model\Order\Item\OrderItemData;
-use Shopsys\FrameworkBundle\Model\Order\Item\OrderPaymentData;
 use Shopsys\FrameworkBundle\Model\Pricing\Price;
 use Shopsys\ShopBundle\Model\Order\Order;
 use Shopsys\ShopBundle\Model\Payment\Payment;
@@ -19,14 +17,6 @@ use Shopsys\ShopBundle\Model\Payment\Payment;
  */
 class ExtendedOrderPayment extends ExtendedOrderItem
 {
-    /**
-     * @var \Shopsys\ShopBundle\Model\Payment\Payment
-     *
-     * @ORM\ManyToOne(targetEntity="Shopsys\ShopBundle\Model\Payment\Payment")
-     * @ORM\JoinColumn(nullable=true)
-     */
-    protected $payment;
-
     /**
      * @var string|null
      *
@@ -61,29 +51,6 @@ class ExtendedOrderPayment extends ExtendedOrderItem
             null
         );
         $this->payment = $payment;
-    }
-
-    /**
-     * @return \Shopsys\ShopBundle\Model\Payment\Payment
-     */
-    public function getPayment()
-    {
-        return $this->payment;
-    }
-
-    /**
-     * @param \Shopsys\FrameworkBundle\Model\Order\Item\OrderItemData $orderPaymentData
-     */
-    public function edit(OrderItemData $orderPaymentData)
-    {
-        if ($orderPaymentData instanceof OrderPaymentData) {
-            $this->payment = $orderPaymentData->payment;
-            parent::edit($orderPaymentData);
-        } else {
-            throw new \Shopsys\FrameworkBundle\Model\Order\Item\Exception\InvalidArgumentException(
-                'Instance of ' . OrderPaymentData::class . ' is required as argument.'
-            );
-        }
     }
 
     /**
