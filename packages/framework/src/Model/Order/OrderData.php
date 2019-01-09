@@ -167,7 +167,7 @@ class OrderData
     public $orderPayment;
 
     /**
-     * @var \Shopsys\FrameworkBundle\Model\Order\Item\OrderTransportData|null
+     * @var \Shopsys\FrameworkBundle\Model\Order\Item\OrderItemData|null
      */
     public $orderTransport;
 
