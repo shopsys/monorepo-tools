@@ -10,7 +10,6 @@ use Shopsys\FrameworkBundle\Model\Customer\User;
 use Shopsys\FrameworkBundle\Model\Order\Item\OrderItem;
 use Shopsys\FrameworkBundle\Model\Order\Item\OrderItemFactoryInterface;
 use Shopsys\FrameworkBundle\Model\Order\Item\OrderItemPriceCalculation;
-use Shopsys\FrameworkBundle\Model\Order\Item\OrderProduct;
 use Shopsys\FrameworkBundle\Model\Order\Preview\OrderPreview;
 use Shopsys\FrameworkBundle\Model\Order\Status\OrderStatus;
 use Shopsys\FrameworkBundle\Model\Payment\PaymentPriceCalculation;
@@ -496,7 +495,7 @@ class Order
     }
 
     /**
-     * @return \Shopsys\FrameworkBundle\Model\Order\Item\OrderPayment
+     * @return \Shopsys\FrameworkBundle\Model\Order\Item\OrderItem
      */
     public function getOrderPayment()
     {
@@ -524,7 +523,7 @@ class Order
     }
 
     /**
-     * @return \Shopsys\FrameworkBundle\Model\Order\Item\OrderTransport
+     * @return \Shopsys\FrameworkBundle\Model\Order\Item\OrderItem
      */
     public function getOrderTransport()
     {
@@ -899,7 +898,7 @@ class Order
     }
 
     /**
-     * @return \Shopsys\FrameworkBundle\Model\Order\Item\OrderProduct[]
+     * @return \Shopsys\FrameworkBundle\Model\Order\Item\OrderItem[]
      */
     public function getProductItems()
     {
@@ -952,7 +951,7 @@ class Order
      * @param \Shopsys\FrameworkBundle\Model\Order\Item\OrderItemFactoryInterface $orderItemFactory
      * @param \Shopsys\FrameworkBundle\Component\Domain\Domain $domain
      * @param \Shopsys\FrameworkBundle\Model\Order\OrderPriceCalculation $orderPriceCalculation
-     * @return \Shopsys\FrameworkBundle\Model\Order\Item\OrderProduct
+     * @return \Shopsys\FrameworkBundle\Model\Order\Item\OrderItem
      */
     public function addProduct(
         Product $product,
@@ -960,7 +959,7 @@ class Order
         OrderItemFactoryInterface $orderItemFactory,
         Domain $domain,
         OrderPriceCalculation $orderPriceCalculation
-    ): OrderProduct {
+    ): OrderItem {
         $orderDomainConfig = $domain->getDomainConfigById($this->getDomainId());
 
         $orderProduct = $orderItemFactory->createProduct(

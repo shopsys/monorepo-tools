@@ -8,9 +8,6 @@ use Doctrine\ORM\Mapping\Driver\AnnotationDriver;
 use Doctrine\ORM\Tools\SchemaTool;
 use Shopsys\FrameworkBundle\Component\EntityExtension\EntityNameResolver;
 use Shopsys\FrameworkBundle\Model\Order\Item\OrderItem;
-use Shopsys\FrameworkBundle\Model\Order\Item\OrderPayment;
-use Shopsys\FrameworkBundle\Model\Order\Item\OrderProduct;
-use Shopsys\FrameworkBundle\Model\Order\Item\OrderTransport;
 use Shopsys\FrameworkBundle\Model\Payment\Payment;
 use Shopsys\FrameworkBundle\Model\Product\Brand\Brand;
 use Shopsys\ShopBundle\Model\Category\Category;
@@ -66,9 +63,6 @@ class EntityExtensionTest extends TransactionFunctionalTestCase
             Product::class => ExtendedProduct::class,
             Category::class => ExtendedCategory::class,
             OrderItem::class => ExtendedOrderItem::class,
-            OrderProduct::class => ExtendedOrderProduct::class,
-            OrderPayment::class => ExtendedOrderPayment::class,
-            OrderTransport::class => ExtendedOrderTransport::class,
             Brand::class => ExtendedBrand::class,
             Order::class => ExtendedOrder::class,
         ];
@@ -161,9 +155,6 @@ class EntityExtensionTest extends TransactionFunctionalTestCase
         $this->doTestExtendedEntityInstantiation(OrderItem::class, ExtendedOrderPayment::class, self::ORDER_PAYMENT_ID);
         $this->doTestExtendedEntityInstantiation(OrderItem::class, ExtendedOrderProduct::class, self::ORDER_PRODUCT_ID);
         $this->doTestExtendedEntityInstantiation(OrderItem::class, ExtendedOrderTransport::class, self::ORDER_TRANSPORT_ID);
-        $this->doTestExtendedEntityInstantiation(OrderPayment::class, ExtendedOrderPayment::class, self::ORDER_PAYMENT_ID);
-        $this->doTestExtendedEntityInstantiation(OrderProduct::class, ExtendedOrderProduct::class, self::ORDER_PRODUCT_ID);
-        $this->doTestExtendedEntityInstantiation(OrderTransport::class, ExtendedOrderTransport::class, self::ORDER_TRANSPORT_ID);
     }
 
     private function doTestExtendedProductPersistence(): void

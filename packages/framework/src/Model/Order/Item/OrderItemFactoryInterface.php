@@ -19,7 +19,7 @@ interface OrderItemFactoryInterface
      * @param string|null $unitName
      * @param string|null $catnum
      * @param \Shopsys\FrameworkBundle\Model\Product\Product|null $product
-     * @return \Shopsys\FrameworkBundle\Model\Order\Item\OrderProduct
+     * @return \Shopsys\FrameworkBundle\Model\Order\Item\OrderItem
      */
     public function createProduct(
         Order $order,
@@ -30,7 +30,7 @@ interface OrderItemFactoryInterface
         ?string $unitName,
         ?string $catnum,
         Product $product = null
-    ): OrderProduct;
+    ): OrderItem;
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\Order\Order $order
@@ -39,7 +39,7 @@ interface OrderItemFactoryInterface
      * @param string $vatPercent
      * @param int $quantity
      * @param \Shopsys\FrameworkBundle\Model\Payment\Payment $payment
-     * @return \Shopsys\FrameworkBundle\Model\Order\Item\OrderPayment
+     * @return \Shopsys\FrameworkBundle\Model\Order\Item\OrderItem
      */
     public function createPayment(
         Order $order,
@@ -48,7 +48,7 @@ interface OrderItemFactoryInterface
         string $vatPercent,
         int $quantity,
         Payment $payment
-    ): OrderPayment;
+    ): OrderItem;
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\Order\Order $order
@@ -57,7 +57,7 @@ interface OrderItemFactoryInterface
      * @param string $vatPercent
      * @param int $quantity
      * @param \Shopsys\FrameworkBundle\Model\Transport\Transport $transport
-     * @return \Shopsys\FrameworkBundle\Model\Order\Item\OrderTransport
+     * @return \Shopsys\FrameworkBundle\Model\Order\Item\OrderItem
      */
     public function createTransport(
         Order $order,
@@ -66,5 +66,5 @@ interface OrderItemFactoryInterface
         string $vatPercent,
         int $quantity,
         Transport $transport
-    ): OrderTransport;
+    ): OrderItem;
 }

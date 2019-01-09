@@ -14,15 +14,8 @@ use Shopsys\FrameworkBundle\Model\Transport\Transport;
 /**
  * @ORM\Table(name="order_items")
  * @ORM\Entity
- * @ORM\InheritanceType("SINGLE_TABLE")
- * @ORM\DiscriminatorColumn(name="type", type="string")
- * @ORM\DiscriminatorMap({
- *     "payment" = "\Shopsys\FrameworkBundle\Model\Order\Item\OrderPayment",
- *     "product" = "\Shopsys\FrameworkBundle\Model\Order\Item\OrderProduct",
- *     "transport" = "\Shopsys\FrameworkBundle\Model\Order\Item\OrderTransport"
- * })
  */
-abstract class OrderItem
+class OrderItem
 {
     public const
         TYPE_PAYMENT = 'payment',
@@ -41,9 +34,9 @@ abstract class OrderItem
     /**
      * @var string
      *
-     * @ORM\Column(type="string", length=10)
+     * @ORM\Column(type="string")
      */
-    protected $itemType;
+    protected $type;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Order\Order
@@ -152,10 +145,10 @@ abstract class OrderItem
         $this->priceWithVat = $price->getPriceWithVat();
         $this->vatPercent = $vatPercent;
         $this->quantity = $quantity;
+        $this->type = $type;
         $this->unitName = $unitName;
         $this->catnum = $catnum;
         $this->order->addItem($this); // call after setting attrs for recalc total price
-        $this->itemType = $type;
     }
 
     /**
@@ -333,7 +326,7 @@ abstract class OrderItem
      */
     public function isTypeProduct(): bool
     {
-        return $this->itemType === self::TYPE_PRODUCT;
+        return $this->type === self::TYPE_PRODUCT;
     }
 
     /**
@@ -341,7 +334,7 @@ abstract class OrderItem
      */
     public function isTypePayment(): bool
     {
-        return $this->itemType === self::TYPE_PAYMENT;
+        return $this->type === self::TYPE_PAYMENT;
     }
 
     /**
@@ -349,27 +342,27 @@ abstract class OrderItem
      */
     public function isTypeTransport(): bool
     {
-        return $this->itemType === self::TYPE_TRANSPORT;
+        return $this->type === self::TYPE_TRANSPORT;
     }
 
     protected function checkTypeTransport(): void
     {
         if (!$this->isTypeTransport()) {
-            throw WrongItemTypeException::create(self::TYPE_TRANSPORT, $this->itemType);
+            throw new WrongItemTypeException(self::TYPE_TRANSPORT, $this->type);
         }
     }
 
     protected function checkTypePayment(): void
     {
         if (!$this->isTypePayment()) {
-            throw WrongItemTypeException::create(self::TYPE_PAYMENT, $this->itemType);
+            throw new WrongItemTypeException(self::TYPE_PAYMENT, $this->type);
         }
     }
 
     protected function checkTypeProduct(): void
     {
         if (!$this->isTypeProduct()) {
-            throw WrongItemTypeException::create(self::TYPE_PRODUCT, $this->itemType);
+            throw new WrongItemTypeException(self::TYPE_PRODUCT, $this->type);
         }
     }
 }

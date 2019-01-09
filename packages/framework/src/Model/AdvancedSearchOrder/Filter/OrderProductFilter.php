@@ -5,7 +5,7 @@ namespace Shopsys\FrameworkBundle\Model\AdvancedSearchOrder\Filter;
 use Doctrine\ORM\QueryBuilder;
 use Shopsys\FrameworkBundle\Form\ProductType;
 use Shopsys\FrameworkBundle\Model\AdvancedSearch\AdvancedSearchFilterInterface;
-use Shopsys\FrameworkBundle\Model\Order\Item\OrderProduct;
+use Shopsys\FrameworkBundle\Model\Order\Item\OrderItem;
 
 class OrderProductFilter implements AdvancedSearchFilterInterface
 {
@@ -61,7 +61,7 @@ class OrderProductFilter implements AdvancedSearchFilterInterface
                 $dqlOperator = $this->getContainsDqlOperator($ruleData->operator);
                 $parameterName = 'orderProduct_' . $index;
                 $tableAlias = 'oi_' . $index;
-                $queryBuilder->andWhere($dqlOperator . ' (SELECT 1 FROM ' . OrderProduct::class . ' ' . $tableAlias . ' ' .
+                $queryBuilder->andWhere($dqlOperator . ' (SELECT 1 FROM ' . OrderItem::class . ' ' . $tableAlias . ' ' .
                     'WHERE ' . $tableAlias . '.order = o AND ' . $tableAlias . '.product = :' . $parameterName . ')');
                 $queryBuilder->setParameter($parameterName, $searchValue);
             }

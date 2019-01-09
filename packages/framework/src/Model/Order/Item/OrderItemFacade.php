@@ -76,7 +76,7 @@ class OrderItemFacade
     /**
      * @param int $orderId
      * @param int $productId
-     * @return \Shopsys\FrameworkBundle\Model\Order\Item\OrderProduct
+     * @return \Shopsys\FrameworkBundle\Model\Order\Item\OrderItem
      */
     public function addProductToOrder($orderId, $productId)
     {

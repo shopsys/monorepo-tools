@@ -10,9 +10,6 @@ use Shopsys\FrameworkBundle\Model\Order\Item\Exception\MainVariantCannotBeOrdere
 use Shopsys\FrameworkBundle\Model\Order\Item\Exception\WrongItemTypeException;
 use Shopsys\FrameworkBundle\Model\Order\Item\OrderItem;
 use Shopsys\FrameworkBundle\Model\Order\Item\OrderItemData;
-use Shopsys\FrameworkBundle\Model\Order\Item\OrderPayment;
-use Shopsys\FrameworkBundle\Model\Order\Item\OrderProduct;
-use Shopsys\FrameworkBundle\Model\Order\Item\OrderTransport;
 use Shopsys\FrameworkBundle\Model\Order\Order;
 use Shopsys\FrameworkBundle\Model\Payment\Payment;
 use Shopsys\FrameworkBundle\Model\Pricing\Price;
@@ -156,14 +153,18 @@ class OrderItemTest extends TestCase
      */
     private function createOrderPayment(): OrderItem
     {
-        return new OrderPayment(
+        $orderPayment = new OrderItem(
             $this->createOrderMock(),
             '',
             new Price(10, 12),
             0.2,
             1,
-            $this->createPaymentMock()
+            OrderItem::TYPE_PAYMENT,
+            null,
+            null
         );
+        $orderPayment->setPayment($this->createPaymentMock());
+        return $orderPayment;
     }
 
     /**
@@ -171,14 +172,18 @@ class OrderItemTest extends TestCase
      */
     private function createOrderTransport(): OrderItem
     {
-        return new OrderTransport(
+        $orderTransport = new OrderItem(
             $this->createOrderMock(),
             '',
             new Price(10, 12),
             0.2,
             1,
-            $this->createTransportMock()
+            OrderItem::TYPE_TRANSPORT,
+            null,
+            null
         );
+        $orderTransport->setTransport($this->createTransportMock());
+        return $orderTransport;
     }
 
     /**
@@ -187,16 +192,18 @@ class OrderItemTest extends TestCase
      */
     private function createOrderProduct(Product $product = null): OrderItem
     {
-        return new OrderProduct(
+        $orderProduct = new OrderItem(
             $this->createOrderMock(),
             '',
             new Price(10, 12),
             0.2,
             1,
+            OrderItem::TYPE_PRODUCT,
             null,
-            null,
-            $product
+            null
         );
+        $orderProduct->setProduct($product);
+        return $orderProduct;
     }
 
     /**

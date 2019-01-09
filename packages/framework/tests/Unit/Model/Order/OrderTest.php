@@ -7,8 +7,7 @@ use DateTimeInterface;
 use PHPUnit\Framework\TestCase;
 use Shopsys\FrameworkBundle\Model\Country\Country;
 use Shopsys\FrameworkBundle\Model\Country\CountryData;
-use Shopsys\FrameworkBundle\Model\Order\Item\OrderPayment;
-use Shopsys\FrameworkBundle\Model\Order\Item\OrderProduct;
+use Shopsys\FrameworkBundle\Model\Order\Item\OrderItem;
 use Shopsys\FrameworkBundle\Model\Order\Order;
 use Shopsys\FrameworkBundle\Model\Order\OrderData;
 use Shopsys\FrameworkBundle\Model\Payment\Payment;
@@ -26,15 +25,16 @@ class OrderTest extends TestCase
         $paymentPrice = new Price(0, 0);
 
         $order = new Order($orderData, 'orderNumber', 'urlHash', null);
-        $orderProduct = new OrderProduct($order, 'productName', $paymentPrice, 0, 1, null, null, null);
-        $orderPayment = new OrderPayment($order, 'paymentName', $paymentPrice, 0, 1, $payment);
+        $orderProduct = new OrderItem($order, 'productName', $paymentPrice, 0, 1, OrderItem::TYPE_PRODUCT, null, null);
+        $orderPayment = new OrderItem($order, 'paymentName', $paymentPrice, 0, 1, OrderItem::TYPE_PAYMENT, null, null);
+        $orderPayment->setPayment($payment);
         $order->addItem($orderProduct);
         $order->addItem($orderPayment);
 
         $productItems = $order->getProductItems();
 
         $this->assertCount(1, $productItems);
-        $this->assertContainsOnlyInstancesOf(OrderProduct::class, $productItems);
+        $this->assertContainsOnlyInstancesOf(OrderItem::class, $productItems);
     }
 
     public function testGetProductItemsCount()
@@ -44,8 +44,9 @@ class OrderTest extends TestCase
         $orderData = new OrderData();
 
         $order = new Order($orderData, 'orderNumber', 'urlHash', null);
-        $productItem = new OrderProduct($order, 'productName', $paymentItemPrice, 0, 1, null, null);
-        $paymentItem = new OrderPayment($order, 'paymentName', $paymentItemPrice, 0, 1, $payment);
+        $productItem = new OrderItem($order, 'productName', $paymentItemPrice, 0, 1, OrderItem::TYPE_PRODUCT, null, null);
+        $paymentItem = new OrderItem($order, 'paymentName', $paymentItemPrice, 0, 1, OrderItem::TYPE_PAYMENT, null, null);
+        $paymentItem->setPayment($payment);
         $order->addItem($productItem);
         $order->addItem($paymentItem);
 

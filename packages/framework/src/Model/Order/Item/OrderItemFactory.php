@@ -33,7 +33,7 @@ class OrderItemFactory implements OrderItemFactoryInterface
      * @param string|null $unitName
      * @param string|null $catnum
      * @param \Shopsys\FrameworkBundle\Model\Product\Product|null $product
-     * @return \Shopsys\FrameworkBundle\Model\Order\Item\OrderProduct
+     * @return \Shopsys\FrameworkBundle\Model\Order\Item\OrderItem
      */
     public function createProduct(
         Order $order,
@@ -44,19 +44,23 @@ class OrderItemFactory implements OrderItemFactoryInterface
         ?string $unitName,
         ?string $catnum,
         Product $product = null
-    ): OrderProduct {
-        $classData = $this->entityNameResolver->resolve(OrderProduct::class);
+    ): OrderItem {
+        $classData = $this->entityNameResolver->resolve(OrderItem::class);
 
-        return new $classData(
+        $orderProduct = new $classData(
             $order,
             $name,
             $price,
             $vatPercent,
             $quantity,
+            OrderItem::TYPE_PRODUCT,
             $unitName,
-            $catnum,
-            $product
+            $catnum
         );
+
+        $orderProduct->setProduct($product);
+
+        return $orderProduct;
     }
 
     /**
@@ -66,7 +70,7 @@ class OrderItemFactory implements OrderItemFactoryInterface
      * @param string $vatPercent
      * @param int $quantity
      * @param \Shopsys\FrameworkBundle\Model\Payment\Payment $payment
-     * @return \Shopsys\FrameworkBundle\Model\Order\Item\OrderPayment
+     * @return \Shopsys\FrameworkBundle\Model\Order\Item\OrderItem
      */
     public function createPayment(
         Order $order,
@@ -75,17 +79,22 @@ class OrderItemFactory implements OrderItemFactoryInterface
         string $vatPercent,
         int $quantity,
         Payment $payment
-    ): OrderPayment {
-        $classData = $this->entityNameResolver->resolve(OrderPayment::class);
+    ): OrderItem {
+        $classData = $this->entityNameResolver->resolve(OrderItem::class);
 
-        return new $classData(
+        $orderPayment = new $classData(
             $order,
             $name,
             $price,
             $vatPercent,
             $quantity,
-            $payment
+            OrderItem::TYPE_PAYMENT,
+            null,
+            null
         );
+
+        $orderPayment->setPayment($payment);
+        return $orderPayment;
     }
 
     /**
@@ -95,7 +104,7 @@ class OrderItemFactory implements OrderItemFactoryInterface
      * @param string $vatPercent
      * @param int $quantity
      * @param \Shopsys\FrameworkBundle\Model\Transport\Transport $transport
-     * @return \Shopsys\FrameworkBundle\Model\Order\Item\OrderTransport
+     * @return \Shopsys\FrameworkBundle\Model\Order\Item\OrderItem
      */
     public function createTransport(
         Order $order,
@@ -104,16 +113,21 @@ class OrderItemFactory implements OrderItemFactoryInterface
         string $vatPercent,
         int $quantity,
         Transport $transport
-    ): OrderTransport {
-        $classData = $this->entityNameResolver->resolve(OrderTransport::class);
+    ): OrderItem {
+        $classData = $this->entityNameResolver->resolve(OrderItem::class);
 
-        return new $classData(
+        $orderTransport = new $classData(
             $order,
             $name,
             $price,
             $vatPercent,
             $quantity,
-            $transport
+            OrderItem::TYPE_TRANSPORT,
+            null,
+            null
         );
+
+        $orderTransport->setTransport($transport);
+        return $orderTransport;
     }
 }
