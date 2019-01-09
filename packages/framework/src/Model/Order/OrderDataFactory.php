@@ -3,7 +3,6 @@
 namespace Shopsys\FrameworkBundle\Model\Order;
 
 use Shopsys\FrameworkBundle\Model\Order\Item\OrderItemDataFactoryInterface;
-use Shopsys\FrameworkBundle\Model\Order\Item\OrderPaymentDataFactoryInterface;
 
 class OrderDataFactory implements OrderDataFactoryInterface
 {
@@ -13,20 +12,12 @@ class OrderDataFactory implements OrderDataFactoryInterface
     protected $orderItemDataFactory;
 
     /**
-     * @var \Shopsys\FrameworkBundle\Model\Order\Item\OrderPaymentDataFactoryInterface
-     */
-    protected $orderPaymentDataFactory;
-
-    /**
      * @param \Shopsys\FrameworkBundle\Model\Order\Item\OrderItemDataFactoryInterface $orderItemDataFactory
-     * @param \Shopsys\FrameworkBundle\Model\Order\Item\OrderPaymentDataFactoryInterface $orderPaymentDataFactory
      */
     public function __construct(
-        OrderItemDataFactoryInterface $orderItemDataFactory,
-        OrderPaymentDataFactoryInterface $orderPaymentDataFactory
+        OrderItemDataFactoryInterface $orderItemDataFactory
     ) {
         $this->orderItemDataFactory = $orderItemDataFactory;
-        $this->orderPaymentDataFactory = $orderPaymentDataFactory;
     }
 
     /**
@@ -92,6 +83,6 @@ class OrderDataFactory implements OrderDataFactoryInterface
         $orderData->createdAsAdministrator = $order->getCreatedAsAdministrator();
         $orderData->createdAsAdministratorName = $order->getCreatedAsAdministratorName();
         $orderData->orderTransport = $this->orderItemDataFactory->createFromOrderItem($order->getOrderTransport());
-        $orderData->orderPayment = $this->orderPaymentDataFactory->createFromOrderPayment($order->getOrderPayment());
+        $orderData->orderPayment = $this->orderItemDataFactory->createFromOrderItem($order->getOrderPayment());
     }
 }

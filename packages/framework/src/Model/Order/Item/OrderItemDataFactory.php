@@ -44,10 +44,12 @@ class OrderItemDataFactory implements OrderItemDataFactoryInterface
      * @param \Shopsys\FrameworkBundle\Model\Order\Item\OrderItemData $orderItemData
      * @param \Shopsys\FrameworkBundle\Model\Order\Item\OrderItem $orderItem
      */
-    protected function addFieldsByOrderItemType(OrderItemData $orderItemData, OrderItem $orderItem)
+    protected function addFieldsByOrderItemType(OrderItemData $orderItemData, OrderItem $orderItem): void
     {
         if ($orderItem->isTypeTransport()) {
             $orderItemData->transport = $orderItem->getTransport();
+        } elseif ($orderItem->isTypePayment()) {
+            $orderItemData->payment = $orderItem->getPayment();
         }
     }
 }
