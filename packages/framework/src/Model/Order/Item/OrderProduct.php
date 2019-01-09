@@ -13,14 +13,6 @@ use Shopsys\FrameworkBundle\Model\Product\Product;
 class OrderProduct extends OrderItem
 {
     /**
-     * @var \Shopsys\FrameworkBundle\Model\Product\Product|null
-     *
-     * @ORM\ManyToOne(targetEntity="Shopsys\FrameworkBundle\Model\Product\Product")
-     * @ORM\JoinColumn(nullable=true, name="product_id", referencedColumnName="id", onDelete="SET NULL")
-     */
-    protected $product;
-
-    /**
      * @param \Shopsys\FrameworkBundle\Model\Order\Order $order
      * @param string $name
      * @param \Shopsys\FrameworkBundle\Model\Pricing\Price $price
@@ -51,26 +43,6 @@ class OrderProduct extends OrderItem
             $catnum
         );
 
-        if ($product !== null && $product->isMainVariant()) {
-            throw new \Shopsys\FrameworkBundle\Model\Order\Item\Exception\MainVariantCannotBeOrderedException();
-        }
-
-        $this->product = $product;
-    }
-
-    /**
-     * @return \Shopsys\FrameworkBundle\Model\Product\Product|null
-     */
-    public function getProduct()
-    {
-        return $this->product;
-    }
-
-    /**
-     * @return bool
-     */
-    public function hasProduct()
-    {
-        return $this->product !== null;
+        $this->setProduct($product);
     }
 }

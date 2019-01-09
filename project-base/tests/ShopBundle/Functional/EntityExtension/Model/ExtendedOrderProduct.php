@@ -18,14 +18,6 @@ use Shopsys\ShopBundle\Model\Product\Product;
 class ExtendedOrderProduct extends ExtendedOrderItem
 {
     /**
-     * @var \Shopsys\FrameworkBundle\Model\Product\Product|null
-     *
-     * @ORM\ManyToOne(targetEntity="Shopsys\ShopBundle\Model\Product\Product")
-     * @ORM\JoinColumn(nullable=true, name="product_id", referencedColumnName="id", onDelete="SET NULL")
-     */
-    protected $product;
-
-    /**
      * @var string|null
      *
      * @ORM\Column(type="string", nullable=true)
@@ -63,27 +55,7 @@ class ExtendedOrderProduct extends ExtendedOrderItem
             $catnum
         );
 
-        if ($product !== null && $product->isMainVariant()) {
-            throw new \Shopsys\FrameworkBundle\Model\Order\Item\Exception\MainVariantCannotBeOrderedException();
-        }
-
-        $this->product = $product;
-    }
-
-    /**
-     * @return \Shopsys\FrameworkBundle\Model\Product\Product|null
-     */
-    public function getProduct()
-    {
-        return $this->product;
-    }
-
-    /**
-     * @return bool
-     */
-    public function hasProduct()
-    {
-        return $this->product !== null;
+        $this->setProduct($product);
     }
 
     /**

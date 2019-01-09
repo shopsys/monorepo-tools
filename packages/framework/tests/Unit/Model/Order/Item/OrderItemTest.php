@@ -79,6 +79,30 @@ class OrderItemTest extends TestCase
         $this->assertSame($payment, $orderItem->getPayment());
     }
 
+    public function testProductCannotBeSetForWrongType(): void
+    {
+        $orderItem = $this->createOrderTransport();
+
+        $this->expectException(WrongItemTypeException::class);
+        $orderItem->setProduct($this->createProductMock());
+    }
+
+    public function testProductCannotBeGottenFromWrongType(): void
+    {
+        $orderItem = $this->createOrderTransport();
+
+        $this->expectException(WrongItemTypeException::class);
+        $orderItem->getProduct();
+    }
+
+    public function testProductCannotHaveProduct(): void
+    {
+        $orderItem = $this->createOrderTransport();
+
+        $this->expectException(WrongItemTypeException::class);
+        $orderItem->hasProduct();
+    }
+
     public function testEditProductTypeWithProduct()
     {
         $orderItemData = new OrderItemData();

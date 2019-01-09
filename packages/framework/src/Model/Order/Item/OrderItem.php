@@ -3,10 +3,12 @@
 namespace Shopsys\FrameworkBundle\Model\Order\Item;
 
 use Doctrine\ORM\Mapping as ORM;
+use Shopsys\FrameworkBundle\Model\Order\Item\Exception\MainVariantCannotBeOrderedException;
 use Shopsys\FrameworkBundle\Model\Order\Item\Exception\WrongItemTypeException;
 use Shopsys\FrameworkBundle\Model\Order\Order;
 use Shopsys\FrameworkBundle\Model\Payment\Payment;
 use Shopsys\FrameworkBundle\Model\Pricing\Price;
+use Shopsys\FrameworkBundle\Model\Product\Product;
 use Shopsys\FrameworkBundle\Model\Transport\Transport;
 
 /**
@@ -115,6 +117,14 @@ abstract class OrderItem
      * @ORM\JoinColumn(nullable=true)
      */
     protected $payment;
+
+    /**
+     * @var \Shopsys\FrameworkBundle\Model\Product\Product|null
+     *
+     * @ORM\ManyToOne(targetEntity="Shopsys\FrameworkBundle\Model\Product\Product")
+     * @ORM\JoinColumn(nullable=true, name="product_id", referencedColumnName="id", onDelete="SET NULL")
+     */
+    protected $product;
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\Order\Order $order
@@ -287,6 +297,38 @@ abstract class OrderItem
     }
 
     /**
+     * @return \Shopsys\FrameworkBundle\Model\Product\Product|null
+     */
+    public function getProduct(): ?Product
+    {
+        $this->checkTypeProduct();
+        return $this->product;
+    }
+
+    /**
+     * @return bool
+     */
+    public function hasProduct()
+    {
+        $this->checkTypeProduct();
+        return $this->product !== null;
+    }
+
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Product\Product|null $product
+     */
+    public function setProduct(?Product $product): void
+    {
+        $this->checkTypeProduct();
+
+        if ($product !== null && $product->isMainVariant()) {
+            throw new MainVariantCannotBeOrderedException();
+        }
+
+        $this->product = $product;
+    }
+
+    /**
      * @return bool
      */
     public function isTypeProduct(): bool
@@ -321,6 +363,13 @@ abstract class OrderItem
     {
         if (!$this->isTypePayment()) {
             throw WrongItemTypeException::create(self::TYPE_PAYMENT, $this->itemType);
+        }
+    }
+
+    protected function checkTypeProduct(): void
+    {
+        if (!$this->isTypeProduct()) {
+            throw WrongItemTypeException::create(self::TYPE_PRODUCT, $this->itemType);
         }
     }
 }
