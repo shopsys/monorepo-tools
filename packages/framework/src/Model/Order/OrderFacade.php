@@ -16,7 +16,6 @@ use Shopsys\FrameworkBundle\Model\Localization\Localization;
 use Shopsys\FrameworkBundle\Model\Order\Item\OrderItemFactoryInterface;
 use Shopsys\FrameworkBundle\Model\Order\Item\OrderItemPriceCalculation;
 use Shopsys\FrameworkBundle\Model\Order\Item\OrderProductFacade;
-use Shopsys\FrameworkBundle\Model\Order\Item\OrderProductFactoryInterface;
 use Shopsys\FrameworkBundle\Model\Order\Mail\OrderMailFacade;
 use Shopsys\FrameworkBundle\Model\Order\Preview\OrderPreview;
 use Shopsys\FrameworkBundle\Model\Order\Preview\OrderPreviewFactory;
@@ -140,11 +139,6 @@ class OrderFacade
     protected $orderItemPriceCalculation;
 
     /**
-     * @var \Shopsys\FrameworkBundle\Model\Order\Item\OrderProductFactoryInterface
-     */
-    protected $orderProductFactory;
-
-    /**
      * @var \Shopsys\FrameworkBundle\Model\Order\FrontOrderDataMapper
      */
     protected $frontOrderDataMapper;
@@ -191,7 +185,6 @@ class OrderFacade
      * @param \Shopsys\FrameworkBundle\Model\Order\OrderFactoryInterface $orderFactory
      * @param \Shopsys\FrameworkBundle\Model\Order\OrderPriceCalculation $orderPriceCalculation
      * @param \Shopsys\FrameworkBundle\Model\Order\Item\OrderItemPriceCalculation $orderItemPriceCalculation
-     * @param \Shopsys\FrameworkBundle\Model\Order\Item\OrderProductFactoryInterface $orderProductFactory
      * @param \Shopsys\FrameworkBundle\Model\Order\FrontOrderDataMapper $frontOrderDataMapper
      * @param \Shopsys\FrameworkBundle\Twig\NumberFormatterExtension $numberFormatterExtension
      * @param \Shopsys\FrameworkBundle\Model\Payment\PaymentPriceCalculation $paymentPriceCalculation
@@ -220,7 +213,6 @@ class OrderFacade
         OrderFactoryInterface $orderFactory,
         OrderPriceCalculation $orderPriceCalculation,
         OrderItemPriceCalculation $orderItemPriceCalculation,
-        OrderProductFactoryInterface $orderProductFactory,
         FrontOrderDataMapper $frontOrderDataMapper,
         NumberFormatterExtension $numberFormatterExtension,
         PaymentPriceCalculation $paymentPriceCalculation,
@@ -248,7 +240,6 @@ class OrderFacade
         $this->orderPriceCalculation = $orderPriceCalculation;
         $this->orderUrlGenerator = $orderUrlGenerator;
         $this->orderItemPriceCalculation = $orderItemPriceCalculation;
-        $this->orderProductFactory = $orderProductFactory;
         $this->frontOrderDataMapper = $frontOrderDataMapper;
         $this->numberFormatterExtension = $numberFormatterExtension;
         $this->paymentPriceCalculation = $paymentPriceCalculation;
@@ -343,7 +334,7 @@ class OrderFacade
         $orderEditResult = $order->edit(
             $orderData,
             $this->orderItemPriceCalculation,
-            $this->orderProductFactory,
+            $this->orderItemFactory,
             $this->orderPriceCalculation
         );
 
@@ -500,9 +491,9 @@ class OrderFacade
     {
         $locale = $this->domain->getDomainConfigById($order->getDomainId())->getLocale();
 
-        $order->fillOrderProducts($orderPreview, $this->orderProductFactory, $this->numberFormatterExtension, $locale);
+        $order->fillOrderProducts($orderPreview, $this->orderItemFactory, $this->numberFormatterExtension, $locale);
         $order->fillOrderPayment($this->paymentPriceCalculation, $this->orderItemFactory, $orderPreview->getProductsPrice(), $locale);
         $order->fillOrderTransport($this->transportPriceCalculation, $this->orderItemFactory, $orderPreview->getProductsPrice(), $locale);
-        $order->fillOrderRounding($this->orderProductFactory, $orderPreview->getRoundingPrice(), $locale);
+        $order->fillOrderRounding($this->orderItemFactory, $orderPreview->getRoundingPrice(), $locale);
     }
 }

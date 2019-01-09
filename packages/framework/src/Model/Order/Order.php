@@ -11,7 +11,6 @@ use Shopsys\FrameworkBundle\Model\Order\Item\OrderItem;
 use Shopsys\FrameworkBundle\Model\Order\Item\OrderItemFactoryInterface;
 use Shopsys\FrameworkBundle\Model\Order\Item\OrderItemPriceCalculation;
 use Shopsys\FrameworkBundle\Model\Order\Item\OrderProduct;
-use Shopsys\FrameworkBundle\Model\Order\Item\OrderProductFactoryInterface;
 use Shopsys\FrameworkBundle\Model\Order\Preview\OrderPreview;
 use Shopsys\FrameworkBundle\Model\Order\Status\OrderStatus;
 use Shopsys\FrameworkBundle\Model\Payment\PaymentPriceCalculation;
@@ -950,7 +949,7 @@ class Order
     /**
      * @param \Shopsys\FrameworkBundle\Model\Product\Product $product
      * @param \Shopsys\FrameworkBundle\Model\Pricing\Price $productPrice
-     * @param \Shopsys\FrameworkBundle\Model\Order\Item\OrderProductFactoryInterface $orderProductFactory
+     * @param \Shopsys\FrameworkBundle\Model\Order\Item\OrderItemFactoryInterface $orderItemFactory
      * @param \Shopsys\FrameworkBundle\Component\Domain\Domain $domain
      * @param \Shopsys\FrameworkBundle\Model\Order\OrderPriceCalculation $orderPriceCalculation
      * @return \Shopsys\FrameworkBundle\Model\Order\Item\OrderProduct
@@ -958,13 +957,13 @@ class Order
     public function addProduct(
         Product $product,
         Price $productPrice,
-        OrderProductFactoryInterface $orderProductFactory,
+        OrderItemFactoryInterface $orderItemFactory,
         Domain $domain,
         OrderPriceCalculation $orderPriceCalculation
     ): OrderProduct {
         $orderDomainConfig = $domain->getDomainConfigById($this->getDomainId());
 
-        $orderProduct = $orderProductFactory->create(
+        $orderProduct = $orderItemFactory->createProduct(
             $this,
             $product->getName($orderDomainConfig->getLocale()),
             $productPrice,
@@ -984,14 +983,14 @@ class Order
     /**
      * @param \Shopsys\FrameworkBundle\Model\Order\OrderData $orderData
      * @param \Shopsys\FrameworkBundle\Model\Order\Item\OrderItemPriceCalculation $orderItemPriceCalculation
-     * @param \Shopsys\FrameworkBundle\Model\Order\Item\OrderProductFactoryInterface $orderProductFactory
+     * @param \Shopsys\FrameworkBundle\Model\Order\Item\OrderItemFactoryInterface $orderItemFactory
      * @param \Shopsys\FrameworkBundle\Model\Order\OrderPriceCalculation $orderPriceCalculation
      * @return \Shopsys\FrameworkBundle\Model\Order\OrderEditResult
      */
     public function edit(
         OrderData $orderData,
         OrderItemPriceCalculation $orderItemPriceCalculation,
-        OrderProductFactoryInterface $orderProductFactory,
+        OrderItemFactoryInterface $orderItemFactory,
         OrderPriceCalculation $orderPriceCalculation
     ): OrderEditResult {
         $orderTransportData = $orderData->orderTransport;
@@ -1016,7 +1015,7 @@ class Order
 
         foreach ($orderData->getNewItemsWithoutTransportAndPayment() as $newOrderItemData) {
             $newOrderItemData->priceWithoutVat = $orderItemPriceCalculation->calculatePriceWithoutVat($newOrderItemData);
-            $orderProductFactory->create(
+            $orderItemFactory->createProduct(
                 $this,
                 $newOrderItemData->name,
                 new Price(
@@ -1097,13 +1096,13 @@ class Order
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\Order\Preview\OrderPreview $orderPreview
-     * @param \Shopsys\FrameworkBundle\Model\Order\Item\OrderProductFactoryInterface $orderProductFactory
+     * @param \Shopsys\FrameworkBundle\Model\Order\Item\OrderItemFactoryInterface $orderItemFactory
      * @param \Shopsys\FrameworkBundle\Twig\NumberFormatterExtension $numberFormatterExtension
      * @param string $locale
      */
     public function fillOrderProducts(
         OrderPreview $orderPreview,
-        OrderProductFactoryInterface $orderProductFactory,
+        OrderItemFactoryInterface $orderItemFactory,
         NumberFormatterExtension $numberFormatterExtension,
         $locale
     ) {
@@ -1122,7 +1121,7 @@ class Order
             $quantifiedItemDiscount = $quantifiedItemDiscounts[$index];
             /* @var $quantifiedItemDiscount \Shopsys\FrameworkBundle\Model\Pricing\Price|null */
 
-            $orderItem = $orderProductFactory->create(
+            $orderItem = $orderItemFactory->createProduct(
                 $this,
                 $product->getName($locale),
                 $quantifiedItemPrice->getUnitPrice(),
@@ -1134,7 +1133,7 @@ class Order
             );
 
             if ($quantifiedItemDiscount !== null) {
-                $this->addOrderItemDiscount($numberFormatterExtension, $orderPreview, $orderProductFactory, $quantifiedItemDiscount, $orderItem, $locale);
+                $this->addOrderItemDiscount($numberFormatterExtension, $orderPreview, $orderItemFactory, $quantifiedItemDiscount, $orderItem, $locale);
             }
         }
     }
@@ -1142,7 +1141,7 @@ class Order
     /**
      * @param \Shopsys\FrameworkBundle\Twig\NumberFormatterExtension $numberFormatterExtension
      * @param \Shopsys\FrameworkBundle\Model\Order\Preview\OrderPreview $orderPreview
-     * @param \Shopsys\FrameworkBundle\Model\Order\Item\OrderProductFactoryInterface $orderProductFactory
+     * @param \Shopsys\FrameworkBundle\Model\Order\Item\OrderItemFactoryInterface $orderItemFactory
      * @param \Shopsys\FrameworkBundle\Model\Pricing\Price $quantifiedItemDiscount
      * @param \Shopsys\FrameworkBundle\Model\Order\Item\OrderItem $orderItem
      * @param string $locale
@@ -1150,7 +1149,7 @@ class Order
     protected function addOrderItemDiscount(
         NumberFormatterExtension $numberFormatterExtension,
         OrderPreview $orderPreview,
-        OrderProductFactoryInterface $orderProductFactory,
+        OrderItemFactoryInterface $orderItemFactory,
         Price $quantifiedItemDiscount,
         OrderItem $orderItem,
         $locale
@@ -1162,7 +1161,7 @@ class Order
             $orderItem->getName()
         );
 
-        $orderProductFactory->create(
+        $orderItemFactory->createProduct(
             $orderItem->getOrder(),
             $name,
             new Price(
@@ -1178,14 +1177,14 @@ class Order
     }
 
     /**
-     * @param \Shopsys\FrameworkBundle\Model\Order\Item\OrderProductFactoryInterface $orderProductFactory
+     * @param \Shopsys\FrameworkBundle\Model\Order\Item\OrderItemFactoryInterface $orderItemFactory
      * @param \Shopsys\FrameworkBundle\Model\Pricing\Price|null $roundingPrice
      * @param string $locale
      */
-    public function fillOrderRounding(OrderProductFactoryInterface $orderProductFactory, ?Price $roundingPrice, $locale)
+    public function fillOrderRounding(OrderItemFactoryInterface $orderItemFactory, ?Price $roundingPrice, $locale)
     {
         if ($roundingPrice !== null) {
-            $orderProductFactory->create(
+            $orderItemFactory->createProduct(
                 $this,
                 t('Rounding', [], 'messages', $locale),
                 $roundingPrice,

@@ -33,7 +33,6 @@ class OrderItemFactory implements OrderItemFactoryInterface
      * @param string|null $unitName
      * @param string|null $catnum
      * @param \Shopsys\FrameworkBundle\Model\Product\Product|null $product
-     *
      * @return \Shopsys\FrameworkBundle\Model\Order\Item\OrderProduct
      */
     public function createProduct(

@@ -42,9 +42,9 @@ class OrderItemFacade
     protected $orderPriceCalculation;
 
     /**
-     * @var \Shopsys\FrameworkBundle\Model\Order\Item\OrderProductFactoryInterface
+     * @var \Shopsys\FrameworkBundle\Model\Order\Item\OrderItemFactoryInterface
      */
-    protected $orderProductFactory;
+    protected $orderItemFactory;
 
     /**
      * @param \Doctrine\ORM\EntityManagerInterface $em
@@ -53,7 +53,7 @@ class OrderItemFacade
      * @param \Shopsys\FrameworkBundle\Model\Product\Pricing\ProductPriceCalculationForUser $productPriceCalculationForUser
      * @param \Shopsys\FrameworkBundle\Component\Domain\Domain $domain
      * @param \Shopsys\FrameworkBundle\Model\Order\OrderPriceCalculation $orderPriceCalculation
-     * @param \Shopsys\FrameworkBundle\Model\Order\Item\OrderProductFactoryInterface $orderProductFactory
+     * @param \Shopsys\FrameworkBundle\Model\Order\Item\OrderItemFactoryInterface $orderItemFactory
      */
     public function __construct(
         EntityManagerInterface $em,
@@ -62,7 +62,7 @@ class OrderItemFacade
         ProductPriceCalculationForUser $productPriceCalculationForUser,
         Domain $domain,
         OrderPriceCalculation $orderPriceCalculation,
-        OrderProductFactoryInterface $orderProductFactory
+        OrderItemFactoryInterface $orderItemFactory
     ) {
         $this->em = $em;
         $this->orderRepository = $orderRepository;
@@ -70,7 +70,7 @@ class OrderItemFacade
         $this->productPriceCalculationForUser = $productPriceCalculationForUser;
         $this->domain = $domain;
         $this->orderPriceCalculation = $orderPriceCalculation;
-        $this->orderProductFactory = $orderProductFactory;
+        $this->orderItemFactory = $orderItemFactory;
     }
 
     /**
@@ -92,7 +92,7 @@ class OrderItemFacade
         $orderProduct = $order->addProduct(
             $product,
             $productPrice,
-            $this->orderProductFactory,
+            $this->orderItemFactory,
             $this->domain,
             $this->orderPriceCalculation
         );

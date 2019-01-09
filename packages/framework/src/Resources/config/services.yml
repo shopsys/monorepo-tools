@@ -743,9 +743,6 @@ services:
     Shopsys\FrameworkBundle\Model\Order\Item\OrderItemFactoryInterface:
         alias: Shopsys\FrameworkBundle\Model\Order\Item\OrderItemFactory
 
-    Shopsys\FrameworkBundle\Model\Order\Item\OrderProductFactoryInterface:
-        alias: Shopsys\FrameworkBundle\Model\Order\Item\OrderProductFactory
-
     Shopsys\FrameworkBundle\Model\Order\Status\OrderStatusFactoryInterface:
         alias: Shopsys\FrameworkBundle\Model\Order\Status\OrderStatusFactory
 
