@@ -1,6 +1,6 @@
-# Releasing a new version
+# Releasing a new version of Shopsys Framework
 
-For releasing a new version, we are leveraging `release` command from [symplify/monorepo-builder](https://github.com/Symplify/MonorepoBuilder) package.
+For releasing a new version of Shopsys Framework, we are leveraging `release` command from [symplify/monorepo-builder](https://github.com/Symplify/MonorepoBuilder) package.
 
 All the source codes and configuration of our release process can be found in `utils/releaser` folder that is located in the root of the monorepo.
 
