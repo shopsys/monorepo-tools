@@ -25,7 +25,7 @@ final class BuildProjectBaseOnHeimdallReleaseWorker extends AbstractShopsysRelea
      */
     public function getPriority(): int
     {
-        return 730;
+        return 735;
     }
 
     /**
