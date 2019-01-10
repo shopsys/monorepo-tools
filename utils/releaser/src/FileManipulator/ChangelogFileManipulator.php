@@ -15,17 +15,29 @@ use Symfony\Component\Finder\SplFileInfo;
 final class ChangelogFileManipulator
 {
     /**
+     * @var string
+     */
+    private $monorepoPackageName;
+
+    /**
+     * @param string $monorepoPackageName
+     */
+    public function __construct(string $monorepoPackageName)
+    {
+        $this->monorepoPackageName = $monorepoPackageName;
+    }
+
+    /**
      * @param \Symfony\Component\Finder\SplFileInfo $splFileInfo
      * @param \PharIo\Version\Version $version
+     * @param \PharIo\Version\Version $mostRecentVersion
      * @return string
      */
-    public function processFileToString(SplFileInfo $splFileInfo, Version $version): string
+    public function processFileToString(SplFileInfo $splFileInfo, Version $version, Version $mostRecentVersion): string
     {
         $content = $this->cleanFromPlaceholders($splFileInfo->getContents());
 
-        $content = $this->changeUnreleasedHeadlineToVersionAndDate($version, $content);
-
-        return $this->updateFooterLinks($version, $content);
+        return $this->changeUnreleasedHeadlineToVersionAndDate($version, $mostRecentVersion, $content);
     }
 
     /**
@@ -39,28 +51,30 @@ final class ChangelogFileManipulator
 
     /**
      * @param \PharIo\Version\Version $version
+     * @param \PharIo\Version\Version $mostRecentVersion
      * @param string $changelogContent
      * @return string
      */
-    private function changeUnreleasedHeadlineToVersionAndDate(Version $version, string $changelogContent): string
+    private function changeUnreleasedHeadlineToVersionAndDate(Version $version, Version $mostRecentVersion, string $changelogContent): string
     {
-        $newHeadline = '## ' . $version->getVersionString() . ' - ' . (new DateTime())->format('Y-m-d');
+        $newHeadline = '## ' . $this->createLink($version, $mostRecentVersion) . ' - ' . (new DateTime())->format('Y-m-d');
 
         return Strings::replace($changelogContent, '#\#\# Unreleased#', $newHeadline);
     }
 
     /**
-     * @see https://regex101.com/r/u8mr0w/1
      * @param \PharIo\Version\Version $version
-     * @param string $content
+     * @param \PharIo\Version\Version $mostRecentVersion
      * @return string
      */
-    private function updateFooterLinks(Version $version, string $content): string
+    private function createLink(Version $version, Version $mostRecentVersion)
     {
-        return Strings::replace(
-            $content,
-            '#^(\[)Unreleased(\]: .*?)HEAD#m',
-            sprintf('$1%s$2%s', $version->getVersionString(), $version->getVersionString())
+        return sprintf(
+            '[%s](https://github.com/%s/compare/%s...%s)',
+            $version->getVersionString(),
+            $this->monorepoPackageName,
+            $mostRecentVersion->getVersionString(),
+            $version->getVersionString()
         );
     }
 }

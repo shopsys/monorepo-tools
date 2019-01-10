@@ -9,6 +9,7 @@ use PharIo\Version\Version;
 use Shopsys\Releaser\FileManipulator\ChangelogFileManipulator;
 use Shopsys\Releaser\ReleaseWorker\AbstractShopsysReleaseWorker;
 use Shopsys\Releaser\Stage;
+use Symplify\MonorepoBuilder\Split\Git\GitManager;
 use Symplify\PackageBuilder\FileSystem\SmartFileInfo;
 
 final class UpdateChangelogReleaseWorker extends AbstractShopsysReleaseWorker
@@ -19,11 +20,18 @@ final class UpdateChangelogReleaseWorker extends AbstractShopsysReleaseWorker
     private $changelogFileManipulator;
 
     /**
-     * @param \Shopsys\Releaser\FileManipulator\ChangelogFileManipulator $changelogFileManipulator
+     * @var \Symplify\MonorepoBuilder\Split\Git\GitManager
      */
-    public function __construct(ChangelogFileManipulator $changelogFileManipulator)
+    private $gitManager;
+
+    /**
+     * @param \Shopsys\Releaser\FileManipulator\ChangelogFileManipulator $changelogFileManipulator
+     * @param \Symplify\MonorepoBuilder\Split\Git\GitManager $gitManager
+     */
+    public function __construct(ChangelogFileManipulator $changelogFileManipulator, GitManager $gitManager)
     {
         $this->changelogFileManipulator = $changelogFileManipulator;
+        $this->gitManager = $gitManager;
     }
 
     /**
@@ -60,7 +68,8 @@ final class UpdateChangelogReleaseWorker extends AbstractShopsysReleaseWorker
         $changelogFileInfo = new SmartFileInfo($changelogFilePath);
 
         // change
-        $newChangelogContent = $this->changelogFileManipulator->processFileToString($changelogFileInfo, $version);
+        $mostRecentVersion = new Version($this->gitManager->getMostRecentTag(getcwd()));
+        $newChangelogContent = $this->changelogFileManipulator->processFileToString($changelogFileInfo, $version, $mostRecentVersion);
 
         // save
         FileSystem::write($changelogFilePath, $newChangelogContent);

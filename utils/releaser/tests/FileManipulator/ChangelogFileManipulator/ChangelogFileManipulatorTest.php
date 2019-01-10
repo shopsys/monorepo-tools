@@ -13,11 +13,12 @@ final class ChangelogFileManipulatorTest extends TestCase
 {
     public function test(): void
     {
-        $changelogFileManipulator = new ChangelogFileManipulator();
+        $changelogFileManipulator = new ChangelogFileManipulator('shopsys/shopsys');
 
         $changedContent = $changelogFileManipulator->processFileToString(
             new SmartFileInfo(__DIR__ . '/Source/CHANGELOG-before.md'),
-            new Version('v1.0.0')
+            new Version('v1.0.0'),
+            new Version('v0.0.9')
         );
 
         $this->assertStringMatchesFormatFile(__DIR__ . '/Source/CHANGELOG-after.md', $changedContent);
