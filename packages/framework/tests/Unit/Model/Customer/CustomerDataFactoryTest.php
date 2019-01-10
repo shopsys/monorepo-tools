@@ -39,6 +39,7 @@ class CustomerDataFactoryTest extends TestCase
         $userData->lastName = 'lastName';
         $userData->createdAt = new DateTime();
         $userData->telephone = 'telephone';
+        $userData->email = 'no-reply@shopsys.com';
 
         $billingCountryData = new CountryData();
         $billingCountryData->name = 'Česká republika';
@@ -69,7 +70,7 @@ class CustomerDataFactoryTest extends TestCase
 
         $billingAddress = $this->createBillingAddress($billingAddressData);
         $deliveryAddress = $this->createDeliveryAddress($deliveryAddressData);
-        $user = new User($userData, $billingAddress, $deliveryAddress);
+        $user = new User($userData, $billingAddress, $deliveryAddress, null);
 
         $transportData = new TransportData();
         $transportData->name = ['cs' => 'transportName'];
@@ -135,10 +136,11 @@ class CustomerDataFactoryTest extends TestCase
         $userData = new UserData();
         $userData->firstName = 'firstName';
         $userData->lastName = 'lastName';
+        $userData->email = 'no-reply@shopsys.com';
         $userData->createdAt = new DateTime();
 
         $billingAddress = $this->createBillingAddress();
-        $user = new User($userData, $billingAddress, null);
+        $user = new User($userData, $billingAddress, null, null);
 
         $transportData = new TransportData();
         $transportData->name = ['cs' => 'transportName'];

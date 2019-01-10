@@ -42,7 +42,8 @@ class UniqueEmailValidator extends ConstraintValidator
         }
 
         $email = (string)$value;
-        $domainId = $this->domain->getId();
+
+        $domainId = $constraint->domainId ?? $this->domain->getId();
 
         if ($constraint->ignoredEmail != $value && $this->customerFacade->findUserByEmailAndDomain($email, $domainId) !== null) {
             $this->context->addViolation(

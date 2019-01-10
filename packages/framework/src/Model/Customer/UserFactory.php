@@ -40,17 +40,9 @@ class UserFactory implements UserFactoryInterface
         ?DeliveryAddress $deliveryAddress,
         ?User $userByEmail
     ): User {
-        if ($userByEmail instanceof User) {
-            $isSameEmail = (mb_strtolower($userByEmail->getEmail()) === mb_strtolower($userData->email));
-            $isSameDomain = ($userByEmail->getDomainId() === $userData->domainId);
-            if ($isSameEmail && $isSameDomain) {
-                throw new \Shopsys\FrameworkBundle\Model\Customer\Exception\DuplicateEmailException($userData->email);
-            }
-        }
-
         $classData = $this->entityNameResolver->resolve(User::class);
 
-        $user = new $classData($userData, $billingAddress, $deliveryAddress);
+        $user = new $classData($userData, $billingAddress, $deliveryAddress, $userByEmail);
 
         $user->changePassword($this->encoderFactory, $userData->password);
 

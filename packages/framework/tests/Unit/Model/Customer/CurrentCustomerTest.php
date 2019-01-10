@@ -72,9 +72,10 @@ class CurrentCustomerTest extends TestCase
     {
         $billingAddress = $this->createMock(BillingAddress::class);
         $userData = new UserData();
+        $userData->email = 'no-reply@shopsys.com';
         $userData->pricingGroup = $pricingGroup;
 
-        return new User($userData, $billingAddress, null);
+        return new User($userData, $billingAddress, null, null);
     }
 
     /**

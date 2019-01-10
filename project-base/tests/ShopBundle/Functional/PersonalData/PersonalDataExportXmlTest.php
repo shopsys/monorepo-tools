@@ -129,7 +129,7 @@ class PersonalDataExportXmlTest extends TransactionFunctionalTestCase
         $userData->email = 'no-reply@shopsys.com';
         $userData->telephone = '+420987654321';
 
-        $user = new User($userData, $billingAddress, $deliveryAddress);
+        $user = new User($userData, $billingAddress, $deliveryAddress, null);
 
         return $user;
     }

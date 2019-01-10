@@ -28,7 +28,8 @@ class ProductPriceCalculationForUserTest extends TestCase
         $billingAddress = $this->createMock(BillingAddress::class);
         $userData = new UserData();
         $userData->pricingGroup = $pricingGroup;
-        $user = new User($userData, $billingAddress, null);
+        $userData->email = 'no-reply@shopsys.com';
+        $user = new User($userData, $billingAddress, null, null);
         $expectedProductPrice = new ProductPrice(new Price(1, 1), false);
 
         $currentCustomerMock = $this->createMock(CurrentCustomer::class);

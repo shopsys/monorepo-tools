@@ -121,15 +121,16 @@ class User implements UserInterface, TimelimitLoginInterface, Serializable
      * @param \Shopsys\FrameworkBundle\Model\Customer\UserData $userData
      * @param \Shopsys\FrameworkBundle\Model\Customer\BillingAddress $billingAddress
      * @param \Shopsys\FrameworkBundle\Model\Customer\DeliveryAddress|null $deliveryAddress
+     * @param \Shopsys\FrameworkBundle\Model\Customer\User|null $userByEmail
      */
     public function __construct(
         UserData $userData,
         BillingAddress $billingAddress,
-        DeliveryAddress $deliveryAddress = null
+        ?DeliveryAddress $deliveryAddress,
+        ?self $userByEmail
     ) {
         $this->firstName = $userData->firstName;
         $this->lastName = $userData->lastName;
-        $this->email = mb_strtolower($userData->email);
         $this->billingAddress = $billingAddress;
         $this->deliveryAddress = $deliveryAddress;
         if ($userData->createdAt !== null) {
@@ -140,6 +141,8 @@ class User implements UserInterface, TimelimitLoginInterface, Serializable
         $this->domainId = $userData->domainId;
         $this->pricingGroup = $userData->pricingGroup;
         $this->telephone = $userData->telephone;
+
+        $this->changeEmail($userData->email, $userByEmail);
     }
 
     /**
@@ -166,13 +169,29 @@ class User implements UserInterface, TimelimitLoginInterface, Serializable
     {
         $email = mb_strtolower($email);
 
-        if ($userByEmail instanceof self) {
-            if (mb_strtolower($userByEmail->getEmail()) === $email && $this !== $userByEmail) {
-                throw new \Shopsys\FrameworkBundle\Model\Customer\Exception\DuplicateEmailException($email);
-            }
+        if ($this !== $userByEmail) {
+            $this->checkDuplicateEmail($email, $this->domainId, $userByEmail);
         }
 
         $this->email = $email;
+    }
+
+    /**
+     * @param string $email
+     * @param int $domainId
+     * @param self|null $userByEmail
+     */
+    protected function checkDuplicateEmail(string $email, int $domainId, ?self $userByEmail): void
+    {
+        if ($userByEmail === null) {
+            return;
+        }
+
+        $isSameEmail = ($userByEmail->getEmail() === $email);
+        $isSameDomain = ($userByEmail->getDomainId() === $domainId);
+        if ($isSameEmail && $isSameDomain) {
+            throw new \Shopsys\FrameworkBundle\Model\Customer\Exception\DuplicateEmailException($email);
+        }
     }
 
     /**

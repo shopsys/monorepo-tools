@@ -132,7 +132,10 @@ class UserFormType extends AbstractType
                         'maxMessage' => 'Email cannot be longer then {{ limit }} characters',
                     ]),
                     new Email(['message' => 'Please enter valid e-mail']),
-                    new UniqueEmail(['ignoredEmail' => $user !== null ? $user->getEmail() : null]),
+                    new UniqueEmail([
+                        'ignoredEmail' => $user !== null ? $user->getEmail() : null,
+                        'domainId' => $options['domain_id'],
+                    ]),
                 ],
                 'label' => t('E-mail'),
             ])
