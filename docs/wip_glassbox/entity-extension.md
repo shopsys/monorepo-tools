@@ -46,7 +46,6 @@ The only real problem we encountered was Gedmo's TreeListener, that is used for 
 
 This event subscriber also clears metadata about inheritance from parent entities because,
 in Doctrine, a MappedSuperclass entity cannot be also a root entity of true mapped inheritance.
-The only real instance of true mapped inheritance in the framework is the OrderItem.
 
 ### LoadORMMetadataSubscriber
 
@@ -95,18 +94,6 @@ Entity data are created by factories only.
 These factories work as same as entity factories.
 If any part of framework creates an entity data, it uses a factory.
 So in the project, we can change the factory to produce extended entity data instead of original and the whole system will create extended entity data.
-
-## OrderItem and true mapped inheritance
-
-![class inheritance of the OrderItem entity](img/order-item.png)
-
-If we want to extend OrderItem entity itself, we have to extend OrderItem and also all descendants and we end up with inheritance tree shown above.
-In Dream project, the descendants (DreamOrderPayment etc.) must extend DreamOrderItem (a direct descendant of OrderItem),
-so they have to contain duplicated code from the original descendant entities.
-DiscriminatorMap must always contain descendants' FQN because LoadORMMetadataSubscriber reads raw original annotations.
-
-**Warning: Extending `OrderItem` and its descendants is a problematic issue that may cause [some problems](https://github.com/shopsys/shopsys/issues/621#issuecomment-442098935).**
-**We are planning to solve this as soon as possible, until then, we do not recommend extending order items. Otherwise, you might be forced to use dirty hacks to make your application work.**
 
 ## How can I extend an entity?
 
