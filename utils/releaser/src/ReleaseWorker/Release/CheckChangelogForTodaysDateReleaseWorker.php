@@ -5,8 +5,10 @@ declare(strict_types=1);
 namespace Shopsys\Releaser\ReleaseWorker\Release;
 
 use Nette\Utils\DateTime;
+use Nette\Utils\FileSystem;
 use Nette\Utils\Strings;
 use PharIo\Version\Version;
+use Shopsys\Releaser\FileManipulator\ChangelogFileManipulator;
 use Shopsys\Releaser\ReleaseWorker\AbstractShopsysReleaseWorker;
 use Shopsys\Releaser\Stage;
 use Symplify\MonorepoBuilder\Release\Message;
@@ -14,6 +16,19 @@ use Symplify\PackageBuilder\FileSystem\SmartFileInfo;
 
 final class CheckChangelogForTodaysDateReleaseWorker extends AbstractShopsysReleaseWorker
 {
+    /**
+     * @var \Shopsys\Releaser\FileManipulator\ChangelogFileManipulator
+     */
+    private $changelogFileManipulator;
+
+    /**
+     * @param \Shopsys\Releaser\FileManipulator\ChangelogFileManipulator $changelogFileManipulator
+     */
+    public function __construct(ChangelogFileManipulator $changelogFileManipulator)
+    {
+        $this->changelogFileManipulator = $changelogFileManipulator;
+    }
+
     /**
      * @param \PharIo\Version\Version $version
      * @return string
@@ -41,17 +56,25 @@ final class CheckChangelogForTodaysDateReleaseWorker extends AbstractShopsysRele
      */
     public function work(Version $version): void
     {
-        $smartFileInfo = new SmartFileInfo(getcwd() . '/CHANGELOG.md');
-
+        $changelogFilePath = getcwd() . '/CHANGELOG.md';
+        $smartFileInfo = new SmartFileInfo($changelogFilePath);
         $fileContent = $smartFileInfo->getContents();
 
         $todayInString = $this->getTodayAsString();
 
-        $pattern = '#\#\# ' . preg_quote($version->getVersionString(), '#') . ' - ' . $todayInString . '#';
+        /**
+         * @see https://regex101.com/r/izBgtv/6
+         */
+        $pattern = '#\#\# \[' . preg_quote($version->getVersionString()) . '\]\(.*\) - (\d+-\d+-\d+)#';
+        $match = Strings::match($fileContent, $pattern);
+        if ($match === null) {
+            $this->symfonyStyle->error('Unable to find current release headline. You need to check the release date in CHANGELOG.md manually.');
+            $this->confirm('Confirm you have manually checked the release date in CHANGELOG.md');
+        }
+        if ($todayInString !== $match[1]) {
+            $newChangelogContent = $this->changelogFileManipulator->updateReleaseDateOfCurrentReleaseToToday($fileContent, $pattern, $todayInString);
+            FileSystem::write($changelogFilePath, $newChangelogContent);
 
-        if (Strings::match($fileContent, $pattern)) {
-            $this->symfonyStyle->success(Message::SUCCESS);
-        } else {
             $this->symfonyStyle->note(sprintf(
                 'CHANGELOG.md date for "%s" version was updated to "%s".',
                 $version->getVersionString(),
@@ -60,6 +83,7 @@ final class CheckChangelogForTodaysDateReleaseWorker extends AbstractShopsysRele
 
             $this->commit('CHANGELOG.md date updated to today');
         }
+        $this->symfonyStyle->success(Message::SUCCESS);
     }
 
     /**
