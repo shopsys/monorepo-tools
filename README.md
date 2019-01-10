@@ -53,6 +53,8 @@ List of typical projects built on previous versions of Shopsys Framework:
 * [Elektro Vlášek](https://www.elektrovlasek.cz/)
 * [AB COM CZECH](https://www.ab-com.cz/)
 * [Knihy.cz](https://www.knihy.cz/)
+* [B2B portal Démos](https://beta.demos24plus.com/login/)
+* [Agátin svět](https://www.agatinsvet.cz/)
 
 ## How to Start a New Project
 The *shopsys/shopsys* package is a monolithic repository, a single development environment, for management of all parts of Shopsys Framework.
