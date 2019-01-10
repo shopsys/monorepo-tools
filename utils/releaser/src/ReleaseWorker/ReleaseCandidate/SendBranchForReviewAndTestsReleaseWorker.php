@@ -16,7 +16,7 @@ final class SendBranchForReviewAndTestsReleaseWorker extends AbstractShopsysRele
      */
     public function getDescription(Version $version): string
     {
-        return 'Send the branch for review and tests';
+        return '[Manually] Send the branch for review and tests';
     }
 
     /**

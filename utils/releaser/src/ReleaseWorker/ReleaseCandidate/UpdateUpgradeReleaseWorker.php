@@ -84,6 +84,7 @@ final class UpdateUpgradeReleaseWorker extends AbstractShopsysReleaseWorker
         $this->updateGeneralUpgradeFile($version);
 
         $this->symfonyStyle->success(Message::SUCCESS);
+        $this->symfonyStyle->note('Review all the upgrading files whether they satisfy our rules and guidelines');
 
         $this->confirm('Confirm all upgrading files are ready for the release and the changes are committed');
     }

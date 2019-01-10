@@ -16,7 +16,7 @@ final class EnsureReleaseHighlightsPostIsReleasedReleaseWorker extends AbstractS
      */
     public function getDescription(Version $version): string
     {
-        return 'Ensure "Release highlights" is released';
+        return '[Manually] Ensure "Release highlights" is released';
     }
 
     /**

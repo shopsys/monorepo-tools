@@ -16,7 +16,7 @@ final class CreateReleaseNotesReleaseWorker extends AbstractShopsysReleaseWorker
      */
     public function getDescription(Version $version): string
     {
-        return 'Create release notes for the new release on Github (link the changelog here)';
+        return '[Manually] Create release notes for the new release on Github (link the changelog here)';
     }
 
     /**

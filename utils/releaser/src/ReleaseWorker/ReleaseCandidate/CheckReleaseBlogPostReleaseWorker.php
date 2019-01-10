@@ -16,7 +16,7 @@ final class CheckReleaseBlogPostReleaseWorker extends AbstractShopsysReleaseWork
      */
     public function getDescription(Version $version): string
     {
-        return 'Prepare "Release highlights" post on https://blog.shopsys.com';
+        return '[Manually] Ensure "Release highlights" post will be prepared for release on https://blog.shopsys.com in a few days';
     }
 
     /**
@@ -33,7 +33,7 @@ final class CheckReleaseBlogPostReleaseWorker extends AbstractShopsysReleaseWork
      */
     public function work(Version $version): void
     {
-        $this->confirm('Confirm the post is prepared');
+        $this->confirm('Confirm the post will be prepared in a few days');
     }
 
     /**

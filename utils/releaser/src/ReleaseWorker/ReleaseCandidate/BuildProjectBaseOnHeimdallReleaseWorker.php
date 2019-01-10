@@ -16,7 +16,7 @@ final class BuildProjectBaseOnHeimdallReleaseWorker extends AbstractShopsysRelea
      */
     public function getDescription(Version $version): string
     {
-        return 'Build project-base on Heimdall';
+        return '[Manually] Build project-base on Heimdall';
     }
 
     /**

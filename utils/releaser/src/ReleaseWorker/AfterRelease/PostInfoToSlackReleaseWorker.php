@@ -16,7 +16,7 @@ final class PostInfoToSlackReleaseWorker extends AbstractShopsysReleaseWorker
      */
     public function getDescription(Version $version): string
     {
-        return 'Post info to slack channels';
+        return '[Manually] Post info to slack channels';
     }
 
     /**

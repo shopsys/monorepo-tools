@@ -24,7 +24,7 @@ final class ResolveDocsTodoReleaseWorker extends AbstractShopsysReleaseWorker
      */
     public function getDescription(Version $version): string
     {
-        return 'Resolve TODO comments in *.md files';
+        return '[Manually] Resolve TODO comments in *.md files';
     }
 
     /**

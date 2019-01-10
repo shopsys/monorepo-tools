@@ -25,7 +25,7 @@ final class CheckHeimdallBuildReleaseWorker extends AbstractShopsysReleaseWorker
      */
     public function getDescription(Version $version): string
     {
-        return 'Check builds on heimdall';
+        return '[Manually] Check builds on Heimdall';
     }
 
     /**
@@ -43,6 +43,6 @@ final class CheckHeimdallBuildReleaseWorker extends AbstractShopsysReleaseWorker
     {
         $this->symfonyStyle->note('It is suitable to discard the deletion of the application in Kubernetes for the new tag');
         $this->symfonyStyle->note('Currently, master will fail anyway because in microservice, there is a dependency on coding standards that are not released yet at the given moment.');
-        $this->confirm('Confirm heimdall build passes');
+        $this->confirm('Confirm Heimdall build passes');
     }
 }

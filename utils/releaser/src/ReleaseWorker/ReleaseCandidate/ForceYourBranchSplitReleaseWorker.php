@@ -16,7 +16,7 @@ final class ForceYourBranchSplitReleaseWorker extends AbstractShopsysReleaseWork
      */
     public function getDescription(Version $version): string
     {
-        return 'Force split your branch';
+        return '[Manually] Push and force-split your branch';
     }
 
     /**
@@ -33,7 +33,7 @@ final class ForceYourBranchSplitReleaseWorker extends AbstractShopsysReleaseWork
      */
     public function work(Version $version): void
     {
-        $this->symfonyStyle->note('use tool-monorepo-force-split-branch on Heimdall');
+        $this->symfonyStyle->note('push your branch and split it using tool-monorepo-force-split-branch on Heimdall');
         $this->confirm('Continue after the branch is split');
     }
 

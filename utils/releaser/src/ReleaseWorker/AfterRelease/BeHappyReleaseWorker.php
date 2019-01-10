@@ -16,7 +16,7 @@ final class BeHappyReleaseWorker extends AbstractShopsysReleaseWorker
      */
     public function getDescription(Version $version): string
     {
-        return 'Be happy - the new version of Shopsys Framework is released!';
+        return '[Manually] Be happy - the new version of Shopsys Framework is released!';
     }
 
     /**

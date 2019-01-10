@@ -16,7 +16,7 @@ final class StopMergingToMasterReleaseWorker extends AbstractShopsysReleaseWorke
      */
     public function getDescription(Version $version): string
     {
-        return 'Tell team to stop merging to `master` branch';
+        return '[Manually] Tell team to stop merging to `master` branch';
     }
 
     /**

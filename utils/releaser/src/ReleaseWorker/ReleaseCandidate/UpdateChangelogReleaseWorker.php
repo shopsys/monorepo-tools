@@ -32,7 +32,7 @@ final class UpdateChangelogReleaseWorker extends AbstractShopsysReleaseWorker
      */
     public function getDescription(Version $version): string
     {
-        return 'Dump new features to CHANGELOG.md, clean from placeholders and manually check everything is ok';
+        return 'Dump new features to CHANGELOG.md, clean from placeholders and [Manually] check everything is ok';
     }
 
     /**

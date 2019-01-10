@@ -16,7 +16,7 @@ final class MeasurePerformanceReleaseWorker extends AbstractShopsysReleaseWorker
      */
     public function getDescription(Version $version): string
     {
-        return 'Measure the performance on performator';
+        return '[Manually] Measure the performance on Performator';
     }
 
     /**

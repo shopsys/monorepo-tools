@@ -33,7 +33,7 @@ final class CheckShopsysInstallReleaseWorker extends AbstractShopsysReleaseWorke
      */
     public function getDescription(Version $version): string
     {
-        return 'Install Shopsys Framework (project-base) using installation guide';
+        return '[Manually] Install Shopsys Framework (project-base) using installation guides (using Docker on Linux and Mac)';
     }
 
     /**

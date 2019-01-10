@@ -16,7 +16,7 @@ final class CreateAndPushGitTagReleaseWorker extends AbstractShopsysReleaseWorke
      */
     public function getDescription(Version $version): string
     {
-        return 'Create and push a git tag';
+        return 'Create and [Manually] push a git tag';
     }
 
     /**
