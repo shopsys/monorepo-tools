@@ -8,22 +8,17 @@ use Doctrine\ORM\Mapping\Driver\AnnotationDriver;
 use Doctrine\ORM\Tools\SchemaTool;
 use Shopsys\FrameworkBundle\Component\EntityExtension\EntityNameResolver;
 use Shopsys\FrameworkBundle\Model\Order\Item\OrderItem;
-use Shopsys\FrameworkBundle\Model\Payment\Payment;
 use Shopsys\FrameworkBundle\Model\Product\Brand\Brand;
 use Shopsys\ShopBundle\Model\Category\Category;
 use Shopsys\ShopBundle\Model\Order\Order;
 use Shopsys\ShopBundle\Model\Order\Order as ExtendedOrder;
 use Shopsys\ShopBundle\Model\Product\Brand\Brand as ExtendedBrand;
 use Shopsys\ShopBundle\Model\Product\Product;
-use Shopsys\ShopBundle\Model\Transport\Transport;
 use Tests\ShopBundle\Functional\EntityExtension\Model\CategoryManyToManyBidirectionalEntity;
 use Tests\ShopBundle\Functional\EntityExtension\Model\CategoryOneToManyBidirectionalEntity;
 use Tests\ShopBundle\Functional\EntityExtension\Model\CategoryOneToOneBidirectionalEntity;
 use Tests\ShopBundle\Functional\EntityExtension\Model\ExtendedCategory;
 use Tests\ShopBundle\Functional\EntityExtension\Model\ExtendedOrderItem;
-use Tests\ShopBundle\Functional\EntityExtension\Model\ExtendedOrderPayment;
-use Tests\ShopBundle\Functional\EntityExtension\Model\ExtendedOrderProduct;
-use Tests\ShopBundle\Functional\EntityExtension\Model\ExtendedOrderTransport;
 use Tests\ShopBundle\Functional\EntityExtension\Model\ExtendedProduct;
 use Tests\ShopBundle\Functional\EntityExtension\Model\ProductManyToManyBidirectionalEntity;
 use Tests\ShopBundle\Functional\EntityExtension\Model\ProductOneToManyBidirectionalEntity;
@@ -43,9 +38,7 @@ class EntityExtensionTest extends TransactionFunctionalTestCase
     const ONE_TO_MANY_SELF_REFERENCING_CATEGORY_ID = 3;
     const MANY_TO_MANY_SELF_REFERENCING_CATEGORY_ID = 4;
 
-    const ORDER_TRANSPORT_ID = 1;
-    const ORDER_PAYMENT_ID = 2;
-    const ORDER_PRODUCT_ID = 3;
+    const ORDER_ITEM_ID = 1;
 
     /**
      * @var \Doctrine\ORM\EntityManager
@@ -54,7 +47,6 @@ class EntityExtensionTest extends TransactionFunctionalTestCase
 
     public function setUp()
     {
-        $this->markTestSkipped();
         parent::setUp();
         $this->em = $this->getEntityManager();
         $this->registerTestEntities();
@@ -152,9 +144,7 @@ class EntityExtensionTest extends TransactionFunctionalTestCase
 
         $this->doTestExtendedEntityInstantiation(Product::class, ExtendedProduct::class, self::MAIN_PRODUCT_ID);
         $this->doTestExtendedEntityInstantiation(Category::class, ExtendedCategory::class, self::MAIN_CATEGORY_ID);
-        $this->doTestExtendedEntityInstantiation(OrderItem::class, ExtendedOrderPayment::class, self::ORDER_PAYMENT_ID);
-        $this->doTestExtendedEntityInstantiation(OrderItem::class, ExtendedOrderProduct::class, self::ORDER_PRODUCT_ID);
-        $this->doTestExtendedEntityInstantiation(OrderItem::class, ExtendedOrderTransport::class, self::ORDER_TRANSPORT_ID);
+        $this->doTestExtendedEntityInstantiation(OrderItem::class, ExtendedOrderItem::class, self::ORDER_ITEM_ID);
     }
 
     private function doTestExtendedProductPersistence(): void
@@ -409,68 +399,14 @@ class EntityExtensionTest extends TransactionFunctionalTestCase
 
     private function doTestExtendedOrderItemsPersistence(): void
     {
-        $orderTransport = $this->getOrderTransport(self::ORDER_TRANSPORT_ID);
-        $orderTransport->setStringField('string for order transport');
-        $orderTransport->setTransportStringField('specific string for order transport');
-
-        $orderPayment = $this->getOrderPayment(self::ORDER_PAYMENT_ID);
-        $orderPayment->setStringField('string for order payment');
-        $orderPayment->setPaymentStringField('specific string for order payment');
-
-        $orderProduct = $this->getOrderProduct(self::ORDER_PRODUCT_ID);
-        $orderProduct->setStringField('string for order product');
-        $orderProduct->setProductStringField('specific string for order product');
+        $orderItem = $this->getOrderItem(self::ORDER_ITEM_ID);
+        $orderItem->setStringField('string value');
 
         $this->em->flush();
         $this->em->clear();
 
-        $foundTransport = $this->getOrderTransport(self::ORDER_TRANSPORT_ID);
-        $this->assertSame('string for order transport', $foundTransport->getStringField());
-        $this->assertSame('specific string for order transport', $foundTransport->getTransportStringField());
-        $this->assertInstanceOf(Transport::class, $foundTransport->getTransport());
-
-        $foundPayment = $this->getOrderPayment(self::ORDER_PAYMENT_ID);
-        $this->assertSame('string for order payment', $foundPayment->getStringField());
-        $this->assertSame('specific string for order payment', $foundPayment->getPaymentStringField());
-        $this->assertInstanceOf(Payment::class, $foundPayment->getPayment());
-
-        $foundProduct = $this->getOrderProduct(self::ORDER_PRODUCT_ID);
-        $this->assertSame('string for order product', $foundProduct->getStringField());
-        $this->assertSame('specific string for order product', $foundProduct->getProductStringField());
-        $this->assertInstanceOf(ExtendedProduct::class, $foundProduct->getProduct());
-    }
-
-    /**
-     * @param int $id
-     * @return \Tests\ShopBundle\Functional\EntityExtension\Model\ExtendedOrderTransport
-     */
-    private function getOrderTransport(int $id): ExtendedOrderTransport
-    {
-        $orderItem = $this->getOrderItem($id);
-        $this->assertInstanceOf(ExtendedOrderTransport::class, $orderItem);
-        return $orderItem;
-    }
-
-    /**
-     * @param int $id
-     * @return \Tests\ShopBundle\Functional\EntityExtension\Model\ExtendedOrderPayment
-     */
-    private function getOrderPayment(int $id): ExtendedOrderPayment
-    {
-        $orderItem = $this->getOrderItem($id);
-        $this->assertInstanceOf(ExtendedOrderPayment::class, $orderItem);
-        return $orderItem;
-    }
-
-    /**
-     * @param int $id
-     * @return \Tests\ShopBundle\Functional\EntityExtension\Model\ExtendedOrderProduct
-     */
-    private function getOrderProduct(int $id): ExtendedOrderProduct
-    {
-        $orderItem = $this->getOrderItem($id);
-        $this->assertInstanceOf(ExtendedOrderProduct::class, $orderItem);
-        return $orderItem;
+        $foundItem = $this->getOrderItem(self::ORDER_ITEM_ID);
+        $this->assertSame('string value', $foundItem->getStringField());
     }
 
     /**
