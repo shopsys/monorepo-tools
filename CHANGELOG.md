@@ -24,11 +24,11 @@ Packages are formatted by release version. You can see all the changes done to p
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
-The changelog is generated during the release process using [ChangelogLinker](https://github.com/symplify/changeloglinker) since `7.0.0-alpha6` release.
+The changelog is generated during the release process using [ChangelogLinker](https://github.com/symplify/changeloglinker) since `v7.0.0-alpha6` release.
 
 <!-- changelog-linker -->
 
-## [7.0.0-beta4] - 2018-11-28
+## [v7.0.0-beta4] - 2018-11-28
 
 ### [shopsys/project-base]
 
@@ -37,7 +37,7 @@ The changelog is generated during the release process using [ChangelogLinker](ht
 - [#635] allow composer unlimited memory
 - [#616] services.yml: automatic registration of classes with suffix "Repository" in namespace `ShopBundle\Model\`
 
-## [7.0.0-beta3] - 2018-11-27
+## [v7.0.0-beta3] - 2018-11-27
 
 ### [shopsys/coding-standards]
 
@@ -111,7 +111,7 @@ The changelog is generated during the release process using [ChangelogLinker](ht
 - [#528] Removed `depends_on` and `links` from `docker-compose.yml` files
 - [#551] github token erase
 
-## [7.0.0-beta2] - 2018-10-19
+## [v7.0.0-beta2] - 2018-10-19
 
 ### [shopsys/framework]
 
@@ -170,7 +170,7 @@ The changelog is generated during the release process using [ChangelogLinker](ht
 
 - [#521] Fixed typo in `.github/ISSUE_TEMPLATE.md`
 
-## [7.0.0-beta1] - 2018-09-18
+## [v7.0.0-beta1] - 2018-09-18
 
 ### [shopsys/framework]
 
@@ -190,7 +190,7 @@ The changelog is generated during the release process using [ChangelogLinker](ht
 - [#476] Demo images are part of the framework package now
 - [#468] Settings for docker on mac are now more optimized
 
-## [7.0.0-alpha6] - 2018-09-14
+## [v7.0.0-alpha6] - 2018-09-14
 
 ### [shopsys/coding-standards]
 
@@ -250,7 +250,7 @@ The changelog is generated during the release process using [ChangelogLinker](ht
 
 - [#436] fix: Symfony >=3.4.15 marked as conflicting in composer.json
 
-## [7.0.0-alpha5] - 2018-08-22
+## [v7.0.0-alpha5] - 2018-08-22
 ### [shopsys/framework]
 #### Added
 - [#354 - Product search in elasticsearch](https://github.com/shopsys/shopsys/pull/354)
@@ -319,8 +319,8 @@ The changelog is generated during the release process using [ChangelogLinker](ht
     - added configuration file for GitHub Stale bot
     - templates for pull requests and issues were moved into [.github](/.github) folder
 - [#401 - Microservice Product Search](https://github.com/shopsys/shopsys/pull/401)
-    - added [Microservice Product Search](https://github.com/shopsys/microservice-product-search), microservice is used for the searching of products on Shopsys Framework 
-       
+    - added [Microservice Product Search](https://github.com/shopsys/microservice-product-search), microservice is used for the searching of products on Shopsys Framework
+
 #### Changed
 - [#389 - Standardized YAML files indentation to 4 spaces](https://github.com/shopsys/shopsys/pull/389)
 
@@ -328,7 +328,7 @@ The changelog is generated during the release process using [ChangelogLinker](ht
 #### Fixed
 - [#399 - monorepo-tools: Handle rewriting of empty commits](https://github.com/shopsys/shopsys/pull/399) [@drekbour]
 
-## [7.0.0-alpha4] - 2018-08-02
+## [v7.0.0-alpha4] - 2018-08-02
 ### [shopsys/framework]
 #### Added
 - [#335 - Possibility to add a new administration page](https://github.com/shopsys/shopsys/pull/335)
@@ -411,7 +411,7 @@ The changelog is generated during the release process using [ChangelogLinker](ht
 
 #### Changed
 - [#296 - normalize phing target "timezones-check"](https://github.com/shopsys/shopsys/pull/296): [@pk16011990]
-    
+
 ### [shopsys/monorepo-tools]
 #### Added
 - [#345 - monorepo-tools: allow incremental build of monorepo](https://github.com/shopsys/shopsys/pull/345) [@lukaso]
@@ -479,7 +479,7 @@ It was only important with [the original open-box architecture](https://blog.sho
 #### Fixed
 - [#323 - Packages that depend on shopsys/framework need redis extension enabled](https://github.com/shopsys/shopsys/pull/323)
     - redis extension in travis config was enabled
-    
+
 ### [shopsys/project-base]
 #### Added
 - configuration for admin controllers as a part of [#335 - Possibility to add a new administration page](https://github.com/shopsys/shopsys/pull/335)
@@ -498,7 +498,7 @@ It was only important with [the original open-box architecture](https://blog.sho
 - [#368 - Microservice Product Search](https://github.com/shopsys/shopsys/pull/368)
     - the repository was added, extracting current product search of Shopsys Framework
 
-## [7.0.0-alpha3] - 2018-07-03
+## [v7.0.0-alpha3] - 2018-07-03
 ### [shopsys/framework]
 #### Changed
 - [#272 - Changed concept of Components](https://github.com/shopsys/shopsys/pull/143):
@@ -595,7 +595,7 @@ It was only important with [the original open-box architecture](https://blog.sho
 #### Security
 - [#178 - JsFormValidatorBundle security issue with Ajax validation](https://github.com/shopsys/shopsys/pull/178)
     - removed the bundle's public route that allowed lookup any DB table by any field
-    - the purpose of the route is for ajax validation of an entity uniqueness but the feature is not used anyway  
+    - the purpose of the route is for ajax validation of an entity uniqueness but the feature is not used anyway
 
 ### [shopsys/shopsys]
 #### Added
@@ -713,7 +713,7 @@ It was only important with [the original open-box architecture](https://blog.sho
     - updated to Twig 2.4.8
     - all depracated calls has been fixed
 
-## [7.0.0-alpha2] - 2018-05-24
+## [v7.0.0-alpha2] - 2018-05-24
 ### [shopsys/framework]
 #### Added
 - [#74 - Export personal information](https://github.com/shopsys/shopsys/pull/74):
@@ -862,7 +862,7 @@ It was only important with [the original open-box architecture](https://blog.sho
     - visibility of all private properties and methods of facades was changed to protected
         - protected visibility allows overriding of behavior from projects
 
-## 7.0.0-alpha1 - 2018-04-12
+## v7.0.0-alpha1 - 2018-04-12
 - We are releasing version 7 (open-source project known as Shopsys Framework) to better distinguish it from Shopsys 6
   (internal platform of Shopsys company) and older versions that we have been developing and improving for 15 years.
 
@@ -901,7 +901,7 @@ from its open-box repository [shopsys/project-base](https://github.com/shopsys/p
         - ArticleFormType
         - AdvertFormType
         - AdministratorFormType
-        
+
 ### [shopsys/http-smoke-testing]
 #### Changed
 - added support of phpunit/phpunit ^6.0 and ^7.0 (@simara-svatopluk)
@@ -1342,22 +1342,22 @@ That's why is this section formatted differently.
  - updated SitemapListener to avoid using of deprecated SitemapListenerInterface
 - updated symfony/swiftmailer-bundle to version 3.2.0 in order to fix deprecated calls 
 - all calls of Form::isValid() are called only on submitted forms in order to prevent deprecated call 
-- symlink so root/bin acts like root/project-base/bin  
-- all commands are now services, that are lazy loaded with autowired dependencies  
+- symlink so root/bin acts like root/project-base/bin
+- all commands are now services, that are lazy loaded with autowired dependencies
 - NewsletterFacadeTest: renamed properties to match class name 
 
 ##### Fixed
 - `BrandFacade::create()` now generates friendly URL for all domains (@sspooky13)
 - `Admin/HeurekaController::embedWidgetAction()` moved to new `Front/HeurekaController` as the action is called in FE template
-- PHPUnit tests do not fail on Windows machine with PHP 7.0 because of excessively long file paths  
+- PHPUnit tests do not fail on Windows machine with PHP 7.0 because of excessively long file paths
 - customizeBundle.js: on-submit actions are no longer triggered when form validation error occurs 
 - fixed google product feed availability values by updating it to v0.1.2 
-- reloading of order preview now calls `Shopsys.register.registerNewContent()` (@petr.kadlec)  
+- reloading of order preview now calls `Shopsys.register.registerNewContent()` (@petr.kadlec)
 - CurrentPromoCodeFacace: promo code is not searched in database if code is empty (@petr.kadlec)
 - CategoryRepository::getCategoriesWithVisibleChildren() checks visibility of children (@petr.kadlec)
 - added missing migration for privacy policy article 
 - OrderStatusFilter: show names in labels instead of ids 
-- legal conditions text in order 3rd step is not HTML escaped anymore  
+- legal conditions text in order 3rd step is not HTML escaped anymore
 - product search now does not cause 500 error when the search string ends with backslash
 
 ##### Removed
@@ -1623,15 +1623,15 @@ That's why is this section formatted differently.
     - YesNoType
 - `.travis.yml` file with Travis CI configuration
 
-[7.0.0-beta4]: https://github.com/shopsys/shopsys/compare/v7.0.0-beta3...v7.0.0-beta4
-[7.0.0-beta3]: https://github.com/shopsys/shopsys/compare/v7.0.0-beta2...v7.0.0-beta3
-[7.0.0-beta2]: https://github.com/shopsys/shopsys/compare/v7.0.0-beta1...v7.0.0-beta2
-[7.0.0-beta1]: https://github.com/shopsys/shopsys/compare/v7.0.0-alpha6...v7.0.0-beta1
-[7.0.0-alpha6]: https://github.com/shopsys/shopsys/compare/v7.0.0-alpha5...v7.0.0-alpha6
-[7.0.0-alpha5]: https://github.com/shopsys/shopsys/compare/v7.0.0-alpha4...v7.0.0-alpha5
-[7.0.0-alpha4]: https://github.com/shopsys/shopsys/compare/v7.0.0-alpha3...v7.0.0-alpha4
-[7.0.0-alpha3]: https://github.com/shopsys/shopsys/compare/v7.0.0-alpha2...v7.0.0-alpha3
-[7.0.0-alpha2]: https://github.com/shopsys/shopsys/compare/v7.0.0-alpha1...v7.0.0-alpha2
+[v7.0.0-beta4]: https://github.com/shopsys/shopsys/compare/v7.0.0-beta3...v7.0.0-beta4
+[v7.0.0-beta3]: https://github.com/shopsys/shopsys/compare/v7.0.0-beta2...v7.0.0-beta3
+[v7.0.0-beta2]: https://github.com/shopsys/shopsys/compare/v7.0.0-beta1...v7.0.0-beta2
+[v7.0.0-beta1]: https://github.com/shopsys/shopsys/compare/v7.0.0-alpha6...v7.0.0-beta1
+[v7.0.0-alpha6]: https://github.com/shopsys/shopsys/compare/v7.0.0-alpha5...v7.0.0-alpha6
+[v7.0.0-alpha5]: https://github.com/shopsys/shopsys/compare/v7.0.0-alpha4...v7.0.0-alpha5
+[v7.0.0-alpha4]: https://github.com/shopsys/shopsys/compare/v7.0.0-alpha3...v7.0.0-alpha4
+[v7.0.0-alpha3]: https://github.com/shopsys/shopsys/compare/v7.0.0-alpha2...v7.0.0-alpha3
+[v7.0.0-alpha2]: https://github.com/shopsys/shopsys/compare/v7.0.0-alpha1...v7.0.0-alpha2
 
 [shopsys/shopsys]: https://github.com/shopsys/shopsys
 [shopsys/project-base]: https://github.com/shopsys/project-base

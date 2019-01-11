@@ -1,0 +1,10 @@
+# setup for MonorepoBuilder: https://github.com/symplify/monorepobuilder
+imports:
+    # release workers for "release" command, run:
+    # e.g. "vendor/bin/monorepo-builder release vX.Y --dry-run -v"
+    - { resource: "utils/releaser/config/services.yaml" }
+
+parameters:
+    enable_default_release_workers: false
+    # require "--stage <name>" when release command is run
+    is_stage_required: true

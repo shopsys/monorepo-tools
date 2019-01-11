@@ -1,0 +1,30 @@
+parameters:
+    # name of the monorepo package, for UPGRADE.md and CHANGELOG.md links
+    monorepo_package_name: "shopsys/shopsys"
+
+    # these stages can use already existing tag; newer version than the last one is required in all other stages by default
+    stages_to_allow_existing_tag:
+        - "after-release"
+
+services:
+    _defaults:
+        autowire: true
+
+    Shopsys\Releaser\:
+        resource: "../src"
+        exclude: "../src/Exception"
+
+    GuzzleHttp\Client: ~
+    Symfony\Component\Console\Helper\QuestionHelper: ~
+
+    Shopsys\Releaser\FilesProvider\ComposerJsonFilesProvider:
+        arguments:
+            - ['packages', 'microservices', 'project-base']
+
+    Twig_Environment:
+        class: Twig_Environment
+
+    Twig_LoaderInterface:
+        class: Twig_Loader_Filesystem
+        arguments:
+            - ['docs/upgrade/template']

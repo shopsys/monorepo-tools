@@ -21,6 +21,9 @@ There you can find links to upgrade notes for other versions too.
     - add default value (e.g. empty string) for `REDIS_PREFIX` env variable to your `app/config/parameters.yml.dist`, `app/config/parameters.yml` (if you already have your parameters file), and to your `docker/php-fpm/Dockerfile`
     - modify your Redis configuration (`app/config/packages/snc_redis.yml`) by prefixing all the prefix values with the value of the env variable (`%env(REDIS_PREFIX)%`)
 
+### Tools
+- *(optional)* drop `--verbose` from all easy-coding-standard phing targets (look for `${path.ecs.executable}`) as the package was upgraded in [#623](https://github.com/shopsys/shopsys/pull/623/) and now outputs name of each file checked in the verbose mode
+
 ### Application
 - stop providing the option `is_group_container_to_render_as_the_last_one` to the `FormGroup` in your forms, the option was removed
     - the separators are rendered automatically since [#619](https://github.com/shopsys/shopsys/pull/619) was merged and the option hasn't been used anymore
