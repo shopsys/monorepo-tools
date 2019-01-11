@@ -23,7 +23,6 @@ class AppKernel extends Kernel
             new Intaro\PostgresSearchBundle\IntaroPostgresSearchBundle(),
             new JMS\TranslationBundle\JMSTranslationBundle(),
             new Knp\Bundle\MenuBundle\KnpMenuBundle(),
-            new Oneup\FlysystemBundle\OneupFlysystemBundle(),
             new Presta\SitemapBundle\PrestaSitemapBundle(),
             new Prezent\Doctrine\TranslatableBundle\PrezentDoctrineTranslatableBundle(),
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),

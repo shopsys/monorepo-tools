@@ -103,7 +103,6 @@
     "league/flysystem": "^1.0",
     "nikic/php-parser": "^3.1",
     "object-calisthenics/phpcs-calisthenics-rules": "^3.1",
-    "oneup/flysystem-bundle": "^3.0",
     "phing/phing": "^2.16.1",
     "phpunit/phpunit": "^7.0",
     "presta/sitemap-bundle": "^1.5.3",
