@@ -79,6 +79,12 @@ yq write --inplace project-base/kubernetes/deployments/webserver-php-fpm.yml spe
 yq write --inplace project-base/kubernetes/deployments/webserver-php-fpm.yml spec.template.spec.containers[0].volumeMounts[1].mountPath /var/www/html/project-base/app/config/domains_urls.yml
 yq write --inplace project-base/kubernetes/deployments/webserver-php-fpm.yml spec.template.spec.containers[0].volumeMounts[2].mountPath /var/www/html/project-base/app/config/parameters.yml
 
+# Set environment variables to container and initContainer for Google Cloud Storage connection - set it to null
+yq write --inplace project-base/kubernetes/deployments/webserver-php-fpm.yml spec.template.spec.containers[0].env[0].value ''
+yq write --inplace project-base/kubernetes/deployments/webserver-php-fpm.yml spec.template.spec.containers[0].env[1].value ''
+yq write --inplace project-base/kubernetes/deployments/webserver-php-fpm.yml spec.template.spec.initContainers[1].env[0].value ''
+yq write --inplace project-base/kubernetes/deployments/webserver-php-fpm.yml spec.template.spec.initContainers[1].env[1].value ''
+
 # Deploy application using kubectl
 kubectl delete namespace ${JOB_NAME} || true
 kubectl create namespace ${JOB_NAME}

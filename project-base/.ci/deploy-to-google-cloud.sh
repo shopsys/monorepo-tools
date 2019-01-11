@@ -6,6 +6,9 @@ echo ${DOCKER_PASSWORD} | docker login --username ${DOCKER_USERNAME} --password-
 # Create unique docker image tag with commit hash
 DOCKER_IMAGE_TAG=production-commit-${GIT_COMMIT}
 
+# Authenticate yourself with service.account.json file.
+export GOOGLE_APPLICATION_CREDENTIALS=/tmp/infrastructure/google-cloud/service-account.json
+
 ## Docker image for application php-fpm container
 docker image pull ${DOCKER_USERNAME}/php-fpm:${DOCKER_IMAGE_TAG} || (
     echo "Image not found (see warning above), building it instead..." &&
@@ -53,8 +56,6 @@ yq write --inplace app/config/parameters.yml parameters.trusted_proxies[+] 10.0.
 
 cd /tmp/infrastructure/google-cloud
 
-# Authenticate yourself with service.account.json file.
-export GOOGLE_APPLICATION_CREDENTIALS=/tmp/infrastructure/google-cloud/service-account.json
 gcloud config set container/use_application_default_credentials true
 
 # Activate Service Account
