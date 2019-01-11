@@ -327,6 +327,7 @@
             <arg path="${path.tests}"/>
 
             <arg value="--level=0"/>
+            <arg value="-vvv"/>
         </exec>
     </target>
 
