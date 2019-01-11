@@ -6,3 +6,21 @@ services:
 
     Shopsys\GoogleCloudBundle\:
         resource: '../../*'
+
+    shopsys.google_cloud.storage_client:
+        class: Google\Cloud\Storage\StorageClient
+        arguments:
+        -   projectId: '%env(GOOGLE_CLOUD_PROJECT_ID)%'
+
+    shopsys.google_cloud.storage_bucket:
+        class: Google\Cloud\Storage\Bucket
+        factory: 'shopsys.google_cloud.storage_client:bucket'
+        arguments:
+        - '%env(GOOGLE_CLOUD_STORAGE_BUCKET_NAME)%'
+
+    Shopsys\GoogleCloudBundle\Filesystem\FilesystemFactoryDecorator:
+        decorates: Shopsys\FrameworkBundle\Component\Filesystem\MainFilesystemFactory
+        arguments:
+            $inner: '@Shopsys\GoogleCloudBundle\Filesystem\FilesystemFactoryDecorator.inner'
+            $googleCloudStorageBucketName: '%env(GOOGLE_CLOUD_STORAGE_BUCKET_NAME)%'
+            $googleCloudProjectId: '%env(GOOGLE_CLOUD_PROJECT_ID)%'
