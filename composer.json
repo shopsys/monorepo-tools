@@ -11,6 +11,7 @@
       ],
       "Shopsys\\CodingStandards\\": "packages/coding-standards/src/",
       "Shopsys\\FormTypesBundle\\": "packages/form-types-bundle/src/",
+      "Shopsys\\GoogleCloudBundle\\": "packages/google-cloud-bundle/src/",
       "Shopsys\\HttpSmokeTesting\\": "packages/http-smoke-testing/src/",
       "Shopsys\\MigrationBundle\\": "packages/migrations/src/",
       "Shopsys\\Plugin\\": "packages/plugin-interface/src/",
@@ -187,6 +188,7 @@
   },
   "replace": {
     "shopsys/form-types-bundle": "self.version",
+    "shopsys/google-cloud-bundle": "self.version",
     "shopsys/http-smoke-testing": "self.version",
     "shopsys/migrations": "self.version",
     "shopsys/plugin-interface": "self.version",
