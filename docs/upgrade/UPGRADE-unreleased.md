@@ -22,6 +22,8 @@ There you can find links to upgrade notes for other versions too.
     ```
 
 ### Application
+- if you were using `oneup/flysystembundle` for using different adapter than the local one, you must now implement `FilesystemFactoryInterface` and init the adapter by yourself.
+- *(optional)* delete dependency on `oneup/flysystembundle` from your `composer.json`
 - remove usages of inherited `OrderItem` classes ([#715](https://github.com/shopsys/shopsys/pull/715))
     - replace usages of `OrderProduct`, `OrderPayment`, and `OrderTransport` with common `OrderItem`
         - use `isType<type>()` method instead of `instanceof`
