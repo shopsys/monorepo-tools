@@ -95,6 +95,7 @@
         "ext-pgsql": "Required for dumping the Postgres database in shopsys:database:dump command"
     },
     "conflict": {
-        "symfony/dependency-injection": "3.4.15|3.4.16"
+        "symfony/dependency-injection": "3.4.15|3.4.16",
+        "twig/twig": "2.6.1"
     }
 }

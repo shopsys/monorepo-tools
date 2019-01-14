@@ -145,7 +145,8 @@
     "symplify/monorepo-builder": "^5.2.17"
   },
   "conflict": {
-    "symfony/dependency-injection": "3.4.15|3.4.16"
+    "symfony/dependency-injection": "3.4.15|3.4.16",
+    "twig/twig": "2.6.1"
   },
   "scripts": {
     "post-install-cmd": [
