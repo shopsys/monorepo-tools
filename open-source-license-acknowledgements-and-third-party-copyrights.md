@@ -64,7 +64,7 @@ https://github.com/kenwheeler/slick/blob/master/LICENSE
 Copyright (c) 2013-2016
 
 ## Images and libraries installed for a full run of Shopsys Framework on Docker
-These images and packages are configured in `docker-compose.yml` and in `Dockerfile`.
+These images and packages are configured in `docker-compose.yml` and in `Dockerfile`. We do not redistribute these packages, we are only referencing them to download, user agrees to download these images by pulling and building images done by `docker-compose up` or `docker build`.
 
 ### Postgres
 Image: `Postgres:10.5-alpine`  
@@ -104,20 +104,50 @@ https://github.com/elastic/elasticsearch/blob/66b5ed86f7adede8102cd4d979b9f4924e
 Copyright 2009-2018 Elasticsearch
 
 ### Php
-Image: `php:7.2-fpm-alpine`  
+Image: `php:7.2-fpm-stretch`  
 License: The PHP License  
 http://php.net/license/
 Copyright (c) 1999 - 2018 The PHP Group. All rights reserved.
-
-### GNU libiconv
-Package: `gnu-libiconv`  
-License: LGPL  
-https://pkgs.alpinelinux.org/package/edge/testing/x86/gnu-libiconv
 
 ### Composer - Dependency Management for PHP
 License: MIT  
 https://github.com/composer/composer/blob/master/LICENSE
 Copyright (c) Nils Adermann, Jordi Boggiano
+
+### wget
+License: GPL  
+https://metadata.ftp-master.debian.org/changelogs/main/w/wget/wget_1.18-5+deb9u2_copyright
+Copyright: (C) 2007 Free Software Foundation, Inc.
+
+### gnupg
+License: GPL-3+  
+https://metadata.ftp-master.debian.org/changelogs/main/g/gnupg2/gnupg2_2.1.18-8~deb9u3_copyright  
+Copyright: 1992, 1995-2016, Free Software Foundation, Inc
+
+### g++
+License: GPL  
+https://metadata.ftp-master.debian.org/changelogs/main/g/gcc-defaults/gcc-defaults_1.168_copyright  
+Copyright (c) 1999 The NetBSD Foundation, Inc.
+
+### locales
+License: LGPL-2.1  
+https://metadata.ftp-master.debian.org/changelogs//main/g/glibc/glibc_2.24-11+deb9u3_copyright  
+Copyright (C) 1991-2015 Free Software Foundation, Inc.
+
+### unzip
+License: Info-ZIP  
+https://metadata.ftp-master.debian.org/changelogs/main/u/unzip/unzip_6.0-21_copyright  
+Copyright (c) 1990-2009 Info-ZIP.  All rights reserved.
+
+### dialog
+License: LGPL-2.1  
+https://metadata.ftp-master.debian.org/changelogs/main/d/dialog/dialog_1.3-20160828-2_copyright  
+Copyright 1999-2016 Thomas E. Dickey  
+
+### apt-utils
+Licens: GPLv2+  
+https://metadata.ftp-master.debian.org/changelogs/main/a/apt/apt_1.4.8_copyright  
+Apt is copyright 1997, 1998, 1999 Jason Gunthorpe and others.
 
 ### grunt-cli
 License: MIT  
@@ -134,36 +164,41 @@ License: MIT
 https://github.com/hirak/prestissimo/blob/master/LICENSE
 Copyright (c) 2017 Hiraku NAKANO
 
+### libicu-dev
+License: ICU License  
+https://metadata.ftp-master.debian.org/changelogs/main/i/icu/icu_57.1-6+deb9u2_copyright
+Copyright (c) 1995-2013 International Business Machines Corporation and others
+
 ### libpng-dev
-License: GPL  
-https://pkgs.alpinelinux.org/package/v3.3/main/x86/libpng-dev
+License: libpng  
+https://metadata.ftp-master.debian.org/changelogs/main/libp/libpng1.6/libpng1.6_1.6.28-1_copyright  
+Copyright: Copyright (c) 1998-2016 Glenn Randers-Pehrson
 
-### icu-dev
-License: MIT or ICU or Unicode-TOU  
-https://pkgs.alpinelinux.org/package/edge/main/x86/icu-dev
-
-### postgresql-dev
-License: PostgreSQL  
-https://pkgs.alpinelinux.org/package/edge/main/x86/postgresql-dev
+### libpq-dev
+Licens: PostgreSQL  
+https://metadata.ftp-master.debian.org/changelogs/main/p/postgresql-9.6/postgresql-9.6_9.6.10-0+deb9u1_copyright  
+Copyright: Portions Copyright (c) 1996-2016, PostgreSQL Global Development Group,
+           Portions Copyright (c) 1994, The Regents of the University of California
 
 ### libzip-dev
-License: BSD-3-clause  
-https://pkgs.alpinelinux.org/package/edge/community/x86/libzip-dev
-Copyright (C) 1999-2018 Dieter Baron and Thomas Klausner
+License: GPL  
+https://metadata.ftp-master.debian.org/changelogs/main/libz/libzip/libzip_1.1.2-1.1_copyright  
+Copyright (C) 2007-2010 Fathi Boudra <fabo@debian.org>
 
-### freetype-dev
-License: FTL or GPL2+  
-https://pkgs.alpinelinux.org/package/edge/main/x86/freetype-dev
-Copyright 1996-2002, 2006 by David Turner, Robert Wilhelm, and Werner Lemberg
+### autoconf
+License: GPL-3+  
+https://metadata.ftp-master.debian.org/changelogs/main/a/autoconf/autoconf_2.69-10_copyright  
+Copyright: 1992-1996, 1999-2001, 2003, 2005-2012 Free Software Foundation, Inc.
 
 ### pecl
 License: The PHP License  
 https://pecl.php.net/copyright.php
 Copyright © 2001-2018 The PHP Group. All rights reserved.
 
-### postgresql
+### postgresql-10 and postgresql-client-10
 License: PostgreSQL  
-https://pkgs.alpinelinux.org/package/edge/main/x86/postgresql-dev
+https://www.postgresql.org/about/licence/  
+Portions Copyright © 1996-2019, The PostgreSQL Global Development Group
 
 ## Other CSS and JS libraries
 Other components, mostly css and js libraries, that are not dynamically installed.
@@ -270,7 +305,7 @@ For the packages installed through the composer, the composer.lock file is the s
 
 For the packages installed through the npm, the GitHub repositories of these packages are used as the source of the information about licenses.
 
-As a source of information about licenses of images and libraries downloaded and installed through Dockerfile and docker-compose.yml, there are used the GitHub repositories of these images and packages. Licenses of some libraries are mentioned also in a description of used Linux distribution https://pkgs.alpinelinux.org/
+As a source of information about licenses of images and libraries downloaded and installed through Dockerfile and docker-compose.yml, there are used the GitHub repositories of these images and packages. Licenses of some libraries are mentioned also in a description of used Linux distribution https://www.debian.org/distrib/packages
 
 Sources of information about licenses of libraries and components that are not downloaded and installed dynamically are the source files of libraries itself or the GitHub repositories of these libraries.
 

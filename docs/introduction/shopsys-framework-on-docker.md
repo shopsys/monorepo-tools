@@ -65,7 +65,7 @@ kind of recipe by which final image is cooked.
 
 Dockerfile example command:
 ```dockerfile
-FROM php:7.2-fpm-alpine
+FROM php:7.2-fpm-stretch
 ```
 * The `FROM` instruction specifies the base image, from which you are building
 
@@ -76,3 +76,39 @@ The official list of Dockerfile commands can be found on [Dockerfile reference](
 
 #### 3.5 docker/nginx/nginx.conf
 [Nginx.conf](/project-base/docker/nginx/nginx.conf) file contains Nginx configuration for new webserver container.
+
+#### 3.6 Images Distribution
+While running Shopsys Framework on docker we needed to decide which distribution will be our images running on. We use 2 types of distributions for our images.
+
+* Debian
+* Alpine Linux
+
+Both have their advantages and drawbacks
+
+##### Debian
+###### Advantages
+Debian is one of the oldest distributions, so even users without Docker experience are able to modify these images because installing tools in this distributions is easy, common and very easy to find on internet if some problem occurs.
+
+Also, Debian supports big amount of Databases and tools used by developers and are easy to install.
+###### Drawbacks
+Debian image is pretty big, which is not ideal for pulling these images on Cloud Solutions because there is more resources used to pull these.
+
+##### Alpine
+###### Advantages
+Alpine Linux is really small and minimalistic which means that clean installation of Alpine linux takes 6MB of memory which is great for pulling these images on Cloud where resource used for pull matters.
+
+###### Disadvantages
+Dockerfiles based from Alpine are harder to modify because it is so slim that with every technology, database or tool you want to install, you also need to install all its dependencies, making it a bit hard to find right solutions.
+
+Alpine Linux also has longtime problem with connection to MSSQL databases, due to missing support by Microsoft drivers.
+
+We divide images used by us into 3 types.
+
+##### Not extended, only used (PostgreSQL, Redis, Elasticsearch)
+Those images are only used as it is, we are not extending them and we are only using them as they are. In this case we choose Alpine Distribution thanks to its size.
+
+##### Microservices
+Microservices should be small as possible, even we are extending php-fpm images used for them, we take advantage of small size and suppose that users of these images will not extend them and more likely will be implementing their own microservices.
+
+##### Application PHP-FPM
+In this case, we use Debian mainly because we suppose users to modify these images often(adding php-extensions, implementing connections to Databases). As Debian is much more easier to modify, we decided that it will be best for new users to start on Debian, and if they care about size, they can always rewrite their Dockerfiles to be use alpine image if needed. Also many of clients using Shopsys Framework often connects to MSSQL databases and we want to make it easy for them.
