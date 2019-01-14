@@ -84,6 +84,11 @@ Cleans up directories with cache and scripts which are generated on demand.
 
 Your go-to command when you feel something should work but does not. Especially useful in the test environment in which cache is not automatically invalidated.
 
+#### clean-redis
+Cleans up cache in Redis database except for sessions.
+
+Useful in development environment and during deploying to production.
+
 ### Database
 
 #### db-migrations-generate

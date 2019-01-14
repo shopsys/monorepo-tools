@@ -995,3 +995,10 @@ services:
     Shopsys\FrameworkBundle\Model\AdvancedSearchOrder\AdvancedSearchOrderFacade:
         arguments:
             $advancedSearchQueryBuilderExtender: '@shopsys.shop.model.advanced_search.advanced_search_query_builder_extender.order'
+
+    Shopsys\FrameworkBundle\Component\Redis\RedisFacade:
+        arguments:
+            $cacheClients:
+            - '@snc_redis.bestselling_products'
+            - '@snc_redis.doctrine_metadata'
+            - '@snc_redis.doctrine_query'

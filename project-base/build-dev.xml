@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="Shopsys Framework (dev)" default="build-demo-ci">
 
-    <target name="build-dev" depends="clean,composer-dev,npm,timezones-check,microservices-check,dirs-create,test-dirs-create,assets,db-migrations,create-domains-data,generate-friendly-urls,replace-domains-urls,microservice-product-search-recreate-structure,microservice-product-search-export-products,grunt,error-pages-generate,tests-acceptance-build,checks-diff" description="Builds application for development preserving your DB and runs checks on changed files."/>
-    <target name="build-dev-quick" depends="clean,composer-dev,npm,dirs-create,test-dirs-create,assets,db-migrations,create-domains-data,generate-friendly-urls,replace-domains-urls,grunt,tests-acceptance-build" description="Builds application for development preserving your DB while skipping nonessential steps."/>
-    <target name="build-demo-dev" depends="wipe-excluding-logs,composer-dev,npm,timezones-check,microservices-check,dirs-create,test-dirs-create,assets,db-demo,microservice-product-search-recreate-structure,microservice-product-search-export-products,grunt,error-pages-generate,tests-acceptance-build,checks-diff" description="Builds application for development with clean demo DB and runs checks on changed files."/>
-    <target name="build-demo-dev-quick" depends="wipe-excluding-logs,composer-dev,npm,dirs-create,test-dirs-create,assets,db-demo,microservice-product-search-recreate-structure,microservice-product-search-export-products,grunt,tests-acceptance-build" description="Builds application for development with clean demo DB while skipping nonessential steps."/>
-    <target name="build-demo-ci" depends="wipe-excluding-logs,timezones-check,microservices-check,dirs-create,test-dirs-create,db-demo,microservice-product-search-recreate-structure,microservice-product-search-export-products,grunt,error-pages-generate,checks-ci" description="Builds application for development with clean demo DB and runs CI checks."/>
-    <target name="build-demo-ci-diff" depends="wipe-excluding-logs,timezones-check,microservices-check,dirs-create,test-dirs-create,db-demo,microservice-product-search-recreate-structure,microservice-product-search-export-products,grunt,error-pages-generate,checks-ci-diff" description="Builds application for development with clean demo DB and runs CI checks on changed files."/>
+    <target name="build-dev" depends="clean,clean-redis,composer-dev,npm,timezones-check,microservices-check,dirs-create,test-dirs-create,assets,db-migrations,create-domains-data,generate-friendly-urls,replace-domains-urls,microservice-product-search-recreate-structure,microservice-product-search-export-products,grunt,error-pages-generate,tests-acceptance-build,checks-diff" description="Builds application for development preserving your DB and runs checks on changed files."/>
+    <target name="build-dev-quick" depends="clean,clean-redis,composer-dev,npm,dirs-create,test-dirs-create,assets,db-migrations,create-domains-data,generate-friendly-urls,replace-domains-urls,grunt,tests-acceptance-build" description="Builds application for development preserving your DB while skipping nonessential steps."/>
+    <target name="build-demo-dev" depends="wipe-excluding-logs,clean-redis,composer-dev,npm,timezones-check,microservices-check,dirs-create,test-dirs-create,assets,db-demo,microservice-product-search-recreate-structure,microservice-product-search-export-products,grunt,error-pages-generate,tests-acceptance-build,checks-diff" description="Builds application for development with clean demo DB and runs checks on changed files."/>
+    <target name="build-demo-dev-quick" depends="wipe-excluding-logs,clean-redis,composer-dev,npm,dirs-create,test-dirs-create,assets,db-demo,microservice-product-search-recreate-structure,microservice-product-search-export-products,grunt,tests-acceptance-build" description="Builds application for development with clean demo DB while skipping nonessential steps."/>
+    <target name="build-demo-ci" depends="wipe-excluding-logs,clean-redis,timezones-check,microservices-check,dirs-create,test-dirs-create,db-demo,microservice-product-search-recreate-structure,microservice-product-search-export-products,grunt,error-pages-generate,checks-ci" description="Builds application for development with clean demo DB and runs CI checks."/>
+    <target name="build-demo-ci-diff" depends="wipe-excluding-logs,clean-redis,timezones-check,microservices-check,dirs-create,test-dirs-create,db-demo,microservice-product-search-recreate-structure,microservice-product-search-export-products,grunt,error-pages-generate,checks-ci-diff" description="Builds application for development with clean demo DB and runs CI checks on changed files."/>
 
     <target name="checks" depends="db-check-mapping,standards,tests" description="Checks ORM mapping, coding standards and runs unit, DB and smoke tests."/>
     <target name="checks-diff" depends="db-check-mapping,standards-diff,tests" description="Checks ORM mapping, coding standards on changed files and runs unit, DB and smoke tests."/>
@@ -16,12 +16,12 @@
     <target name="standards" depends="phplint,ecs,phpstan,twig-lint,yaml-lint,eslint-check" description="Checks coding standards."/>
     <target name="standards-diff" depends="phplint-diff,ecs-diff,phpstan,twig-lint-diff,yaml-lint,eslint-check-diff" description="Checks coding standards on changed files."/>
 
-    <target name="test-db-demo" depends="clean,test-db-wipe-public-schema,test-db-import-basic-structure,test-db-migrations,test-create-domains-data,test-db-fixtures-demo,test-generate-friendly-urls,test-load-plugin-demo-data,test-replace-domains-urls" description="Drops all data in test database and creates a new one with demo data."/>
+    <target name="test-db-demo" depends="clean,clean-redis,test-db-wipe-public-schema,test-db-import-basic-structure,test-db-migrations,test-create-domains-data,test-db-fixtures-demo,test-generate-friendly-urls,test-load-plugin-demo-data,test-replace-domains-urls" description="Drops all data in test database and creates a new one with demo data."/>
     <target name="test-db-performance" depends="test-db-demo,test-db-fixtures-performance" description="Drops all data in test database and creates a new one with performance data."/>
     <target name="tests-static" depends="tests-unit" description="Runs unit tests."/>
     <target name="tests" depends="test-db-demo,tests-static,tests-functional,tests-smoke" description="Runs unit, functional and smoke tests on a newly built test database."/>
 
-    <target name="tests-performance-run" depends="clean,test-db-performance,tests-performance-warmup,tests-performance" description="Runs performance tests on a newly built test database with performance data."/>
+    <target name="tests-performance-run" depends="clean,clean-redis,test-db-performance,tests-performance-warmup,tests-performance" description="Runs performance tests on a newly built test database with performance data."/>
 
     <target name="composer-check" description="Checks if Composer lock file is valid.">
         <exec
@@ -360,7 +360,7 @@
         <phingcall target="eslint-fix-diff" />
     </target>
 
-    <target name="tests-acceptance" depends="clean,test-db-dump" description="Runs acceptance tests. Running Selenium server is required.">
+    <target name="tests-acceptance" depends="clean,clean-redis,test-db-dump" description="Runs acceptance tests. Running Selenium server is required.">
         <available file="${path.env.test}" type="file" property="path.env.test.existed" />
         <if>
             <not>
@@ -408,7 +408,7 @@
         </exec>
     </target>
 
-    <target name="tests-smoke" depends="clean" description="Runs smoke tests.">
+    <target name="tests-smoke" depends="clean,clean-redis" description="Runs smoke tests.">
         <if>
             <istrue value="${is-multidomain}" />
             <then>
@@ -447,7 +447,7 @@
         </if>
     </target>
 
-    <target name="tests-functional" depends="clean" description="Runs functional tests.">
+    <target name="tests-functional" depends="clean,clean-redis" description="Runs functional tests.">
         <if>
             <istrue value="${is-multidomain}" />
             <then>
@@ -485,7 +485,7 @@
         </if>
     </target>
 
-    <target name="tests-performance" depends="clean" description="Runs performance tests.">
+    <target name="tests-performance" depends="clean,clean-redis" description="Runs performance tests.">
         <exec
             executable="${path.phpunit.executable}"
             logoutput="true"
