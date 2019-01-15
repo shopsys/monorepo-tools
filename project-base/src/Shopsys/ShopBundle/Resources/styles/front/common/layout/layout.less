@@ -9,6 +9,7 @@ img {
 .web {
     display: flex;
     flex-direction: column;
+    width: 100%;
     min-height: 100%;
 
     .is-no-flex &, .is-safari & {
@@ -17,7 +18,10 @@ img {
 
     &--window-activated {
         overflow: hidden;
-        margin-right: @web-scrollbar-size;
+
+        @media @query-vl {
+            overflow: unset;
+        }
     }
 
     &__in {

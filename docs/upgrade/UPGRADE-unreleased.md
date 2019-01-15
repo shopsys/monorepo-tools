@@ -48,6 +48,14 @@ There you can find links to upgrade notes for other versions too.
     - from `getPaginatedProductDetailsInCategory` to `getPaginatedProductsInCategory`
     - from `getPaginatedProductDetailsForBrand` to `getPaginatedProductsForBrand`
     - from `getPaginatedProductDetailsForSearch` to `getPaginatedProductsForSearch`
+- (optional) in order to remove white space of webpage after popup window shows up, change file located in [`project-base/src/Shopsys/ShopBundle/Resources/styles/front/common/layout/layout.less`](https://github.com/shopsys/shopsys/pull/710/files#diff-b6f30401eed85fcb59b3b1761855493b) by following instructions.
+    - add new CSS attribute `width: 100%` to CSS class `.web`
+    - add following code snippet to CSS class `.web--window-activated`
+    ```
+    @media @query-vl {
+        overflow: unset;
+    }
+    ```
 
 ## [shopsys/migrations]
 - `GenerateMigrationsService` class was renamed to `MigrationsGenerator`, so change it's usage appropriately ([#627](https://github.com/shopsys/shopsys/pull/627))
