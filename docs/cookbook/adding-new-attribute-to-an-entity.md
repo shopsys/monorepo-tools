@@ -96,7 +96,7 @@ It is a common modification when you need your e-commerce application and ERP sy
     }
     ```
     In the following steps, we will overwrite all services that are responsible
-    for `Product` and `ProductData` instantiation to make them return our extended classes.
+    for `Product` and `ProductData` instantiation to make them take our new attribute into account.
 
 1. Edit `Shopsys\ShopBundle\Model\Product\ProductDataFactory` - overwrite `create()` and `createFromProduct()` methods.
     *Alternatively you can create an independent class by implementing
@@ -163,7 +163,9 @@ The original `ProductFormType` is set as the extended type by implementation of 
          */
         public function buildForm(FormBuilderInterface $builder, array $options)
         {
-            $builder->add('extId', IntegerType::class, [
+            // "basicInformationGroup" is defined in ProductFormType
+            $basicInformationGroup = $builder->get('basicInformationGroup');
+            $basicInformationGroup->add('extId', IntegerType::class, [
                 'required' => true,
                 'constraints' => [
                     new Constraints\NotBlank(['message' => 'Please enter external ID']),
@@ -240,39 +242,6 @@ In order to display your new attribute on a front-end page, you can modify the c
 as it is a part of your open-box, eg. [`detail.html.twig`](../../project-base/src/Shopsys/ShopBundle/Resources/views/Front/Content/Product/detail.html.twig).
 ```
 {{ product.extId }}
-```
-
-## Tests
-You need to fix your tests to reflect new changes:
-* Instances of `Product` and `ProductData` are often created directly in tests - change all of them to your classes.
-* In [`ProductVisibilityRepositoryTest`](../../project-base/tests/ShopBundle/Functional/Model/Product/ProductVisibilityRepositoryTest.php),
-instance of `ProductData` is created directly.
-so you need to use there your class:
-```php
-namespace Tests\ShopBundle\Functional\Model\Product;
-
-use Shopsys\ShopBundle\Model\Product\ProductData;
-
-class ProductVisibilityRepositoryTest extends TransactionFunctionalTestCaseTestCase
-{
-    /**
-     * @return \Shopsys\FrameworkBundle\Model\Product\ProductData
-     */
-    private function getDefaultProductData()
-    {
-        // ...
-
-        $productData = new ProductData();
-
-        // ...
-    }
-}
-```
-* You also need to fix smoke test for creating new product as your new `extId` is required attribute.
-In [`NewProductTest`](../../project-base/tests/ShopBundle/Smoke/NewProductTest.php)
-add following line to the `fillForm()` method:
-```php
-$form['product_form[extId]'] = 123456;
 ```
 
 ## Data fixtures
