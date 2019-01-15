@@ -270,7 +270,7 @@ class ProductFacade
         if (!$product->isMainVariant()) {
             $this->refreshProductManualInputPrices($product, $productData->manualInputPricesByPricingGroupId);
         } else {
-            $product->refreshVariants($productData->variants);
+            $product->refreshVariants($productData->variants, $this->productCategoryDomainFactory);
         }
         $this->refreshProductAccessories($product, $productData->accessories);
         $this->em->flush();

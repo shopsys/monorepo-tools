@@ -7,6 +7,7 @@ use Shopsys\FrameworkBundle\Model\Pricing\Vat\Vat;
 use Shopsys\FrameworkBundle\Model\Pricing\Vat\VatData;
 use Shopsys\FrameworkBundle\Model\Product\BestsellingProduct\BestsellingProductCombinator;
 use Shopsys\FrameworkBundle\Model\Product\Product;
+use Shopsys\FrameworkBundle\Model\Product\ProductCategoryDomainFactory;
 use Shopsys\FrameworkBundle\Model\Product\ProductData;
 
 class BestsellingProductCombinatorTest extends TestCase
@@ -24,11 +25,11 @@ class BestsellingProductCombinatorTest extends TestCase
         $productData = new ProductData();
         $productData->name = ['cs' => 'Product 1'];
         $productData->vat = $vat;
-        $product1 = Product::create($productData);
-        $product2 = Product::create($productData);
-        $product3 = Product::create($productData);
-        $product4 = Product::create($productData);
-        $product5 = Product::create($productData);
+        $product1 = Product::create($productData, new ProductCategoryDomainFactory());
+        $product2 = Product::create($productData, new ProductCategoryDomainFactory());
+        $product3 = Product::create($productData, new ProductCategoryDomainFactory());
+        $product4 = Product::create($productData, new ProductCategoryDomainFactory());
+        $product5 = Product::create($productData, new ProductCategoryDomainFactory());
 
         $manualProductsIndexedByPosition = [
             0 => $product1,

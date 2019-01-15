@@ -9,6 +9,7 @@ use Shopsys\FrameworkBundle\Model\Customer\CustomerIdentifier;
 use Shopsys\FrameworkBundle\Model\Pricing\Vat\Vat;
 use Shopsys\FrameworkBundle\Model\Pricing\Vat\VatData;
 use Shopsys\FrameworkBundle\Model\Product\Product;
+use Shopsys\FrameworkBundle\Model\Product\ProductCategoryDomainFactory;
 use Shopsys\FrameworkBundle\Model\Product\ProductData;
 
 class CartTest extends TestCase
@@ -31,12 +32,12 @@ class CartTest extends TestCase
         $productData1 = new ProductData();
         $productData1->name = ['cs' => 'Product 1'];
         $productData1->vat = $vat;
-        $product1 = Product::create($productData1);
+        $product1 = Product::create($productData1, new ProductCategoryDomainFactory());
 
         $productData2 = new ProductData();
         $productData2->name = ['cs' => 'Product 2'];
         $productData2->vat = $vat;
-        $product2 = Product::create($productData2);
+        $product2 = Product::create($productData2, new ProductCategoryDomainFactory());
 
         $cartItem1 = new CartItem($customerIdentifier, $product1, 1, '0.0');
         $cartItem2 = new CartItem($customerIdentifier, $product2, 3, '0.0');
@@ -66,7 +67,7 @@ class CartTest extends TestCase
         $productData = new ProductData();
         $productData->name = ['cs' => 'Product 1'];
         $productData->vat = $vat;
-        $product = Product::create($productData);
+        $product = Product::create($productData, new ProductCategoryDomainFactory());
 
         $cartItem = new CartItem($customerIdentifier, $product, 1, '0.0');
         $cartItems = [$cartItem];
@@ -86,12 +87,12 @@ class CartTest extends TestCase
         $productData1 = new ProductData();
         $productData1->name = ['cs' => 'Product 1'];
         $productData1->vat = $vat;
-        $product1 = Product::create($productData1);
+        $product1 = Product::create($productData1, new ProductCategoryDomainFactory());
 
         $productData2 = new ProductData();
         $productData2->name = ['cs' => 'Product 2'];
         $productData2->vat = $vat;
-        $product2 = Product::create($productData2);
+        $product2 = Product::create($productData2, new ProductCategoryDomainFactory());
 
         $cartItem1 = new CartItem($customerIdentifier, $product1, 1, '0.0');
         $cartItem2 = new CartItem($customerIdentifier, $product2, 3, '0.0');

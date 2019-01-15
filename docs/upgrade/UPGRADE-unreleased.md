@@ -56,6 +56,20 @@ There you can find links to upgrade notes for other versions too.
         overflow: unset;
     }
     ```
+- change usage of changed methods definitions in `Product` and `ProductFactory` ([#723](https://github.com/shopsys/shopsys/pull/723))
+    - `Product::__construct` to `__construct(ProductData $productData, ProductCategoryDomainFactoryInterface $productCategoryDomainFactory, array $variants = null)`
+    - `Product::create` to `create(ProductData $productData, ProductCategoryDomainFactoryInterface $productCategoryDomainFactory)`
+    - `Product::createMainVariant` to `createMainVariant(ProductData $productData, ProductCategoryDomainFactoryInterface $productCategoryDomainFactory, array $variants)`
+    - `Product::addVariant` to `addVariant(self $variant, ProductCategoryDomainFactoryInterface $productCategoryDomainFactory)`
+    - `Product::addVariants` to `addVariants(array $variants, ProductCategoryDomainFactoryInterface $productCategoryDomainFactory)`
+    - `Product::addNewVariants` to `addNewVariants(array $currentVariants, ProductCategoryDomainFactoryInterface $productCategoryDomainFactory)`
+    - `ProductFactory::__construct` to `__construct(EntityNameResolver $entityNameResolver, ProductAvailabilityCalculation $productAvailabilityCalculation, ProductCategoryDomainFactoryInterface $productCategoryDomainFactory)`
+    - add second parameter `new ProductCategoryDomainFactory()` to `Product::create` and `Product::createMainVariant` in tests
+        - `CartWatcherTest::testGetNotListableItemsWithVisibleButNotSellableProduct`
+        - `CartItemTest::testIsSimilarItemAs`
+        - `CartTest` functions `testRemoveItem` and `createProduct`
+        - `ProductManualInputPriceTest` functions `testRecalculateInputPriceForNewVatPercentWithInputPriceWithoutVat` and `testRecalculateInputPriceForNewVatPercentWithInputPriceWithVat`
+        - `ProductAvailabilityCalculationTest` functions `testCalculateAvailability`, `testCalculateAvailabilityMainVariant` and `testCalculateAvailabilityMainVariantWithNoSellableVariants`
 
 ## [shopsys/migrations]
 - `GenerateMigrationsService` class was renamed to `MigrationsGenerator`, so change it's usage appropriately ([#627](https://github.com/shopsys/shopsys/pull/627))

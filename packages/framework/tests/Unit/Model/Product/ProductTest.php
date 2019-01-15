@@ -13,7 +13,7 @@ class ProductTest extends TestCase
     public function testNoVariant()
     {
         $productData = new ProductData();
-        $product = Product::create($productData);
+        $product = Product::create($productData, new ProductCategoryDomainFactory());
 
         $this->assertFalse($product->isVariant());
         $this->assertFalse($product->isMainVariant());
@@ -22,8 +22,8 @@ class ProductTest extends TestCase
     public function testIsVariant()
     {
         $productData = new ProductData();
-        $variant = Product::create($productData);
-        Product::createMainVariant($productData, [$variant]);
+        $variant = Product::create($productData, new ProductCategoryDomainFactory());
+        Product::createMainVariant($productData, new ProductCategoryDomainFactory(), [$variant]);
 
         $this->assertTrue($variant->isVariant());
         $this->assertFalse($variant->isMainVariant());
@@ -32,8 +32,8 @@ class ProductTest extends TestCase
     public function testIsMainVariant()
     {
         $productData = new ProductData();
-        $variant = Product::create($productData);
-        $mainVariant = Product::createMainVariant($productData, [$variant]);
+        $variant = Product::create($productData, new ProductCategoryDomainFactory());
+        $mainVariant = Product::createMainVariant($productData, new ProductCategoryDomainFactory(), [$variant]);
 
         $this->assertFalse($mainVariant->isVariant());
         $this->assertTrue($mainVariant->isMainVariant());
@@ -42,8 +42,8 @@ class ProductTest extends TestCase
     public function testGetMainVariant()
     {
         $productData = new ProductData();
-        $variant = Product::create($productData);
-        $mainVariant = Product::createMainVariant($productData, [$variant]);
+        $variant = Product::create($productData, new ProductCategoryDomainFactory());
+        $mainVariant = Product::createMainVariant($productData, new ProductCategoryDomainFactory(), [$variant]);
 
         $this->assertSame($mainVariant, $variant->getMainVariant());
     }
@@ -51,7 +51,7 @@ class ProductTest extends TestCase
     public function testGetMainVariantException()
     {
         $productData = new ProductData();
-        $product = Product::create($productData);
+        $product = Product::create($productData, new ProductCategoryDomainFactory());
 
         $this->expectException(\Shopsys\FrameworkBundle\Model\Product\Exception\ProductIsNotVariantException::class);
         $product->getMainVariant();
@@ -59,55 +59,59 @@ class ProductTest extends TestCase
 
     public function testCreateVariantFromVariantException()
     {
+        $productCategoryDomainFactory = new ProductCategoryDomainFactory();
         $productData = new ProductData();
-        $variant = Product::create($productData);
-        $variant2 = Product::create($productData);
-        $mainVariant = Product::createMainVariant($productData, [$variant]);
-        Product::createMainVariant($productData, [$variant2]);
+        $variant = Product::create($productData, $productCategoryDomainFactory);
+        $variant2 = Product::create($productData, $productCategoryDomainFactory);
+        $mainVariant = Product::createMainVariant($productData, $productCategoryDomainFactory, [$variant]);
+        Product::createMainVariant($productData, $productCategoryDomainFactory, [$variant2]);
 
         $this->expectException(\Shopsys\FrameworkBundle\Model\Product\Exception\ProductIsAlreadyVariantException::class);
-        $mainVariant->addVariant($variant2);
+        $mainVariant->addVariant($variant2, $productCategoryDomainFactory);
     }
 
     public function testCreateVariantFromMainVariantException()
     {
+        $productCategoryDomainFactory = new ProductCategoryDomainFactory();
         $productData = new ProductData();
-        $variant = Product::create($productData);
-        $variant2 = Product::create($productData);
-        $mainVariant = Product::createMainVariant($productData, [$variant]);
-        $mainVariant2 = Product::createMainVariant($productData, [$variant2]);
+        $variant = Product::create($productData, $productCategoryDomainFactory);
+        $variant2 = Product::create($productData, $productCategoryDomainFactory);
+        $mainVariant = Product::createMainVariant($productData, $productCategoryDomainFactory, [$variant]);
+        $mainVariant2 = Product::createMainVariant($productData, $productCategoryDomainFactory, [$variant2]);
 
         $this->expectException(\Shopsys\FrameworkBundle\Model\Product\Exception\MainVariantCannotBeVariantException::class);
-        $mainVariant->addVariant($mainVariant2);
+        $mainVariant->addVariant($mainVariant2, $productCategoryDomainFactory);
     }
 
     public function testCreateMainVariantFromVariantException()
     {
+        $productCategoryDomainFactory = new ProductCategoryDomainFactory();
         $productData = new ProductData();
-        $variant = Product::create($productData);
-        $variant2 = Product::create($productData);
-        $variant3 = Product::create($productData);
-        Product::createMainVariant($productData, [$variant]);
-        Product::createMainVariant($productData, [$variant2]);
+        $variant = Product::create($productData, $productCategoryDomainFactory);
+        $variant2 = Product::create($productData, $productCategoryDomainFactory);
+        $variant3 = Product::create($productData, $productCategoryDomainFactory);
+        Product::createMainVariant($productData, $productCategoryDomainFactory, [$variant]);
+        Product::createMainVariant($productData, $productCategoryDomainFactory, [$variant2]);
 
         $this->expectException(\Shopsys\FrameworkBundle\Model\Product\Exception\VariantCanBeAddedOnlyToMainVariantException::class);
-        $variant2->addVariant($variant3);
+        $variant2->addVariant($variant3, $productCategoryDomainFactory);
     }
 
     public function testAddSelfAsVariantException()
     {
+        $productCategoryDomainFactory = new ProductCategoryDomainFactory();
         $productData = new ProductData();
-        $variant = Product::create($productData);
-        $mainVariant = Product::createMainVariant($productData, [$variant]);
+        $variant = Product::create($productData, $productCategoryDomainFactory);
+        $mainVariant = Product::createMainVariant($productData, $productCategoryDomainFactory, [$variant]);
 
         $this->expectException(\Shopsys\FrameworkBundle\Model\Product\Exception\MainVariantCannotBeVariantException::class);
-        $mainVariant->addVariant($mainVariant);
+        $mainVariant->addVariant($mainVariant, $productCategoryDomainFactory);
     }
 
     public function testMarkForVisibilityRecalculation()
     {
         $productData = new ProductData();
-        $product = Product::create($productData);
+        $product = Product::create($productData, new ProductCategoryDomainFactory());
         $product->markForVisibilityRecalculation();
         $this->assertTrue($product->isMarkedForVisibilityRecalculation());
     }
@@ -115,8 +119,8 @@ class ProductTest extends TestCase
     public function testMarkForVisibilityRecalculationMainVariant()
     {
         $productData = new ProductData();
-        $variant = Product::create($productData);
-        $mainVariant = Product::createMainVariant($productData, [$variant]);
+        $variant = Product::create($productData, new ProductCategoryDomainFactory());
+        $mainVariant = Product::createMainVariant($productData, new ProductCategoryDomainFactory(), [$variant]);
         $mainVariant->markForVisibilityRecalculation();
         $this->assertTrue($mainVariant->isMarkedForVisibilityRecalculation());
         $this->assertTrue($variant->isMarkedForVisibilityRecalculation());
@@ -125,8 +129,8 @@ class ProductTest extends TestCase
     public function testMarkForVisibilityRecalculationVariant()
     {
         $productData = new ProductData();
-        $variant = Product::create($productData);
-        $mainVariant = Product::createMainVariant($productData, [$variant]);
+        $variant = Product::create($productData, new ProductCategoryDomainFactory());
+        $mainVariant = Product::createMainVariant($productData, new ProductCategoryDomainFactory(), [$variant]);
         $variant->markForVisibilityRecalculation();
         $this->assertTrue($variant->isMarkedForVisibilityRecalculation());
         $this->assertTrue($mainVariant->isMarkedForVisibilityRecalculation());
@@ -135,7 +139,7 @@ class ProductTest extends TestCase
     public function testDeleteResultNotVariant()
     {
         $productData = new ProductData();
-        $product = Product::create($productData);
+        $product = Product::create($productData, new ProductCategoryDomainFactory());
 
         $this->assertEmpty($product->getProductDeleteResult()->getProductsForRecalculations());
     }
@@ -143,8 +147,8 @@ class ProductTest extends TestCase
     public function testDeleteResultVariant()
     {
         $productData = new ProductData();
-        $variant = Product::create($productData);
-        $mainVariant = Product::createMainVariant($productData, [$variant]);
+        $variant = Product::create($productData, new ProductCategoryDomainFactory());
+        $mainVariant = Product::createMainVariant($productData, new ProductCategoryDomainFactory(), [$variant]);
 
         $this->assertSame([$mainVariant], $variant->getProductDeleteResult()->getProductsForRecalculations());
     }
@@ -152,8 +156,8 @@ class ProductTest extends TestCase
     public function testDeleteResultMainVariant()
     {
         $productData = new ProductData();
-        $variant = Product::create($productData);
-        $mainVariant = Product::createMainVariant($productData, [$variant]);
+        $variant = Product::create($productData, new ProductCategoryDomainFactory());
+        $mainVariant = Product::createMainVariant($productData, new ProductCategoryDomainFactory(), [$variant]);
 
         $this->assertEmpty($mainVariant->getProductDeleteResult()->getProductsForRecalculations());
         $this->assertFalse($variant->isVariant());
@@ -167,7 +171,7 @@ class ProductTest extends TestCase
         $productPriceRecalculationSchedulerMock->expects($this->once())->method('scheduleProductForImmediateRecalculation');
 
         $productData = new ProductData();
-        $product = Product::create($productData);
+        $product = Product::create($productData, new ProductCategoryDomainFactory());
 
         $product->edit(new ProductCategoryDomainFactory(), $productData, $productPriceRecalculationSchedulerMock);
     }
@@ -175,8 +179,8 @@ class ProductTest extends TestCase
     public function testCheckIsNotMainVariantException()
     {
         $productData = new ProductData();
-        $variant = Product::create($productData);
-        $mainVariant = Product::createMainVariant($productData, [$variant]);
+        $variant = Product::create($productData, new ProductCategoryDomainFactory());
+        $mainVariant = Product::createMainVariant($productData, new ProductCategoryDomainFactory(), [$variant]);
 
         $this->expectException(\Shopsys\FrameworkBundle\Model\Product\Exception\ProductIsAlreadyMainVariantException::class);
         $mainVariant->checkIsNotMainVariant();
@@ -185,13 +189,13 @@ class ProductTest extends TestCase
     public function testRefreshVariants()
     {
         $productData = new ProductData();
-        $variant1 = Product::create($productData);
-        $variant2 = Product::create($productData);
-        $variant3 = Product::create($productData);
-        $mainVariant = Product::createMainVariant($productData, [$variant1, $variant2]);
+        $variant1 = Product::create($productData, new ProductCategoryDomainFactory());
+        $variant2 = Product::create($productData, new ProductCategoryDomainFactory());
+        $variant3 = Product::create($productData, new ProductCategoryDomainFactory());
+        $mainVariant = Product::createMainVariant($productData, new ProductCategoryDomainFactory(), [$variant1, $variant2]);
 
         $currentVariants = [$variant2, $variant3];
-        $mainVariant->refreshVariants($currentVariants);
+        $mainVariant->refreshVariants($currentVariants, new ProductCategoryDomainFactory());
 
         $variantsArray = $mainVariant->getVariants();
 

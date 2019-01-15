@@ -14,6 +14,7 @@ It is a common modification when you need your e-commerce application and ERP sy
 
     use Doctrine\ORM\Mapping as ORM;
     use Shopsys\FrameworkBundle\Model\Product\Product as BaseProduct;
+    use Shopsys\FrameworkBundle\Model\Product\ProductCategoryDomainFactoryInterface;
     use Shopsys\FrameworkBundle\Model\Product\ProductData as BaseProductData;
 
     /**
@@ -31,12 +32,13 @@ It is a common modification when you need your e-commerce application and ERP sy
 
         /**
          * @param \Shopsys\ShopBundle\Model\Product\ProductData $productData
+         * @param \Shopsys\FrameworkBundle\Model\Product\ProductCategoryDomainFactoryInterface $productCategoryDomainFactory
          * @param \Shopsys\ShopBundle\Model\Product\Product[]|null $variants
          */
-        protected function __construct(BaseProductData $productData, $variants = null)
+        protected function __construct(BaseProductData $productData, ProductCategoryDomainFactoryInterface $productCategoryDomainFactory, array $variants = null)
         {
             $this->extId = $productData->extId ?? 0;
-            parent::__construct($productData, $variants);
+            parent::__construct($productData, $productCategoryDomainFactory, $variants);
         }
 
         /**

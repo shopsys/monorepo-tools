@@ -8,6 +8,7 @@ use Shopsys\FrameworkBundle\Model\Product\Availability\Availability;
 use Shopsys\FrameworkBundle\Model\Product\Availability\AvailabilityData;
 use Shopsys\FrameworkBundle\Model\Product\Availability\ProductAvailabilityCalculation;
 use Shopsys\FrameworkBundle\Model\Product\Product;
+use Shopsys\FrameworkBundle\Model\Product\ProductCategoryDomainFactory;
 use Shopsys\FrameworkBundle\Model\Product\ProductData;
 use Shopsys\FrameworkBundle\Model\Product\ProductFactory;
 
@@ -23,14 +24,14 @@ class ProductFactoryTest extends TestCase
      */
     protected function setUp()
     {
-        $this->productFactory = new ProductFactory(new EntityNameResolver([]), $this->getProductAvailabilityCalculationMock());
+        $this->productFactory = new ProductFactory(new EntityNameResolver([]), $this->getProductAvailabilityCalculationMock(), new ProductCategoryDomainFactory());
         parent::setUp();
     }
 
     public function testCreateVariant()
     {
         $mainVariantData = new ProductData();
-        $mainProduct = Product::create(new ProductData());
+        $mainProduct = Product::create(new ProductData(), new ProductCategoryDomainFactory());
         $variants = [];
 
         $mainVariant = $this->productFactory->createMainVariant($mainVariantData, $mainProduct, $variants);

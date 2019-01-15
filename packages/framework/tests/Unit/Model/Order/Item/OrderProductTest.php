@@ -8,6 +8,7 @@ use Shopsys\FrameworkBundle\Model\Order\Item\OrderProduct;
 use Shopsys\FrameworkBundle\Model\Order\Order;
 use Shopsys\FrameworkBundle\Model\Pricing\Price;
 use Shopsys\FrameworkBundle\Model\Product\Product;
+use Shopsys\FrameworkBundle\Model\Product\ProductCategoryDomainFactory;
 use Shopsys\FrameworkBundle\Model\Product\ProductData;
 
 class OrderProductTest extends TestCase
@@ -59,8 +60,8 @@ class OrderProductTest extends TestCase
 
     public function testConstructWithMainVariantThrowsException()
     {
-        $variant = Product::create(new ProductData());
-        $mainVariant = Product::createMainVariant(new ProductData(), [$variant]);
+        $variant = Product::create(new ProductData(), new ProductCategoryDomainFactory());
+        $mainVariant = Product::createMainVariant(new ProductData(), new ProductCategoryDomainFactory(), [$variant]);
         $productPrice = new Price(0, 0);
 
         $orderMock = $this->createMock(Order::class);

@@ -11,6 +11,7 @@ use Shopsys\FrameworkBundle\Model\Pricing\PricingSetting;
 use Shopsys\FrameworkBundle\Model\Pricing\Vat\Vat;
 use Shopsys\FrameworkBundle\Model\Pricing\Vat\VatData;
 use Shopsys\FrameworkBundle\Model\Product\Pricing\ProductManualInputPrice;
+use Shopsys\FrameworkBundle\Model\Product\ProductCategoryDomainFactory;
 use Shopsys\FrameworkBundle\Model\Product\ProductDataFactoryInterface;
 use Shopsys\ShopBundle\Model\Product\Product;
 use Tests\ShopBundle\Test\TransactionFunctionalTestCase;
@@ -42,7 +43,7 @@ class ProductManualInputPriceTest extends TransactionFunctionalTestCase
         $productData = $producDataFactory->create();
         $productData->vat = $vat;
         $productData->unit = $this->getReference(UnitDataFixture::UNIT_PIECES);
-        $product = Product::create($productData);
+        $product = Product::create($productData, new ProductCategoryDomainFactory());
 
         $productManualInputPrice = new ProductManualInputPrice($product, $pricingGroup, 1000);
         $inputPriceType = $pricingSetting->getInputPriceType();
@@ -76,7 +77,7 @@ class ProductManualInputPriceTest extends TransactionFunctionalTestCase
         $productData = $productDataFactory->create();
         $productData->vat = $vat;
         $productData->unit = $this->getReference(UnitDataFixture::UNIT_PIECES);
-        $product = Product::create($productData);
+        $product = Product::create($productData, new ProductCategoryDomainFactory());
 
         $productManualInputPrice = new ProductManualInputPrice($product, $pricingGroup, 1000);
 

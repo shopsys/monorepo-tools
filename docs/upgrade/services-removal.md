@@ -140,7 +140,7 @@ If you use these methods, change their calling appropriately:
 - `ProductVariantService::createMainVariant(ProductData $mainVariantData, Product $mainProduct, array $variants)`  
   -> `ProductFactoryInterface::createMainVariant(ProductData $mainVariantData, Product $mainProduct, array $variants)`
 - `ProductVariantService::refreshProductVariants(Product $mainProduct, array $currentVariants)`  
-  -> `Product::refreshVariants(array $currentVariants)`
+  -> `Product::refreshVariants(array $currentVariants, ProductCategoryDomainFactoryInterface $productCategoryDomainFactory)`
 - `RegistrationMailService::getMessageDataByUser(User $user, MailTemplate $mailTemplate)`  
   -> `RegistrationMail::createMessage(MailTemplate $mailTemplate, $user)`
 - `UploadedFileService::createUploadedFile(UploadedFileEntityConfig $uploadedFileEntityConfig, $entityId, array $temporaryFilenames)`

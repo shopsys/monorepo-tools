@@ -13,6 +13,7 @@ use Shopsys\FrameworkBundle\Model\Pricing\Rounding;
 use Shopsys\FrameworkBundle\Model\Product\Pricing\ProductManualInputPriceRepository;
 use Shopsys\FrameworkBundle\Model\Product\Pricing\ProductPriceCalculation;
 use Shopsys\FrameworkBundle\Model\Product\Product;
+use Shopsys\FrameworkBundle\Model\Product\ProductCategoryDomainFactory;
 use Shopsys\FrameworkBundle\Model\Product\ProductData;
 use Shopsys\FrameworkBundle\Model\Product\ProductRepository;
 
@@ -74,8 +75,8 @@ class ProductPriceCalculationTest extends TestCase
         $pricingGroupData->name = 'name';
         $pricingGroup = new PricingGroup($pricingGroupData, 1);
 
-        $variant = Product::create(new ProductData());
-        $product = Product::createMainVariant(new ProductData(), [$variant]);
+        $variant = Product::create(new ProductData(), new ProductCategoryDomainFactory());
+        $product = Product::createMainVariant(new ProductData(), new ProductCategoryDomainFactory(), [$variant]);
 
         $this->expectException(\Shopsys\FrameworkBundle\Model\Product\Pricing\Exception\MainVariantPriceCalculationException::class);
 

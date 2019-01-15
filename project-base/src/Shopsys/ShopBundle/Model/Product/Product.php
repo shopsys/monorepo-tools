@@ -16,11 +16,12 @@ class Product extends BaseProduct
 {
     /**
      * @param \Shopsys\ShopBundle\Model\Product\ProductData $productData
+     * @param \Shopsys\FrameworkBundle\Model\Product\ProductCategoryDomainFactoryInterface $productCategoryDomainFactory
      * @param \Shopsys\ShopBundle\Model\Product\Product[]|null $variants
      */
-    protected function __construct(BaseProductData $productData, array $variants = null)
+    protected function __construct(BaseProductData $productData, ProductCategoryDomainFactoryInterface $productCategoryDomainFactory, array $variants = null)
     {
-        parent::__construct($productData, $variants);
+        parent::__construct($productData, $productCategoryDomainFactory, $variants);
     }
 
     /**
