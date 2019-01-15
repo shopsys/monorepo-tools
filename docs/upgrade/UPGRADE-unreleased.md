@@ -8,7 +8,7 @@ There you can find links to upgrade notes for other versions too.
 ## [shopsys/framework]
 ### Infrastructure
 - *(optional)* Switched to Debian PHP-FPM image ([#702](https://github.com/shopsys/shopsys/pull/702))
-    - update your Dockerfile to extend from debian image, follow [changes](https://github.com/shopsys/shopsys/pull/702/commits/d05979328f9d76d7d690276a7414e0a3c81a00ae)
+    - update your Dockerfile to extend from debian image, follow [changes](https://github.com/shopsys/shopsys/pull/702/commits/d05979328f9d76d7d690276a7414e0a3c81a00ae) and [fix #740](https://github.com/shopsys/shopsys/pull/740/files)
     - change `runAsUser` value in `webserver-php-fpm.yml` manifest to 33 as it is Debian default `www-data` UID
 - Google Cloud deploy using Terraform, Kustomize and Kubernetes ([#633](https://github.com/shopsys/shopsys/pull/633))
     - update your `.dockerignore` to ignore infrastructure files, follow [changes](https://github.com/shopsys/shopsys/pull/633/commits/5e507aa0aff44cb689b8d65fba58da53a8fafd1f)

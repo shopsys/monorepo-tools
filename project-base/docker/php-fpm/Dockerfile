@@ -31,11 +31,16 @@ RUN chmod +x /usr/local/bin/docker-install-composer && \
 # autoconf needed by "redis" extension
 RUN apt-get install -y \
     libpng-dev \
+    libjpeg-dev \
+    libfreetype6-dev \
     libzip-dev \
     libicu-dev \
     libpq-dev \
     autoconf && \
     apt-get clean
+
+# "gd" extension needs to have specified jpeg and freetype dir for jpg/jpeg images support
+RUN docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/
 
 # install necessary tools for running application
 RUN docker-php-ext-install \
