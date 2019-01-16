@@ -104,6 +104,7 @@ So in the project, we can change the factory to produce extended entity data ins
     * `Brand`
     * `Category`
     * `Order`
+    * `OrderItem`
     * `Payment`
     * `Product`
     * `Transport`
