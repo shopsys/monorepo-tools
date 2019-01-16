@@ -14,14 +14,14 @@ class Cart
     /**
      * @var \Shopsys\FrameworkBundle\Model\Cart\Item\CartItem[]
      */
-    private $cartItems;
+    private $items;
 
     /**
-     * @param \Shopsys\FrameworkBundle\Model\Cart\Item\CartItem[] $cartItems
+     * @param \Shopsys\FrameworkBundle\Model\Cart\Item\CartItem[] $items
      */
-    public function __construct(array $cartItems)
+    public function __construct(array $items)
     {
-        $this->cartItems = $cartItems;
+        $this->items = $items;
     }
 
     /**
@@ -29,27 +29,27 @@ class Cart
      */
     public function addItem(CartItem $item)
     {
-        $this->cartItems[] = $item;
+        $this->items[] = $item;
     }
 
     /**
-     * @param int $cartItemId
+     * @param int $itemId
      */
-    public function removeItemById($cartItemId)
+    public function removeItemById($itemId)
     {
-        foreach ($this->cartItems as $key => $cartItem) {
-            if ($cartItem->getId() === $cartItemId) {
-                unset($this->cartItems[$key]);
+        foreach ($this->items as $key => $item) {
+            if ($item->getId() === $itemId) {
+                unset($this->items[$key]);
                 return;
             }
         }
-        $message = 'Cart item with ID = ' . $cartItemId . ' is not in cart for remove.';
+        $message = 'Cart item with ID = ' . $itemId . ' is not in cart for remove.';
         throw new \Shopsys\FrameworkBundle\Model\Cart\Exception\InvalidCartItemException($message);
     }
 
     public function clean()
     {
-        $this->cartItems = [];
+        $this->items = [];
     }
 
     /**
@@ -57,7 +57,7 @@ class Cart
      */
     public function getItems()
     {
-        return $this->cartItems;
+        return $this->items;
     }
 
     /**
@@ -77,43 +77,43 @@ class Cart
     }
 
     /**
-     * @param array $quantitiesByCartItemId
+     * @param array $quantitiesByItemId
      */
-    public function changeQuantities(array $quantitiesByCartItemId)
+    public function changeQuantities(array $quantitiesByItemId)
     {
-        foreach ($this->cartItems as $cartItem) {
-            if (array_key_exists($cartItem->getId(), $quantitiesByCartItemId)) {
-                $cartItem->changeQuantity($quantitiesByCartItemId[$cartItem->getId()]);
+        foreach ($this->items as $item) {
+            if (array_key_exists($item->getId(), $quantitiesByItemId)) {
+                $item->changeQuantity($quantitiesByItemId[$item->getId()]);
             }
         }
     }
 
     /**
-     * @param int $cartItemId
+     * @param int $itemId
      * @return \Shopsys\FrameworkBundle\Model\Cart\Item\CartItem
      */
-    public function getCartItemById($cartItemId)
+    public function getItemById($itemId)
     {
-        foreach ($this->cartItems as $cartItem) {
-            if ($cartItem->getId() === $cartItemId) {
-                return $cartItem;
+        foreach ($this->items as $item) {
+            if ($item->getId() === $itemId) {
+                return $item;
             }
         }
-        $message = 'CartItem with id = ' . $cartItemId . ' not found in cart.';
+        $message = 'CartItem with id = ' . $itemId . ' not found in cart.';
         throw new \Shopsys\FrameworkBundle\Model\Cart\Exception\InvalidCartItemException($message);
     }
 
     /**
      * @return \Shopsys\FrameworkBundle\Model\Order\Item\QuantifiedProduct[]
      */
-    public function getQuantifiedProductsIndexedByCartItemId()
+    public function getQuantifiedProductsIndexedByItemId()
     {
-        $quantifiedProductsByCartItemId = [];
-        foreach ($this->cartItems as $cartItem) {
-            $quantifiedProductsByCartItemId[$cartItem->getId()] = new QuantifiedProduct($cartItem->getProduct(), $cartItem->getQuantity());
+        $quantifiedProductsByItemId = [];
+        foreach ($this->items as $item) {
+            $quantifiedProductsByItemId[$item->getId()] = new QuantifiedProduct($item->getProduct(), $item->getQuantity());
         }
 
-        return $quantifiedProductsByCartItemId;
+        return $quantifiedProductsByItemId;
     }
 
     /**
@@ -123,16 +123,16 @@ class Cart
      */
     public function mergeWithCart(self $cartToMerge, CartItemFactoryInterface $cartItemFactory, CustomerIdentifier $customerIdentifier)
     {
-        foreach ($cartToMerge->getItems() as $cartItemToMerge) {
-            $similarCartItem = $this->findSimilarCartItemByCartItem($cartItemToMerge);
-            if ($similarCartItem instanceof CartItem) {
-                $similarCartItem->changeQuantity($similarCartItem->getQuantity() + $cartItemToMerge->getQuantity());
+        foreach ($cartToMerge->getItems() as $itemToMerge) {
+            $similarItem = $this->findSimilarItemByItem($itemToMerge);
+            if ($similarItem instanceof CartItem) {
+                $similarItem->changeQuantity($similarItem->getQuantity() + $itemToMerge->getQuantity());
             } else {
                 $newCartItem = $cartItemFactory->create(
                     $customerIdentifier,
-                    $cartItemToMerge->getProduct(),
-                    $cartItemToMerge->getQuantity(),
-                    $cartItemToMerge->getWatchedPrice()
+                    $itemToMerge->getProduct(),
+                    $itemToMerge->getQuantity(),
+                    $itemToMerge->getWatchedPrice()
                 );
                 $this->addItem($newCartItem);
             }
@@ -140,14 +140,14 @@ class Cart
     }
 
     /**
-     * @param \Shopsys\FrameworkBundle\Model\Cart\Item\CartItem $cartItem
+     * @param \Shopsys\FrameworkBundle\Model\Cart\Item\CartItem $item
      * @return \Shopsys\FrameworkBundle\Model\Cart\Item\CartItem|null
      */
-    protected function findSimilarCartItemByCartItem(CartItem $cartItem)
+    protected function findSimilarItemByItem(CartItem $item)
     {
-        foreach ($this->cartItems as $similarCartItem) {
-            if ($similarCartItem->isSimilarItemAs($cartItem)) {
-                return $similarCartItem;
+        foreach ($this->items as $similarItem) {
+            if ($similarItem->isSimilarItemAs($item)) {
+                return $similarItem;
             }
         }
 
@@ -173,11 +173,11 @@ class Cart
             throw new \Shopsys\FrameworkBundle\Model\Cart\Exception\InvalidQuantityException($quantity);
         }
 
-        foreach ($this->cartItems as $cartItem) {
-            if ($cartItem->getProduct() === $product) {
-                $cartItem->changeQuantity($cartItem->getQuantity() + $quantity);
-                $cartItem->changeAddedAt(new \DateTime());
-                return new AddProductResult($cartItem, false, $quantity);
+        foreach ($this->items as $item) {
+            if ($item->getProduct() === $product) {
+                $item->changeQuantity($item->getQuantity() + $quantity);
+                $item->changeAddedAt(new \DateTime());
+                return new AddProductResult($item, false, $quantity);
             }
         }
 
