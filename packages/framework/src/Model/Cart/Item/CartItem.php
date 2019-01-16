@@ -4,7 +4,7 @@ namespace Shopsys\FrameworkBundle\Model\Cart\Item;
 
 use DateTime;
 use Doctrine\ORM\Mapping as ORM;
-use Shopsys\FrameworkBundle\Model\Customer\CustomerIdentifier;
+use Shopsys\FrameworkBundle\Model\Cart\Cart;
 use Shopsys\FrameworkBundle\Model\Product\Product;
 
 /**
@@ -23,19 +23,12 @@ class CartItem
     protected $id;
 
     /**
-     * @var string
+     * @var \Shopsys\FrameworkBundle\Model\Cart\Cart
      *
-     * @ORM\Column(type="string", length=127)
+     * @ORM\ManyToOne(targetEntity="Shopsys\FrameworkBundle\Model\Cart\Cart", inversedBy="items")
+     * @ORM\JoinColumn(name="cart_id", referencedColumnName="id", nullable=false)
      */
-    protected $cartIdentifier;
-
-    /**
-     * @var \Shopsys\FrameworkBundle\Model\Customer\User|null
-     *
-     * @ORM\ManyToOne(targetEntity="Shopsys\FrameworkBundle\Model\Customer\User")
-     * @ORM\JoinColumn(name="user_id", referencedColumnName="id", nullable = true, onDelete="CASCADE")
-     */
-    protected $user;
+    protected $cart;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Product\Product|null
@@ -67,19 +60,18 @@ class CartItem
     protected $addedAt;
 
     /**
-     * @param \Shopsys\FrameworkBundle\Model\Customer\CustomerIdentifier $customerIdentifier
+     * @param \Shopsys\FrameworkBundle\Model\Cart\Cart $cart
      * @param \Shopsys\FrameworkBundle\Model\Product\Product $product
      * @param int $quantity
      * @param string $watchedPrice
      */
     public function __construct(
-        CustomerIdentifier $customerIdentifier,
+        Cart $cart,
         Product $product,
         $quantity,
         $watchedPrice
     ) {
-        $this->cartIdentifier = $customerIdentifier->getCartIdentifier();
-        $this->user = $customerIdentifier->getUser();
+        $this->cart = $cart;
         $this->product = $product;
         $this->watchedPrice = $watchedPrice;
         $this->changeQuantity($quantity);
@@ -158,14 +150,6 @@ class CartItem
     public function isSimilarItemAs(self $cartItem)
     {
         return $this->getProduct()->getId() === $cartItem->getProduct()->getId();
-    }
-
-    /**
-     * @return string
-     */
-    public function getCartIdentifier()
-    {
-        return $this->cartIdentifier;
     }
 
     /**

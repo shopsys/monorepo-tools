@@ -90,14 +90,11 @@ class CartController extends FrontBaseController
      */
     public function indexAction(Request $request)
     {
-        $cart = $this->cartFacade->getCartOfCurrentCustomer();
-
-        if ($cart->isEmpty()) {
-            $this->cartFacade->cleanAdditionalData();
-        }
+        $cart = $this->cartFacade->findCartOfCurrentCustomer();
+        $cartItems = $cart === null ? [] : $cart->getItems();
 
         $cartFormData = ['quantities' => []];
-        foreach ($cart->getItems() as $cartItem) {
+        foreach ($cartItems as $cartItem) {
             $cartFormData['quantities'][$cartItem->getId()] = $cartItem->getQuantity();
         }
 
@@ -125,7 +122,6 @@ class CartController extends FrontBaseController
             );
         }
 
-        $cartItems = $cart->getItems();
         $domainId = $this->domain->getId();
 
         $orderPreview = $this->orderPreviewFactory->createForCurrentUser();
@@ -153,7 +149,7 @@ class CartController extends FrontBaseController
         $orderPreview = $this->orderPreviewFactory->createForCurrentUser();
 
         return $this->render('@ShopsysShop/Front/Inline/Cart/cartBox.html.twig', [
-            'cart' => $this->cartFacade->getCartOfCurrentCustomer(),
+            'cart' => $this->cartFacade->findCartOfCurrentCustomer(),
             'productsPrice' => $orderPreview->getProductsPrice(),
         ]);
     }

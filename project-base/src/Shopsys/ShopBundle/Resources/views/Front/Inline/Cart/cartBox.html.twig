@@ -5,7 +5,7 @@
                 <i class="svg svg-cart"></i>
             </span>
             <div class="cart__info js-cart-info">
-                {% if cart.isEmpty %}
+                {% if cart is null %}
                     {{ 'Your cart is empty'|trans }}
                 {% else %}
                     {% transchoice cart.itemsCount with { '%itemsCount%': cart.itemsCount, '%priceWithVat%': productsPrice.priceWithVat|price } %}
@@ -19,7 +19,7 @@
     <div class="cart-mobile header__mobile-button">
         <a href="{{ url('front_cart') }}" class="header__mobile-button__in">
             <i class="svg svg-cart"></i>
-            {% if not cart.isEmpty %}
+            {% if cart is not null %}
                 <span class="header__mobile-button__in__info">
                     {{ cart.itemsCount }}
                 </span>

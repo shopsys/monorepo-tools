@@ -1,13 +1,13 @@
 <?php
 
-namespace Shopsys\FrameworkBundle\Model\Cart\Item;
+namespace Shopsys\FrameworkBundle\Model\Cart;
 
 use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Query\ResultSetMapping;
 use Shopsys\FrameworkBundle\Model\Customer\CustomerIdentifier;
 
-class CartItemRepository
+class CartRepository
 {
     /**
      * @var \Doctrine\ORM\EntityManagerInterface
@@ -25,16 +25,16 @@ class CartItemRepository
     /**
      * @return \Doctrine\ORM\EntityRepository
      */
-    protected function getCartItemRepository()
+    protected function getCartRepository()
     {
-        return $this->em->getRepository(CartItem::class);
+        return $this->em->getRepository(Cart::class);
     }
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\Customer\CustomerIdentifier $customerIdentifier
-     * @return \Shopsys\FrameworkBundle\Model\Cart\Item\CartItem[]
+     * @return \Shopsys\FrameworkBundle\Model\Cart\Cart|null
      */
-    public function getAllByCustomerIdentifier(CustomerIdentifier $customerIdentifier)
+    public function findByCustomerIdentifier(CustomerIdentifier $customerIdentifier)
     {
         $criteria = [];
         if ($customerIdentifier->getUser() !== null) {
@@ -43,7 +43,7 @@ class CartItemRepository
             $criteria['cartIdentifier'] = $customerIdentifier->getCartIdentifier();
         }
 
-        return $this->getCartItemRepository()->findBy($criteria, ['id' => 'desc']);
+        return $this->getCartRepository()->findOneBy($criteria, ['id' => 'desc']);
     }
 
     /**
@@ -52,11 +52,19 @@ class CartItemRepository
     public function deleteOldCartsForUnregisteredCustomers($daysLimit)
     {
         $nativeQuery = $this->em->createNativeQuery(
-            'DELETE FROM cart_items WHERE cart_identifier NOT IN (
-                SELECT CI.cart_identifier
-                FROM cart_items CI
-                WHERE CI.added_at > :timeLimit
-            ) AND user_id IS NULL',
+            'DELETE FROM cart_items WHERE cart_id IN (
+                SELECT C.id
+                FROM carts C
+                WHERE C.modified_at <= :timeLimit AND user_id IS NULL)',
+            new ResultSetMapping()
+        );
+
+        $nativeQuery->execute([
+            'timeLimit' => new DateTime('-' . $daysLimit . ' days'),
+        ]);
+
+        $nativeQuery = $this->em->createNativeQuery(
+            'DELETE FROM carts WHERE modified_at <= :timeLimit AND user_id IS NULL',
             new ResultSetMapping()
         );
 
@@ -71,11 +79,19 @@ class CartItemRepository
     public function deleteOldCartsForRegisteredCustomers($daysLimit)
     {
         $nativeQuery = $this->em->createNativeQuery(
-            'DELETE FROM cart_items WHERE user_id NOT IN (
-                SELECT CI.user_id
-                FROM cart_items CI
-                WHERE CI.added_at > :timeLimit
-            ) AND user_id IS NOT NULL',
+            'DELETE FROM cart_items WHERE cart_id IN (
+                SELECT C.id
+                FROM carts C
+                WHERE C.modified_at <= :timeLimit AND user_id IS NOT NULL)',
+            new ResultSetMapping()
+        );
+
+        $nativeQuery->execute([
+            'timeLimit' => new DateTime('-' . $daysLimit . ' days'),
+        ]);
+
+        $nativeQuery = $this->em->createNativeQuery(
+            'DELETE FROM carts WHERE modified_at <= :timeLimit AND user_id IS NOT NULL',
             new ResultSetMapping()
         );
 

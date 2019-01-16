@@ -80,22 +80,29 @@ Repositories should be used only by facade so you should avoid using them in any
 
 ### Example
 ```php
-// FrameworkBundle/Model/Cart/Item/CartItemRepository.php
+// FrameworkBundle/Model/Cart/CartRepository.php
 
-namespace Shopsys\FrameworkBundle\Model\Cart\Item;
+namespace Shopsys\FrameworkBundle\Model\Cart;
 
 // ...
 
-class CartItemRepository
+class CartRepository
 {
-
     // ...
 
     /**
-     * @param \Shopsys\FrameworkBundle\Model\Customer\CustomerIdentifier $customerIdentifier
-     * @return \Shopsys\FrameworkBundle\Model\Cart\Item\CartItem[]
+     * @return \Doctrine\ORM\EntityRepository
      */
-    public function getAllByCustomerIdentifier(CustomerIdentifier $customerIdentifier)
+    protected function getCartRepository()
+    {
+        return $this->em->getRepository(Cart::class);
+    }
+
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Customer\CustomerIdentifier $customerIdentifier
+     * @return \Shopsys\FrameworkBundle\Model\Cart\Cart|null
+     */
+    public function findByCustomerIdentifier(CustomerIdentifier $customerIdentifier)
     {
         $criteria = [];
         if ($customerIdentifier->getUser() !== null) {
@@ -104,7 +111,7 @@ class CartItemRepository
             $criteria['cartIdentifier'] = $customerIdentifier->getCartIdentifier();
         }
 
-        return $this->getCartItemRepository()->findBy($criteria, ['id' => 'desc']);
+        return $this->getCartRepository()->findOneBy($criteria, ['id' => 'desc']);
     }
 
     /**
@@ -113,11 +120,19 @@ class CartItemRepository
     public function deleteOldCartsForUnregisteredCustomers($daysLimit)
     {
         $nativeQuery = $this->em->createNativeQuery(
-            'DELETE FROM cart_items WHERE cart_identifier NOT IN (
-                SELECT CI.cart_identifier
-                FROM cart_items CI
-                WHERE CI.added_at > :timeLimit
-            ) AND user_id IS NULL',
+            'DELETE FROM cart_items WHERE cart_id IN (
+                SELECT C.id
+                FROM carts C
+                WHERE C.modified_at <= :timeLimit AND user_id IS NULL)',
+            new ResultSetMapping()
+        );
+
+        $nativeQuery->execute([
+            'timeLimit' => new DateTime('-' . $daysLimit . ' days'),
+        ]);
+
+        $nativeQuery = $this->em->createNativeQuery(
+            'DELETE FROM carts WHERE modified_at <= :timeLimit AND user_id IS NULL',
             new ResultSetMapping()
         );
 
@@ -126,16 +141,7 @@ class CartItemRepository
         ]);
     }
 
-    /**
-     * @return \Doctrine\ORM\EntityRepository
-     */
-    protected function getCartItemRepository()
-    {
-        return $this->em->getRepository(CartItem::class);
-    }
-
     // ...
-
 }
 ```
 *Note: Repositories in Shopsys Framework wrap Doctrine repositories. This is done in order to provide only useful methods with understandable names instead of generic API of Doctrine repositories.*
@@ -159,43 +165,6 @@ class CartFacade
     // ...
 
     /**
-     * @var \Doctrine\ORM\EntityManager
-     */
-    protected $em;
-
-    /**
-     * @var \Shopsys\FrameworkBundle\Model\Cart\CartFactory
-     */
-    protected $cartFactory;
-
-    /**
-     * @var \Shopsys\FrameworkBundle\Model\Customer\CustomerIdentifierFactory
-     */
-    protected $customerIdentifierFactory;
-
-    /**
-     * @var \Shopsys\FrameworkBundle\Component\Domain\Domain
-     */
-    protected $domain;
-
-    /**
-     * @var \Shopsys\FrameworkBundle\Model\Customer\CurrentCustomer
-     */
-    protected $currentCustomer;
-
-    /**
-     * @var \Shopsys\FrameworkBundle\Model\Product\Pricing\ProductPriceCalculationForUser
-     */
-    protected $productPriceCalculation;
-
-    /**
-     * @var \Shopsys\FrameworkBundle\Model\Cart\Item\CartItemFactoryInterface
-     */
-    protected $cartItemFactory;
-
-    // ...
-
-    /**
      * @param int $productId
      * @param int $quantity
      * @return \Shopsys\FrameworkBundle\Model\Cart\AddProductResult
@@ -207,10 +176,10 @@ class CartFacade
             $this->domain->getId(),
             $this->currentCustomer->getPricingGroup()
         );
-        $customerIdentifier = $this->customerIdentifierFactory->get();
-        $cart = $this->cartFactory->get($customerIdentifier);
+        $cart = $this->getCartOfCurrentCustomerCreateIfNotExists();
 
-        $result = $cart->addProduct($customerIdentifier, $product, $quantity, $this->productPriceCalculation, $this->cartItemFactory);
+        /* @var $result \Shopsys\FrameworkBundle\Model\Cart\AddProductResult */
+        $result = $cart->addProduct($product, $quantity, $this->productPriceCalculation, $this->cartItemFactory);
 
         $this->em->persist($result->getCartItem());
         $this->em->flush();

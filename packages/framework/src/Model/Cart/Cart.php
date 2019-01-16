@@ -2,26 +2,76 @@
 
 namespace Shopsys\FrameworkBundle\Model\Cart;
 
+use DateTime;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\ORM\Mapping as ORM;
 use Shopsys\FrameworkBundle\Model\Cart\Item\CartItem;
 use Shopsys\FrameworkBundle\Model\Cart\Item\CartItemFactoryInterface;
-use Shopsys\FrameworkBundle\Model\Customer\CustomerIdentifier;
+use Shopsys\FrameworkBundle\Model\Customer\User;
 use Shopsys\FrameworkBundle\Model\Order\Item\QuantifiedProduct;
 use Shopsys\FrameworkBundle\Model\Product\Pricing\ProductPriceCalculationForUser;
 use Shopsys\FrameworkBundle\Model\Product\Product;
 
+/**
+ * @ORM\Table(name="carts")
+ * @ORM\Entity
+ */
 class Cart
 {
     /**
-     * @var \Shopsys\FrameworkBundle\Model\Cart\Item\CartItem[]
+     * @var int
+     *
+     * @ORM\Column(type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      */
-    private $items;
+    protected $id;
 
     /**
-     * @param \Shopsys\FrameworkBundle\Model\Cart\Item\CartItem[] $items
+     * @var string
+     *
+     * @ORM\Column(type="string", length=127)
      */
-    public function __construct(array $items)
+    protected $cartIdentifier;
+
+    /**
+     * @var \Shopsys\FrameworkBundle\Model\Customer\User|null
+     *
+     * @ORM\ManyToOne(targetEntity="Shopsys\FrameworkBundle\Model\Customer\User")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id", nullable = true, onDelete="CASCADE")
+     */
+    protected $user;
+
+    /**
+     * @var \Shopsys\FrameworkBundle\Model\Cart\Item\CartItem[]
+     *
+     * @ORM\OneToMany(
+     *     targetEntity="Shopsys\FrameworkBundle\Model\Cart\Item\CartItem",
+     *     mappedBy="cart",
+     *     cascade={"remove"},
+     *     orphanRemoval=true
+     * )
+     * @ORM\OrderBy({"id" = "DESC"})
+     */
+    protected $items;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(type="datetime")
+     */
+    protected $modifiedAt;
+
+    /**
+     * @param string $cartIdentifier
+     * @param \Shopsys\FrameworkBundle\Model\Customer\User|null $user
+     */
+    public function __construct(string $cartIdentifier, User $user = null)
     {
-        $this->items = $items;
+        $this->cartIdentifier = $cartIdentifier;
+        $this->user = $user;
+        $this->items = new ArrayCollection();
+        $this->modifiedAt = new DateTime();
     }
 
     /**
@@ -29,7 +79,10 @@ class Cart
      */
     public function addItem(CartItem $item)
     {
-        $this->items[] = $item;
+        if (!$this->items->contains($item)) {
+            $this->items->add($item);
+            $this->setModifiedNow();
+        }
     }
 
     /**
@@ -39,7 +92,8 @@ class Cart
     {
         foreach ($this->items as $key => $item) {
             if ($item->getId() === $itemId) {
-                unset($this->items[$key]);
+                $this->items->removeElement($item);
+                $this->setModifiedNow();
                 return;
             }
         }
@@ -49,7 +103,7 @@ class Cart
 
     public function clean()
     {
-        $this->items = [];
+        $this->items->clear();
     }
 
     /**
@@ -57,7 +111,7 @@ class Cart
      */
     public function getItems()
     {
-        return $this->items;
+        return $this->items->toArray();
     }
 
     /**
@@ -65,7 +119,7 @@ class Cart
      */
     public function getItemsCount()
     {
-        return count($this->getItems());
+        return $this->items->count();
     }
 
     /**
@@ -86,6 +140,8 @@ class Cart
                 $item->changeQuantity($quantitiesByItemId[$item->getId()]);
             }
         }
+
+        $this->setModifiedNow();
     }
 
     /**
@@ -119,9 +175,8 @@ class Cart
     /**
      * @param \Shopsys\FrameworkBundle\Model\Cart\Cart $cartToMerge
      * @param \Shopsys\FrameworkBundle\Model\Cart\Item\CartItemFactoryInterface $cartItemFactory
-     * @param \Shopsys\FrameworkBundle\Model\Customer\CustomerIdentifier $customerIdentifier
      */
-    public function mergeWithCart(self $cartToMerge, CartItemFactoryInterface $cartItemFactory, CustomerIdentifier $customerIdentifier)
+    public function mergeWithCart(self $cartToMerge, CartItemFactoryInterface $cartItemFactory)
     {
         foreach ($cartToMerge->getItems() as $itemToMerge) {
             $similarItem = $this->findSimilarItemByItem($itemToMerge);
@@ -129,7 +184,7 @@ class Cart
                 $similarItem->changeQuantity($similarItem->getQuantity() + $itemToMerge->getQuantity());
             } else {
                 $newCartItem = $cartItemFactory->create(
-                    $customerIdentifier,
+                    $this,
                     $itemToMerge->getProduct(),
                     $itemToMerge->getQuantity(),
                     $itemToMerge->getWatchedPrice()
@@ -137,6 +192,8 @@ class Cart
                 $this->addItem($newCartItem);
             }
         }
+
+        $this->setModifiedNow();
     }
 
     /**
@@ -155,7 +212,6 @@ class Cart
     }
 
     /**
-     * @param \Shopsys\FrameworkBundle\Model\Customer\CustomerIdentifier $customerIdentifier
      * @param \Shopsys\FrameworkBundle\Model\Product\Product $product
      * @param int $quantity
      * @param \Shopsys\FrameworkBundle\Model\Product\Pricing\ProductPriceCalculationForUser $productPriceCalculation
@@ -163,7 +219,6 @@ class Cart
      * @return \Shopsys\FrameworkBundle\Model\Cart\AddProductResult
      */
     public function addProduct(
-        CustomerIdentifier $customerIdentifier,
         Product $product,
         $quantity,
         ProductPriceCalculationForUser $productPriceCalculation,
@@ -176,14 +231,37 @@ class Cart
         foreach ($this->items as $item) {
             if ($item->getProduct() === $product) {
                 $item->changeQuantity($item->getQuantity() + $quantity);
-                $item->changeAddedAt(new \DateTime());
+                $item->changeAddedAt(new DateTime());
                 return new AddProductResult($item, false, $quantity);
             }
         }
 
         $productPrice = $productPriceCalculation->calculatePriceForCurrentUser($product);
-        $newCartItem = $cartItemFactory->create($customerIdentifier, $product, $quantity, $productPrice->getPriceWithVat());
+        $newCartItem = $cartItemFactory->create($this, $product, $quantity, $productPrice->getPriceWithVat());
         $this->addItem($newCartItem);
+        $this->setModifiedNow();
+
         return new AddProductResult($newCartItem, true, $quantity);
+    }
+
+    /**
+     * @return string
+     */
+    public function getCartIdentifier()
+    {
+        return $this->cartIdentifier;
+    }
+
+    protected function setModifiedNow()
+    {
+        $this->modifiedAt = new DateTime();
+    }
+
+    /**
+     * @param \DateTime $modifiedAt
+     */
+    public function setModifiedAt(DateTime $modifiedAt)
+    {
+        $this->modifiedAt = $modifiedAt;
     }
 }

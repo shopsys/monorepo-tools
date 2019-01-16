@@ -17,7 +17,7 @@
     <h1>{{ 'Your cart'|trans }}</h1>
 
 
-    {% if cart.itemsCount > 0 %}
+    {% if cart is not null %}
         {{ form_start(form, { attr: { class: 'js-no-validate js-cart-form' }}) }}
             {{ form_errors(form) }}
             <table class="table-cart js-cart">

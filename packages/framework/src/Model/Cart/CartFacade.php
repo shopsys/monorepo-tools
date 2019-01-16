@@ -5,8 +5,9 @@ namespace Shopsys\FrameworkBundle\Model\Cart;
 use Doctrine\ORM\EntityManagerInterface;
 use Shopsys\FrameworkBundle\Component\Domain\Domain;
 use Shopsys\FrameworkBundle\Model\Cart\Item\CartItemFactoryInterface;
-use Shopsys\FrameworkBundle\Model\Cart\Item\CartItemRepository;
+use Shopsys\FrameworkBundle\Model\Cart\Watcher\CartWatcherFacade;
 use Shopsys\FrameworkBundle\Model\Customer\CurrentCustomer;
+use Shopsys\FrameworkBundle\Model\Customer\CustomerIdentifier;
 use Shopsys\FrameworkBundle\Model\Customer\CustomerIdentifierFactory;
 use Shopsys\FrameworkBundle\Model\Order\PromoCode\CurrentPromoCodeFacade;
 use Shopsys\FrameworkBundle\Model\Product\Pricing\ProductPriceCalculationForUser;
@@ -53,11 +54,6 @@ class CartFacade
     protected $currentPromoCodeFacade;
 
     /**
-     * @var \Shopsys\FrameworkBundle\Model\Cart\Item\CartItemRepository
-     */
-    protected $cartItemRepository;
-
-    /**
      * @var \Shopsys\FrameworkBundle\Model\Product\Pricing\ProductPriceCalculationForUser
      */
     protected $productPriceCalculation;
@@ -68,6 +64,16 @@ class CartFacade
     protected $cartItemFactory;
 
     /**
+     * @var \Shopsys\FrameworkBundle\Model\Cart\CartRepository
+     */
+    protected $cartRepository;
+
+    /**
+     * @var \Shopsys\FrameworkBundle\Model\Cart\Watcher\CartWatcherFacade
+     */
+    protected $cartWatcherFacade;
+
+    /**
      * @param \Doctrine\ORM\EntityManagerInterface $em
      * @param \Shopsys\FrameworkBundle\Model\Cart\CartFactory $cartFactory
      * @param \Shopsys\FrameworkBundle\Model\Product\ProductRepository $productRepository
@@ -75,9 +81,10 @@ class CartFacade
      * @param \Shopsys\FrameworkBundle\Component\Domain\Domain $domain
      * @param \Shopsys\FrameworkBundle\Model\Customer\CurrentCustomer $currentCustomer
      * @param \Shopsys\FrameworkBundle\Model\Order\PromoCode\CurrentPromoCodeFacade $currentPromoCodeFacade
-     * @param \Shopsys\FrameworkBundle\Model\Cart\Item\CartItemRepository $cartItemRepository
      * @param \Shopsys\FrameworkBundle\Model\Product\Pricing\ProductPriceCalculationForUser $productPriceCalculation
      * @param \Shopsys\FrameworkBundle\Model\Cart\Item\CartItemFactoryInterface $cartItemFactory
+     * @param \Shopsys\FrameworkBundle\Model\Cart\CartRepository $cartRepository
+     * @param \Shopsys\FrameworkBundle\Model\Cart\Watcher\CartWatcherFacade $cartWatcherFacade
      */
     public function __construct(
         EntityManagerInterface $em,
@@ -87,9 +94,10 @@ class CartFacade
         Domain $domain,
         CurrentCustomer $currentCustomer,
         CurrentPromoCodeFacade $currentPromoCodeFacade,
-        CartItemRepository $cartItemRepository,
         ProductPriceCalculationForUser $productPriceCalculation,
-        CartItemFactoryInterface $cartItemFactory
+        CartItemFactoryInterface $cartItemFactory,
+        CartRepository $cartRepository,
+        CartWatcherFacade $cartWatcherFacade
     ) {
         $this->em = $em;
         $this->cartFactory = $cartFactory;
@@ -98,9 +106,10 @@ class CartFacade
         $this->domain = $domain;
         $this->currentCustomer = $currentCustomer;
         $this->currentPromoCodeFacade = $currentPromoCodeFacade;
-        $this->cartItemRepository = $cartItemRepository;
         $this->productPriceCalculation = $productPriceCalculation;
         $this->cartItemFactory = $cartItemFactory;
+        $this->cartRepository = $cartRepository;
+        $this->cartWatcherFacade = $cartWatcherFacade;
     }
 
     /**
@@ -115,10 +124,10 @@ class CartFacade
             $this->domain->getId(),
             $this->currentCustomer->getPricingGroup()
         );
-        $customerIdentifier = $this->customerIdentifierFactory->get();
-        $cart = $this->cartFactory->get($customerIdentifier);
-        $result = $cart->addProduct($customerIdentifier, $product, $quantity, $this->productPriceCalculation, $this->cartItemFactory);
+        $cart = $this->getCartOfCurrentCustomerCreateIfNotExists();
+
         /* @var $result \Shopsys\FrameworkBundle\Model\Cart\AddProductResult */
+        $result = $cart->addProduct($product, $quantity, $this->productPriceCalculation, $this->cartItemFactory);
 
         $this->em->persist($result->getCartItem());
         $this->em->flush();
@@ -131,7 +140,12 @@ class CartFacade
      */
     public function changeQuantities(array $quantitiesByCartItemId)
     {
-        $cart = $this->getCartOfCurrentCustomer();
+        $cart = $this->findCartOfCurrentCustomer();
+
+        if ($cart === null) {
+            throw new \Shopsys\FrameworkBundle\Model\Cart\Exception\CartIsEmptyException();
+        }
+
         $cart->changeQuantities($quantitiesByCartItemId);
         $this->em->flush();
     }
@@ -141,23 +155,37 @@ class CartFacade
      */
     public function deleteCartItem($cartItemId)
     {
-        $cart = $this->getCartOfCurrentCustomer();
+        $cart = $this->findCartOfCurrentCustomer();
+
+        if ($cart === null) {
+            throw new \Shopsys\FrameworkBundle\Model\Cart\Exception\CartIsEmptyException();
+        }
+
         $cartItemToDelete = $cart->getItemById($cartItemId);
         $cart->removeItemById($cartItemId);
         $this->em->remove($cartItemToDelete);
         $this->em->flush();
+
+        if ($cart->isEmpty()) {
+            $this->deleteCart($cart);
+        }
     }
 
-    public function cleanCart()
+    public function deleteCartOfCurrentCustomer()
     {
-        $cart = $this->getCartOfCurrentCustomer();
-        $cartItemsToDelete = $cart->getItems();
-        $cart->clean();
+        $cart = $this->findCartOfCurrentCustomer();
 
-        foreach ($cartItemsToDelete as $cartItemToDelete) {
-            $this->em->remove($cartItemToDelete);
+        if ($cart !== null) {
+            $this->deleteCart($cart);
         }
+    }
 
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Cart\Cart $cart
+     */
+    public function deleteCart(Cart $cart)
+    {
+        $this->em->remove($cart);
         $this->em->flush();
 
         $this->cleanAdditionalData();
@@ -169,7 +197,12 @@ class CartFacade
      */
     public function getProductByCartItemId($cartItemId)
     {
-        $cart = $this->getCartOfCurrentCustomer();
+        $cart = $this->findCartOfCurrentCustomer();
+
+        if ($cart === null) {
+            $message = 'CartItem with id = ' . $cartItemId . ' not found in cart.';
+            throw new \Shopsys\FrameworkBundle\Model\Cart\Exception\InvalidCartItemException($message);
+        }
 
         return $cart->getItemById($cartItemId)->getProduct();
     }
@@ -180,13 +213,56 @@ class CartFacade
     }
 
     /**
-     * @return \Shopsys\FrameworkBundle\Model\Cart\Cart
+     * @param \Shopsys\FrameworkBundle\Model\Customer\CustomerIdentifier $customerIdentifier
+     * @return \Shopsys\FrameworkBundle\Model\Cart\Cart|null
      */
-    public function getCartOfCurrentCustomer()
+    public function findCartByCustomerIdentifier(CustomerIdentifier $customerIdentifier)
+    {
+        $cart = $this->cartRepository->findByCustomerIdentifier($customerIdentifier);
+
+        if ($cart !== null) {
+            $this->cartWatcherFacade->checkCartModifications($cart);
+        }
+
+        return $cart;
+    }
+
+    /**
+     * @return \Shopsys\FrameworkBundle\Model\Cart\Cart|null
+     */
+    public function findCartOfCurrentCustomer()
     {
         $customerIdentifier = $this->customerIdentifierFactory->get();
 
-        return $this->cartFactory->get($customerIdentifier);
+        return $this->findCartByCustomerIdentifier($customerIdentifier);
+    }
+
+    /**
+     * @return \Shopsys\FrameworkBundle\Model\Cart\Cart
+     */
+    public function getCartOfCurrentCustomerCreateIfNotExists()
+    {
+        $customerIdentifier = $this->customerIdentifierFactory->get();
+
+        return $this->getCartByCustomerIdentifierCreateIfNotExists($customerIdentifier);
+    }
+
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Customer\CustomerIdentifier $customerIdentifier
+     * @return \Shopsys\FrameworkBundle\Model\Cart\Cart
+     */
+    public function getCartByCustomerIdentifierCreateIfNotExists(CustomerIdentifier $customerIdentifier)
+    {
+        $cart = $this->cartRepository->findByCustomerIdentifier($customerIdentifier);
+
+        if ($cart === null) {
+            $cart = $this->cartFactory->create($customerIdentifier);
+
+            $this->em->persist($cart);
+            $this->em->flush($cart);
+        }
+
+        return $cart;
     }
 
     /**
@@ -194,15 +270,18 @@ class CartFacade
      */
     public function getQuantifiedProductsOfCurrentCustomerIndexedByCartItemId()
     {
-        $cart = $this->getCartOfCurrentCustomer();
+        $cart = $this->findCartOfCurrentCustomer();
+
+        if ($cart === null) {
+            return [];
+        }
 
         return $cart->getQuantifiedProductsIndexedByItemId();
     }
 
     public function deleteOldCarts()
     {
-        $this->cartItemRepository->deleteOldCartsForUnregisteredCustomers(self::DAYS_LIMIT_FOR_UNREGISTERED);
-        $this->cartItemRepository->deleteOldCartsForRegisteredCustomers(self::DAYS_LIMIT_FOR_REGISTERED);
-        $this->cartFactory->clearCache();
+        $this->cartRepository->deleteOldCartsForUnregisteredCustomers(self::DAYS_LIMIT_FOR_UNREGISTERED);
+        $this->cartRepository->deleteOldCartsForRegisteredCustomers(self::DAYS_LIMIT_FOR_REGISTERED);
     }
 }

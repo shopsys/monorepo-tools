@@ -174,3 +174,9 @@ services:
     Shopsys\FrameworkBundle\Model\Product\Pricing\ProductManualInputPriceFacade: ~
 
     Shopsys\FrameworkBundle\Model\Cart\Item\CartItemFactory: ~
+
+    Shopsys\FrameworkBundle\Model\Cart\CartRepository: ~
+
+    Shopsys\FrameworkBundle\Model\Cart\Watcher\CartWatcherFacade:
+        arguments:
+            - '@shopsys.shop.component.flash_message.sender.front'

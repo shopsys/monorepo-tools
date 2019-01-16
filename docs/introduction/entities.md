@@ -29,14 +29,14 @@ interface CartItemFactoryInterface
 {
 
     /**
-     * @param \Shopsys\FrameworkBundle\Model\Customer\CustomerIdentifier $customerIdentifier
+     * @param \Shopsys\FrameworkBundle\Model\Cart\Cart $cart
      * @param \Shopsys\FrameworkBundle\Model\Product\Product $product
      * @param int $quantity
      * @param string $watchedPrice
      * @return \Shopsys\FrameworkBundle\Model\Cart\Item\CartItem
      */
     public function create(
-        CustomerIdentifier $customerIdentifier,
+        Cart $cart,
         Product $product,
         int $quantity,
         string $watchedPrice

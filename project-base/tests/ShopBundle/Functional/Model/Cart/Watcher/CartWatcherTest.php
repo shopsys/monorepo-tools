@@ -31,9 +31,9 @@ class CartWatcherTest extends TransactionFunctionalTestCase
         /** @var \Shopsys\FrameworkBundle\Model\Product\Pricing\ProductPriceCalculationForUser $productPriceCalculationForUser */
         $productPriceCalculationForUser = $this->getContainer()->get(ProductPriceCalculationForUser::class);
         $productPrice = $productPriceCalculationForUser->calculatePriceForCurrentUser($product);
-        $cartItem = new CartItem($customerIdentifier, $product, 1, $productPrice->getPriceWithVat());
-        $cartItems = [$cartItem];
-        $cart = new Cart($cartItems);
+        $cart = new Cart($customerIdentifier->getCartIdentifier());
+        $cartItem = new CartItem($cart, $product, 1, $productPrice->getPriceWithVat());
+        $cart->addItem($cartItem);
 
         /** @var \Shopsys\FrameworkBundle\Model\Cart\Watcher\CartWatcher $cartWatcher */
         $cartWatcher = $this->getContainer()->get(CartWatcher::class);
@@ -56,6 +56,8 @@ class CartWatcherTest extends TransactionFunctionalTestCase
 
     public function testGetNotListableItemsWithItemWithoutProduct()
     {
+        $customerIdentifier = new CustomerIdentifier('randomString');
+
         $cartItemMock = $this->getMockBuilder(CartItem::class)
             ->disableOriginalConstructor()
             ->setMethods(null)
@@ -71,8 +73,8 @@ class CartWatcherTest extends TransactionFunctionalTestCase
             ->method('getPricingGroup')
             ->willReturn($expectedPricingGroup);
 
-        $cartItems = [$cartItemMock];
-        $cart = new Cart($cartItems);
+        $cart = new Cart($customerIdentifier->getCartIdentifier());
+        $cart->addItem($cartItemMock);
 
         /** @var \Shopsys\FrameworkBundle\Model\Cart\Watcher\CartWatcher $cartWatcher */
         $cartWatcher = $this->getContainer()->get(CartWatcher::class);
@@ -83,6 +85,7 @@ class CartWatcherTest extends TransactionFunctionalTestCase
 
     public function testGetNotListableItemsWithVisibleButNotSellableProduct()
     {
+        $customerIdentifier = new CustomerIdentifier('randomString');
         $productDataFactory = $this->getContainer()->get(ProductDataFactoryInterface::class);
 
         $productData = $productDataFactory->create();
@@ -136,8 +139,8 @@ class CartWatcherTest extends TransactionFunctionalTestCase
 
         $cartWatcher = new CartWatcher($productPriceCalculationForUser, $productVisibilityRepositoryMock, $domain);
 
-        $cartItems = [$cartItemMock];
-        $cart = new Cart($cartItems);
+        $cart = new Cart($customerIdentifier->getCartIdentifier());
+        $cart->addItem($cartItemMock);
 
         $notListableItems = $cartWatcher->getNotListableItems($cart, $currentCustomerMock);
         $this->assertCount(1, $notListableItems);

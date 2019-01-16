@@ -1,0 +1,3 @@
+prezent_doctrine_translatable:
+    # in tests there is no default locale set
+    fallback_locale: en
