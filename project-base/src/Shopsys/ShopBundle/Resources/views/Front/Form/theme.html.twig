@@ -259,7 +259,7 @@
 
 {% block honey_pot_row %}
     {{ formHoneyPotCheckPasswordAlreadyRendered(form) }}
-    {{ form_row(form, {rowClass: 'js-honey ' ~ rowClass|default('')}) }}
+    {{ form_row(form, {rowClass: 'js-honey display-none' ~ rowClass|default('')}) }}
 {% endblock honey_pot_row %}
 
 {% block date_picker_widget %}

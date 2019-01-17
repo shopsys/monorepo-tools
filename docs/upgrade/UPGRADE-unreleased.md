@@ -16,6 +16,8 @@ There you can find links to upgrade notes for other versions too.
     - *(optional)* If you are using Kubernetes manifests for CI or deployment, follow changes done in manifests and ci `build_kubernetes.sh` script.
 - add `!docker/nginx` line into `.dockerignore` file so `docker/nginx` directory is not excluded during building `php-fpm` image ([#674](https://github.com/shopsys/shopsys/pull/674))
 - make sure your `webserver` service depends on `php-fpm` in your `docker-compose.yml` file so webserver will not fail on error `host not found in upstream php-fpm:9000` ([#679](https://github.com/shopsys/shopsys/pull/679))
+- on a production server enable compression of static files ([#703](https://github.com/shopsys/shopsys/pull/703))
+    - you can see example configuration in [Installation using Docker on Production Server](/docs/installation/installation-using-docker-on-production-server.md) guide
 
 ### Configuration
 - *(optional)* for easier deployment to production, make the trusted proxies in `Shopsys\Boostrap` class loaded from DIC parameter `trusted_proxies` instead of being hard-coded ([#596](https://github.com/shopsys/shopsys/pull/596))
@@ -70,6 +72,9 @@ There you can find links to upgrade notes for other versions too.
         - `CartTest` functions `testRemoveItem` and `createProduct`
         - `ProductManualInputPriceTest` functions `testRecalculateInputPriceForNewVatPercentWithInputPriceWithoutVat` and `testRecalculateInputPriceForNewVatPercentWithInputPriceWithVat`
         - `ProductAvailabilityCalculationTest` functions `testCalculateAvailability`, `testCalculateAvailabilityMainVariant` and `testCalculateAvailabilityMainVariantWithNoSellableVariants`
+- *(optional)* in your `base.html.twig` template move non-essential javascript files at the bottom of a page (([#703](https://github.com/shopsys/shopsys/pull/703)))
+    - we cannot provide exact instructions as we don't know your implementation, for an example take a look at [changes](https://github.com/shopsys/shopsys/pull/703/files#diff-4c948fb55a9ceba2f3070e572ac506f3)
+    - you can use new simplified jquery-ui.min.js file, but please be aware that if your implementation uses more components from jQueryUI, you have to be extra careful
 
 ## [shopsys/migrations]
 - `GenerateMigrationsService` class was renamed to `MigrationsGenerator`, so change it's usage appropriately ([#627](https://github.com/shopsys/shopsys/pull/627))
