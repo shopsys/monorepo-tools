@@ -9,6 +9,7 @@ use Doctrine\ORM\Tools\SchemaTool;
 use Shopsys\FrameworkBundle\Component\EntityExtension\EntityNameResolver;
 use Shopsys\FrameworkBundle\Model\Order\Item\OrderItem;
 use Shopsys\FrameworkBundle\Model\Product\Brand\Brand;
+use Shopsys\FrameworkBundle\Model\Product\ProductTranslation;
 use Shopsys\ShopBundle\Model\Category\Category;
 use Shopsys\ShopBundle\Model\Order\Order;
 use Shopsys\ShopBundle\Model\Order\Order as ExtendedOrder;
@@ -20,6 +21,7 @@ use Tests\ShopBundle\Functional\EntityExtension\Model\CategoryOneToOneBidirectio
 use Tests\ShopBundle\Functional\EntityExtension\Model\ExtendedCategory;
 use Tests\ShopBundle\Functional\EntityExtension\Model\ExtendedOrderItem;
 use Tests\ShopBundle\Functional\EntityExtension\Model\ExtendedProduct;
+use Tests\ShopBundle\Functional\EntityExtension\Model\ExtendedProductTranslation;
 use Tests\ShopBundle\Functional\EntityExtension\Model\ProductManyToManyBidirectionalEntity;
 use Tests\ShopBundle\Functional\EntityExtension\Model\ProductOneToManyBidirectionalEntity;
 use Tests\ShopBundle\Functional\EntityExtension\Model\ProductOneToOneBidirectionalEntity;
@@ -57,6 +59,7 @@ class EntityExtensionTest extends TransactionFunctionalTestCase
             OrderItem::class => ExtendedOrderItem::class,
             Brand::class => ExtendedBrand::class,
             Order::class => ExtendedOrder::class,
+            ProductTranslation::class => ExtendedProductTranslation::class,
         ];
 
         $newEntities = [
@@ -145,6 +148,7 @@ class EntityExtensionTest extends TransactionFunctionalTestCase
         $this->doTestExtendedEntityInstantiation(Product::class, ExtendedProduct::class, self::MAIN_PRODUCT_ID);
         $this->doTestExtendedEntityInstantiation(Category::class, ExtendedCategory::class, self::MAIN_CATEGORY_ID);
         $this->doTestExtendedEntityInstantiation(OrderItem::class, ExtendedOrderItem::class, self::ORDER_ITEM_ID);
+        $this->doTestExtendedEntityInstantiation(ProductTranslation::class, ExtendedProductTranslation::class, self::MAIN_PRODUCT_ID);
     }
 
     private function doTestExtendedProductPersistence(): void

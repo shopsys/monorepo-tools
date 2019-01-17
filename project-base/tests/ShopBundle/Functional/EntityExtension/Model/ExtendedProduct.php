@@ -334,4 +334,12 @@ class ExtendedProduct extends Product
     {
         $this->stringField = $stringField;
     }
+
+    /**
+     * @return \Tests\ShopBundle\Functional\EntityExtension\Model\ExtendedProductTranslation
+     */
+    protected function createTranslation(): ExtendedProductTranslation
+    {
+        return new ExtendedProductTranslation();
+    }
 }
