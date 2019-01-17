@@ -20,6 +20,9 @@ docker image pull ${DOCKER_USERNAME}/php-fpm:${DOCKER_IMAGE_TAG} || (
     docker image push ${DOCKER_USERNAME}/php-fpm:${DOCKER_IMAGE_TAG}
 )
 
+# Set proxy url address to google cloud storage bucket API
+sed -i "s/{{GOOGLE_CLOUD_STORAGE_BUCKET_NAME}}/${GOOGLE_CLOUD_STORAGE_BUCKET_NAME}/g" docker/nginx/google-cloud/nginx.conf
+
 # Create real parameters files to be modified and applied to the cluster as configmaps
 cp app/config/domains_urls.yml.dist app/config/domains_urls.yml
 cp app/config/parameters.yml.dist app/config/parameters.yml
