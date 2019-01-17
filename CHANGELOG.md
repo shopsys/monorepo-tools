@@ -28,6 +28,106 @@ The changelog is generated during the release process using [ChangelogLinker](ht
 
 <!-- changelog-linker -->
 
+## [v7.0.0-beta5](https://github.com/shopsys/shopsys/compare/v7.0.0-beta4...v7.0.0-beta5) - 2019-01-17
+
+### [shopsys/coding-standards]
+
+#### Changed
+
+- [#707] order of imports and sort algorithm is now explicitly set
+
+### [shopsys/framework]
+
+#### Added
+
+- [#619] Simplify adding new form groups
+
+#### Changed
+
+- [#688] renamed AdvancedSearchFacade to AdvancedSearchProductFacade
+- [#650] change visibility in extendable classes according to our docs
+- [#692] redirectController is now registered as a public container service
+- [#624] ImageUploadType now can be used for uploading specific image types
+- [#690] refactored checking duplicated e-mail to User constructor
+- [#687] refactored AdvancedSearch filter names to Filter classes
+- [#723] Copy categories to variant if main variant is edited or variant is added
+
+#### Fixed
+
+- [#706] fixed symfony deprecation warnings
+- [#647] fixed link to our Twitter account @ShopsysFW in demo data
+- [#640] Fixed cart merging after login (closes [#588]), Thanks to [@dzarda86]
+- [#628] selectboxes rollout problem for dev env
+- [#644] JsFormValidatorFactory: make sure prototype's parent is set in CollectionType
+- [#655] calculatedHidden attribute of a main variant is taken over from the hidden attribute, Thanks to [@dzarda86]
+- [#676] formatNumber filter supplied with missing orderLocale variable, Thanks to [@dzarda86]
+- [#712] Stop generating url for unsafe route 'fp_js_form_validator.check_unique_entity', Thanks to [@pk16011990]
+- [#567] fix unnecessary log error after login as admin on second PC, Thanks to [@henzigo]
+
+#### Removed
+
+- [#641] FormGroup: unused option "is_group_container_to_render_as_the_last_one" removed
+- [#609] remove redundant PaginationResult instantiation
+
+### [shopsys/microservice-product-search-export]
+
+#### Fixed
+
+- [#637] fixed search in EAN, partno, catnum
+- [#735] added symfony/dotenv to composer.json
+
+### [shopsys/project-base]
+
+#### Added
+
+- [#673] added support for custom prefixing in redis
+
+#### Changed
+
+- [#596] Trusted proxies are now configurable in parameters.yml file
+- [#703] improved frontend performance
+- [#674] Dockerignore no longer excludes docker/nginx folder
+- [#645] SVG icons in generated document
+- [#702] switched to Debian php-fpm image
+
+#### Fixed
+
+- [#685] fix wrong variable name in flash message
+- [#660] Bootstrap: do not prematurely boot Kernel when running in console
+- [#710] Removed blank space when popup is active
+
+### [shopsys/shopsys]
+
+#### Added
+
+- [#729] added scripts for monorepo maintenance into /.ci directory
+- [#623] Add Releaser to automate release process, Thanks to [@TomasVotruba]
+- [#719] New SSFW references added to readme.md
+- [#642] entity-extension.md: added warning about extending OrderItem and its descendants
+- [#705] added cookbook about basic data import
+- [#651] It's possible to add index prefix to elastic search
+- [#649] docs: added missing link to Adding an Icon into a Button cookbook
+- [#633] Google Cloud deploy using Terraform, Kustomize and Kubernetes
+- [#646] document behavior of less compiling
+- [#693] documentation of translations
+
+#### Changed
+
+- [#733] twig/twig v2.6.1 is now ignored
+- [#610] ProductOnCurrentDomainFacade: rename getPaginatedProductDetails\* methods
+- [#699] Improve upgrade instructions
+- [#708] upgrading-monorepo.md: improved instructions
+- [#709] Improved entity data objects documentation
+- [#627] model service layer removal
+- [#611] how-to-get-a-cluster-running.md updated
+- [#659] Docs: Updated informations about monorepo ([#454])
+- [#716] Phing: PHPStan analysis of packages is separated into another target
+
+#### Fixed
+
+- [#656] docs: duplicated frontend sections are fixed and joint into one
+- [#679] webserver container starts after php-fpm is started
+
 ## [v7.0.0-beta4] - 2018-11-28
 
 ### [shopsys/project-base]
@@ -1790,3 +1890,59 @@ That's why is this section formatted differently.
 [@henzigo]: https://github.com/henzigo
 [#635]: https://github.com/shopsys/shopsys/pull/635
 [#616]: https://github.com/shopsys/shopsys/pull/616
+[#735]: https://github.com/shopsys/shopsys/pull/735
+[#733]: https://github.com/shopsys/shopsys/pull/733
+[#729]: https://github.com/shopsys/shopsys/pull/729
+[#723]: https://github.com/shopsys/shopsys/pull/723
+[#719]: https://github.com/shopsys/shopsys/pull/719
+[#716]: https://github.com/shopsys/shopsys/pull/716
+[#712]: https://github.com/shopsys/shopsys/pull/712
+[#710]: https://github.com/shopsys/shopsys/pull/710
+[#709]: https://github.com/shopsys/shopsys/pull/709
+[#708]: https://github.com/shopsys/shopsys/pull/708
+[#707]: https://github.com/shopsys/shopsys/pull/707
+[#706]: https://github.com/shopsys/shopsys/pull/706
+[#705]: https://github.com/shopsys/shopsys/pull/705
+[#703]: https://github.com/shopsys/shopsys/pull/703
+[#702]: https://github.com/shopsys/shopsys/pull/702
+[#699]: https://github.com/shopsys/shopsys/pull/699
+[#693]: https://github.com/shopsys/shopsys/pull/693
+[#692]: https://github.com/shopsys/shopsys/pull/692
+[#690]: https://github.com/shopsys/shopsys/pull/690
+[#688]: https://github.com/shopsys/shopsys/pull/688
+[#687]: https://github.com/shopsys/shopsys/pull/687
+[#685]: https://github.com/shopsys/shopsys/pull/685
+[#679]: https://github.com/shopsys/shopsys/pull/679
+[#676]: https://github.com/shopsys/shopsys/pull/676
+[#674]: https://github.com/shopsys/shopsys/pull/674
+[#673]: https://github.com/shopsys/shopsys/pull/673
+[#660]: https://github.com/shopsys/shopsys/pull/660
+[#659]: https://github.com/shopsys/shopsys/pull/659
+[#656]: https://github.com/shopsys/shopsys/pull/656
+[#655]: https://github.com/shopsys/shopsys/pull/655
+[#651]: https://github.com/shopsys/shopsys/pull/651
+[#650]: https://github.com/shopsys/shopsys/pull/650
+[#649]: https://github.com/shopsys/shopsys/pull/649
+[#647]: https://github.com/shopsys/shopsys/pull/647
+[#646]: https://github.com/shopsys/shopsys/pull/646
+[#645]: https://github.com/shopsys/shopsys/pull/645
+[#644]: https://github.com/shopsys/shopsys/pull/644
+[#642]: https://github.com/shopsys/shopsys/pull/642
+[#641]: https://github.com/shopsys/shopsys/pull/641
+[#640]: https://github.com/shopsys/shopsys/pull/640
+[#637]: https://github.com/shopsys/shopsys/pull/637
+[#636]: https://github.com/shopsys/shopsys/pull/636
+[#633]: https://github.com/shopsys/shopsys/pull/633
+[#628]: https://github.com/shopsys/shopsys/pull/628
+[#627]: https://github.com/shopsys/shopsys/pull/627
+[#624]: https://github.com/shopsys/shopsys/pull/624
+[#623]: https://github.com/shopsys/shopsys/pull/623
+[#619]: https://github.com/shopsys/shopsys/pull/619
+[#611]: https://github.com/shopsys/shopsys/pull/611
+[#610]: https://github.com/shopsys/shopsys/pull/610
+[#609]: https://github.com/shopsys/shopsys/pull/609
+[#596]: https://github.com/shopsys/shopsys/pull/596
+[#588]: https://github.com/shopsys/shopsys/pull/588
+[#454]: https://github.com/shopsys/shopsys/pull/454
+[#567]: https://github.com/shopsys/shopsys/pull/567
+[@dzarda86]: https://github.com/dzarda86
