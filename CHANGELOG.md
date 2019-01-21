@@ -28,7 +28,7 @@ The changelog is generated during the release process using [ChangelogLinker](ht
 
 <!-- changelog-linker -->
 
-## [v7.0.0-beta5](https://github.com/shopsys/shopsys/compare/v7.0.0-beta4...v7.0.0-beta5) - 2019-01-17
+## [v7.0.0-beta5](https://github.com/shopsys/shopsys/compare/v7.0.0-beta4...v7.0.0-beta5) - 2019-01-21
 
 ### [shopsys/coding-standards]
 
