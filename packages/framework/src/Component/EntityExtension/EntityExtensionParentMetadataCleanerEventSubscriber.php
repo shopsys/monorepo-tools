@@ -13,7 +13,7 @@ class EntityExtensionParentMetadataCleanerEventSubscriber implements EventSubscr
     /**
      * @var \Shopsys\FrameworkBundle\Component\EntityExtension\EntityNameResolver
      */
-    private $entityNameResolver;
+    protected $entityNameResolver;
 
     /**
      * @param \Shopsys\FrameworkBundle\Component\EntityExtension\EntityNameResolver $entityNameResolver
@@ -38,7 +38,7 @@ class EntityExtensionParentMetadataCleanerEventSubscriber implements EventSubscr
     {
         $meta = $eventArgs->getClassMetadata();
         $entityName = $meta->getName();
-        if ($this->entityNameResolver->resolve($entityName) !== $entityName) {
+        if ($this->mustClean($entityName)) {
             $meta->isMappedSuperclass = true;
             $meta->identifier = [];
             $meta->generatorType = ClassMetadataInfo::GENERATOR_TYPE_NONE;
@@ -53,5 +53,32 @@ class EntityExtensionParentMetadataCleanerEventSubscriber implements EventSubscr
             $meta->discriminatorMap = [];
             $meta->discriminatorValue = null;
         }
+    }
+
+    /**
+     * @param string $entityName
+     * @return bool
+     */
+    protected function mustClean(string $entityName): bool
+    {
+        return $this->isExtended($entityName) && !$this->isTranslation($entityName);
+    }
+
+    /**
+     * @param string $entityName
+     * @return bool
+     */
+    protected function isExtended(string $entityName): bool
+    {
+        return $this->entityNameResolver->resolve($entityName) !== $entityName;
+    }
+
+    /**
+     * @param string $entityName
+     * @return bool
+     */
+    protected function isTranslation(string $entityName): bool
+    {
+        return (bool)preg_match('~Translation$~', $entityName);
     }
 }
