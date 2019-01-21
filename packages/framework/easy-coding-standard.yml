@@ -14,6 +14,9 @@ parameters:
             - '*/src/Controller/Admin/AdministratorController.php'
             - '*/tests/Unit/Model/Customer/CustomerDataFactoryTest.php'
             - '*/tests/Unit/Component/Domain/DomainDataCreatorTest.php'
+            - '*/tests/Unit/Component/Image/ImageLocatorTest.php'
+            - '*/tests/Unit/Component/Image/Config/ImageConfigLoaderTest.php'
+            - '*/tests/Unit/Component/Image/Config/ImageConfigTest.php'
 
         ObjectCalisthenics\Sniffs\Metrics\PropertyPerClassLimitSniff:
             - '*/src/Model/Order/Order.php'

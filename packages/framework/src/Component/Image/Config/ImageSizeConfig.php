@@ -30,19 +30,26 @@ class ImageSizeConfig
     private $occurrence;
 
     /**
+     * @var \Shopsys\FrameworkBundle\Component\Image\Config\ImageAdditionalSizeConfig[]
+     */
+    private $additionalSizes;
+
+    /**
      * @param string|null $name
      * @param int $width
      * @param int $height
      * @param bool $crop
      * @param string|null $occurrence
+     * @param \Shopsys\FrameworkBundle\Component\Image\Config\ImageAdditionalSizeConfig[] $additionalSizes
      */
-    public function __construct($name, $width, $height, $crop, $occurrence)
+    public function __construct($name, $width, $height, $crop, $occurrence, array $additionalSizes)
     {
         $this->name = $name;
         $this->width = $width;
         $this->height = $height;
         $this->crop = $crop;
         $this->occurrence = $occurrence;
+        $this->additionalSizes = $additionalSizes;
     }
 
     /**
@@ -83,5 +90,13 @@ class ImageSizeConfig
     public function getOccurrence()
     {
         return $this->occurrence;
+    }
+
+    /**
+     * @return \Shopsys\FrameworkBundle\Component\Image\Config\ImageAdditionalSizeConfig[]
+     */
+    public function getAdditionalSizes(): array
+    {
+        return $this->additionalSizes;
     }
 }
