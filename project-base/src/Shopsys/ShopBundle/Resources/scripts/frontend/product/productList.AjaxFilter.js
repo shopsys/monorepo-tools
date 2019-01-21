@@ -4,7 +4,7 @@
     Shopsys.productList = Shopsys.productList || {};
     Shopsys.productList.AjaxFilter = Shopsys.productList.AjaxFilter || {};
 
-    Shopsys.productList.AjaxFilter = function (ajaxMoreLoader) {
+    Shopsys.productList.AjaxFilter = function () {
         var $productsWithControls = $('.js-product-list-ajax-filter-products-with-controls');
         var $productFilterForm = $('form[name="product_filter_form"]');
         var $showResultsButton = $('.js-product-filter-show-result-button');
@@ -44,7 +44,6 @@
             var $productsHtml = $wrappedData.find('.js-product-list-ajax-filter-products-with-controls');
             $productsWithControls.html($productsHtml.html());
             $productsWithControls.show();
-            ajaxMoreLoader.reInit();
             Shopsys.register.registerNewContent($productsWithControls);
         };
 

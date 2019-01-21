@@ -3,8 +3,8 @@
     Shopsys = window.Shopsys || {};
     Shopsys.productList = Shopsys.productList || {};
 
-    Shopsys.register.registerCallback(function () {
-        $('.js-product-list-ordering-mode').click(function () {
+    Shopsys.register.registerCallback(function ($container) {
+        $container.filterAllNodes('.js-product-list-ordering-mode').click(function () {
             var cookieName = $(this).data('cookie-name');
             var orderingName = $(this).data('ordering-mode');
 
@@ -13,10 +13,8 @@
 
             return false;
         });
-    });
 
-    $(document).ready(function () {
-        $('.js-product-list-with-paginator').each(function () {
+        $container.filterAllNodes('.js-product-list-with-paginator').each(function () {
             var ajaxMoreLoader = new Shopsys.AjaxMoreLoader($(this), {
                 buttonTextCallback: function (loadNextCount) {
                     return Shopsys.translator.transChoice(
@@ -27,8 +25,12 @@
                 }
             });
             ajaxMoreLoader.init();
+        });
+    });
 
-            var ajaxFilter = new Shopsys.productList.AjaxFilter(ajaxMoreLoader);
+    $(document).ready(function () {
+        $('.js-product-list-with-paginator').each(function () {
+            var ajaxFilter = new Shopsys.productList.AjaxFilter();
             ajaxFilter.init();
         });
     });

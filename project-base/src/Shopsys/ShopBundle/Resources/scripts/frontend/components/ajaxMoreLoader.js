@@ -15,7 +15,6 @@
     };
 
     Shopsys.AjaxMoreLoader = function ($wrapper, options) {
-        var self = this;
         var $loadMoreButton;
         var $currentList;
         var $paginationToItemSpan;
@@ -43,10 +42,6 @@
 
             updateLoadMoreButton();
             $loadMoreButton.on('click', onClickLoadMoreButton);
-        };
-
-        this.reInit = function () {
-            self.init();
         };
 
         var onClickLoadMoreButton = function () {

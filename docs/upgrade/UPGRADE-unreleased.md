@@ -37,7 +37,7 @@ There you can find links to upgrade notes for other versions too.
 - change usages of `Shopsys\FrameworkBundle\Model\AdvancedSearch\AdvancedSearchFacade` to `Shopsys\FrameworkBundle\Model\AdvancedSearch\AdvancedSearchProductFacade` ([#688](https://github.com/shopsys/shopsys/pull/688))
 - method `AdministratorRepository::findByIdAndLoginToken()` was deleted. If you were using it, please implement it to your `project-base` by yourself ([#697](https://github.com/shopsys/shopsys/pull/697))
 - new macro `loadMoreButton` is integrated into `@ShopsysShop/Front/Inline/Paginator/paginator.html.twig` ([#579](https://github.com/shopsys/shopsys/pull/579))
-    - update files based on commit from [`ajaxMoreLoader is updated and generalized`](https://github.com/shopsys/shopsys/pull/579/files)
+    - update files based on commits from [`ajaxMoreLoader is updated and generalized`](https://github.com/shopsys/shopsys/pull/579/files) and [`fix cooperation between AjaxMoreLoader and AjaxFilter`](https://github.com/shopsys/shopsys/pull/752/files)
 - fix wrong variable name in flash message ([#685](https://github.com/shopsys/shopsys/pull/685))
     - in `Front/OrderController::checkTransportAndPaymentChanges()`, fix the variable name in the flash message in `$transportAndPaymentCheckResult->isPaymentPriceChanged()` condition
     - dump translations using `php phing dump-translations` and fill in your translations for the new message ID
