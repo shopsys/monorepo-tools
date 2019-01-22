@@ -67,4 +67,50 @@ class ImageController extends FrontBaseController
             throw $this->createNotFoundException($message, $e);
         }
     }
+
+    /**
+     * @param mixed $entityName
+     * @param mixed $type
+     * @param mixed $sizeName
+     * @param mixed $imageId
+     * @param int $additionalIndex
+     */
+    public function getAdditionalImageAction($entityName, $type, $sizeName, int $imageId, int $additionalIndex)
+    {
+        if ($sizeName === ImageConfig::DEFAULT_SIZE_NAME) {
+            $sizeName = null;
+        }
+
+        try {
+            $imageFilepath = $this->imageGeneratorFacade->generateAdditionalImageAndGetFilepath($entityName, $imageId, $additionalIndex, $type, $sizeName);
+        } catch (\Shopsys\FrameworkBundle\Component\Image\Exception\ImageException $e) {
+            $message = sprintf(
+                'Generate image for entity "%s" (type=%s, size=%s, imageId=%s, additionalIndex=%s) failed',
+                $entityName,
+                $type,
+                $sizeName,
+                $imageId,
+                $additionalIndex
+            );
+            throw $this->createNotFoundException($message, $e);
+        }
+
+        try {
+            $fileStream = $this->filesystem->readStream($imageFilepath);
+            $headers = [
+                'content-type' => $this->filesystem->getMimetype($imageFilepath),
+                'content-size' => $this->filesystem->getSize($imageFilepath),
+            ];
+
+            $callback = function () use ($fileStream) {
+                $out = fopen('php://output', 'wb');
+                stream_copy_to_stream($fileStream, $out);
+            };
+
+            return new StreamedResponse($callback, 200, $headers);
+        } catch (\Exception $e) {
+            $message = 'Response with file "' . $imageFilepath . '" failed.';
+            throw $this->createNotFoundException($message, $e);
+        }
+    }
 }

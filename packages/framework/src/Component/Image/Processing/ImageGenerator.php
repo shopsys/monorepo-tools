@@ -73,4 +73,33 @@ class ImageGenerator
 
         return $targetImageFilepath;
     }
+
+    /**
+     * @param \Shopsys\FrameworkBundle\Component\Image\Image $image
+     * @param int $additionalIndex
+     * @param string|null $sizeName
+     * @return string
+     */
+    public function generateAdditionalImageSizeAndGetFilepath(Image $image, int $additionalIndex, ?string $sizeName)
+    {
+        if ($sizeName === ImageConfig::ORIGINAL_SIZE_NAME) {
+            throw new \Shopsys\FrameworkBundle\Component\Image\Processing\Exception\OriginalSizeImageCannotBeGeneratedException(
+                $image
+            );
+        }
+
+        $sourceImageFilepath = $this->imageLocator->getAbsoluteImageFilepath($image, ImageConfig::ORIGINAL_SIZE_NAME);
+        $targetImageFilepath = $this->imageLocator->getAbsoluteAdditionalImageFilepath($image, $additionalIndex, $sizeName);
+        $sizeConfig = $this->imageConfig->getImageSizeConfigByImage($image, $sizeName);
+        $additionalSizeConfig = $sizeConfig->getAdditionalSize($additionalIndex);
+
+        $interventionImage = $this->imageProcessor->createInterventionImage($sourceImageFilepath);
+        $this->imageProcessor->resizeByAdditionalSizeConfig($interventionImage, $sizeConfig, $additionalSizeConfig);
+
+        $interventionImage->encode();
+
+        $this->filesystem->put($targetImageFilepath, $interventionImage);
+
+        return $targetImageFilepath;
+    }
 }

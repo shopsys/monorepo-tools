@@ -51,4 +51,29 @@ class ImageGeneratorFacade
 
         return $this->imageGenerator->generateImageSizeAndGetFilepath($image, $sizeName);
     }
+
+    /**
+     * @param string $entityName
+     * @param int $imageId
+     * @param int $additionalIndex
+     * @param string|null $type
+     * @param string|null $sizeName
+     * @return string
+     */
+    public function generateAdditionalImageAndGetFilepath(string $entityName, int $imageId, int $additionalIndex, ?string $type, ?string $sizeName): string
+    {
+        $image = $this->imageRepository->getById($imageId);
+
+        if ($image->getEntityName() !== $entityName) {
+            $message = 'Image (ID = ' . $imageId . ') does not have entity name "' . $entityName . '"';
+            throw new \Shopsys\FrameworkBundle\Component\Image\Exception\ImageNotFoundException($message);
+        }
+
+        if ($image->getType() !== $type) {
+            $message = 'Image (ID = ' . $imageId . ') does not have type "' . $type . '"';
+            throw new \Shopsys\FrameworkBundle\Component\Image\Exception\ImageNotFoundException($message);
+        }
+
+        return $this->imageGenerator->generateAdditionalImageSizeAndGetFilepath($image, $additionalIndex, $sizeName);
+    }
 }

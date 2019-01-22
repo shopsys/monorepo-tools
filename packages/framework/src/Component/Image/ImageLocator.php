@@ -81,6 +81,19 @@ class ImageLocator
 
     /**
      * @param \Shopsys\FrameworkBundle\Component\Image\Image $image
+     * @param int $additionalIndex
+     * @param string|null $sizeName
+     * @return string
+     */
+    public function getAbsoluteAdditionalImageFilepath(Image $image, int $additionalIndex, ?string $sizeName)
+    {
+        $relativePath = $this->getRelativeAdditionalImageFilepath($image, $additionalIndex, $sizeName);
+
+        return $this->imageDir . $relativePath;
+    }
+
+    /**
+     * @param \Shopsys\FrameworkBundle\Component\Image\Image $image
      * @return bool
      */
     public function imageExists(Image $image)

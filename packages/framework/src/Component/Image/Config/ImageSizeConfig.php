@@ -2,6 +2,8 @@
 
 namespace Shopsys\FrameworkBundle\Component\Image\Config;
 
+use Shopsys\FrameworkBundle\Component\Image\Config\Exception\ImageAdditionalSizeNotFoundException;
+
 class ImageSizeConfig
 {
     /**
@@ -98,5 +100,18 @@ class ImageSizeConfig
     public function getAdditionalSizes(): array
     {
         return $this->additionalSizes;
+    }
+
+    /**
+     * @param int $additionalIndex
+     * @return \Shopsys\FrameworkBundle\Component\Image\Config\ImageAdditionalSizeConfig
+     */
+    public function getAdditionalSize(int $additionalIndex): ImageAdditionalSizeConfig
+    {
+        if (!isset($this->additionalSizes[$additionalIndex])) {
+            throw new ImageAdditionalSizeNotFoundException($this->name, $additionalIndex);
+        }
+
+        return $this->additionalSizes[$additionalIndex];
     }
 }
