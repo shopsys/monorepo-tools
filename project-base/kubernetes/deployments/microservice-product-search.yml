@@ -20,5 +20,5 @@ spec:
                 app: microservice-product-search
         spec:
             containers:
-            -   image: shopsys/microservice-product-search:v7.0.0-beta5
+            -   image: shopsys/microservice-product-search:latest
                 name: microservice-product-search
