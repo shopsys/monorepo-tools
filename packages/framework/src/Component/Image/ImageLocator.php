@@ -7,6 +7,8 @@ use Shopsys\FrameworkBundle\Component\Image\Config\ImageConfig;
 
 class ImageLocator
 {
+    private const ADDITIONAL_IMAGE_MASK = 'additional_{index}_{filename}';
+
     /**
      * @var string
      */
@@ -44,6 +46,25 @@ class ImageLocator
         $path = $this->getRelativeImagePath($image->getEntityName(), $image->getType(), $sizeName);
 
         return $path . $image->getFilename();
+    }
+
+    /**
+     * @param \Shopsys\FrameworkBundle\Component\Image\Image $image
+     * @param int $additionalIndex
+     * @param string|null $sizeName
+     * @return string
+     */
+    public function getRelativeAdditionalImageFilepath(Image $image, int $additionalIndex, ?string $sizeName)
+    {
+        $path = $this->getRelativeImagePath($image->getEntityName(), $image->getType(), $sizeName);
+
+        $filename = str_replace(
+            ['{index}', '{filename}'],
+            [$additionalIndex, $image->getFilename()],
+            self::ADDITIONAL_IMAGE_MASK
+        );
+
+        return $path . $filename;
     }
 
     /**

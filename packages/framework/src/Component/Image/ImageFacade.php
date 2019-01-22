@@ -258,6 +258,46 @@ class ImageFacade
     }
 
     /**
+     * @param \Shopsys\FrameworkBundle\Component\Domain\Config\DomainConfig $domainConfig
+     * @param \Shopsys\FrameworkBundle\Component\Image\Image $imageOrEntity
+     * @param string|null $sizeName
+     * @param string|null $type
+     * @return \Shopsys\FrameworkBundle\Component\Image\AdditionalImageData[]
+     */
+    public function getAdditionalImagesData(DomainConfig $domainConfig, $imageOrEntity, ?string $sizeName, ?string $type)
+    {
+        $image = $this->getImageByObject($imageOrEntity, $type);
+
+        $entityConfig = $this->imageConfig->getEntityConfigByEntityName($image->getEntityName());
+        $sizeConfig = $entityConfig->getSizeConfig($sizeName);
+
+        $result = [];
+        foreach ($sizeConfig->getAdditionalSizes() as $additionalSizeIndex => $additionalSizeConfig) {
+            $url = $this->getAdditionalImageUrl($domainConfig, $additionalSizeIndex, $image, $sizeName);
+            $result[] = new AdditionalImageData($additionalSizeConfig->getMedia(), $url);
+        }
+        return $result;
+    }
+
+    /**
+     * @param \Shopsys\FrameworkBundle\Component\Domain\Config\DomainConfig $domainConfig
+     * @param int $additionalSizeIndex
+     * @param \Shopsys\FrameworkBundle\Component\Image\Image $image
+     * @param string|null $sizeName
+     * @return string
+     */
+    protected function getAdditionalImageUrl(DomainConfig $domainConfig, int $additionalSizeIndex, Image $image, ?string $sizeName)
+    {
+        if ($this->imageLocator->imageExists($image)) {
+            return $domainConfig->getUrl()
+                . $this->imageUrlPrefix
+                . $this->imageLocator->getRelativeAdditionalImageFilepath($image, $additionalSizeIndex, $sizeName);
+        }
+
+        throw new \Shopsys\FrameworkBundle\Component\Image\Exception\ImageNotFoundException();
+    }
+
+    /**
      * @param \Shopsys\FrameworkBundle\Component\Image\Image|Object $imageOrEntity
      * @param string|null $type
      * @return \Shopsys\FrameworkBundle\Component\Image\Image

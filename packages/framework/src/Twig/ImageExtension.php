@@ -128,12 +128,14 @@ class ImageExtension extends Twig_Extension
             $image = $this->imageFacade->getImageByObject($imageOrEntity, $attributes['type']);
             $entityName = $image->getEntityName();
             $attributes['src'] = $this->getImageUrl($image, $attributes['size'], $attributes['type']);
+            $additionalImagesData = $this->imageFacade->getAdditionalImagesData($this->domain->getCurrentDomainConfig(), $image, $attributes['size'], $attributes['type']);
         } catch (\Shopsys\FrameworkBundle\Component\Image\Exception\ImageNotFoundException $e) {
             $entityName = 'noimage';
             $attributes['src'] = $this->getEmptyImageUrl();
+            $additionalImagesData = [];
         }
 
-        return $this->getImageHtmlByEntityName($attributes, $entityName);
+        return $this->getImageHtmlByEntityName($attributes, $entityName, $additionalImagesData);
     }
 
     /**
@@ -199,15 +201,17 @@ class ImageExtension extends Twig_Extension
     /**
      * @param array $attributes
      * @param $entityName
+     * @param \Shopsys\FrameworkBundle\Component\Image\AdditionalImageData[] $additionalImagesData
      * @return string
      */
-    private function getImageHtmlByEntityName(array $attributes, $entityName)
+    private function getImageHtmlByEntityName(array $attributes, $entityName, $additionalImagesData = [])
     {
         $htmlAttributes = $attributes;
         unset($htmlAttributes['type'], $htmlAttributes['size']);
 
         return $this->templating->render('@ShopsysFramework/Common/image.html.twig', [
             'attr' => $htmlAttributes,
+            'additionalImagesData' => $additionalImagesData,
             'imageCssClass' => $this->getImageCssClass($entityName, $attributes['type'], $attributes['size']),
         ]);
     }
