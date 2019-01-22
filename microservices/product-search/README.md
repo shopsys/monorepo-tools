@@ -97,3 +97,10 @@ Please, check our [Contribution Guide](https://github.com/shopsys/shopsys/blob/m
 What to do when you are in troubles or need some help? The best way is to contact us on our Slack [http://slack.shopsys-framework.com/](http://slack.shopsys-framework.com/)
 
 If you want to [report issues](https://github.com/shopsys/shopsys/issues/new), please use the main [Shopsys repository](https://github.com/shopsys/shopsys).
+
+## License
+### Source Code
+Source code is under MIT license, for more information, read [LICENSE](https://github.com/shopsys/shopsys/blob/master/microservices/product-search/LICENSE).
+
+### Docker Image
+Built image is under GPL license, for more information read [LICENSE-docker-image](https://github.com/shopsys/shopsys/blob/master/microservices/product-search/LICENSE-docker-image).
