@@ -3,8 +3,10 @@
 namespace Shopsys\FrameworkBundle\DataFixtures\Demo;
 
 use Shopsys\FrameworkBundle\Component\Csv\CsvReader;
+use Shopsys\FrameworkBundle\Component\Domain\Domain;
 use Shopsys\FrameworkBundle\Component\String\EncodingConverter;
 use Shopsys\FrameworkBundle\Component\String\TransformString;
+use Shopsys\FrameworkBundle\Model\Country\Country;
 use Shopsys\FrameworkBundle\Model\Customer\BillingAddressDataFactoryInterface;
 use Shopsys\FrameworkBundle\Model\Customer\CustomerDataFactoryInterface;
 use Shopsys\FrameworkBundle\Model\Customer\DeliveryAddressDataFactoryInterface;
@@ -72,12 +74,18 @@ class UserDataFixtureLoader
     private $deliveryAddressDataFactory;
 
     /**
+     * @var \Shopsys\FrameworkBundle\Component\Domain\Domain
+     */
+    private $domain;
+
+    /**
      * @param string $path
      * @param \Shopsys\FrameworkBundle\Component\Csv\CsvReader $csvReader
      * @param \Shopsys\FrameworkBundle\Model\Customer\UserDataFactoryInterface $userDataFactory
      * @param \Shopsys\FrameworkBundle\Model\Customer\CustomerDataFactoryInterface $customerDataFactory
      * @param \Shopsys\FrameworkBundle\Model\Customer\BillingAddressDataFactoryInterface $billingAddressDataFactory
      * @param \Shopsys\FrameworkBundle\Model\Customer\DeliveryAddressDataFactoryInterface $deliveryAddressDataFactory
+     * @param \Shopsys\FrameworkBundle\Component\Domain\Domain $domain
      */
     public function __construct(
         $path,
@@ -85,7 +93,8 @@ class UserDataFixtureLoader
         UserDataFactoryInterface $userDataFactory,
         CustomerDataFactoryInterface $customerDataFactory,
         BillingAddressDataFactoryInterface $billingAddressDataFactory,
-        DeliveryAddressDataFactoryInterface $deliveryAddressDataFactory
+        DeliveryAddressDataFactoryInterface $deliveryAddressDataFactory,
+        Domain $domain
     ) {
         $this->path = $path;
         $this->csvReader = $csvReader;
@@ -93,6 +102,7 @@ class UserDataFixtureLoader
         $this->customerDataFactory = $customerDataFactory;
         $this->billingAddressDataFactory = $billingAddressDataFactory;
         $this->deliveryAddressDataFactory = $deliveryAddressDataFactory;
+        $this->domain = $domain;
     }
 
     /**
@@ -118,6 +128,7 @@ class UserDataFixtureLoader
             $row = EncodingConverter::cp1250ToUtf8($row);
             $customersData[] = $this->getCustomerDataFromCsvRow($row);
         }
+
         return $customersData;
     }
 
@@ -172,7 +183,7 @@ class UserDataFixtureLoader
         $billingAddressData->street = $row[self::COLUMN_STREET];
         $billingAddressData->city = $row[self::COLUMN_CITY];
         $billingAddressData->postcode = $row[self::COLUMN_POSTCODE];
-        $billingAddressData->country = $this->getCountryByName($row[self::COLUMN_COUNTRY]);
+        $billingAddressData->country = $this->getCountryByNameAndDomain($row[self::COLUMN_COUNTRY], $domainId);
         if ($row[self::COLUMN_DELIVERY_ADDRESS_FILLED] === 'true') {
             $deliveryAddressData = $this->deliveryAddressDataFactory->create();
             $deliveryAddressData->addressFilled = true;
@@ -183,7 +194,7 @@ class UserDataFixtureLoader
             $deliveryAddressData->postcode = $row[self::COLUMN_DELIVERY_POSTCODE];
             $deliveryAddressData->street = $row[self::COLUMN_DELIVERY_STREET];
             $deliveryAddressData->telephone = $row[self::COLUMN_DELIVERY_TELEPHONE];
-            $deliveryAddressData->country = $this->getCountryByName($row[self::COLUMN_DELIVERY_COUNTRY]);
+            $deliveryAddressData->country = $this->getCountryByNameAndDomain($row[self::COLUMN_DELIVERY_COUNTRY], $domainId);
             $customerData->deliveryAddressData = $deliveryAddressData;
         } else {
             $customerData->deliveryAddressData = $this->deliveryAddressDataFactory->create();
@@ -198,12 +209,15 @@ class UserDataFixtureLoader
 
     /**
      * @param string $countryName
+     * @param int $domainId
      * @return \Shopsys\FrameworkBundle\Model\Country\Country
      */
-    private function getCountryByName($countryName)
+    private function getCountryByNameAndDomain(string $countryName, int $domainId): Country
     {
+        $locale = $this->domain->getDomainConfigById($domainId)->getLocale();
+
         foreach ($this->countries as $country) {
-            if ($country->getName() === $countryName) {
+            if ($country->getName($locale) === $countryName) {
                 return $country;
             }
         }

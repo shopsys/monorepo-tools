@@ -42,8 +42,8 @@ class CustomerDataFactoryTest extends TestCase
         $userData->email = 'no-reply@shopsys.com';
 
         $billingCountryData = new CountryData();
-        $billingCountryData->name = 'Česká republika';
-        $billingCountry = new Country($billingCountryData, self::DOMAIN_ID);
+        $billingCountryData->names = ['cs' => 'Česká republika'];
+        $billingCountry = new Country($billingCountryData);
         $billingAddressData = new BillingAddressData();
         $billingAddressData->street = 'street';
         $billingAddressData->city = 'city';
@@ -55,8 +55,8 @@ class CustomerDataFactoryTest extends TestCase
         $billingAddressData->country = $billingCountry;
 
         $deliveryCountryData = new CountryData();
-        $deliveryCountryData->name = 'Slovenská republika';
-        $deliveryCountry = new Country($deliveryCountryData, self::DOMAIN_ID);
+        $deliveryCountryData->names = ['cs' => 'Slovenská republika'];
+        $deliveryCountry = new Country($deliveryCountryData);
         $deliveryAddressData = new DeliveryAddressData();
         $deliveryAddressData->addressFilled = true;
         $deliveryAddressData->street = 'deliveryStreet';
@@ -126,13 +126,13 @@ class CustomerDataFactoryTest extends TestCase
         $customerDataFactory = $this->getCustomerDataFactory();
 
         $billingCountryData = new CountryData();
-        $billingCountryData->name = 'Česká republika';
+        $billingCountryData->names = ['cs' => 'Česká republika'];
 
         $deliveryCountryData = new CountryData();
-        $deliveryCountryData->name = 'Slovenská republika';
+        $deliveryCountryData->names = ['cs' => 'Slovenská republika'];
 
-        $billingCountry = new Country($billingCountryData, self::DOMAIN_ID);
-        $deliveryCountry = new Country($deliveryCountryData, self::DOMAIN_ID);
+        $billingCountry = new Country($billingCountryData);
+        $deliveryCountry = new Country($deliveryCountryData);
         $userData = new UserData();
         $userData->firstName = 'firstName';
         $userData->lastName = 'lastName';

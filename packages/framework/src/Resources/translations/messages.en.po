@@ -436,6 +436,12 @@ msgstr ""
 msgid "Country"
 msgstr ""
 
+msgid "Country <strong><a href=\"{{ url }}\">{{ name }}</a></strong> created"
+msgstr ""
+
+msgid "Country <strong><a href=\"{{ url }}\">{{ name }}</a></strong> modified"
+msgstr ""
+
 msgid "Country code"
 msgstr ""
 
@@ -470,6 +476,9 @@ msgid "Create new brand"
 msgstr ""
 
 msgid "Create new category"
+msgstr ""
+
+msgid "Create new country"
 msgstr ""
 
 msgid "Create new customer"
@@ -824,6 +833,12 @@ msgid "Editing category"
 msgstr ""
 
 msgid "Editing category - %name%"
+msgstr ""
+
+msgid "Editing country"
+msgstr ""
+
+msgid "Editing country - %name%"
 msgstr ""
 
 msgid "Editing customer"
@@ -1276,6 +1291,9 @@ msgstr ""
 msgid "New category"
 msgstr ""
 
+msgid "New country"
+msgstr ""
+
 msgid "New customer"
 msgstr ""
 
@@ -1613,6 +1631,9 @@ msgid "Pricing groups"
 msgstr ""
 
 msgid "Pricing settings modified"
+msgstr ""
+
+msgid "Priority"
 msgstr ""
 
 msgid "Privacy policy"
@@ -2021,6 +2042,9 @@ msgid "Terms-and-conditions.html"
 msgstr ""
 
 msgid "The change will be applied to products in 10 minutes"
+msgstr ""
+
+msgid "The higher the priority, the higher the country will be shown in the listings. Countries with the same priority will be sorted alphabetically."
 msgstr ""
 
 msgid "The price of the product <strong>{{ name }}</strong> you have in cart has changed. Please, check your order."

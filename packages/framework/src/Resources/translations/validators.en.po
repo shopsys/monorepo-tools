@@ -25,6 +25,9 @@ msgstr ""
 msgid "Country code cannot be longer than {{ limit }} characters"
 msgstr ""
 
+msgid "Country code with this code already exists"
+msgstr ""
+
 msgid "Country name cannot be longer than {{ limit }} characters"
 msgstr ""
 
@@ -194,6 +197,9 @@ msgid "Please enter code"
 msgstr ""
 
 msgid "Please enter company name"
+msgstr ""
+
+msgid "Please enter country code"
 msgstr ""
 
 msgid "Please enter country name"

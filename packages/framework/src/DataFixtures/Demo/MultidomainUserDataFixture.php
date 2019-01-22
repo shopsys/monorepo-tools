@@ -67,8 +67,8 @@ class MultidomainUserDataFixture extends AbstractReferenceFixture implements Dep
     private function loadForDomain(int $domainId)
     {
         $countries = [
-            $this->getReferenceForDomain(MultidomainCountryDataFixture::COUNTRY_CZECH_REPUBLIC, $domainId),
-            $this->getReferenceForDomain(MultidomainCountryDataFixture::COUNTRY_SLOVAKIA, $domainId),
+            $this->getReference(CountryDataFixture::COUNTRY_CZECH_REPUBLIC),
+            $this->getReference(CountryDataFixture::COUNTRY_SLOVAKIA),
         ];
         $this->loaderService->injectReferences($countries);
 
@@ -87,7 +87,7 @@ class MultidomainUserDataFixture extends AbstractReferenceFixture implements Dep
     public function getDependencies()
     {
         return [
-            MultidomainCountryDataFixture::class,
+            CountryDataFixture::class,
             UserDataFixture::class,
         ];
     }

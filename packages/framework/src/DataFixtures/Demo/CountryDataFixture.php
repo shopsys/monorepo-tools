@@ -10,8 +10,8 @@ use Shopsys\FrameworkBundle\Model\Country\CountryFacade;
 
 class CountryDataFixture extends AbstractReferenceFixture
 {
-    const COUNTRY_CZECH_REPUBLIC_1 = 'country_czech_republic_1';
-    const COUNTRY_SLOVAKIA_1 = 'country_slovakia_1';
+    public const COUNTRY_CZECH_REPUBLIC = 'country_czech_republic';
+    public const COUNTRY_SLOVAKIA = 'country_slovakia';
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Country\CountryFacade
@@ -36,28 +36,33 @@ class CountryDataFixture extends AbstractReferenceFixture
     /**
      * @param \Doctrine\Common\Persistence\ObjectManager $manager
      */
-    public function load(ObjectManager $manager)
+    public function load(ObjectManager $manager): void
     {
-        $domainId = 1;
         $countryData = $this->countryDataFactory->create();
-        $countryData->name = 'Czech republic';
+        $countryData->names = [
+            'cs' => 'Česká republika',
+            'en' => 'Czech republic',
+        ];
         $countryData->code = 'CZ';
-        $this->createCountry($countryData, $domainId, self::COUNTRY_CZECH_REPUBLIC_1);
+        $this->createCountry($countryData, self::COUNTRY_CZECH_REPUBLIC);
 
         $countryData = $this->countryDataFactory->create();
-        $countryData->name = 'Slovakia';
+        $countryData->names = [
+            'cs' => 'Slovenská republika',
+            'en' => 'Slovakia',
+        ];
         $countryData->code = 'SK';
-        $this->createCountry($countryData, $domainId, self::COUNTRY_SLOVAKIA_1);
+
+        $this->createCountry($countryData, self::COUNTRY_SLOVAKIA);
     }
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\Country\CountryData $countryData
-     * @param int $domainId
      * @param string $referenceName
      */
-    private function createCountry(CountryData $countryData, $domainId, $referenceName)
+    private function createCountry(CountryData $countryData, $referenceName): void
     {
-        $country = $this->countryFacade->create($countryData, $domainId);
+        $country = $this->countryFacade->create($countryData);
         $this->addReference($referenceName, $country);
     }
 }

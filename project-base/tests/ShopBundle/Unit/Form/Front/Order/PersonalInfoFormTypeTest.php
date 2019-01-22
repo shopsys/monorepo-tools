@@ -109,7 +109,7 @@ class PersonalInfoFormTypeTest extends TypeTestCase
         $countryMock->method('getId')->willReturn(1);
 
         $this->countryFacade = $this->createMock(CountryFacade::class);
-        $this->countryFacade->method('getAllByDomainId')->willReturn([$countryMock]);
+        $this->countryFacade->method('getAllEnabledOnDomain')->willReturn([$countryMock]);
 
         $this->domain = $this->createMock(Domain::class);
         $this->domain->method('getId')->willReturn(1);

@@ -25,6 +25,9 @@ msgstr "Název firmy nesmí být delší než {{ limit }} znaků"
 msgid "Country code cannot be longer than {{ limit }} characters"
 msgstr "Kód země nesmí být delší než {{ limit }} znaků"
 
+msgid "Country code with this code already exists"
+msgstr "Takový kód země již existuje"
+
 msgid "Country name cannot be longer than {{ limit }} characters"
 msgstr "Název státu nesmí být delší než {{ limit }} znaků"
 
@@ -195,6 +198,9 @@ msgstr "Vyplňte prosím kód."
 
 msgid "Please enter company name"
 msgstr "Vyplňte prosím název firmy"
+
+msgid "Please enter country code"
+msgstr "Vyplňte prosím kód země"
 
 msgid "Please enter country name"
 msgstr "Vyplňte prosím název státu"

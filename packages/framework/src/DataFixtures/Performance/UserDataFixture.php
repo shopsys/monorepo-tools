@@ -173,7 +173,7 @@ class UserDataFixture
     {
         $customerData = $this->customerDataFactory->create();
 
-        $country = $this->persistentReferenceFacade->getReference(CountryDataFixture::COUNTRY_CZECH_REPUBLIC_1);
+        $country = $this->persistentReferenceFacade->getReference(CountryDataFixture::COUNTRY_CZECH_REPUBLIC);
 
         $userData = $this->userDataFactory->createForDomainId($domainId);
         $userData->firstName = $this->faker->firstName;

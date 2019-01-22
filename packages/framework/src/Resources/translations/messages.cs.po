@@ -436,6 +436,12 @@ msgstr "Přehled států"
 msgid "Country"
 msgstr "Stát"
 
+msgid "Country <strong><a href=\"{{ url }}\">{{ name }}</a></strong> created"
+msgstr "Byl vytvořen stát <strong><a href=\"{{ url }}\">{{ name }}</a></strong>"
+
+msgid "Country <strong><a href=\"{{ url }}\">{{ name }}</a></strong> modified"
+msgstr "Byl upraven stát <strong><a href=\"{{ url }}\">{{ name }}</a></strong>"
+
 msgid "Country code"
 msgstr "Kód země"
 
@@ -471,6 +477,9 @@ msgstr "Vytvořit novou značku"
 
 msgid "Create new category"
 msgstr "Vytvořit novou kategorii"
+
+msgid "Create new country"
+msgstr "Vytvořit nový stát"
 
 msgid "Create new customer"
 msgstr "Vytvořit nového zákazníka"
@@ -825,6 +834,12 @@ msgstr "Editace kategorie"
 
 msgid "Editing category - %name%"
 msgstr "Editace kategorie - %name%"
+
+msgid "Editing country"
+msgstr "Editace státu"
+
+msgid "Editing country - %name%"
+msgstr "Editace státu -  %name%"
 
 msgid "Editing customer"
 msgstr "Editace zákazníka"
@@ -1276,6 +1291,9 @@ msgstr "Nová značka"
 msgid "New category"
 msgstr "Nová kategorie"
 
+msgid "New country"
+msgstr "Nový stát"
+
 msgid "New customer"
 msgstr "Nový zákazník"
 
@@ -1614,6 +1632,9 @@ msgstr "Cenové skupiny"
 
 msgid "Pricing settings modified"
 msgstr "Nastavení cenotvorby bylo upraveno"
+
+msgid "Priority"
+msgstr "Priorita"
 
 msgid "Privacy policy"
 msgstr "Zásady ochrany osobních údajů"
@@ -2022,6 +2043,9 @@ msgstr "Obchodní-podmínky.html"
 
 msgid "The change will be applied to products in 10 minutes"
 msgstr "Změna se u zboží projeví do 10 minut"
+
+msgid "The higher the priority, the higher the country will be shown in the listings. Countries with the same priority will be sorted alphabetically."
+msgstr "Čím vyšší priorita, tím bude stát zobrazen výše v seznamech. Státy se stejnou prioritou budou seřazeny abecedně."
 
 msgid "The price of the product <strong>{{ name }}</strong> you have in cart has changed. Please, check your order."
 msgstr "Byla změněna cena zboží <strong>{{ name }}</strong>, které máte v košíku. Prosím, překontrolujte si objednávku."

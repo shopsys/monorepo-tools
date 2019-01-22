@@ -37,7 +37,7 @@ class BillingAddressFormType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $countries = $this->countryFacade->getAllByDomainId($options['domain_id']);
+        $countries = $this->countryFacade->getAllEnabledOnDomain($options['domain_id']);
 
         $builder
             ->add('companyCustomer', CheckboxType::class, ['required' => false])
