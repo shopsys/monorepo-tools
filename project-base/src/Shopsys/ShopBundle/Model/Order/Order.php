@@ -4,8 +4,8 @@ namespace Shopsys\ShopBundle\Model\Order;
 
 use Doctrine\ORM\Mapping as ORM;
 use Shopsys\FrameworkBundle\Model\Customer\User;
+use Shopsys\FrameworkBundle\Model\Order\Item\OrderItemFactoryInterface;
 use Shopsys\FrameworkBundle\Model\Order\Item\OrderItemPriceCalculation;
-use Shopsys\FrameworkBundle\Model\Order\Item\OrderProductFactoryInterface;
 use Shopsys\FrameworkBundle\Model\Order\Order as BaseOrder;
 use Shopsys\FrameworkBundle\Model\Order\OrderData as BaseOrderData;
 use Shopsys\FrameworkBundle\Model\Order\OrderEditResult;
@@ -35,16 +35,16 @@ class Order extends BaseOrder
     /**
      * @param \Shopsys\ShopBundle\Model\Order\OrderData $orderData
      * @param \Shopsys\FrameworkBundle\Model\Order\Item\OrderItemPriceCalculation $orderItemPriceCalculation
-     * @param \Shopsys\FrameworkBundle\Model\Order\Item\OrderProductFactoryInterface $orderProductFactory
+     * @param \Shopsys\FrameworkBundle\Model\Order\Item\OrderItemFactoryInterface $orderItemFactory
      * @param \Shopsys\FrameworkBundle\Model\Order\OrderPriceCalculation $orderPriceCalculation
      * @return \Shopsys\FrameworkBundle\Model\Order\OrderEditResult
      */
     public function edit(
         BaseOrderData $orderData,
         OrderItemPriceCalculation $orderItemPriceCalculation,
-        OrderProductFactoryInterface $orderProductFactory,
+        OrderItemFactoryInterface $orderItemFactory,
         OrderPriceCalculation $orderPriceCalculation
     ): OrderEditResult {
-        return parent::edit($orderData, $orderItemPriceCalculation, $orderProductFactory, $orderPriceCalculation);
+        return parent::edit($orderData, $orderItemPriceCalculation, $orderItemFactory, $orderPriceCalculation);
     }
 }

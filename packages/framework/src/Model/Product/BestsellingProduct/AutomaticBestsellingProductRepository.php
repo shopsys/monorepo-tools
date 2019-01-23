@@ -5,7 +5,7 @@ namespace Shopsys\FrameworkBundle\Model\Product\BestsellingProduct;
 use DateTime;
 use Doctrine\ORM\Query\Expr\Join;
 use Shopsys\FrameworkBundle\Model\Category\Category;
-use Shopsys\FrameworkBundle\Model\Order\Item\OrderProduct;
+use Shopsys\FrameworkBundle\Model\Order\Item\OrderItem;
 use Shopsys\FrameworkBundle\Model\Order\Status\OrderStatus;
 use Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroup;
 use Shopsys\FrameworkBundle\Model\Product\Pricing\ProductCalculatedPrice;
@@ -46,7 +46,7 @@ class AutomaticBestsellingProductRepository
         $queryBuilder
             ->addSelect('COUNT(op) AS HIDDEN orderCount')
             ->join(ProductCalculatedPrice::class, 'pcp', Join::WITH, 'pcp.product = p')
-            ->join(OrderProduct::class, 'op', Join::WITH, 'op.product = p')
+            ->join(OrderItem::class, 'op', Join::WITH, 'op.product = p')
             ->join('op.order', 'o')
             ->join('o.status', 'os')
             ->andWhere('pcp.pricingGroup = prv.pricingGroup')

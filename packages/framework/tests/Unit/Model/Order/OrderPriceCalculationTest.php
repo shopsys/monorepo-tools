@@ -2,11 +2,10 @@
 
 namespace Tests\FrameworkBundle\Unit\Model\Order;
 
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
+use Shopsys\FrameworkBundle\Model\Order\Item\OrderItem;
 use Shopsys\FrameworkBundle\Model\Order\Item\OrderItemPriceCalculation;
-use Shopsys\FrameworkBundle\Model\Order\Item\OrderPayment;
-use Shopsys\FrameworkBundle\Model\Order\Item\OrderProduct;
-use Shopsys\FrameworkBundle\Model\Order\Item\OrderTransport;
 use Shopsys\FrameworkBundle\Model\Order\Order;
 use Shopsys\FrameworkBundle\Model\Order\OrderPriceCalculation;
 use Shopsys\FrameworkBundle\Model\Payment\Payment;
@@ -21,10 +20,10 @@ class OrderPriceCalculationTest extends TestCase
     public function testGetOrderTotalPrice()
     {
         $orderItems = [
-            $this->createMock(OrderProduct::class),
-            $this->createMock(OrderProduct::class),
-            $this->createMock(OrderPayment::class),
-            $this->createMock(OrderTransport::class),
+            $this->createOrderProductMock(),
+            $this->createOrderProductMock(),
+            $this->createOrderPaymentMock(),
+            $this->createOrderTransportMock(),
         ];
 
         $pricesMap = [
@@ -160,5 +159,41 @@ class OrderPriceCalculationTest extends TestCase
         $roundingPrice = $priceCalculation->calculateOrderRoundingPrice($payment, $currency, $orderTotalPrice)->getPriceWithVat();
 
         $this->assertSame('0.1', (string)$roundingPrice);
+    }
+
+    /**
+     * @return \Shopsys\FrameworkBundle\Model\Order\Item\OrderItem|\PHPUnit\Framework\MockObject\MockObject
+     */
+    protected function createOrderProductMock(): MockObject
+    {
+        $orderProductMock = $this->createMock(OrderItem::class);
+
+        $orderProductMock->method('isTypeProduct')->willReturn(true);
+
+        return $orderProductMock;
+    }
+
+    /**
+     * @return \Shopsys\FrameworkBundle\Model\Order\Item\OrderItem|\PHPUnit\Framework\MockObject\MockObject
+     */
+    protected function createOrderPaymentMock(): MockObject
+    {
+        $orderProductMock = $this->createMock(OrderItem::class);
+
+        $orderProductMock->method('isTypePayment')->willReturn(true);
+
+        return $orderProductMock;
+    }
+
+    /**
+     * @return \Shopsys\FrameworkBundle\Model\Order\Item\OrderItem|\PHPUnit\Framework\MockObject\MockObject
+     */
+    protected function createOrderTransportMock(): MockObject
+    {
+        $orderProductMock = $this->createMock(OrderItem::class);
+
+        $orderProductMock->method('isTypeTransport')->willReturn(true);
+
+        return $orderProductMock;
     }
 }

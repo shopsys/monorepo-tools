@@ -2,7 +2,7 @@
 
 namespace Shopsys\FrameworkBundle\Form\Admin\Order;
 
-use Shopsys\FrameworkBundle\Model\Order\Item\OrderPaymentData;
+use Shopsys\FrameworkBundle\Model\Order\Item\OrderItemData;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\MoneyType;
@@ -51,7 +51,7 @@ class OrderPaymentFormType extends AbstractType
             ->setRequired('payments')
             ->setAllowedTypes('payments', 'array')
             ->setDefaults([
-                'data_class' => OrderPaymentData::class,
+                'data_class' => OrderItemData::class,
                 'attr' => ['novalidate' => 'novalidate'],
             ]);
     }

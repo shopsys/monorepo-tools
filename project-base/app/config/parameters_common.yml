@@ -23,6 +23,7 @@ parameters:
         Shopsys\FrameworkBundle\Model\Category\Category: Shopsys\ShopBundle\Model\Category\Category
         Shopsys\FrameworkBundle\Model\Customer\User: Shopsys\ShopBundle\Model\Customer\User
         Shopsys\FrameworkBundle\Model\Order\Order: Shopsys\ShopBundle\Model\Order\Order
+        Shopsys\FrameworkBundle\Model\Order\Item\OrderItem: Shopsys\ShopBundle\Model\Order\Item\OrderItem
         Shopsys\FrameworkBundle\Model\Transport\Transport: Shopsys\ShopBundle\Model\Transport\Transport
         Shopsys\FrameworkBundle\Model\Payment\Payment: Shopsys\ShopBundle\Model\Payment\Payment
         Shopsys\FrameworkBundle\Model\Product\Product: Shopsys\ShopBundle\Model\Product\Product

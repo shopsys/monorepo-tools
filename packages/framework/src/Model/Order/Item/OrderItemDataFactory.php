@@ -20,6 +20,7 @@ class OrderItemDataFactory implements OrderItemDataFactoryInterface
     {
         $orderItemData = new OrderItemData();
         $this->fillFromOrderItem($orderItemData, $orderItem);
+        $this->addFieldsByOrderItemType($orderItemData, $orderItem);
 
         return $orderItemData;
     }
@@ -37,5 +38,18 @@ class OrderItemDataFactory implements OrderItemDataFactoryInterface
         $orderItemData->quantity = $orderItem->getQuantity();
         $orderItemData->unitName = $orderItem->getUnitName();
         $orderItemData->catnum = $orderItem->getCatnum();
+    }
+
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Order\Item\OrderItemData $orderItemData
+     * @param \Shopsys\FrameworkBundle\Model\Order\Item\OrderItem $orderItem
+     */
+    protected function addFieldsByOrderItemType(OrderItemData $orderItemData, OrderItem $orderItem): void
+    {
+        if ($orderItem->isTypeTransport()) {
+            $orderItemData->transport = $orderItem->getTransport();
+        } elseif ($orderItem->isTypePayment()) {
+            $orderItemData->payment = $orderItem->getPayment();
+        }
     }
 }

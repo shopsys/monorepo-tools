@@ -7,6 +7,7 @@ as well as a list of customizations that are not (and will not be) possible at a
 ## What is achievable easily
 * [Extending an entity](/docs/wip_glassbox/entity-extension.md)
     * [Adding a new attribute](/docs/cookbook/adding-new-attribute-to-an-entity.md)
+    * *Note: There are some limitations when extending OrderItem, for more see [the documentation](/docs/wip_glassbox/entity-extension.md#orderitem)*
 * The administration can be extended by:
     * [Adding a new administration page](/docs/cookbook/adding-a-new-administration-page.md) along with the side menu and breadcrumbs
     * [Extending particular forms](/docs/wip_glassbox/form-extension.md) without the need of the template overriding

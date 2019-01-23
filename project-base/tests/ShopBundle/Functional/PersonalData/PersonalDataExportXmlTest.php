@@ -10,7 +10,7 @@ use Shopsys\FrameworkBundle\Model\Customer\BillingAddress;
 use Shopsys\FrameworkBundle\Model\Customer\BillingAddressData;
 use Shopsys\FrameworkBundle\Model\Customer\DeliveryAddress;
 use Shopsys\FrameworkBundle\Model\Customer\DeliveryAddressData;
-use Shopsys\FrameworkBundle\Model\Order\Item\OrderProduct;
+use Shopsys\FrameworkBundle\Model\Order\Item\OrderItem;
 use Shopsys\FrameworkBundle\Model\Order\Status\OrderStatus;
 use Shopsys\FrameworkBundle\Model\Pricing\Currency\Currency;
 use Shopsys\FrameworkBundle\Model\Pricing\Currency\CurrencyData;
@@ -42,7 +42,8 @@ class PersonalDataExportXmlTest extends TransactionFunctionalTestCase
         $order = $this->createOrder($currency, $status, $country);
         $product = $this->createMock(Product::class);
         $price = new Price(1, 1);
-        $orderItem = new OrderProduct($order, 'test', $price, 1, 1, 'ks', 'cat', $product);
+        $orderItem = new OrderItem($order, 'test', $price, 1, 1, OrderItem::TYPE_PRODUCT, 'ks', 'cat');
+        $orderItem->setProduct($product);
         $order->addItem($orderItem);
         $order->setStatus($status);
 

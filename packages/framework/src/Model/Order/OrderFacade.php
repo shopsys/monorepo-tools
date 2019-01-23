@@ -13,11 +13,9 @@ use Shopsys\FrameworkBundle\Model\Customer\CustomerFacade;
 use Shopsys\FrameworkBundle\Model\Customer\User;
 use Shopsys\FrameworkBundle\Model\Heureka\HeurekaFacade;
 use Shopsys\FrameworkBundle\Model\Localization\Localization;
+use Shopsys\FrameworkBundle\Model\Order\Item\OrderItemFactoryInterface;
 use Shopsys\FrameworkBundle\Model\Order\Item\OrderItemPriceCalculation;
-use Shopsys\FrameworkBundle\Model\Order\Item\OrderPaymentFactoryInterface;
 use Shopsys\FrameworkBundle\Model\Order\Item\OrderProductFacade;
-use Shopsys\FrameworkBundle\Model\Order\Item\OrderProductFactoryInterface;
-use Shopsys\FrameworkBundle\Model\Order\Item\OrderTransportFactoryInterface;
 use Shopsys\FrameworkBundle\Model\Order\Mail\OrderMailFacade;
 use Shopsys\FrameworkBundle\Model\Order\Preview\OrderPreview;
 use Shopsys\FrameworkBundle\Model\Order\Preview\OrderPreviewFactory;
@@ -141,11 +139,6 @@ class OrderFacade
     protected $orderItemPriceCalculation;
 
     /**
-     * @var \Shopsys\FrameworkBundle\Model\Order\Item\OrderProductFactoryInterface
-     */
-    protected $orderProductFactory;
-
-    /**
      * @var \Shopsys\FrameworkBundle\Model\Order\FrontOrderDataMapper
      */
     protected $frontOrderDataMapper;
@@ -161,19 +154,14 @@ class OrderFacade
     protected $paymentPriceCalculation;
 
     /**
-     * @var \Shopsys\FrameworkBundle\Model\Order\Item\OrderPaymentFactoryInterface
-     */
-    protected $orderPaymentFactory;
-
-    /**
      * @var \Shopsys\FrameworkBundle\Model\Transport\TransportPriceCalculation
      */
     protected $transportPriceCalculation;
 
     /**
-     * @var \Shopsys\FrameworkBundle\Model\Order\Item\OrderTransportFactoryInterface
+     * @var \Shopsys\FrameworkBundle\Model\Order\Item\OrderItemFactoryInterface
      */
-    protected $orderTransportFactory;
+    protected $orderItemFactory;
 
     /**
      * @param \Doctrine\ORM\EntityManagerInterface $em
@@ -197,13 +185,11 @@ class OrderFacade
      * @param \Shopsys\FrameworkBundle\Model\Order\OrderFactoryInterface $orderFactory
      * @param \Shopsys\FrameworkBundle\Model\Order\OrderPriceCalculation $orderPriceCalculation
      * @param \Shopsys\FrameworkBundle\Model\Order\Item\OrderItemPriceCalculation $orderItemPriceCalculation
-     * @param \Shopsys\FrameworkBundle\Model\Order\Item\OrderProductFactoryInterface $orderProductFactory
      * @param \Shopsys\FrameworkBundle\Model\Order\FrontOrderDataMapper $frontOrderDataMapper
      * @param \Shopsys\FrameworkBundle\Twig\NumberFormatterExtension $numberFormatterExtension
      * @param \Shopsys\FrameworkBundle\Model\Payment\PaymentPriceCalculation $paymentPriceCalculation
-     * @param \Shopsys\FrameworkBundle\Model\Order\Item\OrderPaymentFactoryInterface $orderPaymentFactory
      * @param \Shopsys\FrameworkBundle\Model\Transport\TransportPriceCalculation $transportPriceCalculation
-     * @param \Shopsys\FrameworkBundle\Model\Order\Item\OrderTransportFactoryInterface $orderTransportFactory
+     * @param \Shopsys\FrameworkBundle\Model\Order\Item\OrderItemFactoryInterface $orderItemFactory
      */
     public function __construct(
         EntityManagerInterface $em,
@@ -227,13 +213,11 @@ class OrderFacade
         OrderFactoryInterface $orderFactory,
         OrderPriceCalculation $orderPriceCalculation,
         OrderItemPriceCalculation $orderItemPriceCalculation,
-        OrderProductFactoryInterface $orderProductFactory,
         FrontOrderDataMapper $frontOrderDataMapper,
         NumberFormatterExtension $numberFormatterExtension,
         PaymentPriceCalculation $paymentPriceCalculation,
-        OrderPaymentFactoryInterface $orderPaymentFactory,
         TransportPriceCalculation $transportPriceCalculation,
-        OrderTransportFactoryInterface $orderTransportFactory
+        OrderItemFactoryInterface $orderItemFactory
     ) {
         $this->em = $em;
         $this->orderNumberSequenceRepository = $orderNumberSequenceRepository;
@@ -256,13 +240,11 @@ class OrderFacade
         $this->orderPriceCalculation = $orderPriceCalculation;
         $this->orderUrlGenerator = $orderUrlGenerator;
         $this->orderItemPriceCalculation = $orderItemPriceCalculation;
-        $this->orderProductFactory = $orderProductFactory;
         $this->frontOrderDataMapper = $frontOrderDataMapper;
         $this->numberFormatterExtension = $numberFormatterExtension;
         $this->paymentPriceCalculation = $paymentPriceCalculation;
-        $this->orderPaymentFactory = $orderPaymentFactory;
         $this->transportPriceCalculation = $transportPriceCalculation;
-        $this->orderTransportFactory = $orderTransportFactory;
+        $this->orderItemFactory = $orderItemFactory;
     }
 
     /**
@@ -352,7 +334,7 @@ class OrderFacade
         $orderEditResult = $order->edit(
             $orderData,
             $this->orderItemPriceCalculation,
-            $this->orderProductFactory,
+            $this->orderItemFactory,
             $this->orderPriceCalculation
         );
 
@@ -509,9 +491,9 @@ class OrderFacade
     {
         $locale = $this->domain->getDomainConfigById($order->getDomainId())->getLocale();
 
-        $order->fillOrderProducts($orderPreview, $this->orderProductFactory, $this->numberFormatterExtension, $locale);
-        $order->fillOrderPayment($this->paymentPriceCalculation, $this->orderPaymentFactory, $orderPreview->getProductsPrice(), $locale);
-        $order->fillOrderTransport($this->transportPriceCalculation, $this->orderTransportFactory, $orderPreview->getProductsPrice(), $locale);
-        $order->fillOrderRounding($this->orderProductFactory, $orderPreview->getRoundingPrice(), $locale);
+        $order->fillOrderProducts($orderPreview, $this->orderItemFactory, $this->numberFormatterExtension, $locale);
+        $order->fillOrderPayment($this->paymentPriceCalculation, $this->orderItemFactory, $orderPreview->getProductsPrice(), $locale);
+        $order->fillOrderTransport($this->transportPriceCalculation, $this->orderItemFactory, $orderPreview->getProductsPrice(), $locale);
+        $order->fillOrderRounding($this->orderItemFactory, $orderPreview->getRoundingPrice(), $locale);
     }
 }

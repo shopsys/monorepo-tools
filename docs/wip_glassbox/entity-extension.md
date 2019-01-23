@@ -46,7 +46,6 @@ The only real problem we encountered was Gedmo's TreeListener, that is used for 
 
 This event subscriber also clears metadata about inheritance from parent entities because,
 in Doctrine, a MappedSuperclass entity cannot be also a root entity of true mapped inheritance.
-The only real instance of true mapped inheritance in the framework is the OrderItem.
 
 ### LoadORMMetadataSubscriber
 
@@ -96,18 +95,6 @@ These factories work as same as entity factories.
 If any part of framework creates an entity data, it uses a factory.
 So in the project, we can change the factory to produce extended entity data instead of original and the whole system will create extended entity data.
 
-## OrderItem and true mapped inheritance
-
-![class inheritance of the OrderItem entity](img/order-item.png)
-
-If we want to extend OrderItem entity itself, we have to extend OrderItem and also all descendants and we end up with inheritance tree shown above.
-In Dream project, the descendants (DreamOrderPayment etc.) must extend DreamOrderItem (a direct descendant of OrderItem),
-so they have to contain duplicated code from the original descendant entities.
-DiscriminatorMap must always contain descendants' FQN because LoadORMMetadataSubscriber reads raw original annotations.
-
-**Warning: Extending `OrderItem` and its descendants is a problematic issue that may cause [some problems](https://github.com/shopsys/shopsys/issues/621#issuecomment-442098935).**
-**We are planning to solve this as soon as possible, until then, we do not recommend extending order items. Otherwise, you might be forced to use dirty hacks to make your application work.**
-
 ## How can I extend an entity?
 
 * Create a new entity in your `src/Shopsys/ShopBundle/Model` directory that extends already existing framework entity
@@ -117,6 +104,7 @@ DiscriminatorMap must always contain descendants' FQN because LoadORMMetadataSub
     * `Brand`
     * `Category`
     * `Order`
+    * `OrderItem`
     * `Payment`
     * `Product`
     * `Transport`
@@ -145,3 +133,18 @@ DiscriminatorMap must always contain descendants' FQN because LoadORMMetadataSub
   * add your extended entity into `$entityExtensionMap` in the `setUp()` method
 
 *Tip: to see how it works in practice check out `\Tests\ShopBundle\Functional\EntityExtension\EntityExtensionTest` that tests end-to-end extensibility of `Product`, `Category` and `OrderItem`.*
+
+## Limitations
+
+### OrderItem
+
+`OrderItem` is a bit special entity because it is not created from `OrderItemData`, it is created from different sources like from product itself.
+All creations are done by [`Order`](/packages/framework/src/Model/Order/Order.php) entity only, where you can check that it really make sense to not create the `OrderItem` from a data object.
+
+If you need to extend the `OrderItem` by a new field, for example, an ID from an external system, you'll have to fill this field after the `Order` is created by a new public method on `Order` class.
+And then if you'll need to be able to edit this field from the administration, you'll have to override `edit` method of `Order` entity and solve setting this new field there.
+
+The other way of data - from `OrderItem` to `OrderItemData` is standard.
+So if you extend `OrderItem` in a standard fashion, set a new field in extended `OrderItemDataFactory` then `OrderItemData` object will contain the correct value from the `OrderItem` object.
+
+Creating a new type of `OrderItem` is possible and does not cause problems because the new type is completely in your hands.

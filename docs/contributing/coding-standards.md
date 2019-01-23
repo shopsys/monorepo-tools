@@ -94,3 +94,5 @@ Besides the rules that are checked by automatic tools, we have few rules for whi
     - Controllers
     - Facades
     - Repositories
+- Framework entities must not use [Doctrine inheritance mapping](https://www.doctrine-project.org/projects/doctrine-orm/en/2.6/reference/inheritance-mapping.html)
+  because it causes problems during entity extension. Such problem with `OrderItem` was resolved during [making OrderItem extendable #715](https://github.com/shopsys/shopsys/pull/715).

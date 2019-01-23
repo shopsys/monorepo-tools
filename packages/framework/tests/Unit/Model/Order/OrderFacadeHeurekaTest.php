@@ -15,11 +15,9 @@ use Shopsys\FrameworkBundle\Model\Customer\CustomerFacade;
 use Shopsys\FrameworkBundle\Model\Heureka\HeurekaFacade;
 use Shopsys\FrameworkBundle\Model\Localization\Localization;
 use Shopsys\FrameworkBundle\Model\Order\FrontOrderDataMapper;
+use Shopsys\FrameworkBundle\Model\Order\Item\OrderItemFactoryInterface;
 use Shopsys\FrameworkBundle\Model\Order\Item\OrderItemPriceCalculation;
-use Shopsys\FrameworkBundle\Model\Order\Item\OrderPaymentFactoryInterface;
 use Shopsys\FrameworkBundle\Model\Order\Item\OrderProductFacade;
-use Shopsys\FrameworkBundle\Model\Order\Item\OrderProductFactoryInterface;
-use Shopsys\FrameworkBundle\Model\Order\Item\OrderTransportFactoryInterface;
 use Shopsys\FrameworkBundle\Model\Order\Mail\OrderMailFacade;
 use Shopsys\FrameworkBundle\Model\Order\Order;
 use Shopsys\FrameworkBundle\Model\Order\OrderFacade;
@@ -109,14 +107,13 @@ class OrderFacadeHeurekaTest extends TestCase
             $this->createMock(OrderFactoryInterface::class),
             $this->createMock(OrderPriceCalculation::class),
             $this->createMock(OrderItemPriceCalculation::class),
-            $this->createMock(OrderProductFactoryInterface::class),
             $this->createMock(FrontOrderDataMapper::class),
             $this->createMock(NumberFormatterExtension::class),
             $this->createMock(PaymentPriceCalculation::class),
-            $this->createMock(OrderPaymentFactoryInterface::class),
             $this->createMock(TransportPriceCalculation::class),
-            $this->createMock(OrderTransportFactoryInterface::class)
+            $this->createMock(OrderItemFactoryInterface::class)
         );
+
         return $orderFacade;
     }
 
@@ -138,6 +135,7 @@ class OrderFacadeHeurekaTest extends TestCase
     {
         $domainConfig = new DomainConfig(1, '', '', 'cs');
         $domain = new Domain([$domainConfig], $this->createMock(Setting::class));
+
         return $domain;
     }
 
@@ -148,6 +146,7 @@ class OrderFacadeHeurekaTest extends TestCase
     {
         $order = $this->createMock(Order::class);
         $order->method('getDomainId')->willReturn(1);
+
         return $order;
     }
 }
