@@ -94,6 +94,7 @@ class CountryFormType extends AbstractType
                     ],
                     'required' => false,
                     'constraints' => [
+                        new Constraints\Type(['type' => 'numeric']),
                         new Constraints\GreaterThanOrEqual(['value' => 0]),
                     ],
                 ],
