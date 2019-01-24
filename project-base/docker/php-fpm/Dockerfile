@@ -1,4 +1,4 @@
-FROM php:7.2-fpm-stretch as base
+FROM php:7.3-fpm-stretch as base
 
 ARG project_root=.
 ENV REDIS_PREFIX=''

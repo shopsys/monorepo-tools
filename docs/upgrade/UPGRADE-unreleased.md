@@ -6,6 +6,9 @@ This guide contains instructions to upgrade from version v7.0.0-beta5 to Unrelea
 There you can find links to upgrade notes for other versions too.
 
 ## [shopsys/framework]
+### Infrastructure
+- *(optional)* in your `docker/php-fpm/Dockerfile` change base image to `php:7.3-fpm-stretch` ([#694](https://github.com/shopsys/shopsys/pull/694))
+
 ### Tools
 - *(optional)* add a new phing target `clean-redis` to your `build.xml` and `build-dev.xml` and use it where you need to clean Redis cache.
   You can find an inspiration in [#736](https://github.com/shopsys/shopsys/pull/736/files)
