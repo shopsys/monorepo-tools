@@ -8,6 +8,7 @@
 1. [Docker Sync does not Synchronize File Consistently](#docker-sync-does-not-synchronize-file-consistently)
 1. [A docker container is not running](#a-docker-container-is-not-running)
 1. [Composer dependencies installation fails on memory limit](#composer-dependencies-installation-fails-on-memory-limit)
+1. [Starting up the Docker containers fails due to invalid reference format](#starting-up-the-docker-containers-fails-due-to-invalid-reference-format)
 
 If you are developing on Shopsys Framework using docker, you might run into some problems during the process.
 
@@ -151,3 +152,14 @@ When `composer install` or `composer update` fails on an error with exceeding th
 
 *Note: Since `v7.0.0-beta4` we have set the Composer memory limit to `-1` (which means unlimited) in the php-fpm's `Dockerfile`.*
 *If you still encounter memory issues while using Docker for Windows (or Mac), try increasing the limits in `Docker -> Preferences… -> Advanced`.*
+
+## Starting up the Docker containers fails due to invalid reference format
+Docker images may fail to build during `docker-compose up -d` due to invalid reference format, eg.:
+```
+Building php-fpm
+Step 1/41 : FROM php:7.2-fpm-stretch as base
+ERROR: Service 'php-fpm' failed to build: Error parsing reference: "php:7.2-fpm-stretch as base" is not a valid repository/tag: invalid reference format
+```
+This is because you have a version of Docker which does not support [multi-stage builds](https://docs.docker.com/develop/develop-images/multistage-build/).
+
+Upgrade your Docker to version **17.05 or higher** and try running the command again.
