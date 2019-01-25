@@ -4,6 +4,7 @@ This article describes how we work with entities and our specialities.
 1. Entity is a class encapsulating data and you can read more what is an entity in the [model architecture article](basics-about-model-architecture.md).
 1. Entities are created by [factories](#entity-factory).
 1. For domain-specific data we use [domain entities](#domain-entity).
+1. For language-specific data we use [translation entities](#translation-entity).
 1. Data that we need for entity construction are encapsulated in [entity data](#entity-data).
 1. Entity data are created by [entity data factories](#entity-data-factory).
 
@@ -178,6 +179,112 @@ class Brand extends AbstractTranslatableEntity
 }
 ```
 
+## Translation entity
+
+We use [prezent/doctrine-translatable](https://github.com/Prezent/doctrine-translatable) for translated attributes.
+The entity extends `\Shopsys\FrameworkBundle\Model\Localization\AbstractTranslatableEntity` as the `Brand` does in example below.
+
+Setting the properties of a domain entity is always done via the main entity itself.
+Basically, that means only the main entity knows about the existence of translation entities.
+The rest of the application uses the main entity as a proxy to the translation-specific properties.
+*The concept is similar to [domain entities](#domain-entity)* but uses Doctrine extension.
+
+### Example
+```php
+// FrameworkBundle/Model/Product/Brand/BrandTranslation.php
+
+namespace Shopsys\FrameworkBundle\Model\Product\Brand;
+
+use Doctrine\ORM\Mapping as ORM;
+use Prezent\Doctrine\Translatable\Annotation as Prezent;
+use Prezent\Doctrine\Translatable\Entity\AbstractTranslation;
+
+/**
+ * @ORM\Table(name="brand_translations")
+ * @ORM\Entity
+ */
+class BrandTranslation extends AbstractTranslation
+{
+    /**
+     * @Prezent\Translatable(targetEntity="Shopsys\FrameworkBundle\Model\Product\Brand\Brand")
+     */
+    protected $translatable;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(type="text", nullable=true)
+     */
+    protected $description;
+
+    /**
+     * @return string
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
+     * @param string $description
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
+    }
+}
+```
+
+...and its main entity `Brand` working as a proxy:
+
+```php
+// FrameworkBundle/Model/Product/Brand/Brand.php
+
+namespace Shopsys\FrameworkBundle\Model\Product\Brand;
+
+/**
+ * @ORM\Table(name="brands")
+ * @ORM\Entity
+ */
+class Brand extends AbstractTranslatableEntity
+{
+
+    // ...
+
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Product\Brand\BrandData $brandData
+     */
+    protected function setTranslations(BrandData $brandData)
+    {
+        foreach ($brandData->descriptions as $locale => $description) {
+            $brandTranslation = $this->translation($locale);
+            /* @var $brandTranslation \Shopsys\FrameworkBundle\Model\Product\Brand\BrandTranslation */
+            $brandTranslation->setDescription($description);
+        }
+    }
+
+    /**
+     * @return \Shopsys\FrameworkBundle\Model\Product\Brand\BrandTranslation
+     */
+    protected function createTranslation()
+    {
+        return new BrandTranslation();
+    }
+
+    /**
+     * @param string $locale
+     * @return string
+     */
+    public function getDescription($locale = null)
+    {
+        return $this->translation($locale)->getDescription();
+    }
+
+    // ...
+
+}
+```
+
 ## Entity data
 
 Is a data object that is used to transfer data through application and also to create an entity.
@@ -248,6 +355,16 @@ class BrandData
     }
 }
 ```
+
+### Data for multidomain or multilanguage field
+
+As you can see in example above, multidomain or multilanguage field is an array.
+
+Multidomain field like `seoH1s` have to be indexed by `domainId` - integer ID of the given domain.
+Data factory has to prepare this array to contain keys for all domain IDs, because domain entities are created by these array items (even if their value is null).
+
+Multilanguage field like `description` have to be indexed by `locale` - string identifier of language (you can find them in [`domains.yml`](/project-base/app/config/domains.yml)).
+Data factory does not need to prepare this array, because the extension we use for translated entities can handle unprepared translations.
 
 ## Entity data factory
 

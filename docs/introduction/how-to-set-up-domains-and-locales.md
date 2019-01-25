@@ -1,31 +1,9 @@
 # How to Set Up Domains and Locales (Languages)
 
-During the development with the Shopsys Framework, it is possible to meet concepts - domain, multidomain, multilanguage.
-This document explains what these terms mean and how to work with them during the development of your project.
+This article describes how to work with domains and languages during the development of your project.
+For an explanation of the basic terms, please read [domain, multidomain and multilanguage](domain-multidomain-multilanguage.md) article first.
 
-## Domain, multidomain, multilanguage
-
-- **Domain** - Domain can be understood as one instance of eshop data.
-For example, just furniture can be bough on the domain shopsys-furniture.com while only electronics can be found on the domain shopsys-electro.com.
-It is still one application with one product catalogue.
-Access to these individual domains is provided through individual url addresses.
-All domains share one common administration.
-
-- **Multidomain attribute** - A distinct value of this attribute can be set for each domain.
-An example of a multidomain attribute is a default pricing group for not logged customer.
-This pricing group can be different for each domain.
-An example of a not multidomain attribute is en ean on the product.
-This attribute is the same for each domain.
-
-- **Multilang attribute** - A distinct value of this attribute can be set for each locale.
-An example of a multilang attribute is a name of the product.
-An example of a not multilang attribute is an EAN of the product.
-
-- **Difference between multidomain and multilang attribute** - A value of some multilang attribute will be the same for each domain with the same locale.
-For example, when a name of the product is set as *A4tech mouse* for the locale *en* , this name of this product will be the same for each domain with the locale *en*.
-While multidomain attribute can be set to different values for different domains regardless of the locale of the domain.
-
-*Note: Demo data on the Shopsys Framework contains data only in en and cs locales*
+*Note: Demo data on the Shopsys Framework contains data only in `en` and `cs` locales*
 
 ## Settings and working with domains
 
@@ -110,7 +88,7 @@ If you add a new domain, you need to create an elasticsearch configuration for t
 As the configuration is part of the microservice, you need to fork the microservice and create this configuration here.
 
 ### 3. Locale settings
-Some parts of these instructions are already prepared for the locales en and cs.
+Some parts of these instructions are already prepared for the locales `en` and `cs`.
 
 #### 3.1 Set up the locale for domain
 Set up the locale of the domain in `app/config/domains.yml`.
