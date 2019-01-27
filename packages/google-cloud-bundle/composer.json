@@ -1,0 +1,35 @@
+{
+    "name": "shopsys/google-cloud-bundle",
+    "type": "library",
+    "description": "Shopsys Framework Google Cloud Bundle",
+    "keywords": ["google cloud", "Shopsys Framework", "SSFW"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Shopsys",
+            "homepage": "https://www.shopsys.com/"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Shopsys\\GoogleCloudBundle\\": "src/"
+        }
+    },
+    "require": {
+        "php": "^7.1",
+        "google/cloud-storage": "^1.10",
+        "shopsys/form-types-bundle": "@dev",
+        "shopsys/framework": "@dev",
+        "shopsys/migrations": "@dev",
+        "shopsys/plugin-interface": "@dev",
+        "superbalist/flysystem-google-storage": "^7.1",
+        "symfony/config": "^3.4",
+        "symfony/dependency-injection": "^3.4",
+        "symfony/framework-bundle": "^3.4",
+        "symfony/http-kernel": "^3.4",
+        "symfony/options-resolver": "^3.4"
+    },
+    "require-dev": {
+        "shopsys/coding-standards": "dev-master"
+    }
+}

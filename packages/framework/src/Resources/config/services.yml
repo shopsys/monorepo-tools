@@ -66,6 +66,18 @@ services:
     jms_translation.extractor_manager:
         alias: Shopsys\FrameworkBundle\Component\Translation\NormalizingExtractorManager
 
+    main_filesystem:
+        class: League\Flysystem\FilesystemInterface
+        factory: ['@Shopsys\FrameworkBundle\Component\Filesystem\MainFilesystemFactory', create]
+
+    Shopsys\FrameworkBundle\Component\Filesystem\MainFilesystemFactory:
+        arguments:
+            $projectDir: '%kernel.project_dir%'
+
+    local_filesystem:
+        class: League\Flysystem\FilesystemInterface
+        factory: ['@Shopsys\FrameworkBundle\Component\Filesystem\LocalFilesystemFactory', create]
+
     NinjaMutex\Lock\LockInterface:
         class: NinjaMutex\Lock\FlockLock
         arguments:

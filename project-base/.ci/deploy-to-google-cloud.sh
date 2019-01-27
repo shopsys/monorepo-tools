@@ -6,6 +6,9 @@ echo ${DOCKER_PASSWORD} | docker login --username ${DOCKER_USERNAME} --password-
 # Create unique docker image tag with commit hash
 DOCKER_IMAGE_TAG=production-commit-${GIT_COMMIT}
 
+# Authenticate yourself with service.account.json file.
+export GOOGLE_APPLICATION_CREDENTIALS=/tmp/infrastructure/google-cloud/service-account.json
+
 ## Docker image for application php-fpm container
 docker image pull ${DOCKER_USERNAME}/php-fpm:${DOCKER_IMAGE_TAG} || (
     echo "Image not found (see warning above), building it instead..." &&
@@ -16,6 +19,9 @@ docker image pull ${DOCKER_USERNAME}/php-fpm:${DOCKER_IMAGE_TAG} || (
         . &&
     docker image push ${DOCKER_USERNAME}/php-fpm:${DOCKER_IMAGE_TAG}
 )
+
+# Set proxy url address to google cloud storage bucket API
+sed -i "s/{{GOOGLE_CLOUD_STORAGE_BUCKET_NAME}}/${GOOGLE_CLOUD_STORAGE_BUCKET_NAME}/g" docker/nginx/google-cloud/nginx.conf
 
 # Create real parameters files to be modified and applied to the cluster as configmaps
 cp app/config/domains_urls.yml.dist app/config/domains_urls.yml
@@ -38,6 +44,12 @@ yq write --inplace kubernetes/kustomize/overlays/production/ingress-patch.yaml s
 yq write --inplace kubernetes/deployments/webserver-php-fpm.yml spec.template.spec.hostAliases[0].hostnames[+] ${FIRST_DOMAIN_HOSTNAME}
 yq write --inplace kubernetes/deployments/webserver-php-fpm.yml spec.template.spec.hostAliases[0].hostnames[+] ${SECOND_DOMAIN_HOSTNAME}
 
+# Set environment variables to container and initContainer for Google Cloud Storage connection
+yq write --inplace kubernetes/deployments/webserver-php-fpm.yml spec.template.spec.containers[0].env[0].value ${GOOGLE_CLOUD_STORAGE_BUCKET_NAME}
+yq write --inplace kubernetes/deployments/webserver-php-fpm.yml spec.template.spec.containers[0].env[1].value ${PROJECT_ID}
+yq write --inplace kubernetes/deployments/webserver-php-fpm.yml spec.template.spec.initContainers[1].env[0].value ${GOOGLE_CLOUD_STORAGE_BUCKET_NAME}
+yq write --inplace kubernetes/deployments/webserver-php-fpm.yml spec.template.spec.initContainers[1].env[1].value ${PROJECT_ID}
+
 # Set domain urls
 yq write --inplace app/config/domains_urls.yml domains_urls[0].url https://${FIRST_DOMAIN_HOSTNAME}
 yq write --inplace app/config/domains_urls.yml domains_urls[1].url https://${SECOND_DOMAIN_HOSTNAME}
@@ -47,8 +59,6 @@ yq write --inplace app/config/parameters.yml parameters.trusted_proxies[+] 10.0.
 
 cd /tmp/infrastructure/google-cloud
 
-# Authenticate yourself with service.account.json file.
-export GOOGLE_APPLICATION_CREDENTIALS=/tmp/infrastructure/google-cloud/service-account.json
 gcloud config set container/use_application_default_credentials true
 
 # Activate Service Account

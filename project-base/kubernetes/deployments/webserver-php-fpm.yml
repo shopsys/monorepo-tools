@@ -55,7 +55,7 @@ spec:
                     subPath: parameters.yml
             -   name: initialize-database
                 image: ~
-                command: ["sh", "-c", "cd /var/www/html && ./phing db-create db-demo microservice-product-search-recreate-structure microservice-product-search-export-products grunt error-pages-generate warmup"]
+                command: ["sh", "-c", "cd /var/www/html && ./phing db-create dirs-create db-demo microservice-product-search-recreate-structure microservice-product-search-export-products grunt error-pages-generate warmup"]
                 volumeMounts:
                 -   name: source-codes
                     mountPath: /var/www/html
@@ -65,6 +65,11 @@ spec:
                 -   name: parameters
                     mountPath: /var/www/html/app/config/parameters.yml
                     subPath: parameters.yml
+                env:
+                -   name: GOOGLE_CLOUD_STORAGE_BUCKET_NAME
+                    value: ~
+                -   name: GOOGLE_CLOUD_PROJECT_ID
+                    value: ~
             containers:
             -   image: ~
                 name: php-fpm
@@ -80,6 +85,11 @@ spec:
                 -   name: parameters
                     mountPath: /var/www/html/app/config/parameters.yml
                     subPath: parameters.yml
+                env:
+                -   name: GOOGLE_CLOUD_STORAGE_BUCKET_NAME
+                    value: ~
+                -   name: GOOGLE_CLOUD_PROJECT_ID
+                    value: ~
             -   image: nginx:1.13.10-alpine
                 name: webserver
                 ports:
