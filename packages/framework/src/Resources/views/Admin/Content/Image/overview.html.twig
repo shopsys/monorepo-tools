@@ -48,6 +48,15 @@
                             </td>
                         </tr>
                     {% endif %}
+                    {% for additionalSizeConfig in sizeConfig.additionalSizes %}
+                        <tr>
+                            <td><i>- additional_{{ loop.index }}</i></td>
+                            <td><i>{{ additionalSizeConfig.width|default('-')}}</i></td>
+                            <td><i>{{ additionalSizeConfig.height|default('-') }}</i></td>
+                            <td><i>{{ additionalSizeConfig.media }}</i></td>
+                            <td></td>
+                        </tr>
+                    {% endfor %}
                 {% endfor %}
             </tbody>
         </table>
