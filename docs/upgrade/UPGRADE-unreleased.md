@@ -74,6 +74,7 @@ There you can find links to upgrade notes for other versions too.
                 imageId: \d+
                 additionalIndex: \d+
       ```
+- if you extended `EntityExtensionParentMetadataCleanerEventSubscriber`, review whether you need to implement [fix for translation entities #748](https://github.com/shopsys/shopsys/pull/748) or whether you still need the extension at all
 
 `Cart` has been slightly refactored ((#765)[https://github.com/shopsys/shopsys/pull/765/]), so change your usages appropriately:
  - property `cartItems` has been renamed to `items`
