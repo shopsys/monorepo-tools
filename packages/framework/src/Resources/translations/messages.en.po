@@ -1564,6 +1564,9 @@ msgstr ""
 msgid "Please check the entered values.<br><br>"
 msgstr ""
 
+msgid "Please fill all default values before creating a product"
+msgstr ""
+
 msgid "Please wait until all files are uploaded and try again."
 msgstr ""
 
@@ -1940,6 +1943,9 @@ msgid "Slider page <strong><a href=\"{{ url }}\">{{ name }}</a></strong> modifie
 msgstr ""
 
 msgid "Slider pages"
+msgstr ""
+
+msgid "Fill missing settings to enable creating products. More information here."
 msgstr ""
 
 msgid "Sorting priority"

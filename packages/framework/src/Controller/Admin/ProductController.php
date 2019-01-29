@@ -8,6 +8,7 @@ use Shopsys\FrameworkBundle\Component\Domain\Domain;
 use Shopsys\FrameworkBundle\Component\Grid\GridFactory;
 use Shopsys\FrameworkBundle\Component\Grid\QueryBuilderWithRowManipulatorDataSource;
 use Shopsys\FrameworkBundle\Component\Router\Security\Annotation\CsrfProtection;
+use Shopsys\FrameworkBundle\Component\Setting\Setting;
 use Shopsys\FrameworkBundle\Form\Admin\Product\ProductFormType;
 use Shopsys\FrameworkBundle\Form\Admin\Product\ProductMassActionFormType;
 use Shopsys\FrameworkBundle\Form\Admin\Product\VariantFormType;
@@ -16,14 +17,17 @@ use Shopsys\FrameworkBundle\Form\Admin\QuickSearch\QuickSearchFormType;
 use Shopsys\FrameworkBundle\Model\Administrator\AdministratorGridFacade;
 use Shopsys\FrameworkBundle\Model\AdminNavigation\BreadcrumbOverrider;
 use Shopsys\FrameworkBundle\Model\AdvancedSearch\AdvancedSearchProductFacade;
+use Shopsys\FrameworkBundle\Model\Product\Availability\AvailabilityFacade;
 use Shopsys\FrameworkBundle\Model\Product\Listing\ProductListAdminFacade;
 use Shopsys\FrameworkBundle\Model\Product\MassAction\ProductMassActionFacade;
 use Shopsys\FrameworkBundle\Model\Product\Product;
 use Shopsys\FrameworkBundle\Model\Product\ProductDataFactoryInterface;
 use Shopsys\FrameworkBundle\Model\Product\ProductFacade;
 use Shopsys\FrameworkBundle\Model\Product\ProductVariantFacade;
+use Shopsys\FrameworkBundle\Model\Product\Unit\UnitFacade;
 use Shopsys\FrameworkBundle\Twig\ProductExtension;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class ProductController extends AdminBaseController
 {
@@ -83,6 +87,21 @@ class ProductController extends AdminBaseController
     protected $domain;
 
     /**
+     * @var \Shopsys\FrameworkBundle\Model\Product\Unit\UnitFacade
+     */
+    protected $unitFacade;
+
+    /**
+     * @var \Shopsys\FrameworkBundle\Component\Setting\Setting
+     */
+    protected $setting;
+
+    /**
+     * @var \Shopsys\FrameworkBundle\Model\Product\Availability\AvailabilityFacade
+     */
+    protected $availabilityFacade;
+
+    /**
      * @param \Shopsys\FrameworkBundle\Model\Product\MassAction\ProductMassActionFacade $productMassActionFacade
      * @param \Shopsys\FrameworkBundle\Component\Grid\GridFactory $gridFactory
      * @param \Shopsys\FrameworkBundle\Model\Product\ProductFacade $productFacade
@@ -94,6 +113,9 @@ class ProductController extends AdminBaseController
      * @param \Shopsys\FrameworkBundle\Model\Product\ProductVariantFacade $productVariantFacade
      * @param \Shopsys\FrameworkBundle\Twig\ProductExtension $productExtension
      * @param \Shopsys\FrameworkBundle\Component\Domain\Domain $domain
+     * @param \Shopsys\FrameworkBundle\Model\Product\Unit\UnitFacade $unitFacade
+     * @param \Shopsys\FrameworkBundle\Component\Setting\Setting $setting
+     * @param \Shopsys\FrameworkBundle\Model\Product\Availability\AvailabilityFacade $availabilityFacade
      */
     public function __construct(
         ProductMassActionFacade $productMassActionFacade,
@@ -106,7 +128,10 @@ class ProductController extends AdminBaseController
         AdvancedSearchProductFacade $advancedSearchProductFacade,
         ProductVariantFacade $productVariantFacade,
         ProductExtension $productExtension,
-        Domain $domain
+        Domain $domain,
+        UnitFacade $unitFacade,
+        Setting $setting,
+        AvailabilityFacade $availabilityFacade
     ) {
         $this->productMassActionFacade = $productMassActionFacade;
         $this->gridFactory = $gridFactory;
@@ -119,6 +144,9 @@ class ProductController extends AdminBaseController
         $this->productVariantFacade = $productVariantFacade;
         $this->productExtension = $productExtension;
         $this->domain = $domain;
+        $this->unitFacade = $unitFacade;
+        $this->setting = $setting;
+        $this->availabilityFacade = $availabilityFacade;
     }
 
     /**
@@ -167,7 +195,12 @@ class ProductController extends AdminBaseController
      */
     public function newAction(Request $request)
     {
-        $productData = $this->productDataFactory->create();
+        try {
+            $productData = $this->productDataFactory->create();
+        } catch (NotFoundHttpException $e) {
+            $this->getFlashMessageSender()->addErrorFlash(t('Please fill all default values before creating a product'));
+            return $this->redirectToRoute('admin_product_list');
+        }
 
         $form = $this->createForm(ProductFormType::class, $productData, ['product' => null]);
         $form->handleRequest($request);
@@ -238,12 +271,15 @@ class ProductController extends AdminBaseController
 
         $this->administratorGridFacade->restoreAndRememberGridLimit($administrator, $grid);
 
+        $productCanBeCreated = $this->productCanBeCreated();
+
         return $this->render('@ShopsysFramework/Admin/Content/Product/list.html.twig', [
             'gridView' => $grid->createView(),
             'quickSearchForm' => $quickSearchForm->createView(),
             'advancedSearchForm' => $advancedSearchForm->createView(),
             'massActionForm' => $massActionForm->createView(),
             'isAdvancedSearchFormSubmitted' => $this->advancedSearchProductFacade->isAdvancedSearchFormSubmitted($request),
+            'productCanBeCreated' => $productCanBeCreated,
         ]);
     }
 
@@ -371,5 +407,17 @@ class ProductController extends AdminBaseController
             'product' => $product,
             'domains' => $this->domain->getAll(),
         ]);
+    }
+
+    /**
+     * @return bool
+     */
+    protected function productCanBeCreated()
+    {
+        if (empty($this->unitFacade->getAll()) || $this->setting->get(Setting::DEFAULT_UNIT) === 0 || empty($this->availabilityFacade->getAll())) {
+            return false;
+        }
+
+        return true;
     }
 }
