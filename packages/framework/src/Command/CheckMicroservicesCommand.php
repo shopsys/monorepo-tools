@@ -67,7 +67,7 @@ class CheckMicroservicesCommand extends Command
                 'searchText' => '',
             ]);
         } catch (\GuzzleHttp\Exception\ConnectException $ex) {
-            $message = 'Microservice Product Search is unvailable!';
+            $message = 'Microservice Product Search is unavailable!';
             throw new \Shopsys\FrameworkBundle\Command\Exception\UnavailableMicroserviceException($message, 0, $ex);
         }
 
