@@ -30,6 +30,7 @@ class ImageLocatorTest extends TestCase
                         ImageConfigDefinition::CONFIG_SIZE_HEIGHT => null,
                         ImageConfigDefinition::CONFIG_SIZE_CROP => false,
                         ImageConfigDefinition::CONFIG_SIZE_OCCURRENCE => null,
+                        ImageConfigDefinition::CONFIG_SIZE_ADDITIONAL_SIZES => [],
                     ],
                     [
                         ImageConfigDefinition::CONFIG_SIZE_NAME => 'SizeName_0_1',
@@ -37,6 +38,7 @@ class ImageLocatorTest extends TestCase
                         ImageConfigDefinition::CONFIG_SIZE_HEIGHT => null,
                         ImageConfigDefinition::CONFIG_SIZE_CROP => false,
                         ImageConfigDefinition::CONFIG_SIZE_OCCURRENCE => null,
+                        ImageConfigDefinition::CONFIG_SIZE_ADDITIONAL_SIZES => [],
                     ],
                 ],
                 ImageConfigDefinition::CONFIG_TYPES => [
@@ -50,6 +52,7 @@ class ImageLocatorTest extends TestCase
                                 ImageConfigDefinition::CONFIG_SIZE_HEIGHT => null,
                                 ImageConfigDefinition::CONFIG_SIZE_CROP => false,
                                 ImageConfigDefinition::CONFIG_SIZE_OCCURRENCE => null,
+                                ImageConfigDefinition::CONFIG_SIZE_ADDITIONAL_SIZES => [],
                             ],
                             [
                                 ImageConfigDefinition::CONFIG_SIZE_NAME => null,
@@ -57,6 +60,7 @@ class ImageLocatorTest extends TestCase
                                 ImageConfigDefinition::CONFIG_SIZE_HEIGHT => 100,
                                 ImageConfigDefinition::CONFIG_SIZE_CROP => true,
                                 ImageConfigDefinition::CONFIG_SIZE_OCCURRENCE => null,
+                                ImageConfigDefinition::CONFIG_SIZE_ADDITIONAL_SIZES => [],
                             ],
                         ],
                     ],

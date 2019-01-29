@@ -19,6 +19,8 @@ class ImageConfigDefinition implements ConfigurationInterface
     const CONFIG_SIZE_HEIGHT = 'height';
     const CONFIG_SIZE_CROP = 'crop';
     const CONFIG_SIZE_OCCURRENCE = 'occurrence';
+    const CONFIG_SIZE_ADDITIONAL_SIZES = 'additionalSizes';
+    const CONFIG_SIZE_ADDITIONAL_SIZE_MEDIA = 'media';
 
     /**
      * @return \Symfony\Component\Config\Definition\Builder\TreeBuilder
@@ -54,6 +56,16 @@ class ImageConfigDefinition implements ConfigurationInterface
                         ->scalarNode(self::CONFIG_SIZE_HEIGHT)->defaultNull()->end()
                         ->scalarNode(self::CONFIG_SIZE_CROP)->defaultFalse()->end()
                         ->scalarNode(self::CONFIG_SIZE_OCCURRENCE)->defaultNull()->end()
+                        ->arrayNode(self::CONFIG_SIZE_ADDITIONAL_SIZES)
+                            ->defaultValue([])
+                            ->prototype('array')
+                            ->children()
+                                ->scalarNode(self::CONFIG_SIZE_ADDITIONAL_SIZE_MEDIA)->isRequired()->end()
+                                ->scalarNode(self::CONFIG_SIZE_WIDTH)->defaultNull()->end()
+                                ->scalarNode(self::CONFIG_SIZE_HEIGHT)->defaultNull()->end()
+                            ->end()
+                        ->end()
+                        ->end()
                     ->end()
                 ->end()
                 ->end()

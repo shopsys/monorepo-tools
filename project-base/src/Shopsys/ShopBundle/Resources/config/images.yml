@@ -10,6 +10,9 @@
 #                    height: 300
 #                    crop: false
 #                    occurrence: 'Front-end: Product detail, when selected'
+#                    additionalSizes:
+#                       - {width: 1100, height: ~, media: "(min-width: 1200px)"}
+#                       - {width: 275, height: ~, media: "(max-width: 480px)"}
 #                -   name: list
 #                    width: 100
 #                    height: 100

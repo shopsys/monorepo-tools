@@ -4,8 +4,10 @@ namespace Tests\FrameworkBundle\Unit\Component\Image\Config;
 
 use PHPUnit\Framework\TestCase;
 use Shopsys\FrameworkBundle\Component\Image\Config\Exception\DuplicateEntityNameException;
+use Shopsys\FrameworkBundle\Component\Image\Config\Exception\DuplicateMediaException;
 use Shopsys\FrameworkBundle\Component\Image\Config\Exception\DuplicateSizeNameException;
 use Shopsys\FrameworkBundle\Component\Image\Config\Exception\DuplicateTypeNameException;
+use Shopsys\FrameworkBundle\Component\Image\Config\Exception\WidthAndHeightMissingException;
 use Shopsys\FrameworkBundle\Component\Image\Config\ImageConfig;
 use Shopsys\FrameworkBundle\Component\Image\Config\ImageConfigDefinition;
 use Shopsys\FrameworkBundle\Component\Image\Config\ImageConfigLoader;
@@ -97,6 +99,7 @@ class ImageConfigLoaderTest extends TestCase
                         ImageConfigDefinition::CONFIG_SIZE_HEIGHT => null,
                         ImageConfigDefinition::CONFIG_SIZE_CROP => false,
                         ImageConfigDefinition::CONFIG_SIZE_OCCURRENCE => null,
+                        ImageConfigDefinition::CONFIG_SIZE_ADDITIONAL_SIZES => [],
                     ],
                     [
                         ImageConfigDefinition::CONFIG_SIZE_NAME => null,
@@ -104,6 +107,7 @@ class ImageConfigLoaderTest extends TestCase
                         ImageConfigDefinition::CONFIG_SIZE_HEIGHT => null,
                         ImageConfigDefinition::CONFIG_SIZE_CROP => false,
                         ImageConfigDefinition::CONFIG_SIZE_OCCURRENCE => null,
+                        ImageConfigDefinition::CONFIG_SIZE_ADDITIONAL_SIZES => [],
                     ],
                 ],
                 ImageConfigDefinition::CONFIG_TYPES => [],
@@ -152,6 +156,97 @@ class ImageConfigLoaderTest extends TestCase
         $this->assertInstanceOf(DuplicateTypeNameException::class, $previousException);
     }
 
+    public function testLoadFromArrayAdditionalSizeWithAndHeightAreNull()
+    {
+        $inputConfig = [
+            [
+                ImageConfigDefinition::CONFIG_CLASS => 'Class_1',
+                ImageConfigDefinition::CONFIG_ENTITY_NAME => 'Name_1',
+                ImageConfigDefinition::CONFIG_MULTIPLE => false,
+                ImageConfigDefinition::CONFIG_SIZES => [],
+                ImageConfigDefinition::CONFIG_TYPES => [
+                    [
+                        ImageConfigDefinition::CONFIG_TYPE_NAME => 'TypeName_1',
+                        ImageConfigDefinition::CONFIG_MULTIPLE => true,
+                        ImageConfigDefinition::CONFIG_SIZES => [
+                            [
+                                ImageConfigDefinition::CONFIG_SIZE_NAME => 'SizeName_1',
+                                ImageConfigDefinition::CONFIG_SIZE_WIDTH => null,
+                                ImageConfigDefinition::CONFIG_SIZE_HEIGHT => null,
+                                ImageConfigDefinition::CONFIG_SIZE_CROP => false,
+                                ImageConfigDefinition::CONFIG_SIZE_OCCURRENCE => null,
+                                ImageConfigDefinition::CONFIG_SIZE_ADDITIONAL_SIZES => [
+                                    [
+                                        ImageConfigDefinition::CONFIG_SIZE_ADDITIONAL_SIZE_MEDIA => '(min-width: 1200px)',
+                                        ImageConfigDefinition::CONFIG_SIZE_WIDTH => null,
+                                        ImageConfigDefinition::CONFIG_SIZE_HEIGHT => null,
+                                    ],
+                                ],
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+        ];
+
+        $previousException = null;
+        try {
+            $this->imageConfigLoader->loadFromArray($inputConfig);
+        } catch (\Shopsys\FrameworkBundle\Component\Image\Config\Exception\EntityParseException $exception) {
+            $previousException = $exception->getPrevious();
+        }
+
+        $this->assertInstanceOf(WidthAndHeightMissingException::class, $previousException);
+    }
+
+    public function testLoadFromArrayAdditionalSizeDuplicateMedia()
+    {
+        $inputConfig = [
+            [
+                ImageConfigDefinition::CONFIG_CLASS => 'Class_1',
+                ImageConfigDefinition::CONFIG_ENTITY_NAME => 'Name_1',
+                ImageConfigDefinition::CONFIG_MULTIPLE => false,
+                ImageConfigDefinition::CONFIG_SIZES => [],
+                ImageConfigDefinition::CONFIG_TYPES => [
+                    [
+                        ImageConfigDefinition::CONFIG_TYPE_NAME => 'TypeName_1',
+                        ImageConfigDefinition::CONFIG_MULTIPLE => true,
+                        ImageConfigDefinition::CONFIG_SIZES => [
+                            [
+                                ImageConfigDefinition::CONFIG_SIZE_NAME => 'SizeName_1',
+                                ImageConfigDefinition::CONFIG_SIZE_WIDTH => null,
+                                ImageConfigDefinition::CONFIG_SIZE_HEIGHT => null,
+                                ImageConfigDefinition::CONFIG_SIZE_CROP => false,
+                                ImageConfigDefinition::CONFIG_SIZE_OCCURRENCE => null,
+                                ImageConfigDefinition::CONFIG_SIZE_ADDITIONAL_SIZES => [
+                                    [
+                                        ImageConfigDefinition::CONFIG_SIZE_ADDITIONAL_SIZE_MEDIA => '(min-width: 1200px)',
+                                        ImageConfigDefinition::CONFIG_SIZE_WIDTH => 200,
+                                        ImageConfigDefinition::CONFIG_SIZE_HEIGHT => null,
+                                    ],
+                                    [
+                                        ImageConfigDefinition::CONFIG_SIZE_ADDITIONAL_SIZE_MEDIA => '(min-width: 1200px)',
+                                        ImageConfigDefinition::CONFIG_SIZE_WIDTH => 200,
+                                        ImageConfigDefinition::CONFIG_SIZE_HEIGHT => null,
+                                    ],
+                                ],
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+        ];
+
+        $previousException = null;
+        try {
+            $this->imageConfigLoader->loadFromArray($inputConfig);
+        } catch (\Shopsys\FrameworkBundle\Component\Image\Config\Exception\EntityParseException $exception) {
+            $previousException = $exception->getPrevious();
+        }
+
+        $this->assertInstanceOf(DuplicateMediaException::class, $previousException);
+    }
+
     public function testLoadFromArray()
     {
         $inputConfig = [
@@ -171,6 +266,13 @@ class ImageConfigLoaderTest extends TestCase
                                 ImageConfigDefinition::CONFIG_SIZE_HEIGHT => null,
                                 ImageConfigDefinition::CONFIG_SIZE_CROP => false,
                                 ImageConfigDefinition::CONFIG_SIZE_OCCURRENCE => null,
+                                ImageConfigDefinition::CONFIG_SIZE_ADDITIONAL_SIZES => [
+                                    [
+                                        ImageConfigDefinition::CONFIG_SIZE_ADDITIONAL_SIZE_MEDIA => '(min-width: 1200px)',
+                                        ImageConfigDefinition::CONFIG_SIZE_WIDTH => 200,
+                                        ImageConfigDefinition::CONFIG_SIZE_HEIGHT => null,
+                                    ],
+                                ],
                             ],
                             [
                                 ImageConfigDefinition::CONFIG_SIZE_NAME => 'SizeName_2',
@@ -178,6 +280,7 @@ class ImageConfigLoaderTest extends TestCase
                                 ImageConfigDefinition::CONFIG_SIZE_HEIGHT => 100,
                                 ImageConfigDefinition::CONFIG_SIZE_CROP => true,
                                 ImageConfigDefinition::CONFIG_SIZE_OCCURRENCE => null,
+                                ImageConfigDefinition::CONFIG_SIZE_ADDITIONAL_SIZES => [],
                             ],
                         ],
                     ],
@@ -205,6 +308,12 @@ class ImageConfigLoaderTest extends TestCase
         $this->assertSame(200, $imageSize->getWidth());
         $this->assertSame(100, $imageSize->getHeight());
         $this->assertSame(true, $imageSize->getCrop());
+
+        $imageSize1 = $imageEntityConfig->getSizeConfigByType('TypeName_1', 'SizeName_1');
+        $additionalSize = $imageSize1->getAdditionalSize(0);
+        $this->assertSame('(min-width: 1200px)', $additionalSize->getMedia());
+        $this->assertSame(200, $additionalSize->getWidth());
+        $this->assertSame(null, $additionalSize->getHeight());
     }
 
     public function testLoadFromArrayOriginalSize()
@@ -244,6 +353,7 @@ class ImageConfigLoaderTest extends TestCase
                         ImageConfigDefinition::CONFIG_SIZE_HEIGHT => 100,
                         ImageConfigDefinition::CONFIG_SIZE_CROP => true,
                         ImageConfigDefinition::CONFIG_SIZE_OCCURRENCE => null,
+                        ImageConfigDefinition::CONFIG_SIZE_ADDITIONAL_SIZES => [],
                     ],
                 ],
                 ImageConfigDefinition::CONFIG_TYPES => [],

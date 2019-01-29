@@ -2,6 +2,8 @@
 
 namespace Shopsys\FrameworkBundle\Component\Image\Config;
 
+use Shopsys\FrameworkBundle\Component\Image\Config\Exception\DuplicateMediaException;
+use Shopsys\FrameworkBundle\Component\Image\Config\Exception\WidthAndHeightMissingException;
 use Shopsys\FrameworkBundle\Component\Utils\Utils;
 use Symfony\Component\Config\Definition\Processor;
 use Symfony\Component\Filesystem\Filesystem;
@@ -113,22 +115,54 @@ class ImageConfigLoader
         foreach ($sizesConfig as $sizeConfig) {
             $sizeName = $sizeConfig[ImageConfigDefinition::CONFIG_SIZE_NAME];
             $key = Utils::ifNull($sizeName, ImageEntityConfig::WITHOUT_NAME_KEY);
+            $additionalSizes = $this->prepareAdditionalSizes($sizeName ?: '~', $sizeConfig[ImageConfigDefinition::CONFIG_SIZE_ADDITIONAL_SIZES]);
             if (!array_key_exists($key, $result)) {
                 $result[$key] = new ImageSizeConfig(
                     $sizeName,
                     $sizeConfig[ImageConfigDefinition::CONFIG_SIZE_WIDTH],
                     $sizeConfig[ImageConfigDefinition::CONFIG_SIZE_HEIGHT],
                     $sizeConfig[ImageConfigDefinition::CONFIG_SIZE_CROP],
-                    $sizeConfig[ImageConfigDefinition::CONFIG_SIZE_OCCURRENCE]
+                    $sizeConfig[ImageConfigDefinition::CONFIG_SIZE_OCCURRENCE],
+                    $additionalSizes
                 );
             } else {
                 throw new \Shopsys\FrameworkBundle\Component\Image\Config\Exception\DuplicateSizeNameException($sizeName);
             }
         }
         if (!array_key_exists(ImageConfig::ORIGINAL_SIZE_NAME, $result)) {
-            $result[ImageConfig::ORIGINAL_SIZE_NAME] = new ImageSizeConfig(ImageConfig::ORIGINAL_SIZE_NAME, null, null, false, null);
+            $result[ImageConfig::ORIGINAL_SIZE_NAME] = new ImageSizeConfig(ImageConfig::ORIGINAL_SIZE_NAME, null, null, false, null, []);
         }
 
+        return $result;
+    }
+
+    /**
+     * @param string $sizeName
+     * @param array $additionalSizesConfig
+     * @return \Shopsys\FrameworkBundle\Component\Image\Config\ImageAdditionalSizeConfig[]
+     */
+    private function prepareAdditionalSizes(string $sizeName, array $additionalSizesConfig): array
+    {
+        $usedMedia = [];
+        $result = [];
+        foreach ($additionalSizesConfig as $index => $additionalSizeConfig) {
+            $media = $additionalSizeConfig[ImageConfigDefinition::CONFIG_SIZE_ADDITIONAL_SIZE_MEDIA];
+            $height = $additionalSizeConfig[ImageConfigDefinition::CONFIG_SIZE_HEIGHT];
+            $width = $additionalSizeConfig[ImageConfigDefinition::CONFIG_SIZE_WIDTH];
+            if ($width === null && $height === null) {
+                throw new WidthAndHeightMissingException(sprintf('%s.additionalSizes[%s]', $sizeName, $index));
+            }
+            if (in_array($media, $usedMedia, true)) {
+                throw new DuplicateMediaException($media);
+            }
+            $usedMedia[] = $media;
+
+            $result[] = new ImageAdditionalSizeConfig(
+                $width,
+                $height,
+                $media
+            );
+        }
         return $result;
     }
 

@@ -2,6 +2,8 @@
 
 namespace Shopsys\FrameworkBundle\Component\Image\Processing;
 
+use Shopsys\FrameworkBundle\Component\Image\Exception\ImageNotFoundException;
+use Shopsys\FrameworkBundle\Component\Image\Image;
 use Shopsys\FrameworkBundle\Component\Image\ImageRepository;
 
 class ImageGeneratorFacade
@@ -39,16 +41,43 @@ class ImageGeneratorFacade
     {
         $image = $this->imageRepository->getById($imageId);
 
+        $this->checkEntityNameAndType($image, $entityName, $type);
+
+        return $this->imageGenerator->generateImageSizeAndGetFilepath($image, $sizeName);
+    }
+
+    /**
+     * @param \Shopsys\FrameworkBundle\Component\Image\Image $image
+     * @param string $entityName
+     * @param null|string $type
+     */
+    protected function checkEntityNameAndType(Image $image, string $entityName, ?string $type): void
+    {
         if ($image->getEntityName() !== $entityName) {
-            $message = 'Image (ID = ' . $imageId . ') does not have entity name "' . $entityName . '"';
-            throw new \Shopsys\FrameworkBundle\Component\Image\Exception\ImageNotFoundException($message);
+            $message = sprintf('Image (ID = %s) does not have entity name "%s"', $image->getId(), $entityName);
+            throw new ImageNotFoundException($message);
         }
 
         if ($image->getType() !== $type) {
-            $message = 'Image (ID = ' . $imageId . ') does not have type "' . $type . '"';
-            throw new \Shopsys\FrameworkBundle\Component\Image\Exception\ImageNotFoundException($message);
+            $message = sprintf('Image (ID = %s) does not have type "%s"', $image->getId(), $type);
+            throw new ImageNotFoundException($message);
         }
+    }
 
-        return $this->imageGenerator->generateImageSizeAndGetFilepath($image, $sizeName);
+    /**
+     * @param string $entityName
+     * @param int $imageId
+     * @param int $additionalIndex
+     * @param string|null $type
+     * @param string|null $sizeName
+     * @return string
+     */
+    public function generateAdditionalImageAndGetFilepath(string $entityName, int $imageId, int $additionalIndex, ?string $type, ?string $sizeName): string
+    {
+        $image = $this->imageRepository->getById($imageId);
+
+        $this->checkEntityNameAndType($image, $entityName, $type);
+
+        return $this->imageGenerator->generateAdditionalImageSizeAndGetFilepath($image, $additionalIndex, $sizeName);
     }
 }

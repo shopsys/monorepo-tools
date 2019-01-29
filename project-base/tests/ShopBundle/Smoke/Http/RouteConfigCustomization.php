@@ -80,7 +80,7 @@ class RouteConfigCustomization
                     . 'See http://symfony.com/doc/current/reference/configuration/security.html#check-path'
                 );
             })
-            ->customizeByRouteName(['front_image', 'front_image_without_type'], function (RouteConfig $config) {
+            ->customizeByRouteName(['front_image', 'front_image_without_type', 'front_additional_image', 'front_additional_image_without_type'], function (RouteConfig $config) {
                 $config->skipRoute('There are no images in the shop when the tests are processed.');
             })
             ->customizeByRouteName('admin_domain_selectdomain', function (RouteConfig $config) {

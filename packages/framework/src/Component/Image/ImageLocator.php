@@ -7,6 +7,8 @@ use Shopsys\FrameworkBundle\Component\Image\Config\ImageConfig;
 
 class ImageLocator
 {
+    private const ADDITIONAL_IMAGE_MASK = 'additional_{index}_{filename}';
+
     /**
      * @var string
      */
@@ -48,12 +50,44 @@ class ImageLocator
 
     /**
      * @param \Shopsys\FrameworkBundle\Component\Image\Image $image
+     * @param int $additionalIndex
+     * @param string|null $sizeName
+     * @return string
+     */
+    public function getRelativeAdditionalImageFilepath(Image $image, int $additionalIndex, ?string $sizeName)
+    {
+        $path = $this->getRelativeImagePath($image->getEntityName(), $image->getType(), $sizeName);
+
+        $filename = str_replace(
+            ['{index}', '{filename}'],
+            [$additionalIndex, $image->getFilename()],
+            self::ADDITIONAL_IMAGE_MASK
+        );
+
+        return $path . $filename;
+    }
+
+    /**
+     * @param \Shopsys\FrameworkBundle\Component\Image\Image $image
      * @param string|null $sizeName
      * @return string
      */
     public function getAbsoluteImageFilepath(Image $image, $sizeName)
     {
         $relativePath = $this->getRelativeImageFilepath($image, $sizeName);
+
+        return $this->imageDir . $relativePath;
+    }
+
+    /**
+     * @param \Shopsys\FrameworkBundle\Component\Image\Image $image
+     * @param int $additionalIndex
+     * @param string|null $sizeName
+     * @return string
+     */
+    public function getAbsoluteAdditionalImageFilepath(Image $image, int $additionalIndex, ?string $sizeName)
+    {
+        $relativePath = $this->getRelativeAdditionalImageFilepath($image, $additionalIndex, $sizeName);
 
         return $this->imageDir . $relativePath;
     }

@@ -4,6 +4,7 @@ namespace Shopsys\ShopBundle\Controller\Front;
 
 use League\Flysystem\FilesystemInterface;
 use Shopsys\FrameworkBundle\Component\Image\Config\ImageConfig;
+use Shopsys\FrameworkBundle\Component\Image\Exception\ImageException;
 use Shopsys\FrameworkBundle\Component\Image\Processing\ImageGeneratorFacade;
 use Symfony\Component\HttpFoundation\StreamedResponse;
 
@@ -43,12 +44,56 @@ class ImageController extends FrontBaseController
 
         try {
             $imageFilepath = $this->imageGeneratorFacade->generateImageAndGetFilepath($entityName, $imageId, $type, $sizeName);
-        } catch (\Shopsys\FrameworkBundle\Component\Image\Exception\ImageException $e) {
-            $message = 'Generate image for entity "' . $entityName
-                . '" (type=' . $type . ', size=' . $sizeName . ', imageId=' . $imageId . ') failed.';
+        } catch (ImageException $e) {
+            $message = sprintf(
+                'Generate image for entity "%s" (type=%s, size=%s, imageId=%s) failed',
+                $entityName,
+                $type,
+                $sizeName,
+                $imageId
+            );
             throw $this->createNotFoundException($message, $e);
         }
 
+        return $this->sendImage($imageFilepath);
+    }
+
+    /**
+     * @param mixed $entityName
+     * @param mixed $type
+     * @param mixed $sizeName
+     * @param mixed $imageId
+     * @param int $additionalIndex
+     */
+    public function getAdditionalImageAction($entityName, $type, $sizeName, int $imageId, int $additionalIndex)
+    {
+        if ($sizeName === ImageConfig::DEFAULT_SIZE_NAME) {
+            $sizeName = null;
+        }
+
+        try {
+            $imageFilepath = $this->imageGeneratorFacade->generateAdditionalImageAndGetFilepath($entityName, $imageId, $additionalIndex, $type, $sizeName);
+        } catch (ImageException $e) {
+            $message = sprintf(
+                'Generate image for entity "%s" (type=%s, size=%s, imageId=%s, additionalIndex=%s) failed',
+                $entityName,
+                $type,
+                $sizeName,
+                $imageId,
+                $additionalIndex
+            );
+            throw $this->createNotFoundException($message, $e);
+        }
+
+        return $this->sendImage($imageFilepath);
+    }
+
+    /**
+     * @param string $imageFilepath
+     * @return \Symfony\Component\HttpFoundation\StreamedResponse
+     */
+    protected function sendImage(string $imageFilepath): StreamedResponse
+    {
         try {
             $fileStream = $this->filesystem->readStream($imageFilepath);
             $headers = [

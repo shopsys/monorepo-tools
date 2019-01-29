@@ -80,6 +80,6 @@ class ImageEntityConfigTest extends TestCase
      */
     private function createImageSizeConfig($name)
     {
-        return new ImageSizeConfig($name, null, null, false, null);
+        return new ImageSizeConfig($name, null, null, false, null, []);
     }
 }

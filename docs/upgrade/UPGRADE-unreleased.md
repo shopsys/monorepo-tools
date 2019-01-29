@@ -45,6 +45,26 @@ There you can find links to upgrade notes for other versions too.
         - change `ExtendedOrderItem` to standard class - remove `abstract` and inheritance annotations
         - change `doTestExtendedOrderItemsPersistence` to test only `OrderItem`
         - please find inspiration in [#715](https://github.com/shopsys/shopsys/pull/715/files)
+- *(optional)* to allow [support for multiple image sizes #766](https://github.com/shopsys/shopsys/pull/766) you have to
+    - implement action `getAdditionalImageAction()` in `Front/ImageController.php` (or copy it from [ImageController.php](https://github.com/shopsys/project-base/blob/master/src/Shopsys/ShopBundle/Controller/Front/ImageController.php))
+    - add routes into your frontend router
+      ```yml
+        front_additional_image:
+            path: /%shopsys.content_dir_name%/images/{entityName}/{type}/{sizeName}/additional_{additionalIndex}_{imageId}.{extension}
+            defaults: { _controller: ShopsysShopBundle:Front\Image:getAdditionalImage }
+            requirements:
+                imageId: \d+
+                additionalIndex: \d+
+
+        front_additional_image_without_type:
+            path: /%shopsys.content_dir_name%/images/{entityName}/{sizeName}/additional_{additionalIndex}_{imageId}.{extension}
+            defaults:
+                _controller: ShopsysShopBundle:Front\Image:getAdditionalImage
+                type: ~
+            requirements:
+                imageId: \d+
+                additionalIndex: \d+
+      ```
 
 [Upgrade from v7.0.0-beta5 to Unreleased]: https://github.com/shopsys/shopsys/compare/v7.0.0-beta5...HEAD
 [shopsys/shopsys]: https://github.com/shopsys/shopsys

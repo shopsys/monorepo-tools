@@ -6,6 +6,7 @@ use Intervention\Image\Constraint;
 use Intervention\Image\Image;
 use Intervention\Image\ImageManager;
 use League\Flysystem\FilesystemInterface;
+use Shopsys\FrameworkBundle\Component\Image\Config\ImageAdditionalSizeConfig;
 use Shopsys\FrameworkBundle\Component\Image\Config\ImageSizeConfig;
 use Symfony\Component\Filesystem\Filesystem;
 
@@ -142,6 +143,16 @@ class ImageProcessor
     public function resizeBySizeConfig(Image $image, ImageSizeConfig $sizeConfig)
     {
         $this->resize($image, $sizeConfig->getWidth(), $sizeConfig->getHeight(), $sizeConfig->getCrop());
+    }
+
+    /**
+     * @param \Intervention\Image\Image $image
+     * @param \Shopsys\FrameworkBundle\Component\Image\Config\ImageSizeConfig $sizeConfig
+     * @param \Shopsys\FrameworkBundle\Component\Image\Config\ImageAdditionalSizeConfig $additionalSizeConfig
+     */
+    public function resizeByAdditionalSizeConfig(Image $image, ImageSizeConfig $sizeConfig, ImageAdditionalSizeConfig $additionalSizeConfig)
+    {
+        $this->resize($image, $additionalSizeConfig->getWidth(), $additionalSizeConfig->getHeight(), $sizeConfig->getCrop());
     }
 
     /**
