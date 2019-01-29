@@ -143,5 +143,7 @@ Then rebuild and start containers
 docker-compose up -d
 ```
 
+***Note:** During installation there will be installed 3-rd party software as dependencies of Shopsys Framework by [Dockerfile](https://docs.docker.com/engine/reference/builder/) with licenses that are described in document [Open Source License Acknowledgements and Third-Party Copyrights](../../open-source-license-acknowledgements-and-third-party-copyrights.md)*
+
 ### 5. Setup the application
 [Application setup guide](installation-using-docker-application-setup.md)

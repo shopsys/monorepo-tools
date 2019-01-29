@@ -6,6 +6,8 @@ Typical upgrade sequence should be:
 * run `php phing composer-dev clean db-migrations` in `php-fpm` container
 * if you're experiencing some errors, you can always rebuild application and load demo data with `php phing build-demo-dev`
 
+***Note:** During the execution of `build-demo-dev phing target`, there will be installed 3-rd party software as dependencies of Shopsys Framework by [composer](https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies) and [npm](https://docs.npmjs.com/about-the-public-npm-registry) with licenses that are described in document [Open Source License Acknowledgements and Third-Party Copyrights](../../open-source-license-acknowledgements-and-third-party-copyrights.md)*
+
 ## [From v7.0.0-beta5 to Unreleased]
 - [#694 PHP 7.3 support](https://github.com/shopsys/shopsys/pull/694)
     - rebuild your Docker images with `docker-compose up -d --build`

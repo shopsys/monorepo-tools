@@ -41,5 +41,7 @@ You can find out your UID by running `id -u` and your GID by running `id -g`.
 docker-compose up -d --build
 ```
 
+***Note:** During the build of the docker containers there will be installed 3-rd party software as dependencies of Shopsys Framework by [Dockerfile](https://docs.docker.com/engine/reference/builder/) with licenses that are described in document [Open Source License Acknowledgements and Third-Party Copyrights](../../open-source-license-acknowledgements-and-third-party-copyrights.md)*
+
 ### 5. Setup the application
 [Application setup guide](installation-using-docker-application-setup.md)

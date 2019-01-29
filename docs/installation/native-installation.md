@@ -33,6 +33,8 @@ First of all, you need to install the following software on your system:
 
 *Note: The names link to the appropriate installation guide or download page.*
 
+***Note:** During installation there will be installed 3-rd party software as dependencies of Shopsys Framework by [Dockerfile](https://docs.docker.com/engine/reference/builder/), [composer](https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies) and [npm](https://docs.npmjs.com/about-the-public-npm-registry) with licenses that are described in document [Open Source License Acknowledgements and Third-Party Copyrights](../../open-source-license-acknowledgements-and-third-party-copyrights.md)*
+
 After that, you can follow the steps below in order to install and configure Shopsys Framework.
 
 ## Steps
@@ -82,6 +84,8 @@ Install composer dependencies:
 ```
 composer install
 ```
+
+***Note:** During composer installation there will be installed 3-rd party software as dependencies of Shopsys Framework with licenses that are described in document [Open Source License Acknowledgements and Third-Party Copyrights](../../open-source-license-acknowledgements-and-third-party-copyrights.md)*
 
 Configure connection to the Elasticsearch by setting up the ELASTICSEARCH_HOSTS_STRING environment variable (or the [.env file](http://symfony.com/doc/current/components/dotenv.html)) and if you have multiple instances of Shopsys Framework using the same Elasticsearch set up ELASTIC_SEARCH_INDEX_PREFIX environment variable as well and then run the server:
 
@@ -171,6 +175,8 @@ More information about what Phing targets are and how they work can be found in 
 php phing build-demo-dev
 ```
 **For solutions to commonly encountered problems during build see section [Troubleshooting](#troubleshooting) below or you might want to check [Required PHP Configuration](../introduction/required-php-configuration.md).**
+
+***Note:** During the execution of `build-demo-dev phing target`, there will be installed 3-rd party software as dependencies of Shopsys Framework by [composer](https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies) and [npm](https://docs.npmjs.com/about-the-public-npm-registry) with licenses that are described in document [Open Source License Acknowledgements and Third-Party Copyrights](../../open-source-license-acknowledgements-and-third-party-copyrights.md)*
 
 ### 6. Run integrated HTTP server
 ```

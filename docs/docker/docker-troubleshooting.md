@@ -153,6 +153,8 @@ When `composer install` or `composer update` fails on an error with exceeding th
 *Note: Since `v7.0.0-beta4` we have set the Composer memory limit to `-1` (which means unlimited) in the php-fpm's `Dockerfile`.*
 *If you still encounter memory issues while using Docker for Windows (or Mac), try increasing the limits in `Docker -> Preferences… -> Advanced`.*
 
+***Note:** Composer dependencies contain 3-rd party software with licenses that are described in document [Open Source License Acknowledgements and Third-Party Copyrights](../../open-source-license-acknowledgements-and-third-party-copyrights.md)*
+
 ## Starting up the Docker containers fails due to invalid reference format
 Docker images may fail to build during `docker-compose up -d` due to invalid reference format, eg.:
 ```
