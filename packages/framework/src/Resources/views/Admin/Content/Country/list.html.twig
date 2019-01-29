@@ -1,9 +1,15 @@
 {% extends '@ShopsysFramework/Admin/Layout/layoutWithPanel.html.twig' %}
 
 {% block title %}- {{ 'Countries overview'|trans }}{% endblock %}
+
 {% block h1 %}{{ 'Countries overview'|trans }}{% endblock %}
 
 {% block main_content %}
-    {{ render(controller('ShopsysFrameworkBundle:Admin/Domain:domainTabs')) }}
+    <div class="wrap-bar">
+        <a href="{{ url('admin_country_new') }}" class="btn btn--plus wrap-bar__btn">
+            <i class="btn__icon">+</i>
+            {{ 'Create new country'|trans }}
+        </a>
+    </div>
     {{ gridView.render() }}
 {% endblock %}

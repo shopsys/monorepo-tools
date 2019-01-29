@@ -67,7 +67,7 @@ class OrderFacadeTest extends TransactionFunctionalTestCase
         $orderData->street = 'street';
         $orderData->city = 'city';
         $orderData->postcode = 'postcode';
-        $orderData->country = $persistentReferenceFacade->getReference(CountryDataFixture::COUNTRY_CZECH_REPUBLIC_1);
+        $orderData->country = $persistentReferenceFacade->getReference(CountryDataFixture::COUNTRY_CZECH_REPUBLIC);
         $orderData->deliveryAddressSameAsBillingAddress = false;
         $orderData->deliveryFirstName = 'deliveryFirstName';
         $orderData->deliveryLastName = 'deliveryLastName';
@@ -76,7 +76,7 @@ class OrderFacadeTest extends TransactionFunctionalTestCase
         $orderData->deliveryStreet = 'deliveryStreet';
         $orderData->deliveryCity = 'deliveryCity';
         $orderData->deliveryPostcode = 'deliveryPostcode';
-        $orderData->deliveryCountry = $persistentReferenceFacade->getReference(CountryDataFixture::COUNTRY_CZECH_REPUBLIC_1);
+        $orderData->deliveryCountry = $persistentReferenceFacade->getReference(CountryDataFixture::COUNTRY_CZECH_REPUBLIC);
         $orderData->note = 'note';
         $orderData->domainId = 1;
         $orderData->currency = $this->getReference(CurrencyDataFixture::CURRENCY_CZK);

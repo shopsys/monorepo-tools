@@ -4,13 +4,6 @@
     {{ 'No countries found. You have to create some first.'|trans }}
 {% endblock %}
 
-{% block grid_title_cell_id_code %}
-    {{ gridView.renderBlock('grid_title_cell', { column:column }) }}
-    <span title="" class="js-tooltip cursor-help" data-toggle="tooltip" data-placement="top" data-original-title="{{ 'Country code in ISO 3166-1 alpha-2'|trans }}">
-        <i class="svg svg-question"></i>
-    </span>
-{% endblock %}
-
 {% block grid_pager_totalcount %}
     {% set entityName = 'countries'|trans %}
     {{ parent() }}

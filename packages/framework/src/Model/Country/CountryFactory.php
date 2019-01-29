@@ -21,13 +21,12 @@ class CountryFactory implements CountryFactoryInterface
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\Country\CountryData $data
-     * @param int $domainId
      * @return \Shopsys\FrameworkBundle\Model\Country\Country
      */
-    public function create(CountryData $data, int $domainId): Country
+    public function create(CountryData $data): Country
     {
         $classData = $this->entityNameResolver->resolve(Country::class);
 
-        return new $classData($data, $domainId);
+        return new $classData($data);
     }
 }

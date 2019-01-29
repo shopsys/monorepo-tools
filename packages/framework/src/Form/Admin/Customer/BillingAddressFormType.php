@@ -39,7 +39,7 @@ class BillingAddressFormType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $countries = $this->countryFacade->getAllByDomainId($options['domain_id']);
+        $countries = $this->countryFacade->getAllEnabledOnDomain($options['domain_id']);
 
         $builderCompanyDataGroup = $builder->create('companyData', GroupType::class, [
             'label' => t('Company data'),

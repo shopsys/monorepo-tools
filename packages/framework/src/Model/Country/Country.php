@@ -2,13 +2,17 @@
 
 namespace Shopsys\FrameworkBundle\Model\Country;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Prezent\Doctrine\Translatable\Annotation as Prezent;
+use Shopsys\FrameworkBundle\Model\Country\Exception\CountryDomainNotFoundException;
+use Shopsys\FrameworkBundle\Model\Localization\AbstractTranslatableEntity;
 
 /**
  * @ORM\Table(name="countries")
  * @ORM\Entity
  */
-class Country
+class Country extends AbstractTranslatableEntity
 {
     /**
      * @var int
@@ -20,76 +24,151 @@ class Country
     protected $id;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(type="string", length=255)
-     */
-    protected $name;
-
-    /**
      * Country code in ISO 3166-1 alpha-2
      * @var string|null
      *
-     * @ORM\Column(type="string", length=2, nullable=true)
+     * @ORM\Column(type="string", length=2)
      */
     protected $code;
 
     /**
-     * @var int
+     * @var \Shopsys\FrameworkBundle\Model\Country\CountryTranslation[]
      *
-     * @ORM\Column(type="integer")
+     * @Prezent\Translations(targetEntity="Shopsys\FrameworkBundle\Model\Country\CountryTranslation")
      */
-    protected $domainId;
+    protected $translations;
+
+    /**
+     * @var \Shopsys\FrameworkBundle\Model\Country\CountryDomain[]
+     *
+     * @ORM\OneToMany(targetEntity="Shopsys\FrameworkBundle\Model\Country\CountryDomain", mappedBy="country", cascade={"persist"}, fetch="EXTRA_LAZY")
+     */
+    protected $domains;
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\Country\CountryData $countryData
-     * @param int $domainId
      */
-    public function __construct(CountryData $countryData, $domainId)
+    public function __construct(CountryData $countryData)
     {
-        $this->name = $countryData->name;
-        $this->domainId = $domainId;
+        $this->translations = new ArrayCollection();
+        $this->domains = new ArrayCollection();
+        $this->setTranslations($countryData);
+        $this->createDomains($countryData);
         $this->code = $countryData->code;
     }
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\Country\CountryData $countryData
      */
-    public function edit(CountryData $countryData)
+    protected function setTranslations(CountryData $countryData): void
     {
-        $this->name = $countryData->name;
+        foreach ($countryData->names as $locale => $name) {
+            $this->translation($locale)->setName($name);
+        }
+    }
+
+    /**
+     * @param string|null $locale
+     * @return string
+     */
+    public function getName($locale = null): string
+    {
+        return $this->translation($locale)->getName();
+    }
+
+    /**
+     * @param int $domainId
+     * @return bool
+     */
+    public function isEnabled(int $domainId): bool
+    {
+        return $this->getCountryDomain($domainId)->isEnabled();
+    }
+
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Country\CountryData $countryData
+     */
+    public function edit(CountryData $countryData): void
+    {
         $this->code = $countryData->code;
+        $this->setTranslations($countryData);
+        $this->setDomains($countryData);
     }
 
     /**
      * @return int
      */
-    public function getId()
+    public function getId(): int
     {
         return $this->id;
     }
 
     /**
-     * @return string
-     */
-    public function getName()
-    {
-        return $this->name;
-    }
-
-    /**
-     * @return int
-     */
-    public function getDomainId()
-    {
-        return $this->domainId;
-    }
-
-    /**
      * @return null|string
      */
-    public function getCode()
+    public function getCode(): ?string
     {
         return $this->code;
+    }
+
+    /**
+     * @param int $domainId
+     * @return int
+     */
+    public function getPriority(int $domainId): int
+    {
+        return $this->getCountryDomain($domainId)->getPriority();
+    }
+
+    /**
+     * @return \Shopsys\FrameworkBundle\Model\Country\CountryTranslation
+     */
+    protected function createTranslation(): CountryTranslation
+    {
+        return new CountryTranslation();
+    }
+
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Country\CountryData $countryData
+     */
+    protected function setDomains(CountryData $countryData): void
+    {
+        foreach ($this->domains as $countryDomain) {
+            $domainId = $countryDomain->getDomainId();
+            $countryDomain->setEnabled($countryData->enabled[$domainId]);
+            $countryDomain->setPriority($countryData->priority[$domainId] ?? 0);
+        }
+    }
+
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Country\CountryData $countryData
+     */
+    protected function createDomains(CountryData $countryData): void
+    {
+        $domainIds = array_keys($countryData->enabled);
+
+        foreach ($domainIds as $domainId) {
+            $countryDomain = new CountryDomain($this, $domainId);
+            $this->domains[] = $countryDomain;
+        }
+
+        $this->setDomains($countryData);
+    }
+
+    /**
+     * @param int $domainId
+     * @return \Shopsys\FrameworkBundle\Model\Country\CountryDomain
+     */
+    protected function getCountryDomain(int $domainId): CountryDomain
+    {
+        if ($this->domains !== null) {
+            foreach ($this->domains as $countryDomain) {
+                if ($countryDomain->getDomainId() === $domainId) {
+                    return $countryDomain;
+                }
+            }
+        }
+
+        throw new CountryDomainNotFoundException($domainId, $this->id);
     }
 }

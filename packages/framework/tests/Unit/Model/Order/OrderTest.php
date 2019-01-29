@@ -57,8 +57,8 @@ class OrderTest extends TestCase
     {
         $orderData = new OrderData();
         $countryData = new CountryData();
-        $countryData->name = 'Slovenská republika';
-        $country = new Country($countryData, self::DOMAIN_ID);
+        $countryData->names = ['cs' => 'Slovenská republika'];
+        $country = new Country($countryData);
 
         $orderData->companyName = 'companyName';
         $orderData->telephone = 'telephone';
@@ -86,8 +86,8 @@ class OrderTest extends TestCase
     {
         $orderData = new OrderData();
         $countryData = new CountryData();
-        $countryData->name = 'Slovenská republika';
-        $country = new Country($countryData, self::DOMAIN_ID);
+        $countryData->names = ['cs' => 'Slovenská republika'];
+        $country = new Country($countryData);
 
         $orderData->companyName = 'companyName';
         $orderData->telephone = 'telephone';

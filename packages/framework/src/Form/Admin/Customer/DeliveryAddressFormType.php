@@ -39,7 +39,7 @@ class DeliveryAddressFormType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $countries = $this->countryFacade->getAllByDomainId($options['domain_id']);
+        $countries = $this->countryFacade->getAllEnabledOnDomain($options['domain_id']);
 
         $builderDeliveryAdress = $builder->create('deliveryAddress', GroupType::class, [
             'label' => t('Shipping address'),

@@ -245,7 +245,9 @@ class SideMenuBuilder
         $brandsMenu->addChild('new', ['route' => 'admin_brand_new', 'label' => t('New brand'), 'display' => false]);
         $brandsMenu->addChild('edit', ['route' => 'admin_brand_edit', 'label' => t('Editing brand'), 'display' => false]);
         $listsMenu->addChild('units', ['route' => 'admin_unit_list', 'label' => t('Units')]);
-        $listsMenu->addChild('countries', ['route' => 'admin_country_list', 'label' => t('Countries')]);
+        $countriesMenu = $listsMenu->addChild('countries', ['route' => 'admin_country_list', 'label' => t('Countries')]);
+        $countriesMenu->addChild('new', ['route' => 'admin_country_new', 'label' => t('New country'), 'display' => false]);
+        $countriesMenu->addChild('edit', ['route' => 'admin_country_edit', 'label' => t('Editing country'), 'display' => false]);
 
         $imagesMenu = $menu->addChild('images', ['label' => t('Image size')]);
         $imagesMenu->addChild('sizes', ['route' => 'admin_image_overview', 'label' => t('Image size')]);

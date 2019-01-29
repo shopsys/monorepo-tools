@@ -102,7 +102,7 @@ class MultidomainOrderDataFixture extends AbstractReferenceFixture implements De
         $orderData->street = 'Devátá 25';
         $orderData->city = 'Ostrava';
         $orderData->postcode = '71200';
-        $orderData->country = $this->getReferenceForDomain(MultidomainCountryDataFixture::COUNTRY_CZECH_REPUBLIC, $domainId);
+        $orderData->country = $this->getReference(CountryDataFixture::COUNTRY_CZECH_REPUBLIC);
         $orderData->deliveryAddressSameAsBillingAddress = true;
         $orderData->domainId = $domainId;
         $orderData->currency = $this->getReference(CurrencyDataFixture::CURRENCY_EUR);
@@ -126,7 +126,7 @@ class MultidomainOrderDataFixture extends AbstractReferenceFixture implements De
         $orderData->street = 'Pouliční 11';
         $orderData->city = 'Městník';
         $orderData->postcode = '12345';
-        $orderData->country = $this->getReferenceForDomain(MultidomainCountryDataFixture::COUNTRY_CZECH_REPUBLIC, $domainId);
+        $orderData->country = $this->getReference(CountryDataFixture::COUNTRY_CZECH_REPUBLIC);
         $orderData->companyName = 'shopsys s.r.o.';
         $orderData->companyNumber = '123456789';
         $orderData->companyTaxNumber = '987654321';
@@ -138,7 +138,7 @@ class MultidomainOrderDataFixture extends AbstractReferenceFixture implements De
         $orderData->deliveryStreet = 'Zakopaná 42';
         $orderData->deliveryCity = 'Zemín';
         $orderData->deliveryPostcode = '54321';
-        $orderData->deliveryCountry = $this->getReferenceForDomain(MultidomainCountryDataFixture::COUNTRY_SLOVAKIA, $domainId);
+        $orderData->deliveryCountry = $this->getReference(CountryDataFixture::COUNTRY_SLOVAKIA);
         $orderData->note = 'Prosím o dodání do pátku. Děkuji.';
         $orderData->domainId = $domainId;
         $orderData->currency = $this->getReference(CurrencyDataFixture::CURRENCY_CZK);
@@ -164,7 +164,7 @@ class MultidomainOrderDataFixture extends AbstractReferenceFixture implements De
         $orderData->street = 'Sídlištní 3259';
         $orderData->city = 'Orlová';
         $orderData->postcode = '65421';
-        $orderData->country = $this->getReferenceForDomain(MultidomainCountryDataFixture::COUNTRY_CZECH_REPUBLIC, $domainId);
+        $orderData->country = $this->getReference(CountryDataFixture::COUNTRY_CZECH_REPUBLIC);
         $orderData->deliveryAddressSameAsBillingAddress = true;
         $orderData->domainId = $domainId;
         $orderData->currency = $this->getReference(CurrencyDataFixture::CURRENCY_EUR);
@@ -189,7 +189,7 @@ class MultidomainOrderDataFixture extends AbstractReferenceFixture implements De
         $orderData->street = 'Vyhlídková 88';
         $orderData->city = 'Ostrava';
         $orderData->postcode = '71201';
-        $orderData->country = $this->getReferenceForDomain(MultidomainCountryDataFixture::COUNTRY_CZECH_REPUBLIC, $domainId);
+        $orderData->country = $this->getReference(CountryDataFixture::COUNTRY_CZECH_REPUBLIC);
         $orderData->deliveryAddressSameAsBillingAddress = true;
         $orderData->domainId = $domainId;
         $orderData->currency = $this->getReference(CurrencyDataFixture::CURRENCY_EUR);
@@ -240,7 +240,7 @@ class MultidomainOrderDataFixture extends AbstractReferenceFixture implements De
     public function getDependencies()
     {
         return [
-            MultidomainCountryDataFixture::class,
+            CountryDataFixture::class,
             MultidomainSettingValueDataFixture::class,
             OrderDataFixture::class,
         ];

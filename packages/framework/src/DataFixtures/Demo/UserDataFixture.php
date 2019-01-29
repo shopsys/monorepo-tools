@@ -58,8 +58,8 @@ class UserDataFixture extends AbstractReferenceFixture implements DependentFixtu
     public function load(ObjectManager $manager)
     {
         $countries = [
-            $this->getReference(CountryDataFixture::COUNTRY_CZECH_REPUBLIC_1),
-            $this->getReference(CountryDataFixture::COUNTRY_SLOVAKIA_1),
+            $this->getReference(CountryDataFixture::COUNTRY_CZECH_REPUBLIC),
+            $this->getReference(CountryDataFixture::COUNTRY_SLOVAKIA),
         ];
         $this->loaderService->injectReferences($countries);
 
