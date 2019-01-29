@@ -8,7 +8,6 @@ use Shopsys\FrameworkBundle\DataFixtures\Demo\CurrencyDataFixture;
 use Shopsys\FrameworkBundle\DataFixtures\Demo\OrderStatusDataFixture;
 use Shopsys\FrameworkBundle\Model\Cart\CartFacade;
 use Shopsys\FrameworkBundle\Model\Cart\Item\CartItemFactory;
-use Shopsys\FrameworkBundle\Model\Customer\CustomerIdentifier;
 use Shopsys\FrameworkBundle\Model\Order\Item\OrderItemData;
 use Shopsys\FrameworkBundle\Model\Order\OrderDataFactoryInterface;
 use Shopsys\FrameworkBundle\Model\Order\OrderFacade;
@@ -46,13 +45,10 @@ class OrderFacadeTest extends TransactionFunctionalTestCase
         /** @var \Shopsys\FrameworkBundle\Model\Cart\Item\CartItemFactory $cartItemFactory */
         $cartItemFactory = $this->getContainer()->get(CartItemFactory::class);
 
-        $cart = $cartFacade->getCartOfCurrentCustomer();
-
-        $customerIdentifier = new CustomerIdentifier('randomString');
-
+        $cart = $cartFacade->getCartOfCurrentCustomerCreateIfNotExists();
         $product = $productRepository->getById(1);
 
-        $cart->addProduct($customerIdentifier, $product, 1, $productPriceCalculation, $cartItemFactory);
+        $cart->addProduct($product, 1, $productPriceCalculation, $cartItemFactory);
 
         $transport = $transportRepository->getById(1);
         $payment = $paymentRepository->getById(1);

@@ -3,6 +3,7 @@
 namespace Tests\ShopBundle\Functional\Model\Cart;
 
 use Shopsys\FrameworkBundle\DataFixtures\Demo\UnitDataFixture;
+use Shopsys\FrameworkBundle\Model\Cart\Cart;
 use Shopsys\FrameworkBundle\Model\Cart\Item\CartItem;
 use Shopsys\FrameworkBundle\Model\Customer\CustomerIdentifier;
 use Shopsys\FrameworkBundle\Model\Pricing\Vat\Vat;
@@ -45,9 +46,11 @@ class CartItemTest extends TransactionFunctionalTestCase
         $em->persist($product2);
         $em->flush();
 
-        $cartItem1 = new CartItem($customerIdentifier, $product1, 1, '0.0');
-        $cartItem2 = new CartItem($customerIdentifier, $product1, 3, '0.0');
-        $cartItem3 = new CartItem($customerIdentifier, $product2, 1, '0.0');
+        $cart = new Cart($customerIdentifier->getCartIdentifier());
+
+        $cartItem1 = new CartItem($cart, $product1, 1, '0.0');
+        $cartItem2 = new CartItem($cart, $product1, 3, '0.0');
+        $cartItem3 = new CartItem($cart, $product2, 1, '0.0');
 
         $this->assertTrue($cartItem1->isSimilarItemAs($cartItem2));
         $this->assertFalse($cartItem1->isSimilarItemAs($cartItem3));

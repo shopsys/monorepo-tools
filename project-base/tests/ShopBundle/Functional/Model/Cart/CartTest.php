@@ -43,12 +43,14 @@ class CartTest extends TransactionFunctionalTestCase
         $product1 = Product::create($productData, new ProductCategoryDomainFactory());
         $product2 = Product::create($productData, new ProductCategoryDomainFactory());
 
-        $cartItem1 = new CartItem($customerIdentifier, $product1, 1, '0.0');
-        $cartItem2 = new CartItem($customerIdentifier, $product2, 3, '0.0');
-        $cartItems = [$cartItem1, $cartItem2];
+        $cart = new Cart($customerIdentifier->getCartIdentifier());
 
-        $cart = new Cart($cartItems);
+        $cartItem1 = new CartItem($cart, $product1, 1, '0.0');
+        $cart->addItem($cartItem1);
+        $cartItem2 = new CartItem($cart, $product2, 3, '0.0');
+        $cart->addItem($cartItem2);
 
+        $em->persist($cart);
         $em->persist($vat);
         $em->persist($availability);
         $em->persist($product1);
@@ -58,6 +60,9 @@ class CartTest extends TransactionFunctionalTestCase
         $em->flush();
 
         $cart->removeItemById($cartItem1->getId());
+        $em->remove($cartItem1);
+        $em->flush();
+
         $this->assertSame(1, $cart->getItemsCount());
     }
 
@@ -67,9 +72,10 @@ class CartTest extends TransactionFunctionalTestCase
 
         $customerIdentifier = new CustomerIdentifier('randomString');
 
-        $cartItem = new CartItem($customerIdentifier, $product, 1, '0.0');
-        $cartItems = [$cartItem];
-        $cart = new Cart($cartItems);
+        $cart = new Cart($customerIdentifier->getCartIdentifier());
+
+        $cartItem = new CartItem($cart, $product, 1, '0.0');
+        $cart->addItem($cartItem);
 
         $cart->clean();
 
@@ -92,25 +98,22 @@ class CartTest extends TransactionFunctionalTestCase
 
         $cartIdentifier1 = 'abc123';
         $cartIdentifier2 = 'def456';
+
         $customerIdentifier1 = new CustomerIdentifier($cartIdentifier1);
+        $mainCart = new Cart($customerIdentifier1->getCartIdentifier());
+
         $customerIdentifier2 = new CustomerIdentifier($cartIdentifier2);
+        $mergingCart = new Cart($customerIdentifier2->getCartIdentifier());
 
-        $cartItem = new CartItem($customerIdentifier1, $product1, 2, '0.0');
-        $cartItems = [$cartItem];
-        $mainCart = new Cart($cartItems);
+        $cartItem = new CartItem($mainCart, $product1, 2, '0.0');
+        $mainCart->addItem($cartItem);
 
-        $cartItem1 = new CartItem($customerIdentifier2, $product1, 3, '0.0');
-        $cartItem2 = new CartItem($customerIdentifier2, $product2, 1, '0.0');
-        $cartItems = [$cartItem1, $cartItem2];
-        $mergingCart = new Cart($cartItems);
+        $cartItem1 = new CartItem($mergingCart, $product1, 3, '0.0');
+        $mergingCart->addItem($cartItem1);
+        $cartItem2 = new CartItem($mergingCart, $product2, 1, '0.0');
+        $mergingCart->addItem($cartItem2);
 
-        $mainCart->mergeWithCart($mergingCart, $cartItemFactory, $customerIdentifier1);
-
-        foreach ($mainCart->getItems() as $item) {
-            if ($item->getCartIdentifier() !== $customerIdentifier1->getCartIdentifier()) {
-                $this->fail('Merged cart contain cartItem with wrong cartIdentifier');
-            }
-        }
+        $mainCart->mergeWithCart($mergingCart, $cartItemFactory);
 
         $this->assertSame(2, $mainCart->getItemsCount());
 
@@ -148,11 +151,10 @@ class CartTest extends TransactionFunctionalTestCase
 
         $customerIdentifier = new CustomerIdentifier('randomString');
 
-        $cartItems = [];
-        $cart = new Cart($cartItems);
+        $cart = new Cart($customerIdentifier->getCartIdentifier());
 
         $this->expectException('Shopsys\FrameworkBundle\Model\Cart\Exception\InvalidQuantityException');
-        $cart->addProduct($customerIdentifier, $product, 1.1, $productPriceCalculation, $cartItemFactory);
+        $cart->addProduct($product, 1.1, $productPriceCalculation, $cartItemFactory);
     }
 
     public function testCannotAddProductZeroQuantityToCart()
@@ -163,11 +165,10 @@ class CartTest extends TransactionFunctionalTestCase
 
         $customerIdentifier = new CustomerIdentifier('randomString');
 
-        $cartItems = [];
-        $cart = new Cart($cartItems);
+        $cart = new Cart($customerIdentifier->getCartIdentifier());
 
         $this->expectException('Shopsys\FrameworkBundle\Model\Cart\Exception\InvalidQuantityException');
-        $cart->addProduct($customerIdentifier, $product, 0, $productPriceCalculation, $cartItemFactory);
+        $cart->addProduct($product, 0, $productPriceCalculation, $cartItemFactory);
     }
 
     public function testCannotAddProductNegativeQuantityToCart()
@@ -178,11 +179,10 @@ class CartTest extends TransactionFunctionalTestCase
 
         $customerIdentifier = new CustomerIdentifier('randomString');
 
-        $cartItems = [];
-        $cart = new Cart($cartItems);
+        $cart = new Cart($customerIdentifier->getCartIdentifier());
 
         $this->expectException('Shopsys\FrameworkBundle\Model\Cart\Exception\InvalidQuantityException');
-        $cart->addProduct($customerIdentifier, $product, -10, $productPriceCalculation, $cartItemFactory);
+        $cart->addProduct($product, -10, $productPriceCalculation, $cartItemFactory);
     }
 
     public function testAddProductToCartMarksAddedProductAsNew()
@@ -193,12 +193,11 @@ class CartTest extends TransactionFunctionalTestCase
 
         $customerIdentifier = new CustomerIdentifier('randomString');
 
-        $cartItems = [];
-        $cart = new Cart($cartItems);
+        $cart = new Cart($customerIdentifier->getCartIdentifier());
 
         $quantity = 2;
 
-        $result = $cart->addProduct($customerIdentifier, $product, $quantity, $productPriceCalculation, $cartItemFactory);
+        $result = $cart->addProduct($product, $quantity, $productPriceCalculation, $cartItemFactory);
         $this->assertTrue($result->getIsNew());
     }
 
@@ -210,13 +209,14 @@ class CartTest extends TransactionFunctionalTestCase
 
         $customerIdentifier = new CustomerIdentifier('randomString');
 
-        $cartItem = new CartItem($customerIdentifier, $product, 1, '0.0');
-        $cartItems = [$cartItem];
-        $cart = new Cart($cartItems);
+        $cart = new Cart($customerIdentifier->getCartIdentifier());
+
+        $cartItem = new CartItem($cart, $product, 1, '0.0');
+        $cart->addItem($cartItem);
 
         $quantity = 2;
 
-        $result = $cart->addProduct($customerIdentifier, $product, $quantity, $productPriceCalculation, $cartItemFactory);
+        $result = $cart->addProduct($product, $quantity, $productPriceCalculation, $cartItemFactory);
         $this->assertFalse($result->getIsNew());
     }
 
@@ -228,12 +228,11 @@ class CartTest extends TransactionFunctionalTestCase
 
         $customerIdentifier = new CustomerIdentifier('randomString');
 
-        $cartItems = [];
-        $cart = new Cart($cartItems);
+        $cart = new Cart($customerIdentifier->getCartIdentifier());
 
         $quantity = 2;
 
-        $result = $cart->addProduct($customerIdentifier, $product, $quantity, $productPriceCalculation, $cartItemFactory);
+        $result = $cart->addProduct($product, $quantity, $productPriceCalculation, $cartItemFactory);
         $this->assertSame($quantity, $result->getAddedQuantity());
     }
 
@@ -245,13 +244,14 @@ class CartTest extends TransactionFunctionalTestCase
 
         $customerIdentifier = new CustomerIdentifier('randomString');
 
-        $cartItem = new CartItem($customerIdentifier, $product, 1, '0.0');
-        $cartItems = [$cartItem];
-        $cart = new Cart($cartItems);
+        $cart = new Cart($customerIdentifier->getCartIdentifier());
+
+        $cartItem = new CartItem($cart, $product, 1, '0.0');
+        $cart->addItem($cartItem);
 
         $quantity = 2;
 
-        $result = $cart->addProduct($customerIdentifier, $product, $quantity, $productPriceCalculation, $cartItemFactory);
+        $result = $cart->addProduct($product, $quantity, $productPriceCalculation, $cartItemFactory);
         $this->assertSame($quantity, $result->getAddedQuantity());
     }
 

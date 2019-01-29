@@ -296,7 +296,7 @@ class OrderFacade
         $order = $this->createOrder($orderData, $orderPreview, $user);
         $this->orderProductFacade->subtractOrderProductsFromStock($order->getProductItems());
 
-        $this->cartFacade->cleanCart();
+        $this->cartFacade->deleteCartOfCurrentCustomer();
         $this->currentPromoCodeFacade->removeEnteredPromoCode();
         if ($user instanceof User) {
             $this->customerFacade->amendCustomerDataFromOrder($user, $order);

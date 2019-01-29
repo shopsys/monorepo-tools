@@ -16,8 +16,9 @@ class CartTest extends TestCase
 {
     public function testGetItemsCountZero()
     {
-        $cartItems = [];
-        $cart = new Cart($cartItems);
+        $customerIdentifier = new CustomerIdentifier('randomString');
+        $cart = new Cart($customerIdentifier->getCartIdentifier());
+
         $this->assertSame(0, $cart->getItemsCount());
     }
 
@@ -39,19 +40,22 @@ class CartTest extends TestCase
         $productData2->vat = $vat;
         $product2 = Product::create($productData2, new ProductCategoryDomainFactory());
 
-        $cartItem1 = new CartItem($customerIdentifier, $product1, 1, '0.0');
-        $cartItem2 = new CartItem($customerIdentifier, $product2, 3, '0.0');
-        $cartItems = [$cartItem1, $cartItem2];
+        $cart = new Cart($customerIdentifier->getCartIdentifier());
 
-        $cart = new Cart($cartItems);
+        $cartItem1 = new CartItem($cart, $product1, 1, '0.0');
+        $cart->addItem($cartItem1);
+
+        $cartItem2 = new CartItem($cart, $product2, 3, '0.0');
+        $cart->addItem($cartItem2);
+
         $this->assertSame(2, $cart->getItemsCount());
     }
 
     public function testIsEmpty()
     {
-        $cartItems = [];
+        $customerIdentifier = new CustomerIdentifier('randomString');
 
-        $cart = new Cart($cartItems);
+        $cart = new Cart($customerIdentifier->getCartIdentifier());
 
         $this->assertTrue($cart->isEmpty());
     }
@@ -69,11 +73,12 @@ class CartTest extends TestCase
         $productData->vat = $vat;
         $product = Product::create($productData, new ProductCategoryDomainFactory());
 
-        $cartItem = new CartItem($customerIdentifier, $product, 1, '0.0');
-        $cartItems = [$cartItem];
+        $cart = new Cart($customerIdentifier->getCartIdentifier());
 
-        $cart = new Cart($cartItems);
-        $this->assertFalse($cart->IsEmpty());
+        $cartItem = new CartItem($cart, $product, 1, '0.0');
+        $cart->addItem($cartItem);
+
+        $this->assertFalse($cart->isEmpty());
     }
 
     public function testClean()
@@ -94,11 +99,13 @@ class CartTest extends TestCase
         $productData2->vat = $vat;
         $product2 = Product::create($productData2, new ProductCategoryDomainFactory());
 
-        $cartItem1 = new CartItem($customerIdentifier, $product1, 1, '0.0');
-        $cartItem2 = new CartItem($customerIdentifier, $product2, 3, '0.0');
-        $cartItems = [$cartItem1, $cartItem2];
+        $cart = new Cart($customerIdentifier->getCartIdentifier());
 
-        $cart = new Cart($cartItems);
+        $cartItem1 = new CartItem($cart, $product1, 1, '0.0');
+        $cart->addItem($cartItem1);
+        $cartItem2 = new CartItem($cart, $product2, 3, '0.0');
+        $cart->addItem($cartItem2);
+
         $cart->clean();
 
         $this->assertTrue($cart->isEmpty());
