@@ -20,6 +20,9 @@ There you can find links to upgrade notes for other versions too.
             </exec>
         </target>
     ```
+- *(optional)* add a new [script](https://github.com/shopsys/shopsys/pull/759/files#diff-e5f46a7c45e95214037078344ce17721) to `scripts/install.sh`
+    - this script serves as a fast way to install demo instance of Shopsys Framework.
+    - also this script can be used if you change the configuration of docker or app, script will apply all the changes done in these files and rebuild images.
 
 ### Database migrations
 - after running database migrations, all your countries across domains will be merged together and original names will be added as translations

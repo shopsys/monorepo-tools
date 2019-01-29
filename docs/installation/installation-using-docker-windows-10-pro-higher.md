@@ -119,7 +119,16 @@ cd project-base
 - *The `--keep-vcs` option initializes GIT repository in your project folder that is needed for diff commands of the application build and keeps the GIT history of `shopsys/project-base`.*
 - *The `--stability=beta` option enables you to install the project from the last beta release. Default value for the option is `stable` but there is no stable release yet.*
 
-### 2. Create docker-compose.yml and docker-sync.yml file
+### 2.1 Use install script
+In case you want to start demo of the app as fast as possible, you can now execute install script.
+
+```
+./scripts/install.sh
+```
+
+If you want to know more about what is happening during installation, continue with next step.
+
+### 2.2 Create docker-compose.yml and docker-sync.yml file
 Create `docker-compose.yml` from template [`docker-compose-win.yml.dist`](../../project-base/docker/conf/docker-compose-win.yml.dist).
 ```
 cp docker/conf/docker-compose-win.yml.dist docker-compose.yml
