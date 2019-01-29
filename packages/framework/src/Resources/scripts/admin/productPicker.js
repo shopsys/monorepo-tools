@@ -42,7 +42,7 @@
 
         var makePicker = function (event) {
             $.magnificPopup.open({
-                items: {src: $pickerButton.data('product-picker-url').replace('__instance_id__', instanceId)},
+                items: { src: $pickerButton.data('product-picker-url').replace('__instance_id__', instanceId) },
                 type: 'iframe',
                 closeOnBgClick: true
             });

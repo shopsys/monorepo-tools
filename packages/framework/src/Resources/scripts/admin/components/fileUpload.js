@@ -55,7 +55,7 @@
             Shopsys.ajax({
                 url: deleteUrl,
                 type: 'POST',
-                data: {filename: filename},
+                data: { filename: filename },
                 dataType: 'json'
             });
         };

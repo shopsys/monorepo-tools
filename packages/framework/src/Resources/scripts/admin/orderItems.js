@@ -20,7 +20,7 @@
             var itemName = Shopsys.escape.escapeHtml($itemNameElement.val());
 
             Shopsys.window({
-                content: Shopsys.translator.trans('Do you really want to remove item "<i>%itemName%</i>" from the order?', {'%itemName%': itemName}),
+                content: Shopsys.translator.trans('Do you really want to remove item "<i>%itemName%</i>" from the order?', { '%itemName%': itemName }),
                 buttonCancel: true,
                 buttonContinue: true,
                 eventContinue: function () {
@@ -101,10 +101,10 @@
                 Shopsys.validation.addNewItemToCollection('#js-order-items', index);
                 Shopsys.order.items.refreshCount($collection);
 
-                Shopsys.window({content: Shopsys.translator.trans('Product saved in order')});
+                Shopsys.window({ content: Shopsys.translator.trans('Product saved in order') });
             },
             error: function () {
-                Shopsys.window({content: Shopsys.translator.trans('Unable to add product')});
+                Shopsys.window({ content: Shopsys.translator.trans('Unable to add product') });
             }
         });
     };

@@ -11,6 +11,9 @@ Typical upgrade sequence should be:
 ## [From v7.0.0-beta5 to Unreleased]
 - [#694 PHP 7.3 support](https://github.com/shopsys/shopsys/pull/694)
     - rebuild your Docker images with `docker-compose up -d --build`
+- *(optional)* [#755 update npm packages to latest version](https://github.com/shopsys/shopsys/pull/755)
+    - remove all npm packages by removing folder `project-base/node_modules` and `project-base/package-lock.json`
+    - run command `php phing npm`
 
 ## [From v7.0.0-beta4 to v7.0.0-beta5]
 - [#651 It's possible to add index prefix to elastic search](https://github.com/shopsys/shopsys/pull/651)

@@ -73,7 +73,7 @@
 
         var openProductsPickerWindow = function () {
             $.magnificPopup.open({
-                items: {src: $productsPicker.data('products-picker-url').replace('__js_instance_id__', instanceId)},
+                items: { src: $productsPicker.data('products-picker-url').replace('__js_instance_id__', instanceId) },
                 type: 'iframe',
                 closeOnBgClick: true
             });

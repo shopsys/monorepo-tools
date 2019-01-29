@@ -38,9 +38,7 @@
         };
 
         var onApplyPromoCode = function (response) {
-            if (response.result === true) {
-                document.location = document.location;
-            } else {
+            if (response.result !== true) {
                 Shopsys.window({
                     content: response.message
                 });

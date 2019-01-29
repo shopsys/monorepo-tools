@@ -11,7 +11,7 @@
             if (url !== undefined) {
                 FpJsFormValidator.ajax.sendRequest(
                     url,
-                    {email: value},
+                    { email: value },
                     function (response) {
                         var existsEmail = JSON.parse(response);
 

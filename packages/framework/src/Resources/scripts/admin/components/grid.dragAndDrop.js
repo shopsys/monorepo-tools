@@ -63,10 +63,10 @@
                 $grid.data('positionsChanged', false);
                 Shopsys.grid.dragAndDrop.highlightChanges($grid, false);
 
-                Shopsys.window({content: Shopsys.translator.trans('Order saved')});
+                Shopsys.window({ content: Shopsys.translator.trans('Order saved') });
             },
             error: function () {
-                Shopsys.window({content: Shopsys.translator.trans('Order saving failed')});
+                Shopsys.window({ content: Shopsys.translator.trans('Order saving failed') });
             }
         });
         $grid.trigger('save');

@@ -9,7 +9,7 @@
             return Shopsys.translator.transChoice(
                 '{1}Load next %loadNextCount% item|[2,Inf]Load next %loadNextCount% items',
                 loadNextCount,
-                {'%loadNextCount%': loadNextCount}
+                { '%loadNextCount%': loadNextCount }
             );
         }
     };

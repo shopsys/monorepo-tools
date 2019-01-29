@@ -49,10 +49,10 @@
             data: data,
             dataType: 'json',
             success: function () {
-                Shopsys.window({content: Shopsys.translator.trans('Order saved')});
+                Shopsys.window({ content: Shopsys.translator.trans('Order saved') });
             },
             error: function () {
-                Shopsys.window({content: Shopsys.translator.trans('Order saving failed')});
+                Shopsys.window({ content: Shopsys.translator.trans('Order saving failed') });
             }
         });
 
