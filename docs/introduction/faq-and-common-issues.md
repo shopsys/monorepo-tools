@@ -18,6 +18,7 @@ For more detailed information about the Shopsys Framework, please see [Shopsys F
 - [How do I change the environment (PRODUCTION/DEVELOPMENT/TEST)?](#how-do-i-change-the-environment-productiondevelopmenttest)
 - [Are some periodic tasks part of the Shopsys Framework (cron)?](#are-some-periodic-tasks-part-of-the-shopsys-framework-cron)
 - [Why are you using entity data instead of entities for Symfony forms?](#why-are-you-using-entity-data-instead-of-entities-for-symfony-forms)
+- [What is the configuration file `services_test.yml` good for?](#what-is-the-configuration-file-services_testyml-good-for)
 
 ## What are the phing targets?
 Every phing target is a task that can be executed simply by `php phing <target-name>` command.
@@ -93,3 +94,9 @@ Do not forget to set up a cron on your server to execute [`php phing cron`](/doc
 ## Why are you using entity data instead of entities for Symfony forms?
 We are using [entity data objects](entities.md#entity-data) instead of [entities](basics-about-model-architecture.md#entity)
 because Symfony forms need setters for all fields and we don't want to mess entities with them.
+
+## What is the configuration file `services_test.yml` good for?
+[`services_test.yml`](../../project-base/src/Shopsys/ShopBundle/Resources/config/services_test.yml)
+is a service configuration file that is loaded in TEST environment in addition to
+the standard configuration defined in [`services.yml`](../../project-base/src/Shopsys/ShopBundle/Resources/config/services.yml) as sometimes the configuration differs from the standard one and we need to override it.
+E.g., by default, all our services are defined as private. However, in tests, we are retrieving some services directly from the container hence we need to have them public in TEST environment.

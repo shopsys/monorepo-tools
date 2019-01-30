@@ -193,7 +193,8 @@ class ProductRepository extends BaseProductRepository
 }
 ```
 
-Add information about the class extension into the container configuration in [`services.yml`](../../project-base/src/Shopsys/ShopBundle/Resources/config/services.yml)
+Add information about the class extension into the container configuration in [`services.yml`](../../project-base/src/Shopsys/ShopBundle/Resources/config/services.yml).
+To [make the service public in TEST environment](../introduction/faq-and-common-issues.md#what-is-the-configuration-file-services_testyml-good-for), you need to add the same line into [`services_test.yml`](../../project-base/src/Shopsys/ShopBundle/Resources/config/services_test.yml) as well.
 ```yaml
     Shopsys\FrameworkBundle\Model\Product\ProductRepository: '@Shopsys\ShopBundle\Model\Product\ProductRepository'
 ```
@@ -226,7 +227,8 @@ class ProductFacade extends BaseProductFacade
 
 *Note: You should overwrite `protected $productRepository` annotation so IDE knows that you are using the extended `ProductRepository`*
 
-Add information about the class extension into the container configuration in [`services.yml`](../../project-base/src/Shopsys/ShopBundle/Resources/config/services.yml)
+Add information about the class extension into the container configuration in [`services.yml`](../../project-base/src/Shopsys/ShopBundle/Resources/config/services.yml).
+To [make the service public in TEST environment](../introduction/faq-and-common-issues.md#what-is-the-configuration-file-services_testyml-good-for), you need to add the same line into [`services_test.yml`](../../project-base/src/Shopsys/ShopBundle/Resources/config/services_test.yml) as well.
 ```yaml
     Shopsys\FrameworkBundle\Model\Product\ProductFacade: '@Shopsys\ShopBundle\Model\Product\ProductFacade'
 ```
@@ -413,7 +415,8 @@ class VatFacade extends BaseVatFacade
 
 *Note: You should overwrite `protected $vatRepository` annotation so IDE knows that you are using the extended `VatRepository`*
 
-Add information about the class extension into the container configuration in [`services.yml`](../../project-base/src/Shopsys/ShopBundle/Resources/config/services.yml)
+Add information about the class extension into the container configuration in [`services.yml`](../../project-base/src/Shopsys/ShopBundle/Resources/config/services.yml).
+To [make the service public in TEST environment](../introduction/faq-and-common-issues.md#what-is-the-configuration-file-services_testyml-good-for), you need to add the same line into [`services_test.yml`](../../project-base/src/Shopsys/ShopBundle/Resources/config/services_test.yml) as well.
 ```yaml
     Shopsys\FrameworkBundle\Model\Pricing\Vat\VatFacade: '@Shopsys\ShopBundle\Model\Pricing\Vat\VatFacade'
 ```
