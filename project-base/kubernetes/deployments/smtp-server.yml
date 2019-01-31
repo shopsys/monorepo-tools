@@ -12,6 +12,9 @@ spec:
             containers:
             -   name: smtp-server
                 image: namshi/smtp:latest
+                env:
+                -   name: RELAY_NETWORKS
+                    value: :192.168.0.0/16:10.0.0.0/8:172.16.0.0/12
                 ports:
                 -   name: smtp
                     containerPort: 25

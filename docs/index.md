@@ -52,6 +52,7 @@
 * [Logging on Continuous Integration server running Kubernetes](/docs/kubernetes/logging-on-continuous-integration-server-running-kubernetes.md)
 * [How to deploy SSFW to Google Cloud platform](/docs/kubernetes/how-to-deploy-ssfw-to-google-cloud-platform.md)
 * [Deploy Your Application to Google Cloud on your CI/CD](/docs/kubernetes/deploy-your-application-to-google-cloud-on-your-ci-cd.md)
+* [How to set SMTP Server Container](/docs/kubernetes/how-to-set-smtp-server-container.md)
 
 ## Microservices
 One of the explored ideas of Shopsys Framework is the idea of a product, that some of its parts are designed as the microservices.

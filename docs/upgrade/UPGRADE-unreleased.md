@@ -8,6 +8,14 @@ There you can find links to upgrade notes for other versions too.
 ## [shopsys/framework]
 ### Infrastructure
 - *(optional)* in your `docker/php-fpm/Dockerfile` change base image to `php:7.3-fpm-stretch` ([#694](https://github.com/shopsys/shopsys/pull/694))
+- add subnet of your **k8s** cluster as ENV variable into the config `/project-base/kubernetes/deployments/smtp-server.yml` for POD of smtp container ([#777](https://github.com/shopsys/shopsys/pull/777))  
+for instance:
+    ```yaml
+    image: namshi/smtp:latest
+    env:
+    -   name: RELAY_NETWORKS
+        value: :192.168.0.0/16:10.0.0.0/8:172.16.0.0/12
+    ```
 
 ### Tools
 - *(optional)* add a new phing target `clean-redis` to your `build.xml` and `build-dev.xml` and use it where you need to clean Redis cache.
