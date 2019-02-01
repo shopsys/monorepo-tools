@@ -83,7 +83,7 @@ class ProductData
     public $outOfStockAvailability;
 
     /**
-     * @var array
+     * @var \Shopsys\FrameworkBundle\Model\Product\Flag\Flag[]
      */
     public $flags;
 
