@@ -28,7 +28,7 @@ class CategoryData
     public $seoH1s;
 
     /**
-     * @var string[]
+     * @var string[]|null[]
      */
     public $descriptions;
 
