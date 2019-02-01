@@ -12,6 +12,7 @@ class DomainsConfigDefinition implements ConfigurationInterface
     const CONFIG_NAME = 'name';
     const CONFIG_LOCALE = 'locale';
     const CONFIG_STYLES_DIRECTORY = 'styles_directory';
+    const CONFIG_DESIGN_ID = 'design_id';
 
     /**
      * @return \Symfony\Component\Config\Definition\Builder\TreeBuilder
@@ -31,6 +32,7 @@ class DomainsConfigDefinition implements ConfigurationInterface
                             ->scalarNode(self::CONFIG_NAME)->isRequired()->cannotBeEmpty()->end()
                             ->scalarNode(self::CONFIG_LOCALE)->isRequired()->cannotBeEmpty()->end()
                             ->scalarNode(self::CONFIG_STYLES_DIRECTORY)->defaultValue(DomainConfig::STYLES_DIRECTORY_DEFAULT)->end()
+                            ->scalarNode(self::CONFIG_DESIGN_ID)->defaultNull()->end()
                         ->end()
                     ->end()
                 ->end()

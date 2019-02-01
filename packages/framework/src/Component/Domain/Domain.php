@@ -69,6 +69,14 @@ class Domain implements DomainIdsProviderInterface
     }
 
     /**
+     * @return string|null
+     */
+    public function getDesignId()
+    {
+        return $this->getCurrentDomainConfig()->getDesignId();
+    }
+
+    /**
      * @return bool
      */
     public function isHttps()
