@@ -8,7 +8,7 @@ use Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\UrlListData;
 class ProductData
 {
     /**
-     * @var array
+     * @var string[]
      */
     public $name;
 
@@ -43,7 +43,7 @@ class ProductData
     public $sellingTo;
 
     /**
-     * @var bool|null
+     * @var bool
      */
     public $sellingDenied;
 
