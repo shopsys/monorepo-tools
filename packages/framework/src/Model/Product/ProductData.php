@@ -68,7 +68,7 @@ class ProductData
     public $unit;
 
     /**
-     * @var string
+     * @var string Product::OUT_OF_STOCK_ACTION_*
      */
     public $outOfStockAction;
 
