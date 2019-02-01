@@ -13,7 +13,7 @@ class Currency
     const CODE_CZK = 'CZK';
     const CODE_EUR = 'EUR';
 
-    const DEFAULT_EXCHANGE_RATE = 1;
+    const DEFAULT_EXCHANGE_RATE = '1';
 
     /**
      * @var int
