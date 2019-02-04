@@ -25,7 +25,7 @@ class UserData
     public $password;
 
     /**
-     * @var int
+     * @var int|null
      */
     public $domainId;
 
@@ -46,6 +46,5 @@ class UserData
 
     public function __construct()
     {
-        $this->domainId = 1;
     }
 }

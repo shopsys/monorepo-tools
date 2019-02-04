@@ -40,6 +40,7 @@ class CustomerDataFactoryTest extends TestCase
         $userData->createdAt = new DateTime();
         $userData->telephone = 'telephone';
         $userData->email = 'no-reply@shopsys.com';
+        $userData->domainId = 1;
 
         $billingCountryData = new CountryData();
         $billingCountryData->names = ['cs' => 'Česká republika'];
@@ -138,6 +139,7 @@ class CustomerDataFactoryTest extends TestCase
         $userData->lastName = 'lastName';
         $userData->email = 'no-reply@shopsys.com';
         $userData->createdAt = new DateTime();
+        $userData->domainId = 1;
 
         $billingAddress = $this->createBillingAddress();
         $user = new User($userData, $billingAddress, null, null);

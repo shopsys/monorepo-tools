@@ -29,6 +29,7 @@ class ProductPriceCalculationForUserTest extends TestCase
         $userData = new UserData();
         $userData->pricingGroup = $pricingGroup;
         $userData->email = 'no-reply@shopsys.com';
+        $userData->domainId = 1;
         $user = new User($userData, $billingAddress, null, null);
         $expectedProductPrice = new ProductPrice(new Price(1, 1), false);
 
