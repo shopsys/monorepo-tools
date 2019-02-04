@@ -10,17 +10,17 @@ class HeurekaCategoryCronModule implements SimpleCronModuleInterface
     /**
      * @var \Shopsys\ProductFeed\HeurekaBundle\Model\HeurekaCategory\HeurekaCategoryDownloader
      */
-    private $heurekaCategoryDownloader;
+    protected $heurekaCategoryDownloader;
 
     /**
      * @var \Symfony\Bridge\Monolog\Logger
      */
-    private $logger;
+    protected $logger;
 
     /**
      * @var \Shopsys\ProductFeed\HeurekaBundle\Model\HeurekaCategory\HeurekaCategoryFacade
      */
-    private $heurekaCategoryFacade;
+    protected $heurekaCategoryFacade;
 
     /**
      * @param \Shopsys\ProductFeed\HeurekaBundle\Model\HeurekaCategory\HeurekaCategoryDownloader $heurekaCategoryDownloader
