@@ -118,7 +118,7 @@ systemctl enable postgresql-10
 ```
 Next with help of default postgres administration user we create new database user with login root. You will be prompted to enter password for newly created user root.
 ```
-su - postgres -c "createuser --createdb --superuser --pwprompt root"
+sudo -u postgres createuser --createdb --superuser --pwprompt root
 ```
 Now we need to allow connection between docker containers and database via local network and PostgresSQL port.
 ```
@@ -266,10 +266,10 @@ Now we need to copy [`docker-compose-prod-deploy.yml.dist`](../../project-base/d
 After the image is in the registry of the production server we create docker containers and build application for production with clean DB and base data.  
 We use parameter `-p` to specify the name of the project and prefix for the volumes so these will be easily accessible.
 There are named volumes created under path `/var/lib/docker/volumes/` and one persisted folder `production-content` for all uploaded images and generated files that should not be removed.  
-We create persisted folder with correct owner id `82` so internal docker `php-fpm` container user has access into the folder.
+We create persisted folder with correct owner id `33` so internal docker `php-fpm` container user has access into the folder.
 ```
 mkdir /var/www/production-content
-chown -R 82:82 /var/www/production-content
+chown -R 33:33 /var/www/production-content
 ```
 and start containers with docker-compose.
 ```

@@ -18,6 +18,7 @@ There you can find links to upgrade notes for other versions too.
 - *(optional)* Switched to Debian PHP-FPM image ([#702](https://github.com/shopsys/shopsys/pull/702))
     - update your Dockerfile to extend from debian image, follow [changes](https://github.com/shopsys/project-base/commit/023d6f20f3d041dce09d381522bd6c438ed9fa59) and [fix #740](https://github.com/shopsys/shopsys/pull/740/files)
     - change `runAsUser` value in `webserver-php-fpm.yml` manifest to 33 as it is Debian default `www-data` UID
+    - change owner of persisted folder on production server to 33 as it is Debian default `www-data` UID
 
 ### Configuration
 - *(optional)* for easier deployment to production, make the trusted proxies in `Shopsys\Boostrap` class loaded from DIC parameter `trusted_proxies` instead of being hard-coded ([#596](https://github.com/shopsys/shopsys/pull/596))
