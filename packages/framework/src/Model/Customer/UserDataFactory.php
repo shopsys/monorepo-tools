@@ -46,6 +46,7 @@ class UserDataFactory implements UserDataFactoryInterface
     protected function fillForDomainId(UserData $userData, int $domainId)
     {
         $userData->pricingGroup = $this->pricingGroupSettingFacade->getDefaultPricingGroupByDomainId($domainId);
+        $userData->domainId = $domainId;
     }
 
     /**

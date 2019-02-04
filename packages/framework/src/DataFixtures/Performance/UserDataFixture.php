@@ -180,7 +180,6 @@ class UserDataFixture
         $userData->lastName = $this->faker->lastName;
         $userData->email = $userNumber . '.' . $this->faker->safeEmail;
         $userData->password = $this->faker->password;
-        $userData->domainId = $domainId;
         $userData->createdAt = $this->faker->dateTimeBetween('-1 year', 'now');
         $userData->telephone = $this->faker->phoneNumber;
 
