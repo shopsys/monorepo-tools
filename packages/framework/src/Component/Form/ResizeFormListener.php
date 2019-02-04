@@ -17,27 +17,27 @@ class ResizeFormListener implements EventSubscriberInterface
     /**
      * @var string
      */
-    private $type;
+    protected $type;
 
     /**
      * @var array
      */
-    private $options;
+    protected $options;
 
     /**
      * @var bool
      */
-    private $allowAdd;
+    protected $allowAdd;
 
     /**
      * @var bool
      */
-    private $allowDelete;
+    protected $allowDelete;
 
     /**
      * @var bool
      */
-    private $deleteEmpty;
+    protected $deleteEmpty;
 
     /**
      * @param string|null $type
@@ -233,7 +233,7 @@ class ResizeFormListener implements EventSubscriberInterface
      * @param mixed $previousViewData
      * @return mixed
      */
-    private function removeEmptyChildrenFromFormAndData(FormInterface $form, $viewData, $previousViewData)
+    protected function removeEmptyChildrenFromFormAndData(FormInterface $form, $viewData, $previousViewData)
     {
         foreach ($form as $name => $child) {
             $isNew = !isset($previousViewData[$name]);
@@ -254,7 +254,7 @@ class ResizeFormListener implements EventSubscriberInterface
      * @param \Symfony\Component\Form\FormInterface $form
      * @return mixed
      */
-    private function removeDataItemsNotPresentInForm($viewData, FormInterface $form)
+    protected function removeDataItemsNotPresentInForm($viewData, FormInterface $form)
     {
         $toDelete = [];
 
@@ -278,7 +278,7 @@ class ResizeFormListener implements EventSubscriberInterface
      * @param mixed $value
      * @return mixed
      */
-    private function normToView(FormInterface $form, $value)
+    protected function normToView(FormInterface $form, $value)
     {
         // Scalar values should  be converted to strings to
         // facilitate differentiation between empty ("") and zero (0).
@@ -303,7 +303,7 @@ class ResizeFormListener implements EventSubscriberInterface
      * @param string $value
      * @return mixed
      */
-    private function viewToNorm(FormInterface $form, $value)
+    protected function viewToNorm(FormInterface $form, $value)
     {
         $transformers = $form->getConfig()->getViewTransformers();
 

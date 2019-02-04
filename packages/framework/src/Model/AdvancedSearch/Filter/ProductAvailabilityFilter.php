@@ -16,7 +16,7 @@ class ProductAvailabilityFilter implements AdvancedSearchFilterInterface
     /**
      * @var \Shopsys\FrameworkBundle\Model\Product\Availability\AvailabilityFacade
      */
-    private $availabilityFacade;
+    protected $availabilityFacade;
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\Product\Availability\AvailabilityFacade $availabilityFacade

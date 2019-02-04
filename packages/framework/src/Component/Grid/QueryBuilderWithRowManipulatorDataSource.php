@@ -11,7 +11,7 @@ class QueryBuilderWithRowManipulatorDataSource extends QueryBuilderDataSource
     /**
      * @var callable
      */
-    private $manipulateRowCallback;
+    protected $manipulateRowCallback;
 
     /**
      * @param \Doctrine\ORM\QueryBuilder $queryBuilder

@@ -20,7 +20,7 @@ class Bag
     /**
      * @var \Symfony\Component\HttpFoundation\Session\SessionInterface
      */
-    private $session;
+    protected $session;
 
     /**
      * @param string $bagName
@@ -104,7 +104,7 @@ class Bag
      * @param string $key
      * @return string
      */
-    private function getFullbagName($key)
+    protected function getFullbagName($key)
     {
         return self::MAIN_KEY . '__' . $this->bagName . '__' . $key;
     }
@@ -113,7 +113,7 @@ class Bag
      * @param string $key
      * @return array
      */
-    private function getMessages($key)
+    protected function getMessages($key)
     {
         $flashBag = $this->session->getFlashBag();
         $messages = $flashBag->get($this->getFullbagName($key));
@@ -125,7 +125,7 @@ class Bag
      * @param bool $escape
      * @param string $key
      */
-    private function addMessage($message, $escape, $key)
+    protected function addMessage($message, $escape, $key)
     {
         if (is_array($message)) {
             foreach ($message as $item) {

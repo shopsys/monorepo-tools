@@ -9,12 +9,12 @@ class QuantifiedProduct
     /**
      * @var \Shopsys\FrameworkBundle\Model\Product\Product
      */
-    private $product;
+    protected $product;
 
     /**
      * @var int
      */
-    private $quantity;
+    protected $quantity;
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\Product\Product $product

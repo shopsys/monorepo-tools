@@ -15,17 +15,17 @@ class DomainIconResizer
     /**
      * @var \Shopsys\FrameworkBundle\Component\Image\Processing\ImageProcessor
      */
-    private $imageProcessor;
+    protected $imageProcessor;
 
     /**
      * @var \Symfony\Bridge\Monolog\Logger
      */
-    private $logger;
+    protected $logger;
 
     /**
      * @var \League\Flysystem\FilesystemInterface
      */
-    private $filesystem;
+    protected $filesystem;
 
     /**
      * @param \Symfony\Bridge\Monolog\Logger $logger

@@ -11,17 +11,17 @@ class CurrentDomainRouter implements RouterInterface
     /**
      * @var \Symfony\Component\Routing\RequestContext
      */
-    private $context;
+    protected $context;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\Domain\Domain
      */
-    private $domain;
+    protected $domain;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\Router\DomainRouterFactory
      */
-    private $domainRouterFactory;
+    protected $domainRouterFactory;
 
     /**
      * @param \Shopsys\FrameworkBundle\Component\Domain\Domain $domain
@@ -80,7 +80,7 @@ class CurrentDomainRouter implements RouterInterface
     /**
      * @return \Shopsys\FrameworkBundle\Component\Router\DomainRouter
      */
-    private function getDomainRouter()
+    protected function getDomainRouter()
     {
         return $this->domainRouterFactory->getRouter($this->domain->getId());
     }

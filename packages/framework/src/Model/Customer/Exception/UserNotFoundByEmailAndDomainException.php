@@ -9,12 +9,12 @@ class UserNotFoundByEmailAndDomainException extends UserNotFoundException
     /**
      * @var string
      */
-    private $email;
+    protected $email;
 
     /**
      * @var int
      */
-    private $domainId;
+    protected $domainId;
 
     /**
      * @param string $email

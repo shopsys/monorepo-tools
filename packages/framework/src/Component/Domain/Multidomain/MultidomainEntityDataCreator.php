@@ -11,17 +11,17 @@ class MultidomainEntityDataCreator
     /**
      * @var \Shopsys\FrameworkBundle\Component\Domain\Multidomain\MultidomainEntityClassFinderFacade
      */
-    private $multidomainEntityClassFinderFacade;
+    protected $multidomainEntityClassFinderFacade;
 
     /**
      * @var \Doctrine\ORM\EntityManagerInterface
      */
-    private $em;
+    protected $em;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\Doctrine\SqlQuoter
      */
-    private $sqlQuoter;
+    protected $sqlQuoter;
 
     /**
      * @param \Shopsys\FrameworkBundle\Component\Domain\Multidomain\MultidomainEntityClassFinderFacade $multidomainEntityClassFinderFacade
@@ -66,7 +66,7 @@ class MultidomainEntityDataCreator
      * @param string $tableName
      * @param string[] $columnNames
      */
-    private function copyMultidomainDataForNewDomain($templateDomainId, $newDomainId, $tableName, array $columnNames)
+    protected function copyMultidomainDataForNewDomain($templateDomainId, $newDomainId, $tableName, array $columnNames)
     {
         $quotedColumnNames = $this->sqlQuoter->quoteIdentifiers($columnNames);
         $quotedColumnNamesSql = implode(', ', $quotedColumnNames);

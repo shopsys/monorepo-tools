@@ -13,12 +13,12 @@ class QueryPaginator implements PaginatorInterface
     /**
      * @var \Doctrine\ORM\QueryBuilder
      */
-    private $queryBuilder;
+    protected $queryBuilder;
 
     /**
      * @var string|null
      */
-    private $hydrationMode;
+    protected $hydrationMode;
 
     /**
      * @param \Doctrine\ORM\QueryBuilder $queryBuilder
@@ -82,7 +82,7 @@ class QueryPaginator implements PaginatorInterface
      * @param \Doctrine\ORM\QueryBuilder $queryBuilder
      * @return \Doctrine\ORM\NativeQuery
      */
-    private function getTotalNativeQuery(QueryBuilder $queryBuilder)
+    protected function getTotalNativeQuery(QueryBuilder $queryBuilder)
     {
         $em = $queryBuilder->getEntityManager();
 

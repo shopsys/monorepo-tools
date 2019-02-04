@@ -9,7 +9,7 @@ class ProductPrice extends Price
     /**
      * @var bool
      */
-    private $priceFrom;
+    protected $priceFrom;
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\Pricing\Price $price

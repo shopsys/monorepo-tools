@@ -18,27 +18,27 @@ class OrderPreviewCalculation
     /**
      * @var \Shopsys\FrameworkBundle\Model\Product\Pricing\QuantifiedProductPriceCalculation
      */
-    private $quantifiedProductPriceCalculation;
+    protected $quantifiedProductPriceCalculation;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Product\Pricing\QuantifiedProductDiscountCalculation
      */
-    private $quantifiedProductDiscountCalculation;
+    protected $quantifiedProductDiscountCalculation;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Transport\TransportPriceCalculation
      */
-    private $transportPriceCalculation;
+    protected $transportPriceCalculation;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Payment\PaymentPriceCalculation
      */
-    private $paymentPriceCalculation;
+    protected $paymentPriceCalculation;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Order\OrderPriceCalculation
      */
-    private $orderPriceCalculation;
+    protected $orderPriceCalculation;
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\Product\Pricing\QuantifiedProductPriceCalculation $quantifiedProductPriceCalculation
@@ -152,7 +152,7 @@ class OrderPreviewCalculation
      * @param \Shopsys\FrameworkBundle\Model\Pricing\Price|null $paymentPrice
      * @return \Shopsys\FrameworkBundle\Model\Pricing\Price|null
      */
-    private function calculateRoundingPrice(
+    protected function calculateRoundingPrice(
         Payment $payment,
         Currency $currency,
         Price $productsPrice,
@@ -176,7 +176,7 @@ class OrderPreviewCalculation
      * @param \Shopsys\FrameworkBundle\Model\Pricing\Price|null $roundingPrice
      * @return \Shopsys\FrameworkBundle\Model\Pricing\Price
      */
-    private function calculateTotalPrice(
+    protected function calculateTotalPrice(
         Price $productsPrice,
         Price $transportPrice = null,
         Price $paymentPrice = null,
@@ -206,7 +206,7 @@ class OrderPreviewCalculation
      * @param \Shopsys\FrameworkBundle\Model\Pricing\Price[] $quantifiedItemsDiscounts
      * @return \Shopsys\FrameworkBundle\Model\Pricing\Price
      */
-    private function getProductsPrice(array $quantifiedItemsPrices, array $quantifiedItemsDiscounts)
+    protected function getProductsPrice(array $quantifiedItemsPrices, array $quantifiedItemsDiscounts)
     {
         $finalPrice = new Price(0, 0);
 

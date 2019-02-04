@@ -13,27 +13,27 @@ class ProductAvailabilityCalculation
     /**
      * @var \Shopsys\FrameworkBundle\Model\Product\Availability\AvailabilityFacade
      */
-    private $availabilityFacade;
+    protected $availabilityFacade;
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\Product\ProductSellingDeniedRecalculator $productSellingDeniedRecalculator
      */
-    private $productSellingDeniedRecalculator;
+    protected $productSellingDeniedRecalculator;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Product\ProductVisibilityFacade
      */
-    private $productVisibilityFacade;
+    protected $productVisibilityFacade;
 
     /**
      * @var \Doctrine\ORM\EntityManagerInterface
      */
-    private $em;
+    protected $em;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Product\ProductRepository
      */
-    private $productRepository;
+    protected $productRepository;
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\Product\Availability\AvailabilityFacade $availabilityFacade
@@ -82,7 +82,7 @@ class ProductAvailabilityCalculation
      * @param \Shopsys\FrameworkBundle\Model\Product\Product $mainVariant
      * @return \Shopsys\FrameworkBundle\Model\Product\Availability\Availability
      */
-    private function calculateMainVariantAvailability(Product $mainVariant)
+    protected function calculateMainVariantAvailability(Product $mainVariant)
     {
         $atLeastSomewhereSellableVariants = $this->getAtLeastSomewhereSellableVariantsByMainVariant($mainVariant);
         if (count($atLeastSomewhereSellableVariants) === 0) {
@@ -107,7 +107,7 @@ class ProductAvailabilityCalculation
      * @param \Shopsys\FrameworkBundle\Model\Product\Product $mainVariant
      * @return \Shopsys\FrameworkBundle\Model\Product\Product[]
      */
-    private function getAtLeastSomewhereSellableVariantsByMainVariant(Product $mainVariant)
+    protected function getAtLeastSomewhereSellableVariantsByMainVariant(Product $mainVariant)
     {
         $allVariants = $mainVariant->getVariants();
         foreach ($allVariants as $variant) {

@@ -10,7 +10,7 @@ class MicroserviceClient
     /**
      * @var \GuzzleHttp\Client
      */
-    private $guzzleClient;
+    protected $guzzleClient;
 
     /**
      * @param \GuzzleHttp\Client $guzzleClient

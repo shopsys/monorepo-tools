@@ -10,7 +10,7 @@ class InvalidGridLimitValueException extends Exception implements AdministratorE
     /**
      * @var mixed
      */
-    private $limit;
+    protected $limit;
 
     /**
      * @param mixed $limit

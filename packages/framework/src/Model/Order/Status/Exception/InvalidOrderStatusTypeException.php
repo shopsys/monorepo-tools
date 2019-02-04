@@ -9,7 +9,7 @@ class InvalidOrderStatusTypeException extends Exception implements OrderStatusEx
     /**
      * @var int
      */
-    private $orderStatusType;
+    protected $orderStatusType;
 
     /**
      * @param int $orderStatusType

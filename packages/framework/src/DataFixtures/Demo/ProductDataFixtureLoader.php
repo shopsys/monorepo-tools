@@ -39,57 +39,57 @@ class ProductDataFixtureLoader
     /**
      * @var \Shopsys\FrameworkBundle\DataFixtures\Demo\ProductParametersFixtureLoader
      */
-    private $productParametersFixtureLoader;
+    protected $productParametersFixtureLoader;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Pricing\Vat\Vat[]
      */
-    private $vats;
+    protected $vats;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Product\Availability\Availability[]
      */
-    private $availabilities;
+    protected $availabilities;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Category\Category[]
      */
-    private $categories;
+    protected $categories;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Product\Flag\Flag[]
      */
-    private $flags;
+    protected $flags;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Product\Brand\Brand[]
      */
-    private $brands;
+    protected $brands;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Product\Unit\Unit[]
      */
-    private $units;
+    protected $units;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroup[]
      */
-    private $pricingGroups;
+    protected $pricingGroups;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Product\ProductDataFactoryInterface
      */
-    private $productDataFactory;
+    protected $productDataFactory;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\Domain\Domain
      */
-    private $domain;
+    protected $domain;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroupFacade
      */
-    private $pricingGroupFacade;
+    protected $pricingGroupFacade;
 
     /**
      * @param \Shopsys\FrameworkBundle\DataFixtures\Demo\ProductParametersFixtureLoader $productParametersFixtureLoader
@@ -169,7 +169,7 @@ class ProductDataFixtureLoader
      * @param \Shopsys\FrameworkBundle\Model\Product\ProductData $productData
      * @param array $row
      */
-    private function updateProductDataFromCsvRowForFirstDomain(ProductData $productData, array $row)
+    protected function updateProductDataFromCsvRowForFirstDomain(ProductData $productData, array $row)
     {
         $domainId = 1;
 
@@ -260,7 +260,7 @@ class ProductDataFixtureLoader
      * @param int $domainId
      * @return int
      */
-    private function getShortDescriptionColumnForDomain($domainId)
+    protected function getShortDescriptionColumnForDomain($domainId)
     {
         $locale = $this->domain->getDomainConfigById($domainId)->getLocale();
 
@@ -278,7 +278,7 @@ class ProductDataFixtureLoader
      * @param int $domainId
      * @return int
      */
-    private function getDescriptionColumnForDomain($domainId)
+    protected function getDescriptionColumnForDomain($domainId)
     {
         $locale = $this->domain->getDomainConfigById($domainId)->getLocale();
 
@@ -296,7 +296,7 @@ class ProductDataFixtureLoader
      * @param string $string
      * @return string[]
      */
-    private function getProductManualPricesIndexedByPricingGroupFromString($string)
+    protected function getProductManualPricesIndexedByPricingGroupFromString($string)
     {
         $productManualPricesByPricingGroup = [];
         $rowData = explode(';', $string);
@@ -313,7 +313,7 @@ class ProductDataFixtureLoader
      * @param array $valuesByKey
      * @return string[]
      */
-    private function getValuesByKeyString($keyString, array $valuesByKey)
+    protected function getValuesByKeyString($keyString, array $valuesByKey)
     {
         $values = [];
         if (!empty($keyString)) {
@@ -331,7 +331,7 @@ class ProductDataFixtureLoader
      * @param \Shopsys\FrameworkBundle\Model\Product\ProductData $productData
      * @param int $domainId
      */
-    private function setProductDataPricesFromCsv(array $row, ProductData $productData, $domainId)
+    protected function setProductDataPricesFromCsv(array $row, ProductData $productData, $domainId)
     {
         if ($domainId === 1) {
             $manualPricesColumn = $row[self::COLUMN_MANUAL_PRICES_DOMAIN_1];
@@ -353,7 +353,7 @@ class ProductDataFixtureLoader
      * @param string[] $demoDataManualPrices
      * @return string[]
      */
-    private function addZeroPricesForPricingGroupsThatAreMissingInDemoData($demoDataManualPrices)
+    protected function addZeroPricesForPricingGroupsThatAreMissingInDemoData($demoDataManualPrices)
     {
         $allPricingGroups = $this->pricingGroupFacade->getAll();
 
@@ -370,7 +370,7 @@ class ProductDataFixtureLoader
      * @param int $domainId
      * @return int
      */
-    private function getCsvProductColumnNameByDomainId(int $domainId)
+    protected function getCsvProductColumnNameByDomainId(int $domainId)
     {
         switch ($this->domain->getDomainConfigById($domainId)->getLocale()) {
             case 'cs':

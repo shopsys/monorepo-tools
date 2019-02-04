@@ -9,7 +9,7 @@ class RememberGridLimitException extends Exception implements AdministratorExcep
     /**
      * @var string
      */
-    private $gridId;
+    protected $gridId;
 
     /**
      * @param string $gridId

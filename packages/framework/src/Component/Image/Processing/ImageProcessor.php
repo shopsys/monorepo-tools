@@ -20,22 +20,22 @@ class ImageProcessor
     /**
      * @var string[]
      */
-    private $supportedImageExtensions;
+    protected $supportedImageExtensions;
 
     /**
      * @var \Intervention\Image\ImageManager
      */
-    private $imageManager;
+    protected $imageManager;
 
     /**
      * @var \League\Flysystem\FilesystemInterface
      */
-    private $filesystem;
+    protected $filesystem;
 
     /**
      * @var \Symfony\Component\Filesystem\Filesystem
      */
-    private $localFilesystem;
+    protected $localFilesystem;
 
     /**
      * @param \Intervention\Image\ImageManager $imageManager
@@ -167,7 +167,7 @@ class ImageProcessor
      * @param string $filepath
      * @param string $newFilepath
      */
-    private function removeFileIfRenamed($filepath, $newFilepath)
+    protected function removeFileIfRenamed($filepath, $newFilepath)
     {
         if ($this->filesystem->has($filepath) && $filepath !== $newFilepath) {
             $this->filesystem->delete($filepath);

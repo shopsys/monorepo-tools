@@ -31,7 +31,7 @@ class StringColumnsFinder
      * @param \Doctrine\ORM\Mapping\ClassMetadataInfo $classMetadataInfo
      * @return string[]
      */
-    private function getStringColumnNames(ClassMetadataInfo $classMetadataInfo)
+    protected function getStringColumnNames(ClassMetadataInfo $classMetadataInfo)
     {
         $stringColumnNames = [];
         foreach ($classMetadataInfo->getFieldNames() as $fieldName) {
@@ -46,7 +46,7 @@ class StringColumnsFinder
     /**
      * @return string[]
      */
-    private function getDoctrineStringTypes()
+    protected function getDoctrineStringTypes()
     {
         return [
             'text',

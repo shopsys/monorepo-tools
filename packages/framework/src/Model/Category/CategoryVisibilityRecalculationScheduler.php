@@ -9,12 +9,12 @@ class CategoryVisibilityRecalculationScheduler
     /**
      * @var bool
      */
-    private $recalculate = false;
+    protected $recalculate = false;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Product\ProductVisibilityFacade
      */
-    private $productVisibilityFacade;
+    protected $productVisibilityFacade;
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\Product\ProductVisibilityFacade $productVisibilityFacade

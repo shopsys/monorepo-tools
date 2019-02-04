@@ -43,7 +43,7 @@ class PoDumper implements DumperInterface
      * @param string $str
      * @return string
      */
-    private function escape($str)
+    protected function escape($str)
     {
         return addcslashes($str, "\0..\37\42\134");
     }
@@ -52,7 +52,7 @@ class PoDumper implements DumperInterface
      * @param \JMS\TranslationBundle\Model\Message[] $messages
      * @return \JMS\TranslationBundle\Model\Message[]
      */
-    private function sortMessagesByMessageId(array $messages)
+    protected function sortMessagesByMessageId(array $messages)
     {
         usort($messages, function (Message $messageA, Message $messageB) {
             return strcmp($messageA->getId(), $messageB->getId());

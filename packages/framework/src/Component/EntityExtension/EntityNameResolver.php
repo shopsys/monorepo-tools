@@ -49,7 +49,7 @@ class EntityNameResolver
      * @param string $string
      * @return string
      */
-    private function resolveInString(string $string): string
+    protected function resolveInString(string $string): string
     {
         foreach ($this->entityExtensionMap as $originalEntityName => $extendedEntityName) {
             $pattern = '~\b' . preg_quote($originalEntityName, '~') . '\b(?!\\\\)~u';
@@ -63,7 +63,7 @@ class EntityNameResolver
      * @param array $array
      * @return array
      */
-    private function resolveInArray(array $array): array
+    protected function resolveInArray(array $array): array
     {
         return array_map([$this, 'resolveIn'], $array);
     }
@@ -73,7 +73,7 @@ class EntityNameResolver
      *
      * @param object $object
      */
-    private function resolveInObjectProperties($object): void
+    protected function resolveInObjectProperties($object): void
     {
         $reflection = new \ReflectionObject($object);
         foreach ($reflection->getProperties() as $property) {

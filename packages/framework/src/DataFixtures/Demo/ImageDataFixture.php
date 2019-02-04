@@ -21,37 +21,37 @@ class ImageDataFixture extends AbstractReferenceFixture implements DependentFixt
     /**
      * @var string
      */
-    private $dataFixturesImagesDirectory;
+    protected $dataFixturesImagesDirectory;
 
     /**
      * @var string
      */
-    private $targetDomainImagesDirectory;
+    protected $targetDomainImagesDirectory;
 
     /**
      * @var string
      */
-    private $filesystem;
+    protected $filesystem;
 
     /**
      * @var string
      */
-    private $targetImagesDirectory;
+    protected $targetImagesDirectory;
 
     /**
      * @var \Symfony\Component\Filesystem\Filesystem
      */
-    private $localFilesystem;
+    protected $localFilesystem;
 
     /**
      * @var \League\Flysystem\MountManager
      */
-    private $mountManager;
+    protected $mountManager;
 
     /**
      * @var \Doctrine\ORM\EntityManagerInterface
      */
-    private $em;
+    protected $em;
 
     /**
      * @param mixed $dataFixturesImagesDirectory
@@ -94,7 +94,7 @@ class ImageDataFixture extends AbstractReferenceFixture implements DependentFixt
         }
     }
 
-    private function processDbImagesChanges()
+    protected function processDbImagesChanges()
     {
         $this->processBrandsImages();
         $this->processCategoriesImages();
@@ -105,7 +105,7 @@ class ImageDataFixture extends AbstractReferenceFixture implements DependentFixt
         $this->restartImagesIdsDbSequence();
     }
 
-    private function processBrandsImages()
+    protected function processBrandsImages()
     {
         $brandsImagesData = [
             79 => BrandDataFixture::BRAND_APPLE,
@@ -142,7 +142,7 @@ class ImageDataFixture extends AbstractReferenceFixture implements DependentFixt
         }
     }
 
-    private function processCategoriesImages()
+    protected function processCategoriesImages()
     {
         $categoriesImagesData = [
             68 => CategoryDataFixture::CATEGORY_ELECTRONICS,
@@ -166,7 +166,7 @@ class ImageDataFixture extends AbstractReferenceFixture implements DependentFixt
         }
     }
 
-    private function processPaymentsImages()
+    protected function processPaymentsImages()
     {
         $paymentsImagesData = [
             53 => PaymentDataFixture::PAYMENT_CARD,
@@ -182,7 +182,7 @@ class ImageDataFixture extends AbstractReferenceFixture implements DependentFixt
         }
     }
 
-    private function processTransportsImages()
+    protected function processTransportsImages()
     {
         $transportsImagesData = [
             56 => TransportDataFixture::TRANSPORT_CZECH_POST,
@@ -198,7 +198,7 @@ class ImageDataFixture extends AbstractReferenceFixture implements DependentFixt
         }
     }
 
-    private function processProductsImages()
+    protected function processProductsImages()
     {
         $productsIdsWithImageIdSameAsProductId = [
             1, 2, 3, 4, 5, 6, 7, 8, 9, 10,
@@ -223,7 +223,7 @@ class ImageDataFixture extends AbstractReferenceFixture implements DependentFixt
         }
     }
 
-    private function processSliderItemsImages()
+    protected function processSliderItemsImages()
     {
         $imagesIdsIndexedBySliderItemsIds = [
             1 => 59,
@@ -241,7 +241,7 @@ class ImageDataFixture extends AbstractReferenceFixture implements DependentFixt
      * @param string $entityName
      * @param int $imageId
      */
-    private function saveImageIntoDb(int $entityId, string $entityName, int $imageId)
+    protected function saveImageIntoDb(int $entityId, string $entityName, int $imageId)
     {
         $query = $this->em->createNativeQuery(
             'INSERT INTO images (id, entity_name, entity_id, type, extension, position, modified_at)
@@ -264,7 +264,7 @@ class ImageDataFixture extends AbstractReferenceFixture implements DependentFixt
      * @param string $origin
      * @param string $target
      */
-    private function moveFilesFromLocalFilesystemToFilesystem(string $origin, string $target)
+    protected function moveFilesFromLocalFilesystemToFilesystem(string $origin, string $target)
     {
         $finder = new Finder();
         $finder->files()->in($origin);
@@ -282,12 +282,12 @@ class ImageDataFixture extends AbstractReferenceFixture implements DependentFixt
         }
     }
 
-    private function truncateImagesFromDb()
+    protected function truncateImagesFromDb()
     {
         $this->em->createNativeQuery('TRUNCATE TABLE ' . self::IMAGES_TABLE_NAME, new ResultSetMapping())->execute();
     }
 
-    private function restartImagesIdsDbSequence()
+    protected function restartImagesIdsDbSequence()
     {
         $this->em->createNativeQuery('ALTER SEQUENCE images_id_seq RESTART WITH 103', new ResultSetMapping())->execute();
     }

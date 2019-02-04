@@ -7,7 +7,7 @@ class AdvancedSearchConfig
     /**
      * @var \Shopsys\FrameworkBundle\Model\AdvancedSearch\AdvancedSearchFilterInterface[]
      */
-    private $filters;
+    protected $filters;
 
     public function __construct()
     {

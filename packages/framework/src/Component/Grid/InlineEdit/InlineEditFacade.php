@@ -11,7 +11,7 @@ class InlineEditFacade
     /**
      * @var \Shopsys\FrameworkBundle\Component\Grid\InlineEdit\GridInlineEditRegistry
      */
-    private $gridInlineEditRegistry;
+    protected $gridInlineEditRegistry;
 
     /**
      * @param \Shopsys\FrameworkBundle\Component\Grid\InlineEdit\GridInlineEditRegistry $gridInlineEditRegistry
@@ -73,7 +73,7 @@ class InlineEditFacade
      * @param \Symfony\Component\Form\Form $form
      * @return string
      */
-    private function renderFormAsRow(GridInlineEditInterface $gridInlineEditService, $rowId, Form $form)
+    protected function renderFormAsRow(GridInlineEditInterface $gridInlineEditService, $rowId, Form $form)
     {
         $grid = $gridInlineEditService->getGrid();
         if ($rowId === null) {
@@ -90,7 +90,7 @@ class InlineEditFacade
      * @param \Symfony\Component\Form\Form $form
      * @return array
      */
-    private function getFormRowTemplateParameters(Grid $grid, Form $form)
+    protected function getFormRowTemplateParameters(Grid $grid, Form $form)
     {
         $formView = $form->createView();
         $rows = $grid->getRows();

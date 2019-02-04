@@ -9,12 +9,12 @@ class ParameterFilterChoice
     /**
      * @var \Shopsys\FrameworkBundle\Model\Product\Parameter\Parameter
      */
-    private $parameter;
+    protected $parameter;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Product\Parameter\ParameterValue[]
      */
-    private $values;
+    protected $values;
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\Product\Parameter\Parameter $parameter

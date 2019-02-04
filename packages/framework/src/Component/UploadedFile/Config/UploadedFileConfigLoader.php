@@ -11,17 +11,17 @@ class UploadedFileConfigLoader
     /**
      * @var \Symfony\Component\Filesystem\Filesystem
      */
-    private $filesystem;
+    protected $filesystem;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\UploadedFile\Config\UploadedFileEntityConfig[]
      */
-    private $uploadedFileEntityConfigsByClass;
+    protected $uploadedFileEntityConfigsByClass;
 
     /**
      * @var string[]
      */
-    private $entityNamesByEntityNames;
+    protected $entityNamesByEntityNames;
 
     /**
      * @param \Symfony\Component\Filesystem\Filesystem $filesystem
@@ -58,7 +58,7 @@ class UploadedFileConfigLoader
     /**
      * @param array $outputConfig
      */
-    private function loadFileEntityConfigsFromArray($outputConfig)
+    protected function loadFileEntityConfigsFromArray($outputConfig)
     {
         $this->uploadedFileEntityConfigsByClass = [];
         $this->entityNamesByEntityNames = [];
@@ -81,7 +81,7 @@ class UploadedFileConfigLoader
      * @param array $entityConfig
      * @return \Shopsys\FrameworkBundle\Component\UploadedFile\Config\UploadedFileEntityConfig
      */
-    private function processEntityConfig($entityConfig)
+    protected function processEntityConfig($entityConfig)
     {
         $entityClass = $entityConfig[UploadedFileConfigDefinition::CONFIG_CLASS];
         $entityName = $entityConfig[UploadedFileConfigDefinition::CONFIG_ENTITY_NAME];

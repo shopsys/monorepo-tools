@@ -11,12 +11,12 @@ class CategoryBreadcrumbGenerator implements BreadcrumbGeneratorInterface
     /**
      * @var \Shopsys\FrameworkBundle\Model\Category\CategoryRepository
      */
-    private $categoryRepository;
+    protected $categoryRepository;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\Domain\Domain
      */
-    private $domain;
+    protected $domain;
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\Category\CategoryRepository $categoryRepository

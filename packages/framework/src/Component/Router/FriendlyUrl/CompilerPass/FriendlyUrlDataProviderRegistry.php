@@ -9,7 +9,7 @@ class FriendlyUrlDataProviderRegistry
     /**
      * @var \Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\CompilerPass\FriendlyUrlDataProviderInterface[]
      */
-    private $friendlyUrlDataProviders;
+    protected $friendlyUrlDataProviders;
 
     public function __construct()
     {

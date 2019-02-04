@@ -22,27 +22,27 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
     /**
      * @var \Shopsys\FrameworkBundle\Model\Customer\UserRepository
      */
-    private $userRepository;
+    protected $userRepository;
 
     /**
      * @var \Faker\Generator
      */
-    private $faker;
+    protected $faker;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Order\OrderFacade
      */
-    private $orderFacade;
+    protected $orderFacade;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Order\Preview\OrderPreviewFactory
      */
-    private $orderPreviewFactory;
+    protected $orderPreviewFactory;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Order\OrderDataFactoryInterface
      */
-    private $orderDataFactory;
+    protected $orderDataFactory;
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\Customer\UserRepository $userRepository
@@ -567,7 +567,7 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
      * @param array $products
      * @param \Shopsys\FrameworkBundle\Model\Customer\User $user
      */
-    private function createOrder(
+    protected function createOrder(
         OrderData $orderData,
         array $products,
         User $user = null

@@ -11,12 +11,12 @@ class EntityManagerDecorator extends BaseEntityManagerDecorator
     /**
      * @var \Shopsys\FrameworkBundle\Component\EntityExtension\EntityNameResolver
      */
-    private $entityNameResolver;
+    protected $entityNameResolver;
 
     /**
      * @var \Doctrine\ORM\Repository\RepositoryFactory
      */
-    private $repositoryFactory;
+    protected $repositoryFactory;
 
     /**
      * @param \Doctrine\ORM\EntityManagerInterface $em

@@ -9,22 +9,22 @@ class FeedRegistry
     /**
      * @var \Shopsys\FrameworkBundle\Model\Feed\FeedInterface[][]
      */
-    private $feedsByType = [];
+    protected $feedsByType = [];
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Feed\FeedInterface[]
      */
-    private $feedsByName = [];
+    protected $feedsByName = [];
 
     /**
      * @var string[]
      */
-    private $knownTypes;
+    protected $knownTypes;
 
     /**
      * @var string
      */
-    private $defaultType;
+    protected $defaultType;
 
     /**
      * @param string[] $knownTypes
@@ -90,7 +90,7 @@ class FeedRegistry
     /**
      * @param string $type
      */
-    private function assertTypeIsKnown(string $type): void
+    protected function assertTypeIsKnown(string $type): void
     {
         if (!in_array($type, $this->knownTypes, true)) {
             throw new \Shopsys\FrameworkBundle\Model\Feed\Exception\UnknownFeedTypeException($type, $this->knownTypes);
@@ -100,7 +100,7 @@ class FeedRegistry
     /**
      * @param string $name
      */
-    private function assertNameIsUnique(string $name): void
+    protected function assertNameIsUnique(string $name): void
     {
         if (array_key_exists($name, $this->feedsByName)) {
             throw new \Shopsys\FrameworkBundle\Model\Feed\Exception\FeedNameNotUniqueException($name);

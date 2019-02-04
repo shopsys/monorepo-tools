@@ -36,7 +36,7 @@ class MultidomainEntityClassFinder
      * @param \Doctrine\ORM\Mapping\ClassMetadata $classMetadata
      * @return bool
      */
-    private function isMultidomainEntity(ClassMetadata $classMetadata)
+    protected function isMultidomainEntity(ClassMetadata $classMetadata)
     {
         $identifierFieldNames = $classMetadata->getIdentifierFieldNames();
 

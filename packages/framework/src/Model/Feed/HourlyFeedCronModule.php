@@ -11,17 +11,17 @@ class HourlyFeedCronModule implements SimpleCronModuleInterface
     /**
      * @var \Shopsys\FrameworkBundle\Model\Feed\FeedFacade
      */
-    private $feedFacade;
+    protected $feedFacade;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\Domain\Domain
      */
-    private $domain;
+    protected $domain;
 
     /**
      * @var \Symfony\Bridge\Monolog\Logger
      */
-    private $logger;
+    protected $logger;
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\Feed\FeedFacade $feedFacade

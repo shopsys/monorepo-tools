@@ -16,12 +16,12 @@ class Authenticator
     /**
      * @var \Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage
      */
-    private $tokenStorage;
+    protected $tokenStorage;
 
     /**
      * @var \Symfony\Component\HttpKernel\Debug\TraceableEventDispatcher
      */
-    private $traceableEventDispatcher;
+    protected $traceableEventDispatcher;
 
     /**
      * @param \Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage $tokenStorage

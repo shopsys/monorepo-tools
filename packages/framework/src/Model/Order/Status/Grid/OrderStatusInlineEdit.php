@@ -14,17 +14,17 @@ class OrderStatusInlineEdit extends AbstractGridInlineEdit
     /**
      * @var \Shopsys\FrameworkBundle\Model\Order\Status\OrderStatusFacade
      */
-    private $orderStatusFacade;
+    protected $orderStatusFacade;
 
     /**
      * @var \Symfony\Component\Form\FormFactoryInterface
      */
-    private $formFactory;
+    protected $formFactory;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Order\Status\OrderStatusDataFactoryInterface
      */
-    private $orderStatusDataFactory;
+    protected $orderStatusDataFactory;
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\Order\Status\Grid\OrderStatusGridFactory $orderStatusGridFactory

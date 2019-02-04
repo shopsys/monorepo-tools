@@ -10,7 +10,7 @@ class SimpleBreadcrumbGenerator implements BreadcrumbGeneratorInterface
     /**
      * @var string[]|null
      */
-    private $routeNameMap;
+    protected $routeNameMap;
 
     /**
      * @param string $routeName
@@ -37,7 +37,7 @@ class SimpleBreadcrumbGenerator implements BreadcrumbGeneratorInterface
     /**
      * @return string[]
      */
-    private function getRouteNameMap()
+    protected function getRouteNameMap()
     {
         if ($this->routeNameMap === null) {
             // Caching in order to translate breadcrumb item names only once

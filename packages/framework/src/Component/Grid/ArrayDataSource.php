@@ -9,12 +9,12 @@ class ArrayDataSource implements DataSourceInterface
     /**
      * @var array
      */
-    private $data;
+    protected $data;
 
     /**
      * @var string
      */
-    private $rowIdSourceColumnName;
+    protected $rowIdSourceColumnName;
 
     /**
      * @param array $data

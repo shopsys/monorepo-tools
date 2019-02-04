@@ -10,12 +10,12 @@ class ProductPriceRecalculationScheduler
     /**
      * @var \Shopsys\FrameworkBundle\Model\Product\ProductRepository
      */
-    private $productRepository;
+    protected $productRepository;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Product\Product[]
      */
-    private $products = [];
+    protected $products = [];
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\Product\ProductRepository $productRepository

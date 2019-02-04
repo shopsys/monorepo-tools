@@ -13,12 +13,12 @@ class ScriptDataFixture extends AbstractReferenceFixture
     /**
      * @var \Shopsys\FrameworkBundle\Model\Script\ScriptFacade
      */
-    private $scriptFacade;
+    protected $scriptFacade;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Script\ScriptDataFactoryInterface
      */
-    private $scriptDataFactory;
+    protected $scriptDataFactory;
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\Script\ScriptFacade $scriptFacade

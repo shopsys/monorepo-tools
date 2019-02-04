@@ -13,7 +13,7 @@ class SettingValueShopInfoDataFixture extends AbstractReferenceFixture
     /**
      * @var \Shopsys\FrameworkBundle\Component\Setting\Setting
      */
-    private $setting;
+    protected $setting;
 
     const SETTING_VALUES = [
         ShopInfoSettingFacade::SHOP_INFO_PHONE_NUMBER => '+1-234-567-8989',

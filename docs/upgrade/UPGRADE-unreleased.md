@@ -155,6 +155,10 @@ for instance:
     - if you have extended `CountryFormType`, revise your changes – new fields are available
     - if you have extended `CountryController` revise your changes – `new` and `edit` actions were added
 
+- if you have extended classes from `Shopsys\FrameworkBundle\Model`, `Shopsys\FrameworkBundle\Component` or `Shopsys\FrameworkBundle\DataFixtures\Demo` namespace ([#788](https://github.com/shopsys/shopsys/pull/788))
+    - you need to adjust extended methods and fields to `protected` visibility because all `private` visibilities from these namespaces were changed to `protected`
+    - you can delete methods that you just copied due to inability to inherit
+
 [Upgrade from v7.0.0-beta5 to Unreleased]: https://github.com/shopsys/shopsys/compare/v7.0.0-beta5...HEAD
 [shopsys/shopsys]: https://github.com/shopsys/shopsys
 [shopsys/project-base]: https://github.com/shopsys/project-base

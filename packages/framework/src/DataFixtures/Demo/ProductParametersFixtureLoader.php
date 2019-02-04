@@ -13,27 +13,27 @@ class ProductParametersFixtureLoader
     /**
      * @var \Shopsys\FrameworkBundle\Model\Product\Parameter\ParameterFacade
      */
-    private $parameterFacade;
+    protected $parameterFacade;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Product\Parameter\Parameter[]
      */
-    private $parameters;
+    protected $parameters;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Product\Parameter\ProductParameterValueDataFactoryInterface
      */
-    private $productParameterValueDataFactory;
+    protected $productParameterValueDataFactory;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Product\Parameter\ParameterValueDataFactoryInterface
      */
-    private $parameterValueDataFactory;
+    protected $parameterValueDataFactory;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Product\Parameter\ParameterDataFactoryInterface
      */
-    private $parameterDataFactory;
+    protected $parameterDataFactory;
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\Product\Parameter\ParameterFacade $parameterFacade
@@ -89,7 +89,7 @@ class ProductParametersFixtureLoader
      * @param string $serializedParameterNames
      * @param string $serializedValueTexts
      */
-    private function addProductParameterValuesDataToCollection(
+    protected function addProductParameterValuesDataToCollection(
         ArrayCollection $productParameterValuesDataCollection,
         $serializedParameterNames,
         $serializedValueTexts
@@ -115,7 +115,7 @@ class ProductParametersFixtureLoader
      * @param string $serializedString
      * @return string[]
      */
-    private function getDeserializedValuesIndexedByLocale($serializedString)
+    protected function getDeserializedValuesIndexedByLocale($serializedString)
     {
         $values = [];
         $items = explode(',', $serializedString);
@@ -131,7 +131,7 @@ class ProductParametersFixtureLoader
      * @param string[] $parameterNamesByLocale
      * @return \Shopsys\FrameworkBundle\Model\Product\Parameter\Parameter
      */
-    private function findParameterByNamesOrCreateNew(array $parameterNamesByLocale)
+    protected function findParameterByNamesOrCreateNew(array $parameterNamesByLocale)
     {
         $cacheId = json_encode($parameterNamesByLocale);
 

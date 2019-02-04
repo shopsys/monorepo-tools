@@ -10,12 +10,12 @@ class ProductSellingPrice
     /**
      * @var \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroup
      */
-    private $pricingGroup;
+    protected $pricingGroup;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Pricing\Price
      */
-    private $sellingPrice;
+    protected $sellingPrice;
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroup $pricingGroup

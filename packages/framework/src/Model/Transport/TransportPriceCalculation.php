@@ -12,12 +12,12 @@ class TransportPriceCalculation
     /**
      * @var \Shopsys\FrameworkBundle\Model\Pricing\BasePriceCalculation
      */
-    private $basePriceCalculation;
+    protected $basePriceCalculation;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Pricing\PricingSetting
      */
-    private $pricingSetting;
+    protected $pricingSetting;
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\Pricing\BasePriceCalculation $basePriceCalculation
@@ -72,7 +72,7 @@ class TransportPriceCalculation
      * @param int $domainId
      * @return bool
      */
-    private function isFree(Price $productsPrice, $domainId)
+    protected function isFree(Price $productsPrice, $domainId)
     {
         $freeTransportAndPaymentPriceLimit = $this->pricingSetting->getFreeTransportAndPaymentPriceLimit($domainId);
 

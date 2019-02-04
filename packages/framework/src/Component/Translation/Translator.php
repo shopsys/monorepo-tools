@@ -13,27 +13,27 @@ class Translator implements TranslatorInterface, TranslatorBagInterface
     /**
      * @var \Shopsys\FrameworkBundle\Component\Translation\Translator|null
      */
-    private static $self;
+    protected static $self;
 
     /**
      * @var \Symfony\Component\Translation\TranslatorInterface
      */
-    private $originalTranslator;
+    protected $originalTranslator;
 
     /**
      * @var \Symfony\Component\Translation\TranslatorBagInterface
      */
-    private $originalTranslatorBag;
+    protected $originalTranslatorBag;
 
     /**
      * @var \Symfony\Component\Translation\TranslatorInterface
      */
-    private $identityTranslator;
+    protected $identityTranslator;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\Translation\MessageIdNormalizer
      */
-    private $messageIdNormalizer;
+    protected $messageIdNormalizer;
 
     /**
      * @param \Symfony\Component\Translation\TranslatorInterface $originalTranslator
@@ -107,7 +107,7 @@ class Translator implements TranslatorInterface, TranslatorBagInterface
      * @param string|null $locale
      * @return string|null
      */
-    private function resolveLocale($locale)
+    protected function resolveLocale($locale)
     {
         if ($locale === null) {
             return $this->getLocale();
@@ -120,7 +120,7 @@ class Translator implements TranslatorInterface, TranslatorBagInterface
      * @param string|null $domain
      * @return string
      */
-    private function resolveDomain($domain)
+    protected function resolveDomain($domain)
     {
         if ($domain === null) {
             return self::DEFAULT_DOMAIN;

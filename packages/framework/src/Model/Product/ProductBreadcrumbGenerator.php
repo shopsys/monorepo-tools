@@ -13,17 +13,17 @@ class ProductBreadcrumbGenerator implements BreadcrumbGeneratorInterface
     /**
      * @var \Shopsys\FrameworkBundle\Model\Product\ProductRepository
      */
-    private $productRepository;
+    protected $productRepository;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Category\CategoryFacade
      */
-    private $categoryFacade;
+    protected $categoryFacade;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\Domain\Domain
      */
-    private $domain;
+    protected $domain;
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\Product\ProductRepository $productRepository
@@ -65,7 +65,7 @@ class ProductBreadcrumbGenerator implements BreadcrumbGeneratorInterface
      * @param \Shopsys\FrameworkBundle\Model\Category\Category $category
      * @return \Shopsys\FrameworkBundle\Component\Breadcrumb\BreadcrumbItem[]
      */
-    private function getCategoryBreadcrumbItems(Category $category)
+    protected function getCategoryBreadcrumbItems(Category $category)
     {
         $categoriesInPath = $this->categoryFacade->getVisibleCategoriesInPathFromRootOnDomain(
             $category,

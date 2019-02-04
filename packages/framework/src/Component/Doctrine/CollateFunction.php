@@ -12,12 +12,12 @@ class CollateFunction extends FunctionNode
     /**
      * @var \Doctrine\ORM\Query\AST\Node
      */
-    private $inputStringExpression;
+    protected $inputStringExpression;
 
     /**
      * @var string
      */
-    private $collation;
+    protected $collation;
 
     /**
      * @param \Doctrine\ORM\Query\Parser $parser

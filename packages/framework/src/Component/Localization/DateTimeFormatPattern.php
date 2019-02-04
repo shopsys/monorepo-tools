@@ -7,24 +7,24 @@ class DateTimeFormatPattern
     /**
      * @var string
      */
-    private $pattern;
+    protected $pattern;
 
     /**
      * @var string
      */
-    private $locale;
+    protected $locale;
 
     /**
      * @link http://php.net/manual/en/class.intldateformatter.php#intl.intldateformatter-constants
      * @var int|null
      */
-    private $dateType;
+    protected $dateType;
 
     /**
      * @link http://php.net/manual/en/class.intldateformatter.php#intl.intldateformatter-constants
      * @var int|null
      */
-    private $timeType;
+    protected $timeType;
 
     /**
      * @param string $pattern

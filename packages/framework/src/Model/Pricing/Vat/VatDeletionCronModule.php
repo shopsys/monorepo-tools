@@ -11,17 +11,17 @@ class VatDeletionCronModule implements IteratedCronModuleInterface
     /**
      * @var \Symfony\Bridge\Monolog\Logger
      */
-    private $logger;
+    protected $logger;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Pricing\Vat\VatFacade
      */
-    private $vatFacade;
+    protected $vatFacade;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Product\Pricing\ProductInputPriceFacade
      */
-    private $productInputPriceFacade;
+    protected $productInputPriceFacade;
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\Pricing\Vat\VatFacade $vatFacade

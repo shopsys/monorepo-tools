@@ -10,7 +10,7 @@ class ProductSearchExportCronModule implements SimpleCronModuleInterface
     /**
      * @var \Shopsys\FrameworkBundle\Model\Product\ProductSearchExport\ProductSearchExportFacade
      */
-    private $productSearchExportFacade;
+    protected $productSearchExportFacade;
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\Product\ProductSearchExport\ProductSearchExportFacade $productSearchExportFacade

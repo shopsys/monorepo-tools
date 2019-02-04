@@ -17,7 +17,7 @@ class PostgresqlLocaleMapper
     /**
      * @var string[]
      */
-    private static $windowsLocalesIndexedByCollation = [
+    protected static $windowsLocalesIndexedByCollation = [
         'af_ZA' => 'Afrikaans_South Africa',
         'am_ET' => 'Amharic_Ethiopia',
         'ar_AE' => 'Arabic_United Arab Emirates',

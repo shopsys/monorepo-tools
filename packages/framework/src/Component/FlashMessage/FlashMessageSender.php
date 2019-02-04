@@ -9,12 +9,12 @@ class FlashMessageSender
     /**
      * @var \Shopsys\FrameworkBundle\Component\FlashMessage\Bag
      */
-    private $flashMessageBag;
+    protected $flashMessageBag;
 
     /**
      * @var \Twig_Environment
      */
-    private $twigEnvironment;
+    protected $twigEnvironment;
 
     /**
      * @param \Shopsys\FrameworkBundle\Component\FlashMessage\Bag $flashMessageBag
@@ -63,7 +63,7 @@ class FlashMessageSender
      * @param array $parameters
      * @return string
      */
-    private function renderStringTwigTemplate($template, array $parameters)
+    protected function renderStringTwigTemplate($template, array $parameters)
     {
         $twigTemplate = $this->twigEnvironment->createTemplate($template);
 

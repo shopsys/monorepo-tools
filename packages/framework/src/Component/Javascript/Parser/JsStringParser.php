@@ -43,7 +43,7 @@ class JsStringParser
      * @param string $stringLiteral
      * @return string
      */
-    private function parseStringLiteral($stringLiteral)
+    protected function parseStringLiteral($stringLiteral)
     {
         return json_decode($this->normalizeStringLiteral($stringLiteral));
     }
@@ -52,7 +52,7 @@ class JsStringParser
      * @param string $stringLiteral
      * @return string
      */
-    private function normalizeStringLiteral($stringLiteral)
+    protected function normalizeStringLiteral($stringLiteral)
     {
         $matches = [];
         if (preg_match('/^"(.*)"$/', $stringLiteral, $matches)) {

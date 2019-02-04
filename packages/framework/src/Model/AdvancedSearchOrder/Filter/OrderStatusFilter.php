@@ -14,7 +14,7 @@ class OrderStatusFilter implements AdvancedSearchFilterInterface
     /**
      * @var \Shopsys\FrameworkBundle\Model\Order\Status\OrderStatusFacade
      */
-    private $orderStatusFacade;
+    protected $orderStatusFacade;
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\Order\Status\OrderStatusFacade $orderStatusFacade
@@ -83,7 +83,7 @@ class OrderStatusFilter implements AdvancedSearchFilterInterface
      * @param string $operator
      * @return string
      */
-    private function getContainsDqlOperator($operator)
+    protected function getContainsDqlOperator($operator)
     {
         switch ($operator) {
             case self::OPERATOR_IS:

@@ -9,7 +9,7 @@ class InvalidQuantityException extends Exception implements CartException
     /**
      * @var mixed
      */
-    private $invalidValue;
+    protected $invalidValue;
 
     /**
      * @param mixed $invalidValue

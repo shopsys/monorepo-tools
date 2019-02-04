@@ -16,17 +16,17 @@ class JsTranslatorCallParser
     /**
      * @var \Shopsys\FrameworkBundle\Component\Javascript\Parser\JsFunctionCallParser
      */
-    private $jsFunctionCallParser;
+    protected $jsFunctionCallParser;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\Javascript\Parser\JsStringParser
      */
-    private $jsStringParser;
+    protected $jsStringParser;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\Translation\TransMethodSpecification[]
      */
-    private $transMethodSpecifications;
+    protected $transMethodSpecifications;
 
     /**
      * @param \Shopsys\FrameworkBundle\Component\Javascript\Parser\JsFunctionCallParser $jsFunctionCallParser
@@ -79,7 +79,7 @@ class JsTranslatorCallParser
      * @param \PLUG\JavaScript\JNodes\nonterminal\JCallExprNode $callExprNode
      * @return bool
      */
-    private function isTransFunctionCall(JCallExprNode $callExprNode)
+    protected function isTransFunctionCall(JCallExprNode $callExprNode)
     {
         $functionName = $this->jsFunctionCallParser->getFunctionName($callExprNode);
 
@@ -96,7 +96,7 @@ class JsTranslatorCallParser
      * @param \PLUG\JavaScript\JNodes\JNodeBase $messageIdArgumentNode
      * @return string
      */
-    private function getMessageId(JNodeBase $messageIdArgumentNode)
+    protected function getMessageId(JNodeBase $messageIdArgumentNode)
     {
         try {
             $messageId = $this->jsStringParser->getConcatenatedString($messageIdArgumentNode);
@@ -116,7 +116,7 @@ class JsTranslatorCallParser
      * @param \PLUG\JavaScript\JNodes\nonterminal\JCallExprNode $callExprNode
      * @return string
      */
-    private function getDomain(JCallExprNode $callExprNode)
+    protected function getDomain(JCallExprNode $callExprNode)
     {
         $functionName = $this->jsFunctionCallParser->getFunctionName($callExprNode);
         $domainArgumentIndex = $this->transMethodSpecifications[$functionName]->getDomainArgumentIndex();
@@ -144,7 +144,7 @@ class JsTranslatorCallParser
      * @param \PLUG\JavaScript\JNodes\nonterminal\JCallExprNode $callExprNode
      * @return \PLUG\JavaScript\JNodes\JNodeBase
      */
-    private function getMessageIdArgumentNode(JCallExprNode $callExprNode)
+    protected function getMessageIdArgumentNode(JCallExprNode $callExprNode)
     {
         $functionName = $this->jsFunctionCallParser->getFunctionName($callExprNode);
         $messageIdArgumentIndex = $this->transMethodSpecifications[$functionName]->getMessageIdArgumentIndex();

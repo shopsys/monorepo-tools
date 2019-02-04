@@ -13,12 +13,12 @@ class LocalizationListener implements EventSubscriberInterface
     /**
      * @var \Shopsys\FrameworkBundle\Component\Domain\Domain
      */
-    private $domain;
+    protected $domain;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Localization\Localization
      */
-    private $localization;
+    protected $localization;
 
     /**
      * @param \Shopsys\FrameworkBundle\Component\Domain\Domain $domain
@@ -52,7 +52,7 @@ class LocalizationListener implements EventSubscriberInterface
      * @param \Symfony\Component\HttpFoundation\Request $request
      * @return bool
      */
-    private function isAdminRequest(Request $request)
+    protected function isAdminRequest(Request $request)
     {
         return preg_match('/^admin_/', $request->attributes->get('_route')) === 1;
     }

@@ -12,7 +12,7 @@ class ImageConfig
     /**
      * @var \Shopsys\FrameworkBundle\Component\Image\Config\ImageEntityConfig[]
      */
-    private $imageEntityConfigsByClass;
+    protected $imageEntityConfigsByClass;
 
     /**
      * @param \Shopsys\FrameworkBundle\Component\Image\Config\ImageEntityConfig[] $imageEntityConfigsByClass

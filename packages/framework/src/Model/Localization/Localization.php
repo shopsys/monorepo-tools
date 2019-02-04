@@ -11,7 +11,7 @@ class Localization
     /**
      * @var string[]
      */
-    private $languageNamesByLocale = [
+    protected $languageNamesByLocale = [
         'cs' => 'Čeština',
         'de' => 'Deutsch',
         'en' => 'English',
@@ -23,7 +23,7 @@ class Localization
     /**
      * @var string[]
      */
-    private $collationsByLocale = [
+    protected $collationsByLocale = [
         'cs' => 'cs_CZ',
         'de' => 'de_DE',
         'en' => 'en_US',
@@ -35,12 +35,12 @@ class Localization
     /**
      * @var \Shopsys\FrameworkBundle\Component\Domain\Domain
      */
-    private $domain;
+    protected $domain;
 
     /**
      * @var array
      */
-    private $allLocales;
+    protected $allLocales;
 
     /**
      * @param \Shopsys\FrameworkBundle\Component\Domain\Domain $domain

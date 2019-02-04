@@ -9,7 +9,7 @@ class ImageEntityConfigNotFoundException extends Exception implements ImageConfi
     /**
      * @var string
      */
-    private $entityClassOrName;
+    protected $entityClassOrName;
 
     /**
      * @param string $entityClassOrName

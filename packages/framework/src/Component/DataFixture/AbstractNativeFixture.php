@@ -11,7 +11,7 @@ abstract class AbstractNativeFixture extends AbstractFixture
     /**
      * @var \Doctrine\ORM\EntityManagerInterface
      */
-    private $entityManager;
+    protected $entityManager;
 
     /**
      * @required

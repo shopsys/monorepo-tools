@@ -7,12 +7,12 @@ class UploadedFileEntityConfig
     /**
      * @var string
      */
-    private $entityName;
+    protected $entityName;
 
     /**
      * @var string
      */
-    private $entityClass;
+    protected $entityClass;
 
     /**
      * @param string $entityName

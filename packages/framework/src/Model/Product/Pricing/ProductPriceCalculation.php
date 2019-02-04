@@ -13,22 +13,22 @@ class ProductPriceCalculation
     /**
      * @var \Shopsys\FrameworkBundle\Model\Pricing\BasePriceCalculation
      */
-    private $basePriceCalculation;
+    protected $basePriceCalculation;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Pricing\PricingSetting
      */
-    private $pricingSetting;
+    protected $pricingSetting;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Product\Pricing\ProductManualInputPriceRepository
      */
-    private $productManualInputPriceRepository;
+    protected $productManualInputPriceRepository;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Product\ProductRepository
      */
-    private $productRepository;
+    protected $productRepository;
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\Pricing\BasePriceCalculation $basePriceCalculation
@@ -69,7 +69,7 @@ class ProductPriceCalculation
      * @param \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroup $pricingGroup
      * @return \Shopsys\FrameworkBundle\Model\Product\Pricing\ProductPrice
      */
-    private function calculateMainVariantPrice(Product $mainVariant, $domainId, PricingGroup $pricingGroup)
+    protected function calculateMainVariantPrice(Product $mainVariant, $domainId, PricingGroup $pricingGroup)
     {
         $variants = $this->productRepository->getAllSellableVariantsByMainVariant(
             $mainVariant,
@@ -97,7 +97,7 @@ class ProductPriceCalculation
      * @param \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroup $pricingGroup
      * @return \Shopsys\FrameworkBundle\Model\Product\Pricing\ProductPrice
      */
-    private function calculateProductPriceForPricingGroup(Product $product, PricingGroup $pricingGroup)
+    protected function calculateProductPriceForPricingGroup(Product $product, PricingGroup $pricingGroup)
     {
         $manualInputPrice = $this->productManualInputPriceRepository->findByProductAndPricingGroup($product, $pricingGroup);
         if ($manualInputPrice !== null) {

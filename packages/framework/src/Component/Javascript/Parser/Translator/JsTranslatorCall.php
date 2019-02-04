@@ -10,27 +10,27 @@ class JsTranslatorCall
     /**
      * @var \PLUG\JavaScript\JNodes\nonterminal\JCallExprNode
      */
-    private $callExprNode;
+    protected $callExprNode;
 
     /**
      * @var \PLUG\JavaScript\JNodes\JNodeBase
      */
-    private $messageIdArgumentNode;
+    protected $messageIdArgumentNode;
 
     /**
      * @var string
      */
-    private $messageId;
+    protected $messageId;
 
     /**
      * @var string
      */
-    private $domain;
+    protected $domain;
 
     /**
      * @var string
      */
-    private $functionName;
+    protected $functionName;
 
     /**
      * @param \PLUG\JavaScript\JNodes\nonterminal\JCallExprNode $callExprNode

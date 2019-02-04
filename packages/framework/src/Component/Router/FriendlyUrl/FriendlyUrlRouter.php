@@ -12,37 +12,37 @@ class FriendlyUrlRouter implements RouterInterface
     /**
      * @var \Symfony\Component\Routing\RequestContext
      */
-    private $context;
+    protected $context;
 
     /**
      * @var \Symfony\Component\Config\Loader\LoaderInterface
      */
-    private $configLoader;
+    protected $configLoader;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\FriendlyUrlGenerator
      */
-    private $friendlyUrlGenerator;
+    protected $friendlyUrlGenerator;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\FriendlyUrlMatcher
      */
-    private $friendlyUrlMatcher;
+    protected $friendlyUrlMatcher;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\Domain\Config\DomainConfig
      */
-    private $domainConfig;
+    protected $domainConfig;
 
     /**
      * @var string
      */
-    private $friendlyUrlRouterResourceFilepath;
+    protected $friendlyUrlRouterResourceFilepath;
 
     /**
      * @var \Symfony\Component\Routing\RouteCollection
      */
-    private $collection;
+    protected $collection;
 
     /**
      * @param \Symfony\Component\Routing\RequestContext $context

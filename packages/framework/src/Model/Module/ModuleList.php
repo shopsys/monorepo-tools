@@ -33,7 +33,7 @@ class ModuleList
     /**
      * @return string[]
      */
-    private function getLabelsIndexedByName()
+    protected function getLabelsIndexedByName()
     {
         return [
             self::ACCESSORIES_ON_BUY => t('Accessories in purchase confirmation box'),

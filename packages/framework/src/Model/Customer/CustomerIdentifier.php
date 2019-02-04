@@ -7,12 +7,12 @@ class CustomerIdentifier
     /**
      * @var string
      */
-    private $cartIdentifier = '';
+    protected $cartIdentifier = '';
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Customer\User|null
      */
-    private $user;
+    protected $user;
 
     /**
      * @param string $cartIdentifier

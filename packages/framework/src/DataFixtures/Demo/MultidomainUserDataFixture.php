@@ -16,22 +16,22 @@ class MultidomainUserDataFixture extends AbstractReferenceFixture implements Dep
     /**
      * @var \Shopsys\FrameworkBundle\DataFixtures\Demo\UserDataFixtureLoader
      */
-    private $loaderService;
+    protected $loaderService;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Customer\CustomerFacade
      */
-    private $customerFacade;
+    protected $customerFacade;
 
     /**
      * @var \Faker\Generator
      */
-    private $faker;
+    protected $faker;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\Domain\Domain
      */
-    private $domain;
+    protected $domain;
 
     /**
      * @param \Shopsys\FrameworkBundle\DataFixtures\Demo\UserDataFixtureLoader $loaderService
@@ -64,7 +64,7 @@ class MultidomainUserDataFixture extends AbstractReferenceFixture implements Dep
     /**
      * @param int $domainId
      */
-    private function loadForDomain(int $domainId)
+    protected function loadForDomain(int $domainId)
     {
         $countries = [
             $this->getReference(CountryDataFixture::COUNTRY_CZECH_REPUBLIC),

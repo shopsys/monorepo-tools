@@ -10,17 +10,17 @@ class QuantifiedItemPrice
     /**
      * @var \Shopsys\FrameworkBundle\Model\Pricing\Price
      */
-    private $unitPrice;
+    protected $unitPrice;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Pricing\Price
      */
-    private $totalPrice;
+    protected $totalPrice;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Pricing\Vat\Vat
      */
-    private $vat;
+    protected $vat;
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\Pricing\Price $unitPrice

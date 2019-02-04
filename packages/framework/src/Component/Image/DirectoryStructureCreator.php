@@ -10,27 +10,27 @@ class DirectoryStructureCreator
     /**
      * @var \Shopsys\FrameworkBundle\Component\Image\Config\ImageConfig
      */
-    private $imageConfig;
+    protected $imageConfig;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\Image\ImageLocator
      */
-    private $imageLocator;
+    protected $imageLocator;
 
     /**
      * @var \League\Flysystem\FilesystemInterface
      */
-    private $filesystem;
+    protected $filesystem;
 
     /**
      * @var string
      */
-    private $imageDir;
+    protected $imageDir;
 
     /**
      * @var string
      */
-    private $domainImageDir;
+    protected $domainImageDir;
 
     /**
      * @param string $imageDir
@@ -90,7 +90,7 @@ class DirectoryStructureCreator
      * @param \Shopsys\FrameworkBundle\Component\Image\Config\ImageSizeConfig[] $sizeConfigs
      * @return string[]
      */
-    private function getTargetDirectoriesFromSizeConfigs($entityName, $type, array $sizeConfigs)
+    protected function getTargetDirectoriesFromSizeConfigs($entityName, $type, array $sizeConfigs)
     {
         $directories = [];
         foreach ($sizeConfigs as $sizeConfig) {

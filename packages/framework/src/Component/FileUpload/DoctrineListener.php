@@ -10,7 +10,7 @@ class DoctrineListener
     /**
      * @var \Shopsys\FrameworkBundle\Component\FileUpload\FileUpload
      */
-    private $fileUpload;
+    protected $fileUpload;
 
     /**
      * @param \Shopsys\FrameworkBundle\Component\FileUpload\FileUpload $fileUpload

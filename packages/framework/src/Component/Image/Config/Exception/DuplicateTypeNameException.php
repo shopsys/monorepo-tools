@@ -9,7 +9,7 @@ class DuplicateTypeNameException extends Exception implements ImageConfigExcepti
     /**
      * @var string|null
      */
-    private $typeName;
+    protected $typeName;
 
     /**
      * @param string|null $typeName

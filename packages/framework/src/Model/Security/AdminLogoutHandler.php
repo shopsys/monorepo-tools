@@ -12,12 +12,12 @@ class AdminLogoutHandler implements LogoutSuccessHandlerInterface
     /**
      * @var \Symfony\Component\Routing\RouterInterface
      */
-    private $router;
+    protected $router;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Security\AdministratorLoginFacade
      */
-    private $administratorLoginFacade;
+    protected $administratorLoginFacade;
 
     /**
      * @param \Symfony\Component\Routing\RouterInterface $router

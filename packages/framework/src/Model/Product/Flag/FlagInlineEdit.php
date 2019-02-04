@@ -11,17 +11,17 @@ class FlagInlineEdit extends AbstractGridInlineEdit
     /**
      * @var \Shopsys\FrameworkBundle\Model\Product\Flag\FlagFacade
      */
-    private $flagFacade;
+    protected $flagFacade;
 
     /**
      * @var \Symfony\Component\Form\FormFactoryInterface
      */
-    private $formFactory;
+    protected $formFactory;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Product\Flag\FlagDataFactoryInterface
      */
-    private $flagDataFactory;
+    protected $flagDataFactory;
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\Product\Flag\FlagGridFactory $flagGridFactory

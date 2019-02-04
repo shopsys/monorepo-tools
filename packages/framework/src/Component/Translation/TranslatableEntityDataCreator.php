@@ -13,17 +13,17 @@ class TranslatableEntityDataCreator
     /**
      * @var \Doctrine\ORM\EntityManagerInterface
      */
-    private $em;
+    protected $em;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\Doctrine\NotNullableColumnsFinder
      */
-    private $notNullableColumnsFinder;
+    protected $notNullableColumnsFinder;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\Doctrine\SqlQuoter
      */
-    private $sqlQuoter;
+    protected $sqlQuoter;
 
     /**
      * @param \Doctrine\ORM\EntityManagerInterface $em
@@ -61,7 +61,7 @@ class TranslatableEntityDataCreator
     /**
      * @return \Doctrine\ORM\Mapping\ClassMetadata[]
      */
-    private function getAllTranslatableEntitiesMetadata()
+    protected function getAllTranslatableEntitiesMetadata()
     {
         $translatableEntitiesMetadata = [];
         $allClassesMetadata = $this->em->getMetadataFactory()->getAllMetadata();
@@ -81,7 +81,7 @@ class TranslatableEntityDataCreator
      * @param string $tableName
      * @param string[] $columnNames
      */
-    private function copyTranslatableDataForNewLocale($templateLocale, $newLocale, $tableName, array $columnNames)
+    protected function copyTranslatableDataForNewLocale($templateLocale, $newLocale, $tableName, array $columnNames)
     {
         $quotedColumnNames = $this->sqlQuoter->quoteIdentifiers($columnNames);
         $quotedColumnNamesSql = implode(', ', $quotedColumnNames);

@@ -7,7 +7,7 @@ class OrderEditResult
     /**
      * @var bool
      */
-    private $statusChanged;
+    protected $statusChanged;
 
     /**
      * @param bool $statusChanged

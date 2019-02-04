@@ -10,7 +10,7 @@ class QueryBuilder extends BaseQueryBuilder
     /**
      * @var \Shopsys\FrameworkBundle\Component\EntityExtension\EntityNameResolver
      */
-    private $entityNameResolver;
+    protected $entityNameResolver;
 
     /**
      * @param \Doctrine\ORM\EntityManagerInterface $em

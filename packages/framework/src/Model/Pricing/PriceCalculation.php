@@ -9,7 +9,7 @@ class PriceCalculation
     /**
      * @var \Shopsys\FrameworkBundle\Model\Pricing\Rounding
      */
-    private $rounding;
+    protected $rounding;
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\Pricing\Rounding $rounding

@@ -87,12 +87,5 @@ Besides the rules that are checked by automatic tools, we have few rules for whi
     }
     ```
 - Entities have to be created by factories. Only allowed exception are `*Translation` entities that are created by their owner entity.
-- Visibility of all properties, methods and constants of following classes must be protected or public to enable extensibility.
-  This is valid for packages in which we plan extensibility - Framework, ProductFeed\*
-    - Entities
-    - Factories
-    - Controllers
-    - Facades
-    - Repositories
 - Framework entities must not use [Doctrine inheritance mapping](https://www.doctrine-project.org/projects/doctrine-orm/en/2.6/reference/inheritance-mapping.html)
   because it causes problems during entity extension. Such problem with `OrderItem` was resolved during [making OrderItem extendable #715](https://github.com/shopsys/shopsys/pull/715).

@@ -11,17 +11,17 @@ class VatInlineEdit extends AbstractGridInlineEdit
     /**
      * @var \Shopsys\FrameworkBundle\Model\Pricing\Vat\VatFacade
      */
-    private $vatFacade;
+    protected $vatFacade;
 
     /**
      * @var \Symfony\Component\Form\FormFactoryInterface
      */
-    private $formFactory;
+    protected $formFactory;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Pricing\Vat\VatDataFactoryInterface
      */
-    private $vatDataFactory;
+    protected $vatDataFactory;
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\Pricing\Vat\VatGridFactory $vatGridFactory

@@ -9,12 +9,12 @@ class TransportVisibilityCalculation
     /**
      * @var \Shopsys\FrameworkBundle\Model\Transport\IndependentTransportVisibilityCalculation
      */
-    private $independentTransportVisibilityCalculation;
+    protected $independentTransportVisibilityCalculation;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Payment\IndependentPaymentVisibilityCalculation
      */
-    private $independentPaymentVisibilityCalculation;
+    protected $independentPaymentVisibilityCalculation;
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\Transport\IndependentTransportVisibilityCalculation $independentTransportVisibilityCalculation
@@ -49,7 +49,7 @@ class TransportVisibilityCalculation
      * @param int $domainId
      * @return bool
      */
-    private function existsIndependentlyVisiblePaymentWithTransport(array $payments, Transport $transport, $domainId)
+    protected function existsIndependentlyVisiblePaymentWithTransport(array $payments, Transport $transport, $domainId)
     {
         foreach ($payments as $payment) {
             if ($this->independentPaymentVisibilityCalculation->isIndependentlyVisible($payment, $domainId)) {

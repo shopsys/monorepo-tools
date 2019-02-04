@@ -41,22 +41,22 @@ class ConstraintViolationExtractor implements FileVisitorInterface, NodeVisitor
     /**
      * @var \PhpParser\NodeTraverser
      */
-    private $traverser;
+    protected $traverser;
 
     /**
      * @var \JMS\TranslationBundle\Model\MessageCatalogue
      */
-    private $catalogue;
+    protected $catalogue;
 
     /**
      * @var \SplFileInfo
      */
-    private $file;
+    protected $file;
 
     /**
      * @var string[]
      */
-    private $currentExecutionContextVariableNames;
+    protected $currentExecutionContextVariableNames;
 
     public function __construct()
     {
@@ -91,7 +91,7 @@ class ConstraintViolationExtractor implements FileVisitorInterface, NodeVisitor
     /**
      * @param \PhpParser\Node\Stmt\ClassMethod $node
      */
-    private function setCurrentExecutionContextVariableNamesFromNode(ClassMethod $node)
+    protected function setCurrentExecutionContextVariableNamesFromNode(ClassMethod $node)
     {
         $this->currentExecutionContextVariableNames = [];
         foreach ($node->getParams() as $parameter) {
@@ -105,7 +105,7 @@ class ConstraintViolationExtractor implements FileVisitorInterface, NodeVisitor
      * @param \PhpParser\Node\Param $parameter
      * @return string
      */
-    private function isParameterExecutionContextInterfaceSubclass(Node\Param $parameter)
+    protected function isParameterExecutionContextInterfaceSubclass(Node\Param $parameter)
     {
         if ($parameter->type instanceof FullyQualified) {
             $fullyQualifiedName = implode('\\', $parameter->type->parts);
@@ -121,7 +121,7 @@ class ConstraintViolationExtractor implements FileVisitorInterface, NodeVisitor
      * @param \PhpParser\Node $node
      * @return bool
      */
-    private function isAddViolationMethodCall(Node $node): bool
+    protected function isAddViolationMethodCall(Node $node): bool
     {
         return $node->var instanceof Variable
             && in_array($node->var->name, $this->currentExecutionContextVariableNames, true)
@@ -131,7 +131,7 @@ class ConstraintViolationExtractor implements FileVisitorInterface, NodeVisitor
     /**
      * @param \PhpParser\Node\Expr\MethodCall $methodCall
      */
-    private function extractMessage(MethodCall $methodCall)
+    protected function extractMessage(MethodCall $methodCall)
     {
         $firstArgumentWithMessage = reset($methodCall->args);
         if ($firstArgumentWithMessage->value instanceof String_) {

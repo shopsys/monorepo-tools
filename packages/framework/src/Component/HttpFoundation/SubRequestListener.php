@@ -12,12 +12,12 @@ class SubRequestListener
     /**
      * @var \Symfony\Component\HttpFoundation\RedirectResponse
      */
-    private $redirectResponse;
+    protected $redirectResponse;
 
     /**
      * @var \Symfony\Component\HttpFoundation\Request
      */
-    private $masterRequest;
+    protected $masterRequest;
 
     /**
      * @param \Symfony\Component\HttpKernel\Event\FilterControllerEvent $event
@@ -34,7 +34,7 @@ class SubRequestListener
     /**
      * @param \Symfony\Component\HttpFoundation\Request $subRequest
      */
-    private function fillSubRequestFromMasterRequest(Request $subRequest)
+    protected function fillSubRequestFromMasterRequest(Request $subRequest)
     {
         $subRequest->setMethod($this->masterRequest->getMethod());
         $subRequest->request = $this->masterRequest->request;
@@ -62,7 +62,7 @@ class SubRequestListener
     /**
      * @param \Symfony\Component\HttpFoundation\Response $subResponse
      */
-    private function processSubResponse(Response $subResponse)
+    protected function processSubResponse(Response $subResponse)
     {
         if ($subResponse->isRedirection()) {
             if ($this->redirectResponse === null) {

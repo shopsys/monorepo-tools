@@ -10,7 +10,7 @@ class FormTimeProvider
     /**
      * @var \Symfony\Component\HttpFoundation\Session\SessionInterface
      */
-    private $session;
+    protected $session;
 
     /**
      * @param \Symfony\Component\HttpFoundation\Session\SessionInterface $session

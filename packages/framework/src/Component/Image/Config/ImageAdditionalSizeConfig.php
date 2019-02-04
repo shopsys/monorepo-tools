@@ -7,17 +7,17 @@ class ImageAdditionalSizeConfig
     /**
      * @var int|null
      */
-    private $width;
+    protected $width;
 
     /**
      * @var int|null
      */
-    private $height;
+    protected $height;
 
     /**
      * @var string
      */
-    private $media;
+    protected $media;
 
     /**
      * @param int|null $width

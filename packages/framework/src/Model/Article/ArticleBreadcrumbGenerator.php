@@ -10,7 +10,7 @@ class ArticleBreadcrumbGenerator implements BreadcrumbGeneratorInterface
     /**
      * @var \Shopsys\FrameworkBundle\Model\Article\ArticleRepository
      */
-    private $articleRepository;
+    protected $articleRepository;
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\Article\ArticleRepository $articleRepository

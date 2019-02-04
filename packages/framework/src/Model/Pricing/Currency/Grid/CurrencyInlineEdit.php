@@ -13,17 +13,17 @@ class CurrencyInlineEdit extends AbstractGridInlineEdit
     /**
      * @var \Shopsys\FrameworkBundle\Model\Pricing\Currency\CurrencyFacade
      */
-    private $currencyFacade;
+    protected $currencyFacade;
 
     /**
      * @var \Symfony\Component\Form\FormFactoryInterface
      */
-    private $formFactory;
+    protected $formFactory;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Pricing\Currency\CurrencyDataFactoryInterface
      */
-    private $currencyDataFactory;
+    protected $currencyDataFactory;
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\Pricing\Currency\Grid\CurrencyGridFactory $currencyGridFactory

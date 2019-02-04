@@ -7,7 +7,7 @@ class GridInlineEditRegistry
     /**
      * @var \Shopsys\FrameworkBundle\Component\Grid\InlineEdit\GridInlineEditInterface[]
      */
-    private $gridInlineEdits;
+    protected $gridInlineEdits;
 
     /**
      * @param \Shopsys\FrameworkBundle\Component\Grid\InlineEdit\GridInlineEditInterface[] $gridInlineEdits

@@ -20,17 +20,17 @@ class MultidomainPricingGroupDataFixture extends AbstractReferenceFixture implem
     /**
      * @var \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroupFacade
      */
-    private $pricingGroupFacade;
+    protected $pricingGroupFacade;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroupDataFactoryInterface
      */
-    private $pricingGroupDataFactory;
+    protected $pricingGroupDataFactory;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\Domain\Domain
      */
-    private $domain;
+    protected $domain;
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroupFacade $pricingGroupFacade
@@ -60,7 +60,7 @@ class MultidomainPricingGroupDataFixture extends AbstractReferenceFixture implem
     /**
      * @param int $domainId
      */
-    private function loadForDomain(int $domainId)
+    protected function loadForDomain(int $domainId)
     {
         $pricingGroupData = $this->pricingGroupDataFactory->create();
 
@@ -83,7 +83,7 @@ class MultidomainPricingGroupDataFixture extends AbstractReferenceFixture implem
      * @param int $domainId
      * @param string $referenceName
      */
-    private function createPricingGroup(
+    protected function createPricingGroup(
         PricingGroupData $pricingGroupData,
         $domainId,
         $referenceName

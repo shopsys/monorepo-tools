@@ -15,12 +15,12 @@ class SitemapDumper extends Dumper
     /**
      * @var \League\Flysystem\FilesystemInterface
      */
-    private $abstractFilesystem;
+    protected $abstractFilesystem;
 
     /**
      * @var \League\Flysystem\MountManager
      */
-    private $mountManager;
+    protected $mountManager;
 
     /**
      * @param \Symfony\Component\EventDispatcher\EventDispatcherInterface $dispatcher

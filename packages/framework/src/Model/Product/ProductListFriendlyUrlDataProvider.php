@@ -17,12 +17,12 @@ class ProductListFriendlyUrlDataProvider implements FriendlyUrlDataProviderInter
     /**
      * @var \Doctrine\ORM\EntityManagerInterface
      */
-    private $em;
+    protected $em;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\FriendlyUrlDataFactoryInterface
      */
-    private $friendlyUrlDataFactory;
+    protected $friendlyUrlDataFactory;
 
     /**
      * @param \Doctrine\ORM\EntityManagerInterface $em

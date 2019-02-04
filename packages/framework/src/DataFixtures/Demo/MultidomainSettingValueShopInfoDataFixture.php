@@ -22,12 +22,12 @@ class MultidomainSettingValueShopInfoDataFixture extends AbstractReferenceFixtur
     /**
      * @var \Shopsys\FrameworkBundle\Component\Setting\Setting
      */
-    private $setting;
+    protected $setting;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\Domain\Domain
      */
-    private $domain;
+    protected $domain;
 
     /**
      * @param \Shopsys\FrameworkBundle\Component\Setting\Setting $setting
@@ -52,7 +52,7 @@ class MultidomainSettingValueShopInfoDataFixture extends AbstractReferenceFixtur
     /**
      * @param int $domainId
      */
-    private function loadForDomain(int $domainId)
+    protected function loadForDomain(int $domainId)
     {
         foreach (self::SETTING_VALUES as $key => $value) {
             $this->setting->setForDomain($key, $value, $domainId);

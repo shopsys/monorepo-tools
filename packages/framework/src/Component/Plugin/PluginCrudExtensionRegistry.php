@@ -17,7 +17,7 @@ class PluginCrudExtensionRegistry
     /**
      * @var \Shopsys\Plugin\PluginCrudExtensionInterface[][]
      */
-    private $crudExtensionsByTypeAndServiceId = [];
+    protected $crudExtensionsByTypeAndServiceId = [];
 
     /**
      * @param \Shopsys\Plugin\PluginCrudExtensionInterface $crudExtension

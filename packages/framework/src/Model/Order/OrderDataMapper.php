@@ -7,7 +7,7 @@ class OrderDataMapper
     /**
      * @var \Shopsys\FrameworkBundle\Model\Order\OrderDataFactoryInterface
      */
-    private $orderDataFactory;
+    protected $orderDataFactory;
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\Order\OrderDataFactoryInterface $orderDataFactory

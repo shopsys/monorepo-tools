@@ -24,32 +24,32 @@ class PhpFileExtractor implements FileVisitorInterface, NodeVisitor
     /**
      * @var \PhpParser\NodeTraverser
      */
-    private $traverser;
+    protected $traverser;
 
     /**
      * @var \Doctrine\Common\Annotations\DocParser
      */
-    private $docParser;
+    protected $docParser;
 
     /**
      * @var \JMS\TranslationBundle\Model\MessageCatalogue
      */
-    private $catalogue;
+    protected $catalogue;
 
     /**
      * @var \SplFileInfo
      */
-    private $file;
+    protected $file;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\Translation\TransMethodSpecification[]
      */
-    private $transMethodSpecifications;
+    protected $transMethodSpecifications;
 
     /**
      * @var \PhpParser\Node|null
      */
-    private $previousNode;
+    protected $previousNode;
 
     /**
      * @param \Doctrine\Common\Annotations\DocParser $docParser
@@ -105,7 +105,7 @@ class PhpFileExtractor implements FileVisitorInterface, NodeVisitor
      * @param \PhpParser\Node\Expr\MethodCall|\PhpParser\Node\Expr\FuncCall $node
      * @return string
      */
-    private function getMessageId($node)
+    protected function getMessageId($node)
     {
         $methodName = $this->getNormalizedMethodName($this->getNodeName($node));
         $messageIdArgumentIndex = $this->transMethodSpecifications[$methodName]->getMessageIdArgumentIndex();
@@ -121,7 +121,7 @@ class PhpFileExtractor implements FileVisitorInterface, NodeVisitor
      * @param \PhpParser\Node\Expr\MethodCall|\PhpParser\Node\Expr\FuncCall $node
      * @return string
      */
-    private function getDomain($node)
+    protected function getDomain($node)
     {
         $methodName = $this->getNormalizedMethodName($this->getNodeName($node));
         $domainArgumentIndex = $this->transMethodSpecifications[$methodName]->getDomainArgumentIndex();
@@ -137,7 +137,7 @@ class PhpFileExtractor implements FileVisitorInterface, NodeVisitor
      * @param \PhpParser\Node $node
      * @return bool
      */
-    private function isTransMethodOrFuncCall(Node $node)
+    protected function isTransMethodOrFuncCall(Node $node)
     {
         if ($node instanceof MethodCall || $node instanceof FuncCall) {
             try {
@@ -158,7 +158,7 @@ class PhpFileExtractor implements FileVisitorInterface, NodeVisitor
      * @param \PhpParser\Node $node
      * @return bool
      */
-    private function isIgnored(Node $node)
+    protected function isIgnored(Node $node)
     {
         foreach ($this->getAnnotations($node) as $annotation) {
             if ($annotation instanceof Ignore) {
@@ -173,7 +173,7 @@ class PhpFileExtractor implements FileVisitorInterface, NodeVisitor
      * @param \PhpParser\Node $node
      * @return \Doctrine\Common\Annotations\Annotation[]
      */
-    private function getAnnotations(Node $node)
+    protected function getAnnotations(Node $node)
     {
         $docComment = $this->getDocComment($node);
 
@@ -188,7 +188,7 @@ class PhpFileExtractor implements FileVisitorInterface, NodeVisitor
      * @param \PhpParser\Node $node
      * @return \PhpParser\Comment\Doc|null
      */
-    private function getDocComment(Node $node)
+    protected function getDocComment(Node $node)
     {
         $docComment = $node->getDocComment();
 
@@ -205,7 +205,7 @@ class PhpFileExtractor implements FileVisitorInterface, NodeVisitor
      * @param string $methodName
      * @return string
      */
-    private function getNormalizedMethodName($methodName)
+    protected function getNormalizedMethodName($methodName)
     {
         return mb_strtolower($methodName);
     }
@@ -214,7 +214,7 @@ class PhpFileExtractor implements FileVisitorInterface, NodeVisitor
      * @param \PhpParser\Node $node
      * @return string
      */
-    private function getNodeName(Node $node)
+    protected function getNodeName(Node $node)
     {
         if ($node instanceof MethodCall) {
             return $node->name;

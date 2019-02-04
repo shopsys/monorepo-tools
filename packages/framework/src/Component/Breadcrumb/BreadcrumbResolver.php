@@ -7,7 +7,7 @@ class BreadcrumbResolver
     /**
      * @var \Shopsys\FrameworkBundle\Component\Breadcrumb\BreadcrumbGeneratorInterface[]
      */
-    private $breadcrumbGeneratorsByRouteName;
+    protected $breadcrumbGeneratorsByRouteName;
 
     public function __construct()
     {

@@ -18,12 +18,12 @@ class PricingGroupDataFixture extends AbstractReferenceFixture
     /**
      * @var \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroupFacade
      */
-    private $pricingGroupFacade;
+    protected $pricingGroupFacade;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroupDataFactoryInterface
      */
-    private $pricingGroupDataFactory;
+    protected $pricingGroupDataFactory;
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroupFacade $pricingGroupFacade
@@ -62,7 +62,7 @@ class PricingGroupDataFixture extends AbstractReferenceFixture
      * @param \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroupData $pricingGroupData
      * @param string $referenceName
      */
-    private function createPricingGroup(
+    protected function createPricingGroup(
         PricingGroupData $pricingGroupData,
         $referenceName
     ) {

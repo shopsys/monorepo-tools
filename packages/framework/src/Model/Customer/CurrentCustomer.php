@@ -10,12 +10,12 @@ class CurrentCustomer
     /**
      * @var \Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface
      */
-    private $tokenStorage;
+    protected $tokenStorage;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroupSettingFacade
      */
-    private $pricingGroupSettingFacade;
+    protected $pricingGroupSettingFacade;
 
     /**
      * @param \Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface $tokenStorage

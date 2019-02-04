@@ -10,22 +10,22 @@ class InputPriceRecalculationScheduler
     /**
      * @var \Shopsys\FrameworkBundle\Model\Pricing\InputPriceRecalculator
      */
-    private $inputPriceRecalculator;
+    protected $inputPriceRecalculator;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\Setting\Setting
      */
-    private $setting;
+    protected $setting;
 
     /**
      * @var bool
      */
-    private $recalculateInputPricesWithoutVat;
+    protected $recalculateInputPricesWithoutVat;
 
     /**
      * @var bool
      */
-    private $recalculateInputPricesWithVat;
+    protected $recalculateInputPricesWithVat;
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\Pricing\InputPriceRecalculator $inputPriceRecalculator

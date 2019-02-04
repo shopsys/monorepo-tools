@@ -11,7 +11,7 @@ class JsConstantCompilerPass implements JsCompilerPassInterface
     /**
      * @var \Shopsys\FrameworkBundle\Component\Javascript\Parser\Constant\JsConstantCallParser
      */
-    private $jsConstantCallParser;
+    protected $jsConstantCallParser;
 
     /**
      * @param \Shopsys\FrameworkBundle\Component\Javascript\Parser\Constant\JsConstantCallParser $jsConstantCallParser
@@ -50,7 +50,7 @@ class JsConstantCompilerPass implements JsCompilerPassInterface
      * @param string $constantName
      * @return mixed
      */
-    private function getConstantValue($constantName)
+    protected function getConstantValue($constantName)
     {
         // Normal defined constant (either class or global)
         if (defined($constantName)) {

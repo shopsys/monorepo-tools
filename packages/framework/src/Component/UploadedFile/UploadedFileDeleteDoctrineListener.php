@@ -10,12 +10,12 @@ class UploadedFileDeleteDoctrineListener
     /**
      * @var \Shopsys\FrameworkBundle\Component\UploadedFile\Config\UploadedFileConfig
      */
-    private $uploadedFileConfig;
+    protected $uploadedFileConfig;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\UploadedFile\UploadedFileFacade
      */
-    private $uploadedFileFacade;
+    protected $uploadedFileFacade;
 
     /**
      * @param \Shopsys\FrameworkBundle\Component\UploadedFile\Config\UploadedFileConfig $uploadedFileConfig

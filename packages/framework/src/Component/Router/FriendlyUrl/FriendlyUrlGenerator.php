@@ -14,7 +14,7 @@ class FriendlyUrlGenerator extends BaseUrlGenerator
     /**
      * @var \Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\FriendlyUrlRepository
      */
-    private $friendlyUrlRepository;
+    protected $friendlyUrlRepository;
 
     /**
      * @param \Symfony\Component\Routing\RequestContext $context

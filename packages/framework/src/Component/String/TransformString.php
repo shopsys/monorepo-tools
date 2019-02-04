@@ -78,7 +78,7 @@ class TransformString
      * @param string $string
      * @return string
      */
-    private static function toAscii($string)
+    protected static function toAscii($string)
     {
         return iconv('utf-8', 'us-ascii//TRANSLIT//IGNORE', $string);
     }

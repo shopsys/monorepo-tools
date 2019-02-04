@@ -11,7 +11,7 @@ class MainFilesystemFactory implements FilesystemFactoryInterface
     /**
      * @var string
      */
-    private $projectDir;
+    protected $projectDir;
 
     /**
      * @param string $projectDir

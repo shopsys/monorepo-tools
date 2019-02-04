@@ -39,7 +39,7 @@ class ImageConfigDefinition implements ConfigurationInterface
      * @param \Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition $node
      * @return \Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition
      */
-    private function buildItemsNode(ArrayNodeDefinition $node)
+    protected function buildItemsNode(ArrayNodeDefinition $node)
     {
         return $node
             ->addDefaultsIfNotSet()

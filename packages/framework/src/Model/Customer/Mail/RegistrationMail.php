@@ -22,12 +22,12 @@ class RegistrationMail implements MessageFactoryInterface
     /**
      * @var \Shopsys\FrameworkBundle\Component\Setting\Setting
      */
-    private $setting;
+    protected $setting;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\Router\DomainRouterFactory
      */
-    private $domainRouterFactory;
+    protected $domainRouterFactory;
 
     /**
      * @param \Shopsys\FrameworkBundle\Component\Setting\Setting $setting
@@ -61,7 +61,7 @@ class RegistrationMail implements MessageFactoryInterface
      * @param \Shopsys\FrameworkBundle\Model\Customer\User $user
      * @return array
      */
-    private function getVariablesReplacements(User $user)
+    protected function getVariablesReplacements(User $user)
     {
         $router = $this->domainRouterFactory->getRouter($user->getDomainId());
 

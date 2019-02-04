@@ -17,22 +17,22 @@ class InputPriceRecalculator
     /**
      * @var \Doctrine\ORM\EntityManagerInterface
      */
-    private $em;
+    protected $em;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Pricing\InputPriceCalculation
      */
-    private $inputPriceCalculation;
+    protected $inputPriceCalculation;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Payment\PaymentPriceCalculation
      */
-    private $paymentPriceCalculation;
+    protected $paymentPriceCalculation;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Transport\TransportPriceCalculation
      */
-    private $transportPriceCalculation;
+    protected $transportPriceCalculation;
 
     /**
      * @param \Doctrine\ORM\EntityManagerInterface $em
@@ -65,7 +65,7 @@ class InputPriceRecalculator
     /**
      * @param string $newInputPriceType
      */
-    private function recalculateInputPriceForNewType($newInputPriceType)
+    protected function recalculateInputPriceForNewType($newInputPriceType)
     {
         $this->recalculateTransportsInputPriceForNewType($newInputPriceType);
         $this->recalculatePaymentsInputPriceForNewType($newInputPriceType);
@@ -74,7 +74,7 @@ class InputPriceRecalculator
     /**
      * @param string $toInputPriceType
      */
-    private function recalculatePaymentsInputPriceForNewType($toInputPriceType)
+    protected function recalculatePaymentsInputPriceForNewType($toInputPriceType)
     {
         $query = $this->em->createQueryBuilder()
             ->select('p')
@@ -102,7 +102,7 @@ class InputPriceRecalculator
     /**
      * @param string $toInputPriceType
      */
-    private function recalculateTransportsInputPriceForNewType($toInputPriceType)
+    protected function recalculateTransportsInputPriceForNewType($toInputPriceType)
     {
         $query = $this->em->createQueryBuilder()
             ->select('t')
@@ -131,7 +131,7 @@ class InputPriceRecalculator
      * @param \Doctrine\ORM\Query $query
      * @param \Closure $callback
      */
-    private function batchProcessQuery(Query $query, Closure $callback)
+    protected function batchProcessQuery(Query $query, Closure $callback)
     {
         $iteration = 0;
 

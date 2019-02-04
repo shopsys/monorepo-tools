@@ -7,27 +7,27 @@ class FileForUpload
     /**
      * @var string
      */
-    private $temporaryFilename;
+    protected $temporaryFilename;
 
     /**
      * @var bool
      */
-    private $isImage;
+    protected $isImage;
 
     /**
      * @var string
      */
-    private $category;
+    protected $category;
 
     /**
      * @var string|null
      */
-    private $targetDirectory;
+    protected $targetDirectory;
 
     /**
      * @var int
      */
-    private $nameConventionType;
+    protected $nameConventionType;
 
     /**
      * @param string $temporaryFilename

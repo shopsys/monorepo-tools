@@ -17,17 +17,17 @@ class MultidomainCategoryDataFixture extends AbstractReferenceFixture implements
     /**
      * @var \Shopsys\FrameworkBundle\Model\Category\CategoryFacade
      */
-    private $categoryFacade;
+    protected $categoryFacade;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Category\CategoryDataFactoryInterface
      */
-    private $categoryDataFacade;
+    protected $categoryDataFacade;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\Domain\Domain
      */
-    private $domain;
+    protected $domain;
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\Category\CategoryFacade $categoryFacade
@@ -57,7 +57,7 @@ class MultidomainCategoryDataFixture extends AbstractReferenceFixture implements
     /**
      * @param int $domainId
      */
-    private function loadForDomain(int $domainId)
+    protected function loadForDomain(int $domainId)
     {
         $this->editCategoryOnDomain(
             DemoCategoryDataFixture::CATEGORY_ELECTRONICS,
@@ -158,7 +158,7 @@ class MultidomainCategoryDataFixture extends AbstractReferenceFixture implements
      * @param int $domainId
      * @param string $description
      */
-    private function editCategoryOnDomain(string $referenceName, int $domainId, string $description)
+    protected function editCategoryOnDomain(string $referenceName, int $domainId, string $description)
     {
         $category = $this->getReference($referenceName);
         /* @var $category \Shopsys\FrameworkBundle\Model\Category\Category */

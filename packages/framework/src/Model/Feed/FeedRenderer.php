@@ -11,12 +11,12 @@ class FeedRenderer
     /**
      * @var \Twig_Environment
      */
-    private $twig;
+    protected $twig;
 
     /**
      * @var \Twig_TemplateWrapper
      */
-    private $template;
+    protected $template;
 
     /**
      * @param \Twig_Environment $twig
@@ -61,7 +61,7 @@ class FeedRenderer
      * @param array $parameters
      * @return string
      */
-    private function getRenderedBlock(string $name, array $parameters): string
+    protected function getRenderedBlock(string $name, array $parameters): string
     {
         if (!$this->template->hasBlock($name)) {
             throw new \Shopsys\FrameworkBundle\Model\Feed\Exception\TemplateBlockNotFoundException($name, $this->template->getTemplateName());

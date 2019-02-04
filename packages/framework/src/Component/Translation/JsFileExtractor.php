@@ -17,17 +17,17 @@ class JsFileExtractor implements FileVisitorInterface
     /**
      * @var \SplFileInfo
      */
-    private $file;
+    protected $file;
 
     /**
      * @var \JMS\TranslationBundle\Model\MessageCatalogue
      */
-    private $catalogue;
+    protected $catalogue;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\Javascript\Parser\Translator\JsTranslatorCallParser
      */
-    private $jsTranslatorCallParser;
+    protected $jsTranslatorCallParser;
 
     /**
      * @param \Shopsys\FrameworkBundle\Component\Javascript\Parser\Translator\JsTranslatorCallParser $jsTranslatorCallParser
@@ -87,7 +87,7 @@ class JsFileExtractor implements FileVisitorInterface
     /**
      * @param string $contents
      */
-    private function parseFile($contents)
+    protected function parseFile($contents)
     {
         $node = JParser::parse_string($contents, true, JParser::class, JTokenizer::class);
 

@@ -7,17 +7,17 @@ class Price
     /**
      * @var string
      */
-    private $priceWithoutVat;
+    protected $priceWithoutVat;
 
     /**
      * @var string
      */
-    private $priceWithVat;
+    protected $priceWithVat;
 
     /**
      * @var string
      */
-    private $vatAmount;
+    protected $vatAmount;
 
     /**
      * @param string $priceWithoutVat

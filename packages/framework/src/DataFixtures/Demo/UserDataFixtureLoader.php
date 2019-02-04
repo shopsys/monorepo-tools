@@ -41,42 +41,42 @@ class UserDataFixtureLoader
     /**
      * @var \Shopsys\FrameworkBundle\Component\Csv\CsvReader
      */
-    private $csvReader;
+    protected $csvReader;
 
     /**
      * @var string
      */
-    private $path;
+    protected $path;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Customer\UserDataFactoryInterface
      */
-    private $userDataFactory;
+    protected $userDataFactory;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Country\Country[]
      */
-    private $countries;
+    protected $countries;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Customer\CustomerDataFactoryInterface
      */
-    private $customerDataFactory;
+    protected $customerDataFactory;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Customer\BillingAddressDataFactoryInterface
      */
-    private $billingAddressDataFactory;
+    protected $billingAddressDataFactory;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Customer\DeliveryAddressDataFactoryInterface
      */
-    private $deliveryAddressDataFactory;
+    protected $deliveryAddressDataFactory;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\Domain\Domain
      */
-    private $domain;
+    protected $domain;
 
     /**
      * @param string $path
@@ -137,7 +137,7 @@ class UserDataFixtureLoader
      * @param int $domainId
      * @return array
      */
-    private function filterRowsByDomainId(array $rows, $domainId)
+    protected function filterRowsByDomainId(array $rows, $domainId)
     {
         $filteredRows = [];
         $rowId = 0;
@@ -163,7 +163,7 @@ class UserDataFixtureLoader
      * @param array $row
      * @return \Shopsys\FrameworkBundle\Model\Customer\CustomerData
      */
-    private function getCustomerDataFromCsvRow(array $row)
+    protected function getCustomerDataFromCsvRow(array $row)
     {
         $customerData = $this->customerDataFactory->create();
         $domainId = (int)$row[self::COLUMN_DOMAIN_ID];
@@ -212,7 +212,7 @@ class UserDataFixtureLoader
      * @param int $domainId
      * @return \Shopsys\FrameworkBundle\Model\Country\Country
      */
-    private function getCountryByNameAndDomain(string $countryName, int $domainId): Country
+    protected function getCountryByNameAndDomain(string $countryName, int $domainId): Country
     {
         $locale = $this->domain->getDomainConfigById($domainId)->getLocale();
 

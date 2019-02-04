@@ -17,12 +17,12 @@ class FlagDataFixture extends AbstractReferenceFixture
     /**
      * @var \Shopsys\FrameworkBundle\Model\Product\Flag\FlagFacade
      */
-    private $flagFacade;
+    protected $flagFacade;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Product\Flag\FlagDataFactoryInterface
      */
-    private $flagDataFactory;
+    protected $flagDataFactory;
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\Product\Flag\FlagFacade $flagFacade
@@ -63,7 +63,7 @@ class FlagDataFixture extends AbstractReferenceFixture
      * @param \Shopsys\FrameworkBundle\Model\Product\Flag\FlagData $flagData
      * @param string|null $referenceName
      */
-    private function createFlag(FlagData $flagData, $referenceName = null)
+    protected function createFlag(FlagData $flagData, $referenceName = null)
     {
         $flag = $this->flagFacade->create($flagData);
         if ($referenceName !== null) {

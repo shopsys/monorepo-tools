@@ -9,7 +9,7 @@ class DuplicateEntityNameException extends Exception implements UploadedFileConf
     /**
      * @var string
      */
-    private $entityName;
+    protected $entityName;
 
     /**
      * @param string $entityName

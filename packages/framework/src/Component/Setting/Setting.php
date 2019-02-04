@@ -25,17 +25,17 @@ class Setting
     /**
      * @var \Doctrine\ORM\EntityManagerInterface
      */
-    private $em;
+    protected $em;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\Setting\SettingValueRepository
      */
-    private $settingValueRepository;
+    protected $settingValueRepository;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\Setting\SettingValue[][]
      */
-    private $values;
+    protected $values;
 
     /**
      * @param \Doctrine\ORM\EntityManagerInterface $em
@@ -127,7 +127,7 @@ class Setting
     /**
      * @param int $domainId
      */
-    private function loadDomainValues($domainId)
+    protected function loadDomainValues($domainId)
     {
         if ($domainId === null) {
             $message = 'Cannot load setting value for null domain ID';

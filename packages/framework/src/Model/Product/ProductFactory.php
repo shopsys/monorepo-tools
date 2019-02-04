@@ -20,7 +20,7 @@ class ProductFactory implements ProductFactoryInterface
     /**
      * @var \Shopsys\FrameworkBundle\Model\Product\ProductCategoryDomainFactoryInterface
      */
-    private $productCategoryDomainFactory;
+    protected $productCategoryDomainFactory;
 
     /**
      * @param \Shopsys\FrameworkBundle\Component\EntityExtension\EntityNameResolver $entityNameResolver

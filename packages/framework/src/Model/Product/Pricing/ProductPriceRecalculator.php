@@ -14,37 +14,37 @@ class ProductPriceRecalculator
     /**
      * @var \Doctrine\ORM\EntityManagerInterface
      */
-    private $em;
+    protected $em;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Product\Pricing\ProductPriceCalculation
      */
-    private $productPriceCalculation;
+    protected $productPriceCalculation;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Product\Pricing\ProductCalculatedPriceRepository
      */
-    private $productCalculatedPriceRepository;
+    protected $productCalculatedPriceRepository;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Product\Pricing\ProductPriceRecalculationScheduler
      */
-    private $productPriceRecalculationScheduler;
+    protected $productPriceRecalculationScheduler;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroupFacade
      */
-    private $pricingGroupFacade;
+    protected $pricingGroupFacade;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroup[]|null
      */
-    private $allPricingGroups;
+    protected $allPricingGroups;
 
     /**
      * @var \Doctrine\ORM\Internal\Hydration\IterableResult|\Shopsys\FrameworkBundle\Model\Product\Product[][]|null
      */
-    private $productRowsIterator;
+    protected $productRowsIterator;
 
     /**
      * @param \Doctrine\ORM\EntityManagerInterface $em
@@ -111,7 +111,7 @@ class ProductPriceRecalculator
         $this->clearCache();
     }
 
-    private function clearCache()
+    protected function clearCache()
     {
         $this->allPricingGroups = null;
     }
@@ -119,7 +119,7 @@ class ProductPriceRecalculator
     /**
      * @return \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroup[]
      */
-    private function getAllPricingGroups()
+    protected function getAllPricingGroups()
     {
         if ($this->allPricingGroups === null) {
             $this->allPricingGroups = $this->pricingGroupFacade->getAll();
@@ -131,7 +131,7 @@ class ProductPriceRecalculator
     /**
      * @param \Shopsys\FrameworkBundle\Model\Product\Product $product
      */
-    private function recalculateProductPrices(Product $product)
+    protected function recalculateProductPrices(Product $product)
     {
         foreach ($this->getAllPricingGroups() as $pricingGroup) {
             try {

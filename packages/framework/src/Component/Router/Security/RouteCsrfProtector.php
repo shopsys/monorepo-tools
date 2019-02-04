@@ -19,12 +19,12 @@ class RouteCsrfProtector implements EventSubscriberInterface
     /**
      * @var \Doctrine\Common\Annotations\Reader
      */
-    private $annotationReader;
+    protected $annotationReader;
 
     /**
      * @var \Symfony\Component\Security\Csrf\CsrfTokenManagerInterface
      */
-    private $tokenManager;
+    protected $tokenManager;
 
     /**
      * @param \Doctrine\Common\Annotations\Reader $annotationReader
@@ -85,7 +85,7 @@ class RouteCsrfProtector implements EventSubscriberInterface
      * @param string $csrfToken
      * @return bool
      */
-    private function isCsrfTokenValid($routeName, $csrfToken)
+    protected function isCsrfTokenValid($routeName, $csrfToken)
     {
         $token = new CsrfToken($this->getCsrfTokenId($routeName), $csrfToken);
 
@@ -96,7 +96,7 @@ class RouteCsrfProtector implements EventSubscriberInterface
      * @param \Symfony\Component\HttpKernel\Event\FilterControllerEvent $event
      * @return bool
      */
-    private function isProtected(FilterControllerEvent $event)
+    protected function isProtected(FilterControllerEvent $event)
     {
         if (!$event->isMasterRequest()) {
             return false;

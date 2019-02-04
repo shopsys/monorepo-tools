@@ -10,7 +10,7 @@ class FriendlyUrlMatcher
     /**
      * @var \Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\FriendlyUrlRepository
      */
-    private $friendlyUrlRepository;
+    protected $friendlyUrlRepository;
 
     /**
      * @param \Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\FriendlyUrlRepository $friendlyUrlRepository

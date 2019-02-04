@@ -17,12 +17,12 @@ class MultidomainSettingValueDataFixture extends AbstractReferenceFixture implem
     /**
      * @var \Shopsys\FrameworkBundle\Component\Setting\Setting
      */
-    private $setting;
+    protected $setting;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\Domain\Domain
      */
-    private $domain;
+    protected $domain;
 
     /**
      * @param \Shopsys\FrameworkBundle\Component\Setting\Setting $setting
@@ -47,7 +47,7 @@ class MultidomainSettingValueDataFixture extends AbstractReferenceFixture implem
     /**
      * @param int $domainId
      */
-    private function loadForDomain(int $domainId)
+    protected function loadForDomain(int $domainId)
     {
         $termsAndConditionsDomain = $this->getReferenceForDomain(MultidomainArticleDataFixture::ARTICLE_TERMS_AND_CONDITIONS, $domainId);
         /* @var $termsAndConditionsDomain \Shopsys\FrameworkBundle\Model\Article\Article */

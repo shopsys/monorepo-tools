@@ -33,7 +33,7 @@ class InputPriceCalculation
      * @param string $vatPercent
      * @return string
      */
-    private function getInputPriceWithoutVat($basePriceWithVat, $vatPercent)
+    protected function getInputPriceWithoutVat($basePriceWithVat, $vatPercent)
     {
         return 100 * $basePriceWithVat / (100 + $vatPercent);
     }

@@ -14,12 +14,12 @@ class FrontendUserProvider implements UserProviderInterface
     /**
      * @var \Shopsys\FrameworkBundle\Model\Customer\UserRepository
      */
-    private $userRepository;
+    protected $userRepository;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\Domain\Domain
      */
-    private $domain;
+    protected $domain;
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\Customer\UserRepository $userRepository

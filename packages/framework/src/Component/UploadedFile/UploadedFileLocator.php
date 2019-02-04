@@ -10,17 +10,17 @@ class UploadedFileLocator
     /**
      * @var string
      */
-    private $uploadedFileDir;
+    protected $uploadedFileDir;
 
     /**
      * @var string
      */
-    private $uploadedFileUrlPrefix;
+    protected $uploadedFileUrlPrefix;
 
     /**
      * @var \League\Flysystem\FilesystemInterface
      */
-    private $filesystem;
+    protected $filesystem;
 
     /**
      * @param string $uploadedFileDir
@@ -83,7 +83,7 @@ class UploadedFileLocator
      * @param string $entityName
      * @return string
      */
-    private function getRelativeFilePath($entityName)
+    protected function getRelativeFilePath($entityName)
     {
         return $entityName;
     }

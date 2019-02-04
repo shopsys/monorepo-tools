@@ -9,7 +9,7 @@ class EntityParseException extends Exception implements ImageConfigException
     /**
      * @var string
      */
-    private $entityClass;
+    protected $entityClass;
 
     /**
      * @param string $entityClass

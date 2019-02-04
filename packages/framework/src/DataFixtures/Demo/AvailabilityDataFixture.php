@@ -19,17 +19,17 @@ class AvailabilityDataFixture extends AbstractReferenceFixture
     /**
      * @var \Shopsys\FrameworkBundle\Model\Product\Availability\AvailabilityFacade
      */
-    private $availabilityFacade;
+    protected $availabilityFacade;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Product\Availability\AvailabilityDataFactoryInterface
      */
-    private $availabilityDataFactory;
+    protected $availabilityDataFactory;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\Setting\Setting
      */
-    private $setting;
+    protected $setting;
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\Product\Availability\AvailabilityFacade $availabilityFacade
@@ -75,7 +75,7 @@ class AvailabilityDataFixture extends AbstractReferenceFixture
      * @param string|null $referenceName
      * @return \Shopsys\FrameworkBundle\Model\Product\Availability\Availability
      */
-    private function createAvailability(AvailabilityData $availabilityData, $referenceName = null)
+    protected function createAvailability(AvailabilityData $availabilityData, $referenceName = null)
     {
         $availability = $this->availabilityFacade->create($availabilityData);
         if ($referenceName !== null) {

@@ -9,7 +9,7 @@ class ProductSellingDeniedRecalculator
     /**
      * @var \Doctrine\ORM\EntityManagerInterface
      */
-    private $em;
+    protected $em;
 
     /**
      * @param \Doctrine\ORM\EntityManagerInterface $entityManager
@@ -37,7 +37,7 @@ class ProductSellingDeniedRecalculator
     /**
      * @param \Shopsys\FrameworkBundle\Model\Product\Product[] $products
      */
-    private function calculate(array $products = [])
+    protected function calculate(array $products = [])
     {
         $this->calculateIndependent($products);
         $this->propagateMainVariantSellingDeniedToVariants($products);
@@ -48,7 +48,7 @@ class ProductSellingDeniedRecalculator
      * @param \Shopsys\FrameworkBundle\Model\Product\Product $product
      * @return \Shopsys\FrameworkBundle\Model\Product\Product[]
      */
-    private function getProductsForCalculations(Product $product)
+    protected function getProductsForCalculations(Product $product)
     {
         $products = [$product];
         if ($product->isMainVariant()) {
@@ -63,7 +63,7 @@ class ProductSellingDeniedRecalculator
     /**
      * @param \Shopsys\FrameworkBundle\Model\Product\Product[] $products
      */
-    private function calculateIndependent(array $products)
+    protected function calculateIndependent(array $products)
     {
         $qb = $this->em->createQueryBuilder()
             ->update(Product::class, 'p')
@@ -87,7 +87,7 @@ class ProductSellingDeniedRecalculator
     /**
      * @param \Shopsys\FrameworkBundle\Model\Product\Product[] $products
      */
-    private function propagateMainVariantSellingDeniedToVariants(array $products)
+    protected function propagateMainVariantSellingDeniedToVariants(array $products)
     {
         $qb = $this->em->createQueryBuilder()
             ->update(Product::class, 'p')
@@ -113,7 +113,7 @@ class ProductSellingDeniedRecalculator
     /**
      * @param \Shopsys\FrameworkBundle\Model\Product\Product[] $products
      */
-    private function propagateVariantsSellingDeniedToMainVariant(array $products)
+    protected function propagateVariantsSellingDeniedToMainVariant(array $products)
     {
         $qb = $this->em->createQueryBuilder()
             ->update(Product::class, 'p')

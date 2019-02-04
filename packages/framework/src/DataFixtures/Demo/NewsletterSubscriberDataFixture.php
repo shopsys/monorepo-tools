@@ -11,7 +11,7 @@ class NewsletterSubscriberDataFixture extends AbstractReferenceFixture
     const FIRST_DOMAIN_ID = 1;
 
     /** @var \Shopsys\FrameworkBundle\Model\Newsletter\NewsletterFacade */
-    private $newsletterFacade;
+    protected $newsletterFacade;
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\Newsletter\NewsletterFacade $newsletterFacade
@@ -36,7 +36,7 @@ class NewsletterSubscriberDataFixture extends AbstractReferenceFixture
     /**
      * @return string[]
      */
-    private function getEmailData()
+    protected function getEmailData()
     {
         return [
             'james.black@no-reply.com',

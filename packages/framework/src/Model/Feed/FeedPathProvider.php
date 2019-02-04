@@ -25,7 +25,7 @@ class FeedPathProvider
     /**
      * @var string
      */
-    private $projectDir;
+    protected $projectDir;
 
     /**
      * @param string $feedUrlPrefix
