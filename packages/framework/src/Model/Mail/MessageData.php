@@ -35,7 +35,7 @@ class MessageData
     public $fromName;
 
     /**
-     * @var string
+     * @var string[]
      */
     public $variablesReplacementsForSubject;
 
