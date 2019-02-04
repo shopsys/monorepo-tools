@@ -1,0 +1,4 @@
+services:
+    Shopsys\CodingStandards\CsFixer\ForbiddenPrivateVisibilityFixer:
+        analyzed_namespaces:
+            - TestNamespace
