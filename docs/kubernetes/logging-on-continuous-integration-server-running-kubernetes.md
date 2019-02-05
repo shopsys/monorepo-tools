@@ -2,7 +2,10 @@
 As this [article](/docs/introduction/logging.md) describes, our logs are streamed. Since we want to be able to look at logs on our CI without needing to perform `kubectl` commands on server we need to make simple workaround in order to get logs out of application and containers onto local storage.
 
 ## Problem
-As we do not want to have much instances of application running at once on our servers because of heavy load we delete after each build Kubernetes namespace. Deleting namespace means that all running pods will be deleted with their logs.
+On our CI, every branch is built in its own Kubernetes namespace for isolation.
+As we do not want to have many instances of application running at once on our servers because of heavy load, we delete the whole Kubernetes namespace after each build.
+Deleting the namespace removes all running pods in it along with the logs.
+So, after a failed build we don't have access to the logs to see what went wrong.
 
 ## Our way
 We decided to go the simplest way possible. In order to get logs for developers to see easily, we print the output of `kubectl logs` into files saved in jenkins workspace.
