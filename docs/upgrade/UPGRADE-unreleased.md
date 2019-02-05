@@ -8,7 +8,7 @@ There you can find links to upgrade notes for other versions too.
 ## [shopsys/framework]
 ### Infrastructure
 - *(optional)* in your `docker/php-fpm/Dockerfile` change base image to `php:7.3-fpm-stretch` ([#694](https://github.com/shopsys/shopsys/pull/694))
-- add subnet of your **k8s** cluster as ENV variable into the config `/project-base/kubernetes/deployments/smtp-server.yml` for POD of smtp container ([#777](https://github.com/shopsys/shopsys/pull/777))  
+- add subnet of your Kubernetes cluster as ENV variable into the config `/project-base/kubernetes/deployments/smtp-server.yml` for the pod of smtp container ([#777](https://github.com/shopsys/shopsys/pull/777))  
 for instance:
     ```yaml
     image: namshi/smtp:latest

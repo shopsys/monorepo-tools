@@ -16,7 +16,7 @@ It performs the load of data fixtures, initialization of databases, tests, check
 Selection of the CI is important.
 We currently have really great experience with Jenkins CI.
 Mainly because of its freedom with jobs, where it gives you opportunity to write any shell code you want.
-That means that you can control things like workspaces clean up, or have control over kubernetes namespaces which can be crucial with server resources.
+That means that you can control things like workspaces clean up, or have control over Kubernetes namespaces which can be crucial with server resources.
 
 ### Prepare your CI
 There are couple of prerequisites that need to be installed onto the server running the CI.
