@@ -87,7 +87,10 @@
             $window.addClass(options.cssClass);
         }
 
-        var $windowContent = $('<div class="js-window-content window-popup__in"></div>').html(options.content);
+        var $windowContent = $('<div class="js-window-content window-popup__in"></div>').html(
+            '<div class="display-none in-message in-message--alert js-window-validation-errors"></div>'
+            + options.content
+        );
 
         $activeWindow = $window;
 
