@@ -1,4 +1,6 @@
 version: '2'
+options:
+    max_attempt: 15
 syncs:
     shopsys-framework-sync:
         sync_userid: 1000
@@ -13,6 +15,7 @@ syncs:
             '.docker-sync',
             '.DS_Store',
             'docker',
+            'microservices',
             'nbproject',
             'project-base/docker',
             'project-base/docs',
