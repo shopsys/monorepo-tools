@@ -307,7 +307,7 @@ class OrderFacade
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\Order\Order $order
-     * @param bool|null $disallowHeurekaVerifiedByCustomers
+     * @param bool $disallowHeurekaVerifiedByCustomers
      */
     public function sendHeurekaOrderInfo(Order $order, $disallowHeurekaVerifiedByCustomers)
     {
