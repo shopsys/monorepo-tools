@@ -150,3 +150,6 @@ If you need to change the locale of a specific domain to another locale that is 
 #### Change the locale to the locale that is not yet used by another domain
 If you need to change the locale of a specific domain to another locale that is not yet already used by another domain, add new temporary domain with this new locale and follow the instructions of [How to add a new domain](#2-how-to-add-a-new-domain).
 The following procedure is the same as in the case with [Change the locale to the locale that is already used by another domain](#change-the-locale-to-the-locale-that-is-already-used-by-another-domain).
+
+### 6. Change domains appearance
+If you need to distinguish your domains visually, see [Creating a Multidomain Design cookbook](../cookbook/creating-a-multidomain-design.md).
