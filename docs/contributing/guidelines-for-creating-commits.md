@@ -46,14 +46,10 @@ OrderFlowFacade: removed unused uses
 * Never start the message with the phrase "fix:". Again, it prevents developers from getting confused between description of the fixed error and description of the current state.
 * Method or function name should be always followed by parentheses.
 * Property or variable name should be always prefixed with a dollar sign.
-* When merging a modification from the SSFW internal backlog, we use our identifier of the user story in the beginning of merge commit message.
+* Merge commits and commits created using the *Squash and merge* method (see [Merging to Master on Github](/docs/contributing/merging-to-master-on-github.md)) should always contain the PR number in parentheses:
 
 ```
-[US-2022] OrderFlow is not autowired anymore
-```
-
-```
-[US-1023] [US-1024] acceptance tests for customer registration and login
+updated packages versions in package.json (#755)
 ```
 
 ### Rules for specific use cases
