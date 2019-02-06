@@ -69,8 +69,7 @@
                             {{ 'Log out'|trans }}
                         </a>
                     {% else %}
-                        <a href="{{ url('front_login') }}"
-                            onclick="Shopsys.window({ content: '{{ render(controller('ShopsysShopBundle:Front/Login:windowForm'))|escape('js') }}' }); return false;">
+                        <a class="js-login-button" href="{{ url('front_login') }}" data-url="{{ url('front_login_window_form') }}">
                             {{ 'Log in'|trans }}
                         </a>
                         <a href="{{ url('front_registration_register') }}">
@@ -120,8 +119,8 @@
                         <li class="menu-iconic__item">
                             <a
                                 href="{{ url('front_login') }}"
-                                onclick="Shopsys.window({ content: '{{ render(controller('ShopsysShopBundle:Front/Login:windowForm'))|escape('js') }}' }); return false;"
-                                class="js-login-link-desktop menu-iconic__item__link"
+                                data-url="{{ url('front_login_window_form') }}"
+                                class="js-login-link-desktop js-login-button menu-iconic__item__link"
                             >
                                 <i class="svg svg-user"></i>
                                 <span>

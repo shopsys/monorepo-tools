@@ -1579,8 +1579,8 @@ msgstr "Prosím překontrolujte následující informace:"
 msgid "Please check the correctness of all data filled."
 msgstr "Prosím zkontrolujte si správnost vyplnění všech údajů"
 
-msgid "Please check the entered values.<br><br>"
-msgstr "Překontrolujte prosím zadané hodnoty.<br><br>"
+msgid "Please check the entered values.<br>"
+msgstr "Překontrolujte prosím zadané hodnoty.<br>"
 
 msgid "Please fill all default values before creating a product"
 msgstr "Prosím vyplňte všechny výchozí hodnoty před vytvořením produktu"

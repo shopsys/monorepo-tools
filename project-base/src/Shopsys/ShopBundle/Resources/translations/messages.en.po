@@ -244,9 +244,6 @@ msgstr ""
 msgid "Image"
 msgstr ""
 
-msgid "Invalid login"
-msgstr ""
-
 msgid "Items"
 msgstr ""
 
@@ -548,6 +545,9 @@ msgid "The price of payment {{ paymentName }} changed during ordering process. C
 msgstr ""
 
 msgid "The price of shipping {{ transportName }} changed during ordering process. Check your order, please."
+msgstr ""
+
+msgid "This account doesn't exist or password is incorrect"
 msgstr ""
 
 msgid "This category contains no products."

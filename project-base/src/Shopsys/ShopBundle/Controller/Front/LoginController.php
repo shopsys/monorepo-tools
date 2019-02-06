@@ -37,7 +37,7 @@ class LoginController extends FrontBaseController
         try {
             $this->authenticator->checkLoginProcess($request);
         } catch (\Shopsys\FrameworkBundle\Model\Security\Exception\LoginFailedException $e) {
-            $form->addError(new FormError(t('Invalid login')));
+            $form->addError(new FormError(t('This account doesn\'t exist or password is incorrect')));
         }
 
         return $this->render('@ShopsysShop/Front/Content/Login/loginForm.html.twig', [

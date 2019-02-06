@@ -1,19 +1,14 @@
-{{ form_start(form, {attr: {class: 'js-front-login-window', 'multipleForm': true}}) }}
+{{ init_js_validation(null, false) }}
+{{ form_start(form, {attr: {class: 'js-front-login-window'}}) }}
     {{ form_errors(form) }}
 
     <div class="box-login">
-        <h3 class="box-login__title">{{ 'Login'|trans }}</h3>
-
-        <div class="js-front-login-window-message in-message in-message--alert display-none"></div>
-
         <div class="box-login__item">
-            {{ form_widget(form.email, {attr: {placeholder: 'E-mail'|trans}}) }}
-            {{ form_errors(form.email) }}
+            {{ form_row(form.email, { label: 'E-mail'|trans, rowClass: 'form-line-block', errors_attr: { class: 'form-error--line-block' } }) }}
         </div>
 
         <div class="box-login__item">
-            {{ form_errors(form.password) }}
-            {{ form_widget(form.password, {attr: {placeholder: 'Password'|trans}}) }}
+            {{ form_row(form.password, { label: 'Password'|trans, rowClass: 'form-line-block', errors_attr: { class: 'form-error--line-block' } }) }}
         </div>
 
         <div class="box-login__item box-login__item--checkbox">
