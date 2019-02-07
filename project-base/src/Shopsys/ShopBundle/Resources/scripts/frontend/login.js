@@ -15,7 +15,8 @@
                 type: 'POST',
                 success: function (data) {
                     var $window = Shopsys.window({
-                        content: data
+                        content: data,
+                        textHeading: Shopsys.translator.trans('Login')
                     });
 
                     $window.on('submit', '.js-front-login-window', onSubmit);

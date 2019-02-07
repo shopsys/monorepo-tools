@@ -66,10 +66,12 @@
             buttonContinue: false,
             textContinue: Shopsys.translator.trans('Yes'),
             textCancel: Shopsys.translator.trans('No'),
+            textHeading: '',
             urlContinue: '#',
             cssClass: 'window-popup--standard',
             cssClassContinue: '',
             cssClassCancel: '',
+            cssClassHeading: '',
             closeOnBgClick: true,
             eventClose: function () {},
             eventContinue: function () {},
@@ -87,7 +89,13 @@
             $window.addClass(options.cssClass);
         }
 
-        var $windowContent = $('<div class="js-window-content window-popup__in"></div>').html(
+        var $windowContent = $('<div class="js-window-content window-popup__in"></div>');
+
+        if (options.textHeading !== '') {
+            $windowContent.append('<h2 class="' + options.cssClassHeading + '">' + options.textHeading + '</h2>');
+        }
+
+        $windowContent.append(
             '<div class="display-none in-message in-message--alert js-window-validation-errors"></div>'
             + options.content
         );
