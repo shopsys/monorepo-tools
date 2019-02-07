@@ -38,6 +38,7 @@ If you are interested, you can read more about the monorepo approach here - http
 * [shopsys/form-types-bundle](https://github.com/shopsys/form-types-bundle)
 * [shopsys/migrations](https://github.com/shopsys/migrations)
 * [shopsys/monorepo-tools](https://github.com/shopsys/monorepo-tools)
+* [shopsys/google-cloud-bundle](https://github.com/shopsys/google-cloud-bundle)
 
 `microservices/`
 * [shopsys/microservice-product-search](https://github.com/shopsys/microservice-product-search)
