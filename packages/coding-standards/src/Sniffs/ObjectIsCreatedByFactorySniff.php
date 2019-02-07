@@ -48,8 +48,9 @@ final class ObjectIsCreatedByFactorySniff implements Sniff
 
         $instantiatedClassName = $this->naming->getClassName($file, $instantiatedClassNamePosition);
         $factoryClassName = $instantiatedClassName . 'Factory';
+        $currentClassName = $this->getFirstClassNameInFile($file);
 
-        if ($factoryClassName === $this->getFirstClassNameInFile($file) || !class_exists($factoryClassName)) {
+        if (!class_exists($factoryClassName) || is_a($currentClassName, $factoryClassName, true)) {
             return;
         }
 
