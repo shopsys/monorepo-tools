@@ -15,7 +15,7 @@ NC="\e[0m"
 SPLIT_BRANCH=$1
 
 if [[ "$SPLIT_BRANCH" == "" ]]; then
-    printf "${RED}$(date +%T) > You must provide branch name to remove!${NC}\n\n"
+    printf "${RED}$(date +%T) > You must provide a branch name to remove!${NC}\n\n"
     exit 1
 elif [[ "$SPLIT_BRANCH" == "master" ]]; then
     printf "${RED}$(date +%T) > You cannot remove master branch!${NC}\n\n"

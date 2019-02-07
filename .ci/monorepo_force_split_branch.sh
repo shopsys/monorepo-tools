@@ -20,7 +20,7 @@ SPLIT_BRANCH=$1
 WORKSPACE=${WORKSPACE:-$PWD}
 
 if [[ "$SPLIT_BRANCH" == "" ]]; then
-    printf "${RED}$(date +%T) > You must provide branch name to remove!${NC}\n\n"
+    printf "${RED}$(date +%T) > You must provide a branch name to split!${NC}\n\n"
     exit 1
 elif [[ "$SPLIT_BRANCH" == "master" ]]; then
     printf "${RED}$(date +%T) > You cannot force split master branch!${NC}\n\n"
