@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Shopsys\FrameworkBundle\Model\Localization;
 
 use Shopsys\FrameworkBundle\Component\Domain\Domain;
+use Shopsys\FrameworkBundle\Model\Localization\Exception\AdminLocaleNotFoundException;
 
 class Localization
 {
@@ -45,11 +46,18 @@ class Localization
     protected $allLocales;
 
     /**
-     * @param \Shopsys\FrameworkBundle\Component\Domain\Domain $domain
+     * @var string
      */
-    public function __construct(Domain $domain)
+    protected $adminLocale;
+
+    /**
+     * @param \Shopsys\FrameworkBundle\Component\Domain\Domain $domain
+     * @param string $adminLocale
+     */
+    public function __construct(Domain $domain, string $adminLocale)
     {
         $this->domain = $domain;
+        $this->adminLocale = $adminLocale;
     }
 
     /**
@@ -65,7 +73,13 @@ class Localization
      */
     public function getAdminLocale(): string
     {
-        return 'en';
+        $allLocales = $this->getLocalesOfAllDomains();
+
+        if (!in_array($this->adminLocale, $allLocales, true)) {
+            throw new AdminLocaleNotFoundException($this->adminLocale, $allLocales);
+        }
+
+        return $this->adminLocale;
     }
 
     /**
@@ -76,7 +90,9 @@ class Localization
         if ($this->allLocales === null) {
             $this->allLocales = [];
             foreach ($this->domain->getAll() as $domainConfig) {
-                $this->allLocales[$domainConfig->getLocale()] = $domainConfig->getLocale();
+                $domainLocale = $domainConfig->getLocale();
+
+                $this->allLocales[$domainLocale] = $domainLocale;
             }
         }
 
