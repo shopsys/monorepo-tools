@@ -10,7 +10,9 @@ Take a look at the article about [Monorepo](../introduction/monorepo.md) for mor
 * [PHP](http://php.net/manual/en/install.unix.php)
 * [Composer](https://getcomposer.org/doc/00-intro.md#installation-linux-unix-osx)
 * [Docker](https://docs.docker.com/engine/installation/)
+    * At least version **17.05 or higher** so it supports [multi-stage builds](https://docs.docker.com/develop/develop-images/multistage-build/).
 * [Docker Compose](https://docs.docker.com/compose/install/)
+    * At least version **1.17.0 or higher** because we use compose file version `3.4`
 
 ## Steps
 ### 1. Create new project from Shopsys Framework sources

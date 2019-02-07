@@ -19,6 +19,8 @@ This solution uses [*docker-sync*](http://docker-sync.io/) (for fast two-way syn
 * [PHP](http://php.net/manual/en/install.windows.php)
 * [Docker for Windows](https://docs.docker.com/docker-for-windows/install/)
     * Docker for Windows requires at least 4 GB of memory, otherwise, `composer install` can result in `Killed` status (we recommend to set 2 GB RAM, 1 CPU and 2 GB Swap in `Docker -> Preferences… -> Advanced`)
+    * Version of Docker Engine should be at least **17.05 or higher** so it supports [multi-stage builds](https://docs.docker.com/develop/develop-images/multistage-build/).
+    * Version of Docker Compose should be at least **1.17.0 or higher** because we use compose file version `3.4`
 * [Docker-sync](http://docker-sync.io/) (installation guide [see below](./installation-using-docker-windows-10-pro-higher.md/#installation-of-docker-sync-for-windows))
 
 ### Installation of Docker-sync for Windows

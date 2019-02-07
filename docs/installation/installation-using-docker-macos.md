@@ -14,6 +14,8 @@ This solution uses [*docker-sync*](http://docker-sync.io/) (for fast two-way syn
 * [Docker for Mac](https://docs.docker.com/engine/installation/)
     * Docker-sync suggests ([in known issue](https://github.com/EugenMayer/docker-sync/issues/517)) to use Docker for Mac in version 17.09.1-ce-mac42 (21090)
     * Docker for Mac requires at least 4 GB of memory, otherwise, `composer install` can result in `Killed` status (we recommend to set 2 GB RAM, 1 CPU and 2 GB Swap in `Docker -> Preferences… -> Advanced`)
+    * Version of Docker Engine should be at least **17.05 or higher** so it supports [multi-stage builds](https://docs.docker.com/develop/develop-images/multistage-build/).
+    * Version of Docker Compose should be at least **1.17.0 or higher** because we use compose file version `3.4`
 * [Docker-sync](http://docker-sync.io/) (install via `sudo gem install docker-sync`)
 
 ## Steps
