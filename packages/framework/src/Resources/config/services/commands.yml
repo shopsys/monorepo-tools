@@ -23,8 +23,10 @@ services:
 
     Shopsys\FrameworkBundle\Command\CreateApplicationDirectoriesCommand:
         arguments:
-            - '%kernel.project_dir%'
-            - '%shopsys.content_dir_name%'
+            $defaultInternalDirectories: '%shopsys.framework.default_internal_directories%'
+            $defaultPublicDirectories: '%shopsys.framework.default_public_directories%'
+            $internalDirectories: '%internal_directories%'
+            $publicDirectories: '%public_directories%'
 
     Shopsys\FrameworkBundle\Command\GenerateGruntfileCommand:
         arguments:

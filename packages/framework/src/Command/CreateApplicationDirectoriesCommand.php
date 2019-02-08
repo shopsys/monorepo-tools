@@ -13,6 +13,26 @@ use Symfony\Component\Filesystem\Filesystem;
 class CreateApplicationDirectoriesCommand extends Command
 {
     /**
+     * @var array
+     */
+    private $defaultInternalDirectories;
+
+    /**
+     * @var array
+     */
+    private $defaultPublicDirectories;
+
+    /**
+     * @var array|null
+     */
+    private $internalDirectories;
+
+    /**
+     * @var array|null
+     */
+    private $publicDirectories;
+
+    /**
      * @var string
      */
     protected static $defaultName = 'shopsys:create-directories';
@@ -38,39 +58,35 @@ class CreateApplicationDirectoriesCommand extends Command
     private $uploadedFileDirectoryStructureCreator;
 
     /**
-     * @var string
-     */
-    private $projectDir;
-
-    /**
-     * @var string
-     */
-    private $webContentDirName;
-
-    /**
-     * @param string $projectDir
-     * @param string $webContentDirName
+     * @param array $defaultInternalDirectories
+     * @param array $defaultPublicDirectories
+     * @param array|null $internalDirectories
+     * @param array|null $publicDirectories
      * @param \League\Flysystem\FilesystemInterface $filesystem
      * @param \Symfony\Component\Filesystem\Filesystem $localFilesystem
      * @param \Shopsys\FrameworkBundle\Component\Image\DirectoryStructureCreator $imageDirectoryStructureCreator
      * @param \Shopsys\FrameworkBundle\Component\UploadedFile\DirectoryStructureCreator $uploadedFileDirectoryStructureCreator
      */
     public function __construct(
-        string $projectDir,
-        string $webContentDirName,
+        $defaultInternalDirectories,
+        $defaultPublicDirectories,
+        $internalDirectories,
+        $publicDirectories,
         FilesystemInterface $filesystem,
         Filesystem $localFilesystem,
         ImageDirectoryStructureCreator $imageDirectoryStructureCreator,
         UploadedFileDirectoryStructureCreator $uploadedFileDirectoryStructureCreator
     ) {
+        $this->defaultInternalDirectories = $defaultInternalDirectories;
+        $this->defaultPublicDirectories = $defaultPublicDirectories;
+        $this->internalDirectories = $internalDirectories;
+        $this->publicDirectories = $publicDirectories;
         $this->filesystem = $filesystem;
         $this->localFilesystem = $localFilesystem;
         $this->imageDirectoryStructureCreator = $imageDirectoryStructureCreator;
         $this->uploadedFileDirectoryStructureCreator = $uploadedFileDirectoryStructureCreator;
 
         parent::__construct();
-        $this->projectDir = $projectDir;
-        $this->webContentDirName = $webContentDirName;
     }
 
     protected function configure()
@@ -95,29 +111,14 @@ class CreateApplicationDirectoriesCommand extends Command
      */
     private function createMiscellaneousDirectories(OutputInterface $output)
     {
-        $directories = [
-            '/web/' . $this->webContentDirName . '/feeds',
-            '/web/' . $this->webContentDirName . '/sitemaps',
-            '/web/' . $this->webContentDirName . '/wysiwyg',
-        ];
+        $publicDirectories = $this->getPublicDirectories();
+        $internalDirectories = $this->getInternalDirectories();
 
-        $localDirectories = [
-            $this->projectDir . '/build/stats',
-            $this->projectDir . '/docs/generated',
-            $this->projectDir . '/var/cache',
-            $this->projectDir . '/var/lock',
-            $this->projectDir . '/var/logs',
-            $this->projectDir . '/var/errorPages',
-            $this->projectDir . '/web/assets/admin/styles',
-            $this->projectDir . '/web/assets/frontend/styles',
-            $this->projectDir . '/web/assets/scripts',
-        ];
-
-        foreach ($directories as $directory) {
+        foreach ($publicDirectories as $directory) {
             $this->filesystem->createDir($directory);
         }
 
-        $this->localFilesystem->mkdir($localDirectories);
+        $this->localFilesystem->mkdir($internalDirectories);
 
         $output->writeln('<fg=green>Miscellaneous application directories were successfully created.</fg=green>');
     }
@@ -140,5 +141,33 @@ class CreateApplicationDirectoriesCommand extends Command
         $this->uploadedFileDirectoryStructureCreator->makeUploadedFileDirectories();
 
         $output->writeln('<fg=green>Directories for UploadedFile entities were successfully created.</fg=green>');
+    }
+
+    /**
+     * return array
+     */
+    private function getPublicDirectories()
+    {
+        $directories = $this->defaultPublicDirectories;
+
+        if (is_array($this->publicDirectories)) {
+            $directories = array_unique(array_merge($directories, $this->publicDirectories));
+        }
+
+        return $directories;
+    }
+
+    /**
+     * @return array
+     */
+    private function getInternalDirectories()
+    {
+        $directories = $this->defaultInternalDirectories;
+
+        if (is_array($this->internalDirectories)) {
+            $directories = array_unique(array_merge($directories, $this->internalDirectories));
+        }
+
+        return $directories;
     }
 }

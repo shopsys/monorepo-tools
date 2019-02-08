@@ -78,6 +78,7 @@ class AppKernel extends Kernel
     private function getConfigs()
     {
         $configs = [
+            __DIR__ . '/config/directories.yml',
             __DIR__ . '/config/parameters_common.yml',
             __DIR__ . '/config/parameters.yml',
             __DIR__ . '/config/paths.yml',

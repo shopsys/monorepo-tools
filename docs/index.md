@@ -26,7 +26,11 @@
 * [Shopsys Framework Development Workflow](introduction/shopsys-framework-development-workflow.md)
 * [How to Work with Products](./introduction/how-to-work-with-products.md)
 * [Translations](./introduction/translations.md)
+<!--- TODO
+Add:
 
+* [Directories](./introduction/directories.md)
+-->
 ## Cookbook
 * [Dumping and Importing the Database](./cookbook/dumping-and-importing-the-database.md)
 * [Configuring Jenkins for Continuous Integration](./cookbook/jenkins-configuration.md)
