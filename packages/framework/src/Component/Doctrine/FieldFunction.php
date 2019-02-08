@@ -13,12 +13,12 @@ class FieldFunction extends FunctionNode
     /**
      * @var \Doctrine\ORM\Query\AST\Node
      */
-    private $firstArgumentExpression;
+    protected $firstArgumentExpression;
 
     /**
      * @var \Doctrine\ORM\Query\AST\Node[]
      */
-    private $nextArgumentExpressions;
+    protected $nextArgumentExpressions;
 
     /**
      * @param \Doctrine\ORM\Query\Parser $parser

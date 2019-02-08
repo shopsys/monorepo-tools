@@ -13,12 +13,12 @@ class JsTranslatorCompilerPass implements JsCompilerPassInterface
     /**
      * @var \Shopsys\FrameworkBundle\Component\Javascript\Parser\Translator\JsTranslatorCallParser
      */
-    private $jsTranslatorCallParser;
+    protected $jsTranslatorCallParser;
 
     /**
      * @var \Symfony\Component\Translation\TranslatorInterface
      */
-    private $translator;
+    protected $translator;
 
     /**
      * @param \Shopsys\FrameworkBundle\Component\Javascript\Parser\Translator\JsTranslatorCallParser $jsTranslatorCallParser
@@ -58,7 +58,7 @@ class JsTranslatorCompilerPass implements JsCompilerPassInterface
      * @param \Shopsys\FrameworkBundle\Component\Javascript\Parser\Translator\JsTranslatorCall $jsTranslatorsCall
      * @return string
      */
-    private function translate($jsTranslatorsCall)
+    protected function translate($jsTranslatorsCall)
     {
         $locale = $this->translator->getLocale();
         $catalogue = $this->translator->getCatalogue($locale);

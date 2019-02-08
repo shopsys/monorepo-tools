@@ -12,17 +12,17 @@ class DomainUrlReplacer
     /**
      * @var \Shopsys\FrameworkBundle\Component\Doctrine\StringColumnsFinder
      */
-    private $stringColumnsFinder;
+    protected $stringColumnsFinder;
 
     /**
      * @var \Doctrine\ORM\EntityManagerInterface
      */
-    private $em;
+    protected $em;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\Doctrine\SqlQuoter
      */
-    private $sqlQuoter;
+    protected $sqlQuoter;
 
     /**
      * @param \Shopsys\FrameworkBundle\Component\Doctrine\StringColumnsFinder $stringColumnsFinder
@@ -56,7 +56,7 @@ class DomainUrlReplacer
     /**
      * @return string[][]
      */
-    private function getAllStringColumnNamesIndexedByTableName()
+    protected function getAllStringColumnNamesIndexedByTableName()
     {
         $classesMetadata = $this->em->getMetadataFactory()->getAllMetadata();
 
@@ -70,7 +70,7 @@ class DomainUrlReplacer
      * @param string $domainConfigUrl
      * @return string
      */
-    private function getUrlReplacementSql($tableName, array $columnNames, $domainSettingUrl, $domainConfigUrl)
+    protected function getUrlReplacementSql($tableName, array $columnNames, $domainSettingUrl, $domainConfigUrl)
     {
         $sqlParts = [];
         $quotedTableName = $this->sqlQuoter->quoteIdentifier($tableName);

@@ -18,7 +18,7 @@ class TimedFormTypeExtension extends AbstractTypeExtension
     /**
      * @var \Shopsys\FrameworkBundle\Component\Form\FormTimeProvider
      */
-    private $formTimeProvider;
+    protected $formTimeProvider;
 
     /**
      * @param \Shopsys\FrameworkBundle\Component\Form\FormTimeProvider $formTimeProvider

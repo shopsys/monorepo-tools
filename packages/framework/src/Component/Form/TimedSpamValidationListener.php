@@ -12,12 +12,12 @@ class TimedSpamValidationListener implements EventSubscriberInterface
     /**
      * @var \Shopsys\FrameworkBundle\Component\Form\FormTimeProvider
      */
-    private $formTimeProvider;
+    protected $formTimeProvider;
 
     /**
      * @var string[]
      */
-    private $options;
+    protected $options;
 
     /**
      * @param \Shopsys\FrameworkBundle\Component\Form\FormTimeProvider $formTimeProvider

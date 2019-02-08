@@ -10,12 +10,12 @@ class ProductAvailabilityCronModule implements IteratedCronModuleInterface
     /**
      * @var \Symfony\Bridge\Monolog\Logger
      */
-    private $logger;
+    protected $logger;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Product\Availability\ProductAvailabilityRecalculator
      */
-    private $productAvailabilityRecalculator;
+    protected $productAvailabilityRecalculator;
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\Product\Availability\ProductAvailabilityRecalculator $productAvailabilityRecalculator

@@ -15,7 +15,7 @@ class CronModuleExecutor
     /**
      * @var \DateTimeImmutable|null
      */
-    private $canRunTo;
+    protected $canRunTo;
 
     /**
      * @param int $secondsTimeout

@@ -9,7 +9,7 @@ class MultipleFormSetting
     /**
      * @var bool
      */
-    private $isCurrentFormMultiple = self::DEFAULT_MULTIPLE;
+    protected $isCurrentFormMultiple = self::DEFAULT_MULTIPLE;
 
     public function currentFormIsMultiple()
     {

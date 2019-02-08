@@ -10,7 +10,7 @@ class JsCompiler
     /**
      * @var \Shopsys\FrameworkBundle\Component\Javascript\Compiler\JsCompilerPassInterface[]
      */
-    private $compilerPasses;
+    protected $compilerPasses;
 
     /**
      * @param \Shopsys\FrameworkBundle\Component\Javascript\Compiler\JsCompilerPassInterface[] $compilerPasses

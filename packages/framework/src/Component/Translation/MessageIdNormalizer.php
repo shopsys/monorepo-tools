@@ -40,7 +40,7 @@ class MessageIdNormalizer
      * @param string $domain
      * @return \JMS\TranslationBundle\Model\Message
      */
-    private function getNormalizedMessage(Message $message, $domain)
+    protected function getNormalizedMessage(Message $message, $domain)
     {
         $normalizedMessageId = $this->normalizeMessageId($message->getId());
 

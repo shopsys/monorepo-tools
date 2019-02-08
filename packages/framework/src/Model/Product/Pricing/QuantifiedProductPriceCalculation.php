@@ -15,32 +15,32 @@ class QuantifiedProductPriceCalculation
     /**
      * @var \Shopsys\FrameworkBundle\Model\Product\Pricing\ProductPriceCalculationForUser
      */
-    private $productPriceCalculationForUser;
+    protected $productPriceCalculationForUser;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Pricing\Rounding
      */
-    private $rounding;
+    protected $rounding;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Order\Item\QuantifiedProduct
      */
-    private $quantifiedProduct;
+    protected $quantifiedProduct;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Product\Product
      */
-    private $product;
+    protected $product;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Pricing\Price
      */
-    private $productPrice;
+    protected $productPrice;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Pricing\PriceCalculation
      */
-    private $priceCalculation;
+    protected $priceCalculation;
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\Product\Pricing\ProductPriceCalculationForUser $productPriceCalculationForUser
@@ -94,7 +94,7 @@ class QuantifiedProductPriceCalculation
     /**
      * @return string
      */
-    private function getTotalPriceWithoutVat()
+    protected function getTotalPriceWithoutVat()
     {
         return $this->getTotalPriceWithVat() - $this->getTotalPriceVatAmount();
     }
@@ -102,7 +102,7 @@ class QuantifiedProductPriceCalculation
     /**
      * @return string
      */
-    private function getTotalPriceWithVat()
+    protected function getTotalPriceWithVat()
     {
         return $this->productPrice->getPriceWithVat() * $this->quantifiedProduct->getQuantity();
     }
@@ -110,7 +110,7 @@ class QuantifiedProductPriceCalculation
     /**
      * @return string
      */
-    private function getTotalPriceVatAmount()
+    protected function getTotalPriceVatAmount()
     {
         $vatPercent = $this->product->getVat()->getPercent();
 

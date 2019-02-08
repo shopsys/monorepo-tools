@@ -13,7 +13,7 @@ class TopProductDataFixture extends AbstractReferenceFixture implements Dependen
     /**
      * @var \Shopsys\FrameworkBundle\Model\Product\TopProduct\TopProductFacade
      */
-    private $topProductFacade;
+    protected $topProductFacade;
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\Product\TopProduct\TopProductFacade $topProductFacade
@@ -40,7 +40,7 @@ class TopProductDataFixture extends AbstractReferenceFixture implements Dependen
     /**
      * @param string[] $productReferenceNames
      */
-    private function createTopProducts(array $productReferenceNames)
+    protected function createTopProducts(array $productReferenceNames)
     {
         $products = [];
         foreach ($productReferenceNames as $productReferenceName) {

@@ -11,12 +11,12 @@ class ProductDataFixtureCsvReader
     /**
      * @var string
      */
-    private $path;
+    protected $path;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\Csv\CsvReader
      */
-    private $csvReader;
+    protected $csvReader;
 
     /**
      * @param string $path
@@ -48,7 +48,7 @@ class ProductDataFixtureCsvReader
      * @param array $rawRow
      * @return array mixed
      */
-    private function prepareRawRow($rawRow)
+    protected function prepareRawRow($rawRow)
     {
         $row = array_map([TransformString::class, 'emptyToNull'], $rawRow);
 

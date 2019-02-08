@@ -21,12 +21,12 @@ class ConfigureMenuEvent extends Event
     /**
      * @var \Knp\Menu\FactoryInterface
      */
-    private $menuFactory;
+    protected $menuFactory;
 
     /**
      * @var \Knp\Menu\ItemInterface
      */
-    private $menu;
+    protected $menu;
 
     /**
      * @param \Knp\Menu\FactoryInterface $menuFactory

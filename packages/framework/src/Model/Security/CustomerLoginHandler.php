@@ -17,7 +17,7 @@ class CustomerLoginHandler implements AuthenticationSuccessHandlerInterface, Aut
     /**
      * @var \Symfony\Component\Routing\RouterInterface
      */
-    private $router;
+    protected $router;
 
     /**
      * @param \Shopsys\FrameworkBundle\Component\Router\CurrentDomainRouter $router

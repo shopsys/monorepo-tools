@@ -7,32 +7,32 @@ class Column
     /**
      * @var string
      */
-    private $id;
+    protected $id;
 
     /**
      * @var string
      */
-    private $sourceColumnName;
+    protected $sourceColumnName;
 
     /**
      * @var string
      */
-    private $title;
+    protected $title;
 
     /**
      * @var bool
      */
-    private $sortable;
+    protected $sortable;
 
     /**
      * @var string
      */
-    private $classAttribute;
+    protected $classAttribute;
 
     /**
      * @var string
      */
-    private $orderSourceColumnName;
+    protected $orderSourceColumnName;
 
     /**
      * @param string $id

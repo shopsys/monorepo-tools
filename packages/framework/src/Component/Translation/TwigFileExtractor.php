@@ -12,7 +12,7 @@ class TwigFileExtractor implements FileVisitorInterface
     /**
      * @var \JMS\TranslationBundle\Translation\Extractor\File\TwigFileExtractor
      */
-    private $originalTwigFileExtractor;
+    protected $originalTwigFileExtractor;
 
     /**
      * @param \JMS\TranslationBundle\Translation\Extractor\File\TwigFileExtractor $originalTwigFileExtractor
@@ -29,7 +29,7 @@ class TwigFileExtractor implements FileVisitorInterface
      * but original \JMS\TranslationBundle\Translation\Extractor\File\TwigFileExtractor is not open for that type of extension
      * so we need to inject our \Shopsys\FrameworkBundle\Component\Translation\CustomTransFiltersVisitor using ReflectionObject
      */
-    private function injectCustomVisitor()
+    protected function injectCustomVisitor()
     {
         $reflectionObject = new ReflectionObject($this->originalTwigFileExtractor);
         $traverserReflectionProperty = $reflectionObject->getProperty('traverser');

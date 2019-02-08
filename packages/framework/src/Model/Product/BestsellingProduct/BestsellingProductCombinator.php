@@ -32,7 +32,7 @@ class BestsellingProductCombinator
      * @param \Shopsys\FrameworkBundle\Model\Product\Product[] $manualProducts
      * @return \Shopsys\FrameworkBundle\Model\Product\Product[]
      */
-    private function getAutomaticProductsExcludingManual(
+    protected function getAutomaticProductsExcludingManual(
         array $automaticProducts,
         array $manualProducts
     ) {
@@ -52,7 +52,7 @@ class BestsellingProductCombinator
      * @param int $maxResults
      * @return \Shopsys\FrameworkBundle\Model\Product\Product[]
      */
-    private function getCombinedProducts(
+    protected function getCombinedProducts(
         array $manualProductsIndexedByPosition,
         array $automaticProductsExcludingManual,
         $maxResults

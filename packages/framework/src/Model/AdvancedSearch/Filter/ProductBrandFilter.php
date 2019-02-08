@@ -16,7 +16,7 @@ class ProductBrandFilter implements AdvancedSearchFilterInterface
     /**
      * @var \Shopsys\FrameworkBundle\Model\Product\Brand\BrandFacade
      */
-    private $brandFacade;
+    protected $brandFacade;
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\Product\Brand\BrandFacade $brandFacade

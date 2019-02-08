@@ -11,7 +11,7 @@ class ValueByDateTimeDataPointFormatter
     /**
      * @var \Shopsys\FrameworkBundle\Twig\DateTimeFormatterExtension
      */
-    private $dateTimeFormatterExtension;
+    protected $dateTimeFormatterExtension;
 
     /**
      * @param \Shopsys\FrameworkBundle\Twig\DateTimeFormatterExtension $dateTimeFormatterExtension
@@ -72,7 +72,7 @@ class ValueByDateTimeDataPointFormatter
      * @param \Shopsys\FrameworkBundle\Model\Statistics\ValueByDateTimeDataPoint[] $valueByDateTimeDataPoints
      * @return \DateTime[]
      */
-    private function getDateTimes(array $valueByDateTimeDataPoints)
+    protected function getDateTimes(array $valueByDateTimeDataPoints)
     {
         $returnData = [];
         foreach ($valueByDateTimeDataPoints as $key => $valueByDateTimeDataPoint) {

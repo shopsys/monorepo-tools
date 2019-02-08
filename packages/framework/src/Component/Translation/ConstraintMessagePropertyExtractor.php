@@ -35,22 +35,22 @@ class ConstraintMessagePropertyExtractor implements FileVisitorInterface, NodeVi
     /**
      * @var \PhpParser\NodeTraverser
      */
-    private $traverser;
+    protected $traverser;
 
     /**
      * @var \JMS\TranslationBundle\Model\MessageCatalogue
      */
-    private $catalogue;
+    protected $catalogue;
 
     /**
      * @var \SplFileInfo
      */
-    private $file;
+    protected $file;
 
     /**
      * @var bool
      */
-    private $isInsideConstraintClass = null;
+    protected $isInsideConstraintClass = null;
 
     public function __construct()
     {
@@ -97,7 +97,7 @@ class ConstraintMessagePropertyExtractor implements FileVisitorInterface, NodeVi
      * @param \PhpParser\Node\Stmt\Class_ $node
      * @return bool
      */
-    private function isConstraintClass(Class_ $node)
+    protected function isConstraintClass(Class_ $node)
     {
         return is_subclass_of((string)$node->namespacedName, Constraint::class);
     }
@@ -105,7 +105,7 @@ class ConstraintMessagePropertyExtractor implements FileVisitorInterface, NodeVi
     /**
      * @param \PhpParser\Node\Stmt\Property $node
      */
-    private function extractMessagesFromProperty(Property $node)
+    protected function extractMessagesFromProperty(Property $node)
     {
         foreach ($node->props as $propertyProperty) {
             if ($this->isMessagePropertyProperty($propertyProperty)) {
@@ -123,7 +123,7 @@ class ConstraintMessagePropertyExtractor implements FileVisitorInterface, NodeVi
      * @param \PhpParser\Node\Stmt\PropertyProperty $node
      * @return bool
      */
-    private function isMessagePropertyProperty(PropertyProperty $node)
+    protected function isMessagePropertyProperty(PropertyProperty $node)
     {
         return strtolower(substr($node->name, -7)) === 'message';
     }

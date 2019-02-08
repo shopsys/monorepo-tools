@@ -9,17 +9,17 @@ class AddProductResult
     /**
      * @var \Shopsys\FrameworkBundle\Model\Cart\Item\CartItem
      */
-    private $cartItem;
+    protected $cartItem;
 
     /**
      * @var bool
      */
-    private $isNew;
+    protected $isNew;
 
     /**
      * @var int
      */
-    private $addedQuantity;
+    protected $addedQuantity;
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\Cart\Item\CartItem $cartItem

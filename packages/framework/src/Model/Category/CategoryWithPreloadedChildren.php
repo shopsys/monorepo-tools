@@ -14,12 +14,12 @@ class CategoryWithPreloadedChildren
     /**
      * @var \Shopsys\FrameworkBundle\Model\Category\Category
      */
-    private $category;
+    protected $category;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Category\CategoryWithPreloadedChildren[]
      */
-    private $children;
+    protected $children;
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\Category\Category $category

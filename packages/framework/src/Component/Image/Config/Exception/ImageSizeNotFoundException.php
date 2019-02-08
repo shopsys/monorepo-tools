@@ -9,12 +9,12 @@ class ImageSizeNotFoundException extends Exception implements ImageConfigExcepti
     /**
      * @var string
      */
-    private $entityClass;
+    protected $entityClass;
 
     /**
      * @var string
      */
-    private $sizeName;
+    protected $sizeName;
 
     /**
      * @param string $entityClass

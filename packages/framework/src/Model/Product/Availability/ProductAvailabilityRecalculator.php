@@ -13,22 +13,22 @@ class ProductAvailabilityRecalculator
     /**
      * @var \Doctrine\ORM\EntityManagerInterface
      */
-    private $em;
+    protected $em;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Product\Availability\ProductAvailabilityRecalculationScheduler
      */
-    private $productAvailabilityRecalculationScheduler;
+    protected $productAvailabilityRecalculationScheduler;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Product\Availability\ProductAvailabilityCalculation
      */
-    private $productAvailabilityCalculation;
+    protected $productAvailabilityCalculation;
 
     /**
      * @var \Doctrine\ORM\Internal\Hydration\IterableResult|\Shopsys\FrameworkBundle\Model\Product\Product[][]|null
      */
-    private $productRowsIterator;
+    protected $productRowsIterator;
 
     /**
      * @param \Doctrine\ORM\EntityManagerInterface $em
@@ -88,7 +88,7 @@ class ProductAvailabilityRecalculator
     /**
      * @param \Shopsys\FrameworkBundle\Model\Product\Product $product
      */
-    private function recalculateProductAvailability(Product $product)
+    protected function recalculateProductAvailability(Product $product)
     {
         $calculatedAvailability = $this->productAvailabilityCalculation->calculateAvailability($product);
         $product->setCalculatedAvailability($calculatedAvailability);

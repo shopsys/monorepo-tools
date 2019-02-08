@@ -13,12 +13,12 @@ class OrderPriceCalculation
     /**
      * @var \Shopsys\FrameworkBundle\Model\Order\Item\OrderItemPriceCalculation
      */
-    private $orderItemPriceCalculation;
+    protected $orderItemPriceCalculation;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Pricing\Rounding
      */
-    private $rounding;
+    protected $rounding;
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\Order\Item\OrderItemPriceCalculation $orderItemPriceCalculation

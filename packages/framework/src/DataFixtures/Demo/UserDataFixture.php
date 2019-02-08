@@ -17,19 +17,19 @@ class UserDataFixture extends AbstractReferenceFixture implements DependentFixtu
     const USER_WITH_RESET_PASSWORD_HASH = 'user_with_reset_password_hash';
 
     /** @var \Shopsys\FrameworkBundle\Model\Customer\CustomerFacade */
-    private $customerFacade;
+    protected $customerFacade;
 
     /** @var \Shopsys\FrameworkBundle\DataFixtures\Demo\UserDataFixtureLoader */
-    private $loaderService;
+    protected $loaderService;
 
     /** @var \Faker\Generator */
-    private $faker;
+    protected $faker;
 
     /** @var \Doctrine\ORM\EntityManagerInterface */
-    private $em;
+    protected $em;
 
     /** @var \Shopsys\FrameworkBundle\Component\String\HashGenerator */
-    private $hashGenerator;
+    protected $hashGenerator;
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\Customer\CustomerFacade $customerFacade
@@ -90,7 +90,7 @@ class UserDataFixture extends AbstractReferenceFixture implements DependentFixtu
     /**
      * @param \Shopsys\FrameworkBundle\Model\Customer\User $customer
      */
-    private function resetPassword(User $customer)
+    protected function resetPassword(User $customer)
     {
         $customer->resetPassword($this->hashGenerator);
         $this->em->flush($customer);

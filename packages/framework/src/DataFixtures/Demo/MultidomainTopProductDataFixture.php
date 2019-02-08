@@ -16,12 +16,12 @@ class MultidomainTopProductDataFixture extends AbstractReferenceFixture implemen
     /**
      * @var \Shopsys\FrameworkBundle\Model\Product\TopProduct\TopProductFacade
      */
-    private $topProductFacade;
+    protected $topProductFacade;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\Domain\Domain
      */
-    private $domain;
+    protected $domain;
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\Product\TopProduct\TopProductFacade $topProductFacade
@@ -46,7 +46,7 @@ class MultidomainTopProductDataFixture extends AbstractReferenceFixture implemen
     /**
      * @param int $domainId
      */
-    private function loadForDomain(int $domainId)
+    protected function loadForDomain(int $domainId)
     {
         $topProductReferenceNamesOnDomain = [
             DemoProductDataFixture::PRODUCT_PREFIX . '14',

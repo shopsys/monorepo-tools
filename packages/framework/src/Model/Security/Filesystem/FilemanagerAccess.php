@@ -10,22 +10,22 @@ class FilemanagerAccess
     /**
      * @var \Shopsys\FrameworkBundle\Model\Security\Filesystem\FilemanagerAccess|null
      */
-    private static $self;
+    protected static $self;
 
     /**
      * @var string
      */
-    private $filemanagerUploadDir;
+    protected $filemanagerUploadDir;
 
     /**
      * @var \FM\ElfinderBundle\Configuration\ElFinderConfigurationReader
      */
-    private $elFinderConfigurationReader;
+    protected $elFinderConfigurationReader;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\Filesystem\FilepathComparator
      */
-    private $filepathComparator;
+    protected $filepathComparator;
 
     /**
      * @param mixed $filamanagerUploadDir

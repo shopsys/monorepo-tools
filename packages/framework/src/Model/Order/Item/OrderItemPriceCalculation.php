@@ -12,7 +12,7 @@ class OrderItemPriceCalculation
     /**
      * @var \Shopsys\FrameworkBundle\Model\Pricing\PriceCalculation
      */
-    private $priceCalculation;
+    protected $priceCalculation;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Pricing\Vat\VatFactoryInterface
@@ -22,7 +22,7 @@ class OrderItemPriceCalculation
     /**
      * @var \Shopsys\FrameworkBundle\Model\Pricing\Vat\VatDataFactoryInterface
      */
-    private $vatDataFactory;
+    protected $vatDataFactory;
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\Pricing\PriceCalculation $priceCalculation

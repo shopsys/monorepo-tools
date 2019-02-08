@@ -12,7 +12,7 @@ class HeurekaSetting
     /**
      * @var \Shopsys\FrameworkBundle\Component\Setting\Setting
      */
-    private $setting;
+    protected $setting;
 
     /**
      * @param \Shopsys\FrameworkBundle\Component\Setting\Setting $setting

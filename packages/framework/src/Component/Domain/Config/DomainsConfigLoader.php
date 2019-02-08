@@ -12,7 +12,7 @@ class DomainsConfigLoader
     /**
      * @var \Symfony\Component\Filesystem\Filesystem
      */
-    private $filesystem;
+    protected $filesystem;
 
     /**
      * @param \Symfony\Component\Filesystem\Filesystem $filesystem
@@ -50,7 +50,7 @@ class DomainsConfigLoader
      * @param array $processedConfigsByDomainId
      * @return \Shopsys\FrameworkBundle\Component\Domain\Config\DomainConfig[]
      */
-    private function loadDomainConfigsFromArray($processedConfigsByDomainId)
+    protected function loadDomainConfigsFromArray($processedConfigsByDomainId)
     {
         $domainConfigs = [];
 
@@ -65,7 +65,7 @@ class DomainsConfigLoader
      * @param array $domainConfig
      * @return \Shopsys\FrameworkBundle\Component\Domain\Config\DomainConfig
      */
-    private function processDomainConfigArray(array $domainConfig)
+    protected function processDomainConfigArray(array $domainConfig)
     {
         return new DomainConfig(
             $domainConfig[DomainsConfigDefinition::CONFIG_ID],
@@ -81,7 +81,7 @@ class DomainsConfigLoader
      * @param array $domainUrlsConfigsByDomainId
      * @return array
      */
-    private function addUrlsToProcessedConfig($domainConfigsByDomainId, $domainUrlsConfigsByDomainId)
+    protected function addUrlsToProcessedConfig($domainConfigsByDomainId, $domainUrlsConfigsByDomainId)
     {
         foreach ($domainConfigsByDomainId as $domainId => $domainConfigArray) {
             $domainConfigArray[DomainsUrlsConfigDefinition::CONFIG_URL] =
@@ -97,7 +97,7 @@ class DomainsConfigLoader
      * @param \Symfony\Component\Config\Definition\ConfigurationInterface $configDefinition
      * @return array
      */
-    private function getProcessedConfig($filepath, ConfigurationInterface $configDefinition)
+    protected function getProcessedConfig($filepath, ConfigurationInterface $configDefinition)
     {
         $yamlParser = new Parser();
         $processor = new Processor();
@@ -118,7 +118,7 @@ class DomainsConfigLoader
      * @param array $domainUrlsConfigsByDomainId
      * @return bool
      */
-    private function isConfigMatchingUrlsConfig($domainConfigsByDomainId, $domainUrlsConfigsByDomainId)
+    protected function isConfigMatchingUrlsConfig($domainConfigsByDomainId, $domainUrlsConfigsByDomainId)
     {
         foreach (array_keys($domainConfigsByDomainId) as $domainId) {
             if (!array_key_exists($domainId, $domainUrlsConfigsByDomainId)) {

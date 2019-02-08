@@ -7,12 +7,12 @@ class DelayedPricingSetting
     /**
      * @var \Shopsys\FrameworkBundle\Model\Pricing\PricingSetting
      */
-    private $pricingSetting;
+    protected $pricingSetting;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Pricing\InputPriceRecalculationScheduler
      */
-    private $inputPriceRecalculationScheduler;
+    protected $inputPriceRecalculationScheduler;
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\Pricing\PricingSetting $pricingSetting

@@ -129,7 +129,7 @@ class ProductFacade
     /**
      * @var \Shopsys\FrameworkBundle\Model\Product\Pricing\ProductPriceCalculation
      */
-    private $productPriceCalculation;
+    protected $productPriceCalculation;
 
     /**
      * @param \Doctrine\ORM\EntityManagerInterface $em

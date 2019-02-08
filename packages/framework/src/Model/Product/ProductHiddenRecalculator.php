@@ -9,7 +9,7 @@ class ProductHiddenRecalculator
     /**
      * @var \Doctrine\ORM\EntityManagerInterface
      */
-    private $em;
+    protected $em;
 
     /**
      * @param \Doctrine\ORM\EntityManagerInterface $entityManager
@@ -36,7 +36,7 @@ class ProductHiddenRecalculator
     /**
      * @param \Shopsys\FrameworkBundle\Model\Product\Product|null $product
      */
-    private function executeQuery(Product $product = null)
+    protected function executeQuery(Product $product = null)
     {
         $qb = $this->em->createQueryBuilder()
             ->update(Product::class, 'p')

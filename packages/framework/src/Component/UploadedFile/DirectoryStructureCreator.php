@@ -10,17 +10,17 @@ class DirectoryStructureCreator
     /**
      * @var \Shopsys\FrameworkBundle\Component\UploadedFile\Config\UploadedFileConfig
      */
-    private $uploadedFileConfig;
+    protected $uploadedFileConfig;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\UploadedFile\UploadedFileLocator
      */
-    private $uploadedFileLocator;
+    protected $uploadedFileLocator;
 
     /**
      * @var \League\Flysystem\FilesystemInterface
      */
-    private $filesysytem;
+    protected $filesysytem;
 
     /**
      * @param \Shopsys\FrameworkBundle\Component\UploadedFile\Config\UploadedFileConfig $uploadedFileConfig

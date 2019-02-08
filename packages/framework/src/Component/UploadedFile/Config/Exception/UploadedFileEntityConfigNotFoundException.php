@@ -9,7 +9,7 @@ class UploadedFileEntityConfigNotFoundException extends Exception implements Upl
     /**
      * @var string
      */
-    private $entityClassOrName;
+    protected $entityClassOrName;
 
     /**
      * @param string $entityClassOrName

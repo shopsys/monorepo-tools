@@ -16,12 +16,12 @@ class TransportDataFixture extends AbstractReferenceFixture implements Dependent
     const TRANSPORT_PERSONAL = 'transport_personal';
 
     /** @var \Shopsys\FrameworkBundle\Model\Transport\TransportFacade */
-    private $transportFacade;
+    protected $transportFacade;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Transport\TransportDataFactoryInterface
      */
-    private $transportDataFactory;
+    protected $transportDataFactory;
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\Transport\TransportFacade $transportFacade
@@ -89,7 +89,7 @@ class TransportDataFixture extends AbstractReferenceFixture implements Dependent
      * @param string $referenceName
      * @param \Shopsys\FrameworkBundle\Model\Transport\TransportData $transportData
      */
-    private function createTransport($referenceName, TransportData $transportData)
+    protected function createTransport($referenceName, TransportData $transportData)
     {
         $transport = $this->transportFacade->create($transportData);
         $this->addReference($referenceName, $transport);

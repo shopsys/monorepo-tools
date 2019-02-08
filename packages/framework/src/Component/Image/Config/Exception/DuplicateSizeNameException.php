@@ -9,7 +9,7 @@ class DuplicateSizeNameException extends Exception implements ImageConfigExcepti
     /**
      * @var string|null
      */
-    private $sizeName;
+    protected $sizeName;
 
     /**
      * @param string|null $sizeName

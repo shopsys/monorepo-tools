@@ -7,12 +7,12 @@ class TransportAndPaymentCheckResult
     /**
      * @var bool
      */
-    private $transportPriceChanged;
+    protected $transportPriceChanged;
 
     /**
      * @var bool
      */
-    private $paymentPriceChanged;
+    protected $paymentPriceChanged;
 
     /**
      * @param bool $transportPriceChanged

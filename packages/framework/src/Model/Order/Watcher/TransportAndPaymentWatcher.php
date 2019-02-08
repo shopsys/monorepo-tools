@@ -20,17 +20,17 @@ class TransportAndPaymentWatcher
     /**
      * @var \Symfony\Component\HttpFoundation\Session\SessionInterface
      */
-    private $session;
+    protected $session;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Payment\PaymentPriceCalculation
      */
-    private $paymentPriceCalculation;
+    protected $paymentPriceCalculation;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Transport\TransportPriceCalculation
      */
-    private $transportPriceCalculation;
+    protected $transportPriceCalculation;
 
     /**
      * @param \Symfony\Component\HttpFoundation\Session\SessionInterface $session
@@ -97,7 +97,7 @@ class TransportAndPaymentWatcher
      * @param int $domainId
      * @return bool
      */
-    private function checkTransportPrice(
+    protected function checkTransportPrice(
         Transport $transport,
         Currency $currency,
         OrderPreview $orderPreview,
@@ -129,7 +129,7 @@ class TransportAndPaymentWatcher
      * @param int $domainId
      * @return bool
      */
-    private function checkPaymentPrice(
+    protected function checkPaymentPrice(
         Payment $payment,
         Currency $currency,
         OrderPreview $orderPreview,
@@ -161,7 +161,7 @@ class TransportAndPaymentWatcher
      * @param int $domainId
      * @return array
      */
-    private function getTransportPrices(
+    protected function getTransportPrices(
         $transports,
         Currency $currency,
         OrderPreview $orderPreview,
@@ -188,7 +188,7 @@ class TransportAndPaymentWatcher
      * @param int $domainId
      * @return array
      */
-    private function getPaymentPrices(
+    protected function getPaymentPrices(
         $payments,
         Currency $currency,
         OrderPreview $orderPreview,
@@ -215,7 +215,7 @@ class TransportAndPaymentWatcher
      * @param \Shopsys\FrameworkBundle\Model\Order\Preview\OrderPreview $orderPreview
      * @param int $domainId
      */
-    private function rememberTransportAndPayment(
+    protected function rememberTransportAndPayment(
         array $transports,
         array $payments,
         Currency $currency,
@@ -241,7 +241,7 @@ class TransportAndPaymentWatcher
     /**
      * @return array
      */
-    private function getRememberedTransportAndPayment()
+    protected function getRememberedTransportAndPayment()
     {
         return $this->session->get(self::SESSION_ROOT, [
             self::SESSION_TRANSPORT_PRICES => [],
@@ -252,7 +252,7 @@ class TransportAndPaymentWatcher
     /**
      * @return array
      */
-    private function getRememberedTransportPrices()
+    protected function getRememberedTransportPrices()
     {
         return $this->getRememberedTransportAndPayment()[self::SESSION_TRANSPORT_PRICES];
     }
@@ -260,7 +260,7 @@ class TransportAndPaymentWatcher
     /**
      * @return array
      */
-    private function getRememberedPaymentPrices()
+    protected function getRememberedPaymentPrices()
     {
         return $this->getRememberedTransportAndPayment()[self::SESSION_PAYMENT_PRICES];
     }

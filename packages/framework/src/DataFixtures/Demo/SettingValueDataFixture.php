@@ -13,7 +13,7 @@ class SettingValueDataFixture extends AbstractReferenceFixture implements Depend
     /**
      * @var \Shopsys\FrameworkBundle\Component\Setting\Setting
      */
-    private $setting;
+    protected $setting;
 
     /**
      * @param \Shopsys\FrameworkBundle\Component\Setting\Setting $setting

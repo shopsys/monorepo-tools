@@ -13,37 +13,37 @@ class GridView
     /**
      * @var \Shopsys\FrameworkBundle\Component\Grid\Grid
      */
-    private $grid;
+    protected $grid;
 
     /**
      * @var array
      */
-    private $templateParameters;
+    protected $templateParameters;
 
     /**
      * @var \Twig_TemplateWrapper[]
      */
-    private $templates;
+    protected $templates;
 
     /**
      * @var string|string[]|null
      */
-    private $theme;
+    protected $theme;
 
     /**
      * @var \Symfony\Component\HttpFoundation\RequestStack
      */
-    private $requestStack;
+    protected $requestStack;
 
     /**
      * @var \Symfony\Component\Routing\RouterInterface
      */
-    private $router;
+    protected $router;
 
     /**
      * @var \Twig_Environment
      */
-    private $twig;
+    protected $twig;
 
     /**
      * @param \Shopsys\FrameworkBundle\Component\Grid\Grid $grid
@@ -215,7 +215,7 @@ class GridView
      * @param string $name
      * @return bool
      */
-    private function blockExists($name)
+    protected function blockExists($name)
     {
         foreach ($this->getTemplates() as $template) {
             if ($template->hasBlock($name)) {
@@ -238,7 +238,7 @@ class GridView
      * @param string|string[] $theme
      * @param array $parameters
      */
-    private function setTheme($theme, array $parameters = [])
+    protected function setTheme($theme, array $parameters = [])
     {
         $this->theme = $theme;
         $this->templateParameters = $parameters;
@@ -247,7 +247,7 @@ class GridView
     /**
      * @return \Twig_TemplateWrapper[]
      */
-    private function getTemplates()
+    protected function getTemplates()
     {
         if (empty($this->templates)) {
             $this->templates = [];
@@ -267,7 +267,7 @@ class GridView
      * @param string $theme
      * @return \Twig_TemplateWrapper
      */
-    private function getTemplateFromString($theme)
+    protected function getTemplateFromString($theme)
     {
         return $this->twig->load($theme);
     }
@@ -277,7 +277,7 @@ class GridView
      * @param array $row
      * @return mixed
      */
-    private function getCellValue(Column $column, $row)
+    protected function getCellValue(Column $column, $row)
     {
         return Grid::getValueFromRowBySourceColumnName($row, $column->getSourceColumnName());
     }
@@ -286,7 +286,7 @@ class GridView
      * @param mixed $variable
      * @return string
      */
-    private function getVariableType($variable)
+    protected function getVariableType($variable)
     {
         switch (gettype($variable)) {
             case 'boolean':

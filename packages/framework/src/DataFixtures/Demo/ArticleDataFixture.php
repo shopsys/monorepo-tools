@@ -19,12 +19,12 @@ class ArticleDataFixture extends AbstractReferenceFixture
     /**
      * @var \Shopsys\FrameworkBundle\Model\Article\ArticleFacade
      */
-    private $articleFacade;
+    protected $articleFacade;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Article\ArticleDataFactoryInterface
      */
-    private $articleDataFactory;
+    protected $articleDataFactory;
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\Article\ArticleFacade $articleFacade
@@ -80,7 +80,7 @@ class ArticleDataFixture extends AbstractReferenceFixture
      * @param \Shopsys\FrameworkBundle\Model\Article\ArticleData $articleData
      * @param string|null $referenceName
      */
-    private function createArticle(ArticleData $articleData, $referenceName = null)
+    protected function createArticle(ArticleData $articleData, $referenceName = null)
     {
         $article = $this->articleFacade->create($articleData);
         if ($referenceName !== null) {

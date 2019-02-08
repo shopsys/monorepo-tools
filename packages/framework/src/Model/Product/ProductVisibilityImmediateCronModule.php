@@ -10,7 +10,7 @@ class ProductVisibilityImmediateCronModule implements SimpleCronModuleInterface
     /**
      * @var \Shopsys\FrameworkBundle\Model\Product\ProductVisibilityFacade
      */
-    private $productVisibilityFacade;
+    protected $productVisibilityFacade;
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\Product\ProductVisibilityFacade $productVisibilityFacade

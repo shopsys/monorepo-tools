@@ -19,37 +19,37 @@ class MultidomainProductDataFixture extends AbstractReferenceFixture implements 
     /**
      * @var \Shopsys\FrameworkBundle\DataFixtures\Demo\ProductDataFixtureLoader
      */
-    private $productDataFixtureLoader;
+    protected $productDataFixtureLoader;
 
     /**
      * @var \Shopsys\FrameworkBundle\DataFixtures\ProductDataFixtureReferenceInjector
      */
-    private $referenceInjector;
+    protected $referenceInjector;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\DataFixture\PersistentReferenceFacade
      */
-    private $persistentReferenceFacade;
+    protected $persistentReferenceFacade;
 
     /**
      * @var \Shopsys\FrameworkBundle\DataFixtures\Demo\ProductDataFixtureCsvReader
      */
-    private $productDataFixtureCsvReader;
+    protected $productDataFixtureCsvReader;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Product\ProductFacade
      */
-    private $productFacade;
+    protected $productFacade;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Product\ProductDataFactoryInterface
      */
-    private $productDataFactory;
+    protected $productDataFactory;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\Domain\Domain
      */
-    private $domain;
+    protected $domain;
 
     /**
      * @param \Shopsys\FrameworkBundle\DataFixtures\Demo\ProductDataFixtureLoader $productDataFixtureLoader
@@ -91,7 +91,7 @@ class MultidomainProductDataFixture extends AbstractReferenceFixture implements 
     /**
      * @param int $domainId
      */
-    private function loadForDomain(int $domainId)
+    protected function loadForDomain(int $domainId)
     {
         $this->referenceInjector->loadReferences($this->productDataFixtureLoader, $this->persistentReferenceFacade, $domainId);
 
@@ -111,7 +111,7 @@ class MultidomainProductDataFixture extends AbstractReferenceFixture implements 
      * @param \Shopsys\FrameworkBundle\Model\Product\Product $product
      * @param array $row
      */
-    private function editProduct(Product $product, array $row)
+    protected function editProduct(Product $product, array $row)
     {
         $productData = $this->productDataFactory->createFromProduct($product);
         $this->productDataFixtureLoader->updateProductDataFromCsvRowForSecondDomain($productData, $row);

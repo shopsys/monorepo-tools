@@ -9,7 +9,7 @@ class DuplicateEntityNameException extends Exception implements ImageConfigExcep
     /**
      * @var string
      */
-    private $entityName;
+    protected $entityName;
 
     /**
      * @param string $entityName

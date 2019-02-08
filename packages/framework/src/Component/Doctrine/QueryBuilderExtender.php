@@ -48,7 +48,7 @@ class QueryBuilderExtender
      * @param \Doctrine\ORM\QueryBuilder $queryBuilder
      * @return string
      */
-    private function getRootAlias(QueryBuilder $queryBuilder)
+    protected function getRootAlias(QueryBuilder $queryBuilder)
     {
         $rootAliases = $queryBuilder->getRootAliases();
         if (count($rootAliases) !== self::REQUIRED_ALIASES_COUNT) {

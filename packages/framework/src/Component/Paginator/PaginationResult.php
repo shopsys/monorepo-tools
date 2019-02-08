@@ -7,37 +7,37 @@ class PaginationResult
     /**
      * @var int
      */
-    private $page;
+    protected $page;
 
     /**
      * @var int
      */
-    private $pageSize;
+    protected $pageSize;
 
     /**
      * @var int
      */
-    private $totalCount;
+    protected $totalCount;
 
     /**
      * @var array
      */
-    private $results;
+    protected $results;
 
     /**
      * @var int
      */
-    private $pageCount;
+    protected $pageCount;
 
     /**
      * @var int
      */
-    private $fromItem;
+    protected $fromItem;
 
     /**
      * @var int
      */
-    private $toItem;
+    protected $toItem;
 
     /**
      * @param int $page

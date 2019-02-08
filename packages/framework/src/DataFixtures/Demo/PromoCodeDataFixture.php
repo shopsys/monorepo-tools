@@ -12,12 +12,12 @@ class PromoCodeDataFixture extends AbstractReferenceFixture
     /**
      * @var \Shopsys\FrameworkBundle\Model\Order\PromoCode\PromoCodeFacade
      */
-    private $promoCodeFacade;
+    protected $promoCodeFacade;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Order\PromoCode\PromoCodeDataFactoryInterface
      */
-    private $promoCodeDataFactory;
+    protected $promoCodeDataFactory;
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\Order\PromoCode\PromoCodeFacade $promoCodeFacade

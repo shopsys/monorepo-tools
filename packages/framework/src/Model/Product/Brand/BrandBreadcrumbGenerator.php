@@ -10,7 +10,7 @@ class BrandBreadcrumbGenerator implements BreadcrumbGeneratorInterface
     /**
      * @var \Shopsys\FrameworkBundle\Model\Product\Brand\BrandRepository
      */
-    private $brandRepository;
+    protected $brandRepository;
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\Product\Brand\BrandRepository $brandRepository

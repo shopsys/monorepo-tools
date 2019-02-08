@@ -11,7 +11,7 @@ class NormalizingExtractorManager extends ExtractorManager
     /**
      * @var \Shopsys\FrameworkBundle\Component\Translation\MessageIdNormalizer
      */
-    private $messageIdNormalizer;
+    protected $messageIdNormalizer;
 
     /**
      * @param \JMS\TranslationBundle\Translation\Extractor\FileExtractor $extractor

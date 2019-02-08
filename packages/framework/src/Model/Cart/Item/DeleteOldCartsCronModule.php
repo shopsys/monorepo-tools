@@ -11,7 +11,7 @@ class DeleteOldCartsCronModule implements SimpleCronModuleInterface
     /**
      * @var \Shopsys\FrameworkBundle\Model\Cart\CartFacade
      */
-    private $cartFacade;
+    protected $cartFacade;
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\Cart\CartFacade $cartFacade

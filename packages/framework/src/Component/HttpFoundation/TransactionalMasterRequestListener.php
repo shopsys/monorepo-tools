@@ -12,12 +12,12 @@ class TransactionalMasterRequestListener
     /**
      * @var \Doctrine\ORM\EntityManagerInterface
      */
-    private $em;
+    protected $em;
 
     /**
      * @var bool
      */
-    private $inTransaction;
+    protected $inTransaction;
 
     /**
      * @param \Doctrine\ORM\EntityManagerInterface $em

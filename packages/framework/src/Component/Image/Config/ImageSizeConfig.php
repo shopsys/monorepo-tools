@@ -9,32 +9,32 @@ class ImageSizeConfig
     /**
      * @var string|null
      */
-    private $name;
+    protected $name;
 
     /**
      * @var int
      */
-    private $width;
+    protected $width;
 
     /**
      * @var int
      */
-    private $height;
+    protected $height;
 
     /**
      * @var bool
      */
-    private $crop;
+    protected $crop;
 
     /**
      * @var string|null
      */
-    private $occurrence;
+    protected $occurrence;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\Image\Config\ImageAdditionalSizeConfig[]
      */
-    private $additionalSizes;
+    protected $additionalSizes;
 
     /**
      * @param string|null $name

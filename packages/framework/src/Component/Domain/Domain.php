@@ -14,17 +14,17 @@ class Domain implements DomainIdsProviderInterface
     /**
      * @var \Shopsys\FrameworkBundle\Component\Domain\Config\DomainConfig|null
      */
-    private $currentDomainConfig;
+    protected $currentDomainConfig;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\Domain\Config\DomainConfig[]
      */
-    private $domainConfigs;
+    protected $domainConfigs;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\Setting\Setting
      */
-    private $setting;
+    protected $setting;
 
     /**
      * @param \Shopsys\FrameworkBundle\Component\Domain\Config\DomainConfig[] $domainConfigs

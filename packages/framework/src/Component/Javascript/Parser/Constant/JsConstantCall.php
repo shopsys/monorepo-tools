@@ -9,12 +9,12 @@ class JsConstantCall
     /**
      * @var \PLUG\JavaScript\JNodes\nonterminal\JCallExprNode
      */
-    private $callExprNode;
+    protected $callExprNode;
 
     /**
      * @var string
      */
-    private $constantName;
+    protected $constantName;
 
     /**
      * @param \PLUG\JavaScript\JNodes\nonterminal\JCallExprNode $callExprNode

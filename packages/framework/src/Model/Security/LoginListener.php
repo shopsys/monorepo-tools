@@ -15,17 +15,17 @@ class LoginListener
     /**
      * @var \Doctrine\ORM\EntityManagerInterface
      */
-    private $em;
+    protected $em;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Order\OrderFlowFacade
      */
-    private $orderFlowFacade;
+    protected $orderFlowFacade;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Administrator\Activity\AdministratorActivityFacade
      */
-    private $administratorActivityFacade;
+    protected $administratorActivityFacade;
 
     /**
      * @param \Doctrine\ORM\EntityManagerInterface $em

@@ -68,7 +68,7 @@ class OrderCityFilter implements AdvancedSearchFilterInterface
      * @param string $operator
      * @return string
      */
-    private function getContainsDqlOperator($operator)
+    protected function getContainsDqlOperator($operator)
     {
         switch ($operator) {
             case self::OPERATOR_CONTAINS:

@@ -11,17 +11,17 @@ class UnitInlineEdit extends AbstractGridInlineEdit
     /**
      * @var \Shopsys\FrameworkBundle\Model\Product\Unit\UnitFacade
      */
-    private $unitFacade;
+    protected $unitFacade;
 
     /**
      * @var \Symfony\Component\Form\FormFactoryInterface
      */
-    private $formFactory;
+    protected $formFactory;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Product\Unit\UnitDataFactoryInterface
      */
-    private $unitDataFactory;
+    protected $unitDataFactory;
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\Product\Unit\UnitGridFactory $unitGridFactory

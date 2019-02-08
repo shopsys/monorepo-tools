@@ -13,22 +13,22 @@ class ImageGenerator
     /**
      * @var \Shopsys\FrameworkBundle\Component\Image\Processing\ImageProcessor
      */
-    private $imageProcessor;
+    protected $imageProcessor;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\Image\ImageLocator
      */
-    private $imageLocator;
+    protected $imageLocator;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\Image\Config\ImageConfig
      */
-    private $imageConfig;
+    protected $imageConfig;
 
     /**
      * @var \League\Flysystem\FilesystemInterface
      */
-    private $filesystem;
+    protected $filesystem;
 
     /**
      * @param \Shopsys\FrameworkBundle\Component\Image\Processing\ImageProcessor $imageProcessor

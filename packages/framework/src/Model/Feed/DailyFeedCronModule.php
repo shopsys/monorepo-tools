@@ -12,32 +12,32 @@ class DailyFeedCronModule implements IteratedCronModuleInterface
     /**
      * @var \Shopsys\FrameworkBundle\Model\Feed\FeedFacade
      */
-    private $feedFacade;
+    protected $feedFacade;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\Domain\Domain
      */
-    private $domain;
+    protected $domain;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\Setting\Setting
      */
-    private $setting;
+    protected $setting;
 
     /**
      * @var \Symfony\Bridge\Monolog\Logger
      */
-    private $logger;
+    protected $logger;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Feed\FeedExportCreationDataQueue
      */
-    private $feedExportCreationDataQueue;
+    protected $feedExportCreationDataQueue;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Feed\FeedExport|null
      */
-    private $currentFeedExport;
+    protected $currentFeedExport;
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\Feed\FeedFacade $feedFacade
@@ -151,7 +151,7 @@ class DailyFeedCronModule implements IteratedCronModuleInterface
      * @param int|null $lastSeekId
      * @return \Shopsys\FrameworkBundle\Model\Feed\FeedExport
      */
-    private function createCurrentFeedExport(int $lastSeekId = null): FeedExport
+    protected function createCurrentFeedExport(int $lastSeekId = null): FeedExport
     {
         return $this->feedFacade->createFeedExport(
             $this->feedExportCreationDataQueue->getCurrentFeedName(),

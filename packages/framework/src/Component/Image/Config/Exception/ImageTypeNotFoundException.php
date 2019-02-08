@@ -9,12 +9,12 @@ class ImageTypeNotFoundException extends Exception implements ImageConfigExcepti
     /**
      * @var string
      */
-    private $entityClass;
+    protected $entityClass;
 
     /**
      * @var string
      */
-    private $imageType;
+    protected $imageType;
 
     /**
      * @param string $entityClass

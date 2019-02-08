@@ -7,12 +7,12 @@ class FriendlyUrlUniqueResult
     /**
      * @var bool
      */
-    private $unique;
+    protected $unique;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\FriendlyUrl
      */
-    private $friendlyUrlForPersist;
+    protected $friendlyUrlForPersist;
 
     /**
      * @param bool $unique

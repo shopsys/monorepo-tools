@@ -7,17 +7,17 @@ class OrderTotalPrice
     /**
      * @var string
      */
-    private $priceWithVat;
+    protected $priceWithVat;
 
     /**
      * @var string
      */
-    private $priceWithoutVat;
+    protected $priceWithoutVat;
 
     /**
      * @var string
      */
-    private $productPriceWithVat;
+    protected $productPriceWithVat;
 
     /**
      * @param string $priceWithVat

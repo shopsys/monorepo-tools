@@ -16,12 +16,12 @@ class PaymentDataFixture extends AbstractReferenceFixture implements DependentFi
     const PAYMENT_CASH = 'payment_cash';
 
     /** @var \Shopsys\FrameworkBundle\Model\Payment\PaymentFacade */
-    private $paymentFacade;
+    protected $paymentFacade;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Payment\PaymentDataFactoryInterface
      */
-    private $paymentDataFactory;
+    protected $paymentDataFactory;
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\Payment\PaymentFacade $paymentFacade
@@ -94,7 +94,7 @@ class PaymentDataFixture extends AbstractReferenceFixture implements DependentFi
      * @param \Shopsys\FrameworkBundle\Model\Payment\PaymentData $paymentData
      * @param array $transportsReferenceNames
      */
-    private function createPayment(
+    protected function createPayment(
         $referenceName,
         PaymentData $paymentData,
         array $transportsReferenceNames

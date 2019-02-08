@@ -11,7 +11,7 @@ class Mailer
     /**
      * @var \Swift_Mailer
      */
-    private $swiftMailer;
+    protected $swiftMailer;
 
     /**
      * @param \Swift_Mailer $swiftMailer
@@ -43,7 +43,7 @@ class Mailer
      * @param \Shopsys\FrameworkBundle\Model\Mail\MessageData $messageData
      * @return \Swift_Message
      */
-    private function getMessageWithReplacedVariables(MessageData $messageData)
+    protected function getMessageWithReplacedVariables(MessageData $messageData)
     {
         $toEmail = $messageData->toEmail;
         $body = $this->replaceVariables(
@@ -82,7 +82,7 @@ class Mailer
      * @param array $variablesKeysAndValues
      * @return string
      */
-    private function replaceVariables($string, $variablesKeysAndValues)
+    protected function replaceVariables($string, $variablesKeysAndValues)
     {
         return strtr($string, $variablesKeysAndValues);
     }

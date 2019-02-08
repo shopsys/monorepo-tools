@@ -10,7 +10,7 @@ class SitemapCronModule implements SimpleCronModuleInterface
     /**
      * @var \Shopsys\FrameworkBundle\Model\Sitemap\SitemapFacade
      */
-    private $sitemapFacade;
+    protected $sitemapFacade;
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\Sitemap\SitemapFacade $sitemapFacade

@@ -21,17 +21,17 @@ class SitemapListener implements EventSubscriberInterface
     /**
      * @var \Shopsys\FrameworkBundle\Model\Sitemap\SitemapFacade
      */
-    private $sitemapFacade;
+    protected $sitemapFacade;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\Domain\Domain
      */
-    private $domain;
+    protected $domain;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\Router\DomainRouterFactory
      */
-    private $domainRouterFactory;
+    protected $domainRouterFactory;
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\Sitemap\SitemapFacade $sitemapFacade
@@ -88,7 +88,7 @@ class SitemapListener implements EventSubscriberInterface
      * @param string $section
      * @param int $elementPriority
      */
-    private function addUrlsBySitemapItems(
+    protected function addUrlsBySitemapItems(
         array $sitemapItems,
         AbstractGenerator $generator,
         DomainConfig $domainConfig,
@@ -108,7 +108,7 @@ class SitemapListener implements EventSubscriberInterface
      * @param string $section
      * @param int $elementPriority
      */
-    private function addHomepageUrl(
+    protected function addHomepageUrl(
         AbstractGenerator $generator,
         DomainConfig $domainConfig,
         $section,
@@ -125,7 +125,7 @@ class SitemapListener implements EventSubscriberInterface
      * @param string $slug
      * @return string
      */
-    private function getAbsoluteUrlByDomainConfigAndSlug(DomainConfig $domainConfig, $slug)
+    protected function getAbsoluteUrlByDomainConfigAndSlug(DomainConfig $domainConfig, $slug)
     {
         return $domainConfig->getUrl() . '/' . $slug;
     }

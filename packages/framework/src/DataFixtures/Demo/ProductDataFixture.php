@@ -17,22 +17,22 @@ class ProductDataFixture extends AbstractReferenceFixture implements DependentFi
     const PRODUCT_PREFIX = 'product_';
 
     /** @var \Shopsys\FrameworkBundle\DataFixtures\Demo\ProductDataFixtureLoader */
-    private $productDataFixtureLoader;
+    protected $productDataFixtureLoader;
 
     /** @var \Shopsys\FrameworkBundle\DataFixtures\ProductDataFixtureReferenceInjector */
-    private $referenceInjector;
+    protected $referenceInjector;
 
     /** @var \Shopsys\FrameworkBundle\Component\DataFixture\PersistentReferenceFacade */
-    private $persistentReferenceFacade;
+    protected $persistentReferenceFacade;
 
     /** @var \Shopsys\FrameworkBundle\DataFixtures\Demo\ProductDataFixtureCsvReader */
-    private $productDataFixtureCsvReader;
+    protected $productDataFixtureCsvReader;
 
     /** @var \Shopsys\FrameworkBundle\Model\Product\ProductFacade */
-    private $productFacade;
+    protected $productFacade;
 
     /** @var \Shopsys\FrameworkBundle\Model\Product\ProductVariantFacade */
-    private $productVariantFacade;
+    protected $productVariantFacade;
 
     /**
      * @param \Shopsys\FrameworkBundle\DataFixtures\Demo\ProductDataFixtureLoader $productDataFixtureLoader
@@ -86,7 +86,7 @@ class ProductDataFixture extends AbstractReferenceFixture implements DependentFi
      * @param \Shopsys\FrameworkBundle\Model\Product\ProductData $productData
      * @return \Shopsys\FrameworkBundle\Model\Product\Product
      */
-    private function createProduct($referenceName, ProductData $productData)
+    protected function createProduct($referenceName, ProductData $productData)
     {
         $product = $this->productFacade->create($productData);
 
@@ -99,7 +99,7 @@ class ProductDataFixture extends AbstractReferenceFixture implements DependentFi
      * @param \Shopsys\FrameworkBundle\Model\Product\Product[] $productsByCatnum
      * @param int $productNo
      */
-    private function createVariants(array $productsByCatnum, $productNo)
+    protected function createVariants(array $productsByCatnum, $productNo)
     {
         $csvRows = $this->productDataFixtureCsvReader->getProductDataFixtureCsvRows();
         $variantCatnumsByMainVariantCatnum = $this->productDataFixtureLoader->getVariantCatnumsIndexedByMainVariantCatnum($csvRows);

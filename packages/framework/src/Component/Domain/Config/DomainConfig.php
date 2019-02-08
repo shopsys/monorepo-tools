@@ -9,27 +9,27 @@ class DomainConfig
     /**
      * @var int
      */
-    private $id;
+    protected $id;
 
     /**
      * @var string
      */
-    private $url;
+    protected $url;
 
     /**
      * @var string
      */
-    private $name;
+    protected $name;
 
     /**
      * @var string
      */
-    private $locale;
+    protected $locale;
 
     /**
      * @var string
      */
-    private $stylesDirectory;
+    protected $stylesDirectory;
 
     /**
      * @param int $id

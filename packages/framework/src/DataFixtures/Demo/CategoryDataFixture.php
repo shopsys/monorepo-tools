@@ -26,17 +26,17 @@ class CategoryDataFixture extends AbstractReferenceFixture
     /**
      * @var \Shopsys\FrameworkBundle\Model\Category\CategoryFacade
      */
-    private $categoryFacade;
+    protected $categoryFacade;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Category\CategoryDataFactoryInterface
      */
-    private $categoryDataFactory;
+    protected $categoryDataFactory;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\Domain\Domain
      */
-    private $domain;
+    protected $domain;
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\Category\CategoryFacade $categoryFacade
@@ -229,7 +229,7 @@ class CategoryDataFixture extends AbstractReferenceFixture
     /**
      * @return null[]
      */
-    private function createDomainKeyedArray(): array
+    protected function createDomainKeyedArray(): array
     {
         return array_fill_keys($this->domain->getAllIds(), null);
     }
@@ -239,7 +239,7 @@ class CategoryDataFixture extends AbstractReferenceFixture
      * @param string|null $referenceName
      * @return \Shopsys\FrameworkBundle\Model\Category\Category
      */
-    private function createCategory(CategoryData $categoryData, $referenceName = null)
+    protected function createCategory(CategoryData $categoryData, $referenceName = null)
     {
         $category = $this->categoryFacade->create($categoryData);
         if ($referenceName !== null) {

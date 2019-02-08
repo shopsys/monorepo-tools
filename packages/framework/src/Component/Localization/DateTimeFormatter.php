@@ -10,7 +10,7 @@ class DateTimeFormatter
     /**
      * @var \Shopsys\FrameworkBundle\Component\Localization\DateTimeFormatPatternRepository
      */
-    private $customDateTimeFormatPatternRepository;
+    protected $customDateTimeFormatPatternRepository;
 
     /**
      * @param \Shopsys\FrameworkBundle\Component\Localization\DateTimeFormatPatternRepository $customDateTimeFormatPatternRepository
@@ -47,7 +47,7 @@ class DateTimeFormatter
      * @param int|null $timeType
      * @return string|null
      */
-    private function getCustomPattern($locale, $dateType, $timeType)
+    protected function getCustomPattern($locale, $dateType, $timeType)
     {
         $dateTimePattern = $this->customDateTimeFormatPatternRepository->findDateTimePattern($locale, $dateType, $timeType);
         if ($dateTimePattern !== null) {

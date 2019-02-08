@@ -11,12 +11,12 @@ class QueryBuilderDataSource implements DataSourceInterface
     /**
      * @var \Doctrine\ORM\QueryBuilder
      */
-    private $queryBuilder;
+    protected $queryBuilder;
 
     /**
      * @var string
      */
-    private $rowIdSourceColumnName;
+    protected $rowIdSourceColumnName;
 
     /**
      * @param \Doctrine\ORM\QueryBuilder $queryBuilder
@@ -80,7 +80,7 @@ class QueryBuilderDataSource implements DataSourceInterface
      * @param string $orderSourceColumnName
      * @param string $orderDirection
      */
-    private function addQueryOrder(QueryBuilder $queryBuilder, $orderSourceColumnName, $orderDirection)
+    protected function addQueryOrder(QueryBuilder $queryBuilder, $orderSourceColumnName, $orderDirection)
     {
         $queryBuilder->orderBy($orderSourceColumnName, $orderDirection);
     }
@@ -89,7 +89,7 @@ class QueryBuilderDataSource implements DataSourceInterface
      * @param \Doctrine\ORM\QueryBuilder $queryBuilder
      * @param int $rowId
      */
-    private function prepareQueryWithOneRow(QueryBuilder $queryBuilder, $rowId)
+    protected function prepareQueryWithOneRow(QueryBuilder $queryBuilder, $rowId)
     {
         $queryBuilder
             ->andWhere($this->rowIdSourceColumnName . ' = :rowId')

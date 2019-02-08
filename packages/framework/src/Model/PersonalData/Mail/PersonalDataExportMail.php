@@ -21,17 +21,17 @@ class PersonalDataExportMail implements MailTypeInterface, MessageFactoryInterfa
     /**
      * @var \Shopsys\FrameworkBundle\Component\Domain\Domain
      */
-    private $domain;
+    protected $domain;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\Setting\Setting
      */
-    private $setting;
+    protected $setting;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\Router\DomainRouterFactory
      */
-    private $domainRouterFactory;
+    protected $domainRouterFactory;
 
     /**
      * @param \Shopsys\FrameworkBundle\Component\Domain\Domain $domain
@@ -117,7 +117,7 @@ class PersonalDataExportMail implements MailTypeInterface, MessageFactoryInterfa
      * @param string $domainName
      * @return array
      */
-    private function getBodyValuesIndexedByVariableName($url, $email, $domainName)
+    protected function getBodyValuesIndexedByVariableName($url, $email, $domainName)
     {
         return [
             self::VARIABLE_URL => $url,
@@ -130,7 +130,7 @@ class PersonalDataExportMail implements MailTypeInterface, MessageFactoryInterfa
      * @param string $domainName
      * @return array
      */
-    private function getSubjectValuesIndexedByVariableName($domainName)
+    protected function getSubjectValuesIndexedByVariableName($domainName)
     {
         return [
             self::VARIABLE_DOMAIN => $domainName,
@@ -141,7 +141,7 @@ class PersonalDataExportMail implements MailTypeInterface, MessageFactoryInterfa
      * @param string $hash
      * @return string
      */
-    private function getVariablePersonalDataAccessUrl($hash)
+    protected function getVariablePersonalDataAccessUrl($hash)
     {
         $router = $this->domainRouterFactory->getRouter($this->domain->getId());
 

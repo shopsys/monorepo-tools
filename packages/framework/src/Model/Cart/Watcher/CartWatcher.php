@@ -13,17 +13,17 @@ class CartWatcher
     /**
      * @var \Shopsys\FrameworkBundle\Model\Product\Pricing\ProductPriceCalculationForUser
      */
-    private $productPriceCalculationForUser;
+    protected $productPriceCalculationForUser;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Product\ProductVisibilityRepository
      */
-    private $productVisibilityRepository;
+    protected $productVisibilityRepository;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\Domain\Domain
      */
-    private $domain;
+    protected $domain;
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\Product\Pricing\ProductPriceCalculationForUser $productPriceCalculationForUser

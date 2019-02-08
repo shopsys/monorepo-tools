@@ -11,27 +11,27 @@ class ImageEntityConfig
     /**
      * @var string
      */
-    private $entityName;
+    protected $entityName;
 
     /**
      * @var string
      */
-    private $entityClass;
+    protected $entityClass;
 
     /**
      * @var array
      */
-    private $sizeConfigsByType;
+    protected $sizeConfigsByType;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\Image\Config\ImageSizeConfig[]
      */
-    private $sizeConfigs;
+    protected $sizeConfigs;
 
     /**
      * @var array
      */
-    private $multipleByType;
+    protected $multipleByType;
 
     /**
      * @param string $entityName
@@ -145,7 +145,7 @@ class ImageEntityConfig
      * @param string $sizeName
      * @return \Shopsys\FrameworkBundle\Component\Image\Config\ImageSizeConfig
      */
-    private function getSizeConfigFromSizeConfigs($sizes, $sizeName)
+    protected function getSizeConfigFromSizeConfigs($sizes, $sizeName)
     {
         $key = Utils::ifNull($sizeName, self::WITHOUT_NAME_KEY);
         if (array_key_exists($key, $sizes)) {

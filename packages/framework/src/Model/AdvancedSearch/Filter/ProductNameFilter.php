@@ -68,7 +68,7 @@ class ProductNameFilter implements AdvancedSearchFilterInterface
      * @param string $operator
      * @return string
      */
-    private function getDqlOperator($operator)
+    protected function getDqlOperator($operator)
     {
         switch ($operator) {
             case self::OPERATOR_CONTAINS:

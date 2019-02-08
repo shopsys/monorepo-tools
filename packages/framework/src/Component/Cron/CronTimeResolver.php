@@ -25,7 +25,7 @@ class CronTimeResolver
      * @param string $timeString
      * @return bool
      */
-    private function isMatchWithTimeString($value, $timeString)
+    protected function isMatchWithTimeString($value, $timeString)
     {
         $timeValues = explode(',', $timeString);
         $matches = null;

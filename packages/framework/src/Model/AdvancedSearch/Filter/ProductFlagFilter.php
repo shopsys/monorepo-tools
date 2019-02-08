@@ -16,7 +16,7 @@ class ProductFlagFilter implements AdvancedSearchFilterInterface
     /**
      * @var \Shopsys\FrameworkBundle\Model\Product\Flag\FlagFacade
      */
-    private $flagFacade;
+    protected $flagFacade;
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\Product\Flag\FlagFacade $flagFacade

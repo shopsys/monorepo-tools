@@ -7,17 +7,17 @@ class TransMethodSpecification
     /**
      * @var string
      */
-    private $methodName;
+    protected $methodName;
 
     /**
      * @var int
      */
-    private $messageIdArgumentIndex;
+    protected $messageIdArgumentIndex;
 
     /**
      * @var int|null
      */
-    private $domainArgumentIndex;
+    protected $domainArgumentIndex;
 
     /**
      * @param string $methodName

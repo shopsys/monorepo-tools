@@ -17,17 +17,17 @@ class UnitDataFixture extends AbstractReferenceFixture
     /**
      * @var \Shopsys\FrameworkBundle\Model\Product\Unit\UnitFacade
      */
-    private $unitFacade;
+    protected $unitFacade;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Product\Unit\UnitDataFactoryInterface
      */
-    private $unitDataFactory;
+    protected $unitDataFactory;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\Setting\Setting
      */
-    private $setting;
+    protected $setting;
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\Product\Unit\UnitFacade $unitFacade
@@ -64,7 +64,7 @@ class UnitDataFixture extends AbstractReferenceFixture
      * @param \Shopsys\FrameworkBundle\Model\Product\Unit\UnitData $unitData
      * @param string|null $referenceName
      */
-    private function createUnit(UnitData $unitData, $referenceName = null)
+    protected function createUnit(UnitData $unitData, $referenceName = null)
     {
         $unit = $this->unitFacade->create($unitData);
         if ($referenceName !== null) {
@@ -72,7 +72,7 @@ class UnitDataFixture extends AbstractReferenceFixture
         }
     }
 
-    private function setPiecesAsDefaultUnit(): void
+    protected function setPiecesAsDefaultUnit(): void
     {
         $defaultUnit = $this->getReference(self::UNIT_PIECES);
         /** @var $defaultUnit \Shopsys\FrameworkBundle\Model\Product\Unit\Unit */

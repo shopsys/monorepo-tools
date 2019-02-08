@@ -129,7 +129,7 @@ team of {domain}
      * @param mixed $name
      * @param \Shopsys\FrameworkBundle\Model\Mail\MailTemplateData $mailTemplateData
      */
-    private function createMailTemplate(
+    protected function createMailTemplate(
         ObjectManager $manager,
         $name,
         MailTemplateData $mailTemplateData

@@ -7,7 +7,7 @@ class ProductDeleteResult
     /**
      * @var \Shopsys\FrameworkBundle\Model\Product\Product[]
      */
-    private $productsForRecalculations;
+    protected $productsForRecalculations;
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\Product\Product[] $productsForRecalculations

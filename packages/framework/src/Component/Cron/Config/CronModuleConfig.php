@@ -9,22 +9,22 @@ class CronModuleConfig implements CronTimeInterface
     /**
      * @var \Shopsys\Plugin\Cron\SimpleCronModuleInterface
      */
-    private $service;
+    protected $service;
 
     /**
      * @var string
      */
-    private $serviceId;
+    protected $serviceId;
 
     /**
      * @var string
      */
-    private $timeMinutes;
+    protected $timeMinutes;
 
     /**
      * @var string
      */
-    private $timeHours;
+    protected $timeHours;
 
     /**
      * @param \Shopsys\Plugin\Cron\SimpleCronModuleInterface|\Shopsys\Plugin\Cron\IteratedCronModuleInterface $service

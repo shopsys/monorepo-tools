@@ -15,37 +15,37 @@ class FileUpload
     /**
      * @var string
      */
-    private $temporaryDir;
+    protected $temporaryDir;
 
     /**
      * @var string
      */
-    private $uploadedFileDir;
+    protected $uploadedFileDir;
 
     /**
      * @var string
      */
-    private $imageDir;
+    protected $imageDir;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\FileUpload\FileNamingConvention
      */
-    private $fileNamingConvention;
+    protected $fileNamingConvention;
 
     /**
      * @var \Symfony\Component\Filesystem\Filesystem
      */
-    private $localFilesystem;
+    protected $localFilesystem;
 
     /**
      * @var \League\Flysystem\MountManager
      */
-    private $mountManager;
+    protected $mountManager;
 
     /**
      * @var \League\Flysystem\FilesystemInterface
      */
-    private $filesystem;
+    protected $filesystem;
 
     /**
      * @param string $temporaryDir
@@ -111,7 +111,7 @@ class FileUpload
      * @param string $filename
      * @return string
      */
-    private function getTemporaryFilename($filename)
+    protected function getTemporaryFilename($filename)
     {
         return TransformString::safeFilename(uniqid('', true) . '__' . $filename);
     }
@@ -153,7 +153,7 @@ class FileUpload
      * @param string|null $targetDirectory
      * @return string
      */
-    private function getTargetFilepath($filename, $isImage, $category, $targetDirectory)
+    protected function getTargetFilepath($filename, $isImage, $category, $targetDirectory)
     {
         return $this->getUploadDirectory($isImage, $category, $targetDirectory) . '/' . $filename;
     }

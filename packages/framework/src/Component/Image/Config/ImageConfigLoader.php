@@ -14,17 +14,17 @@ class ImageConfigLoader
     /**
      * @var \Symfony\Component\Filesystem\Filesystem
      */
-    private $filesystem;
+    protected $filesystem;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\Image\Config\ImageEntityConfig[]
      */
-    private $foundEntityConfigs;
+    protected $foundEntityConfigs;
 
     /**
      * @var array
      */
-    private $foundEntityNames;
+    protected $foundEntityNames;
 
     /**
      * @param \Symfony\Component\Filesystem\Filesystem $filesystem
@@ -85,7 +85,7 @@ class ImageConfigLoader
     /**
      * @param array $entityConfig
      */
-    private function processEntityConfig($entityConfig)
+    protected function processEntityConfig($entityConfig)
     {
         $entityClass = $entityConfig[ImageConfigDefinition::CONFIG_CLASS];
         $entityName = $entityConfig[ImageConfigDefinition::CONFIG_ENTITY_NAME];
@@ -109,7 +109,7 @@ class ImageConfigLoader
      * @param array $sizesConfig
      * @return \Shopsys\FrameworkBundle\Component\Image\Config\ImageSizeConfig[]
      */
-    private function prepareSizes($sizesConfig)
+    protected function prepareSizes($sizesConfig)
     {
         $result = [];
         foreach ($sizesConfig as $sizeConfig) {
@@ -141,7 +141,7 @@ class ImageConfigLoader
      * @param array $additionalSizesConfig
      * @return \Shopsys\FrameworkBundle\Component\Image\Config\ImageAdditionalSizeConfig[]
      */
-    private function prepareAdditionalSizes(string $sizeName, array $additionalSizesConfig): array
+    protected function prepareAdditionalSizes(string $sizeName, array $additionalSizesConfig): array
     {
         $usedMedia = [];
         $result = [];
@@ -170,7 +170,7 @@ class ImageConfigLoader
      * @param array $typesConfig
      * @return array
      */
-    private function prepareTypes($typesConfig)
+    protected function prepareTypes($typesConfig)
     {
         $result = [];
         foreach ($typesConfig as $typeConfig) {
@@ -189,7 +189,7 @@ class ImageConfigLoader
      * @param array $entityConfig
      * @return array
      */
-    private function getMultipleByType(array $entityConfig)
+    protected function getMultipleByType(array $entityConfig)
     {
         $multipleByType = [];
         $multipleByType[ImageEntityConfig::WITHOUT_NAME_KEY] = $entityConfig[ImageConfigDefinition::CONFIG_MULTIPLE];

@@ -9,7 +9,7 @@ class PluginDataFixtureRegistry
     /**
      * @var \Shopsys\Plugin\PluginDataFixtureInterface[]
      */
-    private $pluginDataFixtures = [];
+    protected $pluginDataFixtures = [];
 
     /**
      * @param \Shopsys\Plugin\PluginDataFixtureInterface $pluginDataFixture

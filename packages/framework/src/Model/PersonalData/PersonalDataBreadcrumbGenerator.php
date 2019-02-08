@@ -37,7 +37,7 @@ class PersonalDataBreadcrumbGenerator implements BreadcrumbGeneratorInterface
     /**
      * @return array
      */
-    private function getPersonalDataRouteNames()
+    protected function getPersonalDataRouteNames()
     {
         return [
             'front_personal_data',

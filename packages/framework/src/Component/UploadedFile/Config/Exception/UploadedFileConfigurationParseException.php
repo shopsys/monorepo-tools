@@ -9,7 +9,7 @@ class UploadedFileConfigurationParseException extends Exception implements Uploa
     /**
      * @var string
      */
-    private $entityClass;
+    protected $entityClass;
 
     /**
      * @param string $entityClass

@@ -9,12 +9,12 @@ class BasePriceCalculation
     /**
      * @var \Shopsys\FrameworkBundle\Model\Pricing\PriceCalculation
      */
-    private $priceCalculation;
+    protected $priceCalculation;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Pricing\Rounding
      */
-    private $rounding;
+    protected $rounding;
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\Pricing\PriceCalculation $priceCalculation
@@ -66,7 +66,7 @@ class BasePriceCalculation
      * @param \Shopsys\FrameworkBundle\Model\Pricing\Vat\Vat $vat
      * @return string
      */
-    private function getBasePriceWithVat($inputPrice, $inputPriceType, Vat $vat)
+    protected function getBasePriceWithVat($inputPrice, $inputPriceType, Vat $vat)
     {
         switch ($inputPriceType) {
             case PricingSetting::INPUT_PRICE_TYPE_WITH_VAT:

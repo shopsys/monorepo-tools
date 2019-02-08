@@ -15,12 +15,12 @@ class MultidomainNewsletterSubscriberDataFixture extends AbstractReferenceFixtur
     /**
      * @var \Shopsys\FrameworkBundle\Model\Newsletter\NewsletterFacade
      */
-    private $newsletterFacade;
+    protected $newsletterFacade;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\Domain\Domain
      */
-    private $domain;
+    protected $domain;
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\Newsletter\NewsletterFacade $newsletterFacade
@@ -47,7 +47,7 @@ class MultidomainNewsletterSubscriberDataFixture extends AbstractReferenceFixtur
     /**
      * @param int $domainId
      */
-    private function loadForDomain(int $domainId)
+    protected function loadForDomain(int $domainId)
     {
         $newsletterSubscribersData = $this->getEmailData();
 
@@ -59,7 +59,7 @@ class MultidomainNewsletterSubscriberDataFixture extends AbstractReferenceFixtur
     /**
      * @return string[]
      */
-    private function getEmailData()
+    protected function getEmailData()
     {
         return [
             'anna.anina@no-reply.com',

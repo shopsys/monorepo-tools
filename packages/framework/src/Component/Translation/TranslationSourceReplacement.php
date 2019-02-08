@@ -7,22 +7,22 @@ class TranslationSourceReplacement
     /**
      * @var string
      */
-    private $oldSource;
+    protected $oldSource;
 
     /**
      * @var string
      */
-    private $newSource;
+    protected $newSource;
 
     /**
      * @var string
      */
-    private $domain;
+    protected $domain;
 
     /**
      * @var string[]
      */
-    private $sourceFileReferences;
+    protected $sourceFileReferences;
 
     /**
      * @param string $oldSource
@@ -113,7 +113,7 @@ class TranslationSourceReplacement
      * @param string $sourceFileReference
      * @return string
      */
-    private function extractSourceFilePathFromReference($sourceFileReference)
+    protected function extractSourceFilePathFromReference($sourceFileReference)
     {
         return explode(':', $sourceFileReference)[0];
     }
@@ -122,7 +122,7 @@ class TranslationSourceReplacement
      * @param string $sourceFileReference
      * @return int|null
      */
-    private function extractSourceFileLineFromReference($sourceFileReference)
+    protected function extractSourceFileLineFromReference($sourceFileReference)
     {
         $parts = explode(':', $sourceFileReference);
 

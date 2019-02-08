@@ -7,17 +7,17 @@ class BreadcrumbItem
     /**
      * @var string
      */
-    private $name;
+    protected $name;
 
     /**
      * @var string|null
      */
-    private $routeName;
+    protected $routeName;
 
     /**
      * @var array
      */
-    private $routeParameters;
+    protected $routeParameters;
 
     /**
      * @param string $name

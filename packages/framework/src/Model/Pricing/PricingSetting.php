@@ -24,12 +24,12 @@ class PricingSetting
     /**
      * @var \Shopsys\FrameworkBundle\Component\Setting\Setting
      */
-    private $setting;
+    protected $setting;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Product\Pricing\ProductPriceRecalculationScheduler
      */
-    private $productPriceRecalculationScheduler;
+    protected $productPriceRecalculationScheduler;
 
     /**
      * @param \Shopsys\FrameworkBundle\Component\Setting\Setting $setting

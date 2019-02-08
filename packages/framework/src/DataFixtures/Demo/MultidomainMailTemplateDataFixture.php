@@ -18,17 +18,17 @@ class MultidomainMailTemplateDataFixture extends AbstractReferenceFixture implem
     /**
      * @var \Shopsys\FrameworkBundle\Model\Mail\MailTemplateFacade
      */
-    private $mailTemplateFacade;
+    protected $mailTemplateFacade;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Mail\MailTemplateDataFactoryInterface
      */
-    private $mailTemplateDataFactory;
+    protected $mailTemplateDataFactory;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\Domain\Domain
      */
-    private $domain;
+    protected $domain;
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\Mail\MailTemplateFacade $mailTemplateFacade
@@ -58,7 +58,7 @@ class MultidomainMailTemplateDataFixture extends AbstractReferenceFixture implem
     /**
      * @param int $domainId
      */
-    private function loadForDomain(int $domainId)
+    protected function loadForDomain(int $domainId)
     {
         $mailTemplateData = $this->mailTemplateDataFactory->create();
         $mailTemplateData->name = 'order_status_1';
@@ -167,7 +167,7 @@ class MultidomainMailTemplateDataFixture extends AbstractReferenceFixture implem
      * @param \Shopsys\FrameworkBundle\Model\Mail\MailTemplateData $mailTemplateData
      * @param int $domainId
      */
-    private function updateMailTemplate(MailTemplateData $mailTemplateData, int $domainId)
+    protected function updateMailTemplate(MailTemplateData $mailTemplateData, int $domainId)
     {
         $this->mailTemplateFacade->saveMailTemplatesData([$mailTemplateData], $domainId);
     }

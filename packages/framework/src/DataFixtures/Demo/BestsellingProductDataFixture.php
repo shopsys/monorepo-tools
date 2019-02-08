@@ -11,7 +11,7 @@ use Shopsys\FrameworkBundle\Model\Product\BestsellingProduct\ManualBestsellingPr
 class BestsellingProductDataFixture extends AbstractReferenceFixture implements DependentFixtureInterface
 {
     /** @var \Shopsys\FrameworkBundle\Model\Product\BestsellingProduct\ManualBestsellingProductFacade */
-    private $manualBestsellingProductFacade;
+    protected $manualBestsellingProductFacade;
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\Product\BestsellingProduct\ManualBestsellingProductFacade $manualBestsellingProductFacade

@@ -13,12 +13,12 @@ class FrontLogoutHandler implements LogoutSuccessHandlerInterface
     /**
      * @var \Shopsys\FrameworkBundle\Model\Order\OrderFlowFacade
      */
-    private $orderFlowFacade;
+    protected $orderFlowFacade;
 
     /**
      * @var \Symfony\Component\Routing\RouterInterface
      */
-    private $router;
+    protected $router;
 
     /**
      * @param \Symfony\Component\Routing\RouterInterface $router

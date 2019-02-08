@@ -10,7 +10,7 @@ class ErrorPageCronModule implements SimpleCronModuleInterface
     /**
      * @var \Shopsys\FrameworkBundle\Component\Error\ErrorPagesFacade
      */
-    private $errorPagesFacade;
+    protected $errorPagesFacade;
 
     /**
      * @param \Shopsys\FrameworkBundle\Component\Error\ErrorPagesFacade $errorPagesFacade

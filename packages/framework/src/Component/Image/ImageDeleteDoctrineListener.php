@@ -11,12 +11,12 @@ class ImageDeleteDoctrineListener
     /**
      * @var \Shopsys\FrameworkBundle\Component\Image\Config\ImageConfig
      */
-    private $imageConfig;
+    protected $imageConfig;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\Image\ImageFacade
      */
-    private $imageFacade;
+    protected $imageFacade;
 
     /**
      * @param \Shopsys\FrameworkBundle\Component\Image\Config\ImageConfig $imageConfig
@@ -35,7 +35,7 @@ class ImageDeleteDoctrineListener
      *
      * @return \Shopsys\FrameworkBundle\Component\Image\ImageFacade
      */
-    private function getImageFacade()
+    protected function getImageFacade()
     {
         return $this->imageFacade;
     }
@@ -58,7 +58,7 @@ class ImageDeleteDoctrineListener
      * @param object $entity
      * @param \Doctrine\ORM\EntityManagerInterface $em
      */
-    private function deleteEntityImages($entity, EntityManagerInterface $em)
+    protected function deleteEntityImages($entity, EntityManagerInterface $em)
     {
         $images = $this->getImageFacade()->getAllImagesByEntity($entity);
         foreach ($images as $image) {

@@ -7,12 +7,12 @@ class PriceRange
     /**
      * @var string
      */
-    private $minimalPrice;
+    protected $minimalPrice;
 
     /**
      * @var string
      */
-    private $maximalPrice;
+    protected $maximalPrice;
 
     /**
      * @param string|null $minimalPrice

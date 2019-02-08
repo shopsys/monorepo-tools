@@ -14,52 +14,52 @@ class ActionColumn
     /**
      * @var \Symfony\Component\Routing\RouterInterface
      */
-    private $router;
+    protected $router;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\Router\Security\RouteCsrfProtector
      */
-    private $routeCsrfProtector;
+    protected $routeCsrfProtector;
 
     /**
      * @var string
      */
-    private $type;
+    protected $type;
 
     /**
      * @var string
      */
-    private $title;
+    protected $title;
 
     /**
      * @var string
      */
-    private $route;
+    protected $route;
 
     /**
      * @var array
      */
-    private $bindingRouteParams;
+    protected $bindingRouteParams;
 
     /**
      * @var array
      */
-    private $additionalRouteParams;
+    protected $additionalRouteParams;
 
     /**
      * @var string|null
      */
-    private $classAttribute;
+    protected $classAttribute;
 
     /**
      * @var string|null
      */
-    private $confirmMessage;
+    protected $confirmMessage;
 
     /**
      * @var bool
      */
-    private $isAjaxConfirm;
+    protected $isAjaxConfirm;
 
     /**
      * @param \Symfony\Component\Routing\RouterInterface $router

@@ -9,12 +9,12 @@ class ValueByDateTimeDataPoint
     /**
      * @var int
      */
-    private $value;
+    protected $value;
 
     /**
      * @var \DateTime
      */
-    private $dateTime;
+    protected $dateTime;
 
     /**
      * @param mixed $count

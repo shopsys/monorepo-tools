@@ -11,7 +11,7 @@ class AdvancedSearchQueryBuilderExtender
     /**
      * @var \Shopsys\FrameworkBundle\Model\AdvancedSearch\AdvancedSearchConfig
      */
-    private $advancedSearchConfig;
+    protected $advancedSearchConfig;
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\AdvancedSearch\AdvancedSearchConfig $advancedSearchConfig

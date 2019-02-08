@@ -14,12 +14,12 @@ class DomainRouter extends ChainRouter
     /**
      * @var bool
      */
-    private $freeze = false;
+    protected $freeze = false;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\FriendlyUrlRouter
      */
-    private $friendlyUrlRouter;
+    protected $friendlyUrlRouter;
 
     /**
      * @param \Symfony\Component\Routing\RequestContext $context

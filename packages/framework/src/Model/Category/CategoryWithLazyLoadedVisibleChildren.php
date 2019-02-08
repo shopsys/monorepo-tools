@@ -15,22 +15,22 @@ class CategoryWithLazyLoadedVisibleChildren
     /**
      * @var \Closure
      */
-    private $lazyLoadChildrenCallback;
+    protected $lazyLoadChildrenCallback;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Category\Category
      */
-    private $category;
+    protected $category;
 
     /**
      * @var bool
      */
-    private $hasChildren;
+    protected $hasChildren;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Category\CategoryWithLazyLoadedVisibleChildren[]|null
      */
-    private $children;
+    protected $children;
 
     /**
      * @param \Closure $lazyLoadChildrenCallback

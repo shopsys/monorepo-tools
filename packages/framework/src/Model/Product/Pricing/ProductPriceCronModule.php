@@ -10,12 +10,12 @@ class ProductPriceCronModule implements IteratedCronModuleInterface
     /**
      * @var \Symfony\Bridge\Monolog\Logger
      */
-    private $logger;
+    protected $logger;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Product\Pricing\ProductPriceRecalculator
      */
-    private $productPriceRecalculator;
+    protected $productPriceRecalculator;
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\Product\Pricing\ProductPriceRecalculator $productPriceRecalculator

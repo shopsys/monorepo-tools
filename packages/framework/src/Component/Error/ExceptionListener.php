@@ -9,7 +9,7 @@ class ExceptionListener
     /**
      * @var \Exception|null
      */
-    private $lastException;
+    protected $lastException;
 
     /**
      * @param \Symfony\Component\HttpKernel\Event\GetResponseForExceptionEvent $event

@@ -16,7 +16,7 @@ class FeedExportCreationDataQueue
     /**
      * @var array
      */
-    private $dataInQueue = [];
+    protected $dataInQueue = [];
 
     /**
      * @param string[] $feedNames

@@ -16,7 +16,7 @@ class EnvironmentFileSetting
     /**
      * @var string
      */
-    private $environmentFileDirectory;
+    protected $environmentFileDirectory;
 
     /**
      * @param string $environmentFileDirectory

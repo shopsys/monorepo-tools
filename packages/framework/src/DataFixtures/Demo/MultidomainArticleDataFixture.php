@@ -22,17 +22,17 @@ class MultidomainArticleDataFixture extends AbstractReferenceFixture implements 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Article\ArticleFacade
      */
-    private $articleFacade;
+    protected $articleFacade;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Article\ArticleDataFactoryInterface
      */
-    private $articleDataFactory;
+    protected $articleDataFactory;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\Domain\Domain
      */
-    private $domain;
+    protected $domain;
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\Article\ArticleFacade $articleFacade
@@ -62,7 +62,7 @@ class MultidomainArticleDataFixture extends AbstractReferenceFixture implements 
     /**
      * @param int $domainId
      */
-    private function loadForDomain(int $domainId)
+    protected function loadForDomain(int $domainId)
     {
         $articleData = $this->articleDataFactory->create();
 
@@ -102,7 +102,7 @@ class MultidomainArticleDataFixture extends AbstractReferenceFixture implements 
      * @param \Shopsys\FrameworkBundle\Model\Article\ArticleData $articleData
      * @param string|null $referenceName
      */
-    private function createArticle(ArticleData $articleData, string $referenceName = null)
+    protected function createArticle(ArticleData $articleData, string $referenceName = null)
     {
         $article = $this->articleFacade->create($articleData);
         if ($referenceName !== null) {

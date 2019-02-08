@@ -17,142 +17,142 @@ class Grid
     /**
      * @var string
      */
-    private $id;
+    protected $id;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\Grid\Column[]
      */
-    private $columnsById = [];
+    protected $columnsById = [];
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\Grid\ActionColumn[]
      */
-    private $actionColumns = [];
+    protected $actionColumns = [];
 
     /**
      * @var bool
      */
-    private $enablePaging = false;
+    protected $enablePaging = false;
 
     /**
      * @var bool
      */
-    private $enableSelecting = false;
+    protected $enableSelecting = false;
 
     /**
      * @var array
      */
-    private $allowedLimits = [30, 100, 200, 500];
+    protected $allowedLimits = [30, 100, 200, 500];
 
     /**
      * @var int
      */
-    private $limit;
+    protected $limit;
 
     /**
      * @var bool
      */
-    private $isLimitFromRequest = false;
+    protected $isLimitFromRequest = false;
 
     /**
      * @var int
      */
-    private $page = 1;
+    protected $page = 1;
 
     /**
      * @var int|null
      */
-    private $totalCount;
+    protected $totalCount;
 
     /**
      * @var int|null
      */
-    private $pageCount;
+    protected $pageCount;
 
     /**
      * @var string|null
      */
-    private $orderSourceColumnName;
+    protected $orderSourceColumnName;
 
     /**
      * @var string|null
      */
-    private $orderDirection;
+    protected $orderDirection;
 
     /**
      * @var bool
      */
-    private $isOrderFromRequest = false;
+    protected $isOrderFromRequest = false;
 
     /**
      * @var array
      */
-    private $rows = [];
+    protected $rows = [];
 
     /**
      * @var \Symfony\Component\HttpFoundation\RequestStack
      */
-    private $requestStack;
+    protected $requestStack;
 
     /**
      * @var \Symfony\Component\Routing\RouterInterface
      */
-    private $router;
+    protected $router;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\Router\Security\RouteCsrfProtector
      */
-    private $routeCsrfProtector;
+    protected $routeCsrfProtector;
 
     /**
      * @var \Twig_Environment
      */
-    private $twig;
+    protected $twig;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\Grid\DataSourceInterface
      */
-    private $dataSource;
+    protected $dataSource;
 
     /**
      * @var string
      */
-    private $actionColumnClassAttribute = '';
+    protected $actionColumnClassAttribute = '';
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\Grid\InlineEdit\GridInlineEditInterface|null
      */
-    private $inlineEditService;
+    protected $inlineEditService;
 
     /**
      * @var string|null
      */
-    private $orderingEntityClass;
+    protected $orderingEntityClass;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\Paginator\PaginationResult
      */
-    private $paginationResults;
+    protected $paginationResults;
 
     /**
      * @var string|string[]|null
      */
-    private $viewTheme;
+    protected $viewTheme;
 
     /**
      * @var array
      */
-    private $viewTemplateParameters;
+    protected $viewTemplateParameters;
 
     /**
      * @var array
      */
-    private $selectedRowIds;
+    protected $selectedRowIds;
 
     /**
      * @var bool
      */
-    private $multipleDragAndDrop;
+    protected $multipleDragAndDrop;
 
     /**
      * @param string $id
@@ -477,7 +477,7 @@ class Grid
     /**
      * @param int $limit
      */
-    private function setLimit($limit)
+    protected function setLimit($limit)
     {
         if (in_array($limit, $this->allowedLimits, true)) {
             $this->limit = $limit;
@@ -564,7 +564,7 @@ class Grid
     /**
      * @param string $orderString
      */
-    private function setOrderingByOrderString($orderString)
+    protected function setOrderingByOrderString($orderString)
     {
         if (substr($orderString, 0, 1) === '-') {
             $this->orderDirection = DataSourceInterface::ORDER_DESC;
@@ -574,7 +574,7 @@ class Grid
         $this->orderSourceColumnName = trim($orderString, '-');
     }
 
-    private function loadFromRequest()
+    protected function loadFromRequest()
     {
         $queryData = $this->requestStack->getMasterRequest()->query->get(self::GET_PARAMETER, []);
         if (array_key_exists($this->id, $queryData)) {
@@ -655,7 +655,7 @@ class Grid
         );
     }
 
-    private function loadRows()
+    protected function loadRows()
     {
         if (array_key_exists($this->orderSourceColumnName, $this->columnsById)
             && $this->columnsById[$this->orderSourceColumnName]->isSortable()
@@ -685,12 +685,12 @@ class Grid
     /**
      * @param int $rowId
      */
-    private function loadRowsWithOneRow($rowId)
+    protected function loadRowsWithOneRow($rowId)
     {
         $this->rows = [$this->dataSource->getOneRow($rowId)];
     }
 
-    private function executeTotalQuery()
+    protected function executeTotalQuery()
     {
         $this->totalCount = $this->dataSource->getTotalRowsCount();
         $this->pageCount = max(ceil($this->totalCount / $this->limit), 1);

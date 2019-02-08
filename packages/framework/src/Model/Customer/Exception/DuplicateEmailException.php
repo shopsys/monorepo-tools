@@ -9,7 +9,7 @@ class DuplicateEmailException extends Exception implements CustomerException
     /**
      * @var string
      */
-    private $email;
+    protected $email;
 
     /**
      * @param string $email

@@ -11,17 +11,17 @@ use Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\FriendlyUrlDataFactoryI
 
 class ArticleDetailFriendlyUrlDataProvider implements FriendlyUrlDataProviderInterface
 {
-    private const ROUTE_NAME = 'front_article_detail';
+    protected const ROUTE_NAME = 'front_article_detail';
 
     /**
      * @var \Doctrine\ORM\EntityManagerInterface
      */
-    private $em;
+    protected $em;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\FriendlyUrlDataFactoryInterface
      */
-    private $friendlyUrlDataFactory;
+    protected $friendlyUrlDataFactory;
 
     /**
      * @param \Doctrine\ORM\EntityManagerInterface $em

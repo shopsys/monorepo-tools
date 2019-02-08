@@ -12,12 +12,12 @@ class CronConfig
     /**
      * @var \Shopsys\FrameworkBundle\Component\Cron\CronTimeResolver
      */
-    private $cronTimeResolver;
+    protected $cronTimeResolver;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\Cron\Config\CronModuleConfig[]
      */
-    private $cronModuleConfigs;
+    protected $cronModuleConfigs;
 
     /**
      * @param \Shopsys\FrameworkBundle\Component\Cron\CronTimeResolver $cronTimeResolver

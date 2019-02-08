@@ -7,22 +7,22 @@ use Shopsys\FrameworkBundle\Component\Image\Config\ImageConfig;
 
 class ImageLocator
 {
-    private const ADDITIONAL_IMAGE_MASK = 'additional_{index}_{filename}';
+    protected const ADDITIONAL_IMAGE_MASK = 'additional_{index}_{filename}';
 
     /**
      * @var string
      */
-    private $imageDir;
+    protected $imageDir;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\Image\Config\ImageConfig
      */
-    private $imageConfig;
+    protected $imageConfig;
 
     /**
      * @var \League\Flysystem\FilesystemInterface
      */
-    private $filesystem;
+    protected $filesystem;
 
     /**
      * @param mixed $imageDir

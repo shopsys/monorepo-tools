@@ -16,12 +16,12 @@ class AdministratorUserProvider implements UserProviderInterface
     /**
      * @var \Shopsys\FrameworkBundle\Model\Administrator\AdministratorRepository
      */
-    private $administratorRepository;
+    protected $administratorRepository;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Administrator\Activity\AdministratorActivityFacade
      */
-    private $administratorActivityFacade;
+    protected $administratorActivityFacade;
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\Administrator\AdministratorRepository $administratorRepository

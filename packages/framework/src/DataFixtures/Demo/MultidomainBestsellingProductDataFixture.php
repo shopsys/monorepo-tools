@@ -17,12 +17,12 @@ class MultidomainBestsellingProductDataFixture extends AbstractReferenceFixture 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Product\BestsellingProduct\ManualBestsellingProductFacade
      */
-    private $manualBestsellingProductFacade;
+    protected $manualBestsellingProductFacade;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\Domain\Domain
      */
-    private $domain;
+    protected $domain;
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\Product\BestsellingProduct\ManualBestsellingProductFacade $manualBestsellingProductFacade
@@ -47,7 +47,7 @@ class MultidomainBestsellingProductDataFixture extends AbstractReferenceFixture 
     /**
      * @param int $domainId
      */
-    private function loadForDomain(int $domainId)
+    protected function loadForDomain(int $domainId)
     {
         $this->manualBestsellingProductFacade->edit(
             $this->getReference(DemoCategoryDataFixture::CATEGORY_PHOTO),

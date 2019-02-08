@@ -20,17 +20,17 @@ class VatDataFixture extends AbstractReferenceFixture
     /**
      * @var \Shopsys\FrameworkBundle\Model\Pricing\Vat\VatFacade
      */
-    private $vatFacade;
+    protected $vatFacade;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Pricing\Vat\VatDataFactoryInterface
      */
-    private $vatDataFactory;
+    protected $vatDataFactory;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\Setting\Setting
      */
-    private $setting;
+    protected $setting;
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\Pricing\Vat\VatFacade $vatFacade
@@ -81,7 +81,7 @@ class VatDataFixture extends AbstractReferenceFixture
      * @param \Shopsys\FrameworkBundle\Model\Pricing\Vat\VatData $vatData
      * @param string|null $referenceName
      */
-    private function createVat(VatData $vatData, $referenceName = null)
+    protected function createVat(VatData $vatData, $referenceName = null)
     {
         $vat = $this->vatFacade->create($vatData);
         if ($referenceName !== null) {
@@ -89,7 +89,7 @@ class VatDataFixture extends AbstractReferenceFixture
         }
     }
 
-    private function setHighVatAsDefault()
+    protected function setHighVatAsDefault()
     {
         $defaultVat = $this->getReference(self::VAT_HIGH);
         /** @var $defaultVat \Shopsys\FrameworkBundle\Model\Pricing\Vat\Vat */

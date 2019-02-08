@@ -38,7 +38,7 @@ class GroupedScalarHydrator extends AbstractHydrator
      * @param array $data
      * @return array
      */
-    private function gatherGroupedScalarRowData(&$data)
+    protected function gatherGroupedScalarRowData(&$data)
     {
         $rowData = [];
 
