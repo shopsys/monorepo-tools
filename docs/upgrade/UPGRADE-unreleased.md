@@ -157,6 +157,7 @@ for instance:
     - if you have extended `CountryGridFactory`, revise your changes because class changed its namespace
     - if you have extended `CountryFormType`, revise your changes – new fields are available
     - if you have extended `CountryController` revise your changes – `new` and `edit` actions were added
+- if you have extended `Localization` class, you have to add type-hints to extended methods because they were added in the parent class ([#806](https://github.com/shopsys/shopsys/pull/806))
 
 - if you have extended classes from `Shopsys\FrameworkBundle\Model`, `Shopsys\FrameworkBundle\Component` or `Shopsys\FrameworkBundle\DataFixtures\Demo` namespace ([#788](https://github.com/shopsys/shopsys/pull/788))
     - you need to adjust extended methods and fields to `protected` visibility because all `private` visibilities from these namespaces were changed to `protected`

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Shopsys\FrameworkBundle\Model\Localization;
 
 use Shopsys\FrameworkBundle\Component\Domain\Domain;
@@ -38,7 +40,7 @@ class Localization
     protected $domain;
 
     /**
-     * @var array
+     * @var string[]|null
      */
     protected $allLocales;
 
@@ -53,7 +55,7 @@ class Localization
     /**
      * @return string
      */
-    public function getLocale()
+    public function getLocale(): string
     {
         return $this->domain->getLocale();
     }
@@ -61,15 +63,15 @@ class Localization
     /**
      * @return string
      */
-    public function getAdminLocale()
+    public function getAdminLocale(): string
     {
         return 'en';
     }
 
     /**
-     * @return array
+     * @return string[]
      */
-    public function getLocalesOfAllDomains()
+    public function getLocalesOfAllDomains(): array
     {
         if ($this->allLocales === null) {
             $this->allLocales = [];
@@ -84,7 +86,7 @@ class Localization
     /**
      * @return string[]
      */
-    public function getAllDefinedCollations()
+    public function getAllDefinedCollations(): array
     {
         return $this->collationsByLocale;
     }
@@ -93,7 +95,7 @@ class Localization
      * @param string $locale
      * @return string
      */
-    public function getLanguageName($locale)
+    public function getLanguageName(string $locale): string
     {
         if (!array_key_exists($locale, $this->languageNamesByLocale)) {
             throw new \Shopsys\FrameworkBundle\Model\Localization\Exception\InvalidLocaleException(
@@ -108,7 +110,7 @@ class Localization
      * @param string $locale
      * @return string
      */
-    public function getCollationByLocale($locale)
+    public function getCollationByLocale(string $locale): string
     {
         if (array_key_exists($locale, $this->collationsByLocale)) {
             return $this->collationsByLocale[$locale];
