@@ -37,6 +37,16 @@ for instance:
     -       RUN pecl install redis-4.0.2 && \
     +       RUN pecl install redis-4.1.1 && \
     ```
+    - add a new phing target `redis-check` to your `build-dev.xml` and use it before any call to Redis like `clear-redis`
+        - You can find inspiration in [#815](https://github.com/shopsys/shopsys/pull/815/files)
+        ```xml
+          <target name="redis-check" description="Checks availability of Redis">
+              <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
+                  <arg value="${path.bin-console}" />
+                  <arg value="shopsys:redis:check-availability" />
+              </exec>
+          </target>
+        ```
 
 ### Database migrations
 - after running database migrations, all your countries across domains will be merged together and original names will be added as translations
