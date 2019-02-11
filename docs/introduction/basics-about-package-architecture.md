@@ -42,13 +42,6 @@ Other candidates for extraction into modules are for example payment methods gat
 
 *Note: The specific modules in this diagram are just examples.*
 
-### Microservices
-Microservice acts as a fully independent unit.
-It uses its own separate server, separate logic and it uses own vendor directory for Composer dependencies.
-All of these parts are located in a separate Docker container
-
-So far, we created a [Microservice responsible for product search](https://github.com/shopsys/microservice-product-search) via Elasticsearch.
-
 ## How to develop your project on Shopsys Framework
 ### Create new project from Shopsys Framework sources
 Install [`shopsys/project-base`](https://github.com/shopsys/project-base) using composer to get your own private copy.

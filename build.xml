@@ -4,7 +4,6 @@
     <property name="path.root" value="./project-base"/>
     <property name="path.vendor" value="./vendor"/>
     <property name="path.packages" value="./packages"/>
-    <property name="path.microservices" value="./microservices"/>
     <property name="path.bin-console" value="./project-base/bin/console"/>
     <property name="path.framework" value="${path.packages}/framework"/>
     <property name="path.phpstan.config" value="./phpstan.neon"/>
@@ -35,8 +34,8 @@
         <phingcall target="composer-check" />
     </target>
 
-    <target name="standards" depends="phplint,ecs,phpstan-packages,twig-lint,yaml-lint,eslint-check,standards-packages,standards-utils" description="Checks coding standards in the project-base, packages, microservices and utils folder."/>
-    <target name="standards-diff" depends="phplint-diff,ecs-diff,phpstan-packages,twig-lint-diff,yaml-lint,eslint-check-diff,standards-packages, standards-utils" description="Checks coding standards on changed files in the project-base, packages, microservices and utils folder."/>
+    <target name="standards" depends="phplint,ecs,phpstan-packages,twig-lint,yaml-lint,eslint-check,standards-packages,standards-utils" description="Checks coding standards in the project-base, packages and utils folder."/>
+    <target name="standards-diff" depends="phplint-diff,ecs-diff,phpstan-packages,twig-lint-diff,yaml-lint,eslint-check-diff,standards-packages, standards-utils" description="Checks coding standards on changed files in the project-base, packages and utils folder."/>
 
     <target name="clean" description="Cleans up directories with cache and scripts which are generated on demand.">
         <delete failonerror="false" includeemptydirs="true">
@@ -52,35 +51,30 @@
         </delete>
     </target>
 
-    <target name="standards-fix" description="Automatically fixes some coding standards violations in the project-base, packages, microservices and utils folder.">
+    <target name="standards-fix" description="Automatically fixes some coding standards violations in the project-base, packages and utils folder.">
         <phingcall target="ecs-fix" />
         <phingcall target="eslint-fix" />
         <phingcall target="standards-fix-packages" />
         <phingcall target="standards-fix-utils" />
     </target>
 
-    <target name="standards-fix-diff" description="Automatically fixes some coding standards violations in changed files in project-base and all files in packages and microservices.">
+    <target name="standards-fix-diff" description="Automatically fixes some coding standards violations in changed files in project-base and all files in packages.">
         <phingcall target="ecs-fix-diff" />
         <phingcall target="eslint-fix-diff" />
         <phingcall target="standards-fix-packages-diff" />
         <phingcall target="standards-fix-utils" />
     </target>
 
-    <target name="standards-packages" description="Checks coding standards in all packages and microservices.">
+    <target name="standards-packages" description="Checks coding standards in all packages.">
         <exec executable="${path.phplint.executable}" logoutput="true" passthru="true" checkreturn="true">
             <arg path="./packages/*/src"/>
-            <arg path="./microservices/*/src"/>
             <arg path="./packages/*/tests" />
-            <arg path="./microservices/*/tests"/>
         </exec>
         <exec executable="${path.ecs.executable}" logoutput="true" passthru="true" checkreturn="true">
             <arg value="check" />
             <arg path="./packages/*/src"/>
-            <arg path="./microservices/*/src"/>
             <arg path="./packages/*/tests" />
             <arg path="./packages/*/*.md"/>
-            <arg path="./microservices/*/tests"/>
-            <arg path="./microservices/*/*.md"/>
             <arg path="./*.md"/>
             <arg path="./docs"/>
         </exec>
@@ -105,17 +99,14 @@
         </exec>
     </target>
 
-    <target name="standards-fix-packages" description="Automatically fixes some coding standards violations in all packages and microservices.">
+    <target name="standards-fix-packages" description="Automatically fixes some coding standards violations in all packages.">
         <exec executable="${path.ecs.executable}" logoutput="true" passthru="true" checkreturn="true">
             <arg value="check" />
             <arg value="--clear-cache" />
             <arg value="--fix" />
             <arg path="./packages/*/src"/>
-            <arg path="./microservices/*/src"/>
             <arg path="./packages/*/tests" />
             <arg path="./packages/*/*.md"/>
-            <arg path="./microservices/*/tests"/>
-            <arg path="./microservices/*/*.md"/>
             <arg path="./*.md"/>
             <arg path="./docs"/>
         </exec>
@@ -130,16 +121,13 @@
         </exec>
     </target>
 
-    <target name="standards-fix-packages-diff" description="Automatically fixes some coding standards violations in all changed files of packages and microservices.">
+    <target name="standards-fix-packages-diff" description="Automatically fixes some coding standards violations in all changed files of packages">
         <exec executable="${path.ecs.executable}" logoutput="true" passthru="true" checkreturn="true">
             <arg value="check" />
             <arg value="--fix" />
             <arg path="./packages/*/src"/>
-            <arg path="./microservices/*/src"/>
             <arg path="./packages/*/tests" />
             <arg path="./packages/*/*.md"/>
-            <arg path="./microservices/*/tests"/>
-            <arg path="./microservices/*/*.md"/>
             <arg path="./*.md"/>
             <arg path="./docs"/>
         </exec>
@@ -232,9 +220,6 @@
         <exec executable="${path.vendor}/bin/phpunit" logoutput="true" passthru="true" checkreturn="true">
             <arg value="--configuration"/>
             <arg value="${path.packages}/framework/phpunit.xml"/>
-        </exec>
-        <exec executable="${path.vendor}/bin/phpunit" logoutput="true" passthru="true" checkreturn="true">
-            <arg value="${path.microservices}/product-search-export/tests"/>
         </exec>
         <exec executable="${path.vendor}/bin/phpunit" logoutput="true" passthru="true" checkreturn="true">
             <arg value="--configuration"/>

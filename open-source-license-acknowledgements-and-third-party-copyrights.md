@@ -289,7 +289,6 @@ Copyright 2014 Klaus Hartl
 
 ## Libraries dynamically referenced via Composer
 Run `composer license` in your `shopsys-framework-php-fpm` container of your project to get the latest licensing info about all dependencies.
-For licensing info about all composer dependencies of microservices, run `composer license` in the container of given microservice.
 
 ## Libraries dynamically referenced via npm
 Run these commands in your `shopsys-framework-php-fpm` container of your project to get the latest licensing info about all packages.

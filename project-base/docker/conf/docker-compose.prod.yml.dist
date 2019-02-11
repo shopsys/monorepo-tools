@@ -29,26 +29,6 @@ services:
         networks:
             - shopsys-network
 
-    microservice-product-search:
-        restart: always
-        image: shopsys/microservice-product-search
-        container_name: shopsys-framework-microservice-product-search
-        environment:
-            - ELASTICSEARCH_HOSTS_STRING=192.168.0.1:9200
-            - ELASTIC_SEARCH_INDEX_PREFIX=production_
-        networks:
-            - shopsys-network
-
-    microservice-product-search-export:
-        restart: always
-        image: shopsys/microservice-product-search-export
-        container_name: shopsys-framework-microservice-product-search-export
-        environment:
-            - ELASTICSEARCH_HOSTS_STRING=192.168.0.1:9200
-            - ELASTIC_SEARCH_INDEX_PREFIX=production_
-        networks:
-            - shopsys-network
-
     smtp-server:
         restart: always
         image: namshi/smtp:latest

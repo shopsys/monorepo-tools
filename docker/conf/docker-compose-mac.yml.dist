@@ -42,32 +42,8 @@ services:
             - shopsys-framework-sync:/var/www/html
             - shopsys-framework-vendor-sync:/var/www/html/vendor
             - shopsys-framework-web-sync:/var/www/html/project-base/web
-            - shopsys-framework-microservice-product-search-sync:/var/www/html/microservices/product-search
-            - shopsys-framework-microservice-product-search-export-sync:/var/www/html/microservices/product-search-export
         ports:
             - "35729:35729"
-
-    microservice-product-search:
-        build:
-            context: microservices/product-search
-            dockerfile: docker/Dockerfile
-            target: development
-            args:
-                <<: *common_build_args
-        container_name: shopsys-framework-microservice-product-search
-        volumes:
-            - shopsys-framework-microservice-product-search-sync:/var/www/html
-
-    microservice-product-search-export:
-        build:
-            context: microservices/product-search-export
-            dockerfile: docker/Dockerfile
-            target: development
-            args:
-                <<: *common_build_args
-        container_name: shopsys-framework-microservice-product-search-export
-        volumes:
-            - shopsys-framework-microservice-product-search-export-sync:/var/www/html
 
     redis:
         image: redis:4.0-alpine
@@ -116,12 +92,6 @@ services:
 
 volumes:
     shopsys-framework-sync:
-        external: true
-
-    shopsys-framework-microservice-product-search-sync:
-        external: true
-
-    shopsys-framework-microservice-product-search-export-sync:
         external: true
 
     shopsys-framework-vendor-sync:

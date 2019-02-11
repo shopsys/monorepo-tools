@@ -668,10 +668,7 @@ services:
 
     FM\ElfinderBundle\Configuration\ElFinderConfigurationReader: '@fm_elfinder.configurator.default'
 
-    Shopsys\FrameworkBundle\Command\CheckMicroservicesCommand:
-        arguments:
-            $microserviceProductSearchClient: '@shopsys.microservice_client.product_search'
-            $microserviceProductSearchExportClient: '@shopsys.microservice_client.product_search_export'
+    Shopsys\FrameworkBundle\Command\CheckMicroservicesCommand: ~
 
     Shopsys\FrameworkBundle\Model\PersonalData\PersonalDataAccessRequestFactoryInterface:
         alias: Shopsys\FrameworkBundle\Model\PersonalData\PersonalDataAccessRequestFactory
@@ -925,9 +922,9 @@ services:
     Shopsys\FrameworkBundle\Model\Product\Unit\UnitDataFactoryInterface:
         alias: Shopsys\FrameworkBundle\Model\Product\Unit\UnitDataFactory
 
-    Shopsys\FrameworkBundle\Model\Product\Search\ProductSearchRepository:
+    Shopsys\FrameworkBundle\Model\Product\Search\ProductElasticsearchRepository:
         arguments:
-            $microserviceProductSearchClient: '@shopsys.microservice_client.product_search'
+            $indexPrefix: '%env(ELASTIC_SEARCH_INDEX_PREFIX)%'
 
     Shopsys\FrameworkBundle\Model\Product\ProductDataFactoryInterface:
         alias: Shopsys\FrameworkBundle\Model\Product\ProductDataFactory
@@ -941,27 +938,7 @@ services:
     Shopsys\FrameworkBundle\Model\Transport\TransportDataFactoryInterface:
         alias: Shopsys\FrameworkBundle\Model\Transport\TransportDataFactory
 
-    Shopsys\FrameworkBundle\Component\Microservice\ProductSearchExport\ProductSearchExportStructureFacade:
-        arguments:
-            $microserviceClient: '@shopsys.microservice_client.product_search_export'
-
-    Shopsys\FrameworkBundle\Model\Product\ProductSearchExport\ProductSearchExportExporter:
-        arguments:
-            $client: '@shopsys.microservice_client.product_search_export'
-
-    Shopsys\FrameworkBundle\Model\Product\ProductSearchExport\ProductSearchExportDataConverter: ~
-
-    shopsys.microservice_client.product_search:
-        class: 'Shopsys\FrameworkBundle\Component\Microservice\MicroserviceClient'
-        factory: 'Shopsys\FrameworkBundle\Component\Microservice\MicroserviceClientFactory:create'
-        arguments:
-            $microserviceUrl: '%microservice_product_search_url%'
-
-    shopsys.microservice_client.product_search_export:
-        class: 'Shopsys\FrameworkBundle\Component\Microservice\MicroserviceClient'
-        factory: 'Shopsys\FrameworkBundle\Component\Microservice\MicroserviceClientFactory:create'
-        arguments:
-            $microserviceUrl: '%microservice_product_search_export_url%'
+    Shopsys\FrameworkBundle\Model\Product\Search\Export\ProductSearchExportDataConverter: ~
 
     Shopsys\FrameworkBundle\Model\Sitemap\SitemapFilePrefixer: ~
 
@@ -1017,3 +994,24 @@ services:
             - '@snc_redis.bestselling_products'
             - '@snc_redis.doctrine_metadata'
             - '@snc_redis.doctrine_query'
+
+    Elasticsearch\ClientBuilder:
+      class: Elasticsearch\ClientBuilder
+      factory: [Elasticsearch\ClientBuilder, create]
+      calls:
+        - method: setHosts
+          arguments:
+            - ['%elasticsearch_host%']
+
+    Elasticsearch\Client:
+      class: Elasticsearch\Client
+      factory: ['@Elasticsearch\ClientBuilder', build]
+
+    Shopsys\FrameworkBundle\Component\Elasticsearch\ElasticsearchStructureManager:
+        arguments:
+            - '%shopsys.elasticsearch.structure_dir%'
+            - '%env(ELASTIC_SEARCH_INDEX_PREFIX)%'
+
+    Shopsys\FrameworkBundle\Model\Product\Search\Export\ProductSearchExporter: ~
+
+    Shopsys\FrameworkBundle\Model\Product\Search\ProductElasticsearchConverter: ~

@@ -15,7 +15,6 @@ syncs:
             '.docker-sync',
             '.DS_Store',
             'docker',
-            'microservices',
             'nbproject',
             'project-base/docker',
             'project-base/docs',
@@ -28,16 +27,6 @@ syncs:
             'vendor'
         ]
         host_disk_mount_mode: 'delegated'
-
-    shopsys-framework-microservice-product-search-sync:
-        sync_userid: 1000
-        sync_strategy: 'unison'
-        src: './microservices/product-search/'
-
-    shopsys-framework-microservice-product-search-export-sync:
-        sync_userid: 1000
-        sync_strategy: 'unison'
-        src: './microservices/product-search-export/'
 
     shopsys-framework-web-sync:
         sync_userid: 1000

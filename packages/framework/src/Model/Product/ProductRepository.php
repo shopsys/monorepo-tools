@@ -15,7 +15,7 @@ use Shopsys\FrameworkBundle\Model\Product\Filter\ProductFilterData;
 use Shopsys\FrameworkBundle\Model\Product\Filter\ProductFilterRepository;
 use Shopsys\FrameworkBundle\Model\Product\Listing\ProductListOrderingConfig;
 use Shopsys\FrameworkBundle\Model\Product\Pricing\ProductCalculatedPrice;
-use Shopsys\FrameworkBundle\Model\Product\Search\ProductSearchRepository;
+use Shopsys\FrameworkBundle\Model\Product\Search\ProductElasticsearchRepository;
 
 class ProductRepository
 {
@@ -40,29 +40,29 @@ class ProductRepository
     protected $localization;
 
     /**
-     * @var \Shopsys\FrameworkBundle\Model\Product\Search\ProductSearchRepository
+     * @var \Shopsys\FrameworkBundle\Model\Product\Search\ProductElasticsearchRepository
      */
-    protected $productSearchRepository;
+    protected $productElasticsearchRepository;
 
     /**
      * @param \Doctrine\ORM\EntityManagerInterface $em
      * @param \Shopsys\FrameworkBundle\Model\Product\Filter\ProductFilterRepository $productFilterRepository
      * @param \Shopsys\FrameworkBundle\Component\Doctrine\QueryBuilderExtender $queryBuilderExtender
      * @param \Shopsys\FrameworkBundle\Model\Localization\Localization $localization
-     * @param \Shopsys\FrameworkBundle\Model\Product\Search\ProductSearchRepository $productSearchRepository
+     * @param \Shopsys\FrameworkBundle\Model\Product\Search\ProductElasticsearchRepository $productElasticsearchRepository
      */
     public function __construct(
         EntityManagerInterface $em,
         ProductFilterRepository $productFilterRepository,
         QueryBuilderExtender $queryBuilderExtender,
         Localization $localization,
-        ProductSearchRepository $productSearchRepository
+        ProductElasticsearchRepository $productElasticsearchRepository
     ) {
         $this->em = $em;
         $this->productFilterRepository = $productFilterRepository;
         $this->queryBuilderExtender = $queryBuilderExtender;
         $this->localization = $localization;
-        $this->productSearchRepository = $productSearchRepository;
+        $this->productElasticsearchRepository = $productElasticsearchRepository;
     }
 
     /**
@@ -252,7 +252,7 @@ class ProductRepository
         $this->addTranslation($queryBuilder, $locale);
         $this->addDomain($queryBuilder, $domainId);
 
-        $this->productSearchRepository->filterBySearchText($queryBuilder, $searchText);
+        $this->productElasticsearchRepository->filterBySearchText($queryBuilder, $searchText);
 
         return $queryBuilder;
     }
@@ -410,7 +410,7 @@ class ProductRepository
             $pricingGroup
         );
 
-        $this->productSearchRepository->addRelevance($queryBuilder, $searchText);
+        $this->productElasticsearchRepository->addRelevance($queryBuilder, $searchText);
         $this->applyOrdering($queryBuilder, $orderingModeId, $pricingGroup, $locale);
 
         $queryPaginator = new QueryPaginator($queryBuilder);

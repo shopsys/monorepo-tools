@@ -8,7 +8,7 @@ Take a look at the article about [Monorepo](../introduction/monorepo.md) for mor
 This guide provides instructions how to install Shopsys Framework on your local machine as a server.
 If you would like to use a prepared Docker container instead go to [Installation Using Docker](installation-using-docker.md).
 
-*This installation guide is not tested due to experimental microservices development.*
+*This installation guide is not tested.*
 
 ## Requirements
 First of all, you need to install the following software on your system:
@@ -63,85 +63,28 @@ monolog:
       path: "%kernel.logs_dir%/%kernel.environment%.cron.log"
 ```
 
-#### 2.2. Set up the microservice for product search
-For the product search to be working correctly, you'll have to install a [microservice for product search](https://github.com/shopsys/microservice-product-search).
-It will act as a fully independent unit with a separate web server and repository.
-
-Clone the repository into a separate directory:
-```
-git clone https://github.com/shopsys/microservice-product-search.git
-cd microservice-product-search
-```
-
-Require symfony webserver:
-
-```
-composer require-dev symfony/web-server-bundle
-```
-
-Install composer dependencies:
-
-```
-composer install
-```
-
-***Note:** During composer installation there will be installed 3-rd party software as dependencies of Shopsys Framework with licenses that are described in document [Open Source License Acknowledgements and Third-Party Copyrights](../../open-source-license-acknowledgements-and-third-party-copyrights.md)*
-
-Configure connection to the Elasticsearch by setting up the ELASTICSEARCH_HOSTS_STRING environment variable (or the [.env file](http://symfony.com/doc/current/components/dotenv.html)) and if you have multiple instances of Shopsys Framework using the same Elasticsearch set up ELASTIC_SEARCH_INDEX_PREFIX environment variable as well and then run the server:
-
-```
-php bin/console server:run 127.0.0.1:8001
-```
-
-*Note: If you use other port for the microservice to run, you'll have to pass its URL to the application as a parameter `microservice_product_search_url`.*
-
-In this moment the microservice is ready for the requests processing.
-
-#### 2.3. Set up the microservice for product search export
-You have to install also [microservice for product search export](https://github.com/shopsys/microservice-product-search-export).
-The installation is as same as for product search microservice. In short, it is:
-
-```
-git clone https://github.com/shopsys/microservice-product-search-export.git
-cd microservice-product-search-export
-
-composer require-dev symfony/web-server-bundle
-
-composer install
-```
-
-Configure connection to the Elasticsearch by setting up the ELASTICSEARCH_HOSTS_STRING environment variable and if you have multiple instances of Shopsys Framework using the same Elasticsearch set up ELASTIC_SEARCH_INDEX_PREFIX environment variable as well.
-ELASTIC_SEARCH_INDEX_PREFIX needs to be the same as ELASTIC_SEARCH_INDEX_PREFIX in microservice for product search.
-
-```
-php bin/console server:run 127.0.0.1:8002
-```
-
-*Note: If you use other port for the microservice to run, you'll have to pass its URL to the application as a parameter `microservice_product_search_export_url`.*
-
 ### 3. Install dependencies and configure parameters
 Composer will prompt you to set main parameters (`app/config/parameters.yml`):
 
-| Name                                     | Description                                                                   | Default value |
-| ---------------------------------        | ----------------------------------------------------------------------------- | ------------- |
-| `database_host`                          | access data of your PostgreSQL database                                       | 127.0.0.1     |
-| `database_port`                          | ...                                                                           | 5432          |
-| `database_name`                          | ...                                                                           | shopsys       |
-| `database_user`                          | ...                                                                           | postgres      |
-| `database_password`                      | ...                                                                           | ...           |
-| `database_server_version`                | version of your PostgreSQL server                                             | 10.5          |
-| `redis_host`                             | host of your Redis storage (credentials are not supported right now)          | 127.0.0.1     |
-| `mailer_transport`                       | access data of your mail server                                               | ...           |
-| `mailer_host`                            | ...                                                                           | ...           |
-| `mailer_user`                            | ...                                                                           | ...           |
-| `mailer_password`                        | ...                                                                           | ...           |
-| `mailer_disable_delivery`                | set to `true` if you don't want to send any e-mails                           | ...           |
-| `mailer_master_email_address`            | set if you want to send all e-mails to one address (useful for development)   | ...           |
-| `mailer_delivery_whitelist`              | set if you want to have master e-mail but allow sending to specific addresses | ...           |
-| `microservice_product_search_url`        | URL of the product search microservice                                        | http://127.0.0.1:8001 |
-| `microservice_product_search_export_url` | URL of the product search export microservice                                 | http://127.0.0.1:8002 |
-| `secret`                                 | randomly generated secret token                                               | ...           |
-| `trusted_proxies`                        | proxies that are trusted to pass traffic, used mainly for production          | [127.0.0.1] |
+| Name                                     | Description                                                                   | Default value  |
+| ---------------------------------        | ----------------------------------------------------------------------------- | -------------- |
+| `database_host`                          | access data of your PostgreSQL database                                       | 127.0.0.1      |
+| `database_port`                          | ...                                                                           | 5432           |
+| `database_name`                          | ...                                                                           | shopsys        |
+| `database_user`                          | ...                                                                           | postgres       |
+| `database_password`                      | ...                                                                           | ...            |
+| `database_server_version`                | version of your PostgreSQL server                                             | 10.5           |
+| `elasticsearch_host`                     | host of your Elasticsearch                                                    | 127.0.0.1:9200 |
+| `redis_host`                             | host of your Redis storage (credentials are not supported right now)          | 127.0.0.1      |
+| `mailer_transport`                       | access data of your mail server                                               | ...            |
+| `mailer_host`                            | ...                                                                           | ...            |
+| `mailer_user`                            | ...                                                                           | ...            |
+| `mailer_password`                        | ...                                                                           | ...            |
+| `mailer_disable_delivery`                | set to `true` if you don't want to send any e-mails                           | ...            |
+| `mailer_master_email_address`            | set if you want to send all e-mails to one address (useful for development)   | ...            |
+| `mailer_delivery_whitelist`              | set if you want to have master e-mail but allow sending to specific addresses | ...            |
+| `secret`                                 | randomly generated secret token                                               | ...            |
+| `trusted_proxies`                        | proxies that are trusted to pass traffic, used mainly for production          | [127.0.0.1]    |
 
 Composer will then prompt you to set parameters for testing environment (`app/config/parameters_test.yml`):
 

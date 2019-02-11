@@ -107,8 +107,5 @@ We divide images used by us into 3 types.
 ##### Not extended, only used (PostgreSQL, Redis, Elasticsearch)
 Those images are only used as it is, we are not extending them and we are only using them as they are. In this case we choose Alpine Distribution thanks to its size.
 
-##### Microservices
-Microservices should be small as possible, even we are extending php-fpm images used for them, we take advantage of small size and suppose that users of these images will not extend them and more likely will be implementing their own microservices.
-
 ##### Application PHP-FPM
 In this case, we use Debian mainly because we suppose users to modify these images often(adding php-extensions, implementing connections to Databases). As Debian is much more easier to modify, we decided that it will be best for new users to start on Debian, and if they care about size, they can always rewrite their Dockerfiles to be use alpine image if needed. Also many of clients using Shopsys Framework often connects to MSSQL databases and we want to make it easy for them.

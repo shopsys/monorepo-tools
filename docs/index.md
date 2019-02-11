@@ -58,12 +58,6 @@ Add:
 * [Deploy Your Application to Google Cloud on your CI/CD](/docs/kubernetes/deploy-your-application-to-google-cloud-on-your-ci-cd.md)
 * [How to set SMTP Server Container](/docs/kubernetes/how-to-set-smtp-server-container.md)
 
-## Microservices
-One of the explored ideas of Shopsys Framework is the idea of a product, that some of its parts are designed as the microservices.
-Microservice acts as a fully independent unit and all of its parts are located in a separate Docker container.
-* [Microservice Product Search](https://github.com/shopsys/microservice-product-search)
-* [Microservice Product Search Export](https://github.com/shopsys/microservice-product-search-export)
-
 ## FAQ
 For the frequently asked questions, see
 * [FAQ and Common Issues](./introduction/faq-and-common-issues.md)

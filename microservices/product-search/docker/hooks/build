@@ -1,5 +1,0 @@
-#!/bin/bash
-
-# hook is needed to pass ENV variable as an Docker argument
-# https://docs.docker.com/docker-cloud/builds/advanced/#custom-build-phase-hooks
-docker build -f Dockerfile --target production -t $IMAGE_NAME ..

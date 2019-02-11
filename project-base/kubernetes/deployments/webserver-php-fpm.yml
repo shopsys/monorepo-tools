@@ -55,7 +55,7 @@ spec:
                     subPath: parameters.yml
             -   name: initialize-database
                 image: ~
-                command: ["sh", "-c", "cd /var/www/html && ./phing db-create dirs-create db-demo microservice-product-search-recreate-structure microservice-product-search-export-products grunt error-pages-generate warmup"]
+                command: ["sh", "-c", "cd /var/www/html && ./phing db-create dirs-create db-demo product-search-recreate-structure product-search-export-products grunt error-pages-generate warmup"]
                 volumeMounts:
                 -   name: source-codes
                     mountPath: /var/www/html

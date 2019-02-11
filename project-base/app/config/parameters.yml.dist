@@ -6,6 +6,8 @@ parameters:
     database_password: root
     database_server_version: 10.5
 
+    elasticsearch_host: elasticsearch:9200
+
     redis_host: redis
 
     mailer_transport: smtp
@@ -15,9 +17,6 @@ parameters:
     mailer_disable_delivery: false
     mailer_master_email_address: no-reply@shopsys.com
     mailer_delivery_whitelist: [/@shopsys\.com$/]
-
-    microservice_product_search_url: 'http://microservice-product-search'
-    microservice_product_search_export_url: 'http://microservice-product-search-export'
 
     secret: ThisTokenIsNotSoSecretChangeIt
     trusted_proxies:

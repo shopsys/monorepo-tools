@@ -29,8 +29,6 @@ parameters:
         'shopsys/form-types-bundle': 'https://github.com/shopsys/form-types-bundle'
         'shopsys/migrations': 'https://github.com/shopsys/migrations'
         'shopsys/monorepo-tools': 'https://github.com/shopsys/monorepo-tools'
-        'shopsys/microservice-product-search': 'https://github.com/shopsys/microservice-product-search'
-        'shopsys/microservice-product-search-export': 'https://github.com/shopsys/microservice-product-search-export'
         'shopsys/google-cloud-bundle/': 'https://github.com/shopsys/google-cloud-bundle'
     package_aliases:
         'shopsys': 'shopsys/shopsys'
@@ -47,6 +45,4 @@ parameters:
         'form-types-bundle': 'shopsys/form-types-bundle'
         'migrations': 'shopsys/migrations'
         'monorepo-tools': 'shopsys/monorepo-tools'
-        'microservice-product-search': 'shopsys/microservice-product-search'
-        'microservice-product-search-export': 'shopsys/microservice-product-search-export'
         'google-cloud-bundle': 'shopsys/google-cloud-bundle'

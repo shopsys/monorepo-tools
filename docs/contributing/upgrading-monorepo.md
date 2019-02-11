@@ -14,6 +14,12 @@ Typical upgrade sequence should be:
 - *(optional)* [#755 update npm packages to latest version](https://github.com/shopsys/shopsys/pull/755)
     - remove all npm packages by removing folder `project-base/node_modules` and `project-base/package-lock.json`
     - run command `php phing npm`
+- [#783 microservices has been removed and their funcionality has been moved to framework](https://github.com/shopsys/shopsys/pull/793)
+    - remove microservice services and volumes from `docker-compose.yml`, remove volumes of microservices and remove exclude on microservice directory in `docker-sync.yml`
+    - run `docker-compose down --remove-orphans`
+    - run `docker-sync clean` if you are using MacOS or Windows installation using Docker
+    - run `docker-sync start` if you are using MacOS or Windows installation using Docker
+    - run `docker-compose up -d --build`
 
 ## [From v7.0.0-beta4 to v7.0.0-beta5]
 - [#651 It's possible to add index prefix to elastic search](https://github.com/shopsys/shopsys/pull/651)

@@ -2,6 +2,7 @@ FROM php:7.3-fpm-stretch as base
 
 ARG project_root=.
 ENV REDIS_PREFIX=''
+ENV ELASTIC_SEARCH_INDEX_PREFIX=''
 
 # install required tools
 # git for computing diffs

@@ -42,34 +42,10 @@ docker image pull ${DOCKER_USERNAME}/php-fpm:${DOCKER_IMAGE_TAG} || (
     docker image push ${DOCKER_USERNAME}/php-fpm:${DOCKER_IMAGE_TAG}
 )
 
-## Docker image for microservice product-search
-docker image pull ${DOCKER_USERNAME}/microservice-product-search:${DOCKER_IMAGE_TAG} || (
-    echo "Image not found (see warning above), building it instead..." &&
-    docker image build \
-        --tag ${DOCKER_USERNAME}/microservice-product-search:${DOCKER_IMAGE_TAG} \
-        --target production \
-        -f microservices/product-search/docker/Dockerfile \
-        microservices/product-search &&
-    docker image push ${DOCKER_USERNAME}/microservice-product-search:${DOCKER_IMAGE_TAG}
-)
-
-## Docker image for microservice product-search-export
-docker image pull ${DOCKER_USERNAME}/microservice-product-search-export:${DOCKER_IMAGE_TAG} || (
-    echo "Image not found (see warning above), building it instead..." &&
-    docker image build \
-        --tag ${DOCKER_USERNAME}/microservice-product-search-export:${DOCKER_IMAGE_TAG} \
-        --target production \
-        -f microservices/product-search-export/docker/Dockerfile \
-        microservices/product-search-export &&
-    docker image push ${DOCKER_USERNAME}/microservice-product-search-export:${DOCKER_IMAGE_TAG}
-)
-
-# Replace docker images for php-fpm of application and microservices
+# Replace docker images for php-fpm of application
 yq write --inplace project-base/kubernetes/deployments/webserver-php-fpm.yml spec.template.spec.containers[0].image ${DOCKER_USERNAME}/php-fpm:${DOCKER_IMAGE_TAG}
 yq write --inplace project-base/kubernetes/deployments/webserver-php-fpm.yml spec.template.spec.initContainers[0].image ${DOCKER_USERNAME}/php-fpm:${DOCKER_IMAGE_TAG}
 yq write --inplace project-base/kubernetes/deployments/webserver-php-fpm.yml spec.template.spec.initContainers[1].image ${DOCKER_USERNAME}/php-fpm:${DOCKER_IMAGE_TAG}
-yq write --inplace project-base/kubernetes/deployments/microservice-product-search.yml spec.template.spec.containers[0].image ${DOCKER_USERNAME}/microservice-product-search:${DOCKER_IMAGE_TAG}
-yq write --inplace project-base/kubernetes/deployments/microservice-product-search-export.yml spec.template.spec.containers[0].image ${DOCKER_USERNAME}/microservice-product-search-export:${DOCKER_IMAGE_TAG}
 
 # Set different path to parameters and domain configmap paths, as default context is that root of the project is project-base, here it is monorepo so we need to check it
 yq write --inplace project-base/kubernetes/deployments/webserver-php-fpm.yml spec.template.spec.initContainers[0].volumeMounts[1].mountPath /var/www/html/project-base/app/config/domains_urls.yml
@@ -105,8 +81,6 @@ kubectl rollout status --namespace=${JOB_NAME} deployment/redis-admin --watch
 kubectl rollout status --namespace=${JOB_NAME} deployment/selenium-server --watch
 kubectl rollout status --namespace=${JOB_NAME} deployment/smtp-server --watch
 kubectl rollout status --namespace=${JOB_NAME} deployment/webserver-php-fpm --watch
-kubectl rollout status --namespace=${JOB_NAME} deployment/microservice-product-search --watch
-kubectl rollout status --namespace=${JOB_NAME} deployment/microservice-product-search-export --watch
 
 # Find running php-fpm container
 PHP_FPM_POD=$(kubectl get pods --namespace=${JOB_NAME} -l app=webserver-php-fpm -o=jsonpath='{.items[0].metadata.name}')

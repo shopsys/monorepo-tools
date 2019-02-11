@@ -163,6 +163,33 @@ for instance:
 - if you have extended classes from `Shopsys\FrameworkBundle\Model`, `Shopsys\FrameworkBundle\Component` or `Shopsys\FrameworkBundle\DataFixtures\Demo` namespace ([#788](https://github.com/shopsys/shopsys/pull/788))
     - you need to adjust extended methods and fields to `protected` visibility because all `private` visibilities from these namespaces were changed to `protected`
     - you can delete methods that you just copied due to inability to inherit
+- Microservices has been removed and their funcionality has been moved to framework ([#793](https://github.com/shopsys/shopsys/pull/793/)):
+    - classes from microservices has been moved to `Shopsys\FrameworkBundle\Model\Product\Search` namespace
+    - definitions of indexes has been moved to project folder `src/Shopsys/ShopBundle/Resources/definition`, copy them to your project as well
+        - add `shopsys.elasticsearch.structure_dir: '%shopsys.resources_dir%/definition/'` to your `paths.yml` config file
+    - Symfony commands for Elasticsearch management has changed their namespace from `shopsys:microservice:product-search` to `shopsys:product-search`
+        - update your `build.xml` and `build-dev.xml` to reflect this change
+        - if you have extended those command in your project, update their class and file names and `$defaultName` property appropriately
+    - `StructureManager` has been moved to `packages/framework/src/Component/Elasticsearch` and renamed to `ElasticsearchStructureManager` update your code if you extended or used it
+        - its methods `getIndexName`, `createIndex`, `deleteIndex` and `getDefinition` now accept second mandatory parameter `index`  update your code if you are using them
+            - this parameter is for distinguishing different use cases like Product search
+    - this classes has been moved, update your code if you extended them or used them in your code:
+        - `ProductSearchExportFacade` has been moved from `Shopsys\FrameworkBundle\Model\Product\ProductSearchExport` to `Shopsys\FrameworkBundle\Model\Product\Search\Export`
+        - `ProductSearchExportRepository` has been moved from `Shopsys\FrameworkBundle\Model\Product\ProductSearchExport` to `Shopsys\FrameworkBundle\Model\Product\Search\Export`
+        - `ProductSearchExportCronModule` has been moved from `Shopsys\FrameworkBundle\Model\Product\ProductSearchExport` to `Shopsys\FrameworkBundle\Model\Product\Search\Export`
+    - Phing target `microservices-check` has been removed because it is no longer necessary
+        - update your `build-dev.xml` to reflect this change
+    - Phing targets starting with `microservice` has this prefix removed e.g. `microservice-product-search-create-structure` has been renamed to `product-search-create-structure`
+        - update your `build.xml`,`build-dev.xml` and `kubernetes/deployments/webserver-php-fpm.yml` to reflect this change
+    - run `composer install` so you will be prompted to set value for new parameter `elasticsearch_host`
+    - remove all microservice Docker services and volumes from your `docker-compose` and `docker-sync` files
+    - update your `php-fpm/Dockerfile` to include default ENV variable `ELASTIC_SEARCH_INDEX_PREFIX` or set this environment while building `php-fpm` image
+    - if you are using Kubernetes with our prepared scripts remove all rows including word microservice from all scripts in `.ci` folder
+        - only exception is `restart_kubernetes.sh` and line starting `kubectl exec` where you remove `microservices-` prefix in names of Phing targets
+    - remove microservices from `kubernetes` `deployments` and `services` folders and update `kubernetes/kustomize/base/kustomization.yaml` appropriately
+    - `ProductSearchExportRepositoryTest` move from `Tests\ShopBundle\Functional\Model\Product\ProductSearchExport` to `Tests\ShopBundle\Functional\Model\Product\Search`
+    - in production you will need to run `product-search-recreate-structure` Phing target while next build to create indexes again with new name
+        - after that remove previous indexes used for Product search, so they do not consume any memory ([link to Elasticsearch documentation](https://www.elastic.co/guide/en/elasticsearch/reference/current/indices-delete-index.html))
 
 ## [shopsys/product-feed-heureka]
 - if you have extended class HeurekaCategoryDownloader or HeurekaCategoryCronModule ([#788](https://github.com/shopsys/shopsys/pull/788))
@@ -184,5 +211,3 @@ for instance:
 [shopsys/form-types-bundle]: https://github.com/shopsys/form-types-bundle
 [shopsys/migrations]: https://github.com/shopsys/migrations
 [shopsys/monorepo-tools]: https://github.com/shopsys/monorepo-tools
-[shopsys/microservice-product-search]: https://github.com/shopsys/microservice-product-search
-[shopsys/microservice-product-search-export]: https://github.com/shopsys/microservice-product-search-export

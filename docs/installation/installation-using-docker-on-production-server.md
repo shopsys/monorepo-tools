@@ -1,7 +1,7 @@
 # Installation Using Docker on Production Server
 
 This guide shows you how to install and configure production server applications needed for your project based on [Shopsys Framework](https://github.com/shopsys/project-base).  
-We do not want to setup each application or each microservice application manually and we want to have separate runtime for each one.
+We do not want to setup each application manually and we want to have separate runtime for each one.
 We use docker containers, built from docker images and php source code from git repository to have everything setup correctly and fast.
 As we do not want to lose data after deploying a new version of the project, we install all the data storages (postgres, elasticsearch, redis) natively.
 This guide also shows you how to setup first built image of the project on production server and how to deploy new versions of the project.  

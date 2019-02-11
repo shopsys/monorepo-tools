@@ -33,3 +33,4 @@ parameters:
     shopsys.vendor_dir: '%kernel.root_dir%/../vendor'
     shopsys.js_form_validator_output_vendor_dir: '../vendor'
     shopsys.data_fixtures_images.resources_dir: '%shopsys.data_fixtures.resources_dir%/images/'
+    shopsys.elasticsearch.structure_dir: '%shopsys.resources_dir%/definition/'

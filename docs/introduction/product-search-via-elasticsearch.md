@@ -9,20 +9,18 @@ Therefore, relevant product attributes are also stored in Elasticsearch index un
 When the product search action is performed on frontend, the query is send to Elasticsearch.
 As a result, found product IDs are returned from Elasticsearch and then the product data are loaded from PostgreSQL database into entities using Doctrine ORM.
 
-The search process itself is provided through a microservice. For more information about the microservice, see [Microservice Product Search](https://github.com/shopsys/microservice-product-search).
-
 ### Elasticsearch index setting
 Elasticsearch [index](https://www.elastic.co/blog/what-is-an-elasticsearch-index) is a logical namespace, you can imagine single index as a single database in terms of relational databases.
 
 The Elasticsearch indexes are created during application build.
-You can also create or delete indexes manually using phing targets `elasticsearch-indexes-create`, and `elasticsearch-indexes-delete` respectively, or you can use `elasticsearch-indexes-recreate` that encapsulates the previous two.
+You can also create or delete indexes manually using phing targets `product-search-create-structure`, and `product-search-delete-structure` respectively, or you can use `product-search-recreate-structure` that encapsulates the previous two.
 
 *Note: More information about what Phing targets are and how they work can be found in [Console Commands for Application Management (Phing Targets)](/docs/introduction/console-commands-for-application-management-phing-targets.md)*
 
 Unique index is created for each domain as some product attributes can have distinct values for each domain.
 To discover the exact mapping setting, you can look at the JSON configuration files
-that are located in `src/Resources/elasticsearch/` directory in [`shopsys/framework`](https://github.com/shopsys/framework) package.
-The directory is configured using `%shopsys.framework.elasticsearch_sources_dir%` parameter.
+that are located in `src/Shopsys/ShopBundle/Resources/definition/` directory in [`shopsys/project-base`](https://github.com/shopsys/project-base).
+The directory is configured using `%shopsys.elasticsearch.structure_dir%` parameter.
 
 ### Product data export
 No data are automaticly stored in Elasticsearch by "itself". When you store data into a relational database, they are not stored in Elasticsearch.
@@ -36,8 +34,8 @@ Following product attributes are exported into Elasticsearch (i.e. the search is
 * description
 * short description
 
-Data of all products are exported into Elasticsearch by CRON module (`ElasticsearchExportCronModule`) once an hour.
-Alternatively, you can force the export manually using `elasticsearch-products-export` phing target.
+Data of all products are exported into Elasticsearch by CRON module (`ProductSearchExportCronModule.php`) once an hour.
+Alternatively, you can force the export manually using `product-search-export-products` phing target.
 
 ### Searching for products
 
@@ -59,7 +57,7 @@ But if we simplify, we can say that the search term is searched in attributes an
 * short description - match anywhere
 * description - match anywhere
 
-The searched fields and their priority are defined directly in the `Shopsys\MicroserviceProductSearch\Repository\ProductSearchRepository::createQuery()` function.
+The searched fields and their priority are defined directly in the `Shopsys\FrameworkBundle\Model\Product\Search\ProductElasticsearchRepository::createQuery()` function.
 
 If you want to improve searching, you can learn more in [Elasticsearch analysis](https://www.elastic.co/guide/en/elasticsearch/reference/current/analysis.html).
 
@@ -67,12 +65,12 @@ If you want to improve searching, you can learn more in [Elasticsearch analysis]
 When using docker installation, Elasticsearch API is available on the address [http://127.0.0.1:9200](http://127.0.0.1:9200).
 
 ## How to change the default index, data export setting, and searching behaviour?
-If you wish to reconfigure the indexes setting, simply change the `%shopsys.framework.elasticsearch_sources_dir%` parameter
-to your custom directory and put your own JSON configurations in it using the same naming pattern (`<domain_id>.json`).
+If you wish to reconfigure the indexes setting, simply change the JSON configurations in `src/Shopsys/ShopBundle/Resources/Resources/definition/`.
+Configurations use the `<index>/<domain_id>.json` naming pattern.
 
-If you need to change the data that are exported into Elasticsearch, overwrite appropriate methods in `ElasticsearchProductRepository` and `ElasticsearchProductDataConverter` classes.
+If you need to change the data that are exported into Elasticsearch, overwrite appropriate methods in `ProductSearchExportRepository` and `ProductElasticsearchConverter` classes.
 
-You can also change the searching behavior by overwriting the Microservice product search, specifically  `ProductSearchRepository` class.
+You can also change the searching behavior by overwriting product search, specifically `ProductElasticsearchRepository` class.
 
 ## Known issues
 * When you need to add a new domain, you have to do following steps

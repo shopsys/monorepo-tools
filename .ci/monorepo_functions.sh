@@ -14,9 +14,7 @@ get_all_packages() {
         form-types-bundle \
         migrations \
         monorepo-tools \
-        project-base \
-        microservice-product-search \
-        microservice-product-search-export"
+        project-base"
 }
 
 # Gets a subdirectory in which a package is located
@@ -25,8 +23,6 @@ get_package_subdirectory() {
 
     if [[ "$PACKAGE" == "project-base" ]]; then
         echo $PACKAGE
-    elif [[ "${PACKAGE:0:13}" == "microservice-" ]]; then
-        echo "microservices/${PACKAGE:13}"
     else
         echo "packages/$PACKAGE"
     fi

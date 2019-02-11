@@ -75,7 +75,7 @@ Builds the application for development preserving your DB while skipping non-ess
 Useful for quick migration of recently pulled changes. Cleans cache, installs missing dependencies via Composer, executes DB migrations, prepares assets and builds LESS into CSS.
 
 #### build-demo-dev-quick
-This target is useful if you have already running application and you want to quickly rebuild your application without checking coding standards, running tests, checking right timezone set and checking microservices.
+This target is useful if you have already running application and you want to quickly rebuild your application without checking coding standards, running tests, checking right timezone set.
 
 #### server-run
 Runs PHP built-in web server for a chosen domain.
@@ -119,13 +119,13 @@ Drops all data in the test database and creates a new one with demo data.
 
 *Note: All database related targets `db-*` have their `test-db-*` variant for the test database.*
 
-#### microservice-product-search-recreate-structure
+#### product-search-recreate-structure
 Recreates Elasticsearch indexes structure.
 Consists of two subtasks that can be run independently:
-* `microservice-product-search-delete-structure` - deletes existing indexes structure
-* `microservice-product-search-create-structure` - creates new indexes structure by json definitions stored in [the microservice resources directory](/microservices/product-search-export/src/Resources/definition).
+* `product-search-delete-structure` - deletes existing indexes structure
+* `product-search-create-structure` - creates new indexes structure by json definitions stored in [the resources directory](/project-base/src/Shopsys/ShopBundle/Resources/definition).
 
-#### microservice-product-search-export-products
+#### product-search-export-products
 Exports all visible products to Elasticsearch.
 
 ### Coding standards

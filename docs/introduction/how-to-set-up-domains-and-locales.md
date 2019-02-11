@@ -82,10 +82,9 @@ php phing grunt
 
 #### 2.8. Create elasticsearch definition for the new domain
 The configuration for elasticsearch must be created for each domain in a separate json file.
-By default, the configurations for the domain 1 and 2 are already parts of a microservice.
-Configuration for elasticsearch can be found in [Definitions of Microservice Product Search Export](https://github.com/shopsys/shopsys/tree/master/microservices/product-search-export/src/Resources/definition).
+By default, the configurations for the domain 1 and 2 are already parts of a project-base.
+Configuration for elasticsearch can be found in `src/Shopsys/ShopBundle/Resources/Resources/definition/`.
 If you add a new domain, you need to create an elasticsearch configuration for this new domain.
-As the configuration is part of the microservice, you need to fork the microservice and create this configuration here.
 
 ### 3. Locale settings
 Some parts of these instructions are already prepared for the locales `en` and `cs`.
