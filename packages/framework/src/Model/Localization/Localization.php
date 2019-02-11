@@ -1,8 +1,11 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Shopsys\FrameworkBundle\Model\Localization;
 
 use Shopsys\FrameworkBundle\Component\Domain\Domain;
+use Shopsys\FrameworkBundle\Model\Localization\Exception\AdminLocaleNotFoundException;
 
 class Localization
 {
@@ -38,22 +41,29 @@ class Localization
     protected $domain;
 
     /**
-     * @var array
+     * @var string[]|null
      */
     protected $allLocales;
 
     /**
-     * @param \Shopsys\FrameworkBundle\Component\Domain\Domain $domain
+     * @var string
      */
-    public function __construct(Domain $domain)
+    protected $adminLocale;
+
+    /**
+     * @param \Shopsys\FrameworkBundle\Component\Domain\Domain $domain
+     * @param string $adminLocale
+     */
+    public function __construct(Domain $domain, string $adminLocale)
     {
         $this->domain = $domain;
+        $this->adminLocale = $adminLocale;
     }
 
     /**
      * @return string
      */
-    public function getLocale()
+    public function getLocale(): string
     {
         return $this->domain->getLocale();
     }
@@ -61,20 +71,28 @@ class Localization
     /**
      * @return string
      */
-    public function getAdminLocale()
+    public function getAdminLocale(): string
     {
-        return 'en';
+        $allLocales = $this->getLocalesOfAllDomains();
+
+        if (!in_array($this->adminLocale, $allLocales, true)) {
+            throw new AdminLocaleNotFoundException($this->adminLocale, $allLocales);
+        }
+
+        return $this->adminLocale;
     }
 
     /**
-     * @return array
+     * @return string[]
      */
-    public function getLocalesOfAllDomains()
+    public function getLocalesOfAllDomains(): array
     {
         if ($this->allLocales === null) {
             $this->allLocales = [];
             foreach ($this->domain->getAll() as $domainConfig) {
-                $this->allLocales[$domainConfig->getLocale()] = $domainConfig->getLocale();
+                $domainLocale = $domainConfig->getLocale();
+
+                $this->allLocales[$domainLocale] = $domainLocale;
             }
         }
 
@@ -84,7 +102,7 @@ class Localization
     /**
      * @return string[]
      */
-    public function getAllDefinedCollations()
+    public function getAllDefinedCollations(): array
     {
         return $this->collationsByLocale;
     }
@@ -93,7 +111,7 @@ class Localization
      * @param string $locale
      * @return string
      */
-    public function getLanguageName($locale)
+    public function getLanguageName(string $locale): string
     {
         if (!array_key_exists($locale, $this->languageNamesByLocale)) {
             throw new \Shopsys\FrameworkBundle\Model\Localization\Exception\InvalidLocaleException(
@@ -108,7 +126,7 @@ class Localization
      * @param string $locale
      * @return string
      */
-    public function getCollationByLocale($locale)
+    public function getCollationByLocale(string $locale): string
     {
         if (array_key_exists($locale, $this->collationsByLocale)) {
             return $this->collationsByLocale[$locale];

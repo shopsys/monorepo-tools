@@ -7,6 +7,7 @@ parameters:
     prezent_doctrine_translatable.listener.class: Shopsys\FrameworkBundle\Model\Localization\TranslatableListener
     faker.seed: 1234
     shopsys.entity_extension.map: {}
+    shopsys.admin_locale: en
 
 services:
     _defaults:
@@ -481,7 +482,9 @@ services:
             - { name: kernel.event_listener, event: kernel.response, method: onKernelResponse }
             - { name: kernel.event_listener, event: kernel.controller, method: onKernelController }
 
-    Shopsys\FrameworkBundle\Model\Localization\Localization: ~
+    Shopsys\FrameworkBundle\Model\Localization\Localization:
+        arguments:
+            $adminLocale: '%shopsys.admin_locale%'
 
     Shopsys\FrameworkBundle\Component\Localization\DateTimeFormatter:
         factory: ['@Shopsys\FrameworkBundle\Model\Localization\CustomDateTimeFormatterFactory', create]
