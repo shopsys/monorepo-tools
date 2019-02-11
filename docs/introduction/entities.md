@@ -45,7 +45,7 @@ interface CartItemFactoryInterface
 ```
 
 The factory has an implementation in the framework and can be overwritten in your project when you need to work with an extended entity.
-You can read about entity extension in a [separate article](../wip_glassbox/entity-extension.md).
+You can read about entity extension in a [separate article](../extensibility/entity-extension.md).
 
 
 ## Domain entity

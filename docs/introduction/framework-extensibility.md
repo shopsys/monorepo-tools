@@ -5,12 +5,12 @@ provides a list of customizations that are not achievable now but are planned to
 as well as a list of customizations that are not (and will not be) possible at all.
 
 ## What is achievable easily
-* [Extending an entity](/docs/wip_glassbox/entity-extension.md)
+* [Extending an entity](/docs/extensibility/entity-extension.md)
     * [Adding a new attribute](/docs/cookbook/adding-new-attribute-to-an-entity.md)
-    * *Note: There are some limitations when extending OrderItem, for more see [the documentation](/docs/wip_glassbox/entity-extension.md#orderitem)*
+    * *Note: There are some limitations when extending OrderItem, for more see [the documentation](/docs/extensibility/entity-extension.md#orderitem)*
 * The administration can be extended by:
     * [Adding a new administration page](/docs/cookbook/adding-a-new-administration-page.md) along with the side menu and breadcrumbs
-    * [Extending particular forms](/docs/wip_glassbox/form-extension.md) without the need of the template overriding
+    * [Extending particular forms](/docs/extensibility/form-extension.md) without the need of the template overriding
 * [Customizing database migrations](/docs/introduction/database-migrations.md)
     * adding a new migration as well as skipping and reordering the existing ones
 * Configuring the smoke tests (see [`RouteConfigCustomization`](/project-base/tests/ShopBundle/Smoke/Http/RouteConfigCustomization.php) class)

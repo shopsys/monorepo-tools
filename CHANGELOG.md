@@ -1059,7 +1059,7 @@ from its open-box repository [shopsys/project-base](https://github.com/shopsys/p
 - Frontend site for requesting personal data information
     - Admin - added email template for personal data request
     - Frontend send email with link to personal data access site 
-- [wip-glassbox-customization.md](docs/wip_glassbox/wip-glassbox-customization.md): new WIP documentation about working with glassbox
+- docs: new WIP documentation about working with glassbox
 - docker: [`php-fpm/Dockerfile`](./project-base/docker/php-fpm/Dockerfile) added installation of `grunt-cli` to be able to run `grunt watch`
     - [`docker-compose.yml.dist`](docker/conf/docker-compose.yml.dist) and [`docker-compose-mac.yml.dist`](docker/conf/docker-compose-mac.yml.dist): opened port 35729 for livereload, that is used by `grunt watch`
 
