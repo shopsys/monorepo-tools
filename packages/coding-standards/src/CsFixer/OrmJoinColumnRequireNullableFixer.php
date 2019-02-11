@@ -25,7 +25,7 @@ final class OrmJoinColumnRequireNullableFixer implements FixerInterface, Defined
         return new FixerDefinition(
             'Annotations @ORM\ManyToOne and @ORM\OneToOne must have defined nullable option in @ORM\JoinColumn',
             [new CodeSample(
-<<<'SAMPLE'
+                <<<'SAMPLE'
 /**
  * @var \StdObject
  * @ORM\ManyToOne(targetEntity="StdObject")
@@ -33,7 +33,7 @@ final class OrmJoinColumnRequireNullableFixer implements FixerInterface, Defined
 private $foo;
 SAMPLE
             ), new CodeSample(
-<<<'SAMPLE'
+                <<<'SAMPLE'
 /**
  * @var \StdObject
  * @ORM\OneToOne(targetEntity="StdObject")
