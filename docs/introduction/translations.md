@@ -137,7 +137,7 @@ JavaScript translations are extracted and translated during compilation of JavaS
     * change the text in the code
     * run `php phing dump-translations`
     * translate text again in `*.po` file(s) for the other languages because the message ID changed
-    * be careful, this is a backward compatibility breaking change because the original message ID does not exist anymore.
+    * be careful, this is a [backward compatibility breaking change](/docs/contributing/backward-compatibility-promise.md#translation-messages) because the original message ID does not exist anymore.
 * You do not care about the consistency between message ID and the original English form
     * just change the translations in `*.po` file(s) for English and all the other languages
 

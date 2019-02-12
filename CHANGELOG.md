@@ -21,7 +21,7 @@ There is a list of all the repositories maintained by monorepo:
 Packages are formatted by release version. You can see all the changes done to package that you carry about with this tree.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
-and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
+and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html) as explained in the [Backward Compatibility Promise](/docs/contributing/backward-compatibility-promise.md).
 
 The changelog is generated during the release process using [ChangelogLinker](https://github.com/symplify/changeloglinker) since `v7.0.0-alpha6` release.
 

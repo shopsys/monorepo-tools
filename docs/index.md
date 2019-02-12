@@ -3,6 +3,7 @@
 ## What is new and how to upgrade
 * In [CHANGELOG.md](../CHANGELOG.md) you can find the list of all important changes in all repositories maintained in [shopsys/shopsys monorepo](https://github.com/shopsys/shopsys/)
 * For step by step upgrade instructions see [UPGRADE.md](../UPGRADE.md)
+* Thanks to our [Backward Compatibility Promise](/docs/contributing/backward-compatibility-promise.md) it should be clear to which versions you can upgrade safely and how we plan to maintain the code in the future
 
 ## Introduction
 * [Installation Using Docker](installation/installation-using-docker.md) and [Native Installation](installation/native-installation.md)
