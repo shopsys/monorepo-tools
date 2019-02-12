@@ -253,7 +253,7 @@
         </exec>
     </target>
 
-    <target name="error-pages-generate" description="Generates error pages displayed in production environment.">
+    <target name="error-pages-generate" depends="prod-warmup" description="Generates error pages displayed in production environment.">
         <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
             <arg value="${path.bin-console}" />
             <arg value="shopsys:error-page:generate-all" />
@@ -333,6 +333,14 @@
         <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
             <arg value="${path.bin-console}" />
             <arg value="cache:warmup" />
+        </exec>
+    </target>
+
+    <target name="prod-warmup" description="Warms up cache for production environment.">
+        <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
+            <arg value="${path.bin-console}" />
+            <arg value="cache:warmup" />
+            <arg value="--env=prod" />
         </exec>
     </target>
 
