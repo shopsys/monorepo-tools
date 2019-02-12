@@ -206,6 +206,12 @@ for instance:
     - <target name="error-pages-generate" description="...">
     + <target name="error-pages-generate" depends="prod-warmup" description="...">
     ```
+- if you have extended any of following factories, provide `Domain` object to parent constructor ([#787](https://github.com/shopsys/shopsys/pull/787))
+    - `AvailabilityDataFactory`
+    - `FlagDataFactory`
+    - `OrderStatusDataFactory`
+    - `ParameterDataFactory`
+    - `UnitDataFactory`
 
 ## [shopsys/product-feed-heureka]
 - if you have extended class HeurekaCategoryDownloader or HeurekaCategoryCronModule ([#788](https://github.com/shopsys/shopsys/pull/788))
