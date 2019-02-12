@@ -7,7 +7,7 @@ use Shopsys\FrameworkBundle\Component\FileUpload\ImageUploadData;
 class PaymentData
 {
     /**
-     * @var string[]
+     * @var string[]|null[]
      */
     public $name;
 
@@ -17,12 +17,12 @@ class PaymentData
     public $vat;
 
     /**
-     * @var string[]
+     * @var string[]|null[]
      */
     public $description;
 
     /**
-     * @var string[]
+     * @var string[]|null[]
      */
     public $instructions;
 

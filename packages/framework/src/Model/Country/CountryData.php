@@ -5,7 +5,7 @@ namespace Shopsys\FrameworkBundle\Model\Country;
 class CountryData
 {
     /**
-     * @var string[]
+     * @var string[]|null[]
      */
     public $names;
 

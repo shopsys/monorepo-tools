@@ -320,7 +320,7 @@ class BrandData
     public $image;
 
     /**
-     * @var string[]
+     * @var string[]|null[]
      */
     public $descriptions;
 

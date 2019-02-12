@@ -133,7 +133,7 @@ class ProductDataFactory implements ProductDataFactoryInterface
      * @param mixed $productData
      * @param \Shopsys\FrameworkBundle\Model\Product\ProductData
      */
-    protected function fillNew($productData)
+    protected function fillNew(ProductData $productData)
     {
         $productData->vat = $this->vatFacade->getDefaultVat();
         $productData->unit = $this->unitFacade->getDefaultUnit();
@@ -150,6 +150,11 @@ class ProductDataFactory implements ProductDataFactoryInterface
         $productData->descriptions = $nullForAllDomains;
         $productData->shortDescriptions = $nullForAllDomains;
         $productData->accessories = [];
+
+        foreach ($this->domain->getAllLocales() as $locale) {
+            $productData->name[$locale] = null;
+            $productData->variantAlias[$locale] = null;
+        }
     }
 
     /**

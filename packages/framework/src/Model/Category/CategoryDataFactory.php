@@ -81,6 +81,10 @@ class CategoryDataFactory implements CategoryDataFactoryInterface
             $categoryData->descriptions[$domainId] = null;
             $categoryData->enabled[$domainId] = true;
         }
+
+        foreach ($this->domain->getAllLocales() as $locale) {
+            $categoryData->name[$locale] = null;
+        }
     }
 
     /**

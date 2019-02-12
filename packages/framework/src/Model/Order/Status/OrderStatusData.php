@@ -5,7 +5,7 @@ namespace Shopsys\FrameworkBundle\Model\Order\Status;
 class OrderStatusData
 {
     /**
-     * @var string[]
+     * @var string[]|null[]
      */
     public $name;
 

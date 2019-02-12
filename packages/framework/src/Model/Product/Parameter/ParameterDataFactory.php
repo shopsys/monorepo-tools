@@ -2,14 +2,41 @@
 
 namespace Shopsys\FrameworkBundle\Model\Product\Parameter;
 
+use Shopsys\FrameworkBundle\Component\Domain\Domain;
+
 class ParameterDataFactory implements ParameterDataFactoryInterface
 {
+    /**
+     * @var \Shopsys\FrameworkBundle\Component\Domain\Domain
+     */
+    protected $domain;
+
+    /**
+     * @param \Shopsys\FrameworkBundle\Component\Domain\Domain $domain
+     */
+    public function __construct(Domain $domain)
+    {
+        $this->domain = $domain;
+    }
+
     /**
      * @return \Shopsys\FrameworkBundle\Model\Product\Parameter\ParameterData
      */
     public function create(): ParameterData
     {
-        return new ParameterData();
+        $parameterData = new ParameterData();
+        $this->fillNew($parameterData);
+        return $parameterData;
+    }
+
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Product\Parameter\ParameterData $parameterData
+     */
+    protected function fillNew(ParameterData $parameterData): void
+    {
+        foreach ($this->domain->getAllLocales() as $locale) {
+            $parameterData->name[$locale] = null;
+        }
     }
 
     /**

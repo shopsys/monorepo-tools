@@ -5,7 +5,7 @@ namespace Shopsys\FrameworkBundle\Model\Product\Flag;
 class FlagData
 {
     /**
-     * @var string[]
+     * @var string[]|null[]
      */
     public $name;
 

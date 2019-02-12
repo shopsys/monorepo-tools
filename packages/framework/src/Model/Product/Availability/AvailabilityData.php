@@ -5,7 +5,7 @@ namespace Shopsys\FrameworkBundle\Model\Product\Availability;
 class AvailabilityData
 {
     /**
-     * @var string[]
+     * @var string[]|null[]
      */
     public $name;
 

@@ -5,7 +5,7 @@ namespace Shopsys\FrameworkBundle\Model\Product\Parameter;
 class ParameterData
 {
     /**
-     * @var string[]
+     * @var string[]|null[]
      */
     public $name;
 

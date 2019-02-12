@@ -2,14 +2,41 @@
 
 namespace Shopsys\FrameworkBundle\Model\Order\Status;
 
+use Shopsys\FrameworkBundle\Component\Domain\Domain;
+
 class OrderStatusDataFactory implements OrderStatusDataFactoryInterface
 {
+    /**
+     * @var \Shopsys\FrameworkBundle\Component\Domain\Domain
+     */
+    protected $domain;
+
+    /**
+     * @param \Shopsys\FrameworkBundle\Component\Domain\Domain $domain
+     */
+    public function __construct(Domain $domain)
+    {
+        $this->domain = $domain;
+    }
+
     /**
      * @return \Shopsys\FrameworkBundle\Model\Order\Status\OrderStatusData
      */
     public function create(): OrderStatusData
     {
-        return new OrderStatusData();
+        $orderStatusData = new OrderStatusData();
+        $this->fillNew($orderStatusData);
+        return $orderStatusData;
+    }
+
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Order\Status\OrderStatusData $orderStatusData
+     */
+    protected function fillNew(OrderStatusData $orderStatusData): void
+    {
+        foreach ($this->domain->getAllLocales() as $locale) {
+            $orderStatusData->name[$locale] = null;
+        }
     }
 
     /**

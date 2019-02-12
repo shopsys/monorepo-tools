@@ -58,6 +58,10 @@ class BrandDataFactory implements BrandDataFactoryInterface
             $brandData->seoTitles[$domainId] = null;
             $brandData->seoH1s[$domainId] = null;
         }
+
+        foreach ($this->domain->getAllLocales() as $locale) {
+            $brandData->descriptions[$locale] = null;
+        }
     }
 
     /**

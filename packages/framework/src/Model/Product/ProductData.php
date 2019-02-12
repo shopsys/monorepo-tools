@@ -8,7 +8,7 @@ use Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\UrlListData;
 class ProductData
 {
     /**
-     * @var string[]
+     * @var string[]|null[]
      */
     public $name;
 
@@ -98,7 +98,7 @@ class ProductData
     public $brand;
 
     /**
-     * @var string[]
+     * @var string[]|null[]
      */
     public $variantAlias;
 
