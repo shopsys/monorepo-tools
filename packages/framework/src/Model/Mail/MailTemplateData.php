@@ -35,7 +35,7 @@ class MailTemplateData
     public $attachment;
 
     /**
-     * @var bool|null
+     * @var bool
      */
     public $deleteAttachment;
 
@@ -43,5 +43,6 @@ class MailTemplateData
     {
         $this->sendMail = false;
         $this->attachment = [];
+        $this->deleteAttachment = false;
     }
 }

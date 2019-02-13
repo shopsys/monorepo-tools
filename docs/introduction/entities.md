@@ -187,6 +187,7 @@ The entity extends `\Shopsys\FrameworkBundle\Model\Localization\AbstractTranslat
 Setting the properties of a domain entity is always done via the main entity itself.
 Basically, that means only the main entity knows about the existence of translation entities.
 The rest of the application uses the main entity as a proxy to the translation-specific properties.
+The extension creates instances of translated entities on-demand and this creation is transparent for user of domain entity.
 *The concept is similar to [domain entities](#domain-entity)* but uses Doctrine extension.
 
 ### Example
@@ -319,7 +320,7 @@ class BrandData
     public $image;
 
     /**
-     * @var string[]
+     * @var string[]|null[]
      */
     public $descriptions;
 
@@ -356,15 +357,63 @@ class BrandData
 }
 ```
 
-### Data for multidomain or multilanguage field
+### Recommendations for data object properties
 
-As you can see in example above, multidomain or multilanguage field is an array.
+#### Scalars
 
-Multidomain field like `seoH1s` have to be indexed by `domainId` - integer ID of the given domain.
-Data factory has to prepare this array to contain keys for all domain IDs, because domain entities are created by these array items (even if their value is null).
+Scalars are the most typical properties in data objects.
+You usually don't have a default value for a scalar field, so your PHPDoc annotation will usually look like `string|null`, `int|null`, `float|null`.
 
-Multilanguage field like `description` have to be indexed by `locale` - string identifier of language (you can find them in [`domains.yml`](/project-base/app/config/domains.yml)).
-Data factory does not need to prepare this array, because the extension we use for translated entities can handle unprepared translations.
+If you need to transfer boolean data, we recommend using `bool` with a default value in the constructor (`true`/`false`) because `false` and `null` behaves similarly in php.
+
+#### Arrays
+
+If you need to transfer arrays, use PHPDoc annotation `string[]`, `int[]`, `float[]`, `bool[]` and initialize an empty array in the constructor.
+
+If you care about array keys, use a name of the key in the property name in form `propertyByKey`. Eg. [`TransportData::$pricesByCurrencyId`](/packages/framework/src/Model/Transport/TransportData.php).
+
+#### Unknown types
+
+We don't recommend to use `mixed` or `array` PHPDoc annotation as they aren't expressive.
+
+The only exception in the framework is `$pluginData` in `CategoryData` and `ProductData`.
+The PHPDoc annotation is an `array` in this case because plugins can contain any type.
+
+#### Entities
+
+It is common that you need to transfer an entity to form or other parts of the system.
+
+If you need to transfer one entity, use PHPDoc annotation `entity|null`, eg. `\Shopsys\FrameworkBundle\Model\Pricing\Vat\Vat|null` in [`TransportData::$vat`](/packages/framework/src/Model/Transport/TransportData.php).
+If you need to transfer a collection of entities, use PHPDoc annotation `entity[]` and initialize the array in the constructor, eg. `\Shopsys\FrameworkBundle\Model\Payment\Payment[]` in [`TransportData::$payments`](/packages/framework/src/Model/Transport/TransportData.php).
+
+#### Images
+
+To transfer images via the system, use PHPDoc annotation `\Shopsys\FrameworkBundle\Component\FileUpload\ImageUploadData` and initialize the field in the constructor as you can see in `BrandData` example above.
+
+#### URL addresses
+
+To transfer URL addresses via the system, use PHPDoc annotation `\Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\UrlListData` and initialize the field in the constructor as you can see in `BrandData` example above.
+
+#### Multidomain
+
+[Multidomain property](/docs/introduction/domain-multidomain-multilanguage.md#multidomain-attribute) is an array and has to be indexed by `domainId` - an integer ID of the given domain.
+An example of such property is a `seoH1s` in the `BrandData` example above.
+Data factory has to create an item in this array for each domain ID, otherwise domain entities would not be created correctly (a domain entity should exist for each domain, even with null values).
+
+Therefore the multidomain field has PHPDoc annotation `string[]|null[]` or `int[]|null[]`.
+For boolean multidomain properties, we recommend using default value filled in the factory and PHPDoc annotation `bool[]` only, eg. property [`TransportData::$enabled`](/packages/framework/src/Model/Transport/TransportData.php).
+
+#### Multilanguage
+
+[Multilanguage property](/docs/introduction/domain-multidomain-multilanguage.md#multilanguage-attribute) is an array and has to be indexed by `locale` - a string identifier of language (you can find them in [`domains.yml`](/project-base/app/config/domains.yml)).
+An example of such property is a `descriptions` in the `BrandData` example above.
+Data factory has to create an item in this array for each locale, otherwise translation entities would not be created correctly (a translation entity should exist for each locale, even with null values).
+Therefore the multidomain field has PHPDoc annotation `string[]|null[]`.
+
+#### Data objects
+
+You can use even data object within your data object when you need composition.
+Eg. [`CustomerData`](/packages/framework/src/Model/Customer/CustomerData.php) or [`OrderData`](/packages/framework/src/Model/Order/OrderData.php) (contains `OrderItemData`).
 
 ## Entity data factory
 

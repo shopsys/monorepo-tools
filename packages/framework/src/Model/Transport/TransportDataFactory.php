@@ -58,6 +58,12 @@ class TransportDataFactory implements TransportDataFactoryInterface
         foreach ($this->domain->getAllIds() as $domainId) {
             $transportData->enabled[$domainId] = true;
         }
+
+        foreach ($this->domain->getAllLocales() as $locale) {
+            $transportData->name[$locale] = null;
+            $transportData->description[$locale] = null;
+            $transportData->instructions[$locale] = null;
+        }
     }
 
     /**

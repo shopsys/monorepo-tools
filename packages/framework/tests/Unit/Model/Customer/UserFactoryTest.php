@@ -28,6 +28,7 @@ class UserFactoryTest extends TestCase
         $userData->lastName = 'lastName';
         $userData->email = 'no-reply@shopsys.com';
         $userData->password = 'pa55w0rd';
+        $userData->domainId = 1;
 
         $user = $customerService->create(
             $userData,

@@ -20,7 +20,7 @@ class ProductFilterData
     public $parameters = [];
 
     /**
-     * @var bool|null
+     * @var bool
      */
     public $inStock;
 
@@ -33,4 +33,9 @@ class ProductFilterData
      * @var \Shopsys\FrameworkBundle\Model\Product\Brand\Brand[]
      */
     public $brands = [];
+
+    public function __construct()
+    {
+        $this->inStock = false;
+    }
 }

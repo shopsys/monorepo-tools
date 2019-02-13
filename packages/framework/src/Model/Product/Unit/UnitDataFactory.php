@@ -2,14 +2,41 @@
 
 namespace Shopsys\FrameworkBundle\Model\Product\Unit;
 
+use Shopsys\FrameworkBundle\Component\Domain\Domain;
+
 class UnitDataFactory implements UnitDataFactoryInterface
 {
+    /**
+     * @var \Shopsys\FrameworkBundle\Component\Domain\Domain
+     */
+    protected $domain;
+
+    /**
+     * @param \Shopsys\FrameworkBundle\Component\Domain\Domain $domain
+     */
+    public function __construct(Domain $domain)
+    {
+        $this->domain = $domain;
+    }
+
     /**
      * @return \Shopsys\FrameworkBundle\Model\Product\Unit\UnitData
      */
     public function create(): UnitData
     {
-        return new UnitData();
+        $unitData = new UnitData();
+        $this->fillNew($unitData);
+        return $unitData;
+    }
+
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Product\Unit\UnitData $unitData
+     */
+    protected function fillNew(UnitData $unitData): void
+    {
+        foreach ($this->domain->getAllLocales() as $locale) {
+            $unitData->name[$locale] = null;
+        }
     }
 
     /**

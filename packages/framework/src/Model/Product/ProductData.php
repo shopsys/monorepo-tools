@@ -8,7 +8,7 @@ use Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\UrlListData;
 class ProductData
 {
     /**
-     * @var array
+     * @var string[]|null[]
      */
     public $name;
 
@@ -43,7 +43,7 @@ class ProductData
     public $sellingTo;
 
     /**
-     * @var bool|null
+     * @var bool
      */
     public $sellingDenied;
 
@@ -68,7 +68,7 @@ class ProductData
     public $unit;
 
     /**
-     * @var string
+     * @var string Product::OUT_OF_STOCK_ACTION_*
      */
     public $outOfStockAction;
 
@@ -83,7 +83,7 @@ class ProductData
     public $outOfStockAvailability;
 
     /**
-     * @var array
+     * @var \Shopsys\FrameworkBundle\Model\Product\Flag\Flag[]
      */
     public $flags;
 
@@ -98,7 +98,7 @@ class ProductData
     public $brand;
 
     /**
-     * @var string[]
+     * @var string[]|null[]
      */
     public $variantAlias;
 

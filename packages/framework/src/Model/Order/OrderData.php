@@ -82,7 +82,7 @@ class OrderData
     public $country;
 
     /**
-     * @var bool|null
+     * @var bool
      */
     public $deliveryAddressSameAsBillingAddress;
 
@@ -174,6 +174,7 @@ class OrderData
     public function __construct()
     {
         $this->itemsWithoutTransportAndPayment = [];
+        $this->deliveryAddressSameAsBillingAddress = false;
     }
 
     /**

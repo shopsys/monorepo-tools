@@ -199,7 +199,6 @@ class UserDataFixtureLoader
         } else {
             $customerData->deliveryAddressData = $this->deliveryAddressDataFactory->create();
         }
-        $userData->domainId = $domainId;
 
         $customerData->userData = $userData;
         $customerData->billingAddressData = $billingAddressData;

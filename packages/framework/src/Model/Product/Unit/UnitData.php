@@ -5,7 +5,7 @@ namespace Shopsys\FrameworkBundle\Model\Product\Unit;
 class UnitData
 {
     /**
-     * @var string[]
+     * @var string[]|null[]
      */
     public $name;
 

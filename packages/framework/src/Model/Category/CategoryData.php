@@ -8,7 +8,7 @@ use Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\UrlListData;
 class CategoryData
 {
     /**
-     * @var string[]
+     * @var string[]|null[]
      */
     public $name;
 
@@ -28,7 +28,7 @@ class CategoryData
     public $seoH1s;
 
     /**
-     * @var string[]
+     * @var string[]|null[]
      */
     public $descriptions;
 

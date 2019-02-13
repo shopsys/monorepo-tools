@@ -58,6 +58,12 @@ class PaymentDataFactory implements PaymentDataFactoryInterface
         foreach ($this->domain->getAllIds() as $domainId) {
             $paymentData->enabled[$domainId] = true;
         }
+
+        foreach ($this->domain->getAllLocales() as $locale) {
+            $paymentData->name[$locale] = null;
+            $paymentData->description[$locale] = null;
+            $paymentData->instructions[$locale] = null;
+        }
     }
 
     /**

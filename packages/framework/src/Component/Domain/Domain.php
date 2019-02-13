@@ -108,6 +108,20 @@ class Domain implements DomainIdsProviderInterface
     }
 
     /**
+     * @return string[]
+     */
+    public function getAllLocales(): array
+    {
+        $locales = [];
+        foreach ($this->getAll() as $domainConfig) {
+            $locale = $domainConfig->getLocale();
+            $locales[$locale] = $locale;
+        }
+
+        return $locales;
+    }
+
+    /**
      * @return int[]
      */
     public function getAllIdsExcludingFirstDomain(): array

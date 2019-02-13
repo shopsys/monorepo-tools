@@ -73,5 +73,9 @@ class CountryDataFactory implements CountryDataFactoryInterface
             $countryData->enabled[$domainId] = true;
             $countryData->priority[$domainId] = null;
         }
+
+        foreach ($this->domain->getAllLocales() as $locale) {
+            $countryData->names[$locale] = null;
+        }
     }
 }

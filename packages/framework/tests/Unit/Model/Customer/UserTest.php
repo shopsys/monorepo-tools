@@ -20,6 +20,7 @@ class UserTest extends TestCase
         $userData->firstName = 'Firstname';
         $userData->lastName = 'Lastname';
         $userData->email = 'no-reply@shopsys.com';
+        $userData->domainId = 1;
         $billingAddress = $this->createBillingAddress();
         $user = new User($userData, $billingAddress, null, null);
 
@@ -32,6 +33,7 @@ class UserTest extends TestCase
         $userData->firstName = 'Firstname';
         $userData->lastName = 'Lastname';
         $userData->email = 'no-reply@shopsys.com';
+        $userData->domainId = 1;
         $billingAddressData = new BillingAddressData();
         $billingAddressData->companyCustomer = true;
         $billingAddressData->companyName = 'CompanyName';
@@ -92,6 +94,7 @@ class UserTest extends TestCase
     ) {
         $userData = new UserData();
         $userData->email = 'no-reply@shopsys.com';
+        $userData->domainId = 1;
         $billingAddressData = new BillingAddressData();
         $billingAddress = new BillingAddress($billingAddressData);
         $user = new User($userData, $billingAddress, null, null);
@@ -145,6 +148,7 @@ class UserTest extends TestCase
         $userData1->lastName = 'lastName1';
         $userData1->email = 'no-reply@shopsys.com';
         $userData1->password = 'pa55w0rd';
+        $userData1->domainId = 1;
 
         $user1 = new User(
             $userData1,
@@ -160,6 +164,7 @@ class UserTest extends TestCase
         $userData2->lastName = 'lastName2';
         $userData2->email = 'no-reply2@shopsys.com';
         $userData2->password = 'pa55w0rd';
+        $userData2->domainId = 1;
 
         $user2 = new User(
             $userData2,
@@ -181,6 +186,7 @@ class UserTest extends TestCase
         $userData1->lastName = 'lastName1';
         $userData1->email = 'no-reply@shopsys.com';
         $userData1->password = 'pa55w0rd';
+        $userData1->domainId = 1;
 
         $user1 = new User(
             $userData1,
@@ -196,6 +202,7 @@ class UserTest extends TestCase
         $userData2->lastName = 'lastName2';
         $userData2->email = 'no-reply@shopsys.com';
         $userData2->password = 'pa55w0rd';
+        $userData2->domainId = 1;
 
         $this->expectException(\Shopsys\FrameworkBundle\Model\Customer\Exception\DuplicateEmailException::class);
         new User(
@@ -216,6 +223,7 @@ class UserTest extends TestCase
         $userData1->lastName = 'lastName1';
         $userData1->email = 'no-reply@shopsys.com';
         $userData1->password = 'pa55w0rd';
+        $userData1->domainId = 1;
 
         $user1 = new User(
             $userData1,
@@ -231,6 +239,7 @@ class UserTest extends TestCase
         $userData2->lastName = 'lastName2';
         $userData2->email = 'NO-reply@shopsys.com';
         $userData2->password = 'pa55w0rd';
+        $userData2->domainId = 1;
 
         $this->expectException(\Shopsys\FrameworkBundle\Model\Customer\Exception\DuplicateEmailException::class);
         new User(

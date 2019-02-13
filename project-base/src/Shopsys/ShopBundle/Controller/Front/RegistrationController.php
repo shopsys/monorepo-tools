@@ -82,7 +82,6 @@ class RegistrationController extends FrontBaseController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $userData = $form->getData();
-            $userData->domainId = $this->domain->getId();
 
             $user = $this->customerFacade->register($userData);
             $this->authenticator->loginUser($user, $request);

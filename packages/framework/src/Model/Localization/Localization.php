@@ -88,12 +88,7 @@ class Localization
     public function getLocalesOfAllDomains(): array
     {
         if ($this->allLocales === null) {
-            $this->allLocales = [];
-            foreach ($this->domain->getAll() as $domainConfig) {
-                $domainLocale = $domainConfig->getLocale();
-
-                $this->allLocales[$domainLocale] = $domainLocale;
-            }
+            $this->allLocales = $this->domain->getAllLocales();
         }
 
         return $this->allLocales;

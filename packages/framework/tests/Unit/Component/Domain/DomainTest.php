@@ -101,4 +101,22 @@ class DomainTest extends TestCase
         $this->expectException(\Shopsys\FrameworkBundle\Component\Domain\Exception\InvalidDomainIdException::class);
         $domain->getDomainConfigById(3);
     }
+
+    public function testGetAllLocales(): void
+    {
+        $domainConfigs = [
+            new DomainConfig(1, 'http://example.com:8080', 'example.com', 'cs'),
+            new DomainConfig(2, 'http://example.org:8080', 'example.org', 'en'),
+            new DomainConfig(3, 'http://example.cz:8080', 'example.cz', 'cs'),
+        ];
+        $settingMock = $this->createMock(Setting::class);
+
+        $domain = new Domain($domainConfigs, $settingMock);
+
+        $expectedLocales = [
+            'cs' => 'cs',
+            'en' => 'en',
+        ];
+        $this->assertSame($expectedLocales, $domain->getAllLocales());
+    }
 }
