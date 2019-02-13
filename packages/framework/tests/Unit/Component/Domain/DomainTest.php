@@ -113,7 +113,10 @@ class DomainTest extends TestCase
 
         $domain = new Domain($domainConfigs, $settingMock);
 
-        $expectedLocales = ['cs', 'en'];
+        $expectedLocales = [
+            'cs' => 'cs',
+            'en' => 'en',
+        ];
         $this->assertSame($expectedLocales, $domain->getAllLocales());
     }
 }

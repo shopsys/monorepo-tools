@@ -114,10 +114,11 @@ class Domain implements DomainIdsProviderInterface
     {
         $locales = [];
         foreach ($this->getAll() as $domainConfig) {
-            $locales[] = $domainConfig->getLocale();
+            $locale = $domainConfig->getLocale();
+            $locales[$locale] = $locale;
         }
 
-        return array_unique($locales);
+        return $locales;
     }
 
     /**
