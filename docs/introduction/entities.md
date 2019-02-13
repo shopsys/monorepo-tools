@@ -376,7 +376,8 @@ If you care about array keys, use a name of the key in the property name in form
 
 We don't recommend to use `mixed` or `array` phpdoc as they aren't expressive.
 
-The only exception in the framework is `$pluginData` in `CategoryData` and `ProductData`. The phpdoc is an `array` in this case because plugins can contain any type.
+The only exception in the framework is `$pluginData` in `CategoryData` and `ProductData`.
+The phpdoc is an `array` in this case because plugins can contain any type.
 
 #### Entities
 
@@ -397,7 +398,7 @@ To transfer URL addresses via the system, use phpdoc `\Shopsys\FrameworkBundle\C
 
 [Multidomain property](/docs/introduction/domain-multidomain-multilanguage.md#multidomain-attribute) is an array and has to be indexed by `domainId` - an integer ID of the given domain.
 An example of such property is a `seoH1s` in the `BrandData` example above.
-Data factory has to prepare this array to contain keys for all domain IDs because domain entities are created by these array items (even if their value is null).
+Data factory has to create an item in this array for each domain ID, otherwise domain entities would not be created correctly (a domain entity should exist for each domain, even with null values).
 
 Therefore the multidomain field has phpdoc `string[]|null[]` or `int[]|null[]`.
 For boolean multidomain properties, we recommend using default value filled in the factory and phpdoc `bool[]` only, eg. property [`TransportData::$enabled`](/packages/framework/src/Model/Transport/TransportData.php).
@@ -406,7 +407,7 @@ For boolean multidomain properties, we recommend using default value filled in t
 
 [Multilanguage property](/docs/introduction/domain-multidomain-multilanguage.md#multilanguage-attribute) is an array and has to be indexed by `locale` - a string identifier of language (you can find them in [`domains.yml`](/project-base/app/config/domains.yml)).
 An example of such property is a `descriptions` in the `BrandData` example above.
-Data factory has to prepare this array to contain keys for all locales because translation entities are created by these array items (even if their value is null).
+Data factory has to create an item in this array for each locale, otherwise translation entities would not be created correctly (a translation entity should exist for each locale, even with null values).
 Therefore the multidomain field has phpdoc `string[]|null[]`.
 
 #### Data objects
