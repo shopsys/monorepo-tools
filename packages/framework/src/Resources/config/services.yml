@@ -1015,3 +1015,11 @@ services:
     Shopsys\FrameworkBundle\Model\Product\Search\Export\ProductSearchExporter: ~
 
     Shopsys\FrameworkBundle\Model\Product\Search\ProductElasticsearchConverter: ~
+
+    Shopsys\FrameworkBundle\Command\CheckRedisCommand:
+        arguments:
+            $cacheClients:
+            - '@snc_redis.bestselling_products'
+            - '@snc_redis.doctrine_metadata'
+            - '@snc_redis.doctrine_query'
+            - '@snc_redis.session'

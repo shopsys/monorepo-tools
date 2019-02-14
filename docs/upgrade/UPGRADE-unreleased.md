@@ -31,6 +31,22 @@ for instance:
 - *(optional)* add a new [script](https://github.com/shopsys/shopsys/pull/759/files#diff-e5f46a7c45e95214037078344ce17721) to `scripts/install.sh`
     - this script serves as a fast way to install demo instance of Shopsys Framework.
     - also this script can be used if you change the configuration of docker or app, script will apply all the changes done in these files and rebuild images.
+- add a way to check if Redis is running [#815](https://github.com/shopsys/shopsys/pull/815)
+    - upgrade redis extension version in your `DockerFile` to version `4.1.1`
+    ```diff
+    -       RUN pecl install redis-4.0.2 && \
+    +       RUN pecl install redis-4.1.1 && \
+    ```
+    - add a new phing target `redis-check` to your `build-dev.xml` and use it before any call to Redis like `clear-redis`
+        - You can find inspiration in [#815](https://github.com/shopsys/shopsys/pull/815/files)
+        ```xml
+          <target name="redis-check" description="Checks availability of Redis">
+              <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
+                  <arg value="${path.bin-console}" />
+                  <arg value="shopsys:redis:check-availability" />
+              </exec>
+          </target>
+        ```
 
 ### Database migrations
 - after running database migrations, all your countries across domains will be merged together and original names will be added as translations
