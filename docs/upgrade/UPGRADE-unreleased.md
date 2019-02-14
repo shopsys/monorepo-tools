@@ -7,7 +7,7 @@ There you can find links to upgrade notes for other versions too.
 
 ## [shopsys/framework]
 ### Infrastructure
-- *(optional)* in your `docker/php-fpm/Dockerfile` change base image to `php:7.3-fpm-stretch` ([#694](https://github.com/shopsys/shopsys/pull/694))
+- *(low priority)* in your `docker/php-fpm/Dockerfile` change base image to `php:7.3-fpm-stretch` ([#694](https://github.com/shopsys/shopsys/pull/694))
 - add subnet of your Kubernetes cluster as ENV variable into the config `/project-base/kubernetes/deployments/smtp-server.yml` for the pod of smtp container ([#777](https://github.com/shopsys/shopsys/pull/777))  
 for instance:
     ```yaml
@@ -18,7 +18,7 @@ for instance:
     ```
 
 ### Tools
-- *(optional)* add a new phing target `clean-redis` to your `build.xml` and `build-dev.xml` and use it where you need to clean Redis cache.
+- *(low priority)* add a new phing target `clean-redis` to your `build.xml` and `build-dev.xml` and use it where you need to clean Redis cache.
   You can find an inspiration in [#736](https://github.com/shopsys/shopsys/pull/736/files)
     ```xml
         <target name="clean-redis" description="Cleans up redis cache">
@@ -28,7 +28,7 @@ for instance:
             </exec>
         </target>
     ```
-- *(optional)* add a new [script](https://github.com/shopsys/shopsys/pull/759/files#diff-e5f46a7c45e95214037078344ce17721) to `scripts/install.sh`
+- *(low priority)* add a new [script](https://github.com/shopsys/shopsys/pull/759/files#diff-e5f46a7c45e95214037078344ce17721) to `scripts/install.sh`
     - this script serves as a fast way to install demo instance of Shopsys Framework.
     - also this script can be used if you change the configuration of docker or app, script will apply all the changes done in these files and rebuild images.
 - add a way to check if Redis is running [#815](https://github.com/shopsys/shopsys/pull/815)
@@ -59,7 +59,7 @@ for instance:
     - create new configuration file `app/config/directories.yml` with 2 types of directories `public_directories` and `internal_directories` and add this file into `$configs` array in `AppKernel::getConfigs()`.
     - if you had implemented your individual directories in `CreateApplicationDirectoriesCommand`, delete your extension of a class and add the directories into `app/config/directories.yml` and fill them into sections, you can read more about sections [here](https://github.com/shopsys/shopsys/blob/master/docs/intruduction/directories.yml) <!--- TODO: change to released version instead of master -->
 - if you were using `oneup/flysystembundle` for using different adapter than the local one, you must now implement `FilesystemFactoryInterface` and init the adapter by yourself.
-- *(optional)* delete dependency on `oneup/flysystembundle` from your `composer.json`
+- *(low priority)* delete dependency on `oneup/flysystembundle` from your `composer.json`
 - remove usages of inherited `OrderItem` classes ([#715](https://github.com/shopsys/shopsys/pull/715))
     - replace usages of `OrderProduct`, `OrderPayment`, and `OrderTransport` with common `OrderItem`
         - use `isType<type>()` method instead of `instanceof`
@@ -81,7 +81,7 @@ for instance:
         - change `ExtendedOrderItem` to standard class - remove `abstract` and inheritance annotations
         - change `doTestExtendedOrderItemsPersistence` to test only `OrderItem`
         - please find inspiration in [#715](https://github.com/shopsys/shopsys/pull/715/files)
-- *(optional)* to allow [support for multiple image sizes #766](https://github.com/shopsys/shopsys/pull/766) you have to
+- *(low priority)* to allow [support for multiple image sizes #766](https://github.com/shopsys/shopsys/pull/766) you have to
     - implement action `getAdditionalImageAction()` in `Front/ImageController.php` (or copy it from [ImageController.php](https://github.com/shopsys/project-base/blob/master/src/Shopsys/ShopBundle/Controller/Front/ImageController.php))
     - add routes into your frontend router
       ```yml
@@ -149,7 +149,7 @@ for instance:
  - `Functional/Model/Cart/CartTest.php` has been changed
  - `Functional/Model/Cart/Watcher/CartWatcherTest.php` has been changed
  - `Functional/Model/Order/OrderFacadeTest.php` has been changed
-- *(optional)* upgrade npm packages to the latest version ([#755](https://github.com/shopsys/shopsys/pull/755))
+- *(low priority)* upgrade npm packages to the latest version ([#755](https://github.com/shopsys/shopsys/pull/755))
     - remove all npm packages by removing folder `project-base/node_modules` and `project-base/package-lock.json`
     - run command `php phing npm`
     - in order to pass standards tests you also need to run `php phing eslint-fix` to let ESlint npm package update your JavaScript files. After that your syntax should be updated to latest JavaScript standards checked by ESLint.

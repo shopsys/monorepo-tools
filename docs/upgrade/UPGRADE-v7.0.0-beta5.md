@@ -10,25 +10,25 @@ There you can find links to upgrade notes for other versions too.
 - Google Cloud deploy using Terraform, Kustomize and Kubernetes ([#633](https://github.com/shopsys/shopsys/pull/633))
     - update your `.dockerignore` to ignore infrastructure files, follow [changes](https://github.com/shopsys/project-base/commit/5b861e1b065f79b9d415166af3cc78b5e4414334)
     - use specific images instead of variables, follow [changes](https://github.com/shopsys/project-base/commit/4a81b78ead6ba181059fc7448c659bd12b7d8d75)
-    - *(optional)* If you are using Kubernetes manifests for CI or deployment, follow changes done in manifests and ci `build_kubernetes.sh` script.
+    - *(low priority)* If you are using Kubernetes manifests for CI or deployment, follow changes done in manifests and ci `build_kubernetes.sh` script.
 - add `!docker/nginx` line into `.dockerignore` file so `docker/nginx` directory is not excluded during building `php-fpm` image ([#674](https://github.com/shopsys/shopsys/pull/674))
 - make sure your `webserver` service depends on `php-fpm` in your `docker-compose.yml` file so webserver will not fail on error `host not found in upstream php-fpm:9000` ([#679](https://github.com/shopsys/shopsys/pull/679))
 - on a production server enable compression of static files ([#703](https://github.com/shopsys/shopsys/pull/703))
     - you can see example configuration in [Installation using Docker on Production Server](/docs/installation/installation-using-docker-on-production-server.md) guide
-- *(optional)* Switched to Debian PHP-FPM image ([#702](https://github.com/shopsys/shopsys/pull/702))
+- *(low priority)* Switched to Debian PHP-FPM image ([#702](https://github.com/shopsys/shopsys/pull/702))
     - update your Dockerfile to extend from debian image, follow [changes](https://github.com/shopsys/project-base/commit/023d6f20f3d041dce09d381522bd6c438ed9fa59) and [fix #740](https://github.com/shopsys/shopsys/pull/740/files)
     - change `runAsUser` value in `webserver-php-fpm.yml` manifest to 33 as it is Debian default `www-data` UID
     - change owner of persisted folder on production server to 33 as it is Debian default `www-data` UID
 
 ### Configuration
-- *(optional)* for easier deployment to production, make the trusted proxies in `Shopsys\Boostrap` class loaded from DIC parameter `trusted_proxies` instead of being hard-coded ([#596](https://github.com/shopsys/shopsys/pull/596))
+- *(low priority)* for easier deployment to production, make the trusted proxies in `Shopsys\Boostrap` class loaded from DIC parameter `trusted_proxies` instead of being hard-coded ([#596](https://github.com/shopsys/shopsys/pull/596))
     - in your `Shopsys\Boostrap`, move the `Request::setTrustedProxies(...)` call along with `Kernel::boot()` so it's not run in console environment, like in [the PR #660](https://github.com/shopsys/shopsys/pull/660/files), otherwise console commands will trigger excessive logging
-- *(optional)* add support for custom prefixing in redis ([#673](https://github.com/shopsys/shopsys/pull/673))
+- *(low priority)* add support for custom prefixing in redis ([#673](https://github.com/shopsys/shopsys/pull/673))
     - add default value (e.g. empty string) for `REDIS_PREFIX` env variable to your `app/config/parameters.yml.dist`, `app/config/parameters.yml` (if you already have your parameters file), and to your `docker/php-fpm/Dockerfile`
     - modify your Redis configuration (`app/config/packages/snc_redis.yml`) by prefixing all the prefix values with the value of the env variable (`%env(REDIS_PREFIX)%`)
 
 ### Tools
-- *(optional)* drop `--verbose` from all easy-coding-standard phing targets (look for `${path.ecs.executable}`) as the package was upgraded in [#623](https://github.com/shopsys/shopsys/pull/623/) and now outputs name of each file checked in the verbose mode
+- *(low priority)* drop `--verbose` from all easy-coding-standard phing targets (look for `${path.ecs.executable}`) as the package was upgraded in [#623](https://github.com/shopsys/shopsys/pull/623/) and now outputs name of each file checked in the verbose mode
 
 ### Application
 - stop providing the option `is_group_container_to_render_as_the_last_one` to the `FormGroup` in your forms, the option was removed
@@ -62,10 +62,10 @@ There you can find links to upgrade notes for other versions too.
         - `CartTest` functions `testRemoveItem` and `createProduct`
         - `ProductManualInputPriceTest` functions `testRecalculateInputPriceForNewVatPercentWithInputPriceWithoutVat` and `testRecalculateInputPriceForNewVatPercentWithInputPriceWithVat`
         - `ProductAvailabilityCalculationTest` functions `testCalculateAvailability`, `testCalculateAvailabilityMainVariant` and `testCalculateAvailabilityMainVariantWithNoSellableVariants`
-- *(optional)* in your `base.html.twig` template move non-essential javascript files at the bottom of a page (([#703](https://github.com/shopsys/shopsys/pull/703)))
+- *(low priority)* in your `base.html.twig` template move non-essential javascript files at the bottom of a page (([#703](https://github.com/shopsys/shopsys/pull/703)))
     - we cannot provide exact instructions as we don't know your implementation, for an example take a look at [changes](https://github.com/shopsys/shopsys/pull/703/files#diff-4c948fb55a9ceba2f3070e572ac506f3)
     - you can use new simplified jquery-ui.min.js file, but please be aware that if your implementation uses more components from jQueryUI, you have to be extra careful
-- *(optional)* in order to remove white space of webpage after popup window shows up, change file located in [`src/Shopsys/ShopBundle/Resources/styles/front/common/layout/layout.less`](https://github.com/shopsys/shopsys/pull/710/files#diff-b6f30401eed85fcb59b3b1761855493b) by following instructions.
+- *(low priority)* in order to remove white space of webpage after popup window shows up, change file located in [`src/Shopsys/ShopBundle/Resources/styles/front/common/layout/layout.less`](https://github.com/shopsys/shopsys/pull/710/files#diff-b6f30401eed85fcb59b3b1761855493b) by following instructions.
     - add new CSS attribute `width: 100%` to CSS class `.web`
     - add following code snippet to CSS class `.web--window-activated`
     ```
@@ -73,9 +73,19 @@ There you can find links to upgrade notes for other versions too.
         overflow: unset;
     }
     ```
-- *(optional)* display svg icons collection correctly in grunt generated document for all browsers ([#645](https://github.com/shopsys/shopsys/pull/645))
+- *(low priority)* display svg icons collection correctly in grunt generated document for all browsers ([#645](https://github.com/shopsys/shopsys/pull/645))
     - add [`src/Shopsys/ShopBundle/Resources/views/Grunt/htmlDocumentTemplate.html`](https://github.com/shopsys/shopsys/pull/645/files#diff-2fa69709c5ba35cd2ad6c5de640d56f9) file from GitHub
     - update `src/Shopsys/ShopBundle/Resources/views/Grunt/gruntfile.js.twig` based on changes in [pull request #645](https://github.com/shopsys/shopsys/pull/645/files#diff-ff210e4f423be8bd6c88818d2bb2a8cd)
+- check correctness and existence of some translation and validation constants in *.po files for passing automation tests
+    - these should exist
+        ```
+        {1}Load next %loadNextCount% item|[2,Inf]Load next %loadNextCount% items
+        The price of payment {{ paymentName }} changed during ordering process. Check your order, please.
+        ```
+    - these should not exist
+        ```
+        The price of payment {{ transportName }} changed during ordering process. Check your order, please.
+        ```
 
 ## [shopsys/migrations]
 - `GenerateMigrationsService` class was renamed to `MigrationsGenerator`, so change it's usage appropriately ([#627](https://github.com/shopsys/shopsys/pull/627))

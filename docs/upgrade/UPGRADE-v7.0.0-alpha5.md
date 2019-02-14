@@ -90,9 +90,9 @@ if you are using docker infrastructure you can follow steps written below.
         - `Shopsys\FrameworkBundle\Model\Product\Search\ElasticsearchSearchClient`
         - `Shopsys\FrameworkBundle\Model\Product\Search\CachedSearchClient`
         - `Shopsys\FrameworkBundle\Model\Product\Search\SearchClient`
-- *(optional)* standardize indentation in your yaml files
+- *(low priority)* standardize indentation in your yaml files
     - you can find yaml files with wrong indentation with regexp `^( {4})* {1,3}[^ ]`
-- *(optional)* we added a new phing target that checks [availabitliy of microservices](https://github.com/shopsys/shopsys/blob/v7.0.0-alpha5/project-base/build-dev.xml#L726-L731).
+- *(low priority)* we added a new phing target that checks [availabitliy of microservices](https://github.com/shopsys/shopsys/blob/v7.0.0-alpha5/project-base/build-dev.xml#L726-L731).
   Feel free to include this target into your build process.
 - add new themes to configuration `app/config/config.yml`, path `twig.form_themes`:
     ```

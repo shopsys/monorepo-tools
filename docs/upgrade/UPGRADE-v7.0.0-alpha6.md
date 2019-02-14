@@ -29,12 +29,12 @@ There you can find links to upgrade notes for other versions too.
     - `parameters.yml.dist` contains new parameter `microservice_product_search_export_url`
         - add `microservice_product_search_export_url: 'http://microservice-product-search-export:8000'` into your `parameters.yml.dist`
         - execute `composer install` *(it will copy parameter into `parameters.yml`)*
-- *(optional)* instead of building the Docker images of the microservices yourself, you can use pre-built images on Docker Hub (see the [`docker-compose.yml`](https://github.com/shopsys/shopsys/blob/v7.0.0-alpha6/project-base/docker/conf) template you used)
+- *(low priority)* instead of building the Docker images of the microservices yourself, you can use pre-built images on Docker Hub (see the [`docker-compose.yml`](https://github.com/shopsys/shopsys/blob/v7.0.0-alpha6/project-base/docker/conf) template you used)
 - [#438 - Attribute telephone moved from a billing address to the personal data of a user](https://github.com/shopsys/shopsys/pull/438)
     - edit `ShopBundle/Form/Front/Customer/BillingAddressFormType` - remove `telephone`
     - edit `ShopBundle/Form/Front/Customer/UserFormType` - add `telephone`
     - edit twig templates and tests in such a way as to reflect the movement of `telephone` attribute according to the [pull request](https://github.com/shopsys/shopsys/pull/438)
-- *(optional)* to use custom postgres configuration check changes in the [`docker-compose.yml`](https://github.com/shopsys/shopsys/blob/v7.0.0-alpha6/project-base/docker/conf) templates and replicate them, there is a new volume for `postgres` container
+- *(low priority)* to use custom postgres configuration check changes in the [`docker-compose.yml`](https://github.com/shopsys/shopsys/blob/v7.0.0-alpha6/project-base/docker/conf) templates and replicate them, there is a new volume for `postgres` container
     - PR [Improve Postgres configuration to improve performance](https://github.com/shopsys/shopsys/pull/444)
     - Stop running containers `docker-compose down`
     - Move data from `project-base/var/postgres-data` into `project-base/var/postgres-data/pgdata`. The directory must have correct permission depending on your OS.
@@ -49,7 +49,7 @@ There you can find links to upgrade notes for other versions too.
         - `shopt -u dotglob`
         - `exit`
     - Start containers `docker-compose up -d`
-- *(optional)* configuration files (`config.yml`, `config_dev.yml`, `config_test.yml`, `security.yml` and `wysiwyg.yml`) has been split into packages config files, for details [see #449](https://github.com/shopsys/shopsys/pull/449)
+- *(low priority)* configuration files (`config.yml`, `config_dev.yml`, `config_test.yml`, `security.yml` and `wysiwyg.yml`) has been split into packages config files, for details [see #449](https://github.com/shopsys/shopsys/pull/449)
     - extract each section into own config file
         - eg. from `config.yml` extract `doctrine:` section into file `packages/doctrine.yml`
         - eg. from `config_dev.yml` extract `assetic:` section info file `packages/dev/assetic.yml`

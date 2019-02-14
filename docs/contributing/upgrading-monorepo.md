@@ -11,7 +11,7 @@ Typical upgrade sequence should be:
 ## [From v7.0.0-beta5 to Unreleased]
 - [#694 PHP 7.3 support](https://github.com/shopsys/shopsys/pull/694)
     - rebuild your Docker images with `docker-compose up -d --build`
-- *(optional)* [#755 update npm packages to latest version](https://github.com/shopsys/shopsys/pull/755)
+- *(low priority)* [#755 update npm packages to latest version](https://github.com/shopsys/shopsys/pull/755)
     - remove all npm packages by removing folder `project-base/node_modules` and `project-base/package-lock.json`
     - run command `php phing npm`
 - [#783 microservices has been removed and their funcionality has been moved to framework](https://github.com/shopsys/shopsys/pull/793)
@@ -76,7 +76,7 @@ Typical upgrade sequence should be:
         - remove excluding of `docs` folder from `docker-sync.yml`
         - run `docker-sync start` to create volumes
     - run `docker-compose up -d --build --force-recreate` to start application  
-- *(optional)* [#551 - github token erase](https://github.com/shopsys/shopsys/pull/551)
+- *(low priority)* [#551 - github token erase](https://github.com/shopsys/shopsys/pull/551)
     - you can stop providing the `github_oauth_token` in your `docker-compose.yml`
 
 ## [From v7.0.0-alpha5 to v7.0.0-alpha6]

@@ -6,12 +6,12 @@ This guide contains instructions to upgrade from version v7.0.0-alpha6 to v7.0.0
 There you can find links to upgrade notes for other versions too.
 
 ## [shopsys/framework]
-- *(optional)* [#468 - Setting for docker on mac are now more optimized](https://github.com/shopsys/shopsys/pull/468)
+- *(low priority)* [#468 - Setting for docker on mac are now more optimized](https://github.com/shopsys/shopsys/pull/468)
     - if you use the Shopsys Framework with docker on the platform Mac, modify your
       [`docker-compose.yml`](https://github.com/shopsys/shopsys/blob/v7.0.0-beta1/docker/conf/docker-compose-mac.yml.dist)
       and [`docker-sync.yml`](https://github.com/shopsys/shopsys/blob/v7.0.0-beta1/docker/conf/docker-sync.yml.dist) according to the new templates
     - next restart docker-compose and docker-sync
-- *(optional)* [#483 - updated info about Docker on Mac](https://github.com/shopsys/shopsys/pull/483)
+- *(low priority)* [#483 - updated info about Docker on Mac](https://github.com/shopsys/shopsys/pull/483)
     - if you use Docker for Mac and experience issues with `composer install` resulting in `Killed` status, try increasing the allowed memory
     - we recommend to set 2 GB RAM, 1 CPU and 2 GB Swap in `Docker -> Preferences… -> Advanced`
 - we changed visibility of Controllers' and Factories' methods and properties to protected

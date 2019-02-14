@@ -16,11 +16,7 @@ There you can find links to upgrade notes for other versions too.
     - `www_data_uid` and `www_data_gid` arguments are optional using an if condition (for building ci and production stage) ([#566](https://github.com/shopsys/shopsys/pull/566))
     - in a `ci` stage is a command to change the environment to keep building in `prod` environment ([#543](https://github.com/shopsys/shopsys/pull/543/files#diff-50a0e02c146dc64c2a172b42022589fa))
 - replace your `docker/php-fpm/docker-php-entrypoint` file with [version from GitHub]((https://github.com/shopsys/shopsys/blob/v7.0.0-beta3/project-base/docker/php-fpm/docker-php-entrypoint))
-- update `docker-compose.yml` file
-    - update php-fpm build configuration ([#533](https://github.com/shopsys/shopsys/pull/533))
-        - change `context` to current directory (`.`)
-        - add `dockerfile` directive with value `docker/php-fpm/Dockerfile`
-        - add `target` environment (`development`)
+- update `docker/conf/docker-compose-prod.yml` file
     - add new smtp container ([#530](https://github.com/shopsys/shopsys/pull/530))
         ```yaml
         smtp-server:
@@ -30,16 +26,22 @@ There you can find links to upgrade notes for other versions too.
                 - shopsys-network
         ```
     - remove smtp row from `extra_hosts` ([#530](https://github.com/shopsys/shopsys/pull/530))
+    - check whether there exists `depends_on` property between webserver and php-fpm services since this is needed for functional volume mounting (see [#598](https://github.com/shopsys/shopsys/pull/598))
+- update `docker-compose.yml` file
+    - update php-fpm build configuration ([#533](https://github.com/shopsys/shopsys/pull/533))
+        - change `context` to current directory (`.`)
+        - add `dockerfile` directive with value `docker/php-fpm/Dockerfile`
+        - add `target` environment (`development`)
     - *(MacOS only)* remove these lines ([#503](https://github.com/shopsys/shopsys/pull/503/))
         ```yaml
+        - shopsys-framework-elasticsearch-data-sync:/usr/share/elasticsearch/data
         shopsys-framework-postgres-data-sync:
             external: true
         shopsys-framework-elasticsearch-data-sync:
             external: true
         ```
-    - *(optional)* remove all `depends_on` and `links` because they are unnecessary ([#528](https://github.com/shopsys/shopsys/pull/528))
-        - the only exception is the `webserver` container that should depend on `php-fpm` in the production configuration `docker-compose.prod.yml.dist`, otherwise a volume will not mount properly (see [#598](https://github.com/shopsys/shopsys/pull/598))
-    - *(optional)* remove github token ([#551](https://github.com/shopsys/shopsys/pull/551))
+    - *(low priority)* remove all `links` because they are unnecessary ([#528](https://github.com/shopsys/shopsys/pull/528))s
+    - *(low priority)* remove github token ([#551](https://github.com/shopsys/shopsys/pull/551))
 - *(MacOS only)* remove these lines from `docker-sync.yml` ([#503](https://github.com/shopsys/shopsys/pull/503/))
     ```yaml
     shopsys-framework-postgres-data-sync:
@@ -51,10 +53,10 @@ There you can find links to upgrade notes for other versions too.
     ```
 - in file `docker/nginx/nginx.conf`, change parameter `fastcgi_param HTTPS` to `$http_x_forwarded_proto;` so the protocol of the original HTTP request is passed into php-fpm container ([#530](https://github.com/shopsys/shopsys/pull/530))
 - in file `docker/nginx/nginx.conf`, change location for images from `^/content/images/` to `^/content(-test)?/images/` ([#547](https://github.com/shopsys/shopsys/pull/547))
-- *(optional)* update `kubernetes/deployments/webserver-php-fpm.yml` to simplify the CI build ([#557](https://github.com/shopsys/shopsys/pull/557/files#diff-7e9545dc0b15fe031affe39181e97969))
+- *(low priority)* update `kubernetes/deployments/webserver-php-fpm.yml` to simplify the CI build ([#557](https://github.com/shopsys/shopsys/pull/557/files#diff-7e9545dc0b15fe031affe39181e97969))
     - change `command` to `["sh", "-c", "cp -r /var/www/html/. /tmp/source-codes"]`
     - change `mountPath` to `/tmp/source-codes`
-- *(optional)* make docker ignore some files to speed up build ([#535](https://github.com/shopsys/shopsys/pull/535))
+- *(low priority)* make docker ignore some files to speed up build ([#535](https://github.com/shopsys/shopsys/pull/535))
     - add `.dockerignore` file with following content
         ```
         # ignore .git (can be volume-mounted in development environment)
@@ -101,7 +103,7 @@ There you can find links to upgrade notes for other versions too.
             <arg path="${path.root}/docs" />
             ```
         - make your `test-create-domains-data` task dependent on `test-create-domains-db-functions` task ([#538](https://github.com/shopsys/shopsys/pull/538/files#diff-ae23427cd8e4dae17850f08f56308c3f))
-        - switch dependency order of `test-db-demo` to `...,test-create-domains-data,test-db-fixtures-demo-singledomain,...`
+        - switch dependency order of `test-db-demo` to `...,test-create-domains-data,test-db-fixtures-demo,...`
         - remove `test-db-fixtures-demo-multidomain` and its usage ([#568](https://github.com/shopsys/shopsys/pull/568/files#diff-ae23427cd8e4dae17850f08f56308c3f))
         - add new target `test-dirs-create` and add it as a dependency after each `dirs-create` in this file ([#547](https://github.com/shopsys/shopsys/pull/547))
             ```xml
@@ -116,12 +118,13 @@ There you can find links to upgrade notes for other versions too.
         - modify file according to [#545](https://github.com/shopsys/shopsys/pull/545) to speed up deployment process of built docker images of php-fpm
             - remove `composer-dev`, `npm`, `assets` and `tests-acceptance-build` dependencies from `build-demo-ci` and `build-demo-ci-diff` targets
             - replace `standards,test` dependencies with `test-db-demo,tests-functional,tests-smoke` in `checks-ci` target
-            - replace `standards-diff,test` dependencies with `test-db-demo,tests-functional,tests-smoke` in `checks-ci` target
+            - replace `standards-diff,test` dependencies with `test-db-demo,tests-functional,tests-smoke` in `checks-ci-diff` target
             - replace `tests` target with following two
                 ```xml
                  <target name="tests-static" depends="tests-unit" description="Runs unit tests."/>
                  <target name="tests" depends="test-db-demo,tests-static,tests-functional,tests-smoke" description="Runs unit, functional and smoke tests on a newly built test database."/>
                 ```
+                *Note: `tests-functional` phing target was renamed from `tests-database` within `(low priority) rename Database tests to Functional tests` instruction*
     - `build.xml`
         - change `db-fixtures-demo-singledomain` command to `<arg value="doctrine:fixtures:load" />` and remove `--fixtures` argument
             because command `shopsys:fixtures:load` doesn't exist anymore ([#568](https://github.com/shopsys/shopsys/pull/568/files#diff-ae23427cd8e4dae17850f08f56308c3f))
@@ -135,11 +138,11 @@ There you can find links to upgrade notes for other versions too.
                 <exclude name="/" />
             </fileset>
             ```
-- *(optional)* use auto-configuration of domain URLs with composer ([#540](https://github.com/shopsys/shopsys/pull/540))
+- *(low priority)* use auto-configuration of domain URLs with composer ([#540](https://github.com/shopsys/shopsys/pull/540))
     - to simplify installation, add `"Shopsys\\FrameworkBundle\\Command\\ComposerScriptHandler::postInstall"` to `post-install-cmd` and `"Shopsys\\FrameworkBundle\\Command\\ComposerScriptHandler::postUpdate"` to  `post-update-cmd` scripts in your `composer.json`
     - you will not have to copy the `domains_urls.yml.dist` during the installation anymore
     - you can also remove the now redundant Phing target `domains-urls-check` from your `build.xml` and `build-dev.xml`
-- *(optional)* remove unsupported `syntaxCheck` attribute from your `phpunit.xml` configuration file ([#592](https://github.com/shopsys/shopsys/pull/592))
+- *(low priority)* remove unsupported `syntaxCheck` attribute from your `phpunit.xml` configuration file ([#592](https://github.com/shopsys/shopsys/pull/592))
 
 ### Configuration
 - use `content-test` directory instead of content during the tests ([#547](https://github.com/shopsys/shopsys/pull/547))
@@ -226,7 +229,7 @@ There you can find links to upgrade notes for other versions too.
             'route_label' => $product->getMainVariant()->getName(),
         ]);
         ```
-- *(optional)* rename Database tests to Functional tests
+- *(low priority)* rename Database tests to Functional tests
     - rename base class `DatabaseTestCase` and its usages to `TransactionFunctionalTestCase`
     - rename test namespace `Database` to `Functional`
     - rename phing target `tests-db` to `tests-functional` and value of `--testsuite` from `Database` to `Functional`
@@ -237,8 +240,13 @@ There you can find links to upgrade notes for other versions too.
         - `testDefinedConstant.js`
         - `testUndefinedConstant.js`
     - you can follow [#541 Rename database tests to functional tests](https://github.com/shopsys/shopsys/pull/541) or [#27 Upgrade demoshop to beta4 version](https://github.com/shopsys/demoshop/pull/27/commits/b0c404e73ea3f4210cfb71faeb94720fe71d72b7#diff-63d5b035284107155c7becd538ca5009)
-- *(optional)* you can change your `Shopsys\Environment` class for consistent env setting during `composer install` ([see diff](https://github.com/shopsys/project-base/commit/eedcf2ea9eaaef6c4f53a83fedbbd3c34428af83))
+- *(low priority)* you can change your `Shopsys\Environment` class for consistent env setting during `composer install` ([see diff](https://github.com/shopsys/project-base/commit/eedcf2ea9eaaef6c4f53a83fedbbd3c34428af83))
     - in `docker/php-fpm/Dockerfile` in a `ci` stage should be a command to change the environment to keep building in `prod` environment, otherwise its built in `dev` ([see diff](https://github.com/shopsys/project-base/commit/c974597237992b3083ed48f0937715de9cf5981d))
+- check correctness of translation and validation constants in *.po files for passing automation tests
+    - these should exist
+        ```
+        Please choose a valid combination of transport and payment
+        ```
 
 ## [shopsys/coding-standards]
 - there are a few new standards, i.e. [new fixers enabled](https://github.com/shopsys/shopsys/pull/573/files#diff-709e8469a9fc8c8b45f8b285ac1a4c92) in the `easy-coding-standard.yml` config that enforce using annotations for all your methods:

@@ -10,7 +10,7 @@ There you can find links to upgrade notes for other versions too.
 - set `ENV COMPOSER_MEMORY_LIMIT=-1` in base stage in your `docker/php-fpm/Dockerfile` as composer consumes huge amount of memory during dependencies installation ([#635](https://github.com/shopsys/shopsys/pull/635/files))
 
 ### Configuration
-- *(optional)* modify your `src/Shopsys/ShopBundle/Resources/config/services.yml` ([#616](https://github.com/shopsys/shopsys/pull/616))
+- *(low priority)* modify your `src/Shopsys/ShopBundle/Resources/config/services.yml` ([#616](https://github.com/shopsys/shopsys/pull/616))
     - change the resource for automatic registration of Model services from `resource: '../../Model/**/*{Facade,Factory}.php'` to `resource: '../../Model/**/*{Facade,Factory,Repository}.php'`
 
 [shopsys/framework]: https://github.com/shopsys/framework
