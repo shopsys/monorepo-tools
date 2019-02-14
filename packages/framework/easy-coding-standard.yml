@@ -40,6 +40,7 @@ parameters:
             - '*/src/Model/Order/Order.php'
             - '*/src/Model/Product/Product.php'
             - '*/src/Model/Product/ProductRepository.php'
+            - '*/tests/Unit/Component/Money/MoneyTest.php'
 
         PHP_CodeSniffer\Standards\Generic\Sniffs\CodeAnalysis\EmptyStatementSniff.DetectedWhile:
             - '*/src/Model/Product/Availability/ProductAvailabilityRecalculator.php'
