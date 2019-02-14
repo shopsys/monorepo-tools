@@ -61,7 +61,7 @@
         "joschi127/doctrine-entity-override-bundle": "^0.5.0",
         "knplabs/knp-menu-bundle": "^2.2.1",
         "league/flysystem": "^1.0",
-        "nikic/php-parser": "^3.1",
+        "nikic/php-parser": "^4.0",
         "presta/sitemap-bundle": "^1.5.3",
         "prezent/doctrine-translatable": "^1.2",
         "prezent/doctrine-translatable-bundle": "^1.0.3",
@@ -88,7 +88,7 @@
         "twig/twig": "^2.4.8"
     },
     "require-dev": {
-        "phpstan/phpstan": "^0.7",
+        "phpstan/phpstan": "^0.11",
         "phpunit/phpunit": "^7.0",
         "shopsys/coding-standards": "dev-master"
     },
