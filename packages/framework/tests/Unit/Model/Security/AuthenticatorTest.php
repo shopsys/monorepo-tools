@@ -4,7 +4,7 @@ namespace Tests\FrameworkBundle\Unit\Model\Security;
 
 use PHPUnit\Framework\TestCase;
 use Shopsys\FrameworkBundle\Model\Security\Authenticator;
-use StdClass;
+use stdClass;
 use Symfony\Component\HttpKernel\Debug\TraceableEventDispatcher;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
 
@@ -20,7 +20,7 @@ class AuthenticatorTest extends TestCase
 
         $requestMock->attributes = $this->createMock('\Symfony\Component\HttpFoundation\ParameterBag');
         $requestMock->attributes->expects($this->once())->method('has')->will($this->returnValue(true));
-        $requestMock->attributes->expects($this->once())->method('get')->will($this->returnValue(new StdClass()));
+        $requestMock->attributes->expects($this->once())->method('get')->will($this->returnValue(new stdClass()));
 
         $this->expectException('Shopsys\FrameworkBundle\Model\Security\Exception\LoginFailedException');
         $authenticator->checkLoginProcess($requestMock);
@@ -31,7 +31,7 @@ class AuthenticatorTest extends TestCase
         $authenticator = $this->getAuthenticator();
 
         $sessionMock = $this->createMock('\Symfony\Component\HttpFoundation\Session\SessionInterface');
-        $sessionMock->expects($this->atLeastOnce())->method('get')->will($this->returnValue(new StdClass()));
+        $sessionMock->expects($this->atLeastOnce())->method('get')->will($this->returnValue(new stdClass()));
         $sessionMock->expects($this->atLeastOnce())->method('remove');
 
         $requestMock = $this->createMock('\Symfony\Component\HttpFoundation\Request');
