@@ -67,7 +67,7 @@ final class SetMutualDependenciesToVersionReleaseWorker extends AbstractShopsysR
         $this->dependencyUpdater->updateFileInfosWithPackagesAndVersion(
             $this->composerJsonFilesProvider->provideExcludingMonorepoComposerJson(),
             $this->packageNamesProvider->provide(),
-            $version->getVersionString()
+            ltrim($version->getVersionString(), 'v')
         );
 
         $this->commit(sprintf(
