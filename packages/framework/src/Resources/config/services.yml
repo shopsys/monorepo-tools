@@ -621,6 +621,16 @@ services:
     twig.stringloader:
         class: Twig_Loader_Array
 
+    Shopsys\FrameworkBundle\Component\Domain\Multidomain\Twig\FilesystemLoader: '@twig.loader.filesystem'
+
+    twig.loader.filesystem:
+        class: Shopsys\FrameworkBundle\Component\Domain\Multidomain\Twig\FilesystemLoader
+        arguments:
+            $locator: '@templating.locator'
+            $parser: '@templating.name_parser'
+            $rootPath: '%kernel.project_dir%'
+            $domain: '@Shopsys\FrameworkBundle\Component\Domain\Domain'
+
     Shopsys\FrameworkBundle\Form\Constraints\UniqueEmailValidator:
         tags:
             - { name: validator.constraint_validator, alias: Shopsys\FrameworkBundle\Form\Constraints\UniqueEmailValidator }

@@ -72,7 +72,8 @@ class DomainsConfigLoader
             $domainConfig[DomainsUrlsConfigDefinition::CONFIG_URL],
             $domainConfig[DomainsConfigDefinition::CONFIG_NAME],
             $domainConfig[DomainsConfigDefinition::CONFIG_LOCALE],
-            $domainConfig[DomainsConfigDefinition::CONFIG_STYLES_DIRECTORY]
+            $domainConfig[DomainsConfigDefinition::CONFIG_STYLES_DIRECTORY],
+            $domainConfig[DomainsConfigDefinition::CONFIG_DESIGN_ID]
         );
     }
 
