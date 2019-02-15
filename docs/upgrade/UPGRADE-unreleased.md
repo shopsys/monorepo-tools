@@ -32,6 +32,7 @@ for instance:
     - this script serves as a fast way to install demo instance of Shopsys Framework.
     - also this script can be used if you change the configuration of docker or app, script will apply all the changes done in these files and rebuild images.
 - add a way to check if Redis is running [#815](https://github.com/shopsys/shopsys/pull/815)
+    - change version of snc/redis-bundle to ^2.1.8 in your composer.json and update dependencies with `composer update`
     - upgrade redis extension version in your `DockerFile` to version `4.1.1`
     ```diff
     -       RUN pecl install redis-4.0.2 && \
