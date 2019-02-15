@@ -8,7 +8,7 @@ use Symplify\PackageBuilder\FileSystem\SmartFileInfo;
 
 /**
  * Most of the functionality is inspired and copy-pasted from two classes from symplify/monorepo-builder package.
- * We need to include project-base/ and microservices/ folders when looking for composer.json files in monorepo,
+ * We need to include project-base/ folder when looking for composer.json files in monorepo,
  * however, project-base/var folder needs to be excluded from search due to permissions problem.
  * @see \Symplify\MonorepoBuilder\FileSystem\ComposerJsonProvider
  * @see \Symplify\MonorepoBuilder\PackageComposerFinder

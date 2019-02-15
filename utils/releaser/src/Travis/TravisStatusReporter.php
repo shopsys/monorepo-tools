@@ -11,12 +11,9 @@ final class TravisStatusReporter
 {
     /**
      * Packages that are not on Packagist, so unable to found by API, but also running on Travis
-     * @var string
+     * @var string[]
      */
-    private const EXTRA_PACKAGES = [
-        'shopsys/microservice-product-search-export',
-        // later add project-base and other microservices; at the moment they're not on Travis
-    ];
+    private const EXTRA_PACKAGES = [];
 
     /**
      * Packages that are not tested on Travis - old packages or forks
