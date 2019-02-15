@@ -86,6 +86,12 @@ By default, the configurations for the domain 1 and 2 are already parts of a pro
 Configuration for elasticsearch can be found in `src/Shopsys/ShopBundle/Resources/Resources/definition/`.
 If you add a new domain, you need to create an elasticsearch configuration for this new domain.
 
+After you create the configuration, you have to create the index in elasticsearch and fill it by products
+```
+php phing product-search-recreate-structure
+php phing product-search-export-products
+```
+
 ### 3. Locale settings
 Some parts of these instructions are already prepared for the locales `en` and `cs`.
 
@@ -95,17 +101,17 @@ This configuration file contains pieces of information about the domain ID, the 
 
 #### 3.2 Frontend routes
 Create a file with the frontend routes for the added locale if this file is not already created for this locale.
-Create this file in the directory `ShopBundle/Resources/config/` with the name `routing_front_xx.yml` where `xx` replace for the code of added locale.
+Create this file in the directory `src/Shopsys/ShopBundle/Resources/config/` with the name `routing_front_xx.yml` where `xx` replace for the code of added locale.
 Import the new routes configuration in `app/config/packages/shopsys_shop.yml`
 
 #### 3.3 Translations and messages
-In order to correctly display the labels like *Registration*, *Cart*, ..., create a file with translations of messages in `ShopBundle/Resources/translations/`.
+In order to correctly display the labels like *Registration*, *Cart*, ..., create a file with translations of messages in `src/Shopsys/ShopBundle/Resources/translations/`.
 Modify the phing target `dump-translations-project-base` in `build-dev.xml` by adding the new locale as `<arg value="xx" />` where `xx` replace for the code of added locale.
 Then run
 ```
 php phing dump-translations
 ```
-There will be created files for translations of messages for the new locale in `ShopBundle/Resources/translations/`.
+There will be created files for translations of messages for the new locale in `src/Shopsys/ShopBundle/Resources/translations/`.
 
 For more information about translations, see [the separate article](/docs/introduction/translations.md).
 
@@ -125,6 +131,8 @@ Administration is by default in `en` locale.
 This means that for example product list in administration tries to display translations of product names in `en` locale.
 If you want to switch it to the another locale, set a parameter `shopsys.admin_locale` in your `parameters.yml` configuration to desired locale.
 However, the selected locale has to be one of registered domains locale.
+
+You can change administration translations by adding messages into your `src/Shopsys/ShopBundle/Resources/translations/messages.xx.po`.
 
 ### 4. Change the url address for an existing domain
 
