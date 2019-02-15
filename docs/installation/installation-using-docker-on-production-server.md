@@ -1,5 +1,7 @@
 # Installation Using Docker on Production Server
 
+**This guide is for the version which is not released yet. See the [version for `v7.0.0-beta5`](https://github.com/shopsys/shopsys/blob/v7.0.0-beta5/docs/installation/installation-using-docker-on-production-server.md).**
+
 This guide shows you how to install and configure production server applications needed for your project based on [Shopsys Framework](https://github.com/shopsys/project-base).  
 We do not want to setup each application manually and we want to have separate runtime for each one.
 We use docker containers, built from docker images and php source code from git repository to have everything setup correctly and fast.

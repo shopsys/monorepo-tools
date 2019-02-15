@@ -1,5 +1,7 @@
 # Installation Using Docker for Windows 10 Pro and higher
 
+**This guide is for the version which is not released yet. See the [version for `v7.0.0-beta5`](https://github.com/shopsys/shopsys/blob/v7.0.0-beta5/docs/installation/installation-using-docker-windows-10-pro-higher.md).**
+
 **Expected installation time:** 3 hours.
 
 This guide covers building new projects based on Shopsys Framework.
