@@ -47,6 +47,10 @@ for instance:
               </exec>
           </target>
         ```
+- update PHPStan to the 0.11 version ([#826](https://github.com/shopsys/shopsys/pull/826))
+    - change version of phpstan/phpstan to ^0.11 in your composer.json and update dependencies with `composer update`
+    - add `- '#Undefined variable: \$undefined#'` as ignored error to `phpstan.neon` configuration file
+    - you may need to change `StdClass` to `stdClass` in `tests/ShopBundle/Functional/Component/Grid/Ordering/GridOrderingFacadeTest.php` to pass PHPStan check
 
 ### Database migrations
 - after running database migrations, all your countries across domains will be merged together and original names will be added as translations

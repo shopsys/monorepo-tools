@@ -2,4 +2,5 @@ parameters:
     ignoreErrors:
         # Add ignored errors here as regular expressions, e.g.:
         # - '#PHPUnit_Framework_MockObject_MockObject(.*) given#'
+        - '#Undefined variable: \$undefined#'
 

@@ -93,7 +93,7 @@
         "ext-pgsql": "*",
         "ext-zip": "*",
         "codeception/codeception": "^2.4.0",
-        "phpstan/phpstan": "^0.7",
+        "phpstan/phpstan": "^0.11",
         "phpunit/phpunit": "^7.0",
         "shopsys/coding-standards": "dev-master",
         "shopsys/http-smoke-testing": "dev-master"
