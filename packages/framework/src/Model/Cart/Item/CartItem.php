@@ -4,6 +4,7 @@ namespace Shopsys\FrameworkBundle\Model\Cart\Item;
 
 use DateTime;
 use Doctrine\ORM\Mapping as ORM;
+use Shopsys\FrameworkBundle\Component\Money\Money;
 use Shopsys\FrameworkBundle\Model\Cart\Cart;
 use Shopsys\FrameworkBundle\Model\Product\Product;
 
@@ -46,9 +47,9 @@ class CartItem
     protected $quantity;
 
     /**
-     * @var string|null
+     * @var \Shopsys\FrameworkBundle\Component\Money\Money|null
      *
-     * @ORM\Column(type="decimal", precision=20, scale=6, nullable=true)
+     * @ORM\Column(type="money", precision=20, scale=6, nullable=true)
      */
     protected $watchedPrice;
 
@@ -63,7 +64,7 @@ class CartItem
      * @param \Shopsys\FrameworkBundle\Model\Cart\Cart $cart
      * @param \Shopsys\FrameworkBundle\Model\Product\Product $product
      * @param int $quantity
-     * @param string $watchedPrice
+     * @param string|null $watchedPrice
      */
     public function __construct(
         Cart $cart,
@@ -73,7 +74,7 @@ class CartItem
     ) {
         $this->cart = $cart;
         $this->product = $product;
-        $this->watchedPrice = $watchedPrice;
+        $this->setWatchedPrice($watchedPrice);
         $this->changeQuantity($quantity);
         $this->addedAt = new DateTime();
     }
@@ -132,7 +133,7 @@ class CartItem
      */
     public function getWatchedPrice()
     {
-        return $this->watchedPrice;
+        return $this->watchedPrice !== null ? $this->watchedPrice->toValue() : null;
     }
 
     /**
@@ -140,7 +141,7 @@ class CartItem
      */
     public function setWatchedPrice($watchedPrice)
     {
-        $this->watchedPrice = $watchedPrice;
+        $this->watchedPrice = $watchedPrice !== null ? Money::fromValue($watchedPrice) : null;
     }
 
     /**

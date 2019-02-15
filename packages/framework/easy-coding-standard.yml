@@ -46,6 +46,10 @@ parameters:
             - '*/src/Model/Product/Availability/ProductAvailabilityRecalculator.php'
             - '*/src/Model/Product/Pricing/ProductPriceRecalculator.php'
 
+        PHP_CodeSniffer\Standards\Generic\Sniffs\NamingConventions\CamelCapsFunctionNameSniff:
+            # public methods in the parent class \Doctrine\DBAL\Types\Type are not in camel case format
+            - '*/src/Component/Doctrine/MoneyType.php'
+
         Shopsys\CodingStandards\Sniffs\ObjectIsCreatedByFactorySniff:
             - '*/tests/*'
             # class that is extended from DomainFactory

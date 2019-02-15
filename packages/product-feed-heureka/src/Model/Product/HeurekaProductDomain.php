@@ -3,6 +3,7 @@
 namespace Shopsys\ProductFeed\HeurekaBundle\Model\Product;
 
 use Doctrine\ORM\Mapping as ORM;
+use Shopsys\FrameworkBundle\Component\Money\Money;
 
 /**
  * @ORM\Table(
@@ -30,9 +31,9 @@ class HeurekaProductDomain
     protected $product;
 
     /**
-     * @var string|null
+     * @var \Shopsys\FrameworkBundle\Component\Money\Money|null
      *
-     * @ORM\Column(type="decimal", precision=20, scale=6, nullable=true)
+     * @ORM\Column(type="money", precision=20, scale=6, nullable=true)
      */
     protected $cpc;
 
@@ -48,7 +49,7 @@ class HeurekaProductDomain
     public function __construct(HeurekaProductDomainData $heurekaProductDomainData)
     {
         $this->product = $heurekaProductDomainData->product;
-        $this->cpc = $heurekaProductDomainData->cpc;
+        $this->cpc = $heurekaProductDomainData->cpc !== null ? Money::fromValue($heurekaProductDomainData->cpc) : null;
         $this->domainId = $heurekaProductDomainData->domainId;
     }
 
@@ -58,7 +59,7 @@ class HeurekaProductDomain
     public function edit(HeurekaProductDomainData $heurekaProductDomainData)
     {
         $this->product = $heurekaProductDomainData->product;
-        $this->cpc = $heurekaProductDomainData->cpc;
+        $this->cpc = $heurekaProductDomainData->cpc !== null ? Money::fromValue($heurekaProductDomainData->cpc) : null;
         $this->domainId = $heurekaProductDomainData->domainId;
     }
 
@@ -83,7 +84,7 @@ class HeurekaProductDomain
      */
     public function getCpc()
     {
-        return $this->cpc;
+        return $this->cpc !== null ? $this->cpc->toValue() : null;
     }
 
     /**

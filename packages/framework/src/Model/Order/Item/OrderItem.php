@@ -3,6 +3,7 @@
 namespace Shopsys\FrameworkBundle\Model\Order\Item;
 
 use Doctrine\ORM\Mapping as ORM;
+use Shopsys\FrameworkBundle\Component\Money\Money;
 use Shopsys\FrameworkBundle\Model\Order\Item\Exception\MainVariantCannotBeOrderedException;
 use Shopsys\FrameworkBundle\Model\Order\Item\Exception\WrongItemTypeException;
 use Shopsys\FrameworkBundle\Model\Order\Order;
@@ -54,16 +55,16 @@ class OrderItem
     protected $name;
 
     /**
-     * @var string
+     * @var \Shopsys\FrameworkBundle\Component\Money\Money
      *
-     * @ORM\Column(type="decimal", precision=20, scale=6)
+     * @ORM\Column(type="money", precision=20, scale=6)
      */
     protected $priceWithoutVat;
 
     /**
-     * @var string
+     * @var \Shopsys\FrameworkBundle\Component\Money\Money
      *
-     * @ORM\Column(type="decimal", precision=20, scale=6)
+     * @ORM\Column(type="money", precision=20, scale=6)
      */
     protected $priceWithVat;
 
@@ -141,8 +142,8 @@ class OrderItem
     ) {
         $this->order = $order; // Must be One-To-Many Bidirectional because of unnecessary join table
         $this->name = $name;
-        $this->priceWithoutVat = $price->getPriceWithoutVat();
-        $this->priceWithVat = $price->getPriceWithVat();
+        $this->priceWithoutVat = Money::fromValue($price->getPriceWithoutVat());
+        $this->priceWithVat = Money::fromValue($price->getPriceWithVat());
         $this->vatPercent = $vatPercent;
         $this->quantity = $quantity;
         $this->type = $type;
@@ -180,7 +181,7 @@ class OrderItem
      */
     public function getPriceWithoutVat()
     {
-        return $this->priceWithoutVat;
+        return $this->priceWithoutVat->toValue();
     }
 
     /**
@@ -188,7 +189,7 @@ class OrderItem
      */
     public function getPriceWithVat()
     {
-        return $this->priceWithVat;
+        return $this->priceWithVat->toValue();
     }
 
     /**
@@ -228,7 +229,7 @@ class OrderItem
      */
     public function getTotalPriceWithVat()
     {
-        return $this->priceWithVat * $this->quantity;
+        return $this->priceWithVat->multiply((string)$this->quantity)->toValue();
     }
 
     /**
@@ -237,8 +238,8 @@ class OrderItem
     public function edit(OrderItemData $orderItemData)
     {
         $this->name = $orderItemData->name;
-        $this->priceWithoutVat = $orderItemData->priceWithoutVat;
-        $this->priceWithVat = $orderItemData->priceWithVat;
+        $this->priceWithoutVat = Money::fromValue($orderItemData->priceWithoutVat);
+        $this->priceWithVat = Money::fromValue($orderItemData->priceWithVat);
         $this->vatPercent = $orderItemData->vatPercent;
         $this->quantity = $orderItemData->quantity;
         $this->unitName = $orderItemData->unitName;

@@ -3,6 +3,7 @@
 namespace Shopsys\ProductFeed\ZboziBundle\Model\Product;
 
 use Doctrine\ORM\Mapping as ORM;
+use Shopsys\FrameworkBundle\Component\Money\Money;
 
 /**
  * @ORM\Table(
@@ -37,16 +38,16 @@ class ZboziProductDomain
     protected $show;
 
     /**
-     * @var string|null
+     * @var \Shopsys\FrameworkBundle\Component\Money\Money|null
      *
-     * @ORM\Column(type="decimal", precision=20, scale=6, nullable=true)
+     * @ORM\Column(type="money", precision=20, scale=6, nullable=true)
      */
     protected $cpc;
 
     /**
-     * @var string|null
+     * @var \Shopsys\FrameworkBundle\Component\Money\Money|null
      *
-     * @ORM\Column(type="decimal", precision=20, scale=6, nullable=true)
+     * @ORM\Column(type="money", precision=20, scale=6, nullable=true)
      */
     protected $cpcSearch;
 
@@ -63,8 +64,8 @@ class ZboziProductDomain
     {
         $this->product = $zboziProductDomainData->product;
         $this->show = $zboziProductDomainData->show;
-        $this->cpc = $zboziProductDomainData->cpc;
-        $this->cpcSearch = $zboziProductDomainData->cpcSearch;
+        $this->cpc = $zboziProductDomainData->cpc !== null ? Money::fromValue($zboziProductDomainData->cpc) : null;
+        $this->cpcSearch = $zboziProductDomainData->cpcSearch !== null ? Money::fromValue($zboziProductDomainData->cpcSearch) : null;
         $this->domainId = $zboziProductDomainData->domainId;
     }
 
@@ -75,8 +76,8 @@ class ZboziProductDomain
     {
         $this->product = $zboziProductDomainData->product;
         $this->show = $zboziProductDomainData->show;
-        $this->cpc = $zboziProductDomainData->cpc;
-        $this->cpcSearch = $zboziProductDomainData->cpcSearch;
+        $this->cpc = $zboziProductDomainData->cpc !== null ? Money::fromValue($zboziProductDomainData->cpc) : null;
+        $this->cpcSearch = $zboziProductDomainData->cpcSearch !== null ? Money::fromValue($zboziProductDomainData->cpcSearch) : null;
         $this->domainId = $zboziProductDomainData->domainId;
     }
 
@@ -117,7 +118,7 @@ class ZboziProductDomain
      */
     public function getCpc()
     {
-        return $this->cpc;
+        return $this->cpc !== null ? $this->cpc->toValue() : null;
     }
 
     /**
@@ -125,6 +126,6 @@ class ZboziProductDomain
      */
     public function getCpcSearch()
     {
-        return $this->cpcSearch;
+        return $this->cpcSearch !== null ? $this->cpcSearch->toValue() : null;
     }
 }

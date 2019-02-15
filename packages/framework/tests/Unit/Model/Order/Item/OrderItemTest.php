@@ -41,6 +41,8 @@ class OrderItemTest extends TestCase
         $orderItem = $this->createOrderTransport();
 
         $orderItemData = new OrderItemData();
+        $orderItemData->priceWithVat = 0;
+        $orderItemData->priceWithoutVat = 0;
         $transport = $this->createTransportMock();
         $orderItemData->transport = $transport;
         $orderItem->edit($orderItemData);
@@ -69,6 +71,8 @@ class OrderItemTest extends TestCase
         $orderItem = $this->createOrderPayment();
 
         $orderItemData = new OrderItemData();
+        $orderItemData->priceWithVat = 0;
+        $orderItemData->priceWithoutVat = 0;
         $payment = $this->createPaymentMock();
         $orderItemData->payment = $payment;
         $orderItem->edit($orderItemData);
@@ -113,8 +117,8 @@ class OrderItemTest extends TestCase
         $orderItem->edit($orderItemData);
 
         $this->assertSame('newName', $orderItem->getName());
-        $this->assertSame(20, $orderItem->getPriceWithVat());
-        $this->assertSame(30, $orderItem->getPriceWithoutVat());
+        $this->assertSame('20', $orderItem->getPriceWithVat());
+        $this->assertSame('30', $orderItem->getPriceWithoutVat());
         $this->assertSame(2, $orderItem->getQuantity());
         $this->assertSame(10, $orderItem->getvatPercent());
     }
@@ -132,8 +136,8 @@ class OrderItemTest extends TestCase
         $orderItem->edit($orderItemData);
 
         $this->assertSame('newName', $orderItem->getName());
-        $this->assertSame(20, $orderItem->getPriceWithVat());
-        $this->assertSame(30, $orderItem->getPriceWithoutVat());
+        $this->assertSame('20', $orderItem->getPriceWithVat());
+        $this->assertSame('30', $orderItem->getPriceWithoutVat());
         $this->assertSame(2, $orderItem->getQuantity());
         $this->assertSame(10, $orderItem->getvatPercent());
     }

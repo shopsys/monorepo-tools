@@ -3,6 +3,7 @@
 namespace Shopsys\FrameworkBundle\Model\Transport;
 
 use Doctrine\ORM\Mapping as ORM;
+use Shopsys\FrameworkBundle\Component\Money\Money;
 use Shopsys\FrameworkBundle\Model\Pricing\Currency\Currency;
 
 /**
@@ -30,9 +31,9 @@ class TransportPrice
     protected $currency;
 
     /**
-     * @var string
+     * @var \Shopsys\FrameworkBundle\Component\Money\Money
      *
-     * @ORM\Column(type="decimal", precision=20, scale=6)
+     * @ORM\Column(type="money", precision=20, scale=6)
      */
     protected $price;
 
@@ -45,7 +46,7 @@ class TransportPrice
     {
         $this->transport = $transport;
         $this->currency = $currency;
-        $this->price = $price;
+        $this->setPrice($price);
     }
 
     /**
@@ -69,7 +70,7 @@ class TransportPrice
      */
     public function getPrice()
     {
-        return $this->price;
+        return $this->price->toValue();
     }
 
     /**
@@ -77,6 +78,6 @@ class TransportPrice
      */
     public function setPrice($price)
     {
-        $this->price = $price;
+        $this->price = Money::fromValue($price);
     }
 }

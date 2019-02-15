@@ -6,6 +6,7 @@ use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Shopsys\FrameworkBundle\Component\Domain\Domain;
+use Shopsys\FrameworkBundle\Component\Money\Money;
 use Shopsys\FrameworkBundle\Model\Customer\User;
 use Shopsys\FrameworkBundle\Model\Order\Item\OrderItem;
 use Shopsys\FrameworkBundle\Model\Order\Item\OrderItemFactoryInterface;
@@ -95,23 +96,23 @@ class Order
     protected $status;
 
     /**
-     * @var string
+     * @var \Shopsys\FrameworkBundle\Component\Money\Money
      *
-     * @ORM\Column(type="decimal", precision=20, scale=6)
+     * @ORM\Column(type="money", precision=20, scale=6)
      */
     protected $totalPriceWithVat;
 
     /**
-     * @var string
+     * @var \Shopsys\FrameworkBundle\Component\Money\Money
      *
-     * @ORM\Column(type="decimal", precision=20, scale=6)
+     * @ORM\Column(type="money", precision=20, scale=6)
      */
     protected $totalPriceWithoutVat;
 
     /**
-     * @var string
+     * @var \Shopsys\FrameworkBundle\Component\Money\Money
      *
-     * @ORM\Column(type="decimal", precision=20, scale=6)
+     * @ORM\Column(type="money", precision=20, scale=6)
      */
     protected $totalProductPriceWithVat;
 
@@ -547,7 +548,7 @@ class Order
      */
     public function getTotalPriceWithVat()
     {
-        return $this->totalPriceWithVat;
+        return $this->totalPriceWithVat->toValue();
     }
 
     /**
@@ -555,7 +556,7 @@ class Order
      */
     public function getTotalPriceWithoutVat()
     {
-        return $this->totalPriceWithoutVat;
+        return $this->totalPriceWithoutVat->toValue();
     }
 
     /**
@@ -563,7 +564,7 @@ class Order
      */
     public function getTotalVatAmount()
     {
-        return $this->totalPriceWithVat - $this->totalPriceWithoutVat;
+        return $this->totalPriceWithVat->subtract($this->totalPriceWithoutVat)->toValue();
     }
 
     /**
@@ -571,7 +572,7 @@ class Order
      */
     public function getTotalProductPriceWithVat()
     {
-        return $this->totalProductPriceWithVat;
+        return $this->totalProductPriceWithVat->toValue();
     }
 
     /**
@@ -587,9 +588,9 @@ class Order
      */
     protected function setTotalPrice(OrderTotalPrice $orderTotalPrice)
     {
-        $this->totalPriceWithVat = $orderTotalPrice->getPriceWithVat();
-        $this->totalPriceWithoutVat = $orderTotalPrice->getPriceWithoutVat();
-        $this->totalProductPriceWithVat = $orderTotalPrice->getProductPriceWithVat();
+        $this->totalPriceWithVat = Money::fromValue($orderTotalPrice->getPriceWithVat());
+        $this->totalPriceWithoutVat = Money::fromValue($orderTotalPrice->getPriceWithoutVat());
+        $this->totalProductPriceWithVat = Money::fromValue($orderTotalPrice->getProductPriceWithVat());
     }
 
     /**

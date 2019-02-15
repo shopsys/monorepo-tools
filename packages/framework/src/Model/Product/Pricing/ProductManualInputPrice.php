@@ -3,6 +3,7 @@
 namespace Shopsys\FrameworkBundle\Model\Product\Pricing;
 
 use Doctrine\ORM\Mapping as ORM;
+use Shopsys\FrameworkBundle\Component\Money\Money;
 use Shopsys\FrameworkBundle\Model\Pricing\BasePriceCalculation;
 use Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroup;
 use Shopsys\FrameworkBundle\Model\Pricing\InputPriceCalculation;
@@ -33,9 +34,9 @@ class ProductManualInputPrice
     protected $pricingGroup;
 
     /**
-     * @var string
+     * @var \Shopsys\FrameworkBundle\Component\Money\Money|null
      *
-     * @ORM\Column(type="decimal", precision=20, scale=6, nullable=true)
+     * @ORM\Column(type="money", precision=20, scale=6, nullable=true)
      */
     protected $inputPrice;
 
@@ -48,7 +49,7 @@ class ProductManualInputPrice
     {
         $this->product = $product;
         $this->pricingGroup = $pricingGroup;
-        $this->inputPrice = $inputPrice;
+        $this->setInputPrice($inputPrice);
     }
 
     /**
@@ -68,19 +69,19 @@ class ProductManualInputPrice
     }
 
     /**
-     * @return string
+     * @return string|null
      */
     public function getInputPrice()
     {
-        return $this->inputPrice;
+        return $this->inputPrice !== null ? $this->inputPrice->toValue() : null;
     }
 
     /**
-     * @param string $inputPrice
+     * @param string|null $inputPrice
      */
     public function setInputPrice($inputPrice)
     {
-        $this->inputPrice = $inputPrice;
+        $this->inputPrice = $inputPrice !== null ? Money::fromValue($inputPrice) : null;
     }
 
     /**

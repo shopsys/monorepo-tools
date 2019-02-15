@@ -3,6 +3,7 @@
 namespace Shopsys\FrameworkBundle\Model\Product\Pricing;
 
 use Doctrine\ORM\Mapping as ORM;
+use Shopsys\FrameworkBundle\Component\Money\Money;
 use Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroup;
 use Shopsys\FrameworkBundle\Model\Product\Product;
 
@@ -31,9 +32,9 @@ class ProductCalculatedPrice
     protected $pricingGroup;
 
     /**
-     * @var string|null
+     * @var \Shopsys\FrameworkBundle\Component\Money\Money|null
      *
-     * @ORM\Column(type="decimal", precision=20, scale=6, nullable=true)
+     * @ORM\Column(type="money", precision=20, scale=6, nullable=true)
      */
     protected $priceWithVat;
 
@@ -46,7 +47,7 @@ class ProductCalculatedPrice
     {
         $this->product = $product;
         $this->pricingGroup = $pricingGroup;
-        $this->priceWithVat = $priceWithVat;
+        $this->setPriceWithVat($priceWithVat);
     }
 
     /**
@@ -70,6 +71,6 @@ class ProductCalculatedPrice
      */
     public function setPriceWithVat($priceWithVat)
     {
-        $this->priceWithVat = $priceWithVat;
+        $this->priceWithVat = $priceWithVat !== null ? Money::fromValue($priceWithVat) : null;
     }
 }

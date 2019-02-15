@@ -11,6 +11,8 @@ doctrine:
         # initialization phase (during DIC service creation) for auto-detecting version from the server.
         # See \Doctrine\DBAL\Connection::getDatabasePlatformVersion().
         server_version: "%database_server_version%"
+        types:
+            money: \Shopsys\FrameworkBundle\Component\Doctrine\MoneyType
 
     orm:
         auto_generate_proxy_classes: false
