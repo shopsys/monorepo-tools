@@ -234,6 +234,10 @@ for instance:
     - `OrderStatusDataFactory`
     - `ParameterDataFactory`
     - `UnitDataFactory`
+- (*low priority*) if you want to test the flow of promo code in cart page, implement new acceptance tests ([#825](https://github.com/shopsys/shopsys/pull/825))
+    - `Tests\ShopBundle\Acceptance\acceptance\CartCest`
+    - `Tests\ShopBundle\Acceptance\acceptance\PageObject\Front\CartPage`
+    - `src/Shopsys/ShopBundle/Resources/views/Front/Content/Order/PromoCode/index.html.twig`
 
 ## [shopsys/product-feed-heureka]
 - if you have extended class HeurekaCategoryDownloader or HeurekaCategoryCronModule ([#788](https://github.com/shopsys/shopsys/pull/788))

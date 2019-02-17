@@ -128,4 +128,38 @@ class CartPage extends AbstractPage
     {
         return $this->webDriver->findElement(WebDriverBy::cssSelector('.js-cart-total-price'));
     }
+
+    /**
+     * @param string $promoCodeName
+     */
+    public function applyPromoCode($promoCodeName)
+    {
+        $promoCodeField = $this->webDriver->findElement(WebDriverBy::cssSelector('#js-promo-code-input'));
+        $this->tester->fillFieldByElement($promoCodeField, $promoCodeName);
+        $this->tester->pressKeysByElement($promoCodeField, WebDriverKeys::ENTER);
+        $this->tester->waitForAjax();
+    }
+
+    public function removePromoCode()
+    {
+        $removePromoCodeButton = $this->webDriver->findElement(WebDriverBy::cssSelector('#js-promo-code-remove-button'));
+        $this->tester->clickByElement($removePromoCodeButton);
+        $this->tester->waitForAjax();
+    }
+
+    /**
+     * @return \Facebook\WebDriver\WebDriverElement
+     */
+    public function canSeePromoCodeSubmitButtonElement()
+    {
+        return $this->tester->seeElement(WebDriverBy::cssSelector('#js-promo-code-submit-button'));
+    }
+
+    /**
+     * @return \Facebook\WebDriver\WebDriverElement
+     */
+    public function canSeePromoCodeRemoveButtonElement()
+    {
+        return $this->tester->canSeeElement(WebDriverBy::cssSelector('#js-promo-code-remove-button'));
+    }
 }

@@ -214,4 +214,34 @@ class CartCest
         $me->amOnPage('/cart/');
         $cartPage->assertTotalPriceWithVat('CZK17,350.00');
     }
+
+    /**
+     * @param \Tests\ShopBundle\Acceptance\acceptance\PageObject\Front\CartPage $cartPage
+     * @param \Tests\ShopBundle\Acceptance\acceptance\PageObject\Front\ProductDetailPage $productDetailPage
+     * @param \Tests\ShopBundle\Test\Codeception\AcceptanceTester $me
+     */
+    public function testPromoCodeFlowInCart(
+        CartPage $cartPage,
+        ProductDetailPage $productDetailPage,
+        AcceptanceTester $me
+    ) {
+        $me->wantTo('see that flow of promocode in cart is correct');
+
+        $me->amOnPage('/aquila-aquagym-non-carbonated-spring-water/');
+        $productDetailPage->addProductIntoCart();
+        $me->amOnPage('/100-czech-crowns-ticket/');
+        $productDetailPage->addProductIntoCart();
+
+        $me->amOnPage('/cart/');
+
+        $cartPage->applyPromoCode('test');
+
+        $cartPage->canSeePromoCodeRemoveButtonElement();
+        $cartPage->assertTotalPriceWithVat('CZK122.00');
+
+        $cartPage->removePromoCode();
+
+        $cartPage->canSeePromoCodeSubmitButtonElement();
+        $cartPage->assertTotalPriceWithVat('CZK136.00');
+    }
 }
