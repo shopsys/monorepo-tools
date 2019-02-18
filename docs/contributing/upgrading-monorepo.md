@@ -8,7 +8,9 @@ Typical upgrade sequence should be:
 
 ***Note:** During the execution of `build-demo-dev phing target`, there will be installed 3-rd party software as dependencies of Shopsys Framework by [composer](https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies) and [npm](https://docs.npmjs.com/about-the-public-npm-registry) with licenses that are described in document [Open Source License Acknowledgements and Third-Party Copyrights](../../open-source-license-acknowledgements-and-third-party-copyrights.md)*
 
-## [From v7.0.0-beta5 to Unreleased]
+## [From v7.0.0-beta6 to Unreleased]
+
+## [From v7.0.0-beta5 to v7.0.0-beta6]
 - [#694 PHP 7.3 support](https://github.com/shopsys/shopsys/pull/694)
     - rebuild your Docker images with `docker-compose up -d --build`
 - *(low priority)* [#755 update npm packages to latest version](https://github.com/shopsys/shopsys/pull/755)
@@ -85,7 +87,8 @@ Typical upgrade sequence should be:
     - `build.dockerfile` should be `docker/Dockerfile`
     - execute `docker-compose up -d --build`, microservices should be up and running
 
-[From v7.0.0-beta5 to Unreleased]: https://github.com/shopsys/shopsys/compare/v7.0.0-beta5...HEAD
+[From v7.0.0-beta6 to Unreleased]: https://github.com/shopsys/shopsys/compare/v7.0.0-beta6...HEAD
+[From v7.0.0-beta5 to v7.0.0-beta6]: https://github.com/shopsys/shopsys/compare/v7.0.0-beta5...v7.0.0-beta6
 [From v7.0.0-beta4 to v7.0.0-beta5]: https://github.com/shopsys/shopsys/compare/v7.0.0-beta4...v7.0.0-beta5
 [From v7.0.0-beta2 to v7.0.0-beta3]: https://github.com/shopsys/shopsys/compare/v7.0.0-beta2...v7.0.0-beta3
 [From v7.0.0-alpha5 to v7.0.0-alpha6]: https://github.com/shopsys/shopsys/compare/v7.0.0-alpha5...v7.0.0-alpha6

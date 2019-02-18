@@ -958,6 +958,9 @@ msgstr "Nahrání souboru selhalo, zkuste to, prosím, znovu."
 msgid "File will be deleted after saving."
 msgstr "Po uložení bude soubor smazán"
 
+msgid "Fill missing settings to enable creating products. More information here."
+msgstr "Pro vytvoření produktu doplňte chybějící nastavení. Více informací zde."
+
 msgid "Filter by"
 msgstr "Filtrovat podle"
 
@@ -1965,9 +1968,6 @@ msgstr "Byla upravena stránka slideru <strong><a href=\"{{ url }}\">{{ name }}<
 
 msgid "Slider pages"
 msgstr "Stránky slideru"
-
-msgid "Fill missing settings to enable creating products. More information here."
-msgstr "Pro vytvoření produktu doplňte chybějící nastavení. Více informací zde."
 
 msgid "Sorting priority"
 msgstr "Priorita řazení"

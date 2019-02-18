@@ -673,9 +673,9 @@ msgstr "{0} Nebyl nalezen žádný produkt | {1} Celkem nalezen 1 produkt | [2,4
 msgid "{1} <strong class=\"cart__state\">%itemsCount%</strong> item for <strong class=\"cart__state\">%priceWithVat%</strong>|[2,Inf] <strong class=\"cart__state\">%itemsCount%</strong> items for <strong class=\"cart__state\">%priceWithVat%</strong>"
 msgstr "{1} <strong class=\"cart__state\">%itemsCount%</strong> položka za <strong class=\"cart__state\">%priceWithVat%</strong> |[2,4] <strong class=\"cart__state\">%itemsCount%</strong> položky za <strong class=\"cart__state\">%priceWithVat%</strong> |[5,Inf] <strong class=\"cart__state\">%itemsCount%</strong> položek za <strong class=\"cart__state\">%priceWithVat%</strong>"
 
-msgid "{1}Load next %loadNextCount% product|[2,Inf]Load next %loadNextCount% products"
-msgstr "[1,4]Načíst další %loadNextCount% zboží|[5,Inf]Načíst dalších %loadNextCount% zboží"
-
 msgid "{1}Load next %loadNextCount% item|[2,Inf]Load next %loadNextCount% items"
 msgstr "{1}Načíst další položku|[2,4]Načíst další %loadNextCount% položky|[5,Inf]Načíst dalších %loadNextCount% položek"
+
+msgid "{1}Load next %loadNextCount% product|[2,Inf]Load next %loadNextCount% products"
+msgstr "[1,4]Načíst další %loadNextCount% zboží|[5,Inf]Načíst dalších %loadNextCount% zboží"
 

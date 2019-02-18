@@ -2,14 +2,7 @@
     "name": "shopsys/product-feed-heureka-delivery",
     "type": "library",
     "description": "Shopsys Framework plugin interface for Heureka delivery XML product feed generation",
-    "keywords": [
-        "Heureka",
-        "product delivery feed",
-        "XML feed",
-        "plugin",
-        "Shopsys Framework",
-        "SSFW"
-    ],
+    "keywords": ["Heureka", "product delivery feed", "XML feed", "plugin", "Shopsys Framework", "SSFW"],
     "license": "MIT",
     "authors": [
         {
@@ -30,10 +23,10 @@
     "require": {
         "php": "^7.1",
         "shopsys/doctrine-orm": "^2.6.2",
-        "shopsys/form-types-bundle": "dev-master",
-        "shopsys/framework": "dev-master",
-        "shopsys/migrations": "dev-master",
-        "shopsys/plugin-interface": "dev-master",
+        "shopsys/form-types-bundle": "7.0.0-beta6",
+        "shopsys/framework": "7.0.0-beta6",
+        "shopsys/migrations": "7.0.0-beta6",
+        "shopsys/plugin-interface": "7.0.0-beta6",
         "symfony/config": "^3.4",
         "symfony/dependency-injection": "^3.4",
         "symfony/framework-bundle": "^3.4",
@@ -41,7 +34,7 @@
     },
     "require-dev": {
         "phpunit/phpunit": "^6.0|^7.0",
-        "shopsys/coding-standards": "dev-master",
+        "shopsys/coding-standards": "7.0.0-beta6",
         "twig/extensions": "^1.5.1",
         "twig/twig": "^2.4.8"
     },

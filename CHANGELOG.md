@@ -27,6 +27,93 @@ The changelog is generated during the release process using [ChangelogLinker](ht
 
 <!-- changelog-linker -->
 
+## [v7.0.0-beta6](https://github.com/shopsys/shopsys/compare/v7.0.0-beta5...v7.0.0-beta6) - 2019-02-18
+
+### [shopsys/coding-standards]
+
+#### Changed
+
+- [#796] ObjectIsCreatedByFactorySniff: allow using descendant factories
+
+#### Fixed
+
+- [#813] fixed whitespace before method argument
+
+### [shopsys/framework]
+
+#### Added
+
+- [#736] added Phing target for cleaning redis cache: clean-redis
+- [#792] added ability to use distinct templates for the other domains
+
+#### Changed
+
+- [#715] OrderItem is now easily extendable
+- [#762] unified list of countries across domains
+- [#781] directories created during shopsys:create-directories command are configurable in yml configuration
+- [#787] reviewed data object properties
+- [#806] administration locale is now possible to set in parameters
+
+#### Fixed
+
+- [#732] avoid 404 in new product page on an empty shop
+
+#### Removed
+
+- [#793] microservices has been removed and their functionality has been moved to framework
+
+### [shopsys/project-base]
+
+#### Added
+
+- [#759] created install script
+- [#825] promocode flow in cart is covered by acceptance tests
+
+#### Fixed
+
+- [#816] warm up production cache before generating error pages
+- [#809] page reloaded after promocode is set
+- [#777] kubernetes uses relay setting for sending mails
+
+### [shopsys/shopsys]
+
+#### Added
+
+- [#766] added support for multiple image sizes (picture element)
+- [#788] added new coding standard: forbidden private visibility in namespace
+- [#815] added checker to check availability of redis
+- [#823] added warnings about version to installation guides
+- [#763] added acknowledgement about 3-rd party software licenses
+- [#780] added missing references to shopsys/google-cloud-bundle
+- [#800] added backward compatibility promise
+- [#730] added support for Google Cloud Storage Bucket
+- [#764] explained minimal version of Docker in docs
+- [#798] added minimal requirements to installation guides
+- [#773] added functional documentation (variants, visibility and exclude from sale)
+- [#774] added missing shopsys/google-cloud-bundle into monorepo split package list
+- [#803] upgrade notes are extended and fixed
+
+#### Changed
+
+- [#694] updated PHP to version 7.3
+- [#811] renamed docs directory "wip_glassbox" to "extensibility"
+- [#782] changed forms in popup so they work with js validation
+- [#826] PHPStan updated and resolved dependencies
+- [#755] updated npm packages to latest version
+- [#768] extracted "Domain, Multidomain, Multilanguage" documentation into a separated article
+
+#### Fixed
+
+- [#831] fixed project-base install conflict due to snc/redis-bundle version
+- [#822] fixed releaser due to microservice removal
+- [#789] fixed kubernetes naming
+- [#801] markdown formatting fixed in 3rd party copyrights
+- [#758] configuration of docker-compose and docker-sync was enhanced for windows development in monorepo
+- [#779] upgrade instructions of cart as entity has been updated to be more format consistent
+- [#743] docs tweaks
+- [#790] use PR # instead of internal backlog IDs in contributing guide for commits
+- [#783] fixed production installation documentation
+
 ## [v7.0.0-beta5](https://github.com/shopsys/shopsys/compare/v7.0.0-beta4...v7.0.0-beta5) - 2019-01-21
 
 ### [shopsys/coding-standards]
@@ -1943,3 +2030,51 @@ That's why is this section formatted differently.
 [#454]: https://github.com/shopsys/shopsys/pull/454
 [#567]: https://github.com/shopsys/shopsys/pull/567
 [@dzarda86]: https://github.com/dzarda86
+[#831]: https://github.com/shopsys/shopsys/pull/831
+[#826]: https://github.com/shopsys/shopsys/pull/826
+[#825]: https://github.com/shopsys/shopsys/pull/825
+[#823]: https://github.com/shopsys/shopsys/pull/823
+[#822]: https://github.com/shopsys/shopsys/pull/822
+[#816]: https://github.com/shopsys/shopsys/pull/816
+[#815]: https://github.com/shopsys/shopsys/pull/815
+[#813]: https://github.com/shopsys/shopsys/pull/813
+[#811]: https://github.com/shopsys/shopsys/pull/811
+[#809]: https://github.com/shopsys/shopsys/pull/809
+[#806]: https://github.com/shopsys/shopsys/pull/806
+[#803]: https://github.com/shopsys/shopsys/pull/803
+[#801]: https://github.com/shopsys/shopsys/pull/801
+[#800]: https://github.com/shopsys/shopsys/pull/800
+[#798]: https://github.com/shopsys/shopsys/pull/798
+[#796]: https://github.com/shopsys/shopsys/pull/796
+[#793]: https://github.com/shopsys/shopsys/pull/793
+[#792]: https://github.com/shopsys/shopsys/pull/792
+[#790]: https://github.com/shopsys/shopsys/pull/790
+[#789]: https://github.com/shopsys/shopsys/pull/789
+[#788]: https://github.com/shopsys/shopsys/pull/788
+[#787]: https://github.com/shopsys/shopsys/pull/787
+[#783]: https://github.com/shopsys/shopsys/pull/783
+[#782]: https://github.com/shopsys/shopsys/pull/782
+[#781]: https://github.com/shopsys/shopsys/pull/781
+[#780]: https://github.com/shopsys/shopsys/pull/780
+[#779]: https://github.com/shopsys/shopsys/pull/779
+[#777]: https://github.com/shopsys/shopsys/pull/777
+[#775]: https://github.com/shopsys/shopsys/pull/775
+[#774]: https://github.com/shopsys/shopsys/pull/774
+[#773]: https://github.com/shopsys/shopsys/pull/773
+[#768]: https://github.com/shopsys/shopsys/pull/768
+[#766]: https://github.com/shopsys/shopsys/pull/766
+[#764]: https://github.com/shopsys/shopsys/pull/764
+[#763]: https://github.com/shopsys/shopsys/pull/763
+[#762]: https://github.com/shopsys/shopsys/pull/762
+[#760]: https://github.com/shopsys/shopsys/pull/760
+[#759]: https://github.com/shopsys/shopsys/pull/759
+[#758]: https://github.com/shopsys/shopsys/pull/758
+[#755]: https://github.com/shopsys/shopsys/pull/755
+[#752]: https://github.com/shopsys/shopsys/pull/752
+[#749]: https://github.com/shopsys/shopsys/pull/749
+[#743]: https://github.com/shopsys/shopsys/pull/743
+[#736]: https://github.com/shopsys/shopsys/pull/736
+[#732]: https://github.com/shopsys/shopsys/pull/732
+[#730]: https://github.com/shopsys/shopsys/pull/730
+[#715]: https://github.com/shopsys/shopsys/pull/715
+[#694]: https://github.com/shopsys/shopsys/pull/694
