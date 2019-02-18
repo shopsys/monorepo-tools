@@ -27,15 +27,15 @@
         "doctrine/dbal": "^2.7",
         "doctrine/doctrine-bundle": "^1.8",
         "shopsys/doctrine-orm": "^2.6.2",
-        "shopsys/form-types-bundle": "7.0.0-beta6",
-        "shopsys/framework": "7.0.0-beta6",
-        "shopsys/migrations": "7.0.0-beta6",
-        "shopsys/plugin-interface": "7.0.0-beta6",
+        "shopsys/form-types-bundle": "dev-master",
+        "shopsys/framework": "dev-master",
+        "shopsys/migrations": "dev-master",
+        "shopsys/plugin-interface": "dev-master",
         "symfony/symfony": "^3.4.8"
     },
     "require-dev": {
         "phpunit/phpunit": "^6.0|^7.0",
-        "shopsys/coding-standards": "7.0.0-beta6",
+        "shopsys/coding-standards": "dev-master",
         "twig/extensions": "^1.5.1",
         "twig/twig": "^2.4.8"
     },
