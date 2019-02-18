@@ -2,12 +2,7 @@
     "name": "shopsys/form-types-bundle",
     "type": "library",
     "description": "Shopsys Framework custom Symfony form types",
-    "keywords": [
-        "form",
-        "form type",
-        "Shopsys Framework",
-        "SSFW"
-    ],
+    "keywords": ["form", "form type", "Shopsys Framework", "SSFW"],
     "license": "MIT",
     "authors": [
         {
@@ -31,7 +26,7 @@
         "symfony/translation": "^3.4"
     },
     "require-dev": {
-        "shopsys/coding-standards": "dev-master"
+        "shopsys/coding-standards": "7.0.0-beta6"
     },
     "conflict": {
         "symfony/dependency-injection": "3.4.15|3.4.16"
