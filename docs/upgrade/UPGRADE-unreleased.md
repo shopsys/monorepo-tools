@@ -57,12 +57,12 @@ for instance:
 - after running database migrations, all your countries across domains will be merged together and original names will be added as translations
     - all your countries have to have country code filled in
     - country not present on some domain will use country code as its name and will be disabled on that domain
-    - [`Version20190121094400`](https://github.com/shopsys/shopsys/blob/master/packages/framework/src/Migrations/Version20190121094400.php <!--- TODO: change to released version instead of master -->
+    - [`Version20190121094400`](https://github.com/shopsys/shopsys/blob/v7.0.0-beta6/packages/framework/src/Migrations/Version20190121094400.php
 
 ### Application
 - use configuration file to define directories that needs to be created during build of the application ([#781](https://github.com/shopsys/shopsys/pull/781))
     - create new configuration file `app/config/directories.yml` with 2 types of directories `public_directories` and `internal_directories` and add this file into `$configs` array in `AppKernel::getConfigs()`.
-    - if you had implemented your individual directories in `CreateApplicationDirectoriesCommand`, delete your extension of a class and add the directories into `app/config/directories.yml` and fill them into sections, you can read more about sections [here](https://github.com/shopsys/shopsys/blob/master/docs/intruduction/directories.yml) <!--- TODO: change to released version instead of master -->
+    - if you had implemented your individual directories in `CreateApplicationDirectoriesCommand`, delete your extension of a class and add the directories into `app/config/directories.yml` and fill them into sections, you can read more about sections [here](https://github.com/shopsys/shopsys/blob/v7.0.0-beta6/docs/intruduction/directories.yml)
 - if you were using `oneup/flysystembundle` for using different adapter than the local one, you must now implement `FilesystemFactoryInterface` and init the adapter by yourself.
 - *(low priority)* delete dependency on `oneup/flysystembundle` from your `composer.json`
 - remove usages of inherited `OrderItem` classes ([#715](https://github.com/shopsys/shopsys/pull/715))
