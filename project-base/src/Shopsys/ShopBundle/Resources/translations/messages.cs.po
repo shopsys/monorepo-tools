@@ -244,9 +244,6 @@ msgstr "Chci se přihlásit k odběru newsletteru"
 msgid "Image"
 msgstr "Obrázek"
 
-msgid "Invalid login"
-msgstr "Byly zadány neplatné přihlašovací údaje"
-
 msgid "Items"
 msgstr "Položky"
 
@@ -549,6 +546,9 @@ msgstr "V průběhu objednávkového procesu byla změněna cena platby {{ payme
 
 msgid "The price of shipping {{ transportName }} changed during ordering process. Check your order, please."
 msgstr "V průběhu objednávkového procesu byla změněna cena dopravy {{ transportName }}. Prosím, překontrolujte si objednávku."
+
+msgid "This account doesn't exist or password is incorrect"
+msgstr "Zadali jste špatné uživatelské jméno nebo heslo"
 
 msgid "This category contains no products."
 msgstr "Tato kategorie neobsahuje žádné produkty"

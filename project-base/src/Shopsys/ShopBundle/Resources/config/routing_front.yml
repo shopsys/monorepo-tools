@@ -141,3 +141,8 @@ front_registration_exists_email:
 front_export_personal_data:
     path: /personal-overview-export/xml/{hash}
     defaults: { _controller: ShopsysShopBundle:Front\PersonalData:exportXml }
+
+front_login_window_form:
+    path: /login/form
+    defaults: { _controller: ShopsysShopBundle:Front\Login:windowForm }
+    methods: [POST]

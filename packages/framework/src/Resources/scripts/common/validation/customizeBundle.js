@@ -153,6 +153,7 @@
     //   there can be loaded callbacks from last form submit which can cause duplicated form error windows
     // (the rest is copy&pasted from original method; eg. ajax validation)
     FpJsFormValidator.customizeMethods.submitForm = function (event) {
+        $('.js-window-validation-errors').addClass('display-none');
         var $form = $(this);
         if (!$form.hasClass('js-no-validate')) {
             FpJsFormValidator.each(this, function (item) {
@@ -441,14 +442,24 @@
 
     Shopsys.validation.showFormErrorsWindow = function (container) {
         var $formattedFormErrors = Shopsys.validation.getFormattedFormErrors(container);
+        var $window = $('#js-window');
 
-        Shopsys.window({
-            content:
-                '<div class="text-left">'
-                + Shopsys.translator.trans('Please check the entered values.<br><br>')
-                + $formattedFormErrors[0].outerHTML
-                + '</div>'
-        });
+        var $errorListHtml = '<div class="text-left">'
+            + Shopsys.translator.trans('Please check the entered values.<br>')
+            + $formattedFormErrors[0].outerHTML
+            + '</div>';
+
+        if ($window.length === 0) {
+            Shopsys.window({
+                content: $errorListHtml
+
+            });
+        } else {
+            $window.filterAllNodes('.js-window-validation-errors')
+                .html($errorListHtml)
+                .removeClass('display-none');
+        }
+
     };
 
     Shopsys.validation.getFormattedFormErrors = function (container) {

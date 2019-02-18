@@ -172,6 +172,44 @@ for instance:
     - if you have extended `CountryController` revise your changes – `new` and `edit` actions were added
 - if you have extended `Localization` class, you have to add type-hints to extended methods because they were added in the parent class ([#806](https://github.com/shopsys/shopsys/pull/806))
     - if you have extended method `Localization::getAdminLocale()` only to have administration in a different language than english, you can delete it and set parameter `shopsys.admin_locale` in your `parameters.yml` file instead
+- fixed JS validation of forms in popup windows ([#782](https://github.com/shopsys/shopsys/pull/782))
+    - login form in popup is now loaded via AJAX
+    - in `window.js` add options `textHeading = ''` and `cssClassHeading: ''` to `var defaults` like this:
+        ```diff
+            var defaults = {
+                content: '',
+                buttonClose: true,
+                buttonCancel: false,
+                buttonContinue: false,
+                textContinue: Shopsys.translator.trans('Yes'),
+                textCancel: Shopsys.translator.trans('No'),
+        +       textHeading: '',
+                urlContinue: '#',
+                cssClass: 'window-popup--standard',
+                cssClassContinue: '',
+                cssClassCancel: '',
+        +       cssClassHeading: '',
+                closeOnBgClick: true,
+                eventClose: function () {},
+                eventContinue: function () {},
+                eventCancel: function () {},
+                eventOnLoad: function () {}
+            };
+        ```
+        - then add the heading to `$windowContent` and add div with `js-validation-errors` class to every popup.:
+        ```diff
+        -   var $windowContent = $('<div class="js-window-content window-popup__in"></div>').html(options.content);
+        +   var $windowContent = $('<div class="js-window-content window-popup__in"></div>');
+        +   if (options.textHeading !== '') {
+        +       $windowContent.append('<h2 class="' + options.cssClassHeading + '">' + options.textHeading + '</h2>');
+        +   }
+        +   $windowContent.append(
+        +       '<div class="display-none in-message in-message--alert js-window-validation-errors"></div>'
+        +       + options.content
+        +   );
+        ```
+    - *(optional)* change login form so it is loaded by AJAX and works with JS validation and change `Login/windowForm.html.twig`, `Login/loginForm.html.twig` and `header.html.twig` templates
+        - you can change it as it was done in this [commit](https://github.com/shopsys/shopsys/pull/782/commits/0e7cf1e615563e804657d7b96ef335617461236c)
 
 - if you have extended classes from `Shopsys\FrameworkBundle\Model`, `Shopsys\FrameworkBundle\Component` or `Shopsys\FrameworkBundle\DataFixtures\Demo` namespace ([#788](https://github.com/shopsys/shopsys/pull/788))
     - you need to adjust extended methods and fields to `protected` visibility because all `private` visibilities from these namespaces were changed to `protected`

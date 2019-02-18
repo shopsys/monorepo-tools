@@ -1579,7 +1579,7 @@ msgstr ""
 msgid "Please check the correctness of all data filled."
 msgstr ""
 
-msgid "Please check the entered values.<br><br>"
+msgid "Please check the entered values.<br>"
 msgstr ""
 
 msgid "Please fill all default values before creating a product"
