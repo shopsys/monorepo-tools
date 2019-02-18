@@ -106,54 +106,45 @@ for instance:
                 imageId: \d+
                 additionalIndex: \d+
       ```
-- if you extended `EntityExtensionParentMetadataCleanerEventSubscriber`, review whether you need to implement [fix for translation entities #748](https://github.com/shopsys/shopsys/pull/748) or whether you still need the extension at all
-
-`Cart` has been slightly refactored ((#765)[https://github.com/shopsys/shopsys/pull/765/]), so change your usages appropriately:
- - property `cartItems` has been renamed to `items`
- - method `getCartItemById` has been renamed to `getItemById`
- - method `getQuantifiedProductsIndexedByCartItemId` has been renamed to `getQuantifiedProductsIndexedByItemId`
- - method `findSimilarCartItemByCartItem` has been renamed to `findSimilarItemByItem`
-
-`Cart` is now entity, so change your usages appropriately:
- - properties `user` and `cart_identifier` were moved from `CartItem` to `Cart`
-    - there are new methods `getCartIdentifier`, `setModifeiedNow` and `setModifiedAt`
- - added new property `modifiedAt`
- - method's `addProduct` first parameter `CustomerIdentifier` has been removed
- - method's `mergeWithCart` third parameter `CustomerIdentifier` has been removed
- - the implementation of methods `addItem`, `removeItemyId`, `getItems`, `getItemsCount`, `changeQuantities`, `getQuantifiedProductsIndexedByItemId`, `mergeWithCart` and `findSimilarItemByItem` has been changed so revise them if you extended them
-
-`CartFactory` has been refactored, so change your usages appropriately:
- - methods `get` and `createNewCart` has been removed, use `CartFacade`'s `findCartOfCurrentCustomer`, `findCartByCustomerIdentifier`, `getCartOfCurrentCustomerCreateIfNotExists` or `getCartByCustomerIdentifierCreateIfNotExists` instead
-    - methods starting with `find` can return `null`
-    - methods ending with `CreateIfNotExists` will always create new `Cart` in database, so use this methods only in case you are adding some items
- - method `clearCache` has been removed
- - attributes `carts`, `cartItemRepository` and `cartWatcherFacade` has been removed
-
-`CartFacade` has been refactored, so change your usages appropriately:
- - it has four new methods for working with `Cart`
-    - methods `findCartOfCurrentCustomer` and `findCartByCustomerIdentifier` will return `Cart` if it contains at least one `CartItem` or `null` if it is empty
-    - methods `getCartOfCurrentCustomerCreateIfNotExists` and `getCartByCustomerIdentifierIfNotExists` will return `Cart` if it contains at least one `CartItem` or create one if it does not
- - the implementation of methods `addProductToCart`, `changeQuantities`, `deleteCartItem`, `getQuantifiedProductsOfCurrentCustomerIndexedByCartItemId` and `deleteOldCarts` has been changed so revise them if you extended them
- - method `cleanCart` has been removed, use method `deleteCart` instead
-
-`CartMigrationFacade` has been refactored, so change your usages appropriately:
- - the constructor has changed
- - implementation of methods `mergeCurrentCartWithCart` and `onKernelController` has been changed, so revise them if you extended them
-
- `CartItemRepository` class has been removed and all its logic has been moved to new `CartRepository`
- `CartItemFactory::create` and `CartItemFactoryInterface::create` methods has changed, its first parameter is no longer `CustomerIdentifier` but `Cart`
-
- In twig templates (e.g. `Front/Content/Cart/index.html.twig` and `Front/Inline/Cart/cartBox.html.twig`), use `cart is not null` instead of `cart.itemsCount > 0` and `cart.isEmpty`
-
- You would probably need to modify your tests as well, because of changes in `Cart`. You would need to revise the following classes:
- - `Unit/Model/Cart/CartFactoryTest.php` has been removed
- - `Unit/Model/Cart/CartTest.php` has been changed
- - `Functional/Model/Cart/CartFacadeDeleteOldCartsTest.php` has been changed
- - `Functional/Model/Cart/CartFacadeTest.php` has been changed
- - `Functional/Model/Cart/CartItemTest.php` has been changed
- - `Functional/Model/Cart/CartTest.php` has been changed
- - `Functional/Model/Cart/Watcher/CartWatcherTest.php` has been changed
- - `Functional/Model/Order/OrderFacadeTest.php` has been changed
+- `Cart` has been slightly refactored ([#765](https://github.com/shopsys/shopsys/pull/765/)), so change your usages appropriately:
+    - property `cartItems` has been renamed to `items`
+    - method `getCartItemById` has been renamed to `getItemById`
+    - method `getQuantifiedProductsIndexedByCartItemId` has been renamed to `getQuantifiedProductsIndexedByItemId`
+    - method `findSimilarCartItemByCartItem` has been renamed to `findSimilarItemByItem`
+    - `Cart` is now entity, so change your usages appropriately:
+        - properties `user` and `cart_identifier` were moved from `CartItem` to `Cart`
+            - there are new methods `getCartIdentifier`, `setModifeiedNow` and `setModifiedAt`
+        - added new property `modifiedAt`
+        - method's `addProduct` first parameter `CustomerIdentifier` has been removed
+        - method's `mergeWithCart` third parameter `CustomerIdentifier` has been removed
+        - the implementation of methods `addItem`, `removeItemyId`, `getItems`, `getItemsCount`, `changeQuantities`, `getQuantifiedProductsIndexedByItemId`, `mergeWithCart` and `findSimilarItemByItem` has been changed so revise them if you extended them
+    - `CartFactory` has been refactored, so change your usages appropriately:
+        - methods `get` and `createNewCart` has been removed, use `CartFacade`'s `findCartOfCurrentCustomer`, `findCartByCustomerIdentifier`, `getCartOfCurrentCustomerCreateIfNotExists` or `getCartByCustomerIdentifierCreateIfNotExists` instead
+            - methods starting with `find` can return `null`
+            - methods ending with `CreateIfNotExists` will always create new `Cart` in database, so use this methods only in case you are adding some items
+        - method `clearCache` has been removed
+        - attributes `carts`, `cartItemRepository` and `cartWatcherFacade` has been removed
+    - `CartFacade` has been refactored, so change your usages appropriately:
+        - it has four new methods for working with `Cart`
+            - methods `findCartOfCurrentCustomer` and `findCartByCustomerIdentifier` will return `Cart` if it contains at least one `CartItem` or `null` if it is empty
+            - methods `getCartOfCurrentCustomerCreateIfNotExists` and `getCartByCustomerIdentifierIfNotExists` will return `Cart` if it contains at least one `CartItem` or create one if it does not
+        - the implementation of methods `addProductToCart`, `changeQuantities`, `deleteCartItem`, `getQuantifiedProductsOfCurrentCustomerIndexedByCartItemId` and `deleteOldCarts` has been changed so revise them if you extended them
+        - method `cleanCart` has been removed, use method `deleteCart` instead
+    - `CartMigrationFacade` has been refactored, so change your usages appropriately:
+        - the constructor has changed
+        - implementation of methods `mergeCurrentCartWithCart` and `onKernelController` has been changed, so revise them if you extended them
+    - `CartItemRepository` class has been removed and all its logic has been moved to new `CartRepository`
+    - `CartItemFactory::create` and `CartItemFactoryInterface::create` methods has changed, its first parameter is no longer `CustomerIdentifier` but `Cart`
+    - In twig templates (e.g. `Front/Content/Cart/index.html.twig` and `Front/Inline/Cart/cartBox.html.twig`), use `cart is not null` instead of `cart.itemsCount > 0` and `cart.isEmpty`
+    - You would probably need to modify your tests as well, because of changes in `Cart`. You would need to revise the following classes:
+        - `Unit/Model/Cart/CartFactoryTest.php` has been removed
+        - `Unit/Model/Cart/CartTest.php` has been changed
+        - `Functional/Model/Cart/CartFacadeDeleteOldCartsTest.php` has been changed
+        - `Functional/Model/Cart/CartFacadeTest.php` has been changed
+        - `Functional/Model/Cart/CartItemTest.php` has been changed
+        - `Functional/Model/Cart/CartTest.php` has been changed
+        - `Functional/Model/Cart/Watcher/CartWatcherTest.php` has been changed
+        - `Functional/Model/Order/OrderFacadeTest.php` has been changed
 - *(low priority)* upgrade npm packages to the latest version ([#755](https://github.com/shopsys/shopsys/pull/755))
     - remove all npm packages by removing folder `project-base/node_modules` and `project-base/package-lock.json`
     - run command `php phing npm`
