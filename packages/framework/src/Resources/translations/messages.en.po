@@ -958,6 +958,9 @@ msgstr ""
 msgid "File will be deleted after saving."
 msgstr ""
 
+msgid "Fill missing settings to enable creating products. More information here."
+msgstr ""
+
 msgid "Filter by"
 msgstr ""
 
@@ -1964,9 +1967,6 @@ msgid "Slider page <strong><a href=\"{{ url }}\">{{ name }}</a></strong> modifie
 msgstr ""
 
 msgid "Slider pages"
-msgstr ""
-
-msgid "Fill missing settings to enable creating products. More information here."
 msgstr ""
 
 msgid "Sorting priority"
