@@ -54,7 +54,7 @@ for instance:
     - you may need to change `StdClass` to `stdClass` in `tests/ShopBundle/Functional/Component/Grid/Ordering/GridOrderingFacadeTest.php` to pass PHPStan check
 
 ### Database migrations
-- after running database migrations, all your countries across domains will be merged together and original names will be added as translations
+- after running database migrations, all your countries across domains will be merged together and original names will be added as translations ([#762](https://github.com/shopsys/shopsys/pull/762))
     - all your countries have to have country code filled in
     - country not present on some domain will use country code as its name and will be disabled on that domain
     - please check [`Version20190121094400`](https://github.com/shopsys/shopsys/blob/v7.0.0-beta6/packages/framework/src/Migrations/Version20190121094400.php)
@@ -63,8 +63,8 @@ for instance:
 - use configuration file to define directories that needs to be created during build of the application ([#781](https://github.com/shopsys/shopsys/pull/781))
     - create new configuration file `app/config/directories.yml` with 2 types of directories `public_directories` and `internal_directories` and add this file into `$configs` array in `AppKernel::getConfigs()`.
     - if you had implemented your individual directories in `CreateApplicationDirectoriesCommand`, delete your extension of a class and add the directories into `app/config/directories.yml` and fill them into sections, you can read more about sections [here](https://github.com/shopsys/shopsys/blob/v7.0.0-beta6/docs/intruduction/directories.yml)
-- if you were using `oneup/flysystembundle` for using different adapter than the local one, you must now implement `FilesystemFactoryInterface` and init the adapter by yourself.
-- *(low priority)* delete dependency on `oneup/flysystembundle` from your `composer.json`
+- if you were using `oneup/flysystembundle` for using different adapter than the local one, you must now implement `FilesystemFactoryInterface` and init the adapter by yourself ([#730](https://github.com/shopsys/shopsys/pull/730))
+- *(low priority)* delete dependency on `oneup/flysystembundle` from your `composer.json` ([#730](https://github.com/shopsys/shopsys/pull/730))
 - remove usages of inherited `OrderItem` classes ([#715](https://github.com/shopsys/shopsys/pull/715))
     - replace usages of `OrderProduct`, `OrderPayment`, and `OrderTransport` with common `OrderItem`
         - use `isType<type>()` method instead of `instanceof`
@@ -80,7 +80,7 @@ for instance:
         - `OrderDataFactory`
         - `OrderItemFacade`
         - `OrderFacade`
-    - remove non-existing test cases from `EntityExtensionTest` ([#715](https://github.com/shopsys/shopsys/pull/715))
+    - remove non-existing test cases from `EntityExtensionTest`
         - remove `ExtendedOrder*` classes
         - remove calling `doTestExtendedEntityInstantiation` with classes that are removed
         - change `ExtendedOrderItem` to standard class - remove `abstract` and inheritance annotations
