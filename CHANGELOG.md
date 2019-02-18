@@ -89,7 +89,7 @@ The changelog is generated during the release process using [ChangelogLinker](ht
 - [#730] added support for Google Cloud Storage Bucket
 - [#764] explained minimal version of Docker in docs
 - [#798] added minimal requirements to installation guides
-- [#773] added functional documentation (variants, visibility and exclude from sale), Thanks to [@PetraPiprekova]
+- [#773] added functional documentation (variants, visibility and exclude from sale)
 - [#774] added missing shopsys/google-cloud-bundle into monorepo split package list
 - [#803] upgrade notes are extended and fixed
 
@@ -2078,4 +2078,3 @@ That's why is this section formatted differently.
 [#730]: https://github.com/shopsys/shopsys/pull/730
 [#715]: https://github.com/shopsys/shopsys/pull/715
 [#694]: https://github.com/shopsys/shopsys/pull/694
-[@PetraPiprekova]: https://github.com/PetraPiprekova
