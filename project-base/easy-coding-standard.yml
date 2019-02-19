@@ -34,3 +34,7 @@ parameters:
 
         Shopsys\CodingStandards\Sniffs\ForbiddenDumpSniff:
             - '*/tests/ShopBundle/Functional/Model/Cart/CartFacadeTest.php'
+
+        Shopsys\CodingStandards\Sniffs\ForbiddenDoctrineInheritanceSniff:
+            - '*/src/Shopsys/ShopBundle/*'
+            - '*/tests/ShopBundle/*'

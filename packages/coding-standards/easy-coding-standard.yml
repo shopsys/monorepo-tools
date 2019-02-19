@@ -26,6 +26,7 @@ services:
     Shopsys\CodingStandards\Sniffs\ForbiddenDumpSniff: ~
     Shopsys\CodingStandards\Sniffs\ForbiddenExitSniff: ~
     Shopsys\CodingStandards\Sniffs\ForbiddenSuperGlobalSniff: ~
+    Shopsys\CodingStandards\Sniffs\ForbiddenDoctrineInheritanceSniff: ~
     # method arguments and variables should be $camelCase
     Shopsys\CodingStandards\Sniffs\ValidVariableNameSniff: ~
     # add all @param, @return and @var annotations, in FQN
@@ -162,7 +163,9 @@ services:
 parameters:
     exclude_files:
         - '*/tests/Unit/**/wrong/*'
+        - '*/tests/Unit/**/Wrong/*'
         - '*/tests/Unit/**/correct/*'
+        - '*/tests/Unit/**/Correct/*'
         - '*/tests/Unit/**/fixed/*'
     skip:
         SlevomatCodingStandard\Sniffs\Classes\UnusedPrivateElementsSniff:
