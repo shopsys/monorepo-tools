@@ -5,6 +5,7 @@ namespace Shopsys\FrameworkBundle\Model\Product\Filter;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\QueryBuilder;
 use Shopsys\FrameworkBundle\Component\Doctrine\QueryBuilderExtender;
+use Shopsys\FrameworkBundle\Component\Money\Money;
 use Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroup;
 use Shopsys\FrameworkBundle\Model\Product\Availability\Availability;
 use Shopsys\FrameworkBundle\Model\Product\Pricing\ProductCalculatedPrice;
@@ -72,25 +73,25 @@ class ProductFilterRepository
 
     /**
      * @param \Doctrine\ORM\QueryBuilder $productsQueryBuilder
-     * @param string $minimalPrice
-     * @param string $maximalPrice
+     * @param \Shopsys\FrameworkBundle\Component\Money\Money|null $minimalPrice
+     * @param \Shopsys\FrameworkBundle\Component\Money\Money|null $maximalPrice
      * @param \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroup $pricingGroup
      */
     protected function filterByPrice(
         QueryBuilder $productsQueryBuilder,
-        $minimalPrice,
-        $maximalPrice,
+        ?Money $minimalPrice,
+        ?Money $maximalPrice,
         PricingGroup $pricingGroup
     ) {
         if ($maximalPrice !== null || $minimalPrice !== null) {
             $priceLimits = 'pcp.product = p AND pcp.pricingGroup = :pricingGroup';
             if ($minimalPrice !== null) {
                 $priceLimits .= ' AND pcp.priceWithVat >= :minimalPrice';
-                $productsQueryBuilder->setParameter('minimalPrice', $minimalPrice);
+                $productsQueryBuilder->setParameter('minimalPrice', $minimalPrice->toString());
             }
             if ($maximalPrice !== null) {
                 $priceLimits .= ' AND pcp.priceWithVat <= :maximalPrice';
-                $productsQueryBuilder->setParameter('maximalPrice', $maximalPrice);
+                $productsQueryBuilder->setParameter('maximalPrice', $maximalPrice->toString());
             }
             $this->queryBuilderExtender->addOrExtendJoin(
                 $productsQueryBuilder,

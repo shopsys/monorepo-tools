@@ -4,6 +4,7 @@ namespace Shopsys\FrameworkBundle\Model\Product\Filter;
 
 use Doctrine\ORM\QueryBuilder;
 use Shopsys\FrameworkBundle\Component\Doctrine\QueryBuilderExtender;
+use Shopsys\FrameworkBundle\Component\Money\Money;
 use Shopsys\FrameworkBundle\Model\Category\Category;
 use Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroup;
 use Shopsys\FrameworkBundle\Model\Product\Pricing\ProductCalculatedPrice;
@@ -83,6 +84,9 @@ class PriceRangeRepository
         $priceRangeData = $queryBuilder->getQuery()->execute();
         $priceRangeDataRow = reset($priceRangeData);
 
-        return new PriceRange($priceRangeDataRow['minimalPrice'], $priceRangeDataRow['maximalPrice']);
+        return new PriceRange(
+            Money::fromString($priceRangeDataRow['minimalPrice'] ?? 0),
+            Money::fromString($priceRangeDataRow['maximalPrice'] ?? 0)
+        );
     }
 }

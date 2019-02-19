@@ -5,12 +5,12 @@ namespace Shopsys\FrameworkBundle\Model\Product\Filter;
 class ProductFilterData
 {
     /**
-     * @var string|null
+     * @var \Shopsys\FrameworkBundle\Component\Money\Money|null
      */
     public $minimalPrice;
 
     /**
-     * @var string|null
+     * @var \Shopsys\FrameworkBundle\Component\Money\Money|null
      */
     public $maximalPrice;
 

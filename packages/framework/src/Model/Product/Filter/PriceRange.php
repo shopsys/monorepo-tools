@@ -2,30 +2,32 @@
 
 namespace Shopsys\FrameworkBundle\Model\Product\Filter;
 
+use Shopsys\FrameworkBundle\Component\Money\Money;
+
 class PriceRange
 {
     /**
-     * @var string
+     * @var \Shopsys\FrameworkBundle\Component\Money\Money
      */
     protected $minimalPrice;
 
     /**
-     * @var string
+     * @var \Shopsys\FrameworkBundle\Component\Money\Money
      */
     protected $maximalPrice;
 
     /**
-     * @param string|null $minimalPrice
-     * @param string|null $maximalPrice
+     * @param \Shopsys\FrameworkBundle\Component\Money\Money $minimalPrice
+     * @param \Shopsys\FrameworkBundle\Component\Money\Money $maximalPrice
      */
-    public function __construct($minimalPrice, $maximalPrice)
+    public function __construct(Money $minimalPrice, Money $maximalPrice)
     {
-        $this->minimalPrice = $minimalPrice === null ? '0' : $minimalPrice;
-        $this->maximalPrice = $maximalPrice === null ? '0' : $maximalPrice;
+        $this->minimalPrice = $minimalPrice;
+        $this->maximalPrice = $maximalPrice;
     }
 
     /**
-     * @return string
+     * @return \Shopsys\FrameworkBundle\Component\Money\Money
      */
     public function getMinimalPrice()
     {
@@ -33,7 +35,7 @@ class PriceRange
     }
 
     /**
-     * @return string
+     * @return \Shopsys\FrameworkBundle\Component\Money\Money
      */
     public function getMaximalPrice()
     {

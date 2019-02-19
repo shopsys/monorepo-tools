@@ -2,6 +2,8 @@
 
 namespace Shopsys\ShopBundle\Form\Front\Product;
 
+use Shopsys\FrameworkBundle\Form\Constraints\NotNegativeMoneyAmount;
+use Shopsys\FrameworkBundle\Form\Transformers\NumericToMoneyTransformer;
 use Shopsys\FrameworkBundle\Model\Product\Filter\ProductFilterConfig;
 use Shopsys\FrameworkBundle\Model\Product\Filter\ProductFilterData;
 use Symfony\Component\Form\AbstractType;
@@ -12,7 +14,6 @@ use Symfony\Component\Form\Extension\Core\Type\MoneyType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Validator\Constraints;
 
 class ProductFilterFormType extends AbstractType
 {
@@ -23,7 +24,8 @@ class ProductFilterFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $priceScale = 2;
-        $priceTransformer = new MoneyToLocalizedStringTransformer($priceScale, false);
+        $modelTransformer = new NumericToMoneyTransformer($priceScale);
+        $viewTransformer = new MoneyToLocalizedStringTransformer($priceScale, false);
         /** @var \Shopsys\FrameworkBundle\Model\Product\Filter\ProductFilterConfig $config */
         $config = $options['product_filter_config'];
 
@@ -32,26 +34,20 @@ class ProductFilterFormType extends AbstractType
                 'currency' => false,
                 'scale' => $priceScale,
                 'required' => false,
-                'attr' => ['placeholder' => $priceTransformer->transform($config->getPriceRange()->getMinimalPrice())],
+                'attr' => ['placeholder' => $viewTransformer->transform($modelTransformer->transform($config->getPriceRange()->getMinimalPrice()))],
                 'invalid_message' => 'Please enter price in correct format (positive number with decimal separator)',
                 'constraints' => [
-                    new Constraints\GreaterThanOrEqual([
-                        'value' => 0,
-                        'message' => 'Price must be greater or equal to {{ compared_value }}',
-                    ]),
+                    new NotNegativeMoneyAmount(['message' => 'Price must be greater or equal to zero']),
                 ],
             ])
             ->add('maximalPrice', MoneyType::class, [
                 'currency' => false,
                 'scale' => $priceScale,
                 'required' => false,
-                'attr' => ['placeholder' => $priceTransformer->transform($config->getPriceRange()->getMaximalPrice())],
+                'attr' => ['placeholder' => $viewTransformer->transform($modelTransformer->transform($config->getPriceRange()->getMaximalPrice()))],
                 'invalid_message' => 'Please enter price in correct format (positive number with decimal separator)',
                 'constraints' => [
-                    new Constraints\GreaterThanOrEqual([
-                        'value' => 0,
-                        'message' => 'Price must be greater or equal to {{ compared_value }}',
-                    ]),
+                    new NotNegativeMoneyAmount(['message' => 'Price must be greater or equal to zero']),
                 ],
             ])
             ->add('parameters', ParameterFilterFormType::class, [
@@ -78,6 +74,9 @@ class ProductFilterFormType extends AbstractType
                 'expanded' => true,
             ])
             ->add('search', SubmitType::class);
+
+        $builder->get('minimalPrice')->addModelTransformer($modelTransformer);
+        $builder->get('maximalPrice')->addModelTransformer($modelTransformer);
     }
 
     /**
