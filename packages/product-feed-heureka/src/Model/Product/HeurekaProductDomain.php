@@ -49,7 +49,7 @@ class HeurekaProductDomain
     public function __construct(HeurekaProductDomainData $heurekaProductDomainData)
     {
         $this->product = $heurekaProductDomainData->product;
-        $this->cpc = $heurekaProductDomainData->cpc !== null ? Money::fromValue($heurekaProductDomainData->cpc) : null;
+        $this->cpc = $heurekaProductDomainData->cpc;
         $this->domainId = $heurekaProductDomainData->domainId;
     }
 
@@ -59,7 +59,7 @@ class HeurekaProductDomain
     public function edit(HeurekaProductDomainData $heurekaProductDomainData)
     {
         $this->product = $heurekaProductDomainData->product;
-        $this->cpc = $heurekaProductDomainData->cpc !== null ? Money::fromValue($heurekaProductDomainData->cpc) : null;
+        $this->cpc = $heurekaProductDomainData->cpc;
         $this->domainId = $heurekaProductDomainData->domainId;
     }
 

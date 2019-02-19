@@ -10,7 +10,7 @@ class HeurekaProductDomainData
     public $product;
 
     /**
-     * @var string|null
+     * @var \Shopsys\FrameworkBundle\Component\Money\Money|null
      */
     public $cpc;
 
