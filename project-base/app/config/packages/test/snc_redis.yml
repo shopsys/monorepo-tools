@@ -1,0 +1,8 @@
+snc_redis:
+    clients:
+        test:
+            type: 'phpredis'
+            alias: 'test'
+            dsn: 'redis://%redis_host%'
+            options:
+                prefix: '%env(REDIS_PREFIX)%test_'
