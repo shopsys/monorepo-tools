@@ -4,9 +4,10 @@ declare(strict_types=1);
 
 namespace Shopsys\FrameworkBundle\Component\Money;
 
+use JsonSerializable;
 use Litipk\BigNumbers\Decimal;
 
-class Money
+class Money implements JsonSerializable
 {
     /**
      * @var \Litipk\BigNumbers\Decimal
@@ -67,6 +68,16 @@ class Money
         }
 
         return (string)$this->decimal;
+    }
+
+    /**
+     * @return string[]
+     */
+    public function jsonSerialize(): array
+    {
+        return [
+            'amount' => $this->toString(),
+        ];
     }
 
     /**

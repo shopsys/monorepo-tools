@@ -3,11 +3,14 @@
 namespace Shopsys\FrameworkBundle\Form;
 
 use Fp\JsFormValidatorBundle\Factory\JsFormValidatorFactory as BaseJsFormValidatorFactory;
+use Fp\JsFormValidatorBundle\Model\JsFormElement;
+use JsonSerializable;
 use Shopsys\FrameworkBundle\Model\Product\Parameter\ParameterValue;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Form;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Routing\Exception\RouteNotFoundException;
+use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\Constraints;
 
 class JsFormValidatorFactory extends BaseJsFormValidatorFactory
@@ -79,7 +82,13 @@ class JsFormValidatorFactory extends BaseJsFormValidatorFactory
             $prototype->setParent($form);
         }
 
-        return parent::createJsModel($form);
+        $model = parent::createJsModel($form);
+
+        if ($model !== null) {
+            $this->jsonSerializeValuesInAllConstraints($model);
+        }
+
+        return $model;
     }
 
     /**
@@ -94,5 +103,42 @@ class JsFormValidatorFactory extends BaseJsFormValidatorFactory
         }
 
         return parent::generateUrl($route);
+    }
+
+    /**
+     * Method searches for all Constraints and serializes all their values implementing JsonSerializable
+     * (eg. $min and $max in {@see \Shopsys\FrameworkBundle\Form\Constraints\MoneyRange}) because
+     * {@see \Fp\JsFormValidatorBundle\Model\JsModelAbstract::phpValueToJs()} does not support JsonSerializable objects
+     *
+     * Method does not modify the original Constraint objects (it clones all the Constraints)
+     *
+     * @param \Fp\JsFormValidatorBundle\Model\JsFormElement $model
+     */
+    protected function jsonSerializeValuesInAllConstraints(JsFormElement $model): void
+    {
+        if (isset($model->data['form']['constraints'])) {
+            foreach ($model->data['form']['constraints'] as $constraintName => $constraintSet) {
+                foreach ($constraintSet as $key => $constraint) {
+                    $model->data['form']['constraints'][$constraintName][$key] = $this->jsonSerializeConstraintValues($constraint);
+                }
+            }
+        }
+    }
+
+    /**
+     * @param \Symfony\Component\Validator\Constraint $constraint
+     * @return \Symfony\Component\Validator\Constraint
+     */
+    protected function jsonSerializeConstraintValues(Constraint $constraint): Constraint
+    {
+        $constraint = clone $constraint;
+
+        foreach ($constraint as $name => $value) {
+            if ($value instanceof JsonSerializable) {
+                $constraint->$name = $value->jsonSerialize();
+            }
+        }
+
+        return $constraint;
     }
 }
