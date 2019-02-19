@@ -64,8 +64,8 @@ class ZboziProductDomain
     {
         $this->product = $zboziProductDomainData->product;
         $this->show = $zboziProductDomainData->show;
-        $this->cpc = $zboziProductDomainData->cpc !== null ? Money::fromValue($zboziProductDomainData->cpc) : null;
-        $this->cpcSearch = $zboziProductDomainData->cpcSearch !== null ? Money::fromValue($zboziProductDomainData->cpcSearch) : null;
+        $this->cpc = $zboziProductDomainData->cpc;
+        $this->cpcSearch = $zboziProductDomainData->cpcSearch;
         $this->domainId = $zboziProductDomainData->domainId;
     }
 
@@ -76,8 +76,8 @@ class ZboziProductDomain
     {
         $this->product = $zboziProductDomainData->product;
         $this->show = $zboziProductDomainData->show;
-        $this->cpc = $zboziProductDomainData->cpc !== null ? Money::fromValue($zboziProductDomainData->cpc) : null;
-        $this->cpcSearch = $zboziProductDomainData->cpcSearch !== null ? Money::fromValue($zboziProductDomainData->cpcSearch) : null;
+        $this->cpc = $zboziProductDomainData->cpc;
+        $this->cpcSearch = $zboziProductDomainData->cpcSearch;
         $this->domainId = $zboziProductDomainData->domainId;
     }
 

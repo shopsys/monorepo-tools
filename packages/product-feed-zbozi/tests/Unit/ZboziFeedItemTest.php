@@ -4,6 +4,7 @@ namespace Tests\ProductFeed\ZboziBundle\Unit;
 
 use PHPUnit\Framework\TestCase;
 use Shopsys\FrameworkBundle\Component\Domain\Config\DomainConfig;
+use Shopsys\FrameworkBundle\Component\Money\Money;
 use Shopsys\FrameworkBundle\Model\Category\CategoryFacade;
 use Shopsys\FrameworkBundle\Model\Pricing\Price;
 use Shopsys\FrameworkBundle\Model\Product\Availability\Availability;
@@ -208,7 +209,7 @@ class ZboziFeedItemTest extends TestCase
     public function testZboziFeedItemWithMaxCpc()
     {
         $zboziProductDomainData = new ZboziProductDomainData();
-        $zboziProductDomainData->cpc = 5.0;
+        $zboziProductDomainData->cpc = Money::fromString('5.0');
         $zboziProductDomain = new ZboziProductDomain($zboziProductDomainData);
 
         $zboziFeedItem = $this->zboziFeedItemFactory->create($this->defaultProduct, $zboziProductDomain, $this->defaultDomain);
@@ -220,7 +221,7 @@ class ZboziFeedItemTest extends TestCase
     public function testZboziFeedItemWithMaxCpcSearch()
     {
         $zboziProductDomainData = new ZboziProductDomainData();
-        $zboziProductDomainData->cpcSearch = 5.0;
+        $zboziProductDomainData->cpcSearch = Money::fromString('5.0');
         $zboziProductDomain = new ZboziProductDomain($zboziProductDomainData);
 
         $zboziFeedItem = $this->zboziFeedItemFactory->create($this->defaultProduct, $zboziProductDomain, $this->defaultDomain);

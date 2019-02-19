@@ -2,6 +2,7 @@
 
 namespace Shopsys\ProductFeed\ZboziBundle\Form;
 
+use Shopsys\FrameworkBundle\Component\Money\Money;
 use Shopsys\Plugin\PluginCrudExtensionInterface;
 use Shopsys\ProductFeed\ZboziBundle\Model\Product\ZboziProductDomainData;
 use Shopsys\ProductFeed\ZboziBundle\Model\Product\ZboziProductDomainDataFactoryInterface;
@@ -101,7 +102,7 @@ class ZboziProductCrudExtension implements PluginCrudExtensionInterface
     /**
      * @param \Shopsys\ProductFeed\ZboziBundle\Model\Product\ZboziProductDomainData $zboziProductDomainData
      * @param string $propertyName
-     * @param string $propertyValue
+     * @param mixed $propertyValue
      */
     private function setZboziProductDomainDataProperty(
         ZboziProductDomainData $zboziProductDomainData,
@@ -135,8 +136,8 @@ class ZboziProductCrudExtension implements PluginCrudExtensionInterface
 
         foreach ($zboziProductDomains as $zboziProductDomain) {
             $pluginData['show'][$zboziProductDomain->getDomainId()] = $zboziProductDomain->getShow();
-            $pluginData['cpc'][$zboziProductDomain->getDomainId()] = $zboziProductDomain->getCpc();
-            $pluginData['cpc_search'][$zboziProductDomain->getDomainId()] = $zboziProductDomain->getCpcSearch();
+            $pluginData['cpc'][$zboziProductDomain->getDomainId()] = $zboziProductDomain->getCpc() !== null ? Money::fromValue($zboziProductDomain->getCpc()) : null;
+            $pluginData['cpc_search'][$zboziProductDomain->getDomainId()] = $zboziProductDomain->getCpcSearch() !== null ? Money::fromValue($zboziProductDomain->getCpcSearch()) : null;
         }
 
         return $pluginData;
