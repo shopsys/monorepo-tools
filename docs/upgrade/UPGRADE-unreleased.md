@@ -5,4 +5,10 @@ This guide contains instructions to upgrade from version v7.0.0-beta6 to Unrelea
 **Before you start, don't forget to take a look at [general instructions](/UPGRADE.md) about upgrading.**
 There you can find links to upgrade notes for other versions too.
 
+## [shopsys/framework]
+### Tools
+- *(low priority)* add `product-search-export-products` as a dependency of `build-demo` phing target in your `build.xml`
+if you want to have products data exported to Elasticsearch after `build-demo` target is run ([#824](https://github.com/shopsys/shopsys/pull/824/files))
+
 [Upgrade from v7.0.0-beta6 to Unreleased]: https://github.com/shopsys/shopsys/compare/v7.0.0-beta6...HEAD
+[shopsys/framework]: https://github.com/shopsys/framework
