@@ -47,7 +47,7 @@ class PaymentData
     public $czkRounding;
 
     /**
-     * @var string[]
+     * @var \Shopsys\FrameworkBundle\Component\Money\Money[]
      */
     public $pricesByCurrencyId;
 

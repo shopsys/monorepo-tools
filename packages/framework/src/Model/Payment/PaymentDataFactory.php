@@ -3,6 +3,7 @@
 namespace Shopsys\FrameworkBundle\Model\Payment;
 
 use Shopsys\FrameworkBundle\Component\Domain\Domain;
+use Shopsys\FrameworkBundle\Component\Money\Money;
 use Shopsys\FrameworkBundle\Model\Pricing\Vat\VatFacade;
 
 class PaymentDataFactory implements PaymentDataFactoryInterface
@@ -110,7 +111,7 @@ class PaymentDataFactory implements PaymentDataFactoryInterface
         }
 
         foreach ($payment->getPrices() as $paymentPrice) {
-            $paymentData->pricesByCurrencyId[$paymentPrice->getCurrency()->getId()] = $paymentPrice->getPrice();
+            $paymentData->pricesByCurrencyId[$paymentPrice->getCurrency()->getId()] = Money::fromValue($paymentPrice->getPrice());
         }
     }
 }

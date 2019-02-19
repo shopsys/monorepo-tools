@@ -4,6 +4,7 @@ namespace Shopsys\FrameworkBundle\Model\Pricing\Currency;
 
 use Doctrine\ORM\EntityManagerInterface;
 use Shopsys\FrameworkBundle\Component\Domain\Domain;
+use Shopsys\FrameworkBundle\Component\Money\Money;
 use Shopsys\FrameworkBundle\Model\Order\OrderRepository;
 use Shopsys\FrameworkBundle\Model\Payment\PaymentPriceFactoryInterface;
 use Shopsys\FrameworkBundle\Model\Payment\PaymentRepository;
@@ -262,12 +263,12 @@ class CurrencyFacade
     {
         $toFlush = [];
         foreach ($this->paymentRepository->getAll() as $payment) {
-            $paymentPrice = $this->paymentPriceFactory->create($payment, $currency, 0);
+            $paymentPrice = $this->paymentPriceFactory->create($payment, $currency, Money::fromInteger(0));
             $this->em->persist($paymentPrice);
             $toFlush[] = $paymentPrice;
         }
         foreach ($this->transportRepository->getAll() as $transport) {
-            $transportPrice = $this->transportPriceFactory->create($transport, $currency, 0);
+            $transportPrice = $this->transportPriceFactory->create($transport, $currency, Money::fromInteger(0));
             $this->em->persist($transportPrice);
             $toFlush[] = $transportPrice;
         }

@@ -5,6 +5,7 @@ namespace Shopsys\ShopBundle\DataFixtures\Demo;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use Shopsys\FrameworkBundle\Component\DataFixture\AbstractReferenceFixture;
+use Shopsys\FrameworkBundle\Component\Money\Money;
 use Shopsys\FrameworkBundle\Model\Transport\TransportData;
 use Shopsys\FrameworkBundle\Model\Transport\TransportDataFactoryInterface;
 use Shopsys\FrameworkBundle\Model\Transport\TransportFacade;
@@ -46,8 +47,8 @@ class TransportDataFixture extends AbstractReferenceFixture implements Dependent
             'en' => 'Czech post',
         ];
         $transportData->pricesByCurrencyId = [
-            $this->getReference(CurrencyDataFixture::CURRENCY_CZK)->getId() => 99.95,
-            $this->getReference(CurrencyDataFixture::CURRENCY_EUR)->getId() => 3.95,
+            $this->getReference(CurrencyDataFixture::CURRENCY_CZK)->getId() => Money::fromString('99.95'),
+            $this->getReference(CurrencyDataFixture::CURRENCY_EUR)->getId() => Money::fromString('3.95'),
         ];
         $transportData->vat = $this->getReference(VatDataFixture::VAT_HIGH);
         $this->createTransport(self::TRANSPORT_CZECH_POST, $transportData);
@@ -58,8 +59,8 @@ class TransportDataFixture extends AbstractReferenceFixture implements Dependent
             'en' => 'PPL',
         ];
         $transportData->pricesByCurrencyId = [
-            $this->getReference(CurrencyDataFixture::CURRENCY_CZK)->getId() => 199.95,
-            $this->getReference(CurrencyDataFixture::CURRENCY_EUR)->getId() => 6.95,
+            $this->getReference(CurrencyDataFixture::CURRENCY_CZK)->getId() => Money::fromString('199.95'),
+            $this->getReference(CurrencyDataFixture::CURRENCY_EUR)->getId() => Money::fromString('6.95'),
         ];
         $transportData->vat = $this->getReference(VatDataFixture::VAT_HIGH);
         $this->createTransport(self::TRANSPORT_PPL, $transportData);
@@ -70,8 +71,8 @@ class TransportDataFixture extends AbstractReferenceFixture implements Dependent
             'en' => 'Personal collection',
         ];
         $transportData->pricesByCurrencyId = [
-            $this->getReference(CurrencyDataFixture::CURRENCY_CZK)->getId() => 0,
-            $this->getReference(CurrencyDataFixture::CURRENCY_EUR)->getId() => 0,
+            $this->getReference(CurrencyDataFixture::CURRENCY_CZK)->getId() => Money::fromString('0'),
+            $this->getReference(CurrencyDataFixture::CURRENCY_EUR)->getId() => Money::fromString('0'),
         ];
         $transportData->description = [
             'cs' => 'Uvítá Vás milý personál!',

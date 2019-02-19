@@ -40,9 +40,9 @@ class PaymentPrice
     /**
      * @param \Shopsys\FrameworkBundle\Model\Payment\Payment $payment
      * @param \Shopsys\FrameworkBundle\Model\Pricing\Currency\Currency $currency
-     * @param string $price
+     * @param \Shopsys\FrameworkBundle\Component\Money\Money $price
      */
-    public function __construct(Payment $payment, Currency $currency, $price)
+    public function __construct(Payment $payment, Currency $currency, Money $price)
     {
         $this->payment = $payment;
         $this->currency = $currency;
@@ -74,10 +74,10 @@ class PaymentPrice
     }
 
     /**
-     * @param string $price
+     * @param \Shopsys\FrameworkBundle\Component\Money\Money $price
      */
-    public function setPrice($price)
+    public function setPrice(Money $price)
     {
-        $this->price = Money::fromValue($price);
+        $this->price = $price;
     }
 }

@@ -42,7 +42,7 @@ class TransportData
     public $payments;
 
     /**
-     * @var string[]
+     * @var \Shopsys\FrameworkBundle\Component\Money\Money[]
      */
     public $pricesByCurrencyId;
 

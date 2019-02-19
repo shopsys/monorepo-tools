@@ -40,9 +40,9 @@ class TransportPrice
     /**
      * @param \Shopsys\FrameworkBundle\Model\Transport\Transport $transport
      * @param \Shopsys\FrameworkBundle\Model\Pricing\Currency\Currency $currency
-     * @param string $price
+     * @param \Shopsys\FrameworkBundle\Component\Money\Money $price
      */
-    public function __construct(Transport $transport, Currency $currency, $price)
+    public function __construct(Transport $transport, Currency $currency, Money $price)
     {
         $this->transport = $transport;
         $this->currency = $currency;
@@ -74,10 +74,10 @@ class TransportPrice
     }
 
     /**
-     * @param string $price
+     * @param \Shopsys\FrameworkBundle\Component\Money\Money $price
      */
-    public function setPrice($price)
+    public function setPrice(Money $price)
     {
-        $this->price = Money::fromValue($price);
+        $this->price = $price;
     }
 }

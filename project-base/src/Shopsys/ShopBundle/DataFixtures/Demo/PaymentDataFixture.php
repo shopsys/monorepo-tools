@@ -5,6 +5,7 @@ namespace Shopsys\ShopBundle\DataFixtures\Demo;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use Shopsys\FrameworkBundle\Component\DataFixture\AbstractReferenceFixture;
+use Shopsys\FrameworkBundle\Component\Money\Money;
 use Shopsys\FrameworkBundle\Model\Payment\PaymentData;
 use Shopsys\FrameworkBundle\Model\Payment\PaymentDataFactoryInterface;
 use Shopsys\FrameworkBundle\Model\Payment\PaymentFacade;
@@ -46,8 +47,8 @@ class PaymentDataFixture extends AbstractReferenceFixture implements DependentFi
             'en' => 'Credit card',
         ];
         $paymentData->pricesByCurrencyId = [
-            $this->getReference(CurrencyDataFixture::CURRENCY_CZK)->getId() => 99.95,
-            $this->getReference(CurrencyDataFixture::CURRENCY_EUR)->getId() => 2.95,
+            $this->getReference(CurrencyDataFixture::CURRENCY_CZK)->getId() => Money::fromString('99.95'),
+            $this->getReference(CurrencyDataFixture::CURRENCY_EUR)->getId() => Money::fromString('2.95'),
         ];
         $paymentData->description = [
             'cs' => 'Rychle, levně a spolehlivě!',
@@ -69,8 +70,8 @@ class PaymentDataFixture extends AbstractReferenceFixture implements DependentFi
             'en' => 'Cash on delivery',
         ];
         $paymentData->pricesByCurrencyId = [
-            $this->getReference(CurrencyDataFixture::CURRENCY_CZK)->getId() => 49.90,
-            $this->getReference(CurrencyDataFixture::CURRENCY_EUR)->getId() => 1.95,
+            $this->getReference(CurrencyDataFixture::CURRENCY_CZK)->getId() => Money::fromString('49.90'),
+            $this->getReference(CurrencyDataFixture::CURRENCY_EUR)->getId() => Money::fromString('1.95'),
         ];
         $paymentData->vat = $this->getReference(VatDataFixture::VAT_HIGH);
         $this->createPayment(self::PAYMENT_CASH_ON_DELIVERY, $paymentData, [TransportDataFixture::TRANSPORT_CZECH_POST]);
@@ -82,8 +83,8 @@ class PaymentDataFixture extends AbstractReferenceFixture implements DependentFi
         ];
         $paymentData->czkRounding = true;
         $paymentData->pricesByCurrencyId = [
-            $this->getReference(CurrencyDataFixture::CURRENCY_CZK)->getId() => 0,
-            $this->getReference(CurrencyDataFixture::CURRENCY_EUR)->getId() => 0,
+            $this->getReference(CurrencyDataFixture::CURRENCY_CZK)->getId() => Money::fromString('0'),
+            $this->getReference(CurrencyDataFixture::CURRENCY_EUR)->getId() => Money::fromString('0'),
         ];
         $paymentData->vat = $this->getReference(VatDataFixture::VAT_HIGH);
         $this->createPayment(self::PAYMENT_CASH, $paymentData, [TransportDataFixture::TRANSPORT_PERSONAL]);

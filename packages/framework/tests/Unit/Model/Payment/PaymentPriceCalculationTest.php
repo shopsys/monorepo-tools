@@ -4,6 +4,7 @@ namespace Tests\FrameworkBundle\Unit\Model\Payment;
 
 use PHPUnit\Framework\TestCase;
 use Shopsys\FrameworkBundle\Component\EntityExtension\EntityNameResolver;
+use Shopsys\FrameworkBundle\Component\Money\Money;
 use Shopsys\FrameworkBundle\Model\Payment\Payment;
 use Shopsys\FrameworkBundle\Model\Payment\PaymentData;
 use Shopsys\FrameworkBundle\Model\Payment\PaymentPriceCalculation;
@@ -105,7 +106,7 @@ class PaymentPriceCalculationTest extends TestCase
         $paymentData->name = ['cs' => 'paymentName'];
         $paymentData->vat = $vat;
         $payment = new Payment($paymentData);
-        $payment->setPrice(new PaymentPriceFactory(new EntityNameResolver([])), $currency, $inputPrice);
+        $payment->setPrice(new PaymentPriceFactory(new EntityNameResolver([])), $currency, Money::fromValue($inputPrice));
 
         $price = $paymentPriceCalculation->calculateIndependentPrice($payment, $currency);
 
@@ -162,7 +163,7 @@ class PaymentPriceCalculationTest extends TestCase
         $paymentData->name = ['cs' => 'paymentName'];
         $paymentData->vat = $vat;
         $payment = new Payment($paymentData);
-        $payment->setPrice(new PaymentPriceFactory(new EntityNameResolver([])), $currency, $inputPrice);
+        $payment->setPrice(new PaymentPriceFactory(new EntityNameResolver([])), $currency, Money::fromValue($inputPrice));
 
         $price = $paymentPriceCalculation->calculatePrice($payment, $currency, $productsPrice, 1);
 

@@ -3,6 +3,7 @@
 namespace Shopsys\FrameworkBundle\Model\Transport;
 
 use Shopsys\FrameworkBundle\Component\Domain\Domain;
+use Shopsys\FrameworkBundle\Component\Money\Money;
 use Shopsys\FrameworkBundle\Model\Pricing\Vat\VatFacade;
 
 class TransportDataFactory implements TransportDataFactoryInterface
@@ -109,7 +110,7 @@ class TransportDataFactory implements TransportDataFactoryInterface
         $transportData->payments = $transport->getPayments()->toArray();
 
         foreach ($transport->getPrices() as $transportPrice) {
-            $transportData->pricesByCurrencyId[$transportPrice->getCurrency()->getId()] = $transportPrice->getPrice();
+            $transportData->pricesByCurrencyId[$transportPrice->getCurrency()->getId()] = Money::fromValue($transportPrice->getPrice());
         }
     }
 }

@@ -2,6 +2,8 @@
 
 namespace Shopsys\FrameworkBundle\Form;
 
+use Shopsys\FrameworkBundle\Form\Constraints\NotNegativeMoneyAmount;
+use Shopsys\FrameworkBundle\Form\Transformers\NumericToMoneyTransformer;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\Form\Extension\Core\Type\MoneyType;
@@ -21,20 +23,21 @@ class PriceTableType extends AbstractType
     {
         foreach ($options['currencies'] as $key => $currency) {
             /* @var $currency \Shopsys\FrameworkBundle\Model\Pricing\Currency\Currency */
-            $builder
-                ->add($key, MoneyType::class, [
-                    'currency' => false,
-                    'scale' => 6,
-                    'required' => true,
-                    'invalid_message' => 'Please enter price in correct format (positive number with decimal separator)',
-                    'constraints' => [
-                        new Constraints\NotBlank(['message' => 'Please enter price']),
-                        new Constraints\GreaterThanOrEqual([
-                            'value' => 0,
-                            'message' => 'Price must be greater or equal to {{ compared_value }}',
-                        ]),
-                    ],
-                ]);
+
+            $priceBuilder = $builder->create($key, MoneyType::class, [
+                'currency' => false,
+                'scale' => 6,
+                'required' => true,
+                'invalid_message' => 'Please enter price in correct format (positive number with decimal separator)',
+                'constraints' => [
+                    new Constraints\NotBlank(['message' => 'Please enter price']),
+                    new NotNegativeMoneyAmount(['message' => 'Price must be greater or equal to zero']),
+                ],
+            ]);
+
+            $priceBuilder->addModelTransformer(new NumericToMoneyTransformer(6));
+
+            $builder->add($priceBuilder);
         }
     }
 
