@@ -139,18 +139,6 @@ msgstr "Detail"
 msgid "Discount"
 msgstr "Sleva"
 
-msgid "Discount code"
-msgstr "Slevový kód"
-
-msgid "Discount code added to order"
-msgstr "Slevový kód byl přidán do objednávky."
-
-msgid "Discount code invalid. Check it, please."
-msgstr "Slevový kód není platný. Prosím, zkontrolujte ho."
-
-msgid "Discount code removed from order"
-msgstr "Slevový kód byl odebrán z objednávky."
-
 msgid "Displaying"
 msgstr "Zobrazuji"
 
@@ -394,8 +382,8 @@ msgstr "Přehled osobních údajů"
 msgid "Please check the correctness of all data filled."
 msgstr "Prosím zkontrolujte si správnost vyplnění všech údajů"
 
-msgid "Please enter discount code."
-msgstr "Zadejte, prosím, slevový kód."
+msgid "Please enter promo code."
+msgstr "Zadejte, prosím, slevový kupón."
 
 msgid "Please enter valid quantity you want to add to cart."
 msgstr "Zadejte prosím platné množství, které chcete vložit do košíku."
@@ -450,6 +438,15 @@ msgstr "Jen zboží skladem"
 
 msgid "Promo code"
 msgstr "Slevový kupón"
+
+msgid "Promo code added to order"
+msgstr "Slevový kupón byl přidán do objednávky."
+
+msgid "Promo code invalid. Check it, please."
+msgstr "Slevový kupón není platný. Prosím, zkontrolujte ho."
+
+msgid "Promo code removed from order"
+msgstr "Slevový kupón byl odebrán z objednávky."
 
 msgid "Register"
 msgstr "Registrovat"

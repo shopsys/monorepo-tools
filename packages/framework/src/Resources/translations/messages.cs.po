@@ -2216,7 +2216,7 @@ msgid "Value"
 msgstr "Hodnota"
 
 msgid "Value of bought products with VAT after application of all discounts and promo codes without price of shipping and payment"
-msgstr "Jde o hodnotu nakoupeného zboží s DPH po uplatnění všech slev a kupónů bez hodnoty dopravy a platby"
+msgstr "Jde o hodnotu nakoupeného zboží s DPH po uplatnění všech slev a slevových kupónů bez hodnoty dopravy a platby"
 
 msgid "Variant"
 msgstr "Varianta"

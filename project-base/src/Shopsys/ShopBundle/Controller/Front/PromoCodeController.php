@@ -42,10 +42,10 @@ class PromoCodeController extends FrontBaseController
         } catch (\Shopsys\FrameworkBundle\Model\Order\PromoCode\Exception\InvalidPromoCodeException $ex) {
             return new JsonResponse([
                 'result' => false,
-                'message' => t('Discount code invalid. Check it, please.'),
+                'message' => t('Promo code invalid. Check it, please.'),
             ]);
         }
-        $this->getFlashMessageSender()->addSuccessFlash(t('Discount code added to order'));
+        $this->getFlashMessageSender()->addSuccessFlash(t('Promo code added to order'));
 
         return new JsonResponse(['result' => true]);
     }
@@ -53,7 +53,7 @@ class PromoCodeController extends FrontBaseController
     public function removeAction()
     {
         $this->currentPromoCodeFacade->removeEnteredPromoCode();
-        $this->getFlashMessageSender()->addSuccessFlash(t('Discount code removed from order'));
+        $this->getFlashMessageSender()->addSuccessFlash(t('Promo code removed from order'));
 
         return $this->redirectToRoute('front_cart');
     }

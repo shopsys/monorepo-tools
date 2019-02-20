@@ -124,7 +124,7 @@ _Note: The message is not escaped, so if there is malicious code in `*.po` files
 ### JavaScript
 
 ```js
-Shopsys.translator.trans('Please enter discount code.');
+Shopsys.translator.trans('Please enter promo code.');
 
 Shopsys.translator.transChoice('{1}Load next item|]1,Inf[Load next items', loadNextCount);
 ```

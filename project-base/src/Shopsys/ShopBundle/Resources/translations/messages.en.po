@@ -139,18 +139,6 @@ msgstr ""
 msgid "Discount"
 msgstr ""
 
-msgid "Discount code"
-msgstr ""
-
-msgid "Discount code added to order"
-msgstr ""
-
-msgid "Discount code invalid. Check it, please."
-msgstr ""
-
-msgid "Discount code removed from order"
-msgstr ""
-
 msgid "Displaying"
 msgstr ""
 
@@ -394,7 +382,7 @@ msgstr ""
 msgid "Please check the correctness of all data filled."
 msgstr ""
 
-msgid "Please enter discount code."
+msgid "Please enter promo code."
 msgstr ""
 
 msgid "Please enter valid quantity you want to add to cart."
@@ -449,6 +437,15 @@ msgid "Products in stock only"
 msgstr ""
 
 msgid "Promo code"
+msgstr ""
+
+msgid "Promo code added to order"
+msgstr ""
+
+msgid "Promo code invalid. Check it, please."
+msgstr ""
+
+msgid "Promo code removed from order"
 msgstr ""
 
 msgid "Register"

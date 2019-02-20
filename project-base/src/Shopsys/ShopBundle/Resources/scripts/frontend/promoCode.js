@@ -32,7 +32,7 @@
                 });
             } else {
                 Shopsys.window({
-                    content: Shopsys.translator.trans('Please enter discount code.')
+                    content: Shopsys.translator.trans('Please enter promo code.')
                 });
             }
         };
