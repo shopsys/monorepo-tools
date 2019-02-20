@@ -136,7 +136,7 @@ class ProductPriceRecalculator
         foreach ($this->getAllPricingGroups() as $pricingGroup) {
             try {
                 $price = $this->productPriceCalculation->calculatePrice($product, $pricingGroup->getDomainId(), $pricingGroup);
-                $priceWithVat = $price->getPriceWithVat();
+                $priceWithVat = $price->getPriceWithVat()->toValue();
             } catch (\Shopsys\FrameworkBundle\Model\Product\Pricing\Exception\MainVariantPriceCalculationException $e) {
                 $priceWithVat = null;
             }

@@ -157,8 +157,8 @@
                                 <td class="text-right">{{ item.priceWithVat|priceWithCurrency(order.currency) }}</td>
                                 <td class="text-right">{{ item.quantity|formatNumber }} {{ item.unitName }}</td>
                                 <td class="text-right">{{ item.vatPercent|formatPercent }}</td>
-                                <td class="text-right">{{ orderItemTotalPricesById[item.id].priceWithVat|priceWithCurrency(order.currency) }}</td>
-                                <td class="text-right">{{ orderItemTotalPricesById[item.id].priceWithoutVat|priceWithCurrency(order.currency) }}</td>
+                                <td class="text-right">{{ orderItemTotalPricesById[item.id].priceWithVat.toValue|priceWithCurrency(order.currency) }}</td>
+                                <td class="text-right">{{ orderItemTotalPricesById[item.id].priceWithoutVat.toValue|priceWithCurrency(order.currency) }}</td>
                             </tr>
                         {% endfor %}
                     </table>

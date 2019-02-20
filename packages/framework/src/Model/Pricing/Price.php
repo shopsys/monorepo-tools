@@ -41,27 +41,27 @@ class Price
     }
 
     /**
-     * @return string
+     * @return \Shopsys\FrameworkBundle\Component\Money\Money
      */
-    public function getPriceWithoutVat(): string
+    public function getPriceWithoutVat(): Money
     {
-        return $this->priceWithoutVat->toValue();
+        return $this->priceWithoutVat;
     }
 
     /**
-     * @return string
+     * @return \Shopsys\FrameworkBundle\Component\Money\Money
      */
-    public function getPriceWithVat(): string
+    public function getPriceWithVat(): Money
     {
-        return $this->priceWithVat->toValue();
+        return $this->priceWithVat;
     }
 
     /**
-     * @return string
+     * @return \Shopsys\FrameworkBundle\Component\Money\Money
      */
-    public function getVatAmount(): string
+    public function getVatAmount(): Money
     {
-        return $this->vatAmount->toValue();
+        return $this->vatAmount;
     }
 
     /**

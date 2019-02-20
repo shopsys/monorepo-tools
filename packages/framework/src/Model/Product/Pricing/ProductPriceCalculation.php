@@ -127,7 +127,8 @@ class ProductPriceCalculation
 
         $minimumPrice = null;
         foreach ($prices as $price) {
-            if ($minimumPrice === null || $price->getPriceWithoutVat() < $minimumPrice->getPriceWithoutVat()) {
+            /** @var \Shopsys\FrameworkBundle\Model\Pricing\Price|null $minimumPrice */
+            if ($minimumPrice === null || $price->getPriceWithoutVat()->isLessThan($minimumPrice->getPriceWithoutVat())) {
                 $minimumPrice = $price;
             }
         }
@@ -148,8 +149,8 @@ class ProductPriceCalculation
         $firstPrice = array_pop($prices);
         /* @var $firstPrice \Shopsys\FrameworkBundle\Model\Pricing\Price */
         foreach ($prices as $price) {
-            if ($price->getPriceWithoutVat() !== $firstPrice->getPriceWithoutVat()
-                || $price->getPriceWithVat() !== $firstPrice->getPriceWithVat()
+            if (!$price->getPriceWithoutVat()->equals($firstPrice->getPriceWithoutVat())
+                || !$price->getPriceWithVat()->equals($firstPrice->getPriceWithVat())
             ) {
                 return true;
             }

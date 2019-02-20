@@ -14,7 +14,7 @@
             <g:image_link>{{ item.imageLink }}</g:image_link>
         {% endif -%}
         <g:availability>{{ item.availability }}</g:availability>
-        <g:price>{{ item.price.priceWithVat|number_format(2, '.', '') }} {{ item.currency.code }}</g:price>
+        <g:price>{{ item.price.priceWithVat.toValue|number_format(2, '.', '') }} {{ item.currency.code }}</g:price>
         {%  if item.brand is not null -%}
             <g:brand>{{ item.brand }}</g:brand>
         {% endif -%}

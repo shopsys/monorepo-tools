@@ -57,8 +57,8 @@ class OrderItemPriceCalculationTest extends TestCase
 
         $totalPrice = $orderItemPriceCalculation->calculateTotalPrice($orderItem);
 
-        $this->assertSame(round(200, 6), round($totalPrice->getPriceWithVat(), 6));
-        $this->assertSame(round(190, 6), round($totalPrice->getPriceWithoutVat(), 6));
-        $this->assertSame(round(10, 6), round($totalPrice->getVatAmount(), 6));
+        $this->assertTrue($totalPrice->getPriceWithVat()->equals(Money::fromInteger(200)));
+        $this->assertTrue($totalPrice->getPriceWithoutVat()->equals(Money::fromInteger(190)));
+        $this->assertTrue($totalPrice->getVatAmount()->equals(Money::fromInteger(10)));
     }
 }

@@ -49,18 +49,18 @@
                                     {{ cartItem.name }}
                                 </a>
                                 <div class="table-cart__cell__price-mobile">
-                                    {{ cartItemPrice.totalPrice.priceWithVat|price }}
+                                    {{ cartItemPrice.totalPrice.priceWithVat.toValue|price }}
                                     {% if cartItemDiscount is not null %}
                                         <div>
                                             {{ 'Discount'|trans }}:
-                                            {{ cartItemDiscount.priceWithVat|price }}
+                                            {{ cartItemDiscount.priceWithVat.toValue|price }}
                                         </div>
                                     {% endif %}
                                 </div>
                             </td>
 
                             <td class="table-cart__cell table-cart__cell--price">
-                                {{ cartItemPrice.unitPrice.priceWithVat|price }}
+                                {{ cartItemPrice.unitPrice.priceWithVat.toValue|price }}
                             </td>
 
                             <td class="table-cart__cell table-cart__cell--price">
@@ -76,11 +76,11 @@
                             </td>
 
                             <td class="table-cart__cell table-cart__cell--price js-cart-item-total-price">
-                                {{ cartItemPrice.totalPrice.priceWithVat|price }}
+                                {{ cartItemPrice.totalPrice.priceWithVat.toValue|price }}
                                 {% if cartItemDiscount is not null %}
                                     <div>
                                         {{ 'Discount'|trans }}:
-                                        {{ cartItemDiscount.priceWithVat|price }}
+                                        {{ cartItemDiscount.priceWithVat.toValue|price }}
                                     </div>
                                 {% endif %}
                             </td>
@@ -105,7 +105,7 @@
                         <td class="table-cart__cell table-cart__cell--total-price js-cart-total-price" colspan="2">
                             {{ 'Total price including VAT'|trans }}:
                             <span>
-                                {{ productsPrice.priceWithVat|price }}
+                                {{ productsPrice.priceWithVat.toValue|price }}
                             </span>
                         </td>
                         <td class="table-cart__cell">&nbsp;</td>

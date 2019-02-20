@@ -5,7 +5,7 @@ ga('require', 'ecommerce');
 ga('ecommerce:addTransaction', {
     'id': '{{ order.number|escape('js') }}',
     'revenue': '{{ order.totalPriceWithVat }}',
-    'shipping': '{{ order.transportAndPaymentPrice.priceWithVat }}',
+    'shipping': '{{ order.transportAndPaymentPrice.priceWithVat.toValue }}',
     'tax': '{{ order.totalVatAmount }}',
     'currency': '{{ order.currency.code|escape('js') }}'
 });

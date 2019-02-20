@@ -28,15 +28,15 @@ class PaymentPriceCalculationTest extends TestCase
                 'inputPriceType' => PricingSetting::INPUT_PRICE_TYPE_WITHOUT_VAT,
                 'inputPrice' => '6999',
                 'vatPercent' => '21',
-                'priceWithoutVat' => '6998.78',
-                'priceWithVat' => '8469',
+                'priceWithoutVat' => Money::fromString('6998.78'),
+                'priceWithVat' => Money::fromString('8469'),
             ],
             [
                 'inputPriceType' => PricingSetting::INPUT_PRICE_TYPE_WITH_VAT,
                 'inputPrice' => '6999.99',
                 'vatPercent' => '21',
-                'priceWithoutVat' => '5784.8',
-                'priceWithVat' => '7000',
+                'priceWithoutVat' => Money::fromString('5784.8'),
+                'priceWithVat' => Money::fromString('7000'),
             ],
         ];
     }
@@ -48,16 +48,16 @@ class PaymentPriceCalculationTest extends TestCase
                 'inputPriceType' => PricingSetting::INPUT_PRICE_TYPE_WITHOUT_VAT,
                 'inputPrice' => '6999',
                 'vatPercent' => '21',
-                'priceWithoutVat' => '6998.78',
-                'priceWithVat' => '8469',
+                'priceWithoutVat' => Money::fromString('6998.78'),
+                'priceWithVat' => Money::fromString('8469'),
                 'productsPrice' => new Price(Money::fromInteger(100), Money::fromInteger(121)),
             ],
             [
                 'inputPriceType' => PricingSetting::INPUT_PRICE_TYPE_WITH_VAT,
                 'inputPrice' => '6999.99',
                 'vatPercent' => '21',
-                'priceWithoutVat' => '5784.8',
-                'priceWithVat' => '7000',
+                'priceWithoutVat' => Money::fromString('5784.8'),
+                'priceWithVat' => Money::fromString('7000'),
                 'productsPrice' => new Price(Money::fromInteger(1000), Money::fromInteger(1210)),
             ],
         ];
@@ -68,15 +68,15 @@ class PaymentPriceCalculationTest extends TestCase
      * @param mixed $inputPriceType
      * @param mixed $inputPrice
      * @param mixed $vatPercent
-     * @param mixed $priceWithoutVat
-     * @param mixed $priceWithVat
+     * @param \Shopsys\FrameworkBundle\Component\Money\Money $priceWithoutVat
+     * @param \Shopsys\FrameworkBundle\Component\Money\Money $priceWithVat
      */
     public function testCalculateIndependentPrice(
         $inputPriceType,
         $inputPrice,
         $vatPercent,
-        $priceWithoutVat,
-        $priceWithVat
+        Money $priceWithoutVat,
+        Money $priceWithVat
     ) {
         $pricingSettingMock = $this->getMockBuilder(PricingSetting::class)
             ->setMethods(['getInputPriceType', 'getRoundingType'])
@@ -110,8 +110,8 @@ class PaymentPriceCalculationTest extends TestCase
 
         $price = $paymentPriceCalculation->calculateIndependentPrice($payment, $currency);
 
-        $this->assertSame(round($priceWithoutVat, 6), round($price->getPriceWithoutVat(), 6));
-        $this->assertSame(round($priceWithVat, 6), round($price->getPriceWithVat(), 6));
+        $this->assertTrue($price->getPriceWithoutVat()->equals($priceWithoutVat));
+        $this->assertTrue($price->getPriceWithVat()->equals($priceWithVat));
     }
 
     /**
@@ -119,17 +119,17 @@ class PaymentPriceCalculationTest extends TestCase
      * @param mixed $inputPriceType
      * @param mixed $inputPrice
      * @param mixed $vatPercent
-     * @param mixed $priceWithoutVat
-     * @param mixed $priceWithVat
-     * @param mixed $productsPrice
+     * @param \Shopsys\FrameworkBundle\Component\Money\Money $priceWithoutVat
+     * @param \Shopsys\FrameworkBundle\Component\Money\Money $priceWithVat
+     * @param \Shopsys\FrameworkBundle\Model\Pricing\Price $productsPrice
      */
     public function testCalculatePrice(
         $inputPriceType,
         $inputPrice,
         $vatPercent,
-        $priceWithoutVat,
-        $priceWithVat,
-        $productsPrice
+        Money $priceWithoutVat,
+        Money $priceWithVat,
+        Price $productsPrice
     ) {
         $priceLimit = Money::fromInteger(1000);
         $pricingSettingMock = $this->getMockBuilder(PricingSetting::class)
@@ -167,12 +167,12 @@ class PaymentPriceCalculationTest extends TestCase
 
         $price = $paymentPriceCalculation->calculatePrice($payment, $currency, $productsPrice, 1);
 
-        if ($productsPrice->getPriceWithVat() > $priceLimit->toValue()) {
-            $this->assertSame(round(0, 6), round($price->getPriceWithoutVat(), 6));
-            $this->assertSame(round(0, 6), round($price->getPriceWithVat(), 6));
+        if ($productsPrice->getPriceWithVat()->isGreaterThan($priceLimit)) {
+            $this->assertTrue($price->getPriceWithoutVat()->equals(Money::zero()));
+            $this->assertTrue($price->getPriceWithVat()->equals(Money::zero()));
         } else {
-            $this->assertSame(round($priceWithoutVat, 6), round($price->getPriceWithoutVat(), 6));
-            $this->assertSame(round($priceWithVat, 6), round($price->getPriceWithVat(), 6));
+            $this->assertTrue($price->getPriceWithoutVat()->equals($priceWithoutVat));
+            $this->assertTrue($price->getPriceWithVat()->equals($priceWithVat));
         }
     }
 }

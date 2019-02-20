@@ -14,9 +14,9 @@ class PriceTest extends TestCase
         $priceToAdd = new Price(Money::fromInteger(10), Money::fromInteger(15));
         $actualAddingResult = $price->add($priceToAdd);
 
-        $this->assertSame(12, $actualAddingResult->getPriceWithoutVat());
-        $this->assertSame(18, $actualAddingResult->getPriceWithVat());
-        $this->assertSame(6, $actualAddingResult->getVatAmount());
+        $this->assertTrue($actualAddingResult->getPriceWithoutVat()->equals(Money::fromInteger(12)));
+        $this->assertTrue($actualAddingResult->getPriceWithVat()->equals(Money::fromInteger(18)));
+        $this->assertTrue($actualAddingResult->getVatAmount()->equals(Money::fromInteger(6)));
     }
 
     public function testAddIsImmutable()
@@ -25,9 +25,9 @@ class PriceTest extends TestCase
         $priceToAdd = new Price(Money::fromInteger(10), Money::fromInteger(15));
         $price->add($priceToAdd);
 
-        $this->assertSame(2, $price->getPriceWithoutVat());
-        $this->assertSame(3, $price->getPriceWithVat());
-        $this->assertSame(1, $price->getVatAmount());
+        $this->assertTrue($price->getPriceWithoutVat()->equals(Money::fromInteger(2)));
+        $this->assertTrue($price->getPriceWithVat()->equals(Money::fromInteger(3)));
+        $this->assertTrue($price->getVatAmount()->equals(Money::fromInteger(1)));
     }
 
     public function testSubtract()
@@ -36,9 +36,9 @@ class PriceTest extends TestCase
         $priceToSubtract = new Price(Money::fromInteger(10), Money::fromInteger(15));
         $actualAddingResult = $price->subtract($priceToSubtract);
 
-        $this->assertSame(-8, $actualAddingResult->getPriceWithoutVat());
-        $this->assertSame(-12, $actualAddingResult->getPriceWithVat());
-        $this->assertSame(-4, $actualAddingResult->getVatAmount());
+        $this->assertTrue($actualAddingResult->getPriceWithoutVat()->equals(Money::fromInteger(-8)));
+        $this->assertTrue($actualAddingResult->getPriceWithVat()->equals(Money::fromInteger(-12)));
+        $this->assertTrue($actualAddingResult->getVatAmount()->equals(Money::fromInteger(-4)));
     }
 
     public function testSubtractIsImmutable()
@@ -47,8 +47,8 @@ class PriceTest extends TestCase
         $priceToSubtract = new Price(Money::fromInteger(10), Money::fromInteger(15));
         $price->subtract($priceToSubtract);
 
-        $this->assertSame(2, $price->getPriceWithoutVat());
-        $this->assertSame(3, $price->getPriceWithVat());
-        $this->assertSame(1, $price->getVatAmount());
+        $this->assertTrue($price->getPriceWithoutVat()->equals(Money::fromInteger(2)));
+        $this->assertTrue($price->getPriceWithVat()->equals(Money::fromInteger(3)));
+        $this->assertTrue($price->getVatAmount()->equals(Money::fromInteger(1)));
     }
 }

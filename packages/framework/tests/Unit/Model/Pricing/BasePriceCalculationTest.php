@@ -21,17 +21,17 @@ class BasePriceCalculationTest extends TestCase
                 'inputPriceType' => PricingSetting::INPUT_PRICE_TYPE_WITHOUT_VAT,
                 'inputPrice' => '6999',
                 'vatPercent' => '21',
-                'basePriceWithoutVat' => '6998.78',
-                'basePriceWithVat' => '8469',
-                'basePriceVatAmount' => '1470.22',
+                'basePriceWithoutVat' => Money::fromString('6998.78'),
+                'basePriceWithVat' => Money::fromString('8469'),
+                'basePriceVatAmount' => Money::fromString('1470.22'),
             ],
             [
                 'inputPriceType' => PricingSetting::INPUT_PRICE_TYPE_WITH_VAT,
                 'inputPrice' => '6999.99',
                 'vatPercent' => '21',
-                'basePriceWithoutVat' => '5784.8',
-                'basePriceWithVat' => '7000',
-                'basePriceVatAmount' => '1215.2',
+                'basePriceWithoutVat' => Money::fromString('5784.8'),
+                'basePriceWithVat' => Money::fromString('7000'),
+                'basePriceVatAmount' => Money::fromString('1215.2'),
             ],
         ];
     }
@@ -41,17 +41,17 @@ class BasePriceCalculationTest extends TestCase
      * @param mixed $inputPriceType
      * @param mixed $inputPrice
      * @param mixed $vatPercent
-     * @param mixed $basePriceWithoutVat
-     * @param mixed $basePriceWithVat
-     * @param mixed $basePriceVatAmount
+     * @param \Shopsys\FrameworkBundle\Component\Money\Money $basePriceWithoutVat
+     * @param \Shopsys\FrameworkBundle\Component\Money\Money $basePriceWithVat
+     * @param \Shopsys\FrameworkBundle\Component\Money\Money $basePriceVatAmount
      */
     public function testCalculateBasePrice(
         $inputPriceType,
         $inputPrice,
         $vatPercent,
-        $basePriceWithoutVat,
-        $basePriceWithVat,
-        $basePriceVatAmount
+        Money $basePriceWithoutVat,
+        Money $basePriceWithVat,
+        Money $basePriceVatAmount
     ) {
         $pricingSettingMock = $this->getMockBuilder(PricingSetting::class)
             ->setMethods(['getRoundingType'])
@@ -72,9 +72,9 @@ class BasePriceCalculationTest extends TestCase
 
         $basePrice = $basePriceCalculation->calculateBasePrice($inputPrice, $inputPriceType, $vat);
 
-        $this->assertSame(round($basePriceWithoutVat, 6), round($basePrice->getPriceWithoutVat(), 6));
-        $this->assertSame(round($basePriceWithVat, 6), round($basePrice->getPriceWithVat(), 6));
-        $this->assertSame(round($basePriceVatAmount, 6), round($basePrice->getVatAmount(), 6));
+        $this->assertTrue($basePrice->getPriceWithoutVat()->equals($basePriceWithoutVat));
+        $this->assertTrue($basePrice->getPriceWithVat()->equals($basePriceWithVat));
+        $this->assertTrue($basePrice->getVatAmount()->equals($basePriceVatAmount));
     }
 
     public function applyCoefficientProvider()
@@ -84,25 +84,25 @@ class BasePriceCalculationTest extends TestCase
                 'priceWithVat' => Money::fromInteger(100),
                 'vatPercent' => '20',
                 'coefficients' => ['2'],
-                'resultPriceWithVat' => '200',
-                'resultPriceWithoutVat' => '167',
-                'resultVatAmount' => '33',
+                'resultPriceWithVat' => Money::fromInteger(200),
+                'resultPriceWithoutVat' => Money::fromInteger(167),
+                'resultVatAmount' => Money::fromInteger(33),
             ],
             [
                 'priceWithVat' => Money::fromInteger(100),
                 'vatPercent' => '10',
                 'coefficients' => ['1'],
-                'resultPriceWithVat' => '100',
-                'resultPriceWithoutVat' => '91',
-                'resultVatAmount' => '9',
+                'resultPriceWithVat' => Money::fromInteger(100),
+                'resultPriceWithoutVat' => Money::fromInteger(91),
+                'resultVatAmount' => Money::fromInteger(9),
             ],
             [
                 'priceWithVat' => Money::fromInteger(100),
                 'vatPercent' => '20',
                 'coefficients' => ['0.6789'],
-                'resultPriceWithVat' => '68',
-                'resultPriceWithoutVat' => '57',
-                'resultVatAmount' => '11',
+                'resultPriceWithVat' => Money::fromInteger(68),
+                'resultPriceWithoutVat' => Money::fromInteger(57),
+                'resultVatAmount' => Money::fromInteger(11),
             ],
         ];
     }
@@ -112,17 +112,17 @@ class BasePriceCalculationTest extends TestCase
      * @param \Shopsys\FrameworkBundle\Component\Money\Money $priceWithVat
      * @param mixed $vatPercent
      * @param mixed $coefficients
-     * @param mixed $resultPriceWithVat
-     * @param mixed $resultPriceWithoutVat
-     * @param mixed $resultVatAmount
+     * @param \Shopsys\FrameworkBundle\Component\Money\Money $resultPriceWithVat
+     * @param \Shopsys\FrameworkBundle\Component\Money\Money $resultPriceWithoutVat
+     * @param \Shopsys\FrameworkBundle\Component\Money\Money $resultVatAmount
      */
     public function testApplyCoefficient(
         Money $priceWithVat,
         $vatPercent,
         $coefficients,
-        $resultPriceWithVat,
-        $resultPriceWithoutVat,
-        $resultVatAmount
+        Money $resultPriceWithVat,
+        Money $resultPriceWithoutVat,
+        Money $resultVatAmount
     ) {
         $rounding = $this->getMockBuilder(Rounding::class)
             ->setMethods(['roundPriceWithVat', 'roundPriceWithoutVat', 'roundVatAmount'])
@@ -147,8 +147,8 @@ class BasePriceCalculationTest extends TestCase
         $vat = new Vat($vatData);
         $resultPrice = $basePriceCalculation->applyCoefficients($price, $vat, $coefficients);
 
-        $this->assertSame(round($resultPriceWithVat, 6), round($resultPrice->getPriceWithVat(), 6));
-        $this->assertSame(round($resultPriceWithoutVat, 6), round($resultPrice->getPriceWithoutVat(), 6));
-        $this->assertSame(round($resultVatAmount, 6), round($resultPrice->getVatAmount(), 6));
+        $this->assertTrue($resultPriceWithVat->equals($resultPrice->getPriceWithVat()));
+        $this->assertTrue($resultPriceWithoutVat->equals($resultPrice->getPriceWithoutVat()));
+        $this->assertTrue($resultVatAmount->equals($resultPrice->getVatAmount()));
     }
 }

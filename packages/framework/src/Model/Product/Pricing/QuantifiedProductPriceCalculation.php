@@ -105,7 +105,7 @@ class QuantifiedProductPriceCalculation
      */
     protected function getTotalPriceWithVat()
     {
-        return $this->productPrice->getPriceWithVat() * $this->quantifiedProduct->getQuantity();
+        return $this->productPrice->getPriceWithVat()->toValue() * $this->quantifiedProduct->getQuantity();
     }
 
     /**

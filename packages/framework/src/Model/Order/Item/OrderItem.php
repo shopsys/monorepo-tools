@@ -142,8 +142,8 @@ class OrderItem
     ) {
         $this->order = $order; // Must be One-To-Many Bidirectional because of unnecessary join table
         $this->name = $name;
-        $this->priceWithoutVat = Money::fromValue($price->getPriceWithoutVat());
-        $this->priceWithVat = Money::fromValue($price->getPriceWithVat());
+        $this->priceWithoutVat = $price->getPriceWithoutVat();
+        $this->priceWithVat = $price->getPriceWithVat();
         $this->vatPercent = $vatPercent;
         $this->quantity = $quantity;
         $this->type = $type;

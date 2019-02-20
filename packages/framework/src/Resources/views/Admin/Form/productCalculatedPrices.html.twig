@@ -31,10 +31,10 @@
                         </div>
                         <div class="form-line__item--right">
                             <div class="form-line__item__price">
-                                {{ productSellingPrice.sellingPrice.priceWithoutVat|priceWithCurrencyByDomainId(domainId) }}
+                                {{ productSellingPrice.sellingPrice.priceWithoutVat.toValue|priceWithCurrencyByDomainId(domainId) }}
                             </div>
                             <div class="form-line__item__price">
-                                <strong>{{ productSellingPrice.sellingPrice.priceWithVat|priceWithCurrencyByDomainId(domainId) }}</strong>
+                                <strong>{{ productSellingPrice.sellingPrice.priceWithVat.toValue|priceWithCurrencyByDomainId(domainId) }}</strong>
                             </div>
                         </div>
                         <div>

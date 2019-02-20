@@ -91,7 +91,7 @@ class InputPriceRecalculator
 
                 $newInputPrice = $this->inputPriceCalculation->getInputPrice(
                     $toInputPriceType,
-                    $paymentPrice->getPriceWithVat(),
+                    $paymentPrice->getPriceWithVat()->toValue(),
                     $payment->getVat()->getPercent()
                 );
 
@@ -119,7 +119,7 @@ class InputPriceRecalculator
 
                 $newInputPrice = $this->inputPriceCalculation->getInputPrice(
                     $toInputPriceType,
-                    $transportPrice->getPriceWithVat(),
+                    $transportPrice->getPriceWithVat()->toValue(),
                     $transport->getVat()->getPercent()
                 );
 

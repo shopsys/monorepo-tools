@@ -206,7 +206,7 @@ class TransportFacade
         $transports = $this->getAllIncludingDeleted();
         foreach ($transports as $transport) {
             $transportPrice = $this->transportPriceCalculation->calculateIndependentPrice($transport, $currency);
-            $transportPricesWithVatByTransportId[$transport->getId()] = $transportPrice->getPriceWithVat();
+            $transportPricesWithVatByTransportId[$transport->getId()] = $transportPrice->getPriceWithVat()->toValue();
         }
 
         return $transportPricesWithVatByTransportId;

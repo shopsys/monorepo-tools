@@ -46,11 +46,11 @@ class OrderPriceCalculation
         foreach ($order->getItems() as $orderItem) {
             $itemTotalPrice = $this->orderItemPriceCalculation->calculateTotalPrice($orderItem);
 
-            $priceWithVat += $itemTotalPrice->getPriceWithVat();
-            $priceWithoutVat += $itemTotalPrice->getPriceWithoutVat();
+            $priceWithVat += $itemTotalPrice->getPriceWithVat()->toValue();
+            $priceWithoutVat += $itemTotalPrice->getPriceWithoutVat()->toValue();
 
             if ($orderItem->isTypeProduct()) {
-                $productPriceWithVat += $itemTotalPrice->getPriceWithVat();
+                $productPriceWithVat += $itemTotalPrice->getPriceWithVat()->toValue();
             }
         }
 
@@ -72,9 +72,11 @@ class OrderPriceCalculation
             return null;
         }
 
-        $roundingPrice = $this->rounding->roundPriceWithVat(
-            round($orderTotalPrice->getPriceWithVat()) - $orderTotalPrice->getPriceWithVat()
-        );
+        $priceWithVat = $orderTotalPrice->getPriceWithVat();
+        $roundedPriceWithVat = $priceWithVat->round(0);
+
+        $roundingPrice = $this->rounding->roundPriceWithVat($roundedPriceWithVat->subtract($priceWithVat)->toValue());
+
         if ($roundingPrice === 0.0) {
             return null;
         }

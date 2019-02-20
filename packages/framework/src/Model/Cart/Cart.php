@@ -237,7 +237,7 @@ class Cart
         }
 
         $productPrice = $productPriceCalculation->calculatePriceForCurrentUser($product);
-        $newCartItem = $cartItemFactory->create($this, $product, $quantity, $productPrice->getPriceWithVat());
+        $newCartItem = $cartItemFactory->create($this, $product, $quantity, $productPrice->getPriceWithVat()->toValue());
         $this->addItem($newCartItem);
         $this->setModifiedNow();
 

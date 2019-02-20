@@ -22,10 +22,10 @@
                     {% if base_prices[key] is defined %}
                         <div class="form-line__item--right">
                             <div class="form-line__item__price">
-                                {{ base_prices[key].priceWithoutVat|priceWithCurrencyByCurrencyId(currency.id) }}
+                                {{ base_prices[key].priceWithoutVat.toValue|priceWithCurrencyByCurrencyId(currency.id) }}
                             </div>
                             <div class="form-line__item__price">
-                                <strong>{{ base_prices[key].priceWithVat|priceWithCurrencyByCurrencyId(currency.id) }}</strong>
+                                <strong>{{ base_prices[key].priceWithVat.toValue|priceWithCurrencyByCurrencyId(currency.id) }}</strong>
                             </div>
                         </div>
                     {% endif %}

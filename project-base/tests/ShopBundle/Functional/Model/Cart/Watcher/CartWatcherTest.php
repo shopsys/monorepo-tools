@@ -33,7 +33,7 @@ class CartWatcherTest extends TransactionFunctionalTestCase
         $productPriceCalculationForUser = $this->getContainer()->get(ProductPriceCalculationForUser::class);
         $productPrice = $productPriceCalculationForUser->calculatePriceForCurrentUser($product);
         $cart = new Cart($customerIdentifier->getCartIdentifier());
-        $cartItem = new CartItem($cart, $product, 1, $productPrice->getPriceWithVat());
+        $cartItem = new CartItem($cart, $product, 1, $productPrice->getPriceWithVat()->toValue());
         $cart->addItem($cartItem);
 
         /** @var \Shopsys\FrameworkBundle\Model\Cart\Watcher\CartWatcher $cartWatcher */

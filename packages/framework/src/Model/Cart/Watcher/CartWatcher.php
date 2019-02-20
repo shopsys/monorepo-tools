@@ -3,6 +3,7 @@
 namespace Shopsys\FrameworkBundle\Model\Cart\Watcher;
 
 use Shopsys\FrameworkBundle\Component\Domain\Domain;
+use Shopsys\FrameworkBundle\Component\Money\Money;
 use Shopsys\FrameworkBundle\Model\Cart\Cart;
 use Shopsys\FrameworkBundle\Model\Customer\CurrentCustomer;
 use Shopsys\FrameworkBundle\Model\Product\Pricing\ProductPriceCalculationForUser;
@@ -49,10 +50,10 @@ class CartWatcher
         $modifiedItems = [];
         foreach ($cart->getItems() as $cartItem) {
             $productPrice = $this->productPriceCalculationForUser->calculatePriceForCurrentUser($cartItem->getProduct());
-            if ($cartItem->getWatchedPrice() != $productPrice->getPriceWithVat()) {
+            if (!$productPrice->getPriceWithVat()->equals(Money::fromValue($cartItem->getWatchedPrice()))) {
                 $modifiedItems[] = $cartItem;
             }
-            $cartItem->setWatchedPrice($productPrice->getPriceWithVat());
+            $cartItem->setWatchedPrice($productPrice->getPriceWithVat()->toValue());
         }
         return $modifiedItems;
     }

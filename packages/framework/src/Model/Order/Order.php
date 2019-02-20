@@ -1165,8 +1165,8 @@ class Order
             $orderItem->getOrder(),
             $name,
             new Price(
-                Money::fromValue($quantifiedItemDiscount->getPriceWithoutVat())->multiply('-1'),
-                Money::fromValue($quantifiedItemDiscount->getPriceWithVat())->multiply('-1')
+                $quantifiedItemDiscount->getPriceWithoutVat()->multiply('-1'),
+                $quantifiedItemDiscount->getPriceWithVat()->multiply('-1')
             ),
             $orderItem->getVatPercent(),
             1,

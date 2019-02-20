@@ -103,9 +103,9 @@ class OrderPreviewCalculationTest extends FunctionalTestCase
         $this->assertSame($quantifiedItemsPrices, $orderPreview->getQuantifiedItemsPrices());
         $this->assertSame($payment, $orderPreview->getPayment());
         $this->assertSame($paymentPrice, $orderPreview->getPaymentPrice());
-        $this->assertSame(2 + 20 + 400 * 2, $orderPreview->getTotalPrice()->getVatAmount());
-        $this->assertSame(12 + 120 + 2400 * 2, $orderPreview->getTotalPrice()->getPriceWithVat());
-        $this->assertSame(10 + 100 + 2000 * 2, $orderPreview->getTotalPrice()->getPriceWithoutVat());
+        $this->assertTrue($orderPreview->getTotalPrice()->getVatAmount()->equals(Money::fromInteger(2 + 20 + 400 * 2)));
+        $this->assertTrue($orderPreview->getTotalPrice()->getPriceWithVat()->equals(Money::fromInteger(12 + 120 + 2400 * 2)));
+        $this->assertTrue($orderPreview->getTotalPrice()->getPriceWithoutVat()->equals(Money::fromInteger(10 + 100 + 2000 * 2)));
         $this->assertSame($transport, $orderPreview->getTransport());
         $this->assertSame($transportPrice, $orderPreview->getTransportPrice());
     }
@@ -181,9 +181,9 @@ class OrderPreviewCalculationTest extends FunctionalTestCase
         $this->assertSame($quantifiedItemsPrices, $orderPreview->getQuantifiedItemsPrices());
         $this->assertNull($orderPreview->getPayment());
         $this->assertNull($orderPreview->getPaymentPrice());
-        $this->assertSame(400 * 2, $orderPreview->getTotalPrice()->getVatAmount());
-        $this->assertSame(2400 * 2, $orderPreview->getTotalPrice()->getPriceWithVat());
-        $this->assertSame(2000 * 2, $orderPreview->getTotalPrice()->getPriceWithoutVat());
+        $this->assertTrue($orderPreview->getTotalPrice()->getVatAmount()->equals(Money::fromInteger(400 * 2)));
+        $this->assertTrue($orderPreview->getTotalPrice()->getPriceWithVat()->equals(Money::fromInteger(2400 * 2)));
+        $this->assertTrue($orderPreview->getTotalPrice()->getPriceWithoutVat()->equals(Money::fromInteger(2000 * 2)));
         $this->assertNull($orderPreview->getTransport());
         $this->assertNull($orderPreview->getTransportPrice());
     }

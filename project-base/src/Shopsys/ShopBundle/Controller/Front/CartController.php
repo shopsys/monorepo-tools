@@ -4,7 +4,6 @@ namespace Shopsys\ShopBundle\Controller\Front;
 
 use Shopsys\FrameworkBundle\Component\Domain\Domain;
 use Shopsys\FrameworkBundle\Component\FlashMessage\ErrorExtractor;
-use Shopsys\FrameworkBundle\Component\Money\Money;
 use Shopsys\FrameworkBundle\Model\Cart\AddProductResult;
 use Shopsys\FrameworkBundle\Model\Cart\CartFacade;
 use Shopsys\FrameworkBundle\Model\Customer\CurrentCustomer;
@@ -128,7 +127,7 @@ class CartController extends FrontBaseController
         $orderPreview = $this->orderPreviewFactory->createForCurrentUser();
         $productsPrice = $orderPreview->getProductsPrice();
         $remainingPriceWithVat = $this->freeTransportAndPaymentFacade->getRemainingPriceWithVat(
-            Money::fromValue($productsPrice->getPriceWithVat()),
+            $productsPrice->getPriceWithVat(),
             $domainId
         );
 
@@ -138,7 +137,7 @@ class CartController extends FrontBaseController
             'cartItemPrices' => $orderPreview->getQuantifiedItemsPrices(),
             'form' => $form->createView(),
             'isFreeTransportAndPaymentActive' => $this->freeTransportAndPaymentFacade->isActive($domainId),
-            'isPaymentAndTransportFree' => $this->freeTransportAndPaymentFacade->isFree(Money::fromValue($productsPrice->getPriceWithVat()), $domainId),
+            'isPaymentAndTransportFree' => $this->freeTransportAndPaymentFacade->isFree($productsPrice->getPriceWithVat(), $domainId),
             'remainingPriceWithVat' => $remainingPriceWithVat->toValue(),
             'cartItemDiscounts' => $orderPreview->getQuantifiedItemsDiscounts(),
             'productsPrice' => $productsPrice,

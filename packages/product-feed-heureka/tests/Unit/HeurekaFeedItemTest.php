@@ -4,6 +4,7 @@ namespace Tests\ProductFeed\HeurekaBundle\Unit;
 
 use PHPUnit\Framework\TestCase;
 use Shopsys\FrameworkBundle\Component\Domain\Config\DomainConfig;
+use Shopsys\FrameworkBundle\Component\Money\Money;
 use Shopsys\FrameworkBundle\Model\Category\Category;
 use Shopsys\FrameworkBundle\Model\Category\CategoryFacade;
 use Shopsys\FrameworkBundle\Model\Pricing\Price;
@@ -118,8 +119,8 @@ class HeurekaFeedItemTest extends TestCase
         self::assertNull($heurekaFeedItem->getDescription());
         self::assertEquals('https://example.com/product-1', $heurekaFeedItem->getUrl());
         self::assertNull($heurekaFeedItem->getImgUrl());
-        self::assertEquals(0, $heurekaFeedItem->getPrice()->getPriceWithoutVat());
-        self::assertEquals(0, $heurekaFeedItem->getPrice()->getPriceWithVat());
+        self::assertTrue($heurekaFeedItem->getPrice()->getPriceWithoutVat()->equals(Money::zero()));
+        self::assertTrue($heurekaFeedItem->getPrice()->getPriceWithVat()->equals(Money::zero()));
         self::assertNull($heurekaFeedItem->getEan());
         self::assertEquals(0, $heurekaFeedItem->getDeliveryDate());
         self::assertNull($heurekaFeedItem->getManufacturer());

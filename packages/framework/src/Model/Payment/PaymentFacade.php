@@ -203,7 +203,7 @@ class PaymentFacade
         $payments = $this->getAllIncludingDeleted();
         foreach ($payments as $payment) {
             $paymentPrice = $this->paymentPriceCalculation->calculateIndependentPrice($payment, $currency);
-            $paymentPricesWithVatByPaymentId[$payment->getId()] = $paymentPrice->getPriceWithVat();
+            $paymentPricesWithVatByPaymentId[$payment->getId()] = $paymentPrice->getPriceWithVat()->toValue();
         }
 
         return $paymentPricesWithVatByPaymentId;

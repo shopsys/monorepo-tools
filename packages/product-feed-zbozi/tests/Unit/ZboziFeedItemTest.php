@@ -122,8 +122,8 @@ class ZboziFeedItemTest extends TestCase
         self::assertNull($zboziFeedItem->getDescription());
         self::assertEquals('https://example.com/product-1', $zboziFeedItem->getUrl());
         self::assertNull($zboziFeedItem->getImgUrl());
-        self::assertEquals(0, $zboziFeedItem->getPrice()->getPriceWithoutVat());
-        self::assertEquals(0, $zboziFeedItem->getPrice()->getPriceWithVat());
+        self::assertTrue($zboziFeedItem->getPrice()->getPriceWithoutVat()->equals(Money::zero()));
+        self::assertTrue($zboziFeedItem->getPrice()->getPriceWithVat()->equals(Money::zero()));
         self::assertNull($zboziFeedItem->getEan());
         self::assertNull($zboziFeedItem->getProductno());
         self::assertEquals(0, $zboziFeedItem->getDeliveryDate());

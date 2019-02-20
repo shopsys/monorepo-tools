@@ -2,7 +2,6 @@
 
 namespace Shopsys\FrameworkBundle\Model\Product\Pricing;
 
-use Shopsys\FrameworkBundle\Component\Money\Money;
 use Shopsys\FrameworkBundle\Model\Pricing\Price;
 
 class ProductPrice extends Price
@@ -19,7 +18,7 @@ class ProductPrice extends Price
     public function __construct(Price $price, $priceFrom)
     {
         $this->priceFrom = $priceFrom;
-        parent::__construct(Money::fromValue($price->getPriceWithoutVat()), Money::fromValue($price->getPriceWithVat()));
+        parent::__construct($price->getPriceWithoutVat(), $price->getPriceWithVat());
     }
 
     /**

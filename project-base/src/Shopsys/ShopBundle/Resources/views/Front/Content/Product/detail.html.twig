@@ -74,16 +74,16 @@
                                 itemtype="http://schema.org/Offer"
                                 class="box-detail-add__prices">
                                 <div class="box-detail-add__prices__item box-detail-add__prices__item--main">
-                                    {{ getProductSellingPrice(product).priceWithVat|price }}
+                                    {{ getProductSellingPrice(product).priceWithVat.toValue|price }}
                                 </div>
                                 <div class="box-detail-add__prices__item">
-                                    {{ getProductSellingPrice(product).priceWithoutVat|price }} {{ 'excluding VAT'|trans }}
+                                    {{ getProductSellingPrice(product).priceWithoutVat.toValue|price }} {{ 'excluding VAT'|trans }}
                                 </div>
                                 <meta itemprop="priceCurrency"
                                     content="{{ currencyCode(domain.id) }}"
                                 >
                                 <meta itemprop="price"
-                                    content="{{ getProductSellingPrice(product).priceWithVat }}"
+                                    content="{{ getProductSellingPrice(product).priceWithVat.toValue }}"
                                 >
                                 <link itemprop="availability"
                                     href="{{ product.calculatedSellingDenied ? 'http://schema.org/OutOfStock' : 'http://schema.org/InStock' }}"
@@ -161,7 +161,7 @@
                                     content="{{ currencyCode(domain.id) }}"
                                 >
                                 <meta itemprop="lowPrice"
-                                    content="{{ getProductSellingPrice(product).priceWithVat }}"
+                                    content="{{ getProductSellingPrice(product).priceWithVat.toValue }}"
                                 >
                                 <link itemprop="availability"
                                     href="{{ product.calculatedSellingDenied ? 'http://schema.org/OutOfStock' : 'http://schema.org/InStock' }}"
@@ -193,7 +193,7 @@
                                 {% endif %}
                             </td>
                             <td class="table-variants__cell table-variants__cell--price">
-                                {{ getProductSellingPrice(variant).priceWithVat|price }}
+                                {{ getProductSellingPrice(variant).priceWithVat.toValue|price }}
                             </td>
                             <td class="table-variants__cell table-variants__cell--action">
                                 {{ render(controller('ShopsysShopBundle:Front/Cart:addProductForm', {product: variant})) }}

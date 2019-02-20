@@ -2,6 +2,7 @@
 
 namespace Shopsys\FrameworkBundle\Model\Order\Watcher;
 
+use Shopsys\FrameworkBundle\Component\Money\Money;
 use Shopsys\FrameworkBundle\Model\Order\OrderData;
 use Shopsys\FrameworkBundle\Model\Order\Preview\OrderPreview;
 use Shopsys\FrameworkBundle\Model\Payment\Payment;
@@ -114,7 +115,7 @@ class TransportAndPaymentWatcher
                 $domainId
             );
 
-            if ($rememberedTransportPriceValue != $transportPrice->getPriceWithVat()) {
+            if (!$transportPrice->getPriceWithVat()->equals(Money::fromValue($rememberedTransportPriceValue))) {
                 return true;
             }
         }
@@ -146,7 +147,7 @@ class TransportAndPaymentWatcher
                 $domainId
             );
 
-            if ($rememberedPaymentPriceValue !== $paymentPrice->getPriceWithVat()) {
+            if (!$paymentPrice->getPriceWithVat()->equals(Money::fromValue($rememberedPaymentPriceValue))) {
                 return true;
             }
         }
@@ -175,7 +176,7 @@ class TransportAndPaymentWatcher
                 $orderPreview->getProductsPrice(),
                 $domainId
             );
-            $transportPriceValues[$transport->getId()] = $transportPrice->getPriceWithVat();
+            $transportPriceValues[$transport->getId()] = $transportPrice->getPriceWithVat()->toValue();
         }
 
         return $transportPriceValues;
@@ -202,7 +203,7 @@ class TransportAndPaymentWatcher
                 $orderPreview->getProductsPrice(),
                 $domainId
             );
-            $paymentPriceValues[$payment->getId()] = $paymentPrice->getPriceWithVat();
+            $paymentPriceValues[$payment->getId()] = $paymentPrice->getPriceWithVat()->toValue();
         }
 
         return $paymentPriceValues;

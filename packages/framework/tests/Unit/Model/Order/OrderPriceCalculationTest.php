@@ -130,7 +130,7 @@ class OrderPriceCalculationTest extends TestCase
         $priceCalculation = new OrderPriceCalculation($orderItemPriceCalculationMock, $roundingMock);
         $roundingPrice = $priceCalculation->calculateOrderRoundingPrice($payment, $currency, $orderTotalPrice)->getPriceWithVat();
 
-        $this->assertSame('-0.3', (string)$roundingPrice);
+        $this->assertTrue($roundingPrice->equals(Money::fromString('-0.3')));
     }
 
     public function testCalculateOrderRoundingPriceUp()
@@ -159,7 +159,7 @@ class OrderPriceCalculationTest extends TestCase
         $priceCalculation = new OrderPriceCalculation($orderItemPriceCalculationMock, $roundingMock);
         $roundingPrice = $priceCalculation->calculateOrderRoundingPrice($payment, $currency, $orderTotalPrice)->getPriceWithVat();
 
-        $this->assertSame('0.1', (string)$roundingPrice);
+        $this->assertTrue($roundingPrice->equals(Money::fromString('0.1')));
     }
 
     /**

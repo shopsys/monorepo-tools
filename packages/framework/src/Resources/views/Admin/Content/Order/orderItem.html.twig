@@ -20,12 +20,12 @@
         <td>{{ form_widget(orderItemForm.vatPercent, {attr: { class: 'text-right'}}) }}</td>
         <td class="text-right text-middle">
             {% if orderItemTotalPricesById[orderItemId] is defined %}
-                {{ orderItemTotalPricesById[orderItemId].priceWithVat|priceWithCurrency(currency) }}
+                {{ orderItemTotalPricesById[orderItemId].priceWithVat.toValue|priceWithCurrency(currency) }}
             {% endif %}
         </td>
         <td class="text-right text-middle">
             {% if orderItemTotalPricesById[orderItemId] is defined %}
-                {{ orderItemTotalPricesById[orderItemId].priceWithoutVat|priceWithCurrency(currency) }}
+                {{ orderItemTotalPricesById[orderItemId].priceWithoutVat.toValue|priceWithCurrency(currency) }}
             {% endif %}
         </td>
         <td class="table-col-5 table-edit__body__cell text-center">

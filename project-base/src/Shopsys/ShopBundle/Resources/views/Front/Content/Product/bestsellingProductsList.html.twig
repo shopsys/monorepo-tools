@@ -16,10 +16,10 @@
                         </h3>
                         <div class="list-products-line__item__price">
                             <div class="list-products-line__item__price__item list-products-line__item__price__item--main">
-                                {{ getProductSellingPrice(product).priceWithVat|price }}
+                                {{ getProductSellingPrice(product).priceWithVat.toValue|price }}
                             </div>
                             <div class="list-products-line__item__price__item">
-                                {{ getProductSellingPrice(product).priceWithoutVat|price }} {{ 'excluding VAT'|trans }}
+                                {{ getProductSellingPrice(product).priceWithoutVat.toValue|price }} {{ 'excluding VAT'|trans }}
                             </div>
                         </div>
                     </a>

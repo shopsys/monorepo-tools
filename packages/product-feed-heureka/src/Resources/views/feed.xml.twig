@@ -15,7 +15,7 @@
         {% if item.imgUrl -%}
             <IMGURL>{{ item.imgUrl }}</IMGURL>
         {% endif -%}
-        <PRICE_VAT>{{ item.price.priceWithVat|number_format(2, ',', '') }}</PRICE_VAT>
+        <PRICE_VAT>{{ item.price.priceWithVat.toValue|number_format(2, ',', '') }}</PRICE_VAT>
         {% if item.ean -%}
             <EAN>{{ item.ean }}</EAN>
         {% endif -%}

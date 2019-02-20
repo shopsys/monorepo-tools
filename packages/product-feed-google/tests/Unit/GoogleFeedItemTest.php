@@ -4,6 +4,7 @@ namespace Tests\ProductFeed\GoogleBundle\Unit;
 
 use PHPUnit\Framework\TestCase;
 use Shopsys\FrameworkBundle\Component\Domain\Config\DomainConfig;
+use Shopsys\FrameworkBundle\Component\Money\Money;
 use Shopsys\FrameworkBundle\Model\Pricing\Currency\Currency;
 use Shopsys\FrameworkBundle\Model\Pricing\Currency\CurrencyFacade;
 use Shopsys\FrameworkBundle\Model\Pricing\Price;
@@ -161,8 +162,8 @@ class GoogleFeedItemTest extends TestCase
         self::assertEquals('https://example.com/product-1', $googleFeedItem->getLink());
         self::assertNull($googleFeedItem->getImageLink());
         self::assertEquals('in stock', $googleFeedItem->getAvailability());
-        self::assertEquals(0, $googleFeedItem->getPrice()->getPriceWithoutVat());
-        self::assertEquals(0, $googleFeedItem->getPrice()->getPriceWithVat());
+        self::assertTrue($googleFeedItem->getPrice()->getPriceWithoutVat()->equals(Money::zero()));
+        self::assertTrue($googleFeedItem->getPrice()->getPriceWithVat()->equals(Money::zero()));
         self::assertEquals('EUR', $googleFeedItem->getCurrency()->getCode());
         self::assertEquals([], $googleFeedItem->getIdentifiers());
     }

@@ -44,7 +44,7 @@
                                 </span>
 
                                 <span class="box-chooser__item__price">
-                                    {{ transportPrice.priceWithVat|priceText }}
+                                    {{ transportPrice.priceWithVat.toValue|priceText }}
                                 </span>
                             </label>
                         {% else %}
@@ -89,7 +89,7 @@
                                 </span>
 
                                 <span class="box-chooser__item__price">
-                                    {{ paymentPrice.priceWithVat|priceText }}
+                                    {{ paymentPrice.priceWithVat.toValue|priceText }}
                                 </span>
                             </label>
                         {% else %}

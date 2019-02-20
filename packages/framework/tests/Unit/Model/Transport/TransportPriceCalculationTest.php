@@ -27,15 +27,15 @@ class TransportPriceCalculationTest extends TestCase
                 'inputPriceType' => PricingSetting::INPUT_PRICE_TYPE_WITHOUT_VAT,
                 'inputPrice' => '6999',
                 'vatPercent' => '21',
-                'priceWithoutVat' => '6998.78',
-                'priceWithVat' => '8469',
+                'priceWithoutVat' => Money::fromString('6998.78'),
+                'priceWithVat' => Money::fromString('8469'),
             ],
             [
                 'inputPriceType' => PricingSetting::INPUT_PRICE_TYPE_WITH_VAT,
                 'inputPrice' => '6999.99',
                 'vatPercent' => '21',
-                'priceWithoutVat' => '5784.8',
-                'priceWithVat' => '7000',
+                'priceWithoutVat' => Money::fromString('5784.8'),
+                'priceWithVat' => Money::fromString('7000'),
             ],
         ];
     }
@@ -45,15 +45,15 @@ class TransportPriceCalculationTest extends TestCase
      * @param mixed $inputPriceType
      * @param mixed $inputPrice
      * @param mixed $vatPercent
-     * @param mixed $priceWithoutVat
-     * @param mixed $priceWithVat
+     * @param \Shopsys\FrameworkBundle\Component\Money\Money $priceWithoutVat
+     * @param \Shopsys\FrameworkBundle\Component\Money\Money $priceWithVat
      */
     public function testCalculateIndependentPrice(
         $inputPriceType,
         $inputPrice,
         $vatPercent,
-        $priceWithoutVat,
-        $priceWithVat
+        Money $priceWithoutVat,
+        Money $priceWithVat
     ) {
         $pricingSettingMock = $this->getMockBuilder(PricingSetting::class)
             ->setMethods(['getInputPriceType', 'getRoundingType'])
@@ -86,7 +86,7 @@ class TransportPriceCalculationTest extends TestCase
 
         $price = $transportPriceCalculation->calculateIndependentPrice($transport, $currency);
 
-        $this->assertSame(round($priceWithoutVat, 6), round($price->getPriceWithoutVat(), 6));
-        $this->assertSame(round($priceWithVat, 6), round($price->getPriceWithVat(), 6));
+        $this->assertTrue($price->getPriceWithoutVat()->equals($priceWithoutVat));
+        $this->assertTrue($price->getPriceWithVat()->equals($priceWithVat));
     }
 }
