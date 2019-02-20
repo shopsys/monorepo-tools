@@ -19,7 +19,6 @@
 * [Components](./introduction/components.md)
 * [Abstract Filesystem](./introduction/abstract-filesystem.md)
 * [Product Feeds](./introduction/product-feeds.md)
-* [Administration Menu](./introduction/administration-menu.md)
 * [Logging](./introduction/logging.md)
 * [Product Searching via Elasticsearch](./introduction/product-search-via-elasticsearch.md)
 * [Domain, Multidomain, Multilanguage](./introduction/domain-multidomain-multilanguage.md)
@@ -48,6 +47,9 @@
 ## Functional documentation
 * [Behavior of Product Variants](./functional/behavior-of-product-variants.md)
 * [Product Visibility and Exclude from Sale](./functional/product-visibility-and-exclude-from-sale.md)
+
+## Administration
+* [Administration Menu](./administration/administration-menu.md)
 
 ## Frontend
 * [Design implementation and Customization](./frontend/design-implementation-and-customization.md)
