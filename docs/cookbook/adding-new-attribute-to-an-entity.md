@@ -245,4 +245,71 @@ as it is a part of your open-box, eg. [`detail.html.twig`](../../project-base/sr
 ```
 
 ## Data fixtures
-Currently, it is not possible to modify data fixtures from your project, this issue will be addressed in near future.
+You can modify data fixtures in `src/Shopsys/ShopBundle/DataFixtures/` of your project
+### Random `extId`
+If you want to add unique random `extId` for products from data fixtures you can add it in `createProductDataFromRowForFirstDomain` method of [`ProductDataFixtureLoader.php`](../../project-base/src/Shopsys/ShopBundle/DataFixtures/Demo/ProductDataFixtureLoader.php).
+You can use [`Faker`](https://github.com/fzaninotto/Faker) to generate random numbers like this:
+```diff
++   use Faker\Generator as Faker;
+
+    //...
+
++   /**
++    * @var \Faker\Generator
++    */
++   private $faker;
+
+    /**
+     * @param \Shopsys\ShopBundle\DataFixtures\Demo\ProductParametersFixtureLoader $productParametersFixtureLoader
+     * @param \Shopsys\FrameworkBundle\Model\Product\ProductDataFactoryInterface $productDataFactory
+     * @param \Shopsys\FrameworkBundle\Component\Domain\Domain $domain
+     * @param \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroupFacade $pricingGroupFacade
++    * @param \Faker\Generator $faker  
+     */
+    public function __construct(
+        ProductParametersFixtureLoader $productParametersFixtureLoader,
+        ProductDataFactoryInterface $productDataFactory,
+        Domain $domain,
+-       PricingGroupFacade $pricingGroupFacade
++       PricingGroupFacade $pricingGroupFacade,
++       Faker $faker
+    ) {
+        $this->productParametersFixtureLoader = $productParametersFixtureLoader;
+        $this->productDataFactory = $productDataFactory;
+        $this->domain = $domain;
+        $this->pricingGroupFacade = $pricingGroupFacade;
++       $this->faker = $faker;  
+    }
+
+    //...
+
+    public function createProductDataFromRowForFirstDomain($row)
+        {
+            $productData = $this->productDataFactory->create();
+            $this->updateProductDataFromCsvRowForFirstDomain($productData, $row);
++           $productData->extId = $this->faker->unique()->numberBetween(1, 10000);
+
+            return $productData;
+        }
+```
+
+### Specific `extId`
+If you need to add specific `extId` to products in data fixture you can add new column to [`demo-data-products.csv`](../../project-base/src/Shopsys/ShopBundle/DataFixtures/resources/demo-data-products.csv).
+Then you have to set the value of the new column in `updateProductDataFromCsvRowForFirstDomain` method of [`ProductDataFixtureLoader.php`](../../project-base/src/Shopsys/ShopBundle/DataFixtures/Demo/ProductDataFixtureLoader.php).
+```diff
++   const COLUMN_EXT_ID = 24;  
+
+    //...
+
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Product\ProductData $productData
+     * @param array $row
+     */
+    protected function updateProductDataFromCsvRowForFirstDomain(ProductData $productData, array $row)
+    {
+
+        //...
+
++       $productData->extId = $row[self::COLUMN_EXT_ID];
+    }  
+```
