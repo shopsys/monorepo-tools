@@ -67,7 +67,7 @@
         "sensio/generator-bundle": "^3.1.7",
         "shopsys/doctrine-orm": "^2.6.2",
         "shopsys/google-cloud-bundle": "dev-master",
-        "shopsys/postgres-search-bundle": "0.1",
+        "shopsys/postgres-search-bundle": "^0.1",
         "shopsys/migrations": "dev-master",
         "shopsys/form-types-bundle": "dev-master",
         "shopsys/framework": "dev-master",
