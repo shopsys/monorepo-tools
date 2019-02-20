@@ -2,20 +2,22 @@
 
 namespace Shopsys\FrameworkBundle\Model\Pricing;
 
+use Shopsys\FrameworkBundle\Component\Money\Money;
+
 class Price
 {
     /**
-     * @var string
+     * @var \Shopsys\FrameworkBundle\Component\Money\Money
      */
     protected $priceWithoutVat;
 
     /**
-     * @var string
+     * @var \Shopsys\FrameworkBundle\Component\Money\Money
      */
     protected $priceWithVat;
 
     /**
-     * @var string
+     * @var \Shopsys\FrameworkBundle\Component\Money\Money
      */
     protected $vatAmount;
 
@@ -25,44 +27,44 @@ class Price
      */
     public function __construct($priceWithoutVat, $priceWithVat)
     {
-        $this->priceWithoutVat = $priceWithoutVat;
-        $this->priceWithVat = $priceWithVat;
-        $this->vatAmount = $priceWithVat - $priceWithoutVat;
+        $this->priceWithoutVat = Money::fromValue($priceWithoutVat);
+        $this->priceWithVat = Money::fromValue($priceWithVat);
+        $this->vatAmount = $this->priceWithVat->subtract($this->priceWithoutVat);
     }
 
     /**
      * @return string
      */
-    public function getPriceWithoutVat()
+    public function getPriceWithoutVat(): string
     {
-        return $this->priceWithoutVat;
+        return $this->priceWithoutVat->toValue();
     }
 
     /**
      * @return string
      */
-    public function getPriceWithVat()
+    public function getPriceWithVat(): string
     {
-        return $this->priceWithVat;
+        return $this->priceWithVat->toValue();
     }
 
     /**
      * @return string
      */
-    public function getVatAmount()
+    public function getVatAmount(): string
     {
-        return $this->vatAmount;
+        return $this->vatAmount->toValue();
     }
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\Pricing\Price $priceToAdd
      * @return \Shopsys\FrameworkBundle\Model\Pricing\Price
      */
-    public function add(self $priceToAdd)
+    public function add(self $priceToAdd): self
     {
         return new self(
-            $this->priceWithoutVat + $priceToAdd->getPriceWithoutVat(),
-            $this->priceWithVat + $priceToAdd->getPriceWithVat()
+            $this->priceWithoutVat->add($priceToAdd->priceWithoutVat)->toValue(),
+            $this->priceWithVat->add($priceToAdd->priceWithVat)->toValue()
         );
     }
 
@@ -70,11 +72,11 @@ class Price
      * @param \Shopsys\FrameworkBundle\Model\Pricing\Price $priceToSubtract
      * @return \Shopsys\FrameworkBundle\Model\Pricing\Price
      */
-    public function subtract(self $priceToSubtract)
+    public function subtract(self $priceToSubtract): self
     {
         return new self(
-            $this->priceWithoutVat - $priceToSubtract->getPriceWithoutVat(),
-            $this->priceWithVat - $priceToSubtract->getPriceWithVat()
+            $this->priceWithoutVat->subtract($priceToSubtract->priceWithoutVat)->toValue(),
+            $this->priceWithVat->subtract($priceToSubtract->priceWithVat)->toValue()
         );
     }
 }
