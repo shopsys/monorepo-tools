@@ -17,6 +17,7 @@ use Shopsys\FrameworkBundle\Model\Transport\Transport;
 use Shopsys\FrameworkBundle\Model\Transport\TransportData;
 use Shopsys\FrameworkBundle\Model\Transport\TransportPriceCalculation;
 use Shopsys\FrameworkBundle\Model\Transport\TransportPriceFactory;
+use Tests\FrameworkBundle\Test\IsMoneyEqual;
 
 class TransportPriceCalculationTest extends TestCase
 {
@@ -86,7 +87,7 @@ class TransportPriceCalculationTest extends TestCase
 
         $price = $transportPriceCalculation->calculateIndependentPrice($transport, $currency);
 
-        $this->assertTrue($price->getPriceWithoutVat()->equals($priceWithoutVat));
-        $this->assertTrue($price->getPriceWithVat()->equals($priceWithVat));
+        $this->assertThat($price->getPriceWithoutVat(), new IsMoneyEqual($priceWithoutVat));
+        $this->assertThat($price->getPriceWithVat(), new IsMoneyEqual($priceWithVat));
     }
 }

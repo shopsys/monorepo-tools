@@ -15,6 +15,7 @@ use Shopsys\FrameworkBundle\Model\Product\Pricing\ProductPriceCalculationForUser
 use Shopsys\FrameworkBundle\Model\Product\Product;
 use Shopsys\ProductFeed\GoogleBundle\Model\FeedItem\GoogleFeedItem;
 use Shopsys\ProductFeed\GoogleBundle\Model\FeedItem\GoogleFeedItemFactory;
+use Tests\FrameworkBundle\Test\IsMoneyEqual;
 
 class GoogleFeedItemTest extends TestCase
 {
@@ -162,8 +163,8 @@ class GoogleFeedItemTest extends TestCase
         self::assertEquals('https://example.com/product-1', $googleFeedItem->getLink());
         self::assertNull($googleFeedItem->getImageLink());
         self::assertEquals('in stock', $googleFeedItem->getAvailability());
-        self::assertTrue($googleFeedItem->getPrice()->getPriceWithoutVat()->equals(Money::zero()));
-        self::assertTrue($googleFeedItem->getPrice()->getPriceWithVat()->equals(Money::zero()));
+        self::assertThat($googleFeedItem->getPrice()->getPriceWithoutVat(), new IsMoneyEqual(Money::zero()));
+        self::assertThat($googleFeedItem->getPrice()->getPriceWithVat(), new IsMoneyEqual(Money::zero()));
         self::assertEquals('EUR', $googleFeedItem->getCurrency()->getCode());
         self::assertEquals([], $googleFeedItem->getIdentifiers());
     }

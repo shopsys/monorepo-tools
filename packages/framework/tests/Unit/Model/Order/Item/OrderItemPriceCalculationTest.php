@@ -11,6 +11,7 @@ use Shopsys\FrameworkBundle\Model\Order\Item\OrderItemPriceCalculation;
 use Shopsys\FrameworkBundle\Model\Pricing\PriceCalculation;
 use Shopsys\FrameworkBundle\Model\Pricing\Vat\VatDataFactory;
 use Shopsys\FrameworkBundle\Model\Pricing\Vat\VatFactory;
+use Tests\FrameworkBundle\Test\IsMoneyEqual;
 
 class OrderItemPriceCalculationTest extends TestCase
 {
@@ -57,8 +58,8 @@ class OrderItemPriceCalculationTest extends TestCase
 
         $totalPrice = $orderItemPriceCalculation->calculateTotalPrice($orderItem);
 
-        $this->assertTrue($totalPrice->getPriceWithVat()->equals(Money::fromInteger(200)));
-        $this->assertTrue($totalPrice->getPriceWithoutVat()->equals(Money::fromInteger(190)));
-        $this->assertTrue($totalPrice->getVatAmount()->equals(Money::fromInteger(10)));
+        $this->assertThat($totalPrice->getPriceWithVat(), new IsMoneyEqual(Money::fromInteger(200)));
+        $this->assertThat($totalPrice->getPriceWithoutVat(), new IsMoneyEqual(Money::fromInteger(190)));
+        $this->assertThat($totalPrice->getVatAmount(), new IsMoneyEqual(Money::fromInteger(10)));
     }
 }

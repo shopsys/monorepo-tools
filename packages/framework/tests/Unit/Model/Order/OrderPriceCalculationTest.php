@@ -15,6 +15,7 @@ use Shopsys\FrameworkBundle\Model\Pricing\Currency\Currency;
 use Shopsys\FrameworkBundle\Model\Pricing\Currency\CurrencyData;
 use Shopsys\FrameworkBundle\Model\Pricing\Price;
 use Shopsys\FrameworkBundle\Model\Pricing\Rounding;
+use Tests\FrameworkBundle\Test\IsMoneyEqual;
 
 class OrderPriceCalculationTest extends TestCase
 {
@@ -130,7 +131,7 @@ class OrderPriceCalculationTest extends TestCase
         $priceCalculation = new OrderPriceCalculation($orderItemPriceCalculationMock, $roundingMock);
         $roundingPrice = $priceCalculation->calculateOrderRoundingPrice($payment, $currency, $orderTotalPrice)->getPriceWithVat();
 
-        $this->assertTrue($roundingPrice->equals(Money::fromString('-0.3')));
+        $this->assertThat($roundingPrice, new IsMoneyEqual(Money::fromString('-0.3')));
     }
 
     public function testCalculateOrderRoundingPriceUp()
@@ -159,7 +160,7 @@ class OrderPriceCalculationTest extends TestCase
         $priceCalculation = new OrderPriceCalculation($orderItemPriceCalculationMock, $roundingMock);
         $roundingPrice = $priceCalculation->calculateOrderRoundingPrice($payment, $currency, $orderTotalPrice)->getPriceWithVat();
 
-        $this->assertTrue($roundingPrice->equals(Money::fromString('0.1')));
+        $this->assertThat($roundingPrice, new IsMoneyEqual(Money::fromString('0.1')));
     }
 
     /**

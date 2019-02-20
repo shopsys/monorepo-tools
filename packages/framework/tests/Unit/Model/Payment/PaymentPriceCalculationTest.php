@@ -18,6 +18,7 @@ use Shopsys\FrameworkBundle\Model\Pricing\PricingSetting;
 use Shopsys\FrameworkBundle\Model\Pricing\Rounding;
 use Shopsys\FrameworkBundle\Model\Pricing\Vat\Vat;
 use Shopsys\FrameworkBundle\Model\Pricing\Vat\VatData;
+use Tests\FrameworkBundle\Test\IsMoneyEqual;
 
 class PaymentPriceCalculationTest extends TestCase
 {
@@ -110,8 +111,8 @@ class PaymentPriceCalculationTest extends TestCase
 
         $price = $paymentPriceCalculation->calculateIndependentPrice($payment, $currency);
 
-        $this->assertTrue($price->getPriceWithoutVat()->equals($priceWithoutVat));
-        $this->assertTrue($price->getPriceWithVat()->equals($priceWithVat));
+        $this->assertThat($price->getPriceWithoutVat(), new IsMoneyEqual($priceWithoutVat));
+        $this->assertThat($price->getPriceWithVat(), new IsMoneyEqual($priceWithVat));
     }
 
     /**
@@ -168,11 +169,11 @@ class PaymentPriceCalculationTest extends TestCase
         $price = $paymentPriceCalculation->calculatePrice($payment, $currency, $productsPrice, 1);
 
         if ($productsPrice->getPriceWithVat()->isGreaterThan($priceLimit)) {
-            $this->assertTrue($price->getPriceWithoutVat()->equals(Money::zero()));
-            $this->assertTrue($price->getPriceWithVat()->equals(Money::zero()));
+            $this->assertThat($price->getPriceWithoutVat(), new IsMoneyEqual(Money::zero()));
+            $this->assertThat($price->getPriceWithVat(), new IsMoneyEqual(Money::zero()));
         } else {
-            $this->assertTrue($price->getPriceWithoutVat()->equals($priceWithoutVat));
-            $this->assertTrue($price->getPriceWithVat()->equals($priceWithVat));
+            $this->assertThat($price->getPriceWithoutVat(), new IsMoneyEqual($priceWithoutVat));
+            $this->assertThat($price->getPriceWithVat(), new IsMoneyEqual($priceWithVat));
         }
     }
 }

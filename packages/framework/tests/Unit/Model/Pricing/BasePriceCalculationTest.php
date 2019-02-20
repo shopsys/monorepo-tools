@@ -11,6 +11,7 @@ use Shopsys\FrameworkBundle\Model\Pricing\PricingSetting;
 use Shopsys\FrameworkBundle\Model\Pricing\Rounding;
 use Shopsys\FrameworkBundle\Model\Pricing\Vat\Vat;
 use Shopsys\FrameworkBundle\Model\Pricing\Vat\VatData;
+use Tests\FrameworkBundle\Test\IsMoneyEqual;
 
 class BasePriceCalculationTest extends TestCase
 {
@@ -72,9 +73,9 @@ class BasePriceCalculationTest extends TestCase
 
         $basePrice = $basePriceCalculation->calculateBasePrice($inputPrice, $inputPriceType, $vat);
 
-        $this->assertTrue($basePrice->getPriceWithoutVat()->equals($basePriceWithoutVat));
-        $this->assertTrue($basePrice->getPriceWithVat()->equals($basePriceWithVat));
-        $this->assertTrue($basePrice->getVatAmount()->equals($basePriceVatAmount));
+        $this->assertThat($basePrice->getPriceWithoutVat(), new IsMoneyEqual($basePriceWithoutVat));
+        $this->assertThat($basePrice->getPriceWithVat(), new IsMoneyEqual($basePriceWithVat));
+        $this->assertThat($basePrice->getVatAmount(), new IsMoneyEqual($basePriceVatAmount));
     }
 
     public function applyCoefficientProvider()
@@ -147,8 +148,8 @@ class BasePriceCalculationTest extends TestCase
         $vat = new Vat($vatData);
         $resultPrice = $basePriceCalculation->applyCoefficients($price, $vat, $coefficients);
 
-        $this->assertTrue($resultPriceWithVat->equals($resultPrice->getPriceWithVat()));
-        $this->assertTrue($resultPriceWithoutVat->equals($resultPrice->getPriceWithoutVat()));
-        $this->assertTrue($resultVatAmount->equals($resultPrice->getVatAmount()));
+        $this->assertThat($resultPrice->getPriceWithVat(), new IsMoneyEqual($resultPriceWithVat));
+        $this->assertThat($resultPrice->getPriceWithoutVat(), new IsMoneyEqual($resultPriceWithoutVat));
+        $this->assertThat($resultPrice->getVatAmount(), new IsMoneyEqual($resultVatAmount));
     }
 }

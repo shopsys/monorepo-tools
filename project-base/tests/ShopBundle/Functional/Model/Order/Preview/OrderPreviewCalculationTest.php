@@ -19,6 +19,7 @@ use Shopsys\FrameworkBundle\Model\Product\Pricing\QuantifiedProductPriceCalculat
 use Shopsys\FrameworkBundle\Model\Transport\TransportPriceCalculation;
 use Shopsys\ShopBundle\Model\Payment\Payment;
 use Shopsys\ShopBundle\Model\Transport\Transport;
+use Tests\FrameworkBundle\Test\IsMoneyEqual;
 use Tests\ShopBundle\Test\FunctionalTestCase;
 
 class OrderPreviewCalculationTest extends FunctionalTestCase
@@ -103,9 +104,9 @@ class OrderPreviewCalculationTest extends FunctionalTestCase
         $this->assertSame($quantifiedItemsPrices, $orderPreview->getQuantifiedItemsPrices());
         $this->assertSame($payment, $orderPreview->getPayment());
         $this->assertSame($paymentPrice, $orderPreview->getPaymentPrice());
-        $this->assertTrue($orderPreview->getTotalPrice()->getVatAmount()->equals(Money::fromInteger(2 + 20 + 400 * 2)));
-        $this->assertTrue($orderPreview->getTotalPrice()->getPriceWithVat()->equals(Money::fromInteger(12 + 120 + 2400 * 2)));
-        $this->assertTrue($orderPreview->getTotalPrice()->getPriceWithoutVat()->equals(Money::fromInteger(10 + 100 + 2000 * 2)));
+        $this->assertThat($orderPreview->getTotalPrice()->getVatAmount(), new IsMoneyEqual(Money::fromInteger(2 + 20 + 400 * 2)));
+        $this->assertThat($orderPreview->getTotalPrice()->getPriceWithVat(), new IsMoneyEqual(Money::fromInteger(12 + 120 + 2400 * 2)));
+        $this->assertThat($orderPreview->getTotalPrice()->getPriceWithoutVat(), new IsMoneyEqual(Money::fromInteger(10 + 100 + 2000 * 2)));
         $this->assertSame($transport, $orderPreview->getTransport());
         $this->assertSame($transportPrice, $orderPreview->getTransportPrice());
     }
@@ -181,9 +182,9 @@ class OrderPreviewCalculationTest extends FunctionalTestCase
         $this->assertSame($quantifiedItemsPrices, $orderPreview->getQuantifiedItemsPrices());
         $this->assertNull($orderPreview->getPayment());
         $this->assertNull($orderPreview->getPaymentPrice());
-        $this->assertTrue($orderPreview->getTotalPrice()->getVatAmount()->equals(Money::fromInteger(400 * 2)));
-        $this->assertTrue($orderPreview->getTotalPrice()->getPriceWithVat()->equals(Money::fromInteger(2400 * 2)));
-        $this->assertTrue($orderPreview->getTotalPrice()->getPriceWithoutVat()->equals(Money::fromInteger(2000 * 2)));
+        $this->assertThat($orderPreview->getTotalPrice()->getVatAmount(), new IsMoneyEqual(Money::fromInteger(400 * 2)));
+        $this->assertThat($orderPreview->getTotalPrice()->getPriceWithVat(), new IsMoneyEqual(Money::fromInteger(2400 * 2)));
+        $this->assertThat($orderPreview->getTotalPrice()->getPriceWithoutVat(), new IsMoneyEqual(Money::fromInteger(2000 * 2)));
         $this->assertNull($orderPreview->getTransport());
         $this->assertNull($orderPreview->getTransportPrice());
     }

@@ -119,8 +119,8 @@ class HeurekaFeedItemTest extends TestCase
         self::assertNull($heurekaFeedItem->getDescription());
         self::assertEquals('https://example.com/product-1', $heurekaFeedItem->getUrl());
         self::assertNull($heurekaFeedItem->getImgUrl());
-        self::assertTrue($heurekaFeedItem->getPrice()->getPriceWithoutVat()->equals(Money::zero()));
-        self::assertTrue($heurekaFeedItem->getPrice()->getPriceWithVat()->equals(Money::zero()));
+        self::assertThat($heurekaFeedItem->getPrice()->getPriceWithoutVat(), new IsMoneyEqual(Money::zero()));
+        self::assertThat($heurekaFeedItem->getPrice()->getPriceWithVat(), new IsMoneyEqual(Money::zero()));
         self::assertNull($heurekaFeedItem->getEan());
         self::assertEquals(0, $heurekaFeedItem->getDeliveryDate());
         self::assertNull($heurekaFeedItem->getManufacturer());
