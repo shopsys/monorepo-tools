@@ -80,7 +80,7 @@ class TransportPriceCalculation
             return false;
         }
 
-        return $productsPrice->getPriceWithVat() >= $freeTransportAndPaymentPriceLimit;
+        return $productsPrice->getPriceWithVat() >= $freeTransportAndPaymentPriceLimit->toValue();
     }
 
     /**

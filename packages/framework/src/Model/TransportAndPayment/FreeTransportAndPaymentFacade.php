@@ -2,6 +2,7 @@
 
 namespace Shopsys\FrameworkBundle\Model\TransportAndPayment;
 
+use Shopsys\FrameworkBundle\Component\Money\Money;
 use Shopsys\FrameworkBundle\Model\Pricing\PricingSetting;
 
 class FreeTransportAndPaymentFacade
@@ -29,39 +30,39 @@ class FreeTransportAndPaymentFacade
     }
 
     /**
-     * @param string $productsPriceWithVat
+     * @param \Shopsys\FrameworkBundle\Component\Money\Money $productsPriceWithVat
      * @param int $domainId
      * @return bool
      */
-    public function isFree($productsPriceWithVat, $domainId)
+    public function isFree(Money $productsPriceWithVat, $domainId)
     {
         $freeTransportAndPaymentPriceLimit = $this->getFreeTransportAndPaymentPriceLimitOnDomain($domainId);
         if ($freeTransportAndPaymentPriceLimit === null) {
             return false;
         }
 
-        return $productsPriceWithVat >= $freeTransportAndPaymentPriceLimit;
+        return $productsPriceWithVat->isGreaterThanOrEqualTo($freeTransportAndPaymentPriceLimit);
     }
 
     /**
-     * @param string $productsPriceWithVat
+     * @param \Shopsys\FrameworkBundle\Component\Money\Money $productsPriceWithVat
      * @param int $domainId
-     * @return int
+     * @return \Shopsys\FrameworkBundle\Component\Money\Money
      */
-    public function getRemainingPriceWithVat($productsPriceWithVat, $domainId)
+    public function getRemainingPriceWithVat(Money $productsPriceWithVat, $domainId): Money
     {
-        if (!$this->isFree($productsPriceWithVat, $domainId)) {
-            return $this->getFreeTransportAndPaymentPriceLimitOnDomain($domainId) - $productsPriceWithVat;
+        if (!$this->isFree($productsPriceWithVat, $domainId) && $this->isActive($domainId)) {
+            return $this->getFreeTransportAndPaymentPriceLimitOnDomain($domainId)->subtract($productsPriceWithVat);
         }
 
-        return 0;
+        return Money::fromInteger(0);
     }
 
     /**
      * @param int $domainId
-     * @return string
+     * @return \Shopsys\FrameworkBundle\Component\Money\Money|null
      */
-    protected function getFreeTransportAndPaymentPriceLimitOnDomain($domainId)
+    protected function getFreeTransportAndPaymentPriceLimitOnDomain($domainId): ?Money
     {
         return $this->pricingSetting->getFreeTransportAndPaymentPriceLimit($domainId);
     }

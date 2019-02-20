@@ -131,7 +131,7 @@ class PaymentPriceCalculationTest extends TestCase
         $priceWithVat,
         $productsPrice
     ) {
-        $priceLimit = 1000;
+        $priceLimit = Money::fromInteger(1000);
         $pricingSettingMock = $this->getMockBuilder(PricingSetting::class)
             ->setMethods(['getInputPriceType', 'getRoundingType', 'getFreeTransportAndPaymentPriceLimit'])
             ->disableOriginalConstructor()
@@ -167,7 +167,7 @@ class PaymentPriceCalculationTest extends TestCase
 
         $price = $paymentPriceCalculation->calculatePrice($payment, $currency, $productsPrice, 1);
 
-        if ($productsPrice->getPriceWithVat() > $priceLimit) {
+        if ($productsPrice->getPriceWithVat() > $priceLimit->toValue()) {
             $this->assertSame(round(0, 6), round($price->getPriceWithoutVat(), 6));
             $this->assertSame(round(0, 6), round($price->getPriceWithVat(), 6));
         } else {

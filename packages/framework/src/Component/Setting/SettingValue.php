@@ -5,6 +5,7 @@ namespace Shopsys\FrameworkBundle\Component\Setting;
 use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 use Shopsys\FrameworkBundle\Component\DateTimeHelper\DateTimeHelper;
+use Shopsys\FrameworkBundle\Component\Money\Money;
 
 /**
  * @ORM\Table(name="setting_values")
@@ -19,6 +20,7 @@ class SettingValue
     const TYPE_FLOAT = 'float';
     const TYPE_BOOLEAN = 'boolean';
     const TYPE_DATETIME = 'datetime';
+    const TYPE_MONEY = 'money';
     const TYPE_NULL = 'none';
 
     const BOOLEAN_TRUE = 'true';
@@ -58,7 +60,7 @@ class SettingValue
 
     /**
      * @param string $name
-     * @param \DateTime|string|int|float|bool|null $value
+     * @param \DateTime|\Shopsys\FrameworkBundle\Component\Money\Money|string|int|float|bool|null $value
      * @param int $domainId
      */
     public function __construct($name, $value, $domainId)
@@ -69,7 +71,7 @@ class SettingValue
     }
 
     /**
-     * @param \DateTime|string|int|float|bool|null $value
+     * @param \DateTime|\Shopsys\FrameworkBundle\Component\Money\Money|string|int|float|bool|null $value
      */
     public function edit($value)
     {
@@ -85,7 +87,7 @@ class SettingValue
     }
 
     /**
-     * @return \DateTime|string|int|float|bool|null
+     * @return \DateTime|\Shopsys\FrameworkBundle\Component\Money\Money|string|int|float|bool|null
      */
     public function getValue()
     {
@@ -103,6 +105,8 @@ class SettingValue
                 return $this->value === self::BOOLEAN_TRUE;
             case self::TYPE_DATETIME:
                 return DateTimeHelper::createFromFormat(self::DATETIME_STORED_FORMAT, $this->value);
+            case self::TYPE_MONEY:
+                return Money::fromString($this->value);
             default:
                 return $this->value;
         }
@@ -117,7 +121,7 @@ class SettingValue
     }
 
     /**
-     * @param \DateTime|string|int|float|bool|null $value
+     * @param \DateTime|\Shopsys\FrameworkBundle\Component\Money\Money|string|int|float|bool|null $value
      */
     protected function setValue($value)
     {
@@ -128,13 +132,15 @@ class SettingValue
             $this->value = $value;
         } elseif ($this->type === self::TYPE_DATETIME) {
             $this->value = $value->format(self::DATETIME_STORED_FORMAT);
+        } elseif ($this->type === self::TYPE_MONEY) {
+            $this->value = $value->toString();
         } else {
             $this->value = (string)$value;
         }
     }
 
     /**
-     * @param \DateTime|string|int|float|bool|null $value
+     * @param \DateTime|\Shopsys\FrameworkBundle\Component\Money\Money|string|int|float|bool|null $value
      * @return string
      */
     protected function getValueType($value)
@@ -151,10 +157,12 @@ class SettingValue
             return self::TYPE_NULL;
         } elseif ($value instanceof DateTime) {
             return self::TYPE_DATETIME;
+        } elseif ($value instanceof Money) {
+            return self::TYPE_MONEY;
         }
 
-        $message = 'Setting value type of "' . gettype($value) . '" is unsupported.'
-            . ' Supported is \DateTime, string, integer, float, boolean or null.';
+        $message = sprintf('Setting value type of "%s" is unsupported.', \is_object($value) ? \get_class($value) : \gettype($value))
+            . sprintf(' Supported is "%s", "%s", string, integer, float, boolean or null.', DateTime::class, Money::class);
         throw new \Shopsys\FrameworkBundle\Component\Setting\Exception\InvalidArgumentException($message);
     }
 }

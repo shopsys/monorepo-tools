@@ -50,7 +50,7 @@ class Setting
 
     /**
      * @param string $key
-     * @return \DateTime|string|int|float|bool|null
+     * @return \DateTime|\Shopsys\FrameworkBundle\Component\Money\Money|string|int|float|bool|null
      */
     public function get($key)
     {
@@ -69,7 +69,7 @@ class Setting
     /**
      * @param string $key
      * @param int $domainId
-     * @return \DateTime|string|int|float|bool|null
+     * @return \DateTime|\Shopsys\FrameworkBundle\Component\Money\Money|string|int|float|bool|null
      */
     public function getForDomain($key, $domainId)
     {
@@ -87,7 +87,7 @@ class Setting
 
     /**
      * @param string $key
-     * @param \DateTime|string|int|float|bool|null $value
+     * @param \DateTime|\Shopsys\FrameworkBundle\Component\Money\Money|string|int|float|bool|null $value
      */
     public function set($key, $value)
     {
@@ -106,7 +106,7 @@ class Setting
 
     /**
      * @param string $key
-     * @param \DateTime|string|int|float|bool|null $value
+     * @param \DateTime|\Shopsys\FrameworkBundle\Component\Money\Money|string|int|float|bool|null $value
      * @param int $domainId
      */
     public function setForDomain($key, $value, $domainId)

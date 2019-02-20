@@ -2,6 +2,7 @@
 
 namespace Shopsys\FrameworkBundle\Model\Pricing;
 
+use Shopsys\FrameworkBundle\Component\Money\Money;
 use Shopsys\FrameworkBundle\Component\Setting\Setting;
 use Shopsys\FrameworkBundle\Model\Pricing\Currency\Currency;
 use Shopsys\FrameworkBundle\Model\Product\Pricing\ProductPriceRecalculationScheduler;
@@ -111,18 +112,18 @@ class PricingSetting
 
     /**
      * @param int $domainId
-     * @return string|null
+     * @return \Shopsys\FrameworkBundle\Component\Money\Money|null
      */
-    public function getFreeTransportAndPaymentPriceLimit($domainId)
+    public function getFreeTransportAndPaymentPriceLimit($domainId): ?Money
     {
         return $this->setting->getForDomain(self::FREE_TRANSPORT_AND_PAYMENT_PRICE_LIMIT, $domainId);
     }
 
     /**
      * @param int $domainId
-     * @param string|null $priceLimit
+     * @param \Shopsys\FrameworkBundle\Component\Money\Money|null $priceLimit
      */
-    public function setFreeTransportAndPaymentPriceLimit($domainId, $priceLimit = null)
+    public function setFreeTransportAndPaymentPriceLimit($domainId, ?Money $priceLimit)
     {
         $this->setting->setForDomain(self::FREE_TRANSPORT_AND_PAYMENT_PRICE_LIMIT, $priceLimit, $domainId);
     }
