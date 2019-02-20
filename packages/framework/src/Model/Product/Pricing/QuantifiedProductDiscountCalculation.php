@@ -2,6 +2,7 @@
 
 namespace Shopsys\FrameworkBundle\Model\Product\Pricing;
 
+use Shopsys\FrameworkBundle\Component\Money\Money;
 use Shopsys\FrameworkBundle\Model\Order\Item\QuantifiedItemPrice;
 use Shopsys\FrameworkBundle\Model\Pricing\Price;
 use Shopsys\FrameworkBundle\Model\Pricing\PriceCalculation;
@@ -45,7 +46,7 @@ class QuantifiedProductDiscountCalculation
         $priceVatAmount = $this->priceCalculation->getVatAmountByPriceWithVat($priceWithVat, $vat);
         $priceWithoutVat = $priceWithVat - $priceVatAmount;
 
-        return new Price($priceWithoutVat, $priceWithVat);
+        return new Price(Money::fromValue($priceWithoutVat), Money::fromValue($priceWithVat));
     }
 
     /**

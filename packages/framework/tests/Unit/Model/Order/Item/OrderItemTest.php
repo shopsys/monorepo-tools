@@ -161,7 +161,7 @@ class OrderItemTest extends TestCase
         $orderPayment = new OrderItem(
             $this->createOrderMock(),
             '',
-            new Price(10, 12),
+            new Price(Money::fromInteger(10), Money::fromInteger(12)),
             0.2,
             1,
             OrderItem::TYPE_PAYMENT,
@@ -180,7 +180,7 @@ class OrderItemTest extends TestCase
         $orderTransport = new OrderItem(
             $this->createOrderMock(),
             '',
-            new Price(10, 12),
+            new Price(Money::fromInteger(10), Money::fromInteger(12)),
             0.2,
             1,
             OrderItem::TYPE_TRANSPORT,
@@ -200,7 +200,7 @@ class OrderItemTest extends TestCase
         $orderProduct = new OrderItem(
             $this->createOrderMock(),
             '',
-            new Price(10, 12),
+            new Price(Money::fromInteger(10), Money::fromInteger(12)),
             0.2,
             1,
             OrderItem::TYPE_PRODUCT,

@@ -4,6 +4,7 @@ namespace Tests\FrameworkBundle\Unit\Model\Product\Pricing;
 
 use PHPUnit\Framework\TestCase;
 use Shopsys\FrameworkBundle\Component\Domain\Domain;
+use Shopsys\FrameworkBundle\Component\Money\Money;
 use Shopsys\FrameworkBundle\Model\Customer\BillingAddress;
 use Shopsys\FrameworkBundle\Model\Customer\CurrentCustomer;
 use Shopsys\FrameworkBundle\Model\Customer\User;
@@ -31,7 +32,7 @@ class ProductPriceCalculationForUserTest extends TestCase
         $userData->email = 'no-reply@shopsys.com';
         $userData->domainId = 1;
         $user = new User($userData, $billingAddress, null, null);
-        $expectedProductPrice = new ProductPrice(new Price(1, 1), false);
+        $expectedProductPrice = new ProductPrice(new Price(Money::fromInteger(1), Money::fromInteger(1)), false);
 
         $currentCustomerMock = $this->createMock(CurrentCustomer::class);
         $pricingGroupSettingFacadeMock = $this->createMock(PricingGroupSettingFacade::class);
@@ -62,7 +63,7 @@ class ProductPriceCalculationForUserTest extends TestCase
         $pricingGroupData = new PricingGroupData();
         $pricingGroupData->name = 'name';
         $pricingGroup = new PricingGroup($pricingGroupData, $domainId);
-        $expectedProductPrice = new ProductPrice(new Price(1, 1), false);
+        $expectedProductPrice = new ProductPrice(new Price(Money::fromInteger(1), Money::fromInteger(1)), false);
 
         $currentCustomerMock = $this->createMock(CurrentCustomer::class);
 

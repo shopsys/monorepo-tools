@@ -3,14 +3,15 @@
 namespace Tests\FrameworkBundle\Unit\Model\Pricing;
 
 use PHPUnit\Framework\TestCase;
+use Shopsys\FrameworkBundle\Component\Money\Money;
 use Shopsys\FrameworkBundle\Model\Pricing\Price;
 
 class PriceTest extends TestCase
 {
     public function testAdd()
     {
-        $price = new Price(2, 3);
-        $priceToAdd = new Price(10, 15);
+        $price = new Price(Money::fromInteger(2), Money::fromInteger(3));
+        $priceToAdd = new Price(Money::fromInteger(10), Money::fromInteger(15));
         $actualAddingResult = $price->add($priceToAdd);
 
         $this->assertSame(12, $actualAddingResult->getPriceWithoutVat());
@@ -20,8 +21,8 @@ class PriceTest extends TestCase
 
     public function testAddIsImmutable()
     {
-        $price = new Price(2, 3);
-        $priceToAdd = new Price(10, 15);
+        $price = new Price(Money::fromInteger(2), Money::fromInteger(3));
+        $priceToAdd = new Price(Money::fromInteger(10), Money::fromInteger(15));
         $price->add($priceToAdd);
 
         $this->assertSame(2, $price->getPriceWithoutVat());
@@ -31,8 +32,8 @@ class PriceTest extends TestCase
 
     public function testSubtract()
     {
-        $price = new Price(2, 3);
-        $priceToSubtract = new Price(10, 15);
+        $price = new Price(Money::fromInteger(2), Money::fromInteger(3));
+        $priceToSubtract = new Price(Money::fromInteger(10), Money::fromInteger(15));
         $actualAddingResult = $price->subtract($priceToSubtract);
 
         $this->assertSame(-8, $actualAddingResult->getPriceWithoutVat());
@@ -42,8 +43,8 @@ class PriceTest extends TestCase
 
     public function testSubtractIsImmutable()
     {
-        $price = new Price(2, 3);
-        $priceToSubtract = new Price(10, 15);
+        $price = new Price(Money::fromInteger(2), Money::fromInteger(3));
+        $priceToSubtract = new Price(Money::fromInteger(10), Money::fromInteger(15));
         $price->subtract($priceToSubtract);
 
         $this->assertSame(2, $price->getPriceWithoutVat());

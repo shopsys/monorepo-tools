@@ -2,6 +2,7 @@
 
 namespace Shopsys\FrameworkBundle\Model\Order\Item;
 
+use Shopsys\FrameworkBundle\Component\Money\Money;
 use Shopsys\FrameworkBundle\Model\Pricing\Price;
 use Shopsys\FrameworkBundle\Model\Pricing\PriceCalculation;
 use Shopsys\FrameworkBundle\Model\Pricing\Vat\VatDataFactoryInterface;
@@ -69,7 +70,7 @@ class OrderItemPriceCalculation
         $totalVatAmount = $this->priceCalculation->getVatAmountByPriceWithVat($totalPriceWithVat, $vat);
         $totalPriceWithoutVat = $totalPriceWithVat - $totalVatAmount;
 
-        return new Price($totalPriceWithoutVat, $totalPriceWithVat);
+        return new Price(Money::fromValue($totalPriceWithoutVat), Money::fromValue($totalPriceWithVat));
     }
 
     /**

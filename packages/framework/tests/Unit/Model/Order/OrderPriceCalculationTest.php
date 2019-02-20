@@ -4,6 +4,7 @@ namespace Tests\FrameworkBundle\Unit\Model\Order;
 
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
+use Shopsys\FrameworkBundle\Component\Money\Money;
 use Shopsys\FrameworkBundle\Model\Order\Item\OrderItem;
 use Shopsys\FrameworkBundle\Model\Order\Item\OrderItemPriceCalculation;
 use Shopsys\FrameworkBundle\Model\Order\Order;
@@ -27,10 +28,10 @@ class OrderPriceCalculationTest extends TestCase
         ];
 
         $pricesMap = [
-            [$orderItems[0], new Price(150, 200)],
-            [$orderItems[1], new Price(1000, 3000)],
-            [$orderItems[2], new Price(15, 20)],
-            [$orderItems[3], new Price(0, 0)],
+            [$orderItems[0], new Price(Money::fromInteger(150), Money::fromInteger(200))],
+            [$orderItems[1], new Price(Money::fromInteger(1000), Money::fromInteger(3000))],
+            [$orderItems[2], new Price(Money::fromInteger(15), Money::fromInteger(20))],
+            [$orderItems[3], new Price(Money::fromInteger(0), Money::fromInteger(0))],
         ];
 
         $roundingMock = $this->createMock(Rounding::class);
@@ -70,7 +71,7 @@ class OrderPriceCalculationTest extends TestCase
         $currencyData->code = Currency::CODE_EUR;
         $currencyData->exchangeRate = 1.0;
         $currency = new Currency($currencyData);
-        $orderTotalPrice = new Price(100, 120);
+        $orderTotalPrice = new Price(Money::fromInteger(100), Money::fromInteger(120));
 
         $roundingMock = $this->createMock(Rounding::class);
         $orderItemPriceCalculationMock = $this->createMock(OrderItemPriceCalculation::class);
@@ -92,7 +93,7 @@ class OrderPriceCalculationTest extends TestCase
         $currencyData->code = Currency::CODE_CZK;
         $currencyData->exchangeRate = 1.0;
         $currency = new Currency($currencyData);
-        $orderTotalPrice = new Price(100, 120);
+        $orderTotalPrice = new Price(Money::fromInteger(100), Money::fromInteger(120));
 
         $roundingMock = $this->createMock(Rounding::class);
         $orderItemPriceCalculationMock = $this->createMock(OrderItemPriceCalculation::class);
@@ -114,7 +115,7 @@ class OrderPriceCalculationTest extends TestCase
         $currencyData->code = Currency::CODE_CZK;
         $currencyData->exchangeRate = 1.0;
         $currency = new Currency($currencyData);
-        $orderTotalPrice = new Price(100, 120.3);
+        $orderTotalPrice = new Price(Money::fromInteger(100), Money::fromString('120.3'));
 
         $roundingMock = $this->getMockBuilder(Rounding::class)
             ->setMethods(['roundPriceWithVat'])
@@ -143,7 +144,7 @@ class OrderPriceCalculationTest extends TestCase
         $currencyData->code = Currency::CODE_CZK;
         $currencyData->exchangeRate = 1.0;
         $currency = new Currency($currencyData);
-        $orderTotalPrice = new Price(100, 120.9);
+        $orderTotalPrice = new Price(Money::fromInteger(100), Money::fromString('120.9'));
 
         $roundingMock = $this->getMockBuilder(Rounding::class)
             ->setMethods(['roundPriceWithVat'])

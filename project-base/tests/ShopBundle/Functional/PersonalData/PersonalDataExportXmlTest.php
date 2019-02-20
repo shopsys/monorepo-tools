@@ -3,6 +3,7 @@
 namespace Tests\ShopBundle\Functional\PersonalData;
 
 use Shopsys\FrameworkBundle\Component\Domain\Domain;
+use Shopsys\FrameworkBundle\Component\Money\Money;
 use Shopsys\FrameworkBundle\Component\Xml\XmlNormalizer;
 use Shopsys\FrameworkBundle\Model\Country\Country;
 use Shopsys\FrameworkBundle\Model\Country\CountryData;
@@ -41,7 +42,7 @@ class PersonalDataExportXmlTest extends TransactionFunctionalTestCase
         $currency = new Currency($currencyData);
         $order = $this->createOrder($currency, $status, $country);
         $product = $this->createMock(Product::class);
-        $price = new Price(1, 1);
+        $price = new Price(Money::fromInteger(1), Money::fromInteger(1));
         $orderItem = new OrderItem($order, 'test', $price, 1, 1, OrderItem::TYPE_PRODUCT, 'ks', 'cat');
         $orderItem->setProduct($product);
         $order->addItem($orderItem);

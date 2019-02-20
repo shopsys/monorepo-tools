@@ -22,14 +22,14 @@ class Price
     protected $vatAmount;
 
     /**
-     * @param string $priceWithoutVat
-     * @param string $priceWithVat
+     * @param \Shopsys\FrameworkBundle\Component\Money\Money $priceWithoutVat
+     * @param \Shopsys\FrameworkBundle\Component\Money\Money $priceWithVat
      */
-    public function __construct($priceWithoutVat, $priceWithVat)
+    public function __construct(Money $priceWithoutVat, Money $priceWithVat)
     {
-        $this->priceWithoutVat = Money::fromValue($priceWithoutVat);
-        $this->priceWithVat = Money::fromValue($priceWithVat);
-        $this->vatAmount = $this->priceWithVat->subtract($this->priceWithoutVat);
+        $this->priceWithoutVat = $priceWithoutVat;
+        $this->priceWithVat = $priceWithVat;
+        $this->vatAmount = $priceWithVat->subtract($priceWithoutVat);
     }
 
     /**
@@ -63,8 +63,8 @@ class Price
     public function add(self $priceToAdd): self
     {
         return new self(
-            $this->priceWithoutVat->add($priceToAdd->priceWithoutVat)->toValue(),
-            $this->priceWithVat->add($priceToAdd->priceWithVat)->toValue()
+            $this->priceWithoutVat->add($priceToAdd->priceWithoutVat),
+            $this->priceWithVat->add($priceToAdd->priceWithVat)
         );
     }
 
@@ -75,8 +75,8 @@ class Price
     public function subtract(self $priceToSubtract): self
     {
         return new self(
-            $this->priceWithoutVat->subtract($priceToSubtract->priceWithoutVat)->toValue(),
-            $this->priceWithVat->subtract($priceToSubtract->priceWithVat)->toValue()
+            $this->priceWithoutVat->subtract($priceToSubtract->priceWithoutVat),
+            $this->priceWithVat->subtract($priceToSubtract->priceWithVat)
         );
     }
 }

@@ -50,7 +50,7 @@ class PaymentPriceCalculationTest extends TestCase
                 'vatPercent' => '21',
                 'priceWithoutVat' => '6998.78',
                 'priceWithVat' => '8469',
-                'productsPrice' => new Price('100', '121'),
+                'productsPrice' => new Price(Money::fromInteger(100), Money::fromInteger(121)),
             ],
             [
                 'inputPriceType' => PricingSetting::INPUT_PRICE_TYPE_WITH_VAT,
@@ -58,7 +58,7 @@ class PaymentPriceCalculationTest extends TestCase
                 'vatPercent' => '21',
                 'priceWithoutVat' => '5784.8',
                 'priceWithVat' => '7000',
-                'productsPrice' => new Price('1000', '1210'),
+                'productsPrice' => new Price(Money::fromInteger(1000), Money::fromInteger(1210)),
             ],
         ];
     }

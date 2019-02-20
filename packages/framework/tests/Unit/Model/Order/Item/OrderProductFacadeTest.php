@@ -4,6 +4,7 @@ namespace Tests\FrameworkBundle\Unit\Model\Order\Item;
 
 use Doctrine\ORM\EntityManager;
 use PHPUnit\Framework\TestCase;
+use Shopsys\FrameworkBundle\Component\Money\Money;
 use Shopsys\FrameworkBundle\Model\Module\ModuleFacade;
 use Shopsys\FrameworkBundle\Model\Order\Item\OrderItem;
 use Shopsys\FrameworkBundle\Model\Order\Item\OrderProductFacade;
@@ -30,7 +31,7 @@ class OrderProductFacadeTest extends TestCase
         $productData->usingStock = true;
         $productData->stockQuantity = $productStockQuantity;
         $product = Product::create($productData, new ProductCategoryDomainFactory());
-        $productPrice = new Price(0, 0);
+        $productPrice = new Price(Money::zero(), Money::zero());
 
         $orderProduct = new OrderItem($orderMock, 'productName', $productPrice, 0, $orderProductQuantity, OrderItem::TYPE_PRODUCT, null, null);
         $orderProduct->setProduct($product);
@@ -52,7 +53,7 @@ class OrderProductFacadeTest extends TestCase
         $productData->usingStock = false;
         $productData->stockQuantity = $productStockQuantity;
         $product = Product::create($productData, new ProductCategoryDomainFactory());
-        $productPrice = new Price(0, 0);
+        $productPrice = new Price(Money::zero(), Money::zero());
 
         $orderProduct = new OrderItem($orderMock, 'productName', $productPrice, 0, $orderProductQuantity, OrderItem::TYPE_PRODUCT, null, null);
         $orderProduct->setProduct($product);
@@ -74,7 +75,7 @@ class OrderProductFacadeTest extends TestCase
         $productData->usingStock = true;
         $productData->stockQuantity = $productStockQuantity;
         $product = Product::create($productData, new ProductCategoryDomainFactory());
-        $productPrice = new Price(0, 0);
+        $productPrice = new Price(Money::zero(), Money::zero());
 
         $orderProduct = new OrderItem($orderMock, 'productName', $productPrice, 0, $orderProductQuantity, OrderItem::TYPE_PRODUCT, null, null);
         $orderProduct->setProduct($product);
@@ -96,7 +97,7 @@ class OrderProductFacadeTest extends TestCase
         $productData->usingStock = false;
         $productData->stockQuantity = $productStockQuantity;
         $product = Product::create($productData, new ProductCategoryDomainFactory());
-        $productPrice = new Price(0, 0);
+        $productPrice = new Price(Money::zero(), Money::zero());
 
         $orderProduct = new OrderItem($orderMock, 'productName', $productPrice, 0, $orderProductQuantity, OrderItem::TYPE_PRODUCT, null, null);
         $orderProduct->setProduct($product);

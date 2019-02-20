@@ -2,6 +2,7 @@
 
 namespace Shopsys\FrameworkBundle\Model\Payment;
 
+use Shopsys\FrameworkBundle\Component\Money\Money;
 use Shopsys\FrameworkBundle\Model\Pricing\BasePriceCalculation;
 use Shopsys\FrameworkBundle\Model\Pricing\Currency\Currency;
 use Shopsys\FrameworkBundle\Model\Pricing\Price;
@@ -45,7 +46,7 @@ class PaymentPriceCalculation
         $domainId
     ) {
         if ($this->isFree($productsPrice, $domainId)) {
-            return new Price(0, 0);
+            return new Price(Money::zero(), Money::zero());
         }
 
         return $this->calculateIndependentPrice($payment, $currency);

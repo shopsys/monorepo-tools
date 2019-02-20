@@ -2,6 +2,7 @@
 
 namespace Shopsys\FrameworkBundle\Model\Pricing;
 
+use Shopsys\FrameworkBundle\Component\Money\Money;
 use Shopsys\FrameworkBundle\Model\Pricing\Vat\Vat;
 
 class BasePriceCalculation
@@ -38,7 +39,7 @@ class BasePriceCalculation
         $vatAmount = $this->priceCalculation->getVatAmountByPriceWithVat($basePriceWithVat, $vat);
         $basePriceWithoutVat = $this->rounding->roundPriceWithoutVat($basePriceWithVat - $vatAmount);
 
-        return new Price($basePriceWithoutVat, $basePriceWithVat);
+        return new Price(Money::fromValue($basePriceWithoutVat), Money::fromValue($basePriceWithVat));
     }
 
     /**
@@ -57,7 +58,7 @@ class BasePriceCalculation
         $vatAmount = $this->priceCalculation->getVatAmountByPriceWithVat($priceWithVat, $vat);
         $priceWithoutVat = $this->rounding->roundPriceWithoutVat($priceWithVat - $vatAmount);
 
-        return new Price($priceWithoutVat, $priceWithVat);
+        return new Price(Money::fromValue($priceWithoutVat), Money::fromValue($priceWithVat));
     }
 
     /**

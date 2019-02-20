@@ -3,6 +3,7 @@
 namespace Tests\FrameworkBundle\Unit\Model\Pricing;
 
 use PHPUnit\Framework\TestCase;
+use Shopsys\FrameworkBundle\Component\Money\Money;
 use Shopsys\FrameworkBundle\Model\Pricing\BasePriceCalculation;
 use Shopsys\FrameworkBundle\Model\Pricing\Price;
 use Shopsys\FrameworkBundle\Model\Pricing\PriceCalculation;
@@ -80,7 +81,7 @@ class BasePriceCalculationTest extends TestCase
     {
         return [
             [
-                'priceWithVat' => '100',
+                'priceWithVat' => Money::fromInteger(100),
                 'vatPercent' => '20',
                 'coefficients' => ['2'],
                 'resultPriceWithVat' => '200',
@@ -88,7 +89,7 @@ class BasePriceCalculationTest extends TestCase
                 'resultVatAmount' => '33',
             ],
             [
-                'priceWithVat' => '100',
+                'priceWithVat' => Money::fromInteger(100),
                 'vatPercent' => '10',
                 'coefficients' => ['1'],
                 'resultPriceWithVat' => '100',
@@ -96,7 +97,7 @@ class BasePriceCalculationTest extends TestCase
                 'resultVatAmount' => '9',
             ],
             [
-                'priceWithVat' => '100',
+                'priceWithVat' => Money::fromInteger(100),
                 'vatPercent' => '20',
                 'coefficients' => ['0.6789'],
                 'resultPriceWithVat' => '68',
@@ -108,7 +109,7 @@ class BasePriceCalculationTest extends TestCase
 
     /**
      * @dataProvider applyCoefficientProvider
-     * @param mixed $priceWithVat
+     * @param \Shopsys\FrameworkBundle\Component\Money\Money $priceWithVat
      * @param mixed $vatPercent
      * @param mixed $coefficients
      * @param mixed $resultPriceWithVat
@@ -116,7 +117,7 @@ class BasePriceCalculationTest extends TestCase
      * @param mixed $resultVatAmount
      */
     public function testApplyCoefficient(
-        $priceWithVat,
+        Money $priceWithVat,
         $vatPercent,
         $coefficients,
         $resultPriceWithVat,
@@ -139,7 +140,7 @@ class BasePriceCalculationTest extends TestCase
         $priceCalculation = new PriceCalculation($rounding);
         $basePriceCalculation = new BasePriceCalculation($priceCalculation, $rounding);
 
-        $price = new Price(0, $priceWithVat);
+        $price = new Price(Money::zero(), $priceWithVat);
         $vatData = new VatData();
         $vatData->name = 'vat';
         $vatData->percent = $vatPercent;

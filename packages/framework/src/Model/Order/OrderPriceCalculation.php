@@ -2,6 +2,7 @@
 
 namespace Shopsys\FrameworkBundle\Model\Order;
 
+use Shopsys\FrameworkBundle\Component\Money\Money;
 use Shopsys\FrameworkBundle\Model\Order\Item\OrderItemPriceCalculation;
 use Shopsys\FrameworkBundle\Model\Payment\Payment;
 use Shopsys\FrameworkBundle\Model\Pricing\Currency\Currency;
@@ -78,6 +79,6 @@ class OrderPriceCalculation
             return null;
         }
 
-        return new Price($roundingPrice, $roundingPrice);
+        return new Price(Money::fromValue($roundingPrice), Money::fromValue($roundingPrice));
     }
 }

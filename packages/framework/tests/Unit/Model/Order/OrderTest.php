@@ -5,6 +5,7 @@ namespace Tests\FrameworkBundle\Unit\Model\Order;
 use DateTime;
 use DateTimeInterface;
 use PHPUnit\Framework\TestCase;
+use Shopsys\FrameworkBundle\Component\Money\Money;
 use Shopsys\FrameworkBundle\Model\Country\Country;
 use Shopsys\FrameworkBundle\Model\Country\CountryData;
 use Shopsys\FrameworkBundle\Model\Order\Item\OrderItem;
@@ -22,7 +23,7 @@ class OrderTest extends TestCase
     {
         $payment = new Payment(new PaymentData());
         $orderData = new OrderData();
-        $paymentPrice = new Price(0, 0);
+        $paymentPrice = new Price(Money::zero(), Money::zero());
 
         $order = new Order($orderData, 'orderNumber', 'urlHash', null);
         $orderProduct = new OrderItem($order, 'productName', $paymentPrice, 0, 1, OrderItem::TYPE_PRODUCT, null, null);
@@ -40,7 +41,7 @@ class OrderTest extends TestCase
     public function testGetProductItemsCount()
     {
         $payment = new Payment(new PaymentData());
-        $paymentItemPrice = new Price(0, 0);
+        $paymentItemPrice = new Price(Money::zero(), Money::zero());
         $orderData = new OrderData();
 
         $order = new Order($orderData, 'orderNumber', 'urlHash', null);

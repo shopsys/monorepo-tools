@@ -2,6 +2,7 @@
 
 namespace Shopsys\FrameworkBundle\Model\Product\Pricing;
 
+use Shopsys\FrameworkBundle\Component\Money\Money;
 use Shopsys\FrameworkBundle\Model\Customer\User;
 use Shopsys\FrameworkBundle\Model\Order\Item\QuantifiedItemPrice;
 use Shopsys\FrameworkBundle\Model\Order\Item\QuantifiedProduct;
@@ -82,8 +83,8 @@ class QuantifiedProductPriceCalculation
         $quantifiedItemPrice = new QuantifiedItemPrice(
             $this->productPrice,
             new Price(
-                $this->getTotalPriceWithoutVat(),
-                $this->getTotalPriceWithVat()
+                Money::fromValue($this->getTotalPriceWithoutVat()),
+                Money::fromValue($this->getTotalPriceWithVat())
             ),
             $product->getVat()
         );

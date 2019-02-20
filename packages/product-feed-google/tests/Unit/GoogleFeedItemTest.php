@@ -4,6 +4,7 @@ namespace Tests\ProductFeed\GoogleBundle\Unit;
 
 use PHPUnit\Framework\TestCase;
 use Shopsys\FrameworkBundle\Component\Domain\Config\DomainConfig;
+use Shopsys\FrameworkBundle\Component\Money\Money;
 use Shopsys\FrameworkBundle\Model\Pricing\Currency\Currency;
 use Shopsys\FrameworkBundle\Model\Pricing\Currency\CurrencyFacade;
 use Shopsys\FrameworkBundle\Model\Pricing\Price;
@@ -72,7 +73,7 @@ class GoogleFeedItemTest extends TestCase
         $this->defaultProduct->method('getName')->with('en')->willReturn('product name');
         $this->defaultProduct->method('isSellingDenied')->willReturn(false);
 
-        $this->mockProductPrice($this->defaultProduct, $this->defaultDomain, new Price(0, 0));
+        $this->mockProductPrice($this->defaultProduct, $this->defaultDomain, new Price(Money::zero(), Money::zero()));
         $this->mockProductUrl($this->defaultProduct, $this->defaultDomain, 'https://example.com/product-1');
     }
 

@@ -682,10 +682,10 @@ class Order
     public function getTransportAndPaymentPrice()
     {
         $transportAndPaymentItems = $this->getTransportAndPaymentItems();
-        $totalPrice = new Price(0, 0);
+        $totalPrice = new Price(Money::zero(), Money::zero());
 
         foreach ($transportAndPaymentItems as $item) {
-            $itemPrice = new Price($item->getPriceWithoutVat(), $item->getPriceWithVat());
+            $itemPrice = new Price(Money::fromValue($item->getPriceWithoutVat()), Money::fromValue($item->getPriceWithVat()));
             $totalPrice = $totalPrice->add($itemPrice);
         }
 
@@ -1019,8 +1019,8 @@ class Order
                 $this,
                 $newOrderItemData->name,
                 new Price(
-                    $newOrderItemData->priceWithoutVat->toValue(),
-                    $newOrderItemData->priceWithVat->toValue()
+                    $newOrderItemData->priceWithoutVat,
+                    $newOrderItemData->priceWithVat
                 ),
                 $newOrderItemData->vatPercent,
                 $newOrderItemData->quantity,
@@ -1165,8 +1165,8 @@ class Order
             $orderItem->getOrder(),
             $name,
             new Price(
-                -$quantifiedItemDiscount->getPriceWithoutVat(),
-                -$quantifiedItemDiscount->getPriceWithVat()
+                Money::fromValue($quantifiedItemDiscount->getPriceWithoutVat())->multiply('-1'),
+                Money::fromValue($quantifiedItemDiscount->getPriceWithVat())->multiply('-1')
             ),
             $orderItem->getVatPercent(),
             1,

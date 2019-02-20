@@ -3,6 +3,7 @@
 namespace Tests\ShopBundle\Functional\Model\Order\Preview;
 
 use Shopsys\FrameworkBundle\Component\Domain\Domain;
+use Shopsys\FrameworkBundle\Component\Money\Money;
 use Shopsys\FrameworkBundle\Model\Order\Item\QuantifiedItemPrice;
 use Shopsys\FrameworkBundle\Model\Order\Item\QuantifiedProduct;
 use Shopsys\FrameworkBundle\Model\Order\OrderPriceCalculation;
@@ -31,10 +32,10 @@ class OrderPreviewCalculationTest extends FunctionalTestCase
         $vatData->percent = 20;
         $vat = new Vat($vatData);
 
-        $paymentPrice = new Price(100, 120);
-        $transportPrice = new Price(10, 12);
-        $unitPrice = new Price(1000, 1200);
-        $totalPrice = new Price(2000, 2400);
+        $paymentPrice = new Price(Money::fromInteger(100), Money::fromInteger(120));
+        $transportPrice = new Price(Money::fromInteger(10), Money::fromInteger(12));
+        $unitPrice = new Price(Money::fromInteger(1000), Money::fromInteger(1200));
+        $totalPrice = new Price(Money::fromInteger(2000), Money::fromInteger(2400));
         $quantifiedItemPrice = new QuantifiedItemPrice($unitPrice, $totalPrice, $vat);
         $quantifiedItemsPrices = [$quantifiedItemPrice, $quantifiedItemPrice];
         $quantifiedProductsDiscounts = [null, null];
@@ -118,8 +119,8 @@ class OrderPreviewCalculationTest extends FunctionalTestCase
         $vatData->percent = 20;
         $vat = new Vat($vatData);
 
-        $unitPrice = new Price(1000, 1200);
-        $totalPrice = new Price(2000, 2400);
+        $unitPrice = new Price(Money::fromInteger(1000), Money::fromInteger(1200));
+        $totalPrice = new Price(Money::fromInteger(2000), Money::fromInteger(2400));
         $quantifiedItemPrice = new QuantifiedItemPrice($unitPrice, $totalPrice, $vat);
         $quantifiedItemsPrices = [$quantifiedItemPrice, $quantifiedItemPrice];
         $quantifiedProductsDiscounts = [null, null];
