@@ -3,6 +3,7 @@
 namespace Tests\ShopBundle\Functional\Model\Cart\Watcher;
 
 use Shopsys\FrameworkBundle\Component\Domain\Domain;
+use Shopsys\FrameworkBundle\Component\Money\Money;
 use Shopsys\FrameworkBundle\Model\Cart\Cart;
 use Shopsys\FrameworkBundle\Model\Cart\Item\CartItem;
 use Shopsys\FrameworkBundle\Model\Cart\Watcher\CartWatcher;
@@ -45,7 +46,7 @@ class CartWatcherTest extends TransactionFunctionalTestCase
 
         /** @var \Shopsys\FrameworkBundle\Model\Product\Pricing\ProductManualInputPriceFacade $manualInputPriceFacade */
         $manualInputPriceFacade = $this->getContainer()->get(ProductManualInputPriceFacade::class);
-        $manualInputPriceFacade->refresh($product, $pricingGroup, '10');
+        $manualInputPriceFacade->refresh($product, $pricingGroup, Money::fromInteger(10));
 
         $modifiedItems2 = $cartWatcher->getModifiedPriceItemsAndUpdatePrices($cart);
         $this->assertNotEmpty($modifiedItems2);

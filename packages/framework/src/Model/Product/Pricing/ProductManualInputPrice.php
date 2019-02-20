@@ -43,9 +43,9 @@ class ProductManualInputPrice
     /**
      * @param \Shopsys\FrameworkBundle\Model\Product\Product $product
      * @param \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroup $pricingGroup
-     * @param string|null $inputPrice
+     * @param \Shopsys\FrameworkBundle\Component\Money\Money|null $inputPrice
      */
-    public function __construct(Product $product, PricingGroup $pricingGroup, $inputPrice)
+    public function __construct(Product $product, PricingGroup $pricingGroup, ?Money $inputPrice)
     {
         $this->product = $product;
         $this->pricingGroup = $pricingGroup;
@@ -77,11 +77,11 @@ class ProductManualInputPrice
     }
 
     /**
-     * @param string|null $inputPrice
+     * @param \Shopsys\FrameworkBundle\Component\Money\Money|null $inputPrice
      */
-    public function setInputPrice($inputPrice)
+    public function setInputPrice(?Money $inputPrice)
     {
-        $this->inputPrice = $inputPrice !== null ? Money::fromValue($inputPrice) : null;
+        $this->inputPrice = $inputPrice;
     }
 
     /**
@@ -106,6 +106,6 @@ class ProductManualInputPrice
             $basePriceForPricingGroup->getPriceWithVat(),
             $newVatPercent
         );
-        $this->setInputPrice($inputPriceForPricingGroup);
+        $this->setInputPrice(Money::fromValue($inputPriceForPricingGroup));
     }
 }

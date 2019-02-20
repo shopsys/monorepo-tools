@@ -3,6 +3,7 @@
 namespace Shopsys\FrameworkBundle\Model\Product\Pricing;
 
 use Doctrine\ORM\EntityManagerInterface;
+use Shopsys\FrameworkBundle\Component\Money\Money;
 use Shopsys\FrameworkBundle\Model\Pricing\BasePriceCalculation;
 use Shopsys\FrameworkBundle\Model\Pricing\Currency\CurrencyFacade;
 use Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroupFacade;
@@ -97,7 +98,7 @@ class ProductInputPriceFacade
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\Product\Product $product
-     * @return string[]
+     * @return \Shopsys\FrameworkBundle\Component\Money\Money[]|null[]
      */
     public function getManualInputPricesDataIndexedByPricingGroupId(Product $product)
     {
@@ -107,7 +108,8 @@ class ProductInputPriceFacade
 
         foreach ($manualInputPrices as $manualInputPrice) {
             $pricingGroupId = $manualInputPrice->getPricingGroup()->getId();
-            $manualInputPricesDataByPricingGroupId[$pricingGroupId] = $manualInputPrice->getInputPrice();
+            $manualInputPricesDataByPricingGroupId[$pricingGroupId] =
+                $manualInputPrice->getInputPrice() !== null ? Money::fromValue($manualInputPrice->getInputPrice()) : null;
         }
 
         return $manualInputPricesDataByPricingGroupId;

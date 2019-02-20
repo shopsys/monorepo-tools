@@ -4,6 +4,7 @@ namespace Shopsys\ShopBundle\DataFixtures\Demo;
 
 use DateTime;
 use Shopsys\FrameworkBundle\Component\Domain\Domain;
+use Shopsys\FrameworkBundle\Component\Money\Money;
 use Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroupFacade;
 use Shopsys\FrameworkBundle\Model\Product\Product;
 use Shopsys\FrameworkBundle\Model\Product\ProductData;
@@ -294,7 +295,7 @@ class ProductDataFixtureLoader
 
     /**
      * @param string $string
-     * @return string[]
+     * @return \Shopsys\FrameworkBundle\Component\Money\Money[]
      */
     protected function getProductManualPricesIndexedByPricingGroupFromString($string)
     {
@@ -302,7 +303,7 @@ class ProductDataFixtureLoader
         $rowData = explode(';', $string);
         foreach ($rowData as $pricingGroupAndPrice) {
             list($pricingGroup, $price) = explode('=', $pricingGroupAndPrice);
-            $productManualPricesByPricingGroup[$pricingGroup] = $price;
+            $productManualPricesByPricingGroup[$pricingGroup] = Money::fromString($price);
         }
 
         return $productManualPricesByPricingGroup;
@@ -350,16 +351,16 @@ class ProductDataFixtureLoader
     }
 
     /**
-     * @param string[] $demoDataManualPrices
-     * @return string[]
+     * @param \Shopsys\FrameworkBundle\Component\Money\Money[] $demoDataManualPrices
+     * @return \Shopsys\FrameworkBundle\Component\Money\Money[]
      */
-    protected function addZeroPricesForPricingGroupsThatAreMissingInDemoData($demoDataManualPrices)
+    protected function addZeroPricesForPricingGroupsThatAreMissingInDemoData(array $demoDataManualPrices): array
     {
         $allPricingGroups = $this->pricingGroupFacade->getAll();
 
         foreach ($allPricingGroups as $pricingGroup) {
             if (!isset($demoDataManualPrices[$pricingGroup->getId()])) {
-                $demoDataManualPrices[$pricingGroup->getId()] = 0;
+                $demoDataManualPrices[$pricingGroup->getId()] = Money::fromInteger(0);
             }
         }
 

@@ -2,6 +2,7 @@
 
 namespace Tests\ShopBundle\Functional\Model\Pricing;
 
+use Shopsys\FrameworkBundle\Component\Money\Money;
 use Shopsys\FrameworkBundle\Component\Setting\Setting;
 use Shopsys\FrameworkBundle\Model\Pricing\BasePriceCalculation;
 use Shopsys\FrameworkBundle\Model\Pricing\InputPriceCalculation;
@@ -45,7 +46,7 @@ class ProductManualInputPriceTest extends TransactionFunctionalTestCase
         $productData->unit = $this->getReference(UnitDataFixture::UNIT_PIECES);
         $product = Product::create($productData, new ProductCategoryDomainFactory());
 
-        $productManualInputPrice = new ProductManualInputPrice($product, $pricingGroup, 1000);
+        $productManualInputPrice = new ProductManualInputPrice($product, $pricingGroup, Money::fromInteger(1000));
         $inputPriceType = $pricingSetting->getInputPriceType();
         $productManualInputPrice->recalculateInputPriceForNewVatPercent($inputPriceType, 15, $basePriceCalculation, $inputPriceCalculation);
 
@@ -79,7 +80,7 @@ class ProductManualInputPriceTest extends TransactionFunctionalTestCase
         $productData->unit = $this->getReference(UnitDataFixture::UNIT_PIECES);
         $product = Product::create($productData, new ProductCategoryDomainFactory());
 
-        $productManualInputPrice = new ProductManualInputPrice($product, $pricingGroup, 1000);
+        $productManualInputPrice = new ProductManualInputPrice($product, $pricingGroup, Money::fromInteger(1000));
 
         $inputPriceType = $pricingSetting->getInputPriceType();
         $productManualInputPrice->recalculateInputPriceForNewVatPercent($inputPriceType, 15, $basePriceCalculation, $inputPriceCalculation);

@@ -9,6 +9,7 @@ use Shopsys\FrameworkBundle\Component\Domain\Domain;
 use Shopsys\FrameworkBundle\Component\Plugin\PluginCrudExtensionFacade;
 use Shopsys\FrameworkBundle\Form\Admin\Product\Parameter\ProductParameterValueFormType;
 use Shopsys\FrameworkBundle\Form\CategoriesType;
+use Shopsys\FrameworkBundle\Form\Constraints\NotNegativeMoneyAmount;
 use Shopsys\FrameworkBundle\Form\Constraints\UniqueProductParameters;
 use Shopsys\FrameworkBundle\Form\DatePickerType;
 use Shopsys\FrameworkBundle\Form\DisplayOnlyType;
@@ -21,6 +22,7 @@ use Shopsys\FrameworkBundle\Form\LocalizedFullWidthType;
 use Shopsys\FrameworkBundle\Form\ProductCalculatedPricesType;
 use Shopsys\FrameworkBundle\Form\ProductParameterValueType;
 use Shopsys\FrameworkBundle\Form\ProductsType;
+use Shopsys\FrameworkBundle\Form\Transformers\NumericToMoneyTransformer;
 use Shopsys\FrameworkBundle\Form\Transformers\ProductParameterValueToProductParameterValuesLocalizedTransformer;
 use Shopsys\FrameworkBundle\Form\Transformers\RemoveDuplicatesFromArrayTransformer;
 use Shopsys\FrameworkBundle\Form\UrlListType;
@@ -641,20 +643,19 @@ class ProductFormType extends AbstractType
             'disabled' => $this->isProductMainVariant($product),
         ]);
         foreach ($this->pricingGroupFacade->getAll() as $pricingGroup) {
-            $manualInputPricesByPricingGroup
-                ->add($pricingGroup->getId(), MoneyType::class, [
-                    'currency' => false,
-                    'scale' => 6,
-                    'required' => false,
-                    'invalid_message' => 'Please enter price in correct format (positive number with decimal separator)',
-                    'constraints' => [
-                        new Constraints\GreaterThanOrEqual([
-                            'value' => 0,
-                            'message' => 'Price must be greater or equal to {{ compared_value }}',
-                        ]),
-                    ],
-                    'label' => $pricingGroup->getName(),
-                ]);
+            $manualInputPrice = $builder->create($pricingGroup->getId(), MoneyType::class, [
+                'currency' => false,
+                'scale' => 6,
+                'required' => false,
+                'invalid_message' => 'Please enter price in correct format (positive number with decimal separator)',
+                'constraints' => [
+                    new NotNegativeMoneyAmount(['message' => 'Price must be greater or equal to zero']),
+                ],
+                'label' => $pricingGroup->getName(),
+            ]);
+            $manualInputPrice->addModelTransformer(new NumericToMoneyTransformer(6));
+
+            $manualInputPricesByPricingGroup->add($manualInputPrice);
         }
         $productCalculatedPricesGroup->add($manualInputPricesByPricingGroup);
         $builderPricesGroup->add($productCalculatedPricesGroup);
