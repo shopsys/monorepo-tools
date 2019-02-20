@@ -238,8 +238,8 @@ class OrderItem
     public function edit(OrderItemData $orderItemData)
     {
         $this->name = $orderItemData->name;
-        $this->priceWithoutVat = Money::fromValue($orderItemData->priceWithoutVat);
-        $this->priceWithVat = Money::fromValue($orderItemData->priceWithVat);
+        $this->priceWithoutVat = $orderItemData->priceWithoutVat;
+        $this->priceWithVat = $orderItemData->priceWithVat;
         $this->vatPercent = $orderItemData->vatPercent;
         $this->quantity = $orderItemData->quantity;
         $this->unitName = $orderItemData->unitName;

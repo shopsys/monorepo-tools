@@ -2,10 +2,12 @@
 
 namespace Shopsys\FrameworkBundle\Form\Admin\Order;
 
+use Shopsys\FrameworkBundle\Form\Transformers\NumericToMoneyTransformer;
 use Shopsys\FrameworkBundle\Model\Order\Item\OrderItemData;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\MoneyType;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -34,13 +36,13 @@ class OrderItemFormType extends AbstractType
             ])
             ->add('priceWithVat', MoneyType::class, [
                 'currency' => false,
+                'scale' => 6,
                 'constraints' => [
                     new Constraints\NotBlank(['message' => 'Please enter unit price with VAT']),
                 ],
                 'error_bubbling' => true,
             ])
-            ->add('vatPercent', MoneyType::class, [
-                'currency' => false,
+            ->add('vatPercent', NumberType::class, [
                 'constraints' => [
                     new Constraints\NotBlank(['message' => 'Please enter VAT rate']),
                 ],
@@ -59,6 +61,8 @@ class OrderItemFormType extends AbstractType
                 ],
                 'error_bubbling' => true,
             ]);
+
+        $builder->get('priceWithVat')->addModelTransformer(new NumericToMoneyTransformer(6));
     }
 
     /**

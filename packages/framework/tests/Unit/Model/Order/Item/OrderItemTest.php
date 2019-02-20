@@ -6,6 +6,7 @@ namespace Tests\FrameworkBundle\Unit\Model\Order\Item;
 
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
+use Shopsys\FrameworkBundle\Component\Money\Money;
 use Shopsys\FrameworkBundle\Model\Order\Item\Exception\MainVariantCannotBeOrderedException;
 use Shopsys\FrameworkBundle\Model\Order\Item\Exception\WrongItemTypeException;
 use Shopsys\FrameworkBundle\Model\Order\Item\OrderItem;
@@ -41,8 +42,8 @@ class OrderItemTest extends TestCase
         $orderItem = $this->createOrderTransport();
 
         $orderItemData = new OrderItemData();
-        $orderItemData->priceWithVat = 0;
-        $orderItemData->priceWithoutVat = 0;
+        $orderItemData->priceWithVat = Money::fromInteger(0);
+        $orderItemData->priceWithoutVat = Money::fromInteger(0);
         $transport = $this->createTransportMock();
         $orderItemData->transport = $transport;
         $orderItem->edit($orderItemData);
@@ -71,8 +72,8 @@ class OrderItemTest extends TestCase
         $orderItem = $this->createOrderPayment();
 
         $orderItemData = new OrderItemData();
-        $orderItemData->priceWithVat = 0;
-        $orderItemData->priceWithoutVat = 0;
+        $orderItemData->priceWithVat = Money::fromInteger(0);
+        $orderItemData->priceWithoutVat = Money::fromInteger(0);
         $payment = $this->createPaymentMock();
         $orderItemData->payment = $payment;
         $orderItem->edit($orderItemData);
@@ -108,8 +109,8 @@ class OrderItemTest extends TestCase
     {
         $orderItemData = new OrderItemData();
         $orderItemData->name = 'newName';
-        $orderItemData->priceWithVat = 20;
-        $orderItemData->priceWithoutVat = 30;
+        $orderItemData->priceWithVat = Money::fromInteger(20);
+        $orderItemData->priceWithoutVat = Money::fromInteger(30);
         $orderItemData->quantity = 2;
         $orderItemData->vatPercent = 10;
 
@@ -127,8 +128,8 @@ class OrderItemTest extends TestCase
     {
         $orderItemData = new OrderItemData();
         $orderItemData->name = 'newName';
-        $orderItemData->priceWithVat = 20;
-        $orderItemData->priceWithoutVat = 30;
+        $orderItemData->priceWithVat = Money::fromInteger(20);
+        $orderItemData->priceWithoutVat = Money::fromInteger(30);
         $orderItemData->quantity = 2;
         $orderItemData->vatPercent = 10;
 

@@ -4,6 +4,7 @@ namespace Tests\FrameworkBundle\Unit\Model\Order\Item;
 
 use PHPUnit\Framework\TestCase;
 use Shopsys\FrameworkBundle\Component\EntityExtension\EntityNameResolver;
+use Shopsys\FrameworkBundle\Component\Money\Money;
 use Shopsys\FrameworkBundle\Model\Order\Item\OrderItem;
 use Shopsys\FrameworkBundle\Model\Order\Item\OrderItemData;
 use Shopsys\FrameworkBundle\Model\Order\Item\OrderItemPriceCalculation;
@@ -22,7 +23,7 @@ class OrderItemPriceCalculationTest extends TestCase
         $priceCalculationMock->expects($this->once())->method('getVatAmountByPriceWithVat')->willReturn(100);
 
         $orderItemData = new OrderItemData();
-        $orderItemData->priceWithVat = 1000;
+        $orderItemData->priceWithVat = Money::fromInteger(1000);
         $orderItemData->vatPercent = 10;
 
         $orderItemPriceCalculation = new OrderItemPriceCalculation($priceCalculationMock, new VatFactory(new EntityNameResolver([])), new VatDataFactory());
