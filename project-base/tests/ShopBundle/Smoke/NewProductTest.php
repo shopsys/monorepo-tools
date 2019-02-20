@@ -2,11 +2,11 @@
 
 namespace Tests\ShopBundle\Smoke;
 
-use Shopsys\FrameworkBundle\DataFixtures\Demo\AvailabilityDataFixture;
-use Shopsys\FrameworkBundle\DataFixtures\Demo\UnitDataFixture;
-use Shopsys\FrameworkBundle\DataFixtures\Demo\VatDataFixture;
 use Shopsys\FrameworkBundle\Form\Admin\Product\ProductFormType;
 use Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroupFacade;
+use Shopsys\ShopBundle\DataFixtures\Demo\AvailabilityDataFixture;
+use Shopsys\ShopBundle\DataFixtures\Demo\UnitDataFixture;
+use Shopsys\ShopBundle\DataFixtures\Demo\VatDataFixture;
 use Symfony\Component\DomCrawler\Form;
 use Symfony\Component\Security\Csrf\CsrfToken;
 use Tests\ShopBundle\Test\FunctionalTestCase;

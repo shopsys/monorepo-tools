@@ -8,6 +8,8 @@ parameters:
 
     skip:
         ObjectCalisthenics\Sniffs\Files\FunctionLengthSniff:
+            - '*/src/Shopsys/ShopBundle/DataFixtures/*/*DataFixture.php'
+            - '*/src/Shopsys/ShopBundle/DataFixtures/Demo/ProductDataFixtureLoader.php'
             - '*/src/Shopsys/ShopBundle/Controller/Front/OrderController.php'
             - '*/src/Shopsys/ShopBundle/Form/Front/Customer/BillingAddressFormType.php'
             - '*/src/Shopsys/ShopBundle/Form/Front/Customer/DeliveryAddressFormType.php'
@@ -20,6 +22,8 @@ parameters:
 
         ObjectCalisthenics\Sniffs\Files\ClassTraitAndInterfaceLengthSniff:
             - '*/tests/ShopBundle/Functional/Model/Product/ProductVisibilityRepositoryTest.php'
+            - '*/src/Shopsys/ShopBundle/DataFixtures/Demo/MultidomainOrderDataFixture.phpFixture.php'
+            - '*/src/Shopsys/ShopBundle/DataFixtures/Demo/OrderDataFixture.php'
 
         Shopsys\CodingStandards\Sniffs\ValidVariableNameSniff:
             - '*/tests/ShopBundle/Functional/EntityExtension/EntityExtensionTest.php'

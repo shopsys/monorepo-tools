@@ -5,12 +5,6 @@ namespace Tests\ShopBundle\Smoke\Http;
 use Shopsys\FrameworkBundle\Component\DataFixture\PersistentReferenceFacade;
 use Shopsys\FrameworkBundle\Component\Domain\Domain;
 use Shopsys\FrameworkBundle\Component\Router\Security\RouteCsrfProtector;
-use Shopsys\FrameworkBundle\DataFixtures\Demo\OrderDataFixture;
-use Shopsys\FrameworkBundle\DataFixtures\Demo\PersonalDataAccessRequestDataFixture;
-use Shopsys\FrameworkBundle\DataFixtures\Demo\PricingGroupDataFixture;
-use Shopsys\FrameworkBundle\DataFixtures\Demo\UnitDataFixture;
-use Shopsys\FrameworkBundle\DataFixtures\Demo\UserDataFixture;
-use Shopsys\FrameworkBundle\DataFixtures\Demo\VatDataFixture;
 use Shopsys\HttpSmokeTesting\Auth\BasicHttpAuth;
 use Shopsys\HttpSmokeTesting\Auth\NoAuth;
 use Shopsys\HttpSmokeTesting\RequestDataSet;
@@ -18,6 +12,12 @@ use Shopsys\HttpSmokeTesting\RouteConfig;
 use Shopsys\HttpSmokeTesting\RouteConfigCustomizer;
 use Shopsys\HttpSmokeTesting\RouteInfo;
 use Shopsys\ShopBundle\Controller\Front\ProductController;
+use Shopsys\ShopBundle\DataFixtures\Demo\OrderDataFixture;
+use Shopsys\ShopBundle\DataFixtures\Demo\PersonalDataAccessRequestDataFixture;
+use Shopsys\ShopBundle\DataFixtures\Demo\PricingGroupDataFixture;
+use Shopsys\ShopBundle\DataFixtures\Demo\UnitDataFixture;
+use Shopsys\ShopBundle\DataFixtures\Demo\UserDataFixture;
+use Shopsys\ShopBundle\DataFixtures\Demo\VatDataFixture;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 class RouteConfigCustomization

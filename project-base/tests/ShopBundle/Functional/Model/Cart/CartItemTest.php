@@ -2,7 +2,6 @@
 
 namespace Tests\ShopBundle\Functional\Model\Cart;
 
-use Shopsys\FrameworkBundle\DataFixtures\Demo\UnitDataFixture;
 use Shopsys\FrameworkBundle\Model\Cart\Cart;
 use Shopsys\FrameworkBundle\Model\Cart\Item\CartItem;
 use Shopsys\FrameworkBundle\Model\Customer\CustomerIdentifier;
@@ -12,6 +11,7 @@ use Shopsys\FrameworkBundle\Model\Product\Availability\Availability;
 use Shopsys\FrameworkBundle\Model\Product\Availability\AvailabilityData;
 use Shopsys\FrameworkBundle\Model\Product\ProductCategoryDomainFactory;
 use Shopsys\FrameworkBundle\Model\Product\ProductDataFactoryInterface;
+use Shopsys\ShopBundle\DataFixtures\Demo\UnitDataFixture;
 use Shopsys\ShopBundle\Model\Product\Product;
 use Tests\ShopBundle\Test\TransactionFunctionalTestCase;
 

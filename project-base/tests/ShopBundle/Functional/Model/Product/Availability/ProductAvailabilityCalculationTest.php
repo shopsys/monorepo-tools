@@ -3,7 +3,6 @@
 namespace Tests\ShopBundle\Functional\Model\Product\Availability;
 
 use Doctrine\ORM\EntityManager;
-use Shopsys\FrameworkBundle\DataFixtures\Demo\AvailabilityDataFixture;
 use Shopsys\FrameworkBundle\Model\Product\Availability\Availability;
 use Shopsys\FrameworkBundle\Model\Product\Availability\AvailabilityFacade;
 use Shopsys\FrameworkBundle\Model\Product\Availability\ProductAvailabilityCalculation;
@@ -12,6 +11,7 @@ use Shopsys\FrameworkBundle\Model\Product\ProductDataFactoryInterface;
 use Shopsys\FrameworkBundle\Model\Product\ProductRepository;
 use Shopsys\FrameworkBundle\Model\Product\ProductSellingDeniedRecalculator;
 use Shopsys\FrameworkBundle\Model\Product\ProductVisibilityFacade;
+use Shopsys\ShopBundle\DataFixtures\Demo\AvailabilityDataFixture;
 use Shopsys\ShopBundle\Model\Product\Product;
 use Tests\ShopBundle\Test\FunctionalTestCase;
 

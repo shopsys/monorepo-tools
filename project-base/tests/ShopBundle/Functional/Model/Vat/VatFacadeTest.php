@@ -2,15 +2,15 @@
 
 namespace Tests\ShopBundle\Functional\Model\Vat;
 
-use Shopsys\FrameworkBundle\DataFixtures\Demo\PaymentDataFixture;
-use Shopsys\FrameworkBundle\DataFixtures\Demo\TransportDataFixture;
-use Shopsys\FrameworkBundle\DataFixtures\Demo\VatDataFixture;
 use Shopsys\FrameworkBundle\Model\Payment\PaymentDataFactoryInterface;
 use Shopsys\FrameworkBundle\Model\Payment\PaymentFacade;
 use Shopsys\FrameworkBundle\Model\Pricing\Vat\VatData;
 use Shopsys\FrameworkBundle\Model\Pricing\Vat\VatFacade;
 use Shopsys\FrameworkBundle\Model\Transport\TransportDataFactoryInterface;
 use Shopsys\FrameworkBundle\Model\Transport\TransportFacade;
+use Shopsys\ShopBundle\DataFixtures\Demo\PaymentDataFixture;
+use Shopsys\ShopBundle\DataFixtures\Demo\TransportDataFixture;
+use Shopsys\ShopBundle\DataFixtures\Demo\VatDataFixture;
 use Tests\ShopBundle\Test\TransactionFunctionalTestCase;
 
 class VatFacadeTest extends TransactionFunctionalTestCase

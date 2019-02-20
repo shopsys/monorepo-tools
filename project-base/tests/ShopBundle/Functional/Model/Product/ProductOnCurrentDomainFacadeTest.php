@@ -2,15 +2,15 @@
 
 namespace Tests\ShopBundle\Functional\Model\Product;
 
-use Shopsys\FrameworkBundle\DataFixtures\Demo\BrandDataFixture;
-use Shopsys\FrameworkBundle\DataFixtures\Demo\CategoryDataFixture;
-use Shopsys\FrameworkBundle\DataFixtures\Demo\FlagDataFixture;
 use Shopsys\FrameworkBundle\Model\Product\Filter\ParameterFilterData;
 use Shopsys\FrameworkBundle\Model\Product\Filter\ProductFilterData;
 use Shopsys\FrameworkBundle\Model\Product\Listing\ProductListOrderingConfig;
 use Shopsys\FrameworkBundle\Model\Product\Parameter\ParameterRepository;
 use Shopsys\FrameworkBundle\Model\Product\Parameter\ParameterValue;
 use Shopsys\FrameworkBundle\Model\Product\ProductOnCurrentDomainFacade;
+use Shopsys\ShopBundle\DataFixtures\Demo\BrandDataFixture;
+use Shopsys\ShopBundle\DataFixtures\Demo\CategoryDataFixture;
+use Shopsys\ShopBundle\DataFixtures\Demo\FlagDataFixture;
 use Shopsys\ShopBundle\Model\Category\Category;
 use Tests\ShopBundle\Test\TransactionFunctionalTestCase;
 

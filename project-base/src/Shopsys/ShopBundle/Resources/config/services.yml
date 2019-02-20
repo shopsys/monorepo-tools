@@ -1,5 +1,7 @@
 imports:
     - { resource: forms.yml }
+    - { resource: services/commands.yml }
+    - { resource: services/data_fixtures.yml }
 
 services:
     _defaults:
@@ -52,3 +54,41 @@ services:
     Shopsys\FrameworkBundle\Model\Product\ProductDataFactoryInterface: '@Shopsys\ShopBundle\Model\Product\ProductDataFactory'
 
     Shopsys\FrameworkBundle\Model\Product\Brand\BrandDataFactoryInterface: '@Shopsys\ShopBundle\Model\Product\Brand\BrandDataFactory'
+
+    Shopsys\ShopBundle\DataFixtures\ProductDataFixtureReferenceInjector: ~
+
+    Shopsys\ShopBundle\DataFixtures\Demo\ProductDataFixtureLoader: ~
+
+    Shopsys\ShopBundle\DataFixtures\Demo\ProductParametersFixtureLoader: ~
+
+    Shopsys\ShopBundle\DataFixtures\Performance\CategoryDataFixture:
+        arguments:
+            - "%shopsys.performance_data.category.counts_by_level%"
+
+    Shopsys\ShopBundle\DataFixtures\Performance\OrderDataFixture:
+        arguments:
+            - "%shopsys.performance_data.order.total_count%"
+            - "%shopsys.performance_data.order.item_count_per_order%"
+
+    Shopsys\ShopBundle\DataFixtures\Performance\ProductDataFixture:
+        arguments:
+            - "%shopsys.performance_data.product.total_count%"
+
+    Shopsys\ShopBundle\DataFixtures\Performance\UserDataFixture:
+        arguments:
+            - "%shopsys.performance_data.user.count_per_domain%"
+
+    Shopsys\ShopBundle\DataFixtures\Demo\ImageDataFixture:
+        arguments:
+            - '%shopsys.data_fixtures_images.resources_dir%'
+            - '%shopsys.image_dir%'
+            - '%shopsys.domain_images_dir%'
+        tags: ['doctrine.fixture.orm']
+
+    Shopsys\ShopBundle\DataFixtures\Demo\ProductDataFixtureCsvReader:
+        arguments:
+            - '%shopsys.data_fixtures.resource_products_filepath%'
+
+    Shopsys\ShopBundle\DataFixtures\Demo\UserDataFixtureLoader:
+        arguments:
+            - '%shopsys.data_fixtures.resource_customers_filepath%'
