@@ -222,6 +222,12 @@ class CartFacade
 
         if ($cart !== null) {
             $this->cartWatcherFacade->checkCartModifications($cart);
+
+            if ($cart->isEmpty()) {
+                $this->deleteCart($cart);
+
+                return null;
+            }
         }
 
         return $cart;

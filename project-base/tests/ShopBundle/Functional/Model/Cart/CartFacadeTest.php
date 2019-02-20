@@ -140,6 +140,45 @@ class CartFacadeTest extends TransactionFunctionalTestCase
     }
 
     /**
+     * @dataProvider productCartDataProvider
+     * @param int $productId
+     * @param bool $cartShouldBeNull
+     */
+    public function testCartNotExistIfNoListableProductIsInCart(int $productId, bool $cartShouldBeNull): void
+    {
+        $cartFacade = $this->getContainer()->get(CartFacade::class);
+        $cartItemFactory = $this->getContainer()->get(CartItemFactory::class);
+
+        $product = $this->getReference(ProductDataFixture::PRODUCT_PREFIX . $productId);
+
+        $cart = $cartFacade->getCartOfCurrentCustomerCreateIfNotExists();
+        $cartItem = $cartItemFactory->create($cart, $product, 1, 10);
+        $cart->addItem($cartItem);
+
+        $this->getEntityManager()->persist($cartItem);
+        $this->getEntityManager()->flush();
+
+        $this->assertFalse($cart->isEmpty(), 'Cart should not be empty');
+
+        $cart = $cartFacade->findCartOfCurrentCustomer();
+
+        if ($cartShouldBeNull) {
+            $this->assertNull($cart);
+        } else {
+            $this->assertEquals(1, $cart->getItemsCount());
+        }
+    }
+
+    public function productCartDataProvider()
+    {
+        return [
+            ['productId' => 1, 'cartShouldBeNull' => false],
+            ['productId' => 34, 'cartShouldBeNull' => true], // not listable product
+
+        ];
+    }
+
+    /**
      * @param \Shopsys\FrameworkBundle\Model\Customer\CustomerIdentifier $customerIdentifier
      * @return \Shopsys\FrameworkBundle\Model\Cart\CartFacade
      */
