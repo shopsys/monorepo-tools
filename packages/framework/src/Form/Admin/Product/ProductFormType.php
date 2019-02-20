@@ -643,7 +643,6 @@ class ProductFormType extends AbstractType
         ]);
         foreach ($this->pricingGroupFacade->getAll() as $pricingGroup) {
             $manualInputPricesByPricingGroup->add($pricingGroup->getId(), MoneyType::class, [
-                'currency' => false,
                 'scale' => 6,
                 'required' => false,
                 'invalid_message' => 'Please enter price in correct format (positive number with decimal separator)',

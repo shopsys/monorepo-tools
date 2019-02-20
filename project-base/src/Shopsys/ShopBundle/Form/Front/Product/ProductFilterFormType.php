@@ -25,13 +25,10 @@ class ProductFilterFormType extends AbstractType
         /** @var \Shopsys\FrameworkBundle\Model\Product\Filter\ProductFilterConfig $config */
         $config = $options['product_filter_config'];
 
-        $moneyBuilder = $builder->create('money', MoneyType::class, [
-            'currency' => false,
-        ]);
+        $moneyBuilder = $builder->create('money', MoneyType::class);
 
         $builder
             ->add('minimalPrice', MoneyType::class, [
-                'currency' => false,
                 'required' => false,
                 'attr' => ['placeholder' => $this->transformMoneyToView($config->getPriceRange()->getMinimalPrice(), $moneyBuilder)],
                 'invalid_message' => 'Please enter price in correct format (positive number with decimal separator)',
@@ -40,7 +37,6 @@ class ProductFilterFormType extends AbstractType
                 ],
             ])
             ->add('maximalPrice', MoneyType::class, [
-                'currency' => false,
                 'required' => false,
                 'attr' => ['placeholder' => $this->transformMoneyToView($config->getPriceRange()->getMaximalPrice(), $moneyBuilder)],
                 'invalid_message' => 'Please enter price in correct format (positive number with decimal separator)',

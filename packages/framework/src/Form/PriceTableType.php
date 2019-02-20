@@ -24,7 +24,6 @@ class PriceTableType extends AbstractType
             /* @var $currency \Shopsys\FrameworkBundle\Model\Pricing\Currency\Currency */
 
             $builder->add($key, MoneyType::class, [
-                'currency' => false,
                 'scale' => 6,
                 'required' => true,
                 'invalid_message' => 'Please enter price in correct format (positive number with decimal separator)',

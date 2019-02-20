@@ -34,7 +34,6 @@ class OrderItemFormType extends AbstractType
                 'error_bubbling' => true,
             ])
             ->add('priceWithVat', MoneyType::class, [
-                'currency' => false,
                 'scale' => 6,
                 'constraints' => [
                     new Constraints\NotBlank(['message' => 'Please enter unit price with VAT']),

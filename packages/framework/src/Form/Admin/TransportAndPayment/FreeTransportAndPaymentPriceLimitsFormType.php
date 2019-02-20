@@ -71,7 +71,6 @@ class FreeTransportAndPaymentPriceLimitsFormType extends AbstractType
                 ])
                 ->add(self::FIELD_PRICE_LIMIT, MoneyType::class, [
                     'required' => true,
-                    'currency' => false,
                     'constraints' => [
                         new NotNegativeMoneyAmount([
                             'message' => 'Price must be greater or equal to zero',
