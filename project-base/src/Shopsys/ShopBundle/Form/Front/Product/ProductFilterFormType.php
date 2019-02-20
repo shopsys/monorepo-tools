@@ -2,12 +2,11 @@
 
 namespace Shopsys\ShopBundle\Form\Front\Product;
 
+use Shopsys\FrameworkBundle\Component\Money\Money;
 use Shopsys\FrameworkBundle\Form\Constraints\NotNegativeMoneyAmount;
-use Shopsys\FrameworkBundle\Form\Transformers\NumericToMoneyTransformer;
 use Shopsys\FrameworkBundle\Model\Product\Filter\ProductFilterConfig;
 use Shopsys\FrameworkBundle\Model\Product\Filter\ProductFilterData;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\DataTransformer\MoneyToLocalizedStringTransformer;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\MoneyType;
@@ -23,18 +22,18 @@ class ProductFilterFormType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $priceScale = 2;
-        $modelTransformer = new NumericToMoneyTransformer($priceScale);
-        $viewTransformer = new MoneyToLocalizedStringTransformer($priceScale, false);
         /** @var \Shopsys\FrameworkBundle\Model\Product\Filter\ProductFilterConfig $config */
         $config = $options['product_filter_config'];
+
+        $moneyBuilder = $builder->create('money', MoneyType::class, [
+            'currency' => false,
+        ]);
 
         $builder
             ->add('minimalPrice', MoneyType::class, [
                 'currency' => false,
-                'scale' => $priceScale,
                 'required' => false,
-                'attr' => ['placeholder' => $viewTransformer->transform($modelTransformer->transform($config->getPriceRange()->getMinimalPrice()))],
+                'attr' => ['placeholder' => $this->transformMoneyToView($config->getPriceRange()->getMinimalPrice(), $moneyBuilder)],
                 'invalid_message' => 'Please enter price in correct format (positive number with decimal separator)',
                 'constraints' => [
                     new NotNegativeMoneyAmount(['message' => 'Price must be greater or equal to zero']),
@@ -42,9 +41,8 @@ class ProductFilterFormType extends AbstractType
             ])
             ->add('maximalPrice', MoneyType::class, [
                 'currency' => false,
-                'scale' => $priceScale,
                 'required' => false,
-                'attr' => ['placeholder' => $viewTransformer->transform($modelTransformer->transform($config->getPriceRange()->getMaximalPrice()))],
+                'attr' => ['placeholder' => $this->transformMoneyToView($config->getPriceRange()->getMaximalPrice(), $moneyBuilder)],
                 'invalid_message' => 'Please enter price in correct format (positive number with decimal separator)',
                 'constraints' => [
                     new NotNegativeMoneyAmount(['message' => 'Price must be greater or equal to zero']),
@@ -74,9 +72,6 @@ class ProductFilterFormType extends AbstractType
                 'expanded' => true,
             ])
             ->add('search', SubmitType::class);
-
-        $builder->get('minimalPrice')->addModelTransformer($modelTransformer);
-        $builder->get('maximalPrice')->addModelTransformer($modelTransformer);
     }
 
     /**
@@ -93,5 +88,24 @@ class ProductFilterFormType extends AbstractType
                 'method' => 'GET',
                 'csrf_protection' => false,
             ]);
+    }
+
+    /**
+     * @param \Shopsys\FrameworkBundle\Component\Money\Money $money
+     * @param \Symfony\Component\Form\FormBuilderInterface $moneyBuilder
+     * @return string
+     */
+    protected function transformMoneyToView(Money $money, FormBuilderInterface $moneyBuilder): string
+    {
+        foreach ($moneyBuilder->getModelTransformers() as $modelTransformer) {
+            /** @var \Symfony\Component\Form\DataTransformerInterface $modelTransformer */
+            $money = $modelTransformer->transform($money);
+        }
+        foreach ($moneyBuilder->getViewTransformers() as $viewTransformer) {
+            /** @var \Symfony\Component\Form\DataTransformerInterface $viewTransformer */
+            $money = $viewTransformer->transform($money);
+        }
+
+        return $money;
     }
 }

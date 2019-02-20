@@ -2,7 +2,6 @@
 
 namespace Shopsys\FrameworkBundle\Form\Admin\Order;
 
-use Shopsys\FrameworkBundle\Form\Transformers\NumericToMoneyTransformer;
 use Shopsys\FrameworkBundle\Model\Order\Item\OrderItemData;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -42,8 +41,6 @@ class OrderTransportFormType extends AbstractType
                 ],
                 'error_bubbling' => true,
             ]);
-
-        $builder->get('priceWithVat')->addModelTransformer(new NumericToMoneyTransformer(6));
     }
 
     /**

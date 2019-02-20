@@ -5,7 +5,6 @@ namespace Shopsys\ProductFeed\HeurekaBundle\Form;
 use Shopsys\FormTypesBundle\MultidomainType;
 use Shopsys\FrameworkBundle\Component\Money\Money;
 use Shopsys\FrameworkBundle\Form\Constraints\MoneyRange;
-use Shopsys\FrameworkBundle\Form\Transformers\NumericToMoneyTransformer;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\MoneyType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -38,7 +37,6 @@ class HeurekaProductFormType extends AbstractType
             'required' => false,
             'entry_options' => [
                 'currency' => 'CZK',
-                'scale' => 2,
                 'constraints' => [
                     new MoneyRange([
                         'min' => Money::fromInteger(0),
@@ -47,10 +45,5 @@ class HeurekaProductFormType extends AbstractType
                 ],
             ],
         ]);
-
-        foreach ($builder->get('cpc')->all() as $price) {
-            /** @var \Symfony\Component\Form\FormBuilderInterface $price */
-            $price->addModelTransformer(new NumericToMoneyTransformer(2));
-        }
     }
 }

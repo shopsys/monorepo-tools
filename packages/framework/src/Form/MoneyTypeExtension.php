@@ -3,6 +3,7 @@
 namespace Shopsys\FrameworkBundle\Form;
 
 use CommerceGuys\Intl\Currency\CurrencyRepositoryInterface;
+use Shopsys\FrameworkBundle\Form\Transformers\NumericToMoneyTransformer;
 use Shopsys\FrameworkBundle\Form\Transformers\RemoveWhitespacesTransformer;
 use Shopsys\FrameworkBundle\Model\Localization\Localization;
 use Symfony\Component\Form\AbstractTypeExtension;
@@ -38,6 +39,7 @@ class MoneyTypeExtension extends AbstractTypeExtension
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        $builder->addModelTransformer(new NumericToMoneyTransformer($options['scale']));
         $builder->addViewTransformer(new RemoveWhitespacesTransformer());
     }
 

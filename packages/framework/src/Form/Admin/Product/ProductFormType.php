@@ -22,7 +22,6 @@ use Shopsys\FrameworkBundle\Form\LocalizedFullWidthType;
 use Shopsys\FrameworkBundle\Form\ProductCalculatedPricesType;
 use Shopsys\FrameworkBundle\Form\ProductParameterValueType;
 use Shopsys\FrameworkBundle\Form\ProductsType;
-use Shopsys\FrameworkBundle\Form\Transformers\NumericToMoneyTransformer;
 use Shopsys\FrameworkBundle\Form\Transformers\ProductParameterValueToProductParameterValuesLocalizedTransformer;
 use Shopsys\FrameworkBundle\Form\Transformers\RemoveDuplicatesFromArrayTransformer;
 use Shopsys\FrameworkBundle\Form\UrlListType;
@@ -643,7 +642,7 @@ class ProductFormType extends AbstractType
             'disabled' => $this->isProductMainVariant($product),
         ]);
         foreach ($this->pricingGroupFacade->getAll() as $pricingGroup) {
-            $manualInputPrice = $builder->create($pricingGroup->getId(), MoneyType::class, [
+            $manualInputPricesByPricingGroup->add($pricingGroup->getId(), MoneyType::class, [
                 'currency' => false,
                 'scale' => 6,
                 'required' => false,
@@ -653,9 +652,6 @@ class ProductFormType extends AbstractType
                 ],
                 'label' => $pricingGroup->getName(),
             ]);
-            $manualInputPrice->addModelTransformer(new NumericToMoneyTransformer(6));
-
-            $manualInputPricesByPricingGroup->add($manualInputPrice);
         }
         $productCalculatedPricesGroup->add($manualInputPricesByPricingGroup);
         $builderPricesGroup->add($productCalculatedPricesGroup);

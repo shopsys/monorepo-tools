@@ -4,7 +4,6 @@ namespace Shopsys\FrameworkBundle\Form\Admin\TransportAndPayment;
 
 use Shopsys\FrameworkBundle\Component\Domain\Domain;
 use Shopsys\FrameworkBundle\Form\Constraints\NotNegativeMoneyAmount;
-use Shopsys\FrameworkBundle\Form\Transformers\NumericToMoneyTransformer;
 use Shopsys\FrameworkBundle\Form\ValidationGroup;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
@@ -73,7 +72,6 @@ class FreeTransportAndPaymentPriceLimitsFormType extends AbstractType
                 ->add(self::FIELD_PRICE_LIMIT, MoneyType::class, [
                     'required' => true,
                     'currency' => false,
-                    'scale' => 2,
                     'constraints' => [
                         new NotNegativeMoneyAmount([
                             'message' => 'Price must be greater or equal to zero',
@@ -85,9 +83,6 @@ class FreeTransportAndPaymentPriceLimitsFormType extends AbstractType
                         ]),
                     ],
                 ]);
-
-            $formBuilderForDomain->get(self::FIELD_PRICE_LIMIT)
-                ->addModelTransformer(new NumericToMoneyTransformer(2));
 
             $formBuilderForDomains->add($formBuilderForDomain);
         }
