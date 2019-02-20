@@ -33,6 +33,14 @@ class Price
     }
 
     /**
+     * @return \Shopsys\FrameworkBundle\Model\Pricing\Price
+     */
+    public static function zero(): self
+    {
+        return new self(Money::zero(), Money::zero());
+    }
+
+    /**
      * @return string
      */
     public function getPriceWithoutVat(): string

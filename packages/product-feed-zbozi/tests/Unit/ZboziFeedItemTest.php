@@ -81,7 +81,7 @@ class ZboziFeedItemTest extends TestCase
         $availabilityMock->method('getDispatchTime')->willReturn(0);
         $this->defaultProduct->method('getCalculatedAvailability')->willReturn($availabilityMock);
 
-        $productPrice = new ProductPrice(new Price(Money::zero(), Money::zero()), false);
+        $productPrice = new ProductPrice(Price::zero(), false);
         $this->productPriceCalculationForUserMock->method('calculatePriceForUserAndDomainId')
             ->with($this->defaultProduct, 1, null)->willReturn($productPrice);
 

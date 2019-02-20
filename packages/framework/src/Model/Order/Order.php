@@ -682,7 +682,7 @@ class Order
     public function getTransportAndPaymentPrice()
     {
         $transportAndPaymentItems = $this->getTransportAndPaymentItems();
-        $totalPrice = new Price(Money::zero(), Money::zero());
+        $totalPrice = Price::zero();
 
         foreach ($transportAndPaymentItems as $item) {
             $itemPrice = new Price(Money::fromValue($item->getPriceWithoutVat()), Money::fromValue($item->getPriceWithVat()));

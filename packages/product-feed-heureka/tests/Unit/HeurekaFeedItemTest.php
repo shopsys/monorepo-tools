@@ -4,7 +4,6 @@ namespace Tests\ProductFeed\HeurekaBundle\Unit;
 
 use PHPUnit\Framework\TestCase;
 use Shopsys\FrameworkBundle\Component\Domain\Config\DomainConfig;
-use Shopsys\FrameworkBundle\Component\Money\Money;
 use Shopsys\FrameworkBundle\Model\Category\Category;
 use Shopsys\FrameworkBundle\Model\Category\CategoryFacade;
 use Shopsys\FrameworkBundle\Model\Pricing\Price;
@@ -81,7 +80,7 @@ class HeurekaFeedItemTest extends TestCase
         $availabilityMock->method('getDispatchTime')->willReturn(0);
         $this->defaultProduct->method('getCalculatedAvailability')->willReturn($availabilityMock);
 
-        $productPrice = new ProductPrice(new Price(Money::zero(), Money::zero()), false);
+        $productPrice = new ProductPrice(Price::zero(), false);
         $this->productPriceCalculationForUserMock->method('calculatePriceForUserAndDomainId')
             ->with($this->defaultProduct, 1, null)->willReturn($productPrice);
 

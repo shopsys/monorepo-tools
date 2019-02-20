@@ -4,7 +4,6 @@ namespace Tests\FrameworkBundle\Unit\Model\Product\Pricing;
 
 use Doctrine\ORM\EntityManager;
 use PHPUnit\Framework\TestCase;
-use Shopsys\FrameworkBundle\Component\Money\Money;
 use Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroup;
 use Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroupFacade;
 use Shopsys\FrameworkBundle\Model\Pricing\Price;
@@ -29,7 +28,7 @@ class ProductPriceRecalculatorTest extends TestCase
             ->disableOriginalConstructor()
             ->setMethods(['calculatePrice'])
             ->getMock();
-        $productPrice = new ProductPrice(new Price(Money::zero(), Money::zero()), false);
+        $productPrice = new ProductPrice(Price::zero(), false);
         $productPriceCalculationMock->expects($this->once())->method('calculatePrice')->willReturn($productPrice);
         $productCalculatedPriceRepositoryMock = $this->getMockBuilder(ProductCalculatedPriceRepository::class)
             ->disableOriginalConstructor()

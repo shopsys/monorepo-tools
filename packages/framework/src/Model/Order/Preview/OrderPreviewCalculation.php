@@ -2,7 +2,6 @@
 
 namespace Shopsys\FrameworkBundle\Model\Order\Preview;
 
-use Shopsys\FrameworkBundle\Component\Money\Money;
 use Shopsys\FrameworkBundle\Model\Customer\User;
 use Shopsys\FrameworkBundle\Model\Order\OrderPriceCalculation;
 use Shopsys\FrameworkBundle\Model\Payment\Payment;
@@ -183,7 +182,7 @@ class OrderPreviewCalculation
         Price $paymentPrice = null,
         Price $roundingPrice = null
     ) {
-        $totalPrice = new Price(Money::zero(), Money::zero());
+        $totalPrice = Price::zero();
 
         $totalPrice = $totalPrice->add($productsPrice);
 
@@ -209,7 +208,7 @@ class OrderPreviewCalculation
      */
     protected function getProductsPrice(array $quantifiedItemsPrices, array $quantifiedItemsDiscounts)
     {
-        $finalPrice = new Price(Money::zero(), Money::zero());
+        $finalPrice = Price::zero();
 
         foreach ($quantifiedItemsPrices as $quantifiedItemPrice) {
             $finalPrice = $finalPrice->add($quantifiedItemPrice->getTotalPrice());
