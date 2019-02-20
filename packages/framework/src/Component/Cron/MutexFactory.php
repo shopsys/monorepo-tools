@@ -30,13 +30,32 @@ class MutexFactory
 
     /**
      * @return \NinjaMutex\Mutex
+     * @deprecated Use `getPrefixedCronMutex` instead
      */
     public function getCronMutex()
     {
-        if (!array_key_exists(self::MUTEX_CRON_NAME, $this->mutexesByName)) {
-            $this->mutexesByName[self::MUTEX_CRON_NAME] = new Mutex(self::MUTEX_CRON_NAME, $this->lock);
+        return $this->getMutexByName(self::MUTEX_CRON_NAME);
+    }
+
+    /**
+     * @param string $prefix
+     * @return \NinjaMutex\Mutex
+     */
+    public function getPrefixedCronMutex(string $prefix): Mutex
+    {
+        return $this->getMutexByName($prefix . '-' . self::MUTEX_CRON_NAME);
+    }
+
+    /**
+     * @param string $mutexName
+     * @return \NinjaMutex\Mutex
+     */
+    protected function getMutexByName(string $mutexName): Mutex
+    {
+        if (!array_key_exists($mutexName, $this->mutexesByName)) {
+            $this->mutexesByName[$mutexName] = new Mutex($mutexName, $this->lock);
         }
 
-        return $this->mutexesByName[self::MUTEX_CRON_NAME];
+        return $this->mutexesByName[$mutexName];
     }
 }

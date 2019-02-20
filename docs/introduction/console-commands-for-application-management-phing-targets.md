@@ -166,8 +166,32 @@ Runs background jobs. Should be executed periodically by system Cron every 5 min
 
 Essential for the production environment. Periodically executed Cron modules recalculate visibility, generate XML feeds and sitemaps, provide error reporting etc.
 
+If you want to have more cron instances registered, you need to create new targets with instance specified.  
+For example:
+```xml
+<target name="cron-default" description="Runs background jobs. Should be executed periodically by system Cron every 5 minutes.">
+    <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
+        <arg value="${path.bin-console}" />
+        <arg value="shopsys:cron" />
+        <arg value="--instance-name=default" />
+    </exec>
+</target>
+
+<target name="cron-import" description="Runs background jobs for import. Should be executed periodically by system Cron every 5 minutes.">
+    <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
+        <arg value="${path.bin-console}" />
+        <arg value="shopsys:cron" />
+        <arg value="--instance-name=import" />
+    </exec>
+</target>
+```
+
+For more information, see [Working with Multiple Cron Instances](/docs/cookbook/working-with-multiple-cron-instances.md) cookbook or you can read about [Cron in general](/docs/introduction/cron.md).
+
 #### cron-list
-Lists all available background jobs.
+Lists all available background jobs. If there is more than one cron instance registered, jobs are grouped by instance.
+
+For more information, see [Working with Multiple Cron Instances](/docs/cookbook/working-with-multiple-cron-instances.md) cookbook or you can read about [Cron in general](/docs/introduction/cron.md).
 
 #### grunt
 Builds CSS from LESS via Grunt.

@@ -102,7 +102,7 @@ class CronFacadeTest extends TestCase
             });
         $this->expectMethodCallWithCronModuleConfig($cronModuleFacadeMock, 'unscheduleModule', $scheduledServiceId);
 
-        $this->createCronFacade($cronConfig, $cronModuleFacadeMock)->runScheduledModules();
+        $this->createCronFacade($cronConfig, $cronModuleFacadeMock)->runScheduledModulesForInstance(CronModuleConfig::DEFAULT_INSTANCE_NAME);
     }
 
     /**
@@ -148,7 +148,7 @@ class CronFacadeTest extends TestCase
         $cronTimeResolver = $cronTimeResolverMock !== null ? $cronTimeResolverMock : new CronTimeResolver();
         $cronConfig = new CronConfig($cronTimeResolver);
         foreach ($servicesIndexedById as $serviceId => $service) {
-            $cronConfig->registerCronModule($service, $serviceId, '*', '*');
+            $cronConfig->registerCronModuleInstance($service, $serviceId, '*', '*', CronModuleConfig::DEFAULT_INSTANCE_NAME);
         }
 
         return $cronConfig;

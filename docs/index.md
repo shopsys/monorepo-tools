@@ -28,6 +28,11 @@
 * [How to Work with Products](./introduction/how-to-work-with-products.md)
 * [Translations](./introduction/translations.md)
 * [Directories](./introduction/directories.md)
+<!--- TODO
+Add:
+
+* [Cron](./introduction/cron.md)
+-->
 
 ## Cookbook
 * [Dumping and Importing the Database](./cookbook/dumping-and-importing-the-database.md)
@@ -40,6 +45,11 @@
 * [Adding Ajax Load More Button into Pagination](./cookbook/adding-ajax-load-more-button-into-pagination.md)
 * [Implementing a basic data import](./cookbook/basic-data-import.md)
 * [Creating a Multidomain Design](./cookbook/creating-a-multidomain-design.md)
+<!--- TODO
+Add:
+
+* [Working with Multiple Cron Instances](./cookbook/working-with-multiple-cron-instances.md)
+-->
 
 ## Functional documentation
 * [Behavior of Product Variants](./functional/behavior-of-product-variants.md)

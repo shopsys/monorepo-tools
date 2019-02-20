@@ -33,8 +33,22 @@ class CronConfig
      * @param string $serviceId
      * @param string $timeHours
      * @param string $timeMinutes
+     *
+     * @deprecated Use `registerCronModuleInstance` instead
      */
     public function registerCronModule($service, $serviceId, $timeHours, $timeMinutes)
+    {
+        $this->registerCronModuleInstance($service, $serviceId, $timeHours, $timeMinutes, CronModuleConfig::DEFAULT_INSTANCE_NAME);
+    }
+
+    /**
+     * @param \Shopsys\Plugin\Cron\SimpleCronModuleInterface|\Shopsys\Plugin\Cron\IteratedCronModuleInterface $service
+     * @param string $serviceId
+     * @param string $timeHours
+     * @param string $timeMinutes
+     * @param string $instanceName
+     */
+    public function registerCronModuleInstance($service, string $serviceId, string $timeHours, string $timeMinutes, string $instanceName): void
     {
         if (!$service instanceof SimpleCronModuleInterface && !$service instanceof IteratedCronModuleInterface) {
             throw new \Shopsys\FrameworkBundle\Component\Cron\Exception\InvalidCronModuleException($serviceId);
@@ -42,7 +56,10 @@ class CronConfig
         $this->cronTimeResolver->validateTimeString($timeHours, 23, 1);
         $this->cronTimeResolver->validateTimeString($timeMinutes, 55, 5);
 
-        $this->cronModuleConfigs[] = new CronModuleConfig($service, $serviceId, $timeHours, $timeMinutes);
+        $cronModuleConfig = new CronModuleConfig($service, $serviceId, $timeHours, $timeMinutes);
+        $cronModuleConfig->assignToInstance($instanceName);
+
+        $this->cronModuleConfigs[] = $cronModuleConfig;
     }
 
     /**
@@ -83,5 +100,22 @@ class CronConfig
         }
 
         throw new \Shopsys\FrameworkBundle\Component\Cron\Config\Exception\CronModuleConfigNotFoundException($serviceId);
+    }
+
+    /**
+     * @param string $instanceName
+     * @return array
+     */
+    public function getCronModuleConfigsForInstance(string $instanceName): array
+    {
+        $matchedCronConfigs = [];
+
+        foreach ($this->cronModuleConfigs as $cronModuleConfig) {
+            if ($cronModuleConfig->getInstanceName() === $instanceName) {
+                $matchedCronConfigs[] = $cronModuleConfig;
+            }
+        }
+
+        return $matchedCronConfigs;
     }
 }

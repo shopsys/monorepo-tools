@@ -6,6 +6,8 @@ use Shopsys\FrameworkBundle\Component\Cron\CronTimeInterface;
 
 class CronModuleConfig implements CronTimeInterface
 {
+    public const DEFAULT_INSTANCE_NAME = 'default';
+
     /**
      * @var \Shopsys\Plugin\Cron\SimpleCronModuleInterface
      */
@@ -27,6 +29,11 @@ class CronModuleConfig implements CronTimeInterface
     protected $timeHours;
 
     /**
+     * @var string
+     */
+    protected $instanceName;
+
+    /**
      * @param \Shopsys\Plugin\Cron\SimpleCronModuleInterface|\Shopsys\Plugin\Cron\IteratedCronModuleInterface $service
      * @param string $serviceId
      * @param string $timeHours
@@ -38,6 +45,7 @@ class CronModuleConfig implements CronTimeInterface
         $this->serviceId = $serviceId;
         $this->timeHours = $timeHours;
         $this->timeMinutes = $timeMinutes;
+        $this->assignToInstance(self::DEFAULT_INSTANCE_NAME);
     }
 
     /**
@@ -70,5 +78,21 @@ class CronModuleConfig implements CronTimeInterface
     public function getTimeHours()
     {
         return $this->timeHours;
+    }
+
+    /**
+     * @return string
+     */
+    public function getInstanceName(): string
+    {
+        return $this->instanceName;
+    }
+
+    /**
+     * @param string $instanceName
+     */
+    public function assignToInstance(string $instanceName): void
+    {
+        $this->instanceName = $instanceName;
     }
 }
