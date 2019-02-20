@@ -71,8 +71,8 @@ class TransportDataFixture extends AbstractReferenceFixture implements Dependent
             'en' => 'Personal collection',
         ];
         $transportData->pricesByCurrencyId = [
-            $this->getReference(CurrencyDataFixture::CURRENCY_CZK)->getId() => Money::fromString('0'),
-            $this->getReference(CurrencyDataFixture::CURRENCY_EUR)->getId() => Money::fromString('0'),
+            $this->getReference(CurrencyDataFixture::CURRENCY_CZK)->getId() => Money::zero(),
+            $this->getReference(CurrencyDataFixture::CURRENCY_EUR)->getId() => Money::zero(),
         ];
         $transportData->description = [
             'cs' => 'Uvítá Vás milý personál!',

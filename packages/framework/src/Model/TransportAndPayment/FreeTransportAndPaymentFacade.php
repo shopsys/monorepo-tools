@@ -55,7 +55,7 @@ class FreeTransportAndPaymentFacade
             return $this->getFreeTransportAndPaymentPriceLimitOnDomain($domainId)->subtract($productsPriceWithVat);
         }
 
-        return Money::fromInteger(0);
+        return Money::zero();
     }
 
     /**

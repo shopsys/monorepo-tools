@@ -42,8 +42,8 @@ class OrderItemTest extends TestCase
         $orderItem = $this->createOrderTransport();
 
         $orderItemData = new OrderItemData();
-        $orderItemData->priceWithVat = Money::fromInteger(0);
-        $orderItemData->priceWithoutVat = Money::fromInteger(0);
+        $orderItemData->priceWithVat = Money::zero();
+        $orderItemData->priceWithoutVat = Money::zero();
         $transport = $this->createTransportMock();
         $orderItemData->transport = $transport;
         $orderItem->edit($orderItemData);
@@ -72,8 +72,8 @@ class OrderItemTest extends TestCase
         $orderItem = $this->createOrderPayment();
 
         $orderItemData = new OrderItemData();
-        $orderItemData->priceWithVat = Money::fromInteger(0);
-        $orderItemData->priceWithoutVat = Money::fromInteger(0);
+        $orderItemData->priceWithVat = Money::zero();
+        $orderItemData->priceWithoutVat = Money::zero();
         $payment = $this->createPaymentMock();
         $orderItemData->payment = $payment;
         $orderItem->edit($orderItemData);

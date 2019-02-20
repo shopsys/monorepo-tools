@@ -263,12 +263,12 @@ class CurrencyFacade
     {
         $toFlush = [];
         foreach ($this->paymentRepository->getAll() as $payment) {
-            $paymentPrice = $this->paymentPriceFactory->create($payment, $currency, Money::fromInteger(0));
+            $paymentPrice = $this->paymentPriceFactory->create($payment, $currency, Money::zero());
             $this->em->persist($paymentPrice);
             $toFlush[] = $paymentPrice;
         }
         foreach ($this->transportRepository->getAll() as $transport) {
-            $transportPrice = $this->transportPriceFactory->create($transport, $currency, Money::fromInteger(0));
+            $transportPrice = $this->transportPriceFactory->create($transport, $currency, Money::zero());
             $this->em->persist($transportPrice);
             $toFlush[] = $transportPrice;
         }

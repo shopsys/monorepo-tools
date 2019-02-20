@@ -28,8 +28,7 @@ class NotNegativeMoneyAmountValidator extends ConstraintValidator
             throw new \Shopsys\FrameworkBundle\Form\Exception\NotMoneyTypeException($value);
         }
 
-        $zeroMoney = Money::fromInteger(0);
-        if ($value->isLessThan($zeroMoney)) {
+        if ($value->isNegative()) {
             $this->context->addViolation($constraint->message);
         }
     }

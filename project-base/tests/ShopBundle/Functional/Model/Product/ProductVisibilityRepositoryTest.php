@@ -239,7 +239,7 @@ class ProductVisibilityRepositoryTest extends TransactionFunctionalTestCase
         $productPriceRecalculator = $this->getContainer()->get(ProductPriceRecalculator::class);
 
         $productData = $this->getDefaultProductData();
-        $this->setPriceForAllDomains($productData, Money::fromInteger(0));
+        $this->setPriceForAllDomains($productData, Money::zero());
         $product1 = $productFacade->create($productData);
 
         $this->setPriceForAllDomains($productData, null);
@@ -407,7 +407,7 @@ class ProductVisibilityRepositoryTest extends TransactionFunctionalTestCase
         $pricingGroup = $this->getReference(PricingGroupDataFixture::PRICING_GROUP_ORDINARY_DOMAIN_1);
         $pricingGroupWithZeroPriceId = $pricingGroup->getId();
 
-        $productData->manualInputPricesByPricingGroupId[$pricingGroupWithZeroPriceId] = Money::fromInteger(0);
+        $productData->manualInputPricesByPricingGroupId[$pricingGroupWithZeroPriceId] = Money::zero();
 
         $product = $productFacade->create($productData);
         $productPriceRecalculator->runImmediateRecalculations();

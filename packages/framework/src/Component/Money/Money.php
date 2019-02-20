@@ -59,6 +59,14 @@ class Money implements JsonSerializable
     }
 
     /**
+     * @return \Shopsys\FrameworkBundle\Component\Money\Money
+     */
+    public static function zero(): self
+    {
+        return static::fromInteger(0);
+    }
+
+    /**
      * @return string
      */
     public function toString(): string
@@ -196,6 +204,30 @@ class Money implements JsonSerializable
     public function isLessThanOrEqualTo(self $money): bool
     {
         return $this->decimal->isLessOrEqualTo($money->decimal);
+    }
+
+    /**
+     * @return bool
+     */
+    public function isNegative(): bool
+    {
+        return $this->decimal->isNegative() && !$this->decimal->isZero();
+    }
+
+    /**
+     * @return bool
+     */
+    public function isPositive(): bool
+    {
+        return $this->decimal->isPositive();
+    }
+
+    /**
+     * @return bool
+     */
+    public function isZero(): bool
+    {
+        return $this->decimal->isZero();
     }
 
     /**

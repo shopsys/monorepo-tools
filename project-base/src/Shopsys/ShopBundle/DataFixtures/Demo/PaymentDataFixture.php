@@ -83,8 +83,8 @@ class PaymentDataFixture extends AbstractReferenceFixture implements DependentFi
         ];
         $paymentData->czkRounding = true;
         $paymentData->pricesByCurrencyId = [
-            $this->getReference(CurrencyDataFixture::CURRENCY_CZK)->getId() => Money::fromString('0'),
-            $this->getReference(CurrencyDataFixture::CURRENCY_EUR)->getId() => Money::fromString('0'),
+            $this->getReference(CurrencyDataFixture::CURRENCY_CZK)->getId() => Money::zero(),
+            $this->getReference(CurrencyDataFixture::CURRENCY_EUR)->getId() => Money::zero(),
         ];
         $paymentData->vat = $this->getReference(VatDataFixture::VAT_HIGH);
         $this->createPayment(self::PAYMENT_CASH, $paymentData, [TransportDataFixture::TRANSPORT_PERSONAL]);

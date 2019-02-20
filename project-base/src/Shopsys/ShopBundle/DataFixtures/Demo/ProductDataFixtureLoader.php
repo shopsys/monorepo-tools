@@ -360,7 +360,7 @@ class ProductDataFixtureLoader
 
         foreach ($allPricingGroups as $pricingGroup) {
             if (!isset($demoDataManualPrices[$pricingGroup->getId()])) {
-                $demoDataManualPrices[$pricingGroup->getId()] = Money::fromInteger(0);
+                $demoDataManualPrices[$pricingGroup->getId()] = Money::zero();
             }
         }
 

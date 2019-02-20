@@ -156,6 +156,13 @@ class MoneyTest extends TestCase
         yield [1.0001, 3, '1.000'];
     }
 
+    public function testZero(): void
+    {
+        $zeroMoney = Money::zero();
+
+        $this->assertSame('0', $zeroMoney->toString());
+    }
+
     public function testAddIsImmutable(): void
     {
         $money = Money::fromString('1');
@@ -671,5 +678,89 @@ class MoneyTest extends TestCase
         yield ['-1', '1', true];
         yield ['0.000001', '0', false];
         yield ['0', '0.000001', true];
+    }
+
+    /**
+     * @dataProvider isPositiveProvider
+     * @param string $a
+     * @param bool $expectedResult
+     */
+    public function testIsPositive(string $a, bool $expectedResult): void
+    {
+        $moneyA = Money::fromString($a);
+
+        $this->assertSame($expectedResult, $moneyA->isPositive());
+    }
+
+    /**
+     * @return \Iterator
+     */
+    public function isPositiveProvider(): Iterator
+    {
+        yield ['0', false];
+        yield ['-0', false];
+        yield ['+0', false];
+        yield ['0.0', false];
+        yield ['-0.0', false];
+        yield ['1', true];
+        yield ['0.55', true];
+        yield ['-1', false];
+        yield ['-0.55', false];
+    }
+
+    /**
+     * @dataProvider isNegativeProvider
+     * @param string $a
+     * @param bool $expectedResult
+     */
+    public function testIsNegative(string $a, bool $expectedResult): void
+    {
+        $moneyA = Money::fromString($a);
+
+        $this->assertSame($expectedResult, $moneyA->isNegative());
+    }
+
+    /**
+     * @return \Iterator
+     */
+    public function isNegativeProvider(): Iterator
+    {
+        yield ['0', false];
+        yield ['-0', false];
+        yield ['+0', false];
+        yield ['0.0', false];
+        yield ['-0.0', false];
+        yield ['1', false];
+        yield ['0.55', false];
+        yield ['-1', true];
+        yield ['-0.55', true];
+    }
+
+    /**
+     * @dataProvider isZeroProvider
+     * @param string $a
+     * @param bool $expectedResult
+     */
+    public function testIsZero(string $a, bool $expectedResult): void
+    {
+        $moneyA = Money::fromString($a);
+
+        $this->assertSame($expectedResult, $moneyA->isZero());
+    }
+
+    /**
+     * @return \Iterator
+     */
+    public function isZeroProvider(): Iterator
+    {
+        yield ['0', true];
+        yield ['-0', true];
+        yield ['+0', true];
+        yield ['0.0', true];
+        yield ['-0.0', true];
+        yield ['1', false];
+        yield ['0.55', false];
+        yield ['-1', false];
+        yield ['-0.55', false];
     }
 }
