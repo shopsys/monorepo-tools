@@ -2,8 +2,6 @@
 
 namespace Shopsys\FrameworkBundle\Model\Order\Item;
 
-use Shopsys\FrameworkBundle\Component\Money\Money;
-
 class OrderItemDataFactory implements OrderItemDataFactoryInterface
 {
     /**
@@ -34,8 +32,8 @@ class OrderItemDataFactory implements OrderItemDataFactoryInterface
     protected function fillFromOrderItem(OrderItemData $orderItemData, OrderItem $orderItem)
     {
         $orderItemData->name = $orderItem->getName();
-        $orderItemData->priceWithVat = Money::fromValue($orderItem->getPriceWithVat());
-        $orderItemData->priceWithoutVat = Money::fromValue($orderItem->getPriceWithoutVat());
+        $orderItemData->priceWithVat = $orderItem->getPriceWithVat();
+        $orderItemData->priceWithoutVat = $orderItem->getPriceWithoutVat();
         $orderItemData->vatPercent = $orderItem->getVatPercent();
         $orderItemData->quantity = $orderItem->getQuantity();
         $orderItemData->unitName = $orderItem->getUnitName();

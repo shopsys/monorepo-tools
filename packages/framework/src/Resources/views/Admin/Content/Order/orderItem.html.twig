@@ -46,8 +46,8 @@
         <td class="text-right">1</td>
         <td class="text-right"></td>
         <td class="text-right">{{ form_widget(orderTransportForm.vatPercent, {attr: { class: 'text-right'}}) }}</td>
-        <td class="text-right">{{ order.orderTransport.priceWithVat|priceWithCurrency(order.currency) }}</td>
-        <td class="text-right">{{ order.orderTransport.priceWithoutVat|priceWithCurrency(order.currency) }}</td>
+        <td class="text-right">{{ order.orderTransport.priceWithVat.toValue|priceWithCurrency(order.currency) }}</td>
+        <td class="text-right">{{ order.orderTransport.priceWithoutVat.toValue|priceWithCurrency(order.currency) }}</td>
         <td></td>
     </tr>
 {% endmacro %}
@@ -64,8 +64,8 @@
         <td class="text-right">1</td>
         <td class="text-right"></td>
         <td class="text-right">{{ form_widget(orderPaymentForm.vatPercent, {attr: { class: 'text-right'}}) }}</td>
-        <td class="text-right">{{ order.orderPayment.priceWithVat|priceWithCurrency(order.currency) }}</td>
-        <td class="text-right">{{ order.orderPayment.priceWithoutVat|priceWithCurrency(order.currency) }}</td>
+        <td class="text-right">{{ order.orderPayment.priceWithVat.toValue|priceWithCurrency(order.currency) }}</td>
+        <td class="text-right">{{ order.orderPayment.priceWithoutVat.toValue|priceWithCurrency(order.currency) }}</td>
         <td></td>
     </tr>
 {% endmacro %}

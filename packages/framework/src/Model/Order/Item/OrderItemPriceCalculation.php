@@ -66,7 +66,7 @@ class OrderItemPriceCalculation
         $vatData->percent = $orderItem->getVatPercent();
         $vat = $this->vatFactory->create($vatData);
 
-        $totalPriceWithVat = $orderItem->getPriceWithVat() * $orderItem->getQuantity();
+        $totalPriceWithVat = $orderItem->getPriceWithVat()->toValue() * $orderItem->getQuantity();
         $totalVatAmount = $this->priceCalculation->getVatAmountByPriceWithVat($totalPriceWithVat, $vat);
         $totalPriceWithoutVat = $totalPriceWithVat - $totalVatAmount;
 

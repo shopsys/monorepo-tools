@@ -125,7 +125,7 @@
                             </div>
                         {% else %}
                             <div class="box-free-transport">
-                                {% trans with {'%price%': remainingPriceWithVat|price} %}
+                                {% trans with {'%price%': remainingPriceWithVat.toValue|price} %}
                                     You still have to purchase products for <strong> %price% </strong> for <strong> free </strong> shipping and payment.
                                 {% endtrans %}
                             </div>

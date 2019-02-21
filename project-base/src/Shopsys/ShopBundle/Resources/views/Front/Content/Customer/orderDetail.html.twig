@@ -154,7 +154,7 @@
                         {% for item in order.items %}
                             <tr>
                                 <td>{{ item.name }}</td>
-                                <td class="text-right">{{ item.priceWithVat|priceWithCurrency(order.currency) }}</td>
+                                <td class="text-right">{{ item.priceWithVat.toValue|priceWithCurrency(order.currency) }}</td>
                                 <td class="text-right">{{ item.quantity|formatNumber }} {{ item.unitName }}</td>
                                 <td class="text-right">{{ item.vatPercent|formatPercent }}</td>
                                 <td class="text-right">{{ orderItemTotalPricesById[item.id].priceWithVat.toValue|priceWithCurrency(order.currency) }}</td>
@@ -168,11 +168,11 @@
                 <table class="box-order-detail__total__table">
                     <tr>
                         <th>{{ 'Total price including VAT'|trans }}: </th>
-                        <td>{{ order.totalPriceWithVat|priceWithCurrency(order.currency) }}</td>
+                        <td>{{ order.totalPriceWithVat.toValue|priceWithCurrency(order.currency) }}</td>
                     </tr>
                     <tr>
                         <th>{{ 'Total price excluding VAT'|trans }}: </th>
-                        <td>{{ order.totalPriceWithoutVat|priceWithCurrency(order.currency) }}</td>
+                        <td>{{ order.totalPriceWithoutVat.toValue|priceWithCurrency(order.currency) }}</td>
                     </tr>
                 </table>
             </div>

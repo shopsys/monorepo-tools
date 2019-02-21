@@ -80,11 +80,11 @@
                         <item_name><![CDATA[{{ item.name }}]]></item_name>
                         <item_quantity>{{ item.quantity }}</item_quantity>
                         <item_unit><![CDATA[{{ item.unitName|default('') }}]]></item_unit>
-                        {% if item.priceWithoutVat %}
-                            <item_unit_price_without_vat>{{ item.priceWithoutVat }}</item_unit_price_without_vat>
+                        {% if not item.priceWithoutVat.isZero %}
+                            <item_unit_price_without_vat>{{ item.priceWithoutVat.toValue }}</item_unit_price_without_vat>
                         {% endif %}
-                        {% if item.priceWithVat %}
-                            <item_unit_price_with_vat>{{ item.priceWithVat }}</item_unit_price_with_vat>
+                        {% if not item.priceWithVat.isZero %}
+                            <item_unit_price_with_vat>{{ item.priceWithVat.toValue }}</item_unit_price_with_vat>
                         {% endif %}
                         {% if order.currency.code %}
                             <item_currency_code><![CDATA[{{ order.currency.code }}]]></item_currency_code>

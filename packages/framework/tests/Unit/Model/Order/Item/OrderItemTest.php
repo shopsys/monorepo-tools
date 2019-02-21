@@ -18,6 +18,7 @@ use Shopsys\FrameworkBundle\Model\Product\Product;
 use Shopsys\FrameworkBundle\Model\Product\ProductCategoryDomainFactory;
 use Shopsys\FrameworkBundle\Model\Product\ProductData;
 use Shopsys\FrameworkBundle\Model\Transport\Transport;
+use Tests\FrameworkBundle\Test\IsMoneyEqual;
 
 class OrderItemTest extends TestCase
 {
@@ -118,8 +119,8 @@ class OrderItemTest extends TestCase
         $orderItem->edit($orderItemData);
 
         $this->assertSame('newName', $orderItem->getName());
-        $this->assertSame('20', $orderItem->getPriceWithVat());
-        $this->assertSame('30', $orderItem->getPriceWithoutVat());
+        $this->assertThat($orderItem->getPriceWithVat(), new IsMoneyEqual(Money::fromInteger(20)));
+        $this->assertThat($orderItem->getPriceWithoutVat(), new IsMoneyEqual(Money::fromInteger(30)));
         $this->assertSame(2, $orderItem->getQuantity());
         $this->assertSame(10, $orderItem->getvatPercent());
     }
@@ -137,8 +138,8 @@ class OrderItemTest extends TestCase
         $orderItem->edit($orderItemData);
 
         $this->assertSame('newName', $orderItem->getName());
-        $this->assertSame('20', $orderItem->getPriceWithVat());
-        $this->assertSame('30', $orderItem->getPriceWithoutVat());
+        $this->assertThat($orderItem->getPriceWithVat(), new IsMoneyEqual(Money::fromInteger(20)));
+        $this->assertThat($orderItem->getPriceWithoutVat(), new IsMoneyEqual(Money::fromInteger(30)));
         $this->assertSame(2, $orderItem->getQuantity());
         $this->assertSame(10, $orderItem->getvatPercent());
     }

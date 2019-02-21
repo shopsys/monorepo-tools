@@ -544,35 +544,35 @@ class Order
     }
 
     /**
-     * @return string
+     * @return \Shopsys\FrameworkBundle\Component\Money\Money
      */
-    public function getTotalPriceWithVat()
+    public function getTotalPriceWithVat(): Money
     {
-        return $this->totalPriceWithVat->toValue();
+        return $this->totalPriceWithVat;
     }
 
     /**
-     * @return string
+     * @return \Shopsys\FrameworkBundle\Component\Money\Money
      */
-    public function getTotalPriceWithoutVat()
+    public function getTotalPriceWithoutVat(): Money
     {
-        return $this->totalPriceWithoutVat->toValue();
+        return $this->totalPriceWithoutVat;
     }
 
     /**
-     * @return string
+     * @return \Shopsys\FrameworkBundle\Component\Money\Money
      */
-    public function getTotalVatAmount()
+    public function getTotalVatAmount(): Money
     {
-        return $this->totalPriceWithVat->subtract($this->totalPriceWithoutVat)->toValue();
+        return $this->totalPriceWithVat->subtract($this->totalPriceWithoutVat);
     }
 
     /**
-     * @return string
+     * @return \Shopsys\FrameworkBundle\Component\Money\Money
      */
-    public function getTotalProductPriceWithVat()
+    public function getTotalProductPriceWithVat(): Money
     {
-        return $this->totalProductPriceWithVat->toValue();
+        return $this->totalProductPriceWithVat;
     }
 
     /**
@@ -685,7 +685,7 @@ class Order
         $totalPrice = Price::zero();
 
         foreach ($transportAndPaymentItems as $item) {
-            $itemPrice = new Price(Money::fromValue($item->getPriceWithoutVat()), Money::fromValue($item->getPriceWithVat()));
+            $itemPrice = new Price($item->getPriceWithoutVat(), $item->getPriceWithVat());
             $totalPrice = $totalPrice->add($itemPrice);
         }
 

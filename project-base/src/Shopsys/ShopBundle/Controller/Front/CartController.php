@@ -138,7 +138,7 @@ class CartController extends FrontBaseController
             'form' => $form->createView(),
             'isFreeTransportAndPaymentActive' => $this->freeTransportAndPaymentFacade->isActive($domainId),
             'isPaymentAndTransportFree' => $this->freeTransportAndPaymentFacade->isFree($productsPrice->getPriceWithVat(), $domainId),
-            'remainingPriceWithVat' => $remainingPriceWithVat->toValue(),
+            'remainingPriceWithVat' => $remainingPriceWithVat,
             'cartItemDiscounts' => $orderPreview->getQuantifiedItemsDiscounts(),
             'productsPrice' => $productsPrice,
         ]);

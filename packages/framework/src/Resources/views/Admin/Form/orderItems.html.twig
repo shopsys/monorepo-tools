@@ -54,8 +54,8 @@
                             </tr>
                             <tr>
                                 <th colspan="6">{{ 'Total'|trans }}:</th>
-                                <th class="text-right">{{ order.totalPriceWithVat|priceWithCurrency(order.currency) }}</th>
-                                <th class="text-right">{{ order.totalPriceWithoutVat|priceWithCurrency(order.currency) }}</th>
+                                <th class="text-right">{{ order.totalPriceWithVat.toValue|priceWithCurrency(order.currency) }}</th>
+                                <th class="text-right">{{ order.totalPriceWithoutVat.toValue|priceWithCurrency(order.currency) }}</th>
                                 <th></th>
                             </tr>
                         </tfoot>

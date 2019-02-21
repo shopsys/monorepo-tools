@@ -183,7 +183,7 @@ class ScriptFacade
     {
         $variableReplacements = [
             self::VARIABLE_NUMBER => $order->getNumber(),
-            self::VARIABLE_TOTAL_PRICE => $order->getTotalPriceWithVat(),
+            self::VARIABLE_TOTAL_PRICE => $order->getTotalPriceWithVat()->toValue(),
         ];
 
         return strtr($code, $variableReplacements);

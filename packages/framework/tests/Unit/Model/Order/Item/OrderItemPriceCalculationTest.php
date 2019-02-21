@@ -52,7 +52,7 @@ class OrderItemPriceCalculationTest extends TestCase
             true,
             ['getPriceWithVat', 'getQuantity', 'getVatPercent']
         );
-        $orderItem->expects($this->once())->method('getPriceWithVat')->willReturn(100);
+        $orderItem->expects($this->once())->method('getPriceWithVat')->willReturn(Money::fromInteger(100));
         $orderItem->expects($this->once())->method('getQuantity')->willReturn(2);
         $orderItem->expects($this->once())->method('getVatPercent')->willReturn(1);
 

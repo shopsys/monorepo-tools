@@ -177,19 +177,19 @@ class OrderItem
     }
 
     /**
-     * @return string
+     * @return \Shopsys\FrameworkBundle\Component\Money\Money
      */
-    public function getPriceWithoutVat()
+    public function getPriceWithoutVat(): Money
     {
-        return $this->priceWithoutVat->toValue();
+        return $this->priceWithoutVat;
     }
 
     /**
-     * @return string
+     * @return \Shopsys\FrameworkBundle\Component\Money\Money
      */
-    public function getPriceWithVat()
+    public function getPriceWithVat(): Money
     {
-        return $this->priceWithVat->toValue();
+        return $this->priceWithVat;
     }
 
     /**
@@ -225,11 +225,11 @@ class OrderItem
     }
 
     /**
-     * @return string
+     * @return \Shopsys\FrameworkBundle\Component\Money\Money
      */
-    public function getTotalPriceWithVat()
+    public function getTotalPriceWithVat(): Money
     {
-        return $this->priceWithVat->multiply((string)$this->quantity)->toValue();
+        return $this->priceWithVat->multiply((string)$this->quantity);
     }
 
     /**
