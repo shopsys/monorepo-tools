@@ -83,7 +83,7 @@
                                     content="{{ currencyCode(domain.id) }}"
                                 >
                                 <meta itemprop="price"
-                                    content="{{ getProductSellingPrice(product).priceWithVat.toValue }}"
+                                    content="{{ getProductSellingPrice(product).priceWithVat|moneyFormat }}"
                                 >
                                 <link itemprop="availability"
                                     href="{{ product.calculatedSellingDenied ? 'http://schema.org/OutOfStock' : 'http://schema.org/InStock' }}"
@@ -161,7 +161,7 @@
                                     content="{{ currencyCode(domain.id) }}"
                                 >
                                 <meta itemprop="lowPrice"
-                                    content="{{ getProductSellingPrice(product).priceWithVat.toValue }}"
+                                    content="{{ getProductSellingPrice(product).priceWithVat|moneyFormat }}"
                                 >
                                 <link itemprop="availability"
                                     href="{{ product.calculatedSellingDenied ? 'http://schema.org/OutOfStock' : 'http://schema.org/InStock' }}"

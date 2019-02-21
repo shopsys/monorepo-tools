@@ -9,7 +9,7 @@
         <PRODUCTNAME>{{ item.name }}</PRODUCTNAME>
         <DESCRIPTION>{{ item.description|striptags|replace({"\n": ' '})|trim }}</DESCRIPTION>
         <URL>{{ item.url }}</URL>
-        <PRICE_VAT>{{ item.price.priceWithVat.toValue|number_format(2, ',', '') }}</PRICE_VAT>
+        <PRICE_VAT>{{ item.price.priceWithVat|moneyFormat(2, ',') }}</PRICE_VAT>
         <DELIVERY_DATE>{{ item.deliveryDate|default(-1) }}</DELIVERY_DATE>
         {% if item.imgUrl -%}
             <IMGURL>{{ item.imgUrl }}</IMGURL>
