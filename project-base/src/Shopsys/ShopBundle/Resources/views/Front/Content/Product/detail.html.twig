@@ -74,10 +74,10 @@
                                 itemtype="http://schema.org/Offer"
                                 class="box-detail-add__prices">
                                 <div class="box-detail-add__prices__item box-detail-add__prices__item--main">
-                                    {{ getProductSellingPrice(product).priceWithVat.toValue|price }}
+                                    {{ getProductSellingPrice(product).priceWithVat|price }}
                                 </div>
                                 <div class="box-detail-add__prices__item">
-                                    {{ getProductSellingPrice(product).priceWithoutVat.toValue|price }} {{ 'excluding VAT'|trans }}
+                                    {{ getProductSellingPrice(product).priceWithoutVat|price }} {{ 'excluding VAT'|trans }}
                                 </div>
                                 <meta itemprop="priceCurrency"
                                     content="{{ currencyCode(domain.id) }}"
@@ -193,7 +193,7 @@
                                 {% endif %}
                             </td>
                             <td class="table-variants__cell table-variants__cell--price">
-                                {{ getProductSellingPrice(variant).priceWithVat.toValue|price }}
+                                {{ getProductSellingPrice(variant).priceWithVat|price }}
                             </td>
                             <td class="table-variants__cell table-variants__cell--action">
                                 {{ render(controller('ShopsysShopBundle:Front/Cart:addProductForm', {product: variant})) }}

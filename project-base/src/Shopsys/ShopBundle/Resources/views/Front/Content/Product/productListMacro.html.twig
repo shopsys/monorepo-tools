@@ -25,16 +25,16 @@
                                 <div class="list-products__item__info__price">
                                     <div class="list-products__item__info__price__item list-products__item__info__price__item--main">
                                         {% if productSellingPrice.priceFrom %}
-                                            {{ 'from %price%'|trans({'%price%': productSellingPrice.priceWithVat.toValue|price}) }}
+                                            {{ 'from %price%'|trans({'%price%': productSellingPrice.priceWithVat|price}) }}
                                         {% else %}
-                                            {{ productSellingPrice.priceWithVat.toValue|price }}
+                                            {{ productSellingPrice.priceWithVat|price }}
                                         {% endif %}
                                     </div>
                                     <div class="list-products__item__info__price__item">
                                         {% if productSellingPrice.priceFrom %}
-                                            {{ 'from %price%'|trans({'%price%': productSellingPrice.priceWithoutVat.toValue|price}) }}
+                                            {{ 'from %price%'|trans({'%price%': productSellingPrice.priceWithoutVat|price}) }}
                                         {% else %}
-                                            {{ productSellingPrice.priceWithoutVat.toValue|price }}
+                                            {{ productSellingPrice.priceWithoutVat|price }}
                                         {% endif %}
                                     </div>
                                 </div>

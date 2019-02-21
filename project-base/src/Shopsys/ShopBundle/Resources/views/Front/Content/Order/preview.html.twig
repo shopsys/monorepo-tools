@@ -11,7 +11,7 @@
                     {{ quantifiedProduct.product.name }}
                 </td>
                 <td class="table-cart-preview__cell table-cart-preview__cell--price">
-                    {{ quantifiedProductPrice.totalPrice.priceWithVat.toValue|price }}
+                    {{ quantifiedProductPrice.totalPrice.priceWithVat|price }}
                 </td>
             </tr>
             {% if quantifiedProductDiscount is not null %}
@@ -32,7 +32,7 @@
                     {{ 'Shipping method'|trans }}: {{ orderPreview.transport.name }}
                 </td>
                 <td class="table-cart-preview__cell table-cart-preview__cell--price">
-                    {{ orderPreview.transportPrice.priceWithVat.toValue|priceText }}
+                    {{ orderPreview.transportPrice.priceWithVat|priceText }}
                 </td>
             </tr>
         {% endif %}
@@ -43,7 +43,7 @@
                     {{ 'Payment method'|trans }}: {{ orderPreview.payment.name }}
                 </td>
                 <td class="table-cart-preview__cell table-cart-preview__cell--price">
-                    {{ orderPreview.paymentPrice.priceWithVat.toValue|priceText }}
+                    {{ orderPreview.paymentPrice.priceWithVat|priceText }}
                 </td>
             </tr>
         {% endif %}
@@ -54,7 +54,7 @@
                     {{ 'Rounding'|trans }}:
                 </td>
                 <td class="table-cart-preview__cell table-cart-preview__cell--price">
-                    {{ orderPreview.roundingPrice.priceWithVat.toValue|price }}
+                    {{ orderPreview.roundingPrice.priceWithVat|price }}
                 </td>
             </tr>
         {% endif %}
@@ -64,7 +64,7 @@
                 {{ 'Total price including VAT'|trans }}:
             </td>
             <td class="table-cart-preview__cell table-cart-preview__cell--price">
-                {{ orderPreview.totalPrice.priceWithVat.toValue|price }}
+                {{ orderPreview.totalPrice.priceWithVat|price }}
             </td>
         </tr>
 
@@ -73,7 +73,7 @@
                 {{ 'Total price excluding VAT'|trans }}:
             </td>
             <td class="table-cart-preview__cell table-cart-preview__cell--price">
-                {{ orderPreview.totalPrice.priceWithoutVat.toValue|price }}
+                {{ orderPreview.totalPrice.priceWithoutVat|price }}
             </td>
         </tr>
 
@@ -82,7 +82,7 @@
                 {{ 'Total amount of VAT'|trans }}:
             </td>
             <td class="table-cart-preview__cell table-cart-preview__cell--price">
-                {{ orderPreview.totalPrice.vatAmount.toValue|price }}
+                {{ orderPreview.totalPrice.vatAmount|price }}
             </td>
         </tr>
 
