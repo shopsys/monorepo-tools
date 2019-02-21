@@ -222,7 +222,7 @@ class OrderMail implements MessageFactoryInterface
     protected function getFormattedPrice(Order $order)
     {
         return $this->priceExtension->priceTextWithCurrencyByCurrencyIdAndLocaleFilter(
-            $order->getTotalPriceWithVat()->toValue(),
+            $order->getTotalPriceWithVat(),
             $order->getCurrency()->getId(),
             $this->getDomainLocaleByOrder($order)
         );

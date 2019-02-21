@@ -6,6 +6,7 @@ use CommerceGuys\Intl\Currency\CurrencyRepositoryInterface;
 use CommerceGuys\Intl\Formatter\NumberFormatter;
 use CommerceGuys\Intl\NumberFormat\NumberFormatRepositoryInterface;
 use Shopsys\FrameworkBundle\Component\Domain\Domain;
+use Shopsys\FrameworkBundle\Component\Money\Money;
 use Shopsys\FrameworkBundle\Model\Localization\Localization;
 use Shopsys\FrameworkBundle\Model\Pricing\Currency\Currency;
 use Shopsys\FrameworkBundle\Model\Pricing\Currency\CurrencyFacade;
@@ -136,7 +137,7 @@ class PriceExtension extends Twig_Extension
     }
 
     /**
-     * @param string $price
+     * @param \Shopsys\FrameworkBundle\Component\Money\Money|string|int|float|null $price
      * @return string
      */
     public function priceFilter($price)
@@ -147,12 +148,12 @@ class PriceExtension extends Twig_Extension
     }
 
     /**
-     * @param string $price
+     * @param \Shopsys\FrameworkBundle\Component\Money\Money|string|int|float|null $price
      * @return string
      */
     public function priceTextFilter($price)
     {
-        if ($price == 0) {
+        if ($this->isZero($price)) {
             return t('Free');
         } else {
             return $this->priceFilter($price);
@@ -160,14 +161,14 @@ class PriceExtension extends Twig_Extension
     }
 
     /**
-     * @param string $price
+     * @param \Shopsys\FrameworkBundle\Component\Money\Money|string|int|float|null $price
      * @param int $currencyId
      * @param string $locale
      * @return string
      */
     public function priceTextWithCurrencyByCurrencyIdAndLocaleFilter($price, $currencyId, $locale)
     {
-        if ($price == 0) {
+        if ($this->isZero($price)) {
             return t('Free');
         } else {
             $currency = $this->currencyFacade->getById($currencyId);
@@ -176,7 +177,20 @@ class PriceExtension extends Twig_Extension
     }
 
     /**
-     * @param string $price
+     * @param \Shopsys\FrameworkBundle\Component\Money\Money|string|int|float|null $price
+     * @return bool
+     */
+    private function isZero($price): bool
+    {
+        if ($price instanceof Money) {
+            return $price->isZero();
+        }
+
+        return $price == 0;
+    }
+
+    /**
+     * @param \Shopsys\FrameworkBundle\Component\Money\Money|string|int|float|null $price
      * @param \Shopsys\FrameworkBundle\Model\Pricing\Currency\Currency $currency
      * @return string
      */
@@ -186,7 +200,7 @@ class PriceExtension extends Twig_Extension
     }
 
     /**
-     * @param string $price
+     * @param \Shopsys\FrameworkBundle\Component\Money\Money|string|int|float|null $price
      * @return string
      */
     public function priceWithCurrencyAdminFilter($price)
@@ -197,7 +211,7 @@ class PriceExtension extends Twig_Extension
     }
 
     /**
-     * @param string $price
+     * @param \Shopsys\FrameworkBundle\Component\Money\Money|string|int|float|null $price
      * @param int $domainId
      * @return string
      */
@@ -209,8 +223,9 @@ class PriceExtension extends Twig_Extension
     }
 
     /**
-     * @param mixed $price
-     * @param mixed $currencyId
+     * @param \Shopsys\FrameworkBundle\Component\Money\Money|string|int|float|null $price
+     * @param int $currencyId
+     * @return string
      */
     public function priceWithCurrencyByCurrencyIdFilter($price, $currencyId)
     {
@@ -220,16 +235,28 @@ class PriceExtension extends Twig_Extension
     }
 
     /**
-     * @param string $price
+     * @param \Shopsys\FrameworkBundle\Component\Money\Money|string|int|float|null $price
      * @param \Shopsys\FrameworkBundle\Model\Pricing\Currency\Currency $currency
      * @param string|null $locale
      * @return string
      */
     private function formatCurrency($price, Currency $currency, $locale = null)
     {
-        if (!is_numeric($price)) {
-            return $price;
+        if ($price instanceof Money) {
+            $price = $price->toString();
+        } else {
+            $message = sprintf('Twig filters for prices must receive a value of "%s" type.', Money::class);
+            @trigger_error($message, E_USER_DEPRECATED);
+
+            if (!is_numeric($price)) {
+                return $price;
+            }
+
+            // $price can be float so we round it before formatting to overcome floating point errors.
+            // If the amounts will be 10^9 or less, the errors should not be in the first 6 decimal places.
+            $price = round($price, 6);
         }
+
         if ($locale === null) {
             $locale = $this->localization->getLocale();
         }
@@ -240,11 +267,7 @@ class PriceExtension extends Twig_Extension
             $locale
         );
 
-        // $price can be float so we round it before formatting to overcome floating point errors.
-        // If the amounts will be 10^9 or less, the errors should not be in the first 6 decimal places.
-        $priceWithFixedFloatingPointError = round($price, 6);
-
-        return $numberFormatter->formatCurrency($priceWithFixedFloatingPointError, $intlCurrency);
+        return $numberFormatter->formatCurrency($price, $intlCurrency);
     }
 
     /**
