@@ -18,6 +18,7 @@ use Shopsys\ProductFeed\HeurekaBundle\Model\FeedItem\HeurekaFeedItemFactory;
 use Shopsys\ProductFeed\HeurekaBundle\Model\FeedItem\HeurekaProductDataBatchLoader;
 use Shopsys\ProductFeed\HeurekaBundle\Model\HeurekaCategory\HeurekaCategory;
 use Shopsys\ProductFeed\HeurekaBundle\Model\HeurekaCategory\HeurekaCategoryFacade;
+use Tests\FrameworkBundle\Test\IsMoneyEqual;
 
 class HeurekaFeedItemTest extends TestCase
 {
@@ -216,10 +217,10 @@ class HeurekaFeedItemTest extends TestCase
     public function testHeurekaFeedItemWithCpc()
     {
         $this->heurekaProductDataBatchLoaderMock->method('getProductCpc')
-            ->with($this->defaultProduct, $this->defaultDomain)->willReturn(5.0);
+            ->with($this->defaultProduct, $this->defaultDomain)->willReturn(Money::fromInteger(5));
 
         $heurekaFeedItem = $this->heurekaFeedItemFactory->create($this->defaultProduct, $this->defaultDomain);
 
-        self::assertEquals(5.0, $heurekaFeedItem->getCpc());
+        self::assertThat($heurekaFeedItem->getCpc(), new IsMoneyEqual(Money::fromInteger(5)));
     }
 }

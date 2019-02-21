@@ -36,10 +36,10 @@
             </PARAM>
         {% endfor -%}
         {% if item.maxCpc is not null -%}
-            <MAX_CPC>{{ item.maxCpc }}</MAX_CPC>
+            <MAX_CPC>{{ item.maxCpc|moneyFormat(2, ',') }}</MAX_CPC>
         {% endif %}
         {% if item.maxCpcSearch is not null -%}
-            <MAX_CPC_SEARCH>{{ item.maxCpcSearch }}</MAX_CPC_SEARCH>
+            <MAX_CPC_SEARCH>{{ item.maxCpcSearch|moneyFormat(2, ',') }}</MAX_CPC_SEARCH>
         {% endif %}
     </SHOPITEM>
 {% endblock %}

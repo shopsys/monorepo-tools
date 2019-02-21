@@ -80,11 +80,11 @@ class HeurekaProductDomain
     }
 
     /**
-     * @return null|string
+     * @return \Shopsys\FrameworkBundle\Component\Money\Money|null
      */
-    public function getCpc()
+    public function getCpc(): ?Money
     {
-        return $this->cpc !== null ? $this->cpc->toValue() : null;
+        return $this->cpc;
     }
 
     /**

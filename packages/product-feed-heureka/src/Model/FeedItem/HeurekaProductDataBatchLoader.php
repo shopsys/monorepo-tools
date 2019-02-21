@@ -3,6 +3,7 @@
 namespace Shopsys\ProductFeed\HeurekaBundle\Model\FeedItem;
 
 use Shopsys\FrameworkBundle\Component\Domain\Config\DomainConfig;
+use Shopsys\FrameworkBundle\Component\Money\Money;
 use Shopsys\FrameworkBundle\Model\Product\Collection\ProductParametersBatchLoader;
 use Shopsys\FrameworkBundle\Model\Product\Collection\ProductUrlsBatchLoader;
 use Shopsys\FrameworkBundle\Model\Product\Product;
@@ -26,7 +27,7 @@ class HeurekaProductDataBatchLoader
     protected $heurekaProductDomainFacade;
 
     /**
-     * @var float[]|null[]
+     * @var \Shopsys\FrameworkBundle\Component\Money\Money[]|null[]
      */
     protected $loadedProductCpcs = [];
 
@@ -68,9 +69,9 @@ class HeurekaProductDataBatchLoader
     /**
      * @param \Shopsys\FrameworkBundle\Model\Product\Product $product
      * @param \Shopsys\FrameworkBundle\Component\Domain\Config\DomainConfig $domainConfig
-     * @return float|null
+     * @return \Shopsys\FrameworkBundle\Component\Money\Money|null
      */
-    public function getProductCpc(Product $product, DomainConfig $domainConfig): ?float
+    public function getProductCpc(Product $product, DomainConfig $domainConfig): ?Money
     {
         $key = $this->getKey($product, $domainConfig);
         if (!array_key_exists($key, $this->loadedProductCpcs)) {

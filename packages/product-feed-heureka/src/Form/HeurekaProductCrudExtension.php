@@ -2,7 +2,6 @@
 
 namespace Shopsys\ProductFeed\HeurekaBundle\Form;
 
-use Shopsys\FrameworkBundle\Component\Money\Money;
 use Shopsys\Plugin\PluginCrudExtensionInterface;
 use Shopsys\ProductFeed\HeurekaBundle\Model\Product\HeurekaProductDomainDataFactoryInterface;
 use Shopsys\ProductFeed\HeurekaBundle\Model\Product\HeurekaProductDomainFacade;
@@ -68,7 +67,7 @@ class HeurekaProductCrudExtension implements PluginCrudExtensionInterface
             'cpc' => [],
         ];
         foreach ($heurekaProductDomains as $heurekaProductDomain) {
-            $pluginData['cpc'][$heurekaProductDomain->getDomainId()] = $heurekaProductDomain->getCpc() !== null ? Money::fromValue($heurekaProductDomain->getCpc()) : null;
+            $pluginData['cpc'][$heurekaProductDomain->getDomainId()] = $heurekaProductDomain->getCpc();
         }
         return $pluginData;
     }

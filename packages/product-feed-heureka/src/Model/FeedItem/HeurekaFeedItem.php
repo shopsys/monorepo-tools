@@ -2,6 +2,7 @@
 
 namespace Shopsys\ProductFeed\HeurekaBundle\Model\FeedItem;
 
+use Shopsys\FrameworkBundle\Component\Money\Money;
 use Shopsys\FrameworkBundle\Model\Feed\FeedItemInterface;
 use Shopsys\FrameworkBundle\Model\Pricing\Price;
 
@@ -68,7 +69,7 @@ class HeurekaFeedItem implements FeedItemInterface
     protected $parametersByName;
 
     /**
-     * @var float|null
+     * @var \Shopsys\FrameworkBundle\Component\Money\Money|null
      */
     protected $cpc;
 
@@ -85,7 +86,7 @@ class HeurekaFeedItem implements FeedItemInterface
      * @param \Shopsys\FrameworkBundle\Model\Pricing\Price $price
      * @param string|null $heurekaCategoryFullName
      * @param array $parametersByName
-     * @param float|null $cpc
+     * @param \Shopsys\FrameworkBundle\Component\Money\Money|null $cpc
      */
     public function __construct(
         int $id,
@@ -100,7 +101,7 @@ class HeurekaFeedItem implements FeedItemInterface
         Price $price,
         ?string $heurekaCategoryFullName,
         array $parametersByName,
-        ?float $cpc
+        ?Money $cpc
     ) {
         $this->id = $id;
         $this->mainVariantId = $mainVariantId;
@@ -222,9 +223,9 @@ class HeurekaFeedItem implements FeedItemInterface
     }
 
     /**
-     * @return float|null
+     * @return \Shopsys\FrameworkBundle\Component\Money\Money|null
      */
-    public function getCpc(): ?float
+    public function getCpc(): ?Money
     {
         return $this->cpc;
     }

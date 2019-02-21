@@ -18,6 +18,7 @@ use Shopsys\ProductFeed\ZboziBundle\Model\FeedItem\ZboziFeedItem;
 use Shopsys\ProductFeed\ZboziBundle\Model\FeedItem\ZboziFeedItemFactory;
 use Shopsys\ProductFeed\ZboziBundle\Model\Product\ZboziProductDomain;
 use Shopsys\ProductFeed\ZboziBundle\Model\Product\ZboziProductDomainData;
+use Tests\FrameworkBundle\Test\IsMoneyEqual;
 
 class ZboziFeedItemTest extends TestCase
 {
@@ -214,7 +215,7 @@ class ZboziFeedItemTest extends TestCase
 
         $zboziFeedItem = $this->zboziFeedItemFactory->create($this->defaultProduct, $zboziProductDomain, $this->defaultDomain);
 
-        self::assertEquals(5.0, $zboziFeedItem->getMaxCpc());
+        self::assertThat($zboziFeedItem->getMaxCpc(), new IsMoneyEqual(Money::fromInteger(5)));
         self::assertNull($zboziFeedItem->getMaxCpcSearch());
     }
 
@@ -227,6 +228,6 @@ class ZboziFeedItemTest extends TestCase
         $zboziFeedItem = $this->zboziFeedItemFactory->create($this->defaultProduct, $zboziProductDomain, $this->defaultDomain);
 
         self::assertNull($zboziFeedItem->getMaxCpc());
-        self::assertEquals(5.0, $zboziFeedItem->getMaxCpcSearch());
+        self::assertThat($zboziFeedItem->getMaxCpcSearch(), new IsMoneyEqual(Money::fromInteger(5)));
     }
 }

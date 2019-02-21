@@ -114,18 +114,18 @@ class ZboziProductDomain
     }
 
     /**
-     * @return null|string
+     * @return \Shopsys\FrameworkBundle\Component\Money\Money|null
      */
-    public function getCpc()
+    public function getCpc(): ?Money
     {
-        return $this->cpc !== null ? $this->cpc->toValue() : null;
+        return $this->cpc;
     }
 
     /**
-     * @return null|string
+     * @return \Shopsys\FrameworkBundle\Component\Money\Money|null
      */
-    public function getCpcSearch()
+    public function getCpcSearch(): ?Money
     {
-        return $this->cpcSearch !== null ? $this->cpcSearch->toValue() : null;
+        return $this->cpcSearch;
     }
 }
