@@ -1164,10 +1164,7 @@ class Order
         $orderItemFactory->createProduct(
             $orderItem->getOrder(),
             $name,
-            new Price(
-                $quantifiedItemDiscount->getPriceWithoutVat()->multiply('-1'),
-                $quantifiedItemDiscount->getPriceWithVat()->multiply('-1')
-            ),
+            $quantifiedItemDiscount->inverse(),
             $orderItem->getVatPercent(),
             1,
             null,

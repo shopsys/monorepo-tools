@@ -87,4 +87,15 @@ class Price
             $this->priceWithVat->subtract($priceToSubtract->priceWithVat)
         );
     }
+
+    /**
+     * @return \Shopsys\FrameworkBundle\Model\Pricing\Price
+     */
+    public function inverse(): self
+    {
+        return new self(
+            $this->priceWithoutVat->multiply('-1'),
+            $this->priceWithVat->multiply('-1')
+        );
+    }
 }

@@ -52,4 +52,24 @@ class PriceTest extends TestCase
         $this->assertThat($price->getPriceWithVat(), new IsMoneyEqual(Money::fromInteger(3)));
         $this->assertThat($price->getVatAmount(), new IsMoneyEqual(Money::fromInteger(1)));
     }
+
+    public function testInverse()
+    {
+        $price = new Price(Money::fromInteger(2), Money::fromInteger(3));
+        $actualInverseResult = $price->inverse();
+
+        $this->assertThat($actualInverseResult->getPriceWithoutVat(), new IsMoneyEqual(Money::fromInteger(-2)));
+        $this->assertThat($actualInverseResult->getPriceWithVat(), new IsMoneyEqual(Money::fromInteger(-3)));
+        $this->assertThat($actualInverseResult->getVatAmount(), new IsMoneyEqual(Money::fromInteger(-1)));
+    }
+
+    public function testInverseIsImmutable()
+    {
+        $price = new Price(Money::fromInteger(2), Money::fromInteger(3));
+        $price->inverse();
+
+        $this->assertThat($price->getPriceWithoutVat(), new IsMoneyEqual(Money::fromInteger(2)));
+        $this->assertThat($price->getPriceWithVat(), new IsMoneyEqual(Money::fromInteger(3)));
+        $this->assertThat($price->getVatAmount(), new IsMoneyEqual(Money::fromInteger(1)));
+    }
 }
