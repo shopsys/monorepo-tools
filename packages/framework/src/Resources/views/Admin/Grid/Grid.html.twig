@@ -353,6 +353,14 @@
     {{ value|formatDateTime }}
 {% endblock %}
 
+{% block grid_value_cell_type_DateTimeImmutable %}
+    {{ value|formatDateTime }}
+{% endblock %}
+
+{% block grid_value_cell_type_Shopsys_FrameworkBundle_Component_Money_Money %}
+    {{ value|priceWithCurrencyAdmin }}
+{% endblock %}
+
 {% block grid_hidden_inputs %}
     {% spaceless %}
         {% set name = name|default('') %}

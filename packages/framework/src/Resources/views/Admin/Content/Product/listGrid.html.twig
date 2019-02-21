@@ -55,10 +55,6 @@
     {% endif %}
 {% endblock %}
 
-{% block grid_value_cell_id_price %}
-    {{ row.priceForProductList|priceWithCurrencyAdmin }}
-{% endblock %}
-
 {% block grid_pager_totalcount %}
     {% set entityName = 'products'|trans %}
     {{ parent() }}

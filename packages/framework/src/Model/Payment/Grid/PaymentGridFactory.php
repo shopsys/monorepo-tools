@@ -96,6 +96,6 @@ class PaymentGridFactory implements GridFactoryInterface
     {
         $transportBasePricesIndexedByCurrencyId = $this->paymentFacade->getIndependentBasePricesIndexedByCurrencyId($payment);
 
-        return $transportBasePricesIndexedByCurrencyId[self::CURRENCY_ID_FOR_LIST]->getPriceWithVat()->toValue();
+        return $transportBasePricesIndexedByCurrencyId[self::CURRENCY_ID_FOR_LIST]->getPriceWithVat();
     }
 }

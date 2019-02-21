@@ -4,10 +4,6 @@
     <a href="{{ url('admin_payment_edit', { id: row.p.id }) }}">{{ value }}</a>
 {% endblock %}
 
-{% block grid_value_cell_id_price %}
-    {{ value|priceWithCurrencyAdmin }}
-{% endblock %}
-
 {% block grid_no_data %}
     {{ 'No payments created so far.'|trans }}
 {% endblock %}
