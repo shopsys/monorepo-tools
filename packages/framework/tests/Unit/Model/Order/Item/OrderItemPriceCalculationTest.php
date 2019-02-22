@@ -21,7 +21,7 @@ class OrderItemPriceCalculationTest extends TestCase
             ->setMethods(['getVatAmountByPriceWithVat'])
             ->disableOriginalConstructor()
             ->getMock();
-        $priceCalculationMock->expects($this->once())->method('getVatAmountByPriceWithVat')->willReturn(100);
+        $priceCalculationMock->expects($this->once())->method('getVatAmountByPriceWithVat')->willReturn(Money::fromInteger(100));
 
         $orderItemData = new OrderItemData();
         $orderItemData->priceWithVat = Money::fromInteger(1000);
@@ -39,7 +39,7 @@ class OrderItemPriceCalculationTest extends TestCase
             ->setMethods(['getVatAmountByPriceWithVat'])
             ->disableOriginalConstructor()
             ->getMock();
-        $priceCalculationMock->expects($this->once())->method('getVatAmountByPriceWithVat')->willReturn(10);
+        $priceCalculationMock->expects($this->once())->method('getVatAmountByPriceWithVat')->willReturn(Money::fromInteger(10));
 
         $orderItemPriceCalculation = new OrderItemPriceCalculation($priceCalculationMock, new VatFactory(new EntityNameResolver([])), new VatDataFactory());
 

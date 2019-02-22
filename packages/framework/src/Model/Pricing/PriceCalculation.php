@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Shopsys\FrameworkBundle\Model\Pricing;
 
 use Shopsys\FrameworkBundle\Component\Money\Money;
@@ -21,35 +23,38 @@ class PriceCalculation
     }
 
     /**
-     * @param string $priceWithVat
+     * @param \Shopsys\FrameworkBundle\Component\Money\Money $priceWithVat
      * @param \Shopsys\FrameworkBundle\Model\Pricing\Vat\Vat $vat
-     * @return string
+     * @return \Shopsys\FrameworkBundle\Component\Money\Money
      */
-    public function getVatAmountByPriceWithVat($priceWithVat, Vat $vat)
+    public function getVatAmountByPriceWithVat(Money $priceWithVat, Vat $vat): Money
     {
-        return $this->rounding->roundVatAmount(
-            Money::fromValue($priceWithVat * $this->getVatCoefficientByPercent($vat->getPercent()))
-        )->toValue();
+        $vatCoefficient = $this->getVatCoefficientByPercent($vat->getPercent());
+
+        return $this->rounding->roundVatAmount($priceWithVat->multiply($vatCoefficient));
     }
 
     /**
      * @param string $vatPercent
      * @return string
      */
-    public function getVatCoefficientByPercent($vatPercent)
+    public function getVatCoefficientByPercent(string $vatPercent): string
     {
         $ratio = $vatPercent / (100 + $vatPercent);
-        return round($ratio, 4);
+
+        return (string)round($ratio, 4);
     }
 
     /**
-     * @param string $priceWithoutVat
+     * @param \Shopsys\FrameworkBundle\Component\Money\Money $priceWithoutVat
      * @param \Shopsys\FrameworkBundle\Model\Pricing\Vat\Vat $vat
      * @param \Shopsys\FrameworkBundle\Model\Pricing\Vat\Vat
-     * @return string
+     * @return \Shopsys\FrameworkBundle\Component\Money\Money
      */
-    public function applyVatPercent($priceWithoutVat, Vat $vat)
+    public function applyVatPercent(Money $priceWithoutVat, Vat $vat): Money
     {
-        return $priceWithoutVat * (100 + $vat->getPercent()) / 100;
+        $multiplier = (string)(1 + $vat->getPercent() / 100);
+
+        return $priceWithoutVat->multiply($multiplier);
     }
 }

@@ -38,7 +38,7 @@ class BasePriceCalculation
     public function calculateBasePrice(Money $inputPrice, int $inputPriceType, Vat $vat): Price
     {
         $basePriceWithVat = $this->getBasePriceWithVat($inputPrice, $inputPriceType, $vat);
-        $vatAmount = Money::fromValue($this->priceCalculation->getVatAmountByPriceWithVat($basePriceWithVat->toValue(), $vat));
+        $vatAmount = $this->priceCalculation->getVatAmountByPriceWithVat($basePriceWithVat, $vat);
         $basePriceWithoutVat = $this->rounding->roundPriceWithoutVat($basePriceWithVat->subtract($vatAmount));
 
         return new Price($basePriceWithoutVat, $basePriceWithVat);
@@ -57,7 +57,7 @@ class BasePriceCalculation
             $priceWithVatBeforeRounding = $priceWithVatBeforeRounding->multiply($coefficient);
         }
         $priceWithVat = $this->rounding->roundPriceWithVat($priceWithVatBeforeRounding);
-        $vatAmount = Money::fromValue($this->priceCalculation->getVatAmountByPriceWithVat($priceWithVat->toValue(), $vat));
+        $vatAmount = $this->priceCalculation->getVatAmountByPriceWithVat($priceWithVat, $vat);
         $priceWithoutVat = $this->rounding->roundPriceWithoutVat($priceWithVat->subtract($vatAmount));
 
         return new Price($priceWithoutVat, $priceWithVat);
@@ -76,7 +76,7 @@ class BasePriceCalculation
                 return $this->rounding->roundPriceWithVat($inputPrice);
 
             case PricingSetting::INPUT_PRICE_TYPE_WITHOUT_VAT:
-                return $this->rounding->roundPriceWithVat(Money::fromValue($this->priceCalculation->applyVatPercent($inputPrice->toValue(), $vat)));
+                return $this->rounding->roundPriceWithVat($this->priceCalculation->applyVatPercent($inputPrice, $vat));
 
             default:
                 throw new \Shopsys\FrameworkBundle\Model\Pricing\Exception\InvalidInputPriceTypeException();

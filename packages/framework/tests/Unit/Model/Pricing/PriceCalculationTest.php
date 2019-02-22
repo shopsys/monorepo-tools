@@ -3,11 +3,13 @@
 namespace Tests\FrameworkBundle\Unit\Model\Pricing;
 
 use PHPUnit\Framework\TestCase;
+use Shopsys\FrameworkBundle\Component\Money\Money;
 use Shopsys\FrameworkBundle\Model\Pricing\PriceCalculation;
 use Shopsys\FrameworkBundle\Model\Pricing\PricingSetting;
 use Shopsys\FrameworkBundle\Model\Pricing\Rounding;
 use Shopsys\FrameworkBundle\Model\Pricing\Vat\Vat;
 use Shopsys\FrameworkBundle\Model\Pricing\Vat\VatData;
+use Tests\FrameworkBundle\Test\IsMoneyEqual;
 
 class PriceCalculationTest extends TestCase
 {
@@ -15,38 +17,38 @@ class PriceCalculationTest extends TestCase
     {
         return [
             [
-                'priceWithoutVat' => '0',
+                'priceWithoutVat' => Money::fromString('0'),
                 'vatPercent' => '21',
-                'expectedPriceWithVat' => '0',
+                'expectedPriceWithVat' => Money::fromString('0'),
             ],
             [
-                'priceWithoutVat' => '100',
+                'priceWithoutVat' => Money::fromString('100'),
                 'vatPercent' => '0',
-                'expectedPriceWithVat' => '100',
+                'expectedPriceWithVat' => Money::fromString('100'),
             ],
             [
-                'priceWithoutVat' => '100',
+                'priceWithoutVat' => Money::fromString('100'),
                 'vatPercent' => '21',
-                'expectedPriceWithVat' => '121',
+                'expectedPriceWithVat' => Money::fromString('121'),
             ],
             [
-                'priceWithoutVat' => '100.9',
+                'priceWithoutVat' => Money::fromString('100.9'),
                 'vatPercent' => '21.1',
-                'expectedPriceWithVat' => '122.1899',
+                'expectedPriceWithVat' => Money::fromString('122.1899'),
             ],
         ];
     }
 
     /**
      * @dataProvider applyVatPercentProvider
-     * @param mixed $priceWithoutVat
-     * @param mixed $vatPercent
-     * @param mixed $expectedPriceWithVat
+     * @param \Shopsys\FrameworkBundle\Component\Money\Money $priceWithoutVat
+     * @param string $vatPercent
+     * @param \Shopsys\FrameworkBundle\Component\Money\Money $expectedPriceWithVat
      */
     public function testApplyVatPercent(
-        $priceWithoutVat,
-        $vatPercent,
-        $expectedPriceWithVat
+        Money $priceWithoutVat,
+        string $vatPercent,
+        Money $expectedPriceWithVat
     ) {
         $pricingSettingMock = $this->getMockBuilder(PricingSetting::class)
             ->setMethods(['getRoundingType'])
@@ -65,40 +67,40 @@ class PriceCalculationTest extends TestCase
 
         $actualPriceWithVat = $priceCalculation->applyVatPercent($priceWithoutVat, $vat);
 
-        $this->assertSame(round($expectedPriceWithVat, 6), round($actualPriceWithVat, 6));
+        $this->assertThat($actualPriceWithVat, new IsMoneyEqual($expectedPriceWithVat));
     }
 
     public function getVatAmountByPriceWithVatProvider()
     {
         return [
             [
-                'priceWithVat' => '0',
+                'priceWithVat' => Money::fromString('0'),
                 'vatPercent' => '10',
-                'expectedVatAmount' => '0',
+                'expectedVatAmount' => Money::fromString('0'),
             ],
             [
-                'priceWithoutVat' => '100',
+                'priceWithoutVat' => Money::fromString('100'),
                 'vatPercent' => '0',
-                'expectedPriceWithVat' => '0',
+                'expectedPriceWithVat' => Money::fromString('0'),
             ],
             [
-                'priceWithoutVat' => '100',
+                'priceWithoutVat' => Money::fromString('100'),
                 'vatPercent' => '21',
-                'expectedPriceWithVat' => '17.36',
+                'expectedPriceWithVat' => Money::fromString('17.36'),
             ],
         ];
     }
 
     /**
      * @dataProvider getVatAmountByPriceWithVatProvider
-     * @param mixed $priceWithVat
-     * @param mixed $vatPercent
-     * @param mixed $expectedVatAmount
+     * @param \Shopsys\FrameworkBundle\Component\Money\Money $priceWithVat
+     * @param string $vatPercent
+     * @param \Shopsys\FrameworkBundle\Component\Money\Money $expectedVatAmount
      */
     public function testGetVatAmountByPriceWithVat(
-        $priceWithVat,
-        $vatPercent,
-        $expectedVatAmount
+        Money $priceWithVat,
+        string $vatPercent,
+        Money $expectedVatAmount
     ) {
         $pricingSettingMock = $this->getMockBuilder(PricingSetting::class)
             ->setMethods(['getRoundingType'])
@@ -117,6 +119,6 @@ class PriceCalculationTest extends TestCase
 
         $actualVatAmount = $priceCalculation->getVatAmountByPriceWithVat($priceWithVat, $vat);
 
-        $this->assertSame(round($expectedVatAmount, 6), round($actualVatAmount, 6));
+        $this->assertThat($actualVatAmount, new IsMoneyEqual($expectedVatAmount));
     }
 }

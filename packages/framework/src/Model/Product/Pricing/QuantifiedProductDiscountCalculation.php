@@ -43,7 +43,7 @@ class QuantifiedProductDiscountCalculation
         $priceWithVat = $this->rounding->roundPriceWithVat(
             Money::fromValue($quantifiedItemPrice->getTotalPrice()->getPriceWithVat()->toValue() * $discountPercent / 100)
         )->toValue();
-        $priceVatAmount = $this->priceCalculation->getVatAmountByPriceWithVat($priceWithVat, $vat);
+        $priceVatAmount = $this->priceCalculation->getVatAmountByPriceWithVat(Money::fromValue($priceWithVat), $vat)->toValue();
         $priceWithoutVat = $priceWithVat - $priceVatAmount;
 
         return new Price(Money::fromValue($priceWithoutVat), Money::fromValue($priceWithVat));
