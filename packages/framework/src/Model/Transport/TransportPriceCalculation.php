@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Shopsys\FrameworkBundle\Model\Transport;
 
 use Shopsys\FrameworkBundle\Model\Pricing\BasePriceCalculation;
@@ -42,8 +44,8 @@ class TransportPriceCalculation
         Transport $transport,
         Currency $currency,
         Price $productsPrice,
-        $domainId
-    ) {
+        int $domainId
+    ): Price {
         if ($this->isFree($productsPrice, $domainId)) {
             return Price::zero();
         }
@@ -59,7 +61,7 @@ class TransportPriceCalculation
     public function calculateIndependentPrice(
         Transport $transport,
         Currency $currency
-    ) {
+    ): Price {
         return $this->basePriceCalculation->calculateBasePrice(
             $transport->getPrice($currency)->getPrice()->toValue(),
             $this->pricingSetting->getInputPriceType(),
@@ -72,7 +74,7 @@ class TransportPriceCalculation
      * @param int $domainId
      * @return bool
      */
-    protected function isFree(Price $productsPrice, $domainId)
+    protected function isFree(Price $productsPrice, int $domainId): bool
     {
         $freeTransportAndPaymentPriceLimit = $this->pricingSetting->getFreeTransportAndPaymentPriceLimit($domainId);
 
@@ -94,8 +96,8 @@ class TransportPriceCalculation
         array $transports,
         Currency $currency,
         Price $productsPrice,
-        $domainId
-    ) {
+        int $domainId
+    ): array {
         $transportsPricesByTransportId = [];
         foreach ($transports as $transport) {
             $transportsPricesByTransportId[$transport->getId()] = $this->calculatePrice(

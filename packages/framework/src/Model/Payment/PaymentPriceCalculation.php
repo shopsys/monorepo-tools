@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Shopsys\FrameworkBundle\Model\Payment;
 
 use Shopsys\FrameworkBundle\Model\Pricing\BasePriceCalculation;
@@ -42,8 +44,8 @@ class PaymentPriceCalculation
         Payment $payment,
         Currency $currency,
         Price $productsPrice,
-        $domainId
-    ) {
+        int $domainId
+    ): Price {
         if ($this->isFree($productsPrice, $domainId)) {
             return Price::zero();
         }
@@ -56,10 +58,8 @@ class PaymentPriceCalculation
      * @param \Shopsys\FrameworkBundle\Model\Pricing\Currency\Currency $currency
      * @return \Shopsys\FrameworkBundle\Model\Pricing\Price
      */
-    public function calculateIndependentPrice(
-        Payment $payment,
-        Currency $currency
-    ) {
+    public function calculateIndependentPrice(Payment $payment, Currency $currency): Price
+    {
         return $this->basePriceCalculation->calculateBasePrice(
             $payment->getPrice($currency)->getPrice()->toValue(),
             $this->pricingSetting->getInputPriceType(),
@@ -72,7 +72,7 @@ class PaymentPriceCalculation
      * @param int $domainId
      * @return bool
      */
-    protected function isFree(Price $productsPrice, $domainId)
+    protected function isFree(Price $productsPrice, int $domainId): bool
     {
         $freeTransportAndPaymentPriceLimit = $this->pricingSetting->getFreeTransportAndPaymentPriceLimit($domainId);
 
@@ -94,8 +94,8 @@ class PaymentPriceCalculation
         array $payments,
         Currency $currency,
         Price $productsPrice,
-        $domainId
-    ) {
+        int $domainId
+    ): array {
         $paymentsPricesByPaymentId = [];
         foreach ($payments as $payment) {
             $paymentsPricesByPaymentId[$payment->getId()] = $this->calculatePrice(
