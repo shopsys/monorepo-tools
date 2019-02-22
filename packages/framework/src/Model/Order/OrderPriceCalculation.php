@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Shopsys\FrameworkBundle\Model\Order;
 
 use Shopsys\FrameworkBundle\Component\Money\Money;
@@ -37,28 +39,24 @@ class OrderPriceCalculation
      * @param \Shopsys\FrameworkBundle\Model\Order\Order $order
      * @return \Shopsys\FrameworkBundle\Model\Order\OrderTotalPrice
      */
-    public function getOrderTotalPrice(Order $order)
+    public function getOrderTotalPrice(Order $order): OrderTotalPrice
     {
-        $priceWithVat = 0;
-        $priceWithoutVat = 0;
-        $productPriceWithVat = 0;
+        $priceWithVat = Money::zero();
+        $priceWithoutVat = Money::zero();
+        $productPriceWithVat = Money::zero();
 
         foreach ($order->getItems() as $orderItem) {
             $itemTotalPrice = $this->orderItemPriceCalculation->calculateTotalPrice($orderItem);
 
-            $priceWithVat += $itemTotalPrice->getPriceWithVat()->toValue();
-            $priceWithoutVat += $itemTotalPrice->getPriceWithoutVat()->toValue();
+            $priceWithVat = $priceWithVat->add($itemTotalPrice->getPriceWithVat());
+            $priceWithoutVat = $priceWithoutVat->add($itemTotalPrice->getPriceWithoutVat());
 
             if ($orderItem->isTypeProduct()) {
-                $productPriceWithVat += $itemTotalPrice->getPriceWithVat()->toValue();
+                $productPriceWithVat = $productPriceWithVat->add($itemTotalPrice->getPriceWithVat());
             }
         }
 
-        return new OrderTotalPrice(
-            Money::fromValue($priceWithVat),
-            Money::fromValue($priceWithoutVat),
-            Money::fromValue($productPriceWithVat)
-        );
+        return new OrderTotalPrice($priceWithVat, $priceWithoutVat, $productPriceWithVat);
     }
 
     /**
@@ -71,7 +69,7 @@ class OrderPriceCalculation
         Payment $payment,
         Currency $currency,
         Price $orderTotalPrice
-    ) {
+    ): ?Price {
         if (!$payment->isCzkRounding() || $currency->getCode() !== Currency::CODE_CZK) {
             return null;
         }
