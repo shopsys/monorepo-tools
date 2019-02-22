@@ -50,13 +50,13 @@ class InputPriceRecalculationSchedulerTest extends TransactionFunctionalTestCase
     {
         return [
             [
-                'inputPriceWithoutVat' => Money::fromString('100'),
-                'inputPriceWithVat' => Money::fromString('121'),
+                'inputPriceWithoutVat' => Money::create(100),
+                'inputPriceWithVat' => Money::create(121),
                 'vatPercent' => '21',
             ],
             [
-                'inputPriceWithoutVat' => Money::fromString('17261.983471'),
-                'inputPriceWithVat' => Money::fromString('20887'),
+                'inputPriceWithoutVat' => Money::create('17261.983471'),
+                'inputPriceWithVat' => Money::create(20887),
                 'vatPercent' => '21',
             ],
         ];

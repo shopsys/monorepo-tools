@@ -48,8 +48,8 @@ class ZboziProductFormType extends AbstractType
                     'currency' => 'CZK',
                     'constraints' => [
                         new MoneyRange([
-                            'min' => Money::fromInteger(1),
-                            'max' => Money::fromInteger(500),
+                            'min' => Money::create(1),
+                            'max' => Money::create(500),
                         ]),
                     ],
                 ],
@@ -62,8 +62,8 @@ class ZboziProductFormType extends AbstractType
                     'currency' => 'CZK',
                     'constraints' => [
                         new MoneyRange([
-                            'min' => Money::fromInteger(1),
-                            'max' => Money::fromInteger(500),
+                            'min' => Money::create(1),
+                            'max' => Money::create(500),
                         ]),
                     ],
                 ],

@@ -303,7 +303,7 @@ class ProductDataFixtureLoader
         $rowData = explode(';', $string);
         foreach ($rowData as $pricingGroupAndPrice) {
             list($pricingGroup, $price) = explode('=', $pricingGroupAndPrice);
-            $productManualPricesByPricingGroup[$pricingGroup] = Money::fromString($price);
+            $productManualPricesByPricingGroup[$pricingGroup] = Money::create($price);
         }
 
         return $productManualPricesByPricingGroup;

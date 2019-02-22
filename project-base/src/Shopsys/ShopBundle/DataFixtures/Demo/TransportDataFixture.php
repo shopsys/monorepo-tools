@@ -47,8 +47,8 @@ class TransportDataFixture extends AbstractReferenceFixture implements Dependent
             'en' => 'Czech post',
         ];
         $transportData->pricesByCurrencyId = [
-            $this->getReference(CurrencyDataFixture::CURRENCY_CZK)->getId() => Money::fromString('99.95'),
-            $this->getReference(CurrencyDataFixture::CURRENCY_EUR)->getId() => Money::fromString('3.95'),
+            $this->getReference(CurrencyDataFixture::CURRENCY_CZK)->getId() => Money::create('99.95'),
+            $this->getReference(CurrencyDataFixture::CURRENCY_EUR)->getId() => Money::create('3.95'),
         ];
         $transportData->vat = $this->getReference(VatDataFixture::VAT_HIGH);
         $this->createTransport(self::TRANSPORT_CZECH_POST, $transportData);
@@ -59,8 +59,8 @@ class TransportDataFixture extends AbstractReferenceFixture implements Dependent
             'en' => 'PPL',
         ];
         $transportData->pricesByCurrencyId = [
-            $this->getReference(CurrencyDataFixture::CURRENCY_CZK)->getId() => Money::fromString('199.95'),
-            $this->getReference(CurrencyDataFixture::CURRENCY_EUR)->getId() => Money::fromString('6.95'),
+            $this->getReference(CurrencyDataFixture::CURRENCY_CZK)->getId() => Money::create('199.95'),
+            $this->getReference(CurrencyDataFixture::CURRENCY_EUR)->getId() => Money::create('6.95'),
         ];
         $transportData->vat = $this->getReference(VatDataFixture::VAT_HIGH);
         $this->createTransport(self::TRANSPORT_PPL, $transportData);

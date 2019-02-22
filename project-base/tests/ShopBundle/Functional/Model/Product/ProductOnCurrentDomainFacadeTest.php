@@ -22,7 +22,7 @@ class ProductOnCurrentDomainFacadeTest extends TransactionFunctionalTestCase
         $category = $this->getReference(CategoryDataFixture::CATEGORY_TV);
 
         $productFilterData = new ProductFilterData();
-        $productFilterData->minimalPrice = Money::fromInteger(1000);
+        $productFilterData->minimalPrice = Money::create(1000);
         $paginationResult = $this->getPaginationResultInCategory($productFilterData, $category);
 
         $this->assertCount(22, $paginationResult->getResults());
@@ -33,7 +33,7 @@ class ProductOnCurrentDomainFacadeTest extends TransactionFunctionalTestCase
         $category = $this->getReference(CategoryDataFixture::CATEGORY_TV);
 
         $productFilterData = new ProductFilterData();
-        $productFilterData->maximalPrice = Money::fromInteger(10000);
+        $productFilterData->maximalPrice = Money::create(10000);
         $paginationResult = $this->getPaginationResultInCategory($productFilterData, $category);
 
         $this->assertCount(22, $paginationResult->getResults());

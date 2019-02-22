@@ -106,7 +106,7 @@ class SettingValue
             case self::TYPE_DATETIME:
                 return DateTimeHelper::createFromFormat(self::DATETIME_STORED_FORMAT, $this->value);
             case self::TYPE_MONEY:
-                return Money::fromString($this->value);
+                return Money::create($this->value);
             default:
                 return $this->value;
         }

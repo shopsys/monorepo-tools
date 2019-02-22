@@ -85,8 +85,8 @@ class PriceRangeRepository
         $priceRangeDataRow = reset($priceRangeData);
 
         return new PriceRange(
-            Money::fromString($priceRangeDataRow['minimalPrice'] ?? 0),
-            Money::fromString($priceRangeDataRow['maximalPrice'] ?? 0)
+            Money::create($priceRangeDataRow['minimalPrice'] ?? 0),
+            Money::create($priceRangeDataRow['maximalPrice'] ?? 0)
         );
     }
 }

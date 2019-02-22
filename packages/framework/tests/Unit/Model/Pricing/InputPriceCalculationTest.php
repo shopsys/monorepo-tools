@@ -30,27 +30,27 @@ class InputPriceCalculationTest extends TestCase
         return [
             [
                 'inputPriceType' => PricingSetting::INPUT_PRICE_TYPE_WITHOUT_VAT,
-                'priceWithVat' => Money::fromString('121'),
+                'priceWithVat' => Money::create(121),
                 'vatPercent' => '21',
-                'expectedResult' => Money::fromString('100'),
+                'expectedResult' => Money::create(100),
             ],
             [
                 'inputPriceType' => PricingSetting::INPUT_PRICE_TYPE_WITH_VAT,
-                'priceWithVat' => Money::fromString('121'),
+                'priceWithVat' => Money::create(121),
                 'vatPercent' => '21',
-                'expectedResult' => Money::fromString('121'),
+                'expectedResult' => Money::create(121),
             ],
             [
                 'inputPriceType' => PricingSetting::INPUT_PRICE_TYPE_WITHOUT_VAT,
-                'priceWithVat' => Money::fromString('100'),
+                'priceWithVat' => Money::create(100),
                 'vatPercent' => '0',
-                'expectedResult' => Money::fromString('100'),
+                'expectedResult' => Money::create(100),
             ],
             [
                 'inputPriceType' => PricingSetting::INPUT_PRICE_TYPE_WITHOUT_VAT,
-                'priceWithVat' => Money::fromString('100'),
+                'priceWithVat' => Money::create(100),
                 'vatPercent' => '21',
-                'expectedResult' => Money::fromString('82.644628'),
+                'expectedResult' => Money::create('82.644628'),
             ],
         ];
     }

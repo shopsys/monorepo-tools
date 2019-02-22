@@ -5,19 +5,20 @@ declare(strict_types=1);
 namespace Tests\FrameworkBundle\Unit\Component\Money;
 
 use Iterator;
+use Litipk\BigNumbers\DecimalConstants;
 use PHPUnit\Framework\TestCase;
 use Shopsys\FrameworkBundle\Component\Money\Money;
 
 class MoneyTest extends TestCase
 {
     /**
-     * @dataProvider fromStringProvider
-     * @param string $string
+     * @dataProvider createProvider
+     * @param int|string $value
      * @param string $expected
      */
-    public function testFromString(string $string, string $expected): void
+    public function testCreate($value, string $expected): void
     {
-        $money = Money::fromString($string);
+        $money = Money::create($value);
 
         $this->assertSame($expected, $money->toString());
     }
@@ -25,7 +26,7 @@ class MoneyTest extends TestCase
     /**
      * @return \Iterator
      */
-    public function fromStringProvider(): Iterator
+    public function createProvider(): Iterator
     {
         yield ['0', '0'];
         yield ['-0', '0'];
@@ -40,23 +41,29 @@ class MoneyTest extends TestCase
         yield ['000.0', '0.0'];
         yield ['010', '10'];
         yield ['1e1', '10'];
+        yield [0, '0'];
+        yield [-0, '0'];
+        yield [1, '1'];
+        yield [-1, '-1'];
+        yield [10, '10'];
+        yield [PHP_INT_MAX, (string)PHP_INT_MAX];
     }
 
     /**
-     * @dataProvider invalidValuesFromStringProvider
-     * @param string $string
+     * @dataProvider invalidValuesCreateProvider
+     * @param int|string $value
      */
-    public function testInvalidValuesInFromString(string $string): void
+    public function testInvalidValuesInCreate($value): void
     {
         $this->expectException(\Shopsys\FrameworkBundle\Component\Money\Exception\MoneyException::class);
 
-        Money::fromString($string);
+        Money::create($value);
     }
 
     /**
      * @return \Iterator
      */
-    public function invalidValuesFromStringProvider(): Iterator
+    public function invalidValuesCreateProvider(): Iterator
     {
         yield [''];
         yield ['xxx'];
@@ -72,49 +79,29 @@ class MoneyTest extends TestCase
         yield ['+-1'];
         yield ['++1'];
         yield ['--1'];
+        yield [0.0];
+        yield [1.0];
+        yield [-1.0];
+        yield [DecimalConstants::zero()];
+        yield [Money::zero()];
     }
 
     /**
-     * @dataProvider fromIntegerProvider
-     * @param int $integer
-     * @param string $expected
-     */
-    public function testFromInteger(int $integer, string $expected): void
-    {
-        $money = Money::fromInteger($integer);
-
-        $this->assertSame($expected, $money->toString());
-    }
-
-    /**
-     * @return \Iterator
-     */
-    public function fromIntegerProvider(): Iterator
-    {
-        yield [0, '0'];
-        yield [-0, '0'];
-        yield [1, '1'];
-        yield [-1, '-1'];
-        yield [10, '10'];
-        yield [PHP_INT_MAX, (string)PHP_INT_MAX];
-    }
-
-    /**
-     * @dataProvider invalidValuesFromFloatProvider
+     * @dataProvider invalidValuesCreateFromFloatProvider
      * @param float $float
      * @param int $scale
      */
-    public function testInvalidValuesInFromFloat(float $float, int $scale): void
+    public function testInvalidValuesInCreateFromFloat(float $float, int $scale): void
     {
         $this->expectException(\Shopsys\FrameworkBundle\Component\Money\Exception\MoneyException::class);
 
-        Money::fromFloat($float, $scale);
+        Money::createFromFloat($float, $scale);
     }
 
     /**
      * @return \Iterator
      */
-    public function invalidValuesFromFloatProvider(): Iterator
+    public function invalidValuesCreateFromFloatProvider(): Iterator
     {
         yield [NAN, 0];
         yield [INF, 0];
@@ -126,14 +113,14 @@ class MoneyTest extends TestCase
     }
 
     /**
-     * @dataProvider fromFloatProvider
+     * @dataProvider createFromFloatProvider
      * @param float $float
      * @param int $scale
      * @param string $expected
      */
-    public function testFromFloat(float $float, int $scale, string $expected): void
+    public function testCreateFromFloat(float $float, int $scale, string $expected): void
     {
-        $money = Money::fromFloat($float, $scale);
+        $money = Money::createFromFloat($float, $scale);
 
         $this->assertSame($expected, $money->toString());
     }
@@ -141,7 +128,7 @@ class MoneyTest extends TestCase
     /**
      * @return \Iterator
      */
-    public function fromFloatProvider(): Iterator
+    public function createFromFloatProvider(): Iterator
     {
         yield [0.0, 0, '0'];
         yield [-0.0, 0, '0'];
@@ -165,9 +152,9 @@ class MoneyTest extends TestCase
 
     public function testAddIsImmutable(): void
     {
-        $money = Money::fromString('1');
+        $money = Money::create(1);
 
-        $money->add(Money::fromString('1'));
+        $money->add(Money::create(1));
 
         $this->assertSame('1', $money->toString());
     }
@@ -180,8 +167,8 @@ class MoneyTest extends TestCase
      */
     public function testAdd(string $a, string $b, string $expectedResult): void
     {
-        $moneyA = Money::fromString($a);
-        $moneyB = Money::fromString($b);
+        $moneyA = Money::create($a);
+        $moneyB = Money::create($b);
 
         $result = $moneyA->add($moneyB);
 
@@ -208,9 +195,9 @@ class MoneyTest extends TestCase
 
     public function testSubtractIsImmutable(): void
     {
-        $money = Money::fromString('1');
+        $money = Money::create(1);
 
-        $money->subtract(Money::fromString('1'));
+        $money->subtract(Money::create(1));
 
         $this->assertSame('1', $money->toString());
     }
@@ -223,8 +210,8 @@ class MoneyTest extends TestCase
      */
     public function testSubtract(string $a, string $b, string $expectedResult): void
     {
-        $moneyA = Money::fromString($a);
-        $moneyB = Money::fromString($b);
+        $moneyA = Money::create($a);
+        $moneyB = Money::create($b);
 
         $result = $moneyA->subtract($moneyB);
 
@@ -251,7 +238,7 @@ class MoneyTest extends TestCase
 
     public function testMultiplyIsImmutable(): void
     {
-        $money = Money::fromString('1');
+        $money = Money::create(1);
 
         $money->multiply('2');
 
@@ -266,7 +253,7 @@ class MoneyTest extends TestCase
      */
     public function testMultiply(string $a, string $b, string $expectedResult): void
     {
-        $moneyA = Money::fromString($a);
+        $moneyA = Money::create($a);
 
         $result = $moneyA->multiply($b);
 
@@ -299,7 +286,7 @@ class MoneyTest extends TestCase
      */
     public function testInvalidMultipliers(string $multiplier): void
     {
-        $money = Money::fromString('1');
+        $money = Money::create(1);
 
         $this->expectException(\Shopsys\FrameworkBundle\Component\Money\Exception\MoneyException::class);
 
@@ -311,12 +298,25 @@ class MoneyTest extends TestCase
      */
     public function invalidMultipliersProvider(): Iterator
     {
-        yield from $this->invalidValuesFromStringProvider();
+        yield [''];
+        yield ['xxx'];
+        yield ['1,00'];
+        yield ['0.'];
+        yield ['.0'];
+        yield ['1.0.0'];
+        yield [' 0'];
+        yield ['0 '];
+        yield ['1+1'];
+        yield ['1 000'];
+        yield ['0x0'];
+        yield ['+-1'];
+        yield ['++1'];
+        yield ['--1'];
     }
 
     public function testDivideIsImmutable(): void
     {
-        $money = Money::fromString('1');
+        $money = Money::create(1);
 
         $money->divide('2', 1);
 
@@ -332,7 +332,7 @@ class MoneyTest extends TestCase
      */
     public function testDivide(string $a, string $b, int $scale, string $expectedResult): void
     {
-        $moneyA = Money::fromString($a);
+        $moneyA = Money::create($a);
 
         $result = $moneyA->divide($b, $scale);
 
@@ -366,7 +366,7 @@ class MoneyTest extends TestCase
      */
     public function testInvalidDivisors(string $divisor): void
     {
-        $money = Money::fromString('1');
+        $money = Money::create(1);
 
         $this->expectException(\Shopsys\FrameworkBundle\Component\Money\Exception\MoneyException::class);
 
@@ -378,7 +378,20 @@ class MoneyTest extends TestCase
      */
     public function invalidDivisorProvider(): Iterator
     {
-        yield from $this->invalidValuesFromStringProvider();
+        yield [''];
+        yield ['xxx'];
+        yield ['1,00'];
+        yield ['0.'];
+        yield ['.0'];
+        yield ['1.0.0'];
+        yield [' 0'];
+        yield ['0 '];
+        yield ['1+1'];
+        yield ['1 000'];
+        yield ['0x0'];
+        yield ['+-1'];
+        yield ['++1'];
+        yield ['--1'];
     }
 
     /**
@@ -387,7 +400,7 @@ class MoneyTest extends TestCase
      */
     public function testCannotDivideByZero(string $divisor): void
     {
-        $money = Money::fromString('1');
+        $money = Money::create(1);
 
         $this->expectException(\DomainException::class);
 
@@ -406,7 +419,7 @@ class MoneyTest extends TestCase
 
     public function testRoundIsImmutable(): void
     {
-        $money = Money::fromString('1.5');
+        $money = Money::create('1.5');
 
         $money->round(0);
 
@@ -421,7 +434,7 @@ class MoneyTest extends TestCase
      */
     public function testRound(string $amount, int $scale, string $expectedResult): void
     {
-        $money = Money::fromString($amount);
+        $money = Money::create($amount);
 
         $result = $money->round($scale);
 
@@ -460,8 +473,8 @@ class MoneyTest extends TestCase
      */
     public function testCompare(string $a, string $b, int $expectedResult): void
     {
-        $moneyA = Money::fromString($a);
-        $moneyB = Money::fromString($b);
+        $moneyA = Money::create($a);
+        $moneyB = Money::create($b);
 
         $result = $moneyA->compare($moneyB);
 
@@ -498,8 +511,8 @@ class MoneyTest extends TestCase
      */
     public function testEquals(string $a, string $b, bool $expectedResult): void
     {
-        $moneyA = Money::fromString($a);
-        $moneyB = Money::fromString($b);
+        $moneyA = Money::create($a);
+        $moneyB = Money::create($b);
 
         $result = $moneyA->equals($moneyB);
 
@@ -536,8 +549,8 @@ class MoneyTest extends TestCase
      */
     public function testGreaterThan(string $a, string $b, bool $expectedResult): void
     {
-        $moneyA = Money::fromString($a);
-        $moneyB = Money::fromString($b);
+        $moneyA = Money::create($a);
+        $moneyB = Money::create($b);
 
         $result = $moneyA->isGreaterThan($moneyB);
 
@@ -574,8 +587,8 @@ class MoneyTest extends TestCase
      */
     public function testGreaterThanOrEqualTo(string $a, string $b, bool $expectedResult): void
     {
-        $moneyA = Money::fromString($a);
-        $moneyB = Money::fromString($b);
+        $moneyA = Money::create($a);
+        $moneyB = Money::create($b);
 
         $result = $moneyA->isGreaterThanOrEqualTo($moneyB);
 
@@ -612,8 +625,8 @@ class MoneyTest extends TestCase
      */
     public function testLessThan(string $a, string $b, bool $expectedResult): void
     {
-        $moneyA = Money::fromString($a);
-        $moneyB = Money::fromString($b);
+        $moneyA = Money::create($a);
+        $moneyB = Money::create($b);
 
         $result = $moneyA->isLessThan($moneyB);
 
@@ -650,8 +663,8 @@ class MoneyTest extends TestCase
      */
     public function testLessThanOrEqualTo(string $a, string $b, bool $expectedResult): void
     {
-        $moneyA = Money::fromString($a);
-        $moneyB = Money::fromString($b);
+        $moneyA = Money::create($a);
+        $moneyB = Money::create($b);
 
         $result = $moneyA->isLessThanOrEqualTo($moneyB);
 
@@ -687,7 +700,7 @@ class MoneyTest extends TestCase
      */
     public function testIsPositive(string $a, bool $expectedResult): void
     {
-        $moneyA = Money::fromString($a);
+        $moneyA = Money::create($a);
 
         $this->assertSame($expectedResult, $moneyA->isPositive());
     }
@@ -715,7 +728,7 @@ class MoneyTest extends TestCase
      */
     public function testIsNegative(string $a, bool $expectedResult): void
     {
-        $moneyA = Money::fromString($a);
+        $moneyA = Money::create($a);
 
         $this->assertSame($expectedResult, $moneyA->isNegative());
     }
@@ -743,7 +756,7 @@ class MoneyTest extends TestCase
      */
     public function testIsZero(string $a, bool $expectedResult): void
     {
-        $moneyA = Money::fromString($a);
+        $moneyA = Money::create($a);
 
         $this->assertSame($expectedResult, $moneyA->isZero());
     }

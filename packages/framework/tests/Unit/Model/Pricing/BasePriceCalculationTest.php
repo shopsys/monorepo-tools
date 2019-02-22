@@ -20,19 +20,19 @@ class BasePriceCalculationTest extends TestCase
         return [
             [
                 'inputPriceType' => PricingSetting::INPUT_PRICE_TYPE_WITHOUT_VAT,
-                'inputPrice' => Money::fromString('6999'),
+                'inputPrice' => Money::create(6999),
                 'vatPercent' => '21',
-                'basePriceWithoutVat' => Money::fromString('6998.78'),
-                'basePriceWithVat' => Money::fromString('8469'),
-                'basePriceVatAmount' => Money::fromString('1470.22'),
+                'basePriceWithoutVat' => Money::create('6998.78'),
+                'basePriceWithVat' => Money::create(8469),
+                'basePriceVatAmount' => Money::create('1470.22'),
             ],
             [
                 'inputPriceType' => PricingSetting::INPUT_PRICE_TYPE_WITH_VAT,
-                'inputPrice' => Money::fromString('6999.99'),
+                'inputPrice' => Money::create('6999.99'),
                 'vatPercent' => '21',
-                'basePriceWithoutVat' => Money::fromString('5784.8'),
-                'basePriceWithVat' => Money::fromString('7000'),
-                'basePriceVatAmount' => Money::fromString('1215.2'),
+                'basePriceWithoutVat' => Money::create('5784.8'),
+                'basePriceWithVat' => Money::create(7000),
+                'basePriceVatAmount' => Money::create('1215.2'),
             ],
         ];
     }
@@ -82,28 +82,28 @@ class BasePriceCalculationTest extends TestCase
     {
         return [
             [
-                'priceWithVat' => Money::fromInteger(100),
+                'priceWithVat' => Money::create(100),
                 'vatPercent' => '20',
                 'coefficients' => ['2'],
-                'resultPriceWithVat' => Money::fromInteger(200),
-                'resultPriceWithoutVat' => Money::fromInteger(167),
-                'resultVatAmount' => Money::fromInteger(33),
+                'resultPriceWithVat' => Money::create(200),
+                'resultPriceWithoutVat' => Money::create(167),
+                'resultVatAmount' => Money::create(33),
             ],
             [
-                'priceWithVat' => Money::fromInteger(100),
+                'priceWithVat' => Money::create(100),
                 'vatPercent' => '10',
                 'coefficients' => ['1'],
-                'resultPriceWithVat' => Money::fromInteger(100),
-                'resultPriceWithoutVat' => Money::fromInteger(91),
-                'resultVatAmount' => Money::fromInteger(9),
+                'resultPriceWithVat' => Money::create(100),
+                'resultPriceWithoutVat' => Money::create(91),
+                'resultVatAmount' => Money::create(9),
             ],
             [
-                'priceWithVat' => Money::fromInteger(100),
+                'priceWithVat' => Money::create(100),
                 'vatPercent' => '20',
                 'coefficients' => ['0.6789'],
-                'resultPriceWithVat' => Money::fromInteger(68),
-                'resultPriceWithoutVat' => Money::fromInteger(57),
-                'resultVatAmount' => Money::fromInteger(11),
+                'resultPriceWithVat' => Money::create(68),
+                'resultPriceWithoutVat' => Money::create(57),
+                'resultVatAmount' => Money::create(11),
             ],
         ];
     }

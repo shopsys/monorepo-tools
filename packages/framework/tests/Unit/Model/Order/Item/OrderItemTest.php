@@ -110,8 +110,8 @@ class OrderItemTest extends TestCase
     {
         $orderItemData = new OrderItemData();
         $orderItemData->name = 'newName';
-        $orderItemData->priceWithVat = Money::fromInteger(20);
-        $orderItemData->priceWithoutVat = Money::fromInteger(30);
+        $orderItemData->priceWithVat = Money::create(20);
+        $orderItemData->priceWithoutVat = Money::create(30);
         $orderItemData->quantity = 2;
         $orderItemData->vatPercent = 10;
 
@@ -119,8 +119,8 @@ class OrderItemTest extends TestCase
         $orderItem->edit($orderItemData);
 
         $this->assertSame('newName', $orderItem->getName());
-        $this->assertThat($orderItem->getPriceWithVat(), new IsMoneyEqual(Money::fromInteger(20)));
-        $this->assertThat($orderItem->getPriceWithoutVat(), new IsMoneyEqual(Money::fromInteger(30)));
+        $this->assertThat($orderItem->getPriceWithVat(), new IsMoneyEqual(Money::create(20)));
+        $this->assertThat($orderItem->getPriceWithoutVat(), new IsMoneyEqual(Money::create(30)));
         $this->assertSame(2, $orderItem->getQuantity());
         $this->assertSame(10, $orderItem->getvatPercent());
     }
@@ -129,8 +129,8 @@ class OrderItemTest extends TestCase
     {
         $orderItemData = new OrderItemData();
         $orderItemData->name = 'newName';
-        $orderItemData->priceWithVat = Money::fromInteger(20);
-        $orderItemData->priceWithoutVat = Money::fromInteger(30);
+        $orderItemData->priceWithVat = Money::create(20);
+        $orderItemData->priceWithoutVat = Money::create(30);
         $orderItemData->quantity = 2;
         $orderItemData->vatPercent = 10;
 
@@ -138,8 +138,8 @@ class OrderItemTest extends TestCase
         $orderItem->edit($orderItemData);
 
         $this->assertSame('newName', $orderItem->getName());
-        $this->assertThat($orderItem->getPriceWithVat(), new IsMoneyEqual(Money::fromInteger(20)));
-        $this->assertThat($orderItem->getPriceWithoutVat(), new IsMoneyEqual(Money::fromInteger(30)));
+        $this->assertThat($orderItem->getPriceWithVat(), new IsMoneyEqual(Money::create(20)));
+        $this->assertThat($orderItem->getPriceWithoutVat(), new IsMoneyEqual(Money::create(30)));
         $this->assertSame(2, $orderItem->getQuantity());
         $this->assertSame(10, $orderItem->getvatPercent());
     }
@@ -162,7 +162,7 @@ class OrderItemTest extends TestCase
         $orderPayment = new OrderItem(
             $this->createOrderMock(),
             '',
-            new Price(Money::fromInteger(10), Money::fromInteger(12)),
+            new Price(Money::create(10), Money::create(12)),
             0.2,
             1,
             OrderItem::TYPE_PAYMENT,
@@ -181,7 +181,7 @@ class OrderItemTest extends TestCase
         $orderTransport = new OrderItem(
             $this->createOrderMock(),
             '',
-            new Price(Money::fromInteger(10), Money::fromInteger(12)),
+            new Price(Money::create(10), Money::create(12)),
             0.2,
             1,
             OrderItem::TYPE_TRANSPORT,
@@ -201,7 +201,7 @@ class OrderItemTest extends TestCase
         $orderProduct = new OrderItem(
             $this->createOrderMock(),
             '',
-            new Price(Money::fromInteger(10), Money::fromInteger(12)),
+            new Price(Money::create(10), Money::create(12)),
             0.2,
             1,
             OrderItem::TYPE_PRODUCT,

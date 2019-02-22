@@ -21,16 +21,16 @@ class OrderItemPriceCalculationTest extends TestCase
             ->setMethods(['getVatAmountByPriceWithVat'])
             ->disableOriginalConstructor()
             ->getMock();
-        $priceCalculationMock->expects($this->once())->method('getVatAmountByPriceWithVat')->willReturn(Money::fromInteger(100));
+        $priceCalculationMock->expects($this->once())->method('getVatAmountByPriceWithVat')->willReturn(Money::create(100));
 
         $orderItemData = new OrderItemData();
-        $orderItemData->priceWithVat = Money::fromInteger(1000);
+        $orderItemData->priceWithVat = Money::create(1000);
         $orderItemData->vatPercent = 10;
 
         $orderItemPriceCalculation = new OrderItemPriceCalculation($priceCalculationMock, new VatFactory(new EntityNameResolver([])), new VatDataFactory());
         $priceWithoutVat = $orderItemPriceCalculation->calculatePriceWithoutVat($orderItemData);
 
-        $this->assertThat($priceWithoutVat, new IsMoneyEqual(Money::fromInteger(900)));
+        $this->assertThat($priceWithoutVat, new IsMoneyEqual(Money::create(900)));
     }
 
     public function testCalculateTotalPrice()
@@ -39,7 +39,7 @@ class OrderItemPriceCalculationTest extends TestCase
             ->setMethods(['getVatAmountByPriceWithVat'])
             ->disableOriginalConstructor()
             ->getMock();
-        $priceCalculationMock->expects($this->once())->method('getVatAmountByPriceWithVat')->willReturn(Money::fromInteger(10));
+        $priceCalculationMock->expects($this->once())->method('getVatAmountByPriceWithVat')->willReturn(Money::create(10));
 
         $orderItemPriceCalculation = new OrderItemPriceCalculation($priceCalculationMock, new VatFactory(new EntityNameResolver([])), new VatDataFactory());
 
@@ -52,14 +52,14 @@ class OrderItemPriceCalculationTest extends TestCase
             true,
             ['getPriceWithVat', 'getQuantity', 'getVatPercent']
         );
-        $orderItem->expects($this->once())->method('getPriceWithVat')->willReturn(Money::fromInteger(100));
+        $orderItem->expects($this->once())->method('getPriceWithVat')->willReturn(Money::create(100));
         $orderItem->expects($this->once())->method('getQuantity')->willReturn(2);
         $orderItem->expects($this->once())->method('getVatPercent')->willReturn(1);
 
         $totalPrice = $orderItemPriceCalculation->calculateTotalPrice($orderItem);
 
-        $this->assertThat($totalPrice->getPriceWithVat(), new IsMoneyEqual(Money::fromInteger(200)));
-        $this->assertThat($totalPrice->getPriceWithoutVat(), new IsMoneyEqual(Money::fromInteger(190)));
-        $this->assertThat($totalPrice->getVatAmount(), new IsMoneyEqual(Money::fromInteger(10)));
+        $this->assertThat($totalPrice->getPriceWithVat(), new IsMoneyEqual(Money::create(200)));
+        $this->assertThat($totalPrice->getPriceWithoutVat(), new IsMoneyEqual(Money::create(190)));
+        $this->assertThat($totalPrice->getVatAmount(), new IsMoneyEqual(Money::create(10)));
     }
 }

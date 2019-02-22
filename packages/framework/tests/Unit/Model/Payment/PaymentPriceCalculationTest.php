@@ -27,17 +27,17 @@ class PaymentPriceCalculationTest extends TestCase
         return [
             [
                 'inputPriceType' => PricingSetting::INPUT_PRICE_TYPE_WITHOUT_VAT,
-                'inputPrice' => Money::fromString('6999'),
+                'inputPrice' => Money::create(6999),
                 'vatPercent' => '21',
-                'priceWithoutVat' => Money::fromString('6998.78'),
-                'priceWithVat' => Money::fromString('8469'),
+                'priceWithoutVat' => Money::create('6998.78'),
+                'priceWithVat' => Money::create(8469),
             ],
             [
                 'inputPriceType' => PricingSetting::INPUT_PRICE_TYPE_WITH_VAT,
-                'inputPrice' => Money::fromString('6999.99'),
+                'inputPrice' => Money::create('6999.99'),
                 'vatPercent' => '21',
-                'priceWithoutVat' => Money::fromString('5784.8'),
-                'priceWithVat' => Money::fromString('7000'),
+                'priceWithoutVat' => Money::create('5784.8'),
+                'priceWithVat' => Money::create(7000),
             ],
         ];
     }
@@ -47,19 +47,19 @@ class PaymentPriceCalculationTest extends TestCase
         return [
             [
                 'inputPriceType' => PricingSetting::INPUT_PRICE_TYPE_WITHOUT_VAT,
-                'inputPrice' => Money::fromString('6999'),
+                'inputPrice' => Money::create(6999),
                 'vatPercent' => '21',
-                'priceWithoutVat' => Money::fromString('6998.78'),
-                'priceWithVat' => Money::fromString('8469'),
-                'productsPrice' => new Price(Money::fromInteger(100), Money::fromInteger(121)),
+                'priceWithoutVat' => Money::create('6998.78'),
+                'priceWithVat' => Money::create(8469),
+                'productsPrice' => new Price(Money::create(100), Money::create(121)),
             ],
             [
                 'inputPriceType' => PricingSetting::INPUT_PRICE_TYPE_WITH_VAT,
-                'inputPrice' => Money::fromString('6999.99'),
+                'inputPrice' => Money::create('6999.99'),
                 'vatPercent' => '21',
-                'priceWithoutVat' => Money::fromString('5784.8'),
-                'priceWithVat' => Money::fromString('7000'),
-                'productsPrice' => new Price(Money::fromInteger(1000), Money::fromInteger(1210)),
+                'priceWithoutVat' => Money::create('5784.8'),
+                'priceWithVat' => Money::create(7000),
+                'productsPrice' => new Price(Money::create(1000), Money::create(1210)),
             ],
         ];
     }
@@ -132,7 +132,7 @@ class PaymentPriceCalculationTest extends TestCase
         Money $priceWithVat,
         Price $productsPrice
     ) {
-        $priceLimit = Money::fromInteger(1000);
+        $priceLimit = Money::create(1000);
         $pricingSettingMock = $this->getMockBuilder(PricingSetting::class)
             ->setMethods(['getInputPriceType', 'getRoundingType', 'getFreeTransportAndPaymentPriceLimit'])
             ->disableOriginalConstructor()

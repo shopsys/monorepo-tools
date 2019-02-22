@@ -52,7 +52,7 @@ class NumericToMoneyTransformer implements DataTransformerInterface
 
         if (is_string($value)) {
             try {
-                return Money::fromString($value);
+                return Money::create($value);
             } catch (\Shopsys\FrameworkBundle\Component\Money\Exception\MoneyException $e) {
                 $message = sprintf('Unable to create Money from the string "%s".', $value);
 
@@ -61,11 +61,11 @@ class NumericToMoneyTransformer implements DataTransformerInterface
         }
 
         if (is_int($value)) {
-            return Money::fromInteger($value);
+            return Money::create($value);
         }
 
         if (is_float($value)) {
-            return Money::fromFloat($value, $this->floatScale);
+            return Money::createFromFloat($value, $this->floatScale);
         }
 
         throw new TransformationFailedException('A string, a number or null must be provided.');

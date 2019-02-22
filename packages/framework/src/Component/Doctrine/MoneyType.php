@@ -51,7 +51,7 @@ class MoneyType extends Type
         }
 
         try {
-            return Money::fromString($value);
+            return Money::create($value);
         } catch (\Exception $e) {
             throw ConversionException::conversionFailedFormat($value, $this->getName(), 'numeric', $e);
         }

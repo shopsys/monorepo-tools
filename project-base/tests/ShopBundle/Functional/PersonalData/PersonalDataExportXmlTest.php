@@ -42,7 +42,7 @@ class PersonalDataExportXmlTest extends TransactionFunctionalTestCase
         $currency = new Currency($currencyData);
         $order = $this->createOrder($currency, $status, $country);
         $product = $this->createMock(Product::class);
-        $price = new Price(Money::fromInteger(1), Money::fromInteger(1));
+        $price = new Price(Money::create(1), Money::create(1));
         $orderItem = new OrderItem($order, 'test', $price, 1, 1, OrderItem::TYPE_PRODUCT, 'ks', 'cat');
         $orderItem->setProduct($product);
         $order->addItem($orderItem);

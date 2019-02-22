@@ -210,24 +210,24 @@ class ZboziFeedItemTest extends TestCase
     public function testZboziFeedItemWithMaxCpc()
     {
         $zboziProductDomainData = new ZboziProductDomainData();
-        $zboziProductDomainData->cpc = Money::fromString('5.0');
+        $zboziProductDomainData->cpc = Money::create('5.0');
         $zboziProductDomain = new ZboziProductDomain($zboziProductDomainData);
 
         $zboziFeedItem = $this->zboziFeedItemFactory->create($this->defaultProduct, $zboziProductDomain, $this->defaultDomain);
 
-        self::assertThat($zboziFeedItem->getMaxCpc(), new IsMoneyEqual(Money::fromInteger(5)));
+        self::assertThat($zboziFeedItem->getMaxCpc(), new IsMoneyEqual(Money::create(5)));
         self::assertNull($zboziFeedItem->getMaxCpcSearch());
     }
 
     public function testZboziFeedItemWithMaxCpcSearch()
     {
         $zboziProductDomainData = new ZboziProductDomainData();
-        $zboziProductDomainData->cpcSearch = Money::fromString('5.0');
+        $zboziProductDomainData->cpcSearch = Money::create('5.0');
         $zboziProductDomain = new ZboziProductDomain($zboziProductDomainData);
 
         $zboziFeedItem = $this->zboziFeedItemFactory->create($this->defaultProduct, $zboziProductDomain, $this->defaultDomain);
 
         self::assertNull($zboziFeedItem->getMaxCpc());
-        self::assertThat($zboziFeedItem->getMaxCpcSearch(), new IsMoneyEqual(Money::fromInteger(5)));
+        self::assertThat($zboziFeedItem->getMaxCpcSearch(), new IsMoneyEqual(Money::create(5)));
     }
 }

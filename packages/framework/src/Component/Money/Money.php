@@ -6,6 +6,7 @@ namespace Shopsys\FrameworkBundle\Component\Money;
 
 use JsonSerializable;
 use Litipk\BigNumbers\Decimal;
+use Shopsys\FrameworkBundle\Component\Money\Exception\UnsupportedTypeException;
 
 class Money implements JsonSerializable
 {
@@ -23,14 +24,24 @@ class Money implements JsonSerializable
     }
 
     /**
-     * @param string $string
+     * @param int|string $value
      * @return \Shopsys\FrameworkBundle\Component\Money\Money
      */
-    public static function fromString(string $string): self
+    public static function create($value): self
     {
-        $decimal = static::createDecimalFromString($string);
+        if (is_string($value)) {
+            $decimal = static::createDecimalFromString($value);
 
-        return new static($decimal);
+            return new static($decimal);
+        }
+
+        if (is_int($value)) {
+            $decimal = Decimal::fromInteger($value);
+
+            return new static($decimal);
+        }
+
+        throw new UnsupportedTypeException($value, ['string', 'int']);
     }
 
     /**
@@ -38,7 +49,7 @@ class Money implements JsonSerializable
      * @param int $scale must be specified when creating from floats to avoid issues with precision
      * @return \Shopsys\FrameworkBundle\Component\Money\Money
      */
-    public static function fromFloat(float $float, int $scale): self
+    public static function createFromFloat(float $float, int $scale): self
     {
         // Using Decimal::fromString as the Decimal::fromFloat has issues with specified scale
         // See https://github.com/Litipk/php-bignumbers/pull/67 for details
@@ -48,22 +59,11 @@ class Money implements JsonSerializable
     }
 
     /**
-     * @param int $integer
-     * @return \Shopsys\FrameworkBundle\Component\Money\Money
-     */
-    public static function fromInteger(int $integer): self
-    {
-        $decimal = Decimal::fromInteger($integer);
-
-        return new static($decimal);
-    }
-
-    /**
      * @return \Shopsys\FrameworkBundle\Component\Money\Money
      */
     public static function zero(): self
     {
-        return static::fromInteger(0);
+        return static::create(0);
     }
 
     /**

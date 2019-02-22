@@ -46,7 +46,7 @@ class ProductVisibilityRepositoryTest extends TransactionFunctionalTestCase
         $productData->categoriesByDomainId = [1 => [$category]];
         $productData->availability = $this->getReference(AvailabilityDataFixture::AVAILABILITY_IN_STOCK);
         $productData->unit = $this->getReference(UnitDataFixture::UNIT_PIECES);
-        $this->setPriceForAllDomains($productData, Money::fromInteger(100));
+        $this->setPriceForAllDomains($productData, Money::create(100));
 
         return $productData;
     }
@@ -401,7 +401,7 @@ class ProductVisibilityRepositoryTest extends TransactionFunctionalTestCase
         $productPriceRecalculator = $this->getContainer()->get(ProductPriceRecalculator::class);
 
         $productData = $this->getDefaultProductData();
-        $this->setPriceForAllDomains($productData, Money::fromInteger(10));
+        $this->setPriceForAllDomains($productData, Money::create(10));
 
         /** @var \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroup $pricingGroup */
         $pricingGroup = $this->getReference(PricingGroupDataFixture::PRICING_GROUP_ORDINARY_DOMAIN_1);
@@ -442,7 +442,7 @@ class ProductVisibilityRepositoryTest extends TransactionFunctionalTestCase
 
         $allPricingGroups = $pricingGroupFacade->getAll();
         foreach ($allPricingGroups as $pricingGroup) {
-            $productData->manualInputPricesByPricingGroupId[$pricingGroup->getId()] = Money::fromInteger(10);
+            $productData->manualInputPricesByPricingGroupId[$pricingGroup->getId()] = Money::create(10);
         }
 
         /** @var \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroup $pricingGroup */

@@ -86,7 +86,7 @@ class MoneyConvertingDataSourceDecorator implements DataSourceInterface
     protected function convertRow(array $row): array
     {
         foreach ($this->moneyColumnNames as $columnName) {
-            $row[$columnName] = $row[$columnName] !== null ? Money::fromString($row[$columnName]) : null;
+            $row[$columnName] = $row[$columnName] !== null ? Money::create($row[$columnName]) : null;
         }
 
         return $row;

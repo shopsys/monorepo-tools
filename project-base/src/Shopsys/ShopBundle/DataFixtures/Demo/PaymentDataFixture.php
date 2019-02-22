@@ -47,8 +47,8 @@ class PaymentDataFixture extends AbstractReferenceFixture implements DependentFi
             'en' => 'Credit card',
         ];
         $paymentData->pricesByCurrencyId = [
-            $this->getReference(CurrencyDataFixture::CURRENCY_CZK)->getId() => Money::fromString('99.95'),
-            $this->getReference(CurrencyDataFixture::CURRENCY_EUR)->getId() => Money::fromString('2.95'),
+            $this->getReference(CurrencyDataFixture::CURRENCY_CZK)->getId() => Money::create('99.95'),
+            $this->getReference(CurrencyDataFixture::CURRENCY_EUR)->getId() => Money::create('2.95'),
         ];
         $paymentData->description = [
             'cs' => 'Rychle, levně a spolehlivě!',
@@ -70,8 +70,8 @@ class PaymentDataFixture extends AbstractReferenceFixture implements DependentFi
             'en' => 'Cash on delivery',
         ];
         $paymentData->pricesByCurrencyId = [
-            $this->getReference(CurrencyDataFixture::CURRENCY_CZK)->getId() => Money::fromString('49.90'),
-            $this->getReference(CurrencyDataFixture::CURRENCY_EUR)->getId() => Money::fromString('1.95'),
+            $this->getReference(CurrencyDataFixture::CURRENCY_CZK)->getId() => Money::create('49.90'),
+            $this->getReference(CurrencyDataFixture::CURRENCY_EUR)->getId() => Money::create('1.95'),
         ];
         $paymentData->vat = $this->getReference(VatDataFixture::VAT_HIGH);
         $this->createPayment(self::PAYMENT_CASH_ON_DELIVERY, $paymentData, [TransportDataFixture::TRANSPORT_CZECH_POST]);

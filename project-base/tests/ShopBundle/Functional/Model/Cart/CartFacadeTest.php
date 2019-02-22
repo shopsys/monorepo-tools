@@ -155,7 +155,7 @@ class CartFacadeTest extends TransactionFunctionalTestCase
         $product = $this->getReference(ProductDataFixture::PRODUCT_PREFIX . $productId);
 
         $cart = $cartFacade->getCartOfCurrentCustomerCreateIfNotExists();
-        $cartItem = $cartItemFactory->create($cart, $product, 1, Money::fromInteger(10));
+        $cartItem = $cartItemFactory->create($cart, $product, 1, Money::create(10));
         $cart->addItem($cartItem);
 
         $this->getEntityManager()->persist($cartItem);

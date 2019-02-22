@@ -217,10 +217,10 @@ class HeurekaFeedItemTest extends TestCase
     public function testHeurekaFeedItemWithCpc()
     {
         $this->heurekaProductDataBatchLoaderMock->method('getProductCpc')
-            ->with($this->defaultProduct, $this->defaultDomain)->willReturn(Money::fromInteger(5));
+            ->with($this->defaultProduct, $this->defaultDomain)->willReturn(Money::create(5));
 
         $heurekaFeedItem = $this->heurekaFeedItemFactory->create($this->defaultProduct, $this->defaultDomain);
 
-        self::assertThat($heurekaFeedItem->getCpc(), new IsMoneyEqual(Money::fromInteger(5)));
+        self::assertThat($heurekaFeedItem->getCpc(), new IsMoneyEqual(Money::create(5)));
     }
 }

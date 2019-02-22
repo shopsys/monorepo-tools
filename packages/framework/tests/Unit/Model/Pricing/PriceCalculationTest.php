@@ -17,24 +17,24 @@ class PriceCalculationTest extends TestCase
     {
         return [
             [
-                'priceWithoutVat' => Money::fromString('0'),
+                'priceWithoutVat' => Money::create(0),
                 'vatPercent' => '21',
-                'expectedPriceWithVat' => Money::fromString('0'),
+                'expectedPriceWithVat' => Money::create(0),
             ],
             [
-                'priceWithoutVat' => Money::fromString('100'),
+                'priceWithoutVat' => Money::create(100),
                 'vatPercent' => '0',
-                'expectedPriceWithVat' => Money::fromString('100'),
+                'expectedPriceWithVat' => Money::create(100),
             ],
             [
-                'priceWithoutVat' => Money::fromString('100'),
+                'priceWithoutVat' => Money::create(100),
                 'vatPercent' => '21',
-                'expectedPriceWithVat' => Money::fromString('121'),
+                'expectedPriceWithVat' => Money::create(121),
             ],
             [
-                'priceWithoutVat' => Money::fromString('100.9'),
+                'priceWithoutVat' => Money::create('100.9'),
                 'vatPercent' => '21.1',
-                'expectedPriceWithVat' => Money::fromString('122.1899'),
+                'expectedPriceWithVat' => Money::create('122.1899'),
             ],
         ];
     }
@@ -74,19 +74,19 @@ class PriceCalculationTest extends TestCase
     {
         return [
             [
-                'priceWithVat' => Money::fromString('0'),
+                'priceWithVat' => Money::create(0),
                 'vatPercent' => '10',
-                'expectedVatAmount' => Money::fromString('0'),
+                'expectedVatAmount' => Money::create(0),
             ],
             [
-                'priceWithoutVat' => Money::fromString('100'),
+                'priceWithoutVat' => Money::create(100),
                 'vatPercent' => '0',
-                'expectedPriceWithVat' => Money::fromString('0'),
+                'expectedPriceWithVat' => Money::create(0),
             ],
             [
-                'priceWithoutVat' => Money::fromString('100'),
+                'priceWithoutVat' => Money::create(100),
                 'vatPercent' => '21',
-                'expectedPriceWithVat' => Money::fromString('17.36'),
+                'expectedPriceWithVat' => Money::create('17.36'),
             ],
         ];
     }

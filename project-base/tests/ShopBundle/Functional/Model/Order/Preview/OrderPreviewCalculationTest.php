@@ -33,10 +33,10 @@ class OrderPreviewCalculationTest extends FunctionalTestCase
         $vatData->percent = 20;
         $vat = new Vat($vatData);
 
-        $paymentPrice = new Price(Money::fromInteger(100), Money::fromInteger(120));
-        $transportPrice = new Price(Money::fromInteger(10), Money::fromInteger(12));
-        $unitPrice = new Price(Money::fromInteger(1000), Money::fromInteger(1200));
-        $totalPrice = new Price(Money::fromInteger(2000), Money::fromInteger(2400));
+        $paymentPrice = new Price(Money::create(100), Money::create(120));
+        $transportPrice = new Price(Money::create(10), Money::create(12));
+        $unitPrice = new Price(Money::create(1000), Money::create(1200));
+        $totalPrice = new Price(Money::create(2000), Money::create(2400));
         $quantifiedItemPrice = new QuantifiedItemPrice($unitPrice, $totalPrice, $vat);
         $quantifiedItemsPrices = [$quantifiedItemPrice, $quantifiedItemPrice];
         $quantifiedProductsDiscounts = [null, null];
@@ -104,9 +104,9 @@ class OrderPreviewCalculationTest extends FunctionalTestCase
         $this->assertSame($quantifiedItemsPrices, $orderPreview->getQuantifiedItemsPrices());
         $this->assertSame($payment, $orderPreview->getPayment());
         $this->assertSame($paymentPrice, $orderPreview->getPaymentPrice());
-        $this->assertThat($orderPreview->getTotalPrice()->getVatAmount(), new IsMoneyEqual(Money::fromInteger(2 + 20 + 400 * 2)));
-        $this->assertThat($orderPreview->getTotalPrice()->getPriceWithVat(), new IsMoneyEqual(Money::fromInteger(12 + 120 + 2400 * 2)));
-        $this->assertThat($orderPreview->getTotalPrice()->getPriceWithoutVat(), new IsMoneyEqual(Money::fromInteger(10 + 100 + 2000 * 2)));
+        $this->assertThat($orderPreview->getTotalPrice()->getVatAmount(), new IsMoneyEqual(Money::create(2 + 20 + 400 * 2)));
+        $this->assertThat($orderPreview->getTotalPrice()->getPriceWithVat(), new IsMoneyEqual(Money::create(12 + 120 + 2400 * 2)));
+        $this->assertThat($orderPreview->getTotalPrice()->getPriceWithoutVat(), new IsMoneyEqual(Money::create(10 + 100 + 2000 * 2)));
         $this->assertSame($transport, $orderPreview->getTransport());
         $this->assertSame($transportPrice, $orderPreview->getTransportPrice());
     }
@@ -120,8 +120,8 @@ class OrderPreviewCalculationTest extends FunctionalTestCase
         $vatData->percent = 20;
         $vat = new Vat($vatData);
 
-        $unitPrice = new Price(Money::fromInteger(1000), Money::fromInteger(1200));
-        $totalPrice = new Price(Money::fromInteger(2000), Money::fromInteger(2400));
+        $unitPrice = new Price(Money::create(1000), Money::create(1200));
+        $totalPrice = new Price(Money::create(2000), Money::create(2400));
         $quantifiedItemPrice = new QuantifiedItemPrice($unitPrice, $totalPrice, $vat);
         $quantifiedItemsPrices = [$quantifiedItemPrice, $quantifiedItemPrice];
         $quantifiedProductsDiscounts = [null, null];
@@ -182,9 +182,9 @@ class OrderPreviewCalculationTest extends FunctionalTestCase
         $this->assertSame($quantifiedItemsPrices, $orderPreview->getQuantifiedItemsPrices());
         $this->assertNull($orderPreview->getPayment());
         $this->assertNull($orderPreview->getPaymentPrice());
-        $this->assertThat($orderPreview->getTotalPrice()->getVatAmount(), new IsMoneyEqual(Money::fromInteger(400 * 2)));
-        $this->assertThat($orderPreview->getTotalPrice()->getPriceWithVat(), new IsMoneyEqual(Money::fromInteger(2400 * 2)));
-        $this->assertThat($orderPreview->getTotalPrice()->getPriceWithoutVat(), new IsMoneyEqual(Money::fromInteger(2000 * 2)));
+        $this->assertThat($orderPreview->getTotalPrice()->getVatAmount(), new IsMoneyEqual(Money::create(400 * 2)));
+        $this->assertThat($orderPreview->getTotalPrice()->getPriceWithVat(), new IsMoneyEqual(Money::create(2400 * 2)));
+        $this->assertThat($orderPreview->getTotalPrice()->getPriceWithoutVat(), new IsMoneyEqual(Money::create(2000 * 2)));
         $this->assertNull($orderPreview->getTransport());
         $this->assertNull($orderPreview->getTransportPrice());
     }

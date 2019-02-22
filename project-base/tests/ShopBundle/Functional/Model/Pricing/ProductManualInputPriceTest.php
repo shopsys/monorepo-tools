@@ -47,11 +47,11 @@ class ProductManualInputPriceTest extends TransactionFunctionalTestCase
         $productData->unit = $this->getReference(UnitDataFixture::UNIT_PIECES);
         $product = Product::create($productData, new ProductCategoryDomainFactory());
 
-        $productManualInputPrice = new ProductManualInputPrice($product, $pricingGroup, Money::fromInteger(1000));
+        $productManualInputPrice = new ProductManualInputPrice($product, $pricingGroup, Money::create(1000));
         $inputPriceType = $pricingSetting->getInputPriceType();
         $productManualInputPrice->recalculateInputPriceForNewVatPercent($inputPriceType, 15, $basePriceCalculation, $inputPriceCalculation);
 
-        $this->assertThat($productManualInputPrice->getInputPrice(), new IsMoneyEqual(Money::fromString('1052.173913')));
+        $this->assertThat($productManualInputPrice->getInputPrice(), new IsMoneyEqual(Money::create('1052.173913')));
     }
 
     public function testRecalculateInputPriceForNewVatPercentWithInputPriceWithVat()
@@ -81,11 +81,11 @@ class ProductManualInputPriceTest extends TransactionFunctionalTestCase
         $productData->unit = $this->getReference(UnitDataFixture::UNIT_PIECES);
         $product = Product::create($productData, new ProductCategoryDomainFactory());
 
-        $productManualInputPrice = new ProductManualInputPrice($product, $pricingGroup, Money::fromInteger(1000));
+        $productManualInputPrice = new ProductManualInputPrice($product, $pricingGroup, Money::create(1000));
 
         $inputPriceType = $pricingSetting->getInputPriceType();
         $productManualInputPrice->recalculateInputPriceForNewVatPercent($inputPriceType, 15, $basePriceCalculation, $inputPriceCalculation);
 
-        $this->assertThat($productManualInputPrice->getInputPrice(), new IsMoneyEqual(Money::fromString('1000')));
+        $this->assertThat($productManualInputPrice->getInputPrice(), new IsMoneyEqual(Money::create(1000)));
     }
 }

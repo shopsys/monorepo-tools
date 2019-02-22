@@ -40,7 +40,7 @@ class HeurekaProductFormType extends AbstractType
                 'constraints' => [
                     new MoneyRange([
                         'min' => Money::zero(),
-                        'max' => Money::fromInteger(500),
+                        'max' => Money::create(500),
                     ]),
                 ],
             ],

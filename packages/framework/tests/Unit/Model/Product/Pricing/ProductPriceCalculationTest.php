@@ -115,24 +115,24 @@ class ProductPriceCalculationTest extends TestCase
         return [
             [
                 'prices' => [
-                    new Price(Money::fromInteger(20), Money::fromInteger(30)),
-                    new Price(Money::fromInteger(10), Money::fromInteger(15)),
-                    new Price(Money::fromInteger(100), Money::fromInteger(120)),
+                    new Price(Money::create(20), Money::create(30)),
+                    new Price(Money::create(10), Money::create(15)),
+                    new Price(Money::create(100), Money::create(120)),
                 ],
-                'minimumPrice' => new Price(Money::fromInteger(10), Money::fromInteger(15)),
+                'minimumPrice' => new Price(Money::create(10), Money::create(15)),
             ],
             [
                 'prices' => [
-                    new Price(Money::fromInteger(10), Money::fromInteger(15)),
+                    new Price(Money::create(10), Money::create(15)),
                 ],
-                'minimumPrice' => new Price(Money::fromInteger(10), Money::fromInteger(15)),
+                'minimumPrice' => new Price(Money::create(10), Money::create(15)),
             ],
             [
                 'prices' => [
-                    new Price(Money::fromInteger(10), Money::fromInteger(15)),
-                    new Price(Money::fromInteger(10), Money::fromInteger(15)),
+                    new Price(Money::create(10), Money::create(15)),
+                    new Price(Money::create(10), Money::create(15)),
                 ],
-                'minimumPrice' => new Price(Money::fromInteger(10), Money::fromInteger(15)),
+                'minimumPrice' => new Price(Money::create(10), Money::create(15)),
             ],
         ];
     }
@@ -157,21 +157,21 @@ class ProductPriceCalculationTest extends TestCase
         return [
             [
                 'prices' => [
-                    new Price(Money::fromInteger(100), Money::fromInteger(120)),
-                    new Price(Money::fromInteger(100), Money::fromInteger(120)),
+                    new Price(Money::create(100), Money::create(120)),
+                    new Price(Money::create(100), Money::create(120)),
                 ],
                 'arePricesDifferent' => false,
             ],
             [
                 'prices' => [
-                    new Price(Money::fromInteger(100), Money::fromInteger(120)),
+                    new Price(Money::create(100), Money::create(120)),
                 ],
                 'arePricesDifferent' => false,
             ],
             [
                 'prices' => [
-                    new Price(Money::fromInteger(200), Money::fromInteger(240)),
-                    new Price(Money::fromInteger(100), Money::fromInteger(120)),
+                    new Price(Money::create(200), Money::create(240)),
+                    new Price(Money::create(100), Money::create(120)),
                 ],
                 'arePricesDifferent' => true,
             ],
