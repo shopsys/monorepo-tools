@@ -129,14 +129,14 @@ class BasePriceCalculationTest extends TestCase
             ->setMethods(['roundPriceWithVat', 'roundPriceWithoutVat', 'roundVatAmount'])
             ->disableOriginalConstructor()
             ->getMock();
-        $rounding->expects($this->any())->method('roundPriceWithVat')->willReturnCallback(function ($value) {
-            return round($value);
+        $rounding->expects($this->any())->method('roundPriceWithVat')->willReturnCallback(function (Money $value) {
+            return $value->round(0);
         });
-        $rounding->expects($this->any())->method('roundPriceWithoutVat')->willReturnCallback(function ($value) {
-            return round($value);
+        $rounding->expects($this->any())->method('roundPriceWithoutVat')->willReturnCallback(function (Money $value) {
+            return $value->round(0);
         });
-        $rounding->expects($this->any())->method('roundVatAmount')->willReturnCallback(function ($value) {
-            return round($value);
+        $rounding->expects($this->any())->method('roundVatAmount')->willReturnCallback(function (Money $value) {
+            return $value->round(0);
         });
         $priceCalculation = new PriceCalculation($rounding);
         $basePriceCalculation = new BasePriceCalculation($priceCalculation, $rounding);

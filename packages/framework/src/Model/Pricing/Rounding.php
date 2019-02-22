@@ -1,6 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Shopsys\FrameworkBundle\Model\Pricing;
+
+use Shopsys\FrameworkBundle\Component\Money\Money;
 
 class Rounding
 {
@@ -18,50 +22,45 @@ class Rounding
     }
 
     /**
-     * @param string $priceWithVat
-     * @return string
+     * @param \Shopsys\FrameworkBundle\Component\Money\Money $priceWithVat
+     * @return \Shopsys\FrameworkBundle\Component\Money\Money
      */
-    public function roundPriceWithVat($priceWithVat)
+    public function roundPriceWithVat(Money $priceWithVat): Money
     {
         $roundingType = $this->pricingSetting->getRoundingType();
 
         switch ($roundingType) {
             case PricingSetting::ROUNDING_TYPE_HUNDREDTHS:
-                $roundedPriceWithVat = round($priceWithVat, 2);
-                break;
+                return $priceWithVat->round(2);
 
             case PricingSetting::ROUNDING_TYPE_FIFTIES:
-                $roundedPriceWithVat = round($priceWithVat * 2, 0) / 2;
-                break;
+                return $priceWithVat->multiply('2')->round(0)->divide('2', 1);
 
             case PricingSetting::ROUNDING_TYPE_INTEGER:
-                $roundedPriceWithVat = round($priceWithVat, 0);
-                break;
+                return $priceWithVat->round(0);
 
             default:
                 throw new \Shopsys\FrameworkBundle\Model\Pricing\Exception\InvalidRoundingTypeException(
                     sprintf('Rounding type %s is not valid', $roundingType)
                 );
         }
-
-        return $roundedPriceWithVat;
     }
 
     /**
-     * @param string $priceWithoutVat
-     * @return string
+     * @param \Shopsys\FrameworkBundle\Component\Money\Money $priceWithoutVat
+     * @return \Shopsys\FrameworkBundle\Component\Money\Money
      */
-    public function roundPriceWithoutVat($priceWithoutVat)
+    public function roundPriceWithoutVat(Money $priceWithoutVat): Money
     {
-        return round($priceWithoutVat, 2);
+        return $priceWithoutVat->round(2);
     }
 
     /**
-     * @param string $vatAmount
-     * @return string
+     * @param \Shopsys\FrameworkBundle\Component\Money\Money $vatAmount
+     * @return \Shopsys\FrameworkBundle\Component\Money\Money
      */
-    public function roundVatAmount($vatAmount)
+    public function roundVatAmount(Money $vatAmount): Money
     {
-        return round($vatAmount, 2);
+        return $vatAmount->round(2);
     }
 }

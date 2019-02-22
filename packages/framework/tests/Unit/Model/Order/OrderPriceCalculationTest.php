@@ -122,8 +122,8 @@ class OrderPriceCalculationTest extends TestCase
             ->setMethods(['roundPriceWithVat'])
             ->disableOriginalConstructor()
             ->getMock();
-        $roundingMock->expects($this->any())->method('roundPriceWithVat')->willReturnCallback(function ($value) {
-            return round($value, 2);
+        $roundingMock->expects($this->any())->method('roundPriceWithVat')->willReturnCallback(function (Money $value) {
+            return $value->round(2);
         });
 
         $orderItemPriceCalculationMock = $this->createMock(OrderItemPriceCalculation::class);
@@ -151,8 +151,8 @@ class OrderPriceCalculationTest extends TestCase
             ->setMethods(['roundPriceWithVat'])
             ->disableOriginalConstructor()
             ->getMock();
-        $roundingMock->expects($this->any())->method('roundPriceWithVat')->willReturnCallback(function ($value) {
-            return round($value, 2);
+        $roundingMock->expects($this->any())->method('roundPriceWithVat')->willReturnCallback(function (Money $value) {
+            return $value->round(2);
         });
 
         $orderItemPriceCalculationMock = $this->createMock(OrderItemPriceCalculation::class);

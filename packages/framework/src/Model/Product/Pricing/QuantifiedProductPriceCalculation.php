@@ -116,8 +116,8 @@ class QuantifiedProductPriceCalculation
         $vatPercent = $this->product->getVat()->getPercent();
 
         return $this->rounding->roundVatAmount(
-            $this->getTotalPriceWithVat() * $this->priceCalculation->getVatCoefficientByPercent($vatPercent)
-        );
+            Money::fromValue($this->getTotalPriceWithVat() * $this->priceCalculation->getVatCoefficientByPercent($vatPercent))
+        )->toValue();
     }
 
     /**

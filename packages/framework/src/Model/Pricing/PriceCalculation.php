@@ -2,6 +2,7 @@
 
 namespace Shopsys\FrameworkBundle\Model\Pricing;
 
+use Shopsys\FrameworkBundle\Component\Money\Money;
 use Shopsys\FrameworkBundle\Model\Pricing\Vat\Vat;
 
 class PriceCalculation
@@ -27,8 +28,8 @@ class PriceCalculation
     public function getVatAmountByPriceWithVat($priceWithVat, Vat $vat)
     {
         return $this->rounding->roundVatAmount(
-            $priceWithVat * $this->getVatCoefficientByPercent($vat->getPercent())
-        );
+            Money::fromValue($priceWithVat * $this->getVatCoefficientByPercent($vat->getPercent()))
+        )->toValue();
     }
 
     /**

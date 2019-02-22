@@ -39,7 +39,7 @@ class BasePriceCalculation
     {
         $basePriceWithVat = $this->getBasePriceWithVat($inputPrice, $inputPriceType, $vat);
         $vatAmount = Money::fromValue($this->priceCalculation->getVatAmountByPriceWithVat($basePriceWithVat->toValue(), $vat));
-        $basePriceWithoutVat = Money::fromValue($this->rounding->roundPriceWithoutVat($basePriceWithVat->subtract($vatAmount)->toValue()));
+        $basePriceWithoutVat = $this->rounding->roundPriceWithoutVat($basePriceWithVat->subtract($vatAmount));
 
         return new Price($basePriceWithoutVat, $basePriceWithVat);
     }
@@ -56,9 +56,9 @@ class BasePriceCalculation
         foreach ($coefficients as $coefficient) {
             $priceWithVatBeforeRounding = $priceWithVatBeforeRounding->multiply($coefficient);
         }
-        $priceWithVat = Money::fromValue($this->rounding->roundPriceWithVat($priceWithVatBeforeRounding->toValue()));
+        $priceWithVat = $this->rounding->roundPriceWithVat($priceWithVatBeforeRounding);
         $vatAmount = Money::fromValue($this->priceCalculation->getVatAmountByPriceWithVat($priceWithVat->toValue(), $vat));
-        $priceWithoutVat = Money::fromValue($this->rounding->roundPriceWithoutVat($priceWithVat->subtract($vatAmount)->toValue()));
+        $priceWithoutVat = $this->rounding->roundPriceWithoutVat($priceWithVat->subtract($vatAmount));
 
         return new Price($priceWithoutVat, $priceWithVat);
     }
@@ -73,10 +73,10 @@ class BasePriceCalculation
     {
         switch ($inputPriceType) {
             case PricingSetting::INPUT_PRICE_TYPE_WITH_VAT:
-                return Money::fromValue($this->rounding->roundPriceWithVat($inputPrice->toValue()));
+                return $this->rounding->roundPriceWithVat($inputPrice);
 
             case PricingSetting::INPUT_PRICE_TYPE_WITHOUT_VAT:
-                return Money::fromValue($this->rounding->roundPriceWithVat($this->priceCalculation->applyVatPercent($inputPrice->toValue(), $vat)));
+                return $this->rounding->roundPriceWithVat(Money::fromValue($this->priceCalculation->applyVatPercent($inputPrice->toValue(), $vat)));
 
             default:
                 throw new \Shopsys\FrameworkBundle\Model\Pricing\Exception\InvalidInputPriceTypeException();

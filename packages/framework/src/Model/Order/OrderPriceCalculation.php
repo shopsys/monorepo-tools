@@ -79,12 +79,12 @@ class OrderPriceCalculation
         $priceWithVat = $orderTotalPrice->getPriceWithVat();
         $roundedPriceWithVat = $priceWithVat->round(0);
 
-        $roundingPrice = $this->rounding->roundPriceWithVat($roundedPriceWithVat->subtract($priceWithVat)->toValue());
+        $roundingPrice = $this->rounding->roundPriceWithVat($roundedPriceWithVat->subtract($priceWithVat));
 
-        if ($roundingPrice === 0.0) {
+        if ($roundingPrice->isZero()) {
             return null;
         }
 
-        return new Price(Money::fromValue($roundingPrice), Money::fromValue($roundingPrice));
+        return new Price($roundingPrice, $roundingPrice);
     }
 }

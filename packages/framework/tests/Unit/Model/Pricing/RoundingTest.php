@@ -3,8 +3,10 @@
 namespace Tests\FrameworkBundle\Unit\Model\Pricing;
 
 use PHPUnit\Framework\TestCase;
+use Shopsys\FrameworkBundle\Component\Money\Money;
 use Shopsys\FrameworkBundle\Model\Pricing\PricingSetting;
 use Shopsys\FrameworkBundle\Model\Pricing\Rounding;
+use Tests\FrameworkBundle\Test\IsMoneyEqual;
 
 class RoundingTest extends TestCase
 {
@@ -12,40 +14,40 @@ class RoundingTest extends TestCase
     {
         return [
             [
-                'unroundedPrice' => '0',
-                'expectedAsPriceWithVat' => '0',
-                'expectedAsPriceWithoutVat' => '0',
-                'expectedAsVatAmount' => '0',
+                'unroundedPrice' => Money::fromString('0'),
+                'expectedAsPriceWithVat' => Money::fromString('0'),
+                'expectedAsPriceWithoutVat' => Money::fromString('0'),
+                'expectedAsVatAmount' => Money::fromString('0'),
             ],
             [
-                'unroundedPrice' => '1',
-                'expectedAsPriceWithVat' => '1',
-                'expectedAsPriceWithoutVat' => '1',
-                'expectedAsVatAmount' => '1',
+                'unroundedPrice' => Money::fromString('1'),
+                'expectedAsPriceWithVat' => Money::fromString('1'),
+                'expectedAsPriceWithoutVat' => Money::fromString('1'),
+                'expectedAsVatAmount' => Money::fromString('1'),
             ],
             [
-                'unroundedPrice' => '0.999',
-                'expectedAsPriceWithVat' => '1',
-                'expectedAsPriceWithoutVat' => '1',
-                'expectedAsVatAmount' => '1',
+                'unroundedPrice' => Money::fromString('0.999'),
+                'expectedAsPriceWithVat' => Money::fromString('1'),
+                'expectedAsPriceWithoutVat' => Money::fromString('1'),
+                'expectedAsVatAmount' => Money::fromString('1'),
             ],
             [
-                'unroundedPrice' => '0.99',
-                'expectedAsPriceWithVat' => '1',
-                'expectedAsPriceWithoutVat' => '0.99',
-                'expectedAsVatAmount' => '0.99',
+                'unroundedPrice' => Money::fromString('0.99'),
+                'expectedAsPriceWithVat' => Money::fromString('1'),
+                'expectedAsPriceWithoutVat' => Money::fromString('0.99'),
+                'expectedAsVatAmount' => Money::fromString('0.99'),
             ],
             [
-                'unroundedPrice' => '0.5',
-                'expectedAsPriceWithVat' => '1',
-                'expectedAsPriceWithoutVat' => '0.50',
-                'expectedAsVatAmount' => '0.50',
+                'unroundedPrice' => Money::fromString('0.5'),
+                'expectedAsPriceWithVat' => Money::fromString('1'),
+                'expectedAsPriceWithoutVat' => Money::fromString('0.50'),
+                'expectedAsVatAmount' => Money::fromString('0.50'),
             ],
             [
-                'unroundedPrice' => '0.49',
-                'expectedAsPriceWithVat' => '0',
-                'expectedAsPriceWithoutVat' => '0.49',
-                'expectedAsVatAmount' => '0.49',
+                'unroundedPrice' => Money::fromString('0.49'),
+                'expectedAsPriceWithVat' => Money::fromString('0'),
+                'expectedAsPriceWithoutVat' => Money::fromString('0.49'),
+                'expectedAsVatAmount' => Money::fromString('0.49'),
             ],
         ];
     }
@@ -73,9 +75,9 @@ class RoundingTest extends TestCase
 
         $rounding = new Rounding($pricingSettingMock);
 
-        $this->assertSame(round($expectedAsPriceWithVat, 6), round($rounding->roundPriceWithVat($unroundedPrice), 6));
-        $this->assertSame(round($expectedAsPriceWithoutVat, 6), round($rounding->roundPriceWithoutVat($unroundedPrice), 6));
-        $this->assertSame(round($expectedAsVatAmount, 6), round($rounding->roundVatAmount($unroundedPrice), 6));
+        $this->assertThat($rounding->roundPriceWithVat($unroundedPrice), new IsMoneyEqual($expectedAsPriceWithVat));
+        $this->assertThat($rounding->roundPriceWithoutVat($unroundedPrice), new IsMoneyEqual($expectedAsPriceWithoutVat));
+        $this->assertThat($rounding->roundVatAmount($unroundedPrice), new IsMoneyEqual($expectedAsVatAmount));
     }
 
     public function roundingPriceWithVatProvider()
@@ -83,48 +85,48 @@ class RoundingTest extends TestCase
         return [
             [
                 'roundingType' => PricingSetting::ROUNDING_TYPE_INTEGER,
-                'inputPrice' => 1.5,
-                'outputPrice' => 2,
+                'inputPrice' => Money::fromString('1.5'),
+                'outputPrice' => Money::fromString('2'),
             ],
             [
                 'roundingType' => PricingSetting::ROUNDING_TYPE_INTEGER,
-                'inputPrice' => 1.49,
-                'outputPrice' => 1,
+                'inputPrice' => Money::fromString('1.49'),
+                'outputPrice' => Money::fromString('1'),
             ],
             [
                 'roundingType' => PricingSetting::ROUNDING_TYPE_HUNDREDTHS,
-                'inputPrice' => 1.01,
-                'outputPrice' => 1.01,
+                'inputPrice' => Money::fromString('1.01'),
+                'outputPrice' => Money::fromString('1.01'),
             ],
             [
                 'roundingType' => PricingSetting::ROUNDING_TYPE_HUNDREDTHS,
-                'inputPrice' => 1.009,
-                'outputPrice' => 1.01,
+                'inputPrice' => Money::fromString('1.009'),
+                'outputPrice' => Money::fromString('1.01'),
             ],
             [
                 'roundingType' => PricingSetting::ROUNDING_TYPE_HUNDREDTHS,
-                'inputPrice' => 1.001,
-                'outputPrice' => 1,
+                'inputPrice' => Money::fromString('1.001'),
+                'outputPrice' => Money::fromString('1'),
             ],
             [
                 'roundingType' => PricingSetting::ROUNDING_TYPE_FIFTIES,
-                'inputPrice' => 1.24,
-                'outputPrice' => 1,
+                'inputPrice' => Money::fromString('1.24'),
+                'outputPrice' => Money::fromString('1'),
             ],
             [
                 'roundingType' => PricingSetting::ROUNDING_TYPE_FIFTIES,
-                'inputPrice' => 1.25,
-                'outputPrice' => 1.5,
+                'inputPrice' => Money::fromString('1.25'),
+                'outputPrice' => Money::fromString('1.5'),
             ],
             [
                 'roundingType' => PricingSetting::ROUNDING_TYPE_FIFTIES,
-                'inputPrice' => 1.74,
-                'outputPrice' => 1.5,
+                'inputPrice' => Money::fromString('1.74'),
+                'outputPrice' => Money::fromString('1.5'),
             ],
             [
                 'roundingType' => PricingSetting::ROUNDING_TYPE_FIFTIES,
-                'inputPrice' => 1.75,
-                'outputPrice' => 2,
+                'inputPrice' => Money::fromString('1.75'),
+                'outputPrice' => Money::fromString('2'),
             ],
         ];
     }
@@ -149,6 +151,6 @@ class RoundingTest extends TestCase
         $rounding = new Rounding($pricingSettingMock);
         $roundedPrice = $rounding->roundPriceWithVat($inputPrice);
 
-        $this->assertSame(round($outputPrice, 6), round($roundedPrice, 6));
+        $this->assertThat($roundedPrice, new IsMoneyEqual($outputPrice));
     }
 }
