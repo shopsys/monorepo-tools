@@ -34,7 +34,7 @@ class Rounding
                 return $priceWithVat->round(2);
 
             case PricingSetting::ROUNDING_TYPE_FIFTIES:
-                return $priceWithVat->multiply('2')->round(0)->divide('2', 1);
+                return $priceWithVat->multiply(2)->round(0)->divide(2, 1);
 
             case PricingSetting::ROUNDING_TYPE_INTEGER:
                 return $priceWithVat->round(0);

@@ -104,7 +104,7 @@ class QuantifiedProductPriceCalculation
      */
     protected function getTotalPriceWithVat(): Money
     {
-        return $this->productPrice->getPriceWithVat()->multiply((string)$this->quantifiedProduct->getQuantity());
+        return $this->productPrice->getPriceWithVat()->multiply($this->quantifiedProduct->getQuantity());
     }
 
     /**

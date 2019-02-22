@@ -94,8 +94,8 @@ class Price
     public function inverse(): self
     {
         return new self(
-            $this->priceWithoutVat->multiply('-1'),
-            $this->priceWithVat->multiply('-1')
+            $this->priceWithoutVat->multiply(-1),
+            $this->priceWithVat->multiply(-1)
         );
     }
 }

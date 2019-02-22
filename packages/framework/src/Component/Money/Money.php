@@ -29,19 +29,9 @@ class Money implements JsonSerializable
      */
     public static function create($value): self
     {
-        if (is_string($value)) {
-            $decimal = static::createDecimalFromString($value);
+        $decimal = static::createDecimal($value);
 
-            return new static($decimal);
-        }
-
-        if (is_int($value)) {
-            $decimal = Decimal::fromInteger($value);
-
-            return new static($decimal);
-        }
-
-        throw new UnsupportedTypeException($value, ['string', 'int']);
+        return new static($decimal);
     }
 
     /**
@@ -53,7 +43,7 @@ class Money implements JsonSerializable
     {
         // Using Decimal::fromString as the Decimal::fromFloat has issues with specified scale
         // See https://github.com/Litipk/php-bignumbers/pull/67 for details
-        $decimal = static::createDecimalFromString((string)$float, $scale);
+        $decimal = static::createDecimal((string)$float, $scale);
 
         return new static($decimal);
     }
@@ -111,25 +101,25 @@ class Money implements JsonSerializable
     }
 
     /**
-     * @param string $multiplier
+     * @param int|string $multiplier
      * @return \Shopsys\FrameworkBundle\Component\Money\Money
      */
-    public function multiply(string $multiplier): self
+    public function multiply($multiplier): self
     {
-        $decimalMultiplier = static::createDecimalFromString($multiplier);
+        $decimalMultiplier = static::createDecimal($multiplier);
         $resultDecimal = $this->decimal->mul($decimalMultiplier);
 
         return new static($resultDecimal);
     }
 
     /**
-     * @param string $divisor
+     * @param int|string $divisor
      * @param int $scale
      * @return \Shopsys\FrameworkBundle\Component\Money\Money
      */
-    public function divide(string $divisor, int $scale): self
+    public function divide($divisor, int $scale): self
     {
-        $decimalDivisor = static::createDecimalFromString($divisor);
+        $decimalDivisor = static::createDecimal($divisor);
 
         // Decimal internally ignores scale when number is zero
         if ($this->decimal->isZero()) {
@@ -231,16 +221,24 @@ class Money implements JsonSerializable
     }
 
     /**
-     * @param string $string
+     * @param int|string $value
      * @param int|null $scale
      * @return \Litipk\BigNumbers\Decimal
      */
-    protected static function createDecimalFromString(string $string, int $scale = null): Decimal
+    protected static function createDecimal($value, int $scale = null): Decimal
     {
-        try {
-            return Decimal::fromString($string, $scale);
-        } catch (\Litipk\BigNumbers\Errors\BigNumbersError | \InvalidArgumentException $e) {
-            throw new \Shopsys\FrameworkBundle\Component\Money\Exception\InvalidNumericArgumentException($string, $e);
+        if (is_int($value)) {
+            return Decimal::fromInteger($value);
         }
+
+        if (is_string($value)) {
+            try {
+                return Decimal::fromString($value, $scale);
+            } catch (\Litipk\BigNumbers\Errors\BigNumbersError | \InvalidArgumentException $e) {
+                throw new \Shopsys\FrameworkBundle\Component\Money\Exception\InvalidNumericArgumentException($value, $e);
+            }
+        }
+
+        throw new UnsupportedTypeException($value, ['string', 'int']);
     }
 }

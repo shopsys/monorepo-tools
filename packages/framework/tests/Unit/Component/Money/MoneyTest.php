@@ -241,6 +241,7 @@ class MoneyTest extends TestCase
         $money = Money::create(1);
 
         $money->multiply('2');
+        $money->multiply(2);
 
         $this->assertSame('1', $money->getAmount());
     }
@@ -248,10 +249,10 @@ class MoneyTest extends TestCase
     /**
      * @dataProvider multiplyProvider
      * @param string $a
-     * @param string $b
+     * @param int|string $b
      * @param string $expectedAmount
      */
-    public function testMultiply(string $a, string $b, string $expectedAmount): void
+    public function testMultiply(string $a, $b, string $expectedAmount): void
     {
         $moneyA = Money::create($a);
 
@@ -278,13 +279,15 @@ class MoneyTest extends TestCase
         yield ['0', '-1.0', '0.0'];
         yield ['-1', '0.5', '-0.5'];
         yield ['-2', '-1', '2'];
+        yield ['1', 2, '2'];
+        yield ['0.5', 2, '1.0'];
     }
 
     /**
      * @dataProvider invalidMultipliersProvider
-     * @param string $multiplier
+     * @param int|string $multiplier
      */
-    public function testInvalidMultipliers(string $multiplier): void
+    public function testInvalidMultipliers($multiplier): void
     {
         $money = Money::create(1);
 
@@ -298,20 +301,7 @@ class MoneyTest extends TestCase
      */
     public function invalidMultipliersProvider(): Iterator
     {
-        yield [''];
-        yield ['xxx'];
-        yield ['1,00'];
-        yield ['0.'];
-        yield ['.0'];
-        yield ['1.0.0'];
-        yield [' 0'];
-        yield ['0 '];
-        yield ['1+1'];
-        yield ['1 000'];
-        yield ['0x0'];
-        yield ['+-1'];
-        yield ['++1'];
-        yield ['--1'];
+        yield from $this->invalidValuesCreateProvider();
     }
 
     public function testDivideIsImmutable(): void
@@ -319,6 +309,7 @@ class MoneyTest extends TestCase
         $money = Money::create(1);
 
         $money->divide('2', 1);
+        $money->divide(2, 1);
 
         $this->assertSame('1', $money->getAmount());
     }
@@ -326,11 +317,11 @@ class MoneyTest extends TestCase
     /**
      * @dataProvider divideProvider
      * @param string $a
-     * @param string $b
+     * @param int|string $b
      * @param int $scale
      * @param string $expectedAmount
      */
-    public function testDivide(string $a, string $b, int $scale, string $expectedAmount): void
+    public function testDivide(string $a, $b, int $scale, string $expectedAmount): void
     {
         $moneyA = Money::create($a);
 
@@ -358,13 +349,16 @@ class MoneyTest extends TestCase
         yield ['-2', '-1', 0, '2'];
         yield ['-1', '0.5', 0, '-2'];
         yield ['10', '-4', 2, '-2.50'];
+        yield ['1', 2, 1, '0.5'];
+        yield ['0.5', 2, 2, '0.25'];
+        yield ['0.5', 2, 1, '0.3'];
     }
 
     /**
      * @dataProvider invalidDivisorProvider
-     * @param string $divisor
+     * @param int|string $divisor
      */
-    public function testInvalidDivisors(string $divisor): void
+    public function testInvalidDivisors($divisor): void
     {
         $money = Money::create(1);
 
@@ -378,27 +372,14 @@ class MoneyTest extends TestCase
      */
     public function invalidDivisorProvider(): Iterator
     {
-        yield [''];
-        yield ['xxx'];
-        yield ['1,00'];
-        yield ['0.'];
-        yield ['.0'];
-        yield ['1.0.0'];
-        yield [' 0'];
-        yield ['0 '];
-        yield ['1+1'];
-        yield ['1 000'];
-        yield ['0x0'];
-        yield ['+-1'];
-        yield ['++1'];
-        yield ['--1'];
+        yield from $this->invalidValuesCreateProvider();
     }
 
     /**
      * @dataProvider cannotDivideByZeroProvider
-     * @param string $divisor
+     * @param int|string $divisor
      */
-    public function testCannotDivideByZero(string $divisor): void
+    public function testCannotDivideByZero($divisor): void
     {
         $money = Money::create(1);
 
@@ -415,6 +396,7 @@ class MoneyTest extends TestCase
         yield ['0'];
         yield ['-0'];
         yield ['0.0'];
+        yield [0];
     }
 
     public function testRoundIsImmutable(): void

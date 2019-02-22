@@ -229,7 +229,7 @@ class OrderItem
      */
     public function getTotalPriceWithVat(): Money
     {
-        return $this->priceWithVat->multiply((string)$this->quantity);
+        return $this->priceWithVat->multiply($this->quantity);
     }
 
     /**
