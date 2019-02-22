@@ -5,6 +5,7 @@ namespace Shopsys\FrameworkBundle\Model\Script;
 use Doctrine\ORM\EntityManagerInterface;
 use Shopsys\FrameworkBundle\Component\Setting\Setting;
 use Shopsys\FrameworkBundle\Model\Order\Order;
+use Shopsys\FrameworkBundle\Twig\MoneyExtension;
 
 class ScriptFacade
 {
@@ -32,21 +33,29 @@ class ScriptFacade
     protected $scriptFactory;
 
     /**
+     * @var \Shopsys\FrameworkBundle\Twig\MoneyExtension
+     */
+    protected $moneyExtension;
+
+    /**
      * @param \Doctrine\ORM\EntityManagerInterface $em
      * @param \Shopsys\FrameworkBundle\Model\Script\ScriptRepository $scriptRepository
      * @param \Shopsys\FrameworkBundle\Component\Setting\Setting $setting
      * @param \Shopsys\FrameworkBundle\Model\Script\ScriptFactoryInterface $scriptFactory
+     * @param \Shopsys\FrameworkBundle\Twig\MoneyExtension $moneyExtension
      */
     public function __construct(
         EntityManagerInterface $em,
         ScriptRepository $scriptRepository,
         Setting $setting,
-        ScriptFactoryInterface $scriptFactory
+        ScriptFactoryInterface $scriptFactory,
+        MoneyExtension $moneyExtension
     ) {
         $this->em = $em;
         $this->scriptRepository = $scriptRepository;
         $this->setting = $setting;
         $this->scriptFactory = $scriptFactory;
+        $this->moneyExtension = $moneyExtension;
     }
 
     /**
@@ -183,7 +192,7 @@ class ScriptFacade
     {
         $variableReplacements = [
             self::VARIABLE_NUMBER => $order->getNumber(),
-            self::VARIABLE_TOTAL_PRICE => $order->getTotalPriceWithVat()->toValue(),
+            self::VARIABLE_TOTAL_PRICE => $this->moneyExtension->moneyFormatFilter($order->getTotalPriceWithVat()),
         ];
 
         return strtr($code, $variableReplacements);
