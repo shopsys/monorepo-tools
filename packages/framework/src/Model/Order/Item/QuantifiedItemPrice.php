@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Shopsys\FrameworkBundle\Model\Order\Item;
 
 use Shopsys\FrameworkBundle\Model\Pricing\Price;
@@ -40,7 +42,7 @@ class QuantifiedItemPrice
     /**
      * @return \Shopsys\FrameworkBundle\Model\Pricing\Price
      */
-    public function getUnitPrice()
+    public function getUnitPrice(): Price
     {
         return $this->unitPrice;
     }
@@ -48,7 +50,7 @@ class QuantifiedItemPrice
     /**
      * @return \Shopsys\FrameworkBundle\Model\Pricing\Price
      */
-    public function getTotalPrice()
+    public function getTotalPrice(): Price
     {
         return $this->totalPrice;
     }
@@ -56,7 +58,7 @@ class QuantifiedItemPrice
     /**
      * @return \Shopsys\FrameworkBundle\Model\Pricing\Vat\Vat
      */
-    public function getVat()
+    public function getVat(): Vat
     {
         return $this->vat;
     }

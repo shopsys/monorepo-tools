@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Shopsys\FrameworkBundle\Model\Product\Pricing;
 
 use Shopsys\FrameworkBundle\Component\Money\Money;
@@ -64,7 +66,7 @@ class QuantifiedProductPriceCalculation
      * @param \Shopsys\FrameworkBundle\Model\Customer\User|null $user
      * @return \Shopsys\FrameworkBundle\Model\Order\Item\QuantifiedItemPrice
      */
-    public function calculatePrice(QuantifiedProduct $quantifiedProduct, $domainId, User $user = null)
+    public function calculatePrice(QuantifiedProduct $quantifiedProduct, int $domainId, User $user = null): QuantifiedItemPrice
     {
         $product = $quantifiedProduct->getProduct();
         if (!$product instanceof Product) {
@@ -82,10 +84,7 @@ class QuantifiedProductPriceCalculation
 
         $quantifiedItemPrice = new QuantifiedItemPrice(
             $this->productPrice,
-            new Price(
-                Money::fromValue($this->getTotalPriceWithoutVat()),
-                Money::fromValue($this->getTotalPriceWithVat())
-            ),
+            new Price($this->getTotalPriceWithoutVat(), $this->getTotalPriceWithVat()),
             $product->getVat()
         );
 
@@ -93,31 +92,30 @@ class QuantifiedProductPriceCalculation
     }
 
     /**
-     * @return string
+     * @return \Shopsys\FrameworkBundle\Component\Money\Money
      */
-    protected function getTotalPriceWithoutVat()
+    protected function getTotalPriceWithoutVat(): Money
     {
-        return $this->getTotalPriceWithVat() - $this->getTotalPriceVatAmount();
+        return $this->getTotalPriceWithVat()->subtract($this->getTotalPriceVatAmount());
     }
 
     /**
-     * @return string
+     * @return \Shopsys\FrameworkBundle\Component\Money\Money
      */
-    protected function getTotalPriceWithVat()
+    protected function getTotalPriceWithVat(): Money
     {
-        return $this->productPrice->getPriceWithVat()->toValue() * $this->quantifiedProduct->getQuantity();
+        return $this->productPrice->getPriceWithVat()->multiply((string)$this->quantifiedProduct->getQuantity());
     }
 
     /**
-     * @return string
+     * @return \Shopsys\FrameworkBundle\Component\Money\Money
      */
-    protected function getTotalPriceVatAmount()
+    protected function getTotalPriceVatAmount(): Money
     {
         $vatPercent = $this->product->getVat()->getPercent();
+        $vatCoefficient = $this->priceCalculation->getVatCoefficientByPercent($vatPercent);
 
-        return $this->rounding->roundVatAmount(
-            Money::fromValue($this->getTotalPriceWithVat() * $this->priceCalculation->getVatCoefficientByPercent($vatPercent))
-        )->toValue();
+        return $this->rounding->roundVatAmount($this->getTotalPriceWithVat()->multiply($vatCoefficient));
     }
 
     /**
@@ -126,7 +124,7 @@ class QuantifiedProductPriceCalculation
      * @param \Shopsys\FrameworkBundle\Model\Customer\User|null $user
      * @return \Shopsys\FrameworkBundle\Model\Order\Item\QuantifiedItemPrice[]
      */
-    public function calculatePrices(array $quantifiedProducts, $domainId, User $user = null)
+    public function calculatePrices(array $quantifiedProducts, int $domainId, User $user = null): array
     {
         $quantifiedItemsPrices = [];
         foreach ($quantifiedProducts as $quantifiedItemIndex => $quantifiedProduct) {
