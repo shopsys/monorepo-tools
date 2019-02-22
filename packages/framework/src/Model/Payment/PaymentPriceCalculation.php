@@ -61,7 +61,7 @@ class PaymentPriceCalculation
         Currency $currency
     ) {
         return $this->basePriceCalculation->calculateBasePrice(
-            $payment->getPrice($currency)->getPrice(),
+            $payment->getPrice($currency)->getPrice()->toValue(),
             $this->pricingSetting->getInputPriceType(),
             $payment->getVat()
         );

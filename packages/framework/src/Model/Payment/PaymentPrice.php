@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Shopsys\FrameworkBundle\Model\Payment;
 
 use Doctrine\ORM\Mapping as ORM;
@@ -52,7 +54,7 @@ class PaymentPrice
     /**
      * @return \Shopsys\FrameworkBundle\Model\Pricing\Currency\Currency
      */
-    public function getCurrency()
+    public function getCurrency(): Currency
     {
         return $this->currency;
     }
@@ -60,23 +62,23 @@ class PaymentPrice
     /**
      * @return \Shopsys\FrameworkBundle\Model\Payment\Payment
      */
-    public function getPayment()
+    public function getPayment(): Payment
     {
         return $this->payment;
     }
 
     /**
-     * @return string
+     * @return \Shopsys\FrameworkBundle\Component\Money\Money
      */
-    public function getPrice()
+    public function getPrice(): Money
     {
-        return $this->price->toValue();
+        return $this->price;
     }
 
     /**
      * @param \Shopsys\FrameworkBundle\Component\Money\Money $price
      */
-    public function setPrice(Money $price)
+    public function setPrice(Money $price): void
     {
         $this->price = $price;
     }

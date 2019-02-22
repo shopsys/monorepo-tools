@@ -69,11 +69,11 @@ class ProductManualInputPrice
     }
 
     /**
-     * @return string|null
+     * @return \Shopsys\FrameworkBundle\Component\Money\Money|null
      */
-    public function getInputPrice()
+    public function getInputPrice(): ?Money
     {
-        return $this->inputPrice !== null ? $this->inputPrice->toValue() : null;
+        return $this->inputPrice;
     }
 
     /**
@@ -96,16 +96,18 @@ class ProductManualInputPrice
         BasePriceCalculation $basePriceCalculation,
         InputPriceCalculation $inputPriceCalculation
     ) {
-        $basePriceForPricingGroup = $basePriceCalculation->calculateBasePrice(
-            $this->getInputPrice(),
-            $inputPriceType,
-            $this->getProduct()->getVat()
-        );
-        $inputPriceForPricingGroup = $inputPriceCalculation->getInputPrice(
-            $inputPriceType,
-            $basePriceForPricingGroup->getPriceWithVat()->toValue(),
-            $newVatPercent
-        );
-        $this->setInputPrice(Money::fromValue($inputPriceForPricingGroup));
+        if ($this->inputPrice !== null) {
+            $basePriceForPricingGroup = $basePriceCalculation->calculateBasePrice(
+                $this->inputPrice->toValue(),
+                $inputPriceType,
+                $this->getProduct()->getVat()
+            );
+            $inputPriceForPricingGroup = $inputPriceCalculation->getInputPrice(
+                $inputPriceType,
+                $basePriceForPricingGroup->getPriceWithVat()->toValue(),
+                $newVatPercent
+            );
+            $this->setInputPrice(Money::fromValue($inputPriceForPricingGroup));
+        }
     }
 }

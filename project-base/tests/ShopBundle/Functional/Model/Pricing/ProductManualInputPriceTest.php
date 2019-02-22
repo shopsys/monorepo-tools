@@ -15,6 +15,7 @@ use Shopsys\FrameworkBundle\Model\Product\ProductDataFactoryInterface;
 use Shopsys\ShopBundle\DataFixtures\Demo\PricingGroupDataFixture;
 use Shopsys\ShopBundle\DataFixtures\Demo\UnitDataFixture;
 use Shopsys\ShopBundle\Model\Product\Product;
+use Tests\FrameworkBundle\Test\IsMoneyEqual;
 use Tests\ShopBundle\Test\TransactionFunctionalTestCase;
 
 class ProductManualInputPriceTest extends TransactionFunctionalTestCase
@@ -50,7 +51,7 @@ class ProductManualInputPriceTest extends TransactionFunctionalTestCase
         $inputPriceType = $pricingSetting->getInputPriceType();
         $productManualInputPrice->recalculateInputPriceForNewVatPercent($inputPriceType, 15, $basePriceCalculation, $inputPriceCalculation);
 
-        $this->assertSame('1052.173913', (string)$productManualInputPrice->getInputPrice());
+        $this->assertThat($productManualInputPrice->getInputPrice(), new IsMoneyEqual(Money::fromString('1052.173913')));
     }
 
     public function testRecalculateInputPriceForNewVatPercentWithInputPriceWithVat()
@@ -85,6 +86,6 @@ class ProductManualInputPriceTest extends TransactionFunctionalTestCase
         $inputPriceType = $pricingSetting->getInputPriceType();
         $productManualInputPrice->recalculateInputPriceForNewVatPercent($inputPriceType, 15, $basePriceCalculation, $inputPriceCalculation);
 
-        $this->assertSame('1000', (string)$productManualInputPrice->getInputPrice());
+        $this->assertThat($productManualInputPrice->getInputPrice(), new IsMoneyEqual(Money::fromString('1000')));
     }
 }
