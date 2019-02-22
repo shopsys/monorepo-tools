@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Shopsys\FrameworkBundle\Model\Product\Pricing;
 
 use Doctrine\ORM\Mapping as ORM;
@@ -41,9 +43,9 @@ class ProductCalculatedPrice
     /**
      * @param \Shopsys\FrameworkBundle\Model\Product\Product $product
      * @param \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroup $pricingGroup
-     * @param string|null $priceWithVat
+     * @param \Shopsys\FrameworkBundle\Component\Money\Money|null $priceWithVat
      */
-    public function __construct(Product $product, PricingGroup $pricingGroup, $priceWithVat)
+    public function __construct(Product $product, PricingGroup $pricingGroup, ?Money $priceWithVat)
     {
         $this->product = $product;
         $this->pricingGroup = $pricingGroup;
@@ -53,7 +55,7 @@ class ProductCalculatedPrice
     /**
      * @return \Shopsys\FrameworkBundle\Model\Product\Product
      */
-    public function getProduct()
+    public function getProduct(): Product
     {
         return $this->product;
     }
@@ -61,16 +63,16 @@ class ProductCalculatedPrice
     /**
      * @return \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroup
      */
-    public function getPricingGroup()
+    public function getPricingGroup(): PricingGroup
     {
         return $this->pricingGroup;
     }
 
     /**
-     * @param string|null $priceWithVat
+     * @param \Shopsys\FrameworkBundle\Component\Money\Money|null $priceWithVat
      */
-    public function setPriceWithVat($priceWithVat)
+    public function setPriceWithVat(?Money $priceWithVat): void
     {
-        $this->priceWithVat = $priceWithVat !== null ? Money::fromValue($priceWithVat) : null;
+        $this->priceWithVat = $priceWithVat;
     }
 }

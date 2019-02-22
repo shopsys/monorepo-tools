@@ -3,6 +3,7 @@
 namespace Shopsys\FrameworkBundle\Model\Product\Pricing;
 
 use Shopsys\FrameworkBundle\Component\EntityExtension\EntityNameResolver;
+use Shopsys\FrameworkBundle\Component\Money\Money;
 use Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroup;
 use Shopsys\FrameworkBundle\Model\Product\Product;
 
@@ -24,13 +25,13 @@ class ProductCalculatedPriceFactory implements ProductCalculatedPriceFactoryInte
     /**
      * @param \Shopsys\FrameworkBundle\Model\Product\Product $product
      * @param \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroup $pricingGroup
-     * @param string|null $priceWithVat
+     * @param \Shopsys\FrameworkBundle\Component\Money\Money|null $priceWithVat
      * @return \Shopsys\FrameworkBundle\Model\Product\Pricing\ProductCalculatedPrice
      */
     public function create(
         Product $product,
         PricingGroup $pricingGroup,
-        ?string $priceWithVat
+        ?Money $priceWithVat
     ): ProductCalculatedPrice {
         $classData = $this->entityNameResolver->resolve(ProductCalculatedPrice::class);
 
