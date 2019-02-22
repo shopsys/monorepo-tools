@@ -3,7 +3,7 @@
 namespace Tests\ShopBundle\Functional\Component\Grid;
 
 use Shopsys\FrameworkBundle\Component\Grid\QueryBuilderWithRowManipulatorDataSource;
-use Shopsys\FrameworkBundle\DataFixtures\Demo\ProductDataFixture;
+use Shopsys\ShopBundle\DataFixtures\Demo\ProductDataFixture;
 use Shopsys\ShopBundle\Model\Product\Product;
 use Tests\ShopBundle\Test\TransactionFunctionalTestCase;
 

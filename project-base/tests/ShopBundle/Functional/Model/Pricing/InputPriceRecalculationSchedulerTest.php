@@ -3,7 +3,6 @@
 namespace Tests\ShopBundle\Functional\Model\Pricing;
 
 use Shopsys\FrameworkBundle\Component\Setting\Setting;
-use Shopsys\FrameworkBundle\DataFixtures\Demo\CurrencyDataFixture;
 use Shopsys\FrameworkBundle\Model\Payment\PaymentDataFactoryInterface;
 use Shopsys\FrameworkBundle\Model\Payment\PaymentFacade;
 use Shopsys\FrameworkBundle\Model\Pricing\InputPriceRecalculationScheduler;
@@ -15,6 +14,7 @@ use Shopsys\FrameworkBundle\Model\Product\Availability\Availability;
 use Shopsys\FrameworkBundle\Model\Product\Availability\AvailabilityData;
 use Shopsys\FrameworkBundle\Model\Transport\TransportDataFactoryInterface;
 use Shopsys\FrameworkBundle\Model\Transport\TransportFacade;
+use Shopsys\ShopBundle\DataFixtures\Demo\CurrencyDataFixture;
 use Symfony\Component\HttpKernel\Event\FilterResponseEvent;
 use Tests\ShopBundle\Test\TransactionFunctionalTestCase;
 

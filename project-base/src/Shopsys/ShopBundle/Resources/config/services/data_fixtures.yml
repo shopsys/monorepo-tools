@@ -1,0 +1,7 @@
+services:
+    _defaults:
+        tags: ['doctrine.fixture.orm']
+        autowire: true
+
+    Shopsys\ShopBundle\DataFixtures\:
+        resource: '../../../DataFixtures/**/*DataFixture.php'

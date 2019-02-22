@@ -3,9 +3,9 @@
 namespace Tests\ShopBundle\Functional\Controller;
 
 use Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\FriendlyUrlFacade;
-use Shopsys\FrameworkBundle\DataFixtures\Demo\ProductDataFixture;
 use Shopsys\FrameworkBundle\Model\Product\ProductDataFactory;
 use Shopsys\FrameworkBundle\Model\Product\ProductFacade;
+use Shopsys\ShopBundle\DataFixtures\Demo\ProductDataFixture;
 use Tests\ShopBundle\Test\TransactionFunctionalTestCase;
 
 class ProductRenameRedirectPreviousUrlTest extends TransactionFunctionalTestCase

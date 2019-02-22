@@ -2,10 +2,10 @@
 
 namespace Tests\ShopBundle\Functional\Model\Product;
 
-use Shopsys\FrameworkBundle\DataFixtures\Demo\ProductDataFixture;
 use Shopsys\FrameworkBundle\Model\Product\ProductDataFactoryInterface;
 use Shopsys\FrameworkBundle\Model\Product\ProductFacade;
 use Shopsys\FrameworkBundle\Model\Product\ProductSellingDeniedRecalculator;
+use Shopsys\ShopBundle\DataFixtures\Demo\ProductDataFixture;
 use Tests\ShopBundle\Test\TransactionFunctionalTestCase;
 
 class ProductSellingDeniedRecalculatorTest extends TransactionFunctionalTestCase

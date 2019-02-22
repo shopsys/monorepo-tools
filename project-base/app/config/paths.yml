@@ -3,7 +3,7 @@ parameters:
     shopsys.css_version_filepath: '%shopsys.web_dir%/assets/cssVersion'
     shopsys.data_fixtures.resource_customers_filepath: '%shopsys.data_fixtures.resources_dir%/demo-data-customers.csv'
     shopsys.data_fixtures.resource_products_filepath: '%shopsys.data_fixtures.resources_dir%/demo-data-products.csv'
-    shopsys.data_fixtures.resources_dir: '%shopsys.framework.root_dir%/src/DataFixtures/resources'
+    shopsys.data_fixtures.resources_dir: '%shopsys.root_dir%/src/Shopsys/ShopBundle/DataFixtures/resources'
     shopsys.default_db_schema_filepath: '%shopsys.framework.resources_dir%/database/schema.sql'
     shopsys.domain_config_filepath: '%kernel.root_dir%/config/domains.yml'
     shopsys.domain_images_dir: '/web%shopsys.domain_images_url_prefix%'

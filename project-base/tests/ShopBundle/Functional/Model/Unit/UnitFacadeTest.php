@@ -2,12 +2,12 @@
 
 namespace Tests\ShopBundle\Functional\Model\Unit;
 
-use Shopsys\FrameworkBundle\DataFixtures\Demo\ProductDataFixture;
-use Shopsys\FrameworkBundle\DataFixtures\Demo\UnitDataFixture;
 use Shopsys\FrameworkBundle\Model\Product\ProductDataFactoryInterface;
 use Shopsys\FrameworkBundle\Model\Product\ProductFacade;
 use Shopsys\FrameworkBundle\Model\Product\Unit\UnitData;
 use Shopsys\FrameworkBundle\Model\Product\Unit\UnitFacade;
+use Shopsys\ShopBundle\DataFixtures\Demo\ProductDataFixture;
+use Shopsys\ShopBundle\DataFixtures\Demo\UnitDataFixture;
 use Tests\ShopBundle\Test\TransactionFunctionalTestCase;
 
 class UnitFacadeTest extends TransactionFunctionalTestCase

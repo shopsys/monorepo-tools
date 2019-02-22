@@ -2,8 +2,6 @@
 
 namespace Tests\ShopBundle\Functional\Model\Pricing\Group;
 
-use Shopsys\FrameworkBundle\DataFixtures\Demo\PricingGroupDataFixture;
-use Shopsys\FrameworkBundle\DataFixtures\Demo\ProductDataFixture;
 use Shopsys\FrameworkBundle\Model\Customer\CustomerDataFactory;
 use Shopsys\FrameworkBundle\Model\Customer\CustomerFacade;
 use Shopsys\FrameworkBundle\Model\Customer\UserDataFactoryInterface;
@@ -11,6 +9,8 @@ use Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroupData;
 use Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroupFacade;
 use Shopsys\FrameworkBundle\Model\Product\Pricing\ProductCalculatedPrice;
 use Shopsys\FrameworkBundle\Model\Product\Pricing\ProductPriceRecalculator;
+use Shopsys\ShopBundle\DataFixtures\Demo\PricingGroupDataFixture;
+use Shopsys\ShopBundle\DataFixtures\Demo\ProductDataFixture;
 use Tests\ShopBundle\Test\TransactionFunctionalTestCase;
 
 class PricingGroupFacadeTest extends TransactionFunctionalTestCase

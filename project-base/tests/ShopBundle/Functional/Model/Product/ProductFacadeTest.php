@@ -3,12 +3,12 @@
 namespace Tests\ShopBundle\Functional\Model\Product;
 
 use ReflectionClass;
-use Shopsys\FrameworkBundle\DataFixtures\Demo\AvailabilityDataFixture;
-use Shopsys\FrameworkBundle\DataFixtures\Demo\ProductDataFixture;
-use Shopsys\FrameworkBundle\DataFixtures\Demo\UnitDataFixture;
-use Shopsys\FrameworkBundle\DataFixtures\Demo\VatDataFixture;
 use Shopsys\FrameworkBundle\Model\Product\ProductDataFactoryInterface;
 use Shopsys\FrameworkBundle\Model\Product\ProductFacade;
+use Shopsys\ShopBundle\DataFixtures\Demo\AvailabilityDataFixture;
+use Shopsys\ShopBundle\DataFixtures\Demo\ProductDataFixture;
+use Shopsys\ShopBundle\DataFixtures\Demo\UnitDataFixture;
+use Shopsys\ShopBundle\DataFixtures\Demo\VatDataFixture;
 use Shopsys\ShopBundle\Model\Product\Product;
 use Tests\ShopBundle\Test\TransactionFunctionalTestCase;
 
