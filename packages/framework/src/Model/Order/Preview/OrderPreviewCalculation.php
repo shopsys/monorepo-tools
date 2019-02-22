@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Shopsys\FrameworkBundle\Model\Order\Preview;
 
 use Shopsys\FrameworkBundle\Model\Customer\User;
@@ -73,13 +75,13 @@ class OrderPreviewCalculation
      */
     public function calculatePreview(
         Currency $currency,
-        $domainId,
+        int $domainId,
         array $quantifiedProducts,
         Transport $transport = null,
         Payment $payment = null,
         User $user = null,
         $promoCodeDiscountPercent = null
-    ) {
+    ): OrderPreview {
         $quantifiedItemsPrices = $this->quantifiedProductPriceCalculation->calculatePrices(
             $quantifiedProducts,
             $domainId,
@@ -158,7 +160,7 @@ class OrderPreviewCalculation
         Price $productsPrice,
         Price $transportPrice = null,
         Price $paymentPrice = null
-    ) {
+    ): ?Price {
         $totalPrice = $this->calculateTotalPrice(
             $productsPrice,
             $transportPrice,
@@ -181,7 +183,7 @@ class OrderPreviewCalculation
         Price $transportPrice = null,
         Price $paymentPrice = null,
         Price $roundingPrice = null
-    ) {
+    ): Price {
         $totalPrice = Price::zero();
 
         $totalPrice = $totalPrice->add($productsPrice);
@@ -206,7 +208,7 @@ class OrderPreviewCalculation
      * @param \Shopsys\FrameworkBundle\Model\Pricing\Price[] $quantifiedItemsDiscounts
      * @return \Shopsys\FrameworkBundle\Model\Pricing\Price
      */
-    protected function getProductsPrice(array $quantifiedItemsPrices, array $quantifiedItemsDiscounts)
+    protected function getProductsPrice(array $quantifiedItemsPrices, array $quantifiedItemsDiscounts): Price
     {
         $finalPrice = Price::zero();
 
@@ -214,10 +216,9 @@ class OrderPreviewCalculation
             $finalPrice = $finalPrice->add($quantifiedItemPrice->getTotalPrice());
         }
 
-        foreach ($quantifiedItemsDiscounts as $discount) {
-            if ($discount !== null) {
-                /* @var $discount \Shopsys\FrameworkBundle\Model\Pricing\Price */
-                $finalPrice = $finalPrice->subtract($discount);
+        foreach ($quantifiedItemsDiscounts as $quantifiedItemDiscount) {
+            if ($quantifiedItemDiscount !== null) {
+                $finalPrice = $finalPrice->subtract($quantifiedItemDiscount);
             }
         }
 
