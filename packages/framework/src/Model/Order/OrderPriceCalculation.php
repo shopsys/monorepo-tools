@@ -54,7 +54,11 @@ class OrderPriceCalculation
             }
         }
 
-        return new OrderTotalPrice($priceWithVat, $priceWithoutVat, $productPriceWithVat);
+        return new OrderTotalPrice(
+            Money::fromValue($priceWithVat),
+            Money::fromValue($priceWithoutVat),
+            Money::fromValue($productPriceWithVat)
+        );
     }
 
     /**

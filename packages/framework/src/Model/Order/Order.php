@@ -588,9 +588,9 @@ class Order
      */
     protected function setTotalPrice(OrderTotalPrice $orderTotalPrice)
     {
-        $this->totalPriceWithVat = Money::fromValue($orderTotalPrice->getPriceWithVat());
-        $this->totalPriceWithoutVat = Money::fromValue($orderTotalPrice->getPriceWithoutVat());
-        $this->totalProductPriceWithVat = Money::fromValue($orderTotalPrice->getProductPriceWithVat());
+        $this->totalPriceWithVat = $orderTotalPrice->getPriceWithVat();
+        $this->totalPriceWithoutVat = $orderTotalPrice->getPriceWithoutVat();
+        $this->totalProductPriceWithVat = $orderTotalPrice->getProductPriceWithVat();
     }
 
     /**
