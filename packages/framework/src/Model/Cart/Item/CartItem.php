@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Shopsys\FrameworkBundle\Model\Cart\Item;
 
 use DateTime;
@@ -64,13 +66,13 @@ class CartItem
      * @param \Shopsys\FrameworkBundle\Model\Cart\Cart $cart
      * @param \Shopsys\FrameworkBundle\Model\Product\Product $product
      * @param int $quantity
-     * @param string|null $watchedPrice
+     * @param \Shopsys\FrameworkBundle\Component\Money\Money|null $watchedPrice
      */
     public function __construct(
         Cart $cart,
         Product $product,
-        $quantity,
-        $watchedPrice
+        int $quantity,
+        ?Money $watchedPrice
     ) {
         $this->cart = $cart;
         $this->product = $product;
@@ -82,7 +84,7 @@ class CartItem
     /**
      * @param int $newQuantity
      */
-    public function changeQuantity($newQuantity)
+    public function changeQuantity(int $newQuantity): void
     {
         if (filter_var($newQuantity, FILTER_VALIDATE_INT) === false || $newQuantity <= 0) {
             throw new \Shopsys\FrameworkBundle\Model\Cart\Exception\InvalidQuantityException($newQuantity);
@@ -94,7 +96,7 @@ class CartItem
     /**
      * @return int
      */
-    public function getId()
+    public function getId(): int
     {
         return $this->id;
     }
@@ -102,7 +104,7 @@ class CartItem
     /**
      * @return \Shopsys\FrameworkBundle\Model\Product\Product
      */
-    public function getProduct()
+    public function getProduct(): Product
     {
         if ($this->product === null) {
             throw new \Shopsys\FrameworkBundle\Model\Product\Exception\ProductNotFoundException();
@@ -115,7 +117,7 @@ class CartItem
      * @param string|null $locale
      * @return string|null
      */
-    public function getName($locale = null)
+    public function getName(string $locale = null): ?string
     {
         return $this->getProduct()->getName($locale);
     }
@@ -123,32 +125,32 @@ class CartItem
     /**
      * @return int
      */
-    public function getQuantity()
+    public function getQuantity(): int
     {
         return $this->quantity;
     }
 
     /**
-     * @return string|null
+     * @return \Shopsys\FrameworkBundle\Component\Money\Money|null
      */
-    public function getWatchedPrice()
+    public function getWatchedPrice(): ?Money
     {
-        return $this->watchedPrice !== null ? $this->watchedPrice->toValue() : null;
+        return $this->watchedPrice;
     }
 
     /**
-     * @param string|null $watchedPrice
+     * @param \Shopsys\FrameworkBundle\Component\Money\Money|null $watchedPrice
      */
-    public function setWatchedPrice($watchedPrice)
+    public function setWatchedPrice(?Money $watchedPrice): void
     {
-        $this->watchedPrice = $watchedPrice !== null ? Money::fromValue($watchedPrice) : null;
+        $this->watchedPrice = $watchedPrice;
     }
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\Cart\Item\CartItem $cartItem
      * @return bool
      */
-    public function isSimilarItemAs(self $cartItem)
+    public function isSimilarItemAs(self $cartItem): bool
     {
         return $this->getProduct()->getId() === $cartItem->getProduct()->getId();
     }
@@ -156,7 +158,7 @@ class CartItem
     /**
      * @return \DateTime
      */
-    public function getAddedAt()
+    public function getAddedAt(): DateTime
     {
         return $this->addedAt;
     }
@@ -164,7 +166,7 @@ class CartItem
     /**
      * @param \DateTime $addedAt
      */
-    public function changeAddedAt(DateTime $addedAt)
+    public function changeAddedAt(DateTime $addedAt): void
     {
         $this->addedAt = $addedAt;
     }

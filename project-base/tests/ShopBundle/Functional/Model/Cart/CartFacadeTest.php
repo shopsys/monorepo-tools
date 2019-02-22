@@ -3,6 +3,7 @@
 namespace Tests\ShopBundle\Functional\Model\Cart;
 
 use Shopsys\FrameworkBundle\Component\Domain\Domain;
+use Shopsys\FrameworkBundle\Component\Money\Money;
 use Shopsys\FrameworkBundle\Model\Cart\CartFacade;
 use Shopsys\FrameworkBundle\Model\Cart\CartFactory;
 use Shopsys\FrameworkBundle\Model\Cart\CartRepository;
@@ -146,13 +147,15 @@ class CartFacadeTest extends TransactionFunctionalTestCase
      */
     public function testCartNotExistIfNoListableProductIsInCart(int $productId, bool $cartShouldBeNull): void
     {
+        /** @var \Shopsys\FrameworkBundle\Model\Cart\CartFacade $cartFacade */
         $cartFacade = $this->getContainer()->get(CartFacade::class);
+        /** @var \Shopsys\FrameworkBundle\Model\Cart\Item\CartItemFactory $cartItemFactory */
         $cartItemFactory = $this->getContainer()->get(CartItemFactory::class);
-
+        /** @var \Shopsys\ShopBundle\Model\Product\Product $product */
         $product = $this->getReference(ProductDataFixture::PRODUCT_PREFIX . $productId);
 
         $cart = $cartFacade->getCartOfCurrentCustomerCreateIfNotExists();
-        $cartItem = $cartItemFactory->create($cart, $product, 1, 10);
+        $cartItem = $cartItemFactory->create($cart, $product, 1, Money::fromInteger(10));
         $cart->addItem($cartItem);
 
         $this->getEntityManager()->persist($cartItem);

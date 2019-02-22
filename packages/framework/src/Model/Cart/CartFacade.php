@@ -274,7 +274,7 @@ class CartFacade
     /**
      * @return \Shopsys\FrameworkBundle\Model\Order\Item\QuantifiedProduct[]
      */
-    public function getQuantifiedProductsOfCurrentCustomerIndexedByCartItemId()
+    public function getQuantifiedProductsOfCurrentCustomer()
     {
         $cart = $this->findCartOfCurrentCustomer();
 
@@ -282,7 +282,7 @@ class CartFacade
             return [];
         }
 
-        return $cart->getQuantifiedProductsIndexedByItemId();
+        return $cart->getQuantifiedProducts();
     }
 
     public function deleteOldCarts()

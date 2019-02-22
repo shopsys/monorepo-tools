@@ -34,9 +34,9 @@
                 </thead>
 
                 <tbody>
-                    {% for cartItem in cartItems %}
-                        {% set cartItemPrice = cartItemPrices[cartItem.id] %}
-                        {% set cartItemDiscount = cartItemDiscounts[cartItem.id] %}
+                    {% for index, cartItem in cartItems %}
+                        {% set cartItemPrice = cartItemPrices[index] %}
+                        {% set cartItemDiscount = cartItemDiscounts[index] %}
                         <tr class="table-cart__row js-cart-item">
                             <td class="table-cart__cell table-cart__cell--image">
                                 <a href="{{ url('front_product_detail', {id: cartItem.product.id}) }}" title="{{ cartItem.product.name }}" class="table-cart__cell__image">

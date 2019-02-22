@@ -4,6 +4,7 @@ namespace Tests\ShopBundle\Functional\Model\Cart;
 
 use DateTime;
 use Shopsys\FrameworkBundle\Component\Domain\Domain;
+use Shopsys\FrameworkBundle\Component\Money\Money;
 use Shopsys\FrameworkBundle\Model\Cart\CartFacade;
 use Shopsys\FrameworkBundle\Model\Cart\CartFactory;
 use Shopsys\FrameworkBundle\Model\Cart\CartRepository;
@@ -208,7 +209,7 @@ class CartFacadeDeleteOldCartsTest extends TransactionFunctionalTestCase
         $product = $this->getProductById(1);
         $cart = $cartFacade->getCartByCustomerIdentifierCreateIfNotExists($customerIdentifier);
 
-        $cartItem = new CartItem($cart, $product, 1, '0.0');
+        $cartItem = new CartItem($cart, $product, 1, Money::zero());
 
         $em->persist($cartItem);
         $em->flush();
