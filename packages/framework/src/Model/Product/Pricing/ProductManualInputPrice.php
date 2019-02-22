@@ -104,10 +104,10 @@ class ProductManualInputPrice
             );
             $inputPriceForPricingGroup = $inputPriceCalculation->getInputPrice(
                 $inputPriceType,
-                $basePriceForPricingGroup->getPriceWithVat()->toValue(),
+                $basePriceForPricingGroup->getPriceWithVat(),
                 $newVatPercent
             );
-            $this->setInputPrice(Money::fromValue($inputPriceForPricingGroup));
+            $this->setInputPrice($inputPriceForPricingGroup);
         }
     }
 }

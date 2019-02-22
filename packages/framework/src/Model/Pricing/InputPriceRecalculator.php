@@ -5,7 +5,6 @@ namespace Shopsys\FrameworkBundle\Model\Pricing;
 use Closure;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Query;
-use Shopsys\FrameworkBundle\Component\Money\Money;
 use Shopsys\FrameworkBundle\Model\Payment\Payment;
 use Shopsys\FrameworkBundle\Model\Payment\PaymentPriceCalculation;
 use Shopsys\FrameworkBundle\Model\Transport\Transport;
@@ -91,11 +90,11 @@ class InputPriceRecalculator
 
                 $newInputPrice = $this->inputPriceCalculation->getInputPrice(
                     $toInputPriceType,
-                    $paymentPrice->getPriceWithVat()->toValue(),
+                    $paymentPrice->getPriceWithVat(),
                     $payment->getVat()->getPercent()
                 );
 
-                $paymentInputPrice->setPrice(Money::fromValue($newInputPrice));
+                $paymentInputPrice->setPrice($newInputPrice);
             }
         });
     }
@@ -119,11 +118,11 @@ class InputPriceRecalculator
 
                 $newInputPrice = $this->inputPriceCalculation->getInputPrice(
                     $toInputPriceType,
-                    $transportPrice->getPriceWithVat()->toValue(),
+                    $transportPrice->getPriceWithVat(),
                     $transport->getVat()->getPercent()
                 );
 
-                $transportInputPrice->setPrice(Money::fromValue($newInputPrice));
+                $transportInputPrice->setPrice($newInputPrice);
             }
         });
     }
