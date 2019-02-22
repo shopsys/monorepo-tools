@@ -100,7 +100,7 @@ class OrderPreviewFactory
      * @param \Shopsys\FrameworkBundle\Model\Transport\Transport|null $transport
      * @param \Shopsys\FrameworkBundle\Model\Payment\Payment|null $payment
      * @param \Shopsys\FrameworkBundle\Model\Customer\User|null $user
-     * @param float|null $promoCodeDiscountPercent
+     * @param string|null $promoCodeDiscountPercent
      * @return \Shopsys\FrameworkBundle\Model\Order\Preview\OrderPreview
      */
     public function create(
@@ -110,7 +110,7 @@ class OrderPreviewFactory
         Transport $transport = null,
         Payment $payment = null,
         User $user = null,
-        $promoCodeDiscountPercent = null
+        string $promoCodeDiscountPercent = null
     ) {
         return $this->orderPreviewCalculation->calculatePreview(
             $currency,
