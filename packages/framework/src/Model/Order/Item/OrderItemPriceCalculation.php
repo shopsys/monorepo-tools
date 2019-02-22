@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Shopsys\FrameworkBundle\Model\Order\Item;
 
 use Shopsys\FrameworkBundle\Component\Money\Money;
@@ -42,42 +44,42 @@ class OrderItemPriceCalculation
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\Order\Item\OrderItemData $orderItemData
-     * @return string
+     * @return \Shopsys\FrameworkBundle\Component\Money\Money
      */
-    public function calculatePriceWithoutVat(OrderItemData $orderItemData)
+    public function calculatePriceWithoutVat(OrderItemData $orderItemData): Money
     {
         $vatData = $this->vatDataFactory->create();
         $vatData->name = 'orderItemVat';
         $vatData->percent = $orderItemData->vatPercent;
         $vat = $this->vatFactory->create($vatData);
-        $vatAmount = $this->priceCalculation->getVatAmountByPriceWithVat($orderItemData->priceWithVat->toValue(), $vat);
+        $vatAmount = Money::fromValue($this->priceCalculation->getVatAmountByPriceWithVat($orderItemData->priceWithVat->toValue(), $vat));
 
-        return $orderItemData->priceWithVat->toValue() - $vatAmount;
+        return $orderItemData->priceWithVat->subtract($vatAmount);
     }
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\Order\Item\OrderItem $orderItem
      * @return \Shopsys\FrameworkBundle\Model\Pricing\Price
      */
-    public function calculateTotalPrice(OrderItem $orderItem)
+    public function calculateTotalPrice(OrderItem $orderItem): Price
     {
         $vatData = $this->vatDataFactory->create();
         $vatData->name = 'orderItemVat';
         $vatData->percent = $orderItem->getVatPercent();
         $vat = $this->vatFactory->create($vatData);
 
-        $totalPriceWithVat = $orderItem->getPriceWithVat()->toValue() * $orderItem->getQuantity();
-        $totalVatAmount = $this->priceCalculation->getVatAmountByPriceWithVat($totalPriceWithVat, $vat);
-        $totalPriceWithoutVat = $totalPriceWithVat - $totalVatAmount;
+        $totalPriceWithVat = $orderItem->getPriceWithVat()->multiply((string)$orderItem->getQuantity());
+        $totalVatAmount = Money::fromValue($this->priceCalculation->getVatAmountByPriceWithVat($totalPriceWithVat->toValue(), $vat));
+        $totalPriceWithoutVat = $totalPriceWithVat->subtract($totalVatAmount);
 
-        return new Price(Money::fromValue($totalPriceWithoutVat), Money::fromValue($totalPriceWithVat));
+        return new Price($totalPriceWithoutVat, $totalPriceWithVat);
     }
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\Order\Item\OrderItem[] $orderItems
      * @return \Shopsys\FrameworkBundle\Model\Pricing\Price[]
      */
-    public function calculateTotalPricesIndexedById($orderItems)
+    public function calculateTotalPricesIndexedById($orderItems): array
     {
         $prices = [];
 

@@ -994,9 +994,9 @@ class Order
         OrderPriceCalculation $orderPriceCalculation
     ): OrderEditResult {
         $orderTransportData = $orderData->orderTransport;
-        $orderTransportData->priceWithoutVat = Money::fromValue($orderItemPriceCalculation->calculatePriceWithoutVat($orderTransportData));
+        $orderTransportData->priceWithoutVat = $orderItemPriceCalculation->calculatePriceWithoutVat($orderTransportData);
         $orderPaymentData = $orderData->orderPayment;
-        $orderPaymentData->priceWithoutVat = Money::fromValue($orderItemPriceCalculation->calculatePriceWithoutVat($orderPaymentData));
+        $orderPaymentData->priceWithoutVat = $orderItemPriceCalculation->calculatePriceWithoutVat($orderPaymentData);
 
         $statusChanged = $this->getStatus() !== $orderData->status;
         $this->editData($orderData);
@@ -1006,7 +1006,7 @@ class Order
         foreach ($this->getItemsWithoutTransportAndPayment() as $orderItem) {
             if (array_key_exists($orderItem->getId(), $orderItemsWithoutTransportAndPaymentData)) {
                 $orderItemData = $orderItemsWithoutTransportAndPaymentData[$orderItem->getId()];
-                $orderItemData->priceWithoutVat = Money::fromValue($orderItemPriceCalculation->calculatePriceWithoutVat($orderItemData));
+                $orderItemData->priceWithoutVat = $orderItemPriceCalculation->calculatePriceWithoutVat($orderItemData);
                 $orderItem->edit($orderItemData);
             } else {
                 $this->removeItem($orderItem);
@@ -1014,7 +1014,7 @@ class Order
         }
 
         foreach ($orderData->getNewItemsWithoutTransportAndPayment() as $newOrderItemData) {
-            $newOrderItemData->priceWithoutVat = Money::fromValue($orderItemPriceCalculation->calculatePriceWithoutVat($newOrderItemData));
+            $newOrderItemData->priceWithoutVat = $orderItemPriceCalculation->calculatePriceWithoutVat($newOrderItemData);
             $orderItemFactory->createProduct(
                 $this,
                 $newOrderItemData->name,

@@ -30,7 +30,7 @@ class OrderItemPriceCalculationTest extends TestCase
         $orderItemPriceCalculation = new OrderItemPriceCalculation($priceCalculationMock, new VatFactory(new EntityNameResolver([])), new VatDataFactory());
         $priceWithoutVat = $orderItemPriceCalculation->calculatePriceWithoutVat($orderItemData);
 
-        $this->assertSame(round(1000 - 100, 6), round($priceWithoutVat, 6));
+        $this->assertThat($priceWithoutVat, new IsMoneyEqual(Money::fromInteger(900)));
     }
 
     public function testCalculateTotalPrice()
