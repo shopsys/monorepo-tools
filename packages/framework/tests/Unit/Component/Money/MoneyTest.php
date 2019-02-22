@@ -14,13 +14,13 @@ class MoneyTest extends TestCase
     /**
      * @dataProvider createProvider
      * @param int|string $value
-     * @param string $expected
+     * @param string $expectedAmount
      */
-    public function testCreate($value, string $expected): void
+    public function testCreate($value, string $expectedAmount): void
     {
         $money = Money::create($value);
 
-        $this->assertSame($expected, $money->toString());
+        $this->assertSame($expectedAmount, $money->getAmount());
     }
 
     /**
@@ -116,13 +116,13 @@ class MoneyTest extends TestCase
      * @dataProvider createFromFloatProvider
      * @param float $float
      * @param int $scale
-     * @param string $expected
+     * @param string $expectedAmount
      */
-    public function testCreateFromFloat(float $float, int $scale, string $expected): void
+    public function testCreateFromFloat(float $float, int $scale, string $expectedAmount): void
     {
         $money = Money::createFromFloat($float, $scale);
 
-        $this->assertSame($expected, $money->toString());
+        $this->assertSame($expectedAmount, $money->getAmount());
     }
 
     /**
@@ -147,7 +147,7 @@ class MoneyTest extends TestCase
     {
         $zeroMoney = Money::zero();
 
-        $this->assertSame('0', $zeroMoney->toString());
+        $this->assertSame('0', $zeroMoney->getAmount());
     }
 
     public function testAddIsImmutable(): void
@@ -156,23 +156,23 @@ class MoneyTest extends TestCase
 
         $money->add(Money::create(1));
 
-        $this->assertSame('1', $money->toString());
+        $this->assertSame('1', $money->getAmount());
     }
 
     /**
      * @dataProvider addProvider
      * @param string $a
      * @param string $b
-     * @param string $expectedResult
+     * @param string $expectedAmount
      */
-    public function testAdd(string $a, string $b, string $expectedResult): void
+    public function testAdd(string $a, string $b, string $expectedAmount): void
     {
         $moneyA = Money::create($a);
         $moneyB = Money::create($b);
 
         $result = $moneyA->add($moneyB);
 
-        $this->assertSame($expectedResult, $result->toString());
+        $this->assertSame($expectedAmount, $result->getAmount());
     }
 
     /**
@@ -199,23 +199,23 @@ class MoneyTest extends TestCase
 
         $money->subtract(Money::create(1));
 
-        $this->assertSame('1', $money->toString());
+        $this->assertSame('1', $money->getAmount());
     }
 
     /**
      * @dataProvider subtractProvider
      * @param string $a
      * @param string $b
-     * @param string $expectedResult
+     * @param string $expectedAmount
      */
-    public function testSubtract(string $a, string $b, string $expectedResult): void
+    public function testSubtract(string $a, string $b, string $expectedAmount): void
     {
         $moneyA = Money::create($a);
         $moneyB = Money::create($b);
 
         $result = $moneyA->subtract($moneyB);
 
-        $this->assertSame($expectedResult, $result->toString());
+        $this->assertSame($expectedAmount, $result->getAmount());
     }
 
     /**
@@ -242,22 +242,22 @@ class MoneyTest extends TestCase
 
         $money->multiply('2');
 
-        $this->assertSame('1', $money->toString());
+        $this->assertSame('1', $money->getAmount());
     }
 
     /**
      * @dataProvider multiplyProvider
      * @param string $a
      * @param string $b
-     * @param string $expectedResult
+     * @param string $expectedAmount
      */
-    public function testMultiply(string $a, string $b, string $expectedResult): void
+    public function testMultiply(string $a, string $b, string $expectedAmount): void
     {
         $moneyA = Money::create($a);
 
         $result = $moneyA->multiply($b);
 
-        $this->assertSame($expectedResult, $result->toString());
+        $this->assertSame($expectedAmount, $result->getAmount());
     }
 
     /**
@@ -320,7 +320,7 @@ class MoneyTest extends TestCase
 
         $money->divide('2', 1);
 
-        $this->assertSame('1', $money->toString());
+        $this->assertSame('1', $money->getAmount());
     }
 
     /**
@@ -328,15 +328,15 @@ class MoneyTest extends TestCase
      * @param string $a
      * @param string $b
      * @param int $scale
-     * @param string $expectedResult
+     * @param string $expectedAmount
      */
-    public function testDivide(string $a, string $b, int $scale, string $expectedResult): void
+    public function testDivide(string $a, string $b, int $scale, string $expectedAmount): void
     {
         $moneyA = Money::create($a);
 
         $result = $moneyA->divide($b, $scale);
 
-        $this->assertSame($expectedResult, $result->toString());
+        $this->assertSame($expectedAmount, $result->getAmount());
     }
 
     /**
@@ -423,22 +423,22 @@ class MoneyTest extends TestCase
 
         $money->round(0);
 
-        $this->assertSame('1.5', $money->toString());
+        $this->assertSame('1.5', $money->getAmount());
     }
 
     /**
      * @dataProvider roundProvider
      * @param string $amount
      * @param int $scale
-     * @param string $expectedResult
+     * @param string $expectedAmount
      */
-    public function testRound(string $amount, int $scale, string $expectedResult): void
+    public function testRound(string $amount, int $scale, string $expectedAmount): void
     {
         $money = Money::create($amount);
 
         $result = $money->round($scale);
 
-        $this->assertSame($expectedResult, $result->toString());
+        $this->assertSame($expectedAmount, $result->getAmount());
     }
 
     /**

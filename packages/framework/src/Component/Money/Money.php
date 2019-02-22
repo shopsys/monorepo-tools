@@ -69,7 +69,7 @@ class Money implements JsonSerializable
     /**
      * @return string
      */
-    public function toString(): string
+    public function getAmount(): string
     {
         if ($this->decimal->isZero() && $this->decimal->isNegative()) {
             return \substr((string)$this->decimal, 1);
@@ -84,7 +84,7 @@ class Money implements JsonSerializable
     public function jsonSerialize(): array
     {
         return [
-            'amount' => $this->toString(),
+            'amount' => $this->getAmount(),
         ];
     }
 

@@ -30,7 +30,7 @@ class MoneyExtension extends Twig_Extension
      */
     public function moneyFormatFilter(Money $money, int $decimal = null, string $decimalPoint = '.', string $thousandsSeparator = '')
     {
-        $moneyString = $money->toString();
+        $moneyString = $money->getAmount();
 
         if ($decimal === null) {
             $decimal = $this->getNumberOfDecimalPlaces($moneyString);

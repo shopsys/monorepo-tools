@@ -16,7 +16,7 @@ class MoneyExporter extends Exporter
     protected function recursiveExport(&$value, $indentation, $processed = null): string
     {
         if ($value instanceof Money) {
-            return $value->toString();
+            return $value->getAmount();
         }
 
         return parent::recursiveExport($value, $indentation, $processed);

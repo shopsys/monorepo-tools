@@ -241,7 +241,7 @@ class PriceExtension extends Twig_Extension
             $locale
         );
 
-        return $numberFormatter->formatCurrency($price->toString(), $intlCurrency);
+        return $numberFormatter->formatCurrency($price->getAmount(), $intlCurrency);
     }
 
     /**

@@ -35,7 +35,7 @@ class MoneyType extends Type
         }
 
         if ($value instanceof Money) {
-            return $value->toString();
+            return $value->getAmount();
         }
 
         throw ConversionException::conversionFailedInvalidType($value, $this->getName(), ['null', Money::class]);

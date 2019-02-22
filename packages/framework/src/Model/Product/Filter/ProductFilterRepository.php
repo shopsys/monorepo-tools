@@ -87,11 +87,11 @@ class ProductFilterRepository
             $priceLimits = 'pcp.product = p AND pcp.pricingGroup = :pricingGroup';
             if ($minimalPrice !== null) {
                 $priceLimits .= ' AND pcp.priceWithVat >= :minimalPrice';
-                $productsQueryBuilder->setParameter('minimalPrice', $minimalPrice->toString());
+                $productsQueryBuilder->setParameter('minimalPrice', $minimalPrice->getAmount());
             }
             if ($maximalPrice !== null) {
                 $priceLimits .= ' AND pcp.priceWithVat <= :maximalPrice';
-                $productsQueryBuilder->setParameter('maximalPrice', $maximalPrice->toString());
+                $productsQueryBuilder->setParameter('maximalPrice', $maximalPrice->getAmount());
             }
             $this->queryBuilderExtender->addOrExtendJoin(
                 $productsQueryBuilder,

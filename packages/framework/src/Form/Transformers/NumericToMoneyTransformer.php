@@ -34,7 +34,7 @@ class NumericToMoneyTransformer implements DataTransformerInterface
         }
 
         if ($value instanceof Money) {
-            return $value->toString();
+            return $value->getAmount();
         }
 
         throw new TransformationFailedException('Money or null must be provided.');

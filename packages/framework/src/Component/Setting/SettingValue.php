@@ -133,7 +133,7 @@ class SettingValue
         } elseif ($this->type === self::TYPE_DATETIME) {
             $this->value = $value->format(self::DATETIME_STORED_FORMAT);
         } elseif ($this->type === self::TYPE_MONEY) {
-            $this->value = $value->toString();
+            $this->value = $value->getAmount();
         } else {
             $this->value = (string)$value;
         }
