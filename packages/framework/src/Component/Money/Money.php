@@ -231,25 +231,6 @@ class Money implements JsonSerializable
     }
 
     /**
-     * @param mixed $value
-     * @return \Shopsys\FrameworkBundle\Component\Money\Money
-     * @internal method for restricting the usage during refactoring
-     */
-    public static function fromValue($value): self
-    {
-        return new static(Decimal::create($value));
-    }
-
-    /**
-     * @return string
-     * @internal method for restricting the usage during refactoring
-     */
-    public function toValue(): string
-    {
-        return $this->decimal->innerValue();
-    }
-
-    /**
      * @param string $string
      * @param int|null $scale
      * @return \Litipk\BigNumbers\Decimal
