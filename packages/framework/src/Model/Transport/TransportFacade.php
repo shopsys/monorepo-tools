@@ -198,15 +198,15 @@ class TransportFacade
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\Pricing\Currency\Currency $currency
-     * @return string[]
+     * @return \Shopsys\FrameworkBundle\Component\Money\Money[]
      */
-    public function getTransportPricesWithVatIndexedByTransportId(Currency $currency)
+    public function getTransportPricesWithVatIndexedByTransportId(Currency $currency): array
     {
         $transportPricesWithVatByTransportId = [];
         $transports = $this->getAllIncludingDeleted();
         foreach ($transports as $transport) {
             $transportPrice = $this->transportPriceCalculation->calculateIndependentPrice($transport, $currency);
-            $transportPricesWithVatByTransportId[$transport->getId()] = $transportPrice->getPriceWithVat()->toValue();
+            $transportPricesWithVatByTransportId[$transport->getId()] = $transportPrice->getPriceWithVat();
         }
 
         return $transportPricesWithVatByTransportId;

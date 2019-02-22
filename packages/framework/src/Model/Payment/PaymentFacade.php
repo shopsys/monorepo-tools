@@ -195,15 +195,15 @@ class PaymentFacade
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\Pricing\Currency\Currency $currency
-     * @return string[]
+     * @return \Shopsys\FrameworkBundle\Component\Money\Money[]
      */
-    public function getPaymentPricesWithVatIndexedByPaymentId(Currency $currency)
+    public function getPaymentPricesWithVatIndexedByPaymentId(Currency $currency): array
     {
         $paymentPricesWithVatByPaymentId = [];
         $payments = $this->getAllIncludingDeleted();
         foreach ($payments as $payment) {
             $paymentPrice = $this->paymentPriceCalculation->calculateIndependentPrice($payment, $currency);
-            $paymentPricesWithVatByPaymentId[$payment->getId()] = $paymentPrice->getPriceWithVat()->toValue();
+            $paymentPricesWithVatByPaymentId[$payment->getId()] = $paymentPrice->getPriceWithVat();
         }
 
         return $paymentPricesWithVatByPaymentId;
