@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Shopsys\FrameworkBundle\Model\Order\Watcher;
 
 use Shopsys\FrameworkBundle\Component\Money\Money;
@@ -55,8 +57,12 @@ class TransportAndPaymentWatcher
      * @param \Shopsys\FrameworkBundle\Model\Payment\Payment[] $payments
      * @return \Shopsys\FrameworkBundle\Model\Order\Watcher\TransportAndPaymentCheckResult
      */
-    public function checkTransportAndPayment(OrderData $orderData, OrderPreview $orderPreview, $transports, $payments)
-    {
+    public function checkTransportAndPayment(
+        OrderData $orderData,
+        OrderPreview $orderPreview,
+        array $transports,
+        array $payments
+    ): TransportAndPaymentCheckResult {
         $transport = $orderData->transport;
         $payment = $orderData->payment;
 
@@ -102,12 +108,18 @@ class TransportAndPaymentWatcher
         Transport $transport,
         Currency $currency,
         OrderPreview $orderPreview,
-        $domainId
-    ) {
+        int $domainId
+    ): bool {
         $transportPrices = $this->getRememberedTransportPrices();
 
         if (array_key_exists($transport->getId(), $transportPrices)) {
             $rememberedTransportPriceValue = $transportPrices[$transport->getId()];
+            if (!($rememberedTransportPriceValue instanceof Money)) {
+                // There might have been a string value in the session from before v7.0.0
+                // In such case, the method warn about the possibility of change of price
+                return true;
+            }
+
             $transportPrice = $this->transportPriceCalculation->calculatePrice(
                 $transport,
                 $currency,
@@ -115,7 +127,7 @@ class TransportAndPaymentWatcher
                 $domainId
             );
 
-            if (!$transportPrice->getPriceWithVat()->equals(Money::fromValue($rememberedTransportPriceValue))) {
+            if (!$transportPrice->getPriceWithVat()->equals($rememberedTransportPriceValue)) {
                 return true;
             }
         }
@@ -134,12 +146,18 @@ class TransportAndPaymentWatcher
         Payment $payment,
         Currency $currency,
         OrderPreview $orderPreview,
-        $domainId
-    ) {
+        int $domainId
+    ): bool {
         $paymentPrices = $this->getRememberedPaymentPrices();
 
         if (array_key_exists($payment->getId(), $paymentPrices)) {
             $rememberedPaymentPriceValue = $paymentPrices[$payment->getId()];
+            if (!($rememberedPaymentPriceValue instanceof Money)) {
+                // There might have been a string value in the session from before v7.0.0
+                // In such case, the method warn about the possibility of change of price
+                return true;
+            }
+
             $paymentPrice = $this->paymentPriceCalculation->calculatePrice(
                 $payment,
                 $currency,
@@ -147,7 +165,7 @@ class TransportAndPaymentWatcher
                 $domainId
             );
 
-            if (!$paymentPrice->getPriceWithVat()->equals(Money::fromValue($rememberedPaymentPriceValue))) {
+            if (!$paymentPrice->getPriceWithVat()->equals($rememberedPaymentPriceValue)) {
                 return true;
             }
         }
@@ -160,14 +178,14 @@ class TransportAndPaymentWatcher
      * @param \Shopsys\FrameworkBundle\Model\Pricing\Currency\Currency $currency
      * @param \Shopsys\FrameworkBundle\Model\Order\Preview\OrderPreview $orderPreview
      * @param int $domainId
-     * @return array
+     * @return \Shopsys\FrameworkBundle\Component\Money\Money[]
      */
     protected function getTransportPrices(
-        $transports,
+        array $transports,
         Currency $currency,
         OrderPreview $orderPreview,
-        $domainId
-    ) {
+        int $domainId
+    ): array {
         $transportPriceValues = [];
         foreach ($transports as $transport) {
             $transportPrice = $this->transportPriceCalculation->calculatePrice(
@@ -176,7 +194,7 @@ class TransportAndPaymentWatcher
                 $orderPreview->getProductsPrice(),
                 $domainId
             );
-            $transportPriceValues[$transport->getId()] = $transportPrice->getPriceWithVat()->toValue();
+            $transportPriceValues[$transport->getId()] = $transportPrice->getPriceWithVat();
         }
 
         return $transportPriceValues;
@@ -187,14 +205,14 @@ class TransportAndPaymentWatcher
      * @param \Shopsys\FrameworkBundle\Model\Pricing\Currency\Currency $currency
      * @param \Shopsys\FrameworkBundle\Model\Order\Preview\OrderPreview $orderPreview
      * @param int $domainId
-     * @return array
+     * @return \Shopsys\FrameworkBundle\Component\Money\Money[]
      */
     protected function getPaymentPrices(
-        $payments,
+        array $payments,
         Currency $currency,
         OrderPreview $orderPreview,
-        $domainId
-    ) {
+        int $domainId
+    ): array {
         $paymentPriceValues = [];
         foreach ($payments as $payment) {
             $paymentPrice = $this->paymentPriceCalculation->calculatePrice(
@@ -203,7 +221,7 @@ class TransportAndPaymentWatcher
                 $orderPreview->getProductsPrice(),
                 $domainId
             );
-            $paymentPriceValues[$payment->getId()] = $paymentPrice->getPriceWithVat()->toValue();
+            $paymentPriceValues[$payment->getId()] = $paymentPrice->getPriceWithVat();
         }
 
         return $paymentPriceValues;
@@ -221,8 +239,8 @@ class TransportAndPaymentWatcher
         array $payments,
         Currency $currency,
         OrderPreview $orderPreview,
-        $domainId
-    ) {
+        int $domainId
+    ): void {
         $this->session->set(self::SESSION_ROOT, [
             self::SESSION_TRANSPORT_PRICES => $this->getTransportPrices(
                 $transports,
@@ -242,7 +260,7 @@ class TransportAndPaymentWatcher
     /**
      * @return array
      */
-    protected function getRememberedTransportAndPayment()
+    protected function getRememberedTransportAndPayment(): array
     {
         return $this->session->get(self::SESSION_ROOT, [
             self::SESSION_TRANSPORT_PRICES => [],
@@ -251,17 +269,17 @@ class TransportAndPaymentWatcher
     }
 
     /**
-     * @return array
+     * @return \Shopsys\FrameworkBundle\Component\Money\Money[]
      */
-    protected function getRememberedTransportPrices()
+    protected function getRememberedTransportPrices(): array
     {
         return $this->getRememberedTransportAndPayment()[self::SESSION_TRANSPORT_PRICES];
     }
 
     /**
-     * @return array
+     * @return \Shopsys\FrameworkBundle\Component\Money\Money[]
      */
-    protected function getRememberedPaymentPrices()
+    protected function getRememberedPaymentPrices(): array
     {
         return $this->getRememberedTransportAndPayment()[self::SESSION_PAYMENT_PRICES];
     }

@@ -26,14 +26,14 @@ class TransportPriceCalculationTest extends TestCase
         return [
             [
                 'inputPriceType' => PricingSetting::INPUT_PRICE_TYPE_WITHOUT_VAT,
-                'inputPrice' => '6999',
+                'inputPrice' => Money::fromString('6999'),
                 'vatPercent' => '21',
                 'priceWithoutVat' => Money::fromString('6998.78'),
                 'priceWithVat' => Money::fromString('8469'),
             ],
             [
                 'inputPriceType' => PricingSetting::INPUT_PRICE_TYPE_WITH_VAT,
-                'inputPrice' => '6999.99',
+                'inputPrice' => Money::fromString('6999.99'),
                 'vatPercent' => '21',
                 'priceWithoutVat' => Money::fromString('5784.8'),
                 'priceWithVat' => Money::fromString('7000'),
@@ -43,16 +43,16 @@ class TransportPriceCalculationTest extends TestCase
 
     /**
      * @dataProvider calculateIndependentPriceProvider
-     * @param mixed $inputPriceType
-     * @param mixed $inputPrice
-     * @param mixed $vatPercent
+     * @param int $inputPriceType
+     * @param \Shopsys\FrameworkBundle\Component\Money\Money $inputPrice
+     * @param string $vatPercent
      * @param \Shopsys\FrameworkBundle\Component\Money\Money $priceWithoutVat
      * @param \Shopsys\FrameworkBundle\Component\Money\Money $priceWithVat
      */
     public function testCalculateIndependentPrice(
-        $inputPriceType,
-        $inputPrice,
-        $vatPercent,
+        int $inputPriceType,
+        Money $inputPrice,
+        string $vatPercent,
         Money $priceWithoutVat,
         Money $priceWithVat
     ) {
@@ -83,7 +83,7 @@ class TransportPriceCalculationTest extends TestCase
         $transportData->name = ['cs' => 'transportName'];
         $transportData->vat = $vat;
         $transport = new Transport($transportData);
-        $transport->setPrice(new TransportPriceFactory(new EntityNameResolver([])), $currency, Money::fromValue($inputPrice));
+        $transport->setPrice(new TransportPriceFactory(new EntityNameResolver([])), $currency, $inputPrice);
 
         $price = $transportPriceCalculation->calculateIndependentPrice($transport, $currency);
 

@@ -27,14 +27,14 @@ class PaymentPriceCalculationTest extends TestCase
         return [
             [
                 'inputPriceType' => PricingSetting::INPUT_PRICE_TYPE_WITHOUT_VAT,
-                'inputPrice' => '6999',
+                'inputPrice' => Money::fromString('6999'),
                 'vatPercent' => '21',
                 'priceWithoutVat' => Money::fromString('6998.78'),
                 'priceWithVat' => Money::fromString('8469'),
             ],
             [
                 'inputPriceType' => PricingSetting::INPUT_PRICE_TYPE_WITH_VAT,
-                'inputPrice' => '6999.99',
+                'inputPrice' => Money::fromString('6999.99'),
                 'vatPercent' => '21',
                 'priceWithoutVat' => Money::fromString('5784.8'),
                 'priceWithVat' => Money::fromString('7000'),
@@ -47,7 +47,7 @@ class PaymentPriceCalculationTest extends TestCase
         return [
             [
                 'inputPriceType' => PricingSetting::INPUT_PRICE_TYPE_WITHOUT_VAT,
-                'inputPrice' => '6999',
+                'inputPrice' => Money::fromString('6999'),
                 'vatPercent' => '21',
                 'priceWithoutVat' => Money::fromString('6998.78'),
                 'priceWithVat' => Money::fromString('8469'),
@@ -55,7 +55,7 @@ class PaymentPriceCalculationTest extends TestCase
             ],
             [
                 'inputPriceType' => PricingSetting::INPUT_PRICE_TYPE_WITH_VAT,
-                'inputPrice' => '6999.99',
+                'inputPrice' => Money::fromString('6999.99'),
                 'vatPercent' => '21',
                 'priceWithoutVat' => Money::fromString('5784.8'),
                 'priceWithVat' => Money::fromString('7000'),
@@ -66,16 +66,16 @@ class PaymentPriceCalculationTest extends TestCase
 
     /**
      * @dataProvider calculateIndependentPriceProvider
-     * @param mixed $inputPriceType
-     * @param mixed $inputPrice
-     * @param mixed $vatPercent
+     * @param int $inputPriceType
+     * @param \Shopsys\FrameworkBundle\Component\Money\Money $inputPrice
+     * @param string $vatPercent
      * @param \Shopsys\FrameworkBundle\Component\Money\Money $priceWithoutVat
      * @param \Shopsys\FrameworkBundle\Component\Money\Money $priceWithVat
      */
     public function testCalculateIndependentPrice(
-        $inputPriceType,
-        $inputPrice,
-        $vatPercent,
+        int $inputPriceType,
+        Money $inputPrice,
+        string $vatPercent,
         Money $priceWithoutVat,
         Money $priceWithVat
     ) {
@@ -107,7 +107,7 @@ class PaymentPriceCalculationTest extends TestCase
         $paymentData->name = ['cs' => 'paymentName'];
         $paymentData->vat = $vat;
         $payment = new Payment($paymentData);
-        $payment->setPrice(new PaymentPriceFactory(new EntityNameResolver([])), $currency, Money::fromValue($inputPrice));
+        $payment->setPrice(new PaymentPriceFactory(new EntityNameResolver([])), $currency, $inputPrice);
 
         $price = $paymentPriceCalculation->calculateIndependentPrice($payment, $currency);
 
@@ -117,17 +117,17 @@ class PaymentPriceCalculationTest extends TestCase
 
     /**
      * @dataProvider calculatePriceProvider
-     * @param mixed $inputPriceType
-     * @param mixed $inputPrice
-     * @param mixed $vatPercent
+     * @param int $inputPriceType
+     * @param \Shopsys\FrameworkBundle\Component\Money\Money $inputPrice
+     * @param string $vatPercent
      * @param \Shopsys\FrameworkBundle\Component\Money\Money $priceWithoutVat
      * @param \Shopsys\FrameworkBundle\Component\Money\Money $priceWithVat
      * @param \Shopsys\FrameworkBundle\Model\Pricing\Price $productsPrice
      */
     public function testCalculatePrice(
-        $inputPriceType,
-        $inputPrice,
-        $vatPercent,
+        int $inputPriceType,
+        Money $inputPrice,
+        string $vatPercent,
         Money $priceWithoutVat,
         Money $priceWithVat,
         Price $productsPrice
@@ -164,7 +164,7 @@ class PaymentPriceCalculationTest extends TestCase
         $paymentData->name = ['cs' => 'paymentName'];
         $paymentData->vat = $vat;
         $payment = new Payment($paymentData);
-        $payment->setPrice(new PaymentPriceFactory(new EntityNameResolver([])), $currency, Money::fromValue($inputPrice));
+        $payment->setPrice(new PaymentPriceFactory(new EntityNameResolver([])), $currency, $inputPrice);
 
         $price = $paymentPriceCalculation->calculatePrice($payment, $currency, $productsPrice, 1);
 
