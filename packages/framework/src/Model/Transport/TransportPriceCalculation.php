@@ -63,7 +63,7 @@ class TransportPriceCalculation
         Currency $currency
     ): Price {
         return $this->basePriceCalculation->calculateBasePrice(
-            $transport->getPrice($currency)->getPrice()->toValue(),
+            $transport->getPrice($currency)->getPrice(),
             $this->pricingSetting->getInputPriceType(),
             $transport->getVat()
         );

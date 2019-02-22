@@ -98,7 +98,7 @@ class ProductManualInputPrice
     ) {
         if ($this->inputPrice !== null) {
             $basePriceForPricingGroup = $basePriceCalculation->calculateBasePrice(
-                $this->inputPrice->toValue(),
+                $this->inputPrice,
                 $inputPriceType,
                 $this->getProduct()->getVat()
             );

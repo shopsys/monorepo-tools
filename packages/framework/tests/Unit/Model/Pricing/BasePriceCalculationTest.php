@@ -20,7 +20,7 @@ class BasePriceCalculationTest extends TestCase
         return [
             [
                 'inputPriceType' => PricingSetting::INPUT_PRICE_TYPE_WITHOUT_VAT,
-                'inputPrice' => '6999',
+                'inputPrice' => Money::fromString('6999'),
                 'vatPercent' => '21',
                 'basePriceWithoutVat' => Money::fromString('6998.78'),
                 'basePriceWithVat' => Money::fromString('8469'),
@@ -28,7 +28,7 @@ class BasePriceCalculationTest extends TestCase
             ],
             [
                 'inputPriceType' => PricingSetting::INPUT_PRICE_TYPE_WITH_VAT,
-                'inputPrice' => '6999.99',
+                'inputPrice' => Money::fromString('6999.99'),
                 'vatPercent' => '21',
                 'basePriceWithoutVat' => Money::fromString('5784.8'),
                 'basePriceWithVat' => Money::fromString('7000'),
@@ -39,16 +39,16 @@ class BasePriceCalculationTest extends TestCase
 
     /**
      * @dataProvider calculateBasePriceProvider
-     * @param mixed $inputPriceType
-     * @param mixed $inputPrice
+     * @param int $inputPriceType
+     * @param \Shopsys\FrameworkBundle\Component\Money\Money $inputPrice
      * @param mixed $vatPercent
      * @param \Shopsys\FrameworkBundle\Component\Money\Money $basePriceWithoutVat
      * @param \Shopsys\FrameworkBundle\Component\Money\Money $basePriceWithVat
      * @param \Shopsys\FrameworkBundle\Component\Money\Money $basePriceVatAmount
      */
     public function testCalculateBasePrice(
-        $inputPriceType,
-        $inputPrice,
+        int $inputPriceType,
+        Money $inputPrice,
         $vatPercent,
         Money $basePriceWithoutVat,
         Money $basePriceWithVat,
