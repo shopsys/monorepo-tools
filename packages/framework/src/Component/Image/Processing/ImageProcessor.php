@@ -102,12 +102,10 @@ class ImageProcessor
             throw new \Shopsys\FrameworkBundle\Component\Image\Processing\Exception\FileIsNotSupportedImageException($filepath);
         }
 
-        $image = $this->createInterventionImage($filepath);
-
-        $image->encode();
-        $this->filesystem->put($newFilepath, $image);
-
-        $this->removeFileIfRenamed($filepath, $newFilepath);
+        $image = $this->createInterventionImage($filepath)->save($newFilepath);
+        if (realpath($filepath) !== realpath($newFilepath)) {
+            $this->localFilesystem->remove($filepath);
+        }
 
         return $image->filename . '.' . $image->extension;
     }
@@ -161,18 +159,5 @@ class ImageProcessor
     public function getSupportedImageExtensions()
     {
         return $this->supportedImageExtensions;
-    }
-
-    /**
-     * @param string $filepath
-     * @param string $newFilepath
-     */
-    protected function removeFileIfRenamed($filepath, $newFilepath)
-    {
-        if ($this->filesystem->has($filepath) && $filepath !== $newFilepath) {
-            $this->filesystem->delete($filepath);
-        } elseif ($this->localFilesystem->exists($filepath) && realpath($filepath) !== realpath($newFilepath)) {
-            $this->localFilesystem->remove($filepath);
-        }
     }
 }
