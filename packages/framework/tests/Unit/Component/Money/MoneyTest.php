@@ -9,7 +9,7 @@ use Litipk\BigNumbers\DecimalConstants;
 use PHPUnit\Framework\TestCase;
 use Shopsys\FrameworkBundle\Component\Money\Money;
 
-class MoneyTest extends TestCase
+final class MoneyTest extends TestCase
 {
     /**
      * @dataProvider createProvider

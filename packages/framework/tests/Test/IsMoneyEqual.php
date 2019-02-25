@@ -5,7 +5,7 @@ namespace Tests\FrameworkBundle\Test;
 use PHPUnit\Framework\Constraint\Constraint;
 use Shopsys\FrameworkBundle\Component\Money\Money;
 
-class IsMoneyEqual extends Constraint
+final class IsMoneyEqual extends Constraint
 {
     /**
      * @var \Shopsys\FrameworkBundle\Component\Money\Money

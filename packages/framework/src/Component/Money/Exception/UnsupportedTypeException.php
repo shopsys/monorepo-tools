@@ -7,7 +7,7 @@ namespace Shopsys\FrameworkBundle\Component\Money\Exception;
 use InvalidArgumentException;
 use Throwable;
 
-class UnsupportedTypeException extends InvalidArgumentException implements MoneyException
+final class UnsupportedTypeException extends InvalidArgumentException implements MoneyException
 {
     /**
      * @param mixed $value

@@ -7,7 +7,7 @@ use Doctrine\DBAL\Types\ConversionException;
 use Doctrine\DBAL\Types\Type;
 use Shopsys\FrameworkBundle\Component\Money\Money;
 
-class MoneyType extends Type
+final class MoneyType extends Type
 {
     /**
      * {@inheritDoc}

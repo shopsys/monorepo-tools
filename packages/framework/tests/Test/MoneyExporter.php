@@ -5,7 +5,7 @@ namespace Tests\FrameworkBundle\Test;
 use SebastianBergmann\Exporter\Exporter;
 use Shopsys\FrameworkBundle\Component\Money\Money;
 
-class MoneyExporter extends Exporter
+final class MoneyExporter extends Exporter
 {
     /**
      * @param mixed $value
