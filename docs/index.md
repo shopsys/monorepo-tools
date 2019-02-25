@@ -26,6 +26,7 @@
 * [How to Set Up Domains and Locales (Languages)](./introduction/how-to-set-up-domains-and-locales.md)
 * [Shopsys Framework Development Workflow](introduction/shopsys-framework-development-workflow.md)
 * [How to Work with Products](./introduction/how-to-work-with-products.md)
+* [How to Work with Money](./introduction/how-to-work-with-money.md)
 * [Translations](./introduction/translations.md)
 * [Directories](./introduction/directories.md)
 * [Cron](./introduction/cron.md)
