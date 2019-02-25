@@ -4,6 +4,7 @@ namespace Shopsys\FrameworkBundle\Component\Image;
 
 use Doctrine\ORM\EntityManagerInterface;
 use League\Flysystem\FilesystemInterface;
+use League\Flysystem\MountManager;
 use Shopsys\FrameworkBundle\Component\Domain\Config\DomainConfig;
 use Shopsys\FrameworkBundle\Component\FileUpload\FileUpload;
 use Shopsys\FrameworkBundle\Component\Image\Config\ImageConfig;
@@ -29,6 +30,11 @@ class ImageFacade
      * @var \League\Flysystem\FilesystemInterface
      */
     protected $filesystem;
+
+    /**
+     * @var \League\Flysystem\MountManager
+     */
+    protected $mountManager;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\FileUpload\FileUpload
@@ -59,6 +65,8 @@ class ImageFacade
      * @param \Shopsys\FrameworkBundle\Component\FileUpload\FileUpload $fileUpload
      * @param \Shopsys\FrameworkBundle\Component\Image\ImageLocator $imageLocator
      * @param \Shopsys\FrameworkBundle\Component\Image\ImageFactoryInterface $imageFactory
+     * @param \League\Flysystem\MountManager $mountManager
+     * @param \League\Flysystem\MountManager;
      */
     public function __construct(
         $imageUrlPrefix,
@@ -68,7 +76,8 @@ class ImageFacade
         FilesystemInterface $filesystem,
         FileUpload $fileUpload,
         ImageLocator $imageLocator,
-        ImageFactoryInterface $imageFactory
+        ImageFactoryInterface $imageFactory,
+        MountManager $mountManager
     ) {
         $this->imageUrlPrefix = $imageUrlPrefix;
         $this->em = $em;
@@ -78,6 +87,7 @@ class ImageFacade
         $this->fileUpload = $fileUpload;
         $this->imageLocator = $imageLocator;
         $this->imageFactory = $imageFactory;
+        $this->mountManager = $mountManager;
     }
 
     /**
@@ -329,9 +339,9 @@ class ImageFacade
         $sourceImages = $this->getAllImagesByEntity($sourceEntity);
         $targetImages = [];
         foreach ($sourceImages as $sourceImage) {
-            $this->filesystem->copy(
-                $this->imageLocator->getAbsoluteImageFilepath($sourceImage, ImageConfig::ORIGINAL_SIZE_NAME),
-                $this->fileUpload->getTemporaryFilepath($sourceImage->getFilename())
+            $this->mountManager->copy(
+                'main://' . $this->imageLocator->getAbsoluteImageFilepath($sourceImage, ImageConfig::ORIGINAL_SIZE_NAME),
+                'local://' . $this->fileUpload->getTemporaryFilepath($sourceImage->getFilename())
             );
 
             $targetImage = $this->imageFactory->create(
