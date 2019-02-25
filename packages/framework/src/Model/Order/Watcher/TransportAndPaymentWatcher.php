@@ -115,8 +115,11 @@ class TransportAndPaymentWatcher
         if (array_key_exists($transport->getId(), $transportPrices)) {
             $rememberedTransportPriceValue = $transportPrices[$transport->getId()];
             if (!($rememberedTransportPriceValue instanceof Money)) {
-                // There might have been a string value in the session from before v7.0.0
-                // In such case, the method warn about the possibility of change of price
+                @trigger_error(
+                    $this->getUnexpectedTypeOfPriceInSessionDeprecationMessage($rememberedTransportPriceValue, __METHOD__),
+                    E_USER_DEPRECATED
+                );
+
                 return true;
             }
 
@@ -153,8 +156,11 @@ class TransportAndPaymentWatcher
         if (array_key_exists($payment->getId(), $paymentPrices)) {
             $rememberedPaymentPriceValue = $paymentPrices[$payment->getId()];
             if (!($rememberedPaymentPriceValue instanceof Money)) {
-                // There might have been a string value in the session from before v7.0.0
-                // In such case, the method warn about the possibility of change of price
+                @trigger_error(
+                    $this->getUnexpectedTypeOfPriceInSessionDeprecationMessage($rememberedPaymentPriceValue, __METHOD__),
+                    E_USER_DEPRECATED
+                );
+
                 return true;
             }
 
@@ -282,5 +288,22 @@ class TransportAndPaymentWatcher
     protected function getRememberedPaymentPrices(): array
     {
         return $this->getRememberedTransportAndPayment()[self::SESSION_PAYMENT_PRICES];
+    }
+
+    /**
+     * @param mixed $value
+     * @param string $methodName
+     * @return string
+     */
+    protected function getUnexpectedTypeOfPriceInSessionDeprecationMessage($value, string $methodName): string
+    {
+        $message = sprintf(
+            'Method "%s" expected the price to be saved as "%s" in session, got "%s" instead.',
+            $methodName,
+            Money::class,
+            \is_object($value) ? \get_class($value) : \gettype($value)
+        );
+
+        return $message . ' The method warned about the possibility of changed price, but it would fail in the future.';
     }
 }
