@@ -44,6 +44,7 @@
 * [Implementing a basic data import](./cookbook/basic-data-import.md)
 * [Creating a Multidomain Design](./cookbook/creating-a-multidomain-design.md)
 * [Working with Multiple Cron Instances](./cookbook/working-with-multiple-cron-instances.md)
+* [Create Basic Grid](./cookbook/create-basic-grid.md)
 
 ## Functional documentation
 * [Behavior of Product Variants](./functional/behavior-of-product-variants.md)
