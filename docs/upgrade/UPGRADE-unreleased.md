@@ -17,6 +17,9 @@ There you can find links to upgrade notes for other versions too.
     - *(low priority)* remove `/var/www/html/var/cache` folder from your `@main_filesystem` filesystem storage if exists, set as local filesystem storage in path `%kernel.project_dir%` by default
 - use `\Shopsys\FrameworkBundle\Component\Money\Money` class for representing monetary values in the whole application ([#821](https://github.com/shopsys/shopsys/pull/821))
     - detailed upgrade instruction will be added shortly, see the PR for more information
+- you need to provide `$temporaryFilenames` parameter anywhere you use `ImageFactoryInterface::create()` and `ImageFacade::uploadImage()` functions ([#869](https://github.com/shopsys/shopsys/pull/869))
+    - the parameter is not nullable now
+- if you're using protected method `ImageProcessor::removeFileIfRenamed()` in your code, remove the usage due to the method was removed and the code was moved to `convertToShopFormatAndGetNewFilename()` ([#869](https://github.com/shopsys/shopsys/pull/869))
 
 ### Tools
 - *(low priority)* add `product-search-export-products` as a dependency of `build-demo` phing target in your `build.xml`

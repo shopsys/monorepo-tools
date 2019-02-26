@@ -92,12 +92,12 @@ class ImageFacade
 
     /**
      * @param object $entity
-     * @param array|null $temporaryFilenames
+     * @param array $temporaryFilenames
      * @param string|null $type
      */
     public function uploadImage($entity, $temporaryFilenames, $type)
     {
-        if ($temporaryFilenames !== null && count($temporaryFilenames) > 0) {
+        if (count($temporaryFilenames) > 0) {
             $entitiesForFlush = [];
             $imageEntityConfig = $this->imageConfig->getImageEntityConfig($entity);
             $entityId = $this->getEntityId($entity);
