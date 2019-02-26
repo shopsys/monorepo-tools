@@ -5,7 +5,8 @@
     "license": "proprietary",
     "autoload": {
         "psr-4": {
-            "Shopsys\\FrameworkBundle\\": "src/"
+            "Shopsys\\FrameworkBundle\\": "src/",
+            "Tests\\FrameworkBundle\\Test\\": "tests/Test/"
         },
         "files": [
             "src/Component/Translation/functions.php",
