@@ -3,11 +3,12 @@
 namespace Shopsys\ProductFeed\HeurekaBundle\Form;
 
 use Shopsys\FormTypesBundle\MultidomainType;
+use Shopsys\FrameworkBundle\Component\Money\Money;
+use Shopsys\FrameworkBundle\Form\Constraints\MoneyRange;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\MoneyType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Translation\TranslatorInterface;
-use Symfony\Component\Validator\Constraints\Range;
 
 class HeurekaProductFormType extends AbstractType
 {
@@ -36,11 +37,10 @@ class HeurekaProductFormType extends AbstractType
             'required' => false,
             'entry_options' => [
                 'currency' => 'CZK',
-                'scale' => 2,
                 'constraints' => [
-                    new Range([
-                        'min' => 0,
-                        'max' => 100,
+                    new MoneyRange([
+                        'min' => Money::zero(),
+                        'max' => Money::create(500),
                     ]),
                 ],
             ],

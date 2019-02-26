@@ -8,6 +8,7 @@ use Doctrine\ORM\Mapping\ManyToMany;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Prezent\Doctrine\Translatable\Annotation as Prezent;
 use Shopsys\FrameworkBundle\Component\Grid\Ordering\OrderableEntityInterface;
+use Shopsys\FrameworkBundle\Component\Money\Money;
 use Shopsys\FrameworkBundle\Model\Localization\AbstractTranslatableEntity;
 use Shopsys\FrameworkBundle\Model\Payment\Payment;
 use Shopsys\FrameworkBundle\Model\Pricing\Currency\Currency;
@@ -203,12 +204,12 @@ class Transport extends AbstractTranslatableEntity implements OrderableEntityInt
     /**
      * @param \Shopsys\FrameworkBundle\Model\Transport\TransportPriceFactoryInterface $transportPriceFactory
      * @param \Shopsys\FrameworkBundle\Model\Pricing\Currency\Currency $currency
-     * @param string $price
+     * @param \Shopsys\FrameworkBundle\Component\Money\Money $price
      */
     public function setPrice(
         TransportPriceFactoryInterface $transportPriceFactory,
         Currency $currency,
-        $price
+        Money $price
     ) {
         foreach ($this->prices as $transportInputPrice) {
             if ($transportInputPrice->getCurrency() === $currency) {

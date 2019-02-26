@@ -4,6 +4,7 @@ namespace Tests\FrameworkBundle\Unit\Model\Payment;
 
 use PHPUnit\Framework\TestCase;
 use Shopsys\FrameworkBundle\Component\EntityExtension\EntityNameResolver;
+use Shopsys\FrameworkBundle\Component\Money\Money;
 use Shopsys\FrameworkBundle\Model\Payment\Payment;
 use Shopsys\FrameworkBundle\Model\Payment\PaymentData;
 use Shopsys\FrameworkBundle\Model\Payment\PaymentPriceCalculation;
@@ -17,6 +18,7 @@ use Shopsys\FrameworkBundle\Model\Pricing\PricingSetting;
 use Shopsys\FrameworkBundle\Model\Pricing\Rounding;
 use Shopsys\FrameworkBundle\Model\Pricing\Vat\Vat;
 use Shopsys\FrameworkBundle\Model\Pricing\Vat\VatData;
+use Tests\FrameworkBundle\Test\IsMoneyEqual;
 
 class PaymentPriceCalculationTest extends TestCase
 {
@@ -25,17 +27,17 @@ class PaymentPriceCalculationTest extends TestCase
         return [
             [
                 'inputPriceType' => PricingSetting::INPUT_PRICE_TYPE_WITHOUT_VAT,
-                'inputPrice' => '6999',
+                'inputPrice' => Money::create(6999),
                 'vatPercent' => '21',
-                'priceWithoutVat' => '6998.78',
-                'priceWithVat' => '8469',
+                'priceWithoutVat' => Money::create('6998.78'),
+                'priceWithVat' => Money::create(8469),
             ],
             [
                 'inputPriceType' => PricingSetting::INPUT_PRICE_TYPE_WITH_VAT,
-                'inputPrice' => '6999.99',
+                'inputPrice' => Money::create('6999.99'),
                 'vatPercent' => '21',
-                'priceWithoutVat' => '5784.8',
-                'priceWithVat' => '7000',
+                'priceWithoutVat' => Money::create('5784.8'),
+                'priceWithVat' => Money::create(7000),
             ],
         ];
     }
@@ -45,37 +47,37 @@ class PaymentPriceCalculationTest extends TestCase
         return [
             [
                 'inputPriceType' => PricingSetting::INPUT_PRICE_TYPE_WITHOUT_VAT,
-                'inputPrice' => '6999',
+                'inputPrice' => Money::create(6999),
                 'vatPercent' => '21',
-                'priceWithoutVat' => '6998.78',
-                'priceWithVat' => '8469',
-                'productsPrice' => new Price('100', '121'),
+                'priceWithoutVat' => Money::create('6998.78'),
+                'priceWithVat' => Money::create(8469),
+                'productsPrice' => new Price(Money::create(100), Money::create(121)),
             ],
             [
                 'inputPriceType' => PricingSetting::INPUT_PRICE_TYPE_WITH_VAT,
-                'inputPrice' => '6999.99',
+                'inputPrice' => Money::create('6999.99'),
                 'vatPercent' => '21',
-                'priceWithoutVat' => '5784.8',
-                'priceWithVat' => '7000',
-                'productsPrice' => new Price('1000', '1210'),
+                'priceWithoutVat' => Money::create('5784.8'),
+                'priceWithVat' => Money::create(7000),
+                'productsPrice' => new Price(Money::create(1000), Money::create(1210)),
             ],
         ];
     }
 
     /**
      * @dataProvider calculateIndependentPriceProvider
-     * @param mixed $inputPriceType
-     * @param mixed $inputPrice
-     * @param mixed $vatPercent
-     * @param mixed $priceWithoutVat
-     * @param mixed $priceWithVat
+     * @param int $inputPriceType
+     * @param \Shopsys\FrameworkBundle\Component\Money\Money $inputPrice
+     * @param string $vatPercent
+     * @param \Shopsys\FrameworkBundle\Component\Money\Money $priceWithoutVat
+     * @param \Shopsys\FrameworkBundle\Component\Money\Money $priceWithVat
      */
     public function testCalculateIndependentPrice(
-        $inputPriceType,
-        $inputPrice,
-        $vatPercent,
-        $priceWithoutVat,
-        $priceWithVat
+        int $inputPriceType,
+        Money $inputPrice,
+        string $vatPercent,
+        Money $priceWithoutVat,
+        Money $priceWithVat
     ) {
         $pricingSettingMock = $this->getMockBuilder(PricingSetting::class)
             ->setMethods(['getInputPriceType', 'getRoundingType'])
@@ -109,28 +111,28 @@ class PaymentPriceCalculationTest extends TestCase
 
         $price = $paymentPriceCalculation->calculateIndependentPrice($payment, $currency);
 
-        $this->assertSame(round($priceWithoutVat, 6), round($price->getPriceWithoutVat(), 6));
-        $this->assertSame(round($priceWithVat, 6), round($price->getPriceWithVat(), 6));
+        $this->assertThat($price->getPriceWithoutVat(), new IsMoneyEqual($priceWithoutVat));
+        $this->assertThat($price->getPriceWithVat(), new IsMoneyEqual($priceWithVat));
     }
 
     /**
      * @dataProvider calculatePriceProvider
-     * @param mixed $inputPriceType
-     * @param mixed $inputPrice
-     * @param mixed $vatPercent
-     * @param mixed $priceWithoutVat
-     * @param mixed $priceWithVat
-     * @param mixed $productsPrice
+     * @param int $inputPriceType
+     * @param \Shopsys\FrameworkBundle\Component\Money\Money $inputPrice
+     * @param string $vatPercent
+     * @param \Shopsys\FrameworkBundle\Component\Money\Money $priceWithoutVat
+     * @param \Shopsys\FrameworkBundle\Component\Money\Money $priceWithVat
+     * @param \Shopsys\FrameworkBundle\Model\Pricing\Price $productsPrice
      */
     public function testCalculatePrice(
-        $inputPriceType,
-        $inputPrice,
-        $vatPercent,
-        $priceWithoutVat,
-        $priceWithVat,
-        $productsPrice
+        int $inputPriceType,
+        Money $inputPrice,
+        string $vatPercent,
+        Money $priceWithoutVat,
+        Money $priceWithVat,
+        Price $productsPrice
     ) {
-        $priceLimit = 1000;
+        $priceLimit = Money::create(1000);
         $pricingSettingMock = $this->getMockBuilder(PricingSetting::class)
             ->setMethods(['getInputPriceType', 'getRoundingType', 'getFreeTransportAndPaymentPriceLimit'])
             ->disableOriginalConstructor()
@@ -166,12 +168,12 @@ class PaymentPriceCalculationTest extends TestCase
 
         $price = $paymentPriceCalculation->calculatePrice($payment, $currency, $productsPrice, 1);
 
-        if ($productsPrice->getPriceWithVat() > $priceLimit) {
-            $this->assertSame(round(0, 6), round($price->getPriceWithoutVat(), 6));
-            $this->assertSame(round(0, 6), round($price->getPriceWithVat(), 6));
+        if ($productsPrice->getPriceWithVat()->isGreaterThan($priceLimit)) {
+            $this->assertThat($price->getPriceWithoutVat(), new IsMoneyEqual(Money::zero()));
+            $this->assertThat($price->getPriceWithVat(), new IsMoneyEqual(Money::zero()));
         } else {
-            $this->assertSame(round($priceWithoutVat, 6), round($price->getPriceWithoutVat(), 6));
-            $this->assertSame(round($priceWithVat, 6), round($price->getPriceWithVat(), 6));
+            $this->assertThat($price->getPriceWithoutVat(), new IsMoneyEqual($priceWithoutVat));
+            $this->assertThat($price->getPriceWithVat(), new IsMoneyEqual($priceWithVat));
         }
     }
 }

@@ -3,6 +3,7 @@
 namespace Tests\ShopBundle\Functional\Model\Product;
 
 use DateTime;
+use Shopsys\FrameworkBundle\Component\Money\Money;
 use Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroupFacade;
 use Shopsys\FrameworkBundle\Model\Pricing\Vat\Vat;
 use Shopsys\FrameworkBundle\Model\Pricing\Vat\VatData;
@@ -45,16 +46,16 @@ class ProductVisibilityRepositoryTest extends TransactionFunctionalTestCase
         $productData->categoriesByDomainId = [1 => [$category]];
         $productData->availability = $this->getReference(AvailabilityDataFixture::AVAILABILITY_IN_STOCK);
         $productData->unit = $this->getReference(UnitDataFixture::UNIT_PIECES);
-        $this->setPriceForAllDomains($productData, 100);
+        $this->setPriceForAllDomains($productData, Money::create(100));
 
         return $productData;
     }
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\Product\ProductData $productData
-     * @param $price
+     * @param \Shopsys\FrameworkBundle\Component\Money\Money|null $price
      */
-    private function setPriceForAllDomains(ProductData $productData, $price)
+    private function setPriceForAllDomains(ProductData $productData, ?Money $price)
     {
         /** @var \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroupFacade $pricingGroupFacade */
         $pricingGroupFacade = $this->getContainer()->get(PricingGroupFacade::class);
@@ -238,7 +239,7 @@ class ProductVisibilityRepositoryTest extends TransactionFunctionalTestCase
         $productPriceRecalculator = $this->getContainer()->get(ProductPriceRecalculator::class);
 
         $productData = $this->getDefaultProductData();
-        $this->setPriceForAllDomains($productData, 0);
+        $this->setPriceForAllDomains($productData, Money::zero());
         $product1 = $productFacade->create($productData);
 
         $this->setPriceForAllDomains($productData, null);
@@ -400,13 +401,13 @@ class ProductVisibilityRepositoryTest extends TransactionFunctionalTestCase
         $productPriceRecalculator = $this->getContainer()->get(ProductPriceRecalculator::class);
 
         $productData = $this->getDefaultProductData();
-        $this->setPriceForAllDomains($productData, 10);
+        $this->setPriceForAllDomains($productData, Money::create(10));
 
         /** @var \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroup $pricingGroup */
         $pricingGroup = $this->getReference(PricingGroupDataFixture::PRICING_GROUP_ORDINARY_DOMAIN_1);
         $pricingGroupWithZeroPriceId = $pricingGroup->getId();
 
-        $productData->manualInputPricesByPricingGroupId[$pricingGroupWithZeroPriceId] = 0;
+        $productData->manualInputPricesByPricingGroupId[$pricingGroupWithZeroPriceId] = Money::zero();
 
         $product = $productFacade->create($productData);
         $productPriceRecalculator->runImmediateRecalculations();
@@ -441,7 +442,7 @@ class ProductVisibilityRepositoryTest extends TransactionFunctionalTestCase
 
         $allPricingGroups = $pricingGroupFacade->getAll();
         foreach ($allPricingGroups as $pricingGroup) {
-            $productData->manualInputPricesByPricingGroupId[$pricingGroup->getId()] = 10;
+            $productData->manualInputPricesByPricingGroupId[$pricingGroup->getId()] = Money::create(10);
         }
 
         /** @var \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroup $pricingGroup */

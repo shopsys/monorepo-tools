@@ -173,9 +173,9 @@ class TransportFacade
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\Transport\Transport $transport
-     * @param string[] $pricesByCurrencyId
+     * @param \Shopsys\FrameworkBundle\Component\Money\Money[] $pricesByCurrencyId
      */
-    protected function updateTransportPrices(Transport $transport, $pricesByCurrencyId)
+    protected function updateTransportPrices(Transport $transport, array $pricesByCurrencyId)
     {
         foreach ($this->currencyFacade->getAll() as $currency) {
             $price = $pricesByCurrencyId[$currency->getId()];
@@ -198,9 +198,9 @@ class TransportFacade
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\Pricing\Currency\Currency $currency
-     * @return string[]
+     * @return \Shopsys\FrameworkBundle\Component\Money\Money[]
      */
-    public function getTransportPricesWithVatIndexedByTransportId(Currency $currency)
+    public function getTransportPricesWithVatIndexedByTransportId(Currency $currency): array
     {
         $transportPricesWithVatByTransportId = [];
         $transports = $this->getAllIncludingDeleted();

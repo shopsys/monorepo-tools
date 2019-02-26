@@ -3,6 +3,7 @@
 namespace Tests\ShopBundle\Functional\Model\Cart;
 
 use ReflectionClass;
+use Shopsys\FrameworkBundle\Component\Money\Money;
 use Shopsys\FrameworkBundle\Model\Cart\Cart;
 use Shopsys\FrameworkBundle\Model\Cart\Item\CartItem;
 use Shopsys\FrameworkBundle\Model\Cart\Item\CartItemFactory;
@@ -45,9 +46,9 @@ class CartTest extends TransactionFunctionalTestCase
 
         $cart = new Cart($customerIdentifier->getCartIdentifier());
 
-        $cartItem1 = new CartItem($cart, $product1, 1, '0.0');
+        $cartItem1 = new CartItem($cart, $product1, 1, Money::zero());
         $cart->addItem($cartItem1);
-        $cartItem2 = new CartItem($cart, $product2, 3, '0.0');
+        $cartItem2 = new CartItem($cart, $product2, 3, Money::zero());
         $cart->addItem($cartItem2);
 
         $em->persist($cart);
@@ -74,7 +75,7 @@ class CartTest extends TransactionFunctionalTestCase
 
         $cart = new Cart($customerIdentifier->getCartIdentifier());
 
-        $cartItem = new CartItem($cart, $product, 1, '0.0');
+        $cartItem = new CartItem($cart, $product, 1, Money::zero());
         $cart->addItem($cartItem);
 
         $cart->clean();
@@ -105,12 +106,12 @@ class CartTest extends TransactionFunctionalTestCase
         $customerIdentifier2 = new CustomerIdentifier($cartIdentifier2);
         $mergingCart = new Cart($customerIdentifier2->getCartIdentifier());
 
-        $cartItem = new CartItem($mainCart, $product1, 2, '0.0');
+        $cartItem = new CartItem($mainCart, $product1, 2, Money::zero());
         $mainCart->addItem($cartItem);
 
-        $cartItem1 = new CartItem($mergingCart, $product1, 3, '0.0');
+        $cartItem1 = new CartItem($mergingCart, $product1, 3, Money::zero());
         $mergingCart->addItem($cartItem1);
-        $cartItem2 = new CartItem($mergingCart, $product2, 1, '0.0');
+        $cartItem2 = new CartItem($mergingCart, $product2, 1, Money::zero());
         $mergingCart->addItem($cartItem2);
 
         $mainCart->mergeWithCart($mergingCart, $cartItemFactory);
@@ -211,7 +212,7 @@ class CartTest extends TransactionFunctionalTestCase
 
         $cart = new Cart($customerIdentifier->getCartIdentifier());
 
-        $cartItem = new CartItem($cart, $product, 1, '0.0');
+        $cartItem = new CartItem($cart, $product, 1, Money::zero());
         $cart->addItem($cartItem);
 
         $quantity = 2;
@@ -246,7 +247,7 @@ class CartTest extends TransactionFunctionalTestCase
 
         $cart = new Cart($customerIdentifier->getCartIdentifier());
 
-        $cartItem = new CartItem($cart, $product, 1, '0.0');
+        $cartItem = new CartItem($cart, $product, 1, Money::zero());
         $cart->addItem($cartItem);
 
         $quantity = 2;

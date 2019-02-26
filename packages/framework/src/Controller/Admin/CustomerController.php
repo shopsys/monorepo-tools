@@ -6,6 +6,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Shopsys\FrameworkBundle\Component\Domain\AdminDomainTabsFacade;
 use Shopsys\FrameworkBundle\Component\Domain\Domain;
 use Shopsys\FrameworkBundle\Component\Grid\GridFactory;
+use Shopsys\FrameworkBundle\Component\Grid\MoneyConvertingDataSourceDecorator;
 use Shopsys\FrameworkBundle\Component\Grid\QueryBuilderDataSource;
 use Shopsys\FrameworkBundle\Component\Router\DomainRouterFactory;
 use Shopsys\FrameworkBundle\Component\Router\Security\Annotation\CsrfProtection;
@@ -185,7 +186,8 @@ class CustomerController extends AdminBaseController
             $quickSearchForm->getData()
         );
 
-        $dataSource = new QueryBuilderDataSource($queryBuilder, 'u.id');
+        $innerDataSource = new QueryBuilderDataSource($queryBuilder, 'u.id');
+        $dataSource = new MoneyConvertingDataSourceDecorator($innerDataSource, ['ordersSumPrice']);
 
         $grid = $this->gridFactory->create('customerList', $dataSource);
         $grid->enablePaging();

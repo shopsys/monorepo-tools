@@ -9,6 +9,7 @@ use Shopsys\FrameworkBundle\Component\Domain\Domain;
 use Shopsys\FrameworkBundle\Component\Plugin\PluginCrudExtensionFacade;
 use Shopsys\FrameworkBundle\Form\Admin\Product\Parameter\ProductParameterValueFormType;
 use Shopsys\FrameworkBundle\Form\CategoriesType;
+use Shopsys\FrameworkBundle\Form\Constraints\NotNegativeMoneyAmount;
 use Shopsys\FrameworkBundle\Form\Constraints\UniqueProductParameters;
 use Shopsys\FrameworkBundle\Form\DatePickerType;
 use Shopsys\FrameworkBundle\Form\DisplayOnlyType;
@@ -641,20 +642,15 @@ class ProductFormType extends AbstractType
             'disabled' => $this->isProductMainVariant($product),
         ]);
         foreach ($this->pricingGroupFacade->getAll() as $pricingGroup) {
-            $manualInputPricesByPricingGroup
-                ->add($pricingGroup->getId(), MoneyType::class, [
-                    'currency' => false,
-                    'scale' => 6,
-                    'required' => false,
-                    'invalid_message' => 'Please enter price in correct format (positive number with decimal separator)',
-                    'constraints' => [
-                        new Constraints\GreaterThanOrEqual([
-                            'value' => 0,
-                            'message' => 'Price must be greater or equal to {{ compared_value }}',
-                        ]),
-                    ],
-                    'label' => $pricingGroup->getName(),
-                ]);
+            $manualInputPricesByPricingGroup->add($pricingGroup->getId(), MoneyType::class, [
+                'scale' => 6,
+                'required' => false,
+                'invalid_message' => 'Please enter price in correct format (positive number with decimal separator)',
+                'constraints' => [
+                    new NotNegativeMoneyAmount(['message' => 'Price must be greater or equal to zero']),
+                ],
+                'label' => $pricingGroup->getName(),
+            ]);
         }
         $productCalculatedPricesGroup->add($manualInputPricesByPricingGroup);
         $builderPricesGroup->add($productCalculatedPricesGroup);

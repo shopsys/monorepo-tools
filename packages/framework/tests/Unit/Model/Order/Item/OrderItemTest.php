@@ -6,6 +6,7 @@ namespace Tests\FrameworkBundle\Unit\Model\Order\Item;
 
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
+use Shopsys\FrameworkBundle\Component\Money\Money;
 use Shopsys\FrameworkBundle\Model\Order\Item\Exception\MainVariantCannotBeOrderedException;
 use Shopsys\FrameworkBundle\Model\Order\Item\Exception\WrongItemTypeException;
 use Shopsys\FrameworkBundle\Model\Order\Item\OrderItem;
@@ -17,6 +18,7 @@ use Shopsys\FrameworkBundle\Model\Product\Product;
 use Shopsys\FrameworkBundle\Model\Product\ProductCategoryDomainFactory;
 use Shopsys\FrameworkBundle\Model\Product\ProductData;
 use Shopsys\FrameworkBundle\Model\Transport\Transport;
+use Tests\FrameworkBundle\Test\IsMoneyEqual;
 
 class OrderItemTest extends TestCase
 {
@@ -41,6 +43,8 @@ class OrderItemTest extends TestCase
         $orderItem = $this->createOrderTransport();
 
         $orderItemData = new OrderItemData();
+        $orderItemData->priceWithVat = Money::zero();
+        $orderItemData->priceWithoutVat = Money::zero();
         $transport = $this->createTransportMock();
         $orderItemData->transport = $transport;
         $orderItem->edit($orderItemData);
@@ -69,6 +73,8 @@ class OrderItemTest extends TestCase
         $orderItem = $this->createOrderPayment();
 
         $orderItemData = new OrderItemData();
+        $orderItemData->priceWithVat = Money::zero();
+        $orderItemData->priceWithoutVat = Money::zero();
         $payment = $this->createPaymentMock();
         $orderItemData->payment = $payment;
         $orderItem->edit($orderItemData);
@@ -104,8 +110,8 @@ class OrderItemTest extends TestCase
     {
         $orderItemData = new OrderItemData();
         $orderItemData->name = 'newName';
-        $orderItemData->priceWithVat = 20;
-        $orderItemData->priceWithoutVat = 30;
+        $orderItemData->priceWithVat = Money::create(20);
+        $orderItemData->priceWithoutVat = Money::create(30);
         $orderItemData->quantity = 2;
         $orderItemData->vatPercent = 10;
 
@@ -113,8 +119,8 @@ class OrderItemTest extends TestCase
         $orderItem->edit($orderItemData);
 
         $this->assertSame('newName', $orderItem->getName());
-        $this->assertSame(20, $orderItem->getPriceWithVat());
-        $this->assertSame(30, $orderItem->getPriceWithoutVat());
+        $this->assertThat($orderItem->getPriceWithVat(), new IsMoneyEqual(Money::create(20)));
+        $this->assertThat($orderItem->getPriceWithoutVat(), new IsMoneyEqual(Money::create(30)));
         $this->assertSame(2, $orderItem->getQuantity());
         $this->assertSame(10, $orderItem->getvatPercent());
     }
@@ -123,8 +129,8 @@ class OrderItemTest extends TestCase
     {
         $orderItemData = new OrderItemData();
         $orderItemData->name = 'newName';
-        $orderItemData->priceWithVat = 20;
-        $orderItemData->priceWithoutVat = 30;
+        $orderItemData->priceWithVat = Money::create(20);
+        $orderItemData->priceWithoutVat = Money::create(30);
         $orderItemData->quantity = 2;
         $orderItemData->vatPercent = 10;
 
@@ -132,8 +138,8 @@ class OrderItemTest extends TestCase
         $orderItem->edit($orderItemData);
 
         $this->assertSame('newName', $orderItem->getName());
-        $this->assertSame(20, $orderItem->getPriceWithVat());
-        $this->assertSame(30, $orderItem->getPriceWithoutVat());
+        $this->assertThat($orderItem->getPriceWithVat(), new IsMoneyEqual(Money::create(20)));
+        $this->assertThat($orderItem->getPriceWithoutVat(), new IsMoneyEqual(Money::create(30)));
         $this->assertSame(2, $orderItem->getQuantity());
         $this->assertSame(10, $orderItem->getvatPercent());
     }
@@ -156,7 +162,7 @@ class OrderItemTest extends TestCase
         $orderPayment = new OrderItem(
             $this->createOrderMock(),
             '',
-            new Price(10, 12),
+            new Price(Money::create(10), Money::create(12)),
             0.2,
             1,
             OrderItem::TYPE_PAYMENT,
@@ -175,7 +181,7 @@ class OrderItemTest extends TestCase
         $orderTransport = new OrderItem(
             $this->createOrderMock(),
             '',
-            new Price(10, 12),
+            new Price(Money::create(10), Money::create(12)),
             0.2,
             1,
             OrderItem::TYPE_TRANSPORT,
@@ -195,7 +201,7 @@ class OrderItemTest extends TestCase
         $orderProduct = new OrderItem(
             $this->createOrderMock(),
             '',
-            new Price(10, 12),
+            new Price(Money::create(10), Money::create(12)),
             0.2,
             1,
             OrderItem::TYPE_PRODUCT,

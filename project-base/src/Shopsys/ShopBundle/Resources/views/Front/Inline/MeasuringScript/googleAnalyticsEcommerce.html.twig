@@ -4,9 +4,9 @@ ga('require', 'ecommerce');
 
 ga('ecommerce:addTransaction', {
     'id': '{{ order.number|escape('js') }}',
-    'revenue': '{{ order.totalPriceWithVat }}',
-    'shipping': '{{ order.transportAndPaymentPrice.priceWithVat }}',
-    'tax': '{{ order.totalVatAmount }}',
+    'revenue': '{{ order.totalPriceWithVat|moneyFormat }}',
+    'shipping': '{{ order.transportAndPaymentPrice.priceWithVat|moneyFormat }}',
+    'tax': '{{ order.totalVatAmount|moneyFormat }}',
     'currency': '{{ order.currency.code|escape('js') }}'
 });
 
@@ -21,7 +21,7 @@ ga('ecommerce:addTransaction', {
                 'category': '{{ productMainCategory.name|escape('js') }}',
             {% endif %}
         {% endif %}
-        'price': '{{ orderProduct.priceWithVat }}',
+        'price': '{{ orderProduct.priceWithVat|moneyFormat }}',
         'quantity': '{{ orderProduct.quantity }}'
     });
 {% endfor %}

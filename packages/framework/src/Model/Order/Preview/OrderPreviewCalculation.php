@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Shopsys\FrameworkBundle\Model\Order\Preview;
 
 use Shopsys\FrameworkBundle\Model\Customer\User;
@@ -68,18 +70,18 @@ class OrderPreviewCalculation
      * @param \Shopsys\FrameworkBundle\Model\Transport\Transport|null $transport
      * @param \Shopsys\FrameworkBundle\Model\Payment\Payment|null $payment
      * @param \Shopsys\FrameworkBundle\Model\Customer\User|null $user
-     * @param float|null $promoCodeDiscountPercent
+     * @param string|null $promoCodeDiscountPercent
      * @return \Shopsys\FrameworkBundle\Model\Order\Preview\OrderPreview
      */
     public function calculatePreview(
         Currency $currency,
-        $domainId,
+        int $domainId,
         array $quantifiedProducts,
         Transport $transport = null,
         Payment $payment = null,
         User $user = null,
-        $promoCodeDiscountPercent = null
-    ) {
+        string $promoCodeDiscountPercent = null
+    ): OrderPreview {
         $quantifiedItemsPrices = $this->quantifiedProductPriceCalculation->calculatePrices(
             $quantifiedProducts,
             $domainId,
@@ -158,7 +160,7 @@ class OrderPreviewCalculation
         Price $productsPrice,
         Price $transportPrice = null,
         Price $paymentPrice = null
-    ) {
+    ): ?Price {
         $totalPrice = $this->calculateTotalPrice(
             $productsPrice,
             $transportPrice,
@@ -181,8 +183,8 @@ class OrderPreviewCalculation
         Price $transportPrice = null,
         Price $paymentPrice = null,
         Price $roundingPrice = null
-    ) {
-        $totalPrice = new Price(0, 0);
+    ): Price {
+        $totalPrice = Price::zero();
 
         $totalPrice = $totalPrice->add($productsPrice);
 
@@ -206,18 +208,17 @@ class OrderPreviewCalculation
      * @param \Shopsys\FrameworkBundle\Model\Pricing\Price[] $quantifiedItemsDiscounts
      * @return \Shopsys\FrameworkBundle\Model\Pricing\Price
      */
-    protected function getProductsPrice(array $quantifiedItemsPrices, array $quantifiedItemsDiscounts)
+    protected function getProductsPrice(array $quantifiedItemsPrices, array $quantifiedItemsDiscounts): Price
     {
-        $finalPrice = new Price(0, 0);
+        $finalPrice = Price::zero();
 
         foreach ($quantifiedItemsPrices as $quantifiedItemPrice) {
             $finalPrice = $finalPrice->add($quantifiedItemPrice->getTotalPrice());
         }
 
-        foreach ($quantifiedItemsDiscounts as $discount) {
-            if ($discount !== null) {
-                /* @var $discount \Shopsys\FrameworkBundle\Model\Pricing\Price */
-                $finalPrice = $finalPrice->subtract($discount);
+        foreach ($quantifiedItemsDiscounts as $quantifiedItemDiscount) {
+            if ($quantifiedItemDiscount !== null) {
+                $finalPrice = $finalPrice->subtract($quantifiedItemDiscount);
             }
         }
 

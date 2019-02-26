@@ -50,11 +50,14 @@ class GroupedScalarHydrator extends AbstractHydrator
 
             $fieldName = $cacheKeyInfo['fieldName'];
 
+            /** @var \Doctrine\DBAL\Types\Type $type */
+            $type = $cacheKeyInfo['type'];
+
             if (isset($cacheKeyInfo['isScalar'])) {
+                $value = $type->convertToPHPValue($value, $this->_platform);
                 $rowData[$fieldName] = $value;
             } else {
                 $dqlAlias = $cacheKeyInfo['dqlAlias'];
-                $type = $cacheKeyInfo['type'];
                 $value = $type ? $type->convertToPHPValue($value, $this->_platform) : $value;
 
                 $rowData[$dqlAlias][$fieldName] = $value;

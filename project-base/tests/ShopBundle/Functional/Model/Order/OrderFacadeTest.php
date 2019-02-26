@@ -3,6 +3,7 @@
 namespace Tests\ShopBundle\Functional\Model\Order;
 
 use Shopsys\FrameworkBundle\Component\DataFixture\PersistentReferenceFacade;
+use Shopsys\FrameworkBundle\Component\Money\Money;
 use Shopsys\FrameworkBundle\Model\Cart\CartFacade;
 use Shopsys\FrameworkBundle\Model\Cart\Item\CartItemFactory;
 use Shopsys\FrameworkBundle\Model\Order\Item\OrderItemData;
@@ -134,15 +135,15 @@ class OrderFacadeTest extends TransactionFunctionalTestCase
 
         $orderItemData1 = new OrderItemData();
         $orderItemData1->name = 'itemName1';
-        $orderItemData1->priceWithoutVat = 100;
-        $orderItemData1->priceWithVat = 121;
+        $orderItemData1->priceWithoutVat = Money::create(100);
+        $orderItemData1->priceWithVat = Money::create(121);
         $orderItemData1->vatPercent = 21;
         $orderItemData1->quantity = 3;
 
         $orderItemData2 = new OrderItemData();
         $orderItemData2->name = 'itemName2';
-        $orderItemData2->priceWithoutVat = 333;
-        $orderItemData2->priceWithVat = 333;
+        $orderItemData2->priceWithoutVat = Money::create(333);
+        $orderItemData2->priceWithVat = Money::create(333);
         $orderItemData2->vatPercent = 0;
         $orderItemData2->quantity = 1;
 

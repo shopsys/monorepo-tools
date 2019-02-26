@@ -15,7 +15,7 @@
         {% if item.imgUrl -%}
             <IMGURL>{{ item.imgUrl }}</IMGURL>
         {% endif -%}
-        <PRICE_VAT>{{ item.price.priceWithVat|number_format(2, ',', '') }}</PRICE_VAT>
+        <PRICE_VAT>{{ item.price.priceWithVat|moneyFormat(2, ',') }}</PRICE_VAT>
         {% if item.ean -%}
             <EAN>{{ item.ean }}</EAN>
         {% endif -%}
@@ -35,7 +35,7 @@
             </PARAM>
         {% endfor -%}
         {% if item.cpc is not null -%}
-            <HEUREKA_CPC>{{ item.cpc|number_format(2, ',', '') }}</HEUREKA_CPC>
+            <HEUREKA_CPC>{{ item.cpc|moneyFormat(2, ',') }}</HEUREKA_CPC>
         {% endif -%}
     </SHOPITEM>
 {% endblock %}

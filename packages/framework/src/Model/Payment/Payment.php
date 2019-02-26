@@ -7,6 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Prezent\Doctrine\Translatable\Annotation as Prezent;
 use Shopsys\FrameworkBundle\Component\Grid\Ordering\OrderableEntityInterface;
+use Shopsys\FrameworkBundle\Component\Money\Money;
 use Shopsys\FrameworkBundle\Model\Localization\AbstractTranslatableEntity;
 use Shopsys\FrameworkBundle\Model\Payment\Exception\PaymentDomainNotFoundException;
 use Shopsys\FrameworkBundle\Model\Pricing\Currency\Currency;
@@ -190,12 +191,12 @@ class Payment extends AbstractTranslatableEntity implements OrderableEntityInter
     /**
      * @param \Shopsys\FrameworkBundle\Model\Payment\PaymentPriceFactoryInterface $paymentPriceFactory
      * @param \Shopsys\FrameworkBundle\Model\Pricing\Currency\Currency $currency
-     * @param string $price
+     * @param \Shopsys\FrameworkBundle\Component\Money\Money $price
      */
     public function setPrice(
         PaymentPriceFactoryInterface $paymentPriceFactory,
         Currency $currency,
-        $price
+        Money $price
     ) {
         foreach ($this->prices as $paymentInputPrice) {
             if ($paymentInputPrice->getCurrency() === $currency) {

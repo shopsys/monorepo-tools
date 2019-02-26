@@ -6,6 +6,7 @@ use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Shopsys\FrameworkBundle\Component\Domain\Domain;
+use Shopsys\FrameworkBundle\Component\Money\Money;
 use Shopsys\FrameworkBundle\Model\Customer\User;
 use Shopsys\FrameworkBundle\Model\Order\Item\OrderItem;
 use Shopsys\FrameworkBundle\Model\Order\Item\OrderItemFactoryInterface;
@@ -95,23 +96,23 @@ class Order
     protected $status;
 
     /**
-     * @var string
+     * @var \Shopsys\FrameworkBundle\Component\Money\Money
      *
-     * @ORM\Column(type="decimal", precision=20, scale=6)
+     * @ORM\Column(type="money", precision=20, scale=6)
      */
     protected $totalPriceWithVat;
 
     /**
-     * @var string
+     * @var \Shopsys\FrameworkBundle\Component\Money\Money
      *
-     * @ORM\Column(type="decimal", precision=20, scale=6)
+     * @ORM\Column(type="money", precision=20, scale=6)
      */
     protected $totalPriceWithoutVat;
 
     /**
-     * @var string
+     * @var \Shopsys\FrameworkBundle\Component\Money\Money
      *
-     * @ORM\Column(type="decimal", precision=20, scale=6)
+     * @ORM\Column(type="money", precision=20, scale=6)
      */
     protected $totalProductPriceWithVat;
 
@@ -543,33 +544,33 @@ class Order
     }
 
     /**
-     * @return string
+     * @return \Shopsys\FrameworkBundle\Component\Money\Money
      */
-    public function getTotalPriceWithVat()
+    public function getTotalPriceWithVat(): Money
     {
         return $this->totalPriceWithVat;
     }
 
     /**
-     * @return string
+     * @return \Shopsys\FrameworkBundle\Component\Money\Money
      */
-    public function getTotalPriceWithoutVat()
+    public function getTotalPriceWithoutVat(): Money
     {
         return $this->totalPriceWithoutVat;
     }
 
     /**
-     * @return string
+     * @return \Shopsys\FrameworkBundle\Component\Money\Money
      */
-    public function getTotalVatAmount()
+    public function getTotalVatAmount(): Money
     {
-        return $this->totalPriceWithVat - $this->totalPriceWithoutVat;
+        return $this->totalPriceWithVat->subtract($this->totalPriceWithoutVat);
     }
 
     /**
-     * @return string
+     * @return \Shopsys\FrameworkBundle\Component\Money\Money
      */
-    public function getTotalProductPriceWithVat()
+    public function getTotalProductPriceWithVat(): Money
     {
         return $this->totalProductPriceWithVat;
     }
@@ -681,7 +682,7 @@ class Order
     public function getTransportAndPaymentPrice()
     {
         $transportAndPaymentItems = $this->getTransportAndPaymentItems();
-        $totalPrice = new Price(0, 0);
+        $totalPrice = Price::zero();
 
         foreach ($transportAndPaymentItems as $item) {
             $itemPrice = new Price($item->getPriceWithoutVat(), $item->getPriceWithVat());
@@ -1163,10 +1164,7 @@ class Order
         $orderItemFactory->createProduct(
             $orderItem->getOrder(),
             $name,
-            new Price(
-                -$quantifiedItemDiscount->getPriceWithoutVat(),
-                -$quantifiedItemDiscount->getPriceWithVat()
-            ),
+            $quantifiedItemDiscount->inverse(),
             $orderItem->getVatPercent(),
             1,
             null,

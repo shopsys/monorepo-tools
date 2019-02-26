@@ -162,14 +162,14 @@ class Cart
     /**
      * @return \Shopsys\FrameworkBundle\Model\Order\Item\QuantifiedProduct[]
      */
-    public function getQuantifiedProductsIndexedByItemId()
+    public function getQuantifiedProducts()
     {
-        $quantifiedProductsByItemId = [];
+        $quantifiedProducts = [];
         foreach ($this->items as $item) {
-            $quantifiedProductsByItemId[$item->getId()] = new QuantifiedProduct($item->getProduct(), $item->getQuantity());
+            $quantifiedProducts[] = new QuantifiedProduct($item->getProduct(), $item->getQuantity());
         }
 
-        return $quantifiedProductsByItemId;
+        return $quantifiedProducts;
     }
 
     /**

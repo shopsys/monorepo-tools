@@ -2,6 +2,7 @@
 
 namespace Tests\ShopBundle\Functional\Model\Cart;
 
+use Shopsys\FrameworkBundle\Component\Money\Money;
 use Shopsys\FrameworkBundle\Model\Cart\Cart;
 use Shopsys\FrameworkBundle\Model\Cart\Item\CartItem;
 use Shopsys\FrameworkBundle\Model\Customer\CustomerIdentifier;
@@ -48,9 +49,9 @@ class CartItemTest extends TransactionFunctionalTestCase
 
         $cart = new Cart($customerIdentifier->getCartIdentifier());
 
-        $cartItem1 = new CartItem($cart, $product1, 1, '0.0');
-        $cartItem2 = new CartItem($cart, $product1, 3, '0.0');
-        $cartItem3 = new CartItem($cart, $product2, 1, '0.0');
+        $cartItem1 = new CartItem($cart, $product1, 1, Money::zero());
+        $cartItem2 = new CartItem($cart, $product1, 3, Money::zero());
+        $cartItem3 = new CartItem($cart, $product2, 1, Money::zero());
 
         $this->assertTrue($cartItem1->isSimilarItemAs($cartItem2));
         $this->assertFalse($cartItem1->isSimilarItemAs($cartItem3));

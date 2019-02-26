@@ -175,7 +175,7 @@ class PaymentFacade
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\Payment\Payment $payment
-     * @param string[] $pricesByCurrencyId
+     * @param \Shopsys\FrameworkBundle\Component\Money\Money[] $pricesByCurrencyId
      */
     protected function updatePaymentPrices(Payment $payment, $pricesByCurrencyId)
     {
@@ -195,9 +195,9 @@ class PaymentFacade
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\Pricing\Currency\Currency $currency
-     * @return string[]
+     * @return \Shopsys\FrameworkBundle\Component\Money\Money[]
      */
-    public function getPaymentPricesWithVatIndexedByPaymentId(Currency $currency)
+    public function getPaymentPricesWithVatIndexedByPaymentId(Currency $currency): array
     {
         $paymentPricesWithVatByPaymentId = [];
         $payments = $this->getAllIncludingDeleted();

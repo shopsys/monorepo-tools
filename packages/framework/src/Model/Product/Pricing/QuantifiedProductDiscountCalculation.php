@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Shopsys\FrameworkBundle\Model\Product\Pricing;
 
 use Shopsys\FrameworkBundle\Model\Order\Item\QuantifiedItemPrice;
@@ -33,31 +35,37 @@ class QuantifiedProductDiscountCalculation
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\Order\Item\QuantifiedItemPrice $quantifiedItemPrice
-     * @param float $discountPercent
-     * @return \Shopsys\FrameworkBundle\Model\Pricing\Price
+     * @param string $discountPercent
+     * @return \Shopsys\FrameworkBundle\Model\Pricing\Price|null
      */
-    protected function calculateDiscount(QuantifiedItemPrice $quantifiedItemPrice, $discountPercent)
+    protected function calculateDiscount(QuantifiedItemPrice $quantifiedItemPrice, string $discountPercent): ?Price
     {
         $vat = $quantifiedItemPrice->getVat();
+        $multiplier = (string)($discountPercent / 100);
         $priceWithVat = $this->rounding->roundPriceWithVat(
-            $quantifiedItemPrice->getTotalPrice()->getPriceWithVat() * $discountPercent / 100
+            $quantifiedItemPrice->getTotalPrice()->getPriceWithVat()->multiply($multiplier)
         );
+
+        if ($priceWithVat->isZero()) {
+            return null;
+        }
+
         $priceVatAmount = $this->priceCalculation->getVatAmountByPriceWithVat($priceWithVat, $vat);
-        $priceWithoutVat = $priceWithVat - $priceVatAmount;
+        $priceWithoutVat = $priceWithVat->subtract($priceVatAmount);
 
         return new Price($priceWithoutVat, $priceWithVat);
     }
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\Order\Item\QuantifiedItemPrice[] $quantifiedItemsPrices
-     * @param float|null $discountPercent
+     * @param string|null $discountPercent
      * @return \Shopsys\FrameworkBundle\Model\Pricing\Price[]
      */
-    public function calculateDiscounts(array $quantifiedItemsPrices, $discountPercent)
+    public function calculateDiscounts(array $quantifiedItemsPrices, ?string $discountPercent): array
     {
         $quantifiedItemsDiscounts = [];
         foreach ($quantifiedItemsPrices as $quantifiedItemIndex => $quantifiedItemPrice) {
-            if ($discountPercent === 0.0 || $discountPercent === null) {
+            if ($discountPercent === null) {
                 $quantifiedItemsDiscounts[$quantifiedItemIndex] = null;
             } else {
                 $quantifiedItemsDiscounts[$quantifiedItemIndex] = $this->calculateDiscount($quantifiedItemPrice, $discountPercent);

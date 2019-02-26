@@ -3,6 +3,7 @@
 namespace Tests\FrameworkBundle\Unit\Model\Product\Pricing;
 
 use PHPUnit\Framework\TestCase;
+use Shopsys\FrameworkBundle\Component\Money\Money;
 use Shopsys\FrameworkBundle\Model\Pricing\BasePriceCalculation;
 use Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroup;
 use Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroupData;
@@ -114,24 +115,24 @@ class ProductPriceCalculationTest extends TestCase
         return [
             [
                 'prices' => [
-                    new Price(20, 30),
-                    new Price(10, 15),
-                    new Price(100, 120),
+                    new Price(Money::create(20), Money::create(30)),
+                    new Price(Money::create(10), Money::create(15)),
+                    new Price(Money::create(100), Money::create(120)),
                 ],
-                'minimumPrice' => new Price(10, 15),
+                'minimumPrice' => new Price(Money::create(10), Money::create(15)),
             ],
             [
                 'prices' => [
-                    new Price(10, 15),
+                    new Price(Money::create(10), Money::create(15)),
                 ],
-                'minimumPrice' => new Price(10, 15),
+                'minimumPrice' => new Price(Money::create(10), Money::create(15)),
             ],
             [
                 'prices' => [
-                    new Price(10, 15),
-                    new Price(10, 15),
+                    new Price(Money::create(10), Money::create(15)),
+                    new Price(Money::create(10), Money::create(15)),
                 ],
-                'minimumPrice' => new Price(10, 15),
+                'minimumPrice' => new Price(Money::create(10), Money::create(15)),
             ],
         ];
     }
@@ -156,28 +157,21 @@ class ProductPriceCalculationTest extends TestCase
         return [
             [
                 'prices' => [
-                    new Price(100, 120),
-                    new Price(100, 120),
+                    new Price(Money::create(100), Money::create(120)),
+                    new Price(Money::create(100), Money::create(120)),
                 ],
                 'arePricesDifferent' => false,
             ],
             [
                 'prices' => [
-                    new Price(100, 120),
+                    new Price(Money::create(100), Money::create(120)),
                 ],
                 'arePricesDifferent' => false,
             ],
             [
                 'prices' => [
-                    new Price(100, 120),
-                    new Price('100', '120'),
-                ],
-                'arePricesDifferent' => true,
-            ],
-            [
-                'prices' => [
-                    new Price(200, 240),
-                    new Price(100, 120),
+                    new Price(Money::create(200), Money::create(240)),
+                    new Price(Money::create(100), Money::create(120)),
                 ],
                 'arePricesDifferent' => true,
             ],

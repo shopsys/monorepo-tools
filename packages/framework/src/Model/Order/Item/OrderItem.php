@@ -3,6 +3,7 @@
 namespace Shopsys\FrameworkBundle\Model\Order\Item;
 
 use Doctrine\ORM\Mapping as ORM;
+use Shopsys\FrameworkBundle\Component\Money\Money;
 use Shopsys\FrameworkBundle\Model\Order\Item\Exception\MainVariantCannotBeOrderedException;
 use Shopsys\FrameworkBundle\Model\Order\Item\Exception\WrongItemTypeException;
 use Shopsys\FrameworkBundle\Model\Order\Order;
@@ -54,16 +55,16 @@ class OrderItem
     protected $name;
 
     /**
-     * @var string
+     * @var \Shopsys\FrameworkBundle\Component\Money\Money
      *
-     * @ORM\Column(type="decimal", precision=20, scale=6)
+     * @ORM\Column(type="money", precision=20, scale=6)
      */
     protected $priceWithoutVat;
 
     /**
-     * @var string
+     * @var \Shopsys\FrameworkBundle\Component\Money\Money
      *
-     * @ORM\Column(type="decimal", precision=20, scale=6)
+     * @ORM\Column(type="money", precision=20, scale=6)
      */
     protected $priceWithVat;
 
@@ -176,17 +177,17 @@ class OrderItem
     }
 
     /**
-     * @return string
+     * @return \Shopsys\FrameworkBundle\Component\Money\Money
      */
-    public function getPriceWithoutVat()
+    public function getPriceWithoutVat(): Money
     {
         return $this->priceWithoutVat;
     }
 
     /**
-     * @return string
+     * @return \Shopsys\FrameworkBundle\Component\Money\Money
      */
-    public function getPriceWithVat()
+    public function getPriceWithVat(): Money
     {
         return $this->priceWithVat;
     }
@@ -224,11 +225,11 @@ class OrderItem
     }
 
     /**
-     * @return string
+     * @return \Shopsys\FrameworkBundle\Component\Money\Money
      */
-    public function getTotalPriceWithVat()
+    public function getTotalPriceWithVat(): Money
     {
-        return $this->priceWithVat * $this->quantity;
+        return $this->priceWithVat->multiply($this->quantity);
     }
 
     /**

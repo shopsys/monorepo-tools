@@ -118,7 +118,7 @@ class ProductData
     public $images;
 
     /**
-     * @var string[]|null[]
+     * @var \Shopsys\FrameworkBundle\Component\Money\Money[]|null[]
      */
     public $manualInputPricesByPricingGroupId;
 

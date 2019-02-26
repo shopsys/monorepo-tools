@@ -3,6 +3,7 @@
 namespace Tests\FrameworkBundle\Unit\Model\Cart;
 
 use PHPUnit\Framework\TestCase;
+use Shopsys\FrameworkBundle\Component\Money\Money;
 use Shopsys\FrameworkBundle\Model\Cart\Cart;
 use Shopsys\FrameworkBundle\Model\Cart\Item\CartItem;
 use Shopsys\FrameworkBundle\Model\Customer\CustomerIdentifier;
@@ -42,10 +43,10 @@ class CartTest extends TestCase
 
         $cart = new Cart($customerIdentifier->getCartIdentifier());
 
-        $cartItem1 = new CartItem($cart, $product1, 1, '0.0');
+        $cartItem1 = new CartItem($cart, $product1, 1, Money::zero());
         $cart->addItem($cartItem1);
 
-        $cartItem2 = new CartItem($cart, $product2, 3, '0.0');
+        $cartItem2 = new CartItem($cart, $product2, 3, Money::zero());
         $cart->addItem($cartItem2);
 
         $this->assertSame(2, $cart->getItemsCount());
@@ -75,7 +76,7 @@ class CartTest extends TestCase
 
         $cart = new Cart($customerIdentifier->getCartIdentifier());
 
-        $cartItem = new CartItem($cart, $product, 1, '0.0');
+        $cartItem = new CartItem($cart, $product, 1, Money::zero());
         $cart->addItem($cartItem);
 
         $this->assertFalse($cart->isEmpty());
@@ -101,9 +102,9 @@ class CartTest extends TestCase
 
         $cart = new Cart($customerIdentifier->getCartIdentifier());
 
-        $cartItem1 = new CartItem($cart, $product1, 1, '0.0');
+        $cartItem1 = new CartItem($cart, $product1, 1, Money::zero());
         $cart->addItem($cartItem1);
-        $cartItem2 = new CartItem($cart, $product2, 3, '0.0');
+        $cartItem2 = new CartItem($cart, $product2, 3, Money::zero());
         $cart->addItem($cartItem2);
 
         $cart->clean();

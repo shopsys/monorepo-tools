@@ -3,6 +3,7 @@
 namespace Shopsys\FrameworkBundle\Model\Product\Pricing;
 
 use Doctrine\ORM\EntityManagerInterface;
+use Shopsys\FrameworkBundle\Component\Money\Money;
 use Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroup;
 use Shopsys\FrameworkBundle\Model\Product\Product;
 
@@ -41,9 +42,9 @@ class ProductManualInputPriceFacade
     /**
      * @param \Shopsys\FrameworkBundle\Model\Product\Product $product
      * @param \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroup $pricingGroup
-     * @param string $inputPrice
+     * @param \Shopsys\FrameworkBundle\Component\Money\Money|null $inputPrice
      */
-    public function refresh(Product $product, PricingGroup $pricingGroup, $inputPrice)
+    public function refresh(Product $product, PricingGroup $pricingGroup, ?Money $inputPrice)
     {
         $manualInputPrice = $this->productManualInputPriceRepository->findByProductAndPricingGroup($product, $pricingGroup);
         if ($manualInputPrice === null) {

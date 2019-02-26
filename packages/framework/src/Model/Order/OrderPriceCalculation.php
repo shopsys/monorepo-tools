@@ -1,7 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Shopsys\FrameworkBundle\Model\Order;
 
+use Shopsys\FrameworkBundle\Component\Money\Money;
 use Shopsys\FrameworkBundle\Model\Order\Item\OrderItemPriceCalculation;
 use Shopsys\FrameworkBundle\Model\Payment\Payment;
 use Shopsys\FrameworkBundle\Model\Pricing\Currency\Currency;
@@ -36,20 +39,20 @@ class OrderPriceCalculation
      * @param \Shopsys\FrameworkBundle\Model\Order\Order $order
      * @return \Shopsys\FrameworkBundle\Model\Order\OrderTotalPrice
      */
-    public function getOrderTotalPrice(Order $order)
+    public function getOrderTotalPrice(Order $order): OrderTotalPrice
     {
-        $priceWithVat = 0;
-        $priceWithoutVat = 0;
-        $productPriceWithVat = 0;
+        $priceWithVat = Money::zero();
+        $priceWithoutVat = Money::zero();
+        $productPriceWithVat = Money::zero();
 
         foreach ($order->getItems() as $orderItem) {
             $itemTotalPrice = $this->orderItemPriceCalculation->calculateTotalPrice($orderItem);
 
-            $priceWithVat += $itemTotalPrice->getPriceWithVat();
-            $priceWithoutVat += $itemTotalPrice->getPriceWithoutVat();
+            $priceWithVat = $priceWithVat->add($itemTotalPrice->getPriceWithVat());
+            $priceWithoutVat = $priceWithoutVat->add($itemTotalPrice->getPriceWithoutVat());
 
             if ($orderItem->isTypeProduct()) {
-                $productPriceWithVat += $itemTotalPrice->getPriceWithVat();
+                $productPriceWithVat = $productPriceWithVat->add($itemTotalPrice->getPriceWithVat());
             }
         }
 
@@ -66,15 +69,17 @@ class OrderPriceCalculation
         Payment $payment,
         Currency $currency,
         Price $orderTotalPrice
-    ) {
+    ): ?Price {
         if (!$payment->isCzkRounding() || $currency->getCode() !== Currency::CODE_CZK) {
             return null;
         }
 
-        $roundingPrice = $this->rounding->roundPriceWithVat(
-            round($orderTotalPrice->getPriceWithVat()) - $orderTotalPrice->getPriceWithVat()
-        );
-        if ($roundingPrice === 0.0) {
+        $priceWithVat = $orderTotalPrice->getPriceWithVat();
+        $roundedPriceWithVat = $priceWithVat->round(0);
+
+        $roundingPrice = $this->rounding->roundPriceWithVat($roundedPriceWithVat->subtract($priceWithVat));
+
+        if ($roundingPrice->isZero()) {
             return null;
         }
 

@@ -2,6 +2,7 @@
 
 namespace Shopsys\ProductFeed\ZboziBundle\Model\FeedItem;
 
+use Shopsys\FrameworkBundle\Component\Money\Money;
 use Shopsys\FrameworkBundle\Model\Feed\FeedItemInterface;
 use Shopsys\FrameworkBundle\Model\Pricing\Price;
 
@@ -75,12 +76,12 @@ class ZboziFeedItem implements FeedItemInterface
     protected $parametersByName;
 
     /**
-     * @var float|null
+     * @var \Shopsys\FrameworkBundle\Component\Money\Money|null
      */
     protected $cpc;
 
     /**
-     * @var float|null
+     * @var \Shopsys\FrameworkBundle\Component\Money\Money|null
      */
     protected $cpcSearch;
 
@@ -98,8 +99,8 @@ class ZboziFeedItem implements FeedItemInterface
      * @param \Shopsys\FrameworkBundle\Model\Pricing\Price $price
      * @param array $pathToMainCategory
      * @param array $parametersByName
-     * @param float|null $cpc
-     * @param float|null $cpcSearch
+     * @param \Shopsys\FrameworkBundle\Component\Money\Money|null $cpc
+     * @param \Shopsys\FrameworkBundle\Component\Money\Money|null $cpcSearch
      */
     public function __construct(
         int $id,
@@ -115,8 +116,8 @@ class ZboziFeedItem implements FeedItemInterface
         Price $price,
         array $pathToMainCategory,
         array $parametersByName,
-        ?float $cpc,
-        ?float $cpcSearch
+        ?Money $cpc,
+        ?Money $cpcSearch
     ) {
         $this->id = $id;
         $this->mainVariantId = $mainVariantId;
@@ -248,17 +249,17 @@ class ZboziFeedItem implements FeedItemInterface
     }
 
     /**
-     * @return float|null
+     * @return \Shopsys\FrameworkBundle\Component\Money\Money|null
      */
-    public function getMaxCpc(): ?float
+    public function getMaxCpc(): ?Money
     {
         return $this->cpc;
     }
 
     /**
-     * @return float|null
+     * @return \Shopsys\FrameworkBundle\Component\Money\Money|null
      */
-    public function getMaxCpcSearch(): ?float
+    public function getMaxCpcSearch(): ?Money
     {
         return $this->cpcSearch;
     }

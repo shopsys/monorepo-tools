@@ -40,10 +40,15 @@ parameters:
             - '*/src/Model/Order/Order.php'
             - '*/src/Model/Product/Product.php'
             - '*/src/Model/Product/ProductRepository.php'
+            - '*/tests/Unit/Component/Money/MoneyTest.php'
 
         PHP_CodeSniffer\Standards\Generic\Sniffs\CodeAnalysis\EmptyStatementSniff.DetectedWhile:
             - '*/src/Model/Product/Availability/ProductAvailabilityRecalculator.php'
             - '*/src/Model/Product/Pricing/ProductPriceRecalculator.php'
+
+        PHP_CodeSniffer\Standards\Generic\Sniffs\NamingConventions\CamelCapsFunctionNameSniff:
+            # public methods in the parent class \Doctrine\DBAL\Types\Type are not in camel case format
+            - '*/src/Component/Doctrine/MoneyType.php'
 
         Shopsys\CodingStandards\Sniffs\ObjectIsCreatedByFactorySniff:
             - '*/tests/*'

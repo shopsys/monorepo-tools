@@ -71,7 +71,7 @@ class Vat
     /**
      * @return string
      */
-    public function getPercent()
+    public function getPercent(): string
     {
         return $this->percent;
     }

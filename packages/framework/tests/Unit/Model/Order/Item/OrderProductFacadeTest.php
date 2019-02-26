@@ -30,7 +30,7 @@ class OrderProductFacadeTest extends TestCase
         $productData->usingStock = true;
         $productData->stockQuantity = $productStockQuantity;
         $product = Product::create($productData, new ProductCategoryDomainFactory());
-        $productPrice = new Price(0, 0);
+        $productPrice = Price::zero();
 
         $orderProduct = new OrderItem($orderMock, 'productName', $productPrice, 0, $orderProductQuantity, OrderItem::TYPE_PRODUCT, null, null);
         $orderProduct->setProduct($product);
@@ -52,7 +52,7 @@ class OrderProductFacadeTest extends TestCase
         $productData->usingStock = false;
         $productData->stockQuantity = $productStockQuantity;
         $product = Product::create($productData, new ProductCategoryDomainFactory());
-        $productPrice = new Price(0, 0);
+        $productPrice = Price::zero();
 
         $orderProduct = new OrderItem($orderMock, 'productName', $productPrice, 0, $orderProductQuantity, OrderItem::TYPE_PRODUCT, null, null);
         $orderProduct->setProduct($product);
@@ -74,7 +74,7 @@ class OrderProductFacadeTest extends TestCase
         $productData->usingStock = true;
         $productData->stockQuantity = $productStockQuantity;
         $product = Product::create($productData, new ProductCategoryDomainFactory());
-        $productPrice = new Price(0, 0);
+        $productPrice = Price::zero();
 
         $orderProduct = new OrderItem($orderMock, 'productName', $productPrice, 0, $orderProductQuantity, OrderItem::TYPE_PRODUCT, null, null);
         $orderProduct->setProduct($product);
@@ -96,7 +96,7 @@ class OrderProductFacadeTest extends TestCase
         $productData->usingStock = false;
         $productData->stockQuantity = $productStockQuantity;
         $product = Product::create($productData, new ProductCategoryDomainFactory());
-        $productPrice = new Price(0, 0);
+        $productPrice = Price::zero();
 
         $orderProduct = new OrderItem($orderMock, 'productName', $productPrice, 0, $orderProductQuantity, OrderItem::TYPE_PRODUCT, null, null);
         $orderProduct->setProduct($product);

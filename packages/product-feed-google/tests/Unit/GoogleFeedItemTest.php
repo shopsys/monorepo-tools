@@ -4,6 +4,7 @@ namespace Tests\ProductFeed\GoogleBundle\Unit;
 
 use PHPUnit\Framework\TestCase;
 use Shopsys\FrameworkBundle\Component\Domain\Config\DomainConfig;
+use Shopsys\FrameworkBundle\Component\Money\Money;
 use Shopsys\FrameworkBundle\Model\Pricing\Currency\Currency;
 use Shopsys\FrameworkBundle\Model\Pricing\Currency\CurrencyFacade;
 use Shopsys\FrameworkBundle\Model\Pricing\Price;
@@ -14,6 +15,7 @@ use Shopsys\FrameworkBundle\Model\Product\Pricing\ProductPriceCalculationForUser
 use Shopsys\FrameworkBundle\Model\Product\Product;
 use Shopsys\ProductFeed\GoogleBundle\Model\FeedItem\GoogleFeedItem;
 use Shopsys\ProductFeed\GoogleBundle\Model\FeedItem\GoogleFeedItemFactory;
+use Tests\FrameworkBundle\Test\IsMoneyEqual;
 
 class GoogleFeedItemTest extends TestCase
 {
@@ -72,7 +74,7 @@ class GoogleFeedItemTest extends TestCase
         $this->defaultProduct->method('getName')->with('en')->willReturn('product name');
         $this->defaultProduct->method('isSellingDenied')->willReturn(false);
 
-        $this->mockProductPrice($this->defaultProduct, $this->defaultDomain, new Price(0, 0));
+        $this->mockProductPrice($this->defaultProduct, $this->defaultDomain, Price::zero());
         $this->mockProductUrl($this->defaultProduct, $this->defaultDomain, 'https://example.com/product-1');
     }
 
@@ -161,8 +163,8 @@ class GoogleFeedItemTest extends TestCase
         self::assertEquals('https://example.com/product-1', $googleFeedItem->getLink());
         self::assertNull($googleFeedItem->getImageLink());
         self::assertEquals('in stock', $googleFeedItem->getAvailability());
-        self::assertEquals(0, $googleFeedItem->getPrice()->getPriceWithoutVat());
-        self::assertEquals(0, $googleFeedItem->getPrice()->getPriceWithVat());
+        self::assertThat($googleFeedItem->getPrice()->getPriceWithoutVat(), new IsMoneyEqual(Money::zero()));
+        self::assertThat($googleFeedItem->getPrice()->getPriceWithVat(), new IsMoneyEqual(Money::zero()));
         self::assertEquals('EUR', $googleFeedItem->getCurrency()->getCode());
         self::assertEquals([], $googleFeedItem->getIdentifiers());
     }

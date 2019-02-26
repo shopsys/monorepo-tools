@@ -3,6 +3,7 @@
 namespace Shopsys\FrameworkBundle\Model\Product\Pricing;
 
 use Doctrine\ORM\Mapping as ORM;
+use Shopsys\FrameworkBundle\Component\Money\Money;
 use Shopsys\FrameworkBundle\Model\Pricing\BasePriceCalculation;
 use Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroup;
 use Shopsys\FrameworkBundle\Model\Pricing\InputPriceCalculation;
@@ -33,22 +34,22 @@ class ProductManualInputPrice
     protected $pricingGroup;
 
     /**
-     * @var string
+     * @var \Shopsys\FrameworkBundle\Component\Money\Money|null
      *
-     * @ORM\Column(type="decimal", precision=20, scale=6, nullable=true)
+     * @ORM\Column(type="money", precision=20, scale=6, nullable=true)
      */
     protected $inputPrice;
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\Product\Product $product
      * @param \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroup $pricingGroup
-     * @param string|null $inputPrice
+     * @param \Shopsys\FrameworkBundle\Component\Money\Money|null $inputPrice
      */
-    public function __construct(Product $product, PricingGroup $pricingGroup, $inputPrice)
+    public function __construct(Product $product, PricingGroup $pricingGroup, ?Money $inputPrice)
     {
         $this->product = $product;
         $this->pricingGroup = $pricingGroup;
-        $this->inputPrice = $inputPrice;
+        $this->setInputPrice($inputPrice);
     }
 
     /**
@@ -68,17 +69,17 @@ class ProductManualInputPrice
     }
 
     /**
-     * @return string
+     * @return \Shopsys\FrameworkBundle\Component\Money\Money|null
      */
-    public function getInputPrice()
+    public function getInputPrice(): ?Money
     {
         return $this->inputPrice;
     }
 
     /**
-     * @param string $inputPrice
+     * @param \Shopsys\FrameworkBundle\Component\Money\Money|null $inputPrice
      */
-    public function setInputPrice($inputPrice)
+    public function setInputPrice(?Money $inputPrice)
     {
         $this->inputPrice = $inputPrice;
     }
@@ -95,16 +96,18 @@ class ProductManualInputPrice
         BasePriceCalculation $basePriceCalculation,
         InputPriceCalculation $inputPriceCalculation
     ) {
-        $basePriceForPricingGroup = $basePriceCalculation->calculateBasePrice(
-            $this->getInputPrice(),
-            $inputPriceType,
-            $this->getProduct()->getVat()
-        );
-        $inputPriceForPricingGroup = $inputPriceCalculation->getInputPrice(
-            $inputPriceType,
-            $basePriceForPricingGroup->getPriceWithVat(),
-            $newVatPercent
-        );
-        $this->setInputPrice($inputPriceForPricingGroup);
+        if ($this->inputPrice !== null) {
+            $basePriceForPricingGroup = $basePriceCalculation->calculateBasePrice(
+                $this->inputPrice,
+                $inputPriceType,
+                $this->getProduct()->getVat()
+            );
+            $inputPriceForPricingGroup = $inputPriceCalculation->getInputPrice(
+                $inputPriceType,
+                $basePriceForPricingGroup->getPriceWithVat(),
+                $newVatPercent
+            );
+            $this->setInputPrice($inputPriceForPricingGroup);
+        }
     }
 }

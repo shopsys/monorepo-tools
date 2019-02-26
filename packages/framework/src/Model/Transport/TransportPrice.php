@@ -1,8 +1,11 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Shopsys\FrameworkBundle\Model\Transport;
 
 use Doctrine\ORM\Mapping as ORM;
+use Shopsys\FrameworkBundle\Component\Money\Money;
 use Shopsys\FrameworkBundle\Model\Pricing\Currency\Currency;
 
 /**
@@ -30,28 +33,28 @@ class TransportPrice
     protected $currency;
 
     /**
-     * @var string
+     * @var \Shopsys\FrameworkBundle\Component\Money\Money
      *
-     * @ORM\Column(type="decimal", precision=20, scale=6)
+     * @ORM\Column(type="money", precision=20, scale=6)
      */
     protected $price;
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\Transport\Transport $transport
      * @param \Shopsys\FrameworkBundle\Model\Pricing\Currency\Currency $currency
-     * @param string $price
+     * @param \Shopsys\FrameworkBundle\Component\Money\Money $price
      */
-    public function __construct(Transport $transport, Currency $currency, $price)
+    public function __construct(Transport $transport, Currency $currency, Money $price)
     {
         $this->transport = $transport;
         $this->currency = $currency;
-        $this->price = $price;
+        $this->setPrice($price);
     }
 
     /**
      * @return \Shopsys\FrameworkBundle\Model\Pricing\Currency\Currency
      */
-    public function getCurrency()
+    public function getCurrency(): Currency
     {
         return $this->currency;
     }
@@ -59,23 +62,23 @@ class TransportPrice
     /**
      * @return \Shopsys\FrameworkBundle\Model\Transport\Transport
      */
-    public function getTransport()
+    public function getTransport(): Transport
     {
         return $this->transport;
     }
 
     /**
-     * @return string
+     * @return \Shopsys\FrameworkBundle\Component\Money\Money
      */
-    public function getPrice()
+    public function getPrice(): Money
     {
         return $this->price;
     }
 
     /**
-     * @param string $price
+     * @param \Shopsys\FrameworkBundle\Component\Money\Money $price
      */
-    public function setPrice($price)
+    public function setPrice(Money $price): void
     {
         $this->price = $price;
     }

@@ -1,7 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Shopsys\FrameworkBundle\Model\Pricing;
 
+use Shopsys\FrameworkBundle\Component\Money\Money;
 use Shopsys\FrameworkBundle\Model\Pricing\Vat\Vat;
 
 class BasePriceCalculation
@@ -27,16 +30,16 @@ class BasePriceCalculation
     }
 
     /**
-     * @param string $inputPrice
+     * @param \Shopsys\FrameworkBundle\Component\Money\Money $inputPrice
      * @param int $inputPriceType
      * @param \Shopsys\FrameworkBundle\Model\Pricing\Vat\Vat $vat
      * @return \Shopsys\FrameworkBundle\Model\Pricing\Price
      */
-    public function calculateBasePrice($inputPrice, $inputPriceType, Vat $vat)
+    public function calculateBasePrice(Money $inputPrice, int $inputPriceType, Vat $vat): Price
     {
         $basePriceWithVat = $this->getBasePriceWithVat($inputPrice, $inputPriceType, $vat);
         $vatAmount = $this->priceCalculation->getVatAmountByPriceWithVat($basePriceWithVat, $vat);
-        $basePriceWithoutVat = $this->rounding->roundPriceWithoutVat($basePriceWithVat - $vatAmount);
+        $basePriceWithoutVat = $this->rounding->roundPriceWithoutVat($basePriceWithVat->subtract($vatAmount));
 
         return new Price($basePriceWithoutVat, $basePriceWithVat);
     }
@@ -47,26 +50,26 @@ class BasePriceCalculation
      * @param string[] $coefficients
      * @return \Shopsys\FrameworkBundle\Model\Pricing\Price
      */
-    public function applyCoefficients(Price $price, Vat $vat, array $coefficients)
+    public function applyCoefficients(Price $price, Vat $vat, array $coefficients): Price
     {
         $priceWithVatBeforeRounding = $price->getPriceWithVat();
         foreach ($coefficients as $coefficient) {
-            $priceWithVatBeforeRounding *= $coefficient;
+            $priceWithVatBeforeRounding = $priceWithVatBeforeRounding->multiply($coefficient);
         }
         $priceWithVat = $this->rounding->roundPriceWithVat($priceWithVatBeforeRounding);
         $vatAmount = $this->priceCalculation->getVatAmountByPriceWithVat($priceWithVat, $vat);
-        $priceWithoutVat = $this->rounding->roundPriceWithoutVat($priceWithVat - $vatAmount);
+        $priceWithoutVat = $this->rounding->roundPriceWithoutVat($priceWithVat->subtract($vatAmount));
 
         return new Price($priceWithoutVat, $priceWithVat);
     }
 
     /**
-     * @param string $inputPrice
+     * @param \Shopsys\FrameworkBundle\Component\Money\Money $inputPrice
      * @param int $inputPriceType
      * @param \Shopsys\FrameworkBundle\Model\Pricing\Vat\Vat $vat
-     * @return string
+     * @return \Shopsys\FrameworkBundle\Component\Money\Money
      */
-    protected function getBasePriceWithVat($inputPrice, $inputPriceType, Vat $vat)
+    protected function getBasePriceWithVat(Money $inputPrice, int $inputPriceType, Vat $vat): Money
     {
         switch ($inputPriceType) {
             case PricingSetting::INPUT_PRICE_TYPE_WITH_VAT:

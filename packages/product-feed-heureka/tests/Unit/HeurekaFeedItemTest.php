@@ -4,6 +4,7 @@ namespace Tests\ProductFeed\HeurekaBundle\Unit;
 
 use PHPUnit\Framework\TestCase;
 use Shopsys\FrameworkBundle\Component\Domain\Config\DomainConfig;
+use Shopsys\FrameworkBundle\Component\Money\Money;
 use Shopsys\FrameworkBundle\Model\Category\Category;
 use Shopsys\FrameworkBundle\Model\Category\CategoryFacade;
 use Shopsys\FrameworkBundle\Model\Pricing\Price;
@@ -17,6 +18,7 @@ use Shopsys\ProductFeed\HeurekaBundle\Model\FeedItem\HeurekaFeedItemFactory;
 use Shopsys\ProductFeed\HeurekaBundle\Model\FeedItem\HeurekaProductDataBatchLoader;
 use Shopsys\ProductFeed\HeurekaBundle\Model\HeurekaCategory\HeurekaCategory;
 use Shopsys\ProductFeed\HeurekaBundle\Model\HeurekaCategory\HeurekaCategoryFacade;
+use Tests\FrameworkBundle\Test\IsMoneyEqual;
 
 class HeurekaFeedItemTest extends TestCase
 {
@@ -80,7 +82,7 @@ class HeurekaFeedItemTest extends TestCase
         $availabilityMock->method('getDispatchTime')->willReturn(0);
         $this->defaultProduct->method('getCalculatedAvailability')->willReturn($availabilityMock);
 
-        $productPrice = new ProductPrice(new Price(0, 0), false);
+        $productPrice = new ProductPrice(Price::zero(), false);
         $this->productPriceCalculationForUserMock->method('calculatePriceForUserAndDomainId')
             ->with($this->defaultProduct, 1, null)->willReturn($productPrice);
 
@@ -118,8 +120,8 @@ class HeurekaFeedItemTest extends TestCase
         self::assertNull($heurekaFeedItem->getDescription());
         self::assertEquals('https://example.com/product-1', $heurekaFeedItem->getUrl());
         self::assertNull($heurekaFeedItem->getImgUrl());
-        self::assertEquals(0, $heurekaFeedItem->getPrice()->getPriceWithoutVat());
-        self::assertEquals(0, $heurekaFeedItem->getPrice()->getPriceWithVat());
+        self::assertThat($heurekaFeedItem->getPrice()->getPriceWithoutVat(), new IsMoneyEqual(Money::zero()));
+        self::assertThat($heurekaFeedItem->getPrice()->getPriceWithVat(), new IsMoneyEqual(Money::zero()));
         self::assertNull($heurekaFeedItem->getEan());
         self::assertEquals(0, $heurekaFeedItem->getDeliveryDate());
         self::assertNull($heurekaFeedItem->getManufacturer());
@@ -215,10 +217,10 @@ class HeurekaFeedItemTest extends TestCase
     public function testHeurekaFeedItemWithCpc()
     {
         $this->heurekaProductDataBatchLoaderMock->method('getProductCpc')
-            ->with($this->defaultProduct, $this->defaultDomain)->willReturn(5.0);
+            ->with($this->defaultProduct, $this->defaultDomain)->willReturn(Money::create(5));
 
         $heurekaFeedItem = $this->heurekaFeedItemFactory->create($this->defaultProduct, $this->defaultDomain);
 
-        self::assertEquals(5.0, $heurekaFeedItem->getCpc());
+        self::assertThat($heurekaFeedItem->getCpc(), new IsMoneyEqual(Money::create(5)));
     }
 }

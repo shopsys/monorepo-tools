@@ -4,6 +4,7 @@ namespace Tests\FrameworkBundle\Unit\Model\Transport;
 
 use PHPUnit\Framework\TestCase;
 use Shopsys\FrameworkBundle\Component\EntityExtension\EntityNameResolver;
+use Shopsys\FrameworkBundle\Component\Money\Money;
 use Shopsys\FrameworkBundle\Model\Pricing\BasePriceCalculation;
 use Shopsys\FrameworkBundle\Model\Pricing\Currency\Currency;
 use Shopsys\FrameworkBundle\Model\Pricing\Currency\CurrencyData;
@@ -16,6 +17,7 @@ use Shopsys\FrameworkBundle\Model\Transport\Transport;
 use Shopsys\FrameworkBundle\Model\Transport\TransportData;
 use Shopsys\FrameworkBundle\Model\Transport\TransportPriceCalculation;
 use Shopsys\FrameworkBundle\Model\Transport\TransportPriceFactory;
+use Tests\FrameworkBundle\Test\IsMoneyEqual;
 
 class TransportPriceCalculationTest extends TestCase
 {
@@ -24,35 +26,35 @@ class TransportPriceCalculationTest extends TestCase
         return [
             [
                 'inputPriceType' => PricingSetting::INPUT_PRICE_TYPE_WITHOUT_VAT,
-                'inputPrice' => '6999',
+                'inputPrice' => Money::create(6999),
                 'vatPercent' => '21',
-                'priceWithoutVat' => '6998.78',
-                'priceWithVat' => '8469',
+                'priceWithoutVat' => Money::create('6998.78'),
+                'priceWithVat' => Money::create(8469),
             ],
             [
                 'inputPriceType' => PricingSetting::INPUT_PRICE_TYPE_WITH_VAT,
-                'inputPrice' => '6999.99',
+                'inputPrice' => Money::create('6999.99'),
                 'vatPercent' => '21',
-                'priceWithoutVat' => '5784.8',
-                'priceWithVat' => '7000',
+                'priceWithoutVat' => Money::create('5784.8'),
+                'priceWithVat' => Money::create(7000),
             ],
         ];
     }
 
     /**
      * @dataProvider calculateIndependentPriceProvider
-     * @param mixed $inputPriceType
-     * @param mixed $inputPrice
-     * @param mixed $vatPercent
-     * @param mixed $priceWithoutVat
-     * @param mixed $priceWithVat
+     * @param int $inputPriceType
+     * @param \Shopsys\FrameworkBundle\Component\Money\Money $inputPrice
+     * @param string $vatPercent
+     * @param \Shopsys\FrameworkBundle\Component\Money\Money $priceWithoutVat
+     * @param \Shopsys\FrameworkBundle\Component\Money\Money $priceWithVat
      */
     public function testCalculateIndependentPrice(
-        $inputPriceType,
-        $inputPrice,
-        $vatPercent,
-        $priceWithoutVat,
-        $priceWithVat
+        int $inputPriceType,
+        Money $inputPrice,
+        string $vatPercent,
+        Money $priceWithoutVat,
+        Money $priceWithVat
     ) {
         $pricingSettingMock = $this->getMockBuilder(PricingSetting::class)
             ->setMethods(['getInputPriceType', 'getRoundingType'])
@@ -85,7 +87,7 @@ class TransportPriceCalculationTest extends TestCase
 
         $price = $transportPriceCalculation->calculateIndependentPrice($transport, $currency);
 
-        $this->assertSame(round($priceWithoutVat, 6), round($price->getPriceWithoutVat(), 6));
-        $this->assertSame(round($priceWithVat, 6), round($price->getPriceWithVat(), 6));
+        $this->assertThat($price->getPriceWithoutVat(), new IsMoneyEqual($priceWithoutVat));
+        $this->assertThat($price->getPriceWithVat(), new IsMoneyEqual($priceWithVat));
     }
 }

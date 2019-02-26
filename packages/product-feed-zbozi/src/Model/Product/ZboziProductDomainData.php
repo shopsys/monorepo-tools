@@ -15,12 +15,12 @@ class ZboziProductDomainData
     public $show;
 
     /**
-     * @var string|null
+     * @var \Shopsys\FrameworkBundle\Component\Money\Money|null
      */
     public $cpc;
 
     /**
-     * @var string|null
+     * @var \Shopsys\FrameworkBundle\Component\Money\Money|null
      */
     public $cpcSearch;
 

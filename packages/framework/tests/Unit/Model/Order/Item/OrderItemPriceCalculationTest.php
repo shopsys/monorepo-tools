@@ -4,12 +4,14 @@ namespace Tests\FrameworkBundle\Unit\Model\Order\Item;
 
 use PHPUnit\Framework\TestCase;
 use Shopsys\FrameworkBundle\Component\EntityExtension\EntityNameResolver;
+use Shopsys\FrameworkBundle\Component\Money\Money;
 use Shopsys\FrameworkBundle\Model\Order\Item\OrderItem;
 use Shopsys\FrameworkBundle\Model\Order\Item\OrderItemData;
 use Shopsys\FrameworkBundle\Model\Order\Item\OrderItemPriceCalculation;
 use Shopsys\FrameworkBundle\Model\Pricing\PriceCalculation;
 use Shopsys\FrameworkBundle\Model\Pricing\Vat\VatDataFactory;
 use Shopsys\FrameworkBundle\Model\Pricing\Vat\VatFactory;
+use Tests\FrameworkBundle\Test\IsMoneyEqual;
 
 class OrderItemPriceCalculationTest extends TestCase
 {
@@ -19,16 +21,16 @@ class OrderItemPriceCalculationTest extends TestCase
             ->setMethods(['getVatAmountByPriceWithVat'])
             ->disableOriginalConstructor()
             ->getMock();
-        $priceCalculationMock->expects($this->once())->method('getVatAmountByPriceWithVat')->willReturn(100);
+        $priceCalculationMock->expects($this->once())->method('getVatAmountByPriceWithVat')->willReturn(Money::create(100));
 
         $orderItemData = new OrderItemData();
-        $orderItemData->priceWithVat = 1000;
+        $orderItemData->priceWithVat = Money::create(1000);
         $orderItemData->vatPercent = 10;
 
         $orderItemPriceCalculation = new OrderItemPriceCalculation($priceCalculationMock, new VatFactory(new EntityNameResolver([])), new VatDataFactory());
         $priceWithoutVat = $orderItemPriceCalculation->calculatePriceWithoutVat($orderItemData);
 
-        $this->assertSame(round(1000 - 100, 6), round($priceWithoutVat, 6));
+        $this->assertThat($priceWithoutVat, new IsMoneyEqual(Money::create(900)));
     }
 
     public function testCalculateTotalPrice()
@@ -37,7 +39,7 @@ class OrderItemPriceCalculationTest extends TestCase
             ->setMethods(['getVatAmountByPriceWithVat'])
             ->disableOriginalConstructor()
             ->getMock();
-        $priceCalculationMock->expects($this->once())->method('getVatAmountByPriceWithVat')->willReturn(10);
+        $priceCalculationMock->expects($this->once())->method('getVatAmountByPriceWithVat')->willReturn(Money::create(10));
 
         $orderItemPriceCalculation = new OrderItemPriceCalculation($priceCalculationMock, new VatFactory(new EntityNameResolver([])), new VatDataFactory());
 
@@ -50,14 +52,14 @@ class OrderItemPriceCalculationTest extends TestCase
             true,
             ['getPriceWithVat', 'getQuantity', 'getVatPercent']
         );
-        $orderItem->expects($this->once())->method('getPriceWithVat')->willReturn(100);
+        $orderItem->expects($this->once())->method('getPriceWithVat')->willReturn(Money::create(100));
         $orderItem->expects($this->once())->method('getQuantity')->willReturn(2);
         $orderItem->expects($this->once())->method('getVatPercent')->willReturn(1);
 
         $totalPrice = $orderItemPriceCalculation->calculateTotalPrice($orderItem);
 
-        $this->assertSame(round(200, 6), round($totalPrice->getPriceWithVat(), 6));
-        $this->assertSame(round(190, 6), round($totalPrice->getPriceWithoutVat(), 6));
-        $this->assertSame(round(10, 6), round($totalPrice->getVatAmount(), 6));
+        $this->assertThat($totalPrice->getPriceWithVat(), new IsMoneyEqual(Money::create(200)));
+        $this->assertThat($totalPrice->getPriceWithoutVat(), new IsMoneyEqual(Money::create(190)));
+        $this->assertThat($totalPrice->getVatAmount(), new IsMoneyEqual(Money::create(10)));
     }
 }

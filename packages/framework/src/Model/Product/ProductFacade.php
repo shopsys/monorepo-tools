@@ -365,7 +365,7 @@ class ProductFacade
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\Product\Product $product
-     * @param string[] $manualInputPrices
+     * @param \Shopsys\FrameworkBundle\Component\Money\Money[]|null[] $manualInputPrices
      */
     protected function refreshProductManualInputPrices(Product $product, array $manualInputPrices)
     {

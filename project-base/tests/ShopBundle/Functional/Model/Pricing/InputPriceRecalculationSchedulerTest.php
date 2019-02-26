@@ -2,6 +2,7 @@
 
 namespace Tests\ShopBundle\Functional\Model\Pricing;
 
+use Shopsys\FrameworkBundle\Component\Money\Money;
 use Shopsys\FrameworkBundle\Component\Setting\Setting;
 use Shopsys\FrameworkBundle\Model\Payment\PaymentDataFactoryInterface;
 use Shopsys\FrameworkBundle\Model\Payment\PaymentFacade;
@@ -16,6 +17,7 @@ use Shopsys\FrameworkBundle\Model\Transport\TransportDataFactoryInterface;
 use Shopsys\FrameworkBundle\Model\Transport\TransportFacade;
 use Shopsys\ShopBundle\DataFixtures\Demo\CurrencyDataFixture;
 use Symfony\Component\HttpKernel\Event\FilterResponseEvent;
+use Tests\FrameworkBundle\Test\IsMoneyEqual;
 use Tests\ShopBundle\Test\TransactionFunctionalTestCase;
 
 class InputPriceRecalculationSchedulerTest extends TransactionFunctionalTestCase
@@ -47,20 +49,28 @@ class InputPriceRecalculationSchedulerTest extends TransactionFunctionalTestCase
     public function inputPricesTestDataProvider()
     {
         return [
-            ['inputPriceWithoutVat' => '100', 'inputPriceWithVat' => '121', 'vatPercent' => '21'],
-            ['inputPriceWithoutVat' => '17261.983471', 'inputPriceWithVat' => '20887', 'vatPercent' => '21'],
+            [
+                'inputPriceWithoutVat' => Money::create(100),
+                'inputPriceWithVat' => Money::create(121),
+                'vatPercent' => '21',
+            ],
+            [
+                'inputPriceWithoutVat' => Money::create('17261.983471'),
+                'inputPriceWithVat' => Money::create(20887),
+                'vatPercent' => '21',
+            ],
         ];
     }
 
     /**
      * @dataProvider inputPricesTestDataProvider
-     * @param mixed $inputPriceWithoutVat
-     * @param mixed $inputPriceWithVat
+     * @param \Shopsys\FrameworkBundle\Component\Money\Money $inputPriceWithoutVat
+     * @param \Shopsys\FrameworkBundle\Component\Money\Money $inputPriceWithVat
      * @param mixed $vatPercent
      */
     public function testOnKernelResponseRecalculateInputPricesWithoutVat(
-        $inputPriceWithoutVat,
-        $inputPriceWithVat,
+        Money $inputPriceWithoutVat,
+        Money $inputPriceWithVat,
         $vatPercent
     ) {
         $em = $this->getEntityManager();
@@ -124,19 +134,19 @@ class InputPriceRecalculationSchedulerTest extends TransactionFunctionalTestCase
         $em->refresh($payment);
         $em->refresh($transport);
 
-        $this->assertSame(round($inputPriceWithoutVat, 6), round($payment->getPrice($currency1)->getPrice(), 6));
-        $this->assertSame(round($inputPriceWithoutVat, 6), round($transport->getPrice($currency1)->getPrice(), 6));
+        $this->assertThat($payment->getPrice($currency1)->getPrice(), new IsMoneyEqual($inputPriceWithoutVat));
+        $this->assertThat($transport->getPrice($currency1)->getPrice(), new IsMoneyEqual($inputPriceWithoutVat));
     }
 
     /**
      * @dataProvider inputPricesTestDataProvider
-     * @param mixed $inputPriceWithoutVat
-     * @param mixed $inputPriceWithVat
+     * @param \Shopsys\FrameworkBundle\Component\Money\Money $inputPriceWithoutVat
+     * @param \Shopsys\FrameworkBundle\Component\Money\Money $inputPriceWithVat
      * @param mixed $vatPercent
      */
     public function testOnKernelResponseRecalculateInputPricesWithVat(
-        $inputPriceWithoutVat,
-        $inputPriceWithVat,
+        Money $inputPriceWithoutVat,
+        Money $inputPriceWithVat,
         $vatPercent
     ) {
         $em = $this->getEntityManager();
@@ -200,7 +210,7 @@ class InputPriceRecalculationSchedulerTest extends TransactionFunctionalTestCase
         $em->refresh($payment);
         $em->refresh($transport);
 
-        $this->assertSame(round($inputPriceWithVat, 6), round($payment->getPrice($currency1)->getPrice(), 6));
-        $this->assertSame(round($inputPriceWithVat, 6), round($transport->getPrice($currency1)->getPrice(), 6));
+        $this->assertThat($payment->getPrice($currency1)->getPrice(), new IsMoneyEqual($inputPriceWithVat));
+        $this->assertThat($transport->getPrice($currency1)->getPrice(), new IsMoneyEqual($inputPriceWithVat));
     }
 }

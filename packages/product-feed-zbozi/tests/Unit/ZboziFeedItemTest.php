@@ -4,6 +4,7 @@ namespace Tests\ProductFeed\ZboziBundle\Unit;
 
 use PHPUnit\Framework\TestCase;
 use Shopsys\FrameworkBundle\Component\Domain\Config\DomainConfig;
+use Shopsys\FrameworkBundle\Component\Money\Money;
 use Shopsys\FrameworkBundle\Model\Category\CategoryFacade;
 use Shopsys\FrameworkBundle\Model\Pricing\Price;
 use Shopsys\FrameworkBundle\Model\Product\Availability\Availability;
@@ -17,6 +18,7 @@ use Shopsys\ProductFeed\ZboziBundle\Model\FeedItem\ZboziFeedItem;
 use Shopsys\ProductFeed\ZboziBundle\Model\FeedItem\ZboziFeedItemFactory;
 use Shopsys\ProductFeed\ZboziBundle\Model\Product\ZboziProductDomain;
 use Shopsys\ProductFeed\ZboziBundle\Model\Product\ZboziProductDomainData;
+use Tests\FrameworkBundle\Test\IsMoneyEqual;
 
 class ZboziFeedItemTest extends TestCase
 {
@@ -80,7 +82,7 @@ class ZboziFeedItemTest extends TestCase
         $availabilityMock->method('getDispatchTime')->willReturn(0);
         $this->defaultProduct->method('getCalculatedAvailability')->willReturn($availabilityMock);
 
-        $productPrice = new ProductPrice(new Price(0, 0), false);
+        $productPrice = new ProductPrice(Price::zero(), false);
         $this->productPriceCalculationForUserMock->method('calculatePriceForUserAndDomainId')
             ->with($this->defaultProduct, 1, null)->willReturn($productPrice);
 
@@ -121,8 +123,8 @@ class ZboziFeedItemTest extends TestCase
         self::assertNull($zboziFeedItem->getDescription());
         self::assertEquals('https://example.com/product-1', $zboziFeedItem->getUrl());
         self::assertNull($zboziFeedItem->getImgUrl());
-        self::assertEquals(0, $zboziFeedItem->getPrice()->getPriceWithoutVat());
-        self::assertEquals(0, $zboziFeedItem->getPrice()->getPriceWithVat());
+        self::assertThat($zboziFeedItem->getPrice()->getPriceWithoutVat(), new IsMoneyEqual(Money::zero()));
+        self::assertThat($zboziFeedItem->getPrice()->getPriceWithVat(), new IsMoneyEqual(Money::zero()));
         self::assertNull($zboziFeedItem->getEan());
         self::assertNull($zboziFeedItem->getProductno());
         self::assertEquals(0, $zboziFeedItem->getDeliveryDate());
@@ -208,24 +210,24 @@ class ZboziFeedItemTest extends TestCase
     public function testZboziFeedItemWithMaxCpc()
     {
         $zboziProductDomainData = new ZboziProductDomainData();
-        $zboziProductDomainData->cpc = 5.0;
+        $zboziProductDomainData->cpc = Money::create('5.0');
         $zboziProductDomain = new ZboziProductDomain($zboziProductDomainData);
 
         $zboziFeedItem = $this->zboziFeedItemFactory->create($this->defaultProduct, $zboziProductDomain, $this->defaultDomain);
 
-        self::assertEquals(5.0, $zboziFeedItem->getMaxCpc());
+        self::assertThat($zboziFeedItem->getMaxCpc(), new IsMoneyEqual(Money::create(5)));
         self::assertNull($zboziFeedItem->getMaxCpcSearch());
     }
 
     public function testZboziFeedItemWithMaxCpcSearch()
     {
         $zboziProductDomainData = new ZboziProductDomainData();
-        $zboziProductDomainData->cpcSearch = 5.0;
+        $zboziProductDomainData->cpcSearch = Money::create('5.0');
         $zboziProductDomain = new ZboziProductDomain($zboziProductDomainData);
 
         $zboziFeedItem = $this->zboziFeedItemFactory->create($this->defaultProduct, $zboziProductDomain, $this->defaultDomain);
 
         self::assertNull($zboziFeedItem->getMaxCpc());
-        self::assertEquals(5.0, $zboziFeedItem->getMaxCpcSearch());
+        self::assertThat($zboziFeedItem->getMaxCpcSearch(), new IsMoneyEqual(Money::create(5)));
     }
 }

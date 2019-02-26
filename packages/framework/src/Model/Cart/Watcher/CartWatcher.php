@@ -49,7 +49,7 @@ class CartWatcher
         $modifiedItems = [];
         foreach ($cart->getItems() as $cartItem) {
             $productPrice = $this->productPriceCalculationForUser->calculatePriceForCurrentUser($cartItem->getProduct());
-            if ($cartItem->getWatchedPrice() != $productPrice->getPriceWithVat()) {
+            if (!$productPrice->getPriceWithVat()->equals($cartItem->getWatchedPrice())) {
                 $modifiedItems[] = $cartItem;
             }
             $cartItem->setWatchedPrice($productPrice->getPriceWithVat());

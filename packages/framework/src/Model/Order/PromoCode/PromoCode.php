@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Shopsys\FrameworkBundle\Model\Order\PromoCode;
 
 use Doctrine\ORM\Mapping as ORM;
@@ -27,7 +29,7 @@ class PromoCode
     protected $code;
 
     /**
-     * @var float
+     * @var string
      *
      * @ORM\Column(type="decimal", precision=20, scale=4)
      */
@@ -39,22 +41,22 @@ class PromoCode
     public function __construct(PromoCodeData $promoCodeData)
     {
         $this->code = $promoCodeData->code;
-        $this->percent = $promoCodeData->percent;
+        $this->percent = (string)$promoCodeData->percent;
     }
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\Order\PromoCode\PromoCodeData $promoCodeData
      */
-    public function edit(PromoCodeData $promoCodeData)
+    public function edit(PromoCodeData $promoCodeData): void
     {
         $this->code = $promoCodeData->code;
-        $this->percent = $promoCodeData->percent;
+        $this->percent = (string)$promoCodeData->percent;
     }
 
     /**
      * @return int
      */
-    public function getId()
+    public function getId(): int
     {
         return $this->id;
     }
@@ -62,15 +64,15 @@ class PromoCode
     /**
      * @return string
      */
-    public function getCode()
+    public function getCode(): string
     {
         return $this->code;
     }
 
     /**
-     * @return float
+     * @return string
      */
-    public function getPercent()
+    public function getPercent(): string
     {
         return $this->percent;
     }

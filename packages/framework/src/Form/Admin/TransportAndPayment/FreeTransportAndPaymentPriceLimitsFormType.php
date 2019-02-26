@@ -3,6 +3,7 @@
 namespace Shopsys\FrameworkBundle\Form\Admin\TransportAndPayment;
 
 use Shopsys\FrameworkBundle\Component\Domain\Domain;
+use Shopsys\FrameworkBundle\Form\Constraints\NotNegativeMoneyAmount;
 use Shopsys\FrameworkBundle\Form\ValidationGroup;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
@@ -70,11 +71,9 @@ class FreeTransportAndPaymentPriceLimitsFormType extends AbstractType
                 ])
                 ->add(self::FIELD_PRICE_LIMIT, MoneyType::class, [
                     'required' => true,
-                    'currency' => false,
                     'constraints' => [
-                        new Constraints\GreaterThanOrEqual([
-                            'value' => 0,
-                            'message' => 'Price must be greater or equal to {{ compared_value }}',
+                        new NotNegativeMoneyAmount([
+                            'message' => 'Price must be greater or equal to zero',
                             'groups' => [self::VALIDATION_GROUP_PRICE_LIMIT_ENABLED],
                         ]),
                         new Constraints\NotBlank([

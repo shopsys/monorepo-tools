@@ -4,6 +4,7 @@ namespace Shopsys\FrameworkBundle\Model\Product\Pricing;
 
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Query\ResultSetMapping;
+use Shopsys\FrameworkBundle\Component\Money\Money;
 use Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroup;
 use Shopsys\FrameworkBundle\Model\Product\Product;
 
@@ -40,10 +41,11 @@ class ProductCalculatedPriceRepository
     /**
      * @param \Shopsys\FrameworkBundle\Model\Product\Product $product
      * @param \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroup $pricingGroup
-     * @param string|null $priceWithVat
+     * @param \Shopsys\FrameworkBundle\Component\Money\Money|null $priceWithVat
      */
-    public function saveCalculatedPrice(Product $product, PricingGroup $pricingGroup, $priceWithVat)
+    public function saveCalculatedPrice(Product $product, PricingGroup $pricingGroup, ?Money $priceWithVat)
     {
+        /** @var \Shopsys\FrameworkBundle\Model\Product\Pricing\ProductCalculatedPrice $productCalculatedPrice */
         $productCalculatedPrice = $this->getProductCalculatedPriceRepository()->find([
             'product' => $product->getId(),
             'pricingGroup' => $pricingGroup->getId(),

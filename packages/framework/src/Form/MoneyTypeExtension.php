@@ -3,6 +3,7 @@
 namespace Shopsys\FrameworkBundle\Form;
 
 use CommerceGuys\Intl\Currency\CurrencyRepositoryInterface;
+use Shopsys\FrameworkBundle\Form\Transformers\NumericToMoneyTransformer;
 use Shopsys\FrameworkBundle\Form\Transformers\RemoveWhitespacesTransformer;
 use Shopsys\FrameworkBundle\Model\Localization\Localization;
 use Symfony\Component\Form\AbstractTypeExtension;
@@ -10,6 +11,7 @@ use Symfony\Component\Form\Extension\Core\Type\MoneyType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class MoneyTypeExtension extends AbstractTypeExtension
 {
@@ -38,6 +40,7 @@ class MoneyTypeExtension extends AbstractTypeExtension
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        $builder->addModelTransformer(new NumericToMoneyTransformer($options['scale']));
         $builder->addViewTransformer(new RemoveWhitespacesTransformer());
     }
 
@@ -47,6 +50,16 @@ class MoneyTypeExtension extends AbstractTypeExtension
     public function buildView(FormView $view, FormInterface $form, array $options)
     {
         $view->vars['money_pattern'] = $this->getPattern($options['currency']);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function configureOptions(OptionsResolver $resolver)
+    {
+        parent::configureOptions($resolver);
+
+        $resolver->setDefault('currency', false);
     }
 
     /**

@@ -22,7 +22,7 @@ class OrderTest extends TestCase
     {
         $payment = new Payment(new PaymentData());
         $orderData = new OrderData();
-        $paymentPrice = new Price(0, 0);
+        $paymentPrice = Price::zero();
 
         $order = new Order($orderData, 'orderNumber', 'urlHash', null);
         $orderProduct = new OrderItem($order, 'productName', $paymentPrice, 0, 1, OrderItem::TYPE_PRODUCT, null, null);
@@ -40,7 +40,7 @@ class OrderTest extends TestCase
     public function testGetProductItemsCount()
     {
         $payment = new Payment(new PaymentData());
-        $paymentItemPrice = new Price(0, 0);
+        $paymentItemPrice = Price::zero();
         $orderData = new OrderData();
 
         $order = new Order($orderData, 'orderNumber', 'urlHash', null);

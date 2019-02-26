@@ -28,7 +28,7 @@ class ProductPriceRecalculatorTest extends TestCase
             ->disableOriginalConstructor()
             ->setMethods(['calculatePrice'])
             ->getMock();
-        $productPrice = new ProductPrice(new Price(0, 0), false);
+        $productPrice = new ProductPrice(Price::zero(), false);
         $productPriceCalculationMock->expects($this->once())->method('calculatePrice')->willReturn($productPrice);
         $productCalculatedPriceRepositoryMock = $this->getMockBuilder(ProductCalculatedPriceRepository::class)
             ->disableOriginalConstructor()

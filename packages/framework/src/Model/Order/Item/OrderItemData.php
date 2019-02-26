@@ -10,12 +10,12 @@ class OrderItemData
     public $name;
 
     /**
-     * @var string|null
+     * @var \Shopsys\FrameworkBundle\Component\Money\Money|null
      */
     public $priceWithVat;
 
     /**
-     * @var string|null
+     * @var \Shopsys\FrameworkBundle\Component\Money\Money|null
      */
     public $priceWithoutVat;
 

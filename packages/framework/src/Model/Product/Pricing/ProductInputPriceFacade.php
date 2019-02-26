@@ -97,7 +97,7 @@ class ProductInputPriceFacade
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\Product\Product $product
-     * @return string[]
+     * @return \Shopsys\FrameworkBundle\Component\Money\Money[]|null[]
      */
     public function getManualInputPricesDataIndexedByPricingGroupId(Product $product)
     {

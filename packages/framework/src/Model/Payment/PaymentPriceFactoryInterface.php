@@ -2,6 +2,7 @@
 
 namespace Shopsys\FrameworkBundle\Model\Payment;
 
+use Shopsys\FrameworkBundle\Component\Money\Money;
 use Shopsys\FrameworkBundle\Model\Pricing\Currency\Currency;
 
 interface PaymentPriceFactoryInterface
@@ -9,12 +10,12 @@ interface PaymentPriceFactoryInterface
     /**
      * @param \Shopsys\FrameworkBundle\Model\Payment\Payment $payment
      * @param \Shopsys\FrameworkBundle\Model\Pricing\Currency\Currency $currency
-     * @param string $price
+     * @param \Shopsys\FrameworkBundle\Component\Money\Money $price
      * @return \Shopsys\FrameworkBundle\Model\Payment\PaymentPrice
      */
     public function create(
         Payment $payment,
         Currency $currency,
-        string $price
+        Money $price
     ): PaymentPrice;
 }
