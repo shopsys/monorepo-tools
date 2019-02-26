@@ -27,6 +27,51 @@ The changelog is generated during the release process using [ChangelogLinker](ht
 
 <!-- changelog-linker -->
 
+## [v7.0.0](https://github.com/shopsys/shopsys/compare/v7.0.0-beta6...v7.0.0) - 2019-02-26
+
+### [shopsys/framework]
+
+#### Changed
+
+- [#817] now it is possible to run multiple cron commands
+
+#### Fixed
+
+- [#852] fixed empty cart when no listable product left in cart
+- [#829] fixed js validation constraints
+- [#869] fixed files uploading
+- [#851] flysystem for ImageFacade::copyImages and FileUpload::postFlushEntity is unified
+
+### [shopsys/project-base]
+
+#### Added
+
+- [#825] promocode flow in cart is covered by acceptance tests
+- [#836] implemented picture element
+
+#### Changed
+
+- [#824] Elasticsearch contains products after "build-demo" target now, thanks to [@pejaycz]
+
+### [shopsys/shopsys]
+
+#### Changed
+
+- [#845] shopsys dependencies now using caret notation
+- [#830] improved documentation "How to set up domains and locales"
+- [#782] changed forms in popup so they work with js validation
+- [#854] data fixtures moved to project-base
+- [#821] new class for representing monetary values
+- [#844] naming of promo code and discount code is unified
+
+#### Fixed
+- [#779] upgrade instructions of cart as entity has been updated to be more format consistent
+- [#857] link to BC promise made absolute in PR template
+
+#### Removed
+
+- [#853] releaser docs: removed note about confusing message
+
 ## [v7.0.0-beta6](https://github.com/shopsys/shopsys/compare/v7.0.0-beta5...v7.0.0-beta6) - 2019-02-18
 
 ### [shopsys/coding-standards]
@@ -2078,3 +2123,24 @@ That's why is this section formatted differently.
 [#730]: https://github.com/shopsys/shopsys/pull/730
 [#715]: https://github.com/shopsys/shopsys/pull/715
 [#694]: https://github.com/shopsys/shopsys/pull/694
+
+[#871]: https://github.com/shopsys/shopsys/pull/871
+[#869]: https://github.com/shopsys/shopsys/pull/869
+[#867]: https://github.com/shopsys/shopsys/pull/867
+[#857]: https://github.com/shopsys/shopsys/pull/857
+[#856]: https://github.com/shopsys/shopsys/pull/856
+[#854]: https://github.com/shopsys/shopsys/pull/854
+[#853]: https://github.com/shopsys/shopsys/pull/853
+[#852]: https://github.com/shopsys/shopsys/pull/852
+[#851]: https://github.com/shopsys/shopsys/pull/851
+[#845]: https://github.com/shopsys/shopsys/pull/845
+[#844]: https://github.com/shopsys/shopsys/pull/844
+[#840]: https://github.com/shopsys/shopsys/pull/840
+[#838]: https://github.com/shopsys/shopsys/pull/838
+[#836]: https://github.com/shopsys/shopsys/pull/836
+[#830]: https://github.com/shopsys/shopsys/pull/830
+[#829]: https://github.com/shopsys/shopsys/pull/829
+[#824]: https://github.com/shopsys/shopsys/pull/824
+[#821]: https://github.com/shopsys/shopsys/pull/821
+[#817]: https://github.com/shopsys/shopsys/pull/817
+[@pejaycz]: https://github.com/pejaycz
