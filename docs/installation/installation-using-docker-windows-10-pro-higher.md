@@ -115,14 +115,13 @@ cd /c/Users/myuser/Documents/
 
 Install project with composer.
 ```
-composer create-project shopsys/project-base --stability=beta --no-install --keep-vcs
+composer create-project shopsys/project-base --no-install --keep-vcs
 cd project-base
 ```
 
 *Notes:*
 - *The `--no-install` option disables installation of the vendors - this will be done later in the Docker container.*
 - *The `--keep-vcs` option initializes GIT repository in your project folder that is needed for diff commands of the application build and keeps the GIT history of `shopsys/project-base`.*
-- *The `--stability=beta` option enables you to install the project from the last beta release. Default value for the option is `stable` but there is no stable release yet.*
 
 ### 2.1 Use install script
 In case you want to start demo of the app as fast as possible, you can now execute install script.
