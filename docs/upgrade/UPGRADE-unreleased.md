@@ -73,6 +73,17 @@ if you want to have products data exported to Elasticsearch after `build-demo` t
     ```
     - if you extended some of data fixtures classes, you have to modify the class directly after you copied data fixtures from [shopsys/project-base]
     - you can follow [#854](https://github.com/shopsys/shopsys/pull/854) for inspiration
+- *(low priority)* to implement default image sizes for individual devices width [#836](https://github.com/shopsys/shopsys/pull/836) you have to
+    - update `src/Shopsys/ShopBundle/Resources/config/images.yml` as has been changed in this [commit](https://github.com/shopsys/shopsys/pull/836/files#diff-6519f98eb70e3d78e0f9756083222ff3)
+    - update all image macros in twig template `src/Shopsys/ShopBundle/Resources/views/Front/Content/Advert/box.html.twig` as shown below
+    ```twig
+    {{ image(advert, { size: advert.positionName }) }}
+    ```
+    - in order to show changes properly for section `noticer` in `images.yml` you need to create banner in administration as **Image with link**.
+    - remove all images in folders (if a folder with images exists) in order to generate new images
+        - `web/content/images/product/default`
+        - `web/content/images/product/list`
+        - `web/content/images/sliderItem/default`
 
 [Upgrade from v7.0.0-beta6 to Unreleased]: https://github.com/shopsys/shopsys/compare/v7.0.0-beta6...HEAD
 [shopsys/framework]: https://github.com/shopsys/framework

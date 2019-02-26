@@ -58,6 +58,7 @@ Add:
 ## Frontend
 * [Design implementation and Customization](./frontend/design-implementation-and-customization.md)
 * [Introduction to LESS](./frontend/introduction-to-less.md)
+* [Configuring image sizes for individual devices width](./frontend/configuring-image-sizes-for-individual-devices-width.md)
 * [Frontend Troubleshooting](./frontend/frontend-troubleshooting.md)
 
 ## Orchestration
