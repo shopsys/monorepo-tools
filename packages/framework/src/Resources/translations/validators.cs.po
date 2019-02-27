@@ -7,6 +7,9 @@ msgstr ""
 msgid "Address {{ url }} already exists."
 msgstr "Adresa {{ url }} již existuje."
 
+msgid "Amount of money should be greater than or equal to zero."
+msgstr "Tato částka musí být větší nebo rovna nule."
+
 msgid "Availability name cannot be longer than {{ limit }} characters"
 msgstr "Název dostupnosti nesmí být delší než {{ limit }} znaků"
 
@@ -337,8 +340,8 @@ msgstr "Vyplňte prosím PSČ"
 msgid "Previously selected main URL dos not exist any more"
 msgstr "Původně vybraná hlavní URL již neexistuje"
 
-msgid "Price must be greater or equal to {{ compared_value }}"
-msgstr "Cena musí být větší nebo rovna {{ compared_value }}"
+msgid "Price must be greater or equal to zero"
+msgstr "Cena musí být větší nebo rovna nule"
 
 msgid "Product name cannot be longer than {{ limit }} characters"
 msgstr "Název produktu nesmí být delší než {{ limit }} znaků"
@@ -372,6 +375,12 @@ msgstr "DIČ nesmí být delší než {{ limit }} znaků"
 
 msgid "Telephone number cannot be longer than {{ limit }} characters"
 msgstr "Telefon nesmí být delší než {{ limit }} znaků"
+
+msgid "The amount of money should be {{ limit }} or less."
+msgstr "Tato částka musí být {{ limit }} nebo méně."
+
+msgid "The amount of money should be {{ limit }} or more."
+msgstr "Tato částka musí být {{ limit }} nebo více."
 
 msgid "This field must be empty"
 msgstr "Toto pole musí zůstat prázdné"

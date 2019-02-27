@@ -42,7 +42,7 @@ vendor/bin/monorepo-builder release <release-number> --dry-run --stage <stage> -
 
 ### Notes
 - The "release-number" argument is the desired tag you want to release, it should always follow [the semantic versioning](https://semver.org/)
-and start with the "v" prefix, e.g. `v7.0.0-beta5`.
+and start with the "v" prefix, e.g. `v7.0.0`.
 - The releaser needs `.git` folder available - this is a problem currently for our Docker on Mac and Windows configuration
 as the folder is currently ignored for performance reasons.
 There is [an issue](https://github.com/shopsys/shopsys/issues/536) on Github that mentions the problem.

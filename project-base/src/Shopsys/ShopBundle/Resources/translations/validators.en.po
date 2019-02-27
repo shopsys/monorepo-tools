@@ -109,7 +109,7 @@ msgstr ""
 msgid "Please enter zip code"
 msgstr ""
 
-msgid "Price must be greater or equal to {{ compared_value }}"
+msgid "Price must be greater or equal to zero"
 msgstr ""
 
 msgid "Quantity must be greater than {{ compared_value }}"
