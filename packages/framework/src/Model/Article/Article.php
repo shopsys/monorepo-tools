@@ -87,7 +87,7 @@ class Article implements OrderableEntityInterface
     protected $placement;
 
     /**
-     * @var string
+     * @var bool
      *
      * @ORM\Column(type="boolean")
      */
