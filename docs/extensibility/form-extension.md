@@ -14,39 +14,7 @@ forms for extensions is below:
 If you want to see example of extending one this forms please check this [link](https://github.com/shopsys/shopsys/commit/d6b84bf54c0b47c72eacc82d540987dd8078fa13).
 
 ## What can we use for creating our own forms
-We created some form types which can help you with creating your own form types. Let's take a look at them
-
-### [GroupType](../../packages/framework/src/Form/GroupType.php)
-Group type is used for creating groups of containers. It is not mapped onto any property and it inherits data into group
-so you can work with forms in this group same as you were before. `GroupType` makes sure to render your fields into nicely
-styled `div` wrap.
-
-`GroupType` comes with few options that you can use for even more comfortable work.
-
-#### `label`
-Label is used for displaying heading of section for example in `CustomerFormType` all user data like name, last name or
-email address are all in section with label 'Personal Data'
-
-### [DisplayOnlyCustomerType](../../packages/framework/src/Form/DisplayOnlyCustomerType.php)
-Displays name of a registered customer along with a link to his/her detail.
-If there is no customer set, `unregistered customer` text will be displayed instead.
-
-### [DisplayOnlyType](../../packages/framework/src/Form/DisplayOnlyType.php)
-Sometimes form needs to only display information but does not need to change and persist this data, for this usages
-there is `DisplayOnlyType` which does not map property onto `entity` and let you to display your own data.
-
-### [DisplayOnlyUrlType](../../packages/framework/src/Form/DisplayOnlyUrlType.php)
-For displaying custom URL based on routing system, there can be used `DisplayOnlyUrlType`.
-
-### [LocalizedFullWidthType](../../packages/framework/src/Form/LocalizedFullWidthType.php)
-For displaying localized field in vertical order of full-width label and inputs, there can be used `LocalizedFullWidthType`.
-
-### [OrderItemsType](../../packages/framework/src/Form/OrderItemsType.php)
-Displays editable table of OrderItems from provided Order.
-
-### [WarningMessageType](../../packages/framework/src/Form/WarningMessageType.php)
-Sometimes the form needs to contain some information that is important for viewer, for this usage there is  `WarningMessageType`
-that shows highlighted message with warning icon.
+We created some form types which can help you with creating your own form types. You can find them in [separate article](../introduction/using-form-types.md)
 
 ## Adding fields into already existing form types
 Imagine that you have added new property into `Product entity` and you want this property to be set in administration
