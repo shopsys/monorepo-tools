@@ -149,6 +149,7 @@
   },
   "conflict": {
     "symfony/dependency-injection": "3.4.15|3.4.16",
+    "symplify/better-phpdoc-parser": ">=5.4.14",
     "twig/twig": "2.6.1"
   },
   "scripts": {

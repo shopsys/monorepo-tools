@@ -25,6 +25,9 @@
         "phpunit/phpunit": "^7.0",
         "symplify/easy-coding-standard-tester": "^5.2.17"
     },
+    "conflict": {
+        "symplify/better-phpdoc-parser": ">=5.4.14"
+    },
     "autoload": {
         "psr-4": {
             "Shopsys\\CodingStandards\\": "src/"
