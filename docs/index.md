@@ -54,6 +54,7 @@
 * [Administration Menu](./administration/administration-menu.md)
 * [Grid](./administration/grid.md)
     * [Grid Rendering Customization](./administration/grid-rendering-customization.md)
+    * [Grid Data Sources](./administration/grid-data-sources.md)
 
 ## Frontend
 * [Design implementation and Customization](./frontend/design-implementation-and-customization.md)
