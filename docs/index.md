@@ -53,6 +53,7 @@
 ## Administration
 * [Administration Menu](./administration/administration-menu.md)
 * [Grid](./administration/grid.md)
+    * [Grid Rendering Customization](./administration/grid-rendering-customization.md)
 
 ## Frontend
 * [Design implementation and Customization](./frontend/design-implementation-and-customization.md)
