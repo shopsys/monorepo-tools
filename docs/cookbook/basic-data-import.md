@@ -301,8 +301,9 @@ Finally, we can implement the private method for filling data object
 
 // ...
 
-use Shopsys\ShopBundle\Model\Pricing\Vat\VatFacade;
+use Shopsys\FrameworkBundle\Component\Money\Money;
 use Shopsys\FrameworkBundle\Model\Product\ProductData;
+use Shopsys\ShopBundle\Model\Pricing\Vat\VatFacade;
 
 // ...
 
@@ -335,7 +336,7 @@ public function __construct(
 private function fillProductData(ProductData $productData, array $externalProductData)
 {
     $productData->name[self::LOCALE] = $externalProductData['name'];
-    $productData->manualInputPricesByPricingGroupId[self::PRICING_GROUP_ID] = $externalProductData['price_without_vat'];
+    $productData->manualInputPricesByPricingGroupId[self::PRICING_GROUP_ID] = Money::create($externalProductData['price_without_vat']);
     $productData->vat = $this->vatFacade->getVatByPercent($externalProductData['vat_percent']); // will be implemented in next step
     $productData->ean = $externalProductData['ean'];
     $productData->descriptions[self::DOMAIN_ID] = $externalProductData['description'];
@@ -351,6 +352,10 @@ private function fillProductData(ProductData $productData, array $externalProduc
 in [`ProductData`](../../packages/framework/src/Model/Product/ProductData.php).
 So we will extend [`VatRepository`](../../packages/framework/src/Model/Pricing/Vat/VatRepository.php)
 and [`VatFacade`](../../packages/framework/src/Model/Pricing/Vat/VatFacade.php) and implement appropriate methods.*
+
+*Note 3: `Money::create()` can be used only for integers and numeric strings.
+If you use floats in your `$externalProductData` array you should always use `Money::createFromFloat()` and specify scale explicitly.
+Read more about monetary values in [How to Work with Money](/docs/introduction/how-to-work-with-money.md).*
 
 #### 3.6 - Extend [`VatRepository`](../../packages/framework/src/Model/Pricing/Vat/VatRepository.php) and implement method `getVatByPercent()` in order to load [`Vat`](../../packages/framework/src/Model/Pricing/Vat/Vat.php) by percent
 ```php

@@ -386,6 +386,13 @@ It is common that you need to transfer an entity to form or other parts of the s
 If you need to transfer one entity, use PHPDoc annotation `entity|null`, eg. `\Shopsys\FrameworkBundle\Model\Pricing\Vat\Vat|null` in [`TransportData::$vat`](/packages/framework/src/Model/Transport/TransportData.php).
 If you need to transfer a collection of entities, use PHPDoc annotation `entity[]` and initialize the array in the constructor, eg. `\Shopsys\FrameworkBundle\Model\Payment\Payment[]` in [`TransportData::$payments`](/packages/framework/src/Model/Transport/TransportData.php).
 
+#### Money
+
+To transfer monetary values (*prices, account balances, discount amounts, price limits etc.*) you should always use `\Shopsys\FrameworkBundle\Component\Money\Money` (optionally nullable or as an array).
+You may initialize a default value in the constructor or in the data factory (eg. with `Money::zero()`).
+
+You can read more about the `Money` class in [How to Work with Money](/docs/introduction/how-to-work-with-money.md).
+
 #### Images
 
 To transfer images via the system, use PHPDoc annotation `\Shopsys\FrameworkBundle\Component\FileUpload\ImageUploadData` and initialize the field in the constructor as you can see in `BrandData` example above.

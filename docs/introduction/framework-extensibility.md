@@ -46,6 +46,7 @@ as well as a list of customizations that are not (and will not be) possible at a
 * Removing an attribute from a framework entity
 * Changing a data type of an entity attribute
 * Removing existing entities and features
+* Extending [the `Money` class](/docs/introduction/how-to-work-with-money.md) and closely related classes (eg. `MoneyType`)
 
 ## Successfully implemented features
 * [Shipping method with pickup places](https://github.com/shopsys/demoshop/pull/6)
