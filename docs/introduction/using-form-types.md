@@ -29,6 +29,7 @@ This option is used as array with two options (`container_class`, `data_type`) a
 ### is_plugin_data_group
 Defaults to `false`.  
 This option can be set to `true` in empty FormType if you want to add some part of a form from some plugin.
+You can learn more about this in [separate article](../extensibility/extending-form-from-plugin.md)
 
 ### render_form_row
 Defaults to `true`.  
