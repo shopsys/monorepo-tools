@@ -1,6 +1,10 @@
 # Using Form Types
 In this article we will show what types you can use when creating or editing forms, what options they have and what they do.
 
+We use two types of naming for form types:
+- `*FormType` - This type is used in Controllers to create forms and their views on front-end or they are used in other FormTypes as sub-forms
+- `*Type` - This type is used only in other FormTypes to ease adding fields with their own widgets and to add to their reusability
+
 ## Default options
 Every form type has some default options that can be used for various things.
 
