@@ -12,7 +12,7 @@
             {% block main_content %}{% endblock %}
         </div>
 
-        <div class="web__main__panel">
+        <div class="web__main__panel dont-print">
             {{ render(controller('ShopsysShopBundle:Front/Category:panel', { request: app.request } )) }}
 
             {% block panel_content %}{% endblock %}

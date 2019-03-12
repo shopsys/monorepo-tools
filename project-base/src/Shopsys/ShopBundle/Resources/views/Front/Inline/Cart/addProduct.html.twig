@@ -1,4 +1,4 @@
-{{ form_start(form, {attr: {class: 'js-add-product', 'data-ajax-url': url('front_cart_add_product_ajax'), 'multipleForm': true}}) }}
+{{ form_start(form, {attr: {class: 'js-add-product dont-print', 'data-ajax-url': url('front_cart_add_product_ajax'), 'multipleForm': true}}) }}
     <span class="form-input-spinbox js-spinbox">
         {{ form_widget(form.quantity, { attr: { class: 'form-input-spinbox__input input-no-style js-spinbox-input', 'data-spinbox-min': 1}}) }}
         <button type="button" class="btn-no-style form-input-spinbox__btn js-spinbox-plus">+</button>

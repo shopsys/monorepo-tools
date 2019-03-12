@@ -1,5 +1,5 @@
 {% if categoriesWithLazyLoadedVisibleChildren|length > 0 %}
-    <ul class="js-category-list list-menu {% if isFirstLevel %}list-menu--root{% endif %}" {% if isFirstLevel %}id="js-categories"{% endif %}>
+    <ul class="js-category-list list-menu dont-print {% if isFirstLevel %}list-menu--root{% endif %}" {% if isFirstLevel %}id="js-categories"{% endif %}>
         {% for categoriyWithLazyLoadedVisibleChildren in categoriesWithLazyLoadedVisibleChildren %}
             {% set isCurrentCategory = (currentCategory is not null and currentCategory == categoriyWithLazyLoadedVisibleChildren.category) %}
             <li class="list-menu__item js-category-item">

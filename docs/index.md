@@ -53,6 +53,7 @@
 * [Introduction to LESS](./frontend/introduction-to-less.md)
 * [Configuring image sizes for individual devices width](./frontend/configuring-image-sizes-for-individual-devices-width.md)
 * [Frontend Troubleshooting](./frontend/frontend-troubleshooting.md)
+* [Understanding the Style Directory](./frontend/understanding-the-style-directory.md)
 
 ## Orchestration
 * [Introduction to Kubernetes](/docs/kubernetes/introduction-to-kubernetes.md)

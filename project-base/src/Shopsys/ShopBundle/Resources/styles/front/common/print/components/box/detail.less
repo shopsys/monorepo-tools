@@ -1,0 +1,43 @@
+.box-detail {
+    .clearfix();
+    margin-bottom: @margin-gap;
+
+    &__image {
+        float: left;
+        width: 50%;
+        padding-right: 20px;
+
+        &__main {
+            padding: 10px;
+            text-align: center;
+
+            border: 1px solid @color-border;
+        }
+    }
+
+    &__info {
+        float: left;
+        width: 50%;
+
+        &__availability {
+            margin-bottom: @margin-gap;
+        }
+
+        &__params {
+            font-size: 0;
+
+            dt, dd {
+                display: inline-block;
+                width: 50%;
+                margin: 0;
+                vertical-align: middle;
+
+                font-size: @font-size;
+            }
+
+            dt {
+                font-weight: 700;
+            }
+        }
+    }
+}

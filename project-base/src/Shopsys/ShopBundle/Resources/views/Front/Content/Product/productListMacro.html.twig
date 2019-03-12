@@ -11,12 +11,12 @@
                             {{ product.name }}
                         </{{ productHeadingTagName|default('h2') }}>
 
-                        <div class="list-products__item__image">
+                        <div class="list-products__item__image dont-print">
                             {{ image(product, { size: 'list', alt: product.name }) }}
                             {{ productFlags.list(product, 'in-flag--in-list') }}
                         </div>
 
-                        <div class="list-products__item__info">
+                        <div class="list-products__item__info dont-print">
                             <p class="list-products__item__info__description">
                                 {{ product.getShortDescription(domain.id) }}
                             </p>

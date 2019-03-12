@@ -49,6 +49,14 @@ module.exports = function(grunt) {
                         sourceMapRootpath: '../../../'
                     }
                 },
+                print{{ domain.id }}: {
+                    files: {
+                        'web/assets/frontend/styles/print{{ domain.id }}_{{ cssVersion }}.css': '{{ (customResourcesDirectory ~ '/styles/front/' ~ domain.stylesDirectory)|raw }}/print/main.less'
+                    },
+                    options: {
+                        compress: true
+                    }
+                },
             {% endfor -%}
 
             {% for domain in domains -%}
@@ -320,12 +328,12 @@ module.exports = function(grunt) {
     grunt.registerTask('default', ["sprite:admin", "sprite:frontend", "webfont", "less", "postcss", "legacssy"]);
 
     {% for domain in domains -%}
-        grunt.registerTask('frontend{{ domain.id }}', ['webfont:frontend', 'sprite:frontend', 'less:frontend{{ domain.id }}', 'legacssy:frontend{{ domain.id }}', 'less:wysiwyg{{ domain.id }}'], 'postcss');
+        grunt.registerTask('frontend{{ domain.id }}', ['webfont:frontend', 'sprite:frontend', 'less:frontend{{ domain.id }}', 'less:print{{ domain.id }}', 'legacssy:frontend{{ domain.id }}', 'less:wysiwyg{{ domain.id }}'], 'postcss');
     {% endfor -%}
     grunt.registerTask('admin', ['sprite:admin', 'webfont:admin', 'less:admin', 'legacssy:admin' ]);
 
     {% for domain in domains -%}
-        grunt.registerTask('frontendLess{{ domain.id }}', ['less:frontend{{ domain.id }}', 'legacssy:frontend{{ domain.id }}', 'less:wysiwyg{{ domain.id }}']);
+        grunt.registerTask('frontendLess{{ domain.id }}', ['less:frontend{{ domain.id }}', 'legacssy:frontend{{ domain.id }}', 'less:print{{ domain.id }}', 'less:wysiwyg{{ domain.id }}']);
     {% endfor -%}
     grunt.registerTask('adminLess', ['less:admin', 'legacssy:admin' ]);
 };

@@ -1,0 +1,23 @@
+.box-breadcrumb {
+    margin-bottom: @margin-gap;
+
+    &__item {
+        color: @color-0;
+        text-decoration: none;
+
+        &--icon {
+            &:first-of-type {
+                display: none;
+            }
+        }
+
+        &--separator {
+            margin-right: 5px;
+            margin-left: 5px;
+
+            &:first-of-type {
+                display: none;
+            }
+        }
+    }
+}

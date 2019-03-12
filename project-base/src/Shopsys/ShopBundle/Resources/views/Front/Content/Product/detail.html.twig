@@ -32,7 +32,7 @@
                 {{ productFlags.list(product) }}
 
                 {% if showGallery %}
-                    <div class="box-gallery js-gallery">
+                    <div class="box-gallery dont-print js-gallery">
                         <span class="box-gallery__arrow box-gallery__arrow--prev js-gallery-prev">
                             <i class="svg svg-arrow"></i>
                         </span>
@@ -210,7 +210,7 @@
             or accessories|length > 0
         %}
             <div class="in-tab js-responsive-tabs">
-                <div class="in-tab__head">
+                <div class="in-tab__head dont-print">
                     {% if product.getDescription(domain.id) %}
                         <a href="#" class="in-tab__head__item js-tabs-button active" data-tab-id="description">
                             {{ descriptionHeadline }}

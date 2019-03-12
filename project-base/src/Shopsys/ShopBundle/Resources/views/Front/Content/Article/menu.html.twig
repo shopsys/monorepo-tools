@@ -1,4 +1,4 @@
-<ul class="menu">
+<ul class="menu dont-print">
     {% for article in articles %}
         <li class="menu__item">
             <a class="menu__item__link" href="{{ url('front_article_detail', { id: article.id }) }}">{{ article.name }}</a>

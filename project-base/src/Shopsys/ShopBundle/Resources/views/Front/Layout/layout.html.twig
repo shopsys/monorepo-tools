@@ -4,7 +4,7 @@
 {% block html_body %}
     {% set adminLoggedAsCustomer = is_granted(constant('Shopsys\\FrameworkBundle\\Model\\Security\\Roles::ROLE_ADMIN_AS_CUSTOMER')) %}
     {% if adminLoggedAsCustomer or isMailerSettingUnusual() %}
-        <div class="window-bar">
+        <div class="window-bar dont-print">
             {% if adminLoggedAsCustomer %}
                 <div class="window-bar__item">
                     {{ 'Attention! You are administrator logged in as the customer.'|trans }}
@@ -35,7 +35,7 @@
     </div>
     {% if not isCookiesConsentGiven() %}
         {% set cookiesArticle = findCookiesArticleByDomainId(getDomain().id) %}
-        <div class="box-cookies js-eu-cookies">
+        <div class="box-cookies dont-print js-eu-cookies">
             <div class="box-cookies__in">
                 <div class="box-cookies__text">
                     <span class="display-none-tablet display-inline-block">
