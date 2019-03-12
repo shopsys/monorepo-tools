@@ -7,6 +7,13 @@ resources:
 -   ../../../services/adminer.yml
 -   ../../../services/redis-admin.yml
 -   ../../../services/selenium-server.yml
+patchesJson6902:
+-   target:
+        group: extensions
+        version: v1beta1
+        kind: Ingress
+        name: shopsys
+    path: ./ingress-patch.yaml
 configMapGenerator:
 -   name: nginx-configuration
     files:
