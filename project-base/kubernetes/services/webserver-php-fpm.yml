@@ -5,7 +5,6 @@ metadata:
 spec:
     selector:
         app: webserver-php-fpm
-    type: NodePort
     ports:
     -   name: http
         port: 8080

@@ -217,6 +217,16 @@ There you can find links to upgrade notes for other versions too.
         +   database_server_version: 10.5
         ...
         ```
+
+### Infrastructure
+- remove node ports from kubernetes services ([#888](https://github.com/shopsys/shopsys/pull/888))
+    - remove `NodePort` type from `kubernetes/services/adminer.yml`, `kubernetes/services/redis-admin.yml`, `kubernetes/services/redis-admin.yml`
+    ```diff
+    -    type: NodePort
+     ports:
+     -   name: http
+    ```
+
 ### Tools
 - add path for tests folder into `ecs-fix` phing target of `build-dev.xml` file to be able to fix files that were found by `ecs` phing target ([#980](https://github.com/shopsys/shopsys/pull/980))
     ```diff
