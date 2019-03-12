@@ -80,7 +80,7 @@
             display: block !important;
         }
 
-        .open & {
+        .open:not(.side-menu__item--active) & {
             .animated(0.1s, 0s);
             .fadeIn-scale-topLeft;
         }
