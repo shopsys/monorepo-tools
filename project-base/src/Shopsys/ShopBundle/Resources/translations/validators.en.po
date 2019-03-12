@@ -124,6 +124,9 @@ msgstr ""
 msgid "Telephone number cannot be longer than {{ limit }} characters"
 msgstr ""
 
+msgid "This e-mail is already registered"
+msgstr ""
+
 msgid "You have to agree with privacy policy"
 msgstr ""
 

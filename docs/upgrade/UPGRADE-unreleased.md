@@ -67,6 +67,17 @@ There you can find links to upgrade notes for other versions too.
     ```
     - generate new `Grtuntfile.js` by running command `php phing gruntfile`
     - generate new CSS files by running command `php phing grunt`
+- *(low priority)* add custom message for unique e-mail validation in `/src/Shopsys/ShopBundle/Form/Front/Registration/RegistrationFormType.php` ([#885](https://github.com/shopsys/shopsys/pull/885))
+    ```diff
+    -                    new UniqueEmail(),
+    +                    new UniqueEmail(['message' => 'This e-mail is already registered']),
+    ```
+    - dump translations via `php phing dump-translations`
+    - fix `CustomerRegistrationCest::testAlreadyUsedEmail` acceptation test
+        ```diff
+        -        $registrationPage->seeEmailError('Email no-reply@shopsys.com is already registered');
+        +        $registrationPage->seeEmailError('This e-mail is already registered');
+        ```
 
 ## [shopsys/coding-standards]
 - We disallow using [Doctrine inheritance mapping](https://www.doctrine-project.org/projects/doctrine-orm/en/2.6/reference/inheritance-mapping.html) in the Shopsys Framework

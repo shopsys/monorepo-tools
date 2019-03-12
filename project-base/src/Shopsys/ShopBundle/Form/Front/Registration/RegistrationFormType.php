@@ -46,7 +46,7 @@ class RegistrationFormType extends AbstractType
                     new Constraints\NotBlank(['message' => 'Please enter e-mail']),
                     new Email(['message' => 'Please enter valid e-mail']),
                     new Constraints\Length(['max' => 255, 'maxMessage' => 'Email cannot be longer then {{ limit }} characters']),
-                    new UniqueEmail(),
+                    new UniqueEmail(['message' => 'This e-mail is already registered']),
                 ],
             ])
             ->add('password', RepeatedType::class, [

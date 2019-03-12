@@ -124,6 +124,9 @@ msgstr "DIČ nesmí být delší než {{ limit }} znaků"
 msgid "Telephone number cannot be longer than {{ limit }} characters"
 msgstr "Telefon nesmí být delší než {{ limit }} znaků"
 
+msgid "This e-mail is already registered"
+msgstr "Tento e-mail je již registrován"
+
 msgid "You have to agree with privacy policy"
 msgstr "Musíte souhlasit se zpracováním osobních údajů"
 
