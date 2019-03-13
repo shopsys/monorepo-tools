@@ -30,6 +30,7 @@
 * [Translations](./introduction/translations.md)
 * [Directories](./introduction/directories.md)
 * [Cron](./introduction/cron.md)
+* [Using Form Types](./introduction/using-form-types.md)
 
 ## Cookbook
 * [Dumping and Importing the Database](./cookbook/dumping-and-importing-the-database.md)
