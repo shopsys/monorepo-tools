@@ -64,5 +64,6 @@ It contains definition of blocks that are used for rendering forms
     - `form_widget` - renders HTML form widget for the given field
     - `form_errors` - renders block with list of validation errors for the given field
     - `form_label` - renders label for the given field including red asterisk if the field is required
+
 and blocks of custom form widgets for various [FormTypes](../introduction/using-form-types.md) eg.:
 - `date_picker_widget` - is rendered as `form_widget` for [`DatePickerType`](../../packages/framework/src/Form/DatePickerType.php)
