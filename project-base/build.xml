@@ -52,10 +52,10 @@
     </if>
 
     <target name="build" depends="build-deploy-part-1-db-independent, build-deploy-part-2-db-dependent" description="Builds application for production preserving your DB."/>
-    <target name="build-deploy-part-1-db-independent" depends="clean,redis-check,clean-redis,composer,npm,dirs-create,assets" description="First part of application build for production preserving your DB (can be run without maintenance page)."/>
-    <target name="build-deploy-part-2-db-dependent" depends="db-migrations,create-domains-data,generate-friendly-urls,replace-domains-urls,grunt,error-pages-generate,warmup" description="Second part of application build for production preserving your DB (must be run with maintenance page when containing DB migrations)."/>
-    <target name="build-new" depends="wipe,redis-check,clean-redis,composer,npm,dirs-create,assets,db-rebuild,grunt,error-pages-generate,warmup,product-search-create-structure" description="Builds application for production with clean DB (with base data only)."/>
-    <target name="build-demo" depends="wipe,redis-check,clean-redis,composer,npm,dirs-create,assets,db-demo,grunt,error-pages-generate,warmup,product-search-recreate-structure,product-search-export-products" description="Builds application for production with clean demo DB."/>
+    <target name="build-deploy-part-1-db-independent" depends="generate-build-version,clean,redis-check,composer,npm,dirs-create,assets" description="First part of application build for production preserving your DB (can be run without maintenance page)."/>
+    <target name="build-deploy-part-2-db-dependent" depends="db-migrations,create-domains-data,generate-friendly-urls,replace-domains-urls,grunt,error-pages-generate,warmup,clean-redis-old" description="Second part of application build for production preserving your DB (must be run with maintenance page when containing DB migrations)."/>
+    <target name="build-new" depends="wipe,generate-build-version,redis-check,composer,npm,dirs-create,assets,db-rebuild,grunt,error-pages-generate,warmup,product-search-create-structure,clean-redis-old" description="Builds application for production with clean DB (with base data only)."/>
+    <target name="build-demo" depends="wipe,generate-build-version,redis-check,composer,npm,dirs-create,assets,db-demo,grunt,error-pages-generate,warmup,product-search-recreate-structure,product-search-export-products,clean-redis-old" description="Builds application for production with clean demo DB."/>
     <target name="db-demo" depends="db-wipe-public-schema,db-import-basic-structure,db-migrations,create-domains-data,db-fixtures-demo,load-plugin-demo-data,generate-friendly-urls,replace-domains-urls" description="Creates DB and fills it with demo data"/>
     <target name="db-rebuild" depends="db-wipe-public-schema,db-import-basic-structure,db-migrations,create-domains-data,generate-friendly-urls,replace-domains-urls" description="Drops all data in database and creates a new one with base data only."/>
     <target name="product-search-recreate-structure" depends="product-search-delete-structure,product-search-create-structure" description="Recreates structure for searching via elasticsearch (deletes existing structure and creates new one)" />
@@ -93,6 +93,13 @@
         <exec executable="${path.php.executable}" passthru="true" checkreturn="true" output="${dev.null}">
             <arg value="${path.bin-console}" />
             <arg value="shopsys:redis:clean-cache" />
+        </exec>
+    </target>
+
+    <target name="clean-redis-old" description="Cleans up redis cache for previous build versions">
+        <exec executable="${path.php.executable}" passthru="true" checkreturn="true" output="${dev.null}">
+            <arg value="${path.bin-console}" />
+            <arg value="shopsys:redis:clean-cache-old" />
         </exec>
     </target>
 
@@ -349,6 +356,20 @@
             <arg value="cache:warmup" />
             <arg value="--env=prod" />
         </exec>
+    </target>
+
+    <target name="generate-build-version">
+        <exec executable="${path.php.executable}" checkreturn="true" outputProperty="version">
+            <arg value="-r" />
+            <arg value="echo date('YmdHis');" />
+        </exec>
+        <copy file="${path.app}/config/parameters_version.yml.dist" tofile="${path.app}/config/parameters_version.yml" overwrite="true">
+            <filterchain>
+                <replacetokens begintoken="%%" endtoken="%%">
+                    <token key="version" value="${version}" />
+                </replacetokens>
+            </filterchain>
+        </copy>
     </target>
 
     <target name="wipe" depends="wipe-excluding-logs" description="Wipes out all generated and/or uploaded files.">

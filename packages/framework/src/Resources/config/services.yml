@@ -8,6 +8,7 @@ parameters:
     faker.seed: 1234
     shopsys.entity_extension.map: {}
     shopsys.admin_locale: en
+    build-version: '0000000000000000'
 
 services:
     _defaults:
@@ -970,6 +971,11 @@ services:
             - '@snc_redis.bestselling_products'
             - '@snc_redis.doctrine_metadata'
             - '@snc_redis.doctrine_query'
+
+    Shopsys\FrameworkBundle\Component\Redis\RedisVersionsFacade:
+        arguments:
+            $globalClient: '@snc_redis.global'
+            $currentVersion: '%build-version%'
 
     Elasticsearch\ClientBuilder:
       class: Elasticsearch\ClientBuilder

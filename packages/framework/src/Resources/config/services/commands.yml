@@ -37,3 +37,6 @@ services:
     Shopsys\MigrationBundle\Command\GenerateMigrationCommand:
         arguments:
             - '%shopsys.vendor_dir%'
+
+    Shopsys\FrameworkBundle\Command\RedisCleanCacheOldCommand:
+        autoconfigure: false

@@ -28,3 +28,4 @@ parameters:
         Shopsys\FrameworkBundle\Model\Payment\Payment: Shopsys\ShopBundle\Model\Payment\Payment
         Shopsys\FrameworkBundle\Model\Product\Product: Shopsys\ShopBundle\Model\Product\Product
         Shopsys\FrameworkBundle\Model\Product\Brand\Brand: Shopsys\ShopBundle\Model\Product\Brand\Brand
+    build-version: '0000000000000000'

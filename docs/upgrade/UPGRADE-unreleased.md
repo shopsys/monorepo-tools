@@ -78,6 +78,81 @@ There you can find links to upgrade notes for other versions too.
         -        $registrationPage->seeEmailError('Email no-reply@shopsys.com is already registered');
         +        $registrationPage->seeEmailError('This e-mail is already registered');
         ```
+- *(low priority)* to improve your deployment process and avoid possible Redis cache problems during deployment, include `build-version` into your builds ([#886](https://github.com/shopsys/shopsys/pull/886))
+    - to `app/AppKernel.php` into function `getConfig()` add
+        ```diff
+        private function getConfig()
+        {
+            // ...
+        +    if (file_exists(__DIR__ . '/config/parameters_version.yml')) {
+        +        $configs[] = __DIR__ . '/config/parameters_version.yml';
+        +    }
+
+            return $configs;
+        }
+        ```
+    - to `app/config/.gitignore` add
+        ```diff
+        + parameters_version.yml
+        ```
+    - configure redis cache clients in `app/config/packages/snc_redis.yml` to use `build-version` prefixes, eg.
+        ```diff
+        snc_redis:
+            clients:
+                bestselling_products:
+                # ...
+        -           prefix: '%env(REDIS_PREFIX)%bestselling_products_'
+        +           prefix: '%env(REDIS_PREFIX)%%build-version%bestselling_products_'
+        ```
+        **But be careful, don't add prefixes to the session client**
+
+        And add a `global` client (it is also without the `build-version` prefix)
+        ```diff
+        snc_redis:
+            clients:
+        +       global:
+        +           type: 'phpredis'
+        +           alias: 'global'
+        +           dsn: 'redis://%redis_host%'
+        +           options:
+        +               prefix: '%env(REDIS_PREFIX)%'
+        ```
+    - to `src/Shopsys/ShopBundle/Resources/config/services/commands.yml` add
+        ```
+        Shopsys\FrameworkBundle\Command\RedisCleanCacheOldCommand: ~
+        ```
+    - create `app/config/parameters_version.yml.dist` with following content
+        ```yml
+        parameters:
+            build-version: %%version%%
+        ```
+    - to `build.xml` add new phing targets
+        ```xml
+        <target name="clean-redis-old" description="Cleans up redis cache for previous build versions">
+            <exec executable="${path.php.executable}" passthru="true" checkreturn="true" output="${dev.null}">
+                <arg value="${path.bin-console}" />
+                <arg value="shopsys:redis:clean-cache-old" />
+            </exec>
+        </target>
+        <target name="generate-build-version">
+            <exec executable="${path.php.executable}" checkreturn="true" outputProperty="version">
+                <arg value="-r" />
+                <arg value="echo date('YmdHis');" />
+            </exec>
+            <copy file="${path.app}/config/parameters_version.yml.dist" tofile="${path.app}/config/parameters_version.yml" overwrite="true">
+                <filterchain>
+                    <replacetokens begintoken="%%" endtoken="%%">
+                        <token key="version" value="${version}" />
+                    </replacetokens>
+                </filterchain>
+            </copy>
+        </target>
+        ```
+    - download [`RedisVersionsFacadeTest.php`](https://github.com/shopsys/project-base/tree/master/tests/ShopBundle/Functional/Component/Redis/RedisVersionsFacadeTest.php) to your tests directory `tests/ShopBundle/Functional/Component/Redis/`
+    - run `php phing generate-build-version`
+    - and include `generate-build-version` and `clean-redis-old` to your build phing targets. Please find inspiration in [#886](https://github.com/shopsys/shopsys/pull/886/files)
+    - once you finish this change (include the `build-version` into caches), you still should deal with older redis cache keys that don't use `build-version` prefix (16 digits).
+      Such keys are not removed even by `clean-redis-old`, please find and remove them manually (via console or UI)
 
 ## [shopsys/coding-standards]
 - We disallow using [Doctrine inheritance mapping](https://www.doctrine-project.org/projects/doctrine-orm/en/2.6/reference/inheritance-mapping.html) in the Shopsys Framework
