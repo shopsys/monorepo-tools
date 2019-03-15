@@ -459,7 +459,7 @@ services:
         class: Shopsys\FrameworkBundle\Model\Localization\IntlCurrencyRepository
 
     Shopsys\FrameworkBundle\Model\Mail\Mailer:
-        arguments: ['@mailer']
+        arguments: ['@mailer', '@swiftmailer.transport.real']
 
     Shopsys\FrameworkBundle\Model\Heureka\HeurekaSetting: ~
 

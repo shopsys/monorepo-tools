@@ -19,6 +19,7 @@ For more detailed information about the Shopsys Framework, please see [Shopsys F
 - [Are some periodic tasks part of the Shopsys Framework (cron)?](#are-some-periodic-tasks-part-of-the-shopsys-framework-cron)
 - [Why are you using entity data instead of entities for Symfony forms?](#why-are-you-using-entity-data-instead-of-entities-for-symfony-forms)
 - [What is the configuration file `services_test.yml` good for?](#what-is-the-configuration-file-services_testyml-good-for)
+- [Why are e-mails not sent immediately but at the end of the script](#why-are-e-mails-sent-before-end-of-the-script-and-not-immediately)
 
 ## What are the phing targets?
 Every phing target is a task that can be executed simply by `php phing <target-name>` command.
@@ -101,3 +102,9 @@ because Symfony forms need setters for all fields and we don't want to mess enti
 is a service configuration file that is loaded in TEST environment in addition to
 the standard configuration defined in [`services.yml`](../../project-base/src/Shopsys/ShopBundle/Resources/config/services.yml) as sometimes the configuration differs from the standard one and we need to override it.
 E.g., by default, all our services are defined as private. However, in tests, we are retrieving some services directly from the container hence we need to have them public in TEST environment.
+
+## Why are e-mails sent before end of the script and not immediately
+Project uses `SwiftMailer` package for sending e-mails and defaultly it has set `spool queue` that stores all mails into `memory` until the script execution is at the end.  
+This spooling method helps the user not to wait for the next page to load while the email is sending.
+However, based on implementations of many projects, project gained functionality that releases spool after the `*cronModule` run is ended in case of `cron` phing target that runs all cron modules at once.
+It is also possible to turn the spool off by removing it from [swiftmailer.yml](../../project-base/app/config/packages/swiftmailer.yml) or changing the behavior of storing e-mails based on [symfony docs](https://symfony.com/doc/3.4/email/spool.html) or [snc_redis docs](https://github.com/snc/SncRedisBundle/blob/master/Resources/doc/index.md#swiftmailer-spooling).

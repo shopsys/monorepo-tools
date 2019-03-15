@@ -5,9 +5,15 @@ namespace Shopsys\FrameworkBundle\Model\Mail;
 use Swift_Attachment;
 use Swift_Mailer;
 use Swift_Message;
+use Swift_Transport;
 
 class Mailer
 {
+    /**
+     * @var \Swift_Transport
+     */
+    protected $realSwiftTransport;
+
     /**
      * @var \Swift_Mailer
      */
@@ -15,10 +21,23 @@ class Mailer
 
     /**
      * @param \Swift_Mailer $swiftMailer
+     * @param \Swift_Transport $realSwiftTransport
      */
-    public function __construct(Swift_Mailer $swiftMailer)
+    public function __construct(Swift_Mailer $swiftMailer, Swift_Transport $realSwiftTransport)
     {
         $this->swiftMailer = $swiftMailer;
+        $this->realSwiftTransport = $realSwiftTransport;
+    }
+
+    public function flushSpoolQueue()
+    {
+        $transport = $this->swiftMailer->getTransport();
+        if ($transport instanceof \Swift_Transport_SpoolTransport) {
+            $spool = $transport->getSpool();
+            if ($spool instanceof \Swift_Spool) {
+                $spool->flushQueue($this->realSwiftTransport);
+            }
+        }
     }
 
     /**
