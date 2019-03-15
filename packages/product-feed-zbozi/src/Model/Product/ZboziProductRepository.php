@@ -37,7 +37,7 @@ class ZboziProductRepository
             ->addSelect('b')->leftJoin('p.brand', 'b')
             ->leftJoin(ZboziProductDomain::class, 'zpd', Join::WITH, 'zpd.product = p AND zpd.domainId = :domainId')
             ->andWhere('p.variantType != :variantTypeMain')->setParameter('variantTypeMain', Product::VARIANT_TYPE_MAIN)
-            ->andWhere('p.sellingDenied = FALSE')
+            ->andWhere('p.calculatedSellingDenied = FALSE')
             ->andWhere('zpd IS NULL OR zpd.show = TRUE')
             ->orderBy('p.id', 'asc')
             ->setMaxResults($maxResults);

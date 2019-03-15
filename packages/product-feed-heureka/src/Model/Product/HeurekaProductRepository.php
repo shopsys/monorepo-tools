@@ -35,7 +35,7 @@ class HeurekaProductRepository
             ->addSelect('v')->join('p.vat', 'v')
             ->addSelect('b')->leftJoin('p.brand', 'b')
             ->andWhere('p.variantType != :variantTypeMain')->setParameter('variantTypeMain', Product::VARIANT_TYPE_MAIN)
-            ->andWhere('p.sellingDenied = FALSE')
+            ->andWhere('p.calculatedSellingDenied = FALSE')
             ->orderBy('p.id', 'asc')
             ->setMaxResults($maxResults);
 

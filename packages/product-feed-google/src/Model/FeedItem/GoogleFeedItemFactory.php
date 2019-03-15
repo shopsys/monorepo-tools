@@ -58,7 +58,7 @@ class GoogleFeedItemFactory
             $product->getPartno(),
             $this->productUrlsBatchLoader->getProductUrl($product, $domainConfig),
             $this->productUrlsBatchLoader->getProductImageUrl($product, $domainConfig),
-            $product->isSellingDenied(),
+            $product->getCalculatedSellingDenied(),
             $this->getPrice($product, $domainConfig),
             $this->getCurrency($domainConfig)
         );
