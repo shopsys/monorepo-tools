@@ -1878,6 +1878,7 @@ That's why is this section formatted differently.
 [shopsys/form-types-bundle]: https://github.com/shopsys/form-types-bundle
 [shopsys/migrations]: https://github.com/shopsys/migrations
 [shopsys/monorepo-tools]: https://github.com/shopsys/monorepo-tools
+[shopsys/google-cloud-bundle]: https://github.com/shopsys/google-cloud-bundle
 
 [@pk16011990]: https://github.com/pk16011990
 [@stanoMilan]: https://github.com/stanoMilan

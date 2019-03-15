@@ -5,7 +5,7 @@ The releases of Shopsys Framework adhere to the [Backward Compatibility Promise]
 Since these are 3 possible scenarios how you can use shopsys, instructions are divided by these scenarios.
 
 ### You use our packages only
-Follow instructions in relevant sections, eg. `shopsys/coding-standards`, `shopsys/microservice-product-search`.
+Follow instructions in relevant sections, eg. `shopsys/coding-standards`, `shopsys/framework`.
 
 ### You are using monorepo
 Follow instructions in a [monorepo upgrade guide](docs/contributing/upgrading-monorepo.md)
@@ -27,12 +27,10 @@ Follow instructions in a [monorepo upgrade guide](docs/contributing/upgrading-mo
     * *(MacOS, Windows only)* run `docker-sync stop`
     * *(MacOS, Windows only)* run `docker-sync clean` so your volumes will be removed
     * follow upgrade notes in a *Infrastructure* section (related with `docker-compose.yml`, `Dockerfile`, docker containers, `nginx.conf`, `php.ini`, etc.)
-    * change all the microservices image versions in your `docker-compose.yml` to version you are upgrading to
-        eg. `image: shopsys/microservice-product-search:v7.0.0-beta1`
     * *(MacOS, Windows only)* run `docker-sync start` to create volumes  
-    * run `docker-compose up -d --build --force-recreate` to start application again
+    * run `docker-compose up -d --build --force-recreate --remove-orphans` to start application again
     * update shopsys framework dependencies in `composer.json` to version you are upgrading to
-        eg. `"shopsys/framework": "v7.0.0-beta1"`
+        eg. `"shopsys/framework": "v7.0.0"`
     * `composer update`
     * follow all upgrade notes you have not done yet
     * `php phing clean`
@@ -57,19 +55,4 @@ Follow instructions in a [monorepo upgrade guide](docs/contributing/upgrading-mo
 * ### [From v7.0.0-alpha1 to v7.0.0-alpha2](docs/upgrade/UPGRADE-v7.0.0-alpha2.md)
 * ### [Before monorepo](docs/upgrade/before-monorepo.md)
 
-[shopsys/shopsys]: https://github.com/shopsys/shopsys
 [shopsys/project-base]: https://github.com/shopsys/project-base
-[shopsys/framework]: https://github.com/shopsys/framework
-[shopsys/product-feed-zbozi]: https://github.com/shopsys/product-feed-zbozi
-[shopsys/product-feed-google]: https://github.com/shopsys/product-feed-google
-[shopsys/product-feed-heureka]: https://github.com/shopsys/product-feed-heureka
-[shopsys/product-feed-heureka-delivery]: https://github.com/shopsys/product-feed-heureka-delivery
-[shopsys/product-feed-interface]: https://github.com/shopsys/product-feed-interface
-[shopsys/plugin-interface]: https://github.com/shopsys/plugin-interface
-[shopsys/coding-standards]: https://github.com/shopsys/coding-standards
-[shopsys/http-smoke-testing]: https://github.com/shopsys/http-smoke-testing
-[shopsys/form-types-bundle]: https://github.com/shopsys/form-types-bundle
-[shopsys/migrations]: https://github.com/shopsys/migrations
-[shopsys/monorepo-tools]: https://github.com/shopsys/monorepo-tools
-[shopsys/microservice-product-search]: https://github.com/shopsys/microservice-product-search
-[shopsys/microservice-product-search-export]: https://github.com/shopsys/microservice-product-search-export
