@@ -153,6 +153,7 @@ There you can find links to upgrade notes for other versions too.
     - and include `generate-build-version` and `clean-redis-old` to your build phing targets. Please find inspiration in [#886](https://github.com/shopsys/shopsys/pull/886/files)
     - once you finish this change (include the `build-version` into caches), you still should deal with older redis cache keys that don't use `build-version` prefix (16 digits).
       Such keys are not removed even by `clean-redis-old`, please find and remove them manually (via console or UI)
+- *(low priority)* remove option `choice_name` from `flags` and `brands` in `ShopBundle/Form/Front/Product/ProductFilterFormType.php` ([#891](https://github.com/shopsys/shopsys/pull/891))
 
 ## [shopsys/coding-standards]
 - We disallow using [Doctrine inheritance mapping](https://www.doctrine-project.org/projects/doctrine-orm/en/2.6/reference/inheritance-mapping.html) in the Shopsys Framework

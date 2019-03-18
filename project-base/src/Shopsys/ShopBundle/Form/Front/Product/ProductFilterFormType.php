@@ -54,7 +54,6 @@ class ProductFilterFormType extends AbstractType
                 'choices' => $config->getFlagChoices(),
                 'choice_label' => 'name',
                 'choice_value' => 'id',
-                'choice_name' => 'id',
                 'multiple' => true,
                 'expanded' => true,
             ])
@@ -63,7 +62,6 @@ class ProductFilterFormType extends AbstractType
                 'choices' => $config->getBrandChoices(),
                 'choice_label' => 'name',
                 'choice_value' => 'id',
-                'choice_name' => 'id',
                 'multiple' => true,
                 'expanded' => true,
             ])
