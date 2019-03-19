@@ -5,6 +5,7 @@ namespace Shopsys\FrameworkBundle\Form\Admin\AdvancedSearch;
 use Shopsys\FrameworkBundle\Model\AdvancedSearch\Filter\ProductAvailabilityFilter;
 use Shopsys\FrameworkBundle\Model\AdvancedSearch\Filter\ProductBrandFilter;
 use Shopsys\FrameworkBundle\Model\AdvancedSearch\Filter\ProductCalculatedSellingDeniedFilter;
+use Shopsys\FrameworkBundle\Model\AdvancedSearch\Filter\ProductCategoryFilter;
 use Shopsys\FrameworkBundle\Model\AdvancedSearch\Filter\ProductCatnumFilter;
 use Shopsys\FrameworkBundle\Model\AdvancedSearch\Filter\ProductFlagFilter;
 use Shopsys\FrameworkBundle\Model\AdvancedSearch\Filter\ProductNameFilter;
@@ -25,5 +26,6 @@ class AdvancedSearchProductFilterTranslation extends AdvancedSearchFilterTransla
         $this->addFilterTranslation(ProductCalculatedSellingDeniedFilter::NAME, t('Excluded from sale'));
         $this->addFilterTranslation(ProductAvailabilityFilter::NAME, t('Availability'));
         $this->addFilterTranslation(ProductBrandFilter::NAME, t('Brand'));
+        $this->addFilterTranslation(ProductCategoryFilter::NAME, t('Category'));
     }
 }
