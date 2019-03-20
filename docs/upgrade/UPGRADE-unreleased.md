@@ -154,6 +154,13 @@ There you can find links to upgrade notes for other versions too.
     - once you finish this change (include the `build-version` into caches), you still should deal with older redis cache keys that don't use `build-version` prefix (16 digits).
       Such keys are not removed even by `clean-redis-old`, please find and remove them manually (via console or UI)
 - *(low priority)* remove option `choice_name` from `flags` and `brands` in `ShopBundle/Form/Front/Product/ProductFilterFormType.php` ([#891](https://github.com/shopsys/shopsys/pull/891))
+- create `Shopsys\ShopBundle\Model\AdvancedSearch\ProductAdvancedSearchConfig` by extending `Shopsys\FrameworkBundle\Model\AdvancedSearch\ProductAdvancedSearchConfig` ([#895](https://github.com/shopsys/shopsys/pull/895))
+    - register `\Shopsys\FrameworkBundle\Model\AdvancedSearch\Filter\ProductCategoryFilter` filter via method `registerFilter` in constructor
+    - register it as service alias via `ShopBundle/Resources/config/services.yml` and `ShopBundle/Resources/config/services_test.yml`
+        ```diff
+        +Shopsys\ShopBundle\Model\AdvancedSearch\ProductAdvancedSearchConfig: ~
+        +Shopsys\FrameworkBundle\Model\AdvancedSearch\ProductAdvancedSearchConfig: '@Shopsys\ShopBundle\Model\AdvancedSearch\ProductAdvancedSearchConfig'
+        ```
 
 ## [shopsys/coding-standards]
 - We disallow using [Doctrine inheritance mapping](https://www.doctrine-project.org/projects/doctrine-orm/en/2.6/reference/inheritance-mapping.html) in the Shopsys Framework
