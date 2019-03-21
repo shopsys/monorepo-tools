@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Shopsys\Releaser\ReleaseWorker\ReleaseCandidate;
 
-use Nette\Utils\Strings;
 use PharIo\Version\Version;
 use Shopsys\Releaser\ReleaseWorker\AbstractShopsysReleaseWorker;
 use Shopsys\Releaser\Stage;
@@ -43,14 +42,5 @@ final class CreateBranchReleaseWorker extends AbstractShopsysReleaseWorker
     public function getStage(): string
     {
         return Stage::RELEASE_CANDIDATE;
-    }
-
-    /**
-     * @param \PharIo\Version\Version $version
-     * @return string
-     */
-    private function createBranchName(Version $version): string
-    {
-        return 'rc-' . Strings::webalize($version->getVersionString());
     }
 }

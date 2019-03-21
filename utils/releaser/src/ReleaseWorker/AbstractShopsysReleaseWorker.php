@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Shopsys\Releaser\ReleaseWorker;
 
+use Nette\Utils\Strings;
+use PharIo\Version\Version;
 use Symfony\Component\Console\Helper\QuestionHelper;
 use Symfony\Component\Console\Input\ArgvInput;
 use Symfony\Component\Console\Output\ConsoleOutput;
@@ -82,5 +84,14 @@ abstract class AbstractShopsysReleaseWorker implements ReleaseWorkerInterface, S
         $output = $process->getOutput();
 
         return !(bool)empty($output);
+    }
+
+    /**
+     * @param \PharIo\Version\Version $version
+     * @return string
+     */
+    protected function createBranchName(Version $version): string
+    {
+        return 'rc-' . Strings::webalize($version->getVersionString());
     }
 }
