@@ -1,6 +1,9 @@
 imports:
     - { resource: '%vendor_dir%/shopsys/coding-standards/easy-coding-standard.yml', ignore_errors: true  }
 
+services:
+    Shopsys\CodingStandards\Sniffs\ConstantVisibilityRequiredSniff: ~
+
 parameters:
     skip:
         Shopsys\CodingStandards\Sniffs\ObjectIsCreatedByFactorySniff:

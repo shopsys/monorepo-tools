@@ -22,9 +22,9 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class ProductDataFixture
 {
-    const BATCH_SIZE = 1000;
+    protected const BATCH_SIZE = 1000;
 
-    const FIRST_PERFORMANCE_PRODUCT = 'first_performance_product';
+    public const FIRST_PERFORMANCE_PRODUCT = 'first_performance_product';
 
     /**
      * @var int

@@ -12,9 +12,9 @@ use Shopsys\FrameworkBundle\Model\Article\ArticleFacade;
 
 class ArticleDataFixture extends AbstractReferenceFixture
 {
-    const ARTICLE_TERMS_AND_CONDITIONS_1 = 'article_terms_and_conditions_1';
-    const ARTICLE_PRIVACY_POLICY_1 = 'article_privacy_policy_1';
-    const ARTICLE_COOKIES_1 = 'article_cookies_1';
+    public const ARTICLE_TERMS_AND_CONDITIONS_1 = 'article_terms_and_conditions_1';
+    public const ARTICLE_PRIVACY_POLICY_1 = 'article_privacy_policy_1';
+    public const ARTICLE_COOKIES_1 = 'article_cookies_1';
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Article\ArticleFacade

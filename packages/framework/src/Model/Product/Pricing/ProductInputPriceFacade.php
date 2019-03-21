@@ -13,6 +13,7 @@ use Shopsys\FrameworkBundle\Model\Product\ProductRepository;
 
 class ProductInputPriceFacade
 {
+    /** @access protected */
     const BATCH_SIZE = 50;
 
     /**

@@ -4,7 +4,9 @@ namespace Shopsys\FrameworkBundle\Component\Image\Processing;
 
 class ImageThumbnailFactory
 {
+    /** @access protected */
     const THUMBNAIL_WIDTH = 140;
+    /** @access protected */
     const THUMBNAIL_HEIGHT = 200;
 
     /**

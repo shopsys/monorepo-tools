@@ -7,8 +7,8 @@ use Tests\ShopBundle\Acceptance\acceptance\PageObject\AbstractPage;
 
 class ProductDetailPage extends AbstractPage
 {
-    const PRODUCT_DETAIL_QUANTITY_INPUT = '.js-product-detail-main-add-to-cart-wrapper input[name="add_product_form[quantity]"]';
-    const PRODUCT_DETAIL_MAIN_WRAPPER = '.js-product-detail-main-add-to-cart-wrapper';
+    protected const PRODUCT_DETAIL_QUANTITY_INPUT = '.js-product-detail-main-add-to-cart-wrapper input[name="add_product_form[quantity]"]';
+    protected const PRODUCT_DETAIL_MAIN_WRAPPER = '.js-product-detail-main-add-to-cart-wrapper';
 
     /**
      * @param int $quantity

@@ -8,9 +8,9 @@ use Shopsys\Plugin\Cron\SimpleCronModuleInterface;
 
 class CronModuleExecutor
 {
-    const RUN_STATUS_OK = 'ok';
-    const RUN_STATUS_TIMEOUT = 'timeout';
-    const RUN_STATUS_SUSPENDED = 'suspended';
+    public const RUN_STATUS_OK = 'ok';
+    public const RUN_STATUS_TIMEOUT = 'timeout';
+    public const RUN_STATUS_SUSPENDED = 'suspended';
 
     /**
      * @var \DateTimeImmutable|null

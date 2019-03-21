@@ -15,7 +15,9 @@ use Shopsys\FrameworkBundle\Model\Product\ProductRepository;
 
 class CartFacade
 {
+    /** @access protected */
     const DAYS_LIMIT_FOR_UNREGISTERED = 60;
+    /** @access protected */
     const DAYS_LIMIT_FOR_REGISTERED = 120;
 
     /**

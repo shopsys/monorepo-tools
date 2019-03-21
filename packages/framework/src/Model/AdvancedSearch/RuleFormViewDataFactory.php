@@ -6,7 +6,7 @@ namespace Shopsys\FrameworkBundle\Model\AdvancedSearch;
 
 class RuleFormViewDataFactory
 {
-    const TEMPLATE_RULE_FORM_KEY = '__template__';
+    public const TEMPLATE_RULE_FORM_KEY = '__template__';
 
     /**
      * @param string $defaultFilterName

@@ -11,10 +11,10 @@ use Shopsys\FrameworkBundle\Model\Product\Availability\AvailabilityFacade;
 
 class AvailabilityDataFixture extends AbstractReferenceFixture
 {
-    const AVAILABILITY_IN_STOCK = 'availability_in_stock';
-    const AVAILABILITY_ON_REQUEST = 'availability_on_request';
-    const AVAILABILITY_OUT_OF_STOCK = 'availability_out_of_stock';
-    const AVAILABILITY_PREPARING = 'availability_preparing';
+    public const AVAILABILITY_IN_STOCK = 'availability_in_stock';
+    public const AVAILABILITY_ON_REQUEST = 'availability_on_request';
+    public const AVAILABILITY_OUT_OF_STOCK = 'availability_out_of_stock';
+    public const AVAILABILITY_PREPARING = 'availability_preparing';
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Product\Availability\AvailabilityFacade

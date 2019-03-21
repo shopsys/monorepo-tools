@@ -11,6 +11,8 @@ services:
                   - analyzed_namespaces:
                         - Shopsys\ProductFeed\ZboziBundle\Model
 
+    Shopsys\CodingStandards\Sniffs\ConstantVisibilityRequiredSniff: ~
+
 parameters:
     skip:
         ObjectCalisthenics\Sniffs\Files\FunctionLengthSniff:

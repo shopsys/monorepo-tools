@@ -25,6 +25,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
  */
 class User implements UserInterface, TimelimitLoginInterface, Serializable
 {
+    /** @access protected */
     const RESET_PASSWORD_HASH_LENGTH = 50;
 
     /**

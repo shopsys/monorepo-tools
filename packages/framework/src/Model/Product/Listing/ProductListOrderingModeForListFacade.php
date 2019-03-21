@@ -6,6 +6,7 @@ use Symfony\Component\HttpFoundation\Request;
 
 class ProductListOrderingModeForListFacade
 {
+    /** @access protected */
     const COOKIE_NAME = 'productListOrderingMode';
 
     /**

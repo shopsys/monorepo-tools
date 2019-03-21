@@ -12,30 +12,30 @@ use Shopsys\FrameworkBundle\Model\Product\ProductDataFactoryInterface;
 
 class ProductDataFixtureLoader
 {
-    const COLUMN_NAME_CS = 0;
-    const COLUMN_NAME_EN = 1;
-    const COLUMN_CATNUM = 2;
-    const COLUMN_PARTNO = 3;
-    const COLUMN_EAN = 4;
-    const COLUMN_DESCRIPTION_CS = 5;
-    const COLUMN_DESCRIPTION_EN = 6;
-    const COLUMN_SHORT_DESCRIPTION_CS = 7;
-    const COLUMN_SHORT_DESCRIPTION_EN = 8;
-    const COLUMN_MANUAL_PRICES_DOMAIN_1 = 9;
-    const COLUMN_MANUAL_PRICES_DOMAIN_2 = 10;
-    const COLUMN_VAT = 11;
-    const COLUMN_SELLING_FROM = 12;
-    const COLUMN_SELLING_TO = 13;
-    const COLUMN_STOCK_QUANTITY = 14;
-    const COLUMN_UNIT = 15;
-    const COLUMN_AVAILABILITY = 16;
-    const COLUMN_PARAMETERS = 17;
-    const COLUMN_CATEGORIES_1 = 18;
-    const COLUMN_CATEGORIES_2 = 19;
-    const COLUMN_FLAGS = 20;
-    const COLUMN_SELLING_DENIED = 21;
-    const COLUMN_BRAND = 22;
-    const COLUMN_MAIN_VARIANT_CATNUM = 23;
+    protected const COLUMN_NAME_CS = 0;
+    protected const COLUMN_NAME_EN = 1;
+    protected const COLUMN_CATNUM = 2;
+    protected const COLUMN_PARTNO = 3;
+    protected const COLUMN_EAN = 4;
+    protected const COLUMN_DESCRIPTION_CS = 5;
+    protected const COLUMN_DESCRIPTION_EN = 6;
+    protected const COLUMN_SHORT_DESCRIPTION_CS = 7;
+    protected const COLUMN_SHORT_DESCRIPTION_EN = 8;
+    protected const COLUMN_MANUAL_PRICES_DOMAIN_1 = 9;
+    protected const COLUMN_MANUAL_PRICES_DOMAIN_2 = 10;
+    protected const COLUMN_VAT = 11;
+    protected const COLUMN_SELLING_FROM = 12;
+    protected const COLUMN_SELLING_TO = 13;
+    protected const COLUMN_STOCK_QUANTITY = 14;
+    protected const COLUMN_UNIT = 15;
+    protected const COLUMN_AVAILABILITY = 16;
+    protected const COLUMN_PARAMETERS = 17;
+    protected const COLUMN_CATEGORIES_1 = 18;
+    protected const COLUMN_CATEGORIES_2 = 19;
+    protected const COLUMN_FLAGS = 20;
+    protected const COLUMN_SELLING_DENIED = 21;
+    protected const COLUMN_BRAND = 22;
+    protected const COLUMN_MAIN_VARIANT_CATNUM = 23;
 
     /**
      * @var \Shopsys\ShopBundle\DataFixtures\Demo\ProductParametersFixtureLoader

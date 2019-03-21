@@ -12,9 +12,9 @@ use Shopsys\FrameworkBundle\Component\Grid\Ordering\OrderableEntityInterface;
  */
 class Article implements OrderableEntityInterface
 {
-    const PLACEMENT_TOP_MENU = 'topMenu';
-    const PLACEMENT_FOOTER = 'footer';
-    const PLACEMENT_NONE = 'none';
+    public const PLACEMENT_TOP_MENU = 'topMenu';
+    public const PLACEMENT_FOOTER = 'footer';
+    public const PLACEMENT_NONE = 'none';
 
     protected const GEDMO_SORTABLE_LAST_POSITION = -1;
 

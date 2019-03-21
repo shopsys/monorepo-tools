@@ -12,6 +12,7 @@ use Shopsys\FrameworkBundle\Model\Transport\TransportPriceCalculation;
 
 class InputPriceRecalculator
 {
+    /** @access protected */
     const BATCH_SIZE = 500;
 
     /**

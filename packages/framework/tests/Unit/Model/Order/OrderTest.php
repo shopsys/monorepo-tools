@@ -16,6 +16,7 @@ use Shopsys\FrameworkBundle\Model\Pricing\Price;
 
 class OrderTest extends TestCase
 {
+    /** @access private */
     const DOMAIN_ID = 1;
 
     public function testGetProductItems()

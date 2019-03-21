@@ -11,8 +11,8 @@ use Shopsys\FrameworkBundle\Model\Product\Unit\UnitFacade;
 
 class UnitDataFixture extends AbstractReferenceFixture
 {
-    const UNIT_CUBIC_METERS = 'unit_m3';
-    const UNIT_PIECES = 'unit_pcs';
+    public const UNIT_CUBIC_METERS = 'unit_m3';
+    public const UNIT_PIECES = 'unit_pcs';
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Product\Unit\UnitFacade

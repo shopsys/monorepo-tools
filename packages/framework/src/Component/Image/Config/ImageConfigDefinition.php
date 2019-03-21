@@ -8,19 +8,19 @@ use Symfony\Component\Config\Definition\ConfigurationInterface;
 
 class ImageConfigDefinition implements ConfigurationInterface
 {
-    const CONFIG_CLASS = 'class';
-    const CONFIG_ENTITY_NAME = 'name';
-    const CONFIG_MULTIPLE = 'multiple';
-    const CONFIG_TYPES = 'types';
-    const CONFIG_TYPE_NAME = 'name';
-    const CONFIG_SIZES = 'sizes';
-    const CONFIG_SIZE_NAME = 'name';
-    const CONFIG_SIZE_WIDTH = 'width';
-    const CONFIG_SIZE_HEIGHT = 'height';
-    const CONFIG_SIZE_CROP = 'crop';
-    const CONFIG_SIZE_OCCURRENCE = 'occurrence';
-    const CONFIG_SIZE_ADDITIONAL_SIZES = 'additionalSizes';
-    const CONFIG_SIZE_ADDITIONAL_SIZE_MEDIA = 'media';
+    public const CONFIG_CLASS = 'class';
+    public const CONFIG_ENTITY_NAME = 'name';
+    public const CONFIG_MULTIPLE = 'multiple';
+    public const CONFIG_TYPES = 'types';
+    public const CONFIG_TYPE_NAME = 'name';
+    public const CONFIG_SIZES = 'sizes';
+    public const CONFIG_SIZE_NAME = 'name';
+    public const CONFIG_SIZE_WIDTH = 'width';
+    public const CONFIG_SIZE_HEIGHT = 'height';
+    public const CONFIG_SIZE_CROP = 'crop';
+    public const CONFIG_SIZE_OCCURRENCE = 'occurrence';
+    public const CONFIG_SIZE_ADDITIONAL_SIZES = 'additionalSizes';
+    public const CONFIG_SIZE_ADDITIONAL_SIZE_MEDIA = 'media';
 
     /**
      * @return \Symfony\Component\Config\Definition\Builder\TreeBuilder

@@ -13,7 +13,7 @@ use Tests\ShopBundle\Test\FunctionalTestCase;
 
 class PriceExtensionTest extends FunctionalTestCase
 {
-    const NBSP = "\xc2\xa0";
+    protected const NBSP = "\xc2\xa0";
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Pricing\Currency\CurrencyFacade

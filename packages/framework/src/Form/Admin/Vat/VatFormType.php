@@ -12,8 +12,8 @@ use Symfony\Component\Validator\Constraints;
 
 class VatFormType extends AbstractType
 {
-    const SCENARIO_CREATE = 'create';
-    const SCENARIO_EDIT = 'edit';
+    public const SCENARIO_CREATE = 'create';
+    public const SCENARIO_EDIT = 'edit';
 
     /**
      * @param \Symfony\Component\Form\FormBuilderInterface $builder

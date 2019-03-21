@@ -13,6 +13,7 @@ use Shopsys\FrameworkBundle\Model\Payment\PaymentRepository;
 
 class PaymentGridFactory implements GridFactoryInterface
 {
+    /** @access protected */
     const CURRENCY_ID_FOR_LIST = 1;
 
     /**

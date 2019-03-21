@@ -12,10 +12,10 @@ use Symfony\Component\Filesystem\Filesystem;
 
 class ImageProcessor
 {
-    const EXTENSION_JPEG = 'jpeg';
-    const EXTENSION_JPG = 'jpg';
-    const EXTENSION_PNG = 'png';
-    const EXTENSION_GIF = 'gif';
+    public const EXTENSION_JPEG = 'jpeg';
+    public const EXTENSION_JPG = 'jpg';
+    public const EXTENSION_PNG = 'png';
+    public const EXTENSION_GIF = 'gif';
 
     /**
      * @var string[]

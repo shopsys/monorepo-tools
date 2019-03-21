@@ -7,6 +7,7 @@ use Doctrine\ORM\EntityManagerInterface;
 
 class OrderNumberSequenceRepository
 {
+    /** @access protected */
     const ID = 1;
 
     /**

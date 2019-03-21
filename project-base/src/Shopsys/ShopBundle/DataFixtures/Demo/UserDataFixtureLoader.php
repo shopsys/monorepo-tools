@@ -14,29 +14,29 @@ use Shopsys\FrameworkBundle\Model\Customer\UserDataFactoryInterface;
 
 class UserDataFixtureLoader
 {
-    const COLUMN_FIRSTNAME = 0;
-    const COLUMN_LASTNAME = 1;
-    const COLUMN_EMAIL = 2;
-    const COLUMN_PASSWORD = 3;
-    const COLUMN_COMPANY_CUSTOMER = 4;
-    const COLUMN_COMPANY_NAME = 5;
-    const COLUMN_COMPANY_NUMBER = 6;
-    const COLUMN_COMPANY_TAX_NUMBER = 7;
-    const COLUMN_STREET = 8;
-    const COLUMN_CITY = 9;
-    const COLUMN_POSTCODE = 10;
-    const COLUMN_TELEPHONE = 11;
-    const COLUMN_COUNTRY = 12;
-    const COLUMN_DELIVERY_ADDRESS_FILLED = 13;
-    const COLUMN_DELIVERY_CITY = 14;
-    const COLUMN_DELIVERY_COMPANY_NAME = 15;
-    const COLUMN_DELIVERY_FIRST_NAME = 16;
-    const COLUMN_DELIVERY_LAST_NAME = 17;
-    const COLUMN_DELIVERY_POSTCODE = 18;
-    const COLUMN_DELIVERY_STREET = 19;
-    const COLUMN_DELIVERY_TELEPHONE = 20;
-    const COLUMN_DELIVERY_COUNTRY = 21;
-    const COLUMN_DOMAIN_ID = 22;
+    protected const COLUMN_FIRSTNAME = 0;
+    protected const COLUMN_LASTNAME = 1;
+    protected const COLUMN_EMAIL = 2;
+    protected const COLUMN_PASSWORD = 3;
+    protected const COLUMN_COMPANY_CUSTOMER = 4;
+    protected const COLUMN_COMPANY_NAME = 5;
+    protected const COLUMN_COMPANY_NUMBER = 6;
+    protected const COLUMN_COMPANY_TAX_NUMBER = 7;
+    protected const COLUMN_STREET = 8;
+    protected const COLUMN_CITY = 9;
+    protected const COLUMN_POSTCODE = 10;
+    protected const COLUMN_TELEPHONE = 11;
+    protected const COLUMN_COUNTRY = 12;
+    protected const COLUMN_DELIVERY_ADDRESS_FILLED = 13;
+    protected const COLUMN_DELIVERY_CITY = 14;
+    protected const COLUMN_DELIVERY_COMPANY_NAME = 15;
+    protected const COLUMN_DELIVERY_FIRST_NAME = 16;
+    protected const COLUMN_DELIVERY_LAST_NAME = 17;
+    protected const COLUMN_DELIVERY_POSTCODE = 18;
+    protected const COLUMN_DELIVERY_STREET = 19;
+    protected const COLUMN_DELIVERY_TELEPHONE = 20;
+    protected const COLUMN_DELIVERY_COUNTRY = 21;
+    protected const COLUMN_DOMAIN_ID = 22;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\Csv\CsvReader

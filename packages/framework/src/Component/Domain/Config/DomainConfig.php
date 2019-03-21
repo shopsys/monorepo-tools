@@ -4,7 +4,7 @@ namespace Shopsys\FrameworkBundle\Component\Domain\Config;
 
 class DomainConfig
 {
-    const STYLES_DIRECTORY_DEFAULT = 'common';
+    public const STYLES_DIRECTORY_DEFAULT = 'common';
 
     /**
      * @var int

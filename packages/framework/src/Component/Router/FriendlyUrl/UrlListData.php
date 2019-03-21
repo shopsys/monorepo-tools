@@ -4,8 +4,8 @@ namespace Shopsys\FrameworkBundle\Component\Router\FriendlyUrl;
 
 class UrlListData
 {
-    const FIELD_DOMAIN = 'domain';
-    const FIELD_SLUG = 'slug';
+    public const FIELD_DOMAIN = 'domain';
+    public const FIELD_SLUG = 'slug';
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\FriendlyUrl[]

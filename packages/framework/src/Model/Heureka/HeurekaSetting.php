@@ -6,7 +6,9 @@ use Shopsys\FrameworkBundle\Component\Setting\Setting;
 
 class HeurekaSetting
 {
+    /** @access protected */
     const HEUREKA_API_KEY = 'heurekaApiKey';
+    /** @access protected */
     const HEUREKA_WIDGET_CODE = 'heurekaWidgetCode';
 
     /**

@@ -25,6 +25,7 @@ use Shopsys\FrameworkBundle\Twig\NumberFormatterExtension;
  */
 class Order
 {
+    /** @access protected */
     const DEFAULT_PRODUCT_QUANTITY = 1;
 
     /**

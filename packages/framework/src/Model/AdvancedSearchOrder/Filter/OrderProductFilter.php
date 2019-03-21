@@ -9,7 +9,7 @@ use Shopsys\FrameworkBundle\Model\Order\Item\OrderItem;
 
 class OrderProductFilter implements AdvancedSearchFilterInterface
 {
-    const NAME = 'orderProduct';
+    public const NAME = 'orderProduct';
 
     /**
      * {@inheritdoc}

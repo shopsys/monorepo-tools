@@ -10,7 +10,9 @@ use Doctrine\ORM\Query\SqlWalker;
  */
 class SortableNullsWalker extends SqlWalker
 {
+    /** @access protected */
     const NULLS_FIRST = 'NULLS FIRST';
+    /** @access protected */
     const NULLS_LAST = 'NULLS LAST';
 
     /**

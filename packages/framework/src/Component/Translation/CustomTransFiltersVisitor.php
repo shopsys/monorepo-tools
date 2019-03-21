@@ -16,10 +16,12 @@ use Twig_Node_Expression_Filter;
  */
 class CustomTransFiltersVisitor extends Twig_BaseNodeVisitor
 {
+    /** @access protected */
     const CUSTOM_TO_DEFAULT_TRANS_FILTERS_MAP = [
         'transHtml' => 'trans',
         'transchoiceHtml' => 'transchoice',
     ];
+    /** @access protected */
     const PRIORITY = -1;
 
     /**

@@ -16,7 +16,9 @@ use Symfony\Component\Security\Http\SecurityEvents;
 
 class AdministratorLoginFacade
 {
+    /** @access protected */
     const MULTIDOMAIN_LOGIN_TOKEN_LENGTH = 50;
+    /** @access protected */
     const MULTIDOMAIN_LOGIN_TOKEN_VALID_SECONDS = 10;
 
     /**

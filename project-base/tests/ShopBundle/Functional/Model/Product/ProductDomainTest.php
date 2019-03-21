@@ -10,13 +10,13 @@ use Tests\ShopBundle\Test\TransactionFunctionalTestCase;
 
 class ProductDomainTest extends TransactionFunctionalTestCase
 {
-    const FIRST_DOMAIN_ID = 1;
-    const SECOND_DOMAIN_ID = 2;
-    const DEMONSTRATIVE_DESCRIPTION = 'Demonstrative description';
-    const DEMONSTRATIVE_SEO_TITLE = 'Demonstrative seo title';
-    const DEMONSTRATIVE_SEO_META_DESCRIPTION = 'Demonstrative seo description';
-    const DEMONSTRATIVE_SEO_H1 = 'Demonstrative seo H1';
-    const DEMONSTRATIVE_SHORT_DESCRIPTION = 'Demonstrative short description';
+    protected const FIRST_DOMAIN_ID = 1;
+    protected const SECOND_DOMAIN_ID = 2;
+    protected const DEMONSTRATIVE_DESCRIPTION = 'Demonstrative description';
+    protected const DEMONSTRATIVE_SEO_TITLE = 'Demonstrative seo title';
+    protected const DEMONSTRATIVE_SEO_META_DESCRIPTION = 'Demonstrative seo description';
+    protected const DEMONSTRATIVE_SEO_H1 = 'Demonstrative seo H1';
+    protected const DEMONSTRATIVE_SHORT_DESCRIPTION = 'Demonstrative short description';
 
     /**
      * @var \Shopsys\ShopBundle\Model\Product\ProductDataFactory

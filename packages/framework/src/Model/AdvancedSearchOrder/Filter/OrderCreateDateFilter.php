@@ -8,7 +8,7 @@ use Shopsys\FrameworkBundle\Model\AdvancedSearch\AdvancedSearchFilterInterface;
 
 class OrderCreateDateFilter implements AdvancedSearchFilterInterface
 {
-    const NAME = 'orderCreatedAt';
+    public const NAME = 'orderCreatedAt';
 
     /**
      * {@inheritdoc}

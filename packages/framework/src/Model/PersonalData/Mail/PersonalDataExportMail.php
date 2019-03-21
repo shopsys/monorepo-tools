@@ -14,9 +14,9 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 class PersonalDataExportMail implements MailTypeInterface, MessageFactoryInterface
 {
-    const VARIABLE_EMAIL = '{e-mail}';
-    const VARIABLE_URL = '{url}';
-    const VARIABLE_DOMAIN = '{domain}';
+    public const VARIABLE_EMAIL = '{e-mail}';
+    public const VARIABLE_URL = '{url}';
+    public const VARIABLE_DOMAIN = '{domain}';
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\Domain\Domain

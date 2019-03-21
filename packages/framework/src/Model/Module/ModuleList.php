@@ -4,9 +4,9 @@ namespace Shopsys\FrameworkBundle\Model\Module;
 
 class ModuleList
 {
-    const ACCESSORIES_ON_BUY = 'accessoriesOnBuy';
-    const PRODUCT_FILTER_COUNTS = 'productFilterCounts';
-    const PRODUCT_STOCK_CALCULATIONS = 'productStockCalculations';
+    public const ACCESSORIES_ON_BUY = 'accessoriesOnBuy';
+    public const PRODUCT_FILTER_COUNTS = 'productFilterCounts';
+    public const PRODUCT_STOCK_CALCULATIONS = 'productStockCalculations';
 
     /**
      * @return string[]

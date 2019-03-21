@@ -6,8 +6,8 @@ use Shopsys\FrameworkBundle\Component\Image\Image;
 
 class ImageConfig
 {
-    const ORIGINAL_SIZE_NAME = 'original';
-    const DEFAULT_SIZE_NAME = 'default';
+    public const ORIGINAL_SIZE_NAME = 'original';
+    public const DEFAULT_SIZE_NAME = 'default';
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\Image\Config\ImageEntityConfig[]

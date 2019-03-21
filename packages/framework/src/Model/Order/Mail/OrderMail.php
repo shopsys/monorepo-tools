@@ -20,20 +20,21 @@ use Twig_Environment;
 
 class OrderMail implements MessageFactoryInterface
 {
+    /** @access protected */
     const MAIL_TEMPLATE_NAME_PREFIX = 'order_status_';
-    const VARIABLE_NUMBER = '{number}';
-    const VARIABLE_DATE = '{date}';
-    const VARIABLE_URL = '{url}';
-    const VARIABLE_TRANSPORT = '{transport}';
-    const VARIABLE_PAYMENT = '{payment}';
-    const VARIABLE_TOTAL_PRICE = '{total_price}';
-    const VARIABLE_BILLING_ADDRESS = '{billing_address}';
-    const VARIABLE_DELIVERY_ADDRESS = '{delivery_address}';
-    const VARIABLE_NOTE = '{note}';
-    const VARIABLE_PRODUCTS = '{products}';
-    const VARIABLE_ORDER_DETAIL_URL = '{order_detail_url}';
-    const VARIABLE_TRANSPORT_INSTRUCTIONS = '{transport_instructions}';
-    const VARIABLE_PAYMENT_INSTRUCTIONS = '{payment_instructions}';
+    public const VARIABLE_NUMBER = '{number}';
+    public const VARIABLE_DATE = '{date}';
+    public const VARIABLE_URL = '{url}';
+    public const VARIABLE_TRANSPORT = '{transport}';
+    public const VARIABLE_PAYMENT = '{payment}';
+    public const VARIABLE_TOTAL_PRICE = '{total_price}';
+    public const VARIABLE_BILLING_ADDRESS = '{billing_address}';
+    public const VARIABLE_DELIVERY_ADDRESS = '{delivery_address}';
+    public const VARIABLE_NOTE = '{note}';
+    public const VARIABLE_PRODUCTS = '{products}';
+    public const VARIABLE_ORDER_DETAIL_URL = '{order_detail_url}';
+    public const VARIABLE_TRANSPORT_INSTRUCTIONS = '{transport_instructions}';
+    public const VARIABLE_PAYMENT_INSTRUCTIONS = '{payment_instructions}';
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\Setting\Setting

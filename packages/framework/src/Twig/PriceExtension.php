@@ -18,7 +18,9 @@ use Twig_SimpleFunction;
 
 class PriceExtension extends Twig_Extension
 {
+    /** @access protected */
     const MINIMUM_FRACTION_DIGITS = 2;
+    /** @access protected */
     const MAXIMUM_FRACTION_DIGITS = 10;
 
     /**

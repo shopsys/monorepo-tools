@@ -6,6 +6,7 @@ use Symfony\Component\HttpFoundation\Request;
 
 class ProductListOrderingModeForSearchFacade
 {
+    /** @access protected */
     const COOKIE_NAME = 'productSearchOrderingMode';
 
     /**

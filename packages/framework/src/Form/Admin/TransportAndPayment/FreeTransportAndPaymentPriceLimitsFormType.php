@@ -16,9 +16,10 @@ use Symfony\Component\Validator\Constraints;
 
 class FreeTransportAndPaymentPriceLimitsFormType extends AbstractType
 {
-    const DOMAINS_SUBFORM_NAME = 'priceLimits';
-    const FIELD_ENABLED = 'enabled';
-    const FIELD_PRICE_LIMIT = 'priceLimit';
+    public const DOMAINS_SUBFORM_NAME = 'priceLimits';
+    public const FIELD_ENABLED = 'enabled';
+    public const FIELD_PRICE_LIMIT = 'priceLimit';
+    /** @access protected */
     const VALIDATION_GROUP_PRICE_LIMIT_ENABLED = 'priceLimitEnabled';
 
     /**

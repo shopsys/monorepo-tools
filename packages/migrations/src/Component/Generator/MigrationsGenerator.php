@@ -9,9 +9,13 @@ use Symfony\Component\Templating\EngineInterface;
 
 class MigrationsGenerator
 {
+    /** @access protected */
     const LINE_LENGTH_LIMIT = 100;
+    /** @access protected */
     const HIGHLIGHT_OFF = false;
+    /** @access protected */
     const INDENT_CHARACTERS = '    ';
+    /** @access protected */
     const INDENT_TABULATOR_COUNT = 3;
 
     /**

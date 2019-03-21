@@ -7,9 +7,9 @@ use Symfony\Component\Config\Definition\ConfigurationInterface;
 
 class DomainsUrlsConfigDefinition implements ConfigurationInterface
 {
-    const CONFIG_DOMAINS_URLS = 'domains_urls';
-    const CONFIG_ID = 'id';
-    const CONFIG_URL = 'url';
+    public const CONFIG_DOMAINS_URLS = 'domains_urls';
+    public const CONFIG_ID = 'id';
+    public const CONFIG_URL = 'url';
 
     /**
      * @return \Symfony\Component\Config\Definition\Builder\TreeBuilder

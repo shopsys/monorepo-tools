@@ -8,6 +8,7 @@ use Shopsys\FrameworkBundle\Component\Router\DomainRouterFactory;
 
 class FriendlyUrlFacade
 {
+    /** @access protected */
     const MAX_URL_UNIQUE_RESOLVE_ATTEMPT = 100;
 
     /**

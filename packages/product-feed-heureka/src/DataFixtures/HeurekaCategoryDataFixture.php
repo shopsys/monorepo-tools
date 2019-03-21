@@ -8,14 +8,22 @@ use Shopsys\ProductFeed\HeurekaBundle\Model\HeurekaCategory\HeurekaCategoryFacad
 
 class HeurekaCategoryDataFixture implements PluginDataFixtureInterface
 {
+    /** @access protected */
     const HEUREKA_CATEGORY_ID_FIRST = 1;
+    /** @access protected */
     const HEUREKA_CATEGORY_ID_SECOND = 2;
+    /** @access protected */
     const HEUREKA_CATEGORY_ID_THIRD = 3;
 
+    /** @access protected */
     const CATEGORY_ID_FIRST = 2;
+    /** @access protected */
     const CATEGORY_ID_SECOND = 3;
+    /** @access protected */
     const CATEGORY_ID_THIRD = 4;
+    /** @access protected */
     const CATEGORY_ID_FOURTH = 5;
+    /** @access protected */
     const CATEGORY_ID_FIFTH = 6;
 
     /**

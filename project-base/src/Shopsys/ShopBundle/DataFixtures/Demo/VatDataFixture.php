@@ -12,10 +12,10 @@ use Shopsys\FrameworkBundle\Model\Pricing\Vat\VatFacade;
 
 class VatDataFixture extends AbstractReferenceFixture
 {
-    const VAT_ZERO = 'vat_zero';
-    const VAT_SECOND_LOW = 'vat_second_low';
-    const VAT_LOW = 'vat_low';
-    const VAT_HIGH = 'vat_high';
+    public const VAT_ZERO = 'vat_zero';
+    public const VAT_SECOND_LOW = 'vat_second_low';
+    public const VAT_LOW = 'vat_low';
+    public const VAT_HIGH = 'vat_high';
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Pricing\Vat\VatFacade

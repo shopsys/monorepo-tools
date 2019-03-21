@@ -11,6 +11,9 @@ services:
                   - analyzed_namespaces:
                         - Shopsys\ProductFeed\GoogleBundle\Model
 
+
+    Shopsys\CodingStandards\Sniffs\ConstantVisibilityRequiredSniff: ~
+
 parameters:
     skip:
         Shopsys\CodingStandards\Sniffs\ObjectIsCreatedByFactorySniff:

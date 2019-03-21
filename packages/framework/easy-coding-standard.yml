@@ -13,6 +13,8 @@ services:
                     - Shopsys\FrameworkBundle\Component
                     - Shopsys\FrameworkBundle\Controller
 
+    Shopsys\CodingStandards\Sniffs\ConstantVisibilityRequiredSniff: ~
+
 parameters:
     skip:
         ObjectCalisthenics\Sniffs\Files\FunctionLengthSniff:

@@ -9,11 +9,11 @@ use Tests\ShopBundle\Test\TransactionFunctionalTestCase;
 
 class CategoryDomainTest extends TransactionFunctionalTestCase
 {
-    const FIRST_DOMAIN_ID = 1;
-    const SECOND_DOMAIN_ID = 2;
-    const DEMONSTRATIVE_SEO_TITLE = 'Demonstrative seo title';
-    const DEMONSTRATIVE_SEO_META_DESCRIPTION = 'Demonstrative seo description';
-    const DEMONSTRATIVE_SEO_H1 = 'Demonstrative seo H1';
+    protected const FIRST_DOMAIN_ID = 1;
+    protected const SECOND_DOMAIN_ID = 2;
+    protected const DEMONSTRATIVE_SEO_TITLE = 'Demonstrative seo title';
+    protected const DEMONSTRATIVE_SEO_META_DESCRIPTION = 'Demonstrative seo description';
+    protected const DEMONSTRATIVE_SEO_H1 = 'Demonstrative seo H1';
 
     /**
      * @var \Shopsys\ShopBundle\Model\Category\CategoryDataFactory

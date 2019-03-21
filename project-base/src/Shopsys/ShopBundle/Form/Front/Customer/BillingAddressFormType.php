@@ -16,7 +16,7 @@ use Symfony\Component\Validator\Constraints;
 
 class BillingAddressFormType extends AbstractType
 {
-    const VALIDATION_GROUP_COMPANY_CUSTOMER = 'companyCustomer';
+    public const VALIDATION_GROUP_COMPANY_CUSTOMER = 'companyCustomer';
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Country\CountryFacade

@@ -4,7 +4,8 @@ namespace Shopsys\FrameworkBundle\Component\FileUpload;
 
 class FileNamingConvention
 {
-    const TYPE_ID = 1;
+    public const TYPE_ID = 1;
+    /** @access protected */
     const TYPE_ORIGINAL_NAME = 2;
 
     /**

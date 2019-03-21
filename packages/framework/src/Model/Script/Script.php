@@ -10,9 +10,9 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Script
 {
-    const PLACEMENT_ORDER_SENT_PAGE = 'placementOrderSentPage';
-    const PLACEMENT_ALL_PAGES = 'placementAllPages';
-    const GOOGLE_ANALYTICS_TRACKING_ID_SETTING_NAME = 'googleAnalyticsTrackingId';
+    public const PLACEMENT_ORDER_SENT_PAGE = 'placementOrderSentPage';
+    public const PLACEMENT_ALL_PAGES = 'placementAllPages';
+    public const GOOGLE_ANALYTICS_TRACKING_ID_SETTING_NAME = 'googleAnalyticsTrackingId';
 
     /**
      * @var int

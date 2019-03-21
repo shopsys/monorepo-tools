@@ -8,6 +8,7 @@ use Shopsys\FrameworkBundle\Component\Money\Money;
 
 class InputPriceCalculation
 {
+    /** @access protected */
     const INPUT_PRICE_SCALE = 6;
 
     /**

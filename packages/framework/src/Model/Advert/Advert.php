@@ -10,16 +10,16 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Advert
 {
-    const TYPE_IMAGE = 'image';
-    const TYPE_CODE = 'code';
+    public const TYPE_IMAGE = 'image';
+    public const TYPE_CODE = 'code';
 
     /**
      * @deprecated use of position constants is discouraged, use literal strings instead
      */
-    const POSITION_HEADER = 'header';
-    const POSITION_FOOTER = 'footer';
-    const POSITION_PRODUCT_LIST = 'productList';
-    const POSITION_LEFT_SIDEBAR = 'leftSidebar';
+    public const POSITION_HEADER = 'header';
+    public const POSITION_FOOTER = 'footer';
+    public const POSITION_PRODUCT_LIST = 'productList';
+    public const POSITION_LEFT_SIDEBAR = 'leftSidebar';
 
     /**
      * @var int

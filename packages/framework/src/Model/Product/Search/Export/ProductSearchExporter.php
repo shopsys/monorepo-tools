@@ -7,6 +7,7 @@ use Shopsys\FrameworkBundle\Model\Product\Search\ProductElasticsearchRepository;
 
 class ProductSearchExporter
 {
+    /** @access protected */
     const BATCH_SIZE = 100;
 
     /**

@@ -24,10 +24,12 @@ use Symfony\Component\Validator\Constraints;
 
 class AdvertFormType extends AbstractType
 {
+    /** @access protected */
     const VALIDATION_GROUP_TYPE_IMAGE = 'typeImage';
+    /** @access protected */
     const VALIDATION_GROUP_TYPE_CODE = 'typeCode';
-    const SCENARIO_CREATE = 'create';
-    const SCENARIO_EDIT = 'edit';
+    public const SCENARIO_CREATE = 'create';
+    public const SCENARIO_EDIT = 'edit';
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\Domain\Domain

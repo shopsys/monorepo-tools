@@ -19,6 +19,7 @@ use Twig_Node;
 
 class PhpFileExtractor implements FileVisitorInterface, NodeVisitor
 {
+    /** @access protected */
     const DEFAULT_MESSAGE_DOMAIN = 'messages';
 
     /**

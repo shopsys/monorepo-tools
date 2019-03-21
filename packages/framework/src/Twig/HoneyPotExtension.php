@@ -8,6 +8,7 @@ use Twig_SimpleFunction;
 
 class HoneyPotExtension extends Twig_Extension
 {
+    /** @access protected */
     const PASSWORD_FIELD_NAME = 'password';
 
     /**

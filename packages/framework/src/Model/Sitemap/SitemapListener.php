@@ -13,9 +13,13 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 class SitemapListener implements EventSubscriberInterface
 {
+    /** @access protected */
     const PRIORITY_HOMEPAGE = 1;
+    /** @access protected */
     const PRIORITY_CATEGORIES = 0.8;
+    /** @access protected */
     const PRIORITY_PRODUCTS = 0.7;
+    /** @access protected */
     const PRIORITY_ARTICLES = 0.5;
 
     /**

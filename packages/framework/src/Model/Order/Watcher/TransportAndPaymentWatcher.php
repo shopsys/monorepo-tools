@@ -16,8 +16,11 @@ use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 class TransportAndPaymentWatcher
 {
+    /** @access protected */
     const SESSION_ROOT = 'transport_and_payment_watcher';
+    /** @access protected */
     const SESSION_TRANSPORT_PRICES = 'transport_prices';
+    /** @access protected */
     const SESSION_PAYMENT_PRICES = 'payment_prices';
 
     /**

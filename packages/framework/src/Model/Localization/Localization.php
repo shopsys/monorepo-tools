@@ -9,6 +9,7 @@ use Shopsys\FrameworkBundle\Model\Localization\Exception\AdminLocaleNotFoundExce
 
 class Localization
 {
+    /** @access protected */
     const DEFAULT_COLLATION = 'en_US';
 
     /**

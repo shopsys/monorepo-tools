@@ -4,8 +4,8 @@ namespace Shopsys\FrameworkBundle\Component\Grid;
 
 interface DataSourceInterface
 {
-    const ORDER_ASC = 'asc';
-    const ORDER_DESC = 'desc';
+    public const ORDER_ASC = 'asc';
+    public const ORDER_DESC = 'desc';
 
     /**
      * @param int|null $limit

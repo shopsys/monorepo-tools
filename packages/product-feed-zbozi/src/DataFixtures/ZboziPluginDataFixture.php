@@ -9,12 +9,19 @@ use Shopsys\ProductFeed\ZboziBundle\Model\Product\ZboziProductDomainFacade;
 
 class ZboziPluginDataFixture implements PluginDataFixtureInterface
 {
+    /** @access protected */
     const DOMAIN_ID_FIRST = 1;
+    /** @access protected */
     const DOMAIN_ID_SECOND = 2;
+    /** @access protected */
     const PRODUCT_ID_FIRST = 1;
+    /** @access protected */
     const PRODUCT_ID_SECOND = 2;
+    /** @access protected */
     const PRODUCT_ID_THIRD = 3;
+    /** @access protected */
     const PRODUCT_ID_FOURTH = 4;
+    /** @access protected */
     const PRODUCT_ID_FIFTH = 5;
 
     /**

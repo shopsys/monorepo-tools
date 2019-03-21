@@ -15,6 +15,7 @@ use Symfony\Component\Security\Http\SecurityEvents;
 
 class LoginAsUserFacade
 {
+    /** @access protected */
     const SESSION_LOGIN_AS = 'loginAsUser';
 
     /**

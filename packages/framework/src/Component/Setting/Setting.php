@@ -6,21 +6,21 @@ use Doctrine\ORM\EntityManagerInterface;
 
 class Setting
 {
-    const ORDER_SENT_PAGE_CONTENT = 'orderSubmittedText';
-    const PERSONAL_DATA_DISPLAY_SITE_CONTENT = 'personalDataDisplaySiteContent';
-    const PERSONAL_DATA_EXPORT_SITE_CONTENT = 'personalDataExportSiteContent';
-    const DEFAULT_PRICING_GROUP = 'defaultPricingGroupId';
-    const DEFAULT_AVAILABILITY_IN_STOCK = 'defaultAvailabilityInStockId';
-    const TERMS_AND_CONDITIONS_ARTICLE_ID = 'termsAndConditionsArticleId';
-    const PRIVACY_POLICY_ARTICLE_ID = 'privacyPolicyArticleId';
-    const COOKIES_ARTICLE_ID = 'cookiesArticleId';
-    const DOMAIN_DATA_CREATED = 'domainDataCreated';
-    const FEED_HASH = 'feedHash';
-    const DEFAULT_UNIT = 'defaultUnitId';
-    const BASE_URL = 'baseUrl';
-    const FEED_NAME_TO_CONTINUE = 'feedNameToContinue';
-    const FEED_DOMAIN_ID_TO_CONTINUE = 'feedDomainIdToContinue';
-    const FEED_ITEM_ID_TO_CONTINUE = 'feedItemIdToContinue';
+    public const ORDER_SENT_PAGE_CONTENT = 'orderSubmittedText';
+    public const PERSONAL_DATA_DISPLAY_SITE_CONTENT = 'personalDataDisplaySiteContent';
+    public const PERSONAL_DATA_EXPORT_SITE_CONTENT = 'personalDataExportSiteContent';
+    public const DEFAULT_PRICING_GROUP = 'defaultPricingGroupId';
+    public const DEFAULT_AVAILABILITY_IN_STOCK = 'defaultAvailabilityInStockId';
+    public const TERMS_AND_CONDITIONS_ARTICLE_ID = 'termsAndConditionsArticleId';
+    public const PRIVACY_POLICY_ARTICLE_ID = 'privacyPolicyArticleId';
+    public const COOKIES_ARTICLE_ID = 'cookiesArticleId';
+    public const DOMAIN_DATA_CREATED = 'domainDataCreated';
+    public const FEED_HASH = 'feedHash';
+    public const DEFAULT_UNIT = 'defaultUnitId';
+    public const BASE_URL = 'baseUrl';
+    public const FEED_NAME_TO_CONTINUE = 'feedNameToContinue';
+    public const FEED_DOMAIN_ID_TO_CONTINUE = 'feedDomainIdToContinue';
+    public const FEED_ITEM_ID_TO_CONTINUE = 'feedItemIdToContinue';
 
     /**
      * @var \Doctrine\ORM\EntityManagerInterface

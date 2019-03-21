@@ -9,6 +9,7 @@ use Shopsys\Plugin\PluginCrudExtensionInterface;
 
 class PluginCrudExtensionRegistry
 {
+    /** @access protected */
     const KNOWN_TYPES = [
         'product',
         'category',

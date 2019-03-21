@@ -11,6 +11,7 @@ use Symfony\Component\HttpFoundation\Request;
 
 class AdvancedSearchOrderFacade
 {
+    /** @access protected */
     const RULES_FORM_NAME = 'as';
 
     /**

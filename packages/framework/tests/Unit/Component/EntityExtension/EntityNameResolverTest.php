@@ -8,10 +8,10 @@ use stdClass;
 
 class EntityNameResolverTest extends TestCase
 {
-    const PARENT_ENTITY_FQCN = 'Vendor\Bundle\Folder\ParentEntityName';
-    const CUSTOM_ENTITY_FQCN = 'MyBundle\MyFolder\MyEntityName';
-    const STRING_WITH_SPACES_ON_BORDERS = ' string ';
-    const STRING_WITHOUT_SPACES_ON_BORDERS = 'string';
+    public const PARENT_ENTITY_FQCN = 'Vendor\Bundle\Folder\ParentEntityName';
+    public const CUSTOM_ENTITY_FQCN = 'MyBundle\MyFolder\MyEntityName';
+    public const STRING_WITH_SPACES_ON_BORDERS = ' string ';
+    public const STRING_WITHOUT_SPACES_ON_BORDERS = 'string';
 
     /**
      * @return array

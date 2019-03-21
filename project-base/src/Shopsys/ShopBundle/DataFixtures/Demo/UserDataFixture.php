@@ -14,7 +14,7 @@ use Shopsys\FrameworkBundle\Model\Customer\User;
 
 class UserDataFixture extends AbstractReferenceFixture implements DependentFixtureInterface
 {
-    const USER_WITH_RESET_PASSWORD_HASH = 'user_with_reset_password_hash';
+    public const USER_WITH_RESET_PASSWORD_HASH = 'user_with_reset_password_hash';
 
     /** @var \Shopsys\FrameworkBundle\Model\Customer\CustomerFacade */
     protected $customerFacade;

@@ -7,8 +7,9 @@ use Symfony\Component\Translation\TranslatorInterface;
 
 class Translator implements TranslatorInterface, TranslatorBagInterface
 {
+    /** @access protected */
     const DEFAULT_DOMAIN = 'messages';
-    const SOURCE_LOCALE = 'en';
+    public const SOURCE_LOCALE = 'en';
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\Translation\Translator|null

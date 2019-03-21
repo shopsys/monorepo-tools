@@ -16,7 +16,7 @@ use Symfony\Component\Validator\Constraints;
 
 class DeliveryAddressFormType extends AbstractType
 {
-    const VALIDATION_GROUP_DIFFERENT_DELIVERY_ADDRESS = 'differentDeliveryAddress';
+    public const VALIDATION_GROUP_DIFFERENT_DELIVERY_ADDRESS = 'differentDeliveryAddress';
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Country\CountryFacade

@@ -14,7 +14,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class CategoryDataFixture
 {
-    const FIRST_PERFORMANCE_CATEGORY = 'first_performance_category';
+    public const FIRST_PERFORMANCE_CATEGORY = 'first_performance_category';
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Category\CategoryDataFactoryInterface

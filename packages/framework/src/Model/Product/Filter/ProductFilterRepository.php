@@ -13,6 +13,7 @@ use Shopsys\FrameworkBundle\Model\Product\Product;
 
 class ProductFilterRepository
 {
+    /** @access protected */
     const DAYS_FOR_STOCK_FILTER = 0;
 
     /**

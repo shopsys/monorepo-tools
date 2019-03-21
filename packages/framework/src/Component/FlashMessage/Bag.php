@@ -6,10 +6,14 @@ use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 class Bag
 {
+    /** @access protected */
     const MAIN_KEY = 'messages';
 
+    /** @access protected */
     const KEY_ERROR = 'error';
+    /** @access protected */
     const KEY_INFO = 'info';
+    /** @access protected */
     const KEY_SUCCESS = 'success';
 
     /**

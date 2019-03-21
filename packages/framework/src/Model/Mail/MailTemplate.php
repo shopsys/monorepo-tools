@@ -15,10 +15,10 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class MailTemplate
 {
-    const REGISTRATION_CONFIRM_NAME = 'registration_confirm';
-    const RESET_PASSWORD_NAME = 'reset_password';
-    const PERSONAL_DATA_ACCESS_NAME = 'personal_data_access';
-    const PERSONAL_DATA_EXPORT_NAME = 'personal_data_export';
+    public const REGISTRATION_CONFIRM_NAME = 'registration_confirm';
+    public const RESET_PASSWORD_NAME = 'reset_password';
+    public const PERSONAL_DATA_ACCESS_NAME = 'personal_data_access';
+    public const PERSONAL_DATA_EXPORT_NAME = 'personal_data_export';
 
     /**
      * @ORM\Column(type="integer")

@@ -6,19 +6,19 @@ use Doctrine\ORM\QueryBuilder;
 
 interface AdvancedSearchFilterInterface
 {
-    const OPERATOR_CONTAINS = 'contains';
-    const OPERATOR_NOT_CONTAINS = 'notContains';
-    const OPERATOR_NOT_SET = 'notSet';
-    const OPERATOR_IS = 'is';
-    const OPERATOR_IS_NOT = 'isNot';
-    const OPERATOR_IS_USED = 'isUsed';
-    const OPERATOR_IS_NOT_USED = 'isNotUsed';
-    const OPERATOR_BEFORE = 'before';
-    const OPERATOR_AFTER = 'after';
-    const OPERATOR_GT = 'gt';
-    const OPERATOR_GTE = 'gte';
-    const OPERATOR_LT = 'lt';
-    const OPERATOR_LTE = 'lte';
+    public const OPERATOR_CONTAINS = 'contains';
+    public const OPERATOR_NOT_CONTAINS = 'notContains';
+    public const OPERATOR_NOT_SET = 'notSet';
+    public const OPERATOR_IS = 'is';
+    public const OPERATOR_IS_NOT = 'isNot';
+    public const OPERATOR_IS_USED = 'isUsed';
+    public const OPERATOR_IS_NOT_USED = 'isNotUsed';
+    public const OPERATOR_BEFORE = 'before';
+    public const OPERATOR_AFTER = 'after';
+    public const OPERATOR_GT = 'gt';
+    public const OPERATOR_GTE = 'gte';
+    public const OPERATOR_LT = 'lt';
+    public const OPERATOR_LTE = 'lte';
 
     /**
      * Returns a unique name of the filter

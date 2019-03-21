@@ -10,8 +10,8 @@ use Shopsys\FrameworkBundle\Model\Pricing\Currency\CurrencyFacade;
 
 class CurrencyDataFixture extends AbstractReferenceFixture
 {
-    const CURRENCY_CZK = 'currency_czk';
-    const CURRENCY_EUR = 'currency_eur';
+    public const CURRENCY_CZK = 'currency_czk';
+    public const CURRENCY_EUR = 'currency_eur';
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Pricing\Currency\CurrencyFacade

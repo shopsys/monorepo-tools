@@ -8,6 +8,7 @@ use Symfony\Component\HttpFoundation\Request;
 
 class AdvancedSearchProductFacade
 {
+    /** @access protected */
     const RULES_FORM_NAME = 'as';
 
     /**

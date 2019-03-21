@@ -8,8 +8,11 @@ use Symfony\Bridge\Monolog\Logger;
 
 class DomainIconResizer
 {
+    /** @access protected */
     const DOMAIN_ICON_WIDTH = 48;
+    /** @access protected */
     const DOMAIN_ICON_HEIGHT = 33;
+    /** @access protected */
     const DOMAIN_ICON_CROP = false;
 
     /**
