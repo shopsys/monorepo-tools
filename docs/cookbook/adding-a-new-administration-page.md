@@ -63,7 +63,7 @@ But to access it, you still need to open a specific URL...
 
 ## Side menu and breadcrumbs
 The admin side menu is implemented by [KnpMenuBundle](https://symfony.com/doc/master/bundles/KnpMenuBundle/index.html) and to extend it, you can use [events](https://symfony.com/doc/master/bundles/KnpMenuBundle/events.html).
-The details about out customization of the menu, read the [Administration Menu](/docs/introduction/administration-menu.md) article.
+For the details about the customization of the menu, read the [Administration Menu](/docs/administration/administration-menu.md) article.
 
 Right now, the Dashboard menu looks like this:
 
