@@ -94,4 +94,26 @@ abstract class AbstractShopsysReleaseWorker implements ReleaseWorkerInterface, S
     {
         return 'rc-' . Strings::webalize($version->getVersionString());
     }
+
+    /**
+     * @return bool
+     */
+    protected function isGitWorkingTreeEmpty(): bool
+    {
+        $status = $this->getProcessResult(['git', 'status']);
+
+        return Strings::contains($status, 'nothing to commit');
+    }
+
+    /**
+     * @param string[] $commandLine
+     * @return string
+     */
+    protected function getProcessResult(array $commandLine): string
+    {
+        $process = new Process($commandLine);
+        $process->run();
+
+        return trim($process->getOutput());
+    }
 }
