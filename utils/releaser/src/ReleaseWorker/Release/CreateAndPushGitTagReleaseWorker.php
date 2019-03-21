@@ -16,7 +16,7 @@ final class CreateAndPushGitTagReleaseWorker extends AbstractShopsysReleaseWorke
      */
     public function getDescription(Version $version): string
     {
-        return 'Create and [Manually] push a git tag';
+        return 'Checkout to master, create, and [Manually] push a git tag';
     }
 
     /**
@@ -34,6 +34,8 @@ final class CreateAndPushGitTagReleaseWorker extends AbstractShopsysReleaseWorke
     public function work(Version $version): void
     {
         $versionString = $version->getVersionString();
+        $this->processRunner->run('git fetch --prune');
+        $this->processRunner->run('git checkout origin/master');
         $this->processRunner->run('git tag ' . $versionString);
         $this->symfonyStyle->note(sprintf('You need to push tag manually using "git push origin %s" command.', $versionString));
         $this->symfonyStyle->note('Rest assured, after you push the tagged master branch, the new tag will be propagated to packagist once the project is built and split on Heimdall automatically.');
