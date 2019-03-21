@@ -74,7 +74,9 @@ final class UpdateChangelogReleaseWorker extends AbstractShopsysReleaseWorker
         // save
         FileSystem::write($changelogFilePath, $newChangelogContent);
 
-        $this->confirm('Confirm you have manually checked CHANGELOG.md and it is final');
+        $this->symfonyStyle->note(sprintf('You need to review the file, resolve unclassified entries, remove uninteresting entries, and commit the changes manually with "changelog is now updated for %s release"', $version->getVersionString()));
+
+        $this->confirm('Confirm you have checked CHANGELOG.md and the changes are committed.');
     }
 
     /**
