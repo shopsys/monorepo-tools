@@ -10,7 +10,7 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 /**
  * Overrides default "server:run" command because web/index.php is used as front controller.
  *
- * Default behaviour of Symfony is to use router_<environment>.php that requires specific front controller.
+ * Default behavior of Symfony is to use router_<environment>.php that requires specific front controller.
  * Front controllers web/app.php and web/app_dev.php were removed because environment is determined by a file
  * in project root.
  */

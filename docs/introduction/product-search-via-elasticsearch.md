@@ -64,7 +64,7 @@ If you want to improve searching, you can learn more in [Elasticsearch analysis]
 ## Where does Elasticsearch run?
 When using docker installation, Elasticsearch API is available on the address [http://127.0.0.1:9200](http://127.0.0.1:9200).
 
-## How to change the default index, data export setting, and searching behaviour?
+## How to change the default index, data export setting, and searching behavior?
 If you wish to reconfigure the indexes setting, simply change the JSON configurations in `src/Shopsys/ShopBundle/Resources/Resources/definition/`.
 Configurations use the `<index>/<domain_id>.json` naming pattern.
 

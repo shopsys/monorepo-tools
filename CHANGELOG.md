@@ -1314,7 +1314,7 @@ That's why is this section formatted differently.
     - phpunit/phpunit 5.7.21
     - twig/twig 1.34.0
     - twig/extensions 1.3.0
-- New automatic test that is controlling right behaviour of plugin 
+- New automatic test that is controlling right behavior of plugin
 - Added travis build icon into [README.md](https://github.com/shopsys/product-feed-heureka/blob/master/README.md) 
 ##### Changed
 - Dependency [shopsys/product-feed-interface] upgraded from ~0.2.0 to ~0.3.0 
@@ -1370,7 +1370,7 @@ That's why is this section formatted differently.
     - phpunit/phpunit >=5.0.0,<6.0
     - twig/twig 1.34.0
     - twig/extensions 1.3.0
-- New automatic test that is controlling right behaviour of plugin 
+- New automatic test that is controlling right behavior of plugin
 - Added travis build icon into [README.md](https://github.com/shopsys/product-feed-zbozi/blob/master/README.md) 
 ##### Changed
 - Dependency [product-feed-interface](https://github.com/shopsys/product-feed-zbozi/blob/master/shopsys/product-feed-interface) upgraded from ~0.2.0 to ~0.3.0 
@@ -1429,7 +1429,7 @@ That's why is this section formatted differently.
     - phpunit/phpunit >=5.0.0,<6.0
     - twig/twig 1.34.0
     - twig/extensions 1.3.0
-- New automatic test that is controlling right behaviour of plugin
+- New automatic test that is controlling right behavior of plugin
 - Added travis build icon into [README.md](https://github.com/shopsys/product-feed-heureka-delivery/blob/master/README.md)
 ##### Changed
 - Dependency [plugin-interface](https://github.com/shopsys/product-feed-interface) upgraded from ~0.2.0 to ~0.3.0

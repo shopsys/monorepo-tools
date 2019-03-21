@@ -389,7 +389,7 @@ msgid "Coefficient"
 msgstr ""
 
 msgid "Colour"
-msgstr ""
+msgstr "Color"
 
 msgid "Communication with customer"
 msgstr ""

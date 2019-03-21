@@ -49,7 +49,7 @@ Monorepo can be installed and used as standard application. This requires some a
 * **docker/** - templates for configuration of docker in monorepo.
 
 * **build.xml** - definitions of targets for use in the monorepo, some already defined targets
-have modified behaviour in such a way that their actions are launched over all monorepo packages
+have modified behavior in such a way that their actions are launched over all monorepo packages
 
 * **composer.json** - contains the dependencies required by individual packages and by Shopsys Framework.
 It is not generated automatically, so each change made in the `composer.json` of the specific package must be reflected
