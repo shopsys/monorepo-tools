@@ -16,7 +16,7 @@ final class CheckShopsysInstallReleaseWorker extends AbstractShopsysReleaseWorke
      */
     public function getPriority(): int
     {
-        return 200;
+        return 130;
     }
 
     /**
