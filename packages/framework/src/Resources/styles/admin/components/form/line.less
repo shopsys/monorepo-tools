@@ -1,15 +1,18 @@
 @form-line-input-size: 230px;
 @form-line-label-size: 230px;
 @form-line-gap-size: 10px;
-@form-line-padding-horizontal: 15px;
-@form-line-padding-vertical: 10px;
+@form-line-padding-horizontal: 22px;
+@form-line-padding-vertical: 20px;
+@form-line-border-style: none;
+@form-line-min-height: 84px;
 
 .form-line {
     .clearfix();
     padding: @form-line-padding-vertical @form-line-padding-horizontal;
     position: relative;
+    min-height: @form-line-min-height;
 
-    border: 1px solid @color-border;
+    border: @form-line-border-style;
     border-left-color: @color-border-darker;
     border-right-color: @color-border-darker;
     background: @color-f;
@@ -47,10 +50,11 @@
 
     &__label {
         width: @form-line-label-size;
-        padding: 6px 10px 6px 0;
-        height: 30px;
+        padding: 13px 10px 11px 0;
         float: left;
 
+        font-family: @font-medium;
+        font-size: 15px;
         font-weight: bold;
 
         &--input {
@@ -61,7 +65,7 @@
 
     &__compulsory {
         position: absolute;
-        top: 14px;
+        top: calc(~"@{form-line-min-height}/2 - @{form-compulsory-size}/2");
         left: -9px;
         z-index: 50;
     }
@@ -100,8 +104,8 @@
         vertical-align: middle;
 
         &--text {
-            padding-top: 6px;
-            padding-bottom: 6px;
+            padding-top: 15px;
+            padding-bottom: 14px;
         }
 
         &--btn {

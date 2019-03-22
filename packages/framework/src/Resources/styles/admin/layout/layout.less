@@ -1,3 +1,6 @@
+@admin-header-background: @color-f;
+@admin-header-padding: 15px;
+
 body {
     background: @bg-web;
 }
@@ -34,7 +37,7 @@ body {
             width: 100%;
             height: @height-header;
 
-            background: @bg-primary;
+            background: @admin-header-background;
             color: @color-f;
 
             &--small {
@@ -43,7 +46,7 @@ body {
         }
 
         &__logo {
-            padding-left: 20px;
+            padding-left: @admin-header-padding;
             min-width: 160px;
 
             @media @query-lg {
@@ -72,19 +75,6 @@ body {
 
         .web--with-info & {
             padding-top: @height-header + @height-fixed-bar;
-        }
-
-        &:after {
-            display: block;
-            position: absolute;
-            top: 0;
-            bottom: 0;
-            left: @width-panel;
-            width: 1px;
-            content: '';
-            opacity: 0.3;
-
-            background: @color-a;
         }
 
         &--blank {

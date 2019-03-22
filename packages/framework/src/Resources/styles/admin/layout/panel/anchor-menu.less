@@ -1,21 +1,23 @@
+@anchor-menu-item-border: @side-menu-item-border;
+
 .anchor-menu {
     .reset-ul();
 
     &__item {
         display: block;
 
-        border-bottom: 1px solid @color-border;
+        border-bottom: @anchor-menu-item-border;
 
         &__anchor {
             position: relative;
             display: block;
-            padding: 10px;
+            padding: 13px 18px;
 
             text-decoration: none;
-            text-transform: uppercase;
             color: @color-action;
-            font-weight: bold;
-            font-size: 12px;
+            font-family: @font-medium;
+            font-weight: 600;
+            font-size: 14px;
 
             &:hover {
                 color: @color-darklink-hover;

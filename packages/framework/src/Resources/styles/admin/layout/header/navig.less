@@ -1,3 +1,7 @@
+@header-navig-link-size-small: 36px;
+@header-navig-icon-size-small: 20px;
+@header-navig-icon-background: @color-grey-light;
+
 .navig {
     .reset-ul();
     display: block;
@@ -27,9 +31,10 @@
             display: block;
             height: @height-header;
             line-height: @height-header;
-            width: 50px;
+            width: @header-navig-icon-size-small;
 
-            color: @color-alterlink;
+
+            color: @color-link;
             text-decoration: none;
             text-align: center;
             cursor: pointer;
@@ -69,7 +74,11 @@
 
             i {
                 position: relative;
-                font-size: 16px;
+                padding: calc(~"(@{header-navig-link-size-small} - @{header-navig-icon-size-small})/2");
+
+                background: @header-navig-icon-background;
+                border-radius: @radius;
+                font-size: @header-navig-icon-size-small;
 
                 .dump-mode & {
                     top: 20px;

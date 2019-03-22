@@ -13,7 +13,10 @@
 /*******************************************************************
 // FONTS
 *******************************************************************/
-@font-base: Arial, Helvetica, sans-serif;
+@import url('https://fonts.googleapis.com/css?family=Roboto:400,500&subset=latin-ext');
+
+@font-base: "Roboto", Arial, Helvetica, sans-serif;
+@font-medium: "Roboto Medium", Arial, Helvetica, sans-serif;
 @font: @font-base;
 
 @font-size: 13px;
@@ -23,15 +26,17 @@
 // SIZES
 *******************************************************************/
 @width-web: 100%;
-@width-panel: 235px;
+@width-panel: 210px;
 
-@width-content: 1100px;
+@width-content: 100%;
 
-@height-header: 52px;
-@height-fixed-bar: 52px;
+@height-header: 64px;
+@height-fixed-bar: 64px;
 
 @item-gap: 25px;
 @content-gap: 25px;
+
+@radius: 3px;
 
 /*******************************************************************
 // COLORS
@@ -57,17 +62,17 @@
 
 @color-grey-dark: #cacaca;
 @color-grey: #dadada;
-@color-grey-light: #eaeaea;
+@color-grey-light: #f7f8fc;
 
-@color-blue: #0F00A0;
+@color-blue: #012798;
 @color-light-blue: #009AFF;
 @color-green: #00CDBE;
 @color-orange: #FCBD46;
-@color-red: #D60000;
+@color-red: #dc3d3d;
 @color-yellow: #FFDD0E;
 
 // context colors
-@color-base: #31454D;
+@color-base: #3e4a59;
 @color-desc: @color-5;
 
 @color-primary: @color-blue;
@@ -86,7 +91,7 @@
 @color-darklink: #818d92;
 @color-darklink-hover: @color-blue;
 
-@color-border: #DCDFE0;
+@color-border: #dce2ea;
 @color-border-dark: #CCD0D4;
 @color-border-darker: #C1CDD1;
 @color-border-blue: @color-blue;
@@ -96,8 +101,8 @@
 @color-action: #66757b;
 @color-move: #818d92;
 
-@bg-web: #CCD0D4;
-@bg-page: #EDF2F4;
+@bg-web: #f8f8f9;
+@bg-page: #f8f8f9;
 @bg-box: @color-f;
 @bg-window: @color-f;
 @bg-table: #dbe3e5;
