@@ -97,6 +97,6 @@ class TransportGridFactory implements GridFactoryInterface
     {
         $transportBasePricesIndexedByCurrencyId = $this->transportFacade->getIndependentBasePricesIndexedByCurrencyId($transport);
 
-        return $transportBasePricesIndexedByCurrencyId[self::CURRENCY_ID_FOR_LIST]->getPriceWithVat();
+        return $transportBasePricesIndexedByCurrencyId[static::CURRENCY_ID_FOR_LIST]->getPriceWithVat();
     }
 }

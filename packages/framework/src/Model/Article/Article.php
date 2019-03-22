@@ -105,7 +105,7 @@ class Article implements OrderableEntityInterface
         $this->seoMetaDescription = $articleData->seoMetaDescription;
         $this->seoH1 = $articleData->seoH1;
         $this->placement = $articleData->placement;
-        $this->position = self::GEDMO_SORTABLE_LAST_POSITION;
+        $this->position = static::GEDMO_SORTABLE_LAST_POSITION;
         $this->hidden = $articleData->hidden;
     }
 

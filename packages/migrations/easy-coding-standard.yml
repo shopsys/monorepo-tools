@@ -4,6 +4,8 @@ imports:
 services:
     Shopsys\CodingStandards\Sniffs\ConstantVisibilityRequiredSniff: ~
 
+    Shopsys\CodingStandards\Sniffs\ForceLateStaticBindingForProtectedConstantsSniff: ~
+
 parameters:
     exclude_files:
         - '*/src/Resources/views/Migration/migration.php.twig'

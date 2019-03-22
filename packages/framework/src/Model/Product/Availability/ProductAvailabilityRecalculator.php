@@ -62,7 +62,7 @@ class ProductAvailabilityRecalculator
             $this->productRowsIterator = $this->productAvailabilityRecalculationScheduler->getProductsIteratorForDelayedRecalculation();
         }
 
-        for ($count = 0; $count < self::BATCH_SIZE; $count++) {
+        for ($count = 0; $count < static::BATCH_SIZE; $count++) {
             $row = $this->productRowsIterator->next();
             if ($row === false) {
                 $this->em->clear();

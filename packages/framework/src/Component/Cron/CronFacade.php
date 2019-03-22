@@ -56,7 +56,7 @@ class CronFacade
      */
     public function runScheduledModules()
     {
-        $cronModuleExecutor = new CronModuleExecutor(self::TIMEOUT_SECONDS);
+        $cronModuleExecutor = new CronModuleExecutor(static::TIMEOUT_SECONDS);
 
         $cronModuleConfigs = $this->cronConfig->getAllCronModuleConfigs();
 
@@ -69,7 +69,7 @@ class CronFacade
      */
     public function runScheduledModulesForInstance(string $instanceName): void
     {
-        $cronModuleExecutor = new CronModuleExecutor(self::TIMEOUT_SECONDS);
+        $cronModuleExecutor = new CronModuleExecutor(static::TIMEOUT_SECONDS);
 
         $cronModuleConfigs = $this->cronConfig->getCronModuleConfigsForInstance($instanceName);
 
@@ -113,7 +113,7 @@ class CronFacade
     {
         $cronModuleConfig = $this->cronConfig->getCronModuleConfigByServiceId($serviceId);
 
-        $cronModuleExecutor = new CronModuleExecutor(self::TIMEOUT_SECONDS);
+        $cronModuleExecutor = new CronModuleExecutor(static::TIMEOUT_SECONDS);
         $this->runModule($cronModuleExecutor, $cronModuleConfig);
     }
 

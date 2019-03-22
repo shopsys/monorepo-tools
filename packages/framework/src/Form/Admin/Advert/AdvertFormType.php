@@ -62,7 +62,7 @@ class AdvertFormType extends AbstractType
         $imageConstraints = [
             new Constraints\NotBlank([
                 'message' => 'Choose image',
-                'groups' => [self::VALIDATION_GROUP_TYPE_IMAGE],
+                'groups' => [static::VALIDATION_GROUP_TYPE_IMAGE],
             ]),
         ];
 
@@ -131,7 +131,7 @@ class AdvertFormType extends AbstractType
                 'constraints' => [
                     new Constraints\NotBlank([
                         'message' => 'Please enter HTML code for advertisement area',
-                        'groups' => [self::VALIDATION_GROUP_TYPE_CODE],
+                        'groups' => [static::VALIDATION_GROUP_TYPE_CODE],
                     ]),
                 ],
                 'attr' => [
@@ -202,9 +202,9 @@ class AdvertFormType extends AbstractType
                     /* @var $advertData \Shopsys\FrameworkBundle\Model\Advert\AdvertData */
 
                     if ($advertData->type === Advert::TYPE_CODE) {
-                        $validationGroups[] = self::VALIDATION_GROUP_TYPE_CODE;
+                        $validationGroups[] = static::VALIDATION_GROUP_TYPE_CODE;
                     } elseif ($advertData->type === Advert::TYPE_IMAGE) {
-                        $validationGroups[] = self::VALIDATION_GROUP_TYPE_IMAGE;
+                        $validationGroups[] = static::VALIDATION_GROUP_TYPE_IMAGE;
                     }
                     return $validationGroups;
                 },

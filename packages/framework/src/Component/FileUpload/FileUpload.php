@@ -131,7 +131,7 @@ class FileUpload
      */
     public function getTemporaryDirectory()
     {
-        return $this->temporaryDir . '/' . self::TEMPORARY_DIRECTORY;
+        return $this->temporaryDir . '/' . static::TEMPORARY_DIRECTORY;
     }
 
     /**

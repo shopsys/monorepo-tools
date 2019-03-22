@@ -124,7 +124,7 @@ class Translator implements TranslatorInterface, TranslatorBagInterface
     protected function resolveDomain($domain)
     {
         if ($domain === null) {
-            return self::DEFAULT_DOMAIN;
+            return static::DEFAULT_DOMAIN;
         }
 
         return $domain;

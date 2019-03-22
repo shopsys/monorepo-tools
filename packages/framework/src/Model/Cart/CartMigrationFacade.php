@@ -75,7 +75,7 @@ class CartMigrationFacade
     {
         $session = $filterControllerEvent->getRequest()->getSession();
 
-        $previousCartIdentifier = $session->get(self::SESSION_PREVIOUS_CART_IDENTIFIER);
+        $previousCartIdentifier = $session->get(static::SESSION_PREVIOUS_CART_IDENTIFIER);
         if (!empty($previousCartIdentifier) && $previousCartIdentifier !== $session->getId()) {
             $previousCustomerIdentifier = $this->customerIdentifierFactory->getOnlyWithCartIdentifier($previousCartIdentifier);
             $cart = $this->cartFacade->findCartByCustomerIdentifier($previousCustomerIdentifier);
@@ -84,6 +84,6 @@ class CartMigrationFacade
                 $this->mergeCurrentCartWithCart($cart);
             }
         }
-        $session->set(self::SESSION_PREVIOUS_CART_IDENTIFIER, $session->getId());
+        $session->set(static::SESSION_PREVIOUS_CART_IDENTIFIER, $session->getId());
     }
 }

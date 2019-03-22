@@ -29,7 +29,7 @@ class ImageThumbnailFactory
     public function getImageThumbnail($filepath)
     {
         $image = $this->imageProcessor->createInterventionImage($filepath);
-        $this->imageProcessor->resize($image, self::THUMBNAIL_WIDTH, self::THUMBNAIL_HEIGHT);
+        $this->imageProcessor->resize($image, static::THUMBNAIL_WIDTH, static::THUMBNAIL_HEIGHT);
 
         return $image;
     }

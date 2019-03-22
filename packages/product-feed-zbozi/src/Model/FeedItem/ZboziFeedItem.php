@@ -238,7 +238,7 @@ class ZboziFeedItem implements FeedItemInterface
      */
     public function getCategoryText(): ?string
     {
-        return implode(self::CATEGORY_PATH_SEPARATOR, $this->pathToMainCategory);
+        return implode(static::CATEGORY_PATH_SEPARATOR, $this->pathToMainCategory);
     }
 
     /**

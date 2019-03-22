@@ -35,7 +35,7 @@ class MutexFactory
      */
     public function getCronMutex()
     {
-        return $this->getMutexByName(self::MUTEX_CRON_NAME);
+        return $this->getMutexByName(static::MUTEX_CRON_NAME);
     }
 
     /**
@@ -44,7 +44,7 @@ class MutexFactory
      */
     public function getPrefixedCronMutex(string $prefix): Mutex
     {
-        return $this->getMutexByName($prefix . '-' . self::MUTEX_CRON_NAME);
+        return $this->getMutexByName($prefix . '-' . static::MUTEX_CRON_NAME);
     }
 
     /**

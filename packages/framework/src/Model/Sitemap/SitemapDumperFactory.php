@@ -70,7 +70,7 @@ class SitemapDumperFactory
             $this->filesystem,
             $this->mountManager,
             $this->sitemapFilePrefixer->getSitemapFilePrefixForDomain($domainId),
-            self::MAX_ITEMS_IN_FILE
+            static::MAX_ITEMS_IN_FILE
         );
     }
 }

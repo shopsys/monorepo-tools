@@ -203,7 +203,7 @@ class JavascriptCompiler
         if (!$this->isCompiledFileFresh($compiledFilename, $sourceFilename)) {
             $content = file_get_contents($sourceFilename);
 
-            if (strpos($sourceFilename, self::NOT_COMPILED_FOLDER) === false) {
+            if (strpos($sourceFilename, static::NOT_COMPILED_FOLDER) === false) {
                 $newContent = $this->jsCompiler->compile($content);
             } else {
                 $newContent = $content;

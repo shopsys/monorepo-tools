@@ -137,7 +137,7 @@ class JsTranslatorCallParser
 
             return $domain;
         } else {
-            return self::DEFAULT_MESSAGE_DOMAIN;
+            return static::DEFAULT_MESSAGE_DOMAIN;
         }
     }
 

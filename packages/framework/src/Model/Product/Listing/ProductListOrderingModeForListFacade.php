@@ -36,7 +36,7 @@ class ProductListOrderingModeForListFacade
                 ProductListOrderingConfig::ORDER_BY_PRICE_DESC => t('from most expensive'),
             ],
             ProductListOrderingConfig::ORDER_BY_PRIORITY,
-            self::COOKIE_NAME
+            static::COOKIE_NAME
         );
     }
 

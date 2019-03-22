@@ -44,9 +44,9 @@ class FormThemeExtension extends \Twig_Extension
     {
         $masterRequest = $this->requestStack->getMasterRequest();
         if ($this->isAdmin($masterRequest->get('_controller'))) {
-            return self::ADMIN_THEME;
+            return static::ADMIN_THEME;
         } else {
-            return self::FRONT_THEME;
+            return static::FRONT_THEME;
         }
     }
 

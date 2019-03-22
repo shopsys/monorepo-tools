@@ -35,7 +35,7 @@ class EnvironmentFileSetting
      */
     public function getEnvironment(bool $console): string
     {
-        $environments = $console ? self::ENVIRONMENTS_CONSOLE : self::ENVIRONMENTS_DEFAULT;
+        $environments = $console ? static::ENVIRONMENTS_CONSOLE : static::ENVIRONMENTS_DEFAULT;
         foreach ($environments as $environment) {
             if (is_file($this->getEnvironmentFilePath($environment))) {
                 return $environment;
@@ -84,6 +84,6 @@ class EnvironmentFileSetting
      */
     public function getEnvironmentFilePath(string $environment): string
     {
-        return $this->environmentFileDirectory . '/' . self::FILE_NAMES_BY_ENVIRONMENT[$environment];
+        return $this->environmentFileDirectory . '/' . static::FILE_NAMES_BY_ENVIRONMENT[$environment];
     }
 }

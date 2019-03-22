@@ -289,7 +289,7 @@ class CartFacade
 
     public function deleteOldCarts()
     {
-        $this->cartRepository->deleteOldCartsForUnregisteredCustomers(self::DAYS_LIMIT_FOR_UNREGISTERED);
-        $this->cartRepository->deleteOldCartsForRegisteredCustomers(self::DAYS_LIMIT_FOR_REGISTERED);
+        $this->cartRepository->deleteOldCartsForUnregisteredCustomers(static::DAYS_LIMIT_FOR_UNREGISTERED);
+        $this->cartRepository->deleteOldCartsForRegisteredCustomers(static::DAYS_LIMIT_FOR_REGISTERED);
     }
 }

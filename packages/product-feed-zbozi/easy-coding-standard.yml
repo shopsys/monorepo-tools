@@ -13,6 +13,8 @@ services:
 
     Shopsys\CodingStandards\Sniffs\ConstantVisibilityRequiredSniff: ~
 
+    Shopsys\CodingStandards\Sniffs\ForceLateStaticBindingForProtectedConstantsSniff: ~
+
 parameters:
     skip:
         ObjectCalisthenics\Sniffs\Files\FunctionLengthSniff:

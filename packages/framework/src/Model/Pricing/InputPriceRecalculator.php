@@ -142,7 +142,7 @@ class InputPriceRecalculator
 
             $callback($object);
 
-            if (($iteration % self::BATCH_SIZE) == 0) {
+            if (($iteration % static::BATCH_SIZE) == 0) {
                 $this->em->flush();
             }
         }

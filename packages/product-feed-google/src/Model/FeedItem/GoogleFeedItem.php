@@ -173,7 +173,7 @@ class GoogleFeedItem implements FeedItemInterface
      */
     public function getAvailability(): string
     {
-        return $this->sellingDenied ? self::AVAILABILITY_OUT_OF_STOCK : self::AVAILABILITY_IN_STOCK;
+        return $this->sellingDenied ? static::AVAILABILITY_OUT_OF_STOCK : static::AVAILABILITY_IN_STOCK;
     }
 
     /**
@@ -198,8 +198,8 @@ class GoogleFeedItem implements FeedItemInterface
     public function getIdentifiers(): array
     {
         return array_filter([
-            self::IDENTIFIER_TYPE_EAN => $this->ean,
-            self::IDENTIFIER_TYPE_PARTNO => $this->partno,
+            static::IDENTIFIER_TYPE_EAN => $this->ean,
+            static::IDENTIFIER_TYPE_PARTNO => $this->partno,
         ]);
     }
 }

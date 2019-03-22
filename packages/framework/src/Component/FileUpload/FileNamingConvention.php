@@ -18,7 +18,7 @@ class FileNamingConvention
     {
         if ($namingConventionType === self::TYPE_ID && is_int($entityId)) {
             return $entityId . '.' . pathinfo($originalFilename, PATHINFO_EXTENSION);
-        } elseif ($namingConventionType === self::TYPE_ORIGINAL_NAME) {
+        } elseif ($namingConventionType === static::TYPE_ORIGINAL_NAME) {
             return $originalFilename;
         } else {
             $message = 'Naming convention ' . $namingConventionType . ' cannot by resolved to filename';

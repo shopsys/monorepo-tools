@@ -8,3 +8,7 @@ parameters:
         Shopsys\CodingStandards\Sniffs\ConstantVisibilityRequiredSniff:
             - '*/src/Shopsys/ShopBundle/*'
             - '*/tests/ShopBundle/*'
+
+        Shopsys\CodingStandards\Sniffs\ForceLateStaticBindingForProtectedConstantsSniff:
+            - '*/src/Shopsys/ShopBundle/*'
+            - '*/tests/ShopBundle/*'

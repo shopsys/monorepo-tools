@@ -131,7 +131,7 @@ class OrderMail implements MessageFactoryInterface
      */
     public static function getMailTemplateNameByStatus(OrderStatus $orderStatus)
     {
-        return self::MAIL_TEMPLATE_NAME_PREFIX . $orderStatus->getId();
+        return static::MAIL_TEMPLATE_NAME_PREFIX . $orderStatus->getId();
     }
 
     /**

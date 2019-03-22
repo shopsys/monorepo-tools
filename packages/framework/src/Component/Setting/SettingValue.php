@@ -101,21 +101,21 @@ class SettingValue
      */
     public function getValue()
     {
-        if ($this->value === null && $this->type !== self::TYPE_NULL) {
+        if ($this->value === null && $this->type !== static::TYPE_NULL) {
             $message = 'Setting value type "' . $this->type . '" does not allow null value.';
             throw new \Shopsys\FrameworkBundle\Component\Setting\Exception\SettingValueTypeNotMatchValueException($message);
         }
 
         switch ($this->type) {
-            case self::TYPE_INTEGER:
+            case static::TYPE_INTEGER:
                 return (int)$this->value;
-            case self::TYPE_FLOAT:
+            case static::TYPE_FLOAT:
                 return (float)$this->value;
-            case self::TYPE_BOOLEAN:
-                return $this->value === self::BOOLEAN_TRUE;
-            case self::TYPE_DATETIME:
-                return DateTimeHelper::createFromFormat(self::DATETIME_STORED_FORMAT, $this->value);
-            case self::TYPE_MONEY:
+            case static::TYPE_BOOLEAN:
+                return $this->value === static::BOOLEAN_TRUE;
+            case static::TYPE_DATETIME:
+                return DateTimeHelper::createFromFormat(static::DATETIME_STORED_FORMAT, $this->value);
+            case static::TYPE_MONEY:
                 return Money::create($this->value);
             default:
                 return $this->value;
@@ -136,13 +136,13 @@ class SettingValue
     protected function setValue($value)
     {
         $this->type = $this->getValueType($value);
-        if ($this->type === self::TYPE_BOOLEAN) {
-            $this->value = $value === true ? self::BOOLEAN_TRUE : self::BOOLEAN_FALSE;
-        } elseif ($this->type === self::TYPE_NULL) {
+        if ($this->type === static::TYPE_BOOLEAN) {
+            $this->value = $value === true ? static::BOOLEAN_TRUE : static::BOOLEAN_FALSE;
+        } elseif ($this->type === static::TYPE_NULL) {
             $this->value = $value;
-        } elseif ($this->type === self::TYPE_DATETIME) {
-            $this->value = $value->format(self::DATETIME_STORED_FORMAT);
-        } elseif ($this->type === self::TYPE_MONEY) {
+        } elseif ($this->type === static::TYPE_DATETIME) {
+            $this->value = $value->format(static::DATETIME_STORED_FORMAT);
+        } elseif ($this->type === static::TYPE_MONEY) {
             $this->value = $value->getAmount();
         } else {
             $this->value = (string)$value;
@@ -156,19 +156,19 @@ class SettingValue
     protected function getValueType($value)
     {
         if (is_int($value)) {
-            return self::TYPE_INTEGER;
+            return static::TYPE_INTEGER;
         } elseif (is_float($value)) {
-            return self::TYPE_FLOAT;
+            return static::TYPE_FLOAT;
         } elseif (is_bool($value)) {
-            return self::TYPE_BOOLEAN;
+            return static::TYPE_BOOLEAN;
         } elseif (is_string($value)) {
-            return self::TYPE_STRING;
+            return static::TYPE_STRING;
         } elseif (is_null($value)) {
-            return self::TYPE_NULL;
+            return static::TYPE_NULL;
         } elseif ($value instanceof DateTime) {
-            return self::TYPE_DATETIME;
+            return static::TYPE_DATETIME;
         } elseif ($value instanceof Money) {
-            return self::TYPE_MONEY;
+            return static::TYPE_MONEY;
         }
 
         $message = sprintf('Setting value type of "%s" is unsupported.', \is_object($value) ? \get_class($value) : \gettype($value))

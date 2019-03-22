@@ -27,7 +27,7 @@ class FriendlyUrlType extends AbstractType
             'required' => true,
             'constraints' => [
                 new Constraints\NotBlank(),
-                new Constraints\Regex(self::SLUG_REGEX),
+                new Constraints\Regex(static::SLUG_REGEX),
             ],
         ]);
     }

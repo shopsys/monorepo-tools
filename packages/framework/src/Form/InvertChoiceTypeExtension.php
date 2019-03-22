@@ -28,13 +28,13 @@ class InvertChoiceTypeExtension extends AbstractTypeExtension
     {
         parent::buildForm($builder, $options);
 
-        if ($options[self::INVERT_OPTION] && !$options['multiple']) {
+        if ($options[static::INVERT_OPTION] && !$options['multiple']) {
             throw new \Shopsys\FrameworkBundle\Component\Form\Exception\InvertedChoiceNotMultipleException(
                 'The "invert" option can be enabled only with "multiple" set to true.'
             );
         }
 
-        if ($options[self::INVERT_OPTION]) {
+        if ($options[static::INVERT_OPTION]) {
             $builder->addModelTransformer(new InverseMultipleChoiceTransformer($options['choices']));
         }
     }
@@ -46,10 +46,10 @@ class InvertChoiceTypeExtension extends AbstractTypeExtension
     {
         parent::configureOptions($resolver);
 
-        $resolver->setRequired(self::INVERT_OPTION)
-            ->setAllowedTypes(self::INVERT_OPTION, 'bool')
+        $resolver->setRequired(static::INVERT_OPTION)
+            ->setAllowedTypes(static::INVERT_OPTION, 'bool')
             ->setDefaults([
-                self::INVERT_OPTION => false,
+                static::INVERT_OPTION => false,
             ]);
     }
 }

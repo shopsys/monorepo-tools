@@ -184,10 +184,10 @@ class Grid
         $this->routeCsrfProtector = $routeCsrfProtector;
         $this->twig = $twig;
 
-        $this->limit = self::DEFAULT_LIMIT;
+        $this->limit = static::DEFAULT_LIMIT;
         $this->page = 1;
 
-        $this->viewTheme = self::DEFAULT_VIEW_THEME;
+        $this->viewTheme = static::DEFAULT_VIEW_THEME;
         $this->viewTemplateParameters = [];
 
         $this->selectedRowIds = [];

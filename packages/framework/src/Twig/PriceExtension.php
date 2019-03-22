@@ -254,8 +254,8 @@ class PriceExtension extends Twig_Extension
     {
         $numberFormat = $this->numberFormatRepository->get($locale);
         $numberFormatter = new NumberFormatter($numberFormat, NumberFormatter::CURRENCY);
-        $numberFormatter->setMinimumFractionDigits(self::MINIMUM_FRACTION_DIGITS);
-        $numberFormatter->setMaximumFractionDigits(self::MAXIMUM_FRACTION_DIGITS);
+        $numberFormatter->setMinimumFractionDigits(static::MINIMUM_FRACTION_DIGITS);
+        $numberFormatter->setMaximumFractionDigits(static::MAXIMUM_FRACTION_DIGITS);
 
         return $numberFormatter;
     }

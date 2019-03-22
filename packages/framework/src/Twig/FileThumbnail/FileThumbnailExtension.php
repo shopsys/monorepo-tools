@@ -102,7 +102,7 @@ class FileThumbnailExtension extends Twig_Extension
     {
         $image = $this->imageThumbnailFactory->getImageThumbnail($filepath);
 
-        return new FileThumbnailInfo(null, $image->encode('data-url', self::IMAGE_THUMBNAIL_QUALITY)->getEncoded());
+        return new FileThumbnailInfo(null, $image->encode('data-url', static::IMAGE_THUMBNAIL_QUALITY)->getEncoded());
     }
 
     /**

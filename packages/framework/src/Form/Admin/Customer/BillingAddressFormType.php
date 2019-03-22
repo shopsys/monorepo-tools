@@ -70,12 +70,12 @@ class BillingAddressFormType extends AbstractType
                         'constraints' => [
                             new Constraints\NotBlank([
                                 'message' => 'Please enter company name',
-                                'groups' => [self::VALIDATION_GROUP_COMPANY_CUSTOMER],
+                                'groups' => [static::VALIDATION_GROUP_COMPANY_CUSTOMER],
                             ]),
                             new Constraints\Length([
                                 'max' => 100,
                                 'maxMessage' => 'Company name cannot be longer than {{ limit }} characters',
-                                'groups' => [self::VALIDATION_GROUP_COMPANY_CUSTOMER],
+                                'groups' => [static::VALIDATION_GROUP_COMPANY_CUSTOMER],
                             ]),
                         ],
                         'label' => t('Company'),
@@ -85,12 +85,12 @@ class BillingAddressFormType extends AbstractType
                         'constraints' => [
                             new Constraints\NotBlank([
                                 'message' => 'Please enter identification number',
-                                'groups' => [self::VALIDATION_GROUP_COMPANY_CUSTOMER],
+                                'groups' => [static::VALIDATION_GROUP_COMPANY_CUSTOMER],
                             ]),
                             new Constraints\Length([
                                 'max' => 50,
                                 'maxMessage' => 'Identification number cannot be longer then {{ limit }} characters',
-                                'groups' => [self::VALIDATION_GROUP_COMPANY_CUSTOMER],
+                                'groups' => [static::VALIDATION_GROUP_COMPANY_CUSTOMER],
                             ]),
                         ],
                         'label' => t('Company number'),
@@ -101,7 +101,7 @@ class BillingAddressFormType extends AbstractType
                             new Constraints\Length([
                                 'max' => 50,
                                 'maxMessage' => 'Tax number cannot be longer than {{ limit }} characters',
-                                'groups' => [self::VALIDATION_GROUP_COMPANY_CUSTOMER],
+                                'groups' => [static::VALIDATION_GROUP_COMPANY_CUSTOMER],
                             ]),
                         ],
                         'label' => t('Tax number'),
@@ -174,7 +174,7 @@ class BillingAddressFormType extends AbstractType
                     /* @var $billingAddressData \Shopsys\FrameworkBundle\Model\Customer\BillingAddressData */
 
                     if ($billingAddressData->companyCustomer) {
-                        $validationGroups[] = self::VALIDATION_GROUP_COMPANY_CUSTOMER;
+                        $validationGroups[] = static::VALIDATION_GROUP_COMPANY_CUSTOMER;
                     }
 
                     return $validationGroups;

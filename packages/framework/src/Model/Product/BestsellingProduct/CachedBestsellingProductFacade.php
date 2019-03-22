@@ -100,7 +100,7 @@ class CachedBestsellingProductFacade
             $sortedProductIds[] = $product->getId();
         }
 
-        $this->cacheProvider->save($cacheId, $sortedProductIds, self::LIFETIME);
+        $this->cacheProvider->save($cacheId, $sortedProductIds, static::LIFETIME);
     }
 
     /**

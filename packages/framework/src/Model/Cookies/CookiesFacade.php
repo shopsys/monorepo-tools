@@ -120,6 +120,6 @@ class CookiesFacade
         }
         $masterRequest = $this->requestStack->getMasterRequest();
 
-        return $masterRequest->cookies->has(self::EU_COOKIES_COOKIE_CONSENT_NAME);
+        return $masterRequest->cookies->has(static::EU_COOKIES_COOKIE_CONSENT_NAME);
     }
 }

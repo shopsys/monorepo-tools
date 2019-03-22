@@ -67,14 +67,14 @@ class BestsellingProductFacade
             $domainId,
             $category,
             $pricingGroup,
-            new DateTime(self::ORDERS_CREATED_AT_LIMIT),
-            self::MAX_RESULTS
+            new DateTime(static::ORDERS_CREATED_AT_LIMIT),
+            static::MAX_RESULTS
         );
 
         return $this->bestsellingProductCombinator->combineManualAndAutomaticProducts(
             $manualProductsIndexedByPosition,
             $automaticProducts,
-            self::MAX_RESULTS
+            static::MAX_RESULTS
         );
     }
 }

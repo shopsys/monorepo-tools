@@ -73,16 +73,16 @@ class SitemapListener implements EventSubscriberInterface
         $generator = $event->getUrlContainer();
         $domainConfig = $this->domain->getDomainConfigById($domainId);
 
-        $this->addHomepageUrl($generator, $domainConfig, $section, self::PRIORITY_HOMEPAGE);
+        $this->addHomepageUrl($generator, $domainConfig, $section, static::PRIORITY_HOMEPAGE);
 
         $productSitemapItems = $this->sitemapFacade->getSitemapItemsForVisibleProducts($domainConfig);
-        $this->addUrlsBySitemapItems($productSitemapItems, $generator, $domainConfig, $section, self::PRIORITY_PRODUCTS);
+        $this->addUrlsBySitemapItems($productSitemapItems, $generator, $domainConfig, $section, static::PRIORITY_PRODUCTS);
 
         $categorySitemapItems = $this->sitemapFacade->getSitemapItemsForVisibleCategories($domainConfig);
-        $this->addUrlsBySitemapItems($categorySitemapItems, $generator, $domainConfig, $section, self::PRIORITY_CATEGORIES);
+        $this->addUrlsBySitemapItems($categorySitemapItems, $generator, $domainConfig, $section, static::PRIORITY_CATEGORIES);
 
         $articleSitemapItems = $this->sitemapFacade->getSitemapItemsForArticlesOnDomain($domainConfig);
-        $this->addUrlsBySitemapItems($articleSitemapItems, $generator, $domainConfig, $section, self::PRIORITY_ARTICLES);
+        $this->addUrlsBySitemapItems($articleSitemapItems, $generator, $domainConfig, $section, static::PRIORITY_ARTICLES);
     }
 
     /**

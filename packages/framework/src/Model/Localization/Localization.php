@@ -127,7 +127,7 @@ class Localization
         if (array_key_exists($locale, $this->collationsByLocale)) {
             return $this->collationsByLocale[$locale];
         } else {
-            return self::DEFAULT_COLLATION;
+            return static::DEFAULT_COLLATION;
         }
     }
 }

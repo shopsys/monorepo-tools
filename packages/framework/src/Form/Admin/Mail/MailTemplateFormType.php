@@ -75,7 +75,7 @@ class MailTemplateFormType extends AbstractType
 
         $subjectConstraints[] = new Constraints\NotBlank([
             'message' => 'Please enter subject',
-            'groups' => [self::VALIDATION_GROUP_SEND_MAIL],
+            'groups' => [static::VALIDATION_GROUP_SEND_MAIL],
         ]);
         $subjectConstraints[] = new Constraints\Length([
             'max' => 255,
@@ -86,7 +86,7 @@ class MailTemplateFormType extends AbstractType
             $subjectConstraints[] = new Contains([
                 'needle' => $variableName,
                 'message' => 'Variable {{ needle }} is required',
-                'groups' => [self::VALIDATION_GROUP_SEND_MAIL],
+                'groups' => [static::VALIDATION_GROUP_SEND_MAIL],
             ]);
         }
 
@@ -103,14 +103,14 @@ class MailTemplateFormType extends AbstractType
 
         $bodyConstraints[] = new Constraints\NotBlank([
             'message' => 'Please enter e-mail content',
-            'groups' => [self::VALIDATION_GROUP_SEND_MAIL],
+            'groups' => [static::VALIDATION_GROUP_SEND_MAIL],
         ]);
 
         foreach ($options['required_body_variables'] as $variableName) {
             $bodyConstraints[] = new Contains([
                 'needle' => $variableName,
                 'message' => 'Variable {{ needle }} is required',
-                'groups' => [self::VALIDATION_GROUP_SEND_MAIL],
+                'groups' => [static::VALIDATION_GROUP_SEND_MAIL],
             ]);
         }
 
@@ -137,7 +137,7 @@ class MailTemplateFormType extends AbstractType
                     /* @var $mailTemplateData \Shopsys\FrameworkBundle\Model\Mail\MailTemplateData */
 
                     if ($mailTemplateData->sendMail) {
-                        $validationGroups[] = self::VALIDATION_GROUP_SEND_MAIL;
+                        $validationGroups[] = static::VALIDATION_GROUP_SEND_MAIL;
                     }
 
                     return $validationGroups;

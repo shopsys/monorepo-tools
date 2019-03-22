@@ -102,7 +102,7 @@ class FriendlyUrlFacade
         $attempt = 0;
         do {
             $attempt++;
-            if ($attempt > self::MAX_URL_UNIQUE_RESOLVE_ATTEMPT) {
+            if ($attempt > static::MAX_URL_UNIQUE_RESOLVE_ATTEMPT) {
                 throw new \Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\Exception\ReachMaxUrlUniqueResolveAttemptException(
                     $friendlyUrl,
                     $attempt

@@ -55,10 +55,10 @@ class AdvancedSearchProductFacade
      */
     public function createAdvancedSearchForm(Request $request)
     {
-        $rulesData = (array)$request->get(self::RULES_FORM_NAME);
+        $rulesData = (array)$request->get(static::RULES_FORM_NAME);
         $rulesFormData = $this->ruleFormViewDataFactory->createFromRequestData(ProductNameFilter::NAME, $rulesData);
 
-        return $this->advancedSearchFormFactory->createRulesForm(self::RULES_FORM_NAME, $rulesFormData);
+        return $this->advancedSearchFormFactory->createRulesForm(static::RULES_FORM_NAME, $rulesFormData);
     }
 
     /**
@@ -72,7 +72,7 @@ class AdvancedSearchProductFacade
             $index => $this->ruleFormViewDataFactory->createDefault($filterName),
         ];
 
-        return $this->advancedSearchFormFactory->createRulesForm(self::RULES_FORM_NAME, $rulesData);
+        return $this->advancedSearchFormFactory->createRulesForm(static::RULES_FORM_NAME, $rulesData);
     }
 
     /**
@@ -93,7 +93,7 @@ class AdvancedSearchProductFacade
      */
     public function isAdvancedSearchFormSubmitted(Request $request)
     {
-        $rulesData = $request->get(self::RULES_FORM_NAME);
+        $rulesData = $request->get(static::RULES_FORM_NAME);
 
         return $rulesData !== null;
     }

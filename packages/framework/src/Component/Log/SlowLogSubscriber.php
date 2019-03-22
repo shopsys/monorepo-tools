@@ -48,7 +48,7 @@ class SlowLogSubscriber implements EventSubscriberInterface
     public function addNotice(PostResponseEvent $event)
     {
         $requestTime = $this->getRequestTime();
-        if ($requestTime > self::REQUEST_TIME_LIMIT_SECONDS) {
+        if ($requestTime > static::REQUEST_TIME_LIMIT_SECONDS) {
             $requestUri = $event->getRequest()->getRequestUri();
             $controllerNameAndAction = $event->getRequest()->get('_controller');
 

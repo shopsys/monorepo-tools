@@ -24,9 +24,9 @@ class SortableNullsWalker extends SqlWalker
         $sql = parent::walkOrderByItem($orderByItem);
 
         if ($orderByItem->isAsc()) {
-            $sql .= ' ' . self::NULLS_FIRST;
+            $sql .= ' ' . static::NULLS_FIRST;
         } elseif ($orderByItem->isDesc()) {
-            $sql .= ' ' . self::NULLS_LAST;
+            $sql .= ' ' . static::NULLS_LAST;
         }
 
         return $sql;

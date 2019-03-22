@@ -51,7 +51,7 @@ class ProductSearchExporter
         do {
             $batchExportedIds = $this->exportBatch($domainId, $locale, $startFrom);
             $exportedIds = array_merge($exportedIds, $batchExportedIds);
-            $startFrom += self::BATCH_SIZE;
+            $startFrom += static::BATCH_SIZE;
         } while (!empty($batchExportedIds));
         $this->removeNotUpdated((string)$domainId, $exportedIds);
     }
@@ -64,7 +64,7 @@ class ProductSearchExporter
      */
     protected function exportBatch(int $domainId, string $locale, int $startFrom): array
     {
-        $productsData = $this->productSearchExportRepository->getProductsData($domainId, $locale, $startFrom, self::BATCH_SIZE);
+        $productsData = $this->productSearchExportRepository->getProductsData($domainId, $locale, $startFrom, static::BATCH_SIZE);
         if (count($productsData) === 0) {
             return [];
         }

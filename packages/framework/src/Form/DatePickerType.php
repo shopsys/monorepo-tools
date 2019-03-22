@@ -20,7 +20,7 @@ class DatePickerType extends AbstractType
     {
         $resolver->setDefaults([
             'widget' => 'single_text',
-            'format' => self::FORMAT_PHP,
+            'format' => static::FORMAT_PHP,
         ]);
     }
 

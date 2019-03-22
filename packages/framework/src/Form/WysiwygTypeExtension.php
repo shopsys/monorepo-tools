@@ -46,7 +46,7 @@ class WysiwygTypeExtension extends AbstractTypeExtension
                     'assets/admin/styles/wysiwyg_' . $cssVersion . '.css',
                 ],
                 'language' => $this->localization->getLocale(),
-                'format_tags' => self::ALLOWED_FORMAT_TAGS,
+                'format_tags' => static::ALLOWED_FORMAT_TAGS,
             ],
         ]);
     }
