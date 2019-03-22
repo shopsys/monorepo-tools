@@ -161,6 +161,7 @@ There you can find links to upgrade notes for other versions too.
         +Shopsys\ShopBundle\Model\AdvancedSearch\ProductAdvancedSearchConfig: ~
         +Shopsys\FrameworkBundle\Model\AdvancedSearch\ProductAdvancedSearchConfig: '@Shopsys\ShopBundle\Model\AdvancedSearch\ProductAdvancedSearchConfig'
         ```
+- *(low priority)* use private method `recursivelyCountCategoriesInCategoryTree` instead of `array_sum` to get maximum for the progress bar in `Shopsys\ShopBundle\DataFixtures\Performance\CategoryDataFixture` ([#902](https://github.com/shopsys/shopsys/pull/902))
 
 ## [shopsys/coding-standards]
 - We disallow using [Doctrine inheritance mapping](https://www.doctrine-project.org/projects/doctrine-orm/en/2.6/reference/inheritance-mapping.html) in the Shopsys Framework
