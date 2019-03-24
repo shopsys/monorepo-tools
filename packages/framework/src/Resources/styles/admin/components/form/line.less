@@ -4,7 +4,7 @@
 @form-line-padding-horizontal: 22px;
 @form-line-padding-vertical: 20px;
 @form-line-border-style: none;
-@form-line-min-height: 84px;
+@form-line-min-height: 44px;
 
 .form-line {
     .clearfix();
@@ -65,7 +65,7 @@
 
     &__compulsory {
         position: absolute;
-        top: calc(~"@{form-line-min-height}/2 - @{form-compulsory-size}/2");
+        top: calc(~"@{form-line-min-height}/2 + @{form-line-padding-vertical} - @{form-compulsory-size}/2");
         left: -9px;
         z-index: 50;
     }
@@ -203,9 +203,11 @@
 
     &__group {
         .clearfix();
-        padding: 6px 15px;
+        padding: 14px;
 
         background: @bg-info;
+        border: 1px solid @color-border-light;
+        border-radius: @radius @radius 0 0;
 
         &__image {
             float: left;

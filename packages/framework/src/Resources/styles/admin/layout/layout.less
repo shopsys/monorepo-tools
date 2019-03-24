@@ -136,7 +136,8 @@ body {
     &__content {
         position: relative;
         margin: 0 auto;
-        padding: 0 @item-gap @content-gap @item-gap;
+        padding: @content-gap;
+        padding-top: calc(~"@{content-gap} - @{wrap-border-gap}");
         max-width: @width-content;
 
         &--padding-top {

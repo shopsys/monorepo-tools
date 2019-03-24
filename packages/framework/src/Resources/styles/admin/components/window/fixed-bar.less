@@ -1,12 +1,12 @@
 .window-fixed-bar {
     position: fixed;
     bottom: 0;
-    left: @width-panel;
+    left: 0;
     right: 0;
     z-index: 1010;
 
     background-color: @color-f;
-    border: 1px solid @color-border-dark;
+    box-shadow: 0 -5px 10px rgba(0, 0, 0, 0.02);
 
     &--developer-mode {
         bottom: 36px;
@@ -47,12 +47,10 @@
     &__item {
         display: flex;
         height: @height-fixed-bar;
-        padding-left: 30px;
-        padding-right: 30px;
+        padding-left: 18px;
+        padding-right: 18px;
         flex: 1;
         align-items: center;
-
-        border-left: 1px solid @color-border-dark;
 
         &:first-child {
             border-left: none;
@@ -80,6 +78,12 @@
 
         &__cell {
             flex: 0 100%;
+
+            color: @color-blue;
+
+            .window-fixed-bar--top & {
+                color: @color-f;
+            }
         }
     }
 }

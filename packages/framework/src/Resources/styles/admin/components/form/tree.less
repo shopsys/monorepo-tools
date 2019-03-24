@@ -1,8 +1,10 @@
+@form-tree-icon-size: 17px;
+
 .form-tree {
     width: 440px;
     max-width: 100%;
 
-    border: 1px solid @color-border;
+    border: 1px solid @color-border-light;
 
     &__title {
         display: block;
@@ -12,7 +14,7 @@
         cursor: pointer;
 
         .form-tree--open & {
-            border-bottom: 1px dashed @color-border;
+            border-bottom: 1px dashed @color-border-light;
         }
 
         &__image {
@@ -82,7 +84,7 @@
     &__content {
         display: none;
         .reset-ul();
-        padding: 5px 0 5px 10px;
+        padding: 14px;
 
         .form-tree--open & {
             display: block;
@@ -129,14 +131,20 @@
 
         &__name {
             display: block;
+            font-size: 14px;
+
+            input {
+                margin: 0 10px;
+            }
 
             &--link {
                 color: @color-link;
-                text-decoration: underline;
-                display: inline;
+                display: inline-block;
+                padding: 5px 10px;
 
                 .form-tree__item__click:hover & {
                     color: @color-link-hover;
+                    text-decoration: underline;
                 }
             }
 
@@ -149,9 +157,11 @@
         &__icon {
             margin-right: 5px;
             float: left;
+            font-size: @form-tree-icon-size;
 
             &--level {
-                margin-top: 5px;
+                margin-top: 3px;
+                margin-left: 14px
             }
         }
 

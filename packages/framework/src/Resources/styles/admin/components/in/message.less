@@ -1,8 +1,9 @@
 @in-message-padding-horizontal: 9px;
 @in-message-padding-vertical: 6px;
 
-@in-message-close-size: 5px;
-@in-message-close-color: #66757B;
+@in-message-close-size: 17px;
+@in-message-close-background: #2a384e;
+@in-message-close-color: @color-f;
 
 // base message settings and elements
 .in-message {
@@ -22,18 +23,30 @@
 
     &__close {
         position: absolute;
-        top: @in-message-close-size;
-        right: @in-message-close-size;
-        padding: @in-message-close-size;
         display: inline-block;
+        height: @in-message-close-size;
+        width: @in-message-close-size;
+        line-height: @in-message-close-size;
+        right: -@in-message-close-size/2;
+        top: -@in-message-close-size/2;
         vertical-align: middle;
+        padding-left: 1px;
 
+        border-radius: 50%;
+        background: @in-message-close-background;
         color: @in-message-close-color;
-        cursor: pointer;
         font-style: normal;
-        font-size: 14px;
+        font-size: 12px;
+        font-weight: bold;
         text-align: center;
         text-decoration: none;
+        text-transform: lowercase;
+        cursor: pointer;
+
+        &:hover {
+            color: @in-message-close-color;
+            text-decoration: none;
+        }
     }
 
     &__list {
@@ -60,10 +73,6 @@
         margin-bottom: @in-message-block-margin-bottom;
         padding-right: @in-message-block-padding-for-close;
         position: relative;
-
-        .in-message__close {
-            top: 0;
-        }
 
         &.in-message--small .in-message__close {
             top: -4px;

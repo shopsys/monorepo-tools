@@ -1,15 +1,15 @@
 .form-full {
     &__title {
         .clearfix();
-        padding: 4px;
+        padding: 15px 0;
 
         &__in {
             display: inline-block;
             line-height: 24px;
 
+            font-family: @font-medium;
             font-weight: bold;
-            font-size: 15px;
-            text-transform: uppercase;
+            font-size: 20px;
         }
 
         &__buttons{
@@ -21,6 +21,10 @@
     &__field {
         position: relative;
         margin-bottom: 10px;
+
+        &:last-of-type {
+            margin-bottom: 0;
+        }
 
         &__input {
             width: 100%;

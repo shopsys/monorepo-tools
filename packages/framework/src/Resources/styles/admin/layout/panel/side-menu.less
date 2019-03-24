@@ -45,6 +45,7 @@
 
                 color: @color-darklink;
                 font-size: @side-menu-item-icon-size;
+                text-decoration: none;
             }
 
             .side-menu__item--active & {
@@ -75,6 +76,10 @@
 
             &:hover {
                 color: @color-primary;
+
+                .svg {
+                    color: @color-primary;
+                }
             }
 
             .side-menu__item--active & {
@@ -104,7 +109,6 @@
             &--superadmin {
                 background: lighten(@color-red, 53%);
             }
-
 
             &__link, &__label {
                 display: block;
@@ -148,6 +152,10 @@
 
                 .side-menu__submenu--level2 .side-menu__submenu__item:last-child & {
                     padding-bottom: 10px;
+                }
+
+                &:hover {
+                    text-decoration: none;
                 }
             }
 

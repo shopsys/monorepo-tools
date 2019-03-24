@@ -122,10 +122,10 @@
 
     &__flag {
         position: absolute;
-        top: 10px;
+        top: 7px;
         left: 7px;
         width: 22px;
-        height: 14px;
+        height: calc(~"@{input-height} - 2*7px");
         display: block;
 
         &:after {
@@ -160,7 +160,7 @@
         top: 7px;
         left: 7px;
         width: 40px;
-        height: 18px;
+        height: calc(~"@{input-height} - 2*7px");
 
         &:after {
             position: absolute;

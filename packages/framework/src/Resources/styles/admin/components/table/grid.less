@@ -3,18 +3,17 @@
     border-collapse: collapse;
 
     thead {
-        background: @bg-primary;
-        color: @color-f;
+        background: @color-f;
+        color: @color-grey;
         font-weight: bold;
     }
 
     tbody {
         background: @color-f;
-        border: 1px solid @color-border;
     }
 
     &__row {
-        border-bottom: 1px solid @color-border;
+        border-bottom: 1px solid @color-grey-light;
 
         &--edit {
             background: @bg-edit;
@@ -28,13 +27,17 @@
     }
 
     &__cell {
-        padding: 6px;
+        padding: 18px 6px;
         height: 40px;
 
         text-align: left;
 
         &:first-child {
             padding-left: 17px;
+
+            .svg {
+                color: @color-blue;
+            }
         }
 
         &:last-child {
@@ -56,6 +59,7 @@
             padding-left: 17px;
             padding-right: 17px;
 
+            color: @color-grey;
             text-align: right;
 
             a, span {
@@ -66,11 +70,14 @@
         }
 
         thead & {
-            padding-top: 14px;
-            padding-bottom: 14px;
+            padding-top: 23px;
+            padding-bottom: 23px;
 
             a {
-                color: @color-f;
+                color: @color-grey;
+                font-family: @font-medium;
+                font-size: 13px;
+                font-weight: 500;
                 text-decoration: none;
             }
         }
