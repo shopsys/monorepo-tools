@@ -57,6 +57,11 @@ services:
 
     Shopsys\FrameworkBundle\Model\Feed\Delivery\DeliveryFeedItemRepository: ~
 
+    Shopsys\FrameworkBundle\Model\Feed\FeedRegistry:
+        arguments:
+            $knownTypes: ['daily', 'hourly']
+            $defaultType: 'daily'
+
     Shopsys\FrameworkBundle\Component\Doctrine\DatabaseSchemaFacade:
         arguments:
             - '%shopsys.default_db_schema_filepath%'
