@@ -4,12 +4,10 @@ declare(strict_types=1);
 
 namespace Shopsys\Releaser\ReleaseWorker\ReleaseCandidate;
 
-use Nette\Utils\Strings;
 use PharIo\Version\Version;
 use Shopsys\Releaser\ReleaseWorker\AbstractShopsysReleaseWorker;
 use Shopsys\Releaser\Stage;
 use Symfony\Component\Console\Style\SymfonyStyle;
-use Symfony\Component\Process\Process;
 
 final class DumpTranslationsReleaseWorker extends AbstractShopsysReleaseWorker
 {
@@ -51,7 +49,7 @@ final class DumpTranslationsReleaseWorker extends AbstractShopsysReleaseWorker
                 $this->commit('dump translations');
                 $this->symfonyStyle->success('Translations were dumped and only deleted were found and committed');
             } else {
-                $this->symfonyStyle->note('There are new translations, check the changed files, fill in the missing translations and commit the changes');
+                $this->symfonyStyle->note('There are new translations, check the changed files (you can use "git status") command, fill in the missing translations and commit the changes');
                 $this->confirm('Confirm files are checked, missing translations completed and the changes are committed');
             }
         } else {
@@ -64,9 +62,7 @@ final class DumpTranslationsReleaseWorker extends AbstractShopsysReleaseWorker
      */
     private function hasNewTranslations(): bool
     {
-        $status = $this->getProcessResult(['git', 'status']);
-
-        return !Strings::contains($status, 'nothing to commit');
+        return !$this->isGitWorkingTreeEmpty();
     }
 
     /**
@@ -95,18 +91,6 @@ final class DumpTranslationsReleaseWorker extends AbstractShopsysReleaseWorker
 
         // has also some modified or added files
         return false;
-    }
-
-    /**
-     * @param string[] $commandLine
-     * @return string
-     */
-    private function getProcessResult(array $commandLine): string
-    {
-        $process = new Process($commandLine);
-        $process->run();
-
-        return trim($process->getOutput());
     }
 
     /**

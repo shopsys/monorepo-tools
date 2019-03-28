@@ -4,18 +4,17 @@ declare(strict_types=1);
 
 namespace Shopsys\Releaser\ReleaseWorker\AfterRelease;
 
-use Shopsys\Releaser\ReleaseWorker\AbstractCheckShopsysInstallReleaseWorker;
+use Shopsys\Releaser\ReleaseWorker\AbstractCheckUncommittedChangesReleaseWorker;
 use Shopsys\Releaser\Stage;
 
-final class CheckShopsysInstallReleaseWorker extends AbstractCheckShopsysInstallReleaseWorker
+final class CheckUncommittedChangesReleaseWorker extends AbstractCheckUncommittedChangesReleaseWorker
 {
     /**
-     * Higher first
      * @return int
      */
     public function getPriority(): int
     {
-        return 130;
+        return 300;
     }
 
     /**

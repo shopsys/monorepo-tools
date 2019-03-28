@@ -33,6 +33,7 @@ final class MergeBranchToMasterReleaseWorker extends AbstractShopsysReleaseWorke
      */
     public function work(Version $version): void
     {
+        $this->symfonyStyle->note('You need to create a merge commit, see https://github.com/shopsys/shopsys/blob/master/docs/contributing/merging-to-master-on-github.md for detailed instructions.');
         $this->confirm('Confirm the release branch was merged to master');
     }
 
