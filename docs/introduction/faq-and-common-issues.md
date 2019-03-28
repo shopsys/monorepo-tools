@@ -73,12 +73,12 @@ This scenario is described in more detail in the tutorial [How to Set Up Domains
 
 ## What are the differences between "listable", "sellable", "offered" and "visible" products?
 Products can be grouped into several groups according to their current status or according to what they are used for.
-These groups are described in more detail in the article [How to Work with Products](./how-to-work-with-products.md).
+These groups are described in more detail in the article [How to Work with Products](../model/how-to-work-with-products.md).
 
 ## How calculated attributes work?
 Some attributes that are used on the Shopsys Framework are not set directly, but their value is automatically calculated based on other attributes.
 For example, if a category of products does not have a name for a locale of the specific domain, this category will be automatically set as not visible on this domain.
-See more about calculated attributes in the article [How to Work with Products](./how-to-work-with-products.md).
+See more about calculated attributes in the article [How to Work with Products](../model/how-to-work-with-products.md).
 
 ## How do I change the environment (PRODUCTION/DEVELOPMENT/TEST)?
 The environment is determined by the existence of the files `PRODUCTION`, `DEVELOPMENT`, `TEST` in the root of your project.
@@ -93,7 +93,7 @@ Yes, there is some prepared configuration for Shopsys Framework cron commands in
 Do not forget to set up a cron on your server to execute [`php phing cron`](/docs/introduction/console-commands-for-application-management-phing-targets.md#cron) every 5 minutes.
 
 ## Why are you using entity data instead of entities for Symfony forms?
-We are using [entity data objects](entities.md#entity-data) instead of [entities](basics-about-model-architecture.md#entity)
+We are using [entity data objects](../model/entities.md#entity-data) instead of [entities](../model/introduction-to-model-architecture.md#entity)
 because Symfony forms need setters for all fields and we don't want to mess entities with them.
 
 ## What is the configuration file `services_test.yml` good for?

@@ -491,7 +491,7 @@ The changelog is generated during the release process using [ChangelogLinker](ht
     - added new phing targets for working with Elasticsearch
     - added CRON module for exporting products' data into Elasticsearch
     - product search uses Elasticsearch
-    - docs: added [article](./docs/introduction/product-search-via-elasticsearch.md) with Elasticsearch overview
+    - docs: added [article](./docs/model/product-search-via-elasticsearch.md) with Elasticsearch overview
 - [#375 ProductFormType should be extensible](https://github.com/shopsys/shopsys/pull/375)
     - `WarningMessageType` is ready to use
     - `DisplayOnlyUrlType` is ready to use

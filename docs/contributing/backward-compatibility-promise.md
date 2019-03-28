@@ -49,7 +49,7 @@ During an upgrade to the next major version, you have to make the changes yourse
 Rules for PHP code are fully covered by [Symfony Backward Compatibility Promise](https://symfony.com/doc/3.4/contributing/code/bc.html).
 
 ### Database Migrations
-A new version may include database migrations if the structure of [the entities](/docs/introduction/entities.md) changed.
+A new version may include database migrations if the structure of [the entities](/docs/model/entities.md) changed.
 
 Migrations in `MINOR` releases are backward-compatible.
 It means they may not change types of existing columns, rename columns and tables, and remove nullability of a column.

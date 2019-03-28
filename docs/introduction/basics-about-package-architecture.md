@@ -2,7 +2,7 @@
 
 ## Introduction
 This article describes the architecture of Shopsys Framework from the viewpoint of packages
-(in a contrast to application layers, about which you can read in the [separate article](./basics-about-model-architecture.md)).
+(in a contrast to application layers, about which you can read in the [separate article](../model/introduction-to-model-architecture.md)).
 After you finish reading the article, you will know
 how to start an implementation, how to perform upgrades of your own project based on Shopsys Framework
 and you will understand what modules are.

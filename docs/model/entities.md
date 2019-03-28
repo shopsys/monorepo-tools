@@ -1,7 +1,7 @@
 # Entities
 
 This article describes how we work with entities and our specialities.
-1. Entity is a class encapsulating data and you can read more what is an entity in the [model architecture article](basics-about-model-architecture.md).
+1. Entity is a class encapsulating data and you can read more what is an entity in the [model architecture article](introduction-to-model-architecture.md).
 1. Entities are created by [factories](#entity-factory).
 1. For domain-specific data we use [domain entities](#domain-entity).
 1. For language-specific data we use [translation entities](#translation-entity).
@@ -56,6 +56,11 @@ That means that you can access domain entity through entity itself and vice vers
 Setting the properties of a domain entity is always done via the main entity itself.
 Basically, that means only the main entity knows about the existence of domain entities.
 The rest of the application uses the main entity as a proxy to the domain-specific properties.
+
+Sometimes you need to find all domain entities programmatically (eg. in [`CreateDomainsDataCommand`](/packages/framework/src/Command/CreateDomainsDataCommand.php)).
+You can use the [`MultidomainEntityClassFinderFacade`](/packages/framework/src/Component/Domain/Multidomain/MultidomainEntityClassFinderFacade.php) which searches for all registered entities that have a composite identifier including a `domainId` field.
+Exceptions (both for including and excluding particular class) can be provided via an implementation of [`MultidomainEntityClassProviderInterface`](/packages/framework/src/Component/Domain/Multidomain/MultidomainEntityClassProviderInterface.php).
+You should provide your own implementation if you need to alter the list of domain entities (otherwise, [`MultidomainEntityClassProvider`](/packages/framework/src/Model/MultidomainEntityClassProvider.php) will be used).
 
 ### Example
 ```php
@@ -391,7 +396,7 @@ If you need to transfer a collection of entities, use PHPDoc annotation `entity[
 To transfer monetary values (*prices, account balances, discount amounts, price limits etc.*) you should always use `\Shopsys\FrameworkBundle\Component\Money\Money` (optionally nullable or as an array).
 You may initialize a default value in the constructor or in the data factory (eg. with `Money::zero()`).
 
-You can read more about the `Money` class in [How to Work with Money](/docs/introduction/how-to-work-with-money.md).
+You can read more about the `Money` class in [How to Work with Money](/docs/model/how-to-work-with-money.md).
 
 #### Images
 

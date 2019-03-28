@@ -18,13 +18,13 @@ An example of a multidomain attribute is a default pricing group for not logged 
 This pricing group can be different for each domain.
 An example of a not multidomain attribute is an EAN on the product.
 This attribute is the same for each domain.
-Please read more about implementation of multidomain attributes in [domain entities](entities.md#domain-entity).
+Please read more about implementation of multidomain attributes in [domain entities](../model/entities.md#domain-entity).
 
 ## Multilanguage attribute
 A distinct value of this attribute can be set for each locale.
 An example of a multilanguage attribute is a name of the product.
 An example of a not multilanguage attribute is an EAN of the product.
-Please read more about implementation of multilanguage attributes in [translation entities](entities.md#translation-entity).
+Please read more about implementation of multilanguage attributes in [translation entities](../model/entities.md#translation-entity).
 
 ## Difference between multidomain and multilanguage attribute
 A value of some multilanguage attribute will be the same for each domain with the same locale.
@@ -33,6 +33,6 @@ While multidomain attribute can be set to different values for different domains
 For example SEO headline of a product can be *A4tech mouse* on first domain and *A4tech mouse for professionals* on second domain.
 
 It might be unclear whether an attribute is multidomain or multilanguage when filling data objects.
-The decision matters because multidomain attributes are indexed by `domain ID` and multilanguage attributes are indexed by `locale` as is described in [data for multidomain or multilanguage fields](entities.md#data-for-multidomain-or-multilanguage-field).  
+The decision matters because multidomain attributes are indexed by `domain ID` and multilanguage attributes are indexed by `locale` as is described in [data for multidomain or multilanguage fields](../model/entities.md#data-for-multidomain-or-multilanguage-field).
 
 If you are not sure, we suggest to take a look into an appropriate entity (whether there is an array of *EntityDomain* or *EntityTranlsation* objects in a given field), form type (whether there is `LocalizedType` or `MultidomainType` used for a given field) or into administration (whether there are locale flags or domain icons for a given field).

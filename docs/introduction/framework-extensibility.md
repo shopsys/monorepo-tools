@@ -16,7 +16,7 @@ as well as a list of customizations that are not (and will not be) possible at a
 * Configuring the smoke tests (see [`RouteConfigCustomization`](/project-base/tests/ShopBundle/Smoke/Http/RouteConfigCustomization.php) class)
     * *Note: This is now achievable as the configuration class is located in the open box project-base.
     However, that makes the upgrading of the component harder so the configuration is planned to be re-worked.*
-* [Implementing custom product feed or modifying an existing one](/docs/introduction/product-feeds.md)
+* [Implementing custom product feed or modifying an existing one](/docs/model/product-feeds.md)
 * [Implementing a basic data import](/docs/cookbook/basic-data-import.md) to import data to you e-shop from an external source
     * adding a new cron module and configuring it
 * [Extending the application using standard Symfony techniques](https://symfony.com/doc/current/bundles/override.html)
@@ -46,7 +46,7 @@ as well as a list of customizations that are not (and will not be) possible at a
 * Removing an attribute from a framework entity
 * Changing a data type of an entity attribute
 * Removing existing entities and features
-* Extending [the `Money` class](/docs/introduction/how-to-work-with-money.md) and closely related classes (eg. `MoneyType`)
+* Extending [the `Money` class](/docs/model/how-to-work-with-money.md) and closely related classes (eg. `MoneyType`)
 
 ## Successfully implemented features
 * [Shipping method with pickup places](https://github.com/shopsys/demoshop/pull/6)
