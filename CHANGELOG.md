@@ -27,6 +27,65 @@ The changelog is generated during the release process using [ChangelogLinker](ht
 
 <!-- changelog-linker -->
 
+## [v7.1.0](https://github.com/shopsys/shopsys/compare/v7.0.0...v7.1.0) - 2019-04-02
+
+### [shopsys/shopsys]
+
+#### Added
+
+- [#887] added documentation about working with forms
+- [#886] added version prefix to redis caches so the application can be safely deployed
+- [#870] new class for representing monetary values PHASE 6
+- [#864] Added grid documentation
+
+#### Fixed
+
+- [#891] fix error in javascript validation of ChoiceType
+- [#901] consistent spelling: behavior, color
+- [#889] feeds: using correct calculatedSellingDenied
+
+#### Changed
+
+- [#868] upgraded UPGRADE.md with experience from upgrading
+- [#876] Update README.md
+- [#892] form types docs tweaks
+- [#808] Redesigned print page of product detail page
+- [#883] remake of model documentation
+- [#903] releaser tweaks
+- [#895] product category filter in advanced search
+
+### [shopsys/coding-standards]
+
+- [#879] marked symplify/better-phpdoc-parser in version >=5.4.14 as conflicting
+- [#848] sniff that forbids Doctrine Inheritance mapping
+
+### [shopsys/framework]
+
+#### Fixed
+
+- [#874] fixed Article::$hidden annotation, Thanks to [@Rixafy]
+- [#905] fix missing service in performance tests of feeds
+- [#881] Firing opening subcategories menu animation only once
+- [#846] cleaning empty Redis cache doesn't cause an error anymore
+
+#### Changed
+
+- [#882] Set adaptive width to selectboxes created by selectize
+
+### shopsys/google-cloud-bundle
+
+#### Changed
+
+- [#878] unified shopsys requirements to dev-master
+
+### [shopsys/project-base]
+
+#### Fixed
+
+- [#902] Performance\CategoryDataFixture: fix maximum count in progress bar
+- [#899] fix EntityExtensionTest when extending entity related to Product
+- [#885] overflow of long e-mail for unique e-mail validation
+
 ## [v7.0.0](https://github.com/shopsys/shopsys/compare/v7.0.0-beta6...v7.0.0) - 2019-02-27
 
 ### [shopsys/framework]
@@ -2145,3 +2204,33 @@ That's why is this section formatted differently.
 [#821]: https://github.com/shopsys/shopsys/pull/821
 [#817]: https://github.com/shopsys/shopsys/pull/817
 [@pejaycz]: https://github.com/pejaycz
+
+[#905]: https://github.com/shopsys/shopsys/pull/905
+[#903]: https://github.com/shopsys/shopsys/pull/903
+[#902]: https://github.com/shopsys/shopsys/pull/902
+[#901]: https://github.com/shopsys/shopsys/pull/901
+[#899]: https://github.com/shopsys/shopsys/pull/899
+[#895]: https://github.com/shopsys/shopsys/pull/895
+[#892]: https://github.com/shopsys/shopsys/pull/892
+[#891]: https://github.com/shopsys/shopsys/pull/891
+[#889]: https://github.com/shopsys/shopsys/pull/889
+[#887]: https://github.com/shopsys/shopsys/pull/887
+[#886]: https://github.com/shopsys/shopsys/pull/886
+[#885]: https://github.com/shopsys/shopsys/pull/885
+[#883]: https://github.com/shopsys/shopsys/pull/883
+[#882]: https://github.com/shopsys/shopsys/pull/882
+[#881]: https://github.com/shopsys/shopsys/pull/881
+[#879]: https://github.com/shopsys/shopsys/pull/879
+[#878]: https://github.com/shopsys/shopsys/pull/878
+[#877]: https://github.com/shopsys/shopsys/pull/877
+[#876]: https://github.com/shopsys/shopsys/pull/876
+[#875]: https://github.com/shopsys/shopsys/pull/875
+[#874]: https://github.com/shopsys/shopsys/pull/874
+[#873]: https://github.com/shopsys/shopsys/pull/873
+[#870]: https://github.com/shopsys/shopsys/pull/870
+[#868]: https://github.com/shopsys/shopsys/pull/868
+[#864]: https://github.com/shopsys/shopsys/pull/864
+[#848]: https://github.com/shopsys/shopsys/pull/848
+[#846]: https://github.com/shopsys/shopsys/pull/846
+[#808]: https://github.com/shopsys/shopsys/pull/808
+[@Rixafy]: https://github.com/Rixafy
