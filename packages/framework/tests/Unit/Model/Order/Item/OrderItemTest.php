@@ -6,6 +6,7 @@ namespace Tests\FrameworkBundle\Unit\Model\Order\Item;
 
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
+use Shopsys\FrameworkBundle\Component\EntityExtension\EntityNameResolver;
 use Shopsys\FrameworkBundle\Component\Money\Money;
 use Shopsys\FrameworkBundle\Model\Order\Item\Exception\MainVariantCannotBeOrderedException;
 use Shopsys\FrameworkBundle\Model\Order\Item\Exception\WrongItemTypeException;
@@ -146,8 +147,8 @@ class OrderItemTest extends TestCase
 
     public function testConstructWithMainVariantThrowsException()
     {
-        $variant = Product::create(new ProductData(), new ProductCategoryDomainFactory());
-        $mainVariant = Product::createMainVariant(new ProductData(), new ProductCategoryDomainFactory(), [$variant]);
+        $variant = Product::create(new ProductData(), new ProductCategoryDomainFactory(new EntityNameResolver([])));
+        $mainVariant = Product::createMainVariant(new ProductData(), new ProductCategoryDomainFactory(new EntityNameResolver([])), [$variant]);
 
         $this->expectException(MainVariantCannotBeOrderedException::class);
 

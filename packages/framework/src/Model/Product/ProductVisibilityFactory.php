@@ -2,10 +2,24 @@
 
 namespace Shopsys\FrameworkBundle\Model\Product;
 
+use Shopsys\FrameworkBundle\Component\EntityExtension\EntityNameResolver;
 use Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroup;
 
 class ProductVisibilityFactory implements ProductVisibilityFactoryInterface
 {
+    /**
+     * @var \Shopsys\FrameworkBundle\Component\EntityExtension\EntityNameResolver
+     */
+    protected $entityNameResolver;
+
+    /**
+     * @param \Shopsys\FrameworkBundle\Component\EntityExtension\EntityNameResolver $entityNameResolver
+     */
+    public function __construct(EntityNameResolver $entityNameResolver)
+    {
+        $this->entityNameResolver = $entityNameResolver;
+    }
+
     /**
      * @param \Shopsys\FrameworkBundle\Model\Product\Product $product
      * @param \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroup $pricingGroup
@@ -17,6 +31,8 @@ class ProductVisibilityFactory implements ProductVisibilityFactoryInterface
         PricingGroup $pricingGroup,
         int $domainId
     ): ProductVisibility {
-        return new ProductVisibility($product, $pricingGroup, $domainId);
+        $classData = $this->entityNameResolver->resolve(ProductVisibility::class);
+
+        return new $classData($product, $pricingGroup, $domainId);
     }
 }

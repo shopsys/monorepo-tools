@@ -5,6 +5,7 @@ namespace Tests\FrameworkBundle\Unit\Component\Router\FriendlyUrl;
 use PHPUnit\Framework\TestCase;
 use Shopsys\FrameworkBundle\Component\Domain\Config\DomainConfig;
 use Shopsys\FrameworkBundle\Component\Domain\Domain;
+use Shopsys\FrameworkBundle\Component\EntityExtension\EntityNameResolver;
 use Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\FriendlyUrl;
 use Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\FriendlyUrlFactory;
 use Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\FriendlyUrlUniqueResultFactory;
@@ -20,7 +21,7 @@ class FriendlyUrlUniqueResultFactoryTest extends TestCase
         $settingMock = $this->createMock(Setting::class);
         $domain = new Domain($domainConfigs, $settingMock);
 
-        $friendlyUrlUniqueResultFactory = new FriendlyUrlUniqueResultFactory(new FriendlyUrlFactory($domain));
+        $friendlyUrlUniqueResultFactory = new FriendlyUrlUniqueResultFactory(new FriendlyUrlFactory($domain, new EntityNameResolver([])));
 
         $attempt = 1;
         $friendlyUrl = new FriendlyUrl('route_name', 7, 1, 'name');
@@ -44,7 +45,7 @@ class FriendlyUrlUniqueResultFactoryTest extends TestCase
         $settingMock = $this->createMock(Setting::class);
         $domain = new Domain($domainConfigs, $settingMock);
 
-        $friendlyUrlUniqueResultFactory = new FriendlyUrlUniqueResultFactory(new FriendlyUrlFactory($domain));
+        $friendlyUrlUniqueResultFactory = new FriendlyUrlUniqueResultFactory(new FriendlyUrlFactory($domain, new EntityNameResolver([])));
 
         $attempt = 1;
         $friendlyUrl = new FriendlyUrl('route_name', 7, 1, 'name');
@@ -71,7 +72,7 @@ class FriendlyUrlUniqueResultFactoryTest extends TestCase
         $settingMock = $this->createMock(Setting::class);
         $domain = new Domain($domainConfigs, $settingMock);
 
-        $friendlyUrlUniqueResultFactory = new FriendlyUrlUniqueResultFactory(new FriendlyUrlFactory($domain));
+        $friendlyUrlUniqueResultFactory = new FriendlyUrlUniqueResultFactory(new FriendlyUrlFactory($domain, new EntityNameResolver([])));
 
         $attempt = 3;
         $friendlyUrl = new FriendlyUrl('route_name', 7, 1, 'name');

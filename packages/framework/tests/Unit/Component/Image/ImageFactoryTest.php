@@ -7,6 +7,7 @@ namespace Tests\FrameworkBundle\Unit\Component\Image;
 use League\Flysystem\FilesystemInterface;
 use League\Flysystem\MountManager;
 use PHPUnit\Framework\TestCase;
+use Shopsys\FrameworkBundle\Component\EntityExtension\EntityNameResolver;
 use Shopsys\FrameworkBundle\Component\FileUpload\FileNamingConvention;
 use Shopsys\FrameworkBundle\Component\FileUpload\FileUpload;
 use Shopsys\FrameworkBundle\Component\Image\Config\ImageEntityConfig;
@@ -25,7 +26,7 @@ class ImageFactoryTest extends TestCase
             ->disableOriginalConstructor()
             ->getMock();
 
-        $imageFactory = new ImageFactory($imageProcessorMock, $this->getFileUpload());
+        $imageFactory = new ImageFactory($imageProcessorMock, $this->getFileUpload(), new EntityNameResolver([]));
 
         $this->expectException(\Shopsys\FrameworkBundle\Component\Image\Exception\EntityMultipleImageException::class);
         $imageFactory->createMultiple($imageEntityConfig, 1, 'type', []);
@@ -45,7 +46,7 @@ class ImageFactoryTest extends TestCase
                 return pathinfo($filepath, PATHINFO_BASENAME);
             });
 
-        $imageFactory = new ImageFactory($imageProcessorMock, $this->getFileUpload());
+        $imageFactory = new ImageFactory($imageProcessorMock, $this->getFileUpload(), new EntityNameResolver([]));
         $images = $imageFactory->createMultiple($imageEntityConfig, 1, 'type', $filenames);
 
         $this->assertCount(2, $images);
@@ -68,7 +69,7 @@ class ImageFactoryTest extends TestCase
             ->getMock();
         $imageProcessorMock->expects($this->any())->method('convertToShopFormatAndGetNewFilename')->willReturn($filename);
 
-        $imageFactory = new ImageFactory($imageProcessorMock, $this->getFileUpload());
+        $imageFactory = new ImageFactory($imageProcessorMock, $this->getFileUpload(), new EntityNameResolver([]));
         $image = $imageFactory->create($imageEntityConfig->getEntityName(), 1, 'type', $filename);
         $temporaryFiles = $image->getTemporaryFilesForUpload();
 

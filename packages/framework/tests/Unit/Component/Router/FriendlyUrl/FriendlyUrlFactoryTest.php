@@ -7,6 +7,7 @@ namespace Tests\FrameworkBundle\Unit\Component\Router\FriendlyUrl;
 use PHPUnit\Framework\TestCase;
 use Shopsys\FrameworkBundle\Component\Domain\Config\DomainConfig;
 use Shopsys\FrameworkBundle\Component\Domain\Domain;
+use Shopsys\FrameworkBundle\Component\EntityExtension\EntityNameResolver;
 use Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\FriendlyUrlFactory;
 use Shopsys\FrameworkBundle\Component\Setting\Setting;
 
@@ -21,7 +22,7 @@ class FriendlyUrlFactoryTest extends TestCase
         $settingMock = $this->createMock(Setting::class);
         $domain = new Domain($domainConfigs, $settingMock);
 
-        $friendlyUrlFactory = new FriendlyUrlFactory($domain);
+        $friendlyUrlFactory = new FriendlyUrlFactory($domain, new EntityNameResolver([]));
 
         $routeName = 'route_name';
         $entityId = 7;

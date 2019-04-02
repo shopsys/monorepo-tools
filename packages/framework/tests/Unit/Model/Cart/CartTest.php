@@ -3,6 +3,7 @@
 namespace Tests\FrameworkBundle\Unit\Model\Cart;
 
 use PHPUnit\Framework\TestCase;
+use Shopsys\FrameworkBundle\Component\EntityExtension\EntityNameResolver;
 use Shopsys\FrameworkBundle\Component\Money\Money;
 use Shopsys\FrameworkBundle\Model\Cart\Cart;
 use Shopsys\FrameworkBundle\Model\Cart\Item\CartItem;
@@ -34,12 +35,12 @@ class CartTest extends TestCase
         $productData1 = new ProductData();
         $productData1->name = ['cs' => 'Product 1'];
         $productData1->vat = $vat;
-        $product1 = Product::create($productData1, new ProductCategoryDomainFactory());
+        $product1 = Product::create($productData1, new ProductCategoryDomainFactory(new EntityNameResolver([])));
 
         $productData2 = new ProductData();
         $productData2->name = ['cs' => 'Product 2'];
         $productData2->vat = $vat;
-        $product2 = Product::create($productData2, new ProductCategoryDomainFactory());
+        $product2 = Product::create($productData2, new ProductCategoryDomainFactory(new EntityNameResolver([])));
 
         $cart = new Cart($customerIdentifier->getCartIdentifier());
 
@@ -72,7 +73,7 @@ class CartTest extends TestCase
         $productData = new ProductData();
         $productData->name = ['cs' => 'Product 1'];
         $productData->vat = $vat;
-        $product = Product::create($productData, new ProductCategoryDomainFactory());
+        $product = Product::create($productData, new ProductCategoryDomainFactory(new EntityNameResolver([])));
 
         $cart = new Cart($customerIdentifier->getCartIdentifier());
 
@@ -93,12 +94,12 @@ class CartTest extends TestCase
         $productData1 = new ProductData();
         $productData1->name = ['cs' => 'Product 1'];
         $productData1->vat = $vat;
-        $product1 = Product::create($productData1, new ProductCategoryDomainFactory());
+        $product1 = Product::create($productData1, new ProductCategoryDomainFactory(new EntityNameResolver([])));
 
         $productData2 = new ProductData();
         $productData2->name = ['cs' => 'Product 2'];
         $productData2->vat = $vat;
-        $product2 = Product::create($productData2, new ProductCategoryDomainFactory());
+        $product2 = Product::create($productData2, new ProductCategoryDomainFactory(new EntityNameResolver([])));
 
         $cart = new Cart($customerIdentifier->getCartIdentifier());
 

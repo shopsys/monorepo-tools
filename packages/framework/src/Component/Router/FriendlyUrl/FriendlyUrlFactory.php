@@ -3,10 +3,16 @@
 namespace Shopsys\FrameworkBundle\Component\Router\FriendlyUrl;
 
 use Shopsys\FrameworkBundle\Component\Domain\Domain;
+use Shopsys\FrameworkBundle\Component\EntityExtension\EntityNameResolver;
 use Shopsys\FrameworkBundle\Component\String\TransformString;
 
 class FriendlyUrlFactory implements FriendlyUrlFactoryInterface
 {
+    /**
+     * @var \Shopsys\FrameworkBundle\Component\EntityExtension\EntityNameResolver
+     */
+    protected $entityNameResolver;
+
     /**
      * @var \Shopsys\FrameworkBundle\Component\Domain\Domain
      */
@@ -14,10 +20,14 @@ class FriendlyUrlFactory implements FriendlyUrlFactoryInterface
 
     /**
      * @param \Shopsys\FrameworkBundle\Component\Domain\Domain $domain
+     * @param \Shopsys\FrameworkBundle\Component\EntityExtension\EntityNameResolver $entityNameResolver
      */
-    public function __construct(Domain $domain)
-    {
+    public function __construct(
+        Domain $domain,
+        EntityNameResolver $entityNameResolver
+    ) {
         $this->domain = $domain;
+        $this->entityNameResolver = $entityNameResolver;
     }
 
     /**
@@ -33,7 +43,9 @@ class FriendlyUrlFactory implements FriendlyUrlFactoryInterface
         int $domainId,
         string $slug
     ): FriendlyUrl {
-        return new FriendlyUrl($routeName, $entityId, $domainId, $slug);
+        $classData = $this->entityNameResolver->resolve(FriendlyUrl::class);
+
+        return new $classData($routeName, $entityId, $domainId, $slug);
     }
 
     /**

@@ -3,6 +3,7 @@
 namespace Tests\ShopBundle\Functional\Model\Cart;
 
 use ReflectionClass;
+use Shopsys\FrameworkBundle\Component\EntityExtension\EntityNameResolver;
 use Shopsys\FrameworkBundle\Component\Money\Money;
 use Shopsys\FrameworkBundle\Model\Cart\Cart;
 use Shopsys\FrameworkBundle\Model\Cart\Item\CartItem;
@@ -41,8 +42,8 @@ class CartTest extends TransactionFunctionalTestCase
         $productData->vat = $vat;
         $productData->availability = $availability;
         $productData->unit = $this->getReference(UnitDataFixture::UNIT_PIECES);
-        $product1 = Product::create($productData, new ProductCategoryDomainFactory());
-        $product2 = Product::create($productData, new ProductCategoryDomainFactory());
+        $product1 = Product::create($productData, new ProductCategoryDomainFactory(new EntityNameResolver([])));
+        $product2 = Product::create($productData, new ProductCategoryDomainFactory(new EntityNameResolver([])));
 
         $cart = new Cart($customerIdentifier->getCartIdentifier());
 
@@ -139,7 +140,7 @@ class CartTest extends TransactionFunctionalTestCase
         $productData->name = ['cs' => 'Any name'];
         $productData->price = $price;
         $productData->vat = $vat;
-        $product = Product::create($productData, new ProductCategoryDomainFactory());
+        $product = Product::create($productData, new ProductCategoryDomainFactory(new EntityNameResolver([])));
 
         return $product;
     }

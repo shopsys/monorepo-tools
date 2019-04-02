@@ -2,6 +2,7 @@
 
 namespace Shopsys\FrameworkBundle\Component\Image;
 
+use Shopsys\FrameworkBundle\Component\EntityExtension\EntityNameResolver;
 use Shopsys\FrameworkBundle\Component\FileUpload\FileUpload;
 use Shopsys\FrameworkBundle\Component\Image\Config\ImageEntityConfig;
 use Shopsys\FrameworkBundle\Component\Image\Processing\ImageProcessor;
@@ -19,13 +20,23 @@ class ImageFactory implements ImageFactoryInterface
     protected $fileUpload;
 
     /**
+     * @var \Shopsys\FrameworkBundle\Component\EntityExtension\EntityNameResolver
+     */
+    protected $entityNameResolver;
+
+    /**
      * @param \Shopsys\FrameworkBundle\Component\Image\Processing\ImageProcessor $imageProcessor
      * @param \Shopsys\FrameworkBundle\Component\FileUpload\FileUpload $fileUpload
+     * @param \Shopsys\FrameworkBundle\Component\EntityExtension\EntityNameResolver $entityNameResolver
      */
-    public function __construct(ImageProcessor $imageProcessor, FileUpload $fileUpload)
-    {
+    public function __construct(
+        ImageProcessor $imageProcessor,
+        FileUpload $fileUpload,
+        EntityNameResolver $entityNameResolver
+    ) {
         $this->imageProcessor = $imageProcessor;
         $this->fileUpload = $fileUpload;
+        $this->entityNameResolver = $entityNameResolver;
     }
 
     /**
@@ -44,7 +55,9 @@ class ImageFactory implements ImageFactoryInterface
         $temporaryFilePath = $this->fileUpload->getTemporaryFilepath($temporaryFilename);
         $convertedFilePath = $this->imageProcessor->convertToShopFormatAndGetNewFilename($temporaryFilePath);
 
-        return new Image($entityName, $entityId, $type, $convertedFilePath);
+        $classData = $this->entityNameResolver->resolve(Image::class);
+
+        return new $classData($entityName, $entityId, $type, $convertedFilePath);
     }
 
     /**

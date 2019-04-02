@@ -2,8 +2,23 @@
 
 namespace Shopsys\FrameworkBundle\Component\DataFixture;
 
+use Shopsys\FrameworkBundle\Component\EntityExtension\EntityNameResolver;
+
 class PersistentReferenceFactory implements PersistentReferenceFactoryInterface
 {
+    /**
+     * @var \Shopsys\FrameworkBundle\Component\EntityExtension\EntityNameResolver
+     */
+    protected $entityNameResolver;
+
+    /**
+     * @param \Shopsys\FrameworkBundle\Component\EntityExtension\EntityNameResolver $entityNameResolver
+     */
+    public function __construct(EntityNameResolver $entityNameResolver)
+    {
+        $this->entityNameResolver = $entityNameResolver;
+    }
+
     /**
      * @param string $referenceName
      * @param string $entityName
@@ -15,6 +30,8 @@ class PersistentReferenceFactory implements PersistentReferenceFactoryInterface
         string $entityName,
         int $entityId
     ): PersistentReference {
-        return new PersistentReference($referenceName, $entityName, $entityId);
+        $classData = $this->entityNameResolver->resolve(PersistentReference::class);
+
+        return new $classData($referenceName, $entityName, $entityId);
     }
 }

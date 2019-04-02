@@ -3,6 +3,7 @@
 namespace Tests\FrameworkBundle\Unit\Model\Product\Pricing;
 
 use PHPUnit\Framework\TestCase;
+use Shopsys\FrameworkBundle\Component\EntityExtension\EntityNameResolver;
 use Shopsys\FrameworkBundle\Component\Money\Money;
 use Shopsys\FrameworkBundle\Model\Pricing\BasePriceCalculation;
 use Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroup;
@@ -76,8 +77,8 @@ class ProductPriceCalculationTest extends TestCase
         $pricingGroupData->name = 'name';
         $pricingGroup = new PricingGroup($pricingGroupData, 1);
 
-        $variant = Product::create(new ProductData(), new ProductCategoryDomainFactory());
-        $product = Product::createMainVariant(new ProductData(), new ProductCategoryDomainFactory(), [$variant]);
+        $variant = Product::create(new ProductData(), new ProductCategoryDomainFactory(new EntityNameResolver([])));
+        $product = Product::createMainVariant(new ProductData(), new ProductCategoryDomainFactory(new EntityNameResolver([])), [$variant]);
 
         $this->expectException(\Shopsys\FrameworkBundle\Model\Product\Pricing\Exception\MainVariantPriceCalculationException::class);
 

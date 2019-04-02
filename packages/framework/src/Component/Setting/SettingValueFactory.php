@@ -2,8 +2,23 @@
 
 namespace Shopsys\FrameworkBundle\Component\Setting;
 
+use Shopsys\FrameworkBundle\Component\EntityExtension\EntityNameResolver;
+
 class SettingValueFactory implements SettingValueFactoryInterface
 {
+    /**
+     * @var \Shopsys\FrameworkBundle\Component\EntityExtension\EntityNameResolver
+     */
+    protected $entityNameResolver;
+
+    /**
+     * @param \Shopsys\FrameworkBundle\Component\EntityExtension\EntityNameResolver $entityNameResolver
+     */
+    public function __construct(EntityNameResolver $entityNameResolver)
+    {
+        $this->entityNameResolver = $entityNameResolver;
+    }
+
     /**
      * @param string $name
      * @param \DateTime|string|int|float|bool|null $value
@@ -15,6 +30,8 @@ class SettingValueFactory implements SettingValueFactoryInterface
         $value,
         int $domainId
     ): SettingValue {
-        return new SettingValue($name, $value, $domainId);
+        $classData = $this->entityNameResolver->resolve(SettingValue::class);
+
+        return new $classData($name, $value, $domainId);
     }
 }

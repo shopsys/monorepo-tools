@@ -2,6 +2,7 @@
 
 namespace Tests\ShopBundle\Functional\Model\Pricing;
 
+use Shopsys\FrameworkBundle\Component\EntityExtension\EntityNameResolver;
 use Shopsys\FrameworkBundle\Component\Money\Money;
 use Shopsys\FrameworkBundle\Component\Setting\Setting;
 use Shopsys\FrameworkBundle\Model\Pricing\BasePriceCalculation;
@@ -45,7 +46,7 @@ class ProductManualInputPriceTest extends TransactionFunctionalTestCase
         $productData = $producDataFactory->create();
         $productData->vat = $vat;
         $productData->unit = $this->getReference(UnitDataFixture::UNIT_PIECES);
-        $product = Product::create($productData, new ProductCategoryDomainFactory());
+        $product = Product::create($productData, new ProductCategoryDomainFactory(new EntityNameResolver([])));
 
         $productManualInputPrice = new ProductManualInputPrice($product, $pricingGroup, Money::create(1000));
         $inputPriceType = $pricingSetting->getInputPriceType();
@@ -79,7 +80,7 @@ class ProductManualInputPriceTest extends TransactionFunctionalTestCase
         $productData = $productDataFactory->create();
         $productData->vat = $vat;
         $productData->unit = $this->getReference(UnitDataFixture::UNIT_PIECES);
-        $product = Product::create($productData, new ProductCategoryDomainFactory());
+        $product = Product::create($productData, new ProductCategoryDomainFactory(new EntityNameResolver([])));
 
         $productManualInputPrice = new ProductManualInputPrice($product, $pricingGroup, Money::create(1000));
 

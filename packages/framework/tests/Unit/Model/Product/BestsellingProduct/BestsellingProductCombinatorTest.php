@@ -3,6 +3,7 @@
 namespace Tests\FrameworkBundle\Unit\Model\Product\BestsellingProduct;
 
 use PHPUnit\Framework\TestCase;
+use Shopsys\FrameworkBundle\Component\EntityExtension\EntityNameResolver;
 use Shopsys\FrameworkBundle\Model\Pricing\Vat\Vat;
 use Shopsys\FrameworkBundle\Model\Pricing\Vat\VatData;
 use Shopsys\FrameworkBundle\Model\Product\BestsellingProduct\BestsellingProductCombinator;
@@ -25,11 +26,11 @@ class BestsellingProductCombinatorTest extends TestCase
         $productData = new ProductData();
         $productData->name = ['cs' => 'Product 1'];
         $productData->vat = $vat;
-        $product1 = Product::create($productData, new ProductCategoryDomainFactory());
-        $product2 = Product::create($productData, new ProductCategoryDomainFactory());
-        $product3 = Product::create($productData, new ProductCategoryDomainFactory());
-        $product4 = Product::create($productData, new ProductCategoryDomainFactory());
-        $product5 = Product::create($productData, new ProductCategoryDomainFactory());
+        $product1 = Product::create($productData, new ProductCategoryDomainFactory(new EntityNameResolver([])));
+        $product2 = Product::create($productData, new ProductCategoryDomainFactory(new EntityNameResolver([])));
+        $product3 = Product::create($productData, new ProductCategoryDomainFactory(new EntityNameResolver([])));
+        $product4 = Product::create($productData, new ProductCategoryDomainFactory(new EntityNameResolver([])));
+        $product5 = Product::create($productData, new ProductCategoryDomainFactory(new EntityNameResolver([])));
 
         $manualProductsIndexedByPosition = [
             0 => $product1,

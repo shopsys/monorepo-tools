@@ -8,6 +8,7 @@ use Shopsys\FrameworkBundle\Component\DataFixture\PersistentReference;
 use Shopsys\FrameworkBundle\Component\DataFixture\PersistentReferenceFacade;
 use Shopsys\FrameworkBundle\Component\DataFixture\PersistentReferenceFactory;
 use Shopsys\FrameworkBundle\Component\DataFixture\PersistentReferenceRepository;
+use Shopsys\FrameworkBundle\Component\EntityExtension\EntityNameResolver;
 use Shopsys\FrameworkBundle\Model\Product\Product;
 use stdClass;
 
@@ -31,7 +32,7 @@ class PersistentReferenceFacadeTest extends TestCase
         $persistentReferenceFacade = new PersistentReferenceFacade(
             $emMock,
             $persistentReferenceRepositoryMock,
-            new PersistentReferenceFactory()
+            new PersistentReferenceFactory(new EntityNameResolver([]))
         );
         $this->expectException(\Shopsys\FrameworkBundle\Component\DataFixture\Exception\MethodGetIdDoesNotExistException::class);
         $persistentReferenceFacade->persistReference('referenceName', new stdClass());
@@ -64,7 +65,7 @@ class PersistentReferenceFacadeTest extends TestCase
         $persistentReferenceFacade = new PersistentReferenceFacade(
             $emMock,
             $persistentReferenceRepositoryMock,
-            new PersistentReferenceFactory()
+            new PersistentReferenceFactory(new EntityNameResolver([]))
         );
         $persistentReferenceFacade->persistReference('newReferenceName', $productMock);
     }
@@ -92,7 +93,7 @@ class PersistentReferenceFacadeTest extends TestCase
         $persistentReferenceFacade = new PersistentReferenceFacade(
             $emMock,
             $persistentReferenceRepositoryMock,
-            new PersistentReferenceFactory()
+            new PersistentReferenceFactory(new EntityNameResolver([]))
         );
 
         $this->assertSame($expectedObject, $persistentReferenceFacade->getReference('referenceName'));
@@ -120,7 +121,7 @@ class PersistentReferenceFacadeTest extends TestCase
         $persistentReferenceFacade = new PersistentReferenceFacade(
             $emMock,
             $persistentReferenceRepositoryMock,
-            new PersistentReferenceFactory()
+            new PersistentReferenceFactory(new EntityNameResolver([]))
         );
 
         $this->expectException(\Shopsys\FrameworkBundle\Component\DataFixture\Exception\EntityNotFoundException::class);

@@ -2,6 +2,7 @@
 
 namespace Shopsys\FrameworkBundle\Component\UploadedFile;
 
+use Shopsys\FrameworkBundle\Component\EntityExtension\EntityNameResolver;
 use Shopsys\FrameworkBundle\Component\FileUpload\FileUpload;
 
 class UploadedFileFactory implements UploadedFileFactoryInterface
@@ -12,11 +13,20 @@ class UploadedFileFactory implements UploadedFileFactoryInterface
     protected $fileUpload;
 
     /**
-     * @param \Shopsys\FrameworkBundle\Component\FileUpload\FileUpload $fileUpload
+     * @var \Shopsys\FrameworkBundle\Component\EntityExtension\EntityNameResolver
      */
-    public function __construct(FileUpload $fileUpload)
-    {
+    protected $entityNameResolver;
+
+    /**
+     * @param \Shopsys\FrameworkBundle\Component\FileUpload\FileUpload $fileUpload
+     * @param \Shopsys\FrameworkBundle\Component\EntityExtension\EntityNameResolver $entityNameResolver
+     */
+    public function __construct(
+        FileUpload $fileUpload,
+        EntityNameResolver $entityNameResolver
+    ) {
         $this->fileUpload = $fileUpload;
+        $this->entityNameResolver = $entityNameResolver;
     }
 
     /**
@@ -32,6 +42,8 @@ class UploadedFileFactory implements UploadedFileFactoryInterface
     ): UploadedFile {
         $temporaryFilepath = $this->fileUpload->getTemporaryFilepath(array_pop($temporaryFilenames));
 
-        return new UploadedFile($entityName, $entityId, pathinfo($temporaryFilepath, PATHINFO_BASENAME));
+        $classData = $this->entityNameResolver->resolve(UploadedFile::class);
+
+        return new $classData($entityName, $entityId, pathinfo($temporaryFilepath, PATHINFO_BASENAME));
     }
 }

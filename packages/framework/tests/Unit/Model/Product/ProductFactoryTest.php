@@ -24,14 +24,14 @@ class ProductFactoryTest extends TestCase
      */
     protected function setUp()
     {
-        $this->productFactory = new ProductFactory(new EntityNameResolver([]), $this->getProductAvailabilityCalculationMock(), new ProductCategoryDomainFactory());
+        $this->productFactory = new ProductFactory(new EntityNameResolver([]), $this->getProductAvailabilityCalculationMock(), new ProductCategoryDomainFactory(new EntityNameResolver([])));
         parent::setUp();
     }
 
     public function testCreateVariant()
     {
         $mainVariantData = new ProductData();
-        $mainProduct = Product::create(new ProductData(), new ProductCategoryDomainFactory());
+        $mainProduct = Product::create(new ProductData(), new ProductCategoryDomainFactory(new EntityNameResolver([])));
         $variants = [];
 
         $mainVariant = $this->productFactory->createMainVariant($mainVariantData, $mainProduct, $variants);

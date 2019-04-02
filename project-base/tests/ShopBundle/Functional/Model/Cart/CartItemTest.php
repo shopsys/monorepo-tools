@@ -2,6 +2,7 @@
 
 namespace Tests\ShopBundle\Functional\Model\Cart;
 
+use Shopsys\FrameworkBundle\Component\EntityExtension\EntityNameResolver;
 use Shopsys\FrameworkBundle\Component\Money\Money;
 use Shopsys\FrameworkBundle\Model\Cart\Cart;
 use Shopsys\FrameworkBundle\Model\Cart\Item\CartItem;
@@ -39,8 +40,8 @@ class CartItemTest extends TransactionFunctionalTestCase
         $productData->availability = $availability;
         $productData->unit = $this->getReference(UnitDataFixture::UNIT_PIECES);
 
-        $product1 = Product::create($productData, new ProductCategoryDomainFactory());
-        $product2 = Product::create($productData, new ProductCategoryDomainFactory());
+        $product1 = Product::create($productData, new ProductCategoryDomainFactory(new EntityNameResolver([])));
+        $product2 = Product::create($productData, new ProductCategoryDomainFactory(new EntityNameResolver([])));
         $em->persist($vat);
         $em->persist($availability);
         $em->persist($product1);
