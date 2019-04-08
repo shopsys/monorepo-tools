@@ -21,7 +21,7 @@ If you want to change the adapter used for Filesystem you must implement factory
 
 #### How to change storage adapter for WYSIWYG
 WYSIWYG configuration is stored in `app/config/packages/fm_elfinder.yml` file in `fm_elfinder\instances\default\connector\roots` section.
-For more information how to set up Flysystem with WYSIWYG visit [FMElfinderBundle Documentation](https://github.com/helios-ag/FMElfinderBundle/blob/master/Resources/doc/flysystem.md).
+For more information how to set up Flysystem with WYSIWYG visit [FMElfinderBundle Documentation](https://github.com/helios-ag/FMElfinderBundle/blob/8.0/Resources/doc/flysystem.md).
 
 #### Create Nginx proxy to load files from different storage
 If you changed the file storage, you have to change also loading of these files to be accessible from the frontend of your application.
