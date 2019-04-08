@@ -9,19 +9,17 @@ fm_elfinder:
                 roots:
                     local:
                         driver: Flysystem
-                        path: '%shopsys.filemanager_upload_web_dir%'
+                        path: 'web/%shopsys.filemanager_upload_web_dir%'
                         flysystem:
-                            type: local
-                            options:
-                                local:
-                                    path: '%shopsys.web_dir%'
+                            enabled: true
+                            filesystem: 'main_filesystem'
                         upload_allow: ['image/png', 'image/jpg', 'image/jpeg']
-                        tmb_path: '%shopsys.filemanager_upload_web_dir%/_thumbnails'
+                        tmb_path: 'web/%shopsys.filemanager_upload_web_dir%/_thumbnails'
                         url: '%shopsys.filemanager_upload_web_dir%'
                         tmb_url: '%shopsys.filemanager_upload_web_dir%/_thumbnails'
                         attributes:
                             thumbnails:
-                                pattern: '/^\/content\/wysiwyg\/_thumbnails$/'
+                                pattern: '/^\/web\/content\/wysiwyg\/_thumbnails$/'
                                 hidden: true
                         disabled_commands:
                             - 'archive'
