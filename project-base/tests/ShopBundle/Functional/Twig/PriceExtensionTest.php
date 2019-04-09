@@ -124,7 +124,6 @@ class PriceExtensionTest extends FunctionalTestCase
     }
 
     /**
-     * @dataProvider priceFilterDataProvider
      * @param mixed $input
      * @param mixed $domainId
      * @param mixed $result
