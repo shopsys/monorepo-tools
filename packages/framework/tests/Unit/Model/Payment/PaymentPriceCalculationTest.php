@@ -85,10 +85,10 @@ class PaymentPriceCalculationTest extends TestCase
             ->getMock();
         $pricingSettingMock
             ->expects($this->any())->method('getInputPriceType')
-                ->will($this->returnValue($inputPriceType));
+                ->willReturn($inputPriceType);
         $pricingSettingMock
             ->expects($this->any())->method('getRoundingType')
-                ->will($this->returnValue(PricingSetting::ROUNDING_TYPE_INTEGER));
+                ->willReturn(PricingSetting::ROUNDING_TYPE_INTEGER);
 
         $rounding = new Rounding($pricingSettingMock);
 
@@ -139,13 +139,13 @@ class PaymentPriceCalculationTest extends TestCase
             ->getMock();
         $pricingSettingMock
             ->expects($this->any())->method('getInputPriceType')
-                ->will($this->returnValue($inputPriceType));
+                ->willReturn($inputPriceType);
         $pricingSettingMock
             ->expects($this->any())->method('getRoundingType')
-                ->will($this->returnValue(PricingSetting::ROUNDING_TYPE_INTEGER));
+                ->willReturn(PricingSetting::ROUNDING_TYPE_INTEGER);
         $pricingSettingMock
             ->expects($this->any())->method('getFreeTransportAndPaymentPriceLimit')
-                ->will($this->returnValue($priceLimit));
+                ->willReturn($priceLimit);
 
         $rounding = new Rounding($pricingSettingMock);
 

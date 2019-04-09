@@ -237,7 +237,7 @@ class GridTest extends TestCase
             ->getMockForAbstractClass();
         $dataSourceMock->expects($this->never())->method('getTotalRowsCount');
         $dataSourceMock->expects($this->once())->method('getPaginatedRows')
-            ->will($this->returnValue(new PaginationResult(1, 1, 0, [])));
+            ->willReturn(new PaginationResult(1, 1, 0, []));
 
         $grid = new Grid(
             'gridId',
@@ -264,9 +264,9 @@ class GridTest extends TestCase
         $dataSourceMock = $this->getMockBuilder(DataSourceInterface::class)
             ->setMethods(['getTotalRowsCount', 'getPaginatedRows'])
             ->getMockForAbstractClass();
-        $dataSourceMock->expects($this->once())->method('getTotalRowsCount')->will($this->returnValue(0));
+        $dataSourceMock->expects($this->once())->method('getTotalRowsCount')->willReturn(0);
         $dataSourceMock->expects($this->once())->method('getPaginatedRows')
-            ->will($this->returnValue(new PaginationResult(1, 1, 0, [])));
+            ->willReturn(new PaginationResult(1, 1, 0, []));
 
         $grid = new Grid(
             'gridId',

@@ -28,7 +28,7 @@ class VatFacadeTest extends TestCase
             ->expects($this->once())
             ->method('get')
             ->with($this->equalTo(Vat::SETTING_DEFAULT_VAT))
-            ->will($this->returnValue(1));
+            ->willReturn(1);
 
         $vatRepositoryMock = $this->getMockBuilder(VatRepository::class)
             ->setMethods(['findById', '__construct'])
@@ -38,7 +38,7 @@ class VatFacadeTest extends TestCase
             ->expects($this->once())
             ->method('findById')
             ->with($this->equalTo(1))
-            ->will($this->returnValue($expected));
+            ->willReturn($expected);
 
         $productPriceRecalculationSchedulerMock = $this->getMockBuilder(ProductPriceRecalculationScheduler::class)
             ->disableOriginalConstructor()
@@ -64,7 +64,7 @@ class VatFacadeTest extends TestCase
             ->setMethods(['getId', '__construct'])
             ->disableOriginalConstructor()
             ->getMock();
-        $vatMock->expects($this->once())->method('getId')->will($this->returnValue(1));
+        $vatMock->expects($this->once())->method('getId')->willReturn(1);
 
         $settingMock = $this->getMockBuilder(Setting::class)
             ->setMethods(['set', '__construct'])

@@ -21,7 +21,7 @@ class SubRequestListenerTest extends TestCase
         $responseMock = $this->getMockBuilder(Response::class)
             ->setMethods(['isRedirection', 'send'])
             ->getMock();
-        $responseMock->expects($this->once())->method('isRedirection')->will($this->returnValue($redirect));
+        $responseMock->expects($this->once())->method('isRedirection')->willReturn($redirect);
         $responseMock->expects($send ? $this->once() : $this->never())->method('send');
 
         return $responseMock;
@@ -33,7 +33,7 @@ class SubRequestListenerTest extends TestCase
             ->setMethods(['__construct', 'isMasterRequest'])
             ->disableOriginalConstructor()
             ->getMock();
-        $eventMock->expects($this->once())->method('isMasterRequest')->will($this->returnValue(true));
+        $eventMock->expects($this->once())->method('isMasterRequest')->willReturn(true);
 
         $subRequestListener = new SubRequestListener();
         $subRequestListener->onKernelResponse($eventMock);
@@ -45,22 +45,22 @@ class SubRequestListenerTest extends TestCase
             ->setMethods(['__construct', 'isMasterRequest', 'getResponse'])
             ->disableOriginalConstructor()
             ->getMock();
-        $eventMock1->expects($this->once())->method('isMasterRequest')->will($this->returnValue(false));
-        $eventMock1->expects($this->once())->method('getResponse')->will($this->returnValue($this->getResponseMock(true)));
+        $eventMock1->expects($this->once())->method('isMasterRequest')->willReturn(false);
+        $eventMock1->expects($this->once())->method('getResponse')->willReturn($this->getResponseMock(true));
 
         $eventMock2 = $this->getMockBuilder(FilterResponseEvent::class)
             ->setMethods(['__construct', 'isMasterRequest', 'getResponse'])
             ->disableOriginalConstructor()
             ->getMock();
-        $eventMock2->expects($this->once())->method('isMasterRequest')->will($this->returnValue(false));
-        $eventMock2->expects($this->once())->method('getResponse')->will($this->returnValue($this->getResponseMock()));
+        $eventMock2->expects($this->once())->method('isMasterRequest')->willReturn(false);
+        $eventMock2->expects($this->once())->method('getResponse')->willReturn($this->getResponseMock());
 
         $eventMock3 = $this->getMockBuilder(FilterResponseEvent::class)
             ->setMethods(['__construct', 'isMasterRequest', 'getResponse'])
             ->disableOriginalConstructor()
             ->getMock();
-        $eventMock3->expects($this->once())->method('isMasterRequest')->will($this->returnValue(false));
-        $eventMock3->expects($this->once())->method('getResponse')->will($this->returnValue($this->getResponseMock(true)));
+        $eventMock3->expects($this->once())->method('isMasterRequest')->willReturn(false);
+        $eventMock3->expects($this->once())->method('getResponse')->willReturn($this->getResponseMock(true));
 
         $subRequestListener = new SubRequestListener();
         $subRequestListener->onKernelResponse($eventMock1);
@@ -76,21 +76,21 @@ class SubRequestListenerTest extends TestCase
             ->setMethods(['__construct', 'isMasterRequest', 'getResponse'])
             ->disableOriginalConstructor()
             ->getMock();
-        $eventMock1->expects($this->once())->method('isMasterRequest')->will($this->returnValue(false));
-        $eventMock1->expects($this->once())->method('getResponse')->will($this->returnValue($this->getResponseMock(true, true)));
+        $eventMock1->expects($this->once())->method('isMasterRequest')->willReturn(false);
+        $eventMock1->expects($this->once())->method('getResponse')->willReturn($this->getResponseMock(true, true));
 
         $eventMock2 = $this->getMockBuilder(FilterResponseEvent::class)
             ->setMethods(['__construct', 'isMasterRequest', 'getResponse'])
             ->disableOriginalConstructor()
             ->getMock();
-        $eventMock2->expects($this->once())->method('isMasterRequest')->will($this->returnValue(false));
-        $eventMock2->expects($this->once())->method('getResponse')->will($this->returnValue($this->getResponseMock()));
+        $eventMock2->expects($this->once())->method('isMasterRequest')->willReturn(false);
+        $eventMock2->expects($this->once())->method('getResponse')->willReturn($this->getResponseMock());
 
         $eventMock3 = $this->getMockBuilder(FilterResponseEvent::class)
             ->setMethods(['__construct', 'isMasterRequest'])
             ->disableOriginalConstructor()
             ->getMock();
-        $eventMock3->expects($this->once())->method('isMasterRequest')->will($this->returnValue(true));
+        $eventMock3->expects($this->once())->method('isMasterRequest')->willReturn(true);
 
         $subRequestListener = new SubRequestListener();
         $subRequestListener->onKernelResponse($eventMock1);
@@ -104,7 +104,7 @@ class SubRequestListenerTest extends TestCase
             ->setMethods(['getMethod'])
             ->getMock();
         /* @var $masterRequestMock \Symfony\Component\HttpFoundation\Request|\PHPUnit\Framework\MockObject\MockObject */
-        $masterRequestMock->expects($this->once())->method('getMethod')->will($this->returnValue('POST'));
+        $masterRequestMock->expects($this->once())->method('getMethod')->willReturn('POST');
         $masterRequestMock->query->replace([
             'key1' => 'value1',
             'key2' => 'value2',
@@ -125,15 +125,15 @@ class SubRequestListenerTest extends TestCase
             ->setMethods(['__construct', 'isMasterRequest', 'getRequest'])
             ->disableOriginalConstructor()
             ->getMock();
-        $eventMock1->expects($this->once())->method('isMasterRequest')->will($this->returnValue(true));
-        $eventMock1->expects($this->atLeastOnce())->method('getRequest')->will($this->returnValue($masterRequestMock));
+        $eventMock1->expects($this->once())->method('isMasterRequest')->willReturn(true);
+        $eventMock1->expects($this->atLeastOnce())->method('getRequest')->willReturn($masterRequestMock);
 
         $eventMock2 = $this->getMockBuilder(FilterControllerEvent::class)
             ->setMethods(['__construct', 'isMasterRequest', 'getRequest'])
             ->disableOriginalConstructor()
             ->getMock();
-        $eventMock2->expects($this->once())->method('isMasterRequest')->will($this->returnValue(false));
-        $eventMock2->expects($this->atLeastOnce())->method('getRequest')->will($this->returnValue($subRequestMock));
+        $eventMock2->expects($this->once())->method('isMasterRequest')->willReturn(false);
+        $eventMock2->expects($this->atLeastOnce())->method('getRequest')->willReturn($subRequestMock);
 
         $subRequestListener = new SubRequestListener();
         $subRequestListener->onKernelController($eventMock1);

@@ -21,7 +21,12 @@ There you can find links to upgrade notes for other versions too.
 - if you extended one of these form fields listed below, you need to change group from `basicInformation` to `prices` ([#956](https://github.com/shopsys/shopsys/pull/956))
     - in `PaymentFormType` fields `vat` and `czkRounding`
     - in `TransportFormType` field `vat`
-
+- *(low priority)* change all occurences of `->will($this->returnValue(` into `->willReturn(` in all `TestCase` tests ([#939](https://github.com/shopsys/shopsys/pull/939))
+    - example:
+        ```diff
+        - $emMock->expects($this->once())->method('find')->will($this->returnValue($expectedObject));
+        + $emMock->expects($this->once())->method('find')->willReturn($expectedObject);
+        ```
 - *(low priority)* reconfigure fm_elfinder to use main_filesystem ([#932](https://github.com/shopsys/shopsys/pull/932))
     - upgrade version of `helios-ag/fm-elfinder-bundle` to `^9.2` in `composer.json`
     - remove `barryvdh/elfinder-flysystem-driver": "^0.2"` from `composer.json`

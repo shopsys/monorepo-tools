@@ -39,7 +39,7 @@ class DomainTest extends TestCase
         $requestMock
             ->expects($this->atLeastOnce())
             ->method('getSchemeAndHttpHost')
-            ->will($this->returnValue('http://example.com:8080'));
+            ->willReturn('http://example.com:8080');
 
         $domain->switchDomainByRequest($requestMock);
         $this->assertSame(1, $domain->getId());

@@ -29,13 +29,13 @@ class LoginListenerTest extends TestCase
         $userMock->expects($this->once())->method('setLoginToken');
 
         $tokenMock = $this->createMock(TokenInterface::class);
-        $tokenMock->expects($this->once())->method('getUser')->will($this->returnValue($userMock));
+        $tokenMock->expects($this->once())->method('getUser')->willReturn($userMock);
 
         $eventMock = $this->getMockBuilder(InteractiveLoginEvent::class)
             ->setMethods(['__construct', 'getAuthenticationToken'])
             ->disableOriginalConstructor()
             ->getMock();
-        $eventMock->expects($this->once())->method('getAuthenticationToken')->will($this->returnValue($tokenMock));
+        $eventMock->expects($this->once())->method('getAuthenticationToken')->willReturn($tokenMock);
 
         $orderFlowFacadeMock = $this->getMockBuilder(OrderFlowFacade::class)
             ->setMethods(['__construct'])
@@ -60,13 +60,13 @@ class LoginListenerTest extends TestCase
         $userMock->expects($this->once())->method('setLastActivity');
 
         $tokenMock = $this->createMock(TokenInterface::class);
-        $tokenMock->expects($this->once())->method('getUser')->will($this->returnValue($userMock));
+        $tokenMock->expects($this->once())->method('getUser')->willReturn($userMock);
 
         $eventMock = $this->getMockBuilder(InteractiveLoginEvent::class)
             ->setMethods(['__construct', 'getAuthenticationToken'])
             ->disableOriginalConstructor()
             ->getMock();
-        $eventMock->expects($this->once())->method('getAuthenticationToken')->will($this->returnValue($tokenMock));
+        $eventMock->expects($this->once())->method('getAuthenticationToken')->willReturn($tokenMock);
 
         $orderFlowFacadeMock = $this->getMockBuilder(OrderFlowFacade::class)
             ->setMethods(['__construct'])
@@ -93,13 +93,13 @@ class LoginListenerTest extends TestCase
             ->getMock();
 
         $tokenMock = $this->createMock(TokenInterface::class);
-        $tokenMock->expects($this->once())->method('getUser')->will($this->returnValue($userMock));
+        $tokenMock->expects($this->once())->method('getUser')->willReturn($userMock);
 
         $eventMock = $this->getMockBuilder(InteractiveLoginEvent::class)
             ->setMethods(['__construct', 'getAuthenticationToken'])
             ->disableOriginalConstructor()
             ->getMock();
-        $eventMock->expects($this->once())->method('getAuthenticationToken')->will($this->returnValue($tokenMock));
+        $eventMock->expects($this->once())->method('getAuthenticationToken')->willReturn($tokenMock);
 
         $orderFlowFacadeMock = $this->getMockBuilder(OrderFlowFacade::class)
             ->setMethods(['__construct', 'resetOrderForm'])
@@ -125,14 +125,14 @@ class LoginListenerTest extends TestCase
         $administratorMock->expects($this->once())->method('setLoginToken');
 
         $tokenMock = $this->createMock(TokenInterface::class);
-        $tokenMock->expects($this->once())->method('getUser')->will($this->returnValue($administratorMock));
+        $tokenMock->expects($this->once())->method('getUser')->willReturn($administratorMock);
 
         $eventMock = $this->getMockBuilder(InteractiveLoginEvent::class)
             ->setMethods(['__construct', 'getAuthenticationToken', 'getRequest'])
             ->disableOriginalConstructor()
             ->getMock();
-        $eventMock->expects($this->once())->method('getAuthenticationToken')->will($this->returnValue($tokenMock));
-        $eventMock->expects($this->once())->method('getRequest')->will($this->returnValue(new Request()));
+        $eventMock->expects($this->once())->method('getAuthenticationToken')->willReturn($tokenMock);
+        $eventMock->expects($this->once())->method('getRequest')->willReturn(new Request());
 
         $orderFlowFacadeMock = $this->getMockBuilder(OrderFlowFacade::class)
             ->setMethods(['__construct'])
