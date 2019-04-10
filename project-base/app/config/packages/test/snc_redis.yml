@@ -5,4 +5,4 @@ snc_redis:
             alias: 'test'
             dsn: 'redis://%redis_host%'
             options:
-                prefix: '%env(REDIS_PREFIX)%test_'
+                prefix: '%env(REDIS_PREFIX)%test:'

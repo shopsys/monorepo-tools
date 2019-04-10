@@ -5,19 +5,19 @@ snc_redis:
             alias: 'bestselling_products'
             dsn: 'redis://%redis_host%'
             options:
-                prefix: '%env(REDIS_PREFIX)%%build-version%bestselling_products_'
+                prefix: '%env(REDIS_PREFIX)%%build-version%:cache:bestselling_products:'
         doctrine_metadata:
             type: 'phpredis'
             alias: 'doctrine_metadata'
             dsn: 'redis://%redis_host%'
             options:
-                prefix: '%env(REDIS_PREFIX)%%build-version%doctrine_metadata_'
+                prefix: '%env(REDIS_PREFIX)%%build-version%:cache:doctrine:metadata:'
         doctrine_query:
             type: 'phpredis'
             alias: 'doctrine_query'
             dsn: 'redis://%redis_host%'
             options:
-                prefix: '%env(REDIS_PREFIX)%%build-version%doctrine_query_'
+                prefix: '%env(REDIS_PREFIX)%%build-version%:cache:doctrine:query:'
         global:
             type: 'phpredis'
             alias: 'global'
@@ -30,4 +30,4 @@ snc_redis:
             dsn: 'redis://%redis_host%'
     session:
         client: 'session'
-        prefix: '%env(REDIS_PREFIX)%session_'
+        prefix: '%env(REDIS_PREFIX)%session:'
