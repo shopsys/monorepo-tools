@@ -20,7 +20,6 @@
 * [Logging](./introduction/logging.md)
 * [Domain, Multidomain, Multilanguage](./introduction/domain-multidomain-multilanguage.md)
 * [How to Set Up Domains and Locales (Languages)](./introduction/how-to-set-up-domains-and-locales.md)
-* [Shopsys Framework Development Workflow](introduction/shopsys-framework-development-workflow.md)
 * [Translations](./introduction/translations.md)
 * [Directories](./introduction/directories.md)
 * [Cron](./introduction/cron.md)
