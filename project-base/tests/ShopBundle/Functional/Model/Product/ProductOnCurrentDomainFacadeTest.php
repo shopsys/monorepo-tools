@@ -105,9 +105,10 @@ class ProductOnCurrentDomainFacadeTest extends TransactionFunctionalTestCase
         $category = $this->getReference(CategoryDataFixture::CATEGORY_PRINTERS);
 
         $parameterFilterData = $this->createParameterFilterData(
-            ['cs' => 'Rozlišení tisku'],
-            [['cs' => '4800x1200']]
+            ['en' => 'Print resolution'],
+            [['en' => '4800x1200']]
         );
+
         $productFilterData = new ProductFilterData();
         $productFilterData->parameters = [$parameterFilterData];
 
@@ -121,10 +122,10 @@ class ProductOnCurrentDomainFacadeTest extends TransactionFunctionalTestCase
         $category = $this->getReference(CategoryDataFixture::CATEGORY_PRINTERS);
 
         $parameterFilterData = $this->createParameterFilterData(
-            ['cs' => 'Rozlišení tisku'],
+            ['en' => 'Print resolution'],
             [
-                ['cs' => '4800x1200'],
-                ['cs' => '2400x600'],
+                ['en' => '4800x1200'],
+                ['en' => '2400x600'],
             ]
         );
         $productFilterData = new ProductFilterData();
@@ -139,12 +140,12 @@ class ProductOnCurrentDomainFacadeTest extends TransactionFunctionalTestCase
         $category = $this->getReference(CategoryDataFixture::CATEGORY_PRINTERS);
 
         $parameterFilterData1 = $this->createParameterFilterData(
-            ['cs' => 'Rozlišení tisku'],
-            [['cs' => '2400x600']]
+            ['en' => 'Print resolution'],
+            [['en' => '2400x600']]
         );
         $parameterFilterData2 = $this->createParameterFilterData(
-            ['cs' => 'LCD'],
-            [['cs' => 'Ano']]
+            ['en' => 'LCD'],
+            [['en' => 'Yes']]
         );
         $productFilterData = new ProductFilterData();
         $productFilterData->parameters = [$parameterFilterData1, $parameterFilterData2];
@@ -185,7 +186,7 @@ class ProductOnCurrentDomainFacadeTest extends TransactionFunctionalTestCase
 
         foreach ($valuesTextsByLocales as $valueTextsByLocales) {
             foreach ($valueTextsByLocales as $locale => $text) {
-                $parameterValues[] = $em->getRepository(ParameterValue::class)->findBy([
+                $parameterValues[] = $em->getRepository(ParameterValue::class)->findOneBy([
                     'text' => $text,
                     'locale' => $locale,
                 ]);
