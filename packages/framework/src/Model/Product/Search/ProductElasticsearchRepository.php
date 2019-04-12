@@ -133,34 +133,9 @@ class ProductElasticsearchRepository
      */
     protected function createQuery(string $indexName, string $searchText): array
     {
-        return [
-            'index' => $indexName,
-            'type' => '_doc',
-            'size' => 1000,
-            'body' => [
-                '_source' => false,
-                'query' => [
-                    'multi_match' => [
-                        'query' => $searchText,
-                        'fields' => [
-                            'name.full_with_diacritic^60',
-                            'name.full_without_diacritic^50',
-                            'name^45',
-                            'name.edge_ngram_with_diacritic^40',
-                            'name.edge_ngram_without_diacritic^35',
-                            'catnum^50',
-                            'catnum.edge_ngram^25',
-                            'partno^40',
-                            'partno.edge_ngram^20',
-                            'ean^60',
-                            'ean.edge_ngram^30',
-                            'short_description^5',
-                            'description^5',
-                        ],
-                    ],
-                ],
-            ],
-        ];
+        $query = new FilterQuery($indexName);
+        $query->search($searchText);
+        return $query->getQuery();
     }
 
     /**
