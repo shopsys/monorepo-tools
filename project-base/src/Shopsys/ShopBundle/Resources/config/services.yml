@@ -52,6 +52,8 @@ services:
 
     Shopsys\FrameworkBundle\Model\Product\ProductDataFactoryInterface: '@Shopsys\ShopBundle\Model\Product\ProductDataFactory'
 
+    Shopsys\FrameworkBundle\Model\Product\ProductOnCurrentDomainFacadeInterface: '@Shopsys\FrameworkBundle\Model\Product\ProductOnCurrentDomainFacade'
+
     Shopsys\FrameworkBundle\Model\Product\Search\Export\ProductSearchExportRepository:
         alias: Shopsys\FrameworkBundle\Model\Product\Search\Export\ProductSearchExportWithFilterRepository
 

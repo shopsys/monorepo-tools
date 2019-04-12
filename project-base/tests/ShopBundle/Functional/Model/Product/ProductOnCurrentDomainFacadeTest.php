@@ -3,19 +3,20 @@
 namespace Tests\ShopBundle\Functional\Model\Product;
 
 use Shopsys\FrameworkBundle\Component\Money\Money;
+use Shopsys\FrameworkBundle\Component\Paginator\PaginationResult;
 use Shopsys\FrameworkBundle\Model\Product\Filter\ParameterFilterData;
 use Shopsys\FrameworkBundle\Model\Product\Filter\ProductFilterData;
 use Shopsys\FrameworkBundle\Model\Product\Listing\ProductListOrderingConfig;
 use Shopsys\FrameworkBundle\Model\Product\Parameter\ParameterRepository;
 use Shopsys\FrameworkBundle\Model\Product\Parameter\ParameterValue;
-use Shopsys\FrameworkBundle\Model\Product\ProductOnCurrentDomainFacade;
+use Shopsys\FrameworkBundle\Model\Product\ProductOnCurrentDomainFacadeInterface;
 use Shopsys\ShopBundle\DataFixtures\Demo\BrandDataFixture;
 use Shopsys\ShopBundle\DataFixtures\Demo\CategoryDataFixture;
 use Shopsys\ShopBundle\DataFixtures\Demo\FlagDataFixture;
 use Shopsys\ShopBundle\Model\Category\Category;
 use Tests\ShopBundle\Test\TransactionFunctionalTestCase;
 
-class ProductOnCurrentDomainFacadeTest extends TransactionFunctionalTestCase
+abstract class ProductOnCurrentDomainFacadeTest extends TransactionFunctionalTestCase
 {
     public function testFilterByMinimalPrice()
     {
@@ -201,12 +202,21 @@ class ProductOnCurrentDomainFacadeTest extends TransactionFunctionalTestCase
      * @param \Shopsys\ShopBundle\Model\Category\Category $category
      * @return \Shopsys\FrameworkBundle\Component\Paginator\PaginationResult
      */
-    private function getPaginationResultInCategory(ProductFilterData $productFilterData, Category $category)
+    public function getPaginationResultInCategory(ProductFilterData $productFilterData, Category $category): PaginationResult
     {
-        /** @var \Shopsys\FrameworkBundle\Model\Product\ProductOnCurrentDomainFacade $productOnCurrentDomainFacade */
-        $productOnCurrentDomainFacade = $this->getContainer()->get(ProductOnCurrentDomainFacade::class);
-        $page = 1;
-        $limit = PHP_INT_MAX;
+        return $this->getPaginationResultInCategoryWithPageAndLimit($productFilterData, $category, 1, 1000);
+    }
+
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Product\Filter\ProductFilterData $productFilterData
+     * @param \Shopsys\ShopBundle\Model\Category\Category $category
+     * @param int $page
+     * @param int $limit
+     * @return \Shopsys\FrameworkBundle\Component\Paginator\PaginationResult
+     */
+    public function getPaginationResultInCategoryWithPageAndLimit(ProductFilterData $productFilterData, Category $category, int $page, int $limit): PaginationResult
+    {
+        $productOnCurrentDomainFacade = $this->getProductOnCurrentDomainFacade();
 
         return $productOnCurrentDomainFacade->getPaginatedProductsInCategory(
             $productFilterData,
@@ -216,4 +226,9 @@ class ProductOnCurrentDomainFacadeTest extends TransactionFunctionalTestCase
             $category->getId()
         );
     }
+
+    /**
+     * @return \Shopsys\FrameworkBundle\Model\Product\ProductOnCurrentDomainFacadeInterface
+     */
+    abstract public function getProductOnCurrentDomainFacade(): ProductOnCurrentDomainFacadeInterface;
 }
