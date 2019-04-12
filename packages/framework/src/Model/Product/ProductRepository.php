@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Shopsys\FrameworkBundle\Model\Product;
 
 use Doctrine\ORM\EntityManagerInterface;
@@ -699,6 +701,28 @@ class ProductRepository
         }
 
         $queryBuilder = $this->getAllOfferedQueryBuilder($domainId, $pricingGroup);
+        $queryBuilder
+            ->andWhere('p.id IN (:productIds)')
+            ->setParameter('productIds', $sortedProductIds)
+            ->addSelect('field(p.id, ' . implode(',', $sortedProductIds) . ') AS HIDDEN relevance')
+            ->orderBy('relevance');
+
+        return $queryBuilder->getQuery()->execute();
+    }
+
+    /**
+     * @param int $domainId
+     * @param \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroup $pricingGroup
+     * @param int[] $sortedProductIds
+     * @return \Shopsys\FrameworkBundle\Model\Product\Product[]
+     */
+    public function getListableByIds(int $domainId, PricingGroup $pricingGroup, array $sortedProductIds): array
+    {
+        if (count($sortedProductIds) === 0) {
+            return [];
+        }
+
+        $queryBuilder = $this->getAllListableQueryBuilder($domainId, $pricingGroup);
         $queryBuilder
             ->andWhere('p.id IN (:productIds)')
             ->setParameter('productIds', $sortedProductIds)
