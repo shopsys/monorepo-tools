@@ -197,6 +197,26 @@ abstract class ProductOnCurrentDomainFacadeTest extends TransactionFunctionalTes
         return $parameterValues;
     }
 
+    public function testPagination(): void
+    {
+        $category = $this->getReference(CategoryDataFixture::CATEGORY_TV);
+
+        $productFilterData = new ProductFilterData();
+        $productFilterData->minimalPrice = Money::create(1000);
+
+        $paginationResult = $this->getPaginationResultInCategoryWithPageAndLimit($productFilterData, $category, 1, 10);
+        $this->assertCount(10, $paginationResult->getResults());
+        $this->assertSame(22, $paginationResult->getTotalCount());
+
+        $paginationResult = $this->getPaginationResultInCategoryWithPageAndLimit($productFilterData, $category, 2, 10);
+        $this->assertCount(10, $paginationResult->getResults());
+        $this->assertSame(22, $paginationResult->getTotalCount());
+
+        $paginationResult = $this->getPaginationResultInCategoryWithPageAndLimit($productFilterData, $category, 3, 2);
+        $this->assertCount(2, $paginationResult->getResults());
+        $this->assertSame(22, $paginationResult->getTotalCount());
+    }
+
     /**
      * @param \Shopsys\FrameworkBundle\Model\Product\Filter\ProductFilterData $productFilterData
      * @param \Shopsys\ShopBundle\Model\Category\Category $category
