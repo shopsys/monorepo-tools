@@ -4,6 +4,7 @@ namespace Tests\ShopBundle\Functional\Model\Product;
 
 use Shopsys\FrameworkBundle\Component\Money\Money;
 use Shopsys\FrameworkBundle\Component\Paginator\PaginationResult;
+use Shopsys\FrameworkBundle\Model\Product\Brand\Brand;
 use Shopsys\FrameworkBundle\Model\Product\Filter\ParameterFilterData;
 use Shopsys\FrameworkBundle\Model\Product\Filter\ProductFilterData;
 use Shopsys\FrameworkBundle\Model\Product\Listing\ProductListOrderingConfig;
@@ -227,6 +228,75 @@ abstract class ProductOnCurrentDomainFacadeTest extends TransactionFunctionalTes
         return $this->getPaginationResultInCategoryWithPageAndLimit($productFilterData, $category, 1, 1000);
     }
 
+    public function testGetProductsForBrand(): void
+    {
+        $brand = $this->getReference(BrandDataFixture::BRAND_CANON);
+
+        $paginationResult = $this->getPaginatedProductsForBrand($brand);
+
+        $this->assertCount(10, $paginationResult->getResults());
+    }
+
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Product\Brand\Brand $brand
+     * @return \Shopsys\FrameworkBundle\Component\Paginator\PaginationResult
+     */
+    public function getPaginatedProductsForBrand(Brand $brand): PaginationResult
+    {
+        $productOnCurrentDomainFacade = $this->getProductOnCurrentDomainFacade();
+        $page = 1;
+        $limit = 1000;
+
+        return $productOnCurrentDomainFacade->getPaginatedProductsForBrand(
+            ProductListOrderingConfig::ORDER_BY_NAME_ASC,
+            $page,
+            $limit,
+            $brand->getId()
+        );
+    }
+
+    public function testGetPaginatedProductsForSearchWithFlagsAndBrand(): void
+    {
+        $productFilterData = new ProductFilterData();
+
+        $flagTopProduct = $this->getReference(FlagDataFixture::FLAG_NEW_PRODUCT);
+        $productFilterData->flags = [$flagTopProduct];
+
+        $brandCanon = $this->getReference(BrandDataFixture::BRAND_CANON);
+        $productFilterData->brands = [$brandCanon];
+
+        $paginationResult = $this->getPaginationResultInSearch($productFilterData, 'mg3550');
+
+        $this->assertCount(3, $paginationResult->getResults());
+    }
+
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Product\Filter\ProductFilterData $productFilterData
+     * @param string $searchText
+     * @return \Shopsys\FrameworkBundle\Component\Paginator\PaginationResult
+     */
+    public function getPaginationResultInSearch(ProductFilterData $productFilterData, string $searchText): PaginationResult
+    {
+        $productOnCurrentDomainFacade = $this->getProductOnCurrentDomainFacade();
+        $page = 1;
+        $limit = 1000;
+
+        return $productOnCurrentDomainFacade->getPaginatedProductsForSearch(
+            $searchText,
+            $productFilterData,
+            ProductListOrderingConfig::ORDER_BY_NAME_ASC,
+            $page,
+            $limit
+        );
+    }
+
+    public function testGetSearchAutocompleteProducts(): void
+    {
+        $paginationResult = $this->getSearchAutocompleteProducts('mg3550');
+
+        $this->assertCount(4, $paginationResult->getResults());
+    }
+
     /**
      * @param \Shopsys\FrameworkBundle\Model\Product\Filter\ProductFilterData $productFilterData
      * @param \Shopsys\ShopBundle\Model\Category\Category $category
@@ -244,6 +314,21 @@ abstract class ProductOnCurrentDomainFacadeTest extends TransactionFunctionalTes
             $page,
             $limit,
             $category->getId()
+        );
+    }
+
+    /**
+     * @param string $searchText
+     * @return \Shopsys\FrameworkBundle\Component\Paginator\PaginationResult
+     */
+    public function getSearchAutocompleteProducts(string $searchText): PaginationResult
+    {
+        $productOnCurrentDomainFacade = $this->getProductOnCurrentDomainFacade();
+        $limit = 1000;
+
+        return $productOnCurrentDomainFacade->getSearchAutocompleteProducts(
+            $searchText,
+            $limit
         );
     }
 
