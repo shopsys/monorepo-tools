@@ -71,10 +71,39 @@ abstract class ProductOnCurrentDomainFacadeCountDataTest extends TransactionFunc
             'one-flag' => $this->categoryOneFlagTestCase(),
             'one-brand' => $this->categoryOneBrandTestCase(),
             'all-flags-all-brands' => $this->categoryAllFlagsAllBrandsTestCase(),
-            'price' => $this->categoryPrice(),
-            'stock' => $this->categoryStock(),
-            'flag-brand-parameters' => $this->categoryFlagBrandAndParameters(),
-            'parameters' => $this->categoryParameters(),
+            'price' => $this->categoryPriceTestCase(),
+            'stock' => $this->categoryStockTestCase(),
+            'flag-brand-parameters' => $this->categoryFlagBrandAndParametersTestCase(),
+            'parameters' => $this->categoryParametersTestCase(),
+        ];
+    }
+
+    /**
+     * @param string $searchText
+     * @param \Shopsys\FrameworkBundle\Model\Product\Filter\ProductFilterData $filterData
+     * @param \Shopsys\FrameworkBundle\Model\Product\Filter\ProductFilterCountData $expectedCountData
+     * @dataProvider searchTestCasesProvider
+     */
+    public function testSearch(string $searchText, ProductFilterData $filterData, ProductFilterCountData $expectedCountData): void
+    {
+        $filterConfig = $this->productFilterConfigFactory->createForSearch($this->domain->getId(), $this->domain->getLocale(), $searchText);
+        $countData = $this->productOnCurrentDomainFacade->getProductFilterCountDataForSearch($searchText, $filterConfig, $filterData);
+
+        $this->assertEquals($expectedCountData, $countData);
+    }
+
+    /**
+     * @return array[]
+     */
+    public function searchTestCasesProvider(): array
+    {
+        return [
+            'no-filter' => $this->searchNoFilterTestCase(),
+            'one-flag' => $this->searchOneFlagTestCase(),
+            'one-brand' => $this->searchOneBrandTestCase(),
+            'price' => $this->searchPriceTestCase(),
+            'stock' => $this->searchStockTestCase(),
+            'price-stock-flag-brands' => $this->searchPriceStockFlagBrandsTestCase(),
         ];
     }
 
@@ -314,7 +343,7 @@ abstract class ProductOnCurrentDomainFacadeCountDataTest extends TransactionFunc
     /**
      * @return array
      */
-    private function categoryPrice(): array
+    private function categoryPriceTestCase(): array
     {
         $category = $this->getReference(CategoryDataFixture::CATEGORY_PRINTERS);
         $filterData = new ProductFilterData();
@@ -375,7 +404,7 @@ abstract class ProductOnCurrentDomainFacadeCountDataTest extends TransactionFunc
     /**
      * @return array
      */
-    private function categoryStock(): array
+    private function categoryStockTestCase(): array
     {
         $category = $this->getReference(CategoryDataFixture::CATEGORY_PHONES);
         $filterData = new ProductFilterData();
@@ -438,7 +467,7 @@ abstract class ProductOnCurrentDomainFacadeCountDataTest extends TransactionFunc
     /**
      * @return array
      */
-    private function categoryFlagBrandAndParameters(): array
+    private function categoryFlagBrandAndParametersTestCase(): array
     {
         $category = $this->getReference(CategoryDataFixture::CATEGORY_PRINTERS);
         $filterData = new ProductFilterData();
@@ -507,7 +536,7 @@ abstract class ProductOnCurrentDomainFacadeCountDataTest extends TransactionFunc
     /**
      * @return array
      */
-    private function categoryParameters(): array
+    private function categoryParametersTestCase(): array
     {
         $category = $this->getReference(CategoryDataFixture::CATEGORY_PRINTERS);
         $filterData = new ProductFilterData();
@@ -616,5 +645,198 @@ abstract class ProductOnCurrentDomainFacadeCountDataTest extends TransactionFunc
         }
 
         return $parameterValues;
+    }
+
+    /**
+     * @return array
+     */
+    private function searchNoFilterTestCase(): array
+    {
+        $filterData = new ProductFilterData();
+        $countData = new ProductFilterCountData();
+        $countData->countInStock = 38;
+        $countData->countByBrandId = [
+            8 => 1,
+            11 => 1,
+            19 => 2,
+            10 => 1,
+            2 => 10,
+            4 => 1,
+            16 => 1,
+            15 => 1,
+            6 => 1,
+            14 => 2,
+            12 => 2,
+            3 => 2,
+        ];
+        $countData->countByFlagId = [
+            1 => 15,
+            2 => 5,
+            3 => 3,
+        ];
+
+        return [
+            'print',
+            $filterData,
+            $countData,
+        ];
+    }
+
+    /**
+     * @return array
+     */
+    private function searchOneFlagTestCase(): array
+    {
+        $filterData = new ProductFilterData();
+        $filterData->flags[] = $this->getReference(FlagDataFixture::FLAG_NEW_PRODUCT);
+        $countData = new ProductFilterCountData();
+        $countData->countInStock = 11;
+        $countData->countByBrandId = [
+            2 => 3,
+            3 => 1,
+            10 => 1,
+            11 => 1,
+            12 => 1,
+            14 => 1,
+            15 => 1,
+            16 => 1,
+            19 => 2,
+        ];
+        $countData->countByFlagId = [
+            2 => 2,
+            3 => 2,
+        ];
+
+        return [
+            'print',
+            $filterData,
+            $countData,
+        ];
+    }
+
+    /**
+     * @return array
+     */
+    private function searchOneBrandTestCase(): array
+    {
+        $filterData = new ProductFilterData();
+        $filterData->brands[] = $this->getReference(BrandDataFixture::BRAND_CANON);
+        $countData = new ProductFilterCountData();
+
+        $countData->countInStock = 10;
+        $countData->countByBrandId = [
+            3 => 2,
+            4 => 1,
+            6 => 1,
+            8 => 1,
+            10 => 1,
+            11 => 1,
+            12 => 2,
+            14 => 2,
+            15 => 1,
+            16 => 1,
+            19 => 2,
+        ];
+        $countData->countByFlagId = [
+            1 => 3,
+            2 => 2,
+        ];
+
+        return [
+            'print',
+            $filterData,
+            $countData,
+        ];
+    }
+
+    /**
+     * @return array
+     */
+    private function searchPriceTestCase(): array
+    {
+        $filterData = new ProductFilterData();
+        $filterData->minimalPrice = Money::create(5000);
+        $filterData->maximalPrice = Money::create(50000);
+        $countData = new ProductFilterCountData();
+        $countData->countInStock = 9;
+        $countData->countByBrandId = [
+            2 => 4,
+            3 => 1,
+            4 => 1,
+            11 => 1,
+            15 => 1,
+        ];
+        $countData->countByFlagId = [
+            1 => 2,
+            2 => 2,
+        ];
+
+        return [
+            'print',
+            $filterData,
+            $countData,
+        ];
+    }
+
+    /**
+     * @return array
+     */
+    private function searchStockTestCase(): array
+    {
+        $filterData = new ProductFilterData();
+        $filterData->inStock = true;
+        $countData = new ProductFilterCountData();
+        $countData->countInStock = 38;
+        $countData->countByBrandId = [
+            2 => 10,
+            3 => 2,
+            4 => 1,
+            6 => 1,
+            8 => 1,
+            10 => 1,
+            11 => 1,
+            12 => 2,
+            14 => 2,
+            16 => 1,
+        ];
+        $countData->countByFlagId = [
+            1 => 11,
+            2 => 4,
+            3 => 2,
+        ];
+
+        return [
+            'print',
+            $filterData,
+            $countData,
+        ];
+    }
+
+    /**
+     * @return array
+     */
+    private function searchPriceStockFlagBrandsTestCase(): array
+    {
+        $filterData = new ProductFilterData();
+        $filterData->inStock = true;
+        $filterData->flags[] = $this->getReference(FlagDataFixture::FLAG_NEW_PRODUCT);
+        $filterData->brands[] = $this->getReference(BrandDataFixture::BRAND_DELONGHI);
+        $filterData->brands[] = $this->getReference(BrandDataFixture::BRAND_DEFENDER);
+        $filterData->brands[] = $this->getReference(BrandDataFixture::BRAND_GENIUS);
+        $filterData->brands[] = $this->getReference(BrandDataFixture::BRAND_HP);
+        $filterData->maximalPrice = Money::create(20000);
+
+        $countData = new ProductFilterCountData();
+        $countData->countInStock = 3;
+        $countData->countByBrandId = [
+            2 => 3,
+            3 => 1,
+        ];
+
+        return [
+            'print',
+            $filterData,
+            $countData,
+        ];
     }
 }
