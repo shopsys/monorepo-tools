@@ -137,6 +137,29 @@ abstract class ProductOnCurrentDomainFacadeTest extends TransactionFunctionalTes
         $this->assertCount(10, $paginationResult->getResults());
     }
 
+    public function testFilterByParametersWithEmptyValue(): void
+    {
+        $category = $this->getReference(CategoryDataFixture::CATEGORY_PRINTERS);
+
+        $parameterFilterData1 = $this->createParameterFilterData(
+            ['en' => 'Print resolution'],
+            [
+                ['en' => '4800x1200'],
+                ['en' => '2400x600'],
+            ]
+        );
+        $parameterFilterData2 = $this->createParameterFilterData(
+            ['en' => 'LCD'],
+            []
+        );
+
+        $productFilterData = new ProductFilterData();
+        $productFilterData->parameters = [$parameterFilterData1, $parameterFilterData2];
+        $paginationResult = $this->getPaginationResultInCategory($productFilterData, $category);
+
+        $this->assertCount(10, $paginationResult->getResults());
+    }
+
     public function testFilterByParametersUsesAndWithinDistinctParameters()
     {
         $category = $this->getReference(CategoryDataFixture::CATEGORY_PRINTERS);
