@@ -11,6 +11,7 @@ services:
             - POSTGRES_USER=root
             - POSTGRES_PASSWORD=root
             - POSTGRES_DB=shopsys
+        command: postgres -c config_file=/var/lib/postgresql/data/postgresql.conf
 
     webserver:
         image: nginx:1.13-alpine
