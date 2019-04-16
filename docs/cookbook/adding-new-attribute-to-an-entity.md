@@ -37,8 +37,9 @@ It is a common modification when you need your e-commerce application and ERP sy
          */
         protected function __construct(BaseProductData $productData, ProductCategoryDomainFactoryInterface $productCategoryDomainFactory, array $variants = null)
         {
-            $this->extId = $productData->extId ?? 0;
             parent::__construct($productData, $productCategoryDomainFactory, $variants);
+
+            $this->extId = $productData->extId ?? 0;
         }
 
         /**
@@ -203,8 +204,9 @@ The original `ProductFormType` is set as the extended type by implementation of 
         BaseProductData $productData,
         ProductPriceRecalculationScheduler $productPriceRecalculationScheduler
     ) {
-        $this->extId = $productData->extId;
         parent::edit($productCategoryDomainFactory, $productData, $productPriceRecalculationScheduler);
+
+        $this->extId = $productData->extId;
     }
     ```
 
