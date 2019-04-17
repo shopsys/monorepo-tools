@@ -58,7 +58,7 @@ abstract class ProductOnCurrentDomainFacadeCountDataTest extends TransactionFunc
         $filterConfig = $this->productFilterConfigFactory->createForCategory($this->domain->getId(), $this->domain->getLocale(), $category);
         $countData = $this->productOnCurrentDomainFacade->getProductFilterCountDataInCategory($category->getId(), $filterConfig, $filterData);
 
-        $this->assertEquals($expectedCountData, $countData);
+        $this->assertEquals($expectedCountData, $this->removeEmptyParameters($countData));
     }
 
     /**
@@ -89,7 +89,7 @@ abstract class ProductOnCurrentDomainFacadeCountDataTest extends TransactionFunc
         $filterConfig = $this->productFilterConfigFactory->createForSearch($this->domain->getId(), $this->domain->getLocale(), $searchText);
         $countData = $this->productOnCurrentDomainFacade->getProductFilterCountDataForSearch($searchText, $filterConfig, $filterData);
 
-        $this->assertEquals($expectedCountData, $countData);
+        $this->assertEquals($expectedCountData, $this->removeEmptyParameters($countData));
     }
 
     /**
@@ -420,15 +420,12 @@ abstract class ProductOnCurrentDomainFacadeCountDataTest extends TransactionFunc
             1 => 2,
         ];
         $countData->countByParameterIdAndValueId = [
-            51 => [],
             17 => [
                 8 => 1,
             ],
             11 => [
                 24 => 1,
             ],
-            46 => [],
-            47 => [],
             19 => [
                 12 => 1,
             ],
@@ -450,8 +447,6 @@ abstract class ProductOnCurrentDomainFacadeCountDataTest extends TransactionFunc
             13 => [
                 26 => 1,
             ],
-            3 => [],
-            48 => [],
             10 => [
                 22 => 1,
             ],
@@ -838,5 +833,20 @@ abstract class ProductOnCurrentDomainFacadeCountDataTest extends TransactionFunc
             $filterData,
             $countData,
         ];
+    }
+
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Product\Filter\ProductFilterCountData $countData
+     * @return \Shopsys\FrameworkBundle\Model\Product\Filter\ProductFilterCountData
+     */
+    private function removeEmptyParameters(ProductFilterCountData $countData): ProductFilterCountData
+    {
+        $result = clone $countData;
+        foreach ($countData->countByParameterIdAndValueId as $parameterId => $values) {
+            if (empty($values)) {
+                unset($result->countByParameterIdAndValueId[$parameterId]);
+            }
+        }
+        return $result;
     }
 }
