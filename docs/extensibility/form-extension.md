@@ -67,3 +67,33 @@ It contains definition of blocks that are used for rendering forms
 
 and blocks of custom form widgets for various [FormTypes](../introduction/using-form-types.md) eg.:
 - `date_picker_widget` - is rendered as `form_widget` for [`DatePickerType`](../../packages/framework/src/Form/DatePickerType.php)
+
+## Changing order of groups and fields
+All form types contain option called `position`. With this option you can specify position of your group or field **on the same hierarchical layer**.
+
+Option `position` can contain four different values:
+
+```php
+$builder
+    ->add('g', TextType::class, ['position' => 'last'])
+    ->add('a', TextType::class, ['position' => 'first'])
+    ->add('c', TextType::class)
+    ->add('f', TextType::class)
+    ->add('e', TextType::class, ['position' => ['before' => 'f']])
+    ->add('d', TextType::class, ['position' => ['after' => 'c']])
+    ->add('b', TextType::class, ['position' => 'first']);
+```
+
+The output will be: A => B => C => D => E => F => G.
+
+*Note: More examples can be found [here](https://github.com/egeloen/ivory-ordered-form/blob/master/doc/usage.md#position).*
+
+### Changing order of existing groups and fields
+
+Implementation of `FormBuilderInterface` contains method `setPosition` that can change order of existing field.
+
+```php
+$builder->get('a')->setPosition('first');
+$builder->get('c')->setPosition(['after' => 'b']);
+```
+*Note: Because `FormBuilderInterface` doesn't declare method `setPosition`, your IDE will warn you that method doesn't exist.*
