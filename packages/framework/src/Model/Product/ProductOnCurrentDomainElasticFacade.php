@@ -15,6 +15,7 @@ use Shopsys\FrameworkBundle\Model\Product\Filter\ProductFilterData;
 use Shopsys\FrameworkBundle\Model\Product\Listing\ProductListOrderingConfig;
 use Shopsys\FrameworkBundle\Model\Product\Search\FilterQuery;
 use Shopsys\FrameworkBundle\Model\Product\Search\ProductElasticsearchRepository;
+use Shopsys\FrameworkBundle\Model\Product\Search\ProductFilterCountDataElasticsearchRepository;
 use Shopsys\FrameworkBundle\Model\Product\Search\ProductFilterDataToQueryTransformer;
 
 class ProductOnCurrentDomainElasticFacade implements ProductOnCurrentDomainFacadeInterface
@@ -45,6 +46,11 @@ class ProductOnCurrentDomainElasticFacade implements ProductOnCurrentDomainFacad
     protected $productElasticsearchRepository;
 
     /**
+     * @var \Shopsys\FrameworkBundle\Model\Product\Search\ProductFilterCountDataElasticsearchRepository
+     */
+    protected $productFilterCountDataElasticsearchRepository;
+
+    /**
      * @var \Shopsys\FrameworkBundle\Component\Elasticsearch\ElasticsearchStructureManager
      */
     protected $elasticsearchStructureManager;
@@ -60,6 +66,7 @@ class ProductOnCurrentDomainElasticFacade implements ProductOnCurrentDomainFacad
      * @param \Shopsys\FrameworkBundle\Model\Customer\CurrentCustomer $currentCustomer
      * @param \Shopsys\FrameworkBundle\Model\Product\Accessory\ProductAccessoryRepository $productAccessoryRepository
      * @param \Shopsys\FrameworkBundle\Model\Product\Search\ProductElasticsearchRepository $productElasticsearchRepository
+     * @param \Shopsys\FrameworkBundle\Model\Product\Search\ProductFilterCountDataElasticsearchRepository $productFilterCountDataElasticsearchRepository
      * @param \Shopsys\FrameworkBundle\Component\Elasticsearch\ElasticsearchStructureManager $elasticsearchStructureManager
      * @param \Shopsys\FrameworkBundle\Model\Product\Search\ProductFilterDataToQueryTransformer $productFilterDataToQueryTransformer
      */
@@ -69,6 +76,7 @@ class ProductOnCurrentDomainElasticFacade implements ProductOnCurrentDomainFacad
         CurrentCustomer $currentCustomer,
         ProductAccessoryRepository $productAccessoryRepository,
         ProductElasticsearchRepository $productElasticsearchRepository,
+        ProductFilterCountDataElasticsearchRepository $productFilterCountDataElasticsearchRepository,
         ElasticsearchStructureManager $elasticsearchStructureManager,
         ProductFilterDataToQueryTransformer $productFilterDataToQueryTransformer
     ) {
@@ -77,6 +85,7 @@ class ProductOnCurrentDomainElasticFacade implements ProductOnCurrentDomainFacad
         $this->currentCustomer = $currentCustomer;
         $this->productAccessoryRepository = $productAccessoryRepository;
         $this->productElasticsearchRepository = $productElasticsearchRepository;
+        $this->productFilterCountDataElasticsearchRepository = $productFilterCountDataElasticsearchRepository;
         $this->elasticsearchStructureManager = $elasticsearchStructureManager;
         $this->productFilterDataToQueryTransformer = $productFilterDataToQueryTransformer;
     }
@@ -243,7 +252,16 @@ class ProductOnCurrentDomainElasticFacade implements ProductOnCurrentDomainFacad
      */
     public function getProductFilterCountDataInCategory($categoryId, ProductFilterConfig $productFilterConfig, ProductFilterData $productFilterData): ProductFilterCountData
     {
-        // TODO: Implement getProductFilterCountDataInCategory() method.
+        $baseFilterQuery = new FilterQuery($this->getIndexName());
+        $baseFilterQuery->filterByCategory([$categoryId]);
+        $baseFilterQuery->filterOnlySellable();
+        $this->productFilterDataToQueryTransformer->addPricesToQuery($productFilterData, $baseFilterQuery, $this->currentCustomer->getPricingGroup());
+        $this->productFilterDataToQueryTransformer->addStockToQuery($productFilterData, $baseFilterQuery);
+
+        return $this->productFilterCountDataElasticsearchRepository->getProductFilterCountDataInCategory(
+            $productFilterData,
+            $baseFilterQuery
+        );
     }
 
     /**
@@ -251,7 +269,16 @@ class ProductOnCurrentDomainElasticFacade implements ProductOnCurrentDomainFacad
      */
     public function getProductFilterCountDataForSearch($searchText, ProductFilterConfig $productFilterConfig, ProductFilterData $productFilterData): ProductFilterCountData
     {
-        // TODO: Implement getProductFilterCountDataForSearch() method.
+        $baseFilterQuery = new FilterQuery($this->getIndexName());
+        $baseFilterQuery->search($searchText);
+        $baseFilterQuery->filterOnlySellable();
+        $this->productFilterDataToQueryTransformer->addPricesToQuery($productFilterData, $baseFilterQuery, $this->currentCustomer->getPricingGroup());
+        $this->productFilterDataToQueryTransformer->addStockToQuery($productFilterData, $baseFilterQuery);
+
+        return $this->productFilterCountDataElasticsearchRepository->getProductFilterCountDataInSearch(
+            $productFilterData,
+            $baseFilterQuery
+        );
     }
 
     /**

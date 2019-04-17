@@ -25,6 +25,7 @@ parameters:
             - '*/src/Model/AdminNavigation/SideMenuBuilder.php'
             - '*/src/Model/Order/Preview/OrderPreviewCalculation.php'
             - '*/src/Model/Product/ProductVisibilityRepository.php'
+            - '*/src/Model/Product/Search/FilterQuery.php'
             - '*/src/Controller/Admin/AdministratorController.php'
             - '*/tests/Unit/Model/Customer/CustomerDataFactoryTest.php'
             - '*/tests/Unit/Component/Domain/DomainDataCreatorTest.php'

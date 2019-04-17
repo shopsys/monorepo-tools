@@ -10,6 +10,8 @@ use Shopsys\FrameworkBundle\Model\Product\Listing\ProductListOrderingConfig;
 
 class FilterQuery
 {
+    protected const MAXIMUM_REASONABLE_AGGREGATION_BUCKET_COUNT = 100;
+
     /** @var array */
     protected $filters = [];
 
@@ -396,5 +398,234 @@ class FilterQuery
     protected function countFrom(int $page, int $limit): int
     {
         return ($page - 1) * $limit;
+    }
+
+    /**
+     * Applies all filters and calculate standard (non pluses) numbers
+     * For flags, brands and stock
+     *
+     * @return array
+     */
+    public function getAbsoluteNumbersAggregationQuery(): array
+    {
+        return [
+            'index' => $this->indexName,
+            'type' => '_doc',
+            'body' => [
+                'size' => 0,
+                'aggs' => [
+                    'flags' => [
+                        'terms' => [
+                            'field' => 'flags',
+                            'size' => static::MAXIMUM_REASONABLE_AGGREGATION_BUCKET_COUNT,
+                        ],
+                    ],
+                    'brands' => [
+                        'terms' => [
+                            'field' => 'brand',
+                            'size' => static::MAXIMUM_REASONABLE_AGGREGATION_BUCKET_COUNT,
+                        ],
+                    ],
+                    'stock' => [
+                        'filter' => [
+                            'term' => [
+                                'in_stock' => 'true',
+                            ],
+                        ],
+                    ],
+                ],
+                'query' => [
+                    'bool' => [
+                        'must' => $this->match,
+                        'filter' => $this->filters,
+                    ],
+                ],
+            ],
+        ];
+    }
+
+    /**
+     * Applies all filters and calculate standard (non pluses) numbers
+     * For flags, brands, stock, parameters
+     * Parameters aggregation have nested structure in result [parameter_id][parameter_value_id]
+     *
+     * @return array
+     */
+    public function getAbsoluteNumbersWithParametersQuery(): array
+    {
+        $query = $this->getAbsoluteNumbersAggregationQuery();
+        $query['body']['aggs']['parameters'] = [
+            'nested' => [
+                'path' => 'parameters',
+            ],
+            'aggs' => [
+                'by_parameters' => [
+                    'terms' => [
+                        'field' => 'parameters.parameter_id',
+                        'size' => static::MAXIMUM_REASONABLE_AGGREGATION_BUCKET_COUNT,
+                    ],
+                    'aggs' => [
+                        'by_value' => [
+                            'terms' => [
+                                'field' => 'parameters.parameter_value_id',
+                                'size' => static::MAXIMUM_REASONABLE_AGGREGATION_BUCKET_COUNT,
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+        ];
+
+        return $query;
+    }
+
+    /**
+     * Answers question "If I add this flag, how many products will be added?"
+     * We are looking for count of products that meet all filters and don't have any of already selected flags
+     *
+     * @param int[] $selectedFlags
+     * @return array
+     */
+    public function getFlagsPlusNumbersQuery(array $selectedFlags): array
+    {
+        return [
+            'index' => $this->indexName,
+            'type' => '_doc',
+            'body' => [
+                'size' => 0,
+                'aggs' => [
+                    'flags' => [
+                        'terms' => [
+                            'field' => 'flags',
+                            'size' => static::MAXIMUM_REASONABLE_AGGREGATION_BUCKET_COUNT,
+                        ],
+                    ],
+                ],
+                'query' => [
+                    'bool' => [
+                        'must' => $this->match,
+                        'filter' => $this->filters,
+                        'must_not' => [
+                            'terms' => [
+                                'flags' => $selectedFlags,
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+        ];
+    }
+
+    /**
+     * Answers question "If I add this brand, how many products will be added?"
+     * We are looking for count of products that meet all filters and don't have any of already selected brand
+     *
+     * @param int[] $selectedBrandsIds
+     * @return array
+     */
+    public function getBrandsPlusNumbersQuery(array $selectedBrandsIds): array
+    {
+        return [
+            'index' => $this->indexName,
+            'type' => '_doc',
+            'body' => [
+                'size' => 0,
+                'aggs' => [
+                    'brands' => [
+                        'terms' => [
+                            'field' => 'brand',
+                            'size' => static::MAXIMUM_REASONABLE_AGGREGATION_BUCKET_COUNT,
+                        ],
+                    ],
+                ],
+                'query' => [
+                    'bool' => [
+                        'must' => $this->match,
+                        'filter' => $this->filters,
+                        'must_not' => [
+                            'terms' => [
+                                'brand' => $selectedBrandsIds,
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+        ];
+    }
+
+    /**
+     * Answers question "If I add this parameter value, how many products will be added?"
+     * We are looking for count of products that meet all filters and don't have already selected parameter value
+     *
+     * This query makes sense only within a single parameter, so it have to be executed for all parameters
+     * (that have selected value and can have plus numbers)
+     *
+     * @param int $selectedParameterId
+     * @param array $selectedValuesIds
+     * @return array
+     */
+    public function getParametersPlusNumbersQuery(int $selectedParameterId, array $selectedValuesIds): array
+    {
+        return [
+            'index' => $this->indexName,
+            'type' => '_doc',
+            'body' => [
+                'size' => 0,
+                'aggs' => [
+                    'parameters' => [
+                        'nested' => [
+                            'path' => 'parameters',
+                        ],
+                        'aggs' => [
+                            'filtered_for_parameter' => [
+                                'filter' => [
+                                    'term' => [
+                                        'parameters.parameter_id' => $selectedParameterId,
+                                    ],
+                                ],
+                                'aggs' => [
+                                    'by_parameters' => [
+                                        'terms' => [
+                                            'field' => 'parameters.parameter_id',
+                                            'size' => static::MAXIMUM_REASONABLE_AGGREGATION_BUCKET_COUNT,
+                                        ],
+                                        'aggs' => [
+                                            'by_value' => [
+                                                'terms' => [
+                                                    'field' => 'parameters.parameter_value_id',
+                                                    'size' => static::MAXIMUM_REASONABLE_AGGREGATION_BUCKET_COUNT,
+                                                ],
+                                            ],
+                                        ],
+                                    ],
+                                ],
+                            ],
+                        ],
+                    ],
+                ],
+                'query' => [
+                    'bool' => [
+                        'must' => $this->match,
+                        'filter' => $this->filters,
+                        'must_not' => [
+                            [
+                                'nested' => [
+                                    'path' => 'parameters',
+                                    'query' => [
+                                        'bool' => [
+                                            'must' => [
+                                                'terms' => [
+                                                    'parameters.parameter_value_id' => $selectedValuesIds,
+                                                ],
+                                            ],
+                                        ],
+                                    ],
+                                ],
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+        ];
     }
 }
