@@ -16,12 +16,13 @@
     <target name="standards" depends="phplint,ecs,phpstan,twig-lint,yaml-lint,eslint-check" description="Checks coding standards."/>
     <target name="standards-diff" depends="phplint-diff,ecs-diff,phpstan,twig-lint-diff,yaml-lint,eslint-check-diff" description="Checks coding standards on changed files."/>
 
-    <target name="test-db-demo" depends="clean,redis-check,clean-redis,test-db-wipe-public-schema,test-db-import-basic-structure,test-db-migrations,test-create-domains-data,test-db-fixtures-demo,test-generate-friendly-urls,test-load-plugin-demo-data,test-replace-domains-urls" description="Drops all data in test database and creates a new one with demo data."/>
+    <target name="test-db-demo" depends="clean,redis-check,clean-redis,test-db-wipe-public-schema,test-db-import-basic-structure,test-db-migrations,test-create-domains-data,test-db-fixtures-demo,test-generate-friendly-urls,test-load-plugin-demo-data,test-replace-domains-urls,test-product-search-recreate-structure,test-product-search-export-products" description="Drops all data in test database and creates a new one with demo data and exports products to elasticsearch test index."/>
     <target name="test-db-performance" depends="test-db-demo,test-db-fixtures-performance" description="Drops all data in test database and creates a new one with performance data."/>
     <target name="tests-static" depends="tests-unit" description="Runs unit tests."/>
     <target name="tests" depends="test-db-demo,tests-static,tests-functional,tests-smoke" description="Runs unit, functional and smoke tests on a newly built test database."/>
 
     <target name="tests-performance-run" depends="clean,redis-check,clean-redis,test-db-performance,tests-performance-warmup,tests-performance" description="Runs performance tests on a newly built test database with performance data."/>
+    <target name="test-product-search-recreate-structure" depends="test-product-search-delete-structure,test-product-search-create-structure" description="Recreates structure for searching via elasticsearch in test environment (deletes existing structure and creates new one)." />
 
     <target name="composer-check" description="Checks if Composer lock file is valid.">
         <exec
@@ -663,6 +664,30 @@
             <arg value="${path.bin-console}" />
             <arg value="--env=test" />
             <arg value="shopsys:plugin-data-fixtures:load" />
+        </exec>
+    </target>
+
+    <target name="test-product-search-create-structure" description="Creates structure for searching via elasticsearch for test environment.">
+        <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
+            <arg value="${path.bin-console}" />
+            <arg value="--env=test" />
+            <arg value="shopsys:product-search:create-structure" />
+        </exec>
+    </target>
+
+    <target name="test-product-search-delete-structure" description="Deletes structure for searching via elasticsearch for test environment.">
+        <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
+            <arg value="${path.bin-console}" />
+            <arg value="--env=test" />
+            <arg value="shopsys:product-search:delete-structure" />
+        </exec>
+    </target>
+
+    <target name="test-product-search-export-products" description="Exports all products for searching via elasticsearch for test environment.">
+        <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
+            <arg value="${path.bin-console}" />
+            <arg value="--env=test" />
+            <arg value="shopsys:product-search:export-products" />
         </exec>
     </target>
 

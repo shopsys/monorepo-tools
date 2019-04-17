@@ -176,3 +176,12 @@ services:
     Shopsys\FrameworkBundle\Model\Cart\Watcher\CartWatcherFacade:
         arguments:
             - '@shopsys.shop.component.flash_message.sender.front'
+
+    Shopsys\FrameworkBundle\Model\Product\Search\ProductElasticsearchRepository:
+        arguments:
+            $indexPrefix: 'test-%env(ELASTIC_SEARCH_INDEX_PREFIX)%'
+
+    Shopsys\FrameworkBundle\Component\Elasticsearch\ElasticsearchStructureManager:
+        arguments:
+            - '%shopsys.elasticsearch.structure_dir%'
+            - 'test-%env(ELASTIC_SEARCH_INDEX_PREFIX)%'

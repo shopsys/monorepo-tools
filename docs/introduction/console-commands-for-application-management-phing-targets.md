@@ -115,7 +115,7 @@ The command is designed to be run only during the first creation of the database
 Drops all data in the database and creates a new one with demo data.
 
 #### test-db-demo
-Drops all data in the test database and creates a new one with demo data.
+Drops all data in the test database and creates a new one with demo data and exports products to elasticsearch test index.
 
 *Note: All database related targets `db-*` have their `test-db-*` variant for the test database.*
 

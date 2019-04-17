@@ -68,7 +68,7 @@ Sometimes you may want to debug individual test without running the whole accept
 
 ### Prepare database dump and switch to TEST environment
 ```
-# create test database and fill it with demo data
+# create test database and fill it with demo data and export products to elasticsearch test index
 php phing test-db-demo
 
 # create test database dump with current data which will be restored before each test
