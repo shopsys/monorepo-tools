@@ -33,7 +33,7 @@ class ProductSearchCreateStructureCommand extends Command
     protected function configure()
     {
         $this
-            ->setDescription('Creates structure for searching via microservice');
+            ->setDescription('Creates structure in Elasticsearch for searching');
     }
 
     /**

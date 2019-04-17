@@ -32,7 +32,7 @@ class ProductSearchExportProductsCommand extends Command
     protected function configure()
     {
         $this
-            ->setDescription('Exports all products for searching via microservice');
+            ->setDescription('Exports all products to Elasticsearch for searching ');
     }
 
     /**
@@ -42,7 +42,7 @@ class ProductSearchExportProductsCommand extends Command
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $symfonyStyleIo = new SymfonyStyle($input, $output);
-        $output->writeln('Exporting products to microservice');
+        $output->writeln('Exporting products to Elasticsearch');
         $this->productSearchExportFacade->exportAll();
         $symfonyStyleIo->success('All products successfully exported');
     }

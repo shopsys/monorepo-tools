@@ -42,8 +42,6 @@ services:
             - shopsys-framework-sync:/var/www/html
             - shopsys-framework-vendor-sync:/var/www/html/vendor
             - shopsys-framework-web-sync:/var/www/html/project-base/web
-            - shopsys-framework-microservice-product-search-sync:/var/www/html/microservices/product-search
-            - shopsys-framework-microservice-product-search-export-sync:/var/www/html/microservices/product-search-export
             - ./project-base/docker/php-fpm/php-ini-overrides.ini:/usr/local/etc/php/php.ini
         ports:
             - "35729:35729"
