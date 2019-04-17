@@ -18,6 +18,7 @@ There you can find links to upgrade notes for other versions too.
         -        $filepath = $file->getPathname();
         +        $filepath = TransformString::removeDriveLetterFromPath($file->getPathname());
         ```
+- `PaymentFormType` fields `vat` and `czkRounding` were moved from `basicInformation` to `prices` group ([#956](https://github.com/shopsys/shopsys/pull/956))
 
 - *(low priority)* reconfigure fm_elfinder to use main_filesystem ([#932](https://github.com/shopsys/shopsys/pull/932))
     - upgrade version of `helios-ag/fm-elfinder-bundle` to `^9.2` in `composer.json`

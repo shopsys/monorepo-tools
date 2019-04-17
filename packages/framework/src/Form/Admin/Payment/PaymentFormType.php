@@ -103,11 +103,21 @@ class PaymentFormType extends AbstractType
                 'required' => false,
                 'label' => t('Hidden'),
             ])
-            ->add('czkRounding', YesNoType::class, [
+            ->add('transports', ChoiceType::class, [
                 'required' => false,
-                'label' => t('Order in CZK round to whole crowns'),
-                'icon_title' => t('Rounding item with 0 % VAT will be added to your order. It is used for payment in cash.'),
-            ])
+                'choices' => $this->transportFacade->getAll(),
+                'choice_label' => 'name',
+                'choice_value' => 'id',
+                'multiple' => true,
+                'expanded' => true,
+                'empty_message' => t('You have to create some shipping first.'),
+                'label' => t('Available shipping methods'),
+            ]);
+
+        $builderPriceGroup = $builder->create('prices', GroupType::class, [
+            'label' => t('Prices'),
+        ]);
+        $builderPriceGroup
             ->add('vat', ChoiceType::class, [
                 'required' => true,
                 'choices' => $this->vatFacade->getAll(),
@@ -118,15 +128,14 @@ class PaymentFormType extends AbstractType
                 ],
                 'label' => t('VAT'),
             ])
-            ->add('transports', ChoiceType::class, [
+            ->add('czkRounding', YesNoType::class, [
                 'required' => false,
-                'choices' => $this->transportFacade->getAll(),
-                'choice_label' => 'name',
-                'choice_value' => 'id',
-                'multiple' => true,
-                'expanded' => true,
-                'empty_message' => t('You have to create some shipping first.'),
-                'label' => t('Available shipping methods'),
+                'label' => t('Order in CZK round to whole crowns'),
+                'icon_title' => t('Rounding item with 0 % VAT will be added to your order. It is used for payment in cash.'),
+            ])
+            ->add('pricesByCurrencyId', PriceTableType::class, [
+                'currencies' => $this->currencyFacade->getAllIndexedById(),
+                'base_prices' => $payment !== null ? $this->paymentFacade->getIndependentBasePricesIndexedByCurrencyId($payment) : [],
             ]);
 
         $builderAdditionalInformationGroup = $builder->create('additionalInformation', GroupType::class, [
@@ -165,20 +174,11 @@ class PaymentFormType extends AbstractType
                 'info_text' => t('You can upload following formats: PNG, JPG, GIF'),
             ]);
 
-        $builderPriceGroup = $builder->create('prices', GroupType::class, [
-            'label' => t('Prices'),
-        ]);
-        $builderPriceGroup
-            ->add('pricesByCurrencyId', PriceTableType::class, [
-                'currencies' => $this->currencyFacade->getAllIndexedById(),
-                'base_prices' => $payment !== null ? $this->paymentFacade->getIndependentBasePricesIndexedByCurrencyId($payment) : [],
-            ]);
-
         $builder
             ->add($builderBasicInformationGroup)
+            ->add($builderPriceGroup)
             ->add($builderAdditionalInformationGroup)
             ->add($builderImageGroup)
-            ->add($builderPriceGroup)
             ->add('save', SubmitType::class);
     }
 
