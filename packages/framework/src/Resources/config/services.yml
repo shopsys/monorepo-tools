@@ -578,12 +578,17 @@ services:
             - '@twig'
             - '%kernel.debug%'
 
-    Shopsys\FrameworkBundle\Component\Error\NotLogFakeHttpExceptionsExceptionListener:
+    Shopsys\FrameworkBundle\Component\Error\NotLogFakeHttpExceptionsExceptionListener: '@twig.exception_listener'
+
+    twig.exception_listener:
+        class: Shopsys\FrameworkBundle\Component\Error\NotLogFakeHttpExceptionsExceptionListener
         tags:
+            - { name: 'kernel.event_subscriber' }
             - { name: 'monolog.logger', channel: 'request' }
         arguments:
             - '%twig.exception_listener.controller%'
             - '@?logger'
+            - '%kernel.debug%'
 
     twig.stringloader:
         class: Twig_Loader_Array
