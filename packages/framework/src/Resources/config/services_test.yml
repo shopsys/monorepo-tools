@@ -110,6 +110,12 @@ services:
 
     Shopsys\FrameworkBundle\Model\Order\Preview\OrderPreviewFactory: ~
 
+    Shopsys\FrameworkBundle\Model\Product\Filter\BrandFilterChoiceRepository: ~
+
+    Shopsys\FrameworkBundle\Model\Product\Filter\FlagFilterChoiceRepository: ~
+
+    Shopsys\FrameworkBundle\Model\Product\Filter\ParameterFilterChoiceRepository: ~
+
     Shopsys\FrameworkBundle\Model\Product\Parameter\ParameterInlineEdit: ~
 
     Shopsys\FrameworkBundle\Model\Product\Parameter\ParameterRepository: ~
