@@ -38,11 +38,6 @@ class ProductElasticsearchRepository
     protected $elasticsearchStructureManager;
 
     /**
-     * @var \Shopsys\FrameworkBundle\Model\Product\Search\ProductFilterDataToQueryTransformer
-     */
-    protected $productFilterDataToQueryTransformer;
-
-    /**
      * @var \Shopsys\FrameworkBundle\Model\Product\Search\FilterQueryFactory
      */
     protected $filterQueryFactory;
@@ -63,8 +58,16 @@ class ProductElasticsearchRepository
         $this->client = $client;
         $this->productElasticsearchConverter = $productElasticsearchConverter;
         $this->elasticsearchStructureManager = $elasticsearchStructureManager;
-        $this->productFilterDataToQueryTransformer = new ProductFilterDataToQueryTransformer();
-        $this->filterQueryFactory = new FilterQueryFactory();
+        $this->filterQueryFactory = $this->createFilterQueryFactory();
+    }
+
+    /**
+     * @return \Shopsys\FrameworkBundle\Model\Product\Search\FilterQueryFactory
+     * @deprecated Will be replaced with constructor injection in the next major release
+     */
+    protected function createFilterQueryFactory(): FilterQueryFactory
+    {
+        return new FilterQueryFactory();
     }
 
     /**
