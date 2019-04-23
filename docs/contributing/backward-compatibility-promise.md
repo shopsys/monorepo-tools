@@ -4,8 +4,6 @@ Smooth and safe upgrades of your own e-commerce project are very important to us
 In the same time, we need to be able to improve Shopsys Framework for you by adding functionality, enhancing or simplifying current functions and fixing bugs.
 After reading this promise you'll understand backward compatibility, what changes you can expect and how we plan to make changes in the future.
 
-*Note: This BC promise becomes effective with the first stable release (`7.0.0`).*
-
 ## Releases and Versioning
 This project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html), which means its release versions are in format `MAJOR.MINOR.PATCH`:
 
