@@ -82,4 +82,16 @@ class TransformString
     {
         return iconv('utf-8', 'us-ascii//TRANSLIT//IGNORE', $string);
     }
+
+    /**
+     * For some cases there is need to have clean absolute paths
+     * Operating systems that use drive letter assignments https://en.wikipedia.org/wiki/Drive_letter_assignment
+     *
+     * @param string $path
+     * @return string
+     */
+    public static function removeDriveLetterFromPath($path)
+    {
+        return preg_replace('#^[A-Z]:#', '', $path);
+    }
 }
