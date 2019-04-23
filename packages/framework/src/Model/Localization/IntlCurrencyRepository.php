@@ -6,7 +6,7 @@ use CommerceGuys\Intl\Currency\CurrencyRepository as BaseCurrencyRepository;
 
 class IntlCurrencyRepository extends BaseCurrencyRepository
 {
-    const SUPPORTED_CURRENCY_CODES = [
+    public const SUPPORTED_CURRENCY_CODES = [
         'AED',
         'AFN',
         'ALL',

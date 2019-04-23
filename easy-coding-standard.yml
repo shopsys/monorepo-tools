@@ -2,3 +2,13 @@ imports:
     - { resource: 'packages/coding-standards/easy-coding-standard.yml' }
     - { resource: 'packages/*/easy-coding-standard.yml' }
     - { resource: 'project-base/easy-coding-standard.yml' }
+
+parameters:
+    skip:
+        Shopsys\CodingStandards\Sniffs\ConstantVisibilityRequiredSniff:
+            - '*/src/Shopsys/ShopBundle/*'
+            - '*/tests/ShopBundle/*'
+
+        Shopsys\CodingStandards\Sniffs\ForceLateStaticBindingForProtectedConstantsSniff:
+            - '*/src/Shopsys/ShopBundle/*'
+            - '*/tests/ShopBundle/*'

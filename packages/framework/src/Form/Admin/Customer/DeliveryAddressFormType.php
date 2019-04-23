@@ -18,6 +18,7 @@ use Symfony\Component\Validator\Constraints;
 
 class DeliveryAddressFormType extends AbstractType
 {
+    /** @access protected */
     const VALIDATION_GROUP_DIFFERENT_DELIVERY_ADDRESS = 'differentDeliveryAddress';
 
     /**
@@ -78,7 +79,7 @@ class DeliveryAddressFormType extends AbstractType
                         'constraints' => [
                             new Constraints\NotBlank([
                                 'message' => 'Please enter first name of contact person',
-                                'groups' => [self::VALIDATION_GROUP_DIFFERENT_DELIVERY_ADDRESS],
+                                'groups' => [static::VALIDATION_GROUP_DIFFERENT_DELIVERY_ADDRESS],
                             ]),
                             new Constraints\Length([
                                 'max' => 100,
@@ -92,7 +93,7 @@ class DeliveryAddressFormType extends AbstractType
                         'constraints' => [
                             new Constraints\NotBlank([
                                 'message' => 'Please enter last name of contact person',
-                                'groups' => [self::VALIDATION_GROUP_DIFFERENT_DELIVERY_ADDRESS],
+                                'groups' => [static::VALIDATION_GROUP_DIFFERENT_DELIVERY_ADDRESS],
                             ]),
                             new Constraints\Length([
                                 'max' => 100,
@@ -116,12 +117,12 @@ class DeliveryAddressFormType extends AbstractType
                         'constraints' => [
                             new Constraints\NotBlank([
                                 'message' => 'Please enter street',
-                                'groups' => [self::VALIDATION_GROUP_DIFFERENT_DELIVERY_ADDRESS],
+                                'groups' => [static::VALIDATION_GROUP_DIFFERENT_DELIVERY_ADDRESS],
                             ]),
                             new Constraints\Length([
                                 'max' => 100,
                                 'maxMessage' => 'Street name cannot be longer than {{ limit }} characters',
-                                'groups' => [self::VALIDATION_GROUP_DIFFERENT_DELIVERY_ADDRESS],
+                                'groups' => [static::VALIDATION_GROUP_DIFFERENT_DELIVERY_ADDRESS],
                             ]),
                         ],
                         'label' => t('Street'),
@@ -131,12 +132,12 @@ class DeliveryAddressFormType extends AbstractType
                         'constraints' => [
                             new Constraints\NotBlank([
                                 'message' => 'Please enter city',
-                                'groups' => [self::VALIDATION_GROUP_DIFFERENT_DELIVERY_ADDRESS],
+                                'groups' => [static::VALIDATION_GROUP_DIFFERENT_DELIVERY_ADDRESS],
                             ]),
                             new Constraints\Length([
                                 'max' => 100,
                                 'maxMessage' => 'City name cannot be longer than {{ limit }} characters',
-                                'groups' => [self::VALIDATION_GROUP_DIFFERENT_DELIVERY_ADDRESS],
+                                'groups' => [static::VALIDATION_GROUP_DIFFERENT_DELIVERY_ADDRESS],
                             ]),
                         ],
                         'label' => t('City'),
@@ -146,12 +147,12 @@ class DeliveryAddressFormType extends AbstractType
                         'constraints' => [
                             new Constraints\NotBlank([
                                 'message' => 'Please enter zip code',
-                                'groups' => [self::VALIDATION_GROUP_DIFFERENT_DELIVERY_ADDRESS],
+                                'groups' => [static::VALIDATION_GROUP_DIFFERENT_DELIVERY_ADDRESS],
                             ]),
                             new Constraints\Length([
                                 'max' => 30,
                                 'maxMessage' => 'Zip code cannot be longer than {{ limit }} characters',
-                                'groups' => [self::VALIDATION_GROUP_DIFFERENT_DELIVERY_ADDRESS],
+                                'groups' => [static::VALIDATION_GROUP_DIFFERENT_DELIVERY_ADDRESS],
                             ]),
                         ],
                         'label' => t('Postcode'),
@@ -189,7 +190,7 @@ class DeliveryAddressFormType extends AbstractType
                     /* @var $deliveryAddressData \Shopsys\FrameworkBundle\Model\Customer\DeliveryAddressData */
 
                     if ($deliveryAddressData->addressFilled) {
-                        $validationGroups[] = self::VALIDATION_GROUP_DIFFERENT_DELIVERY_ADDRESS;
+                        $validationGroups[] = static::VALIDATION_GROUP_DIFFERENT_DELIVERY_ADDRESS;
                     }
 
                     return $validationGroups;

@@ -12,6 +12,7 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 
 class ChangeEnvironmentCommand extends Command
 {
+    /** @access private */
     const ARG_ENVIRONMENT = 'environment';
 
     /**

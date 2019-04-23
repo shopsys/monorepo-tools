@@ -10,6 +10,7 @@ use Symfony\Component\Validator\Constraints;
 
 class FriendlyUrlType extends AbstractType
 {
+    /** @access protected */
     const SLUG_REGEX = '/^[\w_\-\/]+$/';
 
     /**
@@ -26,7 +27,7 @@ class FriendlyUrlType extends AbstractType
             'required' => true,
             'constraints' => [
                 new Constraints\NotBlank(),
-                new Constraints\Regex(self::SLUG_REGEX),
+                new Constraints\Regex(static::SLUG_REGEX),
             ],
         ]);
     }

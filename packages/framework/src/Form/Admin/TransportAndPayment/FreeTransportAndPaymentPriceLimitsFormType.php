@@ -16,9 +16,10 @@ use Symfony\Component\Validator\Constraints;
 
 class FreeTransportAndPaymentPriceLimitsFormType extends AbstractType
 {
-    const DOMAINS_SUBFORM_NAME = 'priceLimits';
-    const FIELD_ENABLED = 'enabled';
-    const FIELD_PRICE_LIMIT = 'priceLimit';
+    public const DOMAINS_SUBFORM_NAME = 'priceLimits';
+    public const FIELD_ENABLED = 'enabled';
+    public const FIELD_PRICE_LIMIT = 'priceLimit';
+    /** @access protected */
     const VALIDATION_GROUP_PRICE_LIMIT_ENABLED = 'priceLimitEnabled';
 
     /**
@@ -60,7 +61,7 @@ class FreeTransportAndPaymentPriceLimitsFormType extends AbstractType
                         $validationGroups = [ValidationGroup::VALIDATION_GROUP_DEFAULT];
                         $formData = $form->getData();
                         if ($formData[self::FIELD_ENABLED]) {
-                            $validationGroups[] = self::VALIDATION_GROUP_PRICE_LIMIT_ENABLED;
+                            $validationGroups[] = static::VALIDATION_GROUP_PRICE_LIMIT_ENABLED;
                         }
 
                         return $validationGroups;
@@ -74,11 +75,11 @@ class FreeTransportAndPaymentPriceLimitsFormType extends AbstractType
                     'constraints' => [
                         new NotNegativeMoneyAmount([
                             'message' => 'Price must be greater or equal to zero',
-                            'groups' => [self::VALIDATION_GROUP_PRICE_LIMIT_ENABLED],
+                            'groups' => [static::VALIDATION_GROUP_PRICE_LIMIT_ENABLED],
                         ]),
                         new Constraints\NotBlank([
                             'message' => 'Please enter price',
-                            'groups' => [self::VALIDATION_GROUP_PRICE_LIMIT_ENABLED],
+                            'groups' => [static::VALIDATION_GROUP_PRICE_LIMIT_ENABLED],
                         ]),
                     ],
                 ]);

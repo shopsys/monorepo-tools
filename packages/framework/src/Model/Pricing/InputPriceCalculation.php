@@ -8,6 +8,7 @@ use Shopsys\FrameworkBundle\Component\Money\Money;
 
 class InputPriceCalculation
 {
+    /** @access protected */
     const INPUT_PRICE_SCALE = 6;
 
     /**
@@ -21,7 +22,7 @@ class InputPriceCalculation
         if ($inputPriceType === PricingSetting::INPUT_PRICE_TYPE_WITHOUT_VAT) {
             $inputPrice = $this->getInputPriceWithoutVat($basePriceWithVat, $vatPercent);
         } elseif ($inputPriceType === PricingSetting::INPUT_PRICE_TYPE_WITH_VAT) {
-            $inputPrice = $basePriceWithVat->round(self::INPUT_PRICE_SCALE);
+            $inputPrice = $basePriceWithVat->round(static::INPUT_PRICE_SCALE);
         } else {
             throw new \Shopsys\FrameworkBundle\Model\Pricing\Exception\InvalidInputPriceTypeException(
                 sprintf('Input price type "%s" is not valid', $inputPriceType)
@@ -40,6 +41,6 @@ class InputPriceCalculation
     {
         $divisor = (string)(1 + $vatPercent / 100);
 
-        return $basePriceWithVat->divide($divisor, self::INPUT_PRICE_SCALE);
+        return $basePriceWithVat->divide($divisor, static::INPUT_PRICE_SCALE);
     }
 }

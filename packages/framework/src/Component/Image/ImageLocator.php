@@ -61,7 +61,7 @@ class ImageLocator
         $filename = str_replace(
             ['{index}', '{filename}'],
             [$additionalIndex, $image->getFilename()],
-            self::ADDITIONAL_IMAGE_MASK
+            static::ADDITIONAL_IMAGE_MASK
         );
 
         return $path . $filename;

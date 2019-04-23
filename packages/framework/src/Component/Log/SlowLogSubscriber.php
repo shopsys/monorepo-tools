@@ -10,6 +10,7 @@ use Symfony\Component\HttpKernel\KernelEvents;
 
 class SlowLogSubscriber implements EventSubscriberInterface
 {
+    /** @access protected */
     const REQUEST_TIME_LIMIT_SECONDS = 2;
 
     /**
@@ -47,7 +48,7 @@ class SlowLogSubscriber implements EventSubscriberInterface
     public function addNotice(PostResponseEvent $event)
     {
         $requestTime = $this->getRequestTime();
-        if ($requestTime > self::REQUEST_TIME_LIMIT_SECONDS) {
+        if ($requestTime > static::REQUEST_TIME_LIMIT_SECONDS) {
             $requestUri = $event->getRequest()->getRequestUri();
             $controllerNameAndAction = $event->getRequest()->get('_controller');
 

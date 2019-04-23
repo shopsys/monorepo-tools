@@ -4,7 +4,7 @@ namespace Shopsys\FrameworkBundle\Model\Order;
 
 class OrderData
 {
-    const NEW_ITEM_PREFIX = 'new_';
+    public const NEW_ITEM_PREFIX = 'new_';
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Transport\Transport|null

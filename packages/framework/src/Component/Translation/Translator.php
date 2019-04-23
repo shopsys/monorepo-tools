@@ -7,8 +7,9 @@ use Symfony\Component\Translation\TranslatorInterface;
 
 class Translator implements TranslatorInterface, TranslatorBagInterface
 {
+    /** @access protected */
     const DEFAULT_DOMAIN = 'messages';
-    const SOURCE_LOCALE = 'en';
+    public const SOURCE_LOCALE = 'en';
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\Translation\Translator|null
@@ -123,7 +124,7 @@ class Translator implements TranslatorInterface, TranslatorBagInterface
     protected function resolveDomain($domain)
     {
         if ($domain === null) {
-            return self::DEFAULT_DOMAIN;
+            return static::DEFAULT_DOMAIN;
         }
 
         return $domain;

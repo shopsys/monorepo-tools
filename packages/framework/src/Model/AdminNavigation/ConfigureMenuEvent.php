@@ -8,15 +8,15 @@ use Symfony\Component\EventDispatcher\Event;
 
 class ConfigureMenuEvent extends Event
 {
-    const SIDE_MENU_ROOT = 'shopsys.admin_side_menu.configure_root';
-    const SIDE_MENU_DASHBOARD = 'shopsys.admin_side_menu.configure_dashboard';
-    const SIDE_MENU_ORDERS = 'shopsys.admin_side_menu.configure_orders';
-    const SIDE_MENU_CUSTOMERS = 'shopsys.admin_side_menu.configure_customers';
-    const SIDE_MENU_PRODUCTS = 'shopsys.admin_side_menu.configure_products';
-    const SIDE_MENU_PRICING = 'shopsys.admin_side_menu.configure_pricing';
-    const SIDE_MENU_MARKETING = 'shopsys.admin_side_menu.configure_marketing';
-    const SIDE_MENU_ADMINISTRATORS = 'shopsys.admin_side_menu.configure_administrators';
-    const SIDE_MENU_SETTINGS = 'shopsys.admin_side_menu.configure_settings';
+    public const SIDE_MENU_ROOT = 'shopsys.admin_side_menu.configure_root';
+    public const SIDE_MENU_DASHBOARD = 'shopsys.admin_side_menu.configure_dashboard';
+    public const SIDE_MENU_ORDERS = 'shopsys.admin_side_menu.configure_orders';
+    public const SIDE_MENU_CUSTOMERS = 'shopsys.admin_side_menu.configure_customers';
+    public const SIDE_MENU_PRODUCTS = 'shopsys.admin_side_menu.configure_products';
+    public const SIDE_MENU_PRICING = 'shopsys.admin_side_menu.configure_pricing';
+    public const SIDE_MENU_MARKETING = 'shopsys.admin_side_menu.configure_marketing';
+    public const SIDE_MENU_ADMINISTRATORS = 'shopsys.admin_side_menu.configure_administrators';
+    public const SIDE_MENU_SETTINGS = 'shopsys.admin_side_menu.configure_settings';
 
     /**
      * @var \Knp\Menu\FactoryInterface

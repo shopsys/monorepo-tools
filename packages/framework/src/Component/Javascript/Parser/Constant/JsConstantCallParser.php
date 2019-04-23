@@ -11,7 +11,9 @@ use Shopsys\FrameworkBundle\Component\Javascript\Parser\JsStringParser;
 
 class JsConstantCallParser
 {
+    /** @access protected */
     const FUNCTION_NAME = 'Shopsys.constant';
+    /** @access protected */
     const NAME_ARGUMENT_INDEX = 0;
 
     /**
@@ -69,7 +71,7 @@ class JsConstantCallParser
     {
         $functionName = $this->jsFunctionCallParser->getFunctionName($callExprNode);
 
-        return $functionName === self::FUNCTION_NAME;
+        return $functionName === static::FUNCTION_NAME;
     }
 
     /**
@@ -99,13 +101,13 @@ class JsConstantCallParser
     protected function getConstantNameArgumentNode(JCallExprNode $callExprNode)
     {
         $argumentNodes = $this->jsFunctionCallParser->getArgumentNodes($callExprNode);
-        if (!isset($argumentNodes[self::NAME_ARGUMENT_INDEX])) {
+        if (!isset($argumentNodes[static::NAME_ARGUMENT_INDEX])) {
             throw new \Shopsys\FrameworkBundle\Component\Javascript\Parser\Constant\Exception\JsConstantCallParserException(
                 'Constant name argument not specified at line ' . $callExprNode->get_line_num()
                     . ', column ' . $callExprNode->get_col_num()
             );
         }
 
-        return $argumentNodes[self::NAME_ARGUMENT_INDEX];
+        return $argumentNodes[static::NAME_ARGUMENT_INDEX];
     }
 }

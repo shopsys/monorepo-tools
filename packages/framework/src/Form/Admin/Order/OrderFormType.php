@@ -31,6 +31,7 @@ use Symfony\Component\Validator\Constraints;
 
 class OrderFormType extends AbstractType
 {
+    /** @access protected */
     const VALIDATION_GROUP_DELIVERY_ADDRESS_SAME_AS_BILLING_ADDRESS = 'deliveryAddressSameAsBillingAddress';
 
     /**
@@ -111,7 +112,7 @@ class OrderFormType extends AbstractType
                     $orderData = $form->getData();
 
                     if (!$orderData->deliveryAddressSameAsBillingAddress) {
-                        $validationGroups[] = self::VALIDATION_GROUP_DELIVERY_ADDRESS_SAME_AS_BILLING_ADDRESS;
+                        $validationGroups[] = static::VALIDATION_GROUP_DELIVERY_ADDRESS_SAME_AS_BILLING_ADDRESS;
                     }
 
                     return $validationGroups;
@@ -382,12 +383,12 @@ class OrderFormType extends AbstractType
                         'constraints' => [
                             new Constraints\NotBlank([
                                 'message' => 'Please enter first name of contact person',
-                                'groups' => [self::VALIDATION_GROUP_DELIVERY_ADDRESS_SAME_AS_BILLING_ADDRESS],
+                                'groups' => [static::VALIDATION_GROUP_DELIVERY_ADDRESS_SAME_AS_BILLING_ADDRESS],
                             ]),
                             new Constraints\Length([
                                 'max' => 100,
                                 'maxMessage' => 'First name of contact person cannot be longer then {{ limit }} characters',
-                                'groups' => [self::VALIDATION_GROUP_DELIVERY_ADDRESS_SAME_AS_BILLING_ADDRESS],
+                                'groups' => [static::VALIDATION_GROUP_DELIVERY_ADDRESS_SAME_AS_BILLING_ADDRESS],
                             ]),
                         ],
                     ])
@@ -397,12 +398,12 @@ class OrderFormType extends AbstractType
                         'constraints' => [
                             new Constraints\NotBlank([
                                 'message' => 'Please enter last name of contact person',
-                                'groups' => [self::VALIDATION_GROUP_DELIVERY_ADDRESS_SAME_AS_BILLING_ADDRESS],
+                                'groups' => [static::VALIDATION_GROUP_DELIVERY_ADDRESS_SAME_AS_BILLING_ADDRESS],
                             ]),
                             new Constraints\Length([
                                 'max' => 100,
                                 'maxMessage' => 'Last name of contact person cannot be longer than {{ limit }} characters',
-                                'groups' => [self::VALIDATION_GROUP_DELIVERY_ADDRESS_SAME_AS_BILLING_ADDRESS],
+                                'groups' => [static::VALIDATION_GROUP_DELIVERY_ADDRESS_SAME_AS_BILLING_ADDRESS],
                             ]),
                         ],
                     ])
@@ -413,7 +414,7 @@ class OrderFormType extends AbstractType
                             new Constraints\Length([
                                 'max' => 100,
                                 'maxMessage' => 'Name cannot be longer than {{ limit }} characters',
-                                'groups' => [self::VALIDATION_GROUP_DELIVERY_ADDRESS_SAME_AS_BILLING_ADDRESS],
+                                'groups' => [static::VALIDATION_GROUP_DELIVERY_ADDRESS_SAME_AS_BILLING_ADDRESS],
                             ]),
                         ],
                     ])
@@ -424,7 +425,7 @@ class OrderFormType extends AbstractType
                             new Constraints\Length([
                                 'max' => 30,
                                 'maxMessage' => 'Telephone number cannot be longer than {{ limit }} characters',
-                                'groups' => [self::VALIDATION_GROUP_DELIVERY_ADDRESS_SAME_AS_BILLING_ADDRESS],
+                                'groups' => [static::VALIDATION_GROUP_DELIVERY_ADDRESS_SAME_AS_BILLING_ADDRESS],
                             ]),
                         ],
                     ])
@@ -434,12 +435,12 @@ class OrderFormType extends AbstractType
                         'constraints' => [
                             new Constraints\NotBlank([
                                 'message' => 'Please enter street',
-                                'groups' => [self::VALIDATION_GROUP_DELIVERY_ADDRESS_SAME_AS_BILLING_ADDRESS],
+                                'groups' => [static::VALIDATION_GROUP_DELIVERY_ADDRESS_SAME_AS_BILLING_ADDRESS],
                             ]),
                             new Constraints\Length([
                                 'max' => 100,
                                 'maxMessage' => 'Street name cannot be longer than {{ limit }} characters',
-                                'groups' => [self::VALIDATION_GROUP_DELIVERY_ADDRESS_SAME_AS_BILLING_ADDRESS],
+                                'groups' => [static::VALIDATION_GROUP_DELIVERY_ADDRESS_SAME_AS_BILLING_ADDRESS],
                             ]),
                         ],
                     ])
@@ -449,11 +450,11 @@ class OrderFormType extends AbstractType
                         'constraints' => [
                             new Constraints\NotBlank([
                                 'message' => 'Please enter city',
-                                'groups' => [self::VALIDATION_GROUP_DELIVERY_ADDRESS_SAME_AS_BILLING_ADDRESS],
+                                'groups' => [static::VALIDATION_GROUP_DELIVERY_ADDRESS_SAME_AS_BILLING_ADDRESS],
                             ]),
                             new Constraints\Length(['max' => 100,
                                 'maxMessage' => 'City name cannot be longer than {{ limit }} characters',
-                                'groups' => [self::VALIDATION_GROUP_DELIVERY_ADDRESS_SAME_AS_BILLING_ADDRESS],
+                                'groups' => [static::VALIDATION_GROUP_DELIVERY_ADDRESS_SAME_AS_BILLING_ADDRESS],
                             ]),
                         ],
                     ])
@@ -463,12 +464,12 @@ class OrderFormType extends AbstractType
                         'constraints' => [
                             new Constraints\NotBlank([
                                 'message' => 'Please enter zip code',
-                                'groups' => [self::VALIDATION_GROUP_DELIVERY_ADDRESS_SAME_AS_BILLING_ADDRESS],
+                                'groups' => [static::VALIDATION_GROUP_DELIVERY_ADDRESS_SAME_AS_BILLING_ADDRESS],
                             ]),
                             new Constraints\Length([
                                 'max' => 30,
                                 'maxMessage' => 'Zip code cannot be longer than {{ limit }} characters',
-                                'groups' => [self::VALIDATION_GROUP_DELIVERY_ADDRESS_SAME_AS_BILLING_ADDRESS],
+                                'groups' => [static::VALIDATION_GROUP_DELIVERY_ADDRESS_SAME_AS_BILLING_ADDRESS],
                             ]),
                         ],
                     ])

@@ -15,6 +15,7 @@ use Shopsys\FrameworkBundle\Component\Image\Config\ImageConfig;
  */
 class Image implements EntityFileUploadInterface
 {
+    /** @access protected */
     const UPLOAD_KEY = 'image';
 
     /**
@@ -94,7 +95,7 @@ class Image implements EntityFileUploadInterface
     {
         $files = [];
         if ($this->temporaryFilename !== null) {
-            $files[self::UPLOAD_KEY] = new FileForUpload(
+            $files[static::UPLOAD_KEY] = new FileForUpload(
                 $this->temporaryFilename,
                 true,
                 $this->entityName,
@@ -111,7 +112,7 @@ class Image implements EntityFileUploadInterface
      */
     public function setFileAsUploaded($key, $originalFilename)
     {
-        if ($key === self::UPLOAD_KEY) {
+        if ($key === static::UPLOAD_KEY) {
             $this->extension = pathinfo($originalFilename, PATHINFO_EXTENSION);
         } else {
             throw new \Shopsys\FrameworkBundle\Component\FileUpload\Exception\InvalidFileKeyException($key);

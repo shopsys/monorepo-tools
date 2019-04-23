@@ -11,7 +11,9 @@ use Symfony\Component\Filesystem\Filesystem;
 
 class FeedExport
 {
+    /** @access protected */
     const TEMPORARY_FILENAME_SUFFIX = '.tmp';
+    /** @access protected */
     const BATCH_SIZE = 1000;
 
     /**
@@ -130,7 +132,7 @@ class FeedExport
             return;
         }
 
-        $itemsInBatch = $this->feed->getItems($this->domainConfig, $this->lastSeekId, self::BATCH_SIZE);
+        $itemsInBatch = $this->feed->getItems($this->domainConfig, $this->lastSeekId, static::BATCH_SIZE);
 
         if ($this->lastSeekId === null) {
             $this->writeToFeed($this->feedRenderer->renderBegin($this->domainConfig));
@@ -143,7 +145,7 @@ class FeedExport
             $countInBatch++;
         }
 
-        if ($countInBatch < self::BATCH_SIZE) {
+        if ($countInBatch < static::BATCH_SIZE) {
             $this->writeToFeed($this->feedRenderer->renderEnd($this->domainConfig));
             $this->finishFile();
         }
@@ -207,7 +209,7 @@ class FeedExport
      */
     protected function getTemporaryFilepath(): string
     {
-        return $this->feedFilepath . self::TEMPORARY_FILENAME_SUFFIX;
+        return $this->feedFilepath . static::TEMPORARY_FILENAME_SUFFIX;
     }
 
     /**
@@ -215,6 +217,6 @@ class FeedExport
      */
     protected function getTemporaryLocalFilepath(): string
     {
-        return $this->feedLocalFilepath . '_local' . self::TEMPORARY_FILENAME_SUFFIX;
+        return $this->feedLocalFilepath . '_local' . static::TEMPORARY_FILENAME_SUFFIX;
     }
 }

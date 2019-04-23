@@ -20,7 +20,7 @@ use Tests\ShopBundle\Smoke\Http\RouteConfigCustomization;
 
 class AllPagesTest extends KernelTestCase
 {
-    const PASSES = 5;
+    protected const PASSES = 5;
 
     protected function setUp()
     {

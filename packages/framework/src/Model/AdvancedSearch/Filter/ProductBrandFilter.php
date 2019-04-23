@@ -11,7 +11,7 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
 class ProductBrandFilter implements AdvancedSearchFilterInterface
 {
-    const NAME = 'productBrand';
+    public const NAME = 'productBrand';
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Product\Brand\BrandFacade

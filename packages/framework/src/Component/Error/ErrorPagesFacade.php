@@ -13,7 +13,9 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 class ErrorPagesFacade
 {
+    /** @access protected */
     const PAGE_STATUS_CODE_404 = Response::HTTP_NOT_FOUND;
+    /** @access protected */
     const PAGE_STATUS_CODE_500 = Response::HTTP_INTERNAL_SERVER_ERROR;
 
     /**
@@ -57,8 +59,8 @@ class ErrorPagesFacade
     public function generateAllErrorPagesForProduction()
     {
         foreach ($this->domain->getAll() as $domainConfig) {
-            $this->generateAndSaveErrorPage($domainConfig->getId(), self::PAGE_STATUS_CODE_404);
-            $this->generateAndSaveErrorPage($domainConfig->getId(), self::PAGE_STATUS_CODE_500);
+            $this->generateAndSaveErrorPage($domainConfig->getId(), static::PAGE_STATUS_CODE_404);
+            $this->generateAndSaveErrorPage($domainConfig->getId(), static::PAGE_STATUS_CODE_500);
         }
     }
 
@@ -84,9 +86,9 @@ class ErrorPagesFacade
     public function getErrorPageStatusCodeByStatusCode($statusCode)
     {
         if ($statusCode === Response::HTTP_NOT_FOUND || $statusCode === Response::HTTP_FORBIDDEN) {
-            return self::PAGE_STATUS_CODE_404;
+            return static::PAGE_STATUS_CODE_404;
         } else {
-            return self::PAGE_STATUS_CODE_500;
+            return static::PAGE_STATUS_CODE_500;
         }
     }
 

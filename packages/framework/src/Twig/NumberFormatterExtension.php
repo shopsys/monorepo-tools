@@ -9,7 +9,9 @@ use Twig_Extension;
 
 class NumberFormatterExtension extends Twig_Extension
 {
+    /** @access protected */
     const MINIMUM_FRACTION_DIGITS = 0;
+    /** @access protected */
     const MAXIMUM_FRACTION_DIGITS = 10;
 
     /**
@@ -64,8 +66,8 @@ class NumberFormatterExtension extends Twig_Extension
     {
         $numberFormat = $this->numberFormatRepository->get($this->getLocale($locale));
         $numberFormatter = new NumberFormatter($numberFormat, NumberFormatter::DECIMAL);
-        $numberFormatter->setMinimumFractionDigits(self::MINIMUM_FRACTION_DIGITS);
-        $numberFormatter->setMaximumFractionDigits(self::MAXIMUM_FRACTION_DIGITS);
+        $numberFormatter->setMinimumFractionDigits(static::MINIMUM_FRACTION_DIGITS);
+        $numberFormatter->setMaximumFractionDigits(static::MAXIMUM_FRACTION_DIGITS);
 
         return $numberFormatter->format($number);
     }
@@ -81,7 +83,7 @@ class NumberFormatterExtension extends Twig_Extension
         $numberFormat = $this->numberFormatRepository->get($this->getLocale($locale));
         $numberFormatter = new NumberFormatter($numberFormat, NumberFormatter::DECIMAL);
         $numberFormatter->setMinimumFractionDigits($minimumFractionDigits);
-        $numberFormatter->setMaximumFractionDigits(self::MAXIMUM_FRACTION_DIGITS);
+        $numberFormatter->setMaximumFractionDigits(static::MAXIMUM_FRACTION_DIGITS);
 
         return $numberFormatter->format($number);
     }
@@ -95,8 +97,8 @@ class NumberFormatterExtension extends Twig_Extension
     {
         $numberFormat = $this->numberFormatRepository->get($this->getLocale($locale));
         $numberFormatter = new NumberFormatter($numberFormat, NumberFormatter::PERCENT);
-        $numberFormatter->setMinimumFractionDigits(self::MINIMUM_FRACTION_DIGITS);
-        $numberFormatter->setMaximumFractionDigits(self::MAXIMUM_FRACTION_DIGITS);
+        $numberFormatter->setMinimumFractionDigits(static::MINIMUM_FRACTION_DIGITS);
+        $numberFormatter->setMaximumFractionDigits(static::MAXIMUM_FRACTION_DIGITS);
 
         return $numberFormatter->format($number);
     }

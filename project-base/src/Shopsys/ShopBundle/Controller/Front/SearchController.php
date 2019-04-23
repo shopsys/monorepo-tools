@@ -8,8 +8,8 @@ use Symfony\Component\HttpFoundation\Request;
 
 class SearchController extends FrontBaseController
 {
-    const AUTOCOMPLETE_CATEGORY_LIMIT = 3;
-    const AUTOCOMPLETE_PRODUCT_LIMIT = 5;
+    protected const AUTOCOMPLETE_CATEGORY_LIMIT = 3;
+    protected const AUTOCOMPLETE_PRODUCT_LIMIT = 5;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Category\CategoryFacade

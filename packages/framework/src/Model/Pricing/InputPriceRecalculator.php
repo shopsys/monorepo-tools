@@ -12,6 +12,7 @@ use Shopsys\FrameworkBundle\Model\Transport\TransportPriceCalculation;
 
 class InputPriceRecalculator
 {
+    /** @access protected */
     const BATCH_SIZE = 500;
 
     /**
@@ -141,7 +142,7 @@ class InputPriceRecalculator
 
             $callback($object);
 
-            if (($iteration % self::BATCH_SIZE) == 0) {
+            if (($iteration % static::BATCH_SIZE) == 0) {
                 $this->em->flush();
             }
         }

@@ -8,7 +8,7 @@ use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 
 class ProductStockFilter implements AdvancedSearchFilterInterface
 {
-    const NAME = 'productStock';
+    public const NAME = 'productStock';
 
     /**
      * {@inheritdoc}

@@ -11,6 +11,7 @@ use Shopsys\FrameworkBundle\Component\Javascript\Parser\JsStringParser;
 
 class JsTranslatorCallParser
 {
+    /** @access protected */
     const DEFAULT_MESSAGE_DOMAIN = 'messages';
 
     /**
@@ -136,7 +137,7 @@ class JsTranslatorCallParser
 
             return $domain;
         } else {
-            return self::DEFAULT_MESSAGE_DOMAIN;
+            return static::DEFAULT_MESSAGE_DOMAIN;
         }
     }
 

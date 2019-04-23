@@ -14,9 +14,10 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 class LoginController extends AdminBaseController
 {
+    /** @access protected */
     const MULTIDOMAIN_LOGIN_TOKEN_PARAMETER_NAME = 'multidomainLoginToken';
-    const ORIGINAL_DOMAIN_ID_PARAMETER_NAME = 'originalDomainId';
-    const ORIGINAL_REFERER_PARAMETER_NAME = 'originalReferer';
+    public const ORIGINAL_DOMAIN_ID_PARAMETER_NAME = 'originalDomainId';
+    public const ORIGINAL_REFERER_PARAMETER_NAME = 'originalReferer';
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Security\Authenticator
@@ -114,7 +115,7 @@ class LoginController extends AdminBaseController
         $redirectTo = $originalDomainRouter->generate(
             'admin_login_authorization',
             [
-                self::MULTIDOMAIN_LOGIN_TOKEN_PARAMETER_NAME => $multidomainToken,
+                static::MULTIDOMAIN_LOGIN_TOKEN_PARAMETER_NAME => $multidomainToken,
                 self::ORIGINAL_REFERER_PARAMETER_NAME => $request->get(self::ORIGINAL_REFERER_PARAMETER_NAME),
             ],
             UrlGeneratorInterface::ABSOLUTE_URL
@@ -129,7 +130,7 @@ class LoginController extends AdminBaseController
      */
     public function authorizationAction(Request $request)
     {
-        $multidomainLoginToken = $request->get(self::MULTIDOMAIN_LOGIN_TOKEN_PARAMETER_NAME);
+        $multidomainLoginToken = $request->get(static::MULTIDOMAIN_LOGIN_TOKEN_PARAMETER_NAME);
         $originalReferer = $request->get(self::ORIGINAL_REFERER_PARAMETER_NAME);
         try {
             $this->administratorLoginFacade->loginByMultidomainToken($request, $multidomainLoginToken);

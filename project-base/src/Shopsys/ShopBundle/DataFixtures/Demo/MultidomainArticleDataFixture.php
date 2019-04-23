@@ -15,9 +15,9 @@ use Shopsys\FrameworkBundle\Model\Article\ArticleFacade;
 
 class MultidomainArticleDataFixture extends AbstractReferenceFixture implements DependentFixtureInterface
 {
-    const ARTICLE_TERMS_AND_CONDITIONS = 'article_terms_and_conditions';
-    const ARTICLE_PRIVACY_POLICY = 'article_privacy_policy';
-    const ARTICLE_COOKIES = 'article_cookies';
+    public const ARTICLE_TERMS_AND_CONDITIONS = 'article_terms_and_conditions';
+    public const ARTICLE_PRIVACY_POLICY = 'article_privacy_policy';
+    public const ARTICLE_COOKIES = 'article_cookies';
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Article\ArticleFacade

@@ -9,6 +9,7 @@ use Shopsys\Plugin\PluginCrudExtensionInterface;
 
 class PluginCrudExtensionRegistry
 {
+    /** @access protected */
     const KNOWN_TYPES = [
         'product',
         'category',
@@ -50,8 +51,8 @@ class PluginCrudExtensionRegistry
      */
     public static function assertTypeIsKnown($type)
     {
-        if (!in_array($type, self::KNOWN_TYPES, true)) {
-            throw new UnknownPluginCrudExtensionTypeException($type, self::KNOWN_TYPES);
+        if (!in_array($type, static::KNOWN_TYPES, true)) {
+            throw new UnknownPluginCrudExtensionTypeException($type, static::KNOWN_TYPES);
         }
     }
 }

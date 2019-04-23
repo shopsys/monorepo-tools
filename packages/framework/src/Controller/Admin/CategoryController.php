@@ -15,6 +15,7 @@ use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 class CategoryController extends AdminBaseController
 {
+    /** @access protected */
     const ALL_DOMAINS = 0;
 
     /**
@@ -153,23 +154,23 @@ class CategoryController extends AdminBaseController
             if ($request->query->has('domain')) {
                 $domainId = (int)$request->query->get('domain');
             } else {
-                $domainId = (int)$this->session->get('categories_selected_domain_id', self::ALL_DOMAINS);
+                $domainId = (int)$this->session->get('categories_selected_domain_id', static::ALL_DOMAINS);
             }
         } else {
-            $domainId = self::ALL_DOMAINS;
+            $domainId = static::ALL_DOMAINS;
         }
 
-        if ($domainId !== self::ALL_DOMAINS) {
+        if ($domainId !== static::ALL_DOMAINS) {
             try {
                 $this->domain->getDomainConfigById($domainId);
             } catch (\Shopsys\FrameworkBundle\Component\Domain\Exception\InvalidDomainIdException $ex) {
-                $domainId = self::ALL_DOMAINS;
+                $domainId = static::ALL_DOMAINS;
             }
         }
 
         $this->session->set('categories_selected_domain_id', $domainId);
 
-        if ($domainId === self::ALL_DOMAINS) {
+        if ($domainId === static::ALL_DOMAINS) {
             $categoriesWithPreloadedChildren = $this->categoryFacade->getAllCategoriesWithPreloadedChildren($request->getLocale());
         } else {
             $categoriesWithPreloadedChildren = $this->categoryFacade->getVisibleCategoriesWithPreloadedChildrenForDomain($domainId, $request->getLocale());
@@ -177,7 +178,7 @@ class CategoryController extends AdminBaseController
 
         return $this->render('@ShopsysFramework/Admin/Content/Category/list.html.twig', [
             'categoriesWithPreloadedChildren' => $categoriesWithPreloadedChildren,
-            'isForAllDomains' => ($domainId === self::ALL_DOMAINS),
+            'isForAllDomains' => ($domainId === static::ALL_DOMAINS),
         ]);
     }
 
@@ -228,7 +229,7 @@ class CategoryController extends AdminBaseController
 
     public function listDomainTabsAction()
     {
-        $domainId = $this->session->get('categories_selected_domain_id', self::ALL_DOMAINS);
+        $domainId = $this->session->get('categories_selected_domain_id', static::ALL_DOMAINS);
 
         return $this->render('@ShopsysFramework/Admin/Content/Category/domainTabs.html.twig', [
             'domainConfigs' => $this->domain->getAll(),

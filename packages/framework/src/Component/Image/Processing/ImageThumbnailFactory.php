@@ -4,7 +4,9 @@ namespace Shopsys\FrameworkBundle\Component\Image\Processing;
 
 class ImageThumbnailFactory
 {
+    /** @access protected */
     const THUMBNAIL_WIDTH = 140;
+    /** @access protected */
     const THUMBNAIL_HEIGHT = 200;
 
     /**
@@ -27,7 +29,7 @@ class ImageThumbnailFactory
     public function getImageThumbnail($filepath)
     {
         $image = $this->imageProcessor->createInterventionImage($filepath);
-        $this->imageProcessor->resize($image, self::THUMBNAIL_WIDTH, self::THUMBNAIL_HEIGHT);
+        $this->imageProcessor->resize($image, static::THUMBNAIL_WIDTH, static::THUMBNAIL_HEIGHT);
 
         return $image;
     }

@@ -7,12 +7,12 @@ use Symfony\Component\Config\Definition\ConfigurationInterface;
 
 class DomainsConfigDefinition implements ConfigurationInterface
 {
-    const CONFIG_DOMAINS = 'domains';
-    const CONFIG_ID = 'id';
-    const CONFIG_NAME = 'name';
-    const CONFIG_LOCALE = 'locale';
-    const CONFIG_STYLES_DIRECTORY = 'styles_directory';
-    const CONFIG_DESIGN_ID = 'design_id';
+    public const CONFIG_DOMAINS = 'domains';
+    public const CONFIG_ID = 'id';
+    public const CONFIG_NAME = 'name';
+    public const CONFIG_LOCALE = 'locale';
+    public const CONFIG_STYLES_DIRECTORY = 'styles_directory';
+    public const CONFIG_DESIGN_ID = 'design_id';
 
     /**
      * @return \Symfony\Component\Config\Definition\Builder\TreeBuilder

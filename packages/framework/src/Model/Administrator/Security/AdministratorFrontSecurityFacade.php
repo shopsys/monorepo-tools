@@ -12,6 +12,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 class AdministratorFrontSecurityFacade
 {
     // same as in security.yml
+    /** @access protected */
     const ADMINISTRATION_CONTEXT = 'administration';
 
     /**
@@ -101,7 +102,7 @@ class AdministratorFrontSecurityFacade
      */
     protected function getAdministratorToken()
     {
-        $serializedToken = $this->session->get('_security_' . self::ADMINISTRATION_CONTEXT);
+        $serializedToken = $this->session->get('_security_' . static::ADMINISTRATION_CONTEXT);
         if ($serializedToken === null) {
             $message = 'Token not found.';
             throw new \Shopsys\FrameworkBundle\Model\Administrator\Security\Exception\InvalidTokenException($message);

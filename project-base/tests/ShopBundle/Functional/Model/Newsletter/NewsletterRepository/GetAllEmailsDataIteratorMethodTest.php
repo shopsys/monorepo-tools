@@ -9,7 +9,7 @@ use Tests\ShopBundle\Test\TransactionFunctionalTestCase;
 
 class GetAllEmailsDataIteratorMethodTest extends TransactionFunctionalTestCase
 {
-    const FIRST_DOMAIN_SUBSCRIBER_EMAIL = 'james.black@no-reply.com';
+    protected const FIRST_DOMAIN_SUBSCRIBER_EMAIL = 'james.black@no-reply.com';
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Newsletter\NewsletterRepository

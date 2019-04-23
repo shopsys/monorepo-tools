@@ -15,6 +15,7 @@ use Symfony\Component\Security\Http\SecurityEvents;
 
 class LoginAsUserFacade
 {
+    /** @access protected */
     const SESSION_LOGIN_AS = 'loginAsUser';
 
     /**
@@ -68,7 +69,7 @@ class LoginAsUserFacade
      */
     public function rememberLoginAsUser(User $user)
     {
-        $this->session->set(self::SESSION_LOGIN_AS, serialize($user));
+        $this->session->set(static::SESSION_LOGIN_AS, serialize($user));
     }
 
     /**
@@ -80,13 +81,13 @@ class LoginAsUserFacade
             throw new \Shopsys\FrameworkBundle\Model\Security\Exception\LoginAsRememberedUserException('Access denied');
         }
 
-        if (!$this->session->has(self::SESSION_LOGIN_AS)) {
+        if (!$this->session->has(static::SESSION_LOGIN_AS)) {
             throw new \Shopsys\FrameworkBundle\Model\Security\Exception\LoginAsRememberedUserException('User not set.');
         }
 
-        $unserializedUser = unserialize($this->session->get(self::SESSION_LOGIN_AS));
+        $unserializedUser = unserialize($this->session->get(static::SESSION_LOGIN_AS));
         /* @var $unserializedUser \Shopsys\FrameworkBundle\Model\Customer\User */
-        $this->session->remove(self::SESSION_LOGIN_AS);
+        $this->session->remove(static::SESSION_LOGIN_AS);
         $freshUser = $this->userRepository->getUserById($unserializedUser->getId());
 
         $password = '';

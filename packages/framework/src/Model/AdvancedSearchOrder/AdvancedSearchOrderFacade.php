@@ -11,6 +11,7 @@ use Symfony\Component\HttpFoundation\Request;
 
 class AdvancedSearchOrderFacade
 {
+    /** @access protected */
     const RULES_FORM_NAME = 'as';
 
     /**
@@ -57,10 +58,10 @@ class AdvancedSearchOrderFacade
      */
     public function createAdvancedSearchOrderForm(Request $request)
     {
-        $rulesData = (array)$request->get(self::RULES_FORM_NAME);
+        $rulesData = (array)$request->get(static::RULES_FORM_NAME);
         $rulesFormData = $this->ruleFormViewDataFactory->createFromRequestData(OrderPriceFilterWithVatFilter::NAME, $rulesData);
 
-        return $this->orderAdvancedSearchFormFactory->createRulesForm(self::RULES_FORM_NAME, $rulesFormData);
+        return $this->orderAdvancedSearchFormFactory->createRulesForm(static::RULES_FORM_NAME, $rulesFormData);
     }
 
     /**
@@ -74,7 +75,7 @@ class AdvancedSearchOrderFacade
             $index => $this->ruleFormViewDataFactory->createDefault($filterName),
         ];
 
-        return $this->orderAdvancedSearchFormFactory->createRulesForm(self::RULES_FORM_NAME, $rulesData);
+        return $this->orderAdvancedSearchFormFactory->createRulesForm(static::RULES_FORM_NAME, $rulesData);
     }
 
     /**
@@ -95,7 +96,7 @@ class AdvancedSearchOrderFacade
      */
     public function isAdvancedSearchOrderFormSubmitted(Request $request)
     {
-        $rulesData = $request->get(self::RULES_FORM_NAME);
+        $rulesData = $request->get(static::RULES_FORM_NAME);
 
         return $rulesData !== null;
     }

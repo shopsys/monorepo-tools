@@ -9,7 +9,9 @@ use Twig_SimpleFunction;
 
 class FormThemeExtension extends \Twig_Extension
 {
+    /** @access protected */
     const ADMIN_THEME = '@ShopsysFramework/Admin/Form/theme.html.twig';
+    /** @access protected */
     const FRONT_THEME = '@ShopsysShop/Front/Form/theme.html.twig';
 
     /**
@@ -42,9 +44,9 @@ class FormThemeExtension extends \Twig_Extension
     {
         $masterRequest = $this->requestStack->getMasterRequest();
         if ($this->isAdmin($masterRequest->get('_controller'))) {
-            return self::ADMIN_THEME;
+            return static::ADMIN_THEME;
         } else {
-            return self::FRONT_THEME;
+            return static::FRONT_THEME;
         }
     }
 

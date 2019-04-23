@@ -9,9 +9,13 @@ use Symfony\Component\Templating\EngineInterface;
 
 class MigrationsGenerator
 {
+    /** @access protected */
     const LINE_LENGTH_LIMIT = 100;
+    /** @access protected */
     const HIGHLIGHT_OFF = false;
+    /** @access protected */
     const INDENT_CHARACTERS = '    ';
+    /** @access protected */
     const INDENT_TABULATOR_COUNT = 3;
 
     /**
@@ -67,7 +71,7 @@ class MigrationsGenerator
     {
         $formattedSqlCommands = [];
         foreach ($filteredSchemaDiffSqlCommands as $key => $filteredSchemaDiffSqlCommand) {
-            if (strlen($filteredSchemaDiffSqlCommand) > self::LINE_LENGTH_LIMIT) {
+            if (strlen($filteredSchemaDiffSqlCommand) > static::LINE_LENGTH_LIMIT) {
                 $formattedSqlCommands[] = $this->formatSqlCommand($filteredSchemaDiffSqlCommand);
             } else {
                 $formattedSqlCommands[] = $filteredSchemaDiffSqlCommand;
@@ -96,9 +100,9 @@ class MigrationsGenerator
     private function formatSqlQueryWithTabs($query)
     {
         $previousTab = SqlFormatter::$tab;
-        SqlFormatter::$tab = self::INDENT_CHARACTERS;
+        SqlFormatter::$tab = static::INDENT_CHARACTERS;
 
-        $formattedQuery = SqlFormatter::format($query, self::HIGHLIGHT_OFF);
+        $formattedQuery = SqlFormatter::format($query, static::HIGHLIGHT_OFF);
 
         SqlFormatter::$tab = $previousTab;
 
@@ -112,7 +116,7 @@ class MigrationsGenerator
     private function indentSqlCommandLines(array $queryLines)
     {
         return array_map(function ($queryLine) {
-            return str_repeat(self::INDENT_CHARACTERS, self::INDENT_TABULATOR_COUNT) . $queryLine;
+            return str_repeat(static::INDENT_CHARACTERS, static::INDENT_TABULATOR_COUNT) . $queryLine;
         }, $queryLines);
     }
 

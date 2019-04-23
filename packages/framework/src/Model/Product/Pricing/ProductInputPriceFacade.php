@@ -13,6 +13,7 @@ use Shopsys\FrameworkBundle\Model\Product\ProductRepository;
 
 class ProductInputPriceFacade
 {
+    /** @access protected */
     const BATCH_SIZE = 50;
 
     /**
@@ -122,7 +123,7 @@ class ProductInputPriceFacade
             $this->productRowsIterator = $this->productRepository->getProductIteratorForReplaceVat();
         }
 
-        for ($count = 0; $count < self::BATCH_SIZE; $count++) {
+        for ($count = 0; $count < static::BATCH_SIZE; $count++) {
             $row = $this->productRowsIterator->next();
             if ($row === false) {
                 $this->em->flush();

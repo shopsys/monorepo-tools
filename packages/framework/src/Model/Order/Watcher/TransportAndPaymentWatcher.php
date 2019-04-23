@@ -16,8 +16,11 @@ use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 class TransportAndPaymentWatcher
 {
+    /** @access protected */
     const SESSION_ROOT = 'transport_and_payment_watcher';
+    /** @access protected */
     const SESSION_TRANSPORT_PRICES = 'transport_prices';
+    /** @access protected */
     const SESSION_PAYMENT_PRICES = 'payment_prices';
 
     /**
@@ -247,14 +250,14 @@ class TransportAndPaymentWatcher
         OrderPreview $orderPreview,
         int $domainId
     ): void {
-        $this->session->set(self::SESSION_ROOT, [
-            self::SESSION_TRANSPORT_PRICES => $this->getTransportPrices(
+        $this->session->set(static::SESSION_ROOT, [
+            static::SESSION_TRANSPORT_PRICES => $this->getTransportPrices(
                 $transports,
                 $currency,
                 $orderPreview,
                 $domainId
             ),
-            self::SESSION_PAYMENT_PRICES => $this->getPaymentPrices(
+            static::SESSION_PAYMENT_PRICES => $this->getPaymentPrices(
                 $payments,
                 $currency,
                 $orderPreview,
@@ -268,9 +271,9 @@ class TransportAndPaymentWatcher
      */
     protected function getRememberedTransportAndPayment(): array
     {
-        return $this->session->get(self::SESSION_ROOT, [
-            self::SESSION_TRANSPORT_PRICES => [],
-            self::SESSION_PAYMENT_PRICES => [],
+        return $this->session->get(static::SESSION_ROOT, [
+            static::SESSION_TRANSPORT_PRICES => [],
+            static::SESSION_PAYMENT_PRICES => [],
         ]);
     }
 
@@ -279,7 +282,7 @@ class TransportAndPaymentWatcher
      */
     protected function getRememberedTransportPrices(): array
     {
-        return $this->getRememberedTransportAndPayment()[self::SESSION_TRANSPORT_PRICES];
+        return $this->getRememberedTransportAndPayment()[static::SESSION_TRANSPORT_PRICES];
     }
 
     /**
@@ -287,7 +290,7 @@ class TransportAndPaymentWatcher
      */
     protected function getRememberedPaymentPrices(): array
     {
-        return $this->getRememberedTransportAndPayment()[self::SESSION_PAYMENT_PRICES];
+        return $this->getRememberedTransportAndPayment()[static::SESSION_PAYMENT_PRICES];
     }
 
     /**

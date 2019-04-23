@@ -8,8 +8,8 @@ use Symfony\Component\Routing\RouterInterface;
 
 class ActionColumn
 {
-    const TYPE_DELETE = 'delete';
-    const TYPE_EDIT = 'edit';
+    public const TYPE_DELETE = 'delete';
+    public const TYPE_EDIT = 'edit';
 
     /**
      * @var \Symfony\Component\Routing\RouterInterface

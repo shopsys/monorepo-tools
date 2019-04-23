@@ -10,6 +10,7 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class FileUpload
 {
+    /** @access protected */
     const TEMPORARY_DIRECTORY = 'fileUploads';
 
     /**
@@ -130,7 +131,7 @@ class FileUpload
      */
     public function getTemporaryDirectory()
     {
-        return $this->temporaryDir . '/' . self::TEMPORARY_DIRECTORY;
+        return $this->temporaryDir . '/' . static::TEMPORARY_DIRECTORY;
     }
 
     /**

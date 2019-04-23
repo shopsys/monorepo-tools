@@ -9,7 +9,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 class ProductPartnoFilter implements AdvancedSearchFilterInterface
 {
-    const NAME = 'productPartno';
+    public const NAME = 'productPartno';
 
     /**
      * {@inheritdoc}

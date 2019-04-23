@@ -17,7 +17,7 @@ use Shopsys\FrameworkBundle\Model\Order\Preview\OrderPreviewFactory;
 
 class OrderDataFixture extends AbstractReferenceFixture implements DependentFixtureInterface
 {
-    const ORDER_PREFIX = 'order_';
+    public const ORDER_PREFIX = 'order_';
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Customer\UserRepository

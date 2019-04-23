@@ -8,8 +8,8 @@ use Symfony\Component\HttpFoundation\Request;
 
 class Domain implements DomainIdsProviderInterface
 {
-    const FIRST_DOMAIN_ID = 1;
-    const MAIN_ADMIN_DOMAIN_ID = 1;
+    public const FIRST_DOMAIN_ID = 1;
+    public const MAIN_ADMIN_DOMAIN_ID = 1;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\Domain\Config\DomainConfig|null

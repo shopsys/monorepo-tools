@@ -15,7 +15,7 @@ class SettingValueShopInfoDataFixture extends AbstractReferenceFixture
      */
     protected $setting;
 
-    const SETTING_VALUES = [
+    public const SETTING_VALUES = [
         ShopInfoSettingFacade::SHOP_INFO_PHONE_NUMBER => '+1-234-567-8989',
         ShopInfoSettingFacade::SHOP_INFO_PHONE_HOURS => '(Mon - Sat: 9 - 10 a.m. to 8 - 10 p.m.)',
         ShopInfoSettingFacade::SHOP_INFO_EMAIL => 'no-reply@shopsys.com',

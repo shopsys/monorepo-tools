@@ -18,7 +18,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class UserDataFixture
 {
-    const FIRST_PERFORMANCE_USER = 'first_performance_user';
+    public const FIRST_PERFORMANCE_USER = 'first_performance_user';
 
     /**
      * @var int

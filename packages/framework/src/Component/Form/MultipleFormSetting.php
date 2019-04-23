@@ -4,7 +4,7 @@ namespace Shopsys\FrameworkBundle\Component\Form;
 
 class MultipleFormSetting
 {
-    const DEFAULT_MULTIPLE = false;
+    public const DEFAULT_MULTIPLE = false;
 
     /**
      * @var bool

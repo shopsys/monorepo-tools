@@ -11,7 +11,7 @@ use Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroupFacade;
 
 class DomainDataCreator
 {
-    const TEMPLATE_DOMAIN_ID = 1;
+    public const TEMPLATE_DOMAIN_ID = 1;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\Domain\Domain

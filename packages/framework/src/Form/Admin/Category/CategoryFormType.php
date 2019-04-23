@@ -30,8 +30,8 @@ use Symfony\Component\Validator\Constraints;
 
 class CategoryFormType extends AbstractType
 {
-    const SCENARIO_CREATE = 'create';
-    const SCENARIO_EDIT = 'edit';
+    public const SCENARIO_CREATE = 'create';
+    public const SCENARIO_EDIT = 'edit';
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Category\CategoryFacade

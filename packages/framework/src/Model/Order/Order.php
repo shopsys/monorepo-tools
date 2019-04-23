@@ -25,6 +25,7 @@ use Shopsys\FrameworkBundle\Twig\NumberFormatterExtension;
  */
 class Order
 {
+    /** @access protected */
     const DEFAULT_PRODUCT_QUANTITY = 1;
 
     /**
@@ -968,7 +969,7 @@ class Order
             $product->getName($orderDomainConfig->getLocale()),
             $productPrice,
             $product->getVat()->getPercent(),
-            self::DEFAULT_PRODUCT_QUANTITY,
+            static::DEFAULT_PRODUCT_QUANTITY,
             $product->getUnit()->getName($orderDomainConfig->getLocale()),
             $product->getCatnum(),
             $product

@@ -6,7 +6,7 @@ use Shopsys\FrameworkBundle\Component\Utils\Utils;
 
 class ImageEntityConfig
 {
-    const WITHOUT_NAME_KEY = '__NULL__';
+    public const WITHOUT_NAME_KEY = '__NULL__';
 
     /**
      * @var string

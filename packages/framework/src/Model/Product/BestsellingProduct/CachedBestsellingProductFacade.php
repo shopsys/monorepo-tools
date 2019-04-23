@@ -10,6 +10,7 @@ use Shopsys\FrameworkBundle\Model\Product\ProductRepository;
 
 class CachedBestsellingProductFacade
 {
+    /** @access protected */
     const LIFETIME = 43200; // 12h
 
     /**
@@ -99,7 +100,7 @@ class CachedBestsellingProductFacade
             $sortedProductIds[] = $product->getId();
         }
 
-        $this->cacheProvider->save($cacheId, $sortedProductIds, self::LIFETIME);
+        $this->cacheProvider->save($cacheId, $sortedProductIds, static::LIFETIME);
     }
 
     /**

@@ -13,6 +13,7 @@ use Shopsys\FrameworkBundle\Model\Product\Product;
 
 class ProductFilterRepository
 {
+    /** @access protected */
     const DAYS_FOR_STOCK_FILTER = 0;
 
     /**
@@ -117,7 +118,7 @@ class ProductFilterRepository
                 'p.calculatedAvailability = a'
             );
             $productsQueryBuilder->andWhere('a.dispatchTime = :dispatchTime');
-            $productsQueryBuilder->setParameter('dispatchTime', self::DAYS_FOR_STOCK_FILTER);
+            $productsQueryBuilder->setParameter('dispatchTime', static::DAYS_FOR_STOCK_FILTER);
         }
     }
 

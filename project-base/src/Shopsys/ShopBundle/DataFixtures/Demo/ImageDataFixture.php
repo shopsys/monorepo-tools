@@ -15,9 +15,9 @@ use Symfony\Component\Finder\Finder;
 
 class ImageDataFixture extends AbstractReferenceFixture implements DependentFixtureInterface
 {
-    const IMAGES_TABLE_NAME = 'images';
+    public const IMAGES_TABLE_NAME = 'images';
 
-    const IMAGE_TYPE = 'jpg';
+    public const IMAGE_TYPE = 'jpg';
 
     /**
      * @var string

@@ -11,17 +11,17 @@ use Shopsys\FrameworkBundle\Model\Category\CategoryFacade;
 
 class CategoryDataFixture extends AbstractReferenceFixture
 {
-    const CATEGORY_ELECTRONICS = 'category_electronics';
-    const CATEGORY_TV = 'category_tv';
-    const CATEGORY_PHOTO = 'category_photo';
-    const CATEGORY_PRINTERS = 'category_printers';
-    const CATEGORY_PC = 'category_pc';
-    const CATEGORY_PHONES = 'category_phones';
-    const CATEGORY_COFFEE = 'category_coffee';
-    const CATEGORY_BOOKS = 'category_books';
-    const CATEGORY_TOYS = 'category_toys';
-    const CATEGORY_GARDEN_TOOLS = 'category_garden_tools';
-    const CATEGORY_FOOD = 'category_food';
+    public const CATEGORY_ELECTRONICS = 'category_electronics';
+    public const CATEGORY_TV = 'category_tv';
+    public const CATEGORY_PHOTO = 'category_photo';
+    public const CATEGORY_PRINTERS = 'category_printers';
+    public const CATEGORY_PC = 'category_pc';
+    public const CATEGORY_PHONES = 'category_phones';
+    public const CATEGORY_COFFEE = 'category_coffee';
+    public const CATEGORY_BOOKS = 'category_books';
+    public const CATEGORY_TOYS = 'category_toys';
+    public const CATEGORY_GARDEN_TOOLS = 'category_garden_tools';
+    public const CATEGORY_FOOD = 'category_food';
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Category\CategoryFacade

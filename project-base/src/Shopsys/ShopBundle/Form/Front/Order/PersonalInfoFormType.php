@@ -23,8 +23,8 @@ use Symfony\Component\Validator\Constraints;
 
 class PersonalInfoFormType extends AbstractType
 {
-    const VALIDATION_GROUP_COMPANY_CUSTOMER = 'companyCustomer';
-    const VALIDATION_GROUP_DIFFERENT_DELIVERY_ADDRESS = 'differentDeliveryAddress';
+    public const VALIDATION_GROUP_COMPANY_CUSTOMER = 'companyCustomer';
+    public const VALIDATION_GROUP_DIFFERENT_DELIVERY_ADDRESS = 'differentDeliveryAddress';
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Country\CountryFacade

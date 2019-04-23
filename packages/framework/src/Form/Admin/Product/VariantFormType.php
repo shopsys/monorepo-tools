@@ -13,8 +13,8 @@ use Symfony\Component\Validator\Constraints;
 
 class VariantFormType extends AbstractType
 {
-    const MAIN_VARIANT = 'mainVariant';
-    const VARIANTS = 'variants';
+    public const MAIN_VARIANT = 'mainVariant';
+    public const VARIANTS = 'variants';
 
     /**
      * @param \Symfony\Component\Form\FormBuilderInterface $builder

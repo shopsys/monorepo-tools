@@ -19,6 +19,7 @@ use Twig_Node;
 
 class PhpFileExtractor implements FileVisitorInterface, NodeVisitor
 {
+    /** @access protected */
     const DEFAULT_MESSAGE_DOMAIN = 'messages';
 
     /**
@@ -129,7 +130,7 @@ class PhpFileExtractor implements FileVisitorInterface, NodeVisitor
         if ($domainArgumentIndex !== null && isset($node->args[$domainArgumentIndex])) {
             return PhpParserNodeHelper::getConcatenatedStringValue($node->args[$domainArgumentIndex]->value, $this->file);
         } else {
-            return self::DEFAULT_MESSAGE_DOMAIN;
+            return static::DEFAULT_MESSAGE_DOMAIN;
         }
     }
 

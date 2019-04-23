@@ -11,6 +11,7 @@ use Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\FriendlyUrlDataFactoryI
 
 class ProductDetailFriendlyUrlDataProvider implements FriendlyUrlDataProviderInterface
 {
+    /** @access protected */
     const ROUTE_NAME = 'front_product_detail';
 
     /**
@@ -48,7 +49,7 @@ class ProductDetailFriendlyUrlDataProvider implements FriendlyUrlDataProviderInt
             ->join('p.translations', 'pt', Join::WITH, 'pt.locale = :locale')
             ->setParameter('locale', $domainConfig->getId())
             ->leftJoin(FriendlyUrl::class, 'f', Join::WITH, 'p.id = f.entityId AND f.routeName = :routeName AND f.domainId = :domainId')
-            ->setParameter('routeName', self::ROUTE_NAME)
+            ->setParameter('routeName', static::ROUTE_NAME)
             ->setParameter('domainId', $domainConfig->getId())
             ->where('f.entityId IS NULL AND pt.name IS NOT NULL');
 
@@ -71,6 +72,6 @@ class ProductDetailFriendlyUrlDataProvider implements FriendlyUrlDataProviderInt
      */
     public function getRouteName(): string
     {
-        return self::ROUTE_NAME;
+        return static::ROUTE_NAME;
     }
 }

@@ -30,17 +30,17 @@ use Tests\ShopBundle\Test\TransactionFunctionalTestCase;
 
 class EntityExtensionTest extends TransactionFunctionalTestCase
 {
-    const MAIN_PRODUCT_ID = 1;
-    const ONE_TO_ONE_SELF_REFERENCING_PRODUCT_ID = 2;
-    const ONE_TO_MANY_SELF_REFERENCING_PRODUCT_ID = 3;
-    const MANY_TO_MANY_SELF_REFERENCING_PRODUCT_ID = 4;
+    protected const MAIN_PRODUCT_ID = 1;
+    protected const ONE_TO_ONE_SELF_REFERENCING_PRODUCT_ID = 2;
+    protected const ONE_TO_MANY_SELF_REFERENCING_PRODUCT_ID = 3;
+    protected const MANY_TO_MANY_SELF_REFERENCING_PRODUCT_ID = 4;
 
-    const MAIN_CATEGORY_ID = 1;
-    const ONE_TO_ONE_SELF_REFERENCING_CATEGORY_ID = 2;
-    const ONE_TO_MANY_SELF_REFERENCING_CATEGORY_ID = 3;
-    const MANY_TO_MANY_SELF_REFERENCING_CATEGORY_ID = 4;
+    protected const MAIN_CATEGORY_ID = 1;
+    protected const ONE_TO_ONE_SELF_REFERENCING_CATEGORY_ID = 2;
+    protected const ONE_TO_MANY_SELF_REFERENCING_CATEGORY_ID = 3;
+    protected const MANY_TO_MANY_SELF_REFERENCING_CATEGORY_ID = 4;
 
-    const ORDER_ITEM_ID = 1;
+    protected const ORDER_ITEM_ID = 1;
 
     /**
      * @var \Doctrine\ORM\EntityManager

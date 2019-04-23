@@ -8,6 +8,7 @@ use Symfony\Component\HttpKernel\Event\FilterResponseEvent;
 
 class ProductAvailabilityRecalculator
 {
+    /** @access protected */
     const BATCH_SIZE = 100;
 
     /**
@@ -61,7 +62,7 @@ class ProductAvailabilityRecalculator
             $this->productRowsIterator = $this->productAvailabilityRecalculationScheduler->getProductsIteratorForDelayedRecalculation();
         }
 
-        for ($count = 0; $count < self::BATCH_SIZE; $count++) {
+        for ($count = 0; $count < static::BATCH_SIZE; $count++) {
             $row = $this->productRowsIterator->next();
             if ($row === false) {
                 $this->em->clear();

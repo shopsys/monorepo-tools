@@ -6,7 +6,7 @@ use Doctrine\ORM\Internal\Hydration\AbstractHydrator;
 
 class GroupedScalarHydrator extends AbstractHydrator
 {
-    const HYDRATION_MODE = 'GroupedScalarHydrator';
+    public const HYDRATION_MODE = 'GroupedScalarHydrator';
 
     /**
      * {@inheritdoc}

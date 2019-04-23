@@ -25,6 +25,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
  */
 class User implements UserInterface, TimelimitLoginInterface, Serializable
 {
+    /** @access protected */
     const RESET_PASSWORD_HASH_LENGTH = 50;
 
     /**
@@ -440,7 +441,7 @@ class User implements UserInterface, TimelimitLoginInterface, Serializable
      */
     public function resetPassword(HashGenerator $hashGenerator): void
     {
-        $hash = $hashGenerator->generateHash(self::RESET_PASSWORD_HASH_LENGTH);
+        $hash = $hashGenerator->generateHash(static::RESET_PASSWORD_HASH_LENGTH);
         $this->resetPasswordHash = $hash;
         $this->resetPasswordHashValidThrough = new DateTime('+48 hours');
     }
