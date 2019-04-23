@@ -1,26 +1,30 @@
-# Basics About Model Architecture
+# Introduction to Model Architecture
 
-In this article you will learn about [entities](#entity), [facades](#facade), [repositories](#repository) and their mutual relations.
+In this article you will learn about the model, its dependencies, [entities](#entity), [facades](#facade), [repositories](#repository) and their mutual relations.
 
-## Basics about the model
+## Definition of a model
+The definition of a model is adopted from [Domain Driven Design (DDD)](https://stackoverflow.com/questions/1222392/can-someone-explain-domain-driven-design-ddd-in-plain-english-please/1222488#1222488). Model is a system of abstractions that describes selected aspect of a domain.
 
-Model architecture of Shopsys Framework is inspired by Domain Driven Design (DDD). Let us define some terms first:
-- **Domain** in DDD is a sphere of knowledge or activity we build application logic around. The domain of Shopsys Framework is e-commerce.
-- **Domain model** is a system of abstractions that describes selected aspects of the domain.
-- **Domain logic** or **business logic** is the higher level rules for how objects of the domain model interact with one another.
+Domain is a sphere of knowledge or activity we build application logic around.
+The domain of Shopsys Framework is e-commerce.
 
-Domain model of Shopsys Framework is located in [`FrameworkBundle/Model`](https://github.com/shopsys/framework/tree/master/src/Model). Its concept is to separate behavior and properties of objects from its persistence. This separation is suitable for code reusability, easier testing and it fulfills the Single Responsibility Principle.
+*Note: In Shopsys Framework, we also use the term domain for another concept which is an instance of eshop data accessible through an individual url address.
+You can read more about this meaning of a domain in [Domain, Multidomain, Multilanguage](../introduction/domain-multidomain-multilanguage.md).*
+
+Each domain has its logic which is the higher level rules for how objects of the domain model interact with one another.
+
+Domain model of Shopsys Framework is located in [`Shopsys\FrameworkBundle\Model`](https://github.com/shopsys/framework/tree/master/src/Model). Its concept is to separate behavior and properties of objects from its persistence. This separation is suitable for code reusability, easier testing and it fulfills the Single Responsibility Principle.
 
 Code belonging to the same feature is grouped together (eg. `Cart` and `CartItem`). Names of classes and methods are based on real world vocabulary to be more intuitive (eg. `OrderHashGenerator` or `getSellableProductsInCategory()`).
 
-Model is divided into three parts: Entity, Repository and Facade. There is `EntityManager` to access the database.
+Model is mostly divided into three parts: Entity, Repository and Facade.
 
-![model architecture schema](img/model-architecture.png 'model architecture schema')
+![model architecture schema](./img/model-architecture.png 'model architecture schema')
 
 ## Entity
-Is class encapsulating data. All entities are persisted by Doctrine ORM. One entity class usually represents one table in the database and one instance of the entity represents one row in the table. The entity is composed of fields, which can be mapped to columns in the table. Doctrine ORM annotations are used to define the details about the database mapping (types of columns, relations, etc.).
+Entity is a class encapsulating data. All entities are persisted by Doctrine ORM. One entity class usually represents one table in the database and one instance of the entity represents one row in the table. The entity is composed of fields, which can be mapped to columns in the table. Doctrine ORM annotations are used to define the details about the database mapping (types of columns, relations, etc.).
 
-Entities are inspired by Rich Domain Model. That means entity is the place where domain logic belongs (e.g. `Product::changeVat()` sets vat and marks product for price recalculation). The entity cannot depend on any other class.
+Entities are inspired by Rich Domain Model. That means entity is the place where domain logic belongs (e.g. `Product::changeVat()` sets vat and marks product for price recalculation).
 
 Entities can be used by all layers of the model and even outside of model (eg. controller or templates).
 
@@ -151,6 +155,8 @@ Facades are a single entry-point into the model. That means you can use the same
 
 Facades as entry-point of the model can be used anywhere outside of the model.
 
+Facades represent all available use-cases for specific model.
+
 ### Example
 ```php
 // FrameworkBundle/Model/Cart/CartFacade.php
@@ -196,3 +202,21 @@ class CartFacade
 The controller handles the request (eg. [saved data](entities.md#entity-data) from form) and passes data to the facade.
 The facade receives data from the controller and requests appropriate entities from the repository.
 Entities and supporting classes (like recalculators, schedulers) processes data and returns output to the facade, that persist it by entity manager.
+
+## Model extension
+Entity extension is described in [Entity Extension article](../extensibility/entity-extension.md).
+
+Other parts of a model can be extended by class inheritance and adding an alias to your `services.yml`, eg.:
+```
+services:
+    Shopsys\FrameworkBundle\Model\Article\ArticleFacade: '@Shopsys\ShopBundle\Model\Article\ArticleFacade'
+```
+
+### Extending from a bundle
+You can extend some entities from other bundles using [CRUD extension](https://github.com/shopsys/plugin-interface#crud-extension).
+Other parts cannot be extended because PHP does not support multiple class inheritance.
+
+## Model Rules
+There are some model-specific rules that help up maintain easier usage of the model.
+They also help which classes should be a part of the `Model` namespace and which shouldn't.
+You can read more about them in [Model Rules](./model-rules.md).

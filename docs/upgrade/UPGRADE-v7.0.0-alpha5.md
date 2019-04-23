@@ -6,7 +6,7 @@ This guide contains instructions to upgrade from version v7.0.0-alpha4 to v7.0.0
 There you can find links to upgrade notes for other versions too.
 
 ## [shopsys/framework]
-- for [product search via Elasticsearch](/docs/introduction/product-search-via-elasticsearch.md), you'll have to:
+- for [product search via Elasticsearch](/docs/model/product-search-via-elasticsearch.md), you'll have to:
     - check changes in the [`docker-compose.yml`](https://github.com/shopsys/shopsys/blob/v7.0.0-alpha5/docker/conf) template you used and replicate them, there is a new container with Elasticsearch
         - *since `docker-compose.yml` is not versioned, apply changes also in your `docker-compose.yml.dist` templates so it is easier to upgrade for your team members or for server upgrade*
     - since the fully installed and ready [Microservice Product Search](https://github.com/shopsys/microservice-product-search) is a necessary condition for the Shopsys Framework to run, the installation procedure of this microservice is a part of Shopsys Framework [installation guide](https://github.com/shopsys/shopsys/blob/v7.0.0-alpha5/docs/installation/installation-using-docker-application-setup.md)

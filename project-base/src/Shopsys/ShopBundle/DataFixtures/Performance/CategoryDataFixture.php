@@ -89,7 +89,7 @@ class CategoryDataFixture
      */
     public function load(OutputInterface $output)
     {
-        $progressBar = $this->progressBarFactory->create($output, array_sum($this->categoryCountsByLevel));
+        $progressBar = $this->progressBarFactory->create($output, $this->recursivelyCountCategoriesInCategoryTree());
 
         $rootCategory = $this->categoryFacade->getRootCategory();
         $this->sqlLoggerFacade->temporarilyDisableLogging();

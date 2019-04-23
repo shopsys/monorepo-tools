@@ -4,8 +4,6 @@ Smooth and safe upgrades of your own e-commerce project are very important to us
 In the same time, we need to be able to improve Shopsys Framework for you by adding functionality, enhancing or simplifying current functions and fixing bugs.
 After reading this promise you'll understand backward compatibility, what changes you can expect and how we plan to make changes in the future.
 
-*Note: This BC promise becomes effective with the first stable release (`7.0.0`).*
-
 ## Releases and Versioning
 This project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html), which means its release versions are in format `MAJOR.MINOR.PATCH`:
 
@@ -49,7 +47,7 @@ During an upgrade to the next major version, you have to make the changes yourse
 Rules for PHP code are fully covered by [Symfony Backward Compatibility Promise](https://symfony.com/doc/3.4/contributing/code/bc.html).
 
 ### Database Migrations
-A new version may include database migrations if the structure of [the entities](/docs/introduction/entities.md) changed.
+A new version may include database migrations if the structure of [the entities](/docs/model/entities.md) changed.
 
 Migrations in `MINOR` releases are backward-compatible.
 It means they may not change types of existing columns, rename columns and tables, and remove nullability of a column.

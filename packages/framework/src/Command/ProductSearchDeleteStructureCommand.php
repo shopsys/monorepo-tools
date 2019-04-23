@@ -32,7 +32,7 @@ class ProductSearchDeleteStructureCommand extends Command
     protected function configure()
     {
         $this
-            ->setDescription('Deletes structure for searching via microservice');
+            ->setDescription('Deletes structure in Elasticsearch for searching');
     }
 
     /**

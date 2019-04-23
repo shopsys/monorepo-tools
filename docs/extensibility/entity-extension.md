@@ -81,9 +81,10 @@ Entities are created by factories. If any part of framework creates an entity, i
 So in the project, we can change the factory to produce extended entities instead of original and the whole system will create extended entities.
 We enforce using factories by our coding standard sniff [`ObjectIsCreatedByFactorySniff`](../../packages/coding-standards/src/Sniffs/ObjectIsCreatedByFactorySniff.php).
 
-Only exception are `*Translation` entities.
+The only exceptions are [translation entities](../model/entities.md#translation-entity) (named `*Translation`) and [domain entities](../model/entities.md#domain-entity) (named `*Domain`).
 They are created by their owner entity.
-If it is needed to extend the translation, it is also necessary to extend the owner entity and override the `createTranslation` method to produce the extended translation.
+If you need to extend the translation, you have to extend the owner entity as well and override the `createTranslation` method to produce the extended translation.
+Similarly, if you need to extend the domain-specific part you have to override the `createDomains` method.
 
 ### Data and DataFactories
 
@@ -91,7 +92,7 @@ Entity data are extended by inheritance.
 Since they are not persisted, there is no need to do anything like in case of entities.
 
 Entity data are created by factories only.
-These factories work as same as entity factories.
+These factories work in the same manner as the entity factories mentioned above.
 If any part of framework creates an entity data, it uses a factory.
 So in the project, we can change the factory to produce extended entity data instead of original and the whole system will create extended entity data.
 
@@ -129,7 +130,7 @@ So in the project, we can change the factory to produce extended entity data ins
   * in hydrated Doctrine references
   * in the EntityManager, Repositories and QueryBuilders
   * in newly created entities
-* If You are running tests, update also `\Tests\ShopBundle\Functional\EntityExtension\EntityExtensionTest`
+* If you are running tests, update also `\Tests\ShopBundle\Functional\EntityExtension\EntityExtensionTest`
   * add your extended entity into `$entityExtensionMap` in the `setUp()` method
 
 *Tip: to see how it works in practice check out `\Tests\ShopBundle\Functional\EntityExtension\EntityExtensionTest` that tests end-to-end extensibility of `Product`, `Category` and `OrderItem`.*

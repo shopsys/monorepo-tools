@@ -33,6 +33,7 @@ final class StopMergingToMasterReleaseWorker extends AbstractShopsysReleaseWorke
      */
     public function work(Version $version): void
     {
+        $this->symfonyStyle->note('You need to write a warning message into "team_ssfw_devs" slack channel, as well as mark the "merge" column on the whiteboard in the office with a significant red cross along with "release in progress" note.');
         $this->confirm('Confirm the merging is stopped');
     }
 

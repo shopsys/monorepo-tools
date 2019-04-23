@@ -191,7 +191,7 @@ class FileUpload
         $filesForUpload = $entity->getTemporaryFilesForUpload();
         foreach ($filesForUpload as $fileForUpload) {
             /* @var $fileForUpload FileForUpload */
-            $sourceFilepath = $this->getTemporaryFilepath($fileForUpload->getTemporaryFilename());
+            $sourceFilepath = TransformString::removeDriveLetterFromPath($this->getTemporaryFilepath($fileForUpload->getTemporaryFilename()));
             $originalFilename = $this->fileNamingConvention->getFilenameByNamingConvention(
                 $fileForUpload->getNameConventionType(),
                 $fileForUpload->getTemporaryFilename(),

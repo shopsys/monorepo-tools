@@ -26,7 +26,7 @@
         "symplify/easy-coding-standard-tester": "^5.2.17"
     },
     "conflict": {
-        "symplify/better-phpdoc-parser": ">=5.4.14"
+        "symplify/better-phpdoc-parser": "5.4.14|5.4.15"
     },
     "autoload": {
         "psr-4": {

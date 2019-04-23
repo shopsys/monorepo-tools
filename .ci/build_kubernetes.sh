@@ -86,4 +86,4 @@ kubectl rollout status --namespace=${JOB_NAME} deployment/webserver-php-fpm --wa
 PHP_FPM_POD=$(kubectl get pods --namespace=${JOB_NAME} -l app=webserver-php-fpm -o=jsonpath='{.items[0].metadata.name}')
 
 # Run phing build targets for build of the application
-kubectl exec ${PHP_FPM_POD} --namespace=${JOB_NAME} ./phing test-db-create test-db-demo test-dirs-create checks-ci
+kubectl exec ${PHP_FPM_POD} --namespace=${JOB_NAME} ./phing test-db-create test-dirs-create checks-ci

@@ -75,6 +75,8 @@ final class SetMutualDependenciesToDevMasterReleaseWorker extends AbstractShopsy
         );
 
         $this->commit('composer.json in all packages now use latest shopsys version');
+        $this->symfonyStyle->note('You need to push the master branch manually, however, you have to wait until the previous (tagged) master build is finished on Heimdall. Otherwise, master-project-base would have never been built from the source codes where there are dependencies on the tagged versions of shopsys packages.');
+        $this->confirm('Confirm you have waited long enough and then pushed the master branch.');
     }
 
     /**

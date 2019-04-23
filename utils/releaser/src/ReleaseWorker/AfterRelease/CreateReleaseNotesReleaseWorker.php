@@ -33,6 +33,7 @@ final class CreateReleaseNotesReleaseWorker extends AbstractShopsysReleaseWorker
      */
     public function work(Version $version): void
     {
+        $this->symfonyStyle->note('See https://github.com/shopsys/shopsys/releases. Use "Draft a new release" button for creating a new release. If you are not sure about the release name or description, you can get inspired by the previous releases.');
         $this->confirm('Confirm release notes are published on Github');
     }
 

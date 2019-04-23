@@ -66,7 +66,7 @@ final class ResolveDocsTodoReleaseWorker extends AbstractShopsysReleaseWorker
         if ($isPassing) {
             $this->symfonyStyle->success(Message::SUCCESS);
         } else {
-            $this->confirm('Confirm all todos in .md files are resolved');
+            $this->confirm(sprintf('Confirm all todos in .md files are resolved and the changes are committed (you can use "documentation is now updated for %s release" commit message)', $version->getVersionString()));
         }
     }
 

@@ -14,7 +14,8 @@ class ArticleData extends BaseArticleData
 
     public function __construct()
     {
-        $this->createdAt = new DateTime();
         parent::__construct();
+
+        $this->createdAt = new DateTime();
     }
 }

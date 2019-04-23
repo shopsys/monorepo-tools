@@ -98,6 +98,10 @@ class AppKernel extends Kernel
             $configs[] = __DIR__ . '/../../parameters_monorepo.yml';
         }
 
+        if (file_exists(__DIR__ . '/config/parameters_version.yml')) {
+            $configs[] = __DIR__ . '/config/parameters_version.yml';
+        }
+
         return $configs;
     }
 

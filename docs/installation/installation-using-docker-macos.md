@@ -1,6 +1,6 @@
 # Installation Using Docker for MacOS
 
-**This guide is for the version which is not released yet. See the [version for `v7.0.0`](https://github.com/shopsys/shopsys/blob/v7.0.0/docs/installation/installation-using-docker-macos.md).**
+**This guide is for the version which is not released yet. See the [version for `v7.1.0`](https://github.com/shopsys/shopsys/blob/v7.1.0/docs/installation/installation-using-docker-macos.md).**
 
 This guide covers building new projects based on Shopsys Framework.
 If you want to contribute to the framework itself,
@@ -12,6 +12,7 @@ This solution uses [*docker-sync*](http://docker-sync.io/) (for fast two-way syn
 ## Requirements
 * [GIT](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
 * [PHP](http://php.net/manual/en/install.macosx.php)
+    * At least version **7.1 or higher**
 * [Composer](https://getcomposer.org/doc/00-intro.md#installation-linux-unix-osx)
 * [Docker for Mac](https://docs.docker.com/engine/installation/)
     * Docker-sync suggests ([in known issue](https://github.com/EugenMayer/docker-sync/issues/517)) to use Docker for Mac in version 17.09.1-ce-mac42 (21090)

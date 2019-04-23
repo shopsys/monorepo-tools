@@ -84,7 +84,16 @@ final class UpdateUpgradeReleaseWorker extends AbstractShopsysReleaseWorker
         $this->updateGeneralUpgradeFile($version);
 
         $this->symfonyStyle->success(Message::SUCCESS);
-        $this->symfonyStyle->note('Review all the upgrading files whether they satisfy our rules and guidelines');
+        $this->symfonyStyle->note('Review all the upgrading files whether they satisfy our rules and guidelines, see https://github.com/shopsys/shopsys/blob/master/docs/contributing/guidelines-for-writing-upgrade.md.');
+        $versionString = $version->getVersionString();
+        $this->symfonyStyle->note(sprintf(
+            'Typically, you need to:
+            - check the correctness of the order of Shopsys packages and sections, 
+            - check whether there are no duplicated instructions for modifying docker related files, 
+            - change the links from master to the %1$s version in UPGRADE-%1$s.md file.',
+            $versionString
+        ));
+        $this->symfonyStyle->note(sprintf('You need to commit the upgrade files manually with commit message "upgrade files are now updated for %s release" commit message.', $versionString));
 
         $this->confirm('Confirm all upgrading files are ready for the release and the changes are committed');
     }

@@ -87,4 +87,4 @@ Besides the rules that are checked by automatic tools, we have few rules for whi
     }
     ```
 - Entities have to be created by factories. Only allowed exception are `*Translation` entities that are created by their owner entity.
-- All monetary values (*prices, account balances, discount amounts, price limits etc.*) must be represented and manipulated by [the `Money` class](/docs/introduction/how-to-work-with-money.md).
+- All monetary values (*prices, account balances, discount amounts, price limits etc.*) must be represented and manipulated by [the `Money` class](/docs/model/how-to-work-with-money.md).

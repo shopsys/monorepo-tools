@@ -33,7 +33,7 @@ final class PostInfoToSlackReleaseWorker extends AbstractShopsysReleaseWorker
      */
     public function work(Version $version): void
     {
-        $this->symfonyStyle->note('#news in public Slack, #group_ssfw_news in internal Slack - link the "release highlights" here');
+        $this->symfonyStyle->note('Add new posts to these channels: #news in public Slack, #group_ssfw_news in internal Slack. You do not need to write essays, just point out one or two most interesting changes and add links to the "release highlights" article and release notes notes on Github.');
         $this->confirm('Confirm the Slack is noted');
     }
 

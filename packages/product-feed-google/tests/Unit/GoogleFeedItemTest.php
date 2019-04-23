@@ -72,7 +72,7 @@ class GoogleFeedItemTest extends TestCase
         $this->defaultProduct = $this->createMock(Product::class);
         $this->defaultProduct->method('getId')->willReturn(1);
         $this->defaultProduct->method('getName')->with('en')->willReturn('product name');
-        $this->defaultProduct->method('isSellingDenied')->willReturn(false);
+        $this->defaultProduct->method('getCalculatedSellingDenied')->willReturn(false);
 
         $this->mockProductPrice($this->defaultProduct, $this->defaultDomain, Price::zero());
         $this->mockProductUrl($this->defaultProduct, $this->defaultDomain, 'https://example.com/product-1');
@@ -205,7 +205,7 @@ class GoogleFeedItemTest extends TestCase
         $product = $this->createMock(Product::class);
         $product->method('getId')->willReturn(1);
         $product->method('getName')->with('en')->willReturn('product name');
-        $product->method('isSellingDenied')->willReturn(true);
+        $product->method('getCalculatedSellingDenied')->willReturn(true);
 
         $googleFeedItem = $this->googleFeedItemFactory->create($product, $this->defaultDomain);
 

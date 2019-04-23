@@ -6,6 +6,7 @@ use League\Flysystem\FilesystemInterface;
 use League\Flysystem\MountManager;
 use Presta\SitemapBundle\DependencyInjection\Configuration;
 use Presta\SitemapBundle\Service\Dumper;
+use Shopsys\FrameworkBundle\Component\String\TransformString;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Finder\Finder;
@@ -57,7 +58,10 @@ class SitemapDumper extends Dumper
 
         $finder = new Finder();
         foreach ($finder->files()->in($this->tmpFolder)->getIterator() as $file) {
-            $this->mountManager->move('local://' . $file->getPathname(), 'main://' . $targetDir . '/' . $file->getBasename());
+            $this->mountManager->move(
+                'local://' . TransformString::removeDriveLetterFromPath($file->getPathname()),
+                'main://' . $targetDir . '/' . $file->getBasename()
+            );
         }
 
         parent::cleanup();

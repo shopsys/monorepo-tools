@@ -6,3 +6,5 @@ services:
 
     Shopsys\ShopBundle\Command\:
         resource: '../../../Command'
+
+    Shopsys\FrameworkBundle\Command\RedisCleanCacheOldCommand: ~

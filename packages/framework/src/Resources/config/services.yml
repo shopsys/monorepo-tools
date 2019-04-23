@@ -8,6 +8,7 @@ parameters:
     faker.seed: 1234
     shopsys.entity_extension.map: {}
     shopsys.admin_locale: en
+    build-version: '0000000000000000'
 
 services:
     _defaults:
@@ -577,12 +578,17 @@ services:
             - '@twig'
             - '%kernel.debug%'
 
-    Shopsys\FrameworkBundle\Component\Error\NotLogFakeHttpExceptionsExceptionListener:
+    Shopsys\FrameworkBundle\Component\Error\NotLogFakeHttpExceptionsExceptionListener: '@twig.exception_listener'
+
+    twig.exception_listener:
+        class: Shopsys\FrameworkBundle\Component\Error\NotLogFakeHttpExceptionsExceptionListener
         tags:
+            - { name: 'kernel.event_subscriber' }
             - { name: 'monolog.logger', channel: 'request' }
         arguments:
             - '%twig.exception_listener.controller%'
             - '@?logger'
+            - '%kernel.debug%'
 
     twig.stringloader:
         class: Twig_Loader_Array
@@ -643,8 +649,6 @@ services:
     Craue\FormFlowBundle\Storage\DataManager: '@craue.form.flow.data_manager_default'
 
     FM\ElfinderBundle\Configuration\ElFinderConfigurationReader: '@fm_elfinder.configurator.default'
-
-    Shopsys\FrameworkBundle\Command\CheckMicroservicesCommand: ~
 
     Shopsys\FrameworkBundle\Model\PersonalData\PersonalDataAccessRequestFactoryInterface:
         alias: Shopsys\FrameworkBundle\Model\PersonalData\PersonalDataAccessRequestFactory
@@ -970,6 +974,11 @@ services:
             - '@snc_redis.bestselling_products'
             - '@snc_redis.doctrine_metadata'
             - '@snc_redis.doctrine_query'
+
+    Shopsys\FrameworkBundle\Component\Redis\RedisVersionsFacade:
+        arguments:
+            $globalClient: '@snc_redis.global'
+            $currentVersion: '%build-version%'
 
     Elasticsearch\ClientBuilder:
       class: Elasticsearch\ClientBuilder

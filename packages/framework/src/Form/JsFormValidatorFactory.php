@@ -52,17 +52,14 @@ class JsFormValidatorFactory extends BaseJsFormValidatorFactory
                 : ['name' => $namespace . 'ChoiceToBooleanArrayTransformer'];
 
             $transformer['choiceList'] = [];
-            $optionsItemsThatAreNotInstanceOfParameterValue = [];
             foreach ($config->getOption('choices') as $formOptionChoiceItem) {
                 if ($formOptionChoiceItem instanceof ParameterValue) {
                     $optionItemId = $formOptionChoiceItem->getId();
                     $transformer['choiceList'][$optionItemId] = $formOptionChoiceItem;
                 } else {
-                    $optionsItemsThatAreNotInstanceOfParameterValue[] = $formOptionChoiceItem;
+                    $transformer['choiceList'][] = $formOptionChoiceItem;
                 }
             }
-
-            array_push($transformer['choiceList'], $optionsItemsThatAreNotInstanceOfParameterValue);
 
             array_unshift($viewTransformers, $transformer);
         }

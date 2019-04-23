@@ -1,6 +1,6 @@
 # Installation Using Docker for Linux
 
-**This guide is for the version which is not released yet. See the [version for `v7.0.0`](https://github.com/shopsys/shopsys/blob/v7.0.0/docs/installation/installation-using-docker-linux.md).**
+**This guide is for the version which is not released yet. See the [version for `v7.1.0`](https://github.com/shopsys/shopsys/blob/v7.1.0/docs/installation/installation-using-docker-linux.md).**
 
 This guide covers building new projects based on Shopsys Framework.
 If you want to contribute to the framework itself,
@@ -10,6 +10,7 @@ Take a look at the article about [Monorepo](../introduction/monorepo.md) for mor
 ## Requirements
 * [GIT](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
 * [PHP](http://php.net/manual/en/install.unix.php)
+    * At least version **7.1 or higher**
 * [Composer](https://getcomposer.org/doc/00-intro.md#installation-linux-unix-osx)
 * [Docker](https://docs.docker.com/engine/installation/)
     * At least version **17.05 or higher** so it supports [multi-stage builds](https://docs.docker.com/develop/develop-images/multistage-build/).

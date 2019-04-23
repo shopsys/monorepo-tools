@@ -1,6 +1,6 @@
 # Installation Using Docker for Windows 10 Pro and higher
 
-**This guide is for the version which is not released yet. See the [version for `v7.0.0`](https://github.com/shopsys/shopsys/blob/v7.0.0/docs/installation/installation-using-docker-windows-10-pro-higher.md).**
+**This guide is for the version which is not released yet. See the [version for `v7.1.0`](https://github.com/shopsys/shopsys/blob/v7.1.0/docs/installation/installation-using-docker-windows-10-pro-higher.md).**
 
 **Expected installation time:** 3 hours.
 
@@ -19,6 +19,7 @@ This solution uses [*docker-sync*](http://docker-sync.io/) (for fast two-way syn
 ## Requirements
 * [GIT](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
 * [PHP](http://php.net/manual/en/install.windows.php)
+    * At least version **7.1 or higher**
 * [Docker for Windows](https://docs.docker.com/docker-for-windows/install/)
     * Docker for Windows requires at least 4 GB of memory, otherwise, `composer install` can result in `Killed` status (we recommend to set 2 GB RAM, 1 CPU and 2 GB Swap in `Docker -> Preferences… -> Advanced`)
     * Version of Docker Engine should be at least **17.05 or higher** so it supports [multi-stage builds](https://docs.docker.com/develop/develop-images/multistage-build/).

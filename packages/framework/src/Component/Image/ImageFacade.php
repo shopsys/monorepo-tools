@@ -8,6 +8,7 @@ use League\Flysystem\MountManager;
 use Shopsys\FrameworkBundle\Component\Domain\Config\DomainConfig;
 use Shopsys\FrameworkBundle\Component\FileUpload\FileUpload;
 use Shopsys\FrameworkBundle\Component\Image\Config\ImageConfig;
+use Shopsys\FrameworkBundle\Component\String\TransformString;
 
 class ImageFacade
 {
@@ -341,7 +342,7 @@ class ImageFacade
         foreach ($sourceImages as $sourceImage) {
             $this->mountManager->copy(
                 'main://' . $this->imageLocator->getAbsoluteImageFilepath($sourceImage, ImageConfig::ORIGINAL_SIZE_NAME),
-                'local://' . $this->fileUpload->getTemporaryFilepath($sourceImage->getFilename())
+                'local://' . TransformString::removeDriveLetterFromPath($this->fileUpload->getTemporaryFilepath($sourceImage->getFilename()))
             );
 
             $targetImage = $this->imageFactory->create(

@@ -19,6 +19,7 @@ For more detailed information about the Shopsys Framework, please see [Shopsys F
 - [Are some periodic tasks part of the Shopsys Framework (cron)?](#are-some-periodic-tasks-part-of-the-shopsys-framework-cron)
 - [Why are you using entity data instead of entities for Symfony forms?](#why-are-you-using-entity-data-instead-of-entities-for-symfony-forms)
 - [What is the configuration file `services_test.yml` good for?](#what-is-the-configuration-file-services_testyml-good-for)
+- [How to change the behavior of the product search on the front-end?](#how-to-change-the-behavior-of-the-product-search-on-the-front-end)
 - [Why are e-mails not sent immediately but at the end of the script](#why-are-e-mails-sent-before-end-of-the-script-and-not-immediately)
 
 ## What are the phing targets?
@@ -74,12 +75,12 @@ This scenario is described in more detail in the tutorial [How to Set Up Domains
 
 ## What are the differences between "listable", "sellable", "offered" and "visible" products?
 Products can be grouped into several groups according to their current status or according to what they are used for.
-These groups are described in more detail in the article [How to Work with Products](./how-to-work-with-products.md).
+These groups are described in more detail in the article [How to Work with Products](../model/how-to-work-with-products.md).
 
 ## How calculated attributes work?
 Some attributes that are used on the Shopsys Framework are not set directly, but their value is automatically calculated based on other attributes.
 For example, if a category of products does not have a name for a locale of the specific domain, this category will be automatically set as not visible on this domain.
-See more about calculated attributes in the article [How to Work with Products](./how-to-work-with-products.md).
+See more about calculated attributes in the article [How to Work with Products](../model/how-to-work-with-products.md).
 
 ## How do I change the environment (PRODUCTION/DEVELOPMENT/TEST)?
 The environment is determined by the existence of the files `PRODUCTION`, `DEVELOPMENT`, `TEST` in the root of your project.
@@ -94,7 +95,7 @@ Yes, there is some prepared configuration for Shopsys Framework cron commands in
 Do not forget to set up a cron on your server to execute [`php phing cron`](/docs/introduction/console-commands-for-application-management-phing-targets.md#cron) every 5 minutes.
 
 ## Why are you using entity data instead of entities for Symfony forms?
-We are using [entity data objects](entities.md#entity-data) instead of [entities](basics-about-model-architecture.md#entity)
+We are using [entity data objects](../model/entities.md#entity-data) instead of [entities](../model/introduction-to-model-architecture.md#entity)
 because Symfony forms need setters for all fields and we don't want to mess entities with them.
 
 ## What is the configuration file `services_test.yml` good for?
@@ -102,6 +103,10 @@ because Symfony forms need setters for all fields and we don't want to mess enti
 is a service configuration file that is loaded in TEST environment in addition to
 the standard configuration defined in [`services.yml`](../../project-base/src/Shopsys/ShopBundle/Resources/config/services.yml) as sometimes the configuration differs from the standard one and we need to override it.
 E.g., by default, all our services are defined as private. However, in tests, we are retrieving some services directly from the container hence we need to have them public in TEST environment.
+
+## How to change the behavior of the product search on the front-end?
+Full-text product search on the front-end is handled via Elasticsearch.
+If you want to change its behavior (e.g. make the EAN not as important or change the way the search string is handled - whether to use an n-gram or not) please see [Product Searching via Elasticsearch](/docs/introduction/product-search-via-elasticsearch.md#how-to-change-the-default-index-data-export-setting-and-searching-behavior).
 
 ## Why are e-mails sent before end of the script and not immediately
 Project uses `SwiftMailer` package for sending e-mails and defaultly it has set `spool queue` that stores all mails into `memory` until the script execution is at the end.  

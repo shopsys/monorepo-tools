@@ -10,31 +10,34 @@
 * [Installation Using Docker on Production Server](installation/installation-using-docker-on-production-server.md)
 * [Console Commands for Application Management (Phing Targets)](./introduction/console-commands-for-application-management-phing-targets.md)
 * [Automated Testing](./introduction/automated-testing.md)
-* [Basics About Model Architecture](./introduction/basics-about-model-architecture.md)
 * [Framework Extensibility](introduction/framework-extensibility.md)
-* [Custom Entities](introduction/custom-entities.md)
 * [Basics About Package Architecture](./introduction/basics-about-package-architecture.md)
 * [Basic and Demo Data During Application Installation](introduction/basic-and-demo-data-during-application-installation.md)
 * [Database Migrations](./introduction/database-migrations.md)
 * [Components](./introduction/components.md)
 * [Abstract Filesystem](./introduction/abstract-filesystem.md)
 * [Product Feeds](./introduction/product-feeds.md)
-* [Administration Menu](./introduction/administration-menu.md)
 * [Logging](./introduction/logging.md)
-* [Product Searching via Elasticsearch](./introduction/product-search-via-elasticsearch.md)
 * [Domain, Multidomain, Multilanguage](./introduction/domain-multidomain-multilanguage.md)
 * [How to Set Up Domains and Locales (Languages)](./introduction/how-to-set-up-domains-and-locales.md)
-* [Shopsys Framework Development Workflow](introduction/shopsys-framework-development-workflow.md)
-* [How to Work with Products](./introduction/how-to-work-with-products.md)
-* [How to Work with Money](./introduction/how-to-work-with-money.md)
 * [Translations](./introduction/translations.md)
 * [Directories](./introduction/directories.md)
 * [Cron](./introduction/cron.md)
 * [Using Form Types](./introduction/using-form-types.md)
 
+## Model
+* [Introduction to Model Architecture](./model/introduction-to-model-architecture.md)
+* [Model Rules](./model/model-rules.md)
+* [How to Work with Products](./model/how-to-work-with-products.md)
+* [How to Work with Money](./model/how-to-work-with-money.md)
+* [Product Feeds](./model/product-feeds.md)
+* [Custom Entities](./model/custom-entities.md)
+* [Product Searching via Elasticsearch](./model/product-search-via-elasticsearch.md)
+
 ## Cookbook
 * [Dumping and Importing the Database](./cookbook/dumping-and-importing-the-database.md)
 * [Configuring Jenkins for Continuous Integration](./cookbook/jenkins-configuration.md)
+* [Adding a New Entity](./cookbook/adding-a-new-entity.md)
 * [Adding New Attribute to an Entity](./cookbook/adding-new-attribute-to-an-entity.md)
 * [Adding a New Administration Page](./cookbook/adding-a-new-administration-page.md)
 * [Adding a New Advert Position](./cookbook/adding-a-new-advert-position.md)
@@ -44,10 +47,19 @@
 * [Implementing a basic data import](./cookbook/basic-data-import.md)
 * [Creating a Multidomain Design](./cookbook/creating-a-multidomain-design.md)
 * [Working with Multiple Cron Instances](./cookbook/working-with-multiple-cron-instances.md)
+* [Create Basic Grid](./cookbook/create-basic-grid.md)
+* [Create Advanced Grid](./cookbook/create-advanced-grid.md)
 
 ## Functional documentation
 * [Behavior of Product Variants](./functional/behavior-of-product-variants.md)
 * [Product Visibility and Exclude from Sale](./functional/product-visibility-and-exclude-from-sale.md)
+* [Cart](./functional/cart.md)
+
+## Administration
+* [Administration Menu](./administration/administration-menu.md)
+* [Grid](./administration/grid.md)
+    * [Grid Rendering Customization](./administration/grid-rendering-customization.md)
+    * [Grid Data Sources](./administration/grid-data-sources.md)
 
 ## Frontend
 * [Design implementation and Customization](./frontend/design-implementation-and-customization.md)

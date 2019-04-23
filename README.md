@@ -27,7 +27,7 @@ Shopsys Framework is fully functional e-commerce platform with all basic functio
 * Registered customers
 * Basic orders management
 * Back-end administration
-* Front-end [full-text search](./docs/introduction/product-search-via-elasticsearch.md) and product filtering
+* Front-end [full-text search](./docs/model/product-search-via-elasticsearch.md) and product filtering
 * 3-step ordering process
 * Basic CMS
 * Support for several currencies, [languages, and domains](./docs/introduction/domain-multidomain-multilanguage.md)
@@ -48,7 +48,6 @@ Shopsys Framework is fully functional e-commerce platform with all basic functio
 
 ## Sites Built on Shopsys Framework
 List of typical projects built on previous versions of Shopsys Framework:
-* [Zoopy](https://www.zoopy.cz/)
 * [Prumex](https://www.prumex.cz/)
 * [Elektro Vlášek](https://www.elektrovlasek.cz/)
 * [AB COM CZECH](https://www.ab-com.cz/)

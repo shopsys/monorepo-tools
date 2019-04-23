@@ -33,7 +33,7 @@ class CustomerIdentifierFactory
     {
         $cartIdentifier = $this->session->getId();
 
-        // when session is not started, returning empty string is behaviour of session_id()
+        // when session is not started, returning empty string is behavior of session_id()
         if ($cartIdentifier === '') {
             $this->session->start();
             $cartIdentifier = $this->session->getId();
