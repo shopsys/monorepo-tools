@@ -208,6 +208,8 @@ class ProductOnCurrentDomainElasticFacade implements ProductOnCurrentDomainFacad
      */
     protected function createProductsForSearchTextFilterQuery(ProductFilterData $productFilterData, $orderingModeId, $page, $limit, $searchText): FilterQuery
     {
+        $searchText = $searchText ?? '';
+
         return $this->createFilterQueryWithProductFilterData($productFilterData, $orderingModeId, $page, $limit)
             ->search($searchText);
     }
@@ -252,11 +254,11 @@ class ProductOnCurrentDomainElasticFacade implements ProductOnCurrentDomainFacad
      */
     public function getProductFilterCountDataInCategory($categoryId, ProductFilterConfig $productFilterConfig, ProductFilterData $productFilterData): ProductFilterCountData
     {
-        $baseFilterQuery = new FilterQuery($this->getIndexName());
-        $baseFilterQuery->filterByCategory([$categoryId]);
-        $baseFilterQuery->filterOnlySellable();
-        $this->productFilterDataToQueryTransformer->addPricesToQuery($productFilterData, $baseFilterQuery, $this->currentCustomer->getPricingGroup());
-        $this->productFilterDataToQueryTransformer->addStockToQuery($productFilterData, $baseFilterQuery);
+        $baseFilterQuery = (new FilterQuery($this->getIndexName()))
+            ->filterByCategory([$categoryId])
+            ->filterOnlySellable();
+        $baseFilterQuery = $this->productFilterDataToQueryTransformer->addPricesToQuery($productFilterData, $baseFilterQuery, $this->currentCustomer->getPricingGroup());
+        $baseFilterQuery = $this->productFilterDataToQueryTransformer->addStockToQuery($productFilterData, $baseFilterQuery);
 
         return $this->productFilterCountDataElasticsearchRepository->getProductFilterCountDataInCategory(
             $productFilterData,
@@ -269,11 +271,13 @@ class ProductOnCurrentDomainElasticFacade implements ProductOnCurrentDomainFacad
      */
     public function getProductFilterCountDataForSearch($searchText, ProductFilterConfig $productFilterConfig, ProductFilterData $productFilterData): ProductFilterCountData
     {
-        $baseFilterQuery = new FilterQuery($this->getIndexName());
-        $baseFilterQuery->search($searchText);
-        $baseFilterQuery->filterOnlySellable();
-        $this->productFilterDataToQueryTransformer->addPricesToQuery($productFilterData, $baseFilterQuery, $this->currentCustomer->getPricingGroup());
-        $this->productFilterDataToQueryTransformer->addStockToQuery($productFilterData, $baseFilterQuery);
+        $searchText = $searchText ?? '';
+
+        $baseFilterQuery = (new FilterQuery($this->getIndexName()))
+            ->search($searchText)
+            ->filterOnlySellable();
+        $baseFilterQuery = $this->productFilterDataToQueryTransformer->addPricesToQuery($productFilterData, $baseFilterQuery, $this->currentCustomer->getPricingGroup());
+        $baseFilterQuery = $this->productFilterDataToQueryTransformer->addStockToQuery($productFilterData, $baseFilterQuery);
 
         return $this->productFilterCountDataElasticsearchRepository->getProductFilterCountDataInSearch(
             $productFilterData,

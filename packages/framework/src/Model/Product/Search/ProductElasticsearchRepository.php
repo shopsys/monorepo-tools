@@ -153,6 +153,8 @@ class ProductElasticsearchRepository
      */
     protected function createQuery(string $indexName, string $searchText): array
     {
+        $searchText = $searchText ?? '';
+
         $query = (new FilterQuery($indexName))
             ->search($searchText);
         return $query->getQuery();
