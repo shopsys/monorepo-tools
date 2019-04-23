@@ -6,6 +6,7 @@ use Elasticsearch\Client;
 use Shopsys\FrameworkBundle\Component\Money\Money;
 use Shopsys\FrameworkBundle\Model\Product\Listing\ProductListOrderingConfig;
 use Shopsys\FrameworkBundle\Model\Product\Search\FilterQuery;
+use Shopsys\FrameworkBundle\Model\Product\Search\FilterQueryFactory;
 use Shopsys\ShopBundle\DataFixtures\Demo\PricingGroupDataFixture;
 use Tests\ShopBundle\Test\TransactionFunctionalTestCase;
 
@@ -162,7 +163,9 @@ class FilterQueryTest extends TransactionFunctionalTestCase
      */
     protected function createFilter(): FilterQuery
     {
-        $filter = new FilterQuery(self::ELASTICSEARCH_INDEX);
+        /** @var \Shopsys\FrameworkBundle\Model\Product\Search\FilterQueryFactory $filterQueryFactory */
+        $filterQueryFactory = $this->getContainer()->get(FilterQueryFactory::class);
+        $filter = $filterQueryFactory->create(self::ELASTICSEARCH_INDEX);
 
         return $filter->filterOnlySellable();
     }

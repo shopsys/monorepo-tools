@@ -43,6 +43,11 @@ class ProductElasticsearchRepository
     protected $productFilterDataToQueryTransformer;
 
     /**
+     * @var \Shopsys\FrameworkBundle\Model\Product\Search\FilterQueryFactory
+     */
+    protected $filterQueryFactory;
+
+    /**
      * @param string $indexPrefix
      * @param \Elasticsearch\Client $client
      * @param \Shopsys\FrameworkBundle\Model\Product\Search\ProductElasticsearchConverter $productElasticsearchConverter
@@ -59,6 +64,7 @@ class ProductElasticsearchRepository
         $this->productElasticsearchConverter = $productElasticsearchConverter;
         $this->elasticsearchStructureManager = $elasticsearchStructureManager;
         $this->productFilterDataToQueryTransformer = new ProductFilterDataToQueryTransformer();
+        $this->filterQueryFactory = new FilterQueryFactory();
     }
 
     /**
@@ -155,7 +161,7 @@ class ProductElasticsearchRepository
     {
         $searchText = $searchText ?? '';
 
-        $query = (new FilterQuery($indexName))
+        $query = $this->filterQueryFactory->create($indexName)
             ->search($searchText);
         return $query->getQuery();
     }
