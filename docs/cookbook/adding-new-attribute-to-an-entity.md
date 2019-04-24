@@ -184,6 +184,7 @@ The original `ProductFormType` is set as the extended type by implementation of 
         }
     }
     ```
+    *Note: If you want to change order for your newly created field, please look at section [Changing order of groups and fields](https://github.com/shopsys/shopsys/blob/master/docs/extensibility/form-extension.md#changing-order-of-groups-and-fields)*
 1. In your `Product` class, overwrite the `edit()` method.
     ```php
     namespace Shopsys\ShopBundle\Model\Product;

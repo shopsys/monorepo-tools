@@ -7,6 +7,14 @@ services:
     Shopsys\FrameworkBundle\Form\:
         resource: '../../Form/'
 
+    Ivory\OrderedForm\Extension\OrderedFormExtension:
+        tags:
+            - { name: form.type_extension, extended_type: Symfony\Component\Form\Extension\Core\Type\FormType }
+
+    Ivory\OrderedForm\Extension\OrderedButtonExtension:
+        tags:
+            - { name: form.type_extension, extended_type: Symfony\Component\Form\Extension\Core\Type\ButtonType }
+
     Shopsys\FrameworkBundle\Form\InvertChoiceTypeExtension:
         tags:
             - { name: form.type_extension, extended_type: Symfony\Component\Form\Extension\Core\Type\ChoiceType }
