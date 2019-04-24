@@ -19,6 +19,33 @@ There you can find links to upgrade notes for other versions too.
         +        $filepath = TransformString::removeDriveLetterFromPath($file->getPathname());
         ```
 
+- *(low priority)* reconfigure fm_elfinder to use main_filesystem ([#932](https://github.com/shopsys/shopsys/pull/932))
+    - upgrade version of `helios-ag/fm-elfinder-bundle` to `^9.2` in `composer.json`
+    - remove `barryvdh/elfinder-flysystem-driver": "^0.2"` from `composer.json`
+    - update `fm_elfinder.yml` config
+    ```diff
+        driver: Flysystem
+    -   path: '%shopsys.filemanager_upload_web_dir%'
+    +   path: 'web/%shopsys.filemanager_upload_web_dir%'
+        flysystem:
+    -       type: local
+    -       options:
+    -           local:
+    -               path: '%shopsys.web_dir%'
+    +       enabled: true
+    +       filesystem: 'main_filesystem'
+        upload_allow: ['image/png', 'image/jpg', 'image/jpeg']
+    -   tmb_path: '%shopsys.filemanager_upload_web_dir%/_thumbnails'
+    +   tmb_path: 'web/%shopsys.filemanager_upload_web_dir%/_thumbnails'
+        url: '%shopsys.filemanager_upload_web_dir%'
+        tmb_url: '%shopsys.filemanager_upload_web_dir%/_thumbnails'
+        attributes:
+            thumbnails:
+    -           pattern: '/^\/content\/wysiwyg\/_thumbnails$/'
+    +           pattern: '/^\/web\/content\/wysiwyg\/_thumbnails$/'
+                hidden: true
+    ```
+    - read the section about proxying the URL content subpaths via webserver domain [`docs/introduction/abstract-filesystem.md`](https://github.com/shopsys/shopsys/blob/master/docs/introduction/abstract-filesystem.md)
 
 ### Configuration
  - *(low priority)* use standard format for redis prefixes ([#928](https://github.com/shopsys/shopsys/pull/928))
@@ -27,5 +54,5 @@ There you can find links to upgrade notes for other versions too.
 
     **Be careful, this upgrade will remove sessions**
 
-
 [Upgrade from v7.1.0 to Unreleased]: https://github.com/shopsys/shopsys/compare/v7.1.0...HEAD
+[shopsys/framework]: https://github.com/shopsys/framework
