@@ -39,7 +39,7 @@ class ProductAvailabilityRecalculatorTest extends TestCase
         $productAvailabilityRecalculationSchedulerMock
             ->expects($this->once())
             ->method('getProductsForImmediateRecalculation')
-            ->will($this->returnValue([$productMock]));
+            ->willReturn([$productMock]);
 
         $productAvailabilityRecalculator = new ProductAvailabilityRecalculator(
             $emMock,

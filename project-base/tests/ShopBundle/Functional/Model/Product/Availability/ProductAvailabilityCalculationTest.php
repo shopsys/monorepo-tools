@@ -51,7 +51,7 @@ class ProductAvailabilityCalculationTest extends FunctionalTestCase
             ->disableOriginalConstructor()
             ->getMock();
         $availabilityFacadeMock->expects($this->any())->method('getDefaultInStockAvailability')
-            ->will($this->returnValue($defaultInStockAvailability));
+            ->willReturn($defaultInStockAvailability);
 
         $productSellingDeniedRecalculatorMock = $this->createMock(ProductSellingDeniedRecalculator::class);
         $productVisibilityFacadeMock = $this->createMock(ProductVisibilityFacade::class);

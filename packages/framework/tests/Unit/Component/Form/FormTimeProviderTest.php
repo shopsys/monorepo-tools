@@ -30,8 +30,8 @@ class FormTimeProviderTest extends TestCase
             ->disableOriginalConstructor()
             ->setMethods(['get', 'has'])
             ->getMock();
-        $sessionMock->expects($this->atLeastOnce())->method('get')->will($this->returnValue(new DateTime($formCreatedAt)));
-        $sessionMock->expects($this->atLeastOnce())->method('has')->will($this->returnValue(true));
+        $sessionMock->expects($this->atLeastOnce())->method('get')->willReturn(new DateTime($formCreatedAt));
+        $sessionMock->expects($this->atLeastOnce())->method('has')->willReturn(true);
 
         $formTimeProvider = new FormTimeProvider($sessionMock);
 
