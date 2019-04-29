@@ -7,10 +7,10 @@ There you can find links to upgrade notes for other versions too.
 
 ## [shopsys/framework]
 ### Application
-- *(low priority)* to add support of functional tests of Redis ([#846](https://github.com/shopsys/shopsys/pull/846))
+- to add support of functional tests of Redis ([#846](https://github.com/shopsys/shopsys/pull/846))
     - download [`snc_redis.yml`](https://github.com/shopsys/project-base/blob/v7.1.0/app/config/packages/test/snc_redis.yml) to `app/config/packages/test/snc_redis.yml`
     - download [`RedisFacadeTest.php`](https://github.com/shopsys/project-base/tree/v7.1.0/tests/ShopBundle/Functional/Component/Redis/RedisFacadeTest.php) to your tests directory `tests/ShopBundle/Functional/Component/Redis/`
-- *(low-priority)* by changes implemented in [#808 redesign print page of product detail page](https://github.com/shopsys/shopsys/pull/808) was created new folder `print` in `src/Shopsys/ShopBundle/Resources/styles/front/common`. In the pull request were implemented changes for styling print page of initial Shopsys Framework configuration. In order to apply changes in your project there is need to do following steps.
+- by changes implemented in [#808 redesign print page of product detail page](https://github.com/shopsys/shopsys/pull/808) was created new folder `print` in `src/Shopsys/ShopBundle/Resources/styles/front/common`. In the pull request were implemented changes for styling print page of initial Shopsys Framework configuration. In order to apply changes in your project there is need to do following steps.
     - copy whole `print` folders from `src/Shopsys/ShopBundle/Resources/styles/front/common/print` and `src/Shopsys/ShopBundle/Resources/styles/front/domain2/print` of [shopsys/project-base](https://github.com/shopsys/project-base/)
     - add `dont-print` class to HTML elements which you want to hide. You can inspire by [changes](https://github.com/shopsys/shopsys/pull/808/files) implemented in [pull request](https://github.com/shopsys/shopsys/pull/808).
     - add new `less` subtask in `src/Shopsys/ShopBundle/Resources/views/Grunt/gruntfile.js.twig`
@@ -67,7 +67,7 @@ There you can find links to upgrade notes for other versions too.
     ```
     - generate new `Grtuntfile.js` by running command `php phing gruntfile`
     - generate new CSS files by running command `php phing grunt`
-- *(low priority)* add custom message for unique e-mail validation in `/src/Shopsys/ShopBundle/Form/Front/Registration/RegistrationFormType.php` ([#885](https://github.com/shopsys/shopsys/pull/885))
+- add custom message for unique e-mail validation in `/src/Shopsys/ShopBundle/Form/Front/Registration/RegistrationFormType.php` ([#885](https://github.com/shopsys/shopsys/pull/885))
     ```diff
     -                    new UniqueEmail(),
     +                    new UniqueEmail(['message' => 'This e-mail is already registered']),
@@ -78,7 +78,7 @@ There you can find links to upgrade notes for other versions too.
         -        $registrationPage->seeEmailError('Email no-reply@shopsys.com is already registered');
         +        $registrationPage->seeEmailError('This e-mail is already registered');
         ```
-- *(low priority)* remove option `choice_name` from `flags` and `brands` in `ShopBundle/Form/Front/Product/ProductFilterFormType.php` ([#891](https://github.com/shopsys/shopsys/pull/891))
+- remove option `choice_name` from `flags` and `brands` in `ShopBundle/Form/Front/Product/ProductFilterFormType.php` ([#891](https://github.com/shopsys/shopsys/pull/891))
 - create `Shopsys\ShopBundle\Model\AdvancedSearch\ProductAdvancedSearchConfig` by extending `Shopsys\FrameworkBundle\Model\AdvancedSearch\ProductAdvancedSearchConfig` ([#895](https://github.com/shopsys/shopsys/pull/895))
     - register `\Shopsys\FrameworkBundle\Model\AdvancedSearch\Filter\ProductCategoryFilter` filter via method `registerFilter` in constructor
     - register it as service alias via `ShopBundle/Resources/config/services.yml` and `ShopBundle/Resources/config/services_test.yml`
@@ -86,7 +86,7 @@ There you can find links to upgrade notes for other versions too.
         +Shopsys\ShopBundle\Model\AdvancedSearch\ProductAdvancedSearchConfig: ~
         +Shopsys\FrameworkBundle\Model\AdvancedSearch\ProductAdvancedSearchConfig: '@Shopsys\ShopBundle\Model\AdvancedSearch\ProductAdvancedSearchConfig'
         ```
-- *(low priority)* use private method `recursivelyCountCategoriesInCategoryTree` instead of `array_sum` to get maximum for the progress bar in `Shopsys\ShopBundle\DataFixtures\Performance\CategoryDataFixture` ([#902](https://github.com/shopsys/shopsys/pull/902))
+- use private method `recursivelyCountCategoriesInCategoryTree` instead of `array_sum` to get maximum for the progress bar in `Shopsys\ShopBundle\DataFixtures\Performance\CategoryDataFixture` ([#902](https://github.com/shopsys/shopsys/pull/902))
 - fix EntityExtensionTest ([899](https://github.com/shopsys/shopsys/pull/899))
     - add this code to your `setUp()` method in `tests/ShopBundle/Functional/EntityExtension/EntityExtensionTest.php`
         ```diff
@@ -109,7 +109,7 @@ There you can find links to upgrade notes for other versions too.
         ```
 
 ### Configuration
-- *(low priority)* to improve your deployment process and avoid possible Redis cache problems during deployment, include `build-version` into your builds ([#886](https://github.com/shopsys/shopsys/pull/886))
+- to improve your deployment process and avoid possible Redis cache problems during deployment, include `build-version` into your builds ([#886](https://github.com/shopsys/shopsys/pull/886))
     - to `app/AppKernel.php` into function `getConfig()` add
         ```diff
         private function getConfig()

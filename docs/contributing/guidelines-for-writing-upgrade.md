@@ -19,10 +19,6 @@ Keep in mind that upgrade instructions are written for users that do not underst
 * Write instructions
     * Good example: *"Do this, then that"*
     * Bad example: *"This was done, this was changed"*
-* If there are any upgrading steps that are not vital for project developers but could be helpful for them,
-    they should be mentioned in the upgrading notes as well and marked as (low priority).
-    The general UPGRADE.md then mentions that the low priority steps are not vital,
-    however we recommend to perform them as well during upgrading as it might ease their work in the future.
 
 ## Files related to upgrade
 

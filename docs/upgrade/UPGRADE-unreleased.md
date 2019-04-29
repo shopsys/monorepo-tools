@@ -21,19 +21,19 @@ There you can find links to upgrade notes for other versions too.
 - if you extended one of these form fields listed below, you need to change group from `basicInformation` to `prices` ([#956](https://github.com/shopsys/shopsys/pull/956))
     - in `PaymentFormType` fields `vat` and `czkRounding`
     - in `TransportFormType` field `vat`
-- *(low priority)* change all occurences of `->will($this->returnValue(` into `->willReturn(` in all `TestCase` tests ([#939](https://github.com/shopsys/shopsys/pull/939))
+- change all occurences of `->will($this->returnValue(` into `->willReturn(` in all `TestCase` tests ([#939](https://github.com/shopsys/shopsys/pull/939))
     - example:
         ```diff
         - $emMock->expects($this->once())->method('find')->will($this->returnValue($expectedObject));
         + $emMock->expects($this->once())->method('find')->willReturn($expectedObject);
         ```
-- *(low priority)* remove unused dataProvider annotation from `Tests\ShopBundle\Functional\Twig\PriceExtensionTest:checkPriceFilter` method ([#939](https://github.com/shopsys/shopsys/pull/939))
+- remove unused dataProvider annotation from `Tests\ShopBundle\Functional\Twig\PriceExtensionTest:checkPriceFilter` method ([#939](https://github.com/shopsys/shopsys/pull/939))
     ```diff
       /**
     -   * @dataProvider priceFilterDataProvider
         * @param mixed $input
     ```
-- *(low priority)* reconfigure fm_elfinder to use main_filesystem ([#932](https://github.com/shopsys/shopsys/pull/932))
+- reconfigure fm_elfinder to use main_filesystem ([#932](https://github.com/shopsys/shopsys/pull/932))
     - upgrade version of `helios-ag/fm-elfinder-bundle` to `^9.2` in `composer.json`
     - remove `barryvdh/elfinder-flysystem-driver": "^0.2"` from `composer.json`
     - update `fm_elfinder.yml` config
@@ -62,7 +62,7 @@ There you can find links to upgrade notes for other versions too.
     - read the section about proxying the URL content subpaths via webserver domain [`docs/introduction/abstract-filesystem.md`](https://github.com/shopsys/shopsys/blob/master/docs/introduction/abstract-filesystem.md)
 
 ### Configuration
- - *(low priority)* use standard format for redis prefixes ([#928](https://github.com/shopsys/shopsys/pull/928))
+ - use standard format for redis prefixes ([#928](https://github.com/shopsys/shopsys/pull/928))
     - change prefixes in `app/config/packages/snc_redis.yml` and `app/config/packages/test/snc_redis.yml`. Please find inspiration in [#928](https://github.com/shopsys/shopsys/pull/928/files)
     - once you finish this change, you still should deal with older redis cache keys that don't use new prefixes. Such keys are not removed even by `clean-redis-old`, please find and remove them manually (via console or UI)
 
