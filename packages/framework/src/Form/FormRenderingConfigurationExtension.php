@@ -24,8 +24,14 @@ class FormRenderingConfigurationExtension extends AbstractTypeExtension
         $view->vars['icon_title'] = $options['icon_title'];
         $view->vars['display_format'] = $options['display_format'];
         $view->vars['js_container'] = $options['js_container'];
-        $view->vars['is_plugin_data_group'] = $options['is_plugin_data_group'];
+        $view->vars['is_plugin_data_group'] = $options['is_plugin_data_group'] ?? false;
         $view->vars['render_form_row'] = $options['render_form_row'];
+
+        if (array_key_exists('is_plugin_data_group', $options)) {
+            $message = 'Using the "is_plugin_data_group" option in forms has been deprecated since Shopsys Framework 7.2 and it will be removed eventually.';
+
+            trigger_error($message, E_USER_DEPRECATED);
+        }
     }
 
     /**
@@ -33,14 +39,15 @@ class FormRenderingConfigurationExtension extends AbstractTypeExtension
      */
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults([
-            'macro' => null,
-            'icon_title' => null,
-            'display_format' => null,
-            'js_container' => null,
-            'is_plugin_data_group' => false,
-            'render_form_row' => true,
-        ]);
+        $resolver
+            ->setDefined('is_plugin_data_group')
+            ->setDefaults([
+                'macro' => null,
+                'icon_title' => null,
+                'display_format' => null,
+                'js_container' => null,
+                'render_form_row' => true,
+            ]);
     }
 
     /**

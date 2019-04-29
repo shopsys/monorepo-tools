@@ -31,6 +31,7 @@ Defaults to `null`.
 This option is used as array with two options (`container_class`, `data_type`) and can be used to wrap your form_row in `<div class="{{ js_container.container_class }}" data-type="{{ js_container.data_type }}">`
 
 ### is_plugin_data_group
+*Using the `is_plugin_data_group` option in forms has been deprecated since Shopsys Framework 7.2 and it will be removed eventually.*  
 Defaults to `false`.  
 This option can be set to `true` in empty FormType if you want to add some part of a form from some plugin.
 You can learn more about this in [separate article](../extensibility/extending-form-from-plugin.md)

@@ -20,7 +20,6 @@ use Shopsys\FrameworkBundle\Model\Category\CategoryFacade;
 use Shopsys\FrameworkBundle\Model\Seo\SeoSettingFacade;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -234,20 +233,14 @@ class CategoryFormType extends AbstractType
                 'info_text' => t('You can upload following formats: PNG, JPG, GIF'),
             ]);
 
-        $builderPluginGroup = $builder->create('plugin', FormType::class, [
-            'inherit_data' => true,
-            'is_plugin_data_group' => true,
-        ]);
-
-        $this->pluginCrudExtensionFacade->extendForm($builderPluginGroup, 'category', 'pluginData');
-
         $builder
             ->add($builderSettingsGroup)
             ->add($builderSeoGroup)
             ->add($builderDescriptionGroup)
             ->add($builderImageGroup)
-            ->add($builderPluginGroup)
             ->add('save', SubmitType::class);
+
+        $this->pluginCrudExtensionFacade->extendForm($builder, 'category', 'pluginData');
     }
 
     /**
