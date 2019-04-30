@@ -39,3 +39,8 @@ spec:
                         value: shopsys
                     -   name: PGDATA
                         value: /var/lib/postgresql/data/pgdata
+                command:
+                    - docker-entrypoint.sh
+                    - postgres
+                    - -c
+                    - config_file=/var/lib/postgresql/data/postgresql.conf

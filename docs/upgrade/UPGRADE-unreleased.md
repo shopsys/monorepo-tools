@@ -154,6 +154,35 @@ There you can find links to upgrade notes for other versions too.
     -       metadata_cache_driver: array
     -       query_cache_driver: array
     ```
+- update definition of postgres service in your `docker-compose.yml` file to use customized configuration ([#946](https://github.com/shopsys/shopsys/pull/946))
+    ```diff
+    postgres:
+        image: postgres:10.5-alpine
+        container_name: shopsys-framework-postgres
+        volumes:
+            - ./docker/postgres/postgres.conf:/var/lib/postgresql/data/postgresql.conf:delegated
+            - ./var/postgres-data:/var/lib/postgresql/data:cached
+        environment:
+            - PGDATA=/var/lib/postgresql/data/pgdata
+            - POSTGRES_USER=root
+            - POSTGRES_PASSWORD=root
+            - POSTGRES_DB=shopsys
+    +   command:
+    +       - docker-entrypoint.sh
+    +       - postgres
+    +       - -c
+    +       - config_file=/var/lib/postgresql/data/postgresql.conf
+    ```
+    - update definition of postgres service in your `kubernetes/deployments/postgres.yml`
+        ```diff
+                -   name: PGDATA
+                    value: /var/lib/postgresql/data/pgdata
+        + command:
+        +    - docker-entrypoint.sh
+        +    - postgres
+        +    - -c
+        +    - config_file=/var/lib/postgresql/data/postgresql.conf
+        ```
 
 [Upgrade from v7.1.0 to Unreleased]: https://github.com/shopsys/shopsys/compare/v7.1.0...HEAD
 [shopsys/framework]: https://github.com/shopsys/framework
