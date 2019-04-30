@@ -129,8 +129,9 @@ This means that if you are using a different locale, these multilang attributes 
 #### 3.6 Locale in administration
 Administration is by default in `en` locale.
 This means that for example product list in administration tries to display translations of product names in `en` locale.
-If you want to switch it to the another locale, set a parameter `shopsys.admin_locale` in your `parameters.yml` configuration to desired locale.
+If you want to switch it to the another locale, set a parameter `shopsys.admin_locale` in your `parameters_common.yml` configuration to desired locale.
 However, the selected locale has to be one of registered domains locale.
+When you change admin locale, you have to update acceptance tests, to have administration use cases tested properly.
 
 You can change administration translations by adding messages into your `src/Shopsys/ShopBundle/Resources/translations/messages.xx.po`.
 
