@@ -104,6 +104,56 @@ There you can find links to upgrade notes for other versions too.
             rules:
         ```
     - check and update also all parent proxy servers for each project
+- use redis as cache for doctrine and framework ([#930](https://github.com/shopsys/shopsys/pull/930))
+    - update `app/config/packages/framework.yml`:
+    ```diff
+    framework:
+    +    annotations:
+    +        cache: shopsys.framework.cache_driver.annotations_cache
+    ```
+    - update `app/config/packages/snc_redis.yml`:
+    ```diff
+    snc_redis:
+        clients:
+            ...
+    +       framework_annotations:
+    +           type: 'phpredis'
+    +           alias: 'framework_annotations'
+    +           dsn: 'redis://%redis_host%'
+    +           options:
+    +               prefix: '%env(REDIS_PREFIX)%%build-version%:cache:framework:annotations:'
+    ```
+    - update `app/config/packages/doctrine.yml`:
+    ```diff
+    metadata_cache_driver:
+        type: service
+    -   id: Doctrine\Common\Cache\ChainCache
+    +   id: shopsys.doctrine.cache_driver.metadata_cache
+    query_cache_driver:
+        type: service
+    -   id: Doctrine\Common\Cache\ChainCache
+    +   id: shopsys.doctrine.cache_driver.query_cache
+    ```
+    - update `app/config/packages/test/doctrine.yml`:
+    ```diff
+    doctrine:
+        ...
+    +   orm:
+    +       metadata_cache_driver:
+    +           type: service
+    +           id: Doctrine\Common\Cache\ArrayCache
+    +       query_cache_driver:
+    +           type: service
+    +           id: Doctrine\Common\Cache\ArrayCache
+    ```
+    - update `app/config/packages/dev/doctrine.yml`:
+    ```diff
+    doctrine:
+        orm:
+            auto_generate_proxy_classes: true
+    -       metadata_cache_driver: array
+    -       query_cache_driver: array
+    ```
 
 [Upgrade from v7.1.0 to Unreleased]: https://github.com/shopsys/shopsys/compare/v7.1.0...HEAD
 [shopsys/framework]: https://github.com/shopsys/framework

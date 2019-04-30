@@ -4,6 +4,8 @@ services:
         autoconfigure: true
         public: true
 
+    Doctrine\Common\Cache\ArrayCache: ~
+
     Shopsys\FrameworkBundle\Component\Domain\DomainFactory:
         class: Shopsys\FrameworkBundle\Component\Domain\DomainFactoryOverwritingDomainUrl
         arguments:
