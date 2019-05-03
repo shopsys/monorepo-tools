@@ -60,6 +60,9 @@ There you can find links to upgrade notes for other versions too.
                 hidden: true
     ```
     - read the section about proxying the URL content subpaths via webserver domain [`docs/introduction/abstract-filesystem.md`](https://github.com/shopsys/shopsys/blob/master/docs/introduction/abstract-filesystem.md)
+- to be more descriptive about error caused by active TEST environment ([#701](https://github.com/shopsys/shopsys/pull/701))
+    - modify `ErrorController::createUnableToResolveDomainResponse()` by these [changes](https://github.com/shopsys/shopsys/pull/701/files#diff-0b1aecbf82624ce474ca3cb8bd75811c).
+
 
 ### Configuration
  - use standard format for redis prefixes ([#928](https://github.com/shopsys/shopsys/pull/928))
