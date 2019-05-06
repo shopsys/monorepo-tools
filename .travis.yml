@@ -1,0 +1,27 @@
+language: php
+
+php:
+  - 7.1
+
+cache:
+  directories:
+    - ~/.composer/cache
+    - ~/.npm
+
+env:
+  - ELASTIC_SEARCH_INDEX_PREFIX=""
+
+before_install:
+  - phpenv config-add project-base/docker/php-fpm/php-ini-overrides.ini
+  - echo "extension = redis.so" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
+  - phpenv config-rm xdebug.ini || return 0
+  - composer global require hirak/prestissimo
+
+install:
+  - COMPOSER_MEMORY_LIMIT=-1 travis_retry composer install --optimize-autoloader --no-interaction --no-progress --dev
+  - php phing npm
+
+script:
+  - php phing standards
+  - php phing tests-static
+
