@@ -33,16 +33,19 @@ final class PhpToDocTypeTransformer
     {
         if ($typeAnalysis === null) {
             $type = 'mixed';
+            $isNullable = false;
         } else {
-            if ($typeAnalysis->isReservedType() && $default === null) {
-                return $typeAnalysis->getName();
-            }
-
             $type = $typeAnalysis->getName();
+            if (method_exists($typeAnalysis, 'isNullable')) {
+                $isNullable = $typeAnalysis->isNullable();
+            } else {
+                // backward-compatibility with friendsofphp/php-cs-fixer in <2.14.3
+                $isNullable = $type[0] === '?';
+            }
         }
 
-        // nullable
-        if ($type[0] === '?' || (is_string($default) && strtolower($default) === 'null')) {
+        // nullable parameter or with a default value of null
+        if ($isNullable || (is_string($default) && strtolower($default) === 'null')) {
             return $this->createFromNullable($tokens, $type);
         }
 
