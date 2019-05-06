@@ -11,6 +11,7 @@ use Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\FriendlyUrlRouterFactor
 use Shopsys\FrameworkBundle\Component\Router\LocalizedRouterFactory;
 use Shopsys\FrameworkBundle\Component\Setting\Setting;
 use Symfony\Component\Config\Loader\DelegatingLoader;
+use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Routing\RequestContext;
 use Symfony\Component\Routing\RouterInterface;
 
@@ -57,6 +58,7 @@ class DomainRouterFactoryTest extends TestCase
             );
 
         $delegatingLoaderMock = $this->createMock(DelegatingLoader::class);
+        $requestStackMock = $this->createMock(RequestStack::class);
 
         $domainRouterFactory = new DomainRouterFactory(
             'routerConfiguration',
@@ -65,6 +67,8 @@ class DomainRouterFactoryTest extends TestCase
             $friendlyUrlRouterFactoryMock,
             $domain
         );
+
+        $domainRouterFactory->setRequestStack($requestStackMock);
         $router = $domainRouterFactory->getRouter(3);
 
         $this->assertInstanceOf(RouterInterface::class, $router);

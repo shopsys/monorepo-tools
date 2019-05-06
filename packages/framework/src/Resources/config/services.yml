@@ -519,6 +519,8 @@ services:
 
     Shopsys\FrameworkBundle\Component\Router\DomainRouterFactory:
         arguments: ['%router.resource%']
+        calls:
+            - method: setRequestStack
 
     Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\FriendlyUrlRouterFactory:
         arguments: ['%shopsys.router.friendly_url_router_filepath%']

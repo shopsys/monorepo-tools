@@ -6,6 +6,7 @@ use Shopsys\FrameworkBundle\Component\Domain\Config\DomainConfig;
 use Shopsys\FrameworkBundle\Component\Domain\Domain;
 use Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\FriendlyUrlRouterFactory;
 use Symfony\Component\Config\Loader\LoaderInterface;
+use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Routing\RequestContext;
 use Symfony\Component\Routing\Router;
 
@@ -42,6 +43,11 @@ class DomainRouterFactory
     protected $routersByDomainId = [];
 
     /**
+     * @var \Symfony\Component\HttpFoundation\RequestStack
+     */
+    protected $requestStack;
+
+    /**
      * @param mixed $routerConfiguration
      * @param \Symfony\Component\Config\Loader\LoaderInterface $configLoader
      * @param \Shopsys\FrameworkBundle\Component\Router\LocalizedRouterFactory $localizedRouterFactory
@@ -60,6 +66,14 @@ class DomainRouterFactory
         $this->localizedRouterFactory = $localizedRouterFactory;
         $this->domain = $domain;
         $this->friendlyUrlRouterFactory = $friendlyUrlRouterFactory;
+    }
+
+    /**
+     * @param \Symfony\Component\HttpFoundation\RequestStack $requestStack
+     */
+    public function setRequestStack(RequestStack $requestStack)
+    {
+        $this->requestStack = $requestStack;
     }
 
     /**
@@ -111,6 +125,10 @@ class DomainRouterFactory
     {
         $urlComponents = parse_url($domainConfig->getUrl());
         $requestContext = new RequestContext();
+        $request = $this->requestStack->getCurrentRequest();
+        if ($request !== null) {
+            $requestContext->fromRequest($request);
+        }
 
         if (array_key_exists('path', $urlComponents)) {
             $requestContext->setBaseUrl($urlComponents['path']);

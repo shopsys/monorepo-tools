@@ -3,10 +3,11 @@
 namespace Shopsys\FrameworkBundle\Component\Router;
 
 use Shopsys\FrameworkBundle\Component\Domain\Domain;
+use Symfony\Cmf\Component\Routing\ChainRouterInterface;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\RequestContext;
-use Symfony\Component\Routing\RouterInterface;
 
-class CurrentDomainRouter implements RouterInterface
+class CurrentDomainRouter implements ChainRouterInterface
 {
     /**
      * @var \Symfony\Component\Routing\RequestContext
@@ -83,5 +84,31 @@ class CurrentDomainRouter implements RouterInterface
     protected function getDomainRouter()
     {
         return $this->domainRouterFactory->getRouter($this->domain->getId());
+    }
+
+    /**
+     * @param \Symfony\Component\Routing\RouterInterface $router
+     * @param int $priority
+     */
+    public function add($router, $priority = 0)
+    {
+        $this->getDomainRouter()->add($router, $priority);
+    }
+
+    /**
+     * @return \Symfony\Component\Routing\RouterInterface[]
+     */
+    public function all()
+    {
+        return $this->getDomainRouter()->all();
+    }
+
+    /**
+     * @param \Symfony\Component\HttpFoundation\Request $request
+     * @return array
+     */
+    public function matchRequest(Request $request)
+    {
+        return $this->getDomainRouter()->matchRequest($request);
     }
 }
