@@ -9,6 +9,24 @@ Typical upgrade sequence should be:
 ***Note:** During the execution of `build-demo-dev phing target`, there will be installed 3-rd party software as dependencies of Shopsys Framework by [composer](https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies) and [npm](https://docs.npmjs.com/about-the-public-npm-registry) with licenses that are described in document [Open Source License Acknowledgements and Third-Party Copyrights](../../open-source-license-acknowledgements-and-third-party-copyrights.md)*
 
 ## [From v7.1.0 to Unreleased]
+- update definition of postgres service in your `docker-compose.yml` file to use customized configuration ([#946](https://github.com/shopsys/shopsys/pull/946))
+    ```diff
+    postgres:
+        image: postgres:10.5-alpine
+        container_name: shopsys-framework-postgres
+        volumes:
+            - ./docker/postgres/postgres.conf:/var/lib/postgresql/data/postgresql.conf:delegated
+            - ./var/postgres-data:/var/lib/postgresql/data:cached
+        environment:
+            - PGDATA=/var/lib/postgresql/data/pgdata
+            - POSTGRES_USER=root
+            - POSTGRES_PASSWORD=root
+            - POSTGRES_DB=shopsys
+    +   command:
+    +       - postgres
+    +       - -c
+    +       - config_file=/var/lib/postgresql/data/postgresql.conf
+    ```
 
 ## [From v7.0.0 to v7.1.0]
 
