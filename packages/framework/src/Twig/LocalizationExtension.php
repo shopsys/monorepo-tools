@@ -66,13 +66,7 @@ class LocalizationExtension extends \Twig_Extension
      */
     private function getTitle($locale)
     {
-        try {
-            $title = $this->localization->getLanguageName($locale);
-        } catch (\Shopsys\FrameworkBundle\Model\Localization\Exception\InvalidLocaleException $e) {
-            $title = '';
-        }
-
-        return $title;
+        return $this->localization->getLanguageName($locale);
     }
 
     /**

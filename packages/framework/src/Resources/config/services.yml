@@ -314,8 +314,6 @@ services:
     Shopsys\FrameworkBundle\Component\Setting\ClearSettingsCacheDoctrineSubscriber:
         tags: ['doctrine.event_subscriber']
 
-    Shopsys\FrameworkBundle\Component\System\System: ~
-
     Shopsys\FrameworkBundle\Model\Sitemap\SitemapDumperFactory:
         arguments:
             - '@event_dispatcher'
