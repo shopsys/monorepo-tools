@@ -102,7 +102,6 @@ This configuration file contains pieces of information about the domain ID, the 
 #### 3.2 Frontend routes
 Create a file with the frontend routes for the added locale if this file is not already created for this locale.
 Create this file in the directory `src/Shopsys/ShopBundle/Resources/config/` with the name `routing_front_xx.yml` where `xx` replace for the code of added locale.
-Import the new routes configuration in `app/config/packages/shopsys_shop.yml`
 
 #### 3.3 Translations and messages
 In order to correctly display the labels like *Registration*, *Cart*, ..., create a file with translations of messages in `src/Shopsys/ShopBundle/Resources/translations/`.

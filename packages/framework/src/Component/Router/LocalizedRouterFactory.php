@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Shopsys\FrameworkBundle\Component\Router;
 
 use Symfony\Component\Config\Loader\LoaderInterface;
@@ -14,9 +16,9 @@ class LocalizedRouterFactory
     protected $configLoader;
 
     /**
-     * @var string[]
+     * @var string
      */
-    protected $localeRoutersResourcesFilepaths;
+    protected $localeRoutersResourcesFilepathMask;
 
     /**
      * @var \Symfony\Component\Routing\Router[][]
@@ -24,13 +26,13 @@ class LocalizedRouterFactory
     protected $routersByLocaleAndHost;
 
     /**
-     * @param mixed $localeRoutersResourcesFilepaths
+     * @param string $localeRoutersResourcesFilepathMask
      * @param \Symfony\Component\Config\Loader\LoaderInterface $configLoader
      */
-    public function __construct($localeRoutersResourcesFilepaths, LoaderInterface $configLoader)
+    public function __construct($localeRoutersResourcesFilepathMask, LoaderInterface $configLoader)
     {
         $this->configLoader = $configLoader;
-        $this->localeRoutersResourcesFilepaths = $localeRoutersResourcesFilepaths;
+        $this->localeRoutersResourcesFilepathMask = $localeRoutersResourcesFilepathMask;
         $this->routersByLocaleAndHost = [];
     }
 
@@ -41,9 +43,9 @@ class LocalizedRouterFactory
      */
     public function getRouter($locale, RequestContext $context)
     {
-        if (!array_key_exists($locale, $this->localeRoutersResourcesFilepaths)) {
-            $message = 'File with localized routes "routing_front_' . $locale . '.yml" was not found. '
-                . 'Please add it to Resources/config folder.';
+        if (file_exists($this->getLocaleRouterResourceByLocale($locale)) === false) {
+            $message = 'File with localized routes for locale `' . $locale . '` was not found. '
+                . 'Please create `' . $this->getLocaleRouterResourceByLocale($locale) . '` file.';
             throw new \Shopsys\FrameworkBundle\Component\Router\Exception\LocalizedRoutingConfigFileNotFoundException($message);
         }
 
@@ -52,12 +54,21 @@ class LocalizedRouterFactory
         ) {
             $this->routersByLocaleAndHost[$locale][$context->getHost()] = new Router(
                 $this->configLoader,
-                $this->localeRoutersResourcesFilepaths[$locale],
+                $this->getLocaleRouterResourceByLocale($locale),
                 [],
                 $context
             );
         }
 
         return $this->routersByLocaleAndHost[$locale][$context->getHost()];
+    }
+
+    /**
+     * @param string $locale
+     * @return string
+     */
+    protected function getLocaleRouterResourceByLocale(string $locale): string
+    {
+        return str_replace('*', $locale, $this->localeRoutersResourcesFilepathMask);
     }
 }

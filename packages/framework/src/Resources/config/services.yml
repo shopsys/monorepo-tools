@@ -528,7 +528,7 @@ services:
         arguments: ['%shopsys.router.friendly_url_router_filepath%']
 
     Shopsys\FrameworkBundle\Component\Router\LocalizedRouterFactory:
-        arguments: ['%shopsys.router.locale_router_filepaths%']
+        arguments: ['%shopsys.router.locale_router_filepath_mask%']
 
     Shopsys\FrameworkBundle\Component\Router\Security\RouteCsrfProtector:
         arguments:
