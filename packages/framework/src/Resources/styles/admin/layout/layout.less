@@ -64,8 +64,9 @@ body {
         position: relative;
         padding-top: @height-header;
         padding-bottom: @height-fixed-bar;
-        padding-left: @width-panel;
         min-height: 100vh;
+        width: @width-web;
+        margin: 0 auto;
 
         background: @bg-page;
 
@@ -90,7 +91,6 @@ body {
         position: fixed;
         top: @height-header;
         bottom: 0;
-        left: 0;
         padding-bottom: @height-fixed-bar;
         width: @width-panel;
 
@@ -136,8 +136,10 @@ body {
     &__content {
         position: relative;
         margin: 0 auto;
-        padding: @content-gap;
         padding-top: calc(~"@{content-gap} - @{wrap-border-gap}");
+        padding-right: 0;
+        padding-bottom: @content-gap;
+        padding-left: @width-panel + @content-gap;
         max-width: @width-content;
 
         &--padding-top {
@@ -157,7 +159,6 @@ body {
         }
 
         &__panel {
-            left: 0;
             z-index: 1000;
         }
     }
