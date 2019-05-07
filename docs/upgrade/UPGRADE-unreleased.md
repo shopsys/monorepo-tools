@@ -184,6 +184,12 @@ There you can find links to upgrade notes for other versions too.
         +    - -c
         +    - config_file=/var/lib/postgresql/data/postgresql.conf
         ```
+### Tools
+- add path for tests folder into `ecs-fix` phing target of `build-dev.xml` file to be able to fix files that were found by `ecs` phing target ([#980](https://github.com/shopsys/shopsys/pull/980))
+    ```diff
+      <arg path="${path.src}" />
+    + <arg path="${path.tests}" />
+    ```
 
 [Upgrade from v7.1.0 to Unreleased]: https://github.com/shopsys/shopsys/compare/v7.1.0...HEAD
 [shopsys/framework]: https://github.com/shopsys/framework
