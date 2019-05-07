@@ -28,12 +28,12 @@ class Localization
      * @var string[]
      */
     protected $collationsByLocale = [
-        'cs' => 'cs_CZ',
-        'de' => 'de_DE',
-        'en' => 'en_US',
-        'hu' => 'hu_HU',
-        'pl' => 'pl_PL',
-        'sk' => 'sk_SK',
+        'cs' => 'cs-CZ-x-icu',
+        'de' => 'de-DE-x-icu',
+        'en' => 'en-US-x-icu',
+        'hu' => 'hu-HU-x-icu',
+        'pl' => 'pl-PL-x-icu',
+        'sk' => 'sk-SK-x-icu',
     ];
 
     /**
