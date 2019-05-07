@@ -184,6 +184,29 @@ There you can find links to upgrade notes for other versions too.
         +    - -c
         +    - config_file=/var/lib/postgresql/data/postgresql.conf
         ```
+- create or move if you already have configuration file for crons in your project base ([#989](https://github.com/shopsys/shopsys/pull/989))
+    - create or move your `cron.yml` file to location `src/ShopBundle/Resources/config/services/`
+    - if you created new file, insert following code:
+        ```
+        services:
+            _defaults:
+                autowire: true
+                autoconfigure: true
+                public: false
+
+        #   Example:
+        #   Shopsys\FrameworkBundle\Model\Product\Search\Export\ProductSearchExportCronModule:
+        #       tags:
+        #           - { name: shopsys.cron, hours: '*', minutes: '*' }
+        ```
+    - update `src/Shopsys/ShopBundle/Resources/config/services.yml`:
+        ```diff
+        imports:
+            - { resource: forms.yml }
+        -   - { resource: services/commands.yml }
+        -   - { resource: services/data_fixtures.yml }
+        +   - { resource: services/*.yml }
+        ```
 ### Tools
 - add path for tests folder into `ecs-fix` phing target of `build-dev.xml` file to be able to fix files that were found by `ecs` phing target ([#980](https://github.com/shopsys/shopsys/pull/980))
     ```diff

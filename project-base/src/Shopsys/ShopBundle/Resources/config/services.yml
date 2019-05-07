@@ -1,7 +1,6 @@
 imports:
     - { resource: forms.yml }
-    - { resource: services/commands.yml }
-    - { resource: services/data_fixtures.yml }
+    - { resource: services/*.yml }
 
 services:
     _defaults:
