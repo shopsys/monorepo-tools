@@ -12,7 +12,7 @@ use Shopsys\FrameworkBundle\Model\Product\Filter\ProductFilterCountRepository;
 use Shopsys\FrameworkBundle\Model\Product\Filter\ProductFilterData;
 use Shopsys\FrameworkBundle\Model\Product\Listing\ProductListOrderingConfig;
 
-class ProductOnCurrentDomainFacade
+class ProductOnCurrentDomainFacade implements ProductOnCurrentDomainFacadeInterface
 {
     /**
      * @var \Shopsys\FrameworkBundle\Model\Product\ProductRepository

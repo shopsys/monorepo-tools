@@ -110,6 +110,12 @@ services:
 
     Shopsys\FrameworkBundle\Model\Order\Preview\OrderPreviewFactory: ~
 
+    Shopsys\FrameworkBundle\Model\Product\Filter\BrandFilterChoiceRepository: ~
+
+    Shopsys\FrameworkBundle\Model\Product\Filter\FlagFilterChoiceRepository: ~
+
+    Shopsys\FrameworkBundle\Model\Product\Filter\ParameterFilterChoiceRepository: ~
+
     Shopsys\FrameworkBundle\Model\Product\Parameter\ParameterInlineEdit: ~
 
     Shopsys\FrameworkBundle\Model\Product\Parameter\ParameterRepository: ~
@@ -150,6 +156,8 @@ services:
 
     Shopsys\FrameworkBundle\Model\Product\ProductOnCurrentDomainFacade: ~
 
+    Shopsys\FrameworkBundle\Model\Product\ProductOnCurrentDomainElasticFacade: ~
+
     Shopsys\FrameworkBundle\Model\Product\Pricing\ProductPriceCalculationForUser: ~
 
     Shopsys\FrameworkBundle\Model\Product\ProductRepository: ~
@@ -172,7 +180,7 @@ services:
 
     Shopsys\FrameworkBundle\Model\Pricing\Vat\VatFacade: ~
 
-    Shopsys\FrameworkBundle\Model\Product\Search\Export\ProductSearchExportRepository: ~
+    Shopsys\FrameworkBundle\Model\Product\Search\FilterQueryFactory: ~
 
     Shopsys\FrameworkBundle\Model\Product\Pricing\ProductManualInputPriceFacade: ~
 
@@ -183,3 +191,5 @@ services:
     Shopsys\FrameworkBundle\Model\Cart\Watcher\CartWatcherFacade:
         arguments:
             - '@shopsys.shop.component.flash_message.sender.front'
+
+    Shopsys\FrameworkBundle\Model\Product\Filter\ProductFilterConfigFactory: ~

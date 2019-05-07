@@ -32,7 +32,9 @@
 * [How to Work with Money](./model/how-to-work-with-money.md)
 * [Product Feeds](./model/product-feeds.md)
 * [Custom Entities](./model/custom-entities.md)
-* [Product Searching via Elasticsearch](./model/product-search-via-elasticsearch.md)
+* [Elasticsearch](./model/elasticsearch.md)
+* [Front-end Product Searching](./model/front-end-product-searching.md)
+* [Front-end Product Filtering](./model/front-end-product-filtering.md)
 
 ## Cookbook
 * [Dumping and Importing the Database](./cookbook/dumping-and-importing-the-database.md)

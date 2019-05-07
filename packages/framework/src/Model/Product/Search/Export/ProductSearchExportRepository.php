@@ -8,6 +8,9 @@ use Doctrine\ORM\QueryBuilder;
 use Shopsys\FrameworkBundle\Model\Product\Product;
 use Shopsys\FrameworkBundle\Model\Product\ProductVisibility;
 
+/**
+ * @deprecated Use ProductSearchExportWithFilterRepository instead
+ */
 class ProductSearchExportRepository
 {
     /**

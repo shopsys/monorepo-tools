@@ -29,7 +29,7 @@ Shopsys Framework is fully functional e-commerce platform with all basic functio
 * Registered customers
 * Basic orders management
 * Back-end administration
-* Front-end [full-text search](./docs/model/product-search-via-elasticsearch.md) and product filtering
+* Front-end [full-text search](./docs/model/front-end-product-searching.md) and [product filtering](./docs/model/front-end-product-filtering.md)
 * 3-step ordering process
 * Basic CMS
 * Support for several currencies, [languages, and domains](./docs/introduction/domain-multidomain-multilanguage.md)

@@ -4,6 +4,7 @@ namespace Tests\ShopBundle\Functional\Model\Product\Search;
 
 use Shopsys\FrameworkBundle\Component\Domain\Domain;
 use Shopsys\FrameworkBundle\Model\Product\Search\Export\ProductSearchExportRepository;
+use Shopsys\FrameworkBundle\Model\Product\Search\Export\ProductSearchExportWithFilterRepository;
 use Tests\ShopBundle\Test\TransactionFunctionalTestCase;
 
 class ProductSearchExportRepositoryTest extends TransactionFunctionalTestCase
@@ -33,7 +34,20 @@ class ProductSearchExportRepositoryTest extends TransactionFunctionalTestCase
         $structure = array_keys(reset($data));
         sort($structure);
 
-        $expectedStructure = [
+        $expectedStructure = $this->getExpectedStructureForRepository($this->repository);
+
+        sort($expectedStructure);
+
+        $this->assertSame($expectedStructure, $structure);
+    }
+
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Product\Search\Export\ProductSearchExportRepository $productSearchExportRepository
+     * @return string[]
+     */
+    private function getExpectedStructureForRepository(ProductSearchExportRepository $productSearchExportRepository): array
+    {
+        $structure = [
             'id',
             'name',
             'catnum',
@@ -42,8 +56,20 @@ class ProductSearchExportRepositoryTest extends TransactionFunctionalTestCase
             'description',
             'shortDescription',
         ];
-        sort($expectedStructure);
 
-        $this->assertSame($expectedStructure, $structure);
+        if ($productSearchExportRepository instanceof ProductSearchExportWithFilterRepository) {
+            $structure = \array_merge($structure, [
+                'brand',
+                'flags',
+                'categories',
+                'in_stock',
+                'prices',
+                'parameters',
+                'ordering_priority',
+                'calculated_selling_denied',
+            ]);
+        }
+
+        return $structure;
     }
 }

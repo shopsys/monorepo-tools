@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Shopsys\FrameworkBundle\Model\Product\Search;
 
 use Doctrine\ORM\QueryBuilder;
@@ -36,6 +38,11 @@ class ProductElasticsearchRepository
     protected $elasticsearchStructureManager;
 
     /**
+     * @var \Shopsys\FrameworkBundle\Model\Product\Search\FilterQueryFactory
+     */
+    protected $filterQueryFactory;
+
+    /**
      * @param string $indexPrefix
      * @param \Elasticsearch\Client $client
      * @param \Shopsys\FrameworkBundle\Model\Product\Search\ProductElasticsearchConverter $productElasticsearchConverter
@@ -51,6 +58,16 @@ class ProductElasticsearchRepository
         $this->client = $client;
         $this->productElasticsearchConverter = $productElasticsearchConverter;
         $this->elasticsearchStructureManager = $elasticsearchStructureManager;
+        $this->filterQueryFactory = $this->createFilterQueryFactory();
+    }
+
+    /**
+     * @return \Shopsys\FrameworkBundle\Model\Product\Search\FilterQueryFactory
+     * @deprecated Will be replaced with constructor injection in the next major release
+     */
+    protected function createFilterQueryFactory(): FilterQueryFactory
+    {
+        return new FilterQueryFactory();
     }
 
     /**
@@ -76,7 +93,7 @@ class ProductElasticsearchRepository
     {
         $productIds = $this->getFoundProductIds($productQueryBuilder, $searchText);
 
-        if (count($productIds)) {
+        if (count($productIds) > 0) {
             $productQueryBuilder->addSelect('field(p.id, ' . implode(',', $productIds) . ') AS HIDDEN relevance');
         } else {
             $productQueryBuilder->addSelect('-1 AS HIDDEN relevance');
@@ -117,12 +134,24 @@ class ProductElasticsearchRepository
      */
     public function getProductIdsBySearchText(int $domainId, ?string $searchText): array
     {
-        if (!$searchText) {
+        if ($searchText === null || $searchText === '') {
             return [];
         }
+
         $parameters = $this->createQuery($this->getIndexName($domainId), $searchText);
         $result = $this->client->search($parameters);
         return $this->extractIds($result);
+    }
+
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Product\Search\FilterQuery $filterQuery
+     * @return \Shopsys\FrameworkBundle\Model\Product\Search\ProductIdsResult
+     */
+    public function getSortedProductIdsByFilterQuery(FilterQuery $filterQuery): ProductIdsResult
+    {
+        $result = $this->client->search($filterQuery->getQuery());
+
+        return new ProductIdsResult($this->extractTotalCount($result), $this->extractIds($result));
     }
 
     /**
@@ -133,34 +162,11 @@ class ProductElasticsearchRepository
      */
     protected function createQuery(string $indexName, string $searchText): array
     {
-        return [
-            'index' => $indexName,
-            'type' => '_doc',
-            'size' => 1000,
-            'body' => [
-                '_source' => false,
-                'query' => [
-                    'multi_match' => [
-                        'query' => $searchText,
-                        'fields' => [
-                            'name.full_with_diacritic^60',
-                            'name.full_without_diacritic^50',
-                            'name^45',
-                            'name.edge_ngram_with_diacritic^40',
-                            'name.edge_ngram_without_diacritic^35',
-                            'catnum^50',
-                            'catnum.edge_ngram^25',
-                            'partno^40',
-                            'partno.edge_ngram^20',
-                            'ean^60',
-                            'ean.edge_ngram^30',
-                            'short_description^5',
-                            'description^5',
-                        ],
-                    ],
-                ],
-            ],
-        ];
+        $searchText = $searchText ?? '';
+
+        $query = $this->filterQueryFactory->create($indexName)
+            ->search($searchText);
+        return $query->getQuery();
     }
 
     /**
@@ -171,6 +177,15 @@ class ProductElasticsearchRepository
     {
         $hits = $result['hits']['hits'];
         return array_column($hits, '_id');
+    }
+
+    /**
+     * @param array $result
+     * @return int
+     */
+    protected function extractTotalCount(array $result): int
+    {
+        return (int)$result['hits']['total'];
     }
 
     /**
