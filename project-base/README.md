@@ -16,10 +16,7 @@ In the future we want to add new technologies to Shopsys Framework (e.g. Elastic
 because such an update will be done just by running `docker-compose build`.
 And that is all!
 
-Create new project on Shopsys Framework easily from this package following one of the installation guides:
-
-* [Installation via Docker (recommended)](https://github.com/shopsys/shopsys/blob/master/docs/installation/installation-using-docker.md)
-* [Native installation](https://github.com/shopsys/shopsys/blob/master/docs/installation/native-installation.md)
+Create new project on Shopsys Framework easily from this package following the [Installation Guide](https://github.com/shopsys/shopsys/blob/master/docs/installation/installation-guide.md).
 
 ## Documentation
 For documentation of Shopsys Framework itself see [Shopsys Framework Knowledge Base](https://github.com/shopsys/shopsys/blob/master/docs/index.md).

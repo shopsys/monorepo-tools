@@ -1,7 +1,7 @@
 # Installation Using Docker - application setup
 
 This guide expects that you have already set up your Docker environment.
-If you haven't already done that check the [Installation Using Docker](installation-using-docker.md).
+If you haven't already done that check the [Installation using Docker](/docs/installation/installation-guide.md#installation-using-docker).
 
 ## 1. Setup the Shopsys Framework application
 Now that the Docker environment is prepared we can setup the application itself.
@@ -24,7 +24,7 @@ composer install -o
 
 ***Note:** During composer installation there will be installed 3-rd party software as dependencies of Shopsys Framework with licenses that are described in document [Open Source License Acknowledgements and Third-Party Copyrights](../../open-source-license-acknowledgements-and-third-party-copyrights.md)*
 
-Composer will prompt you to set parameters ([description of parameters](native-installation.md#2-install-dependencies-and-configure-parameters)).
+Composer will prompt you to set parameters ([description of parameters](application-configuration.md)).
 The default parameters suggested by composer are currently set for application running in Docker so you can just use these.
 
 Only exception is the `secret` parameter - you should input a random string to be used for security purposes.

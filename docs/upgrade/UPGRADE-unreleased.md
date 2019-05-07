@@ -190,6 +190,7 @@ There you can find links to upgrade notes for other versions too.
       <arg path="${path.src}" />
     + <arg path="${path.tests}" />
     ```
+- add `env(ELASTIC_SEARCH_INDEX_PREFIX): ''` into your `app/config/parameters.yml.dist` and also `app/config/parameters.yml` ([#961](https://github.com/shopsys/shopsys/pull/961))
 
 [Upgrade from v7.1.0 to Unreleased]: https://github.com/shopsys/shopsys/compare/v7.1.0...HEAD
 [shopsys/framework]: https://github.com/shopsys/framework

@@ -6,7 +6,7 @@
 * Thanks to our [Backward Compatibility Promise](/docs/contributing/backward-compatibility-promise.md) it should be clear to which versions you can upgrade safely and how we plan to maintain the code in the future
 
 ## Introduction
-* [Installation Using Docker](installation/installation-using-docker.md) and [Native Installation](installation/native-installation.md)
+* [Installation Guide](/docs/installation/installation-guide.md)
 * [Installation Using Docker on Production Server](installation/installation-using-docker-on-production-server.md)
 * [Console Commands for Application Management (Phing Targets)](./introduction/console-commands-for-application-management-phing-targets.md)
 * [Automated Testing](./introduction/automated-testing.md)

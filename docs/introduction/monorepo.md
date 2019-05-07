@@ -60,7 +60,7 @@ also in `composer.json` in the root of monorepo. In monorepo, Shopsys packages a
 Shopsys Framework in monorepo
 
 ## Installation of monorepo
-Installation of Shopsys Framework is almost the same as is described in [Installation Using Docker](../installation/installation-using-docker.md),
+Installation of Shopsys Framework is almost the same as is described in [Installation Using Docker](/docs/installation/installation-guide.md#installation-using-docker),
 but instead of creating a new project based on `project-base` repository, you have to clone [`shopsys/shopsys`](https://github.com/shopsys/shopsys).
 
 Please keep in mind that all commands have to be executed from the monorepo root directory.
