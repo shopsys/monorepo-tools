@@ -2,7 +2,7 @@
 @form-line-label-size: 230px;
 @form-line-gap-size: 10px;
 @form-line-padding-horizontal: 22px;
-@form-line-padding-vertical: 20px;
+@form-line-padding-vertical: 15px;
 @form-line-border-style: none;
 @form-line-min-height: 44px;
 
@@ -48,6 +48,15 @@
         padding: 0;
     }
 
+    .form-group & {
+        &:first-child {
+            padding-top: 20px;
+        }
+        &:last-child {
+            padding-bottom: 20px;
+        }
+    }
+
     &__label {
         width: @form-line-label-size;
         padding: 13px 10px 11px 0;
@@ -56,6 +65,7 @@
         font-family: @font-medium;
         font-size: 15px;
         font-weight: bold;
+        color: @color-grey-middle;
 
         &--input {
             padding-top: 0;
@@ -64,9 +74,8 @@
     }
 
     &__compulsory {
-        position: absolute;
-        top: calc(~"@{form-line-min-height}/2 + @{form-line-padding-vertical} - @{form-compulsory-size}/2");
-        left: -9px;
+        position: relative;
+        top: -2px;
         z-index: 50;
     }
 
