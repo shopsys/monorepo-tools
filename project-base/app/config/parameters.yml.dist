@@ -4,7 +4,6 @@ parameters:
     database_name: shopsys
     database_user: root
     database_password: root
-    database_server_version: 10.5
 
     elasticsearch_host: elasticsearch:9200
 

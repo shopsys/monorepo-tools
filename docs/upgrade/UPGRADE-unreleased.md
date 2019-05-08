@@ -208,6 +208,15 @@ There you can find links to upgrade notes for other versions too.
         -   - { resource: services/data_fixtures.yml }
         +   - { resource: services/*.yml }
         ```
+- move `database_server_version` parameter to `parameters_common.yml` ([#1001](https://github.com/shopsys/shopsys/pull/1001))
+    - remove parameter from `parameters.yml` and `parameters.yml.dist`
+    - add parameter to `parameters_common.yml`:
+        ```diff
+        parameters:
+            database_driver: pdo_pgsql
+        +   database_server_version: 10.5
+        ...
+        ```
 ### Tools
 - add path for tests folder into `ecs-fix` phing target of `build-dev.xml` file to be able to fix files that were found by `ecs` phing target ([#980](https://github.com/shopsys/shopsys/pull/980))
     ```diff

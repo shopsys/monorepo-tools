@@ -1,5 +1,6 @@
 parameters:
     database_driver: pdo_pgsql
+    database_server_version: 10.5
     # Symfony's FrameworkBundle sets throw_at (error_reporting) to 0 in production by default
     debug.error_handler.throw_at: -1
     locale: en

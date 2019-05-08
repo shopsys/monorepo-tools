@@ -27,6 +27,7 @@ Typical upgrade sequence should be:
     +       - -c
     +       - config_file=/var/lib/postgresql/data/postgresql.conf
     ```
+- remove `database_server_version` parameter from `parameters.yml` and `parameters.yml.dist` ([#1001](https://github.com/shopsys/shopsys/pull/1001))
 
 ## [From v7.0.0 to v7.1.0]
 

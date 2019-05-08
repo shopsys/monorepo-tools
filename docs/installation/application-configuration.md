@@ -9,7 +9,6 @@ From the clean project, during composer installation process it will prompt you 
 | `database_name`                          | ...                                                                                                          |
 | `database_user`                          | ...                                                                                                          |
 | `database_password`                      | ...                                                                                                          |
-| `database_server_version`                | version of your PostgreSQL server                                                                            |
 | `elasticsearch_host`                     | host of your Elasticsearch                                                                                   |
 | `redis_host`                             | host of your Redis storage (credentials are not supported right now)                                         |
 | `mailer_transport`                       | access data of your mail server                                                                              |
