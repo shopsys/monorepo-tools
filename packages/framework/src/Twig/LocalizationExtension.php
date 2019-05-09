@@ -19,13 +19,20 @@ class LocalizationExtension extends \Twig_Extension
     private $assetPackages;
 
     /**
+     * @var string
+     */
+    private $webDir;
+
+    /**
+     * @param string $webDir
      * @param \Symfony\Component\Asset\Packages $assetPackages
      * @param \Shopsys\FrameworkBundle\Model\Localization\Localization $localization
      */
-    public function __construct(Packages $assetPackages, Localization $localization)
+    public function __construct(string $webDir, Packages $assetPackages, Localization $localization)
     {
         $this->assetPackages = $assetPackages;
         $this->localization = $localization;
+        $this->webDir = $webDir;
     }
 
     /**
@@ -46,6 +53,10 @@ class LocalizationExtension extends \Twig_Extension
     public function getLocaleFlagHtml($locale, $showTitle = true)
     {
         $src = $this->assetPackages->getUrl('assets/admin/images/flags/' . $locale . '.png');
+
+        if (file_exists($this->webDir . $src) === false) {
+            return strtoupper($locale);
+        }
 
         if ($showTitle) {
             $title = $this->getTitle($locale);
