@@ -2,6 +2,8 @@
 
 namespace Shopsys\FrameworkBundle\Component\String;
 
+use Transliterator;
+
 class TransformString
 {
     /**
@@ -80,7 +82,10 @@ class TransformString
      */
     protected static function toAscii($string)
     {
-        return iconv('utf-8', 'us-ascii//TRANSLIT//IGNORE', $string);
+        $transliteratorToLatin = Transliterator::create('Any-Latin');
+        $transliteratorToAscii = Transliterator::create('Latin-ASCII');
+
+        return $transliteratorToAscii->transliterate($transliteratorToLatin->transliterate($string));
     }
 
     /**
