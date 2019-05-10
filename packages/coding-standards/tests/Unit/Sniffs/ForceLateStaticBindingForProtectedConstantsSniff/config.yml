@@ -1,2 +1,5 @@
+imports:
+    - { resource: '../../../config.yml' }
+
 services:
     Shopsys\CodingStandards\Sniffs\ForceLateStaticBindingForProtectedConstantsSniff:
