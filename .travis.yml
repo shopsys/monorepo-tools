@@ -13,6 +13,7 @@ env:
 
 before_install:
   - phpenv config-add project-base/docker/php-fpm/php-ini-overrides.ini
+  - echo '' | pecl install redis-4.1.1
   - echo "extension = redis.so" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
   - phpenv config-rm xdebug.ini || return 0
   - composer global require hirak/prestissimo
