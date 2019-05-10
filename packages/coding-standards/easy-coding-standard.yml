@@ -1,6 +1,9 @@
 imports:
     # for PSR-2 description, see: http://www.php-fig.org/psr/psr-2/
     - { resource: '%vendor_dir%/symplify/easy-coding-standard/config/psr2.yml' }
+    # some checkers use BetterPhpdocParser services which must be configured (file renamed in symplify/better-phpdoc-parser v5.4.14)
+    - { resource: '%vendor_dir%/symplify/better-phpdoc-parser/config/config.yml', ignore_errors: true }
+    - { resource: '%vendor_dir%/symplify/better-phpdoc-parser/config/config.yaml', ignore_errors: true }
 
 services:
     _defaults:
