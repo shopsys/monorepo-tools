@@ -35,6 +35,7 @@
 * [Elasticsearch](./model/elasticsearch.md)
 * [Front-end Product Searching](./model/front-end-product-searching.md)
 * [Front-end Product Filtering](./model/front-end-product-filtering.md)
+* [Introduction to Read Model](./model/introduction-to-read-model.md)
 
 ## Cookbook
 * [Dumping and Importing the Database](./cookbook/dumping-and-importing-the-database.md)

@@ -3,7 +3,7 @@
 [![Build Status](https://travis-ci.org/shopsys/read-model.svg?branch=master)](https://travis-ci.org/shopsys/read-model)
 [![Downloads](https://img.shields.io/packagist/dt/shopsys/read-model.svg)](https://packagist.org/packages/shopsys/read-model)
 
-This bundle for [Shopsys Framework](https://www.shopsys.com) separate templates from model with read model concept.
+This bundle for [Shopsys Framework](https://www.shopsys.com) separates templates from model using [read model concept](https://github.com/shopsys/shopsys/blob/master/docs/model/introduction-to-read-model.md).
 The bundle is dedicated for projects based on Shopsys Framework (i.e. created from [`shopsys/project-base`](https://github.com/shopsys/project-base)) exclusively.
 
 This repository is maintained by [shopsys/shopsys] monorepo, information about changes are in [monorepo CHANGELOG.md](https://github.com/shopsys/shopsys/blob/master/CHANGELOG.md).
