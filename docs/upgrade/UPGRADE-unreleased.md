@@ -217,6 +217,60 @@ There you can find links to upgrade notes for other versions too.
         +   database_server_version: 10.5
         ...
         ```
+### Infrastructure
+- remove node ports from kubernetes services and add them into the ingress router ([#888](https://github.com/shopsys/shopsys/pull/888))
+    - remove `NodePort` type from `kubernetes/services/adminer.yml`, `kubernetes/services/redis-admin.yml`, `kubernetes/services/redis-admin.yml`
+        ```diff
+        -     type: NodePort
+          ports:
+          -   name: http
+        ```
+    - add ingress kustomize patch for CI deployment into `kubernetes/kustomize/overlays/ci/kustomization.yaml`
+        ```diff
+          -   ../../../services/selenium-server.yml
+        +patchesJson6902:
+        +-   target:
+        +        group: extensions
+        +        version: v1beta1
+        +        kind: Ingress
+        +        name: shopsys
+        +    path: ./ingress-patch.yaml
+          configMapGenerator:
+        ```
+    - add routes for elasticsearch, adminer and redis-admin into `kubernetes/kustomize/overlays/ci/ingress-patch.yaml`
+        ```diff
+        +- op: add
+        +  path: /spec/rules/-
+        +  value:
+        +    host: ~
+        +    http:
+        +        paths:
+        +        -   path: /
+        +            backend:
+        +                serviceName: adminer
+        +                servicePort: 80
+        +- op: add
+        +  path: /spec/rules/-
+        +  value:
+        +    host: ~
+        +    http:
+        +        paths:
+        +        -   path: /
+        +            backend:
+        +                serviceName: elasticsearch
+        +                servicePort: 9200
+        +- op: add
+        +  path: /spec/rules/-
+        +  value:
+        +    host: ~
+        +    http:
+        +        paths:
+        +        -   path: /
+        +            backend:
+        +                serviceName: redis-admin
+        +                servicePort: 80
+        ```
+
 ### Tools
 - add path for tests folder into `ecs-fix` phing target of `build-dev.xml` file to be able to fix files that were found by `ecs` phing target ([#980](https://github.com/shopsys/shopsys/pull/980))
     ```diff

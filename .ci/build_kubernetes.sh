@@ -13,6 +13,11 @@ SECOND_DOMAIN_HOSTNAME=2.${JOB_NAME}.${DEVELOPMENT_SERVER_DOMAIN}
 yq write --inplace project-base/kubernetes/ingress.yml spec.rules[0].host ${FIRST_DOMAIN_HOSTNAME}
 yq write --inplace project-base/kubernetes/ingress.yml spec.rules[1].host ${SECOND_DOMAIN_HOSTNAME}
 
+# Set domain into dev-stack (redis-admin, elasticsearch, adminer) hostnames
+yq write --inplace project-base/kubernetes/kustomize/overlays/ci/ingress-patch.yaml [0].value.host adminer.${FIRST_DOMAIN_HOSTNAME}
+yq write --inplace project-base/kubernetes/kustomize/overlays/ci/ingress-patch.yaml [1].value.host elasticsearch.${FIRST_DOMAIN_HOSTNAME}
+yq write --inplace project-base/kubernetes/kustomize/overlays/ci/ingress-patch.yaml [2].value.host redis-admin.${FIRST_DOMAIN_HOSTNAME}
+
 # Set domain into webserver hostnames
 yq write --inplace project-base/kubernetes/deployments/webserver-php-fpm.yml spec.template.spec.hostAliases[0].hostnames[+] ${FIRST_DOMAIN_HOSTNAME}
 yq write --inplace project-base/kubernetes/deployments/webserver-php-fpm.yml spec.template.spec.hostAliases[0].hostnames[+] ${SECOND_DOMAIN_HOSTNAME}
