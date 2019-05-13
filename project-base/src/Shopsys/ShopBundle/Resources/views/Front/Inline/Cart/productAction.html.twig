@@ -1,0 +1,20 @@
+{% set buttonSizeClass = (type == 'large' ? ' btn--large ' : ' ') %}
+
+{% if productActionView.mainVariant %}
+    <a href="{{ productActionView.detailUrl }}" class="btn btn--success {{ buttonSizeClass }}">
+        {{- 'Choose variant'|trans -}}
+    </a>
+{% elseif productActionView.sellingDenied %}
+    <a href="{{ productActionView.detailUrl }}" class="btn {{ buttonSizeClass }}">
+        {{- 'Product no longer on sale'|trans -}}
+    </a>
+{% else %}
+    {{ form_start(form, {attr: {class: 'js-add-product dont-print', 'data-ajax-url': url('front_cart_add_product_ajax'), 'multipleForm': true}}) }}
+    <span class="form-input-spinbox js-spinbox">
+        {{ form_widget(form.quantity, { attr: { class: 'form-input-spinbox__input input-no-style js-spinbox-input', 'data-spinbox-min': 1}}) }}
+        <button type="button" class="btn-no-style form-input-spinbox__btn js-spinbox-plus">+</button>
+        <button type="button" class="btn-no-style form-input-spinbox__btn form-input-spinbox__btn--minus js-spinbox-minus">-</button>
+    </span>
+    {{ form_widget(form.add, {label: 'Add to cart'|trans, attr: { class: 'btn--success' ~ buttonSizeClass }}) }}
+    {{ form_end(form) }}
+{% endif %}
