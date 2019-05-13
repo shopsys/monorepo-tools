@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Shopsys\FrameworkBundle\Component\Image;
 
 use Doctrine\ORM\EntityManagerInterface;
@@ -368,5 +370,17 @@ class ImageFacade
             $image->setPosition($position);
             $position++;
         }
+    }
+
+    /**
+     * @param int[] $entityIds
+     * @param string $entityClass FQCN
+     * @return \Shopsys\FrameworkBundle\Component\Image\Image[]
+     */
+    public function getImagesByEntitiesIndexedByEntityId(array $entityIds, string $entityClass): array
+    {
+        $entityName = $this->imageConfig->getImageEntityConfigByClass($entityClass)->getEntityName();
+
+        return $this->imageRepository->getMainImagesByEntitiesIndexedByEntityId($entityIds, $entityName);
     }
 }

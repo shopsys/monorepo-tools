@@ -1,0 +1,10 @@
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        public: false
+
+    Shopsys\ReadModelBundle\:
+        resource: '../../**/*{Facade,Factory,Repository}.php'
+
+    Shopsys\ReadModelBundle\Product\Listed\ListedProductViewFacadeInterface: '@Shopsys\ReadModelBundle\Product\Listed\ListedProductViewFacade'
