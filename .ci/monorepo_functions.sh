@@ -4,6 +4,7 @@
 # If you modify this list don't forget updating /docs/introduction/monorepo.md, /changelog-linker.yml, /CHANGELOG.md, and "replace" section in monorepo's composer.json as well
 get_all_packages() {
     echo "framework \
+        read-model \
         google-cloud-bundle \
         product-feed-zbozi \
         product-feed-google \
