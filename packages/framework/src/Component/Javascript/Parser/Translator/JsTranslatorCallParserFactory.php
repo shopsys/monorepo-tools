@@ -8,8 +8,8 @@ use Shopsys\FrameworkBundle\Component\Translation\TransMethodSpecification;
 
 class JsTranslatorCallParserFactory
 {
-    const METHOD_NAME_TRANS = 'Shopsys.translator.trans';
-    const METHOD_NAME_TRANS_CHOICE = 'Shopsys.translator.transChoice';
+    public const METHOD_NAME_TRANS = 'Shopsys.translator.trans';
+    public const METHOD_NAME_TRANS_CHOICE = 'Shopsys.translator.transChoice';
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\Javascript\Parser\JsFunctionCallParser

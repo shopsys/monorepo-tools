@@ -25,9 +25,9 @@ use Tests\ShopBundle\Test\TransactionFunctionalTestCase;
 
 class PersonalDataExportXmlTest extends TransactionFunctionalTestCase
 {
-    const EMAIL = 'no-reply@shopsys.com';
-    const EXPECTED_XML_FILE_NAME = 'test.xml';
-    const DOMAIN_ID_FIRST = Domain::FIRST_DOMAIN_ID;
+    protected const EMAIL = 'no-reply@shopsys.com';
+    protected const EXPECTED_XML_FILE_NAME = 'test.xml';
+    protected const DOMAIN_ID_FIRST = Domain::FIRST_DOMAIN_ID;
 
     public function testExportXml()
     {

@@ -10,8 +10,8 @@ use Shopsys\FrameworkBundle\Model\PersonalData\PersonalDataAccessRequestFacade;
 
 class PersonalDataAccessRequestDataFixture extends AbstractReferenceFixture
 {
-    const REFERENCE_ACCESS_DISPLAY_REQUEST = 'reference_access_display_request';
-    const REFERENCE_ACCESS_EXPORT_REQUEST = 'reference_access_export_request';
+    public const REFERENCE_ACCESS_DISPLAY_REQUEST = 'reference_access_display_request';
+    public const REFERENCE_ACCESS_EXPORT_REQUEST = 'reference_access_export_request';
 
     /** @var \Shopsys\FrameworkBundle\Model\PersonalData\PersonalDataAccessRequestFacade */
     protected $personalDataFacade;

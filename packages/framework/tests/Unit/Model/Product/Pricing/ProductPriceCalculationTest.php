@@ -34,13 +34,13 @@ class ProductPriceCalculationTest extends TestCase
             ->getMock();
         $pricingSettingMock
             ->expects($this->any())->method('getInputPriceType')
-                ->will($this->returnValue($inputPriceType));
+                ->willReturn($inputPriceType);
         $pricingSettingMock
             ->expects($this->any())->method('getRoundingType')
-                ->will($this->returnValue(PricingSetting::ROUNDING_TYPE_INTEGER));
+                ->willReturn(PricingSetting::ROUNDING_TYPE_INTEGER);
         $pricingSettingMock
             ->expects($this->any())->method('getDomainDefaultCurrencyIdByDomainId')
-                ->will($this->returnValue(1));
+                ->willReturn(1);
 
         $productManualInputPriceRepositoryMock = $this->getMockBuilder(ProductManualInputPriceRepository::class)
             ->disableOriginalConstructor()
@@ -52,7 +52,7 @@ class ProductPriceCalculationTest extends TestCase
             ->getMock();
         $productRepositoryMock
             ->expects($this->any())->method('getAllSellableVariantsByMainVariant')
-            ->will($this->returnValue($variants));
+            ->willReturn($variants);
 
         $rounding = new Rounding($pricingSettingMock);
         $priceCalculation = new PriceCalculation($rounding);

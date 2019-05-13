@@ -14,6 +14,7 @@ You can take part in making Shopsys Framework better.
 * [Shopsys Framework Development Workflow](./docs/contributing/shopsys-framework-development-workflow.md)
 * [Merging to Master on Github](./docs/contributing/merging-to-master-on-github.md)
 * [Releasing a new version of Shopsys Framework monorepo](docs/contributing/releasing-a-new-version-of-shopsys-framework.md)
+* [Code Quality Principles](docs/contributing/code-quality-principles.md)
 
 For your code to be accepted, you should follow our guidelines mentioned above,
 and the code must pass [coding standards](./docs/contributing/coding-standards.md) checks and tests:

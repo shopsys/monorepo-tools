@@ -9,7 +9,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 class ProductCatnumFilter implements AdvancedSearchFilterInterface
 {
-    const NAME = 'productCatnum';
+    public const NAME = 'productCatnum';
 
     /**
      * {@inheritdoc}

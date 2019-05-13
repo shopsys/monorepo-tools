@@ -5,6 +5,8 @@ This guide contains instructions to upgrade from version v7.0.0-beta5 to v7.0.0-
 **Before you start, don't forget to take a look at [general instructions](/UPGRADE.md) about upgrading.**
 There you can find links to upgrade notes for other versions too.
 
+*Note: instructions marked as "low priority" are not vital, however, we recommend to perform them as well during upgrading as it might ease your work in the future.*
+
 ## [shopsys/framework]
 ### Infrastructure
 - *(low priority)* in your `docker/php-fpm/Dockerfile` change base image to `php:7.3-fpm-stretch` ([#694](https://github.com/shopsys/shopsys/pull/694))
@@ -180,7 +182,7 @@ for instance:
     - if you have extended `CountryController` revise your changes – `new` and `edit` actions were added
     - rename `CountryDataFixture::COUNTRY_CZECH_REPUBLIC_1` constant to `CountryDataFixture::COUNTRY_CZECH_REPUBLIC`
 - if you have extended `Localization` class, you have to add type-hints to extended methods because they were added in the parent class ([#806](https://github.com/shopsys/shopsys/pull/806))
-    - if you have extended method `Localization::getAdminLocale()` only to have administration in a different language than english, you can delete it and set parameter `shopsys.admin_locale` in your `parameters.yml` file instead
+    - if you have extended method `Localization::getAdminLocale()` only to have administration in a different language than english, you can delete it and set parameter `shopsys.admin_locale` in your `parameters_common.yml` file instead
 - fixed JS validation of forms in popup windows ([#782](https://github.com/shopsys/shopsys/pull/782))
     - login form in popup is now loaded via AJAX
     - in `window.js` add options `textHeading = ''` and `cssClassHeading: ''` to `var defaults` like this:

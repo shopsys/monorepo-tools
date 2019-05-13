@@ -13,10 +13,10 @@ use Shopsys\FrameworkBundle\Model\Localization\AbstractTranslatableEntity;
  */
 class OrderStatus extends AbstractTranslatableEntity
 {
-    const TYPE_NEW = 1;
-    const TYPE_IN_PROGRESS = 2;
-    const TYPE_DONE = 3;
-    const TYPE_CANCELED = 4;
+    public const TYPE_NEW = 1;
+    public const TYPE_IN_PROGRESS = 2;
+    public const TYPE_DONE = 3;
+    public const TYPE_CANCELED = 4;
 
     /**
      * @var int

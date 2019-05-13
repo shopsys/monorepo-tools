@@ -69,7 +69,7 @@ See how to install Shopsys Framework in production and how to proceed when deplo
 
 ## How to set up the administration with a different locale/language (e.g. Czech)?
 The administration uses `en` locale by default.
-If you want to switch it to the another locale, set a parameter `shopsys.admin_locale` in your `parameters.yml` configuration.
+If you want to switch it to the another locale, set a parameter `shopsys.admin_locale` in your `parameters_common.yml` configuration.
 However, the selected locale has to be one of registered domains locale.
 This scenario is described in more detail in the tutorial [How to Set Up Domains and Locales (Languages)](./how-to-set-up-domains-and-locales.md#36-locale-in-administration).
 
@@ -106,7 +106,7 @@ E.g., by default, all our services are defined as private. However, in tests, we
 
 ## How to change the behavior of the product search on the front-end?
 Full-text product search on the front-end is handled via Elasticsearch.
-If you want to change its behavior (e.g. make the EAN not as important or change the way the search string is handled - whether to use an n-gram or not) please see [Product Searching via Elasticsearch](/docs/model/product-search-via-elasticsearch.md#how-to-change-the-default-index-data-export-setting-and-searching-behavior).
+If you want to change its behavior (e.g. make the EAN not as important or change the way the search string is handled - whether to use an n-gram or not) please see [Product Searching](/docs/model/front-end-product-searching.md).
 
 ## Why are e-mails sent before end of the script and not immediately
 Project uses `SwiftMailer` package for sending e-mails and defaultly it has set `spool queue` that stores all mails into `memory` until the script execution is at the end.  

@@ -8,7 +8,7 @@ use Tests\ShopBundle\Test\Codeception\AcceptanceTester;
 
 class CustomerRegistrationCest
 {
-    const MINIMUM_FORM_SUBMIT_WAIT_TIME = 10;
+    protected const MINIMUM_FORM_SUBMIT_WAIT_TIME = 10;
 
     /**
      * @param \Tests\ShopBundle\Acceptance\acceptance\PageObject\Front\RegistrationPage $registrationPage

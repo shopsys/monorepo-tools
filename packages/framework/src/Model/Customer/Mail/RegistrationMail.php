@@ -13,11 +13,11 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 class RegistrationMail implements MessageFactoryInterface
 {
-    const VARIABLE_FIRST_NAME = '{first_name}';
-    const VARIABLE_LAST_NAME = '{last_name}';
-    const VARIABLE_EMAIL = '{email}';
-    const VARIABLE_URL = '{url}';
-    const VARIABLE_LOGIN_PAGE = '{login_page}';
+    public const VARIABLE_FIRST_NAME = '{first_name}';
+    public const VARIABLE_LAST_NAME = '{last_name}';
+    public const VARIABLE_EMAIL = '{email}';
+    public const VARIABLE_URL = '{url}';
+    public const VARIABLE_LOGIN_PAGE = '{login_page}';
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\Setting\Setting

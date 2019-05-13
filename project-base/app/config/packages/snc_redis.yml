@@ -18,6 +18,12 @@ snc_redis:
             dsn: 'redis://%redis_host%'
             options:
                 prefix: '%env(REDIS_PREFIX)%%build-version%:cache:doctrine:query:'
+        framework_annotations:
+            type: 'phpredis'
+            alias: 'framework_annotations'
+            dsn: 'redis://%redis_host%'
+            options:
+                prefix: '%env(REDIS_PREFIX)%%build-version%:cache:framework:annotations:'
         global:
             type: 'phpredis'
             alias: 'global'

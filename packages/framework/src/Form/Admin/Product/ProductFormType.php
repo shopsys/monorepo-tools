@@ -52,11 +52,14 @@ use Symfony\Component\Validator\Constraints;
 
 class ProductFormType extends AbstractType
 {
+    /** @access protected */
     const VALIDATION_GROUP_USING_STOCK = 'usingStock';
+    /** @access protected */
     const VALIDATION_GROUP_USING_STOCK_AND_ALTERNATE_AVAILABILITY = 'usingStockAndAlternateAvailability';
+    /** @access protected */
     const VALIDATION_GROUP_NOT_USING_STOCK = 'notUsingStock';
 
-    const CSRF_TOKEN_ID = 'product_edit_type';
+    public const CSRF_TOKEN_ID = 'product_edit_type';
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Pricing\Vat\VatFacade
@@ -224,12 +227,12 @@ class ProductFormType extends AbstractType
                     /* @var $productData \Shopsys\FrameworkBundle\Model\Product\ProductData */
 
                     if ($productData->usingStock) {
-                        $validationGroups[] = self::VALIDATION_GROUP_USING_STOCK;
+                        $validationGroups[] = static::VALIDATION_GROUP_USING_STOCK;
                         if ($productData->outOfStockAction === Product::OUT_OF_STOCK_ACTION_SET_ALTERNATE_AVAILABILITY) {
-                            $validationGroups[] = self::VALIDATION_GROUP_USING_STOCK_AND_ALTERNATE_AVAILABILITY;
+                            $validationGroups[] = static::VALIDATION_GROUP_USING_STOCK_AND_ALTERNATE_AVAILABILITY;
                         }
                     } else {
-                        $validationGroups[] = self::VALIDATION_GROUP_NOT_USING_STOCK;
+                        $validationGroups[] = static::VALIDATION_GROUP_NOT_USING_STOCK;
                     }
 
                     return $validationGroups;
@@ -526,7 +529,7 @@ class ProductFormType extends AbstractType
                 'constraints' => [
                     new Constraints\NotBlank([
                         'message' => 'Please enter stock quantity',
-                        'groups' => self::VALIDATION_GROUP_USING_STOCK,
+                        'groups' => static::VALIDATION_GROUP_USING_STOCK,
                     ]),
                 ],
                 'disabled' => $this->isProductMainVariant($product),
@@ -545,7 +548,7 @@ class ProductFormType extends AbstractType
                 'constraints' => [
                     new Constraints\NotBlank([
                         'message' => 'Please choose action',
-                        'groups' => self::VALIDATION_GROUP_USING_STOCK,
+                        'groups' => static::VALIDATION_GROUP_USING_STOCK,
                     ]),
                 ],
                 'disabled' => $this->isProductMainVariant($product),
@@ -563,7 +566,7 @@ class ProductFormType extends AbstractType
                 'constraints' => [
                     new Constraints\NotBlank([
                         'message' => 'Please choose availability',
-                        'groups' => self::VALIDATION_GROUP_USING_STOCK_AND_ALTERNATE_AVAILABILITY,
+                        'groups' => static::VALIDATION_GROUP_USING_STOCK_AND_ALTERNATE_AVAILABILITY,
                     ]),
                 ],
                 'disabled' => $this->isProductMainVariant($product),
@@ -583,7 +586,7 @@ class ProductFormType extends AbstractType
                 'constraints' => [
                     new Constraints\NotBlank([
                         'message' => 'Please choose availability',
-                        'groups' => self::VALIDATION_GROUP_NOT_USING_STOCK,
+                        'groups' => static::VALIDATION_GROUP_NOT_USING_STOCK,
                     ]),
                 ],
                 'disabled' => $this->isProductMainVariant($product),
@@ -895,9 +898,6 @@ class ProductFormType extends AbstractType
                 'main_product' => $product,
                 'sortable' => true,
                 'label' => t('Accessories'),
-                'attr' => [
-                    'class' => 'wrap-border',
-                ],
             ])
             ->addViewTransformer($this->removeDuplicatesTransformer);
     }

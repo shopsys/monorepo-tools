@@ -5,6 +5,8 @@ This guide contains instructions to upgrade from version v7.0.0-beta6 to v7.0.0.
 **Before you start, don't forget to take a look at [general instructions](/UPGRADE.md) about upgrading.**
 There you can find links to upgrade notes for other versions too.
 
+*Note: instructions marked as "low priority" are not vital, however, we recommend to perform them as well during upgrading as it might ease your work in the future.*
+
 ## [shopsys/framework]
 
 ### Tools

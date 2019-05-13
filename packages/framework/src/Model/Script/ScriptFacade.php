@@ -9,8 +9,8 @@ use Shopsys\FrameworkBundle\Twig\MoneyExtension;
 
 class ScriptFacade
 {
-    const VARIABLE_NUMBER = '{number}';
-    const VARIABLE_TOTAL_PRICE = '{total_price}';
+    public const VARIABLE_NUMBER = '{number}';
+    public const VARIABLE_TOTAL_PRICE = '{total_price}';
 
     /**
      * @var \Doctrine\ORM\EntityManagerInterface

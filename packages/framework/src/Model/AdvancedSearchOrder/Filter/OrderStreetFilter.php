@@ -9,7 +9,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 class OrderStreetFilter implements AdvancedSearchFilterInterface
 {
-    const NAME = 'customerStreet';
+    public const NAME = 'customerStreet';
 
     /**
      * {@inheritdoc}

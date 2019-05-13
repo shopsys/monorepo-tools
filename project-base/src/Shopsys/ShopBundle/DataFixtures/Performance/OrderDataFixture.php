@@ -26,9 +26,9 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class OrderDataFixture
 {
-    const PERCENTAGE_OF_ORDERS_BY_REGISTERED_USERS = 25;
+    protected const PERCENTAGE_OF_ORDERS_BY_REGISTERED_USERS = 25;
 
-    const BATCH_SIZE = 10;
+    protected const BATCH_SIZE = 10;
 
     /**
      * @var int

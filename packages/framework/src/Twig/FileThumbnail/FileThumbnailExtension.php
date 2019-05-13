@@ -9,7 +9,8 @@ use Twig_SimpleFunction;
 
 class FileThumbnailExtension extends Twig_Extension
 {
-    const DEFAULT_ICON_TYPE = 'all';
+    public const DEFAULT_ICON_TYPE = 'all';
+    /** @access protected */
     const IMAGE_THUMBNAIL_QUALITY = 80;
 
     /**
@@ -101,7 +102,7 @@ class FileThumbnailExtension extends Twig_Extension
     {
         $image = $this->imageThumbnailFactory->getImageThumbnail($filepath);
 
-        return new FileThumbnailInfo(null, $image->encode('data-url', self::IMAGE_THUMBNAIL_QUALITY)->getEncoded());
+        return new FileThumbnailInfo(null, $image->encode('data-url', static::IMAGE_THUMBNAIL_QUALITY)->getEncoded());
     }
 
     /**

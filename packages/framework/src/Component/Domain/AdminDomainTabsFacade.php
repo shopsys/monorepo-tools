@@ -6,6 +6,7 @@ use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 class AdminDomainTabsFacade
 {
+    /** @access protected */
     const SESSION_SELECTED_DOMAIN = 'selected_domain_id';
 
     /**
@@ -39,7 +40,7 @@ class AdminDomainTabsFacade
     public function setSelectedDomainId($domainId)
     {
         $domainConfig = $this->domain->getDomainConfigById($domainId);
-        $this->session->set(self::SESSION_SELECTED_DOMAIN, $domainConfig->getId());
+        $this->session->set(static::SESSION_SELECTED_DOMAIN, $domainConfig->getId());
     }
 
     /**
@@ -48,7 +49,7 @@ class AdminDomainTabsFacade
     public function getSelectedDomainConfig()
     {
         try {
-            $domainId = $this->session->get(self::SESSION_SELECTED_DOMAIN);
+            $domainId = $this->session->get(static::SESSION_SELECTED_DOMAIN);
             return $this->domain->getDomainConfigById($domainId);
         } catch (\Shopsys\FrameworkBundle\Component\Domain\Exception\InvalidDomainIdException $e) {
             $allDomains = $this->domain->getAll();

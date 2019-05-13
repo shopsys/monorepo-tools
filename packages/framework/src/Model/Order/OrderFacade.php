@@ -28,10 +28,10 @@ use Shopsys\FrameworkBundle\Twig\NumberFormatterExtension;
 
 class OrderFacade
 {
-    const VARIABLE_NUMBER = '{number}';
-    const VARIABLE_ORDER_DETAIL_URL = '{order_detail_url}';
-    const VARIABLE_PAYMENT_INSTRUCTIONS = '{payment_instructions}';
-    const VARIABLE_TRANSPORT_INSTRUCTIONS = '{transport_instructions}';
+    public const VARIABLE_NUMBER = '{number}';
+    public const VARIABLE_ORDER_DETAIL_URL = '{order_detail_url}';
+    public const VARIABLE_PAYMENT_INSTRUCTIONS = '{payment_instructions}';
+    public const VARIABLE_TRANSPORT_INSTRUCTIONS = '{transport_instructions}';
 
     /**
      * @var \Doctrine\ORM\EntityManagerInterface

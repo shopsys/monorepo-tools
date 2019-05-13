@@ -71,7 +71,7 @@ class RoundingTest extends TestCase
             ->getMock();
         $pricingSettingMock
             ->expects($this->any())->method('getRoundingType')
-                ->will($this->returnValue(PricingSetting::ROUNDING_TYPE_INTEGER));
+                ->willReturn(PricingSetting::ROUNDING_TYPE_INTEGER);
 
         $rounding = new Rounding($pricingSettingMock);
 
@@ -146,7 +146,7 @@ class RoundingTest extends TestCase
             ->setMethods(['getRoundingType'])
             ->disableOriginalConstructor()
             ->getMock();
-        $pricingSettingMock->expects($this->any())->method('getRoundingType')->will($this->returnValue($roundingType));
+        $pricingSettingMock->expects($this->any())->method('getRoundingType')->willReturn($roundingType);
 
         $rounding = new Rounding($pricingSettingMock);
         $roundedPrice = $rounding->roundPriceWithVat($inputPrice);

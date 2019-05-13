@@ -104,6 +104,9 @@
             "edge_ngram_without_diacritic": {
               "type": "text",
               "analyzer": "edge_ngram_without_diacritic"
+            },
+            "keyword": {
+              "type": "keyword"
             }
           }
         },
@@ -147,6 +150,46 @@
         "description": {
           "type": "text",
           "analyzer": "edge_ngram_without_diacritic_html"
+        },
+        "flags": {
+          "type": "integer"
+        },
+        "brand": {
+          "type": "integer"
+        },
+        "categories": {
+          "type": "integer"
+        },
+        "prices": {
+          "type": "nested",
+          "properties": {
+            "pricing_group_id": {
+              "type": "integer"
+            },
+            "amount": {
+              "type": "float"
+            }
+          }
+        },
+        "in_stock": {
+          "type": "boolean"
+        },
+        "parameters": {
+          "type": "nested",
+          "properties": {
+            "parameter_id": {
+              "type": "integer"
+            },
+            "parameter_value_id": {
+              "type": "integer"
+            }
+          }
+        },
+        "ordering_priority": {
+          "type": "integer"
+        },
+        "calculated_selling_denied": {
+          "type": "boolean"
         }
       }
     }

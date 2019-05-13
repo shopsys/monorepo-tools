@@ -14,6 +14,7 @@ use Shopsys\FrameworkBundle\Component\FileUpload\FileNamingConvention;
  */
 class UploadedFile implements EntityFileUploadInterface
 {
+    /** @access protected */
     const UPLOAD_KEY = 'uploadedFile';
 
     /**
@@ -80,7 +81,7 @@ class UploadedFile implements EntityFileUploadInterface
         }
 
         return [
-            self::UPLOAD_KEY => new FileForUpload(
+            static::UPLOAD_KEY => new FileForUpload(
                 $this->temporaryFilename,
                 false,
                 $this->entityName,
@@ -96,7 +97,7 @@ class UploadedFile implements EntityFileUploadInterface
      */
     public function setFileAsUploaded($key, $originalFilename)
     {
-        if ($key === self::UPLOAD_KEY) {
+        if ($key === static::UPLOAD_KEY) {
             $this->extension = pathinfo($originalFilename, PATHINFO_EXTENSION);
         } else {
             throw new \Shopsys\FrameworkBundle\Component\FileUpload\Exception\InvalidFileKeyException($key);

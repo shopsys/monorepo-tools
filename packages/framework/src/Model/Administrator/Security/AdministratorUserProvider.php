@@ -77,7 +77,7 @@ class AdministratorUserProvider implements UserProviderInterface
 
         if ($administrator instanceof TimelimitLoginInterface) {
             if (time() - $administrator->getLastActivity()->getTimestamp() > 3600 * 5) {
-                throw new \Symfony\Component\Security\Core\Exception\UsernameNotFoundException('Admin was too long unactive.');
+                throw new \Symfony\Component\Security\Core\Exception\AuthenticationExpiredException('Admin was too long inactive.');
             }
             if ($freshAdministrator !== null) {
                 $freshAdministrator->setLastActivity(new DateTime());

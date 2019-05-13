@@ -8,6 +8,7 @@ use stdClass;
 
 class EncodingConverterTest extends TestCase
 {
+    /** @access private */
     const STRING_UTF8 = 'příšerně žluťoučký kůň úpěl ďábelské ódy. PŘÍŠERNĚ ŽLUŤOUČKÝ KŮŇ ÚPĚL ĎÁBELSKÉ ÓDY.';
 
     private function getUtf8String()

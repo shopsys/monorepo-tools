@@ -60,7 +60,7 @@ class BasePriceCalculationTest extends TestCase
             ->getMock();
         $pricingSettingMock
             ->expects($this->any())->method('getRoundingType')
-                ->will($this->returnValue(PricingSetting::ROUNDING_TYPE_INTEGER));
+                ->willReturn(PricingSetting::ROUNDING_TYPE_INTEGER);
 
         $rounding = new Rounding($pricingSettingMock);
         $priceCalculation = new PriceCalculation($rounding);

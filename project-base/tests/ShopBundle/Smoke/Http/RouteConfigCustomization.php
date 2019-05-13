@@ -22,7 +22,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 
 class RouteConfigCustomization
 {
-    const DEFAULT_ID_VALUE = 1;
+    protected const DEFAULT_ID_VALUE = 1;
 
     /**
      * @var \Symfony\Component\DependencyInjection\ContainerInterface

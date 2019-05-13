@@ -7,6 +7,7 @@ use Doctrine\ORM\EntityManagerInterface;
 
 class OrderNumberSequenceRepository
 {
+    /** @access protected */
     const ID = 1;
 
     /**
@@ -40,11 +41,11 @@ class OrderNumberSequenceRepository
 
             $requestedNumber = time();
 
-            $orderNumberSequence = $this->getOrderNumberSequenceRepository()->find(self::ID, LockMode::PESSIMISTIC_WRITE);
+            $orderNumberSequence = $this->getOrderNumberSequenceRepository()->find(static::ID, LockMode::PESSIMISTIC_WRITE);
             /* @var $orderNumberSequence \Shopsys\FrameworkBundle\Model\Order\OrderNumberSequence|null */
             if ($orderNumberSequence === null) {
                 throw new \Shopsys\FrameworkBundle\Model\Order\Exception\OrderNumberSequenceNotFoundException(
-                    'Order number sequence ID ' . self::ID . ' not found.'
+                    'Order number sequence ID ' . static::ID . ' not found.'
                 );
             }
 

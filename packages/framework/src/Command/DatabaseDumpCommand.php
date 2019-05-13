@@ -11,7 +11,9 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class DatabaseDumpCommand extends Command
 {
+    /** @access private */
     const ARG_OUTPUT_FILE = 'outputFile';
+    /** @access private */
     const OPT_PGDUMP_BIN = 'pgdump-bin';
 
     /**

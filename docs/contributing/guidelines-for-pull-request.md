@@ -24,6 +24,10 @@ git fetch
 git rebase origin/master
 ```
 
+**Important note:**
+If your pull request contains any BC breaks (see [Backward Compatibility Promise](/docs/contributing/backward-compatibility-promise.md)), it should not be targeted against the current master but against a branch where the next major release is being prepared.
+E.g., if the latest release is `v7.1.0` and you want to introduce a breaking change, you need to rebase your branch on `8.0` branch and target your PR against it. If no such a branch exists, you need to create one.
+
 * You have to check your change using the command `php phing standards tests tests-acceptance` as it’s mentioned in [contributing](../../project-base/CONTRIBUTING.md).
 
     *Note: In this step you were using multiple Phing targets.

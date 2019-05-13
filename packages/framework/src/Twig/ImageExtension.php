@@ -12,6 +12,7 @@ use Twig_SimpleFunction;
 
 class ImageExtension extends Twig_Extension
 {
+    /** @access protected */
     const NOIMAGE_FILENAME = 'noimage.png';
 
     /**
@@ -157,7 +158,7 @@ class ImageExtension extends Twig_Extension
      */
     private function getEmptyImageUrl()
     {
-        return $this->domain->getUrl() . $this->frontDesignImageUrlPrefix . self::NOIMAGE_FILENAME;
+        return $this->domain->getUrl() . $this->frontDesignImageUrlPrefix . static::NOIMAGE_FILENAME;
     }
 
     /**

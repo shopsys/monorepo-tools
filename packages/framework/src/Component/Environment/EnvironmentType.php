@@ -4,11 +4,11 @@ namespace Shopsys\FrameworkBundle\Component\Environment;
 
 class EnvironmentType
 {
-    const DEVELOPMENT = 'dev';
-    const PRODUCTION = 'prod';
-    const TEST = 'test';
+    public const DEVELOPMENT = 'dev';
+    public const PRODUCTION = 'prod';
+    public const TEST = 'test';
 
-    const ALL = [self::DEVELOPMENT, self::PRODUCTION, self::TEST];
+    public const ALL = [self::DEVELOPMENT, self::PRODUCTION, self::TEST];
 
     /**
      * @param string $environment

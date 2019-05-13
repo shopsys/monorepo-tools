@@ -8,8 +8,11 @@ use Symfony\Bridge\Monolog\Logger;
 
 class DomainIconResizer
 {
+    /** @access protected */
     const DOMAIN_ICON_WIDTH = 48;
+    /** @access protected */
     const DOMAIN_ICON_HEIGHT = 33;
+    /** @access protected */
     const DOMAIN_ICON_CROP = false;
 
     /**
@@ -51,9 +54,9 @@ class DomainIconResizer
     {
         $resizedImage = $this->imageProcessor->resize(
             $this->imageProcessor->createInterventionImage($filepath),
-            self::DOMAIN_ICON_WIDTH,
-            self::DOMAIN_ICON_HEIGHT,
-            self::DOMAIN_ICON_CROP
+            static::DOMAIN_ICON_WIDTH,
+            static::DOMAIN_ICON_HEIGHT,
+            static::DOMAIN_ICON_CROP
         );
         $resizedImage->encode(ImageProcessor::EXTENSION_PNG);
 

@@ -11,8 +11,8 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class PersonalDataAccessRequest
 {
-    const TYPE_DISPLAY = 'display';
-    const TYPE_EXPORT = 'export';
+    public const TYPE_DISPLAY = 'display';
+    public const TYPE_EXPORT = 'export';
 
     /**
      * @var int

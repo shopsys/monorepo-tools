@@ -12,6 +12,7 @@ use Shopsys\FrameworkBundle\Model\Category\Category;
 
 class ProductListFriendlyUrlDataProvider implements FriendlyUrlDataProviderInterface
 {
+    /** @access protected */
     const ROUTE_NAME = 'front_product_list';
 
     /**
@@ -49,7 +50,7 @@ class ProductListFriendlyUrlDataProvider implements FriendlyUrlDataProviderInter
             ->join('c.translations', 'ct', Join::WITH, 'ct.locale = :locale')
             ->setParameter('locale', $domainConfig->getId())
             ->leftJoin(FriendlyUrl::class, 'f', Join::WITH, 'c.id = f.entityId AND f.routeName = :routeName AND f.domainId = :domainId')
-            ->setParameter('routeName', self::ROUTE_NAME)
+            ->setParameter('routeName', static::ROUTE_NAME)
             ->setParameter('domainId', $domainConfig->getId())
             ->where('f.entityId IS NULL AND ct.name IS NOT NULL');
 
@@ -72,6 +73,6 @@ class ProductListFriendlyUrlDataProvider implements FriendlyUrlDataProviderInter
      */
     public function getRouteName(): string
     {
-        return self::ROUTE_NAME;
+        return static::ROUTE_NAME;
     }
 }

@@ -13,7 +13,7 @@ use Shopsys\FrameworkBundle\Model\ShopInfo\ShopInfoSettingFacade;
 
 class MultidomainSettingValueShopInfoDataFixture extends AbstractReferenceFixture implements DependentFixtureInterface
 {
-    const SETTING_VALUES = [
+    public const SETTING_VALUES = [
         ShopInfoSettingFacade::SHOP_INFO_PHONE_NUMBER => '+420123456789',
         ShopInfoSettingFacade::SHOP_INFO_PHONE_HOURS => '(po-pá, 10:00 - 16:00)',
         ShopInfoSettingFacade::SHOP_INFO_EMAIL => 'no-reply@shopsys.cz',

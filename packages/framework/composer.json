@@ -8,6 +8,9 @@
             "Shopsys\\FrameworkBundle\\": "src/",
             "Tests\\FrameworkBundle\\Test\\": "tests/Test/"
         },
+        "classmap": [
+            "src/Component/Filesystem/Flysystem/VolumeDriver.php"
+        ],
         "files": [
             "src/Component/Translation/functions.php",
             "src/Component/VarDumper/functions.php"
@@ -35,6 +38,7 @@
         "ext-xml": "*",
         "ext-filter": "*",
         "arvenil/ninja-mutex": "^0.4.1",
+        "barryvdh/elfinder-flysystem-driver": "^0.2",
         "bmatzner/jquery-bundle": "^2.2.2",
         "bmatzner/jquery-ui-bundle": "^1.10.3",
         "commerceguys/intl": "0.7.4",
@@ -49,12 +53,13 @@
         "doctrine/doctrine-bundle": "^1.8.1",
         "doctrine/doctrine-fixtures-bundle": "^3.0.2",
         "egeloen/ckeditor-bundle": "^4.0.6",
+        "egeloen/ordered-form": "^3.0",
         "elasticsearch/elasticsearch": "^6.0.1",
         "fp/jsformvalidator-bundle": "^1.5.1",
         "fzaninotto/faker": "^1.7.1",
         "gedmo/doctrine-extensions": "^2.4.34",
         "guzzlehttp/guzzle": "^6.3",
-        "helios-ag/fm-elfinder-bundle": "^6.2.1",
+        "helios-ag/fm-elfinder-bundle": "^6.2.1|^9.2",
         "heureka/overeno-zakazniky": "^2.0.6",
         "intervention/image": "^2.3.14",
         "jms/metadata": "^1.6",

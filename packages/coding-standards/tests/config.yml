@@ -1,0 +1,4 @@
+imports:
+    # some checkers use BetterPhpdocParser services which must be configured (file renamed in symplify/better-phpdoc-parser v5.4.14)
+    - { resource: '%vendor_dir%/symplify/better-phpdoc-parser/config/config.yml', ignore_errors: true }
+    - { resource: '%vendor_dir%/symplify/better-phpdoc-parser/config/config.yaml', ignore_errors: true }

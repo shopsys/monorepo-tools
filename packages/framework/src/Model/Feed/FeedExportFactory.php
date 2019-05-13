@@ -10,7 +10,9 @@ use Symfony\Component\Filesystem\Filesystem;
 
 class FeedExportFactory
 {
+    /** @access protected */
     const TEMPORARY_FILENAME_SUFFIX = '.tmp';
+    /** @access protected */
     const BATCH_SIZE = 1000;
 
     /**

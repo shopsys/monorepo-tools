@@ -13,9 +13,13 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 class SitemapListener implements EventSubscriberInterface
 {
+    /** @access protected */
     const PRIORITY_HOMEPAGE = 1;
+    /** @access protected */
     const PRIORITY_CATEGORIES = 0.8;
+    /** @access protected */
     const PRIORITY_PRODUCTS = 0.7;
+    /** @access protected */
     const PRIORITY_ARTICLES = 0.5;
 
     /**
@@ -69,16 +73,16 @@ class SitemapListener implements EventSubscriberInterface
         $generator = $event->getUrlContainer();
         $domainConfig = $this->domain->getDomainConfigById($domainId);
 
-        $this->addHomepageUrl($generator, $domainConfig, $section, self::PRIORITY_HOMEPAGE);
+        $this->addHomepageUrl($generator, $domainConfig, $section, static::PRIORITY_HOMEPAGE);
 
         $productSitemapItems = $this->sitemapFacade->getSitemapItemsForVisibleProducts($domainConfig);
-        $this->addUrlsBySitemapItems($productSitemapItems, $generator, $domainConfig, $section, self::PRIORITY_PRODUCTS);
+        $this->addUrlsBySitemapItems($productSitemapItems, $generator, $domainConfig, $section, static::PRIORITY_PRODUCTS);
 
         $categorySitemapItems = $this->sitemapFacade->getSitemapItemsForVisibleCategories($domainConfig);
-        $this->addUrlsBySitemapItems($categorySitemapItems, $generator, $domainConfig, $section, self::PRIORITY_CATEGORIES);
+        $this->addUrlsBySitemapItems($categorySitemapItems, $generator, $domainConfig, $section, static::PRIORITY_CATEGORIES);
 
         $articleSitemapItems = $this->sitemapFacade->getSitemapItemsForArticlesOnDomain($domainConfig);
-        $this->addUrlsBySitemapItems($articleSitemapItems, $generator, $domainConfig, $section, self::PRIORITY_ARTICLES);
+        $this->addUrlsBySitemapItems($articleSitemapItems, $generator, $domainConfig, $section, static::PRIORITY_ARTICLES);
     }
 
     /**

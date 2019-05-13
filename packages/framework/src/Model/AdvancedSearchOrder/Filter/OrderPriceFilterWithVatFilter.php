@@ -8,7 +8,7 @@ use Symfony\Component\Form\Extension\Core\Type\NumberType;
 
 class OrderPriceFilterWithVatFilter implements AdvancedSearchFilterInterface
 {
-    const NAME = 'orderTotalPriceWithVat';
+    public const NAME = 'orderTotalPriceWithVat';
 
     /**
      * {@inheritdoc}

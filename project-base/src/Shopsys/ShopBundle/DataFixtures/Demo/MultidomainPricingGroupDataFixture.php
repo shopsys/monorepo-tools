@@ -14,8 +14,8 @@ use Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroupFacade;
 
 class MultidomainPricingGroupDataFixture extends AbstractReferenceFixture implements DependentFixtureInterface
 {
-    const PRICING_GROUP_ORDINARY_DOMAIN = 'pricing_group_ordinary_domain';
-    const PRICING_GROUP_VIP_DOMAIN = 'pricing_group_vip_domain';
+    public const PRICING_GROUP_ORDINARY_DOMAIN = 'pricing_group_ordinary_domain';
+    public const PRICING_GROUP_VIP_DOMAIN = 'pricing_group_vip_domain';
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroupFacade

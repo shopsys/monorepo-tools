@@ -14,8 +14,8 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 class ResetPasswordMail implements MailTypeInterface, MessageFactoryInterface
 {
-    const VARIABLE_EMAIL = '{email}';
-    const VARIABLE_NEW_PASSWORD_URL = '{new_password_url}';
+    public const VARIABLE_EMAIL = '{email}';
+    public const VARIABLE_NEW_PASSWORD_URL = '{new_password_url}';
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\Setting\Setting

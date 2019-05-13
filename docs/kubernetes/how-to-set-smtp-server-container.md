@@ -1,4 +1,4 @@
-# How to set SMTP Server Container
+# How to set SMTP Server Container
 
 For sending e-mails from our application we use [SMTP server container](https://hub.docker.com/r/namshi/smtp/) in separate Kubernetes pod so we need to set some additional settings as permission to be able to send e-mails from `webserver-php-fpm` pod.
 For this purpose, we have set `RELAY_NETWORKS` ENV variable with all private networks that can be created by docker into `/project-base/kubernetes/deployments/smtp-server.yml` for pod of smtp container ([#777](https://github.com/shopsys/shopsys/pull/777))  

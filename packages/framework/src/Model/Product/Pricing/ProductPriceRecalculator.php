@@ -9,6 +9,7 @@ use Symfony\Component\HttpKernel\Event\FilterResponseEvent;
 
 class ProductPriceRecalculator
 {
+    /** @access protected */
     const BATCH_SIZE = 250;
 
     /**
@@ -76,7 +77,7 @@ class ProductPriceRecalculator
             $this->productRowsIterator = $this->productPriceRecalculationScheduler->getProductsIteratorForDelayedRecalculation();
         }
 
-        for ($count = 0; $count < self::BATCH_SIZE; $count++) {
+        for ($count = 0; $count < static::BATCH_SIZE; $count++) {
             $row = $this->productRowsIterator->next();
             if ($row === false) {
                 $this->clearCache();

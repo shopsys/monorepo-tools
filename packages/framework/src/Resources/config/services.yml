@@ -60,6 +60,13 @@ services:
 
     Doctrine\Common\Annotations\DocParser: '@jms_translation.doc_parser'
 
+    Ivory\OrderedForm\Orderer\FormOrderer: ~
+
+    form.resolved_type_factory:
+        class: Ivory\OrderedForm\OrderedResolvedFormTypeFactory
+        arguments:
+            - '@Ivory\OrderedForm\Orderer\FormOrderer'
+
     # disable original DefaultPhpFileExtractor
     jms_translation.extractor.file.default_php_extractor:
         alias: Shopsys\FrameworkBundle\Component\Translation\PhpFileExtractor
@@ -91,20 +98,22 @@ services:
             - '@annotation_reader'
 
     shopsys.doctrine.cache_driver.query_cache:
-        class: Doctrine\Common\Cache\ChainCache
+        class: Doctrine\Common\Cache\RedisCache
+        factory: 'Shopsys\FrameworkBundle\Component\Doctrine\Cache\RedisCacheFactory:create'
         arguments:
-            -
-                - '@Doctrine\Common\Cache\ArrayCache'
-                - '@shopsys.shop.component.doctrine.cache.query.redis_cache'
-
-    Doctrine\Common\Cache\ArrayCache: ~
+            - '@snc_redis.doctrine_query'
 
     shopsys.doctrine.cache_driver.metadata_cache:
-        class: Doctrine\Common\Cache\ChainCache
+        class: Doctrine\Common\Cache\CacheProvider
+        factory: 'Shopsys\FrameworkBundle\Component\Doctrine\Cache\FallbackCacheFactory:create'
         arguments:
-            -
-                - '@Doctrine\Common\Cache\ArrayCache'
-                - '@shopsys.shop.component.doctrine.cache.metadata.redis_cache'
+            - '@snc_redis.doctrine_metadata'
+
+    shopsys.framework.cache_driver.annotations_cache:
+        class: Doctrine\Common\Cache\CacheProvider
+        factory: 'Shopsys\FrameworkBundle\Component\Doctrine\Cache\FallbackCacheFactory:create'
+        arguments:
+            - '@snc_redis.framework_annotations'
 
     Shopsys\FrameworkBundle\Model\AdminNavigation\BreadcrumbOverrider: ~
 
@@ -155,18 +164,6 @@ services:
 
     Shopsys\FrameworkBundle\Component\DataFixture\PersistentReferenceFacade:
         public: true
-
-    shopsys.shop.component.doctrine.cache.metadata.redis_cache:
-        class: Doctrine\Common\Cache\RedisCache
-        factory: 'Shopsys\FrameworkBundle\Component\Doctrine\Cache\RedisCacheFactory:create'
-        arguments:
-            - '@snc_redis.doctrine_metadata'
-
-    shopsys.shop.component.doctrine.cache.query.redis_cache:
-        class: Doctrine\Common\Cache\RedisCache
-        factory: 'Shopsys\FrameworkBundle\Component\Doctrine\Cache\RedisCacheFactory:create'
-        arguments:
-            - '@snc_redis.doctrine_query'
 
     Shopsys\FrameworkBundle\Component\Doctrine\DatabaseSchemaFacade:
         arguments:
@@ -522,6 +519,8 @@ services:
 
     Shopsys\FrameworkBundle\Component\Router\DomainRouterFactory:
         arguments: ['%router.resource%']
+        calls:
+            - method: setRequestStack
 
     Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\FriendlyUrlRouterFactory:
         arguments: ['%shopsys.router.friendly_url_router_filepath%']

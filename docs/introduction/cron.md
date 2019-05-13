@@ -4,6 +4,8 @@
 Cron is a tool to run background jobs and is essential for the production environment.
 Periodically executed Cron modules recalculate visibility, generate XML feeds and sitemaps, provide error reporting etc.
 
+By default you can configure your own cron configurations in `src/Shopsys/ShopBundle/Resources/config/services/cron.yml` file.
+
 ## Default Cron Commands
 There is some prepared configuration for Shopsys Framework in a file `src/Resources/config/services/cron.yml` in `FrameworkBundle`.
 

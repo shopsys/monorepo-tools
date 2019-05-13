@@ -7,6 +7,7 @@ use Doctrine\ORM\QueryBuilder;
 
 class QueryBuilderExtender
 {
+    /** @access protected */
     const REQUIRED_ALIASES_COUNT = 1;
 
     /**
@@ -51,7 +52,7 @@ class QueryBuilderExtender
     protected function getRootAlias(QueryBuilder $queryBuilder)
     {
         $rootAliases = $queryBuilder->getRootAliases();
-        if (count($rootAliases) !== self::REQUIRED_ALIASES_COUNT) {
+        if (count($rootAliases) !== static::REQUIRED_ALIASES_COUNT) {
             throw new \Shopsys\FrameworkBundle\Component\Doctrine\Exception\InvalidCountOfAliasesException($rootAliases);
         }
         $firstAlias = reset($rootAliases);

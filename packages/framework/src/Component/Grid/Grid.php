@@ -10,8 +10,10 @@ use Twig_Environment;
 
 class Grid
 {
-    const GET_PARAMETER = 'g';
+    public const GET_PARAMETER = 'g';
+    /** @access protected */
     const DEFAULT_VIEW_THEME = '@ShopsysFramework/Admin/Grid/Grid.html.twig';
+    /** @access protected */
     const DEFAULT_LIMIT = 30;
 
     /**
@@ -182,10 +184,10 @@ class Grid
         $this->routeCsrfProtector = $routeCsrfProtector;
         $this->twig = $twig;
 
-        $this->limit = self::DEFAULT_LIMIT;
+        $this->limit = static::DEFAULT_LIMIT;
         $this->page = 1;
 
-        $this->viewTheme = self::DEFAULT_VIEW_THEME;
+        $this->viewTheme = static::DEFAULT_VIEW_THEME;
         $this->viewTemplateParameters = [];
 
         $this->selectedRowIds = [];

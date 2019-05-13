@@ -6,6 +6,7 @@ use Symfony\Component\HttpFoundation\Request;
 
 class ProductListOrderingModeForListFacade
 {
+    /** @access protected */
     const COOKIE_NAME = 'productListOrderingMode';
 
     /**
@@ -35,7 +36,7 @@ class ProductListOrderingModeForListFacade
                 ProductListOrderingConfig::ORDER_BY_PRICE_DESC => t('from most expensive'),
             ],
             ProductListOrderingConfig::ORDER_BY_PRIORITY,
-            self::COOKIE_NAME
+            static::COOKIE_NAME
         );
     }
 

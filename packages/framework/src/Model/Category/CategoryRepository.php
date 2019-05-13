@@ -17,7 +17,7 @@ use Shopsys\FrameworkBundle\Model\Product\ProductRepository;
 
 class CategoryRepository extends NestedTreeRepository
 {
-    const MOVE_DOWN_TO_BOTTOM = true;
+    public const MOVE_DOWN_TO_BOTTOM = true;
 
     /**
      * @var \Doctrine\ORM\EntityManagerInterface

@@ -13,7 +13,8 @@ use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
 
 class RouteCsrfProtector implements EventSubscriberInterface
 {
-    const CSRF_TOKEN_REQUEST_PARAMETER = 'routeCsrfToken';
+    public const CSRF_TOKEN_REQUEST_PARAMETER = 'routeCsrfToken';
+    /** @access protected */
     const CSRF_TOKEN_ID_PREFIX = 'route_';
 
     /**
@@ -68,7 +69,7 @@ class RouteCsrfProtector implements EventSubscriberInterface
      */
     public function getCsrfTokenId($routeName)
     {
-        return self::CSRF_TOKEN_ID_PREFIX . $routeName;
+        return static::CSRF_TOKEN_ID_PREFIX . $routeName;
     }
 
     /**

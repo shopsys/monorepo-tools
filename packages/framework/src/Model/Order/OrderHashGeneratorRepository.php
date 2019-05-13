@@ -6,7 +6,9 @@ use Shopsys\FrameworkBundle\Component\String\HashGenerator;
 
 class OrderHashGeneratorRepository
 {
+    /** @access protected */
     const HASH_LENGTH = 50;
+    /** @access protected */
     const MAX_GENERATE_TRIES = 100;
 
     /**
@@ -38,10 +40,10 @@ class OrderHashGeneratorRepository
     {
         $triesCount = 0;
         do {
-            $hash = $this->hashGenerator->generateHash(self::HASH_LENGTH);
+            $hash = $this->hashGenerator->generateHash(static::HASH_LENGTH);
             $order = $this->orderRepository->findByUrlHashIncludingDeletedOrders($hash);
             $triesCount++;
-            if ($triesCount > self::MAX_GENERATE_TRIES) {
+            if ($triesCount > static::MAX_GENERATE_TRIES) {
                 throw new \Shopsys\FrameworkBundle\Model\Order\Exception\OrderHashGenerateException('Trying generate hash reached the limit.');
             }
         } while ($order !== null);

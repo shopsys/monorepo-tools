@@ -9,7 +9,7 @@ use Symfony\Component\Form\Extension\Core\Type\EmailType;
 
 class OrderEmailFilter implements AdvancedSearchFilterInterface
 {
-    const NAME = 'customerEmail';
+    public const NAME = 'customerEmail';
 
     /**
      * {@inheritdoc}

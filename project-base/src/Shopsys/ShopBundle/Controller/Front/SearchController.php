@@ -3,13 +3,13 @@
 namespace Shopsys\ShopBundle\Controller\Front;
 
 use Shopsys\FrameworkBundle\Model\Category\CategoryFacade;
-use Shopsys\FrameworkBundle\Model\Product\ProductOnCurrentDomainFacade;
+use Shopsys\FrameworkBundle\Model\Product\ProductOnCurrentDomainFacadeInterface;
 use Symfony\Component\HttpFoundation\Request;
 
 class SearchController extends FrontBaseController
 {
-    const AUTOCOMPLETE_CATEGORY_LIMIT = 3;
-    const AUTOCOMPLETE_PRODUCT_LIMIT = 5;
+    protected const AUTOCOMPLETE_CATEGORY_LIMIT = 3;
+    protected const AUTOCOMPLETE_PRODUCT_LIMIT = 5;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Category\CategoryFacade
@@ -17,17 +17,17 @@ class SearchController extends FrontBaseController
     private $categoryFacade;
 
     /**
-     * @var \Shopsys\FrameworkBundle\Model\Product\ProductOnCurrentDomainFacade
+     * @var \Shopsys\FrameworkBundle\Model\Product\ProductOnCurrentDomainFacadeInterface
      */
     private $productOnCurrentDomainFacade;
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\Category\CategoryFacade $categoryFacade
-     * @param \Shopsys\FrameworkBundle\Model\Product\ProductOnCurrentDomainFacade $productOnCurrentDomainFacade
+     * @param \Shopsys\FrameworkBundle\Model\Product\ProductOnCurrentDomainFacadeInterface $productOnCurrentDomainFacade
      */
     public function __construct(
         CategoryFacade $categoryFacade,
-        ProductOnCurrentDomainFacade $productOnCurrentDomainFacade
+        ProductOnCurrentDomainFacadeInterface $productOnCurrentDomainFacade
     ) {
         $this->categoryFacade = $categoryFacade;
         $this->productOnCurrentDomainFacade = $productOnCurrentDomainFacade;

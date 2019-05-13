@@ -22,6 +22,7 @@
       "Shopsys\\FrameworkBundle\\": "packages/framework/src/"
     },
     "classmap": [
+      "packages/framework/src/Component/Filesystem/Flysystem/VolumeDriver.php",
       "project-base/app/AppCache.php",
       "project-base/app/AppKernel.php",
       "project-base/app/Bootstrap.php",
@@ -84,6 +85,7 @@
     "doctrine/doctrine-migrations-bundle": "^1.3.0",
     "doctrine/migrations": "^1.6.0",
     "egeloen/ckeditor-bundle": "^4.0.6",
+    "egeloen/ordered-form": "^3.0",
     "elasticsearch/elasticsearch": "^6.0.1",
     "friendsofphp/php-cs-fixer": "^2.14.0",
     "fp/jsformvalidator-bundle": "^1.5.1",
@@ -91,7 +93,7 @@
     "gedmo/doctrine-extensions": "^2.4.34",
     "google/cloud-storage": "^1.10",
     "guzzlehttp/guzzle": "^6.3",
-    "helios-ag/fm-elfinder-bundle": "^8.0",
+    "helios-ag/fm-elfinder-bundle": "^9.2",
     "heureka/overeno-zakazniky": "^2.0.6",
     "incenteev/composer-parameter-handler": "^2.1.3",
     "intervention/image": "^2.3.14",

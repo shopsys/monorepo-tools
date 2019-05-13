@@ -4,13 +4,16 @@ namespace Shopsys\FrameworkBundle\Component\Environment;
 
 class EnvironmentFileSetting
 {
+    /** @access protected */
     const FILE_NAMES_BY_ENVIRONMENT = [
         EnvironmentType::DEVELOPMENT => 'DEVELOPMENT',
         EnvironmentType::PRODUCTION => 'PRODUCTION',
         EnvironmentType::TEST => 'TEST',
     ];
 
+    /** @access protected */
     const ENVIRONMENTS_CONSOLE = [EnvironmentType::DEVELOPMENT, EnvironmentType::PRODUCTION];
+    /** @access protected */
     const ENVIRONMENTS_DEFAULT = [EnvironmentType::TEST, EnvironmentType::DEVELOPMENT, EnvironmentType::PRODUCTION];
 
     /**
@@ -32,7 +35,7 @@ class EnvironmentFileSetting
      */
     public function getEnvironment(bool $console): string
     {
-        $environments = $console ? self::ENVIRONMENTS_CONSOLE : self::ENVIRONMENTS_DEFAULT;
+        $environments = $console ? static::ENVIRONMENTS_CONSOLE : static::ENVIRONMENTS_DEFAULT;
         foreach ($environments as $environment) {
             if (is_file($this->getEnvironmentFilePath($environment))) {
                 return $environment;
@@ -81,6 +84,6 @@ class EnvironmentFileSetting
      */
     public function getEnvironmentFilePath(string $environment): string
     {
-        return $this->environmentFileDirectory . '/' . self::FILE_NAMES_BY_ENVIRONMENT[$environment];
+        return $this->environmentFileDirectory . '/' . static::FILE_NAMES_BY_ENVIRONMENT[$environment];
     }
 }

@@ -15,7 +15,7 @@ class FragmentHandlerTest extends TestCase
     public function testRenderNotIgnoreErrorsWithoutDebug()
     {
         $rendererMock = $this->createMock(FragmentRendererInterface::class);
-        $rendererMock->expects($this->once())->method('getName')->will($this->returnValue('rendererName'));
+        $rendererMock->expects($this->once())->method('getName')->willReturn('rendererName');
         $rendererMock->expects($this->atLeastOnce())
             ->method('render')
             ->with(
@@ -28,10 +28,10 @@ class FragmentHandlerTest extends TestCase
             ->willThrowException(new \Exception());
 
         $requestStackMock = $this->createMock(RequestStack::class);
-        $requestStackMock->expects($this->any())->method('getCurrentRequest')->will($this->returnValue(Request::create('/')));
+        $requestStackMock->expects($this->any())->method('getCurrentRequest')->willReturn(Request::create('/'));
 
         $containerMock = $this->createMock(ContainerInterface::class);
-        $containerMock->expects($this->once())->method('get')->will($this->returnValue($rendererMock));
+        $containerMock->expects($this->once())->method('get')->willReturn($rendererMock);
 
         $debug = false;
         $fragmentHandler = new FragmentHandler($containerMock, $requestStackMock, $debug);
@@ -46,14 +46,14 @@ class FragmentHandlerTest extends TestCase
         $response = new Response('', 301);
 
         $rendererMock = $this->createMock(FragmentRendererInterface::class);
-        $rendererMock->expects($this->once())->method('getName')->will($this->returnValue('rendererName'));
+        $rendererMock->expects($this->once())->method('getName')->willReturn('rendererName');
         $rendererMock->expects($this->any())->method('render')->willReturn($response);
 
         $requestStackMock = $this->createMock(RequestStack::class);
-        $requestStackMock->expects($this->any())->method('getCurrentRequest')->will($this->returnValue(Request::create('/')));
+        $requestStackMock->expects($this->any())->method('getCurrentRequest')->willReturn(Request::create('/'));
 
         $containerMock = $this->createMock(ContainerInterface::class);
-        $containerMock->expects($this->once())->method('get')->will($this->returnValue($rendererMock));
+        $containerMock->expects($this->once())->method('get')->willReturn($rendererMock);
 
         $fragmentHandler = new FragmentHandler($containerMock, $requestStackMock, false);
         $fragmentHandler->addRendererService('rendererName', 'rendererName');
@@ -66,14 +66,14 @@ class FragmentHandlerTest extends TestCase
         $response = new Response('', 500);
 
         $rendererMock = $this->createMock(FragmentRendererInterface::class);
-        $rendererMock->expects($this->once())->method('getName')->will($this->returnValue('rendererName'));
+        $rendererMock->expects($this->once())->method('getName')->willReturn('rendererName');
         $rendererMock->expects($this->any())->method('render')->willReturn($response);
 
         $requestStackMock = $this->createMock(RequestStack::class);
-        $requestStackMock->expects($this->any())->method('getCurrentRequest')->will($this->returnValue(Request::create('/')));
+        $requestStackMock->expects($this->any())->method('getCurrentRequest')->willReturn(Request::create('/'));
 
         $containerMock = $this->createMock(ContainerInterface::class);
-        $containerMock->expects($this->once())->method('get')->will($this->returnValue($rendererMock));
+        $containerMock->expects($this->once())->method('get')->willReturn($rendererMock);
 
         $fragmentHandler = new FragmentHandler($containerMock, $requestStackMock, false);
         $fragmentHandler->addRendererService('rendererName', 'rendererName');

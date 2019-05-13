@@ -1,7 +1,7 @@
 # Shopsys Framework Development Workflow
 
 ## Requirements
-* Shopsys Framework [installed](/docs/installation/installation-using-docker.md)
+* Shopsys Framework [installed](/docs/installation/installation-guide.md)
 * [GIT repository](https://git-scm.com/book/en/v2/Git-Basics-Getting-a-Git-Repository) created from Shopsys Framework [project-base](https://github.com/shopsys/project-base/)
 
 ## How to develop a new feature

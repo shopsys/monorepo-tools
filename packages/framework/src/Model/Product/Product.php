@@ -24,12 +24,12 @@ use Shopsys\FrameworkBundle\Model\Product\Pricing\ProductPriceRecalculationSched
  */
 class Product extends AbstractTranslatableEntity
 {
-    const OUT_OF_STOCK_ACTION_SET_ALTERNATE_AVAILABILITY = 'setAlternateAvailability';
-    const OUT_OF_STOCK_ACTION_EXCLUDE_FROM_SALE = 'excludeFromSale';
-    const OUT_OF_STOCK_ACTION_HIDE = 'hide';
-    const VARIANT_TYPE_NONE = 'none';
-    const VARIANT_TYPE_MAIN = 'main';
-    const VARIANT_TYPE_VARIANT = 'variant';
+    public const OUT_OF_STOCK_ACTION_SET_ALTERNATE_AVAILABILITY = 'setAlternateAvailability';
+    public const OUT_OF_STOCK_ACTION_EXCLUDE_FROM_SALE = 'excludeFromSale';
+    public const OUT_OF_STOCK_ACTION_HIDE = 'hide';
+    public const VARIANT_TYPE_NONE = 'none';
+    public const VARIANT_TYPE_MAIN = 'main';
+    public const VARIANT_TYPE_VARIANT = 'variant';
 
     /**
      * @var int

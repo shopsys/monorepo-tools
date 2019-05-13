@@ -9,18 +9,18 @@ use Shopsys\FrameworkBundle\Model\Product\Pricing\ProductPriceRecalculationSched
 
 class PricingSetting
 {
-    const INPUT_PRICE_TYPE = 'inputPriceType';
-    const ROUNDING_TYPE = 'roundingType';
-    const DEFAULT_CURRENCY = 'defaultCurrencyId';
-    const DEFAULT_DOMAIN_CURRENCY = 'defaultDomainCurrencyId';
-    const FREE_TRANSPORT_AND_PAYMENT_PRICE_LIMIT = 'freeTransportAndPaymentPriceLimit';
+    public const INPUT_PRICE_TYPE = 'inputPriceType';
+    public const ROUNDING_TYPE = 'roundingType';
+    public const DEFAULT_CURRENCY = 'defaultCurrencyId';
+    public const DEFAULT_DOMAIN_CURRENCY = 'defaultDomainCurrencyId';
+    public const FREE_TRANSPORT_AND_PAYMENT_PRICE_LIMIT = 'freeTransportAndPaymentPriceLimit';
 
-    const INPUT_PRICE_TYPE_WITH_VAT = 1;
-    const INPUT_PRICE_TYPE_WITHOUT_VAT = 2;
+    public const INPUT_PRICE_TYPE_WITH_VAT = 1;
+    public const INPUT_PRICE_TYPE_WITHOUT_VAT = 2;
 
-    const ROUNDING_TYPE_HUNDREDTHS = 1;
-    const ROUNDING_TYPE_FIFTIES = 2;
-    const ROUNDING_TYPE_INTEGER = 3;
+    public const ROUNDING_TYPE_HUNDREDTHS = 1;
+    public const ROUNDING_TYPE_FIFTIES = 2;
+    public const ROUNDING_TYPE_INTEGER = 3;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\Setting\Setting

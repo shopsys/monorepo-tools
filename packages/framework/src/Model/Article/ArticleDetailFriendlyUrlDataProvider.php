@@ -46,7 +46,7 @@ class ArticleDetailFriendlyUrlDataProvider implements FriendlyUrlDataProviderInt
             ->distinct()
             ->from(Article::class, 'a')
             ->leftJoin(FriendlyUrl::class, 'f', Join::WITH, 'a.id = f.entityId AND f.routeName = :routeName AND f.domainId = a.domainId')
-            ->setParameter('routeName', self::ROUTE_NAME)
+            ->setParameter('routeName', static::ROUTE_NAME)
             ->where('f.entityId IS NULL AND a.domainId = :domainId')
             ->setParameter('domainId', $domainConfig->getId());
         $scalarData = $queryBuilder->getQuery()->getScalarResult();
@@ -68,6 +68,6 @@ class ArticleDetailFriendlyUrlDataProvider implements FriendlyUrlDataProviderInt
      */
     public function getRouteName(): string
     {
-        return self::ROUTE_NAME;
+        return static::ROUTE_NAME;
     }
 }

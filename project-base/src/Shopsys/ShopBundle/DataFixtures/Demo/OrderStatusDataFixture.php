@@ -8,10 +8,10 @@ use Shopsys\FrameworkBundle\Model\Order\Status\OrderStatusFacade;
 
 class OrderStatusDataFixture extends AbstractReferenceFixture
 {
-    const ORDER_STATUS_NEW = 'order_status_new';
-    const ORDER_STATUS_IN_PROGRESS = 'order_status_in_progress';
-    const ORDER_STATUS_DONE = 'order_status_done';
-    const ORDER_STATUS_CANCELED = 'order_status_canceled';
+    public const ORDER_STATUS_NEW = 'order_status_new';
+    public const ORDER_STATUS_IN_PROGRESS = 'order_status_in_progress';
+    public const ORDER_STATUS_DONE = 'order_status_done';
+    public const ORDER_STATUS_CANCELED = 'order_status_canceled';
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Order\Status\OrderStatusFacade

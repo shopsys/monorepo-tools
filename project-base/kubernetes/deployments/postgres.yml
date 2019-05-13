@@ -39,3 +39,7 @@ spec:
                         value: shopsys
                     -   name: PGDATA
                         value: /var/lib/postgresql/data/pgdata
+                args:
+                    - postgres
+                    - -c
+                    - config_file=/var/lib/postgresql/data/postgresql.conf

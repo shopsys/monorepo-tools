@@ -48,7 +48,7 @@ Install [`shopsys/project-base`](https://github.com/shopsys/project-base) using 
 ```
 composer create-project shopsys/project-base --no-install --keep-vcs
 ```
-For more detailed instructions, follow [Installation Using Docker](../installation/installation-using-docker.md).
+For more detailed instructions, follow [Installation Using Docker](/docs/installation/installation-guide.md#installation-using-docker).
 #### Why not clone or fork?
 `composer create-project` ensures that new project will be created from the latest release of `shopsys/project-base`.
 `git clone` creates a new project from current repository master branch.

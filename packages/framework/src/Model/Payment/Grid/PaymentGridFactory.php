@@ -13,6 +13,7 @@ use Shopsys\FrameworkBundle\Model\Payment\PaymentRepository;
 
 class PaymentGridFactory implements GridFactoryInterface
 {
+    /** @access protected */
     const CURRENCY_ID_FOR_LIST = 1;
 
     /**
@@ -96,6 +97,6 @@ class PaymentGridFactory implements GridFactoryInterface
     {
         $transportBasePricesIndexedByCurrencyId = $this->paymentFacade->getIndependentBasePricesIndexedByCurrencyId($payment);
 
-        return $transportBasePricesIndexedByCurrencyId[self::CURRENCY_ID_FOR_LIST]->getPriceWithVat();
+        return $transportBasePricesIndexedByCurrencyId[static::CURRENCY_ID_FOR_LIST]->getPriceWithVat();
     }
 }

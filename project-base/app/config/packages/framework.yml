@@ -1,4 +1,6 @@
 framework:
+    annotations:
+        cache: shopsys.framework.cache_driver.annotations_cache
     secret: "%secret%"
     router:
         resource: "%kernel.root_dir%/config/routing.yml"

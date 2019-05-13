@@ -79,7 +79,7 @@ class PersistentReferenceFacadeTest extends TestCase
             ->setMethods(['__construct', 'find'])
             ->disableOriginalConstructor()
             ->getMock();
-        $emMock->expects($this->once())->method('find')->will($this->returnValue($expectedObject));
+        $emMock->expects($this->once())->method('find')->willReturn($expectedObject);
 
         $persistentReferenceRepositoryMock = $this->getMockBuilder(PersistentReferenceRepository::class)
             ->setMethods(['__construct', 'getByReferenceName'])
@@ -88,7 +88,7 @@ class PersistentReferenceFacadeTest extends TestCase
         $persistentReferenceRepositoryMock
             ->expects($this->once())
             ->method('getByReferenceName')
-            ->will($this->returnValue($persistentReference));
+            ->willReturn($persistentReference);
 
         $persistentReferenceFacade = new PersistentReferenceFacade(
             $emMock,
@@ -107,7 +107,7 @@ class PersistentReferenceFacadeTest extends TestCase
             ->setMethods(['__construct', 'find'])
             ->disableOriginalConstructor()
             ->getMock();
-        $emMock->expects($this->once())->method('find')->will($this->returnValue(null));
+        $emMock->expects($this->once())->method('find')->willReturn(null);
 
         $persistentReferenceRepositoryMock = $this->getMockBuilder(PersistentReferenceRepository::class)
             ->setMethods(['__construct', 'getByReferenceName'])
@@ -116,7 +116,7 @@ class PersistentReferenceFacadeTest extends TestCase
         $persistentReferenceRepositoryMock
             ->expects($this->once())
             ->method('getByReferenceName')
-            ->will($this->returnValue($persistentReference));
+            ->willReturn($persistentReference);
 
         $persistentReferenceFacade = new PersistentReferenceFacade(
             $emMock,

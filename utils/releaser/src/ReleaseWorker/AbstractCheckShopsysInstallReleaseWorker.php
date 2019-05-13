@@ -14,7 +14,7 @@ abstract class AbstractCheckShopsysInstallReleaseWorker extends AbstractShopsysR
      */
     public function getDescription(Version $version): string
     {
-        return '[Manually] Install Shopsys Framework (project-base) using installation guides (using Docker on Linux and Mac)';
+        return '[Manually] Install Shopsys Framework (project-base) using installation guides (using Docker on Linux and Mac and natively)';
     }
 
     /**

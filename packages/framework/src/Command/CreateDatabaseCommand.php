@@ -186,7 +186,7 @@ class CreateDatabaseCommand extends Command
             'SELECT 1
             FROM pg_collation
             WHERE collnamespace = (SELECT oid FROM pg_namespace WHERE nspname = \'pg_catalog\')
-            AND collencoding = pg_char_to_encoding(\'UTF8\')
+            AND (collencoding = pg_char_to_encoding(\'UTF8\') OR collencoding = -1)
             AND collname = ?',
             [$collation]
         );

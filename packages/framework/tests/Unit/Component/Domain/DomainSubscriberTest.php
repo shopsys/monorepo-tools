@@ -17,7 +17,7 @@ class DomainSubscriberTest extends TestCase
             ->setMethods(['__construct', 'isMasterRequest'])
             ->disableOriginalConstructor()
             ->getMock();
-        $eventMock->expects($this->once())->method('isMasterRequest')->will($this->returnValue(false));
+        $eventMock->expects($this->once())->method('isMasterRequest')->willReturn(false);
         $settingMock = $this->createMock(Setting::class);
 
         $domain = new Domain([], $settingMock);
@@ -32,7 +32,7 @@ class DomainSubscriberTest extends TestCase
             ->setMethods(['__construct', 'isMasterRequest'])
             ->disableOriginalConstructor()
             ->getMock();
-        $eventMock->expects($this->once())->method('isMasterRequest')->will($this->returnValue(true));
+        $eventMock->expects($this->once())->method('isMasterRequest')->willReturn(true);
 
         $domainMock = $this->getMockBuilder(Domain::class)
             ->setMethods(['__construct', 'getId'])
@@ -51,8 +51,8 @@ class DomainSubscriberTest extends TestCase
             ->setMethods(['__construct', 'isMasterRequest', 'getRequest'])
             ->disableOriginalConstructor()
             ->getMock();
-        $eventMock->expects($this->once())->method('isMasterRequest')->will($this->returnValue(true));
-        $eventMock->expects($this->once())->method('getRequest')->will($this->returnValue($getRequestResult));
+        $eventMock->expects($this->once())->method('isMasterRequest')->willReturn(true);
+        $eventMock->expects($this->once())->method('getRequest')->willReturn($getRequestResult);
 
         $exception = new \Shopsys\FrameworkBundle\Component\Domain\Exception\NoDomainSelectedException();
         $domainMock = $this->getMockBuilder(Domain::class)

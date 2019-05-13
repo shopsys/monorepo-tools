@@ -17,6 +17,7 @@ use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 class AdministratorController extends AdminBaseController
 {
+    /** @access protected */
     const MAX_ADMINISTRATOR_ACTIVITIES_COUNT = 10;
 
     /**
@@ -151,7 +152,7 @@ class AdministratorController extends AdminBaseController
 
         $lastAdminActivities = $this->administratorActivityFacade->getLastAdministratorActivities(
             $administrator,
-            self::MAX_ADMINISTRATOR_ACTIVITIES_COUNT
+            static::MAX_ADMINISTRATOR_ACTIVITIES_COUNT
         );
 
         return $this->render('@ShopsysFramework/Admin/Content/Administrator/edit.html.twig', [

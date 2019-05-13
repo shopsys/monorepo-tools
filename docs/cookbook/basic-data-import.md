@@ -81,10 +81,9 @@ class ImportProductsCronModule implements SimpleCronModuleInterface
 *Note: Cron modules are not suitable for data transfers initialized by an external source,
 you should implement Web Services for that purpose.*
 
-#### 2.2 - Add cron configuration file to [`config`](../../project-base/src/Shopsys/ShopBundle/Resources/config)
-Add new file `cron.yml`
-```yaml
-# src/Shopsys/ShopBundle/Resources/config/cron.yml
+#### 2.2 - Add cron configuration to [`cron.yml`](../../project-base/src/Shopsys/ShopBundle/Resources/config/services/cron.yml)
+```diff
+# src/Shopsys/ShopBundle/Resources/config/services/cron.yml
 
 services:
     _defaults:
@@ -92,17 +91,10 @@ services:
         autoconfigure: true
         public: false
 
-    Shopsys\ShopBundle\Model\Product\ImportProductsCronModule:
-        class: Shopsys\ShopBundle\Model\Product\ImportProductsCronModule
-        tags:
-            - { name: shopsys.cron, hours: '*/3', minutes: '0' }
-```
-
-Then import this file in [`services.yml`](../../project-base/src/Shopsys/ShopBundle/Resources/config/services.yml)
-```yaml
-imports:
-    - { resource: forms.yml }
-    - { resource: cron.yml }
++   Shopsys\ShopBundle\Model\Product\ImportProductsCronModule:
++       class: Shopsys\ShopBundle\Model\Product\ImportProductsCronModule
++       tags:
++           - { name: shopsys.cron, hours: '*', minutes: '*' }
 ```
 
 *Note: You can schedule cron modules to run at any time you want using [cron expression](https://en.wikipedia.org/wiki/Cron#CRON_expression). This example module will be run every 3 hours.*

@@ -8,7 +8,7 @@ use Shopsys\FrameworkBundle\Model\AdvancedSearch\AdvancedSearchFilterInterface;
 
 class OrderDomainFilter implements AdvancedSearchFilterInterface
 {
-    const NAME = 'orderDomain';
+    public const NAME = 'orderDomain';
 
     /**
      * {@inheritdoc}

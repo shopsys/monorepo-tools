@@ -9,8 +9,8 @@ use Tests\ShopBundle\Test\TransactionFunctionalTestCase;
 
 class PaymentDomainTest extends TransactionFunctionalTestCase
 {
-    const FIRST_DOMAIN_ID = 1;
-    const SECOND_DOMAIN_ID = 2;
+    protected const FIRST_DOMAIN_ID = 1;
+    protected const SECOND_DOMAIN_ID = 2;
 
     /**
      * @var \Shopsys\ShopBundle\Model\Payment\PaymentDataFactory

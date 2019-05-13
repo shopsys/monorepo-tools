@@ -8,6 +8,7 @@ use Twig_SimpleFunction;
 
 class HoneyPotExtension extends Twig_Extension
 {
+    /** @access protected */
     const PASSWORD_FIELD_NAME = 'password';
 
     /**
@@ -65,7 +66,7 @@ class HoneyPotExtension extends Twig_Extension
     private function containsNotRenderedPassword(FormView $formView)
     {
         foreach ($formView->children as $childForm) {
-            if (strpos($childForm->vars['name'], self::PASSWORD_FIELD_NAME) !== false && !$childForm->isRendered()) {
+            if (strpos($childForm->vars['name'], static::PASSWORD_FIELD_NAME) !== false && !$childForm->isRendered()) {
                 return true;
             } elseif ($this->containsNotRenderedPassword($childForm)) {
                 return true;

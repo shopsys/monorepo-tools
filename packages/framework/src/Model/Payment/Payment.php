@@ -111,7 +111,7 @@ class Payment extends AbstractTranslatableEntity implements OrderableEntityInter
         $this->createDomains($paymentData);
         $this->prices = new ArrayCollection();
         $this->czkRounding = $paymentData->czkRounding;
-        $this->position = self::GEDMO_SORTABLE_LAST_POSITION;
+        $this->position = static::GEDMO_SORTABLE_LAST_POSITION;
     }
 
     /**

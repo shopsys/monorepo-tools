@@ -1,4 +1,6 @@
 # Shopsys Framework
+![travis-badge](https://travis-ci.org/shopsys/shopsys.svg?branch=master)
+
 Shopsys Framework is a **fully functional ecommerce platform for businesses transitioning into tech-companies with their own software development team**. 
 It contains the most common B2C and B2B features for online stores, and its infrastructure is prepared for high scalability.
 
@@ -27,7 +29,7 @@ Shopsys Framework is fully functional e-commerce platform with all basic functio
 * Registered customers
 * Basic orders management
 * Back-end administration
-* Front-end [full-text search](./docs/model/product-search-via-elasticsearch.md) and product filtering
+* Front-end [full-text search](./docs/model/front-end-product-searching.md) and [product filtering](./docs/model/front-end-product-filtering.md)
 * 3-step ordering process
 * Basic CMS
 * Support for several currencies, [languages, and domains](./docs/introduction/domain-multidomain-multilanguage.md)
@@ -62,17 +64,9 @@ See more information about the monorepo approach in [the Monorepo article](./doc
 For the purposes of building a new project use our [shopsys/project-base](https://github.com/shopsys/project-base),
 which is fully ready as the base for building your Shopsys Framework project.
 
-We recommend to choose **installation via Docker** because it is the easiest and fastest way to start using Shopsys Framework.
-Docker contains complete development environment necessary for running your application.
-In the future we want to add new technologies to Shopsys Framework.
-**Updating your development environment to use these technologies will be very easy with Docker**
-because such an update will be done just by running `docker-compose build`.
-And that is all!
-
 For more detailed instructions, follow one of the installation guides:
 
-* [Installation via Docker (recommended)](docs/installation/installation-using-docker.md)
-* [Native installation](docs/installation/native-installation.md)
+* [Installation Guide](docs/installation/installation-guide.md)
 * [Deployment to Google Cloud](docs/kubernetes/how-to-deploy-ssfw-to-google-cloud-platform.md)
 * [Installation on production server](docs/installation/installation-using-docker-on-production-server.md)
 

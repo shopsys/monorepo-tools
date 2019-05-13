@@ -6,7 +6,7 @@ use Tests\ShopBundle\Acceptance\acceptance\PageObject\AbstractPage;
 
 class OrderPage extends AbstractPage
 {
-    const FIRST_NAME_FIELD_NAME = 'order_personal_info_form[firstName]';
+    protected const FIRST_NAME_FIELD_NAME = 'order_personal_info_form[firstName]';
 
     /**
      * @param string $transportTitle

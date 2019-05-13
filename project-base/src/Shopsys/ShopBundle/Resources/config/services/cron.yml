@@ -1,0 +1,10 @@
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        public: false
+
+#   Example:
+#   Shopsys\FrameworkBundle\Model\Product\Search\Export\ProductSearchExportCronModule:
+#       tags:
+#           - { name: shopsys.cron, hours: '*', minutes: '*' }

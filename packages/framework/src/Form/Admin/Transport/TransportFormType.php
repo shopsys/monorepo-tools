@@ -104,6 +104,21 @@ class TransportFormType extends AbstractType
                 'required' => false,
                 'label' => t('Hidden'),
             ])
+            ->add('payments', ChoiceType::class, [
+                'required' => false,
+                'choices' => $this->paymentFacade->getAll(),
+                'choice_label' => 'name',
+                'choice_value' => 'id',
+                'multiple' => true,
+                'expanded' => true,
+                'empty_message' => t('You have to create some payment first.'),
+                'label' => t('Available payment methods'),
+            ]);
+
+        $builderPricesGroup = $builder->create('prices', GroupType::class, [
+            'label' => t('Prices'),
+        ]);
+        $builderPricesGroup
             ->add('vat', ChoiceType::class, [
                 'required' => true,
                 'choices' => $this->vatFacade->getAll(),
@@ -114,15 +129,9 @@ class TransportFormType extends AbstractType
                 ],
                 'label' => t('VAT'),
             ])
-            ->add('payments', ChoiceType::class, [
-                'required' => false,
-                'choices' => $this->paymentFacade->getAll(),
-                'choice_label' => 'name',
-                'choice_value' => 'id',
-                'multiple' => true,
-                'expanded' => true,
-                'empty_message' => t('You have to create some payment first.'),
-                'label' => t('Available payment methods'),
+            ->add('pricesByCurrencyId', PriceTableType::class, [
+                'currencies' => $this->currencyFacade->getAllIndexedById(),
+                'base_prices' => $transport !== null ? $this->transportFacade->getIndependentBasePricesIndexedByCurrencyId($transport) : [],
             ]);
 
         $builderAdditionalInformationGroup = $builder->create('additionalInformation', GroupType::class, [
@@ -162,20 +171,11 @@ class TransportFormType extends AbstractType
                 'info_text' => t('You can upload following formats: PNG, JPG, GIF'),
             ]);
 
-        $builderPricesGroup = $builder->create('prices', GroupType::class, [
-            'label' => t('Prices'),
-        ]);
-        $builderPricesGroup
-            ->add('pricesByCurrencyId', PriceTableType::class, [
-                'currencies' => $this->currencyFacade->getAllIndexedById(),
-                'base_prices' => $transport !== null ? $this->transportFacade->getIndependentBasePricesIndexedByCurrencyId($transport) : [],
-            ]);
-
         $builder
             ->add($builderBasicInformationGroup)
+            ->add($builderPricesGroup)
             ->add($builderAdditionalInformationGroup)
             ->add($builderImageGroup)
-            ->add($builderPricesGroup)
             ->add('save', SubmitType::class);
     }
 

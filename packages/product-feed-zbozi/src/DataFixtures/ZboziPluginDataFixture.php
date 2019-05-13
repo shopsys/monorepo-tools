@@ -9,12 +9,19 @@ use Shopsys\ProductFeed\ZboziBundle\Model\Product\ZboziProductDomainFacade;
 
 class ZboziPluginDataFixture implements PluginDataFixtureInterface
 {
+    /** @access protected */
     const DOMAIN_ID_FIRST = 1;
+    /** @access protected */
     const DOMAIN_ID_SECOND = 2;
+    /** @access protected */
     const PRODUCT_ID_FIRST = 1;
+    /** @access protected */
     const PRODUCT_ID_SECOND = 2;
+    /** @access protected */
     const PRODUCT_ID_THIRD = 3;
+    /** @access protected */
     const PRODUCT_ID_FOURTH = 4;
+    /** @access protected */
     const PRODUCT_ID_FIFTH = 5;
 
     /**
@@ -42,83 +49,83 @@ class ZboziPluginDataFixture implements PluginDataFixtureInterface
     public function load()
     {
         $firstZboziProductDomainData = $this->zboziProductDomainDataFactory->create();
-        $firstZboziProductDomainData->domainId = self::DOMAIN_ID_FIRST;
+        $firstZboziProductDomainData->domainId = static::DOMAIN_ID_FIRST;
         $firstZboziProductDomainData->cpc = Money::create(15);
         $firstZboziProductDomainData->cpcSearch = Money::create(8);
         $firstZboziProductDomainData->show = true;
 
-        $this->zboziProductDomainFacade->saveZboziProductDomain(self::PRODUCT_ID_FIRST, $firstZboziProductDomainData);
+        $this->zboziProductDomainFacade->saveZboziProductDomain(static::PRODUCT_ID_FIRST, $firstZboziProductDomainData);
 
         $secondZboziProductDomainData = $this->zboziProductDomainDataFactory->create();
-        $secondZboziProductDomainData->domainId = self::DOMAIN_ID_SECOND;
+        $secondZboziProductDomainData->domainId = static::DOMAIN_ID_SECOND;
         $secondZboziProductDomainData->cpc = Money::create(12);
         $secondZboziProductDomainData->cpcSearch = Money::create(15);
         $secondZboziProductDomainData->show = true;
 
-        $this->zboziProductDomainFacade->saveZboziProductDomain(self::PRODUCT_ID_FIRST, $secondZboziProductDomainData);
+        $this->zboziProductDomainFacade->saveZboziProductDomain(static::PRODUCT_ID_FIRST, $secondZboziProductDomainData);
 
         $thirdZboziProductDomainData = $this->zboziProductDomainDataFactory->create();
-        $thirdZboziProductDomainData->domainId = self::DOMAIN_ID_FIRST;
+        $thirdZboziProductDomainData->domainId = static::DOMAIN_ID_FIRST;
         $thirdZboziProductDomainData->cpc = Money::create(5);
         $thirdZboziProductDomainData->cpcSearch = Money::create(3);
         $thirdZboziProductDomainData->show = false;
 
-        $this->zboziProductDomainFacade->saveZboziProductDomain(self::PRODUCT_ID_SECOND, $thirdZboziProductDomainData);
+        $this->zboziProductDomainFacade->saveZboziProductDomain(static::PRODUCT_ID_SECOND, $thirdZboziProductDomainData);
 
         $fourthZboziProductDomainData = $this->zboziProductDomainDataFactory->create();
-        $fourthZboziProductDomainData->domainId = self::DOMAIN_ID_SECOND;
+        $fourthZboziProductDomainData->domainId = static::DOMAIN_ID_SECOND;
         $fourthZboziProductDomainData->cpc = Money::create(20);
         $fourthZboziProductDomainData->cpcSearch = Money::create(5);
         $fourthZboziProductDomainData->show = true;
 
-        $this->zboziProductDomainFacade->saveZboziProductDomain(self::PRODUCT_ID_SECOND, $fourthZboziProductDomainData);
+        $this->zboziProductDomainFacade->saveZboziProductDomain(static::PRODUCT_ID_SECOND, $fourthZboziProductDomainData);
 
         $fifthZboziProductDomainData = $this->zboziProductDomainDataFactory->create();
-        $fifthZboziProductDomainData->domainId = self::DOMAIN_ID_FIRST;
+        $fifthZboziProductDomainData->domainId = static::DOMAIN_ID_FIRST;
         $fifthZboziProductDomainData->cpc = Money::create(10);
         $fifthZboziProductDomainData->cpcSearch = Money::create(5);
         $fifthZboziProductDomainData->show = false;
 
-        $this->zboziProductDomainFacade->saveZboziProductDomain(self::PRODUCT_ID_THIRD, $fifthZboziProductDomainData);
+        $this->zboziProductDomainFacade->saveZboziProductDomain(static::PRODUCT_ID_THIRD, $fifthZboziProductDomainData);
 
         $sixthZboziProductDomainData = $this->zboziProductDomainDataFactory->create();
-        $sixthZboziProductDomainData->domainId = self::DOMAIN_ID_SECOND;
+        $sixthZboziProductDomainData->domainId = static::DOMAIN_ID_SECOND;
         $sixthZboziProductDomainData->cpc = Money::create(15);
         $sixthZboziProductDomainData->cpcSearch = Money::create(7);
         $sixthZboziProductDomainData->show = false;
 
-        $this->zboziProductDomainFacade->saveZboziProductDomain(self::PRODUCT_ID_THIRD, $sixthZboziProductDomainData);
+        $this->zboziProductDomainFacade->saveZboziProductDomain(static::PRODUCT_ID_THIRD, $sixthZboziProductDomainData);
 
         $seventhZboziProductDomainData = $this->zboziProductDomainDataFactory->create();
-        $seventhZboziProductDomainData->domainId = self::DOMAIN_ID_FIRST;
+        $seventhZboziProductDomainData->domainId = static::DOMAIN_ID_FIRST;
         $seventhZboziProductDomainData->cpc = Money::create(9);
         $seventhZboziProductDomainData->cpcSearch = Money::create(8);
         $seventhZboziProductDomainData->show = true;
 
-        $this->zboziProductDomainFacade->saveZboziProductDomain(self::PRODUCT_ID_FOURTH, $seventhZboziProductDomainData);
+        $this->zboziProductDomainFacade->saveZboziProductDomain(static::PRODUCT_ID_FOURTH, $seventhZboziProductDomainData);
 
         $eighthZboziProductDomainData = $this->zboziProductDomainDataFactory->create();
-        $eighthZboziProductDomainData->domainId = self::DOMAIN_ID_SECOND;
+        $eighthZboziProductDomainData->domainId = static::DOMAIN_ID_SECOND;
         $eighthZboziProductDomainData->cpc = Money::create(4);
         $eighthZboziProductDomainData->cpcSearch = Money::create(3);
         $eighthZboziProductDomainData->show = true;
 
-        $this->zboziProductDomainFacade->saveZboziProductDomain(self::PRODUCT_ID_FOURTH, $eighthZboziProductDomainData);
+        $this->zboziProductDomainFacade->saveZboziProductDomain(static::PRODUCT_ID_FOURTH, $eighthZboziProductDomainData);
 
         $ninthZboziProductDomainData = $this->zboziProductDomainDataFactory->create();
-        $ninthZboziProductDomainData->domainId = self::DOMAIN_ID_FIRST;
+        $ninthZboziProductDomainData->domainId = static::DOMAIN_ID_FIRST;
         $ninthZboziProductDomainData->cpc = Money::create(4);
         $ninthZboziProductDomainData->cpcSearch = Money::create(2);
         $ninthZboziProductDomainData->show = true;
 
-        $this->zboziProductDomainFacade->saveZboziProductDomain(self::PRODUCT_ID_FIFTH, $ninthZboziProductDomainData);
+        $this->zboziProductDomainFacade->saveZboziProductDomain(static::PRODUCT_ID_FIFTH, $ninthZboziProductDomainData);
 
         $tenthZboziProductDomainData = $this->zboziProductDomainDataFactory->create();
-        $tenthZboziProductDomainData->domainId = self::DOMAIN_ID_SECOND;
+        $tenthZboziProductDomainData->domainId = static::DOMAIN_ID_SECOND;
         $tenthZboziProductDomainData->cpc = Money::create(5);
         $tenthZboziProductDomainData->cpcSearch = Money::create(6);
         $tenthZboziProductDomainData->show = false;
 
-        $this->zboziProductDomainFacade->saveZboziProductDomain(self::PRODUCT_ID_FIFTH, $tenthZboziProductDomainData);
+        $this->zboziProductDomainFacade->saveZboziProductDomain(static::PRODUCT_ID_FIFTH, $tenthZboziProductDomainData);
     }
 }

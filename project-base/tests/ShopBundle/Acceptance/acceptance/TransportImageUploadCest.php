@@ -8,12 +8,12 @@ use Tests\ShopBundle\Test\Codeception\AcceptanceTester;
 
 class TransportImageUploadCest
 {
-    const IMAGE_UPLOAD_FIELD_ID = 'transport_form_image_image_file';
-    const SAVE_BUTTON_NAME = 'transport_form[save]';
+    protected const IMAGE_UPLOAD_FIELD_ID = 'transport_form_image_image_file';
+    protected const SAVE_BUTTON_NAME = 'transport_form[save]';
 
-    const EXPECTED_SUCCESS_MESSAGE = 'Shipping Czech post was modified';
+    protected const EXPECTED_SUCCESS_MESSAGE = 'Shipping Czech post was modified';
 
-    const TEST_IMAGE_NAME = 'transportTestImage.png';
+    protected const TEST_IMAGE_NAME = 'transportTestImage.png';
 
     /**
      * @param \Tests\ShopBundle\Test\Codeception\AcceptanceTester $me

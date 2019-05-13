@@ -6,10 +6,14 @@ use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 class Bag
 {
+    /** @access protected */
     const MAIN_KEY = 'messages';
 
+    /** @access protected */
     const KEY_ERROR = 'error';
+    /** @access protected */
     const KEY_INFO = 'info';
+    /** @access protected */
     const KEY_SUCCESS = 'success';
 
     /**
@@ -43,7 +47,7 @@ class Bag
      */
     public function addError($message, $escape = true)
     {
-        $this->addMessage($message, $escape, self::KEY_ERROR);
+        $this->addMessage($message, $escape, static::KEY_ERROR);
     }
 
     /**
@@ -52,7 +56,7 @@ class Bag
      */
     public function addInfo($message, $escape = true)
     {
-        $this->addMessage($message, $escape, self::KEY_INFO);
+        $this->addMessage($message, $escape, static::KEY_INFO);
     }
 
     /**
@@ -61,7 +65,7 @@ class Bag
      */
     public function addSuccess($message, $escape = true)
     {
-        $this->addMessage($message, $escape, self::KEY_SUCCESS);
+        $this->addMessage($message, $escape, static::KEY_SUCCESS);
     }
 
     /**
@@ -69,7 +73,7 @@ class Bag
      */
     public function getErrorMessages()
     {
-        return $this->getMessages(self::KEY_ERROR);
+        return $this->getMessages(static::KEY_ERROR);
     }
 
     /**
@@ -77,7 +81,7 @@ class Bag
      */
     public function getInfoMessages()
     {
-        return $this->getMessages(self::KEY_INFO);
+        return $this->getMessages(static::KEY_INFO);
     }
 
     /**
@@ -85,7 +89,7 @@ class Bag
      */
     public function getSuccessMessages()
     {
-        return $this->getMessages(self::KEY_SUCCESS);
+        return $this->getMessages(static::KEY_SUCCESS);
     }
 
     /**
@@ -95,9 +99,9 @@ class Bag
     {
         $flashBag = $this->session->getFlashBag();
 
-        return !$flashBag->has($this->getFullbagName(self::KEY_ERROR))
-            && !$flashBag->has($this->getFullbagName(self::KEY_INFO))
-            && !$flashBag->has($this->getFullbagName(self::KEY_SUCCESS));
+        return !$flashBag->has($this->getFullbagName(static::KEY_ERROR))
+            && !$flashBag->has($this->getFullbagName(static::KEY_INFO))
+            && !$flashBag->has($this->getFullbagName(static::KEY_SUCCESS));
     }
 
     /**
@@ -106,7 +110,7 @@ class Bag
      */
     protected function getFullbagName($key)
     {
-        return self::MAIN_KEY . '__' . $this->bagName . '__' . $key;
+        return static::MAIN_KEY . '__' . $this->bagName . '__' . $key;
     }
 
     /**

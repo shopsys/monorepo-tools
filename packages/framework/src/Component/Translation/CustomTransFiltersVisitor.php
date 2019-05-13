@@ -16,10 +16,12 @@ use Twig_Node_Expression_Filter;
  */
 class CustomTransFiltersVisitor extends Twig_BaseNodeVisitor
 {
+    /** @access protected */
     const CUSTOM_TO_DEFAULT_TRANS_FILTERS_MAP = [
         'transHtml' => 'trans',
         'transchoiceHtml' => 'transchoice',
     ];
+    /** @access protected */
     const PRIORITY = -1;
 
     /**
@@ -30,8 +32,8 @@ class CustomTransFiltersVisitor extends Twig_BaseNodeVisitor
         if ($node instanceof Twig_Node_Expression_Filter) {
             $filterNameConstantNode = $node->getNode('filter');
             $filterName = $filterNameConstantNode->getAttribute('value');
-            if (array_key_exists($filterName, self::CUSTOM_TO_DEFAULT_TRANS_FILTERS_MAP)) {
-                $newFilterName = self::CUSTOM_TO_DEFAULT_TRANS_FILTERS_MAP[$filterName];
+            if (array_key_exists($filterName, static::CUSTOM_TO_DEFAULT_TRANS_FILTERS_MAP)) {
+                $newFilterName = static::CUSTOM_TO_DEFAULT_TRANS_FILTERS_MAP[$filterName];
                 $this->replaceCustomFilterName($node, $newFilterName);
             }
         }
@@ -67,6 +69,6 @@ class CustomTransFiltersVisitor extends Twig_BaseNodeVisitor
      */
     public function getPriority()
     {
-        return self::PRIORITY;
+        return static::PRIORITY;
     }
 }

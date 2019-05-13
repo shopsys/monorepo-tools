@@ -11,7 +11,7 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
 class ProductFlagFilter implements AdvancedSearchFilterInterface
 {
-    const NAME = 'productFlag';
+    public const NAME = 'productFlag';
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Product\Flag\FlagFacade

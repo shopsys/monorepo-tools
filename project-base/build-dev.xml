@@ -55,6 +55,7 @@
             <arg value="translation:extract" />
             <arg value="--bundle=ShopsysShopBundle" />
             <arg value="--dir=${path.src}/Shopsys/ShopBundle" />
+            <arg value="--dir=${path.app}/Resources" />
             <arg value="--exclude-dir=frontend/plugins" />
             <arg value="--output-format=po" />
             <arg value="--output-dir=${path.src}/Shopsys/ShopBundle/Resources/translations" />
@@ -245,6 +246,7 @@
             <arg value="--clear-cache" />
             <arg value="--fix" />
             <arg path="${path.src}" />
+            <arg path="${path.tests}" />
             <arg path="${path.root}/*.md" />
             <arg path="${path.root}/docs" />
         </exec>

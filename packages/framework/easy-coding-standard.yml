@@ -13,6 +13,10 @@ services:
                     - Shopsys\FrameworkBundle\Component
                     - Shopsys\FrameworkBundle\Controller
 
+    Shopsys\CodingStandards\Sniffs\ConstantVisibilityRequiredSniff: ~
+
+    Shopsys\CodingStandards\Sniffs\ForceLateStaticBindingForProtectedConstantsSniff: ~
+
 parameters:
     skip:
         ObjectCalisthenics\Sniffs\Files\FunctionLengthSniff:
@@ -21,6 +25,7 @@ parameters:
             - '*/src/Model/AdminNavigation/SideMenuBuilder.php'
             - '*/src/Model/Order/Preview/OrderPreviewCalculation.php'
             - '*/src/Model/Product/ProductVisibilityRepository.php'
+            - '*/src/Model/Product/Search/FilterQuery.php'
             - '*/src/Controller/Admin/AdministratorController.php'
             - '*/tests/Unit/Model/Customer/CustomerDataFactoryTest.php'
             - '*/tests/Unit/Component/Domain/DomainDataCreatorTest.php'
@@ -41,6 +46,7 @@ parameters:
             - '*/src/Model/Product/Product.php'
             - '*/src/Model/Product/ProductRepository.php'
             - '*/tests/Unit/Component/Money/MoneyTest.php'
+            - '*/src/Model/Product/Search/FilterQuery.php'
 
         PHP_CodeSniffer\Standards\Generic\Sniffs\CodeAnalysis\EmptyStatementSniff.DetectedWhile:
             - '*/src/Model/Product/Availability/ProductAvailabilityRecalculator.php'
