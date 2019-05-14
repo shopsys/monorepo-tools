@@ -1,3 +1,5 @@
+@top-info-gap: 15px;
+
 .top-info {
     padding: 0 10px;
 
@@ -5,8 +7,8 @@
 
     &__text {
         margin: 0 auto;
-        padding-right: @item-gap;
-        padding-left: @item-gap;
+        padding-right: @top-info-gap;
+        padding-left: @top-info-gap;
 
         @media @query-xl {
             width: @width-content;
@@ -16,14 +18,14 @@
             margin: 0;
             line-height: 30px;
 
-            color: @color-f;
-            font-size: 20px;
-            font-weight: bold;
-            font-style: italic;
+            color: @color-0;
+            font-size: 28px;
+            font-weight: 500;
 
             span {
                 opacity: 0.7;
 
+                color: @color-grey;
                 font-style: normal;
             }
         }
