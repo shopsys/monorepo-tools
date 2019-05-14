@@ -327,7 +327,7 @@ docker run --detach --name build-php-fpm-container \
     --add-host redis:192.168.0.1 --add-host postgres:192.168.0.1 --add-host elasticsearch:192.168.0.1 --add-host smtp-server:192.168.0.1 \
     --network production_shopsys-network \
     production-php-fpm \
-    docker-php-entrypoint php-fpm
+    php-fpm
 
 # turn on maintenance page on actual running production container
 docker exec production-php-fpm php phing maintenance-on
