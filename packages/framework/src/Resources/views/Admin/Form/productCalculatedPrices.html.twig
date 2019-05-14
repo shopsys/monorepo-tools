@@ -3,6 +3,9 @@
         <div class="form-price-heading__cell form-price-heading__cell--field">
             {{ inputPriceLabel({ isSimple: true }) }}
         </div>
+        <div class="form-price-heading__cell form-price-heading__cell--price">{{ 'Price excluding VAT'|trans }}</div>
+        <div class="form-price-heading__cell form-price-heading__cell--price">{{ 'Price including VAT'|trans }}</div>
+
     </div>
     {% if productSellingPricesIndexedByDomainId is defined %}
         {% for domainId, productSellingPrices in productSellingPricesIndexedByDomainId %}
