@@ -1,8 +1,11 @@
+@table-grid-font-size: 15px;
+@table-grid-cell-padding: 15px;
+
 .table-grid {
     width: 100%;
     border-collapse: collapse;
 
-    font-size: 15px;
+
 
     thead {
         background: @color-f;
@@ -29,10 +32,11 @@
     }
 
     &__cell {
-        padding: 15px 6px;
+        padding: @table-grid-cell-padding 6px;
         height: 40px;
 
         text-align: left;
+        font-size: @table-grid-font-size;
 
         &:first-child {
             padding-left: 17px;
@@ -72,13 +76,13 @@
         }
 
         thead & {
-            padding-top: 23px;
-            padding-bottom: 23px;
+            padding-top: @table-grid-cell-padding;
+            padding-bottom: @table-grid-cell-padding;
 
             a {
                 color: @color-base;
                 font-family: @font-medium;
-                font-size: 13px;
+                font-size: @table-grid-font-size;
                 font-weight: 500;
                 text-decoration: none;
             }
