@@ -1,5 +1,6 @@
 @input-width: 315px;
 @input-height: 44px;
+@input-height-small: 30px;
 @input-border-size: 2px;
 @input-line-height: @input-height - 2*@input-border-size;
 @input-padding-horizontal: 14px;
@@ -190,6 +191,10 @@
     .form-input-disabled &,
     &.form-input-disabled {
         background: #eff1f2;
+    }
+
+    .in-grid-control & {
+        height: @input-height-small;
     }
 }
 
