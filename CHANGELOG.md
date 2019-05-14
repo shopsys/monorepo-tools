@@ -27,6 +27,101 @@ The changelog is generated during the release process using [ChangelogLinker](ht
 
 <!-- changelog-linker -->
 
+## [v7.2.0](https://github.com/shopsys/shopsys/compare/v7.1.0...v7.2.0) - 2019-05-14
+
+### [shopsys/shopsys]
+
+#### Added
+
+- [#943] Elasticsearch filtering
+- [#912] added link to elastic instruction to FAQ section
+- [#960] guidelines-for-pull-request.md: added note about branch targeting
+- [#959] UpdateChangelogReleaseWorker: add note about PR targets
+- [#927] add missing step in upgrade instructions to v7.1.0, Thanks to [@henzigo]
+- [#978] configure Travis to check standards and unit tests in monorepo, Thanks to [@henzigo]
+- [#990] code quality principles article
+
+#### Changed
+
+- [#930] use redis for doctrine and framework cache, Thanks to [@henzigo]
+- [#942] absolute paths used via local filesystem flysystem now use paths without drive letters
+- [#939] tests refactoring - remove wrong annotations and use shorter way of writing return value, Thanks to [@pk16011990]
+- [#904] constants are now extendable
+- [#916] demonstrational extended code in project-base should have the final say over the parent method calls
+- [#924] admin locale is now recommended to be changed in parameters_common.yml
+- [#961] native installation guide is up-to-date and generalized
+- [#894] updated list of sites in README.md
+- [#893] moved link to dev workflow instruction from introduction to contribution section
+- [#975] upgrading notes: "low priority" tag is not used anymore (after the stable release)
+
+#### Fixed
+
+- [#946] postgresql.conf is now used by Postgres
+- [#947] nginx has now same limit for filesize as is set in php.ini
+- [#932] fm_elfinder main filesystem volume driver
+- [#993] fixed typo non-breaking space -> space
+- [#967] FAQ: fix path to Product Searching via Elasticsearch
+- [#1016] README.md: add a link to the Travis build badge
+
+#### Removed
+
+- [#1020] remove duplicate entrypoint call in production guide
+- [#992] remove duplicate entrypoint call in commands in postgres container
+- [#940] remove duplicate test database build in kubernetes ci script, Thanks to [@henzigo]
+- [#944] removed mentions about microservices from product search export command
+- [#964] obsolete note in BC promise removed
+
+### [shopsys/coding-standards]
+
+#### Fixed
+
+- [#995] helper PhpToDocTypeTransformer is updated for use with new version of phpcs-fixer package
+- [#1008] include config of better-phpdoc-parser in ECS config
+
+### [shopsys/framework]
+
+#### Added
+
+- [#968] added x-powered-by to response headers
+- [#956] fields in forms can be ordered, Thanks to [@henzigo]
+
+#### Changed
+
+- [#920] cron: Error page: don't log fake exception after generating an error page, Thanks to [@sspooky13]
+- [#952] don't log administrator was disconnected because admin was too long inactive, Thanks to [@sspooky13]
+- [#999] used ICU collations to assure correct sorting throughout OSs
+
+#### Fixed
+
+- [#949] fixed wrong behavior while extending ProductFormType and CategoryFormType
+- [#1000] fix correct creating friendly url without indexPostfix, Thanks to [@henzigo]
+- [#954] Current domain router match route for POST and ajax condition, Thanks to [@stanoMilan]
+- [#958] cron works correctly with time config of "00"
+
+### [shopsys/http-smoke-testing]
+
+#### Changed
+
+- [#1014] use current [shopsys/coding-standards] package
+
+### [shopsys/project-base]
+
+#### Added
+
+- [#989] create configuration file for crons to project base, Thanks to [@henzigo]
+- [#910] availability of docker is now checked before installation
+
+#### Changed
+
+- [#888] kubernetes containers accesspoints are routed via ingress
+- [#928] use Redis standard prefix delimiter, Thanks to [@henzigo]
+- [#1001] move database_server_version to parameters_common.yml, Thanks to [@henzigo]
+
+#### Fixed
+
+- [#931] fixed: translations are now extracted also from overwritten templates in `app/Resources`
+- [#980] ecs-fix phing target fixes result of ecs phing target
+
 ## [v7.1.0](https://github.com/shopsys/shopsys/compare/v7.0.0...v7.1.0) - 2019-04-02
 
 ### [shopsys/shopsys]
@@ -2234,3 +2329,56 @@ That's why is this section formatted differently.
 [#846]: https://github.com/shopsys/shopsys/pull/846
 [#808]: https://github.com/shopsys/shopsys/pull/808
 [@Rixafy]: https://github.com/Rixafy
+
+[#1020]: https://github.com/shopsys/shopsys/pull/1020
+[#1016]: https://github.com/shopsys/shopsys/pull/1016
+[#1014]: https://github.com/shopsys/shopsys/pull/1014
+[#1013]: https://github.com/shopsys/shopsys/pull/1013
+[#1008]: https://github.com/shopsys/shopsys/pull/1008
+[#1006]: https://github.com/shopsys/shopsys/pull/1006
+[#1001]: https://github.com/shopsys/shopsys/pull/1001
+[#1000]: https://github.com/shopsys/shopsys/pull/1000
+[#999]: https://github.com/shopsys/shopsys/pull/999
+[#995]: https://github.com/shopsys/shopsys/pull/995
+[#993]: https://github.com/shopsys/shopsys/pull/993
+[#992]: https://github.com/shopsys/shopsys/pull/992
+[#991]: https://github.com/shopsys/shopsys/pull/991
+[#990]: https://github.com/shopsys/shopsys/pull/990
+[#989]: https://github.com/shopsys/shopsys/pull/989
+[#980]: https://github.com/shopsys/shopsys/pull/980
+[#978]: https://github.com/shopsys/shopsys/pull/978
+[#975]: https://github.com/shopsys/shopsys/pull/975
+[#968]: https://github.com/shopsys/shopsys/pull/968
+[#967]: https://github.com/shopsys/shopsys/pull/967
+[#964]: https://github.com/shopsys/shopsys/pull/964
+[#961]: https://github.com/shopsys/shopsys/pull/961
+[#960]: https://github.com/shopsys/shopsys/pull/960
+[#959]: https://github.com/shopsys/shopsys/pull/959
+[#958]: https://github.com/shopsys/shopsys/pull/958
+[#956]: https://github.com/shopsys/shopsys/pull/956
+[#954]: https://github.com/shopsys/shopsys/pull/954
+[#952]: https://github.com/shopsys/shopsys/pull/952
+[#949]: https://github.com/shopsys/shopsys/pull/949
+[#947]: https://github.com/shopsys/shopsys/pull/947
+[#946]: https://github.com/shopsys/shopsys/pull/946
+[#944]: https://github.com/shopsys/shopsys/pull/944
+[#943]: https://github.com/shopsys/shopsys/pull/943
+[#942]: https://github.com/shopsys/shopsys/pull/942
+[#940]: https://github.com/shopsys/shopsys/pull/940
+[#939]: https://github.com/shopsys/shopsys/pull/939
+[#932]: https://github.com/shopsys/shopsys/pull/932
+[#931]: https://github.com/shopsys/shopsys/pull/931
+[#930]: https://github.com/shopsys/shopsys/pull/930
+[#928]: https://github.com/shopsys/shopsys/pull/928
+[#927]: https://github.com/shopsys/shopsys/pull/927
+[#924]: https://github.com/shopsys/shopsys/pull/924
+[#921]: https://github.com/shopsys/shopsys/pull/921
+[#920]: https://github.com/shopsys/shopsys/pull/920
+[#916]: https://github.com/shopsys/shopsys/pull/916
+[#912]: https://github.com/shopsys/shopsys/pull/912
+[#910]: https://github.com/shopsys/shopsys/pull/910
+[#904]: https://github.com/shopsys/shopsys/pull/904
+[#894]: https://github.com/shopsys/shopsys/pull/894
+[#893]: https://github.com/shopsys/shopsys/pull/893
+[#888]: https://github.com/shopsys/shopsys/pull/888
+[@sspooky13]: https://github.com/sspooky13
