@@ -89,6 +89,19 @@
                 }
             }
         }
+
+        &__arrow {
+            display: inline-block;
+            width: 20px;
+            float: right;;
+
+            &--up {
+                .draw-arrow-top(5px, @color-base, 5px, 8px);
+            }
+            &--down {
+                .draw-arrow-bottom(5px, @color-base, 5px, 8px);
+            }
+        }
     }
 
     &__submenu {
