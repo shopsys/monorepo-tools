@@ -1,7 +1,7 @@
 # Upgrade Instructions for Interchangeable Filtering
 
 This article describes upgrade instructions for [#943 Elastic search filtering](https://github.com/shopsys/shopsys/pull/943).
-Upgrade instructions are in a separate article because there is a lot of instructions and we don't want to jam the [UPGRADE-unreleased.md](/docs/upgrade/UPGRADE-unreleased.md). <!--- TODO change to released version -->
+Upgrade instructions are in a separate article because there is a lot of instructions and we don't want to jam the [UPGRADE-v7.2.0.md](/docs/upgrade/UPGRADE-v7.2.0.md).
 Instructions are meant to be followed when you upgrade from `v7.1.0` to `v7.2.0`.
 
 In order to avoid a BC break and to ease upgrade to the new version of Shopsys Framework,
