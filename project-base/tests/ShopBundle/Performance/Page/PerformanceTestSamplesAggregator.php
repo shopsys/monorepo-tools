@@ -21,6 +21,7 @@ class PerformanceTestSamplesAggregator
             $maxQueryCount = 0;
             $isSuccessful = true;
             $worstStatusCode = null;
+            $performanceTestSample = null;
 
             foreach ($performanceTestSamplesOfUrl as $performanceTestSample) {
                 /* @var $performanceTestSample \Tests\ShopBundle\Performance\Page\PerformanceTestSample */

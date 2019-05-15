@@ -10,6 +10,8 @@ use Shopsys\FrameworkBundle\Model\Localization\AbstractTranslatableEntity;
 /**
  * @ORM\Table(name="availabilities")
  * @ORM\Entity
+ *
+ * @method AvailabilityTranslation translation(?string $locale = null)
  */
 class Availability extends AbstractTranslatableEntity
 {

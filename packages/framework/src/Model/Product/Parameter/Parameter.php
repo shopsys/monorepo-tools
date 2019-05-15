@@ -10,6 +10,8 @@ use Shopsys\FrameworkBundle\Model\Localization\AbstractTranslatableEntity;
 /**
  * @ORM\Table(name="parameters")
  * @ORM\Entity
+ *
+ * @method ParameterTranslation translation(?string $locale = null)
  */
 class Parameter extends AbstractTranslatableEntity
 {

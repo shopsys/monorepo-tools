@@ -21,6 +21,8 @@ use Shopsys\FrameworkBundle\Model\Product\Pricing\ProductPriceRecalculationSched
  *     }
  * )
  * @ORM\Entity
+ *
+ * @method ProductTranslation translation(?string $locale = null)
  */
 class Product extends AbstractTranslatableEntity
 {
@@ -687,7 +689,7 @@ class Product extends AbstractTranslatableEntity
     }
 
     /**
-     * @return \Shopsys\FrameworkBundle\Model\Product\Flag\Flag[]
+     * @return \Doctrine\Common\Collections\ArrayCollection|\Shopsys\FrameworkBundle\Model\Product\Flag\Flag[]
      */
     public function getFlags()
     {

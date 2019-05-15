@@ -48,7 +48,7 @@ class UploadedFile implements EntityFileUploadInterface
     protected $extension;
 
     /**
-     * @var \Datetime
+     * @var \DateTime
      *
      * @ORM\Column(type="datetime")
      */

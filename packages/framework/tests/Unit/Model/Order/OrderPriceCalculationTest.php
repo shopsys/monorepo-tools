@@ -164,7 +164,7 @@ class OrderPriceCalculationTest extends TestCase
     }
 
     /**
-     * @return \Shopsys\FrameworkBundle\Model\Order\Item\OrderItem|\PHPUnit\Framework\MockObject\MockObject
+     * @return \PHPUnit\Framework\MockObject\MockObject
      */
     protected function createOrderProductMock(): MockObject
     {
@@ -176,7 +176,7 @@ class OrderPriceCalculationTest extends TestCase
     }
 
     /**
-     * @return \Shopsys\FrameworkBundle\Model\Order\Item\OrderItem|\PHPUnit\Framework\MockObject\MockObject
+     * @return \PHPUnit\Framework\MockObject\MockObject
      */
     protected function createOrderPaymentMock(): MockObject
     {
@@ -188,7 +188,7 @@ class OrderPriceCalculationTest extends TestCase
     }
 
     /**
-     * @return \Shopsys\FrameworkBundle\Model\Order\Item\OrderItem|\PHPUnit\Framework\MockObject\MockObject
+     * @return \PHPUnit\Framework\MockObject\MockObject
      */
     protected function createOrderTransportMock(): MockObject
     {

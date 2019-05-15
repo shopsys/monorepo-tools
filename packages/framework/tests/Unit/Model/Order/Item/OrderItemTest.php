@@ -213,7 +213,7 @@ class OrderItemTest extends TestCase
     }
 
     /**
-     * @return \Shopsys\FrameworkBundle\Model\Order\Order|\PHPUnit\Framework\MockObject\MockObject
+     * @return \PHPUnit\Framework\MockObject\MockObject
      */
     private function createOrderMock(): MockObject
     {
@@ -221,7 +221,7 @@ class OrderItemTest extends TestCase
     }
 
     /**
-     * @return \Shopsys\FrameworkBundle\Model\Transport\Transport|\PHPUnit\Framework\MockObject\MockObject
+     * @return \PHPUnit\Framework\MockObject\MockObject
      */
     private function createTransportMock(): MockObject
     {
@@ -229,7 +229,7 @@ class OrderItemTest extends TestCase
     }
 
     /**
-     * @return \Shopsys\FrameworkBundle\Model\Payment\Payment|\PHPUnit\Framework\MockObject\MockObject
+     * @return \PHPUnit\Framework\MockObject\MockObject
      */
     private function createPaymentMock(): MockObject
     {
@@ -237,7 +237,7 @@ class OrderItemTest extends TestCase
     }
 
     /**
-     * @return \Shopsys\FrameworkBundle\Model\Product\Product|\PHPUnit\Framework\MockObject\MockObject
+     * @return \PHPUnit\Framework\MockObject\MockObject
      */
     private function createProductMock(): MockObject
     {

@@ -60,7 +60,7 @@ class Order
     protected $createdAt;
 
     /**
-     * @var \Shopsys\FrameworkBundle\Model\Order\Item\OrderItem[]
+     * @var \Doctrine\Common\Collections\ArrayCollection|\Shopsys\FrameworkBundle\Model\Order\Item\OrderItem[]
      *
      * @ORM\OneToMany(
      *     targetEntity="Shopsys\FrameworkBundle\Model\Order\Item\OrderItem",

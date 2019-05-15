@@ -7,7 +7,7 @@ use Doctrine\ORM\EntityManagerInterface;
 class FlagRepository
 {
     /**
-     * @var \Doctrine\ORM\EntityRepository
+     * @var \Doctrine\ORM\EntityManagerInterface
      */
     protected $em;
 

@@ -63,7 +63,7 @@ class Image implements EntityFileUploadInterface
     protected $position;
 
     /**
-     * @var \Datetime
+     * @var \DateTime
      *
      * @ORM\Column(type="datetime")
      */

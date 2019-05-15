@@ -63,7 +63,7 @@ class Administrator implements UserInterface, Serializable, UniqueLoginInterface
     protected $email;
 
     /**
-     * @var \Shopsys\FrameworkBundle\Model\Administrator\AdministratorGridLimit[]
+     * @var \Doctrine\Common\Collections\ArrayCollection|\Shopsys\FrameworkBundle\Model\Administrator\AdministratorGridLimit[]
      * @ORM\OneToMany(
      *     targetEntity="Shopsys\FrameworkBundle\Model\Administrator\AdministratorGridLimit",
      *     mappedBy="administrator",

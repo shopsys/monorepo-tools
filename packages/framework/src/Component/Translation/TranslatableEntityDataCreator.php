@@ -67,7 +67,7 @@ class TranslatableEntityDataCreator
         $allClassesMetadata = $this->em->getMetadataFactory()->getAllMetadata();
         foreach ($allClassesMetadata as $classMetadata) {
             /* @var $classMetadata \Doctrine\ORM\Mapping\ClassMetadata */
-            if (is_subclass_of($classMetadata->name, TranslationInterface::class)) {
+            if (is_subclass_of($classMetadata->getName(), TranslationInterface::class)) {
                 $translatableEntitiesMetadata[] = $classMetadata;
             }
         }

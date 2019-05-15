@@ -101,8 +101,8 @@ class CountryDataModifierVersion20190121094400
     }
 
     /**
-     * @param $domainId
-     * @param $countryCode
+     * @param int $domainId
+     * @param string $countryCode
      * @return bool
      */
     private function codeExistsForDomain($domainId, $countryCode): bool

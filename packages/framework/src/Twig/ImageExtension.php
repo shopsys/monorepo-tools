@@ -202,7 +202,7 @@ class ImageExtension extends Twig_Extension
 
     /**
      * @param array $attributes
-     * @param $entityName
+     * @param string $entityName
      * @param \Shopsys\FrameworkBundle\Component\Image\AdditionalImageData[] $additionalImagesData
      * @return string
      */

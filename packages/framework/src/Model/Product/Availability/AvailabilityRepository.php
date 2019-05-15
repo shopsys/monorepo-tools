@@ -11,7 +11,7 @@ use Shopsys\FrameworkBundle\Model\Product\Product;
 class AvailabilityRepository
 {
     /**
-     * @var \Doctrine\ORM\EntityRepository
+     * @var \Doctrine\ORM\EntityManagerInterface
      */
     protected $em;
 

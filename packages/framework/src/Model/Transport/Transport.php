@@ -17,6 +17,8 @@ use Shopsys\FrameworkBundle\Model\Transport\Exception\TransportDomainNotFoundExc
 /**
  * @ORM\Table(name="transports")
  * @ORM\Entity
+ *
+ * @method TransportTranslation translation(?string $locale = null)
  */
 class Transport extends AbstractTranslatableEntity implements OrderableEntityInterface
 {

@@ -2,6 +2,27 @@ parameters:
     ignoreErrors:
         # Add ignored errors here as regular expressions, e.g.:
         # - '#PHPUnit_Framework_MockObject_MockObject(.*) given#'
+        - '#(Access to an undefined property PHPUnit\\Framework\\MockObject\\MockObject::\$(attributes|query|request))#'
+        -
+            message: '#Symfony\\Component\\Config\\Definition\\Builder\\NodeDefinition::children\(\)#'
+            path: %currentWorkingDirectory%/packages/framework/src/Component/Domain/Config/DomainsConfigDefinition.php
+        -
+            message: '#Symfony\\Component\\Config\\Definition\\Builder\\NodeDefinition::children\(\)#'
+            path: %currentWorkingDirectory%/packages/framework/src/Component/Domain/Config/DomainsUrlsConfigDefinition.php
+        -
+            message: '#Symfony\\Component\\Config\\Definition\\Builder\\NodeParentInterface::scalarNode\(\)#'
+            path: %currentWorkingDirectory%/packages/framework/src/Component/Image/Config/ImageConfigDefinition.php
+        -
+            message: '#Symfony\\Component\\Config\\Definition\\Builder\\NodeParentInterface::scalarNode\(\)#'
+            path: %currentWorkingDirectory%/packages/framework/src/Component/UploadedFile/Config/UploadedFileConfigDefinition.php
+        - '#Method Doctrine\\Common\\Persistence\\ObjectManager::flush\(\) invoked with 1 parameter, 0 required\.#'
+        #TODO delete after deleting the deprecated method and changing typehint in the next major release#
+        -
+            message: '#Access to an undefined property PhpParser\\Node::\$var\.#'
+            path: %currentWorkingDirectory%/packages/framework/src/Component/Translation/ConstraintViolationExtractor.php
+        -
+            message: '#Access to an undefined property PhpParser\\Node::\$name\.#'
+            path: %currentWorkingDirectory%/packages/framework/src/Component/Translation/ConstraintViolationExtractor.php
     excludes_analyse:
         # Exclude coding standards from packages as it is in incompatible version
         - %currentWorkingDirectory%/packages/coding-standards/*

@@ -9,7 +9,7 @@ use Shopsys\FrameworkBundle\Model\Product\Product;
 class UnitRepository
 {
     /**
-     * @var \Doctrine\ORM\EntityRepository
+     * @var \Doctrine\ORM\EntityManagerInterface
      */
     protected $em;
 

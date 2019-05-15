@@ -40,7 +40,7 @@ class PriceCalculation
      */
     public function getVatCoefficientByPercent(string $vatPercent): string
     {
-        $ratio = $vatPercent / (100 + $vatPercent);
+        $ratio = (float)$vatPercent / (100 + (float)$vatPercent);
 
         return (string)round($ratio, 4);
     }
@@ -48,7 +48,6 @@ class PriceCalculation
     /**
      * @param \Shopsys\FrameworkBundle\Component\Money\Money $priceWithoutVat
      * @param \Shopsys\FrameworkBundle\Model\Pricing\Vat\Vat $vat
-     * @param \Shopsys\FrameworkBundle\Model\Pricing\Vat\Vat
      * @return \Shopsys\FrameworkBundle\Component\Money\Money
      */
     public function applyVatPercent(Money $priceWithoutVat, Vat $vat): Money

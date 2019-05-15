@@ -17,6 +17,7 @@ class UploadedFileConfigDefinition implements ConfigurationInterface
     public function getConfigTreeBuilder()
     {
         $treeBuilder = new TreeBuilder();
+        /** @var \Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition $rootNode */
         $rootNode = $treeBuilder->root('entity_files');
 
         $this->buildItemsNode($rootNode->prototype('array'))->end();

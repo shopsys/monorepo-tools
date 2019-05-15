@@ -51,16 +51,19 @@ class FrontendUserProvider implements UserProviderInterface
     }
 
     /**
-     * @param \Symfony\Component\Security\Core\User\UserInterface $user
+     * @param \Symfony\Component\Security\Core\User\UserInterface $userInterface
      * @return \Shopsys\FrameworkBundle\Model\Customer\User
      */
-    public function refreshUser(UserInterface $user)
+    public function refreshUser(UserInterface $userInterface)
     {
-        $class = get_class($user);
+        $class = get_class($userInterface);
         if (!$this->supportsClass($class)) {
             $message = sprintf('Instances of "%s" are not supported.', $class);
             throw new \Symfony\Component\Security\Core\Exception\UnsupportedUserException($message);
         }
+
+        /** @var \Shopsys\FrameworkBundle\Model\Customer\User $user */
+        $user = $userInterface;
 
         if ($user instanceof TimelimitLoginInterface) {
             if (time() - $user->getLastActivity()->getTimestamp() > 3600 * 24) {

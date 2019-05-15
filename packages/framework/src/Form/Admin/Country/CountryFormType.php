@@ -119,7 +119,7 @@ class CountryFormType extends AbstractType
     }
 
     /**
-     * @param $countryCodeValue
+     * @param string $countryCodeValue
      * @param \Symfony\Component\Validator\Context\ExecutionContextInterface $context
      */
     public function validateUniqueCode($countryCodeValue, ExecutionContextInterface $context): void

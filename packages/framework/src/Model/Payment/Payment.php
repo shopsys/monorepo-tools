@@ -16,6 +16,8 @@ use Shopsys\FrameworkBundle\Model\Transport\Transport;
 /**
  * @ORM\Table(name="payments")
  * @ORM\Entity
+ *
+ * @method PaymentTranslation translation(?string $locale = null)
  */
 class Payment extends AbstractTranslatableEntity implements OrderableEntityInterface
 {

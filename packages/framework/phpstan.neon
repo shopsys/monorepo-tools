@@ -2,3 +2,14 @@ parameters:
     ignoreErrors:
         # Ignoring absence of \AppKernel, which should be provided by project implementation
         - '~Instantiated class AppKernel not found~'
+        -
+            message: '#Call to method .+\(\) on an unknown class AppKernel\.#'
+            path: %currentWorkingDirectory%/src/Component/Error/ErrorPagesFacade.php
+        - '#Method Doctrine\\Common\\Persistence\\ObjectManager::flush\(\) invoked with 1 parameter, 0 required\.#'
+        #TODO delete after deleting the deprecated method and changing typehint in the next major release#
+        -
+            message: '#Access to an undefined property PhpParser\\Node::\$var\.#'
+            path: %currentWorkingDirectory%/src/Component/Translation/ConstraintViolationExtractor.php
+        -
+            message: '#Access to an undefined property PhpParser\\Node::\$name\.#'
+            path: %currentWorkingDirectory%/src/Component/Translation/ConstraintViolationExtractor.php

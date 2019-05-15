@@ -27,7 +27,6 @@ class DomainFactoryOverwritingDomainUrl
      * @param string|null $overwriteDomainUrl
      * @param \Shopsys\FrameworkBundle\Component\Domain\Config\DomainsConfigLoader $domainsConfigLoader
      * @param \Shopsys\FrameworkBundle\Component\Setting\Setting $setting
-     * @param \Shopsys\FrameworkBundle\Component\Setting\Setting
      */
     public function __construct($overwriteDomainUrl, DomainsConfigLoader $domainsConfigLoader, Setting $setting)
     {

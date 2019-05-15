@@ -50,7 +50,7 @@ class CurrencyDataFixture extends AbstractReferenceFixture
         $currencyData = $this->currencyDataFactory->create();
         $currencyData->name = 'Euro';
         $currencyData->code = Currency::CODE_EUR;
-        $currencyData->exchangeRate = 25;
+        $currencyData->exchangeRate = '25';
         $currencyEuro = $this->currencyFacade->create($currencyData);
         $this->addReference(self::CURRENCY_EUR, $currencyEuro);
     }

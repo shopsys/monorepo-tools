@@ -130,8 +130,7 @@ class ProductDataFactory implements ProductDataFactoryInterface
     }
 
     /**
-     * @param mixed $productData
-     * @param \Shopsys\FrameworkBundle\Model\Product\ProductData
+     * @param \Shopsys\FrameworkBundle\Model\Product\ProductData $productData
      */
     protected function fillNew(ProductData $productData)
     {

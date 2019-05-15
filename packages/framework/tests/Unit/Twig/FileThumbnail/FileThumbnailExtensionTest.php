@@ -45,6 +45,7 @@ class FileThumbnailExtensionTest extends TestCase
             ->getMock();
         $fileUploadMock->expects($this->any())->method('getTemporaryFilepath')->willReturn('dir/' . $temporaryFilename);
 
+        /** @var \PHPUnit\Framework\MockObject\MockObject|\Intervention\Image\Image $imageMock */
         $imageMock = $this->getMockBuilder(Image::class)
             ->setMethods(['encode'])
             ->disableOriginalConstructor()
