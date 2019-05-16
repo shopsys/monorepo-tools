@@ -122,7 +122,7 @@ There you can find links to upgrade notes for other versions too.
 - if you extended one of these form fields listed below, you need to change the group from `basicInformation` to `prices` ([#956](https://github.com/shopsys/shopsys/pull/956))
     - in `PaymentFormType` fields `vat` and `czkRounding`
     - in `TransportFormType` field `vat`
-- change all occurrences of `->will($this->returnValue(…)` into `->willReturn(…)` in all your `TestCase` tests ([#939](https://github.com/shopsys/shopsys/pull/939))
+- change all occurrences of `->will($this->returnValue(…))` into `->willReturn(…)` in all your `TestCase` tests ([#939](https://github.com/shopsys/shopsys/pull/939))
     - example:
         ```diff
         - $emMock->expects($this->once())->method('find')->will($this->returnValue($expectedObject));
