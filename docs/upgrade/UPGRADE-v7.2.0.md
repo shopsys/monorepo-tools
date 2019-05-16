@@ -135,8 +135,10 @@ There you can find links to upgrade notes for other versions too.
         * @param mixed $input
     ```
 - reconfigure `fm_elfinder` to use `main_filesystem` ([#932](https://github.com/shopsys/shopsys/pull/932))
-    - upgrade version of `helios-ag/fm-elfinder-bundle` to `^9.2` in your `composer.json`
-    - remove `barryvdh/elfinder-flysystem-driver": "^0.2"` from `composer.json`
+    - upgrade the version of `helios-ag/fm-elfinder-bundle` composer dependency to `^9.2`
+        - you can do this by `composer require helios-ag/fm-elfinder-bundle:^9.2 --update-with-dependencies`
+    - remove the package `barryvdh/elfinder-flysystem-driver` from your composer dependencies
+        - you can do this by `composer remove barryvdh/elfinder-flysystem-driver`
     - update `fm_elfinder.yml` config
         ```diff
             driver: Flysystem
