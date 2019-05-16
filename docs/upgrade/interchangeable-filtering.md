@@ -39,8 +39,7 @@ Even then, you should make some upgrade steps to have your code tested properly 
     - replace the Elasticsearch structure files in the `src/Shopsys/ShopBundle/Resources/definition/products/` folder in your project with the new ones from [definitions in shopsys/project-base](https://github.com/shopsys/project-base/blob/v7.2.0/src/Shopsys/ShopBundle/Resources/definition/product/)
     - add the following alias to `services.yml` and `services_test.yml` to start exporting more data into Elasticsearch
         ```yaml
-       Shopsys\FrameworkBundle\Model\Product\Search\Export\ProductSearchExportRepository:
-           alias: Shopsys\FrameworkBundle\Model\Product\Search\Export\ProductSearchExportWithFilterRepository
+       Shopsys\FrameworkBundle\Model\Product\Search\Export\ProductSearchExportRepository: '@Shopsys\FrameworkBundle\Model\Product\Search\Export\ProductSearchExportWithFilterRepository'
         ```
     - update the test of the export repository `tests/ShopBundle/Functional/Model/Product/Search/ProductSearchExportRepositoryTest.php` to match the new Elasticsearch structure
         you can copy [`ProductSearchExportRepositoryTest.php`](https://github.com/shopsys/project-base/blob/v7.2.0/tests/ShopBundle/Functional/Model/Product/Search/ProductSearchExportRepositoryTest.php)
@@ -59,8 +58,7 @@ To start filtering products via Elasticsearch you have to do these steps.
     ```
 - add the following alias to `services.yml` and `services_test.yml` to start exporting more data into Elasticsearch
     ```yaml
-   Shopsys\FrameworkBundle\Model\Product\Search\Export\ProductSearchExportRepository:
-       alias: Shopsys\FrameworkBundle\Model\Product\Search\Export\ProductSearchExportWithFilterRepository
+   Shopsys\FrameworkBundle\Model\Product\Search\Export\ProductSearchExportRepository: '@Shopsys\FrameworkBundle\Model\Product\Search\Export\ProductSearchExportWithFilterRepository'
     ```
 - update the test of the export repository `tests/ShopBundle/Functional/Model/Product/Search/ProductSearchExportRepositoryTest.php` to match the new Elasticsearch structure
     you can copy [`ProductSearchExportRepositoryTest.php`](https://github.com/shopsys/project-base/blob/v7.2.0/tests/ShopBundle/Functional/Model/Product/Search/ProductSearchExportRepositoryTest.php)
