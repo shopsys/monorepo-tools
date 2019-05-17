@@ -1,4 +1,4 @@
-# [Upgrade from v7.0.0 to v7.1.0]
+# [Upgrade from v7.0.0 to v7.1.0](https://github.com/shopsys/shopsys/compare/v7.0.0...v7.1.0)
 
 This guide contains instructions to upgrade from version v7.0.0 to v7.1.0.
 
@@ -194,6 +194,5 @@ There you can find links to upgrade notes for other versions too.
   because it causes problems during entity extension. Such problem with `OrderItem` was resolved during [making OrderItem extendable #715](https://github.com/shopsys/shopsys/pull/715)  
   If you want to use Doctrine inheritance mapping anyway, please skip `Shopsys\CodingStandards\Sniffs\ForbiddenDoctrineInheritanceSniff` ([#848](https://github.com/shopsys/shopsys/pull/848))
 
-[Upgrade from v7.0.0 to v7.1.0]: https://github.com/shopsys/shopsys/compare/v7.0.0...v7.1.0
 [shopsys/framework]: https://github.com/shopsys/framework
 [shopsys/coding-standards]: https://github.com/shopsys/coding-standards

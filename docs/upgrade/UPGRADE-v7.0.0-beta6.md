@@ -1,4 +1,4 @@
-# [Upgrade from v7.0.0-beta5 to v7.0.0-beta6]
+# [Upgrade from v7.0.0-beta5 to v7.0.0-beta6](https://github.com/shopsys/shopsys/compare/v7.0.0-beta5...v7.0.0-beta6)
 
 This guide contains instructions to upgrade from version v7.0.0-beta5 to v7.0.0-beta6.
 
@@ -283,6 +283,5 @@ for instance:
     - you need to adjust already extended methods and fields to `protected` visibility because all `private` visibilities from these namespaces were changed to `protected`
     - you can delete methods that you just copied due to inability to inherit
 
-[Upgrade from v7.0.0-beta5 to v7.0.0-beta6]: https://github.com/shopsys/shopsys/compare/v7.0.0-beta5...v7.0.0-beta6
 [shopsys/framework]: https://github.com/shopsys/framework
 [shopsys/product-feed-heureka]: https://github.com/shopsys/product-feed-heureka

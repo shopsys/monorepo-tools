@@ -1,4 +1,4 @@
-# [Upgrade from v7.1.0 to v7.2.0]
+# [Upgrade from v7.1.0 to v7.2.0](https://github.com/shopsys/shopsys/compare/v7.1.0...v7.2.0)
 
 This guide contains instructions to upgrade from version v7.1.0 to v7.2.0.
 
@@ -283,5 +283,4 @@ There you can find links to upgrade notes for other versions too.
         </target>
     ```
 
-[Upgrade from v7.1.0 to v7.2.0]: https://github.com/shopsys/shopsys/compare/v7.1.0...v7.2.0
 [shopsys/framework]: https://github.com/shopsys/framework

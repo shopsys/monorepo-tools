@@ -1,4 +1,4 @@
-# [Upgrade from v7.0.0-beta6 to v7.0.0]
+# [Upgrade from v7.0.0-beta6 to v7.0.0](https://github.com/shopsys/shopsys/compare/v7.0.0-beta6...v7.0.0)
 
 This guide contains instructions to upgrade from version v7.0.0-beta6 to v7.0.0.
 
@@ -94,6 +94,5 @@ if you want to have products data exported to Elasticsearch after `build-demo` t
         - `web/content/images/product/list`
         - `web/content/images/sliderItem/default`
 
-[Upgrade from v7.0.0-beta6 to v7.0.0]: https://github.com/shopsys/shopsys/compare/v7.0.0-beta6...v7.0.0
 [shopsys/framework]: https://github.com/shopsys/framework
 [shopsys/project-base]: https://github.com/shopsys/project-base
