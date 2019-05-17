@@ -19,6 +19,7 @@
 
     &__row {
         background: @color-f;
+        border-bottom: 1px solid @table-grid-line-color;
 
         &--group {
             background: @bg-info;
@@ -116,10 +117,9 @@
         }
 
         &__move {
-            float: left;
             margin-right: 5px;
             position: relative;
-            top: 8px;
+            top: calc(~"50% - 15px");
             margin-bottom: -1px;
         }
 

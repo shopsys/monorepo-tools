@@ -11,16 +11,29 @@
 
         &--paging {
             text-align: center;
+
+            .window-content & {
+                width: 38%;
+            }
         }
 
         &--settings {
             width: 40%;
 
             text-align: right;
+
+            .window-content & {
+                width: 42%;
+            }
         }
 
         &--show {
             line-height: @input-height;
+
+            .window-content & {
+                width: 20%;
+                line-height: @input-height/2;
+            }
         }
 
         &__go {
