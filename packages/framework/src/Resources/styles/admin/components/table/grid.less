@@ -1,11 +1,11 @@
-@table-grid-font-size: 15px;
+@table-grid-font-size: 13px;
+@table-grid-font-weight: 500;
 @table-grid-cell-padding: 15px;
+@table-grid-line-color: @bg-page;
 
 .table-grid {
     width: 100%;
     border-collapse: collapse;
-
-
 
     thead {
         background: @color-f;
@@ -18,7 +18,7 @@
     }
 
     &__row {
-        border-bottom: 1px solid @color-grey-light;
+        border-bottom: 1px solid @table-grid-line-color;
 
         &--edit {
             background: @bg-edit;
@@ -37,6 +37,7 @@
 
         text-align: left;
         font-size: @table-grid-font-size;
+        font-weight: @table-grid-font-weight;
 
         &:first-child {
             padding-left: 17px;
@@ -79,11 +80,10 @@
             padding-top: @table-grid-cell-padding;
             padding-bottom: @table-grid-cell-padding;
 
+            font-size: @table-grid-font-size;
+
             a {
                 color: @color-base;
-                font-family: @font-medium;
-                font-size: @table-grid-font-size;
-                font-weight: 500;
                 text-decoration: none;
             }
         }
