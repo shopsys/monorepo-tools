@@ -27,7 +27,7 @@
     &__in {
         display: flex;
         width: 100%;
-        height: @height-fixed-bar;
+
         margin: 0 auto;
         max-width: 100%;
 
@@ -41,16 +41,22 @@
 
         .window-fixed-bar--top & {
             max-width: 100%;
+            height: @height-fixed-bar;
         }
     }
 
     &__item {
         display: flex;
-        height: @height-fixed-bar;
+        height: @input-height;
         padding-left: 18px;
         padding-right: 18px;
         flex: 1;
         align-items: center;
+
+
+        .window-fixed-bar--top & {
+            height: @height-fixed-bar;
+        }
 
         &:first-child {
             border-left: none;

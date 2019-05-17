@@ -1,4 +1,4 @@
-@btn-height: 30px;
+@btn-height: @input-height;
 @btn-padding-vertical: 5px;
 @btn-padding-horizontal: 15px;
 
@@ -98,6 +98,8 @@
 @btn-large-height: @btn-height + @btn-large-height-increase;
 @btn-large-line-height: @btn-height - 2*@btn-padding-vertical + @btn-large-height-increase;
 
+@btn-icon-size: 18px;
+
 .btn {
     &--small {
         height: @btn-small-height;
@@ -135,10 +137,10 @@
 
         .btn__icon {
             position: absolute;
-            top: 5px;
+            top: calc(~"50% - @{btn-icon-size}/2 - 2px");
             left: 6px;
-            width: 18px;
-            height: 18px;
+            width: @btn-icon-size;
+            height: @btn-icon-size;
 
             text-align: center;
             line-height: 19px;
