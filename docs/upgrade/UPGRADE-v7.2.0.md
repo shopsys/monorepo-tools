@@ -122,7 +122,7 @@ There you can find links to upgrade notes for other versions too.
 - if you extended one of these form fields listed below, you need to change the group from `basicInformation` to `prices` ([#956](https://github.com/shopsys/shopsys/pull/956))
     - in `PaymentFormType` fields `vat` and `czkRounding`
     - in `TransportFormType` field `vat`
-- change all occurrences of `->will($this->returnValue(…)` into `->willReturn(…)` in all your `TestCase` tests ([#939](https://github.com/shopsys/shopsys/pull/939))
+- change all occurrences of `->will($this->returnValue(…))` into `->willReturn(…)` in all your `TestCase` tests ([#939](https://github.com/shopsys/shopsys/pull/939))
     - example:
         ```diff
         - $emMock->expects($this->once())->method('find')->will($this->returnValue($expectedObject));
@@ -135,8 +135,10 @@ There you can find links to upgrade notes for other versions too.
         * @param mixed $input
     ```
 - reconfigure `fm_elfinder` to use `main_filesystem` ([#932](https://github.com/shopsys/shopsys/pull/932))
-    - upgrade version of `helios-ag/fm-elfinder-bundle` to `^9.2` in your `composer.json`
-    - remove `barryvdh/elfinder-flysystem-driver": "^0.2"` from `composer.json`
+    - upgrade the version of `helios-ag/fm-elfinder-bundle` composer dependency to `^9.2`
+        - you can do this by `composer require helios-ag/fm-elfinder-bundle:^9.2 --update-with-dependencies`
+    - remove the package `barryvdh/elfinder-flysystem-driver` from your direct composer dependecies (`shopsys/framework` includes the driver implementation)
+        - you can do this by `composer remove barryvdh/elfinder-flysystem-driver`
     - update `fm_elfinder.yml` config
         ```diff
             driver: Flysystem
@@ -172,24 +174,6 @@ There you can find links to upgrade notes for other versions too.
     - once you finish this change, you should still deal with older redis cache keys that don't use new prefixes - such keys are not removed even by `php phing clean-redis-old`, please find and remove them manually (via console or UI)
 
     **Be careful, this upgrade will remove current sessions**
-- in order to have translations extracted even from overwritten templates, update your `build-dev.xml` file ([#931](https://github.com/shopsys/shopsys/pull/931)):
-    ```diff
-        <target name="dump-translations-project-base" description="Extracts translatable messages from all source files in project base.">
-            <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
-                <arg value="${path.bin-console}" />
-                <arg value="translation:extract" />
-                <arg value="--bundle=ShopsysShopBundle" />
-                <arg value="--dir=${path.src}/Shopsys/ShopBundle" />
-    +           <arg value="--dir=${path.app}/Resources" />
-                <arg value="--exclude-dir=frontend/plugins" />
-                <arg value="--output-format=po" />
-                <arg value="--output-dir=${path.src}/Shopsys/ShopBundle/Resources/translations" />
-                <arg value="--keep" />
-                <arg value="cs" />
-                <arg value="en" />
-            </exec>
-        </target>
-    ```
 - use redis as cache for doctrine and framework ([#930](https://github.com/shopsys/shopsys/pull/930))
     - update `app/config/packages/framework.yml`:
         ```diff
@@ -279,6 +263,24 @@ There you can find links to upgrade notes for other versions too.
     ```diff
       <arg path="${path.src}" />
     + <arg path="${path.tests}" />
+    ```
+- in order to have translations extracted even from overwritten templates, update your `build-dev.xml` file ([#931](https://github.com/shopsys/shopsys/pull/931)):
+    ```diff
+        <target name="dump-translations-project-base" description="Extracts translatable messages from all source files in project base.">
+            <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
+                <arg value="${path.bin-console}" />
+                <arg value="translation:extract" />
+                <arg value="--bundle=ShopsysShopBundle" />
+                <arg value="--dir=${path.src}/Shopsys/ShopBundle" />
+    +           <arg value="--dir=${path.app}/Resources" />
+                <arg value="--exclude-dir=frontend/plugins" />
+                <arg value="--output-format=po" />
+                <arg value="--output-dir=${path.src}/Shopsys/ShopBundle/Resources/translations" />
+                <arg value="--keep" />
+                <arg value="cs" />
+                <arg value="en" />
+            </exec>
+        </target>
     ```
 
 [Upgrade from v7.1.0 to v7.2.0]: https://github.com/shopsys/shopsys/compare/v7.1.0...v7.2.0
