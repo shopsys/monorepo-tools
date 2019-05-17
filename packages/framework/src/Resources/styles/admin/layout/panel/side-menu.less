@@ -91,9 +91,9 @@
         }
 
         &__arrow {
-            display: inline-block;
+            display: none;
             width: 20px;
-            float: right;;
+            float: right;
 
             &--up {
                 .draw-arrow-top(5px, @color-base, 5px, 8px);
@@ -126,7 +126,7 @@
             &__link, &__label {
                 display: block;
                 position: relative;
-                padding: @side-menu-item-padding;
+                padding: @side-menu-item-padding/2;
                 padding-left: calc(~"@{side-menu-item-icon-size} + @{side-menu-item-padding} + @{side-menu-item-icon-right-gap}");
 
                 color: @color-darklink;
