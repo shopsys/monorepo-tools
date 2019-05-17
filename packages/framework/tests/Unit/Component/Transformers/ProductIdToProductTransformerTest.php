@@ -28,7 +28,7 @@ class ProductIdToProductTransformerTest extends TestCase
     public function testReverseTransform()
     {
         $productId = 1;
-        $product = $this->getMockBuilder(Product::class);
+        $product = $this->createMock(Product::class);
 
         $productsRepositoryGetByIdValues = [
             [$productId, $product],

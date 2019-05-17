@@ -33,7 +33,7 @@ class SliderItemRepository
      */
     public function getById($sliderItemId)
     {
-        /** @var \Shopsys\FrameworkBundle\Model\Slider\SliderItem $sliderItem */
+        /** @var \Shopsys\FrameworkBundle\Model\Slider\SliderItem|null $sliderItem */
         $sliderItem = $this->getSliderItemRepository()->find($sliderItemId);
         if ($sliderItem === null) {
             $message = 'Slider item with ID ' . $sliderItemId . ' not found.';

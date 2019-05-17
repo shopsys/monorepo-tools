@@ -52,7 +52,10 @@ class VatFacadeTest extends TestCase
             new VatFactory(new EntityNameResolver([]))
         );
 
-        $this->assertSame($expected, $vatFacade->getDefaultVat());
+        /** @var \stdClass $defaultVat */
+        $defaultVat = $vatFacade->getDefaultVat();
+
+        $this->assertSame($expected, $defaultVat);
     }
 
     public function testSetDefaultVat()

@@ -383,7 +383,7 @@ class ProductDataFixture
     {
         reset($array);
         while (key($array) !== $key) {
-            if (each($array) === false) {
+            if (empty(each($array)) === true) {
                 throw new \Shopsys\ShopBundle\DataFixtures\Performance\Exception\UndefinedArrayKeyException($key);
             }
         }

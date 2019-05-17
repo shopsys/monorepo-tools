@@ -50,7 +50,7 @@ class GroupedScalarHydrator extends AbstractHydrator
 
             $fieldName = $cacheKeyInfo['fieldName'];
 
-            /** @var \Doctrine\DBAL\Types\Type $type */
+            /** @var \Doctrine\DBAL\Types\Type|null $type */
             $type = $cacheKeyInfo['type'];
 
             if (isset($cacheKeyInfo['isScalar'])) {

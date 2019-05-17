@@ -45,7 +45,7 @@ class ProductCalculatedPriceRepository
      */
     public function saveCalculatedPrice(Product $product, PricingGroup $pricingGroup, ?Money $priceWithVat)
     {
-        /** @var \Shopsys\FrameworkBundle\Model\Product\Pricing\ProductCalculatedPrice $productCalculatedPrice */
+        /** @var \Shopsys\FrameworkBundle\Model\Product\Pricing\ProductCalculatedPrice|null $productCalculatedPrice */
         $productCalculatedPrice = $this->getProductCalculatedPriceRepository()->find([
             'product' => $product->getId(),
             'pricingGroup' => $pricingGroup->getId(),

@@ -2,7 +2,6 @@
 
 namespace Shopsys\FrameworkBundle\Form\Transformers;
 
-use IteratorAggregate;
 use Shopsys\FrameworkBundle\Component\Image\ImageFacade;
 use Symfony\Component\Form\DataTransformerInterface;
 
@@ -29,7 +28,7 @@ class ImagesIdsToImagesTransformer implements DataTransformerInterface
     {
         $imagesIds = [];
 
-        if (is_array($images) || $images instanceof IteratorAggregate) {
+        if (is_iterable($images)) {
             foreach ($images as $image) {
                 $imagesIds[] = $image->getId();
             }

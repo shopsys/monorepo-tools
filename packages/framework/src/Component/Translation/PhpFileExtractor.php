@@ -172,7 +172,7 @@ class PhpFileExtractor implements FileVisitorInterface, NodeVisitor
 
     /**
      * @param \PhpParser\Node $node
-     * @return \Doctrine\Common\Annotations\Annotation[]
+     * @return \Doctrine\Common\Annotations\Annotation[]|\JMS\TranslationBundle\Annotation\Ignore[]
      */
     protected function getAnnotations(Node $node)
     {

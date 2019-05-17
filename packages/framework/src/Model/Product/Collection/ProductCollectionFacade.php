@@ -102,7 +102,7 @@ class ProductCollectionFacade
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\Product\Product[] $products
-     * @return \Shopsys\FrameworkBundle\Component\Image\Image[]
+     * @return \Shopsys\FrameworkBundle\Component\Image\Image[]|null[]
      */
     protected function getMainImagesIndexedByProductId(array $products)
     {

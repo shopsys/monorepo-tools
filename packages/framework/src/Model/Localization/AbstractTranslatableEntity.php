@@ -59,7 +59,7 @@ abstract class AbstractTranslatableEntity extends AbstractTranslatable
             );
         }
 
-        if ($this->currentTranslation && $this->currentTranslation->getLocale() === $locale) {
+        if ($this->currentTranslation !== null && $this->currentTranslation->getLocale() === $locale) {
             return $this->currentTranslation;
         }
 
