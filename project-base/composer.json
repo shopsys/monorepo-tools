@@ -86,7 +86,8 @@
         "tracy/tracy": "^2.4.13",
         "twig/extensions": "^1.5.1",
         "twig/twig": "^2.4.8",
-        "vasek-purchart/console-errors-bundle": "^1.0.1"
+        "vasek-purchart/console-errors-bundle": "^1.0.1",
+        "webmozart/assert": "^1.4"
     },
     "require-dev": {
         "ext-pgsql": "*",
