@@ -1,0 +1,60 @@
+@form-line-box-clicker-size: 41px;
+
+.form-line{
+    &__box {
+        margin-bottom: 4px;
+
+        &__title {
+            .clearfix();
+            position: relative;
+            padding: 6px 15px;
+            margin-bottom: 0;
+
+            background: @bg-info;
+            border: 1px solid @color-border;
+
+            &__image {
+                float: left;
+                width: 46px;
+                height: 26px;
+                position: relative;
+                margin-right: 10px;
+
+                text-align: center;
+                background: @color-f;
+
+                img {
+                    .center-image();
+                }
+            }
+
+            &__name {
+                line-height: 26px;
+
+                font-weight: bold;
+            }
+
+            &__click {
+                position: absolute;
+                display: block;
+                right: 0px;
+                top: 0;
+                width: @form-line-box-clicker-size;
+                height: @form-line-box-clicker-size;
+                line-height: @form-line-box-clicker-size;
+                text-align: center;
+
+                background: @color-blue;
+                color: @color-f;
+                cursor: pointer;
+            }
+        }
+
+        &__content {
+            padding: 6px 15px;
+
+            border: 1px solid @color-border;
+            border-top: none;
+        }
+    }
+}
