@@ -584,7 +584,7 @@
         data-products-picker-url="{{ url('admin_productpicker_pickmultiple', {jsInstanceId: '__js_instance_id__', allowMainVariants: allow_main_variants, allowVariants: allow_variants}) }}"
         data-products-picker-main-product-id="{{ form.vars.main_product ? form.vars.main_product.id : '' }}"
     >
-        <table class="table-form margin-bottom-20">
+        <table class="table-form">
             <thead class="js-products-picker-header">
                 <tr class="table-form__row">
                     <td class="table-form__cell">{{ 'Name'|trans }}</td>
@@ -597,10 +597,14 @@
                 {% endfor %}
             </tbody>
         </table>
-        <a href="#" class="btn btn--plus js-products-picker-button-add">
-            <i class="btn__icon">+</i>
-            {{ label_button_add }}
-        </a>
+        <div class="form-line form-line--no-top-border">
+            <div class="form-line__line form-line__line--no-space">
+                <a href="#" class="btn btn--plus js-products-picker-button-add">
+                    <i class="btn__icon">+</i>
+                    {{ label_button_add }}
+                </a>
+            </div>
+        </div>
     </div>
 {% endblock products_widget %}
 
