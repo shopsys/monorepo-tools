@@ -5,6 +5,7 @@
 @form-line-padding-vertical: 15px;
 @form-line-border-style: none;
 @form-line-min-height: 44px;
+@form-line-inner-padding: 13px 10px 11px 0;
 
 .form-line {
     .clearfix();
@@ -69,7 +70,7 @@
 
     &__label {
         width: @form-line-label-size;
-        padding: 13px 10px 11px 0;
+        padding: @form-line-inner-padding;
         float: left;
 
         font-family: @font-medium;
@@ -127,6 +128,10 @@
             padding-bottom: 14px;
         }
 
+        &--info {
+            padding-top: 6px;
+        }
+
         &--btn {
             padding-top: 3px;
             padding-bottom: 3px;
@@ -169,7 +174,7 @@
         }
 
         &__price {
-            padding: 13px 10px 11px 0;
+            padding: @form-line-inner-padding;
             width: 140px;
             display: inline-block;
             vertical-align: middle;

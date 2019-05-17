@@ -138,7 +138,7 @@
                         </strong>
                     </div>
                 {% endif %}
-                
+
                 <div {% if isMultidomain() %} class="form-line__box__content"{% endif %}>
                     {{ form_widget(contentForm) }}
                 </div>
@@ -226,7 +226,7 @@
                 <div class="form-line__item">
                     {{ form_widget(form) }}
                     {% if form.vars.icon_title is not null %}
-                        <i class="svg svg-info in-icon cursor-help form-line__item form-line__item--text js-tooltip"
+                        <i class="svg svg-info in-icon cursor-help form-line__item form-line__item--info js-tooltip"
                            data-toggle="tooltip" data-placement="right"
                            title="{{ form.vars.icon_title }}"
                         ></i>
@@ -760,7 +760,7 @@
     {% if isSimple|default(false) == false %}
             </div>
             {% if form.vars.icon_title is not null %}
-                <i class="svg svg-info in-icon cursor-help form-line__item form-line__item--text js-tooltip"
+                <i class="svg svg-info in-icon cursor-help form-line__item form-line__item--info js-tooltip"
                    data-toggle="tooltip" data-placement="right"
                    title="{{ form.vars.icon_title }}"
                 ></i>
@@ -912,7 +912,7 @@
         {{- block('appendix_block') -}}
     {% endif %}
     {% if form.vars.icon_title is not null %}
-        <i class="svg svg-info in-icon cursor-help form-line__item form-line__item--text js-tooltip"
+        <i class="svg svg-info in-icon cursor-help form-line__item form-line__item--info js-tooltip"
            data-toggle="tooltip" data-placement="right"
            title="{{ form.vars.icon_title }}"
         ></i>
@@ -1031,7 +1031,7 @@
         <span class="form-line__item form-line__item--text form-line__item--fixed-width-left">{{ symbolAfterInput }}</span>
     {% endif %}
     {% if attr.icon is defined %}
-        <i class="svg svg-{{ attr.iconType|default('info') }} in-icon cursor-help form-line__item form-line__item--text js-tooltip"
+        <i class="svg svg-{{ attr.iconType|default('info') }} in-icon cursor-help form-line__item form-line__item--info js-tooltip"
             data-toggle="tooltip" data-placement="{{ attr.iconPlacement|default('right') }}"
             title="{{ attr.iconTitle|default('') }}"
          ></i>
