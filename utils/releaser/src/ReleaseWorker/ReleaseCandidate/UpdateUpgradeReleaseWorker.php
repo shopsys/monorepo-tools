@@ -131,6 +131,8 @@ final class UpdateUpgradeReleaseWorker extends AbstractShopsysReleaseWorker
 
         FileSystem::write($upgradeFilePath, $newUpgradeContent);
         FileSystem::rename($upgradeFilePath, getcwd() . '/docs/upgrade/UPGRADE-' . $version->getVersionString() . '.md');
+
+        $this->processRunner->run('git add .');
     }
 
     /**
