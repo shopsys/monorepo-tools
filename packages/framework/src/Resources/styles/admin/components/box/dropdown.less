@@ -1,0 +1,94 @@
+@box-dropdown-bg: @color-grey-light;
+@box-dropdown-bg-hover: darken(@box-dropdown-bg, 5%);
+
+@box-dropdown-padding-horizontal: 15px;
+@box-dropdown-padding-vertical: 10px;
+@box-dropdown-font-size: 14px;
+@box-dropdown-arrow-size: 16px;
+
+@box-dropdown-item-bg: @color-f;
+@box-dropdown-item-bg-hover: @color-f;
+@box-dropdown-item-font-size: 13px;
+@box-dropdown-item-font-color: @color-base;
+
+.box-dropdown {
+    display: block;
+    position: relative;
+    cursor: pointer;
+
+    &__select {
+        padding: @box-dropdown-padding-vertical @box-dropdown-padding-horizontal;
+
+        border-radius: @radius;
+        background: @box-dropdown-bg;
+        color: @color-link;
+        font-weight: 500;
+        font-size: @box-dropdown-font-size;
+
+        &:hover {
+            background: @box-dropdown-bg-hover;
+        }
+
+        &__arrow {
+            display: inline-block;
+            width: @box-dropdown-arrow-size;
+            height: @box-dropdown-arrow-size;
+
+            &--down {
+                .draw-arrow-bottom(5px, @color-base, 5px, 8px);
+
+                .open & {
+                    display: none;
+                }
+            }
+
+            &--up {
+                .draw-arrow-top(5px, @color-base, 5px, 8px);
+                display: none;
+
+                .open & {
+                    display: inline-block;
+                }
+            }
+        }
+    }
+
+    &__options {
+        .reset-ul();
+        display: none;
+
+        .open & {
+            display: block;
+            position: absolute;
+            top: 100%;
+        }
+
+        &__item {
+            display: block;
+            background: @box-dropdown-item-bg;
+            padding: @box-dropdown-padding-vertical @box-dropdown-padding-horizontal;
+
+            &:hover {
+                background: @box-dropdown-item-bg-hover;
+            }
+
+            &:first-child {
+                border-top-right-radius: @radius;
+                border-top-left-radius: @radius;
+            }
+
+            &:last-child {
+                border-bottom-right-radius: @radius;
+                border-bottom-left-radius: @radius;
+            }
+
+            &__link {
+                white-space: nowrap;
+
+                color: @box-dropdown-item-font-color;
+                font-size: @box-dropdown-item-font-size;
+                font-weight: 500;
+            }
+        }
+    }
+}
