@@ -126,19 +126,22 @@
 
 {% block multidomain_form_rows_no_padding %}
     {% for domainId, contentForm in form %}
-        {% if isMultidomain() %}
-            <div class="form-line form-line--no-padd">
-                <div class="form-line__group">
-                            <span class="form-line__group__image">
-                                {{ domainIcon(domainId, 'large') }}
-                            </span>
-                    <strong class="form-line__group__name">{{ getDomainName(domainId) }}</strong>
-                </div>
-            </div>
-        {% endif %}
         <div class="form-line">
-            <div class="form-line__line form-line__line--no-space">
-                {{ form_widget(contentForm) }}
+            <div class="form-line__box js-entity-url-list-domain-{{ domainId }}">
+                {% if isMultidomain() %}
+                    <div class="form-line__box__title">
+                        <span class="form-line__box__title__image">
+                            {{ domainIcon(domainId, 'large') }}
+                        </span>
+                        <strong class="form-line__box__title__name">
+                            {{ 'Domain %domainName%'|trans({'%domainName%' : getDomainName(domainId)}) }}
+                        </strong>
+                    </div>
+                {% endif %}
+                
+                <div {% if isMultidomain() %} class="form-line__box__content"{% endif %}>
+                    {{ form_widget(contentForm) }}
+                </div>
             </div>
         </div>
     {% endfor %}

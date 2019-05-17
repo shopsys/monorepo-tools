@@ -1,83 +1,91 @@
 {% block product_calculated_prices_widget %}
-    <div class="form-price-heading">
-        <div class="form-price-heading__cell form-price-heading__cell--field">
-            {{ inputPriceLabel({ isSimple: true }) }}
-        </div>
-        <div class="form-price-heading__cell form-price-heading__cell--price">{{ 'Price excluding VAT'|trans }}</div>
-        <div class="form-price-heading__cell form-price-heading__cell--price">{{ 'Price including VAT'|trans }}</div>
 
-    </div>
+<div class="form-line">
     {% if productSellingPricesIndexedByDomainId is defined %}
         {% for domainId, productSellingPrices in productSellingPricesIndexedByDomainId %}
-            {% if isMultidomain() %}
-                <div class="form-line form-line--no-padd">
-                    <div class="form-line__line form-line__line--no-space">
-                        <div class="form-line__group">
-                        <span class="form-line__group__image">
+            <div class="form-line__box js-entity-url-list-domain-{{ domainId }}">
+                {% if isMultidomain() %}
+                    <div class="form-line__box__title">
+                        <span class="form-line__box__title__image">
                             {{ domainIcon(domainId, 'large') }}
                         </span>
-                            <strong class="form-line__group__name">
-                                {{ getDomainName(domainId) }}
-                            </strong>
-                        </div>
+                        <strong class="form-line__box__title__name">
+                            {{ 'Domain %domainName%'|trans({'%domainName%' : getDomainName(domainId)}) }}
+                        </strong>
                     </div>
-                </div>
-            {% endif %}
-            {% for productSellingPrice in productSellingPrices %}
-                <div class="form-line">
-                    <div class="form-line__label">
-                        {{ form_label(form.manualInputPricesByPricingGroupId[productSellingPrice.pricingGroup.id], productSellingPrice.pricingGroup.name, { isSimple: true, compulsoryClass: 'form-line__compulsory' }) }}
-                    </div>
-                    <div class="form-line__side">
-                        <div class="form-line__item">
-                            {{ form_widget(form.manualInputPricesByPricingGroupId[productSellingPrice.pricingGroup.id], { symbolAfterInput: currencySymbolByDomainId(domainId) }) }}
+                {% endif %}
+
+                <div {% if isMultidomain() %} class="form-line__box__content"{% endif %}>
+                    <div class="form-price-heading">
+                        <div class="form-price-heading__cell form-price-heading__cell--field">
+                            {{ inputPriceLabel({ isSimple: true }) }}
                         </div>
-                        <div class="form-line__item--right">
-                            <div class="form-line__item__price">
-                                {{ productSellingPrice.sellingPrice.priceWithoutVat|priceWithCurrencyByDomainId(domainId) }}
+                        <div class="form-price-heading__cell form-price-heading__cell--price">{{ 'Price excluding VAT'|trans }}</div>
+                        <div class="form-price-heading__cell form-price-heading__cell--price">{{ 'Price including VAT'|trans }}</div>
+                    </div>
+                    {% for productSellingPrice in productSellingPrices %}
+                        <div class="form-line form-line--in-box">
+                            <div class="form-line__label">
+                                {{ form_label(form.manualInputPricesByPricingGroupId[productSellingPrice.pricingGroup.id], productSellingPrice.pricingGroup.name, { isSimple: true, compulsoryClass: 'form-line__compulsory' }) }}
                             </div>
-                            <div class="form-line__item__price">
-                                <strong>{{ productSellingPrice.sellingPrice.priceWithVat|priceWithCurrencyByDomainId(domainId) }}</strong>
+                            <div class="form-line__side">
+                                <div class="form-line__item">
+                                    {{ form_widget(form.manualInputPricesByPricingGroupId[productSellingPrice.pricingGroup.id], { symbolAfterInput: currencySymbolByDomainId(domainId) }) }}
+                                </div>
+                                <div class="form-line__item--right">
+                                    <div class="form-line__item__price">
+                                        {{ productSellingPrice.sellingPrice.priceWithoutVat|priceWithCurrencyByDomainId(domainId) }}
+                                    </div>
+                                    <div class="form-line__item__price">
+                                        <strong>{{ productSellingPrice.sellingPrice.priceWithVat|priceWithCurrencyByDomainId(domainId) }}</strong>
+                                    </div>
+                                </div>
+                                <div>
+                                    {{ form_errors(form.manualInputPricesByPricingGroupId[productSellingPrice.pricingGroup.id] ) }}
+                                </div>
                             </div>
                         </div>
-                        <div>
-                            {{ form_errors(form.manualInputPricesByPricingGroupId[productSellingPrice.pricingGroup.id] ) }}
-                        </div>
-                    </div>
+                    {% endfor %}
                 </div>
-            {% endfor %}
+            </div>
         {% endfor %}
     {% elseif pricingGroupsIndexedByDomainId is defined %}
         {% for domainId, pricingGroups in pricingGroupsIndexedByDomainId %}
-            <div>
-                <div class="form-line form-line--no-padd">
-                    <div class="form-line__line form-line__line--no-space">
-                        {% if isMultidomain() %}
-                            <div class="form-line__group">
-                                <span class="form-line__group__image">
-                                    {{ domainIcon(domainId, 'large') }}
-                                </span>
-                                <strong class="form-line__group__name">
-                                    {{ getDomainName(domainId) }}
-                                </strong>
-                            </div>
-                        {% endif %}
+            <div class="form-line__box js-entity-url-list-domain-{{ domainId }}">
+                {% if isMultidomain() %}
+                    <div class="form-line__box__title">
+                        <span class="form-line__box__title__image">
+                            {{ domainIcon(domainId, 'large') }}
+                        </span>
+                        <strong class="form-line__box__title__name">
+                            {{ 'Domain %domainName%'|trans({'%domainName%' : getDomainName(domainId)}) }}
+                        </strong>
                     </div>
+                {% endif %}
+                <div {% if isMultidomain() %} class="form-line__box__content"{% endif %}>
+                    <div class="form-price-heading">
+                        <div class="form-price-heading__cell form-price-heading__cell--field">
+                            {{ inputPriceLabel({ isSimple: true }) }}
+                        </div>
+                        <div class="form-price-heading__cell form-price-heading__cell--price">{{ 'Price excluding VAT'|trans }}</div>
+                        <div class="form-price-heading__cell form-price-heading__cell--price">{{ 'Price including VAT'|trans }}</div>
+                    </div>
+                    {% for pricingGroup in pricingGroups %}
+                        <div class="form-line form-line--in-box">
+                            <div class="form-line__label">
+                                {{ form_label(form.manualInputPricesByPricingGroupId[pricingGroup.id], pricingGroup.name, { isSimple: true, compulsoryClass: 'form-line__compulsory' }) }}
+                            </div>
+                            <div class="form-line__side">
+                                <div class="form-line__item">
+                                    {{ form_widget(form.manualInputPricesByPricingGroupId[pricingGroup.id], { symbolAfterInput: currencySymbolByDomainId(domainId) }) }}
+                                </div>
+                            </div>
+                            {{ form_errors(form.manualInputPricesByPricingGroupId[pricingGroup.id]) }}
+                        </div>
+                    {% endfor %}
                 </div>
-                {% for pricingGroup in pricingGroups %}
-                    <div class="form-line">
-                        <div class="form-line__label">
-                            {{ form_label(form.manualInputPricesByPricingGroupId[pricingGroup.id], pricingGroup.name, { isSimple: true, compulsoryClass: 'form-line__compulsory' }) }}
-                        </div>
-                        <div class="form-line__side">
-                            <div class="form-line__item">
-                                {{ form_widget(form.manualInputPricesByPricingGroupId[pricingGroup.id], { symbolAfterInput: currencySymbolByDomainId(domainId) }) }}
-                            </div>
-                        </div>
-                        {{ form_errors(form.manualInputPricesByPricingGroupId[pricingGroup.id]) }}
-                    </div>
-                {% endfor %}
             </div>
         {% endfor %}
     {% endif %}
+</div>
 {% endblock product_calculated_prices_widget %}
