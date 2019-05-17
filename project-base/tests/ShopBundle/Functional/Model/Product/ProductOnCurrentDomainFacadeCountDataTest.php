@@ -632,10 +632,12 @@ abstract class ProductOnCurrentDomainFacadeCountDataTest extends TransactionFunc
 
         foreach ($valuesTextsByLocales as $valueTextsByLocales) {
             foreach ($valueTextsByLocales as $locale => $text) {
-                $parameterValues[] = $em->getRepository(ParameterValue::class)->findOneBy([
+                /** @var \Shopsys\FrameworkBundle\Model\Product\Parameter\ParameterValue $parameterValue */
+                $parameterValue = $em->getRepository(ParameterValue::class)->findOneBy([
                     'text' => $text,
                     'locale' => $locale,
                 ]);
+                $parameterValues[] = $parameterValue;
             }
         }
 

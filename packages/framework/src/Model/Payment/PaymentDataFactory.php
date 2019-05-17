@@ -89,6 +89,7 @@ class PaymentDataFactory implements PaymentDataFactoryInterface
         $paymentData->czkRounding = $payment->isCzkRounding();
         $paymentData->transports = $payment->getTransports()->toArray();
 
+        /** @var \Shopsys\FrameworkBundle\Model\Payment\PaymentTranslation[] $translations */
         $translations = $payment->getTranslations();
 
         $names = [];

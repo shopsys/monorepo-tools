@@ -22,7 +22,7 @@ abstract class AbstractMigration extends DoctrineAbstractMigration
      * @param array $params
      * @param array $types
      * @param \Doctrine\DBAL\Cache\QueryCacheProfile|null $qcp
-     * @return \Doctrine\DBAL\Driver\Statement
+     * @return \Doctrine\DBAL\Driver\ResultStatement
      */
     public function sql($query, array $params = [], $types = [], QueryCacheProfile $qcp = null)
     {

@@ -25,7 +25,7 @@ class Parameter extends AbstractTranslatableEntity
     protected $id;
 
     /**
-     * @var \Shopsys\FrameworkBundle\Model\Product\Parameter\ParameterTranslation[]
+     * @var \Doctrine\Common\Collections\ArrayCollection|\Shopsys\FrameworkBundle\Model\Product\Parameter\ParameterTranslation[]
      *
      * @Prezent\Translations(targetEntity="Shopsys\FrameworkBundle\Model\Product\Parameter\ParameterTranslation")
      */

@@ -218,7 +218,7 @@ class PhpFileExtractor implements FileVisitorInterface, NodeVisitor
     protected function getNodeName(Node $node)
     {
         if ($node instanceof MethodCall) {
-            return $node->name;
+            return (string)$node->name;
         } elseif ($node instanceof FuncCall && $node->name instanceof Name) {
             return (string)$node->name;
         } else {

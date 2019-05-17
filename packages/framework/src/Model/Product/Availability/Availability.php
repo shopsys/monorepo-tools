@@ -25,7 +25,7 @@ class Availability extends AbstractTranslatableEntity
     protected $id;
 
     /**
-     * @var \Shopsys\FrameworkBundle\Model\Product\Availability\AvailabilityTranslation[]
+     * @var \Doctrine\Common\Collections\ArrayCollection|\Shopsys\FrameworkBundle\Model\Product\Availability\AvailabilityTranslation[]
      *
      * @Prezent\Translations(targetEntity="Shopsys\FrameworkBundle\Model\Product\Availability\AvailabilityTranslation")
      */

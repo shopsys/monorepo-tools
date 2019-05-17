@@ -35,7 +35,7 @@ class ArrayDataSource implements DataSourceInterface
     }
 
     /**
-     * @param string $rowId
+     * @param int $rowId
      * @return mixed
      */
     public function getOneRow($rowId)

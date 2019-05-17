@@ -34,14 +34,14 @@ class Country extends AbstractTranslatableEntity
     protected $code;
 
     /**
-     * @var \Shopsys\FrameworkBundle\Model\Country\CountryTranslation[]
+     * @var \Doctrine\Common\Collections\ArrayCollection|\Shopsys\FrameworkBundle\Model\Country\CountryTranslation[]
      *
      * @Prezent\Translations(targetEntity="Shopsys\FrameworkBundle\Model\Country\CountryTranslation")
      */
     protected $translations;
 
     /**
-     * @var \Shopsys\FrameworkBundle\Model\Country\CountryDomain[]
+     * @var \Doctrine\Common\Collections\ArrayCollection|\Shopsys\FrameworkBundle\Model\Country\CountryDomain[]
      *
      * @ORM\OneToMany(targetEntity="Shopsys\FrameworkBundle\Model\Country\CountryDomain", mappedBy="country", cascade={"persist"}, fetch="EXTRA_LAZY")
      */

@@ -140,7 +140,7 @@ class CronFacadeTest extends TestCase
 
     /**
      * @param array $servicesIndexedById
-     * @param \Shopsys\FrameworkBundle\Component\Cron\CronTimeResolver|\PHPUnit\Framework\MockObject\MockObject|null $cronTimeResolverMock
+     * @param \Shopsys\FrameworkBundle\Component\Cron\CronTimeResolver|null $cronTimeResolverMock
      * @return \Shopsys\FrameworkBundle\Component\Cron\Config\CronConfig
      */
     private function createCronConfigWithRegisteredServices(array $servicesIndexedById, $cronTimeResolverMock = null)

@@ -79,7 +79,7 @@ class ImageSizeConfig
     }
 
     /**
-     * @return int
+     * @return bool
      */
     public function getCrop()
     {

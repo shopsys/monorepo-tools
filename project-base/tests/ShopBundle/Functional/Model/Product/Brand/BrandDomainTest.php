@@ -25,7 +25,7 @@ class BrandDomainTest extends TransactionFunctionalTestCase
     private $brandFactory;
 
     /**
-     * @var \Doctrine\ORM\EntityManager
+     * @var \Shopsys\FrameworkBundle\Component\EntityExtension\EntityManagerDecorator
      */
     private $em;
 

@@ -31,7 +31,7 @@ class VatFacadeTest extends TransactionFunctionalTestCase
 
         $vatData = new VatData();
         $vatData->name = 'name';
-        $vatData->percent = 10;
+        $vatData->percent = '10';
         $vatToDelete = $vatFacade->create($vatData);
         /** @var \Shopsys\FrameworkBundle\Model\Pricing\Vat\Vat $vatToReplaceWith */
         $vatToReplaceWith = $this->getReference(VatDataFixture::VAT_HIGH);

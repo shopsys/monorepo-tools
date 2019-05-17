@@ -3,6 +3,7 @@
 namespace Tests\MigrationBundle\Unit\Component\Doctrine;
 
 use Doctrine\DBAL\Schema\Column;
+use Doctrine\DBAL\Schema\ColumnDiff;
 use Doctrine\DBAL\Schema\ForeignKeyConstraint;
 use Doctrine\DBAL\Schema\Index;
 use Doctrine\DBAL\Schema\SchemaDiff;
@@ -24,7 +25,7 @@ class SchemaDiffFilterTest extends TestCase
         $tableDiff->addedColumns = [new Column('testColumnName1', $testType)];
         $tableDiff->addedForeignKeys = [new ForeignKeyConstraint(['testColumnName2'], 'foreignTableName1', [])];
         $tableDiff->addedIndexes = [new Index('testIndexName1', ['testColumnName3'])];
-        $tableDiff->changedColumns = [new Column('testColumnName4', $testType)];
+        $tableDiff->changedColumns = [new ColumnDiff('testColumnName1', new Column('testColumnName4', $testType))];
         $tableDiff->changedForeignKeys = [new ForeignKeyConstraint(['testColumnName5'], 'foreignTableName2', [])];
         $tableDiff->changedIndexes = [new Index('testIndexName2', ['testColumnName6'])];
         $tableDiff->newName = 'newTableName';

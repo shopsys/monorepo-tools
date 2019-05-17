@@ -67,7 +67,7 @@ class OrderPriceFilterWithVatFilter implements AdvancedSearchFilterInterface
 
     /**
      * @param string $operator
-     * @return string
+     * @return string|null
      */
     protected function getContainsDqlOperator($operator)
     {

@@ -265,7 +265,7 @@ class Order
     protected $note;
 
     /**
-     * @var int
+     * @var bool
      *
      * @ORM\Column(type="boolean")
      */
@@ -640,7 +640,7 @@ class Order
     }
 
     /**
-     * @return \Shopsys\FrameworkBundle\Model\Order\Item\OrderItem[]
+     * @return \Doctrine\Common\Collections\ArrayCollection|\Shopsys\FrameworkBundle\Model\Order\Item\OrderItem[]
      */
     public function getItems()
     {

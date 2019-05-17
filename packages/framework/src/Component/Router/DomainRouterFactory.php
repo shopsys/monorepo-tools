@@ -38,7 +38,7 @@ class DomainRouterFactory
     protected $routerConfiguration;
 
     /**
-     * @var \Symfony\Component\Routing\Router[]
+     * @var \Shopsys\FrameworkBundle\Component\Router\DomainRouter[]
      */
     protected $routersByDomainId = [];
 

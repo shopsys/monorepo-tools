@@ -48,7 +48,7 @@ class HeurekaFeedItemTest extends TestCase
     private $heurekaFeedItemFactory;
 
     /**
-     * @var \Shopsys\FrameworkBundle\Component\Domain\Config\DomainConfig|\PHPUnit\Framework\MockObject\MockObject
+     * @var \Shopsys\FrameworkBundle\Component\Domain\Config\DomainConfig
      */
     private $defaultDomain;
 

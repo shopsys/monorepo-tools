@@ -174,6 +174,7 @@ class ProductDataFactory implements ProductDataFactoryInterface
      */
     protected function fillFromProduct(ProductData $productData, Product $product)
     {
+        /** @var \Shopsys\FrameworkBundle\Model\Product\ProductTranslation[] $translations */
         $translations = $product->getTranslations();
         $names = [];
         $variantAliases = [];

@@ -11,6 +11,8 @@ class FrontBaseController extends Controller
      */
     public function getFlashMessageSender()
     {
-        return $this->get('shopsys.shop.component.flash_message.sender.front');
+        /** @var \Shopsys\FrameworkBundle\Component\FlashMessage\FlashMessageSender $flashMessageSender */
+        $flashMessageSender = $this->get('shopsys.shop.component.flash_message.sender.front');
+        return $flashMessageSender;
     }
 }

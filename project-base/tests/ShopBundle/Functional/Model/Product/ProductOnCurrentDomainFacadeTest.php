@@ -56,6 +56,7 @@ abstract class ProductOnCurrentDomainFacadeTest extends TransactionFunctionalTes
     {
         $category = $this->getReference(CategoryDataFixture::CATEGORY_PRINTERS);
 
+        /** @var \Shopsys\FrameworkBundle\Model\Product\Flag\Flag $flagTopProduct */
         $flagTopProduct = $this->getReference(FlagDataFixture::FLAG_TOP_PRODUCT);
         $productFilterData = new ProductFilterData();
         $productFilterData->flags = [$flagTopProduct];
@@ -68,7 +69,9 @@ abstract class ProductOnCurrentDomainFacadeTest extends TransactionFunctionalTes
     {
         $category = $this->getReference(CategoryDataFixture::CATEGORY_BOOKS);
 
+        /** @var \Shopsys\FrameworkBundle\Model\Product\Flag\Flag $flagTopProduct */
         $flagTopProduct = $this->getReference(FlagDataFixture::FLAG_TOP_PRODUCT);
+        /** @var \Shopsys\FrameworkBundle\Model\Product\Flag\Flag $flagActionProduct */
         $flagActionProduct = $this->getReference(FlagDataFixture::FLAG_ACTION_PRODUCT);
         $productFilterData = new ProductFilterData();
         $productFilterData->flags = [$flagTopProduct, $flagActionProduct];
@@ -81,6 +84,7 @@ abstract class ProductOnCurrentDomainFacadeTest extends TransactionFunctionalTes
     {
         $category = $this->getReference(CategoryDataFixture::CATEGORY_PRINTERS);
 
+        /** @var \Shopsys\ShopBundle\Model\Product\Brand\Brand $brandCanon */
         $brandCanon = $this->getReference(BrandDataFixture::BRAND_CANON);
         $productFilterData = new ProductFilterData();
         $productFilterData->brands = [$brandCanon];
@@ -93,7 +97,9 @@ abstract class ProductOnCurrentDomainFacadeTest extends TransactionFunctionalTes
     {
         $category = $this->getReference(CategoryDataFixture::CATEGORY_PRINTERS);
 
+        /** @var \Shopsys\ShopBundle\Model\Product\Brand\Brand $brandHp */
         $brandHp = $this->getReference(BrandDataFixture::BRAND_HP);
+        /** @var \Shopsys\ShopBundle\Model\Product\Brand\Brand $brandCanon */
         $brandCanon = $this->getReference(BrandDataFixture::BRAND_CANON);
         $productFilterData = new ProductFilterData();
         $productFilterData->brands = [$brandCanon, $brandHp];
@@ -211,10 +217,12 @@ abstract class ProductOnCurrentDomainFacadeTest extends TransactionFunctionalTes
 
         foreach ($valuesTextsByLocales as $valueTextsByLocales) {
             foreach ($valueTextsByLocales as $locale => $text) {
-                $parameterValues[] = $em->getRepository(ParameterValue::class)->findOneBy([
+                /** @var \Shopsys\FrameworkBundle\Model\Product\Parameter\ParameterValue $parameterValue */
+                $parameterValue = $em->getRepository(ParameterValue::class)->findOneBy([
                     'text' => $text,
                     'locale' => $locale,
                 ]);
+                $parameterValues[] = $parameterValue;
             }
         }
 
@@ -282,9 +290,11 @@ abstract class ProductOnCurrentDomainFacadeTest extends TransactionFunctionalTes
     {
         $productFilterData = new ProductFilterData();
 
+        /** @var \Shopsys\FrameworkBundle\Model\Product\Flag\Flag $flagTopProduct */
         $flagTopProduct = $this->getReference(FlagDataFixture::FLAG_NEW_PRODUCT);
         $productFilterData->flags = [$flagTopProduct];
 
+        /** @var \Shopsys\ShopBundle\Model\Product\Brand\Brand $brandCanon */
         $brandCanon = $this->getReference(BrandDataFixture::BRAND_CANON);
         $productFilterData->brands = [$brandCanon];
 
