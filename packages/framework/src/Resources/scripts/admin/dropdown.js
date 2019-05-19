@@ -26,7 +26,7 @@
 
     Shopsys.register.registerCallback(function ($container) {
         $container.filterAllNodes('.js-dropdown').each(function () {
-            var toggleMenu = new Shopsys.dropdown.DropDown($(this));
+            var DropDown = new Shopsys.dropdown.DropDown($(this));
             DropDown.init();
         });
     });
