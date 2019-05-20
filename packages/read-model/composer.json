@@ -24,7 +24,10 @@
         "php": "^7.1",
         "shopsys/framework": "dev-master",
         "twig/twig": "^2.7.0",
-        "webmozart/assert": "^1.4"
+        "webmozart/assert": "^1.4",
+        "shopsys/migrations": "dev-master",
+        "shopsys/form-types-bundle": "dev-master",
+        "shopsys/plugin-interface": "dev-master"
     },
     "require-dev": {
         "phpunit/phpunit": "^6.0|^7.0",
