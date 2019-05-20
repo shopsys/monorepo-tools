@@ -108,7 +108,7 @@ class PersonalDataController extends FrontBaseController
 
         $form->handleRequest($request);
 
-        if ($form->isValid() && $form->isSubmitted()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             $personalData = $this->personalDataAccessRequestFacade->createPersonalDataAccessRequest(
                 $form->getData(),
                 $this->domain->getId()
@@ -138,7 +138,7 @@ class PersonalDataController extends FrontBaseController
 
         $form->handleRequest($request);
 
-        if ($form->isValid() && $form->isSubmitted()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             $personalData = $this->personalDataAccessRequestFacade->createPersonalDataAccessRequest(
                 $form->getData(),
                 $this->domain->getId()
