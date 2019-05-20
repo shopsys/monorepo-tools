@@ -14,5 +14,7 @@ There you can find links to upgrade notes for other versions too.
         - if ($form->isValid() && $form->isSubmitted()) {
         + if ($form->isSubmitted() && $form->isValid()) {
         ```
+- fix the typo in Twig template `@ShopsysShop/Front/Content/Category/panel.html.twig` ([#1043](https://github.com/shopsys/shopsys/pull/1043))
+    - `categoriyWithLazyLoadedVisibleChildren` ⟶ `categoryWithLazyLoadedVisibleChildren`
 
 [shopsys/framework]: https://github.com/shopsys/framework
