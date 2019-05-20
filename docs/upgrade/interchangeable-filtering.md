@@ -46,7 +46,7 @@ Even then, you should make some upgrade steps to have your code tested properly 
     - update the test of the export repository `tests/ShopBundle/Functional/Model/Product/Search/ProductSearchExportRepositoryTest.php` to match the new Elasticsearch structure
         - you can copy [`ProductSearchExportRepositoryTest.php`](https://github.com/shopsys/project-base/blob/v7.2.0/tests/ShopBundle/Functional/Model/Product/Search/ProductSearchExportRepositoryTest.php) from `shopsys/project-base`
         - the test is written in such a way that supports both the SQL and Elasticsearch filtering (depending on the service in your DIC)
-    - recreate the structure and export products to Elasticsearch with `php phing product-search-recreate-structure product-search-export-products`
+    - recreate the structure and export products to Elasticsearch with `php phing product-search-recreate-structure product-search-export-products` on your machine, and also later during deployment of your application
 
 ## Use new Elasticsearch Filtering
 To start filtering products via Elasticsearch you have to do these steps.
@@ -79,4 +79,4 @@ To start filtering products via Elasticsearch you have to do these steps.
 - skip the path `'*/tests/ShopBundle/Functional/Model/Product/ProductOnCurrentDomainFacadeCountDataTest.php'` for the following coding standard sniffs in your `easy-coding-standard.yml` file
     `ObjectCalisthenics\Sniffs\Files\FunctionLengthSniff`
     `ObjectCalisthenics\Sniffs\Files\ClassTraitAndInterfaceLengthSniff`
-- don't forget to recreate the structure and export products to Elasticsearch with `php phing product-search-recreate-structure product-search-export-products`
+- don't forget to recreate the structure and export products to Elasticsearch with `php phing product-search-recreate-structure product-search-export-products`, especially later during deployment of your application
