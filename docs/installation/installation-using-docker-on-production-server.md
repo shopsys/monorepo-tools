@@ -1,6 +1,6 @@
 # Installation Using Docker on Production Server
 
-**This guide is for the version which is not released yet. See the [version for `v7.1.0`](https://github.com/shopsys/shopsys/blob/v7.1.0/docs/installation/installation-using-docker-on-production-server.md).**
+**This guide is for the version which is not released yet. See the [version for `v7.2.0`](https://github.com/shopsys/shopsys/blob/v7.2.0/docs/installation/installation-using-docker-on-production-server.md).**
 
 This guide shows you how to install and configure production server applications needed for your project based on [Shopsys Framework](https://github.com/shopsys/project-base).  
 We do not want to setup each application manually and we want to have separate runtime for each one.
@@ -327,7 +327,7 @@ docker run --detach --name build-php-fpm-container \
     --add-host redis:192.168.0.1 --add-host postgres:192.168.0.1 --add-host elasticsearch:192.168.0.1 --add-host smtp-server:192.168.0.1 \
     --network production_shopsys-network \
     production-php-fpm \
-    docker-php-entrypoint php-fpm
+    php-fpm
 
 # turn on maintenance page on actual running production container
 docker exec production-php-fpm php phing maintenance-on

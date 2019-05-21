@@ -69,6 +69,8 @@ abstract class AbstractShopsysReleaseWorker implements ReleaseWorkerInterface, S
             return;
         }
 
+        $this->configureGitIdentityIfMissing();
+
         $this->processRunner->run('git add .');
         $this->processRunner->run('git commit --message="' . addslashes($message) . '"');
     }
@@ -84,6 +86,26 @@ abstract class AbstractShopsysReleaseWorker implements ReleaseWorkerInterface, S
         $output = $process->getOutput();
 
         return !(bool)empty($output);
+    }
+
+    private function configureGitIdentityIfMissing(): void
+    {
+        $name = $this->getProcessResult(['git', 'config', 'user.name']);
+        $email = $this->getProcessResult(['git', 'config', 'user.email']);
+
+        if ($name === '' || $email === '') {
+            $this->symfonyStyle->warning('Git identity is not configured, unable to create commits...');
+        }
+
+        if ($name === '') {
+            $newName = $this->symfonyStyle->ask('What is your name?');
+            $this->processRunner->run(['git', 'config', 'user.name', $newName]);
+        }
+
+        if ($email === '') {
+            $newEmail = $this->symfonyStyle->ask('What is your email address?');
+            $this->processRunner->run(['git', 'config', 'user.email', $newEmail]);
+        }
     }
 
     /**

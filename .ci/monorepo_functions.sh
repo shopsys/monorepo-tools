@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
 # Lists packages that should be split
+# If you modify this list don't forget updating /docs/introduction/monorepo.md, /changelog-linker.yml, /CHANGELOG.md, and "replace" section in monorepo's composer.json as well
 get_all_packages() {
     echo "framework \
         google-cloud-bundle \

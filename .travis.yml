@@ -1,28 +1,53 @@
-language: php
+language: bash
+dist: xenial
+stages:
+-  Tests
 
-php:
-  - 7.1
+services:
+-   docker
 
 cache:
-  directories:
-    - ~/.composer/cache
-    - ~/.npm
+    directories:
+    -   $CACHE_DIR
 
+addons:
+    apt:
+        update: true
 env:
-  - ELASTIC_SEARCH_INDEX_PREFIX=""
+    global:
+    -   CACHE_DIR=$HOME/.cache/docker
+    -   CACHE_FILE_IMAGE=$CACHE_DIR/php-fpm.tar.gz
+    -   DOCKER_COMPOSE_VERSION=1.24.0
+    -   TRAVIS_USER_ID=$(id -u)
+    -   TRAVIS_GROUP_ID=$(id -g)
 
 before_install:
-  - phpenv config-add project-base/docker/php-fpm/php-ini-overrides.ini
-  - echo '' | pecl install redis-4.1.1
-  - echo "extension = redis.so" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
-  - phpenv config-rm xdebug.ini || return 0
-  - composer global require hirak/prestissimo
+-   sudo add-apt-repository ppa:rmescandon/yq -y
+-   sudo apt-get update
+-   sudo apt-get install -y yq
+-   curl -L https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-`uname -s`-`uname -m` > docker-compose
+-   chmod +x docker-compose
+-   sudo mv docker-compose /usr/local/bin
+-   mkdir -p $CACHE_DIR
+-   cp -f ./docker/conf/docker-compose.yml.dist ./docker-compose.yml
+-   yq write --inplace docker-compose.yml services.php-fpm.build.args.www_data_uid $TRAVIS_USER_ID
+-   yq write --inplace docker-compose.yml services.php-fpm.build.args.www_data_uid $TRAVIS_GROUP_ID
 
 install:
-  - COMPOSER_MEMORY_LIMIT=-1 travis_retry composer install --optimize-autoloader --no-interaction --no-progress --dev
-  - php phing npm
+-   docker load < $CACHE_FILE_IMAGE || true
+-   sudo ionice -c 2 -n 0 nice -n -20 docker-compose pull postgres elasticsearch redis selenium-server webserver
+-   docker-compose up -d postgres elasticsearch redis selenium-server php-fpm webserver
+-   if [[ ! -f "$CACHE_FILE_IMAGE" ]]; then docker save $(docker-compose images php-fpm | tail -1 | awk '{print $2}') | gzip -1 -c > $CACHE_FILE_IMAGE; fi
+-   docker ps
+-   docker --version
+-   docker-compose exec php-fpm composer install --no-interaction
+-   docker-compose exec php-fpm ./phing npm
 
-script:
-  - php phing standards
-  - php phing tests-static
+jobs:
+    include:
+    -   stage: Tests
+        name: "Smoke, Functional and Acceptance Tests"
+        script: docker-compose exec php-fpm ./phing db-create test-db-create build-demo-dev-quick error-pages-generate checks-ci
 
+    -   name: "Standards, Unit Tests"
+        script: docker-compose exec php-fpm ./phing standards tests-unit

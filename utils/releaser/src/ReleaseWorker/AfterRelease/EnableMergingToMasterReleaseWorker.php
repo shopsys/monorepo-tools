@@ -25,7 +25,7 @@ final class EnableMergingToMasterReleaseWorker extends AbstractShopsysReleaseWor
      */
     public function getPriority(): int
     {
-        return 155;
+        return 145;
     }
 
     /**

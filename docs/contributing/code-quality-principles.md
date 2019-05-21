@@ -59,7 +59,7 @@ It may be difficult to create the dependency - it may have also dependencies or 
 Once creating the dependency is not the class responsibility, the class code is much more straight-forward.
 
 We inject only dependencies that the class needs, it is forbidden to pass the service locator to the class.
-With service locator injection it is difficult to understand what the class really do (or need) and such class is difficult to test.
+With service locator injection it is difficult to understand what does the class really do (or need) and such class is difficult to test.
 
 We use constructor DI so the class is always in a consistent state.
 
@@ -91,8 +91,8 @@ This leads to safer code.
 
 ### Reasons
 
-We use scalar types (`int`, `float`, `string`, `bool`) as much as possible in new code.
-Using scalar types without strict mode leads to automatic type cast that can be even harmful (eg. input string `""` is cast to integer `0`).
+We use scalar type declarations (`int`, `float`, `string`, `bool`) as much as possible in new code.
+Using scalar type declarations without strict mode leads to automatic type cast that can be even harmful (eg. input string `""` is cast to integer `0`).
 We prevent this risky automatic type cast by declaring strict types.
 
 Please read more about scalar types and strict mode in [Scalar Type Declarations](https://wiki.php.net/rfc/scalar_type_hints_v5).
@@ -139,7 +139,7 @@ The most typical place is `project-base | framework` so you should keep this pri
 
 ### Reasons
 
-In a traditional dependency system, the top-most class depends on the lower layer, which depends on the lower layer and so no.
+In a traditional dependency system, the top-most class depends on the lower layer, which depends on the lower layer and so on.
 In the end, the top-most class indirectly depend on all lower classes in multiple modules.
 
 ```

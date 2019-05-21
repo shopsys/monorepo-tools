@@ -10,7 +10,6 @@ use Shopsys\Releaser\FileManipulator\InstallationGuideFileManipulator;
 use Shopsys\Releaser\FilesProvider\InstallationGuideFilesProvider;
 use Shopsys\Releaser\ReleaseWorker\AbstractShopsysReleaseWorker;
 use Shopsys\Releaser\Stage;
-use Symplify\MonorepoBuilder\Release\Message;
 
 final class SetUnreleasedNoteInInstallationGuidesReleaseWorker extends AbstractShopsysReleaseWorker
 {
@@ -66,7 +65,7 @@ final class SetUnreleasedNoteInInstallationGuidesReleaseWorker extends AbstractS
             FileSystem::write($fileInfo->getPathname(), $newContent);
         }
         $this->commit('docker installation guides: updated note about the unreleased version');
-        $this->symfonyStyle->success(Message::SUCCESS);
+        $this->confirm('Confirm you have pushed the new commit into the master branch');
     }
 
     /**

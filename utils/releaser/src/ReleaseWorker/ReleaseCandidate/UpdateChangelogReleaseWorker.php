@@ -76,7 +76,7 @@ final class UpdateChangelogReleaseWorker extends AbstractShopsysReleaseWorker
 
         $this->symfonyStyle->note(sprintf('You need to review the file, resolve unclassified entries, remove uninteresting entries, and commit the changes manually with "changelog is now updated for %s release"', $version->getVersionString()));
 
-        $this->symfonyStyle->note('You need to manually remove mentions of pull requests that were not merged into the released version (eg. merged into a branch for next major version)');
+        $this->symfonyStyle->note('You need to manually remove mentions of pull requests that were not merged into the released version (eg. merged into a branch for next major version) - you can filter pull requests on Github via "base:BRANCH_NAME"');
 
         $this->confirm('Confirm you have checked CHANGELOG.md and the changes are committed.');
     }
