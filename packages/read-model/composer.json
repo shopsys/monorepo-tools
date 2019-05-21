@@ -22,12 +22,14 @@
     },
     "require": {
         "php": "^7.1",
-        "shopsys/framework": "dev-master",
-        "twig/twig": "^2.7.0",
-        "webmozart/assert": "^1.4",
-        "shopsys/migrations": "dev-master",
         "shopsys/form-types-bundle": "dev-master",
-        "shopsys/plugin-interface": "dev-master"
+        "shopsys/framework": "dev-master",
+        "shopsys/migrations": "dev-master",
+        "shopsys/plugin-interface": "dev-master",
+        "symfony/config": "^3.4",
+        "symfony/dependency-injection": "^3.4",
+        "symfony/http-kernel": "^3.4",
+        "webmozart/assert": "^1.4"
     },
     "require-dev": {
         "phpunit/phpunit": "^6.0|^7.0",
