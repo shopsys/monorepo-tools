@@ -46,6 +46,7 @@ class AppKernel extends Kernel
             new Ivory\CKEditorBundle\IvoryCKEditorBundle(), // has to be loaded after FrameworkBundle and TwigBundle
             new Joschi127\DoctrineEntityOverrideBundle\Joschi127DoctrineEntityOverrideBundle(),
             new Shopsys\FrameworkBundle\ShopsysFrameworkBundle(),
+            new Shopsys\ReadModelBundle\ShopsysReadModelBundle(), // has to be loaded after ShopsysFrameworkBundle because it overrides Twig `image` function
             new Shopsys\ShopBundle\ShopsysShopBundle(), // must be loaded as last, because translations must overwrite other bundles
         ];
 

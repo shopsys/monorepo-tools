@@ -122,18 +122,18 @@ class FriendlyUrlRepository
     }
 
     /**
-     * @param object[] $entities
+     * @param object[]|int[] $entitiesOrEntityIds
      * @param string $routeName
      * @param int $domainId
      * @return \Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\FriendlyUrl[]
      */
-    public function getMainFriendlyUrlsByEntitiesIndexedByEntityId(array $entities, $routeName, $domainId)
+    public function getMainFriendlyUrlsByEntitiesIndexedByEntityId(array $entitiesOrEntityIds, $routeName, $domainId)
     {
         $queryBuilder = $this->em->createQueryBuilder()
             ->select('f')
             ->from(FriendlyUrl::class, 'f', 'f.entityId')
             ->andWhere('f.routeName = :routeName')->setParameter('routeName', $routeName)
-            ->andWhere('f.entityId IN (:entities)')->setParameter('entities', $entities)
+            ->andWhere('f.entityId IN (:entities)')->setParameter('entities', $entitiesOrEntityIds)
             ->andWhere('f.domainId = :domainId')->setParameter('domainId', $domainId)
             ->andWhere('f.main = TRUE');
 

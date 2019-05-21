@@ -39,6 +39,7 @@ If you are interested, you can read more about the monorepo approach here - http
 * [shopsys/migrations](https://github.com/shopsys/migrations)
 * [shopsys/monorepo-tools](https://github.com/shopsys/monorepo-tools)
 * [shopsys/google-cloud-bundle](https://github.com/shopsys/google-cloud-bundle)
+* [shopsys/read-model](https://github.com/shopsys/read-model)
 
 *Note: The list of these packages is maintained in the function `get_all_packages` in [`.ci/monorepo_functions.sh`](/.ci/monorepo_functions.sh).
 It is used for automated splitting of the monorepo and needs to be updated when a package is added or removed.*

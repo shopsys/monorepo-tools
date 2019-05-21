@@ -58,11 +58,35 @@ class ImageLocator
     {
         $path = $this->getRelativeImagePath($image->getEntityName(), $image->getType(), $sizeName);
 
-        $filename = str_replace(
-            ['{index}', '{filename}'],
-            [$additionalIndex, $image->getFilename()],
-            static::ADDITIONAL_IMAGE_MASK
-        );
+        $filename = $this->getAdditionalImageFilename($image->getFilename(), $additionalIndex);
+
+        return $path . $filename;
+    }
+
+    /**
+     * @param int $id
+     * @param string $extension
+     * @param string $entityName
+     * @param string|null $type
+     * @param string|null $sizeName
+     * @param int|null $additionalIndex
+     * @return string
+     */
+    public function getRelativeImageFilepathFromAttributes(
+        int $id,
+        string $extension,
+        string $entityName,
+        ?string $type,
+        string $sizeName = null,
+        int $additionalIndex = null
+    ): string {
+        $path = $this->getRelativeImagePath($entityName, $type, $sizeName);
+
+        $filename = $id . '.' . $extension;
+
+        if ($additionalIndex !== null) {
+            $filename = $this->getAdditionalImageFilename($filename, $additionalIndex);
+        }
 
         return $path . $filename;
     }
@@ -124,5 +148,19 @@ class ImageLocator
         }
 
         return implode('/', $pathParts) . '/';
+    }
+
+    /**
+     * @param string $filename
+     * @param int $additionalIndex
+     * @return string
+     */
+    protected function getAdditionalImageFilename(string $filename, int $additionalIndex): string
+    {
+        return str_replace(
+            ['{index}', '{filename}'],
+            [$additionalIndex, $filename],
+            static::ADDITIONAL_IMAGE_MASK
+        );
     }
 }

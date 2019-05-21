@@ -217,6 +217,9 @@
             <arg value="${path.packages}/migrations/tests"/>
         </exec>
         <exec executable="${path.vendor}/bin/phpunit" logoutput="true" passthru="true" checkreturn="true">
+            <arg value="${path.packages}/read-model/tests"/>
+        </exec>
+        <exec executable="${path.vendor}/bin/phpunit" logoutput="true" passthru="true" checkreturn="true">
             <arg value="--configuration"/>
             <arg value="${path.packages}/framework/phpunit.xml"/>
         </exec>

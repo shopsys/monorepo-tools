@@ -220,3 +220,7 @@ Other parts cannot be extended because PHP does not support multiple class inher
 There are some model-specific rules that help up maintain easier usage of the model.
 They also help which classes should be a part of the `Model` namespace and which shouldn't.
 You can read more about them in [Model Rules](./model-rules.md).
+
+## Read Model
+Next to the standard model described in this article, there is also an extra layer called "read model" that separates templates and the model itself in particular reading use-cases.
+You can read more in [Introduction to Read Model](/docs/model/introduction-to-read-model.md).

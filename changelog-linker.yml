@@ -31,6 +31,7 @@ parameters:
         'shopsys/migrations': 'https://github.com/shopsys/migrations'
         'shopsys/monorepo-tools': 'https://github.com/shopsys/monorepo-tools'
         'shopsys/google-cloud-bundle/': 'https://github.com/shopsys/google-cloud-bundle'
+        'shopsys/read-model': 'https://github.com/shopsys/read-model'
     package_aliases:
         'shopsys': 'shopsys/shopsys'
         'project-base': 'shopsys/project-base'
@@ -47,3 +48,4 @@ parameters:
         'migrations': 'shopsys/migrations'
         'monorepo-tools': 'shopsys/monorepo-tools'
         'google-cloud-bundle': 'shopsys/google-cloud-bundle'
+        'read-model': 'shopsys/read-model'

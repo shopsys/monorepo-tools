@@ -1,0 +1,38 @@
+{
+    "name": "shopsys/read-model",
+    "type": "library",
+    "description": "[experimental] Read model layer for Shopsys Framework",
+    "keywords": ["Read Model", "Shopsys Framework", "SSFW"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Shopsys",
+            "homepage": "https://www.shopsys.com/"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Shopsys\\ReadModelBundle\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\ReadModelBundle\\": "tests/"
+        }
+    },
+    "require": {
+        "php": "^7.1",
+        "shopsys/form-types-bundle": "dev-master",
+        "shopsys/framework": "dev-master",
+        "shopsys/migrations": "dev-master",
+        "shopsys/plugin-interface": "dev-master",
+        "symfony/config": "^3.4",
+        "symfony/dependency-injection": "^3.4",
+        "symfony/http-kernel": "^3.4",
+        "webmozart/assert": "^1.4"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^6.0|^7.0",
+        "shopsys/coding-standards": "dev-master"
+    }
+}
