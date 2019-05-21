@@ -77,8 +77,8 @@ class ImageLocator
         string $extension,
         string $entityName,
         ?string $type,
-        string $sizeName = null,
-        int $additionalIndex = null
+        ?string $sizeName = null,
+        ?int $additionalIndex = null
     ): string {
         $path = $this->getRelativeImagePath($entityName, $type, $sizeName);
 

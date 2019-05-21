@@ -285,7 +285,7 @@ class ImageFacade
         string $extension,
         string $entityName,
         ?string $type,
-        string $sizeName = null
+        ?string $sizeName = null
     ): string {
         $imageFilepath = $this->imageLocator->getRelativeImageFilepathFromAttributes($id, $extension, $entityName, $type, $sizeName);
 
@@ -329,7 +329,7 @@ class ImageFacade
         string $extension,
         string $entityName,
         ?string $type,
-        string $sizeName = null
+        ?string $sizeName = null
     ): array {
         $entityConfig = $this->imageConfig->getEntityConfigByEntityName($entityName);
         $sizeConfig = $entityConfig->getSizeConfig($sizeName);
