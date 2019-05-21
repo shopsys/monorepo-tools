@@ -33,7 +33,7 @@ class DomainRouter extends ChainRouter
         RouterInterface $basicRouter,
         RouterInterface $localizedRouter,
         FriendlyUrlRouter $friendlyUrlRouter,
-        LoggerInterface $logger = null
+        ?LoggerInterface $logger = null
     ) {
         parent::__construct($logger);
         $this->setContext($context);

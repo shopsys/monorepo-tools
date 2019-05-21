@@ -28,7 +28,7 @@ class FriendlyUrlUniqueResultFactory
         int $attempt,
         FriendlyUrl $friendlyUrl,
         string $entityName,
-        array $matchedRouteData = null
+        ?array $matchedRouteData = null
     ) {
         if ($matchedRouteData === null) {
             return new FriendlyUrlUniqueResult(true, $friendlyUrl);

@@ -10,7 +10,7 @@ class UnsupportedLocaleException extends Exception implements DataFixtureExcepti
      * @param string $locale
      * @param \Exception|null $previous
      */
-    public function __construct($locale, Exception $previous = null)
+    public function __construct($locale, ?Exception $previous = null)
     {
         parent::__construct('Locale "' . $locale . '" is not supported.', 0, $previous);
     }

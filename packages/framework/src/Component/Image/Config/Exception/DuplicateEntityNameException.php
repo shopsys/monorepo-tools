@@ -15,7 +15,7 @@ class DuplicateEntityNameException extends Exception implements ImageConfigExcep
      * @param string $entityName
      * @param \Exception|null $previous
      */
-    public function __construct($entityName, Exception $previous = null)
+    public function __construct($entityName, ?Exception $previous = null)
     {
         $this->entityName = $entityName;
 

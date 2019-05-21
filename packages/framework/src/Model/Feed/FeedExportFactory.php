@@ -75,7 +75,7 @@ class FeedExportFactory
      * @param string|null $lastSeekId
      * @return \Shopsys\FrameworkBundle\Model\Feed\FeedExport
      */
-    public function create(FeedInterface $feed, DomainConfig $domainConfig, string $lastSeekId = null): FeedExport
+    public function create(FeedInterface $feed, DomainConfig $domainConfig, ?string $lastSeekId = null): FeedExport
     {
         $feedRenderer = $this->feedRendererFactory->create($feed);
         $feedFilepath = $this->feedPathProvider->getFeedFilepath($feed->getInfo(), $domainConfig);

@@ -66,7 +66,7 @@ class Cart
      * @param string $cartIdentifier
      * @param \Shopsys\FrameworkBundle\Model\Customer\User|null $user
      */
-    public function __construct(string $cartIdentifier, User $user = null)
+    public function __construct(string $cartIdentifier, ?User $user = null)
     {
         $this->cartIdentifier = $cartIdentifier;
         $this->user = $user;

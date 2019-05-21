@@ -82,11 +82,11 @@ class OrderPreview
         array $quantifiedItemsDiscountsByIndex,
         Price $productsPrice,
         Price $totalPrice,
-        Transport $transport = null,
-        Price $transportPrice = null,
-        Payment $payment = null,
-        Price $paymentPrice = null,
-        Price $roundingPrice = null,
+        ?Transport $transport = null,
+        ?Price $transportPrice = null,
+        ?Payment $payment = null,
+        ?Price $paymentPrice = null,
+        ?Price $roundingPrice = null,
         $promoCodeDiscountPercent = null
     ) {
         $this->quantifiedProductsByIndex = $quantifiedProductsByIndex;

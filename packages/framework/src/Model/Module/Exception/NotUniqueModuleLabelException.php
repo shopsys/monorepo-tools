@@ -10,7 +10,7 @@ class NotUniqueModuleLabelException extends Exception implements ModuleException
      * @param string[] $moduleLabelsIndexedByNames
      * @param \Exception|null $previous
      */
-    public function __construct(array $moduleLabelsIndexedByNames, Exception $previous = null)
+    public function __construct(array $moduleLabelsIndexedByNames, ?Exception $previous = null)
     {
         $moduleDescriptions = [];
         foreach ($moduleLabelsIndexedByNames as $moduleName => $moduleLabel) {

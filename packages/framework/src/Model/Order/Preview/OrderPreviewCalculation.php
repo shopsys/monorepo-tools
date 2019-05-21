@@ -77,10 +77,10 @@ class OrderPreviewCalculation
         Currency $currency,
         int $domainId,
         array $quantifiedProducts,
-        Transport $transport = null,
-        Payment $payment = null,
-        User $user = null,
-        string $promoCodeDiscountPercent = null
+        ?Transport $transport = null,
+        ?Payment $payment = null,
+        ?User $user = null,
+        ?string $promoCodeDiscountPercent = null
     ): OrderPreview {
         $quantifiedItemsPrices = $this->quantifiedProductPriceCalculation->calculatePrices(
             $quantifiedProducts,
@@ -158,8 +158,8 @@ class OrderPreviewCalculation
         Payment $payment,
         Currency $currency,
         Price $productsPrice,
-        Price $transportPrice = null,
-        Price $paymentPrice = null
+        ?Price $transportPrice = null,
+        ?Price $paymentPrice = null
     ): ?Price {
         $totalPrice = $this->calculateTotalPrice(
             $productsPrice,
@@ -180,9 +180,9 @@ class OrderPreviewCalculation
      */
     protected function calculateTotalPrice(
         Price $productsPrice,
-        Price $transportPrice = null,
-        Price $paymentPrice = null,
-        Price $roundingPrice = null
+        ?Price $transportPrice = null,
+        ?Price $paymentPrice = null,
+        ?Price $roundingPrice = null
     ): Price {
         $totalPrice = Price::zero();
 

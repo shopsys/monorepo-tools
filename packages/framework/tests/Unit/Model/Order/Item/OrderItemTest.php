@@ -197,7 +197,7 @@ class OrderItemTest extends TestCase
      * @param \Shopsys\FrameworkBundle\Model\Product\Product|null $product
      * @return \Shopsys\FrameworkBundle\Model\Order\Item\OrderItem
      */
-    private function createOrderProduct(Product $product = null): OrderItem
+    private function createOrderProduct(?Product $product = null): OrderItem
     {
         $orderProduct = new OrderItem(
             $this->createOrderMock(),

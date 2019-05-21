@@ -125,7 +125,7 @@ class CustomerDataFactory implements CustomerDataFactoryInterface
      * @param \Shopsys\FrameworkBundle\Model\Customer\DeliveryAddress|null $deliveryAddress
      * @return \Shopsys\FrameworkBundle\Model\Customer\DeliveryAddressData
      */
-    protected function getAmendedDeliveryAddressDataByOrder(Order $order, DeliveryAddress $deliveryAddress = null)
+    protected function getAmendedDeliveryAddressDataByOrder(Order $order, ?DeliveryAddress $deliveryAddress = null)
     {
         if ($deliveryAddress === null) {
             $deliveryAddressData = $this->deliveryAddressDataFactory->create();

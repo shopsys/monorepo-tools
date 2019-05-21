@@ -76,7 +76,7 @@ class ErrorController extends FrontBaseController
     public function showAction(
         Request $request,
         FlattenException $exception,
-        DebugLoggerInterface $logger = null
+        ?DebugLoggerInterface $logger = null
     ) {
         if ($this->isUnableToResolveDomainInNotDebug($exception)) {
             return $this->createUnableToResolveDomainResponse($request);

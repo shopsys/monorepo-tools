@@ -12,7 +12,7 @@ class UnknownWindowsLocaleException extends Exception
      * @param mixed $collation
      * @param \Throwable|null $previous
      */
-    public function __construct($collation, Throwable $previous = null)
+    public function __construct($collation, ?Throwable $previous = null)
     {
         $message = sprintf(
             'Matching Windows locale for collation "%s" is not known. Consider updating %s class.',

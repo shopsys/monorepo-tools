@@ -11,7 +11,7 @@ class AdvertPositionNotKnownException extends Exception implements AdvertExcepti
      * @param array $knownPositionsNames
      * @param \Exception|null $previous
      */
-    public function __construct(string $positionName, array $knownPositionsNames, Exception $previous = null)
+    public function __construct(string $positionName, array $knownPositionsNames, ?Exception $previous = null)
     {
         $message = sprintf(
             'Unknown advert position name "%s". Known names are %s.',

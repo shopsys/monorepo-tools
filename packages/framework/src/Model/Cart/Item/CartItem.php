@@ -117,7 +117,7 @@ class CartItem
      * @param string|null $locale
      * @return string|null
      */
-    public function getName(string $locale = null): ?string
+    public function getName(?string $locale = null): ?string
     {
         return $this->getProduct()->getName($locale);
     }

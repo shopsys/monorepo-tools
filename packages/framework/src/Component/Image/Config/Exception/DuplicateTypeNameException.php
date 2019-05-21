@@ -15,7 +15,7 @@ class DuplicateTypeNameException extends Exception implements ImageConfigExcepti
      * @param string|null $typeName
      * @param \Exception|null $previous
      */
-    public function __construct($typeName = null, Exception $previous = null)
+    public function __construct($typeName = null, ?Exception $previous = null)
     {
         $this->typeName = $typeName;
 

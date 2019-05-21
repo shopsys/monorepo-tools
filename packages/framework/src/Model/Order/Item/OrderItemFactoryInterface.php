@@ -29,7 +29,7 @@ interface OrderItemFactoryInterface
         int $quantity,
         ?string $unitName,
         ?string $catnum,
-        Product $product = null
+        ?Product $product = null
     ): OrderItem;
 
     /**

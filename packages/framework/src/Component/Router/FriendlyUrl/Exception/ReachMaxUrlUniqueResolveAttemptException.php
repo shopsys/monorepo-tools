@@ -12,7 +12,7 @@ class ReachMaxUrlUniqueResolveAttemptException extends Exception implements Frie
      * @param int $attempt
      * @param \Exception|null $previous
      */
-    public function __construct(FriendlyUrl $friendlyUrl, $attempt, Exception $previous = null)
+    public function __construct(FriendlyUrl $friendlyUrl, $attempt, ?Exception $previous = null)
     {
         $message = 'Route "' . $friendlyUrl->getRouteName() . '" (param id = "' . $friendlyUrl->getEntityId() . '")'
             . ' reach max attempt (' . $attempt . ') for unique resolving.';

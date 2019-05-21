@@ -123,7 +123,7 @@ class GridView
      * @param \Symfony\Component\Form\FormView|null $formView
      * @param \Symfony\Component\Form\FormView
      */
-    public function renderCell(Column $column, array $row = null, FormView $formView = null)
+    public function renderCell(Column $column, ?array $row = null, ?FormView $formView = null)
     {
         if ($row !== null) {
             $value = $this->getCellValue($column, $row);
@@ -199,7 +199,7 @@ class GridView
      * @param array|string|null $removeParameters
      * @return string
      */
-    public function getUrl(array $parameters = null, $removeParameters = null)
+    public function getUrl(?array $parameters = null, $removeParameters = null)
     {
         $masterRequest = $this->requestStack->getMasterRequest();
         $routeParameters = $this->grid->getUrlParameters($parameters, $removeParameters);

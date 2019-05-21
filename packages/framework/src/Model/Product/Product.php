@@ -279,7 +279,7 @@ class Product extends AbstractTranslatableEntity
      * @param \Shopsys\FrameworkBundle\Model\Product\ProductCategoryDomainFactoryInterface $productCategoryDomainFactory
      * @param \Shopsys\FrameworkBundle\Model\Product\Product[]|null $variants
      */
-    protected function __construct(ProductData $productData, ProductCategoryDomainFactoryInterface $productCategoryDomainFactory, array $variants = null)
+    protected function __construct(ProductData $productData, ProductCategoryDomainFactoryInterface $productCategoryDomainFactory, ?array $variants = null)
     {
         $this->translations = new ArrayCollection();
         $this->domains = new ArrayCollection();
@@ -599,7 +599,7 @@ class Product extends AbstractTranslatableEntity
     /**
      * @param \Shopsys\FrameworkBundle\Model\Product\Availability\Availability|null $outOfStockAvailability
      */
-    public function setOutOfStockAvailability(Availability $outOfStockAvailability = null)
+    public function setOutOfStockAvailability(?Availability $outOfStockAvailability = null)
     {
         $this->outOfStockAvailability = $outOfStockAvailability;
         $this->recalculateAvailability = true;

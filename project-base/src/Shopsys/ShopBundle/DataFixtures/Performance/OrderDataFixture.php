@@ -194,7 +194,7 @@ class OrderDataFixture
      * @param \Shopsys\FrameworkBundle\Model\Customer\User $user
      * @return \Shopsys\FrameworkBundle\Model\Order\OrderData
      */
-    private function createOrderData(User $user = null)
+    private function createOrderData(?User $user = null)
     {
         $orderData = $this->orderDataFactory->create();
 

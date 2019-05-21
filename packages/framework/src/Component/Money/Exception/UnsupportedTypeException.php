@@ -14,7 +14,7 @@ final class UnsupportedTypeException extends InvalidArgumentException implements
      * @param string[] $supportedTypes
      * @param \Throwable|null $previous
      */
-    public function __construct($value, array $supportedTypes, Throwable $previous = null)
+    public function __construct($value, array $supportedTypes, ?Throwable $previous = null)
     {
         $message = sprintf('Expected one of: "%s"', implode('", "', $supportedTypes));
         $message .= sprintf(', "%s" given.', \is_object($value) ? \get_class($value) : \gettype($value));

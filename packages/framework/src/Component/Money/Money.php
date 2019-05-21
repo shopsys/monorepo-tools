@@ -225,7 +225,7 @@ final class Money implements JsonSerializable
      * @param int|null $scale
      * @return \Litipk\BigNumbers\Decimal
      */
-    protected static function createDecimal($value, int $scale = null): Decimal
+    protected static function createDecimal($value, ?int $scale = null): Decimal
     {
         if (is_int($value)) {
             return Decimal::fromInteger($value);

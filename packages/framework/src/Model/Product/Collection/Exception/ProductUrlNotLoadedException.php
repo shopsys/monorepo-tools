@@ -13,7 +13,7 @@ class ProductUrlNotLoadedException extends Exception implements ProductCollectio
      * @param \Shopsys\FrameworkBundle\Component\Domain\Config\DomainConfig $domainConfig
      * @param \Exception|null $previous
      */
-    public function __construct(Product $product, DomainConfig $domainConfig, Exception $previous = null)
+    public function __construct(Product $product, DomainConfig $domainConfig, ?Exception $previous = null)
     {
         $message = sprintf(
             'URL for product with ID %d on %s have not been loaded via ProductUrlsBatchLoader::loadForProducts().',

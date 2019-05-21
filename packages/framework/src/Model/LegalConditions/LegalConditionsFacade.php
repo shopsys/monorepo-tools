@@ -52,7 +52,7 @@ class LegalConditionsFacade
      * @param \Shopsys\FrameworkBundle\Model\Article\Article|null $termsAndConditions
      * @param int $domainId
      */
-    public function setTermsAndConditions(Article $termsAndConditions = null, $domainId)
+    public function setTermsAndConditions(?Article $termsAndConditions = null, $domainId)
     {
         $this->setArticle(Setting::TERMS_AND_CONDITIONS_ARTICLE_ID, $termsAndConditions, $domainId);
     }
@@ -78,7 +78,7 @@ class LegalConditionsFacade
      * @param \Shopsys\FrameworkBundle\Model\Article\Article|null $privacyPolicy
      * @param int $domainId
      */
-    public function setPrivacyPolicy(Article $privacyPolicy = null, $domainId)
+    public function setPrivacyPolicy(?Article $privacyPolicy = null, $domainId)
     {
         $this->setArticle(Setting::PRIVACY_POLICY_ARTICLE_ID, $privacyPolicy, $domainId);
     }
@@ -124,7 +124,7 @@ class LegalConditionsFacade
      * @param \Shopsys\FrameworkBundle\Model\Article\Article|null $privacyPolicy
      * @param int $domainId
      */
-    protected function setArticle($settingKey, Article $privacyPolicy = null, $domainId)
+    protected function setArticle($settingKey, ?Article $privacyPolicy = null, $domainId)
     {
         $articleId = null;
         if ($privacyPolicy !== null) {

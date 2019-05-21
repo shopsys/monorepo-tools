@@ -24,7 +24,7 @@ class FilesystemLoader extends BaseFilesystemLoader
         FileLocatorInterface $locator,
         TemplateNameParserInterface $parser,
         ?string $rootPath = null,
-        Domain $domain = null
+        ?Domain $domain = null
     ) {
         $this->domain = $domain;
         parent::__construct($locator, $parser, $rootPath);

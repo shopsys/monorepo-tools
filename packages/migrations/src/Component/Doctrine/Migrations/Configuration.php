@@ -39,7 +39,7 @@ class Configuration extends DoctrineConfiguration
         Connection $connection,
         OutputWriter $outputWriter,
         MigrationFinderInterface $finder,
-        QueryWriter $queryWriter = null
+        ?QueryWriter $queryWriter = null
     ) {
         $this->migrationsLock = $migrationsLock;
         $this->outputWriter = $outputWriter;

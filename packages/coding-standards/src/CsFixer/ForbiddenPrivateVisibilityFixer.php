@@ -24,7 +24,7 @@ final class ForbiddenPrivateVisibilityFixer implements DefinedFixerInterface, Co
     /**
      * {@inheritdoc}
      */
-    public function configure(array $configuration = null): void
+    public function configure(?array $configuration = null): void
     {
         if ($configuration !== null) {
             $this->analyzedNamespaces = $this->extractNamespaces($configuration);

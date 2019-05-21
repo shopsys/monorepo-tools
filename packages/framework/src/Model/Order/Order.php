@@ -318,7 +318,7 @@ class Order
         OrderData $orderData,
         $orderNumber,
         $urlHash,
-        User $user = null
+        ?User $user = null
     ) {
         $this->transport = $orderData->transport;
         $this->payment = $orderData->payment;

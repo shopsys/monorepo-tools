@@ -13,7 +13,7 @@ class ProductParametersNotLoadedException extends Exception implements ProductCo
      * @param \Shopsys\FrameworkBundle\Component\Domain\Config\DomainConfig $domainConfig
      * @param \Exception|null $previous
      */
-    public function __construct(Product $product, DomainConfig $domainConfig, Exception $previous = null)
+    public function __construct(Product $product, DomainConfig $domainConfig, ?Exception $previous = null)
     {
         $message = sprintf(
             'Parameters for product with ID %d on %s have not been loaded via ProductParametersBatchLoader::loadForProducts().',

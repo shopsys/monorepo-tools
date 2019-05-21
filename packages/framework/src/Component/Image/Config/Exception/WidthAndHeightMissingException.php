@@ -11,7 +11,7 @@ class WidthAndHeightMissingException extends Exception implements ImageConfigExc
      * @param string $additionalSizeName
      * @param \Exception|null $previous
      */
-    public function __construct(string $additionalSizeName, Exception $previous = null)
+    public function __construct(string $additionalSizeName, ?Exception $previous = null)
     {
         $message = sprintf(
             'You have to specify at least one of "%s" or "%s" for additional size "%s"',

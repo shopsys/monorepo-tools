@@ -11,7 +11,7 @@ class PluginCrudExtensionAlreadyRegisteredException extends Exception implements
      * @param string $key
      * @param \Exception|null $previous
      */
-    public function __construct($type, $key, Exception $previous = null)
+    public function __construct($type, $key, ?Exception $previous = null)
     {
         $message = sprintf('Plugin CRUD extension of type "%s" with key "%s" was already registered.', $type, $key);
 

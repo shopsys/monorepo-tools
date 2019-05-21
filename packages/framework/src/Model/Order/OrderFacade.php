@@ -253,7 +253,7 @@ class OrderFacade
      * @param \Shopsys\FrameworkBundle\Model\Customer\User|null $user
      * @return \Shopsys\FrameworkBundle\Model\Order\Order
      */
-    public function createOrder(OrderData $orderData, OrderPreview $orderPreview, User $user = null)
+    public function createOrder(OrderData $orderData, OrderPreview $orderPreview, ?User $user = null)
     {
         $orderNumber = $this->orderNumberSequenceRepository->getNextNumber();
         $orderUrlHash = $this->orderHashGeneratorRepository->getUniqueHash();

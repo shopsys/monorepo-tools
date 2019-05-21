@@ -102,7 +102,7 @@ class MultidomainArticleDataFixture extends AbstractReferenceFixture implements 
      * @param \Shopsys\FrameworkBundle\Model\Article\ArticleData $articleData
      * @param string|null $referenceName
      */
-    protected function createArticle(ArticleData $articleData, string $referenceName = null)
+    protected function createArticle(ArticleData $articleData, ?string $referenceName = null)
     {
         $article = $this->articleFacade->create($articleData);
         if ($referenceName !== null) {

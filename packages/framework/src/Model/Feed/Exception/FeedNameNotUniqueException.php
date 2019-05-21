@@ -10,7 +10,7 @@ class FeedNameNotUniqueException extends Exception implements FeedException
      * @param string $name
      * @param \Exception|null $previous
      */
-    public function __construct(string $name, Exception $previous = null)
+    public function __construct(string $name, ?Exception $previous = null)
     {
         $message = 'Feed with name "' . $name . ' is already registered. Feed names must be unique.';
 

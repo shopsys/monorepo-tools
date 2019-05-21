@@ -231,7 +231,7 @@ class PriceExtension extends Twig_Extension
      * @param string|null $locale
      * @return string
      */
-    private function formatCurrency(Money $price, Currency $currency, string $locale = null): string
+    private function formatCurrency(Money $price, Currency $currency, ?string $locale = null): string
     {
         if ($locale === null) {
             $locale = $this->localization->getLocale();

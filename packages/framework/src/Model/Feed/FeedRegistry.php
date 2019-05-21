@@ -43,7 +43,7 @@ class FeedRegistry
      * @param \Shopsys\FrameworkBundle\Model\Feed\FeedInterface $feed
      * @param string|null $type
      */
-    public function registerFeed(FeedInterface $feed, string $type = null): void
+    public function registerFeed(FeedInterface $feed, ?string $type = null): void
     {
         $type = Utils::ifNull($type, $this->defaultType);
         $this->assertTypeIsKnown($type);

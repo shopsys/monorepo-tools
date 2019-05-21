@@ -151,7 +151,7 @@ class DailyFeedCronModule implements IteratedCronModuleInterface
      * @param int|null $lastSeekId
      * @return \Shopsys\FrameworkBundle\Model\Feed\FeedExport
      */
-    protected function createCurrentFeedExport(int $lastSeekId = null): FeedExport
+    protected function createCurrentFeedExport(?int $lastSeekId = null): FeedExport
     {
         return $this->feedFacade->createFeedExport(
             $this->feedExportCreationDataQueue->getCurrentFeedName(),

@@ -21,7 +21,7 @@ class ImageSizeNotFoundException extends Exception implements ImageConfigExcepti
      * @param string $sizeName
      * @param \Exception|null $previous
      */
-    public function __construct($entityClass, $sizeName, Exception $previous = null)
+    public function __construct($entityClass, $sizeName, ?Exception $previous = null)
     {
         $this->entityClass = $entityClass;
         $this->sizeName = $sizeName;

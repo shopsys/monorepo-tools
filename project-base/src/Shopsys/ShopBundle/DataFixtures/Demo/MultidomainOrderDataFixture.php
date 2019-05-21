@@ -210,7 +210,7 @@ class MultidomainOrderDataFixture extends AbstractReferenceFixture implements De
     protected function createOrder(
         OrderData $orderData,
         array $products,
-        User $user = null
+        ?User $user = null
     ) {
         $quantifiedProducts = [];
         foreach ($products as $productReferenceName => $quantity) {

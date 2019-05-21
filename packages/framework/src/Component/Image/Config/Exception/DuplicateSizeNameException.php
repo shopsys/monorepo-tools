@@ -15,7 +15,7 @@ class DuplicateSizeNameException extends Exception implements ImageConfigExcepti
      * @param string|null $sizeName
      * @param \Exception|null $previous
      */
-    public function __construct($sizeName = null, Exception $previous = null)
+    public function __construct($sizeName = null, ?Exception $previous = null)
     {
         $this->sizeName = $sizeName;
 

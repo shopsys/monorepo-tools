@@ -181,7 +181,7 @@ class CountryFormTypeTest extends TypeTestCase
      * @param \Shopsys\FrameworkBundle\Model\Country\Country|null $country
      * @return \Symfony\Component\Form\FormInterface
      */
-    private function createCountryForm(Country $country = null): FormInterface
+    private function createCountryForm(?Country $country = null): FormInterface
     {
         return $this->factory->create(CountryFormType::class, null, ['country' => $country]);
     }

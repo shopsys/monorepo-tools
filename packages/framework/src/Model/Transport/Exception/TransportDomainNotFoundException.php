@@ -11,7 +11,7 @@ class TransportDomainNotFoundException extends Exception implements TransportExc
      * @param int $domainId
      * @param \Exception|null $previous
      */
-    public function __construct(int $transportId = null, int $domainId, Exception $previous = null)
+    public function __construct(?int $transportId = null, int $domainId, ?Exception $previous = null)
     {
         $transportDescription = $transportId !== null ? sprintf('with ID %d', $transportId) : 'without ID';
         $message = sprintf('TransportDomain for transport %s and domain ID %d not found.', $transportDescription, $domainId);

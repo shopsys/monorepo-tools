@@ -78,7 +78,7 @@ class FeedFacade
      * @param int|null $lastSeekId
      * @return \Shopsys\FrameworkBundle\Model\Feed\FeedExport
      */
-    public function createFeedExport(string $feedName, DomainConfig $domainConfig, int $lastSeekId = null): FeedExport
+    public function createFeedExport(string $feedName, DomainConfig $domainConfig, ?int $lastSeekId = null): FeedExport
     {
         /*
          * Product is visible, when it has at least one visible category.
@@ -96,7 +96,7 @@ class FeedFacade
      * @param string|null $feedType
      * @return \Shopsys\FrameworkBundle\Model\Feed\FeedInfoInterface[]
      */
-    public function getFeedsInfo(string $feedType = null): array
+    public function getFeedsInfo(?string $feedType = null): array
     {
         $feeds = $feedType === null ? $this->feedRegistry->getAllFeeds() : $this->feedRegistry->getFeeds($feedType);
 
@@ -112,7 +112,7 @@ class FeedFacade
      * @param string|null $feedType
      * @return string[]
      */
-    public function getFeedNames(string $feedType = null): array
+    public function getFeedNames(?string $feedType = null): array
     {
         $feedNames = [];
         foreach ($this->getFeedsInfo($feedType) as $feedInfo) {

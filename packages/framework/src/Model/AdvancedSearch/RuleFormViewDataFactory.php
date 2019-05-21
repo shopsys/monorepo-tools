@@ -13,7 +13,7 @@ class RuleFormViewDataFactory
      * @param array|null $requestData
      * @return array
      */
-    public function createFromRequestData(string $defaultFilterName, array $requestData = null): array
+    public function createFromRequestData(string $defaultFilterName, ?array $requestData = null): array
     {
         if ($requestData === null) {
             $searchRulesViewData = [];

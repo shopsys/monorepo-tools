@@ -36,7 +36,7 @@ class ProductHiddenRecalculator
     /**
      * @param \Shopsys\FrameworkBundle\Model\Product\Product|null $product
      */
-    protected function executeQuery(Product $product = null)
+    protected function executeQuery(?Product $product = null)
     {
         $qb = $this->em->createQueryBuilder()
             ->update(Product::class, 'p')

@@ -43,7 +43,7 @@ class OrderItemFactory implements OrderItemFactoryInterface
         int $quantity,
         ?string $unitName,
         ?string $catnum,
-        Product $product = null
+        ?Product $product = null
     ): OrderItem {
         $classData = $this->entityNameResolver->resolve(OrderItem::class);
 

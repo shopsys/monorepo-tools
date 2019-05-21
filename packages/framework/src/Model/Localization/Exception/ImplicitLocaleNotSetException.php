@@ -13,7 +13,7 @@ class ImplicitLocaleNotSetException extends Exception implements LocalizationExc
      * @param mixed $entityId
      * @param \Exception|null $previous
      */
-    public function __construct($entity, $entityId, Exception $previous = null)
+    public function __construct($entity, $entityId, ?Exception $previous = null)
     {
         $message = sprintf(
             'You tried to get a translation of entity %s (ID: "%s") without specifying a locale'

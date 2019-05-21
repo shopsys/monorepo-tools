@@ -27,6 +27,7 @@ There you can find links to upgrade notes for other versions too.
     - SliderItemFactory
 
     In case of extending one of these classes, you should add an `EntityNameResolver` to a constructor and use it in a `create()` method to resolve correct class to return.
+- run `php phing standards-fix` so all nullable values will be now defined using nullability (?) symbol ([#1010](https://github.com/shopsys/shopsys/pull/1010))
 
 ### Tools
 - improve `build-dev.xml` to use test prefix for elasticsearch in tests ([#933](https://github.com/shopsys/shopsys/pull/933))

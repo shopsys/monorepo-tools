@@ -14,7 +14,7 @@ class AdminLocaleNotFoundException extends RuntimeException implements Localizat
      * @param string[] $possibleLocales
      * @param \Exception|null $previous
      */
-    public function __construct(string $adminLocale, array $possibleLocales, Exception $previous = null)
+    public function __construct(string $adminLocale, array $possibleLocales, ?Exception $previous = null)
     {
         $message = sprintf(
             'You tried to use administration in "%1$s" locale, but you have registered only ["%2$s"].'

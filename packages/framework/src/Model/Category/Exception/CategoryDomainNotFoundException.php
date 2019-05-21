@@ -11,7 +11,7 @@ class CategoryDomainNotFoundException extends Exception implements CategoryExcep
      * @param int $domainId
      * @param \Exception|null $previous
      */
-    public function __construct(int $categoryId = null, int $domainId, Exception $previous = null)
+    public function __construct(?int $categoryId = null, int $domainId, ?Exception $previous = null)
     {
         $categoryDescription = $categoryId !== null ? sprintf('with ID %d', $categoryId) : 'without ID';
         $message = sprintf('CategoryDomain for category %s and domain ID %d not found.', $categoryDescription, $domainId);

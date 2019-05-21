@@ -11,7 +11,7 @@ class ProductDomainNotFoundException extends Exception implements ProductExcepti
      * @param int $domainId
      * @param \Exception|null $previous
      */
-    public function __construct(int $productId = null, int $domainId, Exception $previous = null)
+    public function __construct(?int $productId = null, int $domainId, ?Exception $previous = null)
     {
         $productDescription = $productId !== null ? sprintf('with ID %d', $productId) : 'without ID';
         $message = sprintf('ProductDomain for product %s and domain ID %d not found.', $productDescription, $domainId);

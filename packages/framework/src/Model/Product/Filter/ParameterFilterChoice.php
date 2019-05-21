@@ -21,7 +21,7 @@ class ParameterFilterChoice
      * @param \Shopsys\FrameworkBundle\Model\Product\Parameter\ParameterValue[] $values
      */
     public function __construct(
-        Parameter $parameter = null,
+        ?Parameter $parameter = null,
         array $values = []
     ) {
         $this->parameter = $parameter;
