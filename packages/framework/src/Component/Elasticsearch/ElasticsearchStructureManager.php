@@ -85,7 +85,13 @@ class ElasticsearchStructureManager
     {
         $file = sprintf('%s/%s/%s.json', $this->definitionDirectory, $index, $domainId);
         if (!is_file($file)) {
-            throw new ElasticsearchStructureException(sprintf('File %s not found', $file));
+            throw new ElasticsearchStructureException(
+                sprintf(
+                    'Definition file %d.json, for domain ID %1$d, not found in definition folder "%s".' . PHP_EOL . 'Please make sure that for each domain exists a definition json file named by the corresponding domain ID.',
+                    $domainId,
+                    $this->definitionDirectory
+                )
+            );
         }
         $json = file_get_contents($file);
 
