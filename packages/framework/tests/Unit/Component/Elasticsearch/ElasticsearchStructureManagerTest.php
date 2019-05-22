@@ -23,7 +23,7 @@ class ElasticsearchStructureManagerTest extends TestCase
     private $client;
 
     /**
-     * @var \Elasticsearch\Namespaces\IndicesNamespace
+     * @var \Elasticsearch\Namespaces\IndicesNamespace|\PHPUnit\Framework\MockObject\MockObject
      */
     private $indices;
 

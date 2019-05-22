@@ -347,7 +347,7 @@ class ProductFacade
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\Product\Product $product
-     * @return \Shopsys\FrameworkBundle\Model\Product\Pricing\ProductSellingPrice[]
+     * @return \Shopsys\FrameworkBundle\Model\Product\Pricing\ProductSellingPrice[][]
      */
     public function getAllProductSellingPricesIndexedByDomainId(Product $product)
     {

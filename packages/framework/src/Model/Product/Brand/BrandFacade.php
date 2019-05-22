@@ -98,7 +98,7 @@ class BrandFacade
     }
 
     /**
-     * @param $brandId
+     * @param int $brandId
      * @param \Shopsys\FrameworkBundle\Model\Product\Brand\BrandData $brandData
      * @return \Shopsys\FrameworkBundle\Model\Product\Brand\Brand
      */

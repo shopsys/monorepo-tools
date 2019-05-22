@@ -32,8 +32,8 @@ class ModuleExtension extends Twig_Extension
     }
 
     /**
-     * @param int $moduleName
-     * @return string
+     * @param string $moduleName
+     * @return bool
      */
     public function isModuleEnabled($moduleName)
     {

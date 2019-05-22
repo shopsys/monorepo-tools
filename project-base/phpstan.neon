@@ -3,4 +3,32 @@ parameters:
         # Add ignored errors here as regular expressions, e.g.:
         # - '#PHPUnit_Framework_MockObject_MockObject(.*) given#'
         - '#Undefined variable: \$undefined#'
-
+        #ignore annotations in generated code#
+        -
+            message: '#(PHPDoc tag @(param|return) has invalid value .+ expected TOKEN_IDENTIFIER at offset \d+)#'
+            path: %currentWorkingDirectory%/tests/ShopBundle/Test/Codeception/_generated/AcceptanceTesterActions.php
+        -
+            message: '#(PHPDoc tag @throws with type .+ is not subtype of Throwable)#'
+            path: %currentWorkingDirectory%/tests/ShopBundle/Test/Codeception/_generated/AcceptanceTesterActions.php
+        -
+            message: '#Call to an undefined method Symfony\\Component\\Config\\Definition\\Builder\\NodeParentInterface::end\(\)#'
+            path: %currentWorkingDirectory%/src/Shopsys/ShopBundle/DependencyInjection/Configuration.php
+        - '#Method Doctrine\\Common\\Persistence\\ObjectManager::flush\(\) invoked with 1 parameter, 0 required\.#'
+        -
+            message: '#(Property Shopsys\\.+::\$.+ \(Shopsys\\.+\) does not accept object\.)#'
+            path: %currentWorkingDirectory%/src/Shopsys/ShopBundle/DataFixtures/*
+        -
+            message: '#Method Shopsys\\ShopBundle\\DataFixtures\\ProductDataFixtureReferenceInjector::.+\(\) should return array<.+> but returns array<string, object>\.#'
+            path: %currentWorkingDirectory%/src/Shopsys/ShopBundle/DataFixtures/ProductDataFixtureReferenceInjector.php
+        -
+            message: '#(Property (Shopsys|Tests)\\.+::\$.+ \(.+\) does not accept object\.)#'
+            path: %currentWorkingDirectory%/tests/ShopBundle/*
+        -
+            message: '#(Method .+::.+\(\) should return .+ but returns (object|Codeception\\Module).)#'
+            path: %currentWorkingDirectory%/tests/ShopBundle/*
+        -
+            message: '#Array \(array<.+>\) does not accept object\.#'
+            path: %currentWorkingDirectory%/tests/ShopBundle/Functional/Model/Product/ProductOnCurrentDomainFacadeCountDataTest.php
+includes:
+    - vendor/phpstan/phpstan-doctrine/extension.neon
+    - vendor/phpstan/phpstan-phpunit/extension.neon

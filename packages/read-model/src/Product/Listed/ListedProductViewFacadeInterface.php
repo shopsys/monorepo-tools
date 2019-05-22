@@ -42,7 +42,7 @@ interface ListedProductViewFacadeInterface
     public function getFilteredPaginatedInCategory(int $categoryId, ProductFilterData $filterData, string $orderingModeId, int $page, int $limit): PaginationResult;
 
     /**
-     * @param string|null $searchText
+     * @param string $searchText
      * @param \Shopsys\FrameworkBundle\Model\Product\Filter\ProductFilterData $filterData
      * @param string $orderingModeId {@see Shopsys\FrameworkBundle\Model\Product\Listing\ProductListOrderingConfig}
      * @param int $page Page number (starting with 1)

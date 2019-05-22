@@ -100,10 +100,11 @@ class SubRequestListenerTest extends TestCase
 
     public function testOnKernelController()
     {
+        /* @var \Symfony\Component\HttpFoundation\Request|\PHPUnit\Framework\MockObject\MockObject $masterRequestMock */
         $masterRequestMock = $this->getMockBuilder(Request::class)
             ->setMethods(['getMethod'])
             ->getMock();
-        /* @var $masterRequestMock \Symfony\Component\HttpFoundation\Request|\PHPUnit\Framework\MockObject\MockObject */
+
         $masterRequestMock->expects($this->once())->method('getMethod')->willReturn('POST');
         $masterRequestMock->query->replace([
             'key1' => 'value1',

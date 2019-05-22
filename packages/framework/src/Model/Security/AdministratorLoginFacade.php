@@ -102,6 +102,7 @@ class AdministratorLoginFacade
     {
         $token = $this->tokenStorage->getToken();
         if ($token !== null) {
+            /** @var \Shopsys\FrameworkBundle\Model\Administrator\Administrator $currentAdministrator */
             $currentAdministrator = $token->getUser();
             $currentAdministrator->setLoginToken('');
 

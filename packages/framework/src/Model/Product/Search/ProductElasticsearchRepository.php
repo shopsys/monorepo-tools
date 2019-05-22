@@ -102,7 +102,7 @@ class ProductElasticsearchRepository
 
     /**
      * @param \Doctrine\ORM\QueryBuilder $productQueryBuilder
-     * @param $searchText
+     * @param string|null $searchText
      * @return int[]
      */
     protected function getFoundProductIds(QueryBuilder $productQueryBuilder, $searchText)

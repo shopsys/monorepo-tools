@@ -15,7 +15,7 @@ class NotInArray extends Constraint
     public $message = 'Value must not be neither of following: {{ array }}';
 
     /**
-     * @var array
+     * @var array|\Traversable|\ArrayAccess
      */
     public $array = [];
 

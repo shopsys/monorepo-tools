@@ -19,7 +19,7 @@ class TransportTest extends TestCase
     {
         $vatData = new VatData();
         $vatData->name = 'vat';
-        $vatData->percent = 21;
+        $vatData->percent = '21';
         $vat = new Vat($vatData);
         $transportData = new TransportData();
         $transportData->name = ['cs' => 'transportName'];
@@ -37,7 +37,7 @@ class TransportTest extends TestCase
     {
         $vatData = new VatData();
         $vatData->name = 'vat';
-        $vatData->percent = 21;
+        $vatData->percent = '21';
         $vat = new Vat($vatData);
         $paymentData = new PaymentData();
         $paymentData->name = ['cs' => 'paymentName', 'en' => 'paymentName'];

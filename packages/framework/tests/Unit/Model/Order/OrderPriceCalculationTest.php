@@ -70,7 +70,7 @@ class OrderPriceCalculationTest extends TestCase
         $currencyData = new CurrencyData();
         $currencyData->name = 'currencyName';
         $currencyData->code = Currency::CODE_EUR;
-        $currencyData->exchangeRate = 1.0;
+        $currencyData->exchangeRate = '1.0';
         $currency = new Currency($currencyData);
         $orderTotalPrice = new Price(Money::create(100), Money::create(120));
 
@@ -92,7 +92,7 @@ class OrderPriceCalculationTest extends TestCase
         $currencyData = new CurrencyData();
         $currencyData->name = 'currencyName';
         $currencyData->code = Currency::CODE_CZK;
-        $currencyData->exchangeRate = 1.0;
+        $currencyData->exchangeRate = '1.0';
         $currency = new Currency($currencyData);
         $orderTotalPrice = new Price(Money::create(100), Money::create(120));
 
@@ -114,7 +114,7 @@ class OrderPriceCalculationTest extends TestCase
         $currencyData = new CurrencyData();
         $currencyData->name = 'currencyName';
         $currencyData->code = Currency::CODE_CZK;
-        $currencyData->exchangeRate = 1.0;
+        $currencyData->exchangeRate = '1.0';
         $currency = new Currency($currencyData);
         $orderTotalPrice = new Price(Money::create(100), Money::create('120.3'));
 
@@ -143,7 +143,7 @@ class OrderPriceCalculationTest extends TestCase
         $currencyData = new CurrencyData();
         $currencyData->name = 'currencyName';
         $currencyData->code = Currency::CODE_CZK;
-        $currencyData->exchangeRate = 1.0;
+        $currencyData->exchangeRate = '1.0';
         $currency = new Currency($currencyData);
         $orderTotalPrice = new Price(Money::create(100), Money::create('120.9'));
 
@@ -164,7 +164,7 @@ class OrderPriceCalculationTest extends TestCase
     }
 
     /**
-     * @return \Shopsys\FrameworkBundle\Model\Order\Item\OrderItem|\PHPUnit\Framework\MockObject\MockObject
+     * @return \PHPUnit\Framework\MockObject\MockObject
      */
     protected function createOrderProductMock(): MockObject
     {
@@ -176,7 +176,7 @@ class OrderPriceCalculationTest extends TestCase
     }
 
     /**
-     * @return \Shopsys\FrameworkBundle\Model\Order\Item\OrderItem|\PHPUnit\Framework\MockObject\MockObject
+     * @return \PHPUnit\Framework\MockObject\MockObject
      */
     protected function createOrderPaymentMock(): MockObject
     {
@@ -188,7 +188,7 @@ class OrderPriceCalculationTest extends TestCase
     }
 
     /**
-     * @return \Shopsys\FrameworkBundle\Model\Order\Item\OrderItem|\PHPUnit\Framework\MockObject\MockObject
+     * @return \PHPUnit\Framework\MockObject\MockObject
      */
     protected function createOrderTransportMock(): MockObject
     {

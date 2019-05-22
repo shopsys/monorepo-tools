@@ -98,7 +98,9 @@
     "require-dev": {
         "phpstan/phpstan": "^0.11",
         "phpunit/phpunit": "^7.0",
-        "shopsys/coding-standards": "dev-master"
+        "shopsys/coding-standards": "dev-master",
+        "phpstan/phpstan-doctrine": "^0.11.2",
+        "phpstan/phpstan-phpunit": "^0.11.2"
     },
     "suggest": {
         "ext-pgsql": "Required for dumping the Postgres database in shopsys:database:dump command"

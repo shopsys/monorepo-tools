@@ -7,7 +7,7 @@ use Doctrine\ORM\EntityManagerInterface;
 class BrandRepository
 {
     /**
-     * @var \Doctrine\ORM\EntityRepository
+     * @var \Doctrine\ORM\EntityManagerInterface
      */
     protected $em;
 

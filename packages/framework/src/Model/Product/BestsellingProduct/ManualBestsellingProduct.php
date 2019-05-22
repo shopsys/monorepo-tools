@@ -36,7 +36,7 @@ class ManualBestsellingProduct
     protected $product;
 
     /**
-     * @var int
+     * @var \Shopsys\FrameworkBundle\Model\Category\Category
      *
      * @ORM\ManyToOne(targetEntity="Shopsys\FrameworkBundle\Model\Category\Category", inversedBy="domains")
      * @ORM\JoinColumn(name="category_id", referencedColumnName="id", onDelete="CASCADE", nullable=false)

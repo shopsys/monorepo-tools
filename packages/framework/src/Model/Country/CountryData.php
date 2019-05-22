@@ -20,7 +20,7 @@ class CountryData
     public $enabled;
 
     /**
-     * @var int[]
+     * @var int[]|null[]
      */
     public $priority;
 

@@ -161,7 +161,7 @@ class JavascriptCompiler
 
     /**
      * @param string $javascript
-     * @return string
+     * @return string|null
      */
     private function getRelativeTargetPath($javascript)
     {

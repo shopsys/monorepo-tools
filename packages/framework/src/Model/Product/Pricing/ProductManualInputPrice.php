@@ -25,7 +25,7 @@ class ProductManualInputPrice
     protected $product;
 
     /**
-     * @var \Shopsys\FrameworkBundle\Model\Product\Product
+     * @var \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroup
      *
      * @ORM\Id
      * @ORM\ManyToOne(targetEntity="Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroup")

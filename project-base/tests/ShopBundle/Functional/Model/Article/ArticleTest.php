@@ -21,7 +21,7 @@ class ArticleTest extends TransactionFunctionalTestCase
     private $articleFactory;
 
     /**
-     * @var \Doctrine\ORM\EntityManager
+     * @var \Shopsys\FrameworkBundle\Component\EntityExtension\EntityManagerDecorator
      */
     private $em;
 

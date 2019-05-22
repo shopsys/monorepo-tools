@@ -190,8 +190,8 @@ class UserDataFixture
         $billingAddressData->companyCustomer = $this->faker->boolean();
         if ($billingAddressData->companyCustomer === true) {
             $billingAddressData->companyName = $this->faker->company;
-            $billingAddressData->companyNumber = $this->faker->randomNumber(6);
-            $billingAddressData->companyTaxNumber = $this->faker->randomNumber(6);
+            $billingAddressData->companyNumber = (string)$this->faker->randomNumber(6);
+            $billingAddressData->companyTaxNumber = (string)$this->faker->randomNumber(6);
         }
         $billingAddressData->street = $this->faker->streetAddress;
         $billingAddressData->city = $this->faker->city;

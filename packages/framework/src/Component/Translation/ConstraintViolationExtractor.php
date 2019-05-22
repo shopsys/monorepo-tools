@@ -103,7 +103,7 @@ class ConstraintViolationExtractor implements FileVisitorInterface, NodeVisitor
 
     /**
      * @param \PhpParser\Node\Param $parameter
-     * @return string
+     * @return bool
      */
     protected function isParameterExecutionContextInterfaceSubclass(Node\Param $parameter)
     {

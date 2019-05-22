@@ -11,6 +11,8 @@ use Shopsys\FrameworkBundle\Model\Localization\AbstractTranslatableEntity;
 /**
  * @ORM\Table(name="countries")
  * @ORM\Entity
+ *
+ * @method CountryTranslation translation(?string $locale = null)
  */
 class Country extends AbstractTranslatableEntity
 {
@@ -32,14 +34,14 @@ class Country extends AbstractTranslatableEntity
     protected $code;
 
     /**
-     * @var \Shopsys\FrameworkBundle\Model\Country\CountryTranslation[]
+     * @var \Doctrine\Common\Collections\ArrayCollection|\Shopsys\FrameworkBundle\Model\Country\CountryTranslation[]
      *
      * @Prezent\Translations(targetEntity="Shopsys\FrameworkBundle\Model\Country\CountryTranslation")
      */
     protected $translations;
 
     /**
-     * @var \Shopsys\FrameworkBundle\Model\Country\CountryDomain[]
+     * @var \Doctrine\Common\Collections\ArrayCollection|\Shopsys\FrameworkBundle\Model\Country\CountryDomain[]
      *
      * @ORM\OneToMany(targetEntity="Shopsys\FrameworkBundle\Model\Country\CountryDomain", mappedBy="country", cascade={"persist"}, fetch="EXTRA_LAZY")
      */

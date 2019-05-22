@@ -88,7 +88,7 @@ class GridView
      * @param string $name
      * @param array $parameters
      * @param bool $echo
-     * @return string|null
+     * @return string|null|void
      */
     public function renderBlock($name, array $parameters = [], $echo = true)
     {
@@ -121,7 +121,6 @@ class GridView
      * @param \Shopsys\FrameworkBundle\Component\Grid\Column $column
      * @param array|null $row
      * @param \Symfony\Component\Form\FormView|null $formView
-     * @param \Symfony\Component\Form\FormView
      */
     public function renderCell(Column $column, array $row = null, FormView $formView = null)
     {

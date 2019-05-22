@@ -11,6 +11,8 @@ use Shopsys\FrameworkBundle\Model\Product\Brand\Exception\BrandDomainNotFoundExc
 /**
  * @ORM\Table(name="brands")
  * @ORM\Entity
+ *
+ * @method BrandTranslation translation(?string $locale = null)
  */
 class Brand extends AbstractTranslatableEntity
 {
@@ -31,7 +33,7 @@ class Brand extends AbstractTranslatableEntity
     protected $name;
 
     /**
-     * @var \Shopsys\FrameworkBundle\Model\Product\Brand\BrandTranslation[]
+     * @var \Doctrine\Common\Collections\ArrayCollection|\Shopsys\FrameworkBundle\Model\Product\Brand\BrandTranslation[]
      *
      * @Prezent\Translations(targetEntity="Shopsys\FrameworkBundle\Model\Product\Brand\BrandTranslation")
      */
@@ -89,9 +91,7 @@ class Brand extends AbstractTranslatableEntity
     protected function setTranslations(BrandData $brandData)
     {
         foreach ($brandData->descriptions as $locale => $description) {
-            $brandTranslation = $this->translation($locale);
-            /* @var $brandTranslation \Shopsys\FrameworkBundle\Model\Product\Brand\BrandTranslation */
-            $brandTranslation->setDescription($description);
+            $this->translation($locale)->setDescription($description);
         }
     }
 

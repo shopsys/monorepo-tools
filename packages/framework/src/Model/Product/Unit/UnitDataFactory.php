@@ -57,6 +57,7 @@ class UnitDataFactory implements UnitDataFactoryInterface
      */
     protected function fillFromUnit(UnitData $unitData, Unit $unit)
     {
+        /** @var \Shopsys\FrameworkBundle\Model\Product\Unit\UnitTranslation[] $translations */
         $translations = $unit->getTranslations();
         $names = [];
         foreach ($translations as $translate) {

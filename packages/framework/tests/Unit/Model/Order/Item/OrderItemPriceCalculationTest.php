@@ -25,7 +25,7 @@ class OrderItemPriceCalculationTest extends TestCase
 
         $orderItemData = new OrderItemData();
         $orderItemData->priceWithVat = Money::create(1000);
-        $orderItemData->vatPercent = 10;
+        $orderItemData->vatPercent = '10';
 
         $orderItemPriceCalculation = new OrderItemPriceCalculation($priceCalculationMock, new VatFactory(new EntityNameResolver([])), new VatDataFactory());
         $priceWithoutVat = $orderItemPriceCalculation->calculatePriceWithoutVat($orderItemData);

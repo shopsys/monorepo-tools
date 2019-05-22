@@ -29,7 +29,7 @@ class ProductCachedAttributesFacade
     protected $sellingPricesByProductId;
 
     /**
-     * @var \Shopsys\FrameworkBundle\Model\Product\Parameter\ProductParameterValue[]
+     * @var \Shopsys\FrameworkBundle\Model\Product\Parameter\ProductParameterValue[][]
      */
     protected $parameterValuesByProductId;
 

@@ -87,9 +87,9 @@ class PersonalDataExportXmlTest extends TransactionFunctionalTestCase
         $billingAddressData->street = 'Hlubinská';
         $billingAddressData->companyCustomer = true;
         $billingAddressData->companyName = 'Shopsys';
-        $billingAddressData->companyNumber = 123456;
-        $billingAddressData->companyTaxNumber = 123456;
-        $billingAddressData->postcode = 70200;
+        $billingAddressData->companyNumber = '123456';
+        $billingAddressData->companyTaxNumber = '123456';
+        $billingAddressData->postcode = '70200';
 
         $billingAddress = new BillingAddress($billingAddressData);
 
@@ -105,7 +105,7 @@ class PersonalDataExportXmlTest extends TransactionFunctionalTestCase
         $deliveryAddressData = new DeliveryAddressData();
         $deliveryAddressData->country = $country;
         $deliveryAddressData->telephone = '+420987654321';
-        $deliveryAddressData->postcode = 70200;
+        $deliveryAddressData->postcode = '70200';
         $deliveryAddressData->companyName = 'Shopsys';
         $deliveryAddressData->street = 'Hlubinská';
         $deliveryAddressData->city = 'Ostrava';
@@ -155,10 +155,10 @@ class PersonalDataExportXmlTest extends TransactionFunctionalTestCase
         $orderData->city = 'Liberec';
         $orderData->street = 'Cihelní 5';
         $orderData->companyName = 'Shopsys';
-        $orderData->postcode = 65421;
+        $orderData->postcode = '65421';
         $orderData->telephone = '+420987654321';
-        $orderData->companyTaxNumber = 123456;
-        $orderData->companyNumber = 123456;
+        $orderData->companyTaxNumber = '123456';
+        $orderData->companyNumber = '123456';
         $orderData->deliveryAddressSameAsBillingAddress = true;
         $orderData->country = $country;
 

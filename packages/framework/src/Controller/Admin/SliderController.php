@@ -67,8 +67,9 @@ class SliderController extends AdminBaseController
      */
     public function listAction()
     {
-        $queryBuilder = $this->getDoctrine()->getManager()->createQueryBuilder();
-        $queryBuilder
+        /** @var \Doctrine\ORM\EntityManager $em */
+        $em = $this->getDoctrine()->getManager();
+        $queryBuilder = $em->createQueryBuilder()
             ->select('s')
             ->from(SliderItem::class, 's')
             ->where('s.domainId = :selectedDomainId')

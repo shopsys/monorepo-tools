@@ -74,9 +74,12 @@ class NewsletterController extends FrontBaseController
      */
     private function createSubscriptionForm(): Form
     {
-        return $this->createForm(SubscriptionFormType::class, null, [
+        /** @var \Symfony\Component\Form\Form $form */
+        $form = $this->createForm(SubscriptionFormType::class, null, [
             'action' => $this->generateUrl('front_newsletter_send'),
         ]);
+
+        return $form;
     }
 
     /**

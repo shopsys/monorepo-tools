@@ -99,7 +99,7 @@ class CategoryDataFixture
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\Category\Category $parentCategory
-     * @param \Shopsys\FrameworkBundle\Component\Console\ProgressBar $progressBar
+     * @param \Symfony\Component\Console\Helper\ProgressBar $progressBar
      * @param int $categoryLevel
      */
     private function recursivelyCreateCategoryTree($parentCategory, ProgressBar $progressBar, $categoryLevel = 0)

@@ -14,7 +14,7 @@ class CheckRedisCommand extends Command
     protected static $defaultName = 'shopsys:redis:check-availability';
 
     /**
-     * @var \Redis
+     * @var \Redis[]
      */
     protected $cacheClients;
 

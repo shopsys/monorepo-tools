@@ -25,7 +25,7 @@ class CategoryDomain
     protected $id;
 
     /**
-     * @var \Shopsys\FrameworkBundle\Model\Product\Product
+     * @var \Shopsys\FrameworkBundle\Model\Category\Category
      *
      * @ORM\ManyToOne(targetEntity="Shopsys\FrameworkBundle\Model\Category\Category", inversedBy="domains")
      * @ORM\JoinColumn(nullable=false, name="category_id", referencedColumnName="id", onDelete="CASCADE")

@@ -14,7 +14,6 @@ class AdvertDataFactory implements AdvertDataFactoryInterface
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\Advert\Advert $advert
-     * @param \Shopsys\FrameworkBundle\Model\Advert\Advert
      * @return \Shopsys\FrameworkBundle\Model\Advert\AdvertData
      */
     public function createFromAdvert(Advert $advert): AdvertData

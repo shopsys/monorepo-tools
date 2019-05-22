@@ -106,7 +106,7 @@ class GoogleProductCrudExtension implements PluginCrudExtensionInterface
     /**
      * @param \Shopsys\ProductFeed\GoogleBundle\Model\Product\GoogleProductDomainData $googleProductDomainData
      * @param string $propertyName
-     * @param string $propertyValue
+     * @param bool $propertyValue
      */
     private function setGoogleProductDomainDataProperty(
         GoogleProductDomainData $googleProductDomainData,

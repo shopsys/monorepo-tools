@@ -69,7 +69,6 @@ class ImageFacade
      * @param \Shopsys\FrameworkBundle\Component\Image\ImageLocator $imageLocator
      * @param \Shopsys\FrameworkBundle\Component\Image\ImageFactoryInterface $imageFactory
      * @param \League\Flysystem\MountManager $mountManager
-     * @param \League\Flysystem\MountManager;
      */
     public function __construct(
         $imageUrlPrefix,

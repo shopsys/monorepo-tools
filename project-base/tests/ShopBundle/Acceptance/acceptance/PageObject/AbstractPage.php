@@ -8,7 +8,7 @@ use Tests\ShopBundle\Test\Codeception\Module\StrictWebDriver;
 abstract class AbstractPage
 {
     /**
-     * @var \Tests\ShopBundle\Test\Codeception\Module\StrictWebDriver
+     * @var \Facebook\WebDriver\Remote\RemoteWebDriver
      */
     protected $webDriver;
 

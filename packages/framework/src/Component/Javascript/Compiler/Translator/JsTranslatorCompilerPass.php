@@ -16,7 +16,7 @@ class JsTranslatorCompilerPass implements JsCompilerPassInterface
     protected $jsTranslatorCallParser;
 
     /**
-     * @var \Symfony\Component\Translation\TranslatorInterface
+     * @var \Shopsys\FrameworkBundle\Component\Translation\Translator
      */
     protected $translator;
 

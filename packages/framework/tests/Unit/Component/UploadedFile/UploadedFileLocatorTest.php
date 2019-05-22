@@ -100,9 +100,8 @@ class UploadedFileLocatorTest extends TestCase
     }
 
     /**
-     * @param $uploadedFileDir
-     * @param $uploadedFileUrlPrefix
-     * @param mixed $has
+     * @param string $uploadedFileUrlPrefix
+     * @param bool $has
      * @return \Shopsys\FrameworkBundle\Component\UploadedFile\UploadedFileLocator
      */
     private function createUploadedFileLocator($uploadedFileUrlPrefix = '', $has = true)

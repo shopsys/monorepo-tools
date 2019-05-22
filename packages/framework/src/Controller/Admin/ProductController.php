@@ -257,7 +257,10 @@ class ProductController extends AdminBaseController
 
         $grid = $this->getGrid($queryBuilder);
 
-        if ($massActionForm->get('submit')->isClicked()) {
+        /** @var \Symfony\Component\Form\SubmitButton $submitButton */
+        $submitButton = $massActionForm->get('submit');
+
+        if ($submitButton->isClicked()) {
             $this->productMassActionFacade->doMassAction(
                 $massActionForm->getData(),
                 $queryBuilder,

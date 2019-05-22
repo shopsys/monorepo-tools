@@ -82,7 +82,7 @@ class ArticleFacade
     }
 
     /**
-     * @param $domainId
+     * @param int $domainId
      * @return int
      */
     public function getAllArticlesCountByDomainId($domainId)

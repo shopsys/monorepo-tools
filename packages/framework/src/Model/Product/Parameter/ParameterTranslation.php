@@ -18,14 +18,14 @@ class ParameterTranslation extends AbstractTranslation
     protected $translatable;
 
     /**
-     * @var string
+     * @var string|null
      *
      * @ORM\Column(type="string", length=100, nullable=true)
      */
     protected $name;
 
     /**
-     * @return string
+     * @return string|null
      */
     public function getName()
     {

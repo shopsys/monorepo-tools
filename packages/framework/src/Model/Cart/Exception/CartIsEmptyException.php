@@ -7,7 +7,6 @@ use Exception;
 class CartIsEmptyException extends Exception implements CartException
 {
     /**
-     * @param string $message
      * @param \Exception|null $previous
      */
     public function __construct(Exception $previous = null)

@@ -31,6 +31,6 @@ class PromoCodeDataFactory implements PromoCodeDataFactoryInterface
     protected function fillFromPromoCode(PromoCodeData $promoCodeData, PromoCode $promoCode)
     {
         $promoCodeData->code = $promoCode->getCode();
-        $promoCodeData->percent = $promoCode->getPercent();
+        $promoCodeData->percent = (float)$promoCode->getPercent();
     }
 }

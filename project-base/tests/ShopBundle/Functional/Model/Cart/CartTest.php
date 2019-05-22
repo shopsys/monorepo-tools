@@ -30,7 +30,7 @@ class CartTest extends TransactionFunctionalTestCase
 
         $vatData = new VatData();
         $vatData->name = 'vat';
-        $vatData->percent = 21;
+        $vatData->percent = '21';
         $vat = new Vat($vatData);
         $availabilityData = new AvailabilityData();
         $availabilityData->dispatchTime = 0;
@@ -123,7 +123,7 @@ class CartTest extends TransactionFunctionalTestCase
     }
 
     /**
-     * @return \Shopsys\ShopBundle\Model\Product\Product
+     * @return \Shopsys\FrameworkBundle\Model\Product\Product
      */
     private function createProduct()
     {
@@ -132,7 +132,7 @@ class CartTest extends TransactionFunctionalTestCase
         $price = 100;
         $vatData = new VatData();
         $vatData->name = 'vat';
-        $vatData->percent = 21;
+        $vatData->percent = '21';
         $vat = new Vat($vatData);
 
         $productData = $productDataFactory->create();

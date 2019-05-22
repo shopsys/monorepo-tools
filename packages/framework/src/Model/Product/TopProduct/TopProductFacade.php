@@ -56,7 +56,7 @@ class TopProductFacade
     }
 
     /**
-     * @param $domainId
+     * @param int $domainId
      * @param \Shopsys\FrameworkBundle\Model\Product\Product[] $products
      */
     public function saveTopProductsForDomain($domainId, array $products)

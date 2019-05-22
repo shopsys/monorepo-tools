@@ -41,7 +41,7 @@ class PaginationResult
 
     /**
      * @param int $page
-     * @param int $pageSize
+     * @param int|null $pageSize
      * @param int $totalCount
      * @param array $results
      */

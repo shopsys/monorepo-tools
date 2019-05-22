@@ -85,7 +85,7 @@ class FriendlyUrl
     }
 
     /**
-     * @return string
+     * @return int
      */
     public function getDomainId()
     {

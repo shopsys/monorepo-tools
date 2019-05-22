@@ -60,7 +60,7 @@ class Order
     protected $createdAt;
 
     /**
-     * @var \Shopsys\FrameworkBundle\Model\Order\Item\OrderItem[]
+     * @var \Doctrine\Common\Collections\ArrayCollection|\Shopsys\FrameworkBundle\Model\Order\Item\OrderItem[]
      *
      * @ORM\OneToMany(
      *     targetEntity="Shopsys\FrameworkBundle\Model\Order\Item\OrderItem",
@@ -265,7 +265,7 @@ class Order
     protected $note;
 
     /**
-     * @var int
+     * @var bool
      *
      * @ORM\Column(type="boolean")
      */
@@ -640,7 +640,7 @@ class Order
     }
 
     /**
-     * @return \Shopsys\FrameworkBundle\Model\Order\Item\OrderItem[]
+     * @return \Doctrine\Common\Collections\ArrayCollection|\Shopsys\FrameworkBundle\Model\Order\Item\OrderItem[]
      */
     public function getItems()
     {
@@ -935,7 +935,7 @@ class Order
      */
     public function isCancelled()
     {
-        return $this->status === OrderStatus::TYPE_CANCELED;
+        return $this->status->getType() === OrderStatus::TYPE_CANCELED;
     }
 
     /**

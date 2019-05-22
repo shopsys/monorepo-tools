@@ -312,7 +312,7 @@ class ProductDataFixtureLoader
     /**
      * @param string $keyString
      * @param array $valuesByKey
-     * @return string[]
+     * @return mixed[]
      */
     protected function getValuesByKeyString($keyString, array $valuesByKey)
     {
@@ -334,6 +334,7 @@ class ProductDataFixtureLoader
      */
     protected function setProductDataPricesFromCsv(array $row, ProductData $productData, $domainId)
     {
+        $manualPricesColumn = '';
         if ($domainId === 1) {
             $manualPricesColumn = $row[self::COLUMN_MANUAL_PRICES_DOMAIN_1];
         } elseif ($domainId === 2) {

@@ -58,6 +58,8 @@ class AvailabilityDataFactory implements AvailabilityDataFactoryInterface
     protected function fillFromAvailability(AvailabilityData $availabilityData, Availability $availability)
     {
         $availabilityData->dispatchTime = $availability->getDispatchTime();
+
+        /** @var \Shopsys\FrameworkBundle\Model\Product\Availability\AvailabilityTranslation[] $translations */
         $translations = $availability->getTranslations();
         $names = [];
         foreach ($translations as $translate) {

@@ -91,7 +91,7 @@ class TransportGridFactory implements GridFactoryInterface
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\Transport\Transport $transport
-     * @return string
+     * @return \Shopsys\FrameworkBundle\Component\Money\Money
      */
     protected function getDisplayPrice(Transport $transport)
     {

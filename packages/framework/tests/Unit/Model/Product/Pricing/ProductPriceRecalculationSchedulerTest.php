@@ -53,7 +53,7 @@ class ProductPriceRecalculationSchedulerTest extends TestCase
             ->setMethods(null)
             ->disableOriginalConstructor()
             ->getMock();
-        $productsIterator = [$productMock];
+        $expectedProductsIterator = [$productMock];
         $productRepositoryMock = $this->getMockBuilder(ProductRepository::class)
             ->setMethods(['markAllProductsForPriceRecalculation', 'getProductsForPriceRecalculationIterator'])
             ->disableOriginalConstructor()
@@ -62,12 +62,15 @@ class ProductPriceRecalculationSchedulerTest extends TestCase
         $productRepositoryMock
             ->expects($this->once())
             ->method('getProductsForPriceRecalculationIterator')
-            ->willReturn($productsIterator);
+            ->willReturn($expectedProductsIterator);
 
         $productPriceRecalculationScheduler = new ProductPriceRecalculationScheduler($productRepositoryMock);
         $productPriceRecalculationScheduler->scheduleAllProductsForDelayedRecalculation();
 
         $this->assertCount(0, $productPriceRecalculationScheduler->getProductsForImmediateRecalculation());
-        $this->assertSame($productsIterator, $productPriceRecalculationScheduler->getProductsIteratorForDelayedRecalculation());
+
+        /** @var \Shopsys\FrameworkBundle\Model\Product\Product[] $productsIterator */
+        $productsIterator = $productPriceRecalculationScheduler->getProductsIteratorForDelayedRecalculation();
+        $this->assertSame($expectedProductsIterator, $productsIterator);
     }
 }

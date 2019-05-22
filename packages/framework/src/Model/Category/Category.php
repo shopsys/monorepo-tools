@@ -13,6 +13,8 @@ use Shopsys\FrameworkBundle\Model\Localization\AbstractTranslatableEntity;
  * @Gedmo\Tree(type="nested")
  * @ORM\Table(name="categories")
  * @ORM\Entity
+ *
+ * @method CategoryTranslation translation(?string $locale = null)
  */
 class Category extends AbstractTranslatableEntity
 {
@@ -26,7 +28,7 @@ class Category extends AbstractTranslatableEntity
     protected $id;
 
     /**
-     * @var \Shopsys\FrameworkBundle\Model\Category\CategoryTranslation[]
+     * @var \Doctrine\Common\Collections\ArrayCollection|\Shopsys\FrameworkBundle\Model\Category\CategoryTranslation[]
      *
      * @Prezent\Translations(targetEntity="Shopsys\FrameworkBundle\Model\Category\CategoryTranslation")
      */
@@ -244,7 +246,7 @@ class Category extends AbstractTranslatableEntity
     }
 
     /**
-     * @param $domainId
+     * @param int $domainId
      * @return bool
      */
     public function isVisible(int $domainId)

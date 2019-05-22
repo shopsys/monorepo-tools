@@ -24,7 +24,7 @@ class OrderItem
         TYPE_TRANSPORT = 'transport';
 
     /**
-     * @var int
+     * @var int|null
      *
      * @ORM\Column(type="integer")
      * @ORM\Id
@@ -153,7 +153,7 @@ class OrderItem
     }
 
     /**
-     * @return int
+     * @return int|null
      */
     public function getId()
     {
