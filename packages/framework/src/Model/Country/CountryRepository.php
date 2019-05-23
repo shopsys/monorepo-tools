@@ -73,6 +73,14 @@ class CountryRepository
     }
 
     /**
+     * @return \Shopsys\FrameworkBundle\Model\Country\Country[]
+     */
+    public function getAll(): array
+    {
+        return $this->getCountryRepository()->findAll();
+    }
+
+    /**
      * @param int $domainId
      * @param string $locale
      * @return \Shopsys\FrameworkBundle\Model\Country\Country[]
