@@ -6,6 +6,7 @@
     <property name="path.packages" value="${project.basedir}/packages"/>
     <property name="path.framework" value="${path.packages}/framework"/>
     <property name="path.utils" value="${project.basedir}/utils"/>
+    <property name="translations.dump.flags" value=""/>
 
     <import file="${path.framework}/build.xml"/>
 
@@ -231,20 +232,6 @@
     </target>
 
     <target name="dump-translations" depends="dump-translations-project-base, dump-translations-packages" description="Extracts translatable messages in all packages ."/>
-
-    <target name="dump-translations-project-base" description="Extracts translatable messages from all source files in project base.">
-        <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
-            <arg value="${path.bin-console}"/>
-            <arg value="translation:extract"/>
-            <arg value="--bundle=ShopsysShopBundle"/>
-            <arg value="--dir=${path.src}/Shopsys/ShopBundle"/>
-            <arg value="--dir=${path.app}/Resources"/>
-            <arg value="--exclude-dir=frontend/plugins"/>
-            <arg value="--output-format=po"/>
-            <arg value="--output-dir=${path.src}/Shopsys/ShopBundle/Resources/translations"/>
-            <arg line="${translations.dump.locales}"/>
-        </exec>
-    </target>
 
     <target name="dump-translations-packages" description="Extracts translatable messages in all packages .">
         <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
