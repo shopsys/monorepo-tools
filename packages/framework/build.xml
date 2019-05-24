@@ -420,9 +420,7 @@
         </exec>
     </target>
 
-    <target name="dump-translations" depends="dump-translations-project-base" description="Extracts translatable messages from all source files in project base."/>
-
-    <target name="dump-translations-project-base" description="Extracts translatable messages from all source files in project base.">
+    <target name="dump-translations" description="Extracts translatable messages from all source files in your project.">
         <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
             <arg value="${path.bin-console}"/>
             <arg value="translation:extract"/>
@@ -435,6 +433,11 @@
             <arg line="${translations.dump.flags}"/>
             <arg line="${translations.dump.locales}"/>
         </exec>
+    </target>
+
+    <target name="dump-translations-project-base" hidden="true">
+        <phingcall target="dump-translations"/>
+        <echo level="warning" message="This phing target is deprecated since Shopsys Framework 7.3.0, use 'dump-translations' instead."/>
     </target>
 
     <target name="diff-files" description="Finds changed files (against origin/master) and saves them into properties.">

@@ -231,9 +231,8 @@
         </exec>
     </target>
 
-    <target name="dump-translations" depends="dump-translations-project-base, dump-translations-packages" description="Extracts translatable messages in all packages ."/>
-
-    <target name="dump-translations-packages" description="Extracts translatable messages in all packages .">
+    <target name="dump-translations" description="Extracts translatable messages in the whole monorepo.">
+        <phingcall target="shopsys_framework.dump-translations"/>
         <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
             <arg value="${path.bin-console}"/>
             <arg value="translation:extract"/>
