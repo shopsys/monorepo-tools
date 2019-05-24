@@ -36,6 +36,7 @@
     <property name="path.web.styles.admin" value="${path.web}/assets/admin/styles"/>
     <property name="path.web.styles.front" value="${path.web}/assets/frontend/styles"/>
     <property name="phpstan.level" value="4"/>
+    <property name="translations.dump.locales" value="en cs"/>
 
     <if>
         <os family="windows"/>
@@ -431,8 +432,7 @@
             <arg value="--output-format=po"/>
             <arg value="--output-dir=${path.src}/Shopsys/ShopBundle/Resources/translations"/>
             <arg value="--keep"/>
-            <arg value="cs"/>
-            <arg value="en"/>
+            <arg line="${translations.dump.locales}"/>
         </exec>
     </target>
 
