@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="Shopsys Framework" default="list">
 
-    <property name="path.root" value="./project-base"/>
-    <property name="path.vendor" value="./vendor"/>
-    <property name="path.packages" value="./packages"/>
-    <property name="path.bin-console" value="./project-base/bin/console"/>
+    <property name="path.root" value="${project.basedir}/project-base"/>
+    <property name="path.vendor" value="${project.basedir}/vendor"/>
+    <property name="path.packages" value="${project.basedir}/packages"/>
     <property name="path.framework" value="${path.packages}/framework"/>
+    <property name="path.utils" value="${project.basedir}/utils"/>
 
-    <import file="${path.framework}/build.xml" />
+    <import file="${path.framework}/build.xml"/>
 
     <target name="composer-dev" description="Installs dependencies for development if composer.lock is valid, otherwise runs composer update.">
         <exec executable="${path.composer.executable}" returnProperty="composer.validate.returnCode">
-            <arg value="validate" />
-            <arg value="--no-check-all" />
-            <arg value="--no-check-publish" />
+            <arg value="validate"/>
+            <arg value="--no-check-all"/>
+            <arg value="--no-check-publish"/>
         </exec>
         <if>
             <equals arg1="${composer.validate.returnCode}" arg2="0"/>
@@ -29,7 +29,7 @@
         <exec executable="${path.composer.executable}" logoutput="true" passthru="true" checkreturn="true">
             <arg value="${composer.action}"/>
         </exec>
-        <phingcall target="composer-check" />
+        <phingcall target="composer-check"/>
     </target>
 
     <target name="standards" depends="phplint,ecs,phpstan,twig-lint,yaml-lint,eslint-check,standards-packages,standards-utils" description="Checks coding standards in the project-base, packages and utils folder."/>
@@ -38,10 +38,10 @@
     <target name="clean" description="Cleans up directories with cache and scripts which are generated on demand.">
         <delete failonerror="false" includeemptydirs="true">
             <fileset dir="${path.var}/cache/">
-                <exclude name="/" />
+                <exclude name="/"/>
             </fileset>
             <fileset dir="${path.web.scripts}/">
-                <exclude name="/" />
+                <exclude name="/"/>
             </fileset>
         </delete>
         <delete failonerror="false" includeemptydirs="true" quiet="true">
@@ -50,127 +50,127 @@
     </target>
 
     <target name="standards-fix" description="Automatically fixes some coding standards violations in the project-base, packages and utils folder.">
-        <phingcall target="ecs-fix" />
-        <phingcall target="eslint-fix" />
-        <phingcall target="standards-fix-packages" />
-        <phingcall target="standards-fix-utils" />
+        <phingcall target="ecs-fix"/>
+        <phingcall target="eslint-fix"/>
+        <phingcall target="standards-fix-packages"/>
+        <phingcall target="standards-fix-utils"/>
     </target>
 
     <target name="standards-fix-diff" description="Automatically fixes some coding standards violations in changed files in project-base and all files in packages.">
-        <phingcall target="ecs-fix-diff" />
-        <phingcall target="eslint-fix-diff" />
-        <phingcall target="standards-fix-packages-diff" />
-        <phingcall target="standards-fix-utils" />
+        <phingcall target="ecs-fix-diff"/>
+        <phingcall target="eslint-fix-diff"/>
+        <phingcall target="standards-fix-packages-diff"/>
+        <phingcall target="standards-fix-utils"/>
     </target>
 
     <target name="standards-packages" description="Checks coding standards in all packages.">
         <exec executable="${path.phplint.executable}" logoutput="true" passthru="true" checkreturn="true">
             <arg path="./packages/*/src"/>
-            <arg path="./packages/*/tests" />
+            <arg path="./packages/*/tests"/>
         </exec>
         <exec executable="${path.ecs.executable}" logoutput="true" passthru="true" checkreturn="true">
-            <arg value="check" />
+            <arg value="check"/>
             <arg path="./packages/*/src"/>
-            <arg path="./packages/*/tests" />
+            <arg path="./packages/*/tests"/>
             <arg path="./packages/*/*.md"/>
             <arg path="./*.md"/>
             <arg path="./docs"/>
         </exec>
         <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
-            <arg value="${path.bin-console}" />
-            <arg value="lint:twig" />
-            <arg value="@ShopsysFrameworkBundle" />
+            <arg value="${path.bin-console}"/>
+            <arg value="lint:twig"/>
+            <arg value="@ShopsysFrameworkBundle"/>
         </exec>
         <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
-            <arg value="${path.bin-console}" />
-            <arg value="lint:yaml" />
-            <arg value="@ShopsysFrameworkBundle" />
-            <arg value="--parse-tags" />
+            <arg value="${path.bin-console}"/>
+            <arg value="lint:yaml"/>
+            <arg value="@ShopsysFrameworkBundle"/>
+            <arg value="--parse-tags"/>
         </exec>
         <exec executable="${path.eslint.executable}" passthru="true" checkreturn="true">
-            <arg value="--color" />
-            <arg path="${path.framework}/src/Resources/scripts" />
-            <arg value="--config" />
-            <arg path="${path.framework}/.eslintrc.json" />
-            <arg value="--ignore-path" />
-            <arg path="${path.framework}/.eslintignore" />
+            <arg value="--color"/>
+            <arg path="${path.framework}/src/Resources/scripts"/>
+            <arg value="--config"/>
+            <arg path="${path.framework}/.eslintrc.json"/>
+            <arg value="--ignore-path"/>
+            <arg path="${path.framework}/.eslintignore"/>
         </exec>
     </target>
 
     <target name="standards-fix-packages" description="Automatically fixes some coding standards violations in all packages.">
         <exec executable="${path.ecs.executable}" logoutput="true" passthru="true" checkreturn="true">
-            <arg value="check" />
-            <arg value="--clear-cache" />
-            <arg value="--fix" />
+            <arg value="check"/>
+            <arg value="--clear-cache"/>
+            <arg value="--fix"/>
             <arg path="./packages/*/src"/>
-            <arg path="./packages/*/tests" />
+            <arg path="./packages/*/tests"/>
             <arg path="./packages/*/*.md"/>
             <arg path="./*.md"/>
             <arg path="./docs"/>
         </exec>
         <exec executable="${path.eslint.executable}" passthru="true" checkreturn="true">
-            <arg value="--color" />
-            <arg value="--fix" />
-            <arg path="${path.framework}/src/Resources/scripts" />
-            <arg value="--config" />
-            <arg path="${path.framework}/.eslintrc.json" />
-            <arg value="--ignore-path" />
-            <arg path="${path.framework}/.eslintignore" />
+            <arg value="--color"/>
+            <arg value="--fix"/>
+            <arg path="${path.framework}/src/Resources/scripts"/>
+            <arg value="--config"/>
+            <arg path="${path.framework}/.eslintrc.json"/>
+            <arg value="--ignore-path"/>
+            <arg path="${path.framework}/.eslintignore"/>
         </exec>
     </target>
 
     <target name="standards-fix-packages-diff" description="Automatically fixes some coding standards violations in all changed files of packages">
         <exec executable="${path.ecs.executable}" logoutput="true" passthru="true" checkreturn="true">
-            <arg value="check" />
-            <arg value="--fix" />
+            <arg value="check"/>
+            <arg value="--fix"/>
             <arg path="./packages/*/src"/>
-            <arg path="./packages/*/tests" />
+            <arg path="./packages/*/tests"/>
             <arg path="./packages/*/*.md"/>
             <arg path="./*.md"/>
             <arg path="./docs"/>
         </exec>
         <exec executable="${path.eslint.executable}" passthru="true" checkreturn="true">
-            <arg value="--color" />
-            <arg value="--fix" />
-            <arg path="${path.framework}/src/Resources/scripts" />
-            <arg value="--config" />
-            <arg path="${path.framework}/.eslintrc.json" />
-            <arg value="--ignore-path" />
-            <arg path="${path.framework}/.eslintignore" />
+            <arg value="--color"/>
+            <arg value="--fix"/>
+            <arg path="${path.framework}/src/Resources/scripts"/>
+            <arg value="--config"/>
+            <arg path="${path.framework}/.eslintrc.json"/>
+            <arg value="--ignore-path"/>
+            <arg path="${path.framework}/.eslintignore"/>
         </exec>
     </target>
 
     <target name="standards-utils" description="Checks coding standards in monorepo utils folder">
         <exec executable="${path.phplint.executable}" logoutput="true" passthru="true" checkreturn="true">
-            <arg path="./utils/*/src"/>
-            <arg path="./utils/*/tests"/>
+            <arg path="${path.utils}/*/src"/>
+            <arg path="${path.utils}/*/tests"/>
         </exec>
         <exec executable="${path.ecs.executable}" logoutput="true" passthru="true" checkreturn="true">
-            <arg value="check" />
-            <arg path="./utils/*/src"/>
-            <arg path="./utils/*/tests"/>
+            <arg value="check"/>
+            <arg path="${path.utils}/*/src"/>
+            <arg path="${path.utils}/*/tests"/>
         </exec>
         <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
-            <arg value="${path.bin-console}" />
-            <arg value="lint:yaml" />
-            <arg value="./utils/*/src"/>
-            <arg value="--parse-tags" />
+            <arg value="${path.bin-console}"/>
+            <arg value="lint:yaml"/>
+            <arg value="${path.utils}/*/src"/>
+            <arg value="--parse-tags"/>
         </exec>
         <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
-            <arg value="${path.bin-console}" />
-            <arg value="lint:yaml" />
-            <arg value="./utils/*/tests"/>
-            <arg value="--parse-tags" />
+            <arg value="${path.bin-console}"/>
+            <arg value="lint:yaml"/>
+            <arg value="${path.utils}/*/tests"/>
+            <arg value="--parse-tags"/>
         </exec>
     </target>
 
     <target name="standards-fix-utils" description="Automatically fixes coding standards violations in monorepo utils folder">
         <exec executable="${path.ecs.executable}" logoutput="true" passthru="true" checkreturn="true">
-            <arg value="check" />
-            <arg value="--clear-cache" />
-            <arg value="--fix" />
-            <arg path="./utils/*/src"/>
-            <arg path="./utils/*/tests"/>
+            <arg value="check"/>
+            <arg value="--clear-cache"/>
+            <arg value="--fix"/>
+            <arg path="${path.utils}/*/src"/>
+            <arg path="${path.utils}/*/tests"/>
         </exec>
     </target>
 
@@ -183,8 +183,8 @@
             <arg path="${path.packages}/*/tests"/>
             <arg path="${path.root}/src"/>
             <arg path="${path.root}/tests"/>
-            <arg path="./utils/*/src"/>
-            <arg path="./utils/*/tests"/>
+            <arg path="${path.utils}/*/src"/>
+            <arg path="${path.utils}/*/tests"/>
             <arg value="--level=${phpstan.level}"/>
             <arg value="-vvv"/>
         </exec>
@@ -194,7 +194,7 @@
 
     <target name="tests-utils">
         <exec executable="${path.vendor}/bin/phpunit" logoutput="true" passthru="true" checkreturn="true">
-            <arg value="./utils/releaser/tests/"/>
+            <arg value="${path.utils}/releaser/tests/"/>
         </exec>
     </target>
 
@@ -230,87 +230,87 @@
         </exec>
     </target>
 
-    <target name="dump-translations" depends="dump-translations-project-base, dump-translations-packages" description="Extracts translatable messages in all packages ." />
+    <target name="dump-translations" depends="dump-translations-project-base, dump-translations-packages" description="Extracts translatable messages in all packages ."/>
 
     <target name="dump-translations-project-base" description="Extracts translatable messages from all source files in project base.">
         <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
-            <arg value="${path.bin-console}" />
-            <arg value="translation:extract" />
-            <arg value="--bundle=ShopsysShopBundle" />
-            <arg value="--dir=${path.src}/Shopsys/ShopBundle" />
-            <arg value="--dir=${path.app}/Resources" />
-            <arg value="--exclude-dir=frontend/plugins" />
-            <arg value="--output-format=po" />
-            <arg value="--output-dir=${path.src}/Shopsys/ShopBundle/Resources/translations" />
-            <arg value="cs" />
-            <arg value="en" />
+            <arg value="${path.bin-console}"/>
+            <arg value="translation:extract"/>
+            <arg value="--bundle=ShopsysShopBundle"/>
+            <arg value="--dir=${path.src}/Shopsys/ShopBundle"/>
+            <arg value="--dir=${path.app}/Resources"/>
+            <arg value="--exclude-dir=frontend/plugins"/>
+            <arg value="--output-format=po"/>
+            <arg value="--output-dir=${path.src}/Shopsys/ShopBundle/Resources/translations"/>
+            <arg value="cs"/>
+            <arg value="en"/>
         </exec>
     </target>
 
     <target name="dump-translations-packages" description="Extracts translatable messages in all packages .">
         <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
-            <arg value="${path.bin-console}" />
-            <arg value="translation:extract" />
-            <arg value="--bundle=ShopsysFormTypesBundle" />
-            <arg value="--dir=${path.packages}/form-types-bundle/src" />
-            <arg value="--output-format=po" />
-            <arg value="--output-dir=${path.packages}/form-types-bundle/src/Resources/translations" />
-            <arg value="cs" />
-            <arg value="en" />
+            <arg value="${path.bin-console}"/>
+            <arg value="translation:extract"/>
+            <arg value="--bundle=ShopsysFormTypesBundle"/>
+            <arg value="--dir=${path.packages}/form-types-bundle/src"/>
+            <arg value="--output-format=po"/>
+            <arg value="--output-dir=${path.packages}/form-types-bundle/src/Resources/translations"/>
+            <arg value="cs"/>
+            <arg value="en"/>
         </exec>
         <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
-            <arg value="${path.bin-console}" />
-            <arg value="translation:extract" />
-            <arg value="--bundle=ShopsysFrameworkBundle" />
-            <arg value="--dir=${path.framework}/src" />
-            <arg value="--exclude-dir=admin/plugins" />
-            <arg value="--exclude-dir=Component/Translation" />
-            <arg value="--exclude-dir=Component/Javascript/Compiler" />
-            <arg value="--exclude-name=*AnnotatedRouteControllerLoader.php" />
-            <arg value="--output-format=po" />
-            <arg value="--output-dir=${path.framework}/src/Resources/translations" />
-            <arg value="cs" />
-            <arg value="en" />
+            <arg value="${path.bin-console}"/>
+            <arg value="translation:extract"/>
+            <arg value="--bundle=ShopsysFrameworkBundle"/>
+            <arg value="--dir=${path.framework}/src"/>
+            <arg value="--exclude-dir=admin/plugins"/>
+            <arg value="--exclude-dir=Component/Translation"/>
+            <arg value="--exclude-dir=Component/Javascript/Compiler"/>
+            <arg value="--exclude-name=*AnnotatedRouteControllerLoader.php"/>
+            <arg value="--output-format=po"/>
+            <arg value="--output-dir=${path.framework}/src/Resources/translations"/>
+            <arg value="cs"/>
+            <arg value="en"/>
         </exec>
         <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
-            <arg value="${path.bin-console}" />
-            <arg value="translation:extract" />
-            <arg value="--bundle=ShopsysProductFeedGoogleBundle" />
-            <arg value="--dir=${path.packages}/product-feed-google/src" />
-            <arg value="--output-format=po" />
-            <arg value="--output-dir=${path.packages}/product-feed-google/src/Resources/translations" />
-            <arg value="cs" />
-            <arg value="en" />
+            <arg value="${path.bin-console}"/>
+            <arg value="translation:extract"/>
+            <arg value="--bundle=ShopsysProductFeedGoogleBundle"/>
+            <arg value="--dir=${path.packages}/product-feed-google/src"/>
+            <arg value="--output-format=po"/>
+            <arg value="--output-dir=${path.packages}/product-feed-google/src/Resources/translations"/>
+            <arg value="cs"/>
+            <arg value="en"/>
         </exec>
         <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
-            <arg value="${path.bin-console}" />
-            <arg value="translation:extract" />
-            <arg value="--bundle=ShopsysProductFeedHeurekaBundle" />
-            <arg value="--dir=${path.packages}/product-feed-heureka/src" />
-            <arg value="--output-format=po" />
-            <arg value="--output-dir=${path.packages}/product-feed-heureka/src/Resources/translations" />
-            <arg value="cs" />
-            <arg value="en" />
+            <arg value="${path.bin-console}"/>
+            <arg value="translation:extract"/>
+            <arg value="--bundle=ShopsysProductFeedHeurekaBundle"/>
+            <arg value="--dir=${path.packages}/product-feed-heureka/src"/>
+            <arg value="--output-format=po"/>
+            <arg value="--output-dir=${path.packages}/product-feed-heureka/src/Resources/translations"/>
+            <arg value="cs"/>
+            <arg value="en"/>
         </exec>
         <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
-            <arg value="${path.bin-console}" />
-            <arg value="translation:extract" />
-            <arg value="--bundle=ShopsysProductFeedHeurekaDeliveryBundle" />
-            <arg value="--dir=${path.packages}/product-feed-heureka-delivery/src" />
-            <arg value="--output-format=po" />
-            <arg value="--output-dir=${path.packages}/product-feed-heureka-delivery/src/Resources/translations" />
-            <arg value="cs" />
-            <arg value="en" />
+            <arg value="${path.bin-console}"/>
+            <arg value="translation:extract"/>
+            <arg value="--bundle=ShopsysProductFeedHeurekaDeliveryBundle"/>
+            <arg value="--dir=${path.packages}/product-feed-heureka-delivery/src"/>
+            <arg value="--output-format=po"/>
+            <arg value="--output-dir=${path.packages}/product-feed-heureka-delivery/src/Resources/translations"/>
+            <arg value="cs"/>
+            <arg value="en"/>
         </exec>
         <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
-            <arg value="${path.bin-console}" />
-            <arg value="translation:extract" />
-            <arg value="--bundle=ShopsysProductFeedZboziBundle" />
-            <arg value="--dir=${path.packages}/product-feed-zbozi/src" />
-            <arg value="--output-format=po" />
-            <arg value="--output-dir=${path.packages}/product-feed-zbozi/src/Resources/translations" />
-            <arg value="cs" />
-            <arg value="en" />
+            <arg value="${path.bin-console}"/>
+            <arg value="translation:extract"/>
+            <arg value="--bundle=ShopsysProductFeedZboziBundle"/>
+            <arg value="--dir=${path.packages}/product-feed-zbozi/src"/>
+            <arg value="--output-format=po"/>
+            <arg value="--output-dir=${path.packages}/product-feed-zbozi/src/Resources/translations"/>
+            <arg value="cs"/>
+            <arg value="en"/>
         </exec>
     </target>
 

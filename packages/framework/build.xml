@@ -1,18 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="Shopsys Framework" default="list">
 
+    <property name="is-multidomain" value="true"/>
     <property name="path.app" value="${path.root}/app"/>
     <property name="path.bin" value="${path.vendor}/bin"/>
+    <property name="path.bin-console" value="${path.root}/bin/console"/>
     <property name="path.build" value="${path.root}/build"/>
     <property name="path.build.properties.local" value="${path.build}/build.local.properties"/>
     <property name="path.build.stats" value="${path.build}/stats"/>
     <property name="path.chromedriver.executable" value="chromedriver"/>
     <property name="path.codeception.configuration" value="${path.build}/codeception.yml"/>
-    <property name="path.codeception.executable" value ="${path.bin}/codecept"/>
+    <property name="path.codeception.executable" value="${path.bin}/codecept"/>
     <property name="path.composer.executable" value="composer"/>
     <property name="path.env.test" value="${path.root}/TEST"/>
     <property name="path.eslint.executable" value="${path.root}/node_modules/.bin/eslint"/>
     <property name="path.framework" value="${project.basedir}"/>
+    <property name="path.git.executable" value="git"/>
     <property name="path.grunt.executable" value="node_modules/.bin/grunt"/>
     <property name="path.npm.executable" value="npm"/>
     <property name="path.pg_dump.executable" value="pg_dump"/>
@@ -32,14 +35,10 @@
     <property name="path.web.scripts" value="${path.web}/assets/scripts"/>
     <property name="path.web.styles.admin" value="${path.web}/assets/admin/styles"/>
     <property name="path.web.styles.front" value="${path.web}/assets/frontend/styles"/>
-
-    <property name="path.bin-console" value="bin/console"/>
-
-    <property name="is-multidomain" value="true" />
     <property name="phpstan.level" value="4"/>
 
     <if>
-        <os family="windows" />
+        <os family="windows"/>
         <then>
             <property name="dev.null" value="NUL"/>
         </then>
@@ -55,315 +54,298 @@
     <target name="build-demo" depends="wipe,generate-build-version,redis-check,composer,npm,dirs-create,assets,db-demo,grunt,error-pages-generate,warmup,product-search-recreate-structure,product-search-export-products,clean-redis-old" description="Builds application for production with clean demo DB."/>
     <target name="db-demo" depends="db-wipe-public-schema,db-import-basic-structure,db-migrations,create-domains-data,db-fixtures-demo,load-plugin-demo-data,generate-friendly-urls,replace-domains-urls" description="Creates DB and fills it with demo data"/>
     <target name="db-rebuild" depends="db-wipe-public-schema,db-import-basic-structure,db-migrations,create-domains-data,generate-friendly-urls,replace-domains-urls" description="Drops all data in database and creates a new one with base data only."/>
-    <target name="product-search-recreate-structure" depends="product-search-delete-structure,product-search-create-structure" description="Recreates structure for searching via elasticsearch (deletes existing structure and creates new one)" />
+    <target name="product-search-recreate-structure" depends="product-search-delete-structure,product-search-create-structure" description="Recreates structure for searching via elasticsearch (deletes existing structure and creates new one)"/>
 
     <target name="assets" description="Installs web assets from external bundles into a public web directory.">
         <exec executable="${path.php.executable}" passthru="true" checkreturn="true" output="${dev.null}">
-            <arg value="${path.bin-console}" />
-            <arg value="assetic:dump" />
+            <arg value="${path.bin-console}"/>
+            <arg value="assetic:dump"/>
         </exec>
 
         <delete failonerror="false" includeemptydirs="true">
             <fileset dir="${path.root}/web/bundles/">
-                <exclude name="/" />
+                <exclude name="/"/>
             </fileset>
         </delete>
         <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
-            <arg value="${path.bin-console}" />
-            <arg value="assets:install" />
-            <arg value="${path.root}/web/" />
+            <arg value="${path.bin-console}"/>
+            <arg value="assets:install"/>
+            <arg value="${path.root}/web/"/>
         </exec>
     </target>
 
     <target name="clean" description="Cleans up directories with cache and scripts which are generated on demand.">
         <delete failonerror="false" includeemptydirs="true">
             <fileset dir="${path.var}/cache/">
-                <exclude name="/" />
+                <exclude name="/"/>
             </fileset>
             <fileset dir="${path.web.scripts}/">
-                <exclude name="/" />
+                <exclude name="/"/>
             </fileset>
         </delete>
     </target>
 
     <target name="clean-redis" description="Cleans up redis cache">
         <exec executable="${path.php.executable}" passthru="true" checkreturn="true" output="${dev.null}">
-            <arg value="${path.bin-console}" />
-            <arg value="shopsys:redis:clean-cache" />
+            <arg value="${path.bin-console}"/>
+            <arg value="shopsys:redis:clean-cache"/>
         </exec>
     </target>
 
     <target name="clean-redis-old" description="Cleans up redis cache for previous build versions">
         <exec executable="${path.php.executable}" passthru="true" checkreturn="true" output="${dev.null}">
-            <arg value="${path.bin-console}" />
-            <arg value="shopsys:redis:clean-cache-old" />
+            <arg value="${path.bin-console}"/>
+            <arg value="shopsys:redis:clean-cache-old"/>
         </exec>
     </target>
 
     <target name="redis-check" description="Checks availability of Redis">
         <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
-            <arg value="${path.bin-console}" />
-            <arg value="shopsys:redis:check-availability" />
+            <arg value="${path.bin-console}"/>
+            <arg value="shopsys:redis:check-availability"/>
         </exec>
     </target>
 
     <target name="clean-styles" description="Cleans up directories with CSS generated by Grunt.">
         <delete failonerror="false" includeemptydirs="true">
             <fileset dir="${path.web.styles.admin}/">
-                <exclude name="/" />
+                <exclude name="/"/>
             </fileset>
             <fileset dir="${path.web.styles.front}/">
-                <exclude name="/" />
+                <exclude name="/"/>
             </fileset>
         </delete>
     </target>
 
     <target name="composer" description="Installs dependencies for production.">
-        <exec
-            executable="${path.composer.executable}"
-            logoutput="true"
-            passthru="true"
-            checkreturn="true"
-        >
-            <arg value="install" />
-            <arg value="--no-dev" />
+        <exec executable="${path.composer.executable}" logoutput="true" passthru="true" checkreturn="true">
+            <arg value="install"/>
+            <arg value="--no-dev"/>
         </exec>
     </target>
 
     <target name="create-domains-data" depends="create-domains-db-functions" description="Creates domains data for newly configured domains.">
         <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
-            <arg value="${path.bin-console}" />
-            <arg value="shopsys:domains-data:create" />
+            <arg value="${path.bin-console}"/>
+            <arg value="shopsys:domains-data:create"/>
         </exec>
         <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
-            <arg value="${path.bin-console}" />
-            <arg value="shopsys:recalculations" />
+            <arg value="${path.bin-console}"/>
+            <arg value="shopsys:recalculations"/>
         </exec>
     </target>
 
     <target name="create-domains-db-functions" description="Creates new domains DB functions.">
         <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
-            <arg value="${path.bin-console}" />
-            <arg value="shopsys:domains-db-functions:create" />
+            <arg value="${path.bin-console}"/>
+            <arg value="shopsys:domains-db-functions:create"/>
         </exec>
     </target>
 
     <target name="product-search-create-structure" description="Creates structure for searching via elasticsearch.">
         <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
-            <arg value="${path.bin-console}" />
-            <arg value="shopsys:product-search:create-structure" />
+            <arg value="${path.bin-console}"/>
+            <arg value="shopsys:product-search:create-structure"/>
         </exec>
     </target>
 
     <target name="product-search-delete-structure" description="Deletes structure for searching via elasticsearch.">
         <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
-            <arg value="${path.bin-console}" />
-            <arg value="shopsys:product-search:delete-structure" />
+            <arg value="${path.bin-console}"/>
+            <arg value="shopsys:product-search:delete-structure"/>
         </exec>
     </target>
 
     <target name="product-search-export-products" description="Exports all products for searching via elasticsearch.">
         <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
-            <arg value="${path.bin-console}" />
-            <arg value="shopsys:product-search:export-products" />
+            <arg value="${path.bin-console}"/>
+            <arg value="shopsys:product-search:export-products"/>
         </exec>
     </target>
 
     <target name="cron" description="Runs background jobs. Should be executed periodically by system Cron every 5 minutes.">
         <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
-            <arg value="${path.bin-console}" />
-            <arg value="shopsys:cron" />
+            <arg value="${path.bin-console}"/>
+            <arg value="shopsys:cron"/>
         </exec>
     </target>
 
     <target name="cron-list" description="Lists all available background jobs.">
         <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
-            <arg value="${path.bin-console}" />
-            <arg value="shopsys:cron" />
-            <arg value="--list" />
+            <arg value="${path.bin-console}"/>
+            <arg value="shopsys:cron"/>
+            <arg value="--list"/>
         </exec>
     </target>
 
     <target name="db-check-mapping" description="Checks if ORM mapping is valid.">
         <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
-            <arg value="${path.bin-console}" />
-            <arg value="shopsys:migrations:check-mapping" />
+            <arg value="${path.bin-console}"/>
+            <arg value="shopsys:migrations:check-mapping"/>
         </exec>
     </target>
 
     <target name="db-create" description="Creates database for application with required configuration.">
         <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
-            <arg value="${path.bin-console}" />
-            <arg value="shopsys:database:create" />
+            <arg value="${path.bin-console}"/>
+            <arg value="shopsys:database:create"/>
         </exec>
     </target>
 
     <target name="db-check-schema" depends="db-check-mapping" description="Checks if database schema is satisfying ORM and returns a list of suggestions to fix it.">
         <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
-            <arg value="${path.bin-console}" />
-            <arg value="shopsys:migrations:check-schema" />
+            <arg value="${path.bin-console}"/>
+            <arg value="shopsys:migrations:check-schema"/>
         </exec>
     </target>
 
     <target name="db-fixtures-demo" description="Loads demo data fixtures.">
         <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
-            <arg value="${path.bin-console}" />
-            <arg value="doctrine:fixtures:load" />
-            <arg value="--append" />
-            <arg value="--no-interaction" />
+            <arg value="${path.bin-console}"/>
+            <arg value="doctrine:fixtures:load"/>
+            <arg value="--append"/>
+            <arg value="--no-interaction"/>
         </exec>
         <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
-            <arg value="${path.bin-console}" />
-            <arg value="shopsys:recalculations" />
+            <arg value="${path.bin-console}"/>
+            <arg value="shopsys:recalculations"/>
         </exec>
     </target>
 
     <target name="db-import-basic-structure" description="Imports basic database structure (without migrations).">
         <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
-            <arg value="${path.bin-console}" />
-            <arg value="shopsys:schema:import-default" />
+            <arg value="${path.bin-console}"/>
+            <arg value="shopsys:schema:import-default"/>
         </exec>
     </target>
 
     <target name="db-migrations" description="Executes database migrations and checks schema.">
         <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
-            <arg value="${path.bin-console}" />
-            <arg value="shopsys:migrations:migrate" />
+            <arg value="${path.bin-console}"/>
+            <arg value="shopsys:migrations:migrate"/>
         </exec>
     </target>
 
     <target name="db-migrations-count" description="Get count of database migrations to execute.">
         <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
-            <arg value="${path.bin-console}" />
-            <arg value="shopsys:migrations:count" />
+            <arg value="${path.bin-console}"/>
+            <arg value="shopsys:migrations:count"/>
         </exec>
     </target>
 
     <target name="db-migrations-generate" depends="db-check-mapping" description="Generates migration file when DB schema is not satisfying ORM.">
         <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
-            <arg value="${path.bin-console}" />
-            <arg value="shopsys:migrations:generate" />
+            <arg value="${path.bin-console}"/>
+            <arg value="shopsys:migrations:generate"/>
         </exec>
     </target>
 
     <target name="db-wipe-public-schema" description="Drops and creates public database schema.">
         <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
-            <arg value="${path.bin-console}" />
-            <arg value="shopsys:schema:drop" />
+            <arg value="${path.bin-console}"/>
+            <arg value="shopsys:schema:drop"/>
         </exec>
         <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
-            <arg value="${path.bin-console}" />
-            <arg value="shopsys:schema:create" />
+            <arg value="${path.bin-console}"/>
+            <arg value="shopsys:schema:create"/>
         </exec>
     </target>
 
     <target name="dirs-create" description="Creates application directories for locks, docs, content, images, uploaded files, etc.">
         <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
-            <arg value="${path.bin-console}" />
-            <arg value="shopsys:create-directories" />
+            <arg value="${path.bin-console}"/>
+            <arg value="shopsys:create-directories"/>
         </exec>
     </target>
 
     <target name="error-pages-generate" depends="prod-warmup, redis-check" description="Generates error pages displayed in production environment.">
         <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
-            <arg value="${path.bin-console}" />
-            <arg value="shopsys:error-page:generate-all" />
+            <arg value="${path.bin-console}"/>
+            <arg value="shopsys:error-page:generate-all"/>
         </exec>
     </target>
 
     <target name="generate-friendly-urls" description="Generates friendly urls for supported entities when missing.">
         <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
-            <arg value="${path.bin-console}" />
-            <arg value="shopsys:generate:friendly-url" />
+            <arg value="${path.bin-console}"/>
+            <arg value="shopsys:generate:friendly-url"/>
         </exec>
     </target>
 
     <target name="grunt" depends="gruntfile,clean-styles" description="Builds CSS from LESS via Grunt.">
-        <exec executable="${path.grunt.executable}" dir="${path.root}" passthru="true" checkreturn="true" />
+        <exec executable="${path.grunt.executable}" dir="${path.root}" passthru="true" checkreturn="true"/>
     </target>
 
     <target name="gruntfile" description="Generates Gruntfile.js by domain settings.">
         <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
-            <arg value="${path.bin-console}" />
-            <arg value="shopsys:generate:gruntfile" />
+            <arg value="${path.bin-console}"/>
+            <arg value="shopsys:generate:gruntfile"/>
         </exec>
     </target>
 
     <target name="list" description="Hidden target to make Phing list all targets when called without an argument." hidden="true">
         <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
-            <arg value="phing" />
-            <arg value="-l" />
+            <arg value="phing"/>
+            <arg value="-l"/>
         </exec>
     </target>
 
     <target name="maintenance-off" description="Turns the maintenance page off.">
-        <delete file="${path.root}/MAINTENANCE" />
+        <delete file="${path.root}/MAINTENANCE"/>
     </target>
 
     <target name="maintenance-on" description="Turns the maintenance page on.">
-        <touch file="${path.root}/MAINTENANCE" />
+        <touch file="${path.root}/MAINTENANCE"/>
     </target>
 
     <target name="npm" description="Installs modules required for Grunt.">
-        <exec
-            executable="${path.npm.executable}"
-            dir="${path.root}"
-            logoutput="true"
-            passthru="true"
-            checkreturn="true"
-        >
+        <exec executable="${path.npm.executable}" dir="${path.root}" logoutput="true" passthru="true" checkreturn="true" >
             <arg value="prune"/>
         </exec>
 
-        <exec
-            executable="${path.npm.executable}"
-            dir="${path.root}"
-            logoutput="true"
-            passthru="true"
-            checkreturn="true"
-        >
+        <exec executable="${path.npm.executable}" dir="${path.root}" logoutput="true" passthru="true" checkreturn="true" >
             <arg value="install"/>
         </exec>
     </target>
 
     <target name="replace-domains-urls" description="Replaces domains urls in database by urls in configuration.">
         <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
-            <arg value="${path.bin-console}" />
-            <arg value="shopsys:domains-urls:replace" />
+            <arg value="${path.bin-console}"/>
+            <arg value="shopsys:domains-urls:replace"/>
         </exec>
     </target>
 
     <target name="load-plugin-demo-data" description="Loads data fixtures of all registered plugins.">
         <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
-            <arg value="${path.bin-console}" />
-            <arg value="shopsys:plugin-data-fixtures:load" />
+            <arg value="${path.bin-console}"/>
+            <arg value="shopsys:plugin-data-fixtures:load"/>
         </exec>
     </target>
 
     <target name="warmup" description="Warms up cache.">
         <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
-            <arg value="${path.bin-console}" />
-            <arg value="cache:warmup" />
+            <arg value="${path.bin-console}"/>
+            <arg value="cache:warmup"/>
         </exec>
     </target>
 
     <target name="prod-warmup" description="Warms up cache for production environment.">
         <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
-            <arg value="${path.bin-console}" />
-            <arg value="cache:warmup" />
-            <arg value="--env=prod" />
+            <arg value="${path.bin-console}"/>
+            <arg value="cache:warmup"/>
+            <arg value="--env=prod"/>
         </exec>
     </target>
 
     <target name="generate-build-version">
         <exec executable="${path.php.executable}" checkreturn="true" outputProperty="version">
-            <arg value="-r" />
-            <arg value="echo date('YmdHis');" />
+            <arg value="-r"/>
+            <arg value="echo date('YmdHis');"/>
         </exec>
         <copy file="${path.app}/config/parameters_version.yml.dist" tofile="${path.app}/config/parameters_version.yml" overwrite="true">
             <filterchain>
                 <replacetokens begintoken="%%" endtoken="%%">
-                    <token key="version" value="${version}" />
+                    <token key="version" value="${version}"/>
                 </replacetokens>
             </filterchain>
         </copy>
@@ -371,32 +353,32 @@
 
     <target name="wipe" depends="wipe-excluding-logs" description="Wipes out all generated and/or uploaded files.">
         <delete failonerror="false" includeemptydirs="true">
-            <fileset dir="${path.var}/logs/" />
+            <fileset dir="${path.var}/logs/"/>
         </delete>
     </target>
 
     <target name="wipe-excluding-logs" depends="clean,clean-styles" description="Wipes out all generated and/or uploaded files except for logs.">
         <delete failonerror="false" includeemptydirs="true">
             <fileset dir="${path.var}/">
-                <exclude name=".gitkeep" />
-                <exclude name="logs/**" />
-                <exclude name="postgres-data/**" />
-                <exclude name="elasticsearch-data/**" />
+                <exclude name=".gitkeep"/>
+                <exclude name="logs/**"/>
+                <exclude name="postgres-data/**"/>
+                <exclude name="elasticsearch-data/**"/>
             </fileset>
             <fileset dir="${path.build.stats}/">
-                <exclude name="/" />
+                <exclude name="/"/>
             </fileset>
             <fileset dir="${path.root}/docs/generated/">
-                <exclude name="/" />
+                <exclude name="/"/>
             </fileset>
             <fileset dir="${path.web}/components/">
-                <exclude name="/" />
+                <exclude name="/"/>
             </fileset>
             <fileset dir="${path.web}/content/">
-                <exclude name="/" />
+                <exclude name="/"/>
             </fileset>
             <fileset dir="${path.web}/content-test/">
-                <exclude name="/" />
+                <exclude name="/"/>
             </fileset>
         </delete>
     </target>
@@ -424,67 +406,65 @@
     <target name="tests-performance-run" depends="clean,redis-check,clean-redis,test-db-performance,tests-performance-warmup,tests-performance" description="Runs performance tests on a newly built test database with performance data."/>
 
     <target name="composer-check" description="Checks if Composer lock file is valid.">
-        <exec
-            executable="${path.composer.executable}"
-            logoutput="true"
-            passthru="true"
-            checkreturn="true"
-        >
-            <arg value="validate" />
-            <arg value="--no-check-all" />
+        <exec executable="${path.composer.executable}" logoutput="true" passthru="true" checkreturn="true">
+            <arg value="validate"/>
+            <arg value="--no-check-all"/>
         </exec>
     </target>
 
     <target name="composer-dev" depends="composer-check" description="Installs dependencies for development.">
-        <exec
-            executable="${path.composer.executable}"
-            logoutput="true"
-            passthru="true"
-            checkreturn="true"
-        >
+        <exec executable="${path.composer.executable}" logoutput="true" passthru="true" checkreturn="true">
             <arg value="install"/>
         </exec>
     </target>
 
-    <target name="dump-translations" depends="dump-translations-project-base" description="Extracts translatable messages from all source files in project base." />
+    <target name="dump-translations" depends="dump-translations-project-base" description="Extracts translatable messages from all source files in project base."/>
 
     <target name="dump-translations-project-base" description="Extracts translatable messages from all source files in project base.">
         <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
-            <arg value="${path.bin-console}" />
-            <arg value="translation:extract" />
-            <arg value="--bundle=ShopsysShopBundle" />
-            <arg value="--dir=${path.src}/Shopsys/ShopBundle" />
-            <arg value="--dir=${path.app}/Resources" />
-            <arg value="--exclude-dir=frontend/plugins" />
-            <arg value="--output-format=po" />
-            <arg value="--output-dir=${path.src}/Shopsys/ShopBundle/Resources/translations" />
-            <arg value="--keep" />
-            <arg value="cs" />
-            <arg value="en" />
+            <arg value="${path.bin-console}"/>
+            <arg value="translation:extract"/>
+            <arg value="--bundle=ShopsysShopBundle"/>
+            <arg value="--dir=${path.src}/Shopsys/ShopBundle"/>
+            <arg value="--dir=${path.app}/Resources"/>
+            <arg value="--exclude-dir=frontend/plugins"/>
+            <arg value="--output-format=po"/>
+            <arg value="--output-dir=${path.src}/Shopsys/ShopBundle/Resources/translations"/>
+            <arg value="--keep"/>
+            <arg value="cs"/>
+            <arg value="en"/>
         </exec>
     </target>
 
     <target name="diff-files" description="Finds changed files (against origin/master) and saves them into properties.">
-        <exec
-            command="git merge-base origin/master HEAD"
-            outputProperty="git.merge.base"
-        />
+        <exec executable="${path.git.executable}" outputProperty="git.merge.base">
+            <arg value="merge-base"/>
+            <arg value="origin/master"/>
+            <arg value="HEAD"/>
+        </exec>
 
-        <exec
-            command="git diff --name-only --diff-filter=ACMR ${git.merge.base} ${path.src} ${path.tests}"
-            outputProperty="git.files.changed"
-        />
+        <exec executable="${path.git.executable}" outputProperty="git.files.changed">
+            <arg value="diff"/>
+            <arg value="--name-only"/>
+            <arg value="--diff-filter=ACMR"/>
+            <arg value="${git.merge.base}"/>
+            <arg path="${path.src}"/>
+            <arg path="${path.tests}"/>
+        </exec>
 
-        <exec
-            command="git ls-files --others --exclude-standard ${path.src} ${path.tests}"
-            outputProperty="git.files.unstaged"
-        />
+        <exec executable="${path.git.executable}" outputProperty="git.files.unstaged">
+            <arg value="ls-files"/>
+            <arg value="--others"/>
+            <arg value="--exclude-standard"/>
+            <arg path="${path.src}"/>
+            <arg path="${path.tests}"/>
+        </exec>
 
         <property name="diff.files.all" value="${git.files.changed}${line.separator}${git.files.unstaged}">
             <filterchain>
                 <!-- ignore Codeception generated class for running acceptance tests -->
                 <linecontainsregexp>
-                    <regexp pattern="^(?!tests/ShopBundle/Test/Codeception/_generated/AcceptanceTesterActions.php).+$" />
+                    <regexp pattern="^(?!tests/ShopBundle/Test/Codeception/_generated/AcceptanceTesterActions.php).+$"/>
                 </linecontainsregexp>
             </filterchain>
         </property>
@@ -493,7 +473,7 @@
             <filterchain>
                 <linecontainsregexp>
                     <!-- linecontainsregexp splits lines using \n, so string can end with whitespace -->
-                    <regexp pattern="\.js\s*$" />
+                    <regexp pattern="\.js\s*$"/>
                 </linecontainsregexp>
             </filterchain>
         </property>
@@ -502,7 +482,7 @@
             <filterchain>
                 <linecontainsregexp>
                     <!-- linecontainsregexp splits lines using \n, so string can end with whitespace -->
-                    <regexp pattern="\.php\s*$" />
+                    <regexp pattern="\.php\s*$"/>
                 </linecontainsregexp>
             </filterchain>
         </property>
@@ -511,7 +491,7 @@
             <filterchain>
                 <linecontainsregexp>
                     <!-- linecontainsregexp splits lines using \n, so string can end with whitespace -->
-                    <regexp pattern="\.twig\s*$" />
+                    <regexp pattern="\.twig\s*$"/>
                 </linecontainsregexp>
             </filterchain>
         </property>
@@ -519,7 +499,7 @@
         <property name="diff.files.all.spaces" value="${diff.files.all}">
             <filterchain>
                 <replaceregexp>
-                    <regexp pattern="[\r\n]+" replace=" " />
+                    <regexp pattern="[\r\n]+" replace=" "/>
                 </replaceregexp>
             </filterchain>
         </property>
@@ -527,7 +507,7 @@
         <property name="diff.files.js.spaces" value="${diff.files.js}">
             <filterchain>
                 <replaceregexp>
-                    <regexp pattern="[\r\n]+" replace=" " />
+                    <regexp pattern="[\r\n]+" replace=" "/>
                 </replaceregexp>
             </filterchain>
         </property>
@@ -535,7 +515,7 @@
         <property name="diff.files.php.spaces" value="${diff.files.php}">
             <filterchain>
                 <replaceregexp>
-                    <regexp pattern="[\r\n]+" replace=" " />
+                    <regexp pattern="[\r\n]+" replace=" "/>
                 </replaceregexp>
             </filterchain>
         </property>
@@ -543,7 +523,7 @@
         <property name="diff.files.twig.spaces" value="${diff.files.twig}">
             <filterchain>
                 <replaceregexp>
-                    <regexp pattern="[\r\n]+" replace=" " />
+                    <regexp pattern="[\r\n]+" replace=" "/>
                 </replaceregexp>
             </filterchain>
         </property>
@@ -551,8 +531,8 @@
         <property name="diff.files.php.commas" value="${diff.files.php}">
             <filterchain>
                 <replaceregexp>
-                    <regexp pattern="[\r\n]+" replace="," />
-                    <regexp pattern="^,|,$" replace="" />
+                    <regexp pattern="[\r\n]+" replace=","/>
+                    <regexp pattern="^,|,$" replace=""/>
                 </replaceregexp>
             </filterchain>
         </property>
@@ -560,28 +540,28 @@
 
     <target name="eslint-check" description="Find JS coding standard violations in all files using ESLint and print human readable output.">
         <exec executable="${path.eslint.executable}" passthru="true" checkreturn="true">
-            <arg value="--color" />
-            <arg path="${path.src}" />
-            <arg value="--config" />
-            <arg path="${path.root}/.eslintrc.json" />
-            <arg value="--ignore-path" />
-            <arg path="${path.root}/.eslintignore" />
+            <arg value="--color"/>
+            <arg path="${path.src}"/>
+            <arg value="--config"/>
+            <arg path="${path.root}/.eslintrc.json"/>
+            <arg value="--ignore-path"/>
+            <arg path="${path.root}/.eslintignore"/>
         </exec>
     </target>
 
     <target name="eslint-check-diff" depends="diff-files" description="Find JS coding standard violations in changed files using ESLint and print human readable output.">
         <if>
             <not>
-                <equals arg1="${diff.files.js.spaces}" arg2="" trim="true" />
+                <equals arg1="${diff.files.js.spaces}" arg2="" trim="true"/>
             </not>
             <then>
                 <exec executable="${path.eslint.executable}" passthru="true" checkreturn="true">
-                    <arg value="--color" />
-                    <arg line="${diff.files.js.spaces}" />
-                    <arg value="--config" />
-                    <arg path="${path.root}/.eslintrc.json" />
-                    <arg value="--ignore-path" />
-                    <arg path="${path.root}/.eslintignore" />
+                    <arg value="--color"/>
+                    <arg line="${diff.files.js.spaces}"/>
+                    <arg value="--config"/>
+                    <arg path="${path.root}/.eslintrc.json"/>
+                    <arg value="--ignore-path"/>
+                    <arg path="${path.root}/.eslintignore"/>
                 </exec>
             </then>
         </if>
@@ -589,137 +569,101 @@
 
     <target name="eslint-fix" description="Fix JS coding standard violations in all files using ESLint.">
         <exec executable="${path.eslint.executable}" passthru="true" checkreturn="true">
-            <arg value="--color" />
-            <arg value="--fix" />
-            <arg path="${path.src}" />
-            <arg value="--config" />
-            <arg path="${path.root}/.eslintrc.json" />
-            <arg value="--ignore-path" />
-            <arg path="${path.root}/.eslintignore" />
+            <arg value="--color"/>
+            <arg value="--fix"/>
+            <arg path="${path.src}"/>
+            <arg value="--config"/>
+            <arg path="${path.root}/.eslintrc.json"/>
+            <arg value="--ignore-path"/>
+            <arg path="${path.root}/.eslintignore"/>
         </exec>
     </target>
 
     <target name="eslint-fix-diff" depends="diff-files" description="Fix JS coding standard violations in changed files using ESLint.">
         <if>
             <not>
-                <equals arg1="${diff.files.js.spaces}" arg2="" trim="true" />
+                <equals arg1="${diff.files.js.spaces}" arg2="" trim="true"/>
             </not>
             <then>
                 <exec executable="${path.eslint.executable}" passthru="true" checkreturn="true">
-                    <arg value="--color" />
-                    <arg value="--fix" />
-                    <arg line="${diff.files.js.spaces}" />
-                    <arg value="--config" />
-                    <arg path="${path.root}/.eslintrc.json" />
-                    <arg value="--ignore-path" />
-                    <arg path="${path.root}/.eslintignore" />
+                    <arg value="--color"/>
+                    <arg value="--fix"/>
+                    <arg line="${diff.files.js.spaces}"/>
+                    <arg value="--config"/>
+                    <arg path="${path.root}/.eslintrc.json"/>
+                    <arg value="--ignore-path"/>
+                    <arg path="${path.root}/.eslintignore"/>
                 </exec>
             </then>
         </if>
     </target>
 
     <target name="ecs" description="Checks coding standards in all files by PHP easy coding standards.">
-        <exec
-            executable="${path.ecs.executable}"
-            logoutput="true"
-            passthru="true"
-            checkreturn="true"
-        >
-            <arg value="check" />
-            <arg value="--clear-cache" />
-            <arg path="${path.src}" />
-            <arg path="${path.tests}" />
-            <arg path="${path.root}/*.md" />
-            <arg path="${path.root}/docs" />
+        <exec executable="${path.ecs.executable}" logoutput="true" passthru="true" checkreturn="true">
+            <arg value="check"/>
+            <arg value="--clear-cache"/>
+            <arg path="${path.src}"/>
+            <arg path="${path.tests}"/>
+            <arg path="${path.root}/*.md"/>
+            <arg path="${path.root}/docs"/>
         </exec>
     </target>
 
     <target name="ecs-fix" description="Checks and fixes automatically fixable coding standards in all files by PHP easy coding standards.">
-        <exec
-            executable="${path.ecs.executable}"
-            logoutput="true"
-            passthru="true"
-            checkreturn="true"
-        >
-            <arg value="check" />
-            <arg value="--clear-cache" />
-            <arg value="--fix" />
-            <arg path="${path.src}" />
-            <arg path="${path.tests}" />
-            <arg path="${path.root}/*.md" />
-            <arg path="${path.root}/docs" />
+        <exec executable="${path.ecs.executable}" logoutput="true" passthru="true" checkreturn="true">
+            <arg value="check"/>
+            <arg value="--clear-cache"/>
+            <arg value="--fix"/>
+            <arg path="${path.src}"/>
+            <arg path="${path.tests}"/>
+            <arg path="${path.root}/*.md"/>
+            <arg path="${path.root}/docs"/>
         </exec>
     </target>
 
-
     <target name="ecs-diff" description="Checks coding standards in all files by PHP easy coding standards.">
-        <exec
-            executable="${path.ecs.executable}"
-            logoutput="true"
-            passthru="true"
-            checkreturn="true"
-        >
-            <arg value="check" />
-            <arg path="${path.src}" />
-            <arg path="${path.tests}" />
-            <arg path="${path.root}/*.md" />
-            <arg path="${path.root}/docs" />
+        <exec executable="${path.ecs.executable}" logoutput="true" passthru="true" checkreturn="true">
+            <arg value="check"/>
+            <arg path="${path.src}"/>
+            <arg path="${path.tests}"/>
+            <arg path="${path.root}/*.md"/>
+            <arg path="${path.root}/docs"/>
         </exec>
     </target>
 
     <target name="ecs-fix-diff" description="Checks and fixes automatically fixable coding standards in all files by PHP easy coding standards.">
-        <exec
-            executable="${path.ecs.executable}"
-            logoutput="true"
-            passthru="true"
-            checkreturn="true"
-        >
-            <arg value="check" />
-            <arg value="--fix" />
-            <arg path="${path.src}" />
-            <arg path="${path.tests}" />
-            <arg path="${path.root}/*.md" />
-            <arg path="${path.root}/docs" />
+        <exec executable="${path.ecs.executable}" logoutput="true" passthru="true" checkreturn="true">
+            <arg value="check"/>
+            <arg value="--fix"/>
+            <arg path="${path.src}"/>
+            <arg path="${path.tests}"/>
+            <arg path="${path.root}/*.md"/>
+            <arg path="${path.root}/docs"/>
         </exec>
     </target>
 
     <target name="phplint" description="Checks syntax of PHP files.">
-        <exec
-            executable="${path.phplint.executable}"
-            logoutput="true"
-            passthru="true"
-            checkreturn="true"
-        >
+        <exec executable="${path.phplint.executable}" logoutput="true" passthru="true" checkreturn="true">
             <arg path="${path.src}"/>
-            <arg path="${path.tests}" />
+            <arg path="${path.tests}"/>
         </exec>
     </target>
 
     <target name="phplint-diff" depends="diff-files" description="Checks syntax of changed PHP files.">
         <if>
             <not>
-                <equals arg1="${diff.files.php.spaces}" arg2="" trim="true" />
+                <equals arg1="${diff.files.php.spaces}" arg2="" trim="true"/>
             </not>
             <then>
-                <exec
-                    executable="${path.phplint.executable}"
-                    logoutput="true"
-                    passthru="true"
-                    checkreturn="true"
-                >
-                    <arg line="${diff.files.php.spaces}" />
+                <exec executable="${path.phplint.executable}" logoutput="true" passthru="true" checkreturn="true">
+                    <arg line="${diff.files.php.spaces}"/>
                 </exec>
             </then>
         </if>
     </target>
 
     <target name="phpstan" depends="tests-acceptance-build" description="Performs static analysis of PHP files using PHPStan.">
-        <exec
-            executable="${path.phpstan.executable}"
-            logoutput="true"
-            passthru="true"
-            checkreturn="true"
-        >
+        <exec executable="${path.phpstan.executable}" logoutput="true" passthru="true" checkreturn="true">
             <arg value="analyze"/>
 
             <arg value="-c"/>
@@ -734,64 +678,54 @@
     </target>
 
     <target name="selenium-run" description="Runs the Selenium server for acceptance testing. ChromeDriver is required.">
-        <exec
-            executable="${path.chromedriver.executable}"
-            logoutput="true"
-            passthru="true"
-            checkreturn="true"
-        >
-            <arg value="--port=4444" />
-            <arg value="--url-base=wd/hub" />
+        <exec executable="${path.chromedriver.executable}" logoutput="true" passthru="true" checkreturn="true">
+            <arg value="--port=4444"/>
+            <arg value="--url-base=wd/hub"/>
         </exec>
     </target>
 
     <target name="server-run" description="Runs PHP built-in web server for a chosen domain.">
         <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
-            <arg value="${path.bin-console}" />
-            <arg value="shopsys:server:run" />
+            <arg value="${path.bin-console}"/>
+            <arg value="shopsys:server:run"/>
         </exec>
     </target>
 
     <target name="standards-fix" description="Automatically fixes some coding standards violations in all files.">
-        <phingcall target="ecs-fix" />
-        <phingcall target="eslint-fix" />
+        <phingcall target="ecs-fix"/>
+        <phingcall target="eslint-fix"/>
     </target>
 
     <target name="standards-fix-diff" description="Automatically fixes some coding standards violations in changed files.">
-        <phingcall target="ecs-fix-diff" />
-        <phingcall target="eslint-fix-diff" />
+        <phingcall target="ecs-fix-diff"/>
+        <phingcall target="eslint-fix-diff"/>
     </target>
 
     <target name="tests-acceptance" depends="clean,redis-check,clean-redis,test-db-dump" description="Runs acceptance tests. Running Selenium server is required.">
-        <available file="${path.env.test}" type="file" property="path.env.test.existed" />
+        <available file="${path.env.test}" type="file" property="path.env.test.existed"/>
         <if>
             <not>
-                <equals arg1="${path.env.test.existed}" arg2="true" />
+                <equals arg1="${path.env.test.existed}" arg2="true"/>
             </not>
             <then>
-                <touch file="${path.root}/TEST" />
+                <touch file="${path.root}/TEST"/>
             </then>
         </if>
 
         <trycatch>
             <try>
-                <exec
-                    executable="${path.codeception.executable}"
-                    logoutput="true"
-                    passthru="true"
-                    checkreturn="true"
-                >
-                    <arg value="run" />
-                    <arg value="--config=${path.codeception.configuration}" />
+                <exec executable="${path.codeception.executable}" logoutput="true" passthru="true" checkreturn="true">
+                    <arg value="run"/>
+                    <arg value="--config=${path.codeception.configuration}"/>
                 </exec>
             </try>
             <finally>
                 <if>
                     <not>
-                        <equals arg1="${path.env.test.existed}" arg2="true" />
+                        <equals arg1="${path.env.test.existed}" arg2="true"/>
                     </not>
                     <then>
-                        <delete file="${path.root}/TEST" />
+                        <delete file="${path.root}/TEST"/>
                     </then>
                 </if>
             </finally>
@@ -799,27 +733,17 @@
     </target>
 
     <target name="tests-acceptance-build" description="Generates AcceptanceTesterActions.php (execute after change of Codeception modules, eg. StrictWebDriver).">
-        <exec
-            executable="${path.codeception.executable}"
-            logoutput="true"
-            passthru="true"
-            checkreturn="true"
-        >
-            <arg value="build" />
-            <arg value="--config=${path.codeception.configuration}" />
+        <exec executable="${path.codeception.executable}" logoutput="true" passthru="true" checkreturn="true">
+            <arg value="build"/>
+            <arg value="--config=${path.codeception.configuration}"/>
         </exec>
     </target>
 
     <target name="tests-smoke" depends="clean,redis-check,clean-redis" description="Runs smoke tests.">
         <if>
-            <istrue value="${is-multidomain}" />
+            <istrue value="${is-multidomain}"/>
             <then>
-                <exec
-                    executable="${path.phpunit.executable}"
-                    logoutput="true"
-                    passthru="true"
-                    checkreturn="true"
-                >
+                <exec executable="${path.phpunit.executable}" logoutput="true" passthru="true" checkreturn="true">
                     <arg value="--colors=always"/>
                     <arg value="--testsuite"/>
                     <arg value="Smoke"/>
@@ -829,14 +753,8 @@
                     <arg value="${path.root}/phpunit.xml"/>
                 </exec>
             </then>
-
             <else>
-                <exec
-                    executable="${path.phpunit.executable}"
-                    logoutput="true"
-                    passthru="true"
-                    checkreturn="true"
-                >
+                <exec executable="${path.phpunit.executable}" logoutput="true" passthru="true" checkreturn="true">
                     <arg value="--colors=always"/>
                     <arg value="--testsuite"/>
                     <arg value="Smoke"/>
@@ -851,14 +769,9 @@
 
     <target name="tests-functional" depends="clean,redis-check,clean-redis" description="Runs functional tests.">
         <if>
-            <istrue value="${is-multidomain}" />
+            <istrue value="${is-multidomain}"/>
             <then>
-                <exec
-                    executable="${path.phpunit.executable}"
-                    logoutput="true"
-                    passthru="true"
-                    checkreturn="true"
-                >
+                <exec executable="${path.phpunit.executable}" logoutput="true" passthru="true" checkreturn="true">
                     <arg value="--colors=always"/>
                     <arg value="--testsuite"/>
                     <arg value="Functional"/>
@@ -869,12 +782,7 @@
                 </exec>
             </then>
             <else>
-                <exec
-                    executable="${path.phpunit.executable}"
-                    logoutput="true"
-                    passthru="true"
-                    checkreturn="true"
-                >
+                <exec executable="${path.phpunit.executable}" logoutput="true" passthru="true" checkreturn="true">
                     <arg value="--colors=always"/>
                     <arg value="--testsuite"/>
                     <arg value="Functional"/>
@@ -888,12 +796,7 @@
     </target>
 
     <target name="tests-performance" depends="clean,redis-check,clean-redis" description="Runs performance tests.">
-        <exec
-            executable="${path.phpunit.executable}"
-            logoutput="true"
-            passthru="true"
-            checkreturn="true"
-        >
+        <exec executable="${path.phpunit.executable}" logoutput="true" passthru="true" checkreturn="true">
             <arg value="--colors=always"/>
             <arg value="--testsuite"/>
             <arg value="Performance"/>
@@ -905,12 +808,7 @@
     </target>
 
     <target name="tests-performance-warmup" description="Warms up cache for performance tests.">
-        <exec
-            executable="${path.phpunit.executable}"
-            logoutput="true"
-            passthru="true"
-            checkreturn="true"
-        >
+        <exec executable="${path.phpunit.executable}" logoutput="true" passthru="true" checkreturn="true">
             <arg value="--colors=always"/>
             <arg value="--testsuite"/>
             <arg value="Performance"/>
@@ -922,12 +820,7 @@
     </target>
 
     <target name="tests-unit" depends="clean" description="Runs unit tests.">
-        <exec
-            executable="${path.phpunit.executable}"
-            logoutput="true"
-            passthru="true"
-            checkreturn="true"
-        >
+        <exec executable="${path.phpunit.executable}" logoutput="true" passthru="true" checkreturn="true">
             <arg value="--colors=always"/>
             <arg value="--testsuite"/>
             <arg value="Unit"/>
@@ -938,168 +831,168 @@
 
     <target name="test-create-domains-db-functions" description="Creates new domains DB functions in test database.">
         <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
-            <arg value="${path.bin-console}" />
-            <arg value="shopsys:domains-db-functions:create" />
-            <arg value="--env=test" />
+            <arg value="${path.bin-console}"/>
+            <arg value="shopsys:domains-db-functions:create"/>
+            <arg value="--env=test"/>
         </exec>
     </target>
 
     <target name="test-create-domains-data" depends="test-create-domains-db-functions" description="Creates domains data in tests DB for newly configured domains.">
         <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
-            <arg value="${path.bin-console}" />
-            <arg value="shopsys:domains-data:create" />
-            <arg value="--env=test" />
+            <arg value="${path.bin-console}"/>
+            <arg value="shopsys:domains-data:create"/>
+            <arg value="--env=test"/>
         </exec>
     </target>
 
     <target name="test-db-check-schema" depends="db-check-mapping" description="Checks if test database schema is satisfying ORM and returns a list of suggestions to fix it.">
         <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
-            <arg value="${path.bin-console}" />
-            <arg value="--env=test" />
-            <arg value="shopsys:migrations:check-schema" />
+            <arg value="${path.bin-console}"/>
+            <arg value="--env=test"/>
+            <arg value="shopsys:migrations:check-schema"/>
         </exec>
     </target>
 
     <target name="test-db-create" description="Creates test database for application with required configuration.">
         <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
-            <arg value="${path.bin-console}" />
-            <arg value="shopsys:database:create" />
-            <arg value="--env=test" />
+            <arg value="${path.bin-console}"/>
+            <arg value="shopsys:database:create"/>
+            <arg value="--env=test"/>
         </exec>
     </target>
 
     <target name="test-db-dump" description="Dumps current test database into a file to be used in acceptance tests.">
         <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
-            <arg value="${path.bin-console}" />
-            <arg value="--env=test" />
-            <arg value="shopsys:database:dump" />
-            <arg value="--pgdump-bin=${path.pg_dump.executable}" />
-            <arg value="${path.test.database.dump}" />
+            <arg value="${path.bin-console}"/>
+            <arg value="--env=test"/>
+            <arg value="shopsys:database:dump"/>
+            <arg value="--pgdump-bin=${path.pg_dump.executable}"/>
+            <arg value="${path.test.database.dump}"/>
         </exec>
     </target>
 
     <target name="db-dump" description="Dumps current database into a file.">
         <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
-            <arg value="${path.bin-console}" />
-            <arg value="shopsys:database:dump" />
-            <arg value="--pgdump-bin=${path.pg_dump.executable}" />
-            <arg value="db-dump-migrate-mc-multidomain.sql" />
+            <arg value="${path.bin-console}"/>
+            <arg value="shopsys:database:dump"/>
+            <arg value="--pgdump-bin=${path.pg_dump.executable}"/>
+            <arg value="db-dump-migrate-mc-multidomain.sql"/>
         </exec>
     </target>
 
     <target name="test-db-fixtures-demo" description="Loads demo data fixtures into test DB.">
         <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
-            <arg value="${path.bin-console}" />
-            <arg value="--env=test" />
-            <arg value="doctrine:fixtures:load" />
-            <arg value="--append" />
-            <arg value="--no-interaction" />
+            <arg value="${path.bin-console}"/>
+            <arg value="--env=test"/>
+            <arg value="doctrine:fixtures:load"/>
+            <arg value="--append"/>
+            <arg value="--no-interaction"/>
         </exec>
         <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
-            <arg value="${path.bin-console}" />
-            <arg value="shopsys:recalculations" />
-            <arg value="--env=test" />
+            <arg value="${path.bin-console}"/>
+            <arg value="shopsys:recalculations"/>
+            <arg value="--env=test"/>
         </exec>
     </target>
 
     <target name="test-db-fixtures-performance" description="Loads performance data fixtures into test DB.">
         <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
-            <arg value="${path.bin-console}" />
-            <arg value="--env=test" />
-            <arg value="shopsys:performance-data" />
+            <arg value="${path.bin-console}"/>
+            <arg value="--env=test"/>
+            <arg value="shopsys:performance-data"/>
         </exec>
         <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
-            <arg value="${path.bin-console}" />
-            <arg value="--env=test" />
-            <arg value="shopsys:recalculations" />
+            <arg value="${path.bin-console}"/>
+            <arg value="--env=test"/>
+            <arg value="shopsys:recalculations"/>
         </exec>
     </target>
 
     <target name="test-db-import-basic-structure" description="Imports basic database structure (without migrations) into test database.">
         <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
-            <arg value="${path.bin-console}" />
-            <arg value="--env=test" />
-            <arg value="shopsys:schema:import-default" />
+            <arg value="${path.bin-console}"/>
+            <arg value="--env=test"/>
+            <arg value="shopsys:schema:import-default"/>
         </exec>
     </target>
 
     <target name="test-db-migrations" description="Executes test database migrations and checks schema.">
         <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
-            <arg value="${path.bin-console}" />
-            <arg value="--env=test" />
-            <arg value="shopsys:migrations:migrate" />
+            <arg value="${path.bin-console}"/>
+            <arg value="--env=test"/>
+            <arg value="shopsys:migrations:migrate"/>
         </exec>
     </target>
 
     <target name="test-db-wipe-public-schema" description="Drops and creates public database schema in test database.">
         <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
-            <arg value="${path.bin-console}" />
-            <arg value="--env=test" />
-            <arg value="shopsys:schema:drop" />
+            <arg value="${path.bin-console}"/>
+            <arg value="--env=test"/>
+            <arg value="shopsys:schema:drop"/>
         </exec>
         <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
-            <arg value="${path.bin-console}" />
-            <arg value="--env=test" />
-            <arg value="shopsys:schema:create" />
+            <arg value="${path.bin-console}"/>
+            <arg value="--env=test"/>
+            <arg value="shopsys:schema:create"/>
         </exec>
     </target>
 
     <target name="test-dirs-create" description="Creates application directories for content, images, uploaded files, etc. for test environment">
         <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
-            <arg value="${path.bin-console}" />
-            <arg value="--env=test" />
-            <arg value="shopsys:create-directories" />
+            <arg value="${path.bin-console}"/>
+            <arg value="--env=test"/>
+            <arg value="shopsys:create-directories"/>
         </exec>
     </target>
 
     <target name="test-generate-friendly-urls" description="Generates friendly urls for supported entities when missing in test DB.">
         <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
-            <arg value="${path.bin-console}" />
-            <arg value="--env=test" />
-            <arg value="shopsys:generate:friendly-url" />
+            <arg value="${path.bin-console}"/>
+            <arg value="--env=test"/>
+            <arg value="shopsys:generate:friendly-url"/>
         </exec>
     </target>
 
     <target name="test-load-plugin-demo-data" description="Loads data fixtures of all registered plugins into test DB.">
         <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
-            <arg value="${path.bin-console}" />
-            <arg value="--env=test" />
-            <arg value="shopsys:plugin-data-fixtures:load" />
+            <arg value="${path.bin-console}"/>
+            <arg value="--env=test"/>
+            <arg value="shopsys:plugin-data-fixtures:load"/>
         </exec>
     </target>
 
     <target name="test-replace-domains-urls" description="Replaces domains urls in test database by urls in configuration.">
         <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
-            <arg value="${path.bin-console}" />
-            <arg value="--env=test" />
-            <arg value="shopsys:domains-urls:replace" />
+            <arg value="${path.bin-console}"/>
+            <arg value="--env=test"/>
+            <arg value="shopsys:domains-urls:replace"/>
         </exec>
     </target>
 
     <target name="twig-lint" description="Checks syntax of Twig templates.">
         <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
-            <arg value="${path.bin-console}" />
-            <arg value="lint:twig" />
-            <arg value="@ShopsysShopBundle" />
+            <arg value="${path.bin-console}"/>
+            <arg value="lint:twig"/>
+            <arg value="@ShopsysShopBundle"/>
         </exec>
     </target>
 
     <target name="timezones-check" description="Checks uniformity of PHP and Postgres timezones.">
         <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
-            <arg value="${path.bin-console}" />
-            <arg value="shopsys:check-timezones" />
+            <arg value="${path.bin-console}"/>
+            <arg value="shopsys:check-timezones"/>
         </exec>
     </target>
 
     <target name="twig-lint-diff" depends="diff-files" description="Checks syntax of changed Twig templates.">
         <if>
             <not>
-                <equals arg1="${diff.files.twig.spaces}" arg2="" trim="true" />
+                <equals arg1="${diff.files.twig.spaces}" arg2="" trim="true"/>
             </not>
             <then>
                 <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
-                    <arg value="${path.bin-console}" />
-                    <arg value="lint:twig" />
+                    <arg value="${path.bin-console}"/>
+                    <arg value="lint:twig"/>
                     <arg line="${diff.files.twig.spaces}"/>
                 </exec>
             </then>
@@ -1108,17 +1001,16 @@
 
     <target name="yaml-lint" description="Checks syntax of Yaml files.">
         <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
-            <arg value="${path.bin-console}" />
-            <arg value="lint:yaml" />
-            <arg value="@ShopsysShopBundle" />
-            <arg value="--parse-tags" />
+            <arg value="${path.bin-console}"/>
+            <arg value="lint:yaml"/>
+            <arg value="@ShopsysShopBundle"/>
+            <arg value="--parse-tags"/>
         </exec>
         <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
-            <arg value="${path.bin-console}" />
-            <arg value="lint:yaml" />
-            <arg value="${path.app}/config" />
-            <arg value="--parse-tags" />
+            <arg value="${path.bin-console}"/>
+            <arg value="lint:yaml"/>
+            <arg value="${path.app}/config"/>
+            <arg value="--parse-tags"/>
         </exec>
     </target>
-
 </project>
