@@ -36,6 +36,7 @@
     <property name="path.bin-console" value="bin/console"/>
 
     <property name="is-multidomain" value="true" />
+    <property name="phpstan.level" value="4"/>
 
     <import file="${path.framework}/build-dev.xml" optional="true" />
 

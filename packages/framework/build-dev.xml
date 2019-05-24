@@ -328,7 +328,7 @@
             <arg path="${path.src}"/>
             <arg path="${path.tests}"/>
 
-            <arg value="--level=4"/>
+            <arg value="--level=${phpstan.level}"/>
             <arg value="-vvv"/>
         </exec>
     </target>

@@ -72,6 +72,25 @@ There you can find links to upgrade notes for other versions too.
         ```
 
 ### Tools
+- use the `build.xml` [Phing configuration](/docs/introduction/console-commands-for-application-management-phing-targets.md) from the `shopsys/framework` package ([#1068](https://github.com/shopsys/shopsys/pull/1068))
+    - assuming your `build.xml` and `build-dev.xml` are the same as in `shopsys/project-base` in `v7.2.1`, just remove `build-dev.xml` and replace `build.xml` with this file:
+        ```xml
+        <?xml version="1.0" encoding="UTF-8"?>
+        <project name="Shopsys Framework" default="list">
+
+            <property file="${project.basedir}/build/build.local.properties"/>
+
+            <property name="path.root" value="${project.basedir}"/>
+            <property name="path.vendor" value="${path.root}/vendor"/>
+            <property name="path.framework" value="${path.vendor}/shopsys/framework"/>
+
+            <import file="${path.framework}/build.xml"/>
+
+            <property name="is-multidomain" value="true"/>
+            <property name="phpstan.level" value="0"/>
+
+        </project>
+        ```
 - we recommend upgrading PHPStan to level 4 [#1040](https://github.com/shopsys/shopsys/pull/1040)
     - you'll find detailed instructions in separate article [Upgrade Instructions for Upgrading PHPStan to Level 4](/docs/upgrade/phpstan-level-4.md)
 

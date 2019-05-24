@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="Shopsys Framework" default="list">
+
+    <property file="${project.basedir}/build/build.local.properties"/>
+
+    <property name="path.root" value="${project.basedir}"/>
+    <property name="path.vendor" value="${path.root}/vendor"/>
+    <property name="path.framework" value="${path.vendor}/shopsys/framework"/>
+
+    <import file="${path.framework}/build.xml"/>
+
+    <property name="is-multidomain" value="true"/>
+
+</project>

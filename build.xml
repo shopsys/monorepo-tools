@@ -185,7 +185,7 @@
             <arg path="${path.root}/tests"/>
             <arg path="./utils/*/src"/>
             <arg path="./utils/*/tests"/>
-            <arg value="--level=4"/>
+            <arg value="--level=${phpstan.level}"/>
             <arg value="-vvv"/>
         </exec>
     </target>
