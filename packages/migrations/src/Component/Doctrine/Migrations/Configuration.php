@@ -10,6 +10,10 @@ use Doctrine\DBAL\Migrations\QueryWriter;
 use Doctrine\DBAL\Migrations\Version;
 use Shopsys\MigrationBundle\Component\Doctrine\Migrations\Exception\MethodIsNotAllowedException;
 
+/**
+ * @method string[] getMigratedVersions()
+ * @see https://github.com/doctrine/migrations/pull/824
+ */
 class Configuration extends DoctrineConfiguration
 {
     /**
@@ -129,18 +133,12 @@ class Configuration extends DoctrineConfiguration
 
     /**
      * @param \Doctrine\DBAL\Migrations\Version $version
-     * @param \Doctrine\DBAL\Migrations\Version[] $migratedVersions
+     * @param string[] $migratedVersions
      * @return bool
      */
     private function shouldExecuteMigration(Version $version, array $migratedVersions)
     {
-        foreach ($migratedVersions as $migratedVersion) {
-            if ($version->getVersion() === $migratedVersion->getVersion()) {
-                return false;
-            }
-        }
-
-        return true;
+        return !in_array($version->getVersion(), $migratedVersions, true);
     }
 
     /**
