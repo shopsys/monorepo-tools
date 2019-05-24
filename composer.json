@@ -77,6 +77,7 @@
     "commerceguys/intl": "0.7.4",
     "composer/composer": "^1.6.0",
     "craue/formflow-bundle": "^3.0.3",
+    "defuse/php-encryption": "^2.2.1",
     "doctrine/annotations": "^1.6.0",
     "doctrine/cache": "^1.7",
     "doctrine/collections": "^1.5",
@@ -144,7 +145,8 @@
     "twig/extensions": "^1.5.1",
     "twig/twig": "^2.4.8",
     "vasek-purchart/console-errors-bundle": "^1.0.1",
-    "webmozart/assert": "^1.4"
+    "webmozart/assert": "^1.4",
+    "trikoder/oauth2-bundle": "^1.1"
   },
   "require-dev": {
     "ext-pgsql": "*",

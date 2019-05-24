@@ -7,6 +7,10 @@ shopsys_framework:
 
 shopsys_api_v1:
     resource: "@ShopsysBackendApiBundle/Resources/config/v1/routing.yml"
+
+oauth2:
+    prefix: /api
+    resource: '@TrikoderOAuth2Bundle/Resources/config/routes.xml'
     
 elfinder:
     resource: "@FMElfinderBundle/Resources/config/routing.yml"

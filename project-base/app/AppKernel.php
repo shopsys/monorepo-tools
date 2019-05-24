@@ -45,6 +45,7 @@ class AppKernel extends Kernel
             new Symfony\Bundle\SwiftmailerBundle\SwiftmailerBundle(),
             new Symfony\Bundle\TwigBundle\TwigBundle(),
             new Symfony\Cmf\Bundle\RoutingBundle\CmfRoutingBundle(),
+            new Trikoder\Bundle\OAuth2Bundle\TrikoderOAuth2Bundle(),
             new VasekPurchart\ConsoleErrorsBundle\ConsoleErrorsBundle(),
             new FOS\CKEditorBundle\FOSCKEditorBundle(), // has to be loaded after FrameworkBundle and TwigBundle
             new Joschi127\DoctrineEntityOverrideBundle\Joschi127DoctrineEntityOverrideBundle(),
@@ -104,6 +105,10 @@ class AppKernel extends Kernel
 
         if (file_exists(__DIR__ . '/config/parameters_version.yml')) {
             $configs[] = __DIR__ . '/config/parameters_version.yml';
+        }
+
+        if (file_exists(__DIR__ . '/config/packages/oauth2/parameters_oauth.yml')) {
+            $configs[] = __DIR__ . '/config/packages/oauth2/parameters_oauth.yml';
         }
 
         return $configs;

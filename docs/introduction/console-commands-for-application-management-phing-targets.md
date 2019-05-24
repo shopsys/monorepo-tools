@@ -100,6 +100,13 @@ The difference between [clean-redis](#clean-redis) is that `clean-redis` cleans 
 
 Useful in a development environment and during deploying to production.
 
+#### backend-api-oauth-keys-generate
+
+Generates oauth private and public key to directory `app/config/packages/oauth2/`, be careful never commit private keys.
+Generates also encryption key to file `app/config/packages/oauth2/parameters_oauth.yml`.
+
+These keys are used by API oauth.
+
 #### build-version-generate
 
 Generates a Symfony configuration `build-version` variable that is used to distinguish different application builds.

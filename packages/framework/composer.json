@@ -42,6 +42,7 @@
         "commerceguys/intl": "0.7.4",
         "composer/composer": "^1.6.0",
         "craue/formflow-bundle": "^3.0.3",
+        "defuse/php-encryption": "^2.2.1",
         "doctrine/common": "^2.8.1",
         "doctrine/annotations": "^1.6",
         "doctrine/cache": "^1.7",

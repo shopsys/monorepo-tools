@@ -15,12 +15,14 @@
     <property name="path.env.test" value="${path.root}/TEST"/>
     <property name="path.eslint.executable" value="${path.root}/node_modules/.bin/eslint"/>
     <property name="path.framework" value="${project.basedir}"/>
+    <property name="path.defuse-key-generate.executable" value="${path.bin}/generate-defuse-key"/>
     <property name="path.git.executable" value="git"/>
     <property name="path.grunt.executable" value="node_modules/.bin/grunt"/>
     <property name="path.npm.executable" value="npm"/>
     <property name="path.pg_dump.executable" value="pg_dump"/>
     <property name="path.php.executable" value="php"/>
     <property name="path.ecs.executable" value="${path.bin}/ecs"/>
+    <property name="path.openssl.executable" value="openssl"/>
     <property name="path.phplint.executable" value="${path.bin}/parallel-lint"/>
     <property name="path.phpstan.config" value="${path.root}/phpstan.neon"/>
     <property name="path.phpstan.executable" value="${path.bin}/phpstan"/>
@@ -67,30 +69,56 @@
         </exec>
     </target>
 
+    <target name="backend-api-oauth-keys-generate" description="Generates keys and parameter for backend OAuth">
+        <exec executable="${path.openssl.executable}" checkreturn="true">
+            <arg value="genrsa"/>
+            <arg value="-out"/>
+            <arg value="${path.app}/config/packages/oauth2/private.key"/>
+            <arg value="2048"/>
+        </exec>
+        <exec executable="${path.openssl.executable}" checkreturn="true">
+            <arg value="rsa"/>
+            <arg value="-in"/>
+            <arg value="${path.app}/config/packages/oauth2/private.key"/>
+            <arg value="-pubout"/>
+            <arg value="-out"/>
+            <arg value="${path.app}/config/packages/oauth2/public.key"/>
+        </exec>
+        <exec executable="${path.defuse-key-generate.executable}" checkreturn="true" outputProperty="encryption_key" error="/dev/null">
+        </exec>
+        <copy file="${path.app}/config/packages/oauth2/parameters_oauth.yml.dist" tofile="${path.app}/config/packages/oauth2/parameters_oauth.yml" overwrite="true">
+            <filterchain>
+                <replacetokens begintoken="%%" endtoken="%%">
+                    <token key="encryption_key" value="${encryption_key}"/>
+                </replacetokens>
+            </filterchain>
+        </copy>
+    </target>
+
     <target name="build" depends="build-deploy-part-1-db-independent,build-deploy-part-2-db-dependent" description="Builds application for production preserving your DB."/>
 
-    <target name="build-demo" depends="wipe,build-version-generate,composer-prod,redis-check,npm,dirs-create,assets,db-demo,grunt,error-pages-generate,warmup,product-search-recreate-structure,product-search-export-products,clean-redis-old" description="Builds application for production with clean demo DB."/>
+    <target name="build-demo" depends="wipe,build-version-generate,composer-prod,backend-api-oauth-keys-generate,redis-check,npm,dirs-create,assets,db-demo,grunt,error-pages-generate,warmup,product-search-recreate-structure,product-search-export-products,clean-redis-old" description="Builds application for production with clean demo DB."/>
 
-    <target name="build-demo-ci" depends="build-version-generate,wipe-excluding-logs,timezones-check,dirs-create,test-dirs-create,db-demo,product-search-recreate-structure,product-search-export-products,grunt,error-pages-generate,clean-redis-old,checks-ci" description="Builds application for development with clean demo DB and runs CI checks."/>
+    <target name="build-demo-ci" depends="build-version-generate,backend-api-oauth-keys-generate,wipe-excluding-logs,timezones-check,dirs-create,test-dirs-create,db-demo,product-search-recreate-structure,product-search-export-products,grunt,error-pages-generate,clean-redis-old,checks-ci" description="Builds application for development with clean demo DB and runs CI checks."/>
 
     <target name="build-demo-ci-diff" hidden="true">
         <phingcall target="build-demo-ci"/>
         <echo level="warning" message="This phing target is deprecated since Shopsys Framework 7.3.0, use 'build-demo-ci' instead."/>
     </target>
 
-    <target name="build-demo-dev" depends="build-version-generate,wipe-excluding-logs,composer-dev,npm,timezones-check,dirs-create,test-dirs-create,assets,db-demo,product-search-recreate-structure,product-search-export-products,grunt,error-pages-generate,tests-acceptance-build,clean-redis-old,checks-diff" description="Builds application for development with clean demo DB and runs checks on changed files."/>
+    <target name="build-demo-dev" depends="build-version-generate,wipe-excluding-logs,composer-dev,backend-api-oauth-keys-generate,npm,timezones-check,dirs-create,test-dirs-create,assets,db-demo,product-search-recreate-structure,product-search-export-products,grunt,error-pages-generate,tests-acceptance-build,clean-redis-old,checks-diff" description="Builds application for development with clean demo DB and runs checks on changed files."/>
 
-    <target name="build-demo-dev-quick" depends="build-version-generate,wipe-excluding-logs,composer-dev,npm,dirs-create,test-dirs-create,assets,db-demo,product-search-recreate-structure,product-search-export-products,grunt,clean-redis-old" description="Builds application for development with clean demo DB while skipping nonessential steps."/>
+    <target name="build-demo-dev-quick" depends="build-version-generate,wipe-excluding-logs,composer-dev,backend-api-oauth-keys-generate,npm,dirs-create,test-dirs-create,assets,db-demo,product-search-recreate-structure,product-search-export-products,grunt,clean-redis-old" description="Builds application for development with clean demo DB while skipping nonessential steps."/>
 
-    <target name="build-deploy-part-1-db-independent" depends="build-version-generate,clean,composer-prod,redis-check,npm,dirs-create,assets" description="First part of application build for production preserving your DB (can be run without maintenance page)."/>
+    <target name="build-deploy-part-1-db-independent" depends="build-version-generate,clean,composer-prod,backend-api-oauth-keys-generate,redis-check,npm,dirs-create,assets" description="First part of application build for production preserving your DB (can be run without maintenance page)."/>
 
     <target name="build-deploy-part-2-db-dependent" depends="db-migrations,domains-data-create,friendly-urls-generate,domains-urls-replace,grunt,error-pages-generate,warmup,clean-redis-old" description="Second part of application build for production preserving your DB (must be run with maintenance page when containing DB migrations)."/>
 
-    <target name="build-dev" depends="build-version-generate,clean,composer-dev,npm,timezones-check,dirs-create,test-dirs-create,assets,db-migrations,domains-data-create,friendly-urls-generate,domains-urls-replace,product-search-recreate-structure,product-search-export-products,grunt,error-pages-generate,tests-acceptance-build,clean-redis-old,checks-diff" description="Builds application for development preserving your DB and runs checks on changed files."/>
+    <target name="build-dev" depends="build-version-generate,clean,composer-dev,backend-api-oauth-keys-generate,npm,timezones-check,dirs-create,test-dirs-create,assets,db-migrations,domains-data-create,friendly-urls-generate,domains-urls-replace,product-search-recreate-structure,product-search-export-products,grunt,error-pages-generate,tests-acceptance-build,clean-redis-old,checks-diff" description="Builds application for development preserving your DB and runs checks on changed files."/>
 
-    <target name="build-dev-quick" depends="build-version-generate,clean,composer-dev,npm,dirs-create,test-dirs-create,assets,db-migrations,domains-data-create,friendly-urls-generate,domains-urls-replace,grunt,clean-redis-old" description="Builds application for development preserving your DB while skipping nonessential steps."/>
+    <target name="build-dev-quick" depends="build-version-generate,clean,composer-dev,backend-api-oauth-keys-generate,npm,dirs-create,test-dirs-create,assets,db-migrations,domains-data-create,friendly-urls-generate,domains-urls-replace,grunt,clean-redis-old" description="Builds application for development preserving your DB while skipping nonessential steps."/>
 
-    <target name="build-new" depends="wipe,build-version-generate,composer-prod,redis-check,npm,dirs-create,assets,db-rebuild,grunt,error-pages-generate,warmup,product-search-recreate-structure,clean-redis-old" description="Builds application for production with clean DB (with base data only)."/>
+    <target name="build-new" depends="wipe,build-version-generate,composer-prod,backend-api-oauth-keys-generate,redis-check,npm,dirs-create,assets,db-rebuild,grunt,error-pages-generate,warmup,product-search-recreate-structure,clean-redis-old" description="Builds application for production with clean DB (with base data only)."/>
 
     <target name="build-version-generate" description="Generates parameters_version.yml config file with a new build version number.">
         <exec executable="${path.php.executable}" checkreturn="true" outputProperty="version">
