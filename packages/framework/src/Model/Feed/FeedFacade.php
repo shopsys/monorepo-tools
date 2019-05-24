@@ -152,7 +152,7 @@ class FeedFacade
         $filePath = $this->feedPathProvider->getFeedFilepath($feedInfo, $domainConfig);
 
         try {
-            return $this->filesystem->getTimestamp($filePath);
+            return (int)$this->filesystem->getTimestamp($filePath);
         } catch (\League\Flysystem\FileNotFoundException $fileNotFundException) {
             return null;
         }

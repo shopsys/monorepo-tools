@@ -53,7 +53,7 @@ class LoginController extends FrontBaseController
     }
 
     /**
-     * @return \Symfony\Component\Form\Form
+     * @return \Symfony\Component\Form\FormInterface
      */
     private function getLoginForm()
     {

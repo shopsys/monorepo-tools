@@ -29,7 +29,7 @@ class ProductDomainTest extends TransactionFunctionalTestCase
     private $productFactory;
 
     /**
-     * @var \Doctrine\ORM\EntityManager
+     * @var \Shopsys\FrameworkBundle\Component\EntityExtension\EntityManagerDecorator
      */
     private $em;
 

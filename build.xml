@@ -33,8 +33,8 @@
         <phingcall target="composer-check" />
     </target>
 
-    <target name="standards" depends="phplint,ecs,phpstan-packages,twig-lint,yaml-lint,eslint-check,standards-packages,standards-utils" description="Checks coding standards in the project-base, packages and utils folder."/>
-    <target name="standards-diff" depends="phplint-diff,ecs-diff,phpstan-packages,twig-lint-diff,yaml-lint,eslint-check-diff,standards-packages, standards-utils" description="Checks coding standards on changed files in the project-base, packages and utils folder."/>
+    <target name="standards" depends="phplint,ecs,phpstan,twig-lint,yaml-lint,eslint-check,standards-packages,standards-utils" description="Checks coding standards in the project-base, packages and utils folder."/>
+    <target name="standards-diff" depends="phplint-diff,ecs-diff,phpstan,twig-lint-diff,yaml-lint,eslint-check-diff,standards-packages, standards-utils" description="Checks coding standards on changed files in the project-base, packages and utils folder."/>
 
     <target name="clean" description="Cleans up directories with cache and scripts which are generated on demand.">
         <delete failonerror="false" includeemptydirs="true">
@@ -175,16 +175,18 @@
         </exec>
     </target>
 
-    <target name="phpstan-packages" depends="phpstan" description="Performs static analysis of PHP files using PHPStan on all packages.">
+    <target name="phpstan" depends="tests-acceptance-build" description="Performs static analysis of PHP files using PHPStan on all packages.">
         <exec executable="${path.phpstan.executable}" logoutput="true" passthru="true" checkreturn="true">
             <arg value="analyze"/>
             <arg value="-c"/>
             <arg path="./phpstan.neon"/>
             <arg path="${path.packages}/*/src"/>
             <arg path="${path.packages}/*/tests"/>
+            <arg path="${path.root}/src"/>
+            <arg path="${path.root}/tests"/>
             <arg path="./utils/*/src"/>
             <arg path="./utils/*/tests"/>
-            <arg value="--level=0"/>
+            <arg value="--level=4"/>
             <arg value="-vvv"/>
         </exec>
     </target>
@@ -215,6 +217,9 @@
         </exec>
         <exec executable="${path.vendor}/bin/phpunit" logoutput="true" passthru="true" checkreturn="true">
             <arg value="${path.packages}/migrations/tests"/>
+        </exec>
+        <exec executable="${path.vendor}/bin/phpunit" logoutput="true" passthru="true" checkreturn="true">
+            <arg value="${path.packages}/read-model/tests"/>
         </exec>
         <exec executable="${path.vendor}/bin/phpunit" logoutput="true" passthru="true" checkreturn="true">
             <arg value="--configuration"/>

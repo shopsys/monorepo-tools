@@ -16,6 +16,8 @@ use Shopsys\FrameworkBundle\Model\Transport\Transport;
 /**
  * @ORM\Table(name="payments")
  * @ORM\Entity
+ *
+ * @method PaymentTranslation translation(?string $locale = null)
  */
 class Payment extends AbstractTranslatableEntity implements OrderableEntityInterface
 {
@@ -31,14 +33,14 @@ class Payment extends AbstractTranslatableEntity implements OrderableEntityInter
     protected $id;
 
     /**
-     * @var \Shopsys\FrameworkBundle\Model\Payment\PaymentTranslation[]
+     * @var \Doctrine\Common\Collections\ArrayCollection|\Shopsys\FrameworkBundle\Model\Payment\PaymentTranslation[]
      *
      * @Prezent\Translations(targetEntity="Shopsys\FrameworkBundle\Model\Payment\PaymentTranslation")
      */
     protected $translations;
 
     /**
-     * @var \Shopsys\FrameworkBundle\Model\Payment\PaymentPrice[]
+     * @var \Doctrine\Common\Collections\ArrayCollection|\Shopsys\FrameworkBundle\Model\Payment\PaymentPrice[]
      *
      * @ORM\OneToMany(targetEntity="Shopsys\FrameworkBundle\Model\Payment\PaymentPrice", mappedBy="payment", cascade={"persist"})
      */
@@ -226,7 +228,7 @@ class Payment extends AbstractTranslatableEntity implements OrderableEntityInter
     }
 
     /**
-     * @return \Shopsys\FrameworkBundle\Model\Payment\PaymentPrice[]
+     * @return \Doctrine\Common\Collections\ArrayCollection|\Shopsys\FrameworkBundle\Model\Payment\PaymentPrice[]
      */
     public function getPrices()
     {

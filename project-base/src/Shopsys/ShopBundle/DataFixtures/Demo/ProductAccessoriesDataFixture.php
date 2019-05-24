@@ -37,9 +37,13 @@ class ProductAccessoriesDataFixture extends AbstractReferenceFixture implements 
         /* @var $product \Shopsys\FrameworkBundle\Model\Product\Product */
 
         $productData = $this->productDataFactory->createFromProduct($product);
+        /** @var \Shopsys\FrameworkBundle\Model\Product\Product $product24 */
+        $product24 = $this->getReference(ProductDataFixture::PRODUCT_PREFIX . '24');
+        /** @var \Shopsys\FrameworkBundle\Model\Product\Product $product13 */
+        $product13 = $this->getReference(ProductDataFixture::PRODUCT_PREFIX . '13');
         $productData->accessories = [
-            $this->getReference(ProductDataFixture::PRODUCT_PREFIX . '24'),
-            $this->getReference(ProductDataFixture::PRODUCT_PREFIX . '13'),
+            $product24,
+            $product13,
         ];
         $this->productFacade->edit($product->getId(), $productData);
     }

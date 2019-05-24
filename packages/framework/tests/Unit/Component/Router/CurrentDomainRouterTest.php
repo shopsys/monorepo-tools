@@ -21,7 +21,7 @@ class CurrentDomainRouterTest extends TestCase
 
         $generateResult = 'generateResult';
         $pathInfo = 'pathInfo';
-        $matchResult = 'matchResult';
+        $matchResult = ['matchResult'];
         $getRouteCollectionResult = 'getRouteCollectionResult';
         $routerMock = $this->getMockBuilder(Router::class)
             ->setMethods(['__construct', 'generate', 'match', 'getRouteCollection'])
@@ -41,6 +41,10 @@ class CurrentDomainRouterTest extends TestCase
 
         $this->assertSame($generateResult, $currentDomainRouter->generate(''));
         $this->assertSame($matchResult, $currentDomainRouter->match($pathInfo));
-        $this->assertSame($getRouteCollectionResult, $currentDomainRouter->getRouteCollection());
+
+        /** @var string $routeCollection */
+        $routeCollection = $currentDomainRouter->getRouteCollection();
+
+        $this->assertSame($getRouteCollectionResult, $routeCollection);
     }
 }

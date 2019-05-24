@@ -11,6 +11,8 @@ class AdminBaseController extends Controller
      */
     public function getFlashMessageSender()
     {
-        return $this->get('shopsys.shop.component.flash_message.sender.admin');
+        /** @var \Shopsys\FrameworkBundle\Component\FlashMessage\FlashMessageSender $flashMessageSender */
+        $flashMessageSender = $this->get('shopsys.shop.component.flash_message.sender.admin');
+        return $flashMessageSender;
     }
 }

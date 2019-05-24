@@ -85,7 +85,7 @@ class ParameterFilterRepository
      * @param \Doctrine\ORM\QueryBuilder $parameterQueryBuilder
      * @param string $ppvAlias
      * @param int $valueIndex
-     * @return \Doctrine\ORM\Query\Expr
+     * @return \Doctrine\ORM\Query\Expr\Orx
      */
     protected function getValuesExpr(
         array $parameterValues,

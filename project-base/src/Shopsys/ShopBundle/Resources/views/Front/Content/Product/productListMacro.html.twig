@@ -1,61 +1,51 @@
-{% macro list(products, listCssClass, productHeadingTagName) %}
+{% macro list(productViews, listCssClass, productHeadingTagName) %}
     {% import '@ShopsysShop/Front/Inline/Product/productFlagsMacro.html.twig' as productFlags %}
-    {% set domain = getDomain() %}
 
     <ul class="list-products js-list js-product-list {{ listCssClass|default('') }}">
-        {% for product in products %}
+        {% for productView in productViews %}
             <li class="list-products__item js-list-products-item">
                 <div class="list-products__item__in">
-                    <a href="{{ url('front_product_detail', {'id': product.id}) }}" class="list-products__item__block">
+                    <a href="{{ productView.action.detailUrl }}" class="list-products__item__block">
                         <{{ productHeadingTagName|default('h2') }} class="list-products__item__title js-list-products-item-title">
-                            {{ product.name }}
+                            {{ productView.name }}
                         </{{ productHeadingTagName|default('h2') }}>
 
                         <div class="list-products__item__image dont-print">
-                            {{ image(product, { size: 'list', alt: product.name }) }}
-                            {{ productFlags.list(product, 'in-flag--in-list') }}
+                            {{ image(productView.image, { size: 'list', alt: productView.name }) }}
+                            {{ renderFlagsByIds(productView.flagIds, 'in-flag--in-list') }}
                         </div>
 
                         <div class="list-products__item__info dont-print">
                             <p class="list-products__item__info__description">
-                                {{ product.getShortDescription(domain.id) }}
+                                {{ productView.shortDescription }}
                             </p>
-                            {% set productSellingPrice = getProductSellingPrice(product) %}
-                            {% if productSellingPrice is not null %}
+                            {% if productView.sellingPrice is not null %}
                                 <div class="list-products__item__info__price">
                                     <div class="list-products__item__info__price__item list-products__item__info__price__item--main">
-                                        {% if productSellingPrice.priceFrom %}
-                                            {{ 'from %price%'|trans({'%price%': productSellingPrice.priceWithVat|price}) }}
+                                        {% if productView.sellingPrice.priceFrom %}
+                                            {{ 'from %price%'|trans({'%price%': productView.sellingPrice.priceWithVat|price}) }}
                                         {% else %}
-                                            {{ productSellingPrice.priceWithVat|price }}
+                                            {{ productView.sellingPrice.priceWithVat|price }}
                                         {% endif %}
                                     </div>
                                     <div class="list-products__item__info__price__item">
-                                        {% if productSellingPrice.priceFrom %}
-                                            {{ 'from %price%'|trans({'%price%': productSellingPrice.priceWithoutVat|price}) }}
+                                        {% if productView.sellingPrice.priceFrom %}
+                                            {{ 'from %price%'|trans({'%price%': productView.sellingPrice.priceWithoutVat|price}) }}
                                         {% else %}
-                                            {{ productSellingPrice.priceWithoutVat|price }}
+                                            {{ productView.sellingPrice.priceWithoutVat|price }}
                                         {% endif %}
                                     </div>
                                 </div>
                             {% endif %}
 
                             <div class="list-products__item__info__availability">
-                                {{ product.calculatedAvailability.getName }}
+                                {{ productView.availability }}
                             </div>
                         </div>
                     </a>
 
                     <div class="list-products__item__action">
-                        {% if not product.isMainVariant %}
-                            {{ render(controller('ShopsysShopBundle:Front/Cart:addProductForm',{
-                                product: product
-                            }
-
-                            )) }}
-                        {% else %}
-                            <a href="{{ url('front_product_detail', { id: product.id }) }}" class="btn btn--success">{{ 'Choose variant'|trans }}</a>
-                        {% endif %}
+                        {{ render(controller('ShopsysShopBundle:Front/Cart:productAction', { productActionView: productView.action } )) }}
                     </div>
                 </div>
             </li>

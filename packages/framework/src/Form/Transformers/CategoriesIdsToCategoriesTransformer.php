@@ -2,7 +2,6 @@
 
 namespace Shopsys\FrameworkBundle\Form\Transformers;
 
-use IteratorAggregate;
 use Shopsys\FrameworkBundle\Model\Category\CategoryRepository;
 use Symfony\Component\Form\DataTransformerInterface;
 
@@ -29,7 +28,7 @@ class CategoriesIdsToCategoriesTransformer implements DataTransformerInterface
     {
         $categoriesIds = [];
 
-        if (is_array($categories) || $categories instanceof IteratorAggregate) {
+        if (is_iterable($categories)) {
             foreach ($categories as $category) {
                 $categoriesIds[] = $category->getId();
             }

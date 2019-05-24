@@ -13,7 +13,7 @@ class ProductParametersBatchLoader
     protected $productCollectionFacade;
 
     /**
-     * @var string[]|null[]
+     * @var string[][]|null[][]
      */
     protected $loadedProductParametersByName = [];
 

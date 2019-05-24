@@ -12,7 +12,7 @@ use Shopsys\FrameworkBundle\Model\Product\ProductBreadcrumbGenerator;
 class FrontBreadcrumbResolverFactory
 {
     /**
-     * @var \Shopsys\FrameworkBundle\Model\Breadcrumb\SimpleBreadcrumbGenerator[]
+     * @var \Shopsys\FrameworkBundle\Component\Breadcrumb\BreadcrumbGeneratorInterface[]
      */
     protected $breadcrumbGenerators;
 

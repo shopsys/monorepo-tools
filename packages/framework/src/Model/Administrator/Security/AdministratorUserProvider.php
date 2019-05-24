@@ -55,16 +55,19 @@ class AdministratorUserProvider implements UserProviderInterface
     }
 
     /**
-     * @param \Symfony\Component\Security\Core\User\UserInterface $administrator
+     * @param \Symfony\Component\Security\Core\User\UserInterface $userInterface
      * @return \Shopsys\FrameworkBundle\Model\Administrator\Administrator
      */
-    public function refreshUser(UserInterface $administrator)
+    public function refreshUser(UserInterface $userInterface)
     {
-        $class = get_class($administrator);
+        $class = get_class($userInterface);
         if (!$this->supportsClass($class)) {
             $message = sprintf('Instances of "%s" are not supported.', $class);
             throw new \Symfony\Component\Security\Core\Exception\UnsupportedUserException($message);
         }
+
+        /** @var \Shopsys\FrameworkBundle\Model\Administrator\Administrator $administrator */
+        $administrator = $userInterface;
 
         $freshAdministrator = $this->administratorRepository->findById($administrator->getId());
 

@@ -19,6 +19,7 @@
       "Shopsys\\ProductFeed\\GoogleBundle\\": "packages/product-feed-google/src/",
       "Shopsys\\ProductFeed\\HeurekaBundle\\": "packages/product-feed-heureka/src/",
       "Shopsys\\ProductFeed\\HeurekaDeliveryBundle\\": "packages/product-feed-heureka-delivery/src/",
+      "Shopsys\\ReadModelBundle\\": "packages/read-model/src/",
       "Shopsys\\FrameworkBundle\\": "packages/framework/src/"
     },
     "classmap": [
@@ -44,6 +45,7 @@
       "Tests\\ProductFeed\\GoogleBundle\\": "packages/product-feed-google/tests/",
       "Tests\\ProductFeed\\HeurekaBundle\\": "packages/product-feed-heureka/tests/",
       "Tests\\ProductFeed\\HeurekaDeliveryBundle\\": "packages/product-feed-heureka-delivery/tests/",
+      "Tests\\ReadModelBundle\\": "packages/read-model/tests/",
       "Shopsys\\Releaser\\": "utils/releaser/src/",
       "Shopsys\\Releaser\\Tests\\": "utils/releaser/tests"
     }
@@ -137,7 +139,8 @@
     "tracy/tracy": "^2.4.13",
     "twig/extensions": "^1.5.1",
     "twig/twig": "^2.4.8",
-    "vasek-purchart/console-errors-bundle": "^1.0.1"
+    "vasek-purchart/console-errors-bundle": "^1.0.1",
+    "webmozart/assert": "^1.4"
   },
   "require-dev": {
     "ext-pgsql": "*",
@@ -147,7 +150,9 @@
     "phpstan/phpstan": "^0.11",
     "symplify/easy-coding-standard-tester": "^5.2.17",
     "symplify/changelog-linker": "^5.2.17",
-    "symplify/monorepo-builder": "^5.2.17"
+    "symplify/monorepo-builder": "^5.2.17",
+    "phpstan/phpstan-doctrine": "^0.11.2",
+    "phpstan/phpstan-phpunit": "^0.11.2"
   },
   "conflict": {
     "symfony/dependency-injection": "3.4.15|3.4.16",
@@ -202,6 +207,7 @@
     "shopsys/product-feed-zbozi": "self.version",
     "shopsys/product-feed-heureka": "self.version",
     "shopsys/product-feed-heureka-delivery": "self.version",
+    "shopsys/read-model": "self.version",
     "shopsys/framework": "self.version",
     "shopsys/coding-standards": "self.version"
   }

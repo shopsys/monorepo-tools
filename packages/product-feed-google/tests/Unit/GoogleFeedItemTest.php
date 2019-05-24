@@ -40,12 +40,12 @@ class GoogleFeedItemTest extends TestCase
     private $googleFeedItemFactory;
 
     /**
-     * @var \Shopsys\FrameworkBundle\Model\Pricing\Currency\Currency|\PHPUnit\Framework\MockObject\MockObject
+     * @var \Shopsys\FrameworkBundle\Model\Pricing\Currency\Currency
      */
     private $defaultCurrency;
 
     /**
-     * @var \Shopsys\FrameworkBundle\Component\Domain\Config\DomainConfig|\PHPUnit\Framework\MockObject\MockObject
+     * @var \Shopsys\FrameworkBundle\Component\Domain\Config\DomainConfig
      */
     private $defaultDomain;
 
@@ -99,7 +99,7 @@ class GoogleFeedItemTest extends TestCase
      * @param string $url
      * @param string $locale
      * @param \Shopsys\FrameworkBundle\Model\Pricing\Currency\Currency $currency
-     * @return \Shopsys\FrameworkBundle\Component\Domain\Config\DomainConfig|\PHPUnit\Framework\MockObject\MockObject
+     * @return \Shopsys\FrameworkBundle\Component\Domain\Config\DomainConfig
      */
     private function createDomainConfigMock(int $id, string $url, string $locale, Currency $currency): DomainConfig
     {

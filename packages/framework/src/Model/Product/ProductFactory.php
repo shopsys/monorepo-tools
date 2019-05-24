@@ -78,7 +78,9 @@ class ProductFactory implements ProductFactoryInterface
      */
     protected function setCalculatedAvailabilityIfMissing(Product $product)
     {
-        if ($product->getCalculatedAvailability() === null) {
+        /** @var \Shopsys\FrameworkBundle\Model\Product\Availability\Availability|null $calculatedAvailability */
+        $calculatedAvailability = $product->getCalculatedAvailability();
+        if ($calculatedAvailability === null) {
             $availability = $this->productAvailabilityCalculation->calculateAvailability($product);
             $product->setCalculatedAvailability($availability);
         }

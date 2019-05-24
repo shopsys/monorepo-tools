@@ -102,7 +102,7 @@ class ProductCollectionFacade
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\Product\Product[] $products
-     * @return \Shopsys\FrameworkBundle\Component\Image\Image[]
+     * @return \Shopsys\FrameworkBundle\Component\Image\Image[]|null[]
      */
     protected function getMainImagesIndexedByProductId(array $products)
     {
@@ -123,14 +123,14 @@ class ProductCollectionFacade
     }
 
     /**
-     * @param \Shopsys\FrameworkBundle\Model\Product\Product[] $products
+     * @param \Shopsys\FrameworkBundle\Model\Product\Product[]|int[] $productsOrProductIds
      * @param \Shopsys\FrameworkBundle\Component\Domain\Config\DomainConfig $domainConfig
      * @return string[]
      */
-    public function getAbsoluteUrlsIndexedByProductId(array $products, DomainConfig $domainConfig)
+    public function getAbsoluteUrlsIndexedByProductId(array $productsOrProductIds, DomainConfig $domainConfig)
     {
         $mainFriendlyUrlsByProductId = $this->friendlyUrlRepository->getMainFriendlyUrlsByEntitiesIndexedByEntityId(
-            $products,
+            $productsOrProductIds,
             'front_product_detail',
             $domainConfig->getId()
         );

@@ -10,6 +10,8 @@ use Shopsys\FrameworkBundle\Model\Localization\AbstractTranslatableEntity;
 /**
  * @ORM\Table(name="flags")
  * @ORM\Entity
+ *
+ * @method FlagTranslation translation(?string $locale = null)
  */
 class Flag extends AbstractTranslatableEntity
 {
@@ -23,7 +25,7 @@ class Flag extends AbstractTranslatableEntity
     protected $id;
 
     /**
-     * @var \Shopsys\FrameworkBundle\Model\Product\Flag\FlagTranslation[]
+     * @var \Doctrine\Common\Collections\ArrayCollection|\Shopsys\FrameworkBundle\Model\Product\Flag\FlagTranslation[]
      *
      * @Prezent\Translations(targetEntity="Shopsys\FrameworkBundle\Model\Product\Flag\FlagTranslation")
      */

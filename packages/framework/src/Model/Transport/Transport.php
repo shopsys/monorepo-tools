@@ -17,6 +17,8 @@ use Shopsys\FrameworkBundle\Model\Transport\Exception\TransportDomainNotFoundExc
 /**
  * @ORM\Table(name="transports")
  * @ORM\Entity
+ *
+ * @method TransportTranslation translation(?string $locale = null)
  */
 class Transport extends AbstractTranslatableEntity implements OrderableEntityInterface
 {
@@ -32,21 +34,21 @@ class Transport extends AbstractTranslatableEntity implements OrderableEntityInt
     protected $id;
 
     /**
-     * @var \Shopsys\FrameworkBundle\Model\Transport\TransportTranslation[]
+     * @var \Doctrine\Common\Collections\ArrayCollection|\Shopsys\FrameworkBundle\Model\Transport\TransportTranslation[]
      *
      * @Prezent\Translations(targetEntity="Shopsys\FrameworkBundle\Model\Transport\TransportTranslation")
      */
     protected $translations;
 
     /**
-     * @var \Shopsys\FrameworkBundle\Model\Transport\TransportDomain[]
+     * @var \Doctrine\Common\Collections\ArrayCollection|\Shopsys\FrameworkBundle\Model\Transport\TransportDomain[]
      *
      * @ORM\OneToMany(targetEntity="Shopsys\FrameworkBundle\Model\Transport\TransportDomain", mappedBy="transport", cascade={"persist"}, fetch="EXTRA_LAZY")
      */
     protected $domains;
 
     /**
-     * @var \Shopsys\FrameworkBundle\Model\Transport\TransportPrice[]
+     * @var \Doctrine\Common\Collections\ArrayCollection|\Shopsys\FrameworkBundle\Model\Transport\TransportPrice[]
      *
      * @ORM\OneToMany(targetEntity="Shopsys\FrameworkBundle\Model\Transport\TransportPrice", mappedBy="transport", cascade={"persist"})
      */
@@ -68,7 +70,7 @@ class Transport extends AbstractTranslatableEntity implements OrderableEntityInt
     protected $hidden;
 
     /**
-     * @var int
+     * @var bool
      *
      * @ORM\Column(type="boolean")
      */
@@ -177,7 +179,7 @@ class Transport extends AbstractTranslatableEntity implements OrderableEntityInt
     }
 
     /**
-     * @return \Shopsys\FrameworkBundle\Model\Transport\TransportPrice[]
+     * @return \Doctrine\Common\Collections\ArrayCollection|\Shopsys\FrameworkBundle\Model\Transport\TransportPrice[]
      */
     public function getPrices()
     {

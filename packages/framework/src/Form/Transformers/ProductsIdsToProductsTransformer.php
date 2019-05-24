@@ -2,7 +2,6 @@
 
 namespace Shopsys\FrameworkBundle\Form\Transformers;
 
-use IteratorAggregate;
 use Shopsys\FrameworkBundle\Model\Product\ProductRepository;
 use Symfony\Component\Form\DataTransformerInterface;
 
@@ -29,7 +28,7 @@ class ProductsIdsToProductsTransformer implements DataTransformerInterface
     {
         $productsIds = [];
 
-        if (is_array($products) || $products instanceof IteratorAggregate) {
+        if (is_iterable($products)) {
             foreach ($products as $key => $product) {
                 $productsIds[$key] = $product->getId();
             }

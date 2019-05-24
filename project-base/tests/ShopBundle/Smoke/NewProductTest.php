@@ -77,12 +77,12 @@ class NewProductTest extends FunctionalTestCase
         $form['product_form[basicInformationGroup][ean]'] = '123456';
         $form['product_form[descriptionsGroup][descriptions][1]'] = 'test description';
         $this->fillManualInputPrices($form);
-        $form['product_form[pricesGroup][vat]']->select($vat->getId());
+        $form['product_form[pricesGroup][vat]']->setValue($vat->getId());
         $form['product_form[displayAvailabilityGroup][sellingFrom]'] = '1.1.1990';
         $form['product_form[displayAvailabilityGroup][sellingTo]'] = '1.1.2000';
         $form['product_form[displayAvailabilityGroup][stockGroup][stockQuantity]'] = '10';
-        $form['product_form[displayAvailabilityGroup][unit]']->select($unit->getId());
-        $form['product_form[displayAvailabilityGroup][availability]']->select($availability->getId());
+        $form['product_form[displayAvailabilityGroup][unit]']->setValue($unit->getId());
+        $form['product_form[displayAvailabilityGroup][availability]']->setValue($availability->getId());
     }
 
     /**

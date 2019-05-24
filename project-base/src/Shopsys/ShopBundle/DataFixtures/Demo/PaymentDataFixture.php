@@ -102,7 +102,9 @@ class PaymentDataFixture extends AbstractReferenceFixture implements DependentFi
     ) {
         $paymentData->transports = [];
         foreach ($transportsReferenceNames as $transportReferenceName) {
-            $paymentData->transports[] = $this->getReference($transportReferenceName);
+            /** @var \Shopsys\FrameworkBundle\Model\Transport\Transport $transport */
+            $transport = $this->getReference($transportReferenceName);
+            $paymentData->transports[] = $transport;
         }
 
         $payment = $this->paymentFacade->create($paymentData);

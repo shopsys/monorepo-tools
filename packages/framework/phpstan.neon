@@ -1,4 +1,43 @@
 parameters:
     ignoreErrors:
+        # Don't forget to add these rules to phpstan.neon in monorepo
         # Ignoring absence of \AppKernel, which should be provided by project implementation
         - '~Instantiated class AppKernel not found~'
+        -
+            message: '#Call to method .+\(\) on an unknown class AppKernel\.#'
+            path: %currentWorkingDirectory%/src/Component/Error/ErrorPagesFacade.php
+        - '#Method Doctrine\\Common\\Persistence\\ObjectManager::flush\(\) invoked with 1 parameter, 0 required\.#'
+        -
+            message: '#Symfony\\Component\\Config\\Definition\\Builder\\NodeDefinition::children\(\)#'
+            path: %currentWorkingDirectory%/src/Component/Domain/Config/DomainsConfigDefinition.php
+        -
+            message: '#Symfony\\Component\\Config\\Definition\\Builder\\NodeDefinition::children\(\)#'
+            path: %currentWorkingDirectory%/src/Component/Domain/Config/DomainsUrlsConfigDefinition.php
+        -
+            message: '#Symfony\\Component\\Config\\Definition\\Builder\\NodeParentInterface::scalarNode\(\)#'
+            path: %currentWorkingDirectory%/src/Component/Image/Config/ImageConfigDefinition.php
+        -
+            message: '#Symfony\\Component\\Config\\Definition\\Builder\\NodeParentInterface::scalarNode\(\)#'
+            path: %currentWorkingDirectory%/src/Component/UploadedFile/Config/UploadedFileConfigDefinition.php
+        -
+            message: '#Property Doctrine\\ORM\\Mapping\\ClassMetadataInfo::\$discriminatorColumn \(array\) does not accept null\.#'
+            path: %currentWorkingDirectory%/src/Component/EntityExtension/EntityExtensionParentMetadataCleanerEventSubscriber.php
+        -
+            message: '#Argument of an invalid type Symfony\\Component\\Validator\\Constraint supplied for foreach, only iterables are supported\.#'
+            path: %currentWorkingDirectory%/src/Form/JsFormValidatorFactory.php
+        -
+            message: '#Property Shopsys\\FrameworkBundle\\Model\\Order\\Order::\$transport \(Shopsys\\FrameworkBundle\\Model\\Transport\\Transport\) does not accept null\.#'
+            path: %currentWorkingDirectory%/src/Model/Order/Order.php
+        -
+            message: '#Property Shopsys\\FrameworkBundle\\Model\\Order\\Order::\$payment \(Shopsys\\FrameworkBundle\\Model\\Payment\\Payment\) does not accept null\.#'
+            path: %currentWorkingDirectory%/src/Model/Order/Order.php
+        #TODO delete after changing typehint in the next major release#
+        -
+            message: '#Access to an undefined property PhpParser\\Node::\$var\.#'
+            path: %currentWorkingDirectory%/src/Component/Translation/ConstraintViolationExtractor.php
+        -
+            message: '#Access to an undefined property PhpParser\\Node::\$name\.#'
+            path: %currentWorkingDirectory%/src/Component/Translation/ConstraintViolationExtractor.php
+includes:
+    - vendor/phpstan/phpstan-doctrine/extension.neon
+    - vendor/phpstan/phpstan-phpunit/extension.neon

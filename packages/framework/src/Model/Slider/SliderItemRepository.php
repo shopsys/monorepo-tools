@@ -33,6 +33,7 @@ class SliderItemRepository
      */
     public function getById($sliderItemId)
     {
+        /** @var \Shopsys\FrameworkBundle\Model\Slider\SliderItem|null $sliderItem */
         $sliderItem = $this->getSliderItemRepository()->find($sliderItemId);
         if ($sliderItem === null) {
             $message = 'Slider item with ID ' . $sliderItemId . ' not found.';
@@ -47,7 +48,9 @@ class SliderItemRepository
      */
     public function findById($id)
     {
-        return $this->getSliderItemRepository()->find($id);
+        /** @var \Shopsys\FrameworkBundle\Model\Slider\SliderItem $sliderItem */
+        $sliderItem = $this->getSliderItemRepository()->find($id);
+        return $sliderItem;
     }
 
     /**

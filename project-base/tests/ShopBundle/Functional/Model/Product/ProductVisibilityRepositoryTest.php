@@ -28,12 +28,13 @@ class ProductVisibilityRepositoryTest extends TransactionFunctionalTestCase
      */
     private function getDefaultProductData()
     {
+        /** @var \Shopsys\ShopBundle\Model\Category\Category $category */
         $category = $this->getReference(CategoryDataFixture::CATEGORY_ELECTRONICS);
 
         $em = $this->getEntityManager();
         $vatData = new VatData();
         $vatData->name = 'vat';
-        $vatData->percent = 21;
+        $vatData->percent = '21';
         $vat = new Vat($vatData);
         $em->persist($vat);
 
@@ -335,6 +336,7 @@ class ProductVisibilityRepositoryTest extends TransactionFunctionalTestCase
         /** @var \Shopsys\FrameworkBundle\Model\Product\Pricing\ProductPriceRecalculator $productPriceRecalculator */
         $productPriceRecalculator = $this->getContainer()->get(ProductPriceRecalculator::class);
 
+        /** @var \Shopsys\ShopBundle\Model\Category\Category $category */
         $category = $this->getReference(CategoryDataFixture::CATEGORY_TOYS);
 
         $productData = $this->getDefaultProductData();

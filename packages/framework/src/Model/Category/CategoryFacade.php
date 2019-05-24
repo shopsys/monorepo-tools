@@ -173,7 +173,7 @@ class CategoryFacade
     }
 
     /**
-     * @param int[] $parentIdByCategoryId
+     * @param int[]|null[] $parentIdByCategoryId
      */
     public function editOrdering($parentIdByCategoryId)
     {
@@ -339,7 +339,7 @@ class CategoryFacade
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\Product\Product $product
-     * @return \Shopsys\FrameworkBundle\Model\Category\Category[]
+     * @return \Shopsys\FrameworkBundle\Model\Category\Category[]|null[]
      */
     public function getProductMainCategoriesIndexedByDomainId(Product $product)
     {

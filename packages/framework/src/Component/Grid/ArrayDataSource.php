@@ -35,7 +35,7 @@ class ArrayDataSource implements DataSourceInterface
     }
 
     /**
-     * @param string $rowId
+     * @param int $rowId
      * @return mixed
      */
     public function getOneRow($rowId)
@@ -52,9 +52,9 @@ class ArrayDataSource implements DataSourceInterface
     }
 
     /**
-     * @param null $limit
+     * @param null|int $limit
      * @param int $page
-     * @param null $orderSourceColumnName
+     * @param null|string $orderSourceColumnName
      * @param string $orderDirection
      * @return \Shopsys\FrameworkBundle\Component\Paginator\PaginationResult
      */

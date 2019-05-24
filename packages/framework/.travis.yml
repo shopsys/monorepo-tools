@@ -10,6 +10,7 @@ cache:
         - ~/.composer/cache
 
 before_install:
+    - echo '' | pecl upgrade redis
     - echo "extension = redis.so" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
 
 install:
@@ -18,5 +19,5 @@ install:
 script:
     - php vendor/bin/parallel-lint ./src
     - php vendor/bin/ecs check --verbose ./src ./tests
-    - php vendor/bin/phpstan analyze -c ./phpstan.neon ./src --level=0
+    - php vendor/bin/phpstan analyze -c ./phpstan.neon ./src --level=4
     - php vendor/bin/phpunit

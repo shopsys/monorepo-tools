@@ -78,7 +78,7 @@ class ImageConfig
     }
 
     /**
-     * @param Object $entity
+     * @param Object|null $entity
      * @return \Shopsys\FrameworkBundle\Component\Image\Config\ImageEntityConfig
      */
     public function getImageEntityConfig($entity)

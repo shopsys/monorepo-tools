@@ -35,6 +35,7 @@
 * [Elasticsearch](./model/elasticsearch.md)
 * [Front-end Product Searching](./model/front-end-product-searching.md)
 * [Front-end Product Filtering](./model/front-end-product-filtering.md)
+* [Introduction to Read Model](./model/introduction-to-read-model.md)
 
 ## Cookbook
 * [Dumping and Importing the Database](./cookbook/dumping-and-importing-the-database.md)
@@ -51,6 +52,7 @@
 * [Working with Multiple Cron Instances](./cookbook/working-with-multiple-cron-instances.md)
 * [Create Basic Grid](./cookbook/create-basic-grid.md)
 * [Create Advanced Grid](./cookbook/create-advanced-grid.md)
+* [Extending Product List](./cookbook/extending-product-list.md)
 
 ## Functional documentation
 * [Behavior of Product Variants](./functional/behavior-of-product-variants.md)

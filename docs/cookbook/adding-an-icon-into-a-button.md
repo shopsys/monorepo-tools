@@ -6,7 +6,7 @@ Let us demonstrate it on "Add to cart button".
 
 ![Add to cart button without icon](img/add-to-cart-without-icon.png)
 
-1. Open the corresponding twig template - `@ShopsysShop/Front/Inline/Cart/addProduct.html.twig`
+1. Open the corresponding twig template - `@ShopsysShop/Front/Inline/Cart/productAction.html.twig`
 2. Find the line where the submit button is rendered and add 3 CSS classes:
     - `btn--with-icon`
     - `btn--with-icon--right` if you want to display the icon after the label or `btn--with-icon--left` if you want to display the icon before the label

@@ -12,12 +12,12 @@ class ImageSizeConfig
     protected $name;
 
     /**
-     * @var int
+     * @var int|null
      */
     protected $width;
 
     /**
-     * @var int
+     * @var int|null
      */
     protected $height;
 
@@ -63,7 +63,7 @@ class ImageSizeConfig
     }
 
     /**
-     * @return int
+     * @return int|null
      */
     public function getWidth()
     {
@@ -71,7 +71,7 @@ class ImageSizeConfig
     }
 
     /**
-     * @return int
+     * @return int|null
      */
     public function getHeight()
     {
@@ -79,7 +79,7 @@ class ImageSizeConfig
     }
 
     /**
-     * @return int
+     * @return bool
      */
     public function getCrop()
     {

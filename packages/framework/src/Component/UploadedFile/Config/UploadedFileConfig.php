@@ -27,7 +27,7 @@ class UploadedFileConfig
     }
 
     /**
-     * @param Object $entity
+     * @param Object|null $entity
      * @return \Shopsys\FrameworkBundle\Component\UploadedFile\Config\UploadedFileEntityConfig
      */
     public function getUploadedFileEntityConfig($entity)

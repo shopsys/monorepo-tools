@@ -130,8 +130,7 @@ class ProductDataFactory implements ProductDataFactoryInterface
     }
 
     /**
-     * @param mixed $productData
-     * @param \Shopsys\FrameworkBundle\Model\Product\ProductData
+     * @param \Shopsys\FrameworkBundle\Model\Product\ProductData $productData
      */
     protected function fillNew(ProductData $productData)
     {
@@ -175,6 +174,7 @@ class ProductDataFactory implements ProductDataFactoryInterface
      */
     protected function fillFromProduct(ProductData $productData, Product $product)
     {
+        /** @var \Shopsys\FrameworkBundle\Model\Product\ProductTranslation[] $translations */
         $translations = $product->getTranslations();
         $names = [];
         $variantAliases = [];

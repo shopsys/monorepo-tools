@@ -82,6 +82,14 @@ class CountryFacade
     }
 
     /**
+     * @return \Shopsys\FrameworkBundle\Model\Country\Country[]
+     */
+    public function getAll(): array
+    {
+        return $this->countryRepository->getAll();
+    }
+
+    /**
      * @param int $domainId
      * @return \Shopsys\FrameworkBundle\Model\Country\Country[]
      */

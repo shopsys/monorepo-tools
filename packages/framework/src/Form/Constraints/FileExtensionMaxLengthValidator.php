@@ -9,7 +9,7 @@ use Symfony\Component\Validator\ConstraintValidator;
 class FileExtensionMaxLengthValidator extends ConstraintValidator
 {
     /**
-     * @param string $value
+     * @param string|\Symfony\Component\HttpFoundation\File\File $value
      * @param \Symfony\Component\Validator\Constraint $constraint
      */
     public function validate($value, Constraint $constraint)

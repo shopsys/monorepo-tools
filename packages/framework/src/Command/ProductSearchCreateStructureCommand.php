@@ -2,7 +2,6 @@
 
 namespace Shopsys\FrameworkBundle\Command;
 
-use Shopsys\FrameworkBundle\Component\Elasticsearch\Exception\ElasticsearchStructureException;
 use Shopsys\FrameworkBundle\Model\Product\Search\Export\ProductSearchExportStructureFacade;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
@@ -44,11 +43,7 @@ class ProductSearchCreateStructureCommand extends Command
     {
         $symfonyStyleIo = new SymfonyStyle($input, $output);
         $output->writeln('Creating structure');
-        try {
-            $this->productSearchExportStructureFacade->createIndexes($output);
-            $symfonyStyleIo->success('Structure created successfully!');
-        } catch (ElasticsearchStructureException $e) {
-            $symfonyStyleIo->error($e->getMessage());
-        }
+        $this->productSearchExportStructureFacade->createIndexes($output);
+        $symfonyStyleIo->success('Structure created successfully!');
     }
 }

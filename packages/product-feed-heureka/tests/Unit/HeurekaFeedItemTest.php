@@ -48,7 +48,7 @@ class HeurekaFeedItemTest extends TestCase
     private $heurekaFeedItemFactory;
 
     /**
-     * @var \Shopsys\FrameworkBundle\Component\Domain\Config\DomainConfig|\PHPUnit\Framework\MockObject\MockObject
+     * @var \Shopsys\FrameworkBundle\Component\Domain\Config\DomainConfig
      */
     private $defaultDomain;
 
@@ -94,7 +94,7 @@ class HeurekaFeedItemTest extends TestCase
      * @param int $id
      * @param string $url
      * @param string $locale
-     * @return \Shopsys\FrameworkBundle\Component\Domain\Config\DomainConfig|\PHPUnit\Framework\MockObject\MockObject
+     * @return \Shopsys\FrameworkBundle\Component\Domain\Config\DomainConfig
      */
     private function createDomainConfigMock(int $id, string $url, string $locale): DomainConfig
     {

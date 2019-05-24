@@ -14,8 +14,9 @@ class AuthenticatorTest extends TestCase
     {
         $authenticator = $this->getAuthenticator();
 
-        $requestMock = $this->createMock('\Symfony\Component\HttpFoundation\Request');
         /* @var $requestMock \Symfony\Component\HttpFoundation\Request|\PHPUnit\Framework\MockObject\MockObject */
+        $requestMock = $this->createMock('\Symfony\Component\HttpFoundation\Request');
+
         $requestMock->expects($this->never())->method('getSession');
 
         $requestMock->attributes = $this->createMock('\Symfony\Component\HttpFoundation\ParameterBag');

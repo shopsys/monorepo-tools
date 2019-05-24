@@ -222,8 +222,8 @@ class OrderDataFixture
             $orderData->postcode = $this->faker->postcode;
             $orderData->country = $this->getRandomCountryFromFirstDomain();
             $orderData->companyName = $this->faker->company;
-            $orderData->companyNumber = $this->faker->randomNumber(6);
-            $orderData->companyTaxNumber = $this->faker->randomNumber(6);
+            $orderData->companyNumber = (string)$this->faker->randomNumber(6);
+            $orderData->companyTaxNumber = (string)$this->faker->randomNumber(6);
         }
 
         $orderData->transport = $this->getRandomTransport();
@@ -335,7 +335,9 @@ class OrderDataFixture
             TransportDataFixture::TRANSPORT_PERSONAL,
         ]);
 
-        return $this->persistentReferenceFacade->getReference($randomTransportReferenceName);
+        /** @var \Shopsys\FrameworkBundle\Model\Transport\Transport $randomTransport */
+        $randomTransport = $this->persistentReferenceFacade->getReference($randomTransportReferenceName);
+        return $randomTransport;
     }
 
     /**
@@ -349,7 +351,9 @@ class OrderDataFixture
             PaymentDataFixture::PAYMENT_CASH,
         ]);
 
-        return $this->persistentReferenceFacade->getReference($randomPaymentReferenceName);
+        /** @var \Shopsys\FrameworkBundle\Model\Payment\Payment $randomPayment */
+        $randomPayment = $this->persistentReferenceFacade->getReference($randomPaymentReferenceName);
+        return $randomPayment;
     }
 
     /**
@@ -357,11 +361,13 @@ class OrderDataFixture
      */
     private function getRandomCountryFromFirstDomain()
     {
-        $randomPaymentReferenceName = $this->faker->randomElement([
+        $randomCountryReferenceName = $this->faker->randomElement([
             CountryDataFixture::COUNTRY_CZECH_REPUBLIC,
             CountryDataFixture::COUNTRY_SLOVAKIA,
         ]);
 
-        return $this->persistentReferenceFacade->getReference($randomPaymentReferenceName);
+        /** @var \Shopsys\FrameworkBundle\Model\Country\Country $randomCountry */
+        $randomCountry = $this->persistentReferenceFacade->getReference($randomCountryReferenceName);
+        return $randomCountry;
     }
 }

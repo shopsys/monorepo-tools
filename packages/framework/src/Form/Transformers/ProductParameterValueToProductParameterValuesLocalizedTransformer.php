@@ -33,7 +33,7 @@ class ProductParameterValueToProductParameterValuesLocalizedTransformer implemen
 
     /**
      * @param mixed $normData
-     * @return \Shopsys\FrameworkBundle\Model\Product\Parameter\ProductParameterValuesLocalizedData[]
+     * @return \Shopsys\FrameworkBundle\Model\Product\Parameter\ProductParameterValuesLocalizedData[]|null
      */
     public function transform($normData)
     {

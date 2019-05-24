@@ -253,7 +253,9 @@ class CreateDatabaseCommand extends Command
     {
         $defaultConnectionName = $this->doctrineRegistry->getDefaultConnectionName();
 
-        return $this->doctrineRegistry->getConnection($defaultConnectionName);
+        /** @var \Doctrine\DBAL\Connection $connection */
+        $connection = $this->doctrineRegistry->getConnection($defaultConnectionName);
+        return $connection;
     }
 
     /**

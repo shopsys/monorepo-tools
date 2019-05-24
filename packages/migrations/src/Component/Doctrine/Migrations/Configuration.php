@@ -134,9 +134,13 @@ class Configuration extends DoctrineConfiguration
      */
     private function shouldExecuteMigration(Version $version, array $migratedVersions)
     {
-        $isVersionInstalled = in_array($version->getVersion(), $migratedVersions, true);
+        foreach ($migratedVersions as $migratedVersion) {
+            if ($version->getVersion() === $migratedVersion->getVersion()) {
+                return false;
+            }
+        }
 
-        return !$isVersionInstalled;
+        return true;
     }
 
     /**

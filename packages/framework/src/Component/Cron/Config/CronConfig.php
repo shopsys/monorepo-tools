@@ -42,7 +42,7 @@ class CronConfig
     }
 
     /**
-     * @param \Shopsys\Plugin\Cron\SimpleCronModuleInterface|\Shopsys\Plugin\Cron\IteratedCronModuleInterface $service
+     * @param \Shopsys\Plugin\Cron\SimpleCronModuleInterface|\Shopsys\Plugin\Cron\IteratedCronModuleInterface|mixed $service
      * @param string $serviceId
      * @param string $timeHours
      * @param string $timeMinutes

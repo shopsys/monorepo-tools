@@ -97,7 +97,9 @@ class Bag
      */
     public function isEmpty()
     {
-        $flashBag = $this->session->getFlashBag();
+        /** @var \Symfony\Component\HttpFoundation\Session\Session $session */
+        $session = $this->session;
+        $flashBag = $session->getFlashBag();
 
         return !$flashBag->has($this->getFullbagName(static::KEY_ERROR))
             && !$flashBag->has($this->getFullbagName(static::KEY_INFO))
@@ -119,7 +121,9 @@ class Bag
      */
     protected function getMessages($key)
     {
-        $flashBag = $this->session->getFlashBag();
+        /** @var \Symfony\Component\HttpFoundation\Session\Session $session */
+        $session = $this->session;
+        $flashBag = $session->getFlashBag();
         $messages = $flashBag->get($this->getFullbagName($key));
         return array_unique($messages);
     }
@@ -140,7 +144,9 @@ class Bag
                 $message = htmlspecialchars($message);
             }
 
-            $this->session->getFlashBag()->add($this->getFullbagName($key), $message);
+            /** @var \Symfony\Component\HttpFoundation\Session\Session $session */
+            $session = $this->session;
+            $session->getFlashBag()->add($this->getFullbagName($key), $message);
         }
     }
 }

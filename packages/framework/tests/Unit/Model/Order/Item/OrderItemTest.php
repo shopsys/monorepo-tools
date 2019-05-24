@@ -46,6 +46,7 @@ class OrderItemTest extends TestCase
         $orderItemData = new OrderItemData();
         $orderItemData->priceWithVat = Money::zero();
         $orderItemData->priceWithoutVat = Money::zero();
+        /** @var \Shopsys\FrameworkBundle\Model\Transport\Transport|\PHPUnit\Framework\MockObject\MockObject $transport */
         $transport = $this->createTransportMock();
         $orderItemData->transport = $transport;
         $orderItem->edit($orderItemData);
@@ -76,6 +77,7 @@ class OrderItemTest extends TestCase
         $orderItemData = new OrderItemData();
         $orderItemData->priceWithVat = Money::zero();
         $orderItemData->priceWithoutVat = Money::zero();
+        /** @var \Shopsys\FrameworkBundle\Model\Payment\Payment|\PHPUnit\Framework\MockObject\MockObject $payment */
         $payment = $this->createPaymentMock();
         $orderItemData->payment = $payment;
         $orderItem->edit($orderItemData);
@@ -114,7 +116,7 @@ class OrderItemTest extends TestCase
         $orderItemData->priceWithVat = Money::create(20);
         $orderItemData->priceWithoutVat = Money::create(30);
         $orderItemData->quantity = 2;
-        $orderItemData->vatPercent = 10;
+        $orderItemData->vatPercent = '10';
 
         $orderItem = $this->createOrderProduct($this->createProductMock());
         $orderItem->edit($orderItemData);
@@ -123,7 +125,7 @@ class OrderItemTest extends TestCase
         $this->assertThat($orderItem->getPriceWithVat(), new IsMoneyEqual(Money::create(20)));
         $this->assertThat($orderItem->getPriceWithoutVat(), new IsMoneyEqual(Money::create(30)));
         $this->assertSame(2, $orderItem->getQuantity());
-        $this->assertSame(10, $orderItem->getvatPercent());
+        $this->assertSame('10', $orderItem->getvatPercent());
     }
 
     public function testEditProductTypeWithoutProduct()
@@ -133,7 +135,7 @@ class OrderItemTest extends TestCase
         $orderItemData->priceWithVat = Money::create(20);
         $orderItemData->priceWithoutVat = Money::create(30);
         $orderItemData->quantity = 2;
-        $orderItemData->vatPercent = 10;
+        $orderItemData->vatPercent = '10';
 
         $orderItem = $this->createOrderProduct();
         $orderItem->edit($orderItemData);
@@ -142,7 +144,7 @@ class OrderItemTest extends TestCase
         $this->assertThat($orderItem->getPriceWithVat(), new IsMoneyEqual(Money::create(20)));
         $this->assertThat($orderItem->getPriceWithoutVat(), new IsMoneyEqual(Money::create(30)));
         $this->assertSame(2, $orderItem->getQuantity());
-        $this->assertSame(10, $orderItem->getvatPercent());
+        $this->assertSame('10', $orderItem->getvatPercent());
     }
 
     public function testConstructWithMainVariantThrowsException()
@@ -214,7 +216,7 @@ class OrderItemTest extends TestCase
     }
 
     /**
-     * @return \Shopsys\FrameworkBundle\Model\Order\Order|\PHPUnit\Framework\MockObject\MockObject
+     * @return \PHPUnit\Framework\MockObject\MockObject
      */
     private function createOrderMock(): MockObject
     {
@@ -222,7 +224,7 @@ class OrderItemTest extends TestCase
     }
 
     /**
-     * @return \Shopsys\FrameworkBundle\Model\Transport\Transport|\PHPUnit\Framework\MockObject\MockObject
+     * @return \PHPUnit\Framework\MockObject\MockObject
      */
     private function createTransportMock(): MockObject
     {
@@ -230,7 +232,7 @@ class OrderItemTest extends TestCase
     }
 
     /**
-     * @return \Shopsys\FrameworkBundle\Model\Payment\Payment|\PHPUnit\Framework\MockObject\MockObject
+     * @return \PHPUnit\Framework\MockObject\MockObject
      */
     private function createPaymentMock(): MockObject
     {
@@ -238,7 +240,7 @@ class OrderItemTest extends TestCase
     }
 
     /**
-     * @return \Shopsys\FrameworkBundle\Model\Product\Product|\PHPUnit\Framework\MockObject\MockObject
+     * @return \PHPUnit\Framework\MockObject\MockObject
      */
     private function createProductMock(): MockObject
     {

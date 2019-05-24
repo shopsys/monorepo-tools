@@ -32,7 +32,7 @@ class OrderNumberSequenceRepository
     }
 
     /**
-     * @return string
+     * @return int
      */
     public function getNextNumber()
     {

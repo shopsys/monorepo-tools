@@ -8,7 +8,7 @@ class UrlListData
     public const FIELD_SLUG = 'slug';
 
     /**
-     * @var \Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\FriendlyUrl[]
+     * @var \Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\FriendlyUrl[][]
      */
     public $toDelete;
 

@@ -66,7 +66,9 @@ class SubRequestListener
     {
         if ($subResponse->isRedirection()) {
             if ($this->redirectResponse === null) {
-                $this->redirectResponse = $subResponse;
+                /** @var \Symfony\Component\HttpFoundation\RedirectResponse $subRedirectResponse */
+                $subRedirectResponse = $subResponse;
+                $this->redirectResponse = $subRedirectResponse;
             } else {
                 $message = 'Only one subresponse can do a redirect.';
                 throw new \Shopsys\FrameworkBundle\Component\HttpFoundation\Exception\TooManyRedirectResponsesException($message);

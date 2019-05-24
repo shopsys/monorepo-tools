@@ -1,0 +1,13 @@
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        public: false
+
+    Shopsys\ReadModelBundle\:
+        resource: '../../**/*{Facade,Factory,Provider,Repository}.php'
+
+    Shopsys\ReadModelBundle\Product\Listed\ListedProductViewFacadeInterface: '@Shopsys\ReadModelBundle\Product\Listed\ListedProductViewFacade'
+
+    Shopsys\ReadModelBundle\Twig\ImageExtension:
+        arguments: ['%shopsys.front_design_image_url_prefix%']

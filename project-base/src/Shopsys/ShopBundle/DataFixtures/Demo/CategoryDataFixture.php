@@ -92,7 +92,9 @@ class CategoryDataFixture extends AbstractReferenceFixture
                 . '(black-and-white), or in color, and in two or three dimensions',
             ]
         );
-        $categoryData->parent = $this->getReference(self::CATEGORY_ELECTRONICS);
+        /** @var \Shopsys\ShopBundle\Model\Category\Category $categoryElectronics */
+        $categoryElectronics = $this->getReference(self::CATEGORY_ELECTRONICS);
+        $categoryData->parent = $categoryElectronics;
         $this->createCategory($categoryData, self::CATEGORY_TV);
 
         $categoryData->name = [

@@ -119,8 +119,9 @@ class BrandController extends AdminBaseController
         $administrator = $this->getUser();
         /* @var $administrator \Shopsys\FrameworkBundle\Model\Administrator\Administrator */
 
-        $queryBuilder = $this->getDoctrine()->getManager()->createQueryBuilder();
-        $queryBuilder->select('b')->from(Brand::class, 'b');
+        /** @var \Doctrine\ORM\EntityManager $em */
+        $em = $this->getDoctrine()->getManager();
+        $queryBuilder = $em->createQueryBuilder()->select('b')->from(Brand::class, 'b');
         $dataSource = new QueryBuilderDataSource($queryBuilder, 'b.id');
 
         $grid = $this->gridFactory->create('brandList', $dataSource);

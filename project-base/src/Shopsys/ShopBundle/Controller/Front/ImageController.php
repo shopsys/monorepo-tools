@@ -62,7 +62,7 @@ class ImageController extends FrontBaseController
      * @param mixed $entityName
      * @param mixed $type
      * @param mixed $sizeName
-     * @param mixed $imageId
+     * @param int $imageId
      * @param int $additionalIndex
      */
     public function getAdditionalImageAction($entityName, $type, $sizeName, int $imageId, int $additionalIndex)

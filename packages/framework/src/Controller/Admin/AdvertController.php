@@ -141,8 +141,10 @@ class AdvertController extends AdminBaseController
         $administrator = $this->getUser();
         /* @var $administrator \Shopsys\FrameworkBundle\Model\Administrator\Administrator */
 
-        $queryBuilder = $this->getDoctrine()->getManager()->createQueryBuilder();
-        $queryBuilder
+        /** @var \Doctrine\ORM\EntityManager $em */
+        $em = $this->getDoctrine()->getManager();
+
+        $queryBuilder = $em->createQueryBuilder()
             ->select('a')
             ->from(Advert::class, 'a')
             ->where('a.domainId = :selectedDomainId')

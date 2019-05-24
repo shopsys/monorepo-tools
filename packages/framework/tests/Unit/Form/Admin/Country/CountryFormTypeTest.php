@@ -154,6 +154,7 @@ class CountryFormTypeTest extends TypeTestCase
 
         $this->countryFacade = $this->createMock(CountryFacade::class);
         $this->countryFacade->method('findByCode')->willReturnMap([['CZ', null], ['UZ', $country]]);
+        $this->countryFacade->method('getAll')->willReturn([$country]);
 
         parent::setUp();
     }

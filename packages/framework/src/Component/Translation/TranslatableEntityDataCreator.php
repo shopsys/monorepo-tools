@@ -64,10 +64,10 @@ class TranslatableEntityDataCreator
     protected function getAllTranslatableEntitiesMetadata()
     {
         $translatableEntitiesMetadata = [];
+        /** @var \Doctrine\ORM\Mapping\ClassMetadata[] $allClassesMetadata */
         $allClassesMetadata = $this->em->getMetadataFactory()->getAllMetadata();
         foreach ($allClassesMetadata as $classMetadata) {
-            /* @var $classMetadata \Doctrine\ORM\Mapping\ClassMetadata */
-            if (is_subclass_of($classMetadata->name, TranslationInterface::class)) {
+            if (is_subclass_of($classMetadata->getName(), TranslationInterface::class)) {
                 $translatableEntitiesMetadata[] = $classMetadata;
             }
         }

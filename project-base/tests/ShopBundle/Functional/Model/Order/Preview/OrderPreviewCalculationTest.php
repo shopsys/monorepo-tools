@@ -30,7 +30,7 @@ class OrderPreviewCalculationTest extends FunctionalTestCase
         $domain = $this->getContainer()->get(Domain::class);
         $vatData = new VatData();
         $vatData->name = 'vatName';
-        $vatData->percent = 20;
+        $vatData->percent = '20';
         $vat = new Vat($vatData);
 
         $paymentPrice = new Price(Money::create(100), Money::create(120));
@@ -117,7 +117,7 @@ class OrderPreviewCalculationTest extends FunctionalTestCase
         $domain = $this->getContainer()->get(Domain::class);
         $vatData = new VatData();
         $vatData->name = 'vatName';
-        $vatData->percent = 20;
+        $vatData->percent = '20';
         $vat = new Vat($vatData);
 
         $unitPrice = new Price(Money::create(1000), Money::create(1200));

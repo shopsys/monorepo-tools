@@ -23,7 +23,7 @@ class PaymentDomainTest extends TransactionFunctionalTestCase
     private $paymentFactory;
 
     /**
-     * @var \Doctrine\ORM\EntityManager
+     * @var \Shopsys\FrameworkBundle\Component\EntityExtension\EntityManagerDecorator
      */
     private $em;
 

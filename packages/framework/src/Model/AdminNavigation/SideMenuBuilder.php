@@ -288,6 +288,8 @@ class SideMenuBuilder
     {
         $event = new ConfigureMenuEvent($this->menuFactory, $menu);
 
-        return $this->eventDispatcher->dispatch($eventName, $event);
+        /** @var \Shopsys\FrameworkBundle\Model\AdminNavigation\ConfigureMenuEvent $configureMenuEvent */
+        $configureMenuEvent = $this->eventDispatcher->dispatch($eventName, $event);
+        return $configureMenuEvent;
     }
 }

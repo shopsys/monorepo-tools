@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Shopsys\FrameworkBundle\Component\Image;
 
 use Doctrine\ORM\EntityManagerInterface;
@@ -67,7 +69,6 @@ class ImageFacade
      * @param \Shopsys\FrameworkBundle\Component\Image\ImageLocator $imageLocator
      * @param \Shopsys\FrameworkBundle\Component\Image\ImageFactoryInterface $imageFactory
      * @param \League\Flysystem\MountManager $mountManager
-     * @param \League\Flysystem\MountManager;
      */
     public function __construct(
         $imageUrlPrefix,
@@ -270,6 +271,28 @@ class ImageFacade
 
     /**
      * @param \Shopsys\FrameworkBundle\Component\Domain\Config\DomainConfig $domainConfig
+     * @param int $id
+     * @param string $extension
+     * @param string $entityName
+     * @param string|null $type
+     * @param string|null $sizeName
+     * @return string
+     */
+    public function getImageUrlFromAttributes(
+        DomainConfig $domainConfig,
+        int $id,
+        string $extension,
+        string $entityName,
+        ?string $type,
+        ?string $sizeName = null
+    ): string {
+        $imageFilepath = $this->imageLocator->getRelativeImageFilepathFromAttributes($id, $extension, $entityName, $type, $sizeName);
+
+        return $domainConfig->getUrl() . $this->imageUrlPrefix . $imageFilepath;
+    }
+
+    /**
+     * @param \Shopsys\FrameworkBundle\Component\Domain\Config\DomainConfig $domainConfig
      * @param \Shopsys\FrameworkBundle\Component\Image\Image $imageOrEntity
      * @param string|null $sizeName
      * @param string|null $type
@@ -287,6 +310,37 @@ class ImageFacade
             $url = $this->getAdditionalImageUrl($domainConfig, $additionalSizeIndex, $image, $sizeName);
             $result[] = new AdditionalImageData($additionalSizeConfig->getMedia(), $url);
         }
+        return $result;
+    }
+
+    /**
+     * @param \Shopsys\FrameworkBundle\Component\Domain\Config\DomainConfig $domainConfig
+     * @param int $id
+     * @param string $extension
+     * @param string $entityName
+     * @param string|null $type
+     * @param string|null $sizeName
+     * @return \Shopsys\FrameworkBundle\Component\Image\AdditionalImageData[]
+     */
+    public function getAdditionalImagesDataFromAttributes(
+        DomainConfig $domainConfig,
+        int $id,
+        string $extension,
+        string $entityName,
+        ?string $type,
+        ?string $sizeName = null
+    ): array {
+        $entityConfig = $this->imageConfig->getEntityConfigByEntityName($entityName);
+        $sizeConfig = $entityConfig->getSizeConfig($sizeName);
+
+        $result = [];
+        foreach ($sizeConfig->getAdditionalSizes() as $additionalSizeIndex => $additionalSizeConfig) {
+            $imageFilepath = $this->imageLocator->getRelativeImageFilepathFromAttributes($id, $extension, $entityName, $type, $sizeName, $additionalSizeIndex);
+            $url = $domainConfig->getUrl() . $this->imageUrlPrefix . $imageFilepath;
+
+            $result[] = new AdditionalImageData($additionalSizeConfig->getMedia(), $url);
+        }
+
         return $result;
     }
 
@@ -368,5 +422,17 @@ class ImageFacade
             $image->setPosition($position);
             $position++;
         }
+    }
+
+    /**
+     * @param int[] $entityIds
+     * @param string $entityClass FQCN
+     * @return \Shopsys\FrameworkBundle\Component\Image\Image[]
+     */
+    public function getImagesByEntitiesIndexedByEntityId(array $entityIds, string $entityClass): array
+    {
+        $entityName = $this->imageConfig->getImageEntityConfigByClass($entityClass)->getEntityName();
+
+        return $this->imageRepository->getMainImagesByEntitiesIndexedByEntityId($entityIds, $entityName);
     }
 }

@@ -121,16 +121,16 @@ class ImageRepository
     }
 
     /**
-     * @param array $entities
+     * @param array $entitiesOrEntityIds
      * @param string $entityName
      * @return \Shopsys\FrameworkBundle\Component\Image\Image[]
      */
-    public function getMainImagesByEntitiesIndexedByEntityId(array $entities, $entityName)
+    public function getMainImagesByEntitiesIndexedByEntityId(array $entitiesOrEntityIds, $entityName)
     {
         $queryBuilder = $this->getImageRepository()
             ->createQueryBuilder('i')
             ->andWhere('i.entityName = :entityName')->setParameter('entityName', $entityName)
-            ->andWhere('i.entityId IN (:entities)')->setParameter('entities', $entities)
+            ->andWhere('i.entityId IN (:entities)')->setParameter('entities', $entitiesOrEntityIds)
             ->addOrderBy('i.position', 'desc')
             ->addOrderBy('i.id', 'desc');
 

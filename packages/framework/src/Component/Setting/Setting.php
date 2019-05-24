@@ -125,7 +125,7 @@ class Setting
     }
 
     /**
-     * @param int $domainId
+     * @param int|null $domainId
      */
     protected function loadDomainValues($domainId)
     {
