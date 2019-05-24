@@ -437,6 +437,21 @@
     </target>
 
     <target name="diff-files" description="Finds changed files (against origin/master) and saves them into properties.">
+        <exec executable="${path.git.executable}" outputProperty="git.status.output" returnProperty="git.status.returnCode">
+            <arg value="status"/>
+        </exec>
+        <if>
+            <not>
+                <equals arg1="${git.status.returnCode}" arg2="0"/>
+            </not>
+            <then>
+                <echo level="error" message="Searching for changed files requires Git to be installed and the .git directory to be available."/>
+                <echo level="info" message="By default, the .git directory is excluded from synchronization of files using docker-sync on Windows and Mac in order to deliver better performance and stability."/>
+                <echo level="info" message="If that's your case, either remove '.git' from 'sync_excludes' in your 'docker-sync.yml' or use the target without the '-diff' suffix."/>
+                <fail message="${git.status.output}"/>
+            </then>
+        </if>
+
         <exec executable="${path.git.executable}" outputProperty="git.merge.base">
             <arg value="merge-base"/>
             <arg value="origin/master"/>
