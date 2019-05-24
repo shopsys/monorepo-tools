@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project name="Shopsys Framework" default="list">
+<project name="shopsys_framework" default="list">
 
     <property name="is-multidomain" value="true"/>
     <property name="path.app" value="${path.root}/app"/>
