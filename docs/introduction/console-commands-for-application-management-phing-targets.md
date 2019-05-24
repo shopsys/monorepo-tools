@@ -10,7 +10,7 @@ php phing
 ```
 
 ## How Phing targets work
-Phing targets are defined in `build.xml` and `build-dev.xml` files.
+Phing targets are defined in `build.xml` file.
 Any Phing target can execute a subset of other targets or console commands.
 
 *Tip: You can use shorthand command `./phing <target-name>` on Unix system or `phing <target-name>` in Windows CMD instead of `php phing <target-name>`.*

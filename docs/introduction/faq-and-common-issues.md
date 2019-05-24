@@ -29,7 +29,7 @@ See more about phing targets in [Console Commands for Application Management (Ph
 ## What are the data fixtures good for?
 Data fixtures are actually demo data available in the Shopys Framework.
 For their installation, use the phing target `db-fixtures-demo`.
-This phing target is usually triggered as the part of others phing targets, because it require the application in a certain state, for example, configured domains, an existing database structure, and so on, see `build.xml` and `build-dev.xml`.
+This phing target is usually triggered as the part of other phing targets, because it requires the application in a certain state (eg. with configured domains and an existing database structure), see [`build.xml`](/packages/framework/build.xml).
 Demo data are used for automatic tests and also for installation of demo shop with prepared data.
 
 ## How to change a domain URL?

@@ -106,7 +106,7 @@ Import the new routes configuration in `app/config/packages/shopsys_shop.yml`
 
 #### 3.3 Translations and messages
 In order to correctly display the labels like *Registration*, *Cart*, ..., create a file with translations of messages in `src/Shopsys/ShopBundle/Resources/translations/`.
-Modify the phing target `dump-translations-project-base` in `build-dev.xml` by adding the new locale as `<arg value="xx" />` where `xx` replace for the code of added locale.
+Override the Phing target `dump-translations-project-base` in the `build.xml` and add the new locale as `<arg value="xx" />` where `xx` replace for the code of added locale.
 Then run
 ```
 php phing dump-translations
