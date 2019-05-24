@@ -1,10 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="Shopsys Framework" default="list">
 
-    <property file="${project.basedir}/build/build.local.properties" />
-
-    <import file="build-dev.xml" optional="true" />
-
     <property name="path.app" value="${path.root}/app"/>
     <property name="path.bin" value="${path.vendor}/bin"/>
     <property name="path.build" value="${path.root}/build"/>
@@ -16,7 +12,7 @@
     <property name="path.composer.executable" value="composer"/>
     <property name="path.env.test" value="${path.root}/TEST"/>
     <property name="path.eslint.executable" value="${path.root}/node_modules/.bin/eslint"/>
-    <property name="path.framework" value="${path.vendor}/shopsys/framework"/>
+    <property name="path.framework" value="${project.basedir}"/>
     <property name="path.grunt.executable" value="node_modules/.bin/grunt"/>
     <property name="path.npm.executable" value="npm"/>
     <property name="path.pg_dump.executable" value="pg_dump"/>
@@ -40,6 +36,8 @@
     <property name="path.bin-console" value="bin/console"/>
 
     <property name="is-multidomain" value="true" />
+
+    <import file="${path.framework}/build-dev.xml" optional="true" />
 
     <if>
         <os family="windows" />

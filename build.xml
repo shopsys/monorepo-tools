@@ -7,8 +7,7 @@
     <property name="path.bin-console" value="./project-base/bin/console"/>
     <property name="path.framework" value="${path.packages}/framework"/>
 
-    <import file="project-base/build-dev.xml" />
-    <import file="project-base/build.xml" />
+    <import file="${path.framework}/build.xml" />
 
     <target name="composer-dev" description="Installs dependencies for development if composer.lock is valid, otherwise runs composer update.">
         <exec executable="${path.composer.executable}" returnProperty="composer.validate.returnCode">

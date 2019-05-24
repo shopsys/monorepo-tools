@@ -16,7 +16,7 @@ Any Phing target can execute a subset of other targets or console commands.
 *Tip: You can use shorthand command `./phing <target-name>` on Unix system or `phing <target-name>` in Windows CMD instead of `php phing <target-name>`.*
 
 Let us take `build` target for example.
-It is located in `build.xml` file and looks like this:
+It is located in `build.xml` file in the `shopsys/framework` package and it looks like this:
 ```xml
 <target name="build" depends="build-deploy-part-1-db-independent, build-deploy-part-2-db-dependent" description="Builds application for production preserving your DB."/>
 ```
