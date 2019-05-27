@@ -33,9 +33,6 @@
         <phingcall target="composer-check"/>
     </target>
 
-    <target name="standards" depends="phplint,ecs,phpstan,twig-lint,yaml-lint,eslint-check,standards-packages,standards-utils" description="Checks coding standards in the project-base, packages and utils folder."/>
-    <target name="standards-diff" depends="phplint-diff,ecs-diff,phpstan,twig-lint-diff,yaml-lint,eslint-check-diff,standards-packages, standards-utils" description="Checks coding standards on changed files in the project-base, packages and utils folder."/>
-
     <target name="clean" description="Cleans up directories with cache and scripts which are generated on demand.">
         <delete failonerror="false" includeemptydirs="true">
             <fileset dir="${path.var}/cache/">
@@ -50,128 +47,161 @@
         </delete>
     </target>
 
-    <target name="standards-fix" description="Automatically fixes some coding standards violations in the project-base, packages and utils folder.">
-        <phingcall target="ecs-fix"/>
-        <phingcall target="eslint-fix"/>
-        <phingcall target="standards-fix-packages"/>
-        <phingcall target="standards-fix-utils"/>
-    </target>
-
-    <target name="standards-fix-diff" description="Automatically fixes some coding standards violations in changed files in project-base and all files in packages.">
-        <phingcall target="ecs-fix-diff"/>
-        <phingcall target="eslint-fix-diff"/>
-        <phingcall target="standards-fix-packages-diff"/>
-        <phingcall target="standards-fix-utils"/>
-    </target>
-
-    <target name="standards-packages" description="Checks coding standards in all packages.">
-        <exec executable="${path.phplint.executable}" logoutput="true" passthru="true" checkreturn="true">
-            <arg path="./packages/*/src"/>
-            <arg path="./packages/*/tests"/>
+    <target name="eslint-check" description="Find JS coding standard violations in all files using ESLint in the whole monorepo and print human readable output.">
+        <phingcall target="shopsys_framework.eslint-check"/>
+        <exec executable="${path.eslint.executable}" passthru="true" checkreturn="true">
+            <arg value="--color"/>
+            <arg path="${path.framework}/src/Resources/scripts"/>
+            <arg value="--config"/>
+            <arg path="${path.framework}/.eslintrc.json"/>
+            <arg value="--ignore-path"/>
+            <arg path="${path.framework}/.eslintignore"/>
         </exec>
+    </target>
+
+    <target name="eslint-check-diff" hidden="true">
+        <echo level="info" message="Checking only changed files via 'eslint-check-diff' not supported in monorepo. Running 'eslint-check' instead..."/>
+        <phingcall target="eslint-check"/>
+    </target>
+
+    <target name="eslint-fix" description="Fix JS coding standard violations in all files using ESLint in the whole monorepo.">
+        <phingcall target="shopsys_framework.eslint-fix"/>
+        <exec executable="${path.eslint.executable}" passthru="true" checkreturn="true">
+            <arg value="--color"/>
+            <arg value="--fix"/>
+            <arg path="${path.framework}/src/Resources/scripts"/>
+            <arg value="--config"/>
+            <arg path="${path.framework}/.eslintrc.json"/>
+            <arg value="--ignore-path"/>
+            <arg path="${path.framework}/.eslintignore"/>
+        </exec>
+    </target>
+
+    <target name="eslint-fix-diff" hidden="true">
+        <echo level="info" message="Fixing only changed files via 'eslint-fix-diff' not supported in monorepo. Running 'eslint-fix' instead..."/>
+        <phingcall target="eslint-fix"/>
+    </target>
+
+    <target name="ecs" description="Checks coding standards in all files in the whole monorepo by PHP easy coding standards.">
         <exec executable="${path.ecs.executable}" logoutput="true" passthru="true" checkreturn="true">
             <arg value="check"/>
-            <arg path="./packages/*/src"/>
-            <arg path="./packages/*/tests"/>
-            <arg path="./packages/*/*.md"/>
-            <arg path="./*.md"/>
-            <arg path="./docs"/>
+            <arg value="--clear-cache"/>
+            <arg path="${path.src}"/>
+            <arg path="${path.tests}"/>
+            <arg path="${path.root}/*.md"/>
+            <arg path="${path.root}/docs"/>
+            <arg path="${path.packages}/*/src"/>
+            <arg path="${path.packages}/*/tests"/>
+            <arg path="${path.packages}/*/*.md"/>
+            <arg path="${path.utils}/*/src"/>
+            <arg path="${path.utils}/*/tests"/>
+            <arg path="${project.basedir}/*.md"/>
+            <arg path="${project.basedir}/docs"/>
+        </exec>
+    </target>
+
+    <target name="ecs-diff" description="Checks coding standards in all files in the whole monorepo by PHP easy coding standards.">
+        <exec executable="${path.ecs.executable}" logoutput="true" passthru="true" checkreturn="true">
+            <arg value="check"/>
+            <arg path="${path.src}"/>
+            <arg path="${path.tests}"/>
+            <arg path="${path.root}/*.md"/>
+            <arg path="${path.root}/docs"/>
+            <arg path="${path.packages}/*/src"/>
+            <arg path="${path.packages}/*/tests"/>
+            <arg path="${path.packages}/*/*.md"/>
+            <arg path="${path.utils}/*/src"/>
+            <arg path="${path.utils}/*/tests"/>
+            <arg path="${project.basedir}/*.md"/>
+            <arg path="${project.basedir}/docs"/>
+        </exec>
+    </target>
+
+    <target name="ecs-fix" description="Checks and fixes automatically fixable coding standards in all files in the whole monorepo by PHP easy coding standards.">
+        <exec executable="${path.ecs.executable}" logoutput="true" passthru="true" checkreturn="true">
+            <arg value="check"/>
+            <arg value="--clear-cache"/>
+            <arg value="--fix"/>
+            <arg path="${path.src}"/>
+            <arg path="${path.tests}"/>
+            <arg path="${path.root}/*.md"/>
+            <arg path="${path.root}/docs"/>
+            <arg path="${path.packages}/*/src"/>
+            <arg path="${path.packages}/*/tests"/>
+            <arg path="${path.packages}/*/*.md"/>
+            <arg path="${path.utils}/*/src"/>
+            <arg path="${path.utils}/*/tests"/>
+            <arg path="${project.basedir}/*.md"/>
+            <arg path="${project.basedir}/docs"/>
+        </exec>
+    </target>
+
+    <target name="ecs-fix-diff" description="Checks and fixes automatically fixable coding standards in all files in the whole monorepo by PHP easy coding standards.">
+        <exec executable="${path.ecs.executable}" logoutput="true" passthru="true" checkreturn="true">
+            <arg value="check"/>
+            <arg value="--fix"/>
+            <arg path="${path.src}"/>
+            <arg path="${path.tests}"/>
+            <arg path="${path.root}/*.md"/>
+            <arg path="${path.root}/docs"/>
+            <arg path="${path.packages}/*/src"/>
+            <arg path="${path.packages}/*/tests"/>
+            <arg path="${path.packages}/*/*.md"/>
+            <arg path="${path.utils}/*/src"/>
+            <arg path="${path.utils}/*/tests"/>
+            <arg path="${project.basedir}/*.md"/>
+            <arg path="${project.basedir}/docs"/>
+        </exec>
+    </target>
+
+    <target name="phplint" description="Checks syntax of PHP files in the whole monorepo.">
+        <exec executable="${path.phplint.executable}" logoutput="true" passthru="true" checkreturn="true">
+            <arg path="${path.src}"/>
+            <arg path="${path.tests}"/>
+            <arg path="${path.packages}/*/src"/>
+            <arg path="${path.packages}/*/tests"/>
+            <arg path="${path.utils}/*/src"/>
+            <arg path="${path.utils}/*/tests"/>
+        </exec>
+    </target>
+
+    <target name="phplint-diff" hidden="true">
+        <echo level="info" message="Checking only changed files via 'phplint-diff' not supported in monorepo. Running 'phplint' instead..."/>
+        <phingcall target="phplint"/>
+    </target>
+
+    <target name="twig-lint" description="Checks syntax of Twig templates in the whole monorepo.">
+        <phingcall target="shopsys_framework.twig-lint"/>
+        <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
+            <arg value="${path.bin-console}"/>
+            <arg value="lint:twig"/>
+            <arg value="${path.packages}"/>
         </exec>
         <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
             <arg value="${path.bin-console}"/>
             <arg value="lint:twig"/>
-            <arg value="@ShopsysFrameworkBundle"/>
+            <arg value="${path.utils}"/>
         </exec>
+    </target>
+
+    <target name="twig-lint-diff" hidden="true">
+        <echo level="info" message="Checking only changed files via 'twig-lint-diff' not supported in monorepo. Running 'twig-lint' instead..."/>
+        <phingcall target="twig-lint"/>
+    </target>
+
+    <target name="yaml-lint" description="Checks syntax of Yaml files in the whole monorepo.">
+        <phingcall target="shopsys_framework.yaml-lint"/>
         <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
             <arg value="${path.bin-console}"/>
             <arg value="lint:yaml"/>
-            <arg value="@ShopsysFrameworkBundle"/>
-            <arg value="--parse-tags"/>
-        </exec>
-        <exec executable="${path.eslint.executable}" passthru="true" checkreturn="true">
-            <arg value="--color"/>
-            <arg path="${path.framework}/src/Resources/scripts"/>
-            <arg value="--config"/>
-            <arg path="${path.framework}/.eslintrc.json"/>
-            <arg value="--ignore-path"/>
-            <arg path="${path.framework}/.eslintignore"/>
-        </exec>
-    </target>
-
-    <target name="standards-fix-packages" description="Automatically fixes some coding standards violations in all packages.">
-        <exec executable="${path.ecs.executable}" logoutput="true" passthru="true" checkreturn="true">
-            <arg value="check"/>
-            <arg value="--clear-cache"/>
-            <arg value="--fix"/>
-            <arg path="./packages/*/src"/>
-            <arg path="./packages/*/tests"/>
-            <arg path="./packages/*/*.md"/>
-            <arg path="./*.md"/>
-            <arg path="./docs"/>
-        </exec>
-        <exec executable="${path.eslint.executable}" passthru="true" checkreturn="true">
-            <arg value="--color"/>
-            <arg value="--fix"/>
-            <arg path="${path.framework}/src/Resources/scripts"/>
-            <arg value="--config"/>
-            <arg path="${path.framework}/.eslintrc.json"/>
-            <arg value="--ignore-path"/>
-            <arg path="${path.framework}/.eslintignore"/>
-        </exec>
-    </target>
-
-    <target name="standards-fix-packages-diff" description="Automatically fixes some coding standards violations in all changed files of packages">
-        <exec executable="${path.ecs.executable}" logoutput="true" passthru="true" checkreturn="true">
-            <arg value="check"/>
-            <arg value="--fix"/>
-            <arg path="./packages/*/src"/>
-            <arg path="./packages/*/tests"/>
-            <arg path="./packages/*/*.md"/>
-            <arg path="./*.md"/>
-            <arg path="./docs"/>
-        </exec>
-        <exec executable="${path.eslint.executable}" passthru="true" checkreturn="true">
-            <arg value="--color"/>
-            <arg value="--fix"/>
-            <arg path="${path.framework}/src/Resources/scripts"/>
-            <arg value="--config"/>
-            <arg path="${path.framework}/.eslintrc.json"/>
-            <arg value="--ignore-path"/>
-            <arg path="${path.framework}/.eslintignore"/>
-        </exec>
-    </target>
-
-    <target name="standards-utils" description="Checks coding standards in monorepo utils folder">
-        <exec executable="${path.phplint.executable}" logoutput="true" passthru="true" checkreturn="true">
-            <arg path="${path.utils}/*/src"/>
-            <arg path="${path.utils}/*/tests"/>
-        </exec>
-        <exec executable="${path.ecs.executable}" logoutput="true" passthru="true" checkreturn="true">
-            <arg value="check"/>
-            <arg path="${path.utils}/*/src"/>
-            <arg path="${path.utils}/*/tests"/>
-        </exec>
-        <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
-            <arg value="${path.bin-console}"/>
-            <arg value="lint:yaml"/>
-            <arg value="${path.utils}/*/src"/>
+            <arg value="${path.packages}"/>
             <arg value="--parse-tags"/>
         </exec>
         <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
             <arg value="${path.bin-console}"/>
             <arg value="lint:yaml"/>
-            <arg value="${path.utils}/*/tests"/>
+            <arg value="${path.utils}"/>
             <arg value="--parse-tags"/>
-        </exec>
-    </target>
-
-    <target name="standards-fix-utils" description="Automatically fixes coding standards violations in monorepo utils folder">
-        <exec executable="${path.ecs.executable}" logoutput="true" passthru="true" checkreturn="true">
-            <arg value="check"/>
-            <arg value="--clear-cache"/>
-            <arg value="--fix"/>
-            <arg path="${path.utils}/*/src"/>
-            <arg path="${path.utils}/*/tests"/>
         </exec>
     </target>
 
