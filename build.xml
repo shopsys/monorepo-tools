@@ -34,14 +34,7 @@
     </target>
 
     <target name="clean" description="Cleans up directories with cache and scripts which are generated on demand.">
-        <delete failonerror="false" includeemptydirs="true">
-            <fileset dir="${path.var}/cache/">
-                <exclude name="/"/>
-            </fileset>
-            <fileset dir="${path.web.scripts}/">
-                <exclude name="/"/>
-            </fileset>
-        </delete>
+        <phingcall target="shopsys_framework.clean"/>
         <delete failonerror="false" includeemptydirs="true" quiet="true">
             <filelist dir="${path.root}" files="migrations-lock.yml"/>
         </delete>
