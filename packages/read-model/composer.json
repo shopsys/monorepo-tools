@@ -3,7 +3,7 @@
     "type": "library",
     "description": "[experimental] Read model layer for Shopsys Framework",
     "keywords": ["Read Model", "Shopsys Framework", "SSFW"],
-    "license": "MIT",
+    "license": "proprietary",
     "authors": [
         {
             "name": "Shopsys",
