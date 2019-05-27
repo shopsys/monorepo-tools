@@ -191,15 +191,8 @@
         </exec>
     </target>
 
-    <target name="tests-static" depends="tests-unit,tests-packages,tests-utils" description="Runs unit tests and tests of all packages and utils."/>
-
-    <target name="tests-utils">
-        <exec executable="${path.vendor}/bin/phpunit" logoutput="true" passthru="true" checkreturn="true">
-            <arg value="${path.utils}/releaser/tests/"/>
-        </exec>
-    </target>
-
-    <target name="tests-packages" description="Runs tests of packages.">
+    <target name="tests-unit" description="Runs unit tests in the whole monorepo.">
+        <phingcall target="shopsys_framework.tests-unit"/>
         <exec executable="${path.vendor}/bin/phpunit" logoutput="true" passthru="true" checkreturn="true">
             <arg value="${path.packages}/product-feed-google/tests"/>
         </exec>
@@ -228,6 +221,9 @@
         <exec executable="${path.vendor}/bin/phpunit" logoutput="true" passthru="true" checkreturn="true">
             <arg value="--configuration"/>
             <arg value="${path.packages}/coding-standards/phpunit.xml"/>
+        </exec>
+        <exec executable="${path.vendor}/bin/phpunit" logoutput="true" passthru="true" checkreturn="true">
+            <arg value="${path.utils}/releaser/tests/"/>
         </exec>
     </target>
 

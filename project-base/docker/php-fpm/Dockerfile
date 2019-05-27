@@ -130,6 +130,6 @@ COPY --chown=www-data:www-data / /var/www/html
 
 RUN composer install --optimize-autoloader --no-interaction --no-progress --dev
 
-RUN php phing composer-dev npm dirs-create test-dirs-create assets standards tests-static tests-acceptance-build
+RUN php phing composer-dev npm dirs-create test-dirs-create assets standards tests-unit tests-acceptance-build
 
 RUN ./bin/console shopsys:environment:change prod

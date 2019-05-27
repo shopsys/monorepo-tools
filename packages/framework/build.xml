@@ -402,8 +402,11 @@
 
     <target name="test-db-demo" depends="clean,redis-check,clean-redis,test-db-wipe-public-schema,test-db-import-basic-structure,test-db-migrations,test-create-domains-data,test-db-fixtures-demo,test-generate-friendly-urls,test-load-plugin-demo-data,test-replace-domains-urls" description="Drops all data in test database and creates a new one with demo data."/>
     <target name="test-db-performance" depends="test-db-demo,test-db-fixtures-performance" description="Drops all data in test database and creates a new one with performance data."/>
-    <target name="tests-static" depends="tests-unit" description="Runs unit tests."/>
-    <target name="tests" depends="test-db-demo,tests-static,tests-functional,tests-smoke" description="Runs unit, functional and smoke tests on a newly built test database."/>
+    <target name="tests-static" hidden="true">
+        <phingcall target="tests-unit"/>
+        <echo level="warning" message="This phing target is deprecated since Shopsys Framework 7.3.0, use 'tests-unit' instead."/>
+    </target>
+    <target name="tests" depends="test-db-demo,tests-unit,tests-functional,tests-smoke" description="Runs unit, functional and smoke tests on a newly built test database."/>
 
     <target name="tests-performance-run" depends="clean,redis-check,clean-redis,test-db-performance,tests-performance-warmup,tests-performance" description="Runs performance tests on a newly built test database with performance data."/>
 
