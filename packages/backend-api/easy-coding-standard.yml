@@ -1,0 +1,21 @@
+imports:
+    - { resource: '%vendor_dir%/shopsys/coding-standards/easy-coding-standard.yml', ignore_errors: true }
+
+services:
+    # this package is meant to be extensible using class inheritance, so we want to avoid private visibilities in the model namespace
+    forbidden_private_visibility_fixer.backend_api:
+        class: Shopsys\CodingStandards\CsFixer\ForbiddenPrivateVisibilityFixer
+        calls:
+            - method: configure
+              arguments:
+                  - analyzed_namespaces:
+                        - Shopsys\BackendApiBundle
+
+    Shopsys\CodingStandards\Sniffs\ConstantVisibilityRequiredSniff: ~
+
+    Shopsys\CodingStandards\Sniffs\ForceLateStaticBindingForProtectedConstantsSniff: ~
+
+parameters:
+    skip:
+        Shopsys\CodingStandards\Sniffs\ObjectIsCreatedByFactorySniff:
+            - '*/tests/*'

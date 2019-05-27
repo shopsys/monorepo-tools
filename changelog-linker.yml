@@ -32,6 +32,7 @@ parameters:
         'shopsys/monorepo-tools': 'https://github.com/shopsys/monorepo-tools'
         'shopsys/google-cloud-bundle/': 'https://github.com/shopsys/google-cloud-bundle'
         'shopsys/read-model': 'https://github.com/shopsys/read-model'
+        'shopsys/backend-api': 'https://github.com/shopsys/backend-api'
     package_aliases:
         'shopsys': 'shopsys/shopsys'
         'project-base': 'shopsys/project-base'
@@ -49,3 +50,4 @@ parameters:
         'monorepo-tools': 'shopsys/monorepo-tools'
         'google-cloud-bundle': 'shopsys/google-cloud-bundle'
         'read-model': 'shopsys/read-model'
+        'backend-api': 'shopsys/backend-api'

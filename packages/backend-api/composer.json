@@ -1,0 +1,35 @@
+{
+    "name": "shopsys/backend-api",
+    "type": "library",
+    "description": "Shopsys Framework API support",
+    "keywords": ["api", "Shopsys Framework", "SSFW"],
+    "license": "proprietary",
+    "authors": [
+        {
+            "name": "Shopsys",
+            "homepage": "https://www.shopsys.com/"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Shopsys\\BackendApiBundle\\": "src/"
+        }
+    },
+    "require": {
+        "php": "^7.2",
+        "ext-pdo": "*",
+        "ext-json": "*",
+        "doctrine/dbal": "^2.7",
+        "friendsofsymfony/rest-bundle": "^2.5",
+        "jms/serializer-bundle": "^2.4",
+        "ramsey/uuid": "^3.8",
+        "shopsys/form-types-bundle": "8.0.x-dev",
+        "shopsys/framework": "8.0.x-dev",
+        "shopsys/migrations": "8.0.x-dev",
+        "shopsys/plugin-interface": "8.0.x-dev",
+        "symfony/config": "^3.4",
+        "symfony/dependency-injection": "^3.4",
+        "symfony/http-foundation": "^3.4",
+        "symfony/http-kernel": "^3.4"
+    }
+}

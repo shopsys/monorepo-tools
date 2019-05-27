@@ -1,0 +1,41 @@
+Shopsys Community License
+version 2018-05-24
+
+Copyright (c) 2014-2019 Shopsys s.r.o., http://www.shopsys.com
+
+The software which includes this copyright notice and license agreement (“Community License Agreement”)
+and associated documentation files (“Software”) is protected by copyright.
+The copyright holder is Shopsys s.r.o., Czech company with Id. No. 27790487 (“Shopsys”).
+
+By this Community License Agreement Shopsys grants to any person obtaining a copy of the Software (“Licensee”)
+free of charge a non-exclusive license (“Community License”) to use the Software
+without restriction (other than restriction in this Community License Agreement),
+including without limitation the rights to use, copy, modify, merge, publish, distribute,
+sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so,
+subject to the following conditions:
+
+(1) If the aggregate value (including all taxes such as value-added tax and sales tax) of the orders
+processed by any instance of the Software or any instance of a software created by derivation
+from the Software (each such an instance further referred to as the “Eshop”) used by the Licensee
+exceeds 3,000,000 € or its equivalent in any other currency in any three months’ period (“Limit Excess”),
+the license for the use of the Software for such Eshop shall terminate one month after the Limit
+Excess (“License Termination”). From time to time Shopsys may publish on its website or otherwise
+communicate to the licensees of the Software the specification of the type of orders which will not count
+towards the limit. The Licensee is welcomed to apply with Shopsys for a new commercial license allowing
+the Licensee to use the Software after the License Termination (“Commercial License”).
+Shopsys will negotiate in good faith the terms of the Commercial License, including the licensing fee.
+The Licensee is not permitted to use the Software (whether in its original or altered form,
+including in the form of the Eshop) after the License Termination without obtaining the Commercial License.
+
+(2) This Community License Agreement including the copyright notice must be included in all
+copies or substantial portions of the Software.
+
+(3) THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED
+TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDER BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
+WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
+WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+
+By using the Software the Licensee agrees to this Community License Agreement.
+This Community License Agreement is governed by laws of the Czech Republic.

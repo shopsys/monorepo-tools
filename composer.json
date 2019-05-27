@@ -9,6 +9,7 @@
         "project-base/app/",
         "project-base/src/Shopsys/"
       ],
+      "Shopsys\\BackendApiBundle\\": "packages/backend-api/src/",
       "Shopsys\\CodingStandards\\": "packages/coding-standards/src/",
       "Shopsys\\FormTypesBundle\\": "packages/form-types-bundle/src/",
       "Shopsys\\GoogleCloudBundle\\": "packages/google-cloud-bundle/src/",
@@ -90,6 +91,7 @@
     "elasticsearch/elasticsearch": "^6.0.1",
     "friendsofphp/php-cs-fixer": "^2.14.0",
     "friendsofsymfony/ckeditor-bundle": "^2.1",
+    "friendsofsymfony/rest-bundle": "^2.5",
     "fp/jsformvalidator-bundle": "^1.5.1",
     "fzaninotto/faker": "^1.7.1",
     "gedmo/doctrine-extensions": "^2.4.34",
@@ -103,6 +105,7 @@
     "jdorn/sql-formatter": "^1.2",
     "jms/metadata": "^1.6",
     "jms/translation-bundle": "^1.4.1",
+    "jms/serializer-bundle": "^2.4",
     "joschi127/doctrine-entity-override-bundle": "^0.5.0",
     "knplabs/knp-menu-bundle": "^2.2.1",
     "league/flysystem": "^1.0",
@@ -199,6 +202,7 @@
     ]
   },
   "replace": {
+    "shopsys/backend-api": "self.version",
     "shopsys/form-types-bundle": "self.version",
     "shopsys/google-cloud-bundle": "self.version",
     "shopsys/http-smoke-testing": "self.version",

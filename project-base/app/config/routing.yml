@@ -4,6 +4,9 @@ shopsys_shop:
 
 shopsys_framework:
     resource: "@ShopsysFrameworkBundle/Resources/config/routing.yml"
+
+shopsys_api_v1:
+    resource: "@ShopsysBackendApiBundle/Resources/config/v1/routing.yml"
     
 elfinder:
     resource: "@FMElfinderBundle/Resources/config/routing.yml"

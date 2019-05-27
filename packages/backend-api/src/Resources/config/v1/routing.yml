@@ -1,0 +1,4 @@
+shopsys_backend_api_v1:
+    resource: "@ShopsysBackendApiBundle/Controller/V1"
+    prefix: /api/v1
+    type: annotation
