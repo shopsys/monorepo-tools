@@ -17,6 +17,7 @@ class ComposerScriptHandler extends ScriptHandler
     {
         static::executeCommands($event, [
             'shopsys:domains-urls:configure',
+            'ckeditor:install --clear=skip --release=full --tag=4.5.11',
             'cache:clear --no-warmup',
         ]);
     }
@@ -28,6 +29,7 @@ class ComposerScriptHandler extends ScriptHandler
     {
         static::executeCommands($event, [
             'shopsys:domains-urls:configure',
+            'ckeditor:install --clear=skip --release=full --tag=4.5.11',
             'cache:clear --no-warmup',
         ]);
     }
