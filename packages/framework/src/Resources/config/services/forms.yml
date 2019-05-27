@@ -41,4 +41,4 @@ services:
 
     Shopsys\FrameworkBundle\Form\WysiwygTypeExtension:
         tags:
-            - { name: form.type_extension, extended_type: Ivory\CKEditorBundle\Form\Type\CKEditorType }
+            - { name: form.type_extension, extended_type: FOS\CKEditorBundle\Form\Type\CKEditorType }

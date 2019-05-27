@@ -35,7 +35,7 @@
 
     Shopsys.validation.ckeditorValidationInit = function (element) {
         $.each(element.children, function (index, childElement) {
-            if (childElement.type === Shopsys.constant('\\Ivory\\CKEditorBundle\\Form\\Type\\CKEditorType::class')) {
+            if (childElement.type === Shopsys.constant('\\FOS\\CKEditorBundle\\Form\\Type\\CKEditorType::class')) {
                 CKEDITOR.instances[childElement.id].on('change', function () {
                     $(childElement.domNode).jsFormValidator('validate');
                 });
@@ -224,7 +224,7 @@
 
     FpJsFormValidator._getInputValue = FpJsFormValidator.getInputValue;
     FpJsFormValidator.getInputValue = function (element) {
-        if (element.type === Shopsys.constant('\\Ivory\\CKEditorBundle\\Form\\Type\\CKEditorType::class')) {
+        if (element.type === Shopsys.constant('\\FOS\\CKEditorBundle\\Form\\Type\\CKEditorType::class')) {
             return CKEDITOR.instances[element.id].getData();
         }
         if (element.type === Shopsys.constant('\\Shopsys\\FrameworkBundle\\Form\\FileUploadType::class') || element.type === Shopsys.constant('\\Shopsys\\FrameworkBundle\\Form\\ImageUploadType::class')) {
