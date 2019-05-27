@@ -71,6 +71,7 @@
         "prezent/doctrine-translatable": "^1.2",
         "prezent/doctrine-translatable-bundle": "^1.0.3",
         "psr/log": "^1.0",
+        "ramsey/uuid": "^3.8",
         "sensio/distribution-bundle": "^5.0.21",
         "sensio/framework-extra-bundle": "^3.0.29",
         "shopsys/doctrine-orm": "^2.6.2",
