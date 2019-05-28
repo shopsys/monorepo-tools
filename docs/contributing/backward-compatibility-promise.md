@@ -128,6 +128,9 @@ Adding a new optional argument to a method is considered a BC break (as the meth
 
 The behavior of elements with classes prefixed with `.js-` should be changed only in a `MAJOR` release.
 
+### Backend API
+The API has its own versioning that is independent from the framework versioning. Read [API Versioning](/docs/backend-api/api-versioning.md) for more information.
+
 ## Summary
 
 ### If You Are a User of Shopsys Framework...
