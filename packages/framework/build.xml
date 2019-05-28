@@ -49,7 +49,7 @@
         </else>
     </if>
 
-    <target name="build" depends="build-deploy-part-1-db-independent, build-deploy-part-2-db-dependent" description="Builds application for production preserving your DB."/>
+    <target name="build" depends="build-deploy-part-1-db-independent,build-deploy-part-2-db-dependent" description="Builds application for production preserving your DB."/>
     <target name="build-deploy-part-1-db-independent" depends="generate-build-version,clean,redis-check,composer,npm,dirs-create,assets" description="First part of application build for production preserving your DB (can be run without maintenance page)."/>
     <target name="build-deploy-part-2-db-dependent" depends="db-migrations,create-domains-data,generate-friendly-urls,replace-domains-urls,grunt,error-pages-generate,warmup,clean-redis-old" description="Second part of application build for production preserving your DB (must be run with maintenance page when containing DB migrations)."/>
     <target name="build-new" depends="wipe,generate-build-version,redis-check,composer,npm,dirs-create,assets,db-rebuild,grunt,error-pages-generate,warmup,product-search-create-structure,clean-redis-old" description="Builds application for production with clean DB (with base data only)."/>
@@ -260,7 +260,7 @@
         </exec>
     </target>
 
-    <target name="error-pages-generate" depends="prod-warmup, redis-check" description="Generates error pages displayed in production environment.">
+    <target name="error-pages-generate" depends="prod-warmup,redis-check" description="Generates error pages displayed in production environment.">
         <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
             <arg value="${path.bin-console}"/>
             <arg value="shopsys:error-page:generate-all"/>
