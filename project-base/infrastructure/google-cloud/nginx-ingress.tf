@@ -6,7 +6,7 @@ resource "kubernetes_namespace" "ingress-nginx" {
   }
 
   provisioner "local-exec" {
-    command     = "kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/master/deploy/mandatory.yaml"
+    command     = "kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/nginx-0.24.1/deploy/mandatory.yaml"
     interpreter = ["/bin/bash", "-c"]
   }
 }

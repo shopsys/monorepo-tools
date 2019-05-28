@@ -18,4 +18,11 @@ There you can find links to upgrade notes for other versions too.
     - `categoriyWithLazyLoadedVisibleChildren` ⟶ `categoryWithLazyLoadedVisibleChildren`
 - create an empty file `app/Resources/.gitkeep` to prepare a folder for [your overwritten templates](/docs/cookbook/modifying-a-template-in-administration.md) ([#1073](https://github.com/shopsys/shopsys/pull/1073))
 
+### Infrastructure
+- replace url part in `infrastructure/google-cloud/nginx-ingress.tf` to use released version of this nginx-ingress configuration ([#1077](https://github.com/shopsys/shopsys/pull/1043))
+    ```diff
+    - command     = "kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/master/deploy/mandatory.yaml"
+    + command     = "kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/nginx-0.24.1/deploy/mandatory.yaml"
+    ```
+
 [shopsys/framework]: https://github.com/shopsys/framework
