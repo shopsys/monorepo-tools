@@ -887,15 +887,6 @@
         </exec>
     </target>
 
-    <target name="db-dump" description="Dumps current database into a file.">
-        <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
-            <arg value="${path.bin-console}"/>
-            <arg value="shopsys:database:dump"/>
-            <arg value="--pgdump-bin=${path.pg_dump.executable}"/>
-            <arg value="db-dump-migrate-mc-multidomain.sql"/>
-        </exec>
-    </target>
-
     <target name="test-db-fixtures-demo" description="Loads demo data fixtures into test DB.">
         <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
             <arg value="${path.bin-console}"/>
