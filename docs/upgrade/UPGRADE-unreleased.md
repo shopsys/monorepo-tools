@@ -95,6 +95,7 @@ There you can find links to upgrade notes for other versions too.
         - `dump-translations-project-base` was deprecated, use `dump-translations` instead
         - `tests-static` was deprecated, use `tests-unit` instead
         - `test-db-check-schema` was deprecated, it is run automatically after DB migrations are executed
+        - `build-demo-ci-diff` and `checks-ci-diff` were deprecated, use `build-demo-ci` and `checks-ci` instead
         - don't forget to update your Dockerfiles, Kubernetes manifests, scripts and other files that might reference the phing targets above
 - we recommend upgrading PHPStan to level 4 [#1040](https://github.com/shopsys/shopsys/pull/1040)
     - you'll find detailed instructions in separate article [Upgrade Instructions for Upgrading PHPStan to Level 4](/docs/upgrade/phpstan-level-4.md)
