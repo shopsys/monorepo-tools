@@ -87,14 +87,14 @@
         </delete>
     </target>
 
-    <target name="clean-redis" description="Cleans up redis cache">
+    <target name="clean-redis" depends="redis-check" description="Cleans up redis cache">
         <exec executable="${path.php.executable}" passthru="true" checkreturn="true" output="${dev.null}">
             <arg value="${path.bin-console}"/>
             <arg value="shopsys:redis:clean-cache"/>
         </exec>
     </target>
 
-    <target name="clean-redis-old" description="Cleans up redis cache for previous build versions">
+    <target name="clean-redis-old" depends="redis-check" description="Cleans up redis cache for previous build versions">
         <exec executable="${path.php.executable}" passthru="true" checkreturn="true" output="${dev.null}">
             <arg value="${path.bin-console}"/>
             <arg value="shopsys:redis:clean-cache-old"/>
@@ -180,7 +180,7 @@
         </exec>
     </target>
 
-    <target name="db-check-mapping" description="Checks if ORM mapping is valid.">
+    <target name="db-check-mapping" depends="clean-redis" description="Checks if ORM mapping is valid.">
         <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
             <arg value="${path.bin-console}"/>
             <arg value="shopsys:migrations:check-mapping"/>
@@ -194,7 +194,7 @@
         </exec>
     </target>
 
-    <target name="db-check-schema" depends="db-check-mapping" description="Checks if database schema is satisfying ORM and returns a list of suggestions to fix it.">
+    <target name="db-check-schema" depends="clean-redis,db-check-mapping" description="Checks if database schema is satisfying ORM and returns a list of suggestions to fix it.">
         <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
             <arg value="${path.bin-console}"/>
             <arg value="shopsys:migrations:check-schema"/>
@@ -235,7 +235,7 @@
         </exec>
     </target>
 
-    <target name="db-migrations-generate" depends="db-check-mapping" description="Generates migration file when DB schema is not satisfying ORM.">
+    <target name="db-migrations-generate" depends="clean-redis,db-check-mapping" description="Generates migration file when DB schema is not satisfying ORM.">
         <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
             <arg value="${path.bin-console}"/>
             <arg value="shopsys:migrations:generate"/>
@@ -385,12 +385,12 @@
         </delete>
     </target>
 
-    <target name="build-dev" depends="generate-build-version,clean,redis-check,clean-redis-old,composer-dev,npm,timezones-check,dirs-create,test-dirs-create,assets,db-migrations,create-domains-data,generate-friendly-urls,replace-domains-urls,product-search-recreate-structure,product-search-export-products,grunt,error-pages-generate,tests-acceptance-build,checks-diff" description="Builds application for development preserving your DB and runs checks on changed files."/>
-    <target name="build-dev-quick" depends="generate-build-version,clean,redis-check,clean-redis-old,composer-dev,npm,dirs-create,test-dirs-create,assets,db-migrations,create-domains-data,generate-friendly-urls,replace-domains-urls,grunt,tests-acceptance-build" description="Builds application for development preserving your DB while skipping nonessential steps."/>
-    <target name="build-demo-dev" depends="generate-build-version,wipe-excluding-logs,redis-check,clean-redis-old,composer-dev,npm,timezones-check,dirs-create,test-dirs-create,assets,db-demo,product-search-recreate-structure,product-search-export-products,grunt,error-pages-generate,tests-acceptance-build,checks-diff" description="Builds application for development with clean demo DB and runs checks on changed files."/>
-    <target name="build-demo-dev-quick" depends="generate-build-version,wipe-excluding-logs,redis-check,clean-redis-old,composer-dev,npm,dirs-create,test-dirs-create,assets,db-demo,product-search-recreate-structure,product-search-export-products,grunt,tests-acceptance-build" description="Builds application for development with clean demo DB while skipping nonessential steps."/>
-    <target name="build-demo-ci" depends="generate-build-version,wipe-excluding-logs,redis-check,clean-redis-old,timezones-check,dirs-create,test-dirs-create,db-demo,product-search-recreate-structure,product-search-export-products,grunt,error-pages-generate,checks-ci" description="Builds application for development with clean demo DB and runs CI checks."/>
-    <target name="build-demo-ci-diff" depends="generate-build-version,wipe-excluding-logs,redis-check,clean-redis-old,timezones-check,dirs-create,test-dirs-create,db-demo,product-search-recreate-structure,product-search-export-products,grunt,error-pages-generate,checks-ci-diff" description="Builds application for development with clean demo DB and runs CI checks on changed files."/>
+    <target name="build-dev" depends="generate-build-version,clean,clean-redis-old,composer-dev,npm,timezones-check,dirs-create,test-dirs-create,assets,db-migrations,create-domains-data,generate-friendly-urls,replace-domains-urls,product-search-recreate-structure,product-search-export-products,grunt,error-pages-generate,tests-acceptance-build,checks-diff" description="Builds application for development preserving your DB and runs checks on changed files."/>
+    <target name="build-dev-quick" depends="generate-build-version,clean,clean-redis-old,composer-dev,npm,dirs-create,test-dirs-create,assets,db-migrations,create-domains-data,generate-friendly-urls,replace-domains-urls,grunt,tests-acceptance-build" description="Builds application for development preserving your DB while skipping nonessential steps."/>
+    <target name="build-demo-dev" depends="generate-build-version,wipe-excluding-logs,clean-redis-old,composer-dev,npm,timezones-check,dirs-create,test-dirs-create,assets,db-demo,product-search-recreate-structure,product-search-export-products,grunt,error-pages-generate,tests-acceptance-build,checks-diff" description="Builds application for development with clean demo DB and runs checks on changed files."/>
+    <target name="build-demo-dev-quick" depends="generate-build-version,wipe-excluding-logs,clean-redis-old,composer-dev,npm,dirs-create,test-dirs-create,assets,db-demo,product-search-recreate-structure,product-search-export-products,grunt,tests-acceptance-build" description="Builds application for development with clean demo DB while skipping nonessential steps."/>
+    <target name="build-demo-ci" depends="generate-build-version,wipe-excluding-logs,clean-redis-old,timezones-check,dirs-create,test-dirs-create,db-demo,product-search-recreate-structure,product-search-export-products,grunt,error-pages-generate,checks-ci" description="Builds application for development with clean demo DB and runs CI checks."/>
+    <target name="build-demo-ci-diff" depends="generate-build-version,wipe-excluding-logs,clean-redis-old,timezones-check,dirs-create,test-dirs-create,db-demo,product-search-recreate-structure,product-search-export-products,grunt,error-pages-generate,checks-ci-diff" description="Builds application for development with clean demo DB and runs CI checks on changed files."/>
 
     <target name="checks" depends="db-check-mapping,standards,tests" description="Checks ORM mapping, coding standards and runs unit, DB and smoke tests."/>
     <target name="checks-diff" depends="db-check-mapping,standards-diff,tests" description="Checks ORM mapping, coding standards on changed files and runs unit, DB and smoke tests."/>
@@ -400,7 +400,7 @@
     <target name="standards" depends="phplint,ecs,phpstan,twig-lint,yaml-lint,eslint-check" description="Checks coding standards."/>
     <target name="standards-diff" depends="phplint-diff,ecs-diff,phpstan,twig-lint-diff,yaml-lint,eslint-check-diff" description="Checks coding standards on changed files."/>
 
-    <target name="test-db-demo" depends="clean,redis-check,clean-redis,test-db-wipe-public-schema,test-db-import-basic-structure,test-db-migrations,test-create-domains-data,test-db-fixtures-demo,test-generate-friendly-urls,test-load-plugin-demo-data,test-replace-domains-urls" description="Drops all data in test database and creates a new one with demo data."/>
+    <target name="test-db-demo" depends="clean,clean-redis,test-db-wipe-public-schema,test-db-import-basic-structure,test-db-migrations,test-create-domains-data,test-db-fixtures-demo,test-generate-friendly-urls,test-load-plugin-demo-data,test-replace-domains-urls" description="Drops all data in test database and creates a new one with demo data."/>
     <target name="test-db-performance" depends="test-db-demo,test-db-fixtures-performance" description="Drops all data in test database and creates a new one with performance data."/>
     <target name="tests-static" hidden="true">
         <phingcall target="tests-unit"/>
@@ -408,7 +408,7 @@
     </target>
     <target name="tests" depends="test-db-demo,tests-unit,tests-functional,tests-smoke" description="Runs unit, functional and smoke tests on a newly built test database."/>
 
-    <target name="tests-performance-run" depends="clean,redis-check,clean-redis,test-db-performance,tests-performance-warmup,tests-performance" description="Runs performance tests on a newly built test database with performance data."/>
+    <target name="tests-performance-run" depends="clean,clean-redis,test-db-performance,tests-performance-warmup,tests-performance" description="Runs performance tests on a newly built test database with performance data."/>
 
     <target name="composer-check" description="Checks if Composer lock file is valid.">
         <exec executable="${path.composer.executable}" logoutput="true" passthru="true" checkreturn="true">
@@ -723,7 +723,7 @@
         <phingcall target="eslint-fix-diff"/>
     </target>
 
-    <target name="tests-acceptance" depends="clean,redis-check,clean-redis,test-db-dump" description="Runs acceptance tests. Running Selenium server is required.">
+    <target name="tests-acceptance" depends="clean,clean-redis,test-db-dump" description="Runs acceptance tests. Running Selenium server is required.">
         <available file="${path.env.test}" type="file" property="path.env.test.existed"/>
         <if>
             <not>
@@ -761,7 +761,7 @@
         </exec>
     </target>
 
-    <target name="tests-smoke" depends="clean,redis-check,clean-redis" description="Runs smoke tests.">
+    <target name="tests-smoke" depends="clean,clean-redis" description="Runs smoke tests.">
         <if>
             <istrue value="${is-multidomain}"/>
             <then>
@@ -789,7 +789,7 @@
         </if>
     </target>
 
-    <target name="tests-functional" depends="clean,redis-check,clean-redis" description="Runs functional tests.">
+    <target name="tests-functional" depends="clean,clean-redis" description="Runs functional tests.">
         <if>
             <istrue value="${is-multidomain}"/>
             <then>
@@ -817,7 +817,7 @@
         </if>
     </target>
 
-    <target name="tests-performance" depends="clean,redis-check,clean-redis" description="Runs performance tests.">
+    <target name="tests-performance" depends="clean,clean-redis" description="Runs performance tests.">
         <exec executable="${path.phpunit.executable}" logoutput="true" passthru="true" checkreturn="true">
             <arg value="--colors=always"/>
             <arg value="--testsuite"/>
@@ -867,7 +867,7 @@
         </exec>
     </target>
 
-    <target name="test-db-check-schema" depends="db-check-mapping" description="Checks if test database schema is satisfying ORM and returns a list of suggestions to fix it.">
+    <target name="test-db-check-schema" depends="clean-redis,db-check-mapping" description="Checks if test database schema is satisfying ORM and returns a list of suggestions to fix it.">
         <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
             <arg value="${path.bin-console}"/>
             <arg value="--env=test"/>
