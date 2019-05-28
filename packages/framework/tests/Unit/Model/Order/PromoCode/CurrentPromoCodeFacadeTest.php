@@ -21,7 +21,7 @@ class CurrentPromoCodeFacadeTest extends TestCase
         $validPromoCodeData->code = 'validCode';
         $validPromoCodeData->percent = 10.0;
         $validPromoCode = new PromoCode($validPromoCodeData);
-        $sessionMock = $this->getMockForAbstractClass(SessionInterface::class, ['get']);
+        $sessionMock = $this->getMockForAbstractClass(SessionInterface::class);
         $sessionMock->expects($this->atLeastOnce())->method('get')->willReturn($validPromoCode->getCode());
         $emMock = $this->createMock(EntityManager::class);
         $promoCodeRepositoryMock = $this->getMockBuilder(PromoCodeRepository::class)
@@ -42,7 +42,7 @@ class CurrentPromoCodeFacadeTest extends TestCase
         $validPromoCodeData->code = 'validCode';
         $validPromoCodeData->percent = 10.0;
         $validPromoCode = new PromoCode($validPromoCodeData);
-        $sessionMock = $this->getMockForAbstractClass(SessionInterface::class, ['get']);
+        $sessionMock = $this->getMockForAbstractClass(SessionInterface::class);
         $sessionMock->expects($this->atLeastOnce())->method('get')->willReturn($validPromoCode->getCode());
         $emMock = $this->createMock(EntityManager::class);
         $promoCodeRepositoryMock = $this->getMockBuilder(PromoCodeRepository::class)
@@ -64,7 +64,7 @@ class CurrentPromoCodeFacadeTest extends TestCase
         $validPromoCodeData->code = 'validCode';
         $validPromoCodeData->percent = 10.0;
         $validPromoCode = new PromoCode($validPromoCodeData);
-        $sessionMock = $this->getMockForAbstractClass(SessionInterface::class, ['get']);
+        $sessionMock = $this->getMockForAbstractClass(SessionInterface::class);
         $sessionMock->expects($this->atLeastOnce())->method('set')->with(
             $this->anything(),
             $this->equalTo($enteredCode)
@@ -85,7 +85,7 @@ class CurrentPromoCodeFacadeTest extends TestCase
     public function testSetEnteredPromoCodeInvalid()
     {
         $enteredCode = 'invalidCode';
-        $sessionMock = $this->getMockForAbstractClass(SessionInterface::class, ['get']);
+        $sessionMock = $this->getMockForAbstractClass(SessionInterface::class);
         $sessionMock->expects($this->never())->method('set');
 
         $emMock = $this->createMock(EntityManager::class);
