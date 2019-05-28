@@ -75,7 +75,7 @@ class FilterQuery
 
         if ($orderingModeId === ProductListOrderingConfig::ORDER_BY_PRICE_ASC) {
             $clone->sorting = [
-                'prices.amount' => [
+                'prices.price_with_vat' => [
                     'order' => 'asc',
                     'nested' => [
                         'path' => 'prices',
@@ -95,7 +95,7 @@ class FilterQuery
 
         if ($orderingModeId === ProductListOrderingConfig::ORDER_BY_PRICE_DESC) {
             $clone->sorting = [
-                'prices.amount' => [
+                'prices.price_with_vat' => [
                     'order' => 'desc',
                     'nested' => [
                         'path' => 'prices',
@@ -203,7 +203,7 @@ class FilterQuery
                             ],
                             [
                                 'range' => [
-                                    'prices.amount' => $prices,
+                                    'prices.price_with_vat' => $prices,
                                 ],
                             ],
                         ],

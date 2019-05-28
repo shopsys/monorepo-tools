@@ -43,7 +43,7 @@ Following product attributes are exported into Elasticsearch (i.e. the search or
 * ordering_priority (priority number)
 * calculated_selling_denied (true/false value whether the product is already sold out)
 
-Data of all products are exported into Elasticsearch by CRON module (`ProductSearchExportCronModule.php`) once an hour.
+Data of all products are exported into Elasticsearch by CRON module (`ProductSearchExportCronModule.php`) every 5 minutes.
 Alternatively, you can force the export manually using `product-search-export-products` Phing target.
 
 ## Use of Elasticsearch
