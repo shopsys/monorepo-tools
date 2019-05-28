@@ -713,15 +713,9 @@
         </exec>
     </target>
 
-    <target name="standards-fix" description="Automatically fixes some coding standards violations in all files.">
-        <phingcall target="ecs-fix"/>
-        <phingcall target="eslint-fix"/>
-    </target>
+    <target name="standards-fix" depends="ecs-fix,eslint-fix" description="Automatically fixes some coding standards violations in all files."/>
 
-    <target name="standards-fix-diff" description="Automatically fixes some coding standards violations in changed files.">
-        <phingcall target="ecs-fix-diff"/>
-        <phingcall target="eslint-fix-diff"/>
-    </target>
+    <target name="standards-fix-diff" depends="ecs-fix-diff,eslint-fix-diff" description="Automatically fixes some coding standards violations in changed files."/>
 
     <target name="tests-acceptance" depends="clean,clean-redis,test-db-dump" description="Runs acceptance tests. Running Selenium server is required.">
         <available file="${path.env.test}" type="file" property="path.env.test.existed"/>
