@@ -40,7 +40,7 @@
         </delete>
     </target>
 
-    <target name="eslint-check" description="Find JS coding standard violations in all files using ESLint in the whole monorepo and print human readable output.">
+    <target name="eslint-check" description="Find JS coding standard violations in all files using ESLint in the whole monorepo and print human readable output." hidden="true">
         <phingcall target="shopsys_framework.eslint-check"/>
         <exec executable="${path.eslint.executable}" passthru="true" checkreturn="true">
             <arg value="--color"/>
@@ -57,7 +57,7 @@
         <phingcall target="eslint-check"/>
     </target>
 
-    <target name="eslint-fix" description="Fix JS coding standard violations in all files using ESLint in the whole monorepo.">
+    <target name="eslint-fix" description="Fix JS coding standard violations in all files using ESLint in the whole monorepo." hidden="true">
         <phingcall target="shopsys_framework.eslint-fix"/>
         <exec executable="${path.eslint.executable}" passthru="true" checkreturn="true">
             <arg value="--color"/>
@@ -75,7 +75,7 @@
         <phingcall target="eslint-fix"/>
     </target>
 
-    <target name="ecs" description="Checks coding standards in all files in the whole monorepo by PHP easy coding standards.">
+    <target name="ecs" description="Checks coding standards in all files in the whole monorepo by PHP easy coding standards." hidden="true">
         <exec executable="${path.ecs.executable}" logoutput="true" passthru="true" checkreturn="true">
             <arg value="check"/>
             <arg value="--clear-cache"/>
@@ -93,7 +93,7 @@
         </exec>
     </target>
 
-    <target name="ecs-diff" description="Checks coding standards in all files in the whole monorepo by PHP easy coding standards.">
+    <target name="ecs-diff" description="Checks coding standards in changed files in the whole monorepo by PHP easy coding standards." hidden="true">
         <exec executable="${path.ecs.executable}" logoutput="true" passthru="true" checkreturn="true">
             <arg value="check"/>
             <arg path="${path.src}"/>
@@ -110,7 +110,7 @@
         </exec>
     </target>
 
-    <target name="ecs-fix" description="Checks and fixes automatically fixable coding standards in all files in the whole monorepo by PHP easy coding standards.">
+    <target name="ecs-fix" description="Checks and fixes automatically fixable coding standards in all files in the whole monorepo by PHP easy coding standards." hidden="true">
         <exec executable="${path.ecs.executable}" logoutput="true" passthru="true" checkreturn="true">
             <arg value="check"/>
             <arg value="--clear-cache"/>
@@ -129,7 +129,7 @@
         </exec>
     </target>
 
-    <target name="ecs-fix-diff" description="Checks and fixes automatically fixable coding standards in all files in the whole monorepo by PHP easy coding standards.">
+    <target name="ecs-fix-diff" description="Checks and fixes automatically fixable coding standards in changed files in the whole monorepo by PHP easy coding standards." hidden="true">
         <exec executable="${path.ecs.executable}" logoutput="true" passthru="true" checkreturn="true">
             <arg value="check"/>
             <arg value="--fix"/>
@@ -147,7 +147,7 @@
         </exec>
     </target>
 
-    <target name="phplint" description="Checks syntax of PHP files in the whole monorepo.">
+    <target name="phplint" description="Checks syntax of PHP files in the whole monorepo." hidden="true">
         <exec executable="${path.phplint.executable}" logoutput="true" passthru="true" checkreturn="true">
             <arg path="${path.src}"/>
             <arg path="${path.tests}"/>
@@ -163,7 +163,7 @@
         <phingcall target="phplint"/>
     </target>
 
-    <target name="twig-lint" description="Checks syntax of Twig templates in the whole monorepo.">
+    <target name="twig-lint" description="Checks syntax of Twig templates in the whole monorepo." hidden="true">
         <phingcall target="shopsys_framework.twig-lint"/>
         <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
             <arg value="${path.bin-console}"/>
@@ -182,7 +182,7 @@
         <phingcall target="twig-lint"/>
     </target>
 
-    <target name="yaml-lint" description="Checks syntax of Yaml files in the whole monorepo.">
+    <target name="yaml-lint" description="Checks syntax of Yaml files in the whole monorepo." hidden="true">
         <phingcall target="shopsys_framework.yaml-lint"/>
         <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
             <arg value="${path.bin-console}"/>
@@ -198,7 +198,7 @@
         </exec>
     </target>
 
-    <target name="phpstan" depends="tests-acceptance-build" description="Performs static analysis of PHP files using PHPStan on all packages.">
+    <target name="phpstan" depends="tests-acceptance-build" description="Performs static analysis of PHP files using PHPStan on all packages." hidden="true">
         <exec executable="${path.phpstan.executable}" logoutput="true" passthru="true" checkreturn="true">
             <arg value="analyze"/>
             <arg value="-c"/>
