@@ -206,21 +206,7 @@ class ListedProductViewFacade implements ListedProductViewFacadeInterface
     {
         $paginationResult = $this->productOnCurrentDomainFacade->getPaginatedProductsForBrand($orderingModeId, $page, $limit, $brandId);
 
-        return $this->createPaginationResultWithData($paginationResult);
-    }
-
-    /**
-     * @param \Shopsys\FrameworkBundle\Component\Paginator\PaginationResult $paginationResult
-     * @return \Shopsys\FrameworkBundle\Component\Paginator\PaginationResult
-     */
-    protected function createPaginationResultWithData(PaginationResult $paginationResult): PaginationResult
-    {
-        return new PaginationResult(
-            $paginationResult->getPage(),
-            $paginationResult->getPageSize(),
-            $paginationResult->getTotalCount(),
-            $this->createFromProducts($paginationResult->getResults())
-        );
+        return $this->createPaginationResultWithArray($paginationResult);
     }
 
     /**
