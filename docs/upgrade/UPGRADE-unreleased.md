@@ -17,6 +17,20 @@ There you can find links to upgrade notes for other versions too.
 - fix the typo in Twig template `@ShopsysShop/Front/Content/Category/panel.html.twig` ([#1043](https://github.com/shopsys/shopsys/pull/1043))
     - `categoriyWithLazyLoadedVisibleChildren` ⟶ `categoryWithLazyLoadedVisibleChildren`
 - create an empty file `app/Resources/.gitkeep` to prepare a folder for [your overwritten templates](/docs/cookbook/modifying-a-template-in-administration.md) ([#1073](https://github.com/shopsys/shopsys/pull/1073))
+- fix `FilterQueryTest` to use ElasticSearch index prefix properly via `ElasticsearchStructureManager` ([#1082](https://github.com/shopsys/shopsys/pull/1082))
+    ```diff
+    - private const ELASTICSEARCH_INDEX = 'product1';
+    + private const ELASTICSEARCH_INDEX = 'product';
+    ```
+    ```diff
+    - $filter = $filterQueryFactory->create(self::ELASTICSEARCH_INDEX);
+    + /** @var \Shopsys\FrameworkBundle\Component\Elasticsearch\ElasticsearchStructureManager $elasticSearchStructureManager */
+    + $elasticSearchStructureManager = $this->getContainer()->get(ElasticsearchStructureManager::class);
+    +
+    + $elasticSearchIndexName = $elasticSearchStructureManager->getIndexName(1, self::ELASTICSEARCH_INDEX);
+    +
+    + $filter = $filterQueryFactory->create($elasticSearchIndexName);
+    ```
 
 ### Infrastructure
 - replace url part in `infrastructure/google-cloud/nginx-ingress.tf` to use released version of this nginx-ingress configuration ([#1077](https://github.com/shopsys/shopsys/pull/1077))

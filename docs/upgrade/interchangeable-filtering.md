@@ -31,7 +31,7 @@ Even then, you should make some upgrade steps to have your code tested properly 
     - `Filter/BrandFilterChoiceRepositoryTest.php`
     - `Filter/FlagFilterChoiceRepositoryTest.php`
     - `Filter/ParameterFilterChoiceRepositoryTest.php`
-    - `Search/FilterQueryTest.php`
+    - `Search/FilterQueryTest.php` ([view fixed in v7.2.1](https://github.com/shopsys/project-base/raw/v7.2.1/tests/ShopBundle/Functional/Model/Product/Search/FilterQueryTest.php))
 - skip the path `'*/tests/ShopBundle/Functional/Model/Product/ProductOnCurrentDomainFacadeCountDataTest.php'` for following coding standard sniffs in your `easy-coding-standard.yml` file
     `ObjectCalisthenics\Sniffs\Files\FunctionLengthSniff`
     `ObjectCalisthenics\Sniffs\Files\ClassTraitAndInterfaceLengthSniff`
@@ -72,7 +72,7 @@ To start filtering products via Elasticsearch you have to do these steps.
     - `Filter/BrandFilterChoiceRepositoryTest.php`
     - `Filter/FlagFilterChoiceRepositoryTest.php`
     - `Filter/ParameterFilterChoiceRepositoryTest.php`
-    - `Search/FilterQueryTest.php`
+    - `Search/FilterQueryTest.php` ([view fixed in v7.2.1](https://github.com/shopsys/project-base/raw/v7.2.1/tests/ShopBundle/Functional/Model/Product/Search/FilterQueryTest.php))
 - skip the path `'*/tests/ShopBundle/Functional/Model/Product/ProductOnCurrentDomainFacadeCountDataTest.php'` for the following coding standard sniffs in your `easy-coding-standard.yml` file
     `ObjectCalisthenics\Sniffs\Files\FunctionLengthSniff`
     `ObjectCalisthenics\Sniffs\Files\ClassTraitAndInterfaceLengthSniff`
