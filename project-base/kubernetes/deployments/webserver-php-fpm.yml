@@ -43,6 +43,8 @@ spec:
             initContainers:
             -   name: copy-source-codes-to-volume
                 image: ~
+                securityContext:
+                    runAsUser: 33
                 command: ["sh", "-c", "cp -r /var/www/html/. /tmp/source-codes"]
                 volumeMounts:
                 -   name: source-codes
@@ -55,6 +57,8 @@ spec:
                     subPath: parameters.yml
             -   name: initialize-database
                 image: ~
+                securityContext:
+                    runAsUser: 33
                 command: ["sh", "-c", "cd /var/www/html && ./phing db-create dirs-create db-demo product-search-recreate-structure product-search-export-products grunt error-pages-generate warmup"]
                 volumeMounts:
                 -   name: source-codes

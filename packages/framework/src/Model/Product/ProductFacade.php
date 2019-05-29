@@ -353,10 +353,26 @@ class ProductFacade
     {
         $productSellingPrices = [];
 
-        foreach ($this->pricingGroupRepository->getAll() as $pricingGroup) {
-            $productSellingPrices[$pricingGroup->getDomainId()][$pricingGroup->getId()] = new ProductSellingPrice(
+        foreach ($this->domain->getAllIds() as $domainId) {
+            $productSellingPrices[$domainId] = $this->getAllProductSellingPricesByDomainId($product, $domainId);
+        }
+
+        return $productSellingPrices;
+    }
+
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Product\Product $product
+     * @param int $domainId
+     * @return \Shopsys\FrameworkBundle\Model\Product\Pricing\ProductSellingPrice[]
+     */
+    public function getAllProductSellingPricesByDomainId(Product $product, int $domainId): array
+    {
+        $productSellingPrices = [];
+
+        foreach ($this->pricingGroupRepository->getPricingGroupsByDomainId($domainId) as $pricingGroup) {
+            $productSellingPrices[$pricingGroup->getId()] = new ProductSellingPrice(
                 $pricingGroup,
-                $this->productPriceCalculation->calculatePrice($product, $pricingGroup->getDomainId(), $pricingGroup)
+                $this->productPriceCalculation->calculatePrice($product, $domainId, $pricingGroup)
             );
         }
 

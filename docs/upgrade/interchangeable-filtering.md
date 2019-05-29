@@ -32,7 +32,7 @@ Even then, you should make some upgrade steps to have your code tested properly 
     - `Filter/BrandFilterChoiceRepositoryTest.php` ([view raw](https://github.com/shopsys/project-base/raw/v7.2.0/tests/ShopBundle/Functional/Model/Product/Filter/BrandFilterChoiceRepositoryTest.php))
     - `Filter/FlagFilterChoiceRepositoryTest.php` ([view raw](https://github.com/shopsys/project-base/raw/v7.2.0/tests/ShopBundle/Functional/Model/Product/Filter/FlagFilterChoiceRepositoryTest.php))
     - `Filter/ParameterFilterChoiceRepositoryTest.php` ([view raw](https://github.com/shopsys/project-base/raw/v7.2.0/tests/ShopBundle/Functional/Model/Product/Filter/ParameterFilterChoiceRepositoryTest.php))
-    - `Search/FilterQueryTest.php` ([view raw](https://github.com/shopsys/project-base/raw/v7.2.0/tests/ShopBundle/Functional/Model/Product/Search/FilterQueryTest.php))
+    - `Search/FilterQueryTest.php` ([view raw](https://github.com/shopsys/project-base/raw/v7.2.0/tests/ShopBundle/Functional/Model/Product/Search/FilterQueryTest.php), [view fixed in v7.2.1](https://github.com/shopsys/project-base/raw/v7.2.1/tests/ShopBundle/Functional/Model/Product/Search/FilterQueryTest.php))
     - be careful when overwriting your own test with a copy from `shopsys/project-base` so you don't lose any of your custom test-cases or modifications
 - skip the path `'*/tests/ShopBundle/Functional/Model/Product/ProductOnCurrentDomainFacadeCountDataTest.php'` for following coding standard sniffs in your `easy-coding-standard.yml` file
     `ObjectCalisthenics\Sniffs\Files\FunctionLengthSniff`
@@ -72,7 +72,7 @@ To start filtering products via Elasticsearch you have to do these steps.
     - `Filter/BrandFilterChoiceRepositoryTest.php` ([view raw](https://github.com/shopsys/project-base/raw/v7.2.0/tests/ShopBundle/Functional/Model/Product/Filter/BrandFilterChoiceRepositoryTest.php))
     - `Filter/FlagFilterChoiceRepositoryTest.php` ([view raw](https://github.com/shopsys/project-base/raw/v7.2.0/tests/ShopBundle/Functional/Model/Product/Filter/FlagFilterChoiceRepositoryTest.php))
     - `Filter/ParameterFilterChoiceRepositoryTest.php` ([view raw](https://github.com/shopsys/project-base/raw/v7.2.0/tests/ShopBundle/Functional/Model/Product/Filter/ParameterFilterChoiceRepositoryTest.php))
-    - `Search/FilterQueryTest.php` ([view raw](https://github.com/shopsys/project-base/raw/v7.2.0/tests/ShopBundle/Functional/Model/Product/Search/FilterQueryTest.php))
+    - `Search/FilterQueryTest.php` ([view raw](https://github.com/shopsys/project-base/raw/v7.2.0/tests/ShopBundle/Functional/Model/Product/Search/FilterQueryTest.php), [view fixed in v7.2.1](https://github.com/shopsys/project-base/raw/v7.2.1/tests/ShopBundle/Functional/Model/Product/Search/FilterQueryTest.php))
     - `Search/ProductSearchExportRepositoryTest.php` ([view raw](https://github.com/shopsys/project-base/raw/v7.2.0/tests/ShopBundle/Functional/Model/Product/Search/ProductSearchExportRepositoryTest.php)) -
     rewrite your current test class with this one, which is written in such a way that supports both the SQL and Elasticsearch filtering (depending on the service in your DIC)
     - be careful when overwriting your own test with a copy from `shopsys/project-base` so you don't lose any of your custom test-cases or modifications
