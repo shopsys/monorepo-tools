@@ -112,7 +112,7 @@ Typical upgrade sequence should be:
     - `build.dockerfile` should be `docker/Dockerfile`
     - execute `docker-compose up -d --build`, microservices should be up and running
 
-[From v7.2.1 to Unreleased]: https://github.com/shopsys/shopsys/compare/v7.2.1...HEAD
+[From v7.2.1 to Unreleased]: https://github.com/shopsys/shopsys/compare/v7.2.1...7.2
 [From v7.2.0 to v7.2.1]: https://github.com/shopsys/shopsys/compare/v7.2.0...v7.2.1
 [From v7.1.0 to v7.2.0]: https://github.com/shopsys/shopsys/compare/v7.1.0...v7.2.0
 [From v7.0.0 to v7.1.0]: https://github.com/shopsys/shopsys/compare/v7.0.0...v7.1.0
