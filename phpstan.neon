@@ -35,7 +35,7 @@ parameters:
             path: %currentWorkingDirectory%/packages/framework/src/Component/Translation/ConstraintViolationExtractor.php
         #Shopsys/project-base - don't forget to add these rules to phpstan.neon in project-base
         -
-            message: '#(PHPDoc tag @(param|return) has invalid value .+ expected TOKEN_IDENTIFIER at offset \d+)#'
+            message: '#(PHPDoc tag @(param|return) has invalid value (.|\n)+ expected TOKEN_IDENTIFIER at offset \d+)#'
             path: %currentWorkingDirectory%/project-base/tests/ShopBundle/Test/Codeception/_generated/AcceptanceTesterActions.php
         -
             message: '#(PHPDoc tag @throws with type .+ is not subtype of Throwable)#'
