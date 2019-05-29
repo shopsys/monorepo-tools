@@ -192,7 +192,7 @@ class ListedProductViewFacade implements ListedProductViewFacadeInterface
     {
         $paginationResult = $this->productOnCurrentDomainFacade->getPaginatedProductsForSearch($searchText, $filterData, $orderingModeId, $page, $limit);
 
-        return $this->createPaginationResultWithData($paginationResult);
+        return $this->createPaginationResultWithArray($paginationResult);
     }
 
     /**
