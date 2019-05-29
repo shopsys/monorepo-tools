@@ -48,7 +48,7 @@ as well as a list of customizations that are not (and will not be) possible at a
 * Removing existing entities and features
 * Extending [the `Money` class](/docs/model/how-to-work-with-money.md) and closely related classes (eg. `MoneyType`)
 
-## Successfully implemented features
+## Examples of implemented features on the [Demoshop repository](https://github.com/shopsys/demoshop)
 * [Shipping method with pickup places](https://github.com/shopsys/demoshop/pull/6)
     * new shipping method Zasilkovna
     * pick up places are downloaded by cron

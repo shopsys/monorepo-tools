@@ -8,7 +8,9 @@ Typical upgrade sequence should be:
 
 ***Note:** During the execution of `build-demo-dev phing target`, there will be installed 3-rd party software as dependencies of Shopsys Framework by [composer](https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies) and [npm](https://docs.npmjs.com/about-the-public-npm-registry) with licenses that are described in document [Open Source License Acknowledgements and Third-Party Copyrights](../../open-source-license-acknowledgements-and-third-party-copyrights.md)*
 
-## [From v7.2.0 to Unreleased]
+## [From v7.2.1 to Unreleased]
+
+## [From v7.2.0 to v7.2.1]
 
 ## [From v7.1.0 to v7.2.0]
 - update definition of postgres service in your `docker-compose.yml` file to use customized configuration ([#946](https://github.com/shopsys/shopsys/pull/946))
@@ -110,7 +112,8 @@ Typical upgrade sequence should be:
     - `build.dockerfile` should be `docker/Dockerfile`
     - execute `docker-compose up -d --build`, microservices should be up and running
 
-[From v7.2.0 to Unreleased]: https://github.com/shopsys/shopsys/compare/v7.2.0...HEAD
+[From v7.2.1 to Unreleased]: https://github.com/shopsys/shopsys/compare/v7.2.1...HEAD
+[From v7.2.0 to v7.2.1]: https://github.com/shopsys/shopsys/compare/v7.2.0...v7.2.1
 [From v7.1.0 to v7.2.0]: https://github.com/shopsys/shopsys/compare/v7.1.0...v7.2.0
 [From v7.0.0 to v7.1.0]: https://github.com/shopsys/shopsys/compare/v7.0.0...v7.1.0
 [From v7.0.0-beta5 to v7.0.0-beta6]: https://github.com/shopsys/shopsys/compare/v7.0.0-beta5...v7.0.0-beta6

@@ -27,6 +27,29 @@ The changelog is generated during the release process using [ChangelogLinker](ht
 
 <!-- changelog-linker -->
 
+## [v7.2.1](https://github.com/shopsys/shopsys/compare/v7.2.0...v7.2.1) - 2019-05-29
+
+### [shopsys/framework]
+
+#### Fixed
+
+- [#1054] ProductSearchCreateStructureCommand exits on error
+- [#1058] CountryFormType uses NotInArray instead of Callback constraint now
+- [#1074] custom extension of FlysystemVolumeDriver is loaded via files instead of classmap
+- [#1083] ProductSearchExportWithFilterRepository: get product selling prices only for certain domain, Thanks to [@malyMiso]
+- [#1084] CurrentPromoCodeFacadeTest: fixed call of getMockForAbstractClass
+
+### [shopsys/project-base]
+
+#### Fixed
+
+- [#1041] Form::isValid() should be called after Form::isSubmitted(), Thanks to [@pk16011990]
+- [#1043] fix typo in twig template, Thanks to [@pk16011990]
+- [#1073] created an empty folder app/Resources/ for overwritten templates
+- [#1077] ingress-nginx deployment config loads now tagged version instead of master branch version
+- [#1078] initialization of php-fpm container via kubernetes is now done via www-data user
+- [#1082] fixed FilterQueryTest to properly use Elasticsearch index
+
 ## [v7.2.0](https://github.com/shopsys/shopsys/compare/v7.1.0...v7.2.0) - 2019-05-15
 
 ### [shopsys/shopsys]
@@ -2382,3 +2405,15 @@ That's why is this section formatted differently.
 [#893]: https://github.com/shopsys/shopsys/pull/893
 [#888]: https://github.com/shopsys/shopsys/pull/888
 [@sspooky13]: https://github.com/sspooky13
+[#1041]: https://github.com/shopsys/shopsys/pull/1041
+[#1043]: https://github.com/shopsys/shopsys/pull/1043
+[#1054]: https://github.com/shopsys/shopsys/pull/1054
+[#1058]: https://github.com/shopsys/shopsys/pull/1058
+[#1073]: https://github.com/shopsys/shopsys/pull/1073
+[#1074]: https://github.com/shopsys/shopsys/pull/1074
+[#1077]: https://github.com/shopsys/shopsys/pull/1077
+[#1078]: https://github.com/shopsys/shopsys/pull/1078
+[#1082]: https://github.com/shopsys/shopsys/pull/1082
+[#1082]: https://github.com/shopsys/shopsys/pull/1083
+[#1084]: https://github.com/shopsys/shopsys/pull/1084
+[@malyMiso]: https://github.com/malyMiso
