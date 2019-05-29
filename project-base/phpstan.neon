@@ -5,7 +5,7 @@ parameters:
         - '#Undefined variable: \$undefined#'
         #ignore annotations in generated code#
         -
-            message: '#(PHPDoc tag @(param|return) has invalid value .+ expected TOKEN_IDENTIFIER at offset \d+)#'
+            message: '#(PHPDoc tag @(param|return) has invalid value (.|\n)+ expected TOKEN_IDENTIFIER at offset \d+)#'
             path: %currentWorkingDirectory%/tests/ShopBundle/Test/Codeception/_generated/AcceptanceTesterActions.php
         -
             message: '#(PHPDoc tag @throws with type .+ is not subtype of Throwable)#'
