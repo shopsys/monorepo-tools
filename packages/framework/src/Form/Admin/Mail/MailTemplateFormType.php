@@ -2,7 +2,7 @@
 
 namespace Shopsys\FrameworkBundle\Form\Admin\Mail;
 
-use Ivory\CKEditorBundle\Form\Type\CKEditorType;
+use FOS\CKEditorBundle\Form\Type\CKEditorType;
 use Shopsys\FrameworkBundle\Form\Constraints\Contains;
 use Shopsys\FrameworkBundle\Form\Constraints\Email;
 use Shopsys\FrameworkBundle\Form\FileUploadType;

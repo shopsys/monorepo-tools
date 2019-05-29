@@ -2,7 +2,7 @@
 
 namespace Shopsys\FrameworkBundle\Form;
 
-use Ivory\CKEditorBundle\Form\Type\CKEditorType;
+use FOS\CKEditorBundle\Form\Type\CKEditorType;
 use Shopsys\FrameworkBundle\Component\Css\CssFacade;
 use Shopsys\FrameworkBundle\Model\Localization\Localization;
 use Symfony\Component\Form\AbstractTypeExtension;

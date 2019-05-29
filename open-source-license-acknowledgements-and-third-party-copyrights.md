@@ -63,6 +63,11 @@ License: MIT
 https://github.com/kenwheeler/slick/blob/master/LICENSE  
 Copyright (c) 2013-2016
 
+### CKEditor
+License: GPL-2 or LGPL-2.1 or MPL-1.1  
+https://github.com/ckeditor/ckeditor-releases/blob/basic/stable/LICENSE.md  
+Copyright (c) 2003-2019, CKSource - Frederico Knabben. All rights reserved.
+
 ## Images and libraries installed for a full run of Shopsys Framework on Docker
 These images and packages are configured in `docker-compose.yml` and in `Dockerfile`. We do not redistribute these packages, we are only referencing them to download, user agrees to download these images by pulling and building images done by `docker-compose up` or `docker build`.
 

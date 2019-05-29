@@ -683,7 +683,7 @@
     {{- block('appendix_block') -}}
 {% endblock form_widget_simple %}
 
-{% use '@IvoryCKEditor/Form/ckeditor_widget.html.twig' with ckeditor_widget as base_ckeditor_widget %}
+{% use '@FOSCKEditor/Form/ckeditor_widget.html.twig' with ckeditor_widget as base_ckeditor_widget %}
 {% block ckeditor_widget %}
     {% if localized is defined %}
         {% set config = config|merge({'contentsCss': config.contentsCss|merge(['assets/admin/styles/wysiwyg-localized_' ~ getCssVersion() ~ '.css'])}) %}
