@@ -177,7 +177,7 @@ class ListedProductViewFacade implements ListedProductViewFacadeInterface
     {
         $paginationResult = $this->productOnCurrentDomainFacade->getPaginatedProductsInCategory($filterData, $orderingModeId, $page, $limit, $categoryId);
 
-        return $this->createPaginationResultWithData($paginationResult);
+        return $this->createPaginationResultWithArray($paginationResult);
     }
 
     /**
@@ -221,6 +221,42 @@ class ListedProductViewFacade implements ListedProductViewFacadeInterface
             $paginationResult->getTotalCount(),
             $this->createFromProducts($paginationResult->getResults())
         );
+    }
+
+    /**
+     * @param \Shopsys\FrameworkBundle\Component\Paginator\PaginationResult $paginationResult
+     * @return \Shopsys\FrameworkBundle\Component\Paginator\PaginationResult
+     */
+    protected function createPaginationResultWithArray(PaginationResult $paginationResult): PaginationResult
+    {
+        return new PaginationResult(
+            $paginationResult->getPage(),
+            $paginationResult->getPageSize(),
+            $paginationResult->getTotalCount(),
+            $this->createFromArray($paginationResult->getResults())
+        );
+    }
+
+    /**
+     * @param array $productsArray
+     * @return \Shopsys\ReadModelBundle\Product\Listed\ListedProductView[]
+     */
+    protected function createFromArray(array $productsArray): array
+    {
+        $imageViews = $this->imageViewFacade->getForEntityIds(Product::class, array_column($productsArray, 'id'));
+
+        $listedProductViews = [];
+        foreach ($productsArray as $productArray) {
+            $productId = $productArray['id'];
+            $listedProductViews[$productId] = $this->listedProductViewFactory->createFromArray(
+                $productArray,
+                $imageViews[$productId],
+                $this->productActionViewFacade->getForArray($productArray),
+                $this->currentCustomer->getPricingGroup()
+            );
+        }
+
+        return $listedProductViews;
     }
 
     /**

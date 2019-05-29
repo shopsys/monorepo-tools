@@ -25,4 +25,18 @@ class ProductActionViewFactory
             $absoluteUrl
         );
     }
+
+    /**
+     * @param array $productArray
+     * @return \Shopsys\ReadModelBundle\Product\Action\ProductActionView
+     */
+    public function createFromArray(array $productArray): ProductActionView
+    {
+        return new ProductActionView(
+            $productArray['id'],
+            $productArray['selling_denied'],
+            $productArray['main_variant'],
+            $productArray['detail_url']
+        );
+    }
 }
