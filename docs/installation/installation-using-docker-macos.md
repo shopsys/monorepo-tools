@@ -1,6 +1,6 @@
 # Installation Using Docker for MacOS
 
-**This guide is for version `v7.2.0`. Switch to another tag to see other versions.**
+**This guide is for version `v7.2.1`. Switch to another tag to see other versions.**
 
 This guide covers building new projects based on Shopsys Framework.
 If you want to contribute to the framework itself,

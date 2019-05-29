@@ -1,6 +1,6 @@
 # Installation Using Docker for Windows 10 Pro and higher
 
-**This guide is for version `v7.2.0`. Switch to another tag to see other versions.**
+**This guide is for version `v7.2.1`. Switch to another tag to see other versions.**
 
 **Expected installation time:** 3 hours.
 
