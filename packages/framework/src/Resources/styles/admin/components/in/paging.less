@@ -1,3 +1,5 @@
+@in-paging-item-size: @input-height-small;
+
 .in-paging {
     .reset-ul();
 
@@ -11,8 +13,8 @@
         a, strong, span {
             display: inline-block;
             vertical-align: middle;
-            height: @input-height;
-            line-height: @input-height;
+            height: @in-paging-item-size;
+            line-height: @in-paging-item-size;
             padding: 0 5px;
 
             text-align: center;
@@ -26,7 +28,7 @@
         }
 
         a, strong {
-            min-width: @input-height;
+            min-width: @in-paging-item-size;
 
             border: 1px solid @color-border-dark;
             border-radius: @radius;

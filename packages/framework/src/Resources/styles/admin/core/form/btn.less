@@ -1,4 +1,4 @@
-@btn-height: @input-height;
+@btn-height: @input-height-small;
 @btn-padding-vertical: 5px;
 @btn-padding-horizontal: 15px;
 
@@ -29,19 +29,26 @@
     &:hover {
         color: @btn-color-hover;
         background: @btn-bg-hover;
+
+        text-decoration: none;
     }
 
     &__icon {
         margin-right: 7px;
         float: left;
         position: relative;
-        top: 3px;
+        top: 5px;
     }
 }
 
 // Modification - colors
 @btn-default-bg: #C1CDD1;
 @btn-default-color: @color-f;
+
+@btn-primary-bg: @color-blue;
+@btn-primary-bg-hover: darken(@color-blue, 10%);
+@btn-primary-color: @color-f;
+@btn-primary-color-hover: @color-f;
 
 @btn-light-bg: @color-f;
 @btn-light-bg-hover: @color-fa;
@@ -60,6 +67,17 @@
         &:hover {
             background: @btn-default-bg;
             color: @btn-default-color;
+        }
+    }
+
+    &--primary,
+    .window-fixed-bar & {
+        background: @btn-primary-bg;
+        color: @btn-primary-color;
+
+        &:hover {
+            background: @btn-primary-bg-hover;
+            color: @btn-primary-color-hover;
         }
     }
 
@@ -117,7 +135,8 @@
         }
     }
 
-    &--medium {
+    &--medium,
+    .window-fixed-bar & {
         height: @btn-medium-height;
         line-height: @btn-medium-line-height;
         padding-left: @btn-medium-padding-horizontal;

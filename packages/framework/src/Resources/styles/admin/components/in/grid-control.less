@@ -1,3 +1,5 @@
+@in-grid-height: @input-height-small;
+
 .in-grid-control {
     font-size: 0;
 
@@ -28,11 +30,11 @@
         }
 
         &--show {
-            line-height: @input-height;
+            line-height: @in-grid-height;
 
             .window-content & {
                 width: 20%;
-                line-height: @input-height/2;
+                line-height: @in-grid-height/2;
             }
         }
 
@@ -44,7 +46,7 @@
             text-align: right;
 
             &__text {
-                line-height: 32px;
+                line-height: @in-grid-height;
                 display: inline-block;
                 margin-right: 5px;
 
@@ -55,6 +57,11 @@
                 display: inline-block;
                 width: 70px;
                 margin-bottom: 3px;
+
+                .input {
+                    height: @in-grid-height;
+                    line-height: @in-grid-height;
+                }
             }
         }
     }
