@@ -54,13 +54,16 @@
         flex: 1;
         align-items: center;
 
-
         .window-fixed-bar--top & {
             height: @height-fixed-bar;
         }
 
         &:first-child {
             border-left: none;
+        }
+
+        &:last-child {
+            text-align: right;
         }
 
         &--1 {
@@ -87,6 +90,11 @@
             flex: 0 100%;
 
             color: @color-blue;
+
+            &__icon {
+                position: relative;
+                top: 1px;
+            }
 
             .window-fixed-bar--top & {
                 color: @color-f;
