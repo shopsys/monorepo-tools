@@ -250,6 +250,10 @@
         </exec>
         <exec executable="${path.vendor}/bin/phpunit" logoutput="true" passthru="true" checkreturn="true">
             <arg value="--colors=always"/>
+            <arg value="${path.packages}/backend-api/tests/"/>
+        </exec>
+        <exec executable="${path.vendor}/bin/phpunit" logoutput="true" passthru="true" checkreturn="true">
+            <arg value="--colors=always"/>
             <arg value="${path.utils}/releaser/tests/"/>
         </exec>
     </target>

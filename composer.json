@@ -38,6 +38,7 @@
   "autoload-dev": {
     "psr-4": {
       "Tests\\": "project-base/tests/",
+      "Tests\\BackendApiBundle\\": "packages/backend-api/tests/",
       "Tests\\CodingStandards\\": "packages/coding-standards/tests/",
       "Tests\\FrameworkBundle\\": "packages/framework/tests/",
       "Tests\\HttpSmokeTesting\\": "packages/http-smoke-testing/tests/",
