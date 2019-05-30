@@ -41,13 +41,18 @@ Following product attributes are exported into Elasticsearch (i.e. the search or
 * in_stock (true/false value whether the product is in stock)
 * parameters (pairs of parameter IDs and parameter value IDs)
 * ordering_priority (priority number)
-* calculated_selling_denied (true/false value whether the product is already sold out)
+* calculated_selling_denied (calculated true/false value whether the product is already sold out)
+* selling_denied (true/false value whether the product can be sold)
+* availability (translation of product availability)
+* main_variant (true/false value whether the product is main variant or not. You can find more about behaviour of variants [here](/docs/functional/behavior-of-product-variants.md))
+* detail_url (absolute url to page with products detail)
+* visibility (all visibilities for all pricing groups and domains)
 
 Data of all products are exported into Elasticsearch by CRON module (`ProductSearchExportCronModule.php`) every 5 minutes.
 Alternatively, you can force the export manually using `product-search-export-products` Phing target.
 
 ## Use of Elasticsearch
-Elasticsearch is used to search, filter and sort products on the frontend.
+Elasticsearch is used to search, filter and sort products on the frontend and to display products in listing via [Read Model](/docs/model/introduction-to-read-model.md).
 You can learn more about [Product searching](/docs/model/front-end-product-searching.md) and [Product filtering](/docs/model/front-end-product-filtering.md) in particular articles.
 [Sorting](/docs/introduction/how-to-set-up-domains-and-locales.md#37-sorting-in-different-locales) is done with the help of [ICU analysis plugin](https://www.elastic.co/guide/en/elasticsearch/plugins/current/analysis-icu.html)
 which ensures that alphabetical sorting is correct for every language and its set of rules.
