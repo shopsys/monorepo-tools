@@ -2414,6 +2414,6 @@ That's why is this section formatted differently.
 [#1077]: https://github.com/shopsys/shopsys/pull/1077
 [#1078]: https://github.com/shopsys/shopsys/pull/1078
 [#1082]: https://github.com/shopsys/shopsys/pull/1082
-[#1082]: https://github.com/shopsys/shopsys/pull/1083
+[#1083]: https://github.com/shopsys/shopsys/pull/1083
 [#1084]: https://github.com/shopsys/shopsys/pull/1084
 [@malyMiso]: https://github.com/malyMiso
