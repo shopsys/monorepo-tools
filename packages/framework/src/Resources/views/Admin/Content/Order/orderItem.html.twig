@@ -2,31 +2,31 @@
     {% import _self as self %}
     {% set currencySymbol = currency is not null ? currencySymbolByCurrencyId(currency.id) : null %}
     <tr class="js-order-item js-order-item-any" id="{{ orderItemForm.vars.id }}" data-index="{{ orderItemId }}">
-        <td>
+        <td class="position-relative">
             {% if productItem and productItem.product %}
                 {{ form_widget(orderItemForm.name, { attr: { class: 'js-order-item-name'}}) }}
-                <a href="{{ path('admin_product_edit', { id: productItem.product.id }) }}" target="_blank">
+                <a href="{{ path('admin_product_edit', { id: productItem.product.id }) }}" class="in-icon in-icon--after-input" target="_blank">
                     <i class="svg svg-arrow-simple in-icon in-icon--detail"></i>
                 </a>
             {% elseif productItem and not productItem.product %}
                 {{ form_widget(orderItemForm.name, { attr: { class: 'js-order-item-name'}}) }}
-                <i class="svg svg-question js-tooltip" data-toggle="tooltip" data-placement="right" title="{{ 'Product not in e-shop.'|trans }}"></i>
+                <i class="in-icon in-icon--after-input svg svg-question js-tooltip" data-toggle="tooltip" data-placement="right" title="{{ 'Product not in e-shop.'|trans }}"></i>
             {% else %}
                 {{ form_widget(orderItemForm.name, { attr: { class: 'js-order-item-name'}}) }}
             {% endif %}
         </td>
-        <td>{{ form_widget(orderItemForm.catnum, {attr: { class: 'text-right'}}) }}</td>
+        <td>{{ form_widget(orderItemForm.catnum, {attr: { class: 'input--auto-size text-right'}}) }}</td>
         <td>{{ self.priceWithVatWidget(orderItemForm.priceWithVat, currencySymbol) }}</td>
-        <td>{{ form_widget(orderItemForm.quantity, {attr: { class: 'text-right input--half-width'}}) }}</td>
-        <td>{{ form_widget(orderItemForm.unitName, {attr: { class: 'text-right input--half-width'}}) }}</td>
-        <td>{{ form_widget(orderItemForm.vatPercent, {attr: { class: 'text-right input--half-width'}}) }}</td>
+        <td>{{ form_widget(orderItemForm.quantity, {attr: { class: 'input--small text-right input--half-width'}}) }}</td>
+        <td>{{ form_widget(orderItemForm.unitName, {attr: { class: 'input--small text-right input--half-width'}}) }}</td>
+        <td>{{ form_widget(orderItemForm.vatPercent, {attr: { class: 'input--small text-right input--half-width'}}) }}</td>
         {% set uncheckedByDefault = orderItemForm.vars.data is not null ? orderItemForm.setPricesManually.vars.data : true %}
         <td class="text-center">{{ form_widget(orderItemForm.setPricesManually, {attr: { class: 'js-set-prices-manually'}, checked: uncheckedByDefault}) }}</td>
         <td>{{ self.calculablePriceWidget(orderItemForm.priceWithoutVat, currencySymbol) }}</td>
         <td>{{ self.calculablePriceWidget(orderItemForm.totalPriceWithVat, currencySymbol) }}</td>
         <td>{{ self.calculablePriceWidget(orderItemForm.totalPriceWithoutVat, currencySymbol) }}</td>
-        <td class="table-col-5 table-edit__body__cell text-center">
-            <a href="#" class="js-order-item-remove table-action"><i class="svg svg-trash"></i></a>
+        <td class="table-col-5 table-grid__cell--actions text-center">
+            <a href="#" class="js-order-item-remove table-action in-icon in-icon--delete"><i class="svg svg-trash"></i></a>
         </td>
     </tr>
 {% endmacro %}
@@ -44,7 +44,7 @@
         <td>{{ self.priceWithVatWidget(orderTransportForm.priceWithVat, currencySymbol) }}</td>
         <td class="text-right">1</td>
         <td></td>
-        <td>{{ form_widget(orderTransportForm.vatPercent, {attr: { class: 'text-right input--half-width'}}) }}</td>
+        <td>{{ form_widget(orderTransportForm.vatPercent, {attr: { class: 'input--small text-right input--half-width'}}) }}</td>
         <td class="text-center">{{ form_widget(orderTransportForm.setPricesManually, {attr: { class: 'js-set-prices-manually'}}) }}</td>
         <td>{{ self.calculablePriceWidget(orderTransportForm.priceWithoutVat, currencySymbol) }}</td>
         <td colspan="3"></td>
@@ -64,7 +64,7 @@
         <td>{{ self.priceWithVatWidget(orderPaymentForm.priceWithVat, currencySymbol) }}</td>
         <td class="text-right">1</td>
         <td></td>
-        <td>{{ form_widget(orderPaymentForm.vatPercent, {attr: { class: 'text-right input--half-width'}}) }}</td>
+        <td>{{ form_widget(orderPaymentForm.vatPercent, {attr: { class: 'input--small text-right input--half-width'}}) }}</td>
         <td class="text-center">{{ form_widget(orderPaymentForm.setPricesManually, {attr: { class: 'js-set-prices-manually'}}) }}</td>
         <td>{{ self.calculablePriceWidget(orderPaymentForm.priceWithoutVat, currencySymbol) }}</td>
         <td colspan="3"></td>
@@ -82,13 +82,13 @@
                     data-placement="right"
             ></i>
         </span>
-        {{ form_widget(priceWithVatForm, {attr: { class: 'text-right input--half-width'}, symbolAfterInput: currencySymbol}) }}
+        {{ form_widget(priceWithVatForm, {attr: { class: 'input--small text-right input--half-width'}, symbolAfterInput: currencySymbol}) }}
     </span>
 {% endmacro %}
 
 {% macro calculablePriceWidget(calculablePriceForm, currencySymbol) %}
     {{ form_errors(calculablePriceForm, {errors_attr: {inline: true}}) }}
     <span class="text-no-wrap">
-        {{ form_widget(calculablePriceForm, {attr: { class: 'js-calculable-price text-right input--half-width'}, symbolAfterInput: currencySymbol}) }}
+        {{ form_widget(calculablePriceForm, {attr: { class: 'input--small text-right input--half-width js-calculable-price'}, symbolAfterInput: currencySymbol}) }}
     </span>
 {% endmacro %}

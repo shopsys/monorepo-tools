@@ -1,3 +1,5 @@
+@in-icon-size: 16px;
+
 .in-icon {
     padding: 0 2px;
 
@@ -5,6 +7,12 @@
     color: @color-action;
     text-decoration: none;
     cursor: pointer;
+
+    &--after-input {
+        position: absolute;
+        top: calc(~"50% - @{in-icon-size}/2");
+        right: -5px;
+    }
 
     &--info {
         color: @color-a;
