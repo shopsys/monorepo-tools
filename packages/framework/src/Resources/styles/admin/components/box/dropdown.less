@@ -29,6 +29,11 @@
             background: @box-dropdown-bg-hover;
         }
 
+        .open & {
+            border-bottom-left-radius: 0;
+            border-bottom-right-radius: 0;
+        }
+
         &__arrow {
             display: inline-block;
             width: @box-dropdown-arrow-size;
@@ -61,6 +66,7 @@
             display: block;
             position: absolute;
             top: 100%;
+            right: 0;
         }
 
         &__item {
@@ -73,7 +79,7 @@
             }
 
             &:first-child {
-                border-top-right-radius: @radius;
+                border-top-right-radius: 0;
                 border-top-left-radius: @radius;
             }
 
