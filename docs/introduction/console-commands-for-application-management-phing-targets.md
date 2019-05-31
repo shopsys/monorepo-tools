@@ -24,11 +24,11 @@ This means that every time you run `php phing build` the `build-deploy-part-1-db
 But what do those targets do?
 Let us take look at the first one, that is located in the same file:
 ```xml
-<target name="build-deploy-part-1-db-independent" depends="clean,composer,npm,dirs-create,domains-urls-check,assets" description="First part of application build for production preserving your DB (can be run without maintenance page)."/>
+<target name="build-deploy-part-1-db-independent" depends="clean,composer-prod,npm,dirs-create,domains-urls-check,assets" description="First part of application build for production preserving your DB (can be run without maintenance page)."/>
 ```
-Target `build-deploy-part-1-db-independent` also executes subset of Phing targets (`clean`,`composer`,`npm`,`dirs-create`,`domains-urls-check`,`assets`).
+Target `build-deploy-part-1-db-independent` also executes subset of Phing targets (`clean`,`composer-prod`,`npm`,`dirs-create`,`domains-urls-check`,`assets`).
 
-***Note:** During the execution of `composer and npm targets`, there will be installed 3-rd party software as dependencies of Shopsys Framework by [composer](https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies) and [npm](https://docs.npmjs.com/about-the-public-npm-registry) with licenses that are described in document [Open Source License Acknowledgements and Third-Party Copyrights](../../open-source-license-acknowledgements-and-third-party-copyrights.md)*
+***Note:** During the execution of `composer-prod`, `composer-dev` and `npm` targets, there will be installed 3-rd party software as dependencies of Shopsys Framework by [composer](https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies) and [npm](https://docs.npmjs.com/about-the-public-npm-registry) with licenses that are described in document [Open Source License Acknowledgements and Third-Party Copyrights](../../open-source-license-acknowledgements-and-third-party-copyrights.md)*
 
 Let us move a little deeper and take a look at the first one, `clean`:
 ```xml

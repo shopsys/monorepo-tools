@@ -50,10 +50,10 @@
     </if>
 
     <target name="build" depends="build-deploy-part-1-db-independent,build-deploy-part-2-db-dependent" description="Builds application for production preserving your DB."/>
-    <target name="build-deploy-part-1-db-independent" depends="generate-build-version,clean,composer,redis-check,npm,dirs-create,assets" description="First part of application build for production preserving your DB (can be run without maintenance page)."/>
+    <target name="build-deploy-part-1-db-independent" depends="generate-build-version,clean,composer-prod,redis-check,npm,dirs-create,assets" description="First part of application build for production preserving your DB (can be run without maintenance page)."/>
     <target name="build-deploy-part-2-db-dependent" depends="db-migrations,create-domains-data,generate-friendly-urls,replace-domains-urls,grunt,error-pages-generate,warmup,clean-redis-old" description="Second part of application build for production preserving your DB (must be run with maintenance page when containing DB migrations)."/>
-    <target name="build-new" depends="wipe,generate-build-version,composer,redis-check,npm,dirs-create,assets,db-rebuild,grunt,error-pages-generate,warmup,product-search-recreate-structure,clean-redis-old" description="Builds application for production with clean DB (with base data only)."/>
-    <target name="build-demo" depends="wipe,generate-build-version,composer,redis-check,npm,dirs-create,assets,db-demo,grunt,error-pages-generate,warmup,product-search-recreate-structure,product-search-export-products,clean-redis-old" description="Builds application for production with clean demo DB."/>
+    <target name="build-new" depends="wipe,generate-build-version,composer-prod,redis-check,npm,dirs-create,assets,db-rebuild,grunt,error-pages-generate,warmup,product-search-recreate-structure,clean-redis-old" description="Builds application for production with clean DB (with base data only)."/>
+    <target name="build-demo" depends="wipe,generate-build-version,composer-prod,redis-check,npm,dirs-create,assets,db-demo,grunt,error-pages-generate,warmup,product-search-recreate-structure,product-search-export-products,clean-redis-old" description="Builds application for production with clean demo DB."/>
     <target name="db-demo" depends="db-wipe-public-schema,db-import-basic-structure,db-migrations,create-domains-data,db-fixtures-demo,load-plugin-demo-data,generate-friendly-urls,replace-domains-urls" description="Creates DB and fills it with demo data"/>
     <target name="db-rebuild" depends="db-wipe-public-schema,db-import-basic-structure,db-migrations,create-domains-data,generate-friendly-urls,replace-domains-urls" description="Drops all data in database and creates a new one with base data only."/>
     <target name="product-search-recreate-structure" depends="product-search-delete-structure,product-search-create-structure" description="Recreates structure for searching via elasticsearch (deletes existing structure and creates new one)"/>
@@ -119,7 +119,12 @@
         </delete>
     </target>
 
-    <target name="composer" description="Installs dependencies for production.">
+    <target name="composer" hidden="true">
+        <phingcall target="composer-prod"/>
+        <echo level="warning" message="This phing target is deprecated since Shopsys Framework 7.3.0, use 'composer-prod' instead."/>
+    </target>
+
+    <target name="composer-prod" description="Installs dependencies for production.">
         <exec executable="${path.composer.executable}" logoutput="true" passthru="true" checkreturn="true">
             <arg value="install"/>
             <arg value="--no-dev"/>
