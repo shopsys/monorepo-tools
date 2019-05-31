@@ -396,9 +396,10 @@
         <echo level="warning" message="This phing target is deprecated since Shopsys Framework 7.3.0, use 'build-demo-ci' instead."/>
     </target>
 
-    <target name="checks" depends="db-check-mapping,standards,tests" description="Checks ORM mapping, coding standards and runs unit, DB and smoke tests."/>
-    <target name="checks-diff" depends="db-check-mapping,standards-diff,tests" description="Checks ORM mapping, coding standards on changed files and runs unit, DB and smoke tests."/>
-    <target name="checks-ci" depends="db-check-mapping,test-db-demo,tests-functional,tests-smoke,tests-acceptance" description="Checks ORM mapping and runs DB, smoke and acceptance tests."/>
+    <target name="checks" depends="checks-internal,standards,tests" description="Runs internal checks, coding standards and runs unit, DB and smoke tests."/>
+    <target name="checks-diff" depends="checks-internal,standards-diff,tests" description="Runs internal checks, coding standards on changed files and runs unit, DB and smoke tests."/>
+    <target name="checks-ci" depends="checks-internal,test-db-demo,tests-functional,tests-smoke,tests-acceptance" description="Runs internal checks and runs DB, smoke and acceptance tests."/>
+    <target name="checks-internal" depends="db-check-schema,timezones-check,redis-check,composer-check" description="Runs all internal checks, eg. availability of services or validity of configuration." hidden="true"/>
     <target name="checks-ci-diff" hidden="true">
         <phingcall target="checks-ci"/>
         <echo level="warning" message="This phing target is deprecated since Shopsys Framework 7.3.0, use 'checks-ci' instead."/>
