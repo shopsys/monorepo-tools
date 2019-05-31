@@ -241,3 +241,7 @@ path.chromedriver.executable=C:/Tools/chromedriver.exe
 ```
 
 Since the `build/build.local.properties` file is not versioned, the changes will only apply to the local machine.
+
+---
+
+*Note: If you want to add new Phing targets into Shopsys Framework or modify existing ones, please read [our guidelines](/docs/contributing/guidelines-for-phing-targets.md) before contributing.*
