@@ -303,6 +303,7 @@
     <target name="npm" description="Installs modules required for Grunt.">
         <exec executable="${path.npm.executable}" dir="${path.root}" logoutput="true" passthru="true" checkreturn="true" >
             <arg value="prune"/>
+            <arg value="--no-audit"/>
         </exec>
 
         <exec executable="${path.npm.executable}" dir="${path.root}" logoutput="true" passthru="true" checkreturn="true" >
