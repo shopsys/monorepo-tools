@@ -91,6 +91,22 @@ There you can find links to upgrade notes for other versions too.
 
         </project>
         ```
+    - if there are any changes in the your phing configuration, you'll need to make some customizations
+        - read about [customization of phing targets and properties](/docs/introduction/console-commands-for-application-management-phing-targets.md#customization-of-phing-targets-and-properties) in the docs
+        - if you have some own additional target definitions, copy them into your `build.xml`
+        - if you have modified any targets, overwrite them in your `build.xml`
+            - examine the target in the `shopsys/framework` package (either on [GitHub](/packages/framework/build.xml) or locally in `vendor/shopsys/framework/build.xml`)
+            - it's possible that the current target's definition suits your needs now after the upgrade - you don't have to overwrite it if that's the case
+            - for future upgradability of your project, it's better to use the original target via `shopsys_framework.TARGET_NAME` if that's possible (eg. if you want to execute a command before or after the original task)
+            - if you think we can support your use case better via [phing target extensibility](/docs/contributing/guidelines-for-phing-targets.md#extensibility), please [open an issue](https://github.com/shopsys/shopsys/issues/new) or [create a pull request](/docs/contributing/guidelines-for-pull-request.md)
+        - if you have deleted any targets, overwrite them in your `build.xml` with a fail task so it doesn't get executed by mistake:
+            ```xml
+            <target name="deleted-target" hidden="true">
+                <fail message="Target 'deleted-target' is disabled on this project."/>
+            </target>
+            ```
+    - if you modified the locales for extraction in `dump-translations`, you can now overwrite just a phing property `translations.dump.locales` instead of overwriting the whole target
+        - for example, if you want to extract locales for German and English, add `<property name="translations.dump.locales" value="de en"/>` to your `build.xml`
     - some phing targets were marked as deprecated or were renamed, stop using them and use the new ones (the original targets will still work, but a warning message will be displayed):
         - `dump-translations-project-base` was deprecated, use `dump-translations` instead
         - `tests-static` was deprecated, use `tests-unit` instead

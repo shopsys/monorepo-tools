@@ -63,7 +63,7 @@ Sometimes, it can be even useful to include an argument such as `<arg line="${my
 This will allow the end users to provide their own flags, modifying the command's behavior without the need for overwriting the whole target.
 
 Removing [DRY violations](/docs/contributing/code-quality-principles.md#dont-repeat-yourself) in the phing target definitions by extracting common tasks and sequences into their own (possibly hidden) targets also helps with extensibility.
-In such case, users could overwrite just the extracted part instead if having to overwrite multiple targets to achieve the same result.
+Instead if having to overwrite a few targets to change the definition, in such case users could overwrite just the extracted part.
 
 ## Extending in monorepo
 

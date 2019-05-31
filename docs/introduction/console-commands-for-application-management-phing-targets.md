@@ -227,10 +227,20 @@ For more information about translations, see [the separate article](/docs/introd
 
 You can override and replace any Phing target or property defined in the `shopsys/framework` package by redefining it in your `build.xml` config.
 
-When you override a Phing target, the original is renamed to `shopsys_framework.TARGET_NAME`.
+When you override a Phing target, the original is renamed to `shopsys_framework.TARGET_NAME` (see [Target Overriding in Phing docs](https://www.phing.info/phing/guide/en/output/chunkhtml/ImportTask.html#idp4684)).
 
 For example, if you override the `clean` target in your `build.xml`, you can still call the original target by `shopsys_framework.clean`.
 This works in direct calls (`php phing shopsys_framework.clean`), in the `depends` attribute of targets and for the `<phingcall target="TARGET_NAME">` task.
+
+For easier maintenance of your project in the future, it's always better to use the original target if it's possible in your use case.
+For example, if you want to call a `new-task` every time an `overwritten-task` is called, you can achieve it like this:
+```xml
+<!-- 'new-task' will be called BEFORE the original implementation -->
+<target name="overwritten-task" depends="new-task,shopsys_framework.overwritten-task"/>
+
+<!-- 'new-task' will be called AFTER the original implementation -->
+<target name="overwritten-task" depends="shopsys_framework.overwritten-task,new-task"/>
+```
 
 ## Local customization of Phing properties (paths etc.)
 You can customize any property defined in `build.xml` via a configuration file `build/build.local.properties` (use `build/build.local.properties.dist` as a template).
