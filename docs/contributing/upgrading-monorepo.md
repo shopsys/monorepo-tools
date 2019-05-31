@@ -28,6 +28,12 @@ Typical upgrade sequence should be:
         environment:
             - discovery.type=single-node
     ```
+- use the restructured phing targets ([#1068](https://github.com/shopsys/shopsys/pull/1068))
+    - don't use targets with suffix `-packages` or `-utils`, the targets without the suffixes now work in the whole monorepo
+        - eg. you can use `tests-unit` to run unit tests in the whole monorepo instead of running `tests-unit`, `tests-packages` and `tests-utils`
+        - you can even use coding standards subtargets in the whole monorepo, such as `ecs`, `eslint-fix`, etc.
+    - read [the new guidelines for phing targets](/docs/contributing/guidelines-for-phing-targets.md) before suggesting changes via pull requests
+
 ## [From v7.2.0 to v7.2.1]
 
 ## [From v7.1.0 to v7.2.0]
