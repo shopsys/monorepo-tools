@@ -76,11 +76,20 @@
         </exec>
     </target>
 
-    <target name="clean" description="Cleans up directories with cache and scripts which are generated on demand.">
+    <target name="clean" depends="clean-scripts,clean-cache-dir" description="Cleans up directories with cache and scripts which are generated on demand."/>
+
+    <target name="clean-cache" depends="clean-cache-dir,clean-redis" description="Cleans up all application cache."/>
+
+    <target name="clean-cache-dir" description="Cleans up directory with Symfony cache." hidden="true">
         <delete failonerror="false" includeemptydirs="true">
             <fileset dir="${path.var}/cache/">
                 <exclude name="/"/>
             </fileset>
+        </delete>
+    </target>
+
+    <target name="clean-scripts" description="Cleans up directory with scripts which are generated on demand." hidden="true">
+        <delete failonerror="false" includeemptydirs="true">
             <fileset dir="${path.web.scripts}/">
                 <exclude name="/"/>
             </fileset>
