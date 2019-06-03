@@ -8,6 +8,10 @@ Names of targets should be in lower-case, using a dash (`-`) as a word separator
 
 Names of properties should be also in lower-case, using a dot (`.`) to separate levels of hierarchy and a dash (`-`) as a word separator.
 
+When naming targets, it's usually best to start with a general subject and then mention the action (typically a verb) so that related commands are next to each other.
+For example, a phing target used to generate DB migrations is named `db-migrations-generate`.
+It's similar to naming Symfony commands where you also start with a more general namespace (eg. `shopsys:migrations:generate`).
+
 When a target enforces some application environment, it should have the environment as a prefix (eg. `test-db-create` or `prod-warmup`).
 Targets without such prefix should use the current environment.
 

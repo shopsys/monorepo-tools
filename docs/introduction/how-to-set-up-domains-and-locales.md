@@ -62,7 +62,7 @@ Set up the locale of the domain according to the instructions in the section [Lo
 There need to be created some multidomain data for the newly added domain.
 Run the phing target
 ```
-php phing create-domains-data
+php phing domains-data-create
 ```
 This command performs multiple actions:
 - multidomain attributes from the first domain are copied for this new domain, see `FrameworkBundle/Component/Domain/DomainDataCreator.php`, where the `TEMPLATE_DOMAIN_ID` constant is defined.
@@ -111,7 +111,7 @@ For example, if you want to add `xx` to the locales, add `<property name="transl
 
 Then run
 ```
-php phing dump-translations
+php phing translations-dump
 ```
 There will be created files for translations of messages for the new locale in `src/Shopsys/ShopBundle/Resources/translations/`.
 
@@ -121,7 +121,7 @@ For more information about translations, see [the separate article](/docs/introd
 Within the database functions, it is necessary to regenerate the default database functions for the locale use that are already created for the `en` locale as default.
 Regenerate database functions by running a phing target
 ```
-php phing create-domains-db-functions
+php phing domains-db-functions-create
 ```
 
 #### 3.5 Multilang attributes
@@ -165,7 +165,7 @@ Change the url address in the configuration of the domain in `app/config/domains
 #### 4.2 Replace the old url address
 Run the phing target
 ```
-php phing replace-domains-urls
+php phing domains-urls-replace
 ```
 Running this command will ensure replacing all occurrences of the old url address in the text attributes in the database with the new url address.
 

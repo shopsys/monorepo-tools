@@ -25,7 +25,7 @@ final class DumpTranslationsReleaseWorker extends AbstractShopsysReleaseWorker
      */
     public function getDescription(Version $version): string
     {
-        return 'Dump new translations with "php phing dump-translations" and commit them';
+        return 'Dump new translations with "php phing translations-dump" and commit them';
     }
 
     /**
@@ -42,7 +42,7 @@ final class DumpTranslationsReleaseWorker extends AbstractShopsysReleaseWorker
      */
     public function work(Version $version): void
     {
-        $this->processRunner->run('php phing dump-translations');
+        $this->processRunner->run('php phing translations-dump');
 
         if ($this->hasNewTranslations()) {
             if ($this->hasOnlyDeletedFiles()) {

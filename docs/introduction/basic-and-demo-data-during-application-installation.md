@@ -5,7 +5,7 @@ All basic data that are vital for Shopsys Framework (e.g. administrator, vat, da
 As the migrations create data for the first domain only,
 after all migrations are executed, necessary data must be created for all the other domains
 (e.g. multidomain settings like free transport limit, database indexes for new locale etc.).
-This is the responsibility of `phing` task `create-domains-data` that executes [`CreateDomainsDataCommand`](./../../packages/framework/src/Command/CreateDomainsDataCommand.php).
+This is the responsibility of `phing` task `domains-data-create` that executes [`CreateDomainsDataCommand`](./../../packages/framework/src/Command/CreateDomainsDataCommand.php).
 
 All the other data that are not vital (products, customers, etc.) are created afterwards as data fixtures (i.e. demo data)
 using `phing` target `db-fixtures-demo`.

@@ -50,12 +50,12 @@
     </if>
 
     <target name="build" depends="build-deploy-part-1-db-independent,build-deploy-part-2-db-dependent" description="Builds application for production preserving your DB."/>
-    <target name="build-deploy-part-1-db-independent" depends="generate-build-version,clean,composer-prod,redis-check,npm,dirs-create,assets" description="First part of application build for production preserving your DB (can be run without maintenance page)."/>
-    <target name="build-deploy-part-2-db-dependent" depends="db-migrations,create-domains-data,generate-friendly-urls,replace-domains-urls,grunt,error-pages-generate,warmup,clean-redis-old" description="Second part of application build for production preserving your DB (must be run with maintenance page when containing DB migrations)."/>
-    <target name="build-new" depends="wipe,generate-build-version,composer-prod,redis-check,npm,dirs-create,assets,db-rebuild,grunt,error-pages-generate,warmup,product-search-recreate-structure,clean-redis-old" description="Builds application for production with clean DB (with base data only)."/>
-    <target name="build-demo" depends="wipe,generate-build-version,composer-prod,redis-check,npm,dirs-create,assets,db-demo,grunt,error-pages-generate,warmup,product-search-recreate-structure,product-search-export-products,clean-redis-old" description="Builds application for production with clean demo DB."/>
-    <target name="db-demo" depends="db-wipe-public-schema,db-import-basic-structure,db-migrations,create-domains-data,db-fixtures-demo,load-plugin-demo-data,generate-friendly-urls,replace-domains-urls" description="Creates DB and fills it with demo data"/>
-    <target name="db-rebuild" depends="db-wipe-public-schema,db-import-basic-structure,db-migrations,create-domains-data,generate-friendly-urls,replace-domains-urls" description="Drops all data in database and creates a new one with base data only."/>
+    <target name="build-deploy-part-1-db-independent" depends="build-version-generate,clean,composer-prod,redis-check,npm,dirs-create,assets" description="First part of application build for production preserving your DB (can be run without maintenance page)."/>
+    <target name="build-deploy-part-2-db-dependent" depends="db-migrations,domains-data-create,friendly-urls-generate,domains-urls-replace,grunt,error-pages-generate,warmup,clean-redis-old" description="Second part of application build for production preserving your DB (must be run with maintenance page when containing DB migrations)."/>
+    <target name="build-new" depends="wipe,build-version-generate,composer-prod,redis-check,npm,dirs-create,assets,db-rebuild,grunt,error-pages-generate,warmup,product-search-recreate-structure,clean-redis-old" description="Builds application for production with clean DB (with base data only)."/>
+    <target name="build-demo" depends="wipe,build-version-generate,composer-prod,redis-check,npm,dirs-create,assets,db-demo,grunt,error-pages-generate,warmup,product-search-recreate-structure,product-search-export-products,clean-redis-old" description="Builds application for production with clean demo DB."/>
+    <target name="db-demo" depends="db-wipe-public-schema,db-import-basic-structure,db-migrations,domains-data-create,db-fixtures-demo,plugin-demo-data-load,friendly-urls-generate,domains-urls-replace" description="Creates DB and fills it with demo data"/>
+    <target name="db-rebuild" depends="db-wipe-public-schema,db-import-basic-structure,db-migrations,domains-data-create,friendly-urls-generate,domains-urls-replace" description="Drops all data in database and creates a new one with base data only."/>
     <target name="product-search-recreate-structure" depends="product-search-delete-structure,product-search-create-structure" description="Recreates structure for searching via elasticsearch (deletes existing structure and creates new one)"/>
 
     <target name="assets" description="Installs web assets from external bundles into a public web directory.">
@@ -140,7 +140,12 @@
         </exec>
     </target>
 
-    <target name="create-domains-data" depends="create-domains-db-functions" description="Creates domains data for newly configured domains. You should run it when you modify domains.yml">
+    <target name="create-domains-data" hidden="true">
+        <phingcall target="domains-data-create"/>
+        <echo level="warning" message="This phing target is deprecated since Shopsys Framework 7.3.0, use 'domains-data-create' instead."/>
+    </target>
+
+    <target name="domains-data-create" depends="domains-db-functions-create" description="Creates domains data for newly configured domains. You should run it when you modify domains.yml">
         <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
             <arg value="${path.bin-console}"/>
             <arg value="shopsys:domains-data:create"/>
@@ -151,7 +156,12 @@
         </exec>
     </target>
 
-    <target name="create-domains-db-functions" description="Creates new domains DB functions." hidden="true">
+    <target name="create-domains-db-functions" hidden="true">
+        <phingcall target="domains-db-functions-create"/>
+        <echo level="warning" message="This phing target is deprecated since Shopsys Framework 7.3.0, use 'domains-db-functions-create' instead."/>
+    </target>
+
+    <target name="domains-db-functions-create" description="Creates new domains DB functions." hidden="true">
         <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
             <arg value="${path.bin-console}"/>
             <arg value="shopsys:domains-db-functions:create"/>
@@ -281,7 +291,12 @@
         </exec>
     </target>
 
-    <target name="generate-friendly-urls" description="Generates friendly urls for supported entities when missing.">
+    <target name="generate-friendly-urls" hidden="true">
+        <phingcall target="friendly-urls-generate"/>
+        <echo level="warning" message="This phing target is deprecated since Shopsys Framework 7.3.0, use 'friendly-urls-generate' instead."/>
+    </target>
+
+    <target name="friendly-urls-generate" description="Generates friendly urls for supported entities when missing.">
         <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
             <arg value="${path.bin-console}"/>
             <arg value="shopsys:generate:friendly-url"/>
@@ -325,14 +340,24 @@
         </exec>
     </target>
 
-    <target name="replace-domains-urls" description="Replaces domains urls in database by urls in configuration. You should run it when you modify domains_urls.yml">
+    <target name="replace-domains-urls" hidden="true">
+        <phingcall target="domains-urls-replace"/>
+        <echo level="warning" message="This phing target is deprecated since Shopsys Framework 7.3.0, use 'domains-urls-replace' instead."/>
+    </target>
+
+    <target name="domains-urls-replace" description="Replaces domains urls in database by urls in configuration. You should run it when you modify domains_urls.yml">
         <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
             <arg value="${path.bin-console}"/>
             <arg value="shopsys:domains-urls:replace"/>
         </exec>
     </target>
 
-    <target name="load-plugin-demo-data" description="Loads data fixtures of all registered plugins." hidden="true">
+    <target name="load-plugin-demo-data" hidden="true">
+        <phingcall target="plugin-demo-data-load"/>
+        <echo level="warning" message="This phing target is deprecated since Shopsys Framework 7.3.0, use 'plugin-demo-data-load' instead."/>
+    </target>
+
+    <target name="plugin-demo-data-load" description="Loads data fixtures of all registered plugins." hidden="true">
         <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
             <arg value="${path.bin-console}"/>
             <arg value="shopsys:plugin-data-fixtures:load"/>
@@ -354,7 +379,12 @@
         </exec>
     </target>
 
-    <target name="generate-build-version" description="Generates parameters_version.yml config file with a new build version number.">
+    <target name="generate-build-version" hidden="true">
+        <phingcall target="build-version-generate"/>
+        <echo level="warning" message="This phing target is deprecated since Shopsys Framework 7.3.0, use 'build-version-generate' instead."/>
+    </target>
+
+    <target name="build-version-generate" description="Generates parameters_version.yml config file with a new build version number.">
         <exec executable="${path.php.executable}" checkreturn="true" outputProperty="version">
             <arg value="-r"/>
             <arg value="echo date('YmdHis');"/>
@@ -400,11 +430,11 @@
         </delete>
     </target>
 
-    <target name="build-dev" depends="generate-build-version,clean,composer-dev,npm,timezones-check,dirs-create,test-dirs-create,assets,db-migrations,create-domains-data,generate-friendly-urls,replace-domains-urls,product-search-recreate-structure,product-search-export-products,grunt,error-pages-generate,tests-acceptance-build,clean-redis-old,checks-diff" description="Builds application for development preserving your DB and runs checks on changed files."/>
-    <target name="build-dev-quick" depends="generate-build-version,clean,composer-dev,npm,dirs-create,test-dirs-create,assets,db-migrations,create-domains-data,generate-friendly-urls,replace-domains-urls,grunt,clean-redis-old" description="Builds application for development preserving your DB while skipping nonessential steps."/>
-    <target name="build-demo-dev" depends="generate-build-version,wipe-excluding-logs,composer-dev,npm,timezones-check,dirs-create,test-dirs-create,assets,db-demo,product-search-recreate-structure,product-search-export-products,grunt,error-pages-generate,tests-acceptance-build,clean-redis-old,checks-diff" description="Builds application for development with clean demo DB and runs checks on changed files."/>
-    <target name="build-demo-dev-quick" depends="generate-build-version,wipe-excluding-logs,composer-dev,npm,dirs-create,test-dirs-create,assets,db-demo,product-search-recreate-structure,product-search-export-products,grunt,clean-redis-old" description="Builds application for development with clean demo DB while skipping nonessential steps."/>
-    <target name="build-demo-ci" depends="generate-build-version,wipe-excluding-logs,timezones-check,dirs-create,test-dirs-create,db-demo,product-search-recreate-structure,product-search-export-products,grunt,error-pages-generate,clean-redis-old,checks-ci" description="Builds application for development with clean demo DB and runs CI checks."/>
+    <target name="build-dev" depends="build-version-generate,clean,composer-dev,npm,timezones-check,dirs-create,test-dirs-create,assets,db-migrations,domains-data-create,friendly-urls-generate,domains-urls-replace,product-search-recreate-structure,product-search-export-products,grunt,error-pages-generate,tests-acceptance-build,clean-redis-old,checks-diff" description="Builds application for development preserving your DB and runs checks on changed files."/>
+    <target name="build-dev-quick" depends="build-version-generate,clean,composer-dev,npm,dirs-create,test-dirs-create,assets,db-migrations,domains-data-create,friendly-urls-generate,domains-urls-replace,grunt,clean-redis-old" description="Builds application for development preserving your DB while skipping nonessential steps."/>
+    <target name="build-demo-dev" depends="build-version-generate,wipe-excluding-logs,composer-dev,npm,timezones-check,dirs-create,test-dirs-create,assets,db-demo,product-search-recreate-structure,product-search-export-products,grunt,error-pages-generate,tests-acceptance-build,clean-redis-old,checks-diff" description="Builds application for development with clean demo DB and runs checks on changed files."/>
+    <target name="build-demo-dev-quick" depends="build-version-generate,wipe-excluding-logs,composer-dev,npm,dirs-create,test-dirs-create,assets,db-demo,product-search-recreate-structure,product-search-export-products,grunt,clean-redis-old" description="Builds application for development with clean demo DB while skipping nonessential steps."/>
+    <target name="build-demo-ci" depends="build-version-generate,wipe-excluding-logs,timezones-check,dirs-create,test-dirs-create,db-demo,product-search-recreate-structure,product-search-export-products,grunt,error-pages-generate,clean-redis-old,checks-ci" description="Builds application for development with clean demo DB and runs CI checks."/>
     <target name="build-demo-ci-diff" hidden="true">
         <phingcall target="build-demo-ci"/>
         <echo level="warning" message="This phing target is deprecated since Shopsys Framework 7.3.0, use 'build-demo-ci' instead."/>
@@ -422,7 +452,7 @@
     <target name="standards" depends="phplint,ecs,phpstan,twig-lint,yaml-lint,eslint-check" description="Checks coding standards."/>
     <target name="standards-diff" depends="phplint-diff,ecs-diff,phpstan,twig-lint-diff,yaml-lint,eslint-check-diff" description="Checks coding standards in changed files."/>
 
-    <target name="test-db-demo" depends="clean,clean-redis,test-db-wipe-public-schema,test-db-import-basic-structure,test-db-migrations,test-create-domains-data,test-db-fixtures-demo,test-generate-friendly-urls,test-load-plugin-demo-data,test-replace-domains-urls" description="Drops all data in test database and creates a new one with demo data." hidden="true"/>
+    <target name="test-db-demo" depends="clean,clean-redis,test-db-wipe-public-schema,test-db-import-basic-structure,test-db-migrations,test-domains-data-create,test-db-fixtures-demo,test-friendly-urls-generate,test-plugin-demo-data-load,test-domains-urls-replace" description="Drops all data in test database and creates a new one with demo data." hidden="true"/>
     <target name="test-db-performance" depends="test-db-demo,test-db-fixtures-performance" description="Drops all data in test database and creates a new one with performance data."/>
     <target name="tests-static" hidden="true">
         <phingcall target="tests-unit"/>
@@ -445,7 +475,12 @@
         </exec>
     </target>
 
-    <target name="dump-translations" description="Extracts translatable messages from all source files in your project.">
+    <target name="dump-translations" hidden="true">
+        <phingcall target="translations-dump"/>
+        <echo level="warning" message="This phing target is deprecated since Shopsys Framework 7.3.0, use 'translations-dump' instead."/>
+    </target>
+
+    <target name="translations-dump" description="Extracts translatable messages from all source files in your project.">
         <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
             <arg value="${path.bin-console}"/>
             <arg value="translation:extract"/>
@@ -461,8 +496,8 @@
     </target>
 
     <target name="dump-translations-project-base" hidden="true">
-        <phingcall target="dump-translations"/>
-        <echo level="warning" message="This phing target is deprecated since Shopsys Framework 7.3.0, use 'dump-translations' instead."/>
+        <phingcall target="translations-dump"/>
+        <echo level="warning" message="This phing target is deprecated since Shopsys Framework 7.3.0, use 'translations-dump' instead."/>
     </target>
 
     <target name="diff-files" description="Finds changed files (against origin/master) and saves them into properties." hidden="true">
@@ -867,7 +902,12 @@
         </exec>
     </target>
 
-    <target name="test-create-domains-db-functions" description="Creates new domains DB functions in test database." hidden="true">
+    <target name="test-create-domains-db-functions" hidden="true">
+        <phingcall target="test-domains-db-functions-create"/>
+        <echo level="warning" message="This phing target is deprecated since Shopsys Framework 7.3.0, use 'test-domains-db-functions-create' instead."/>
+    </target>
+
+    <target name="test-domains-db-functions-create" description="Creates new domains DB functions in test database." hidden="true">
         <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
             <arg value="${path.bin-console}"/>
             <arg value="shopsys:domains-db-functions:create"/>
@@ -875,7 +915,12 @@
         </exec>
     </target>
 
-    <target name="test-create-domains-data" depends="test-create-domains-db-functions" description="Creates domains data in tests DB for newly configured domains." hidden="true">
+    <target name="test-create-domains-data" hidden="true">
+        <phingcall target="test-domains-data-create"/>
+        <echo level="warning" message="This phing target is deprecated since Shopsys Framework 7.3.0, use 'test-domains-data-create' instead."/>
+    </target>
+
+    <target name="test-domains-data-create" depends="test-domains-db-functions-create" description="Creates domains data in tests DB for newly configured domains." hidden="true">
         <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
             <arg value="${path.bin-console}"/>
             <arg value="shopsys:domains-data:create"/>
@@ -975,7 +1020,12 @@
         </exec>
     </target>
 
-    <target name="test-generate-friendly-urls" description="Generates friendly urls for supported entities when missing in test DB." hidden="true">
+    <target name="test-generate-friendly-urls" hidden="true">
+        <phingcall target="test-friendly-urls-generate"/>
+        <echo level="warning" message="This phing target is deprecated since Shopsys Framework 7.3.0, use 'test-friendly-urls-generate' instead."/>
+    </target>
+
+    <target name="test-friendly-urls-generate" description="Generates friendly urls for supported entities when missing in test DB." hidden="true">
         <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
             <arg value="${path.bin-console}"/>
             <arg value="--env=test"/>
@@ -983,7 +1033,12 @@
         </exec>
     </target>
 
-    <target name="test-load-plugin-demo-data" description="Loads data fixtures of all registered plugins into test DB." hidden="true">
+    <target name="test-load-plugin-demo-data" hidden="true">
+        <phingcall target="test-plugin-demo-data-load"/>
+        <echo level="warning" message="This phing target is deprecated since Shopsys Framework 7.3.0, use 'test-plugin-demo-data-load' instead."/>
+    </target>
+
+    <target name="test-plugin-demo-data-load" description="Loads data fixtures of all registered plugins into test DB." hidden="true">
         <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
             <arg value="${path.bin-console}"/>
             <arg value="--env=test"/>
@@ -991,7 +1046,12 @@
         </exec>
     </target>
 
-    <target name="test-replace-domains-urls" description="Replaces domains urls in test database by urls in configuration." hidden="true">
+    <target name="test-replace-domains-urls" hidden="true">
+        <phingcall target="test-domains-urls-replace"/>
+        <echo level="warning" message="This phing target is deprecated since Shopsys Framework 7.3.0, use 'test-domains-urls-replace' instead."/>
+    </target>
+
+    <target name="test-domains-urls-replace" description="Replaces domains urls in test database by urls in configuration." hidden="true">
         <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
             <arg value="${path.bin-console}"/>
             <arg value="--env=test"/>

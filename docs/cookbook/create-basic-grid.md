@@ -133,7 +133,7 @@ First, we add columns we want to see into `SalesmanGridFactory::create` method.
     }
 ```
 
-*Note: In the example above, the column names are translated. Do not forget to [dump translations](/docs/introduction/console-commands-for-application-management-phing-targets.md#dump-translations).*
+*Note: In the example above, the column names are translated. Do not forget to [dump translations](/docs/introduction/console-commands-for-application-management-phing-targets.md#translations-dump).*
 
 ## 2. Display the grid
 
