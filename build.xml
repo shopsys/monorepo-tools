@@ -10,6 +10,13 @@
 
     <import file="${path.framework}/build.xml"/>
 
+    <target name="clean" description="Cleans up directories with cache and scripts which are generated on demand.">
+        <phingcall target="shopsys_framework.clean"/>
+        <delete failonerror="false" includeemptydirs="true" quiet="true">
+            <filelist dir="${path.root}" files="migrations-lock.yml"/>
+        </delete>
+    </target>
+
     <target name="composer-dev" description="Installs dependencies for development if composer.lock is valid, otherwise runs composer update.">
         <exec executable="${path.composer.executable}" returnProperty="composer.validate.returnCode">
             <arg value="validate"/>
@@ -31,48 +38,6 @@
             <arg value="${composer.action}"/>
         </exec>
         <phingcall target="composer-check"/>
-    </target>
-
-    <target name="clean" description="Cleans up directories with cache and scripts which are generated on demand.">
-        <phingcall target="shopsys_framework.clean"/>
-        <delete failonerror="false" includeemptydirs="true" quiet="true">
-            <filelist dir="${path.root}" files="migrations-lock.yml"/>
-        </delete>
-    </target>
-
-    <target name="eslint-check" description="Find JS coding standard violations in all files using ESLint in the whole monorepo and print human readable output." hidden="true">
-        <phingcall target="shopsys_framework.eslint-check"/>
-        <exec executable="${path.eslint.executable}" passthru="true" checkreturn="true">
-            <arg value="--color"/>
-            <arg path="${path.framework}/src/Resources/scripts"/>
-            <arg value="--config"/>
-            <arg path="${path.framework}/.eslintrc.json"/>
-            <arg value="--ignore-path"/>
-            <arg path="${path.framework}/.eslintignore"/>
-        </exec>
-    </target>
-
-    <target name="eslint-check-diff" hidden="true">
-        <echo level="info" message="Checking only changed files via 'eslint-check-diff' not supported in monorepo. Running 'eslint-check' instead..."/>
-        <phingcall target="eslint-check"/>
-    </target>
-
-    <target name="eslint-fix" description="Fix JS coding standard violations in all files using ESLint in the whole monorepo." hidden="true">
-        <phingcall target="shopsys_framework.eslint-fix"/>
-        <exec executable="${path.eslint.executable}" passthru="true" checkreturn="true">
-            <arg value="--color"/>
-            <arg value="--fix"/>
-            <arg path="${path.framework}/src/Resources/scripts"/>
-            <arg value="--config"/>
-            <arg path="${path.framework}/.eslintrc.json"/>
-            <arg value="--ignore-path"/>
-            <arg path="${path.framework}/.eslintignore"/>
-        </exec>
-    </target>
-
-    <target name="eslint-fix-diff" hidden="true">
-        <echo level="info" message="Fixing only changed files via 'eslint-fix-diff' not supported in monorepo. Running 'eslint-fix' instead..."/>
-        <phingcall target="eslint-fix"/>
     </target>
 
     <target name="ecs" description="Checks coding standards in all files in the whole monorepo by PHP easy coding standards." hidden="true">
@@ -147,6 +112,62 @@
         </exec>
     </target>
 
+    <target name="eslint-check" description="Find JS coding standard violations in all files using ESLint in the whole monorepo and print human readable output." hidden="true">
+        <phingcall target="shopsys_framework.eslint-check"/>
+        <exec executable="${path.eslint.executable}" passthru="true" checkreturn="true">
+            <arg value="--color"/>
+            <arg path="${path.framework}/src/Resources/scripts"/>
+            <arg value="--config"/>
+            <arg path="${path.framework}/.eslintrc.json"/>
+            <arg value="--ignore-path"/>
+            <arg path="${path.framework}/.eslintignore"/>
+        </exec>
+    </target>
+
+    <target name="eslint-check-diff" hidden="true">
+        <echo level="info" message="Checking only changed files via 'eslint-check-diff' not supported in monorepo. Running 'eslint-check' instead..."/>
+        <phingcall target="eslint-check"/>
+    </target>
+
+    <target name="eslint-fix" description="Fix JS coding standard violations in all files using ESLint in the whole monorepo." hidden="true">
+        <phingcall target="shopsys_framework.eslint-fix"/>
+        <exec executable="${path.eslint.executable}" passthru="true" checkreturn="true">
+            <arg value="--color"/>
+            <arg value="--fix"/>
+            <arg path="${path.framework}/src/Resources/scripts"/>
+            <arg value="--config"/>
+            <arg path="${path.framework}/.eslintrc.json"/>
+            <arg value="--ignore-path"/>
+            <arg path="${path.framework}/.eslintignore"/>
+        </exec>
+    </target>
+
+    <target name="eslint-fix-diff" hidden="true">
+        <echo level="info" message="Fixing only changed files via 'eslint-fix-diff' not supported in monorepo. Running 'eslint-fix' instead..."/>
+        <phingcall target="eslint-fix"/>
+    </target>
+
+    <target name="phing-targets-sorting-check" description="Checks the sorting of phing targets." hidden="true">
+        <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
+            <arg value="${path.bin-console}"/>
+            <arg value="shopsys:phing-targets:sort"/>
+            <arg value="--check"/>
+            <arg path="${project.basedir}/build.xml"/>
+            <arg path="${path.root}/build.xml"/>
+            <arg path="${path.framework}/build.xml"/>
+        </exec>
+    </target>
+
+    <target name="phing-targets-sorting-fix" description="Sorts the phing targets automatically." hidden="true">
+        <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
+            <arg value="${path.bin-console}"/>
+            <arg value="shopsys:phing-targets:sort"/>
+            <arg path="${project.basedir}/build.xml"/>
+            <arg path="${path.root}/build.xml"/>
+            <arg path="${path.framework}/build.xml"/>
+        </exec>
+    </target>
+
     <target name="phplint" description="Checks syntax of PHP files in the whole monorepo." hidden="true">
         <exec executable="${path.phplint.executable}" logoutput="true" passthru="true" checkreturn="true">
             <arg path="${path.src}"/>
@@ -161,41 +182,6 @@
     <target name="phplint-diff" hidden="true">
         <echo level="info" message="Checking only changed files via 'phplint-diff' not supported in monorepo. Running 'phplint' instead..."/>
         <phingcall target="phplint"/>
-    </target>
-
-    <target name="twig-lint" description="Checks syntax of Twig templates in the whole monorepo." hidden="true">
-        <phingcall target="shopsys_framework.twig-lint"/>
-        <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
-            <arg value="${path.bin-console}"/>
-            <arg value="lint:twig"/>
-            <arg value="${path.packages}"/>
-        </exec>
-        <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
-            <arg value="${path.bin-console}"/>
-            <arg value="lint:twig"/>
-            <arg value="${path.utils}"/>
-        </exec>
-    </target>
-
-    <target name="twig-lint-diff" hidden="true">
-        <echo level="info" message="Checking only changed files via 'twig-lint-diff' not supported in monorepo. Running 'twig-lint' instead..."/>
-        <phingcall target="twig-lint"/>
-    </target>
-
-    <target name="yaml-lint" description="Checks syntax of Yaml files in the whole monorepo." hidden="true">
-        <phingcall target="shopsys_framework.yaml-lint"/>
-        <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
-            <arg value="${path.bin-console}"/>
-            <arg value="lint:yaml"/>
-            <arg value="${path.packages}"/>
-            <arg value="--parse-tags"/>
-        </exec>
-        <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
-            <arg value="${path.bin-console}"/>
-            <arg value="lint:yaml"/>
-            <arg value="${path.utils}"/>
-            <arg value="--parse-tags"/>
-        </exec>
     </target>
 
     <target name="phpstan" depends="tests-acceptance-build" description="Performs static analysis of PHP files using PHPStan on all packages." hidden="true">
@@ -213,6 +199,14 @@
             <arg value="-vvv"/>
         </exec>
     </target>
+
+    <target name="standards" depends="shopsys_framework.standards,phing-targets-sorting-check" description="Checks coding standards."/>
+
+    <target name="standards-diff" depends="shopsys_framework.standards-diff,phing-targets-sorting-check" description="Checks coding standards in changed files."/>
+
+    <target name="standards-fix" depends="shopsys_framework.standards-fix,phing-targets-sorting-fix" description="Automatically fixes *some* coding standards violations in all files. Always run 'standards' to be sure there are no further violations."/>
+
+    <target name="standards-fix-diff" depends="shopsys_framework.standards-fix-diff,phing-targets-sorting-fix" description="Automatically fixes *some* coding standards violations in changed files. Always run 'standards' to be sure there are no further violations."/>
 
     <target name="tests-unit" description="Runs unit tests in the whole monorepo.">
         <phingcall target="shopsys_framework.tests-unit"/>
@@ -322,29 +316,38 @@
         </exec>
     </target>
 
-    <target name="standards" depends="shopsys_framework.standards,phing-targets-sorting-check" description="Checks coding standards."/>
-    <target name="standards-diff" depends="shopsys_framework.standards-diff,phing-targets-sorting-check" description="Checks coding standards in changed files."/>
-    <target name="standards-fix" depends="shopsys_framework.standards-fix,phing-targets-sorting-fix" description="Automatically fixes *some* coding standards violations in all files. Always run 'standards' to be sure there are no further violations."/>
-    <target name="standards-fix-diff" depends="shopsys_framework.standards-fix-diff,phing-targets-sorting-fix" description="Automatically fixes *some* coding standards violations in changed files. Always run 'standards' to be sure there are no further violations."/>
-
-    <target name="phing-targets-sorting-check" description="Checks the sorting of phing targets." hidden="true">
+    <target name="twig-lint" description="Checks syntax of Twig templates in the whole monorepo." hidden="true">
+        <phingcall target="shopsys_framework.twig-lint"/>
         <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
             <arg value="${path.bin-console}"/>
-            <arg value="shopsys:phing-targets:sort"/>
-            <arg value="--check"/>
-            <arg path="${project.basedir}/build.xml"/>
-            <arg path="${path.root}/build.xml"/>
-            <arg path="${path.framework}/build.xml"/>
+            <arg value="lint:twig"/>
+            <arg value="${path.packages}"/>
+        </exec>
+        <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
+            <arg value="${path.bin-console}"/>
+            <arg value="lint:twig"/>
+            <arg value="${path.utils}"/>
         </exec>
     </target>
 
-    <target name="phing-targets-sorting-fix" description="Sorts the phing targets automatically." hidden="true">
+    <target name="twig-lint-diff" hidden="true">
+        <echo level="info" message="Checking only changed files via 'twig-lint-diff' not supported in monorepo. Running 'twig-lint' instead..."/>
+        <phingcall target="twig-lint"/>
+    </target>
+
+    <target name="yaml-lint" description="Checks syntax of Yaml files in the whole monorepo." hidden="true">
+        <phingcall target="shopsys_framework.yaml-lint"/>
         <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
             <arg value="${path.bin-console}"/>
-            <arg value="shopsys:phing-targets:sort"/>
-            <arg path="${project.basedir}/build.xml"/>
-            <arg path="${path.root}/build.xml"/>
-            <arg path="${path.framework}/build.xml"/>
+            <arg value="lint:yaml"/>
+            <arg value="${path.packages}"/>
+            <arg value="--parse-tags"/>
+        </exec>
+        <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
+            <arg value="${path.bin-console}"/>
+            <arg value="lint:yaml"/>
+            <arg value="${path.utils}"/>
+            <arg value="--parse-tags"/>
         </exec>
     </target>
 
