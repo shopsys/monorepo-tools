@@ -10,7 +10,7 @@ In this article, we describe tools and recommendations for translations.
 1. Use a translator for your [translatable texts](#translatable-texts). Shopsys Framework implementation of a translator is [`Shopsys\FrameworkBundle\Component\Translation\Translator`](/packages/framework/src/Component/Translation/Translator.php) class.
    You can find more in [Symfony translation documentation](https://symfony.com/doc/current/components/translation/usage.html).
 
-1. Once you have translations in your code, you have to extract them by running `php phing dump-translations`.
+1. Once you have translations in your code, you have to extract them by running `php phing translations-dump`.
    This command extracts the translatable texts into `*.po` translation files located in directory [src/Shopsys/ShopBundle/Resources/translations/](/project-base/src/Shopsys/ShopBundle/Resources/translations/).
    For more information about phing targets in general, see the [separate article](/docs/introduction/console-commands-for-application-management-phing-targets.md).
 
@@ -58,7 +58,7 @@ We do this because in Czech, the noun is translated as *"objednávka"* and the v
 
 ## Translatable texts
 
-When `php phing dump-translations` command is run, texts are extracted from following places:
+When `php phing translations-dump` command is run, texts are extracted from following places:
 
 ### PHP
 
@@ -135,7 +135,7 @@ JavaScript translations are extracted and translated during compilation of JavaS
 
 * You want to keep the message ID same as the original English form
     * change the text in the code
-    * run `php phing dump-translations`
+    * run `php phing translations-dump`
     * translate text again in `*.po` file(s) for the other languages because the message ID changed
     * be careful, this is a [backward compatibility breaking change](/docs/contributing/backward-compatibility-promise.md#translation-messages) because the original message ID does not exist anymore.
 * You do not care about the consistency between message ID and the original English form

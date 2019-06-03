@@ -72,6 +72,54 @@ There you can find links to upgrade notes for other versions too.
         ```
 
 ### Tools
+- use the `build.xml` [Phing configuration](/docs/introduction/console-commands-for-application-management-phing-targets.md) from the `shopsys/framework` package ([#1068](https://github.com/shopsys/shopsys/pull/1068))
+    - assuming your `build.xml` and `build-dev.xml` are the same as in `shopsys/project-base` in `v7.2.1`, just remove `build-dev.xml` and replace `build.xml` with this file:
+        ```xml
+        <?xml version="1.0" encoding="UTF-8"?>
+        <project name="Shopsys Framework" default="list">
+
+            <property file="${project.basedir}/build/build.local.properties"/>
+
+            <property name="path.root" value="${project.basedir}"/>
+            <property name="path.vendor" value="${path.root}/vendor"/>
+            <property name="path.framework" value="${path.vendor}/shopsys/framework"/>
+
+            <import file="${path.framework}/build.xml"/>
+
+            <property name="is-multidomain" value="true"/>
+            <property name="phpstan.level" value="0"/>
+
+        </project>
+        ```
+    - if there are any changes in the your phing configuration, you'll need to make some customizations
+        - read about [customization of phing targets and properties](/docs/introduction/console-commands-for-application-management-phing-targets.md#customization-of-phing-targets-and-properties) in the docs
+        - if you have some own additional target definitions, copy them into your `build.xml`
+        - if you have modified any targets, overwrite them in your `build.xml`
+            - examine the target in the `shopsys/framework` package (either on [GitHub](/packages/framework/build.xml) or locally in `vendor/shopsys/framework/build.xml`)
+            - it's possible that the current target's definition suits your needs now after the upgrade - you don't have to overwrite it if that's the case
+            - for future upgradability of your project, it's better to use the original target via `shopsys_framework.TARGET_NAME` if that's possible (eg. if you want to execute a command before or after the original task)
+            - if you think we can support your use case better via [phing target extensibility](/docs/contributing/guidelines-for-phing-targets.md#extensibility), please [open an issue](https://github.com/shopsys/shopsys/issues/new) or [create a pull request](/docs/contributing/guidelines-for-pull-request.md)
+        - if you have deleted any targets, overwrite them in your `build.xml` with a fail task so it doesn't get executed by mistake:
+            ```xml
+            <target name="deleted-target" hidden="true">
+                <fail message="Target 'deleted-target' is disabled on this project."/>
+            </target>
+            ```
+    - if you modified the locales for extraction in `dump-translations`, you can now overwrite just a phing property `translations.dump.locales` instead of overwriting the whole target
+        - for example, if you want to extract locales for German and English, add `<property name="translations.dump.locales" value="de en"/>` to your `build.xml`
+    - some phing targets were marked as deprecated or were renamed, stop using them and use the new ones (the original targets will still work, but a warning message will be displayed):
+        - `dump-translations` and `dump-translations-project-base` were deprecated, use `translations-dump` instead
+        - `tests-static` was deprecated, use `tests-unit` instead
+        - `test-db-check-schema` was deprecated, it is run automatically after DB migrations are executed
+        - `build-demo-ci-diff` and `checks-ci-diff` were deprecated, use `build-demo-ci` and `checks-ci` instead
+        - `composer` was deprecated, use `composer-prod` instead
+        - `generate-build-version` was deprecated, use `build-version-generate` instead
+        - `(test-)create-domains-data` was deprecated, use `(test-)domains-data-create` instead
+        - `(test-)create-domains-db-functions` was deprecated, use `(test-)domains-db-functions-create` instead
+        - `(test-)generate-friendly-urls` was deprecated, use `(test-)friendly-urls-generate` instead
+        - `(test-)replace-domains-urls` was deprecated, use `(test-)domains-urls-replace` instead
+        - `(test-)load-plugin-demo-data` was deprecated, use `(test-)plugin-demo-data-load` instead
+        - don't forget to update your Dockerfiles, Kubernetes manifests, scripts and other files that might reference the phing targets above
 - we recommend upgrading PHPStan to level 4 [#1040](https://github.com/shopsys/shopsys/pull/1040)
     - you'll find detailed instructions in separate article [Upgrade Instructions for Upgrading PHPStan to Level 4](/docs/upgrade/phpstan-level-4.md)
 
