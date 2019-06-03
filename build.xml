@@ -322,4 +322,30 @@
         </exec>
     </target>
 
+    <target name="standards" depends="shopsys_framework.standards,phing-targets-sorting-check" description="Checks coding standards."/>
+    <target name="standards-diff" depends="shopsys_framework.standards-diff,phing-targets-sorting-check" description="Checks coding standards in changed files."/>
+    <target name="standards-fix" depends="shopsys_framework.standards-fix,phing-targets-sorting-fix" description="Automatically fixes *some* coding standards violations in all files. Always run 'standards' to be sure there are no further violations."/>
+    <target name="standards-fix-diff" depends="shopsys_framework.standards-fix-diff,phing-targets-sorting-fix" description="Automatically fixes *some* coding standards violations in changed files. Always run 'standards' to be sure there are no further violations."/>
+
+    <target name="phing-targets-sorting-check" description="Checks the sorting of phing targets." hidden="true">
+        <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
+            <arg value="${path.bin-console}"/>
+            <arg value="shopsys:phing-targets:sort"/>
+            <arg value="--check"/>
+            <arg path="${project.basedir}/build.xml"/>
+            <arg path="${path.root}/build.xml"/>
+            <arg path="${path.framework}/build.xml"/>
+        </exec>
+    </target>
+
+    <target name="phing-targets-sorting-fix" description="Sorts the phing targets automatically." hidden="true">
+        <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
+            <arg value="${path.bin-console}"/>
+            <arg value="shopsys:phing-targets:sort"/>
+            <arg path="${project.basedir}/build.xml"/>
+            <arg path="${path.root}/build.xml"/>
+            <arg path="${path.framework}/build.xml"/>
+        </exec>
+    </target>
+
 </project>
