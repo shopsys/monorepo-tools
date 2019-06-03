@@ -82,7 +82,9 @@ services:
         container_name: shopsys-framework-smtp-server
 
     elasticsearch:
-        image: docker.elastic.co/elasticsearch/elasticsearch-oss:6.3.2
+        build:
+            context: .
+            dockerfile: project-base/docker/elasticsearch/Dockerfile
         container_name: shopsys-framework-elasticsearch
         ulimits:
             nofile:

@@ -105,7 +105,7 @@ docker run \
 This command executes [`build_kubernetes.sh`](/.ci/build_kubernetes.sh) in the `shopsys/kubernetes-buildpack` container.
 
 To summarize, the shell script prepares the application config files and Kubernetes manifests for deployment, copies the prepared source code into the image and installs Composer dependencies in the application `php-fpm` container.
-This image is then pushed and tagged into Docker Hub and these tags are then set into Kubernetes manifests.
+Then it builds `elasticsearch` image with ICU Analysis plugin and both images are then pushed and tagged into Docker Hub and these tags are then set into Kubernetes manifests.
 
 In the end, Kubernetes applies these manifests onto the node server where pods are created as a running application.
 

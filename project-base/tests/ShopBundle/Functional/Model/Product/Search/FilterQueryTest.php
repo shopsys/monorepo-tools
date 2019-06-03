@@ -29,7 +29,7 @@ class FilterQueryTest extends TransactionFunctionalTestCase
             ->filterByFlags([3])
             ->applyDefaultOrdering();
 
-        $this->assertIdWithFilter($filter, [1, 5, 50, 16, 33, 39, 70, 40, 45]);
+        $this->assertIdWithFilter($filter, [1, 5, 50, 16, 33, 70, 39, 40, 45]);
     }
 
     public function testFlagBrand(): void
@@ -39,7 +39,7 @@ class FilterQueryTest extends TransactionFunctionalTestCase
             ->filterByFlags([1])
             ->applyDefaultOrdering();
 
-        $this->assertIdWithFilter($filter, [19, 17]);
+        $this->assertIdWithFilter($filter, [17, 19]);
     }
 
     public function testMultiFilter(): void

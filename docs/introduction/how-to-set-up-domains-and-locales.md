@@ -135,6 +135,24 @@ When you change admin locale, you have to update acceptance tests, to have admin
 
 You can change administration translations by adding messages into your `src/Shopsys/ShopBundle/Resources/translations/messages.xx.po`.
 
+#### 3.7 Sorting in different locales
+Alphabetical sorting on frontend uses Elasticsearch and its [ICU analysis plugin](https://www.elastic.co/guide/en/elasticsearch/plugins/6.3/analysis-icu.html).
+Every domain needs to have `language` parameter for field `name.keyword` in `src/Shopsys/ShopBundle/Resources/definition/product/*.json` set in order to sort correctly for given locale.  
+example for domain that uses English language:
+```json
+"name": {
+    "type": "text",
+    "analyzer": "stemming",
+    "fields": {
+        "keyword": {
+            "type": "icu_collation_keyword",
+            "language": "en",
+            "index": false
+        }
+    }
+}
+```
+
 ### 4. Change the url address for an existing domain
 
 #### 4.1 Change the url address
