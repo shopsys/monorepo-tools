@@ -49,15 +49,6 @@
         </else>
     </if>
 
-    <target name="build" depends="build-deploy-part-1-db-independent,build-deploy-part-2-db-dependent" description="Builds application for production preserving your DB."/>
-    <target name="build-deploy-part-1-db-independent" depends="build-version-generate,clean,composer-prod,redis-check,npm,dirs-create,assets" description="First part of application build for production preserving your DB (can be run without maintenance page)."/>
-    <target name="build-deploy-part-2-db-dependent" depends="db-migrations,domains-data-create,friendly-urls-generate,domains-urls-replace,grunt,error-pages-generate,warmup,clean-redis-old" description="Second part of application build for production preserving your DB (must be run with maintenance page when containing DB migrations)."/>
-    <target name="build-new" depends="wipe,build-version-generate,composer-prod,redis-check,npm,dirs-create,assets,db-rebuild,grunt,error-pages-generate,warmup,product-search-recreate-structure,clean-redis-old" description="Builds application for production with clean DB (with base data only)."/>
-    <target name="build-demo" depends="wipe,build-version-generate,composer-prod,redis-check,npm,dirs-create,assets,db-demo,grunt,error-pages-generate,warmup,product-search-recreate-structure,product-search-export-products,clean-redis-old" description="Builds application for production with clean demo DB."/>
-    <target name="db-demo" depends="db-wipe-public-schema,db-import-basic-structure,db-migrations,domains-data-create,db-fixtures-demo,plugin-demo-data-load,friendly-urls-generate,domains-urls-replace" description="Creates DB and fills it with demo data"/>
-    <target name="db-rebuild" depends="db-wipe-public-schema,db-import-basic-structure,db-migrations,domains-data-create,friendly-urls-generate,domains-urls-replace" description="Drops all data in database and creates a new one with base data only."/>
-    <target name="product-search-recreate-structure" depends="product-search-delete-structure,product-search-create-structure" description="Recreates structure for searching via elasticsearch (deletes existing structure and creates new one)"/>
-
     <target name="assets" description="Installs web assets from external bundles into a public web directory.">
         <exec executable="${path.php.executable}" passthru="true" checkreturn="true" output="${dev.null}">
             <arg value="${path.bin-console}"/>
@@ -76,6 +67,58 @@
         </exec>
     </target>
 
+    <target name="build" depends="build-deploy-part-1-db-independent,build-deploy-part-2-db-dependent" description="Builds application for production preserving your DB."/>
+
+    <target name="build-demo" depends="wipe,build-version-generate,composer-prod,redis-check,npm,dirs-create,assets,db-demo,grunt,error-pages-generate,warmup,product-search-recreate-structure,product-search-export-products,clean-redis-old" description="Builds application for production with clean demo DB."/>
+
+    <target name="build-demo-ci" depends="build-version-generate,wipe-excluding-logs,timezones-check,dirs-create,test-dirs-create,db-demo,product-search-recreate-structure,product-search-export-products,grunt,error-pages-generate,clean-redis-old,checks-ci" description="Builds application for development with clean demo DB and runs CI checks."/>
+
+    <target name="build-demo-ci-diff" hidden="true">
+        <phingcall target="build-demo-ci"/>
+        <echo level="warning" message="This phing target is deprecated since Shopsys Framework 7.3.0, use 'build-demo-ci' instead."/>
+    </target>
+
+    <target name="build-demo-dev" depends="build-version-generate,wipe-excluding-logs,composer-dev,npm,timezones-check,dirs-create,test-dirs-create,assets,db-demo,product-search-recreate-structure,product-search-export-products,grunt,error-pages-generate,tests-acceptance-build,clean-redis-old,checks-diff" description="Builds application for development with clean demo DB and runs checks on changed files."/>
+
+    <target name="build-demo-dev-quick" depends="build-version-generate,wipe-excluding-logs,composer-dev,npm,dirs-create,test-dirs-create,assets,db-demo,product-search-recreate-structure,product-search-export-products,grunt,clean-redis-old" description="Builds application for development with clean demo DB while skipping nonessential steps."/>
+
+    <target name="build-deploy-part-1-db-independent" depends="build-version-generate,clean,composer-prod,redis-check,npm,dirs-create,assets" description="First part of application build for production preserving your DB (can be run without maintenance page)."/>
+
+    <target name="build-deploy-part-2-db-dependent" depends="db-migrations,domains-data-create,friendly-urls-generate,domains-urls-replace,grunt,error-pages-generate,warmup,clean-redis-old" description="Second part of application build for production preserving your DB (must be run with maintenance page when containing DB migrations)."/>
+
+    <target name="build-dev" depends="build-version-generate,clean,composer-dev,npm,timezones-check,dirs-create,test-dirs-create,assets,db-migrations,domains-data-create,friendly-urls-generate,domains-urls-replace,product-search-recreate-structure,product-search-export-products,grunt,error-pages-generate,tests-acceptance-build,clean-redis-old,checks-diff" description="Builds application for development preserving your DB and runs checks on changed files."/>
+
+    <target name="build-dev-quick" depends="build-version-generate,clean,composer-dev,npm,dirs-create,test-dirs-create,assets,db-migrations,domains-data-create,friendly-urls-generate,domains-urls-replace,grunt,clean-redis-old" description="Builds application for development preserving your DB while skipping nonessential steps."/>
+
+    <target name="build-new" depends="wipe,build-version-generate,composer-prod,redis-check,npm,dirs-create,assets,db-rebuild,grunt,error-pages-generate,warmup,product-search-recreate-structure,clean-redis-old" description="Builds application for production with clean DB (with base data only)."/>
+
+    <target name="build-version-generate" description="Generates parameters_version.yml config file with a new build version number.">
+        <exec executable="${path.php.executable}" checkreturn="true" outputProperty="version">
+            <arg value="-r"/>
+            <arg value="echo date('YmdHis');"/>
+        </exec>
+        <copy file="${path.app}/config/parameters_version.yml.dist" tofile="${path.app}/config/parameters_version.yml" overwrite="true">
+            <filterchain>
+                <replacetokens begintoken="%%" endtoken="%%">
+                    <token key="version" value="${version}"/>
+                </replacetokens>
+            </filterchain>
+        </copy>
+    </target>
+
+    <target name="checks" depends="checks-internal,standards,tests" description="Runs internal checks, coding standards and runs unit, DB and smoke tests."/>
+
+    <target name="checks-ci" depends="checks-internal,test-db-demo,tests-functional,tests-smoke,tests-acceptance" description="Runs internal checks and runs DB, smoke and acceptance tests."/>
+
+    <target name="checks-ci-diff" hidden="true">
+        <phingcall target="checks-ci"/>
+        <echo level="warning" message="This phing target is deprecated since Shopsys Framework 7.3.0, use 'checks-ci' instead."/>
+    </target>
+
+    <target name="checks-diff" depends="checks-internal,standards-diff,tests" description="Runs internal checks, coding standards on changed files and runs unit, DB and smoke tests."/>
+
+    <target name="checks-internal" depends="db-check-schema,timezones-check,redis-check,composer-check" description="Runs all internal checks, eg. availability of services or validity of configuration." hidden="true"/>
+
     <target name="clean" depends="clean-scripts,clean-cache-dir" description="Cleans up directories with cache and scripts which are generated on demand."/>
 
     <target name="clean-cache" depends="clean-cache-dir,clean-redis" description="Cleans up all application cache."/>
@@ -83,14 +126,6 @@
     <target name="clean-cache-dir" description="Cleans up directory with Symfony cache." hidden="true">
         <delete failonerror="false" includeemptydirs="true">
             <fileset dir="${path.var}/cache/">
-                <exclude name="/"/>
-            </fileset>
-        </delete>
-    </target>
-
-    <target name="clean-scripts" description="Cleans up directory with scripts which are generated on demand." hidden="true">
-        <delete failonerror="false" includeemptydirs="true">
-            <fileset dir="${path.web.scripts}/">
                 <exclude name="/"/>
             </fileset>
         </delete>
@@ -110,11 +145,12 @@
         </exec>
     </target>
 
-    <target name="redis-check" description="Checks availability of Redis" hidden="true">
-        <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
-            <arg value="${path.bin-console}"/>
-            <arg value="shopsys:redis:check-availability"/>
-        </exec>
+    <target name="clean-scripts" description="Cleans up directory with scripts which are generated on demand." hidden="true">
+        <delete failonerror="false" includeemptydirs="true">
+            <fileset dir="${path.web.scripts}/">
+                <exclude name="/"/>
+            </fileset>
+        </delete>
     </target>
 
     <target name="clean-styles" description="Cleans up directories with CSS generated by Grunt." hidden="true">
@@ -133,6 +169,19 @@
         <echo level="warning" message="This phing target is deprecated since Shopsys Framework 7.3.0, use 'composer-prod' instead."/>
     </target>
 
+    <target name="composer-check" description="Checks if Composer lock file is valid." hidden="true">
+        <exec executable="${path.composer.executable}" logoutput="true" passthru="true" checkreturn="true">
+            <arg value="validate"/>
+            <arg value="--no-check-all"/>
+        </exec>
+    </target>
+
+    <target name="composer-dev" depends="composer-check" description="Installs dependencies for development.">
+        <exec executable="${path.composer.executable}" logoutput="true" passthru="true" checkreturn="true">
+            <arg value="install"/>
+        </exec>
+    </target>
+
     <target name="composer-prod" description="Installs dependencies for production.">
         <exec executable="${path.composer.executable}" logoutput="true" passthru="true" checkreturn="true">
             <arg value="install"/>
@@ -145,48 +194,9 @@
         <echo level="warning" message="This phing target is deprecated since Shopsys Framework 7.3.0, use 'domains-data-create' instead."/>
     </target>
 
-    <target name="domains-data-create" depends="domains-db-functions-create" description="Creates domains data for newly configured domains. You should run it when you modify domains.yml">
-        <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
-            <arg value="${path.bin-console}"/>
-            <arg value="shopsys:domains-data:create"/>
-        </exec>
-        <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
-            <arg value="${path.bin-console}"/>
-            <arg value="shopsys:recalculations"/>
-        </exec>
-    </target>
-
     <target name="create-domains-db-functions" hidden="true">
         <phingcall target="domains-db-functions-create"/>
         <echo level="warning" message="This phing target is deprecated since Shopsys Framework 7.3.0, use 'domains-db-functions-create' instead."/>
-    </target>
-
-    <target name="domains-db-functions-create" description="Creates new domains DB functions." hidden="true">
-        <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
-            <arg value="${path.bin-console}"/>
-            <arg value="shopsys:domains-db-functions:create"/>
-        </exec>
-    </target>
-
-    <target name="product-search-create-structure" description="Creates structure for searching via elasticsearch." hidden="true">
-        <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
-            <arg value="${path.bin-console}"/>
-            <arg value="shopsys:product-search:create-structure"/>
-        </exec>
-    </target>
-
-    <target name="product-search-delete-structure" description="Deletes structure for searching via elasticsearch." hidden="true">
-        <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
-            <arg value="${path.bin-console}"/>
-            <arg value="shopsys:product-search:delete-structure"/>
-        </exec>
-    </target>
-
-    <target name="product-search-export-products" description="Exports all products for searching via elasticsearch.">
-        <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
-            <arg value="${path.bin-console}"/>
-            <arg value="shopsys:product-search:export-products"/>
-        </exec>
     </target>
 
     <target name="cron" description="Runs background jobs. Should be executed periodically by system Cron every 5 minutes.">
@@ -211,6 +221,13 @@
         </exec>
     </target>
 
+    <target name="db-check-schema" depends="clean-redis,db-check-mapping" description="Checks if database schema is satisfying ORM and returns a list of suggestions to fix it." hidden="true">
+        <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
+            <arg value="${path.bin-console}"/>
+            <arg value="shopsys:migrations:check-schema"/>
+        </exec>
+    </target>
+
     <target name="db-create" description="Creates database for application with required configuration.">
         <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
             <arg value="${path.bin-console}"/>
@@ -218,12 +235,7 @@
         </exec>
     </target>
 
-    <target name="db-check-schema" depends="clean-redis,db-check-mapping" description="Checks if database schema is satisfying ORM and returns a list of suggestions to fix it." hidden="true">
-        <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
-            <arg value="${path.bin-console}"/>
-            <arg value="shopsys:migrations:check-schema"/>
-        </exec>
-    </target>
+    <target name="db-demo" depends="db-wipe-public-schema,db-import-basic-structure,db-migrations,domains-data-create,db-fixtures-demo,plugin-demo-data-load,friendly-urls-generate,domains-urls-replace" description="Creates DB and fills it with demo data"/>
 
     <target name="db-fixtures-demo" description="Loads demo data fixtures." hidden="true">
         <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
@@ -266,6 +278,8 @@
         </exec>
     </target>
 
+    <target name="db-rebuild" depends="db-wipe-public-schema,db-import-basic-structure,db-migrations,domains-data-create,friendly-urls-generate,domains-urls-replace" description="Drops all data in database and creates a new one with base data only."/>
+
     <target name="db-wipe-public-schema" description="Drops and creates public database schema." hidden="true">
         <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
             <arg value="${path.bin-console}"/>
@@ -275,229 +289,6 @@
             <arg value="${path.bin-console}"/>
             <arg value="shopsys:schema:create"/>
         </exec>
-    </target>
-
-    <target name="dirs-create" description="Creates application directories for locks, docs, content, images, uploaded files, etc.">
-        <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
-            <arg value="${path.bin-console}"/>
-            <arg value="shopsys:create-directories"/>
-        </exec>
-    </target>
-
-    <target name="error-pages-generate" depends="prod-warmup,redis-check" description="Generates error pages displayed in production environment.">
-        <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
-            <arg value="${path.bin-console}"/>
-            <arg value="shopsys:error-page:generate-all"/>
-        </exec>
-    </target>
-
-    <target name="generate-friendly-urls" hidden="true">
-        <phingcall target="friendly-urls-generate"/>
-        <echo level="warning" message="This phing target is deprecated since Shopsys Framework 7.3.0, use 'friendly-urls-generate' instead."/>
-    </target>
-
-    <target name="friendly-urls-generate" description="Generates friendly urls for supported entities when missing.">
-        <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
-            <arg value="${path.bin-console}"/>
-            <arg value="shopsys:generate:friendly-url"/>
-        </exec>
-    </target>
-
-    <target name="grunt" depends="gruntfile,clean-styles" description="Builds CSS from LESS via Grunt.">
-        <exec executable="${path.grunt.executable}" dir="${path.root}" passthru="true" checkreturn="true"/>
-    </target>
-
-    <target name="gruntfile" description="Generates Gruntfile.js by domain settings." hidden="true">
-        <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
-            <arg value="${path.bin-console}"/>
-            <arg value="shopsys:generate:gruntfile"/>
-        </exec>
-    </target>
-
-    <target name="list" description="Hidden target to make Phing list all targets when called without an argument." hidden="true">
-        <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
-            <arg value="phing"/>
-            <arg value="-l"/>
-        </exec>
-    </target>
-
-    <target name="maintenance-off" description="Turns the maintenance page off.">
-        <delete file="${path.root}/MAINTENANCE"/>
-    </target>
-
-    <target name="maintenance-on" description="Turns the maintenance page on.">
-        <touch file="${path.root}/MAINTENANCE"/>
-    </target>
-
-    <target name="npm" description="Installs modules required for Grunt.">
-        <exec executable="${path.npm.executable}" dir="${path.root}" logoutput="true" passthru="true" checkreturn="true" >
-            <arg value="prune"/>
-            <arg value="--no-audit"/>
-        </exec>
-
-        <exec executable="${path.npm.executable}" dir="${path.root}" logoutput="true" passthru="true" checkreturn="true" >
-            <arg value="install"/>
-        </exec>
-    </target>
-
-    <target name="replace-domains-urls" hidden="true">
-        <phingcall target="domains-urls-replace"/>
-        <echo level="warning" message="This phing target is deprecated since Shopsys Framework 7.3.0, use 'domains-urls-replace' instead."/>
-    </target>
-
-    <target name="domains-urls-replace" description="Replaces domains urls in database by urls in configuration. You should run it when you modify domains_urls.yml">
-        <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
-            <arg value="${path.bin-console}"/>
-            <arg value="shopsys:domains-urls:replace"/>
-        </exec>
-    </target>
-
-    <target name="load-plugin-demo-data" hidden="true">
-        <phingcall target="plugin-demo-data-load"/>
-        <echo level="warning" message="This phing target is deprecated since Shopsys Framework 7.3.0, use 'plugin-demo-data-load' instead."/>
-    </target>
-
-    <target name="plugin-demo-data-load" description="Loads data fixtures of all registered plugins." hidden="true">
-        <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
-            <arg value="${path.bin-console}"/>
-            <arg value="shopsys:plugin-data-fixtures:load"/>
-        </exec>
-    </target>
-
-    <target name="warmup" description="Warms up cache.">
-        <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
-            <arg value="${path.bin-console}"/>
-            <arg value="cache:warmup"/>
-        </exec>
-    </target>
-
-    <target name="prod-warmup" description="Warms up cache for production environment." hidden="true">
-        <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
-            <arg value="${path.bin-console}"/>
-            <arg value="cache:warmup"/>
-            <arg value="--env=prod"/>
-        </exec>
-    </target>
-
-    <target name="generate-build-version" hidden="true">
-        <phingcall target="build-version-generate"/>
-        <echo level="warning" message="This phing target is deprecated since Shopsys Framework 7.3.0, use 'build-version-generate' instead."/>
-    </target>
-
-    <target name="build-version-generate" description="Generates parameters_version.yml config file with a new build version number.">
-        <exec executable="${path.php.executable}" checkreturn="true" outputProperty="version">
-            <arg value="-r"/>
-            <arg value="echo date('YmdHis');"/>
-        </exec>
-        <copy file="${path.app}/config/parameters_version.yml.dist" tofile="${path.app}/config/parameters_version.yml" overwrite="true">
-            <filterchain>
-                <replacetokens begintoken="%%" endtoken="%%">
-                    <token key="version" value="${version}"/>
-                </replacetokens>
-            </filterchain>
-        </copy>
-    </target>
-
-    <target name="wipe" depends="wipe-excluding-logs" description="Wipes out all generated and/or uploaded files.">
-        <delete failonerror="false" includeemptydirs="true">
-            <fileset dir="${path.var}/logs/"/>
-        </delete>
-    </target>
-
-    <target name="wipe-excluding-logs" depends="clean,clean-styles" description="Wipes out all generated and/or uploaded files except for logs.">
-        <delete failonerror="false" includeemptydirs="true">
-            <fileset dir="${path.var}/">
-                <exclude name=".gitkeep"/>
-                <exclude name="logs/**"/>
-                <exclude name="postgres-data/**"/>
-                <exclude name="elasticsearch-data/**"/>
-            </fileset>
-            <fileset dir="${path.build.stats}/">
-                <exclude name="/"/>
-            </fileset>
-            <fileset dir="${path.root}/docs/generated/">
-                <exclude name="/"/>
-            </fileset>
-            <fileset dir="${path.web}/components/">
-                <exclude name="/"/>
-            </fileset>
-            <fileset dir="${path.web}/content/">
-                <exclude name="/"/>
-            </fileset>
-            <fileset dir="${path.web}/content-test/">
-                <exclude name="/"/>
-            </fileset>
-        </delete>
-    </target>
-
-    <target name="build-dev" depends="build-version-generate,clean,composer-dev,npm,timezones-check,dirs-create,test-dirs-create,assets,db-migrations,domains-data-create,friendly-urls-generate,domains-urls-replace,product-search-recreate-structure,product-search-export-products,grunt,error-pages-generate,tests-acceptance-build,clean-redis-old,checks-diff" description="Builds application for development preserving your DB and runs checks on changed files."/>
-    <target name="build-dev-quick" depends="build-version-generate,clean,composer-dev,npm,dirs-create,test-dirs-create,assets,db-migrations,domains-data-create,friendly-urls-generate,domains-urls-replace,grunt,clean-redis-old" description="Builds application for development preserving your DB while skipping nonessential steps."/>
-    <target name="build-demo-dev" depends="build-version-generate,wipe-excluding-logs,composer-dev,npm,timezones-check,dirs-create,test-dirs-create,assets,db-demo,product-search-recreate-structure,product-search-export-products,grunt,error-pages-generate,tests-acceptance-build,clean-redis-old,checks-diff" description="Builds application for development with clean demo DB and runs checks on changed files."/>
-    <target name="build-demo-dev-quick" depends="build-version-generate,wipe-excluding-logs,composer-dev,npm,dirs-create,test-dirs-create,assets,db-demo,product-search-recreate-structure,product-search-export-products,grunt,clean-redis-old" description="Builds application for development with clean demo DB while skipping nonessential steps."/>
-    <target name="build-demo-ci" depends="build-version-generate,wipe-excluding-logs,timezones-check,dirs-create,test-dirs-create,db-demo,product-search-recreate-structure,product-search-export-products,grunt,error-pages-generate,clean-redis-old,checks-ci" description="Builds application for development with clean demo DB and runs CI checks."/>
-    <target name="build-demo-ci-diff" hidden="true">
-        <phingcall target="build-demo-ci"/>
-        <echo level="warning" message="This phing target is deprecated since Shopsys Framework 7.3.0, use 'build-demo-ci' instead."/>
-    </target>
-
-    <target name="checks" depends="checks-internal,standards,tests" description="Runs internal checks, coding standards and runs unit, DB and smoke tests."/>
-    <target name="checks-diff" depends="checks-internal,standards-diff,tests" description="Runs internal checks, coding standards on changed files and runs unit, DB and smoke tests."/>
-    <target name="checks-ci" depends="checks-internal,test-db-demo,tests-functional,tests-smoke,tests-acceptance" description="Runs internal checks and runs DB, smoke and acceptance tests."/>
-    <target name="checks-internal" depends="db-check-schema,timezones-check,redis-check,composer-check" description="Runs all internal checks, eg. availability of services or validity of configuration." hidden="true"/>
-    <target name="checks-ci-diff" hidden="true">
-        <phingcall target="checks-ci"/>
-        <echo level="warning" message="This phing target is deprecated since Shopsys Framework 7.3.0, use 'checks-ci' instead."/>
-    </target>
-
-    <target name="standards" depends="phplint,ecs,phpstan,twig-lint,yaml-lint,eslint-check" description="Checks coding standards."/>
-    <target name="standards-diff" depends="phplint-diff,ecs-diff,phpstan,twig-lint-diff,yaml-lint,eslint-check-diff" description="Checks coding standards in changed files."/>
-
-    <target name="test-db-demo" depends="clean,clean-redis,test-db-wipe-public-schema,test-db-import-basic-structure,test-db-migrations,test-domains-data-create,test-db-fixtures-demo,test-friendly-urls-generate,test-plugin-demo-data-load,test-domains-urls-replace" description="Drops all data in test database and creates a new one with demo data." hidden="true"/>
-    <target name="test-db-performance" depends="test-db-demo,test-db-fixtures-performance" description="Drops all data in test database and creates a new one with performance data."/>
-    <target name="tests-static" hidden="true">
-        <phingcall target="tests-unit"/>
-        <echo level="warning" message="This phing target is deprecated since Shopsys Framework 7.3.0, use 'tests-unit' instead."/>
-    </target>
-    <target name="tests" depends="test-db-demo,tests-unit,tests-functional,tests-smoke" description="Runs unit, functional and smoke tests. Builds new test database in the process."/>
-
-    <target name="tests-performance-run" depends="clean,clean-redis,test-db-performance,tests-performance-warmup,tests-performance" description="Runs performance tests. Builds new test database with performance data in the process."/>
-
-    <target name="composer-check" description="Checks if Composer lock file is valid." hidden="true">
-        <exec executable="${path.composer.executable}" logoutput="true" passthru="true" checkreturn="true">
-            <arg value="validate"/>
-            <arg value="--no-check-all"/>
-        </exec>
-    </target>
-
-    <target name="composer-dev" depends="composer-check" description="Installs dependencies for development.">
-        <exec executable="${path.composer.executable}" logoutput="true" passthru="true" checkreturn="true">
-            <arg value="install"/>
-        </exec>
-    </target>
-
-    <target name="dump-translations" hidden="true">
-        <phingcall target="translations-dump"/>
-        <echo level="warning" message="This phing target is deprecated since Shopsys Framework 7.3.0, use 'translations-dump' instead."/>
-    </target>
-
-    <target name="translations-dump" description="Extracts translatable messages from all source files in your project.">
-        <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
-            <arg value="${path.bin-console}"/>
-            <arg value="translation:extract"/>
-            <arg value="--bundle=ShopsysShopBundle"/>
-            <arg value="--dir=${path.src}/Shopsys/ShopBundle"/>
-            <arg value="--dir=${path.app}/Resources"/>
-            <arg value="--exclude-dir=frontend/plugins"/>
-            <arg value="--output-format=po"/>
-            <arg value="--output-dir=${path.src}/Shopsys/ShopBundle/Resources/translations"/>
-            <arg line="${translations.dump.flags}"/>
-            <arg line="${translations.dump.locales}"/>
-        </exec>
-    </target>
-
-    <target name="dump-translations-project-base" hidden="true">
-        <phingcall target="translations-dump"/>
-        <echo level="warning" message="This phing target is deprecated since Shopsys Framework 7.3.0, use 'translations-dump' instead."/>
     </target>
 
     <target name="diff-files" description="Finds changed files (against origin/master) and saves them into properties." hidden="true">
@@ -617,6 +408,99 @@
         </property>
     </target>
 
+    <target name="dirs-create" description="Creates application directories for locks, docs, content, images, uploaded files, etc.">
+        <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
+            <arg value="${path.bin-console}"/>
+            <arg value="shopsys:create-directories"/>
+        </exec>
+    </target>
+
+    <target name="domains-data-create" depends="domains-db-functions-create" description="Creates domains data for newly configured domains. You should run it when you modify domains.yml">
+        <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
+            <arg value="${path.bin-console}"/>
+            <arg value="shopsys:domains-data:create"/>
+        </exec>
+        <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
+            <arg value="${path.bin-console}"/>
+            <arg value="shopsys:recalculations"/>
+        </exec>
+    </target>
+
+    <target name="domains-db-functions-create" description="Creates new domains DB functions." hidden="true">
+        <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
+            <arg value="${path.bin-console}"/>
+            <arg value="shopsys:domains-db-functions:create"/>
+        </exec>
+    </target>
+
+    <target name="domains-urls-replace" description="Replaces domains urls in database by urls in configuration. You should run it when you modify domains_urls.yml">
+        <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
+            <arg value="${path.bin-console}"/>
+            <arg value="shopsys:domains-urls:replace"/>
+        </exec>
+    </target>
+
+    <target name="dump-translations" hidden="true">
+        <phingcall target="translations-dump"/>
+        <echo level="warning" message="This phing target is deprecated since Shopsys Framework 7.3.0, use 'translations-dump' instead."/>
+    </target>
+
+    <target name="dump-translations-project-base" hidden="true">
+        <phingcall target="translations-dump"/>
+        <echo level="warning" message="This phing target is deprecated since Shopsys Framework 7.3.0, use 'translations-dump' instead."/>
+    </target>
+
+    <target name="ecs" description="Checks coding standards in all files by PHP easy coding standards." hidden="true">
+        <exec executable="${path.ecs.executable}" logoutput="true" passthru="true" checkreturn="true">
+            <arg value="check"/>
+            <arg value="--clear-cache"/>
+            <arg path="${path.src}"/>
+            <arg path="${path.tests}"/>
+            <arg path="${path.root}/*.md"/>
+            <arg path="${path.root}/docs"/>
+        </exec>
+    </target>
+
+    <target name="ecs-diff" description="Checks coding standards in changed files by PHP easy coding standards." hidden="true">
+        <exec executable="${path.ecs.executable}" logoutput="true" passthru="true" checkreturn="true">
+            <arg value="check"/>
+            <arg path="${path.src}"/>
+            <arg path="${path.tests}"/>
+            <arg path="${path.root}/*.md"/>
+            <arg path="${path.root}/docs"/>
+        </exec>
+    </target>
+
+    <target name="ecs-fix" description="Checks and fixes automatically fixable coding standards in all files by PHP easy coding standards." hidden="true">
+        <exec executable="${path.ecs.executable}" logoutput="true" passthru="true" checkreturn="true">
+            <arg value="check"/>
+            <arg value="--clear-cache"/>
+            <arg value="--fix"/>
+            <arg path="${path.src}"/>
+            <arg path="${path.tests}"/>
+            <arg path="${path.root}/*.md"/>
+            <arg path="${path.root}/docs"/>
+        </exec>
+    </target>
+
+    <target name="ecs-fix-diff" description="Checks and fixes automatically fixable coding standards in changed files by PHP easy coding standards." hidden="true">
+        <exec executable="${path.ecs.executable}" logoutput="true" passthru="true" checkreturn="true">
+            <arg value="check"/>
+            <arg value="--fix"/>
+            <arg path="${path.src}"/>
+            <arg path="${path.tests}"/>
+            <arg path="${path.root}/*.md"/>
+            <arg path="${path.root}/docs"/>
+        </exec>
+    </target>
+
+    <target name="error-pages-generate" depends="prod-warmup,redis-check" description="Generates error pages displayed in production environment.">
+        <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
+            <arg value="${path.bin-console}"/>
+            <arg value="shopsys:error-page:generate-all"/>
+        </exec>
+    </target>
+
     <target name="eslint-check" description="Find JS coding standard violations in all files using ESLint and print human readable output." hidden="true">
         <exec executable="${path.eslint.executable}" passthru="true" checkreturn="true">
             <arg value="--color"/>
@@ -677,47 +561,62 @@
         </if>
     </target>
 
-    <target name="ecs" description="Checks coding standards in all files by PHP easy coding standards." hidden="true">
-        <exec executable="${path.ecs.executable}" logoutput="true" passthru="true" checkreturn="true">
-            <arg value="check"/>
-            <arg value="--clear-cache"/>
-            <arg path="${path.src}"/>
-            <arg path="${path.tests}"/>
-            <arg path="${path.root}/*.md"/>
-            <arg path="${path.root}/docs"/>
+    <target name="friendly-urls-generate" description="Generates friendly urls for supported entities when missing.">
+        <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
+            <arg value="${path.bin-console}"/>
+            <arg value="shopsys:generate:friendly-url"/>
         </exec>
     </target>
 
-    <target name="ecs-fix" description="Checks and fixes automatically fixable coding standards in all files by PHP easy coding standards." hidden="true">
-        <exec executable="${path.ecs.executable}" logoutput="true" passthru="true" checkreturn="true">
-            <arg value="check"/>
-            <arg value="--clear-cache"/>
-            <arg value="--fix"/>
-            <arg path="${path.src}"/>
-            <arg path="${path.tests}"/>
-            <arg path="${path.root}/*.md"/>
-            <arg path="${path.root}/docs"/>
+    <target name="generate-build-version" hidden="true">
+        <phingcall target="build-version-generate"/>
+        <echo level="warning" message="This phing target is deprecated since Shopsys Framework 7.3.0, use 'build-version-generate' instead."/>
+    </target>
+
+    <target name="generate-friendly-urls" hidden="true">
+        <phingcall target="friendly-urls-generate"/>
+        <echo level="warning" message="This phing target is deprecated since Shopsys Framework 7.3.0, use 'friendly-urls-generate' instead."/>
+    </target>
+
+    <target name="grunt" depends="gruntfile,clean-styles" description="Builds CSS from LESS via Grunt.">
+        <exec executable="${path.grunt.executable}" dir="${path.root}" passthru="true" checkreturn="true"/>
+    </target>
+
+    <target name="gruntfile" description="Generates Gruntfile.js by domain settings." hidden="true">
+        <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
+            <arg value="${path.bin-console}"/>
+            <arg value="shopsys:generate:gruntfile"/>
         </exec>
     </target>
 
-    <target name="ecs-diff" description="Checks coding standards in changed files by PHP easy coding standards." hidden="true">
-        <exec executable="${path.ecs.executable}" logoutput="true" passthru="true" checkreturn="true">
-            <arg value="check"/>
-            <arg path="${path.src}"/>
-            <arg path="${path.tests}"/>
-            <arg path="${path.root}/*.md"/>
-            <arg path="${path.root}/docs"/>
+    <target name="list" description="Hidden target to make Phing list all targets when called without an argument." hidden="true">
+        <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
+            <arg value="phing"/>
+            <arg value="-l"/>
         </exec>
     </target>
 
-    <target name="ecs-fix-diff" description="Checks and fixes automatically fixable coding standards in changed files by PHP easy coding standards." hidden="true">
-        <exec executable="${path.ecs.executable}" logoutput="true" passthru="true" checkreturn="true">
-            <arg value="check"/>
-            <arg value="--fix"/>
-            <arg path="${path.src}"/>
-            <arg path="${path.tests}"/>
-            <arg path="${path.root}/*.md"/>
-            <arg path="${path.root}/docs"/>
+    <target name="load-plugin-demo-data" hidden="true">
+        <phingcall target="plugin-demo-data-load"/>
+        <echo level="warning" message="This phing target is deprecated since Shopsys Framework 7.3.0, use 'plugin-demo-data-load' instead."/>
+    </target>
+
+    <target name="maintenance-off" description="Turns the maintenance page off.">
+        <delete file="${path.root}/MAINTENANCE"/>
+    </target>
+
+    <target name="maintenance-on" description="Turns the maintenance page on.">
+        <touch file="${path.root}/MAINTENANCE"/>
+    </target>
+
+    <target name="npm" description="Installs modules required for Grunt.">
+        <exec executable="${path.npm.executable}" dir="${path.root}" logoutput="true" passthru="true" checkreturn="true">
+            <arg value="prune"/>
+            <arg value="--no-audit"/>
+        </exec>
+
+        <exec executable="${path.npm.executable}" dir="${path.root}" logoutput="true" passthru="true" checkreturn="true">
+            <arg value="install"/>
         </exec>
     </target>
 
@@ -756,6 +655,56 @@
         </exec>
     </target>
 
+    <target name="plugin-demo-data-load" description="Loads data fixtures of all registered plugins." hidden="true">
+        <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
+            <arg value="${path.bin-console}"/>
+            <arg value="shopsys:plugin-data-fixtures:load"/>
+        </exec>
+    </target>
+
+    <target name="prod-warmup" description="Warms up cache for production environment." hidden="true">
+        <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
+            <arg value="${path.bin-console}"/>
+            <arg value="cache:warmup"/>
+            <arg value="--env=prod"/>
+        </exec>
+    </target>
+
+    <target name="product-search-create-structure" description="Creates structure for searching via elasticsearch." hidden="true">
+        <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
+            <arg value="${path.bin-console}"/>
+            <arg value="shopsys:product-search:create-structure"/>
+        </exec>
+    </target>
+
+    <target name="product-search-delete-structure" description="Deletes structure for searching via elasticsearch." hidden="true">
+        <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
+            <arg value="${path.bin-console}"/>
+            <arg value="shopsys:product-search:delete-structure"/>
+        </exec>
+    </target>
+
+    <target name="product-search-export-products" description="Exports all products for searching via elasticsearch.">
+        <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
+            <arg value="${path.bin-console}"/>
+            <arg value="shopsys:product-search:export-products"/>
+        </exec>
+    </target>
+
+    <target name="product-search-recreate-structure" depends="product-search-delete-structure,product-search-create-structure" description="Recreates structure for searching via elasticsearch (deletes existing structure and creates new one)"/>
+
+    <target name="redis-check" description="Checks availability of Redis" hidden="true">
+        <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
+            <arg value="${path.bin-console}"/>
+            <arg value="shopsys:redis:check-availability"/>
+        </exec>
+    </target>
+
+    <target name="replace-domains-urls" hidden="true">
+        <phingcall target="domains-urls-replace"/>
+        <echo level="warning" message="This phing target is deprecated since Shopsys Framework 7.3.0, use 'domains-urls-replace' instead."/>
+    </target>
+
     <target name="selenium-run" description="Runs the Selenium server for acceptance testing. ChromeDriver is required. Only for native installation (Selenium is always running in Docker setup).">
         <exec executable="${path.chromedriver.executable}" logoutput="true" passthru="true" checkreturn="true">
             <arg value="--port=4444"/>
@@ -770,162 +719,22 @@
         </exec>
     </target>
 
+    <target name="standards" depends="phplint,ecs,phpstan,twig-lint,yaml-lint,eslint-check" description="Checks coding standards."/>
+
+    <target name="standards-diff" depends="phplint-diff,ecs-diff,phpstan,twig-lint-diff,yaml-lint,eslint-check-diff" description="Checks coding standards in changed files."/>
+
     <target name="standards-fix" depends="ecs-fix,eslint-fix" description="Automatically fixes *some* coding standards violations in all files. Always run 'standards' to be sure there are no further violations."/>
 
     <target name="standards-fix-diff" depends="ecs-fix-diff,eslint-fix-diff" description="Automatically fixes *some* coding standards violations in changed files. Always run 'standards' to be sure there are no further violations."/>
-
-    <target name="tests-acceptance" depends="clean,clean-redis,test-db-dump" description="Runs acceptance tests. Running Selenium server is required (Selenium is always running in Docker setup).">
-        <available file="${path.env.test}" type="file" property="path.env.test.existed"/>
-        <if>
-            <not>
-                <equals arg1="${path.env.test.existed}" arg2="true"/>
-            </not>
-            <then>
-                <touch file="${path.root}/TEST"/>
-            </then>
-        </if>
-
-        <trycatch>
-            <try>
-                <exec executable="${path.codeception.executable}" logoutput="true" passthru="true" checkreturn="true">
-                    <arg value="run"/>
-                    <arg value="--config=${path.codeception.configuration}"/>
-                </exec>
-            </try>
-            <finally>
-                <if>
-                    <not>
-                        <equals arg1="${path.env.test.existed}" arg2="true"/>
-                    </not>
-                    <then>
-                        <delete file="${path.root}/TEST"/>
-                    </then>
-                </if>
-            </finally>
-        </trycatch>
-    </target>
-
-    <target name="tests-acceptance-build" description="Generates AcceptanceTesterActions.php (execute after change of Codeception modules, eg. StrictWebDriver)." hidden="true">
-        <exec executable="${path.codeception.executable}" logoutput="true" passthru="true" checkreturn="true">
-            <arg value="build"/>
-            <arg value="--config=${path.codeception.configuration}"/>
-        </exec>
-    </target>
-
-    <target name="tests-smoke" depends="clean,clean-redis" description="Runs smoke tests.">
-        <if>
-            <istrue value="${is-multidomain}"/>
-            <then>
-                <exec executable="${path.phpunit.executable}" logoutput="true" passthru="true" checkreturn="true">
-                    <arg value="--colors=always"/>
-                    <arg value="--testsuite"/>
-                    <arg value="Smoke"/>
-                    <arg value="--exclude-group"/>
-                    <arg value="singledomain"/>
-                    <arg value="--configuration"/>
-                    <arg value="${path.root}/phpunit.xml"/>
-                </exec>
-            </then>
-            <else>
-                <exec executable="${path.phpunit.executable}" logoutput="true" passthru="true" checkreturn="true">
-                    <arg value="--colors=always"/>
-                    <arg value="--testsuite"/>
-                    <arg value="Smoke"/>
-                    <arg value="--exclude-group"/>
-                    <arg value="multidomain"/>
-                    <arg value="--configuration"/>
-                    <arg value="${path.root}/phpunit.xml"/>
-                </exec>
-            </else>
-        </if>
-    </target>
-
-    <target name="tests-functional" depends="clean,clean-redis" description="Runs functional tests.">
-        <if>
-            <istrue value="${is-multidomain}"/>
-            <then>
-                <exec executable="${path.phpunit.executable}" logoutput="true" passthru="true" checkreturn="true">
-                    <arg value="--colors=always"/>
-                    <arg value="--testsuite"/>
-                    <arg value="Functional"/>
-                    <arg value="--exclude-group"/>
-                    <arg value="singledomain"/>
-                    <arg value="--configuration"/>
-                    <arg value="${path.root}/phpunit.xml"/>
-                </exec>
-            </then>
-            <else>
-                <exec executable="${path.phpunit.executable}" logoutput="true" passthru="true" checkreturn="true">
-                    <arg value="--colors=always"/>
-                    <arg value="--testsuite"/>
-                    <arg value="Functional"/>
-                    <arg value="--exclude-group"/>
-                    <arg value="multidomain"/>
-                    <arg value="--configuration"/>
-                    <arg value="${path.root}/phpunit.xml"/>
-                </exec>
-            </else>
-        </if>
-    </target>
-
-    <target name="tests-performance" depends="clean,clean-redis" description="Runs performance tests (assuming test DB has been filled with performance data and warmed up, see 'tests-performance-run').">
-        <exec executable="${path.phpunit.executable}" logoutput="true" passthru="true" checkreturn="true">
-            <arg value="--colors=always"/>
-            <arg value="--testsuite"/>
-            <arg value="Performance"/>
-            <arg value="--exclude-group"/>
-            <arg value="warmup"/>
-            <arg value="--configuration"/>
-            <arg value="${path.root}/phpunit.xml"/>
-        </exec>
-    </target>
-
-    <target name="tests-performance-warmup" description="Warms up cache for performance tests.">
-        <exec executable="${path.phpunit.executable}" logoutput="true" passthru="true" checkreturn="true">
-            <arg value="--colors=always"/>
-            <arg value="--testsuite"/>
-            <arg value="Performance"/>
-            <arg value="--group"/>
-            <arg value="warmup"/>
-            <arg value="--configuration"/>
-            <arg value="${path.root}/phpunit.xml"/>
-        </exec>
-    </target>
-
-    <target name="tests-unit" depends="clean" description="Runs unit tests.">
-        <exec executable="${path.phpunit.executable}" logoutput="true" passthru="true" checkreturn="true">
-            <arg value="--colors=always"/>
-            <arg value="--testsuite"/>
-            <arg value="Unit"/>
-            <arg value="--configuration"/>
-            <arg value="${path.root}/phpunit.xml"/>
-        </exec>
-    </target>
-
-    <target name="test-create-domains-db-functions" hidden="true">
-        <phingcall target="test-domains-db-functions-create"/>
-        <echo level="warning" message="This phing target is deprecated since Shopsys Framework 7.3.0, use 'test-domains-db-functions-create' instead."/>
-    </target>
-
-    <target name="test-domains-db-functions-create" description="Creates new domains DB functions in test database." hidden="true">
-        <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
-            <arg value="${path.bin-console}"/>
-            <arg value="shopsys:domains-db-functions:create"/>
-            <arg value="--env=test"/>
-        </exec>
-    </target>
 
     <target name="test-create-domains-data" hidden="true">
         <phingcall target="test-domains-data-create"/>
         <echo level="warning" message="This phing target is deprecated since Shopsys Framework 7.3.0, use 'test-domains-data-create' instead."/>
     </target>
 
-    <target name="test-domains-data-create" depends="test-domains-db-functions-create" description="Creates domains data in tests DB for newly configured domains." hidden="true">
-        <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
-            <arg value="${path.bin-console}"/>
-            <arg value="shopsys:domains-data:create"/>
-            <arg value="--env=test"/>
-        </exec>
+    <target name="test-create-domains-db-functions" hidden="true">
+        <phingcall target="test-domains-db-functions-create"/>
+        <echo level="warning" message="This phing target is deprecated since Shopsys Framework 7.3.0, use 'test-domains-db-functions-create' instead."/>
     </target>
 
     <target name="test-db-check-schema" depends="clean-redis,db-check-mapping" description="Checks if test database schema is satisfying ORM and returns a list of suggestions to fix it." hidden="true">
@@ -944,6 +753,8 @@
             <arg value="--env=test"/>
         </exec>
     </target>
+
+    <target name="test-db-demo" depends="clean,clean-redis,test-db-wipe-public-schema,test-db-import-basic-structure,test-db-migrations,test-domains-data-create,test-db-fixtures-demo,test-friendly-urls-generate,test-plugin-demo-data-load,test-domains-urls-replace" description="Drops all data in test database and creates a new one with demo data." hidden="true"/>
 
     <target name="test-db-dump" description="Dumps current test database into a file to be used in acceptance tests." hidden="true">
         <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
@@ -999,6 +810,8 @@
         </exec>
     </target>
 
+    <target name="test-db-performance" depends="test-db-demo,test-db-fixtures-performance" description="Drops all data in test database and creates a new one with performance data."/>
+
     <target name="test-db-wipe-public-schema" description="Drops and creates public database schema in test database." hidden="true">
         <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
             <arg value="${path.bin-console}"/>
@@ -1020,9 +833,28 @@
         </exec>
     </target>
 
-    <target name="test-generate-friendly-urls" hidden="true">
-        <phingcall target="test-friendly-urls-generate"/>
-        <echo level="warning" message="This phing target is deprecated since Shopsys Framework 7.3.0, use 'test-friendly-urls-generate' instead."/>
+    <target name="test-domains-data-create" depends="test-domains-db-functions-create" description="Creates domains data in tests DB for newly configured domains." hidden="true">
+        <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
+            <arg value="${path.bin-console}"/>
+            <arg value="shopsys:domains-data:create"/>
+            <arg value="--env=test"/>
+        </exec>
+    </target>
+
+    <target name="test-domains-db-functions-create" description="Creates new domains DB functions in test database." hidden="true">
+        <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
+            <arg value="${path.bin-console}"/>
+            <arg value="shopsys:domains-db-functions:create"/>
+            <arg value="--env=test"/>
+        </exec>
+    </target>
+
+    <target name="test-domains-urls-replace" description="Replaces domains urls in test database by urls in configuration." hidden="true">
+        <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
+            <arg value="${path.bin-console}"/>
+            <arg value="--env=test"/>
+            <arg value="shopsys:domains-urls:replace"/>
+        </exec>
     </target>
 
     <target name="test-friendly-urls-generate" description="Generates friendly urls for supported entities when missing in test DB." hidden="true">
@@ -1031,6 +863,11 @@
             <arg value="--env=test"/>
             <arg value="shopsys:generate:friendly-url"/>
         </exec>
+    </target>
+
+    <target name="test-generate-friendly-urls" hidden="true">
+        <phingcall target="test-friendly-urls-generate"/>
+        <echo level="warning" message="This phing target is deprecated since Shopsys Framework 7.3.0, use 'test-friendly-urls-generate' instead."/>
     </target>
 
     <target name="test-load-plugin-demo-data" hidden="true">
@@ -1051,11 +888,162 @@
         <echo level="warning" message="This phing target is deprecated since Shopsys Framework 7.3.0, use 'test-domains-urls-replace' instead."/>
     </target>
 
-    <target name="test-domains-urls-replace" description="Replaces domains urls in test database by urls in configuration." hidden="true">
+    <target name="tests" depends="test-db-demo,tests-unit,tests-functional,tests-smoke" description="Runs unit, functional and smoke tests. Builds new test database in the process."/>
+
+    <target name="tests-acceptance" depends="clean,clean-redis,test-db-dump" description="Runs acceptance tests. Running Selenium server is required (Selenium is always running in Docker setup).">
+        <available file="${path.env.test}" type="file" property="path.env.test.existed"/>
+        <if>
+            <not>
+                <equals arg1="${path.env.test.existed}" arg2="true"/>
+            </not>
+            <then>
+                <touch file="${path.root}/TEST"/>
+            </then>
+        </if>
+
+        <trycatch>
+            <try>
+                <exec executable="${path.codeception.executable}" logoutput="true" passthru="true" checkreturn="true">
+                    <arg value="run"/>
+                    <arg value="--config=${path.codeception.configuration}"/>
+                </exec>
+            </try>
+            <finally>
+                <if>
+                    <not>
+                        <equals arg1="${path.env.test.existed}" arg2="true"/>
+                    </not>
+                    <then>
+                        <delete file="${path.root}/TEST"/>
+                    </then>
+                </if>
+            </finally>
+        </trycatch>
+    </target>
+
+    <target name="tests-acceptance-build" description="Generates AcceptanceTesterActions.php (execute after change of Codeception modules, eg. StrictWebDriver)." hidden="true">
+        <exec executable="${path.codeception.executable}" logoutput="true" passthru="true" checkreturn="true">
+            <arg value="build"/>
+            <arg value="--config=${path.codeception.configuration}"/>
+        </exec>
+    </target>
+
+    <target name="tests-functional" depends="clean,clean-redis" description="Runs functional tests.">
+        <if>
+            <istrue value="${is-multidomain}"/>
+            <then>
+                <exec executable="${path.phpunit.executable}" logoutput="true" passthru="true" checkreturn="true">
+                    <arg value="--colors=always"/>
+                    <arg value="--testsuite"/>
+                    <arg value="Functional"/>
+                    <arg value="--exclude-group"/>
+                    <arg value="singledomain"/>
+                    <arg value="--configuration"/>
+                    <arg value="${path.root}/phpunit.xml"/>
+                </exec>
+            </then>
+            <else>
+                <exec executable="${path.phpunit.executable}" logoutput="true" passthru="true" checkreturn="true">
+                    <arg value="--colors=always"/>
+                    <arg value="--testsuite"/>
+                    <arg value="Functional"/>
+                    <arg value="--exclude-group"/>
+                    <arg value="multidomain"/>
+                    <arg value="--configuration"/>
+                    <arg value="${path.root}/phpunit.xml"/>
+                </exec>
+            </else>
+        </if>
+    </target>
+
+    <target name="tests-performance" depends="clean,clean-redis" description="Runs performance tests (assuming test DB has been filled with performance data and warmed up, see 'tests-performance-run').">
+        <exec executable="${path.phpunit.executable}" logoutput="true" passthru="true" checkreturn="true">
+            <arg value="--colors=always"/>
+            <arg value="--testsuite"/>
+            <arg value="Performance"/>
+            <arg value="--exclude-group"/>
+            <arg value="warmup"/>
+            <arg value="--configuration"/>
+            <arg value="${path.root}/phpunit.xml"/>
+        </exec>
+    </target>
+
+    <target name="tests-performance-run" depends="clean,clean-redis,test-db-performance,tests-performance-warmup,tests-performance" description="Runs performance tests. Builds new test database with performance data in the process."/>
+
+    <target name="tests-performance-warmup" description="Warms up cache for performance tests.">
+        <exec executable="${path.phpunit.executable}" logoutput="true" passthru="true" checkreturn="true">
+            <arg value="--colors=always"/>
+            <arg value="--testsuite"/>
+            <arg value="Performance"/>
+            <arg value="--group"/>
+            <arg value="warmup"/>
+            <arg value="--configuration"/>
+            <arg value="${path.root}/phpunit.xml"/>
+        </exec>
+    </target>
+
+    <target name="tests-smoke" depends="clean,clean-redis" description="Runs smoke tests.">
+        <if>
+            <istrue value="${is-multidomain}"/>
+            <then>
+                <exec executable="${path.phpunit.executable}" logoutput="true" passthru="true" checkreturn="true">
+                    <arg value="--colors=always"/>
+                    <arg value="--testsuite"/>
+                    <arg value="Smoke"/>
+                    <arg value="--exclude-group"/>
+                    <arg value="singledomain"/>
+                    <arg value="--configuration"/>
+                    <arg value="${path.root}/phpunit.xml"/>
+                </exec>
+            </then>
+            <else>
+                <exec executable="${path.phpunit.executable}" logoutput="true" passthru="true" checkreturn="true">
+                    <arg value="--colors=always"/>
+                    <arg value="--testsuite"/>
+                    <arg value="Smoke"/>
+                    <arg value="--exclude-group"/>
+                    <arg value="multidomain"/>
+                    <arg value="--configuration"/>
+                    <arg value="${path.root}/phpunit.xml"/>
+                </exec>
+            </else>
+        </if>
+    </target>
+
+    <target name="tests-static" hidden="true">
+        <phingcall target="tests-unit"/>
+        <echo level="warning" message="This phing target is deprecated since Shopsys Framework 7.3.0, use 'tests-unit' instead."/>
+    </target>
+
+    <target name="tests-unit" depends="clean" description="Runs unit tests.">
+        <exec executable="${path.phpunit.executable}" logoutput="true" passthru="true" checkreturn="true">
+            <arg value="--colors=always"/>
+            <arg value="--testsuite"/>
+            <arg value="Unit"/>
+            <arg value="--configuration"/>
+            <arg value="${path.root}/phpunit.xml"/>
+        </exec>
+    </target>
+
+    <target name="timezones-check" description="Checks uniformity of PHP and Postgres timezones." hidden="true">
         <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
             <arg value="${path.bin-console}"/>
-            <arg value="--env=test"/>
-            <arg value="shopsys:domains-urls:replace"/>
+            <arg value="shopsys:check-timezones"/>
+        </exec>
+    </target>
+
+    <target name="translations-dump" description="Extracts translatable messages from all source files in your project.">
+        <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
+            <arg value="${path.bin-console}"/>
+            <arg value="translation:extract"/>
+            <arg value="--bundle=ShopsysShopBundle"/>
+            <arg value="--dir=${path.src}/Shopsys/ShopBundle"/>
+            <arg value="--dir=${path.app}/Resources"/>
+            <arg value="--exclude-dir=frontend/plugins"/>
+            <arg value="--output-format=po"/>
+            <arg value="--output-dir=${path.src}/Shopsys/ShopBundle/Resources/translations"/>
+            <arg line="${translations.dump.flags}"/>
+            <arg line="${translations.dump.locales}"/>
         </exec>
     </target>
 
@@ -1064,13 +1052,6 @@
             <arg value="${path.bin-console}"/>
             <arg value="lint:twig"/>
             <arg value="@ShopsysShopBundle"/>
-        </exec>
-    </target>
-
-    <target name="timezones-check" description="Checks uniformity of PHP and Postgres timezones." hidden="true">
-        <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
-            <arg value="${path.bin-console}"/>
-            <arg value="shopsys:check-timezones"/>
         </exec>
     </target>
 
@@ -1087,6 +1068,45 @@
                 </exec>
             </then>
         </if>
+    </target>
+
+    <target name="warmup" description="Warms up cache.">
+        <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
+            <arg value="${path.bin-console}"/>
+            <arg value="cache:warmup"/>
+        </exec>
+    </target>
+
+    <target name="wipe" depends="wipe-excluding-logs" description="Wipes out all generated and/or uploaded files.">
+        <delete failonerror="false" includeemptydirs="true">
+            <fileset dir="${path.var}/logs/"/>
+        </delete>
+    </target>
+
+    <target name="wipe-excluding-logs" depends="clean,clean-styles" description="Wipes out all generated and/or uploaded files except for logs.">
+        <delete failonerror="false" includeemptydirs="true">
+            <fileset dir="${path.var}/">
+                <exclude name=".gitkeep"/>
+                <exclude name="logs/**"/>
+                <exclude name="postgres-data/**"/>
+                <exclude name="elasticsearch-data/**"/>
+            </fileset>
+            <fileset dir="${path.build.stats}/">
+                <exclude name="/"/>
+            </fileset>
+            <fileset dir="${path.root}/docs/generated/">
+                <exclude name="/"/>
+            </fileset>
+            <fileset dir="${path.web}/components/">
+                <exclude name="/"/>
+            </fileset>
+            <fileset dir="${path.web}/content/">
+                <exclude name="/"/>
+            </fileset>
+            <fileset dir="${path.web}/content-test/">
+                <exclude name="/"/>
+            </fileset>
+        </delete>
     </target>
 
     <target name="yaml-lint" description="Checks syntax of Yaml files." hidden="true">
