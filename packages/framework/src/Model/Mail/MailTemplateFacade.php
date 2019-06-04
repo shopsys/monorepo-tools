@@ -2,6 +2,7 @@
 
 namespace Shopsys\FrameworkBundle\Model\Mail;
 
+use BadMethodCallException;
 use Doctrine\ORM\EntityManagerInterface;
 use Shopsys\FrameworkBundle\Component\Domain\Domain;
 use Shopsys\FrameworkBundle\Component\UploadedFile\UploadedFileFacade;
@@ -46,6 +47,11 @@ class MailTemplateFacade
     protected $mailTemplateDataFactory;
 
     /**
+     * @var \Shopsys\FrameworkBundle\Model\Mail\MailTemplateAttachmentFilepathProvider|null
+     */
+    protected $mailTemplateAttachmentFilepathProvider;
+
+    /**
      * @param \Doctrine\ORM\EntityManagerInterface $em
      * @param \Shopsys\FrameworkBundle\Model\Mail\MailTemplateRepository $mailTemplateRepository
      * @param \Shopsys\FrameworkBundle\Model\Order\Status\OrderStatusRepository $orderStatusRepository
@@ -70,6 +76,19 @@ class MailTemplateFacade
         $this->uploadedFileFacade = $uploadedFileFacade;
         $this->mailTemplateFactory = $mailTemplateFactory;
         $this->mailTemplateDataFactory = $mailTemplateDataFactory;
+    }
+
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Mail\MailTemplateAttachmentFilepathProvider $mailTemplateAttachmentFilepathProvider
+     * @deprecated Will be changed to constructor injection in 8.0
+     */
+    public function setMailTemplateAttachmentFilepathProvider(MailTemplateAttachmentFilepathProvider $mailTemplateAttachmentFilepathProvider): void
+    {
+        if ($this->mailTemplateAttachmentFilepathProvider !== null) {
+            throw new BadMethodCallException(sprintf('Method "%s" has been already called and cannot be called multiple times.', __METHOD__));
+        }
+
+        $this->mailTemplateAttachmentFilepathProvider = $mailTemplateAttachmentFilepathProvider;
     }
 
     /**
@@ -206,10 +225,17 @@ class MailTemplateFacade
      */
     public function getMailTemplateAttachmentsFilepaths(MailTemplate $mailTemplate)
     {
+        if ($this->mailTemplateAttachmentFilepathProvider === null) {
+            throw new BadMethodCallException(sprintf('Method "%s::setMailTemplateAttachmentFilepathProvider()" has to be called in "services.yml" definition.', __CLASS__));
+        }
+
         $filepaths = [];
         if ($this->uploadedFileFacade->hasUploadedFile($mailTemplate)) {
             $uploadedFile = $this->uploadedFileFacade->getUploadedFileByEntity($mailTemplate);
-            $filepaths[] = $this->uploadedFileFacade->getAbsoluteUploadedFileFilepath($uploadedFile);
+
+            $temporaryFilePath = $this->mailTemplateAttachmentFilepathProvider->getTemporaryFilepath($uploadedFile);
+
+            $filepaths[] = $temporaryFilePath;
         }
 
         return $filepaths;
