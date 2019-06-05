@@ -1,24 +1,21 @@
 language: php
 
+php:
+    - 7.2
+    - 7.3
+
+env:
+    - DEPENDENCIES=""
+    - DEPENDENCIES="--prefer-lowest --prefer-stable"
+
 cache:
     directories:
         - ~/.composer/cache
 
-matrix:
-    include:
-        - { php: 5.6 }
-        - { php: 5.6, env: DEPENDENCIES="--prefer-lowest --prefer-stable" }
-        - { php: 7.0 }
-        - { php: 7.1, env: CHECK_STANDARDS="true" }
-        - { php: 7.1, env: DEPENDENCIES="--prefer-lowest --prefer-stable" }
-        - { php: 7.2 }
-        - { php: 7.3 }
-
 install:
-    - if [[ "$CHECK_STANDARDS" == "true" ]]; then composer require --dev shopsys/coding-standards:dev-master; fi
     - travis_retry composer update $DEPENDENCIES
 
 script:
     - php vendor/bin/parallel-lint ./src ./tests
     - php vendor/bin/phpunit tests
-    - if [[ "$CHECK_STANDARDS" == "true" ]]; then php vendor/bin/ecs check --verbose ./src ./tests; fi
+    - php vendor/bin/ecs check --verbose ./src ./tests

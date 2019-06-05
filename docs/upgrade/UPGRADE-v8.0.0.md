@@ -69,6 +69,7 @@ There you can find links to upgrade notes for other versions too.
             - use Ivory\CKEditorBundle\Form\Type\CKEditorType;
             + use FOS\CKEditorBundle\Form\Type\CKEditorType;
             ```
+- update the minimal PHP version in your `composer.json` in `require` and `config.platform` section to `7.2` because version `7.1` is no longer supported in Shopsys Framework ([#1066](https://github.com/shopsys/shopsys/pull/1066))
 
 ### Tools
 - improve `build-dev.xml` to use test prefix for elasticsearch in tests ([#933](https://github.com/shopsys/shopsys/pull/933))

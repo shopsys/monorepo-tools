@@ -21,7 +21,7 @@
         }
     },
     "require": {
-        "php": "^7.1",
+        "php": "^7.2",
         "ext-simplexml": "*",
         "ext-pdo": "*",
         "ext-json": "*",
@@ -37,7 +37,7 @@
         "symfony/symfony": "^3.4.8"
     },
     "require-dev": {
-        "phpunit/phpunit": "^6.0|^7.0",
+        "phpunit/phpunit": "^7.0",
         "shopsys/coding-standards": "8.0.x-dev",
         "twig/extensions": "^1.5.1",
         "twig/twig": "^2.4.8"
