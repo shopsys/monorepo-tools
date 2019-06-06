@@ -90,8 +90,6 @@ New targets would look like
 
 and these targets only have to be registered in system crontab.
 
-*Note: Do not delete default `cron` target. It may come in handy.*
-
 ## Pitfalls
 - If you tag cron module with another instance without changes in Phing targets, your jobs will not be executed automatically, because command will hold on instance choice question.
 - You can easily set your system to run too much cron jobs at once, resulting in server response time slowdown.

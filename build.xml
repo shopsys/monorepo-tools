@@ -1,20 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="Shopsys Framework" default="list">
 
-    <property name="path.root" value="./project-base"/>
-    <property name="path.vendor" value="./vendor"/>
-    <property name="path.packages" value="./packages"/>
-    <property name="path.bin-console" value="./project-base/bin/console"/>
+    <property name="path.root" value="${project.basedir}/project-base"/>
+    <property name="path.vendor" value="${project.basedir}/vendor"/>
+    <property name="path.packages" value="${project.basedir}/packages"/>
     <property name="path.framework" value="${path.packages}/framework"/>
+    <property name="path.utils" value="${project.basedir}/utils"/>
+    <property name="translations.dump.flags" value=""/>
 
-    <import file="project-base/build-dev.xml" />
-    <import file="project-base/build.xml" />
+    <import file="${path.framework}/build.xml"/>
+
+    <target name="clean" description="Cleans up directories with cache and scripts which are generated on demand.">
+        <phingcall target="shopsys_framework.clean"/>
+        <delete failonerror="false" includeemptydirs="true" quiet="true">
+            <filelist dir="${path.root}" files="migrations-lock.yml"/>
+        </delete>
+    </target>
 
     <target name="composer-dev" description="Installs dependencies for development if composer.lock is valid, otherwise runs composer update.">
         <exec executable="${path.composer.executable}" returnProperty="composer.validate.returnCode">
-            <arg value="validate" />
-            <arg value="--no-check-all" />
-            <arg value="--no-check-publish" />
+            <arg value="validate"/>
+            <arg value="--no-check-all"/>
+            <arg value="--no-check-publish"/>
         </exec>
         <if>
             <equals arg1="${composer.validate.returnCode}" arg2="0"/>
@@ -30,152 +37,154 @@
         <exec executable="${path.composer.executable}" logoutput="true" passthru="true" checkreturn="true">
             <arg value="${composer.action}"/>
         </exec>
-        <phingcall target="composer-check" />
+        <phingcall target="composer-check"/>
     </target>
 
-    <target name="standards" depends="phplint,ecs,phpstan,twig-lint,yaml-lint,eslint-check,standards-packages,standards-utils" description="Checks coding standards in the project-base, packages and utils folder."/>
-    <target name="standards-diff" depends="phplint-diff,ecs-diff,phpstan,twig-lint-diff,yaml-lint,eslint-check-diff,standards-packages, standards-utils" description="Checks coding standards on changed files in the project-base, packages and utils folder."/>
-
-    <target name="clean" description="Cleans up directories with cache and scripts which are generated on demand.">
-        <delete failonerror="false" includeemptydirs="true">
-            <fileset dir="${path.var}/cache/">
-                <exclude name="/" />
-            </fileset>
-            <fileset dir="${path.web.scripts}/">
-                <exclude name="/" />
-            </fileset>
-        </delete>
-        <delete failonerror="false" includeemptydirs="true" quiet="true">
-            <filelist dir="${path.root}" files="migrations-lock.yml"/>
-        </delete>
+    <target name="ecs" description="Checks coding standards in all files in the whole monorepo by PHP easy coding standards." hidden="true">
+        <exec executable="${path.ecs.executable}" logoutput="true" passthru="true" checkreturn="true">
+            <arg value="check"/>
+            <arg value="--clear-cache"/>
+            <arg path="${path.src}"/>
+            <arg path="${path.tests}"/>
+            <arg path="${path.root}/*.md"/>
+            <arg path="${path.root}/docs"/>
+            <arg path="${path.packages}/*/src"/>
+            <arg path="${path.packages}/*/tests"/>
+            <arg path="${path.packages}/*/*.md"/>
+            <arg path="${path.utils}/*/src"/>
+            <arg path="${path.utils}/*/tests"/>
+            <arg path="${project.basedir}/*.md"/>
+            <arg path="${project.basedir}/docs"/>
+        </exec>
     </target>
 
-    <target name="standards-fix" description="Automatically fixes some coding standards violations in the project-base, packages and utils folder.">
-        <phingcall target="ecs-fix" />
-        <phingcall target="eslint-fix" />
-        <phingcall target="standards-fix-packages" />
-        <phingcall target="standards-fix-utils" />
+    <target name="ecs-diff" description="Checks coding standards in changed files in the whole monorepo by PHP easy coding standards." hidden="true">
+        <exec executable="${path.ecs.executable}" logoutput="true" passthru="true" checkreturn="true">
+            <arg value="check"/>
+            <arg path="${path.src}"/>
+            <arg path="${path.tests}"/>
+            <arg path="${path.root}/*.md"/>
+            <arg path="${path.root}/docs"/>
+            <arg path="${path.packages}/*/src"/>
+            <arg path="${path.packages}/*/tests"/>
+            <arg path="${path.packages}/*/*.md"/>
+            <arg path="${path.utils}/*/src"/>
+            <arg path="${path.utils}/*/tests"/>
+            <arg path="${project.basedir}/*.md"/>
+            <arg path="${project.basedir}/docs"/>
+        </exec>
     </target>
 
-    <target name="standards-fix-diff" description="Automatically fixes some coding standards violations in changed files in project-base and all files in packages.">
-        <phingcall target="ecs-fix-diff" />
-        <phingcall target="eslint-fix-diff" />
-        <phingcall target="standards-fix-packages-diff" />
-        <phingcall target="standards-fix-utils" />
+    <target name="ecs-fix" description="Checks and fixes automatically fixable coding standards in all files in the whole monorepo by PHP easy coding standards." hidden="true">
+        <exec executable="${path.ecs.executable}" logoutput="true" passthru="true" checkreturn="true">
+            <arg value="check"/>
+            <arg value="--clear-cache"/>
+            <arg value="--fix"/>
+            <arg path="${path.src}"/>
+            <arg path="${path.tests}"/>
+            <arg path="${path.root}/*.md"/>
+            <arg path="${path.root}/docs"/>
+            <arg path="${path.packages}/*/src"/>
+            <arg path="${path.packages}/*/tests"/>
+            <arg path="${path.packages}/*/*.md"/>
+            <arg path="${path.utils}/*/src"/>
+            <arg path="${path.utils}/*/tests"/>
+            <arg path="${project.basedir}/*.md"/>
+            <arg path="${project.basedir}/docs"/>
+        </exec>
     </target>
 
-    <target name="standards-packages" description="Checks coding standards in all packages.">
+    <target name="ecs-fix-diff" description="Checks and fixes automatically fixable coding standards in changed files in the whole monorepo by PHP easy coding standards." hidden="true">
+        <exec executable="${path.ecs.executable}" logoutput="true" passthru="true" checkreturn="true">
+            <arg value="check"/>
+            <arg value="--fix"/>
+            <arg path="${path.src}"/>
+            <arg path="${path.tests}"/>
+            <arg path="${path.root}/*.md"/>
+            <arg path="${path.root}/docs"/>
+            <arg path="${path.packages}/*/src"/>
+            <arg path="${path.packages}/*/tests"/>
+            <arg path="${path.packages}/*/*.md"/>
+            <arg path="${path.utils}/*/src"/>
+            <arg path="${path.utils}/*/tests"/>
+            <arg path="${project.basedir}/*.md"/>
+            <arg path="${project.basedir}/docs"/>
+        </exec>
+    </target>
+
+    <target name="eslint-check" description="Find JS coding standard violations in all files using ESLint in the whole monorepo and print human readable output." hidden="true">
+        <phingcall target="shopsys_framework.eslint-check"/>
+        <exec executable="${path.eslint.executable}" passthru="true" checkreturn="true">
+            <arg value="--color"/>
+            <arg path="${path.framework}/src/Resources/scripts"/>
+            <arg value="--config"/>
+            <arg path="${path.framework}/.eslintrc.json"/>
+            <arg value="--ignore-path"/>
+            <arg path="${path.framework}/.eslintignore"/>
+        </exec>
+    </target>
+
+    <target name="eslint-check-diff" hidden="true">
+        <echo level="info" message="Checking only changed files via 'eslint-check-diff' not supported in monorepo. Running 'eslint-check' instead..."/>
+        <phingcall target="eslint-check"/>
+    </target>
+
+    <target name="eslint-fix" description="Fix JS coding standard violations in all files using ESLint in the whole monorepo." hidden="true">
+        <phingcall target="shopsys_framework.eslint-fix"/>
+        <exec executable="${path.eslint.executable}" passthru="true" checkreturn="true">
+            <arg value="--color"/>
+            <arg value="--fix"/>
+            <arg path="${path.framework}/src/Resources/scripts"/>
+            <arg value="--config"/>
+            <arg path="${path.framework}/.eslintrc.json"/>
+            <arg value="--ignore-path"/>
+            <arg path="${path.framework}/.eslintignore"/>
+        </exec>
+    </target>
+
+    <target name="eslint-fix-diff" hidden="true">
+        <echo level="info" message="Fixing only changed files via 'eslint-fix-diff' not supported in monorepo. Running 'eslint-fix' instead..."/>
+        <phingcall target="eslint-fix"/>
+    </target>
+
+    <target name="phing-targets-sorting-check" description="Checks the sorting of phing targets." hidden="true">
+        <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
+            <arg value="${path.bin-console}"/>
+            <arg value="shopsys:phing-targets:sort"/>
+            <arg value="--check"/>
+            <arg path="${project.basedir}/build.xml"/>
+            <arg path="${path.root}/build.xml"/>
+            <arg path="${path.framework}/build.xml"/>
+        </exec>
+    </target>
+
+    <target name="phing-targets-sorting-fix" description="Sorts the phing targets automatically." hidden="true">
+        <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
+            <arg value="${path.bin-console}"/>
+            <arg value="shopsys:phing-targets:sort"/>
+            <arg path="${project.basedir}/build.xml"/>
+            <arg path="${path.root}/build.xml"/>
+            <arg path="${path.framework}/build.xml"/>
+        </exec>
+    </target>
+
+    <target name="phplint" description="Checks syntax of PHP files in the whole monorepo." hidden="true">
         <exec executable="${path.phplint.executable}" logoutput="true" passthru="true" checkreturn="true">
-            <arg path="./packages/*/src"/>
-            <arg path="./packages/*/tests" />
-        </exec>
-        <exec executable="${path.ecs.executable}" logoutput="true" passthru="true" checkreturn="true">
-            <arg value="check" />
-            <arg path="./packages/*/src"/>
-            <arg path="./packages/*/tests" />
-            <arg path="./packages/*/*.md"/>
-            <arg path="./*.md"/>
-            <arg path="./docs"/>
-        </exec>
-        <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
-            <arg value="${path.bin-console}" />
-            <arg value="lint:twig" />
-            <arg value="@ShopsysFrameworkBundle" />
-        </exec>
-        <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
-            <arg value="${path.bin-console}" />
-            <arg value="lint:yaml" />
-            <arg value="@ShopsysFrameworkBundle" />
-            <arg value="--parse-tags" />
-        </exec>
-        <exec executable="${path.eslint.executable}" passthru="true" checkreturn="true">
-            <arg value="--color" />
-            <arg path="${path.framework}/src/Resources/scripts" />
-            <arg value="--config" />
-            <arg path="${path.framework}/.eslintrc.json" />
-            <arg value="--ignore-path" />
-            <arg path="${path.framework}/.eslintignore" />
+            <arg path="${path.src}"/>
+            <arg path="${path.tests}"/>
+            <arg path="${path.packages}/*/src"/>
+            <arg path="${path.packages}/*/tests"/>
+            <arg path="${path.utils}/*/src"/>
+            <arg path="${path.utils}/*/tests"/>
         </exec>
     </target>
 
-    <target name="standards-fix-packages" description="Automatically fixes some coding standards violations in all packages.">
-        <exec executable="${path.ecs.executable}" logoutput="true" passthru="true" checkreturn="true">
-            <arg value="check" />
-            <arg value="--clear-cache" />
-            <arg value="--fix" />
-            <arg path="./packages/*/src"/>
-            <arg path="./packages/*/tests" />
-            <arg path="./packages/*/*.md"/>
-            <arg path="./*.md"/>
-            <arg path="./docs"/>
-        </exec>
-        <exec executable="${path.eslint.executable}" passthru="true" checkreturn="true">
-            <arg value="--color" />
-            <arg value="--fix" />
-            <arg path="${path.framework}/src/Resources/scripts" />
-            <arg value="--config" />
-            <arg path="${path.framework}/.eslintrc.json" />
-            <arg value="--ignore-path" />
-            <arg path="${path.framework}/.eslintignore" />
-        </exec>
+    <target name="phplint-diff" hidden="true">
+        <echo level="info" message="Checking only changed files via 'phplint-diff' not supported in monorepo. Running 'phplint' instead..."/>
+        <phingcall target="phplint"/>
     </target>
 
-    <target name="standards-fix-packages-diff" description="Automatically fixes some coding standards violations in all changed files of packages">
-        <exec executable="${path.ecs.executable}" logoutput="true" passthru="true" checkreturn="true">
-            <arg value="check" />
-            <arg value="--fix" />
-            <arg path="./packages/*/src"/>
-            <arg path="./packages/*/tests" />
-            <arg path="./packages/*/*.md"/>
-            <arg path="./*.md"/>
-            <arg path="./docs"/>
-        </exec>
-        <exec executable="${path.eslint.executable}" passthru="true" checkreturn="true">
-            <arg value="--color" />
-            <arg value="--fix" />
-            <arg path="${path.framework}/src/Resources/scripts" />
-            <arg value="--config" />
-            <arg path="${path.framework}/.eslintrc.json" />
-            <arg value="--ignore-path" />
-            <arg path="${path.framework}/.eslintignore" />
-        </exec>
-    </target>
-
-    <target name="standards-utils" description="Checks coding standards in monorepo utils folder">
-        <exec executable="${path.phplint.executable}" logoutput="true" passthru="true" checkreturn="true">
-            <arg path="./utils/*/src"/>
-            <arg path="./utils/*/tests"/>
-        </exec>
-        <exec executable="${path.ecs.executable}" logoutput="true" passthru="true" checkreturn="true">
-            <arg value="check" />
-            <arg path="./utils/*/src"/>
-            <arg path="./utils/*/tests"/>
-        </exec>
-        <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
-            <arg value="${path.bin-console}" />
-            <arg value="lint:yaml" />
-            <arg value="./utils/*/src"/>
-            <arg value="--parse-tags" />
-        </exec>
-        <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
-            <arg value="${path.bin-console}" />
-            <arg value="lint:yaml" />
-            <arg value="./utils/*/tests"/>
-            <arg value="--parse-tags" />
-        </exec>
-    </target>
-
-    <target name="standards-fix-utils" description="Automatically fixes coding standards violations in monorepo utils folder">
-        <exec executable="${path.ecs.executable}" logoutput="true" passthru="true" checkreturn="true">
-            <arg value="check" />
-            <arg value="--clear-cache" />
-            <arg value="--fix" />
-            <arg path="./utils/*/src"/>
-            <arg path="./utils/*/tests"/>
-        </exec>
-    </target>
-
-    <target name="phpstan" depends="tests-acceptance-build" description="Performs static analysis of PHP files using PHPStan on all packages.">
+    <target name="phpstan" depends="tests-acceptance-build" description="Performs static analysis of PHP files using PHPStan on all packages." hidden="true">
         <exec executable="${path.phpstan.executable}" logoutput="true" passthru="true" checkreturn="true">
             <arg value="analyze"/>
             <arg value="-c"/>
@@ -184,134 +193,161 @@
             <arg path="${path.packages}/*/tests"/>
             <arg path="${path.root}/src"/>
             <arg path="${path.root}/tests"/>
-            <arg path="./utils/*/src"/>
-            <arg path="./utils/*/tests"/>
-            <arg value="--level=4"/>
+            <arg path="${path.utils}/*/src"/>
+            <arg path="${path.utils}/*/tests"/>
+            <arg value="--level=${phpstan.level}"/>
             <arg value="-vvv"/>
         </exec>
     </target>
 
-    <target name="tests-static" depends="tests-unit,tests-packages,tests-utils" description="Runs unit tests and tests of all packages and utils."/>
+    <target name="standards" depends="shopsys_framework.standards,phing-targets-sorting-check" description="Checks coding standards."/>
 
-    <target name="tests-utils">
-        <exec executable="${path.vendor}/bin/phpunit" logoutput="true" passthru="true" checkreturn="true">
-            <arg value="./utils/releaser/tests/"/>
-        </exec>
-    </target>
+    <target name="standards-diff" depends="shopsys_framework.standards-diff,phing-targets-sorting-check" description="Checks coding standards in changed files."/>
 
-    <target name="tests-packages" description="Runs tests of packages.">
+    <target name="standards-fix" depends="shopsys_framework.standards-fix,phing-targets-sorting-fix" description="Automatically fixes *some* coding standards violations in all files. Always run 'standards' to be sure there are no further violations."/>
+
+    <target name="standards-fix-diff" depends="shopsys_framework.standards-fix-diff,phing-targets-sorting-fix" description="Automatically fixes *some* coding standards violations in changed files. Always run 'standards' to be sure there are no further violations."/>
+
+    <target name="tests-unit" description="Runs unit tests in the whole monorepo.">
+        <phingcall target="shopsys_framework.tests-unit"/>
         <exec executable="${path.vendor}/bin/phpunit" logoutput="true" passthru="true" checkreturn="true">
+            <arg value="--colors=always"/>
             <arg value="${path.packages}/product-feed-google/tests"/>
         </exec>
         <exec executable="${path.vendor}/bin/phpunit" logoutput="true" passthru="true" checkreturn="true">
+            <arg value="--colors=always"/>
             <arg value="${path.packages}/product-feed-heureka/tests"/>
         </exec>
         <exec executable="${path.vendor}/bin/phpunit" logoutput="true" passthru="true" checkreturn="true">
+            <arg value="--colors=always"/>
             <arg value="${path.packages}/product-feed-heureka-delivery/tests"/>
         </exec>
         <exec executable="${path.vendor}/bin/phpunit" logoutput="true" passthru="true" checkreturn="true">
+            <arg value="--colors=always"/>
             <arg value="${path.packages}/product-feed-zbozi/tests"/>
         </exec>
         <exec executable="${path.vendor}/bin/phpunit" logoutput="true" passthru="true" checkreturn="true">
+            <arg value="--colors=always"/>
             <arg value="${path.packages}/http-smoke-testing/tests"/>
         </exec>
         <exec executable="${path.vendor}/bin/phpunit" logoutput="true" passthru="true" checkreturn="true">
+            <arg value="--colors=always"/>
             <arg value="${path.packages}/migrations/tests"/>
         </exec>
         <exec executable="${path.vendor}/bin/phpunit" logoutput="true" passthru="true" checkreturn="true">
+            <arg value="--colors=always"/>
             <arg value="${path.packages}/read-model/tests"/>
         </exec>
         <exec executable="${path.vendor}/bin/phpunit" logoutput="true" passthru="true" checkreturn="true">
+            <arg value="--colors=always"/>
             <arg value="--configuration"/>
             <arg value="${path.packages}/framework/phpunit.xml"/>
         </exec>
         <exec executable="${path.vendor}/bin/phpunit" logoutput="true" passthru="true" checkreturn="true">
+            <arg value="--colors=always"/>
             <arg value="--configuration"/>
             <arg value="${path.packages}/coding-standards/phpunit.xml"/>
         </exec>
-    </target>
-
-    <target name="dump-translations" depends="dump-translations-project-base, dump-translations-packages" description="Extracts translatable messages in all packages ." />
-
-    <target name="dump-translations-project-base" description="Extracts translatable messages from all source files in project base.">
-        <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
-            <arg value="${path.bin-console}" />
-            <arg value="translation:extract" />
-            <arg value="--bundle=ShopsysShopBundle" />
-            <arg value="--dir=${path.src}/Shopsys/ShopBundle" />
-            <arg value="--dir=${path.app}/Resources" />
-            <arg value="--exclude-dir=frontend/plugins" />
-            <arg value="--output-format=po" />
-            <arg value="--output-dir=${path.src}/Shopsys/ShopBundle/Resources/translations" />
-            <arg value="cs" />
-            <arg value="en" />
+        <exec executable="${path.vendor}/bin/phpunit" logoutput="true" passthru="true" checkreturn="true">
+            <arg value="--colors=always"/>
+            <arg value="${path.utils}/releaser/tests/"/>
         </exec>
     </target>
 
-    <target name="dump-translations-packages" description="Extracts translatable messages in all packages .">
+    <target name="translations-dump" description="Extracts translatable messages in the whole monorepo.">
+        <phingcall target="shopsys_framework.translations-dump"/>
         <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
-            <arg value="${path.bin-console}" />
-            <arg value="translation:extract" />
-            <arg value="--bundle=ShopsysFormTypesBundle" />
-            <arg value="--dir=${path.packages}/form-types-bundle/src" />
-            <arg value="--output-format=po" />
-            <arg value="--output-dir=${path.packages}/form-types-bundle/src/Resources/translations" />
-            <arg value="cs" />
-            <arg value="en" />
+            <arg value="${path.bin-console}"/>
+            <arg value="translation:extract"/>
+            <arg value="--bundle=ShopsysFormTypesBundle"/>
+            <arg value="--dir=${path.packages}/form-types-bundle/src"/>
+            <arg value="--output-format=po"/>
+            <arg value="--output-dir=${path.packages}/form-types-bundle/src/Resources/translations"/>
+            <arg line="${translations.dump.locales}"/>
         </exec>
         <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
-            <arg value="${path.bin-console}" />
-            <arg value="translation:extract" />
-            <arg value="--bundle=ShopsysFrameworkBundle" />
-            <arg value="--dir=${path.framework}/src" />
-            <arg value="--exclude-dir=admin/plugins" />
-            <arg value="--exclude-dir=Component/Translation" />
-            <arg value="--exclude-dir=Component/Javascript/Compiler" />
-            <arg value="--exclude-name=*AnnotatedRouteControllerLoader.php" />
-            <arg value="--output-format=po" />
-            <arg value="--output-dir=${path.framework}/src/Resources/translations" />
-            <arg value="cs" />
-            <arg value="en" />
+            <arg value="${path.bin-console}"/>
+            <arg value="translation:extract"/>
+            <arg value="--bundle=ShopsysFrameworkBundle"/>
+            <arg value="--dir=${path.framework}/src"/>
+            <arg value="--exclude-dir=admin/plugins"/>
+            <arg value="--exclude-dir=Component/Translation"/>
+            <arg value="--exclude-dir=Component/Javascript/Compiler"/>
+            <arg value="--exclude-name=*AnnotatedRouteControllerLoader.php"/>
+            <arg value="--output-format=po"/>
+            <arg value="--output-dir=${path.framework}/src/Resources/translations"/>
+            <arg line="${translations.dump.locales}"/>
         </exec>
         <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
-            <arg value="${path.bin-console}" />
-            <arg value="translation:extract" />
-            <arg value="--bundle=ShopsysProductFeedGoogleBundle" />
-            <arg value="--dir=${path.packages}/product-feed-google/src" />
-            <arg value="--output-format=po" />
-            <arg value="--output-dir=${path.packages}/product-feed-google/src/Resources/translations" />
-            <arg value="cs" />
-            <arg value="en" />
+            <arg value="${path.bin-console}"/>
+            <arg value="translation:extract"/>
+            <arg value="--bundle=ShopsysProductFeedGoogleBundle"/>
+            <arg value="--dir=${path.packages}/product-feed-google/src"/>
+            <arg value="--output-format=po"/>
+            <arg value="--output-dir=${path.packages}/product-feed-google/src/Resources/translations"/>
+            <arg line="${translations.dump.locales}"/>
         </exec>
         <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
-            <arg value="${path.bin-console}" />
-            <arg value="translation:extract" />
-            <arg value="--bundle=ShopsysProductFeedHeurekaBundle" />
-            <arg value="--dir=${path.packages}/product-feed-heureka/src" />
-            <arg value="--output-format=po" />
-            <arg value="--output-dir=${path.packages}/product-feed-heureka/src/Resources/translations" />
-            <arg value="cs" />
-            <arg value="en" />
+            <arg value="${path.bin-console}"/>
+            <arg value="translation:extract"/>
+            <arg value="--bundle=ShopsysProductFeedHeurekaBundle"/>
+            <arg value="--dir=${path.packages}/product-feed-heureka/src"/>
+            <arg value="--output-format=po"/>
+            <arg value="--output-dir=${path.packages}/product-feed-heureka/src/Resources/translations"/>
+            <arg line="${translations.dump.locales}"/>
         </exec>
         <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
-            <arg value="${path.bin-console}" />
-            <arg value="translation:extract" />
-            <arg value="--bundle=ShopsysProductFeedHeurekaDeliveryBundle" />
-            <arg value="--dir=${path.packages}/product-feed-heureka-delivery/src" />
-            <arg value="--output-format=po" />
-            <arg value="--output-dir=${path.packages}/product-feed-heureka-delivery/src/Resources/translations" />
-            <arg value="cs" />
-            <arg value="en" />
+            <arg value="${path.bin-console}"/>
+            <arg value="translation:extract"/>
+            <arg value="--bundle=ShopsysProductFeedHeurekaDeliveryBundle"/>
+            <arg value="--dir=${path.packages}/product-feed-heureka-delivery/src"/>
+            <arg value="--output-format=po"/>
+            <arg value="--output-dir=${path.packages}/product-feed-heureka-delivery/src/Resources/translations"/>
+            <arg line="${translations.dump.locales}"/>
         </exec>
         <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
-            <arg value="${path.bin-console}" />
-            <arg value="translation:extract" />
-            <arg value="--bundle=ShopsysProductFeedZboziBundle" />
-            <arg value="--dir=${path.packages}/product-feed-zbozi/src" />
-            <arg value="--output-format=po" />
-            <arg value="--output-dir=${path.packages}/product-feed-zbozi/src/Resources/translations" />
-            <arg value="cs" />
-            <arg value="en" />
+            <arg value="${path.bin-console}"/>
+            <arg value="translation:extract"/>
+            <arg value="--bundle=ShopsysProductFeedZboziBundle"/>
+            <arg value="--dir=${path.packages}/product-feed-zbozi/src"/>
+            <arg value="--output-format=po"/>
+            <arg value="--output-dir=${path.packages}/product-feed-zbozi/src/Resources/translations"/>
+            <arg line="${translations.dump.locales}"/>
+        </exec>
+    </target>
+
+    <target name="twig-lint" description="Checks syntax of Twig templates in the whole monorepo." hidden="true">
+        <phingcall target="shopsys_framework.twig-lint"/>
+        <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
+            <arg value="${path.bin-console}"/>
+            <arg value="lint:twig"/>
+            <arg value="${path.packages}"/>
+        </exec>
+        <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
+            <arg value="${path.bin-console}"/>
+            <arg value="lint:twig"/>
+            <arg value="${path.utils}"/>
+        </exec>
+    </target>
+
+    <target name="twig-lint-diff" hidden="true">
+        <echo level="info" message="Checking only changed files via 'twig-lint-diff' not supported in monorepo. Running 'twig-lint' instead..."/>
+        <phingcall target="twig-lint"/>
+    </target>
+
+    <target name="yaml-lint" description="Checks syntax of Yaml files in the whole monorepo." hidden="true">
+        <phingcall target="shopsys_framework.yaml-lint"/>
+        <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
+            <arg value="${path.bin-console}"/>
+            <arg value="lint:yaml"/>
+            <arg value="${path.packages}"/>
+            <arg value="--parse-tags"/>
+        </exec>
+        <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
+            <arg value="${path.bin-console}"/>
+            <arg value="lint:yaml"/>
+            <arg value="${path.utils}"/>
+            <arg value="--parse-tags"/>
         </exec>
     </target>
 

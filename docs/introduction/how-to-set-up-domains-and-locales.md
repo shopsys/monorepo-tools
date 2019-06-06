@@ -62,7 +62,7 @@ Set up the locale of the domain according to the instructions in the section [Lo
 There need to be created some multidomain data for the newly added domain.
 Run the phing target
 ```
-php phing create-domains-data
+php phing domains-data-create
 ```
 This command performs multiple actions:
 - multidomain attributes from the first domain are copied for this new domain, see `FrameworkBundle/Component/Domain/DomainDataCreator.php`, where the `TEMPLATE_DOMAIN_ID` constant is defined.
@@ -106,10 +106,12 @@ Import the new routes configuration in `app/config/packages/shopsys_shop.yml`
 
 #### 3.3 Translations and messages
 In order to correctly display the labels like *Registration*, *Cart*, ..., create a file with translations of messages in `src/Shopsys/ShopBundle/Resources/translations/`.
-Modify the phing target `dump-translations-project-base` in `build-dev.xml` by adding the new locale as `<arg value="xx" />` where `xx` replace for the code of added locale.
+Override the Phing property `translations.dump.locales` in the `build.xml` and set a space-separated list of locales you want to dump.
+For example, if you want to add `xx` to the locales, add `<property name="translations.dump.locales" value="cs en xx"/>` to your `build.xml`.
+
 Then run
 ```
-php phing dump-translations
+php phing translations-dump
 ```
 There will be created files for translations of messages for the new locale in `src/Shopsys/ShopBundle/Resources/translations/`.
 
@@ -119,7 +121,7 @@ For more information about translations, see [the separate article](/docs/introd
 Within the database functions, it is necessary to regenerate the default database functions for the locale use that are already created for the `en` locale as default.
 Regenerate database functions by running a phing target
 ```
-php phing create-domains-db-functions
+php phing domains-db-functions-create
 ```
 
 #### 3.5 Multilang attributes
@@ -135,6 +137,24 @@ When you change admin locale, you have to update acceptance tests, to have admin
 
 You can change administration translations by adding messages into your `src/Shopsys/ShopBundle/Resources/translations/messages.xx.po`.
 
+#### 3.7 Sorting in different locales
+Alphabetical sorting on frontend uses Elasticsearch and its [ICU analysis plugin](https://www.elastic.co/guide/en/elasticsearch/plugins/6.3/analysis-icu.html).
+Every domain needs to have `language` parameter for field `name.keyword` in `src/Shopsys/ShopBundle/Resources/definition/product/*.json` set in order to sort correctly for given locale.  
+example for domain that uses English language:
+```json
+"name": {
+    "type": "text",
+    "analyzer": "stemming",
+    "fields": {
+        "keyword": {
+            "type": "icu_collation_keyword",
+            "language": "en",
+            "index": false
+        }
+    }
+}
+```
+
 ### 4. Change the url address for an existing domain
 
 #### 4.1 Change the url address
@@ -145,7 +165,7 @@ Change the url address in the configuration of the domain in `app/config/domains
 #### 4.2 Replace the old url address
 Run the phing target
 ```
-php phing replace-domains-urls
+php phing domains-urls-replace
 ```
 Running this command will ensure replacing all occurrences of the old url address in the text attributes in the database with the new url address.
 

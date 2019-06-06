@@ -9,6 +9,30 @@ Typical upgrade sequence should be:
 ***Note:** During the execution of `build-demo-dev phing target`, there will be installed 3-rd party software as dependencies of Shopsys Framework by [composer](https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies) and [npm](https://docs.npmjs.com/about-the-public-npm-registry) with licenses that are described in document [Open Source License Acknowledgements and Third-Party Copyrights](../../open-source-license-acknowledgements-and-third-party-copyrights.md)*
 
 ## [From v7.2.1 to Unreleased]
+- update definition of Elasticsearch service in your `docker-compose.yml` file to use Dockerfile that installs ICU analysis plugin ([#1069](https://github.com/shopsys/shopsys/pull/1069))
+    ```diff
+    elasticsearch:
+    -   image: docker.elastic.co/elasticsearch/elasticsearch-oss:6.3.2
+    +   build:
+    +       context: .
+    +       dockerfile: project-base/docker/elasticsearch/Dockerfile
+        container_name: shopsys-framework-elasticsearch
+        ulimits:
+            nofile:
+                soft: 65536
+                hard: 65536
+        ports:
+            - "9200:9200"
+        volumes:
+            - elasticsearch-data:/usr/share/elasticsearch/data
+        environment:
+            - discovery.type=single-node
+    ```
+- use the restructured phing targets ([#1068](https://github.com/shopsys/shopsys/pull/1068))
+    - don't use targets with suffix `-packages` or `-utils`, the targets without the suffixes now work in the whole monorepo
+        - eg. you can use `tests-unit` to run unit tests in the whole monorepo instead of running `tests-unit`, `tests-packages` and `tests-utils`
+        - you can even use coding standards subtargets in the whole monorepo, such as `ecs`, `eslint-fix`, etc.
+    - read [the new guidelines for phing targets](/docs/contributing/guidelines-for-phing-targets.md) before suggesting changes via pull requests
 
 ## [From v7.2.0 to v7.2.1]
 

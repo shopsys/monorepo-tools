@@ -47,8 +47,10 @@ Data of all products are exported into Elasticsearch by CRON module (`ProductSea
 Alternatively, you can force the export manually using `product-search-export-products` Phing target.
 
 ## Use of Elasticsearch
-Elasticsearch is used for search and filter products on frontend.
+Elasticsearch is used to search, filter and sort products on the frontend.
 You can learn more about [Product searching](/docs/model/front-end-product-searching.md) and [Product filtering](/docs/model/front-end-product-filtering.md) in particular articles.
+[Sorting](/docs/introduction/how-to-set-up-domains-and-locales.md#37-sorting-in-different-locales) is done with the help of [ICU analysis plugin](https://www.elastic.co/guide/en/elasticsearch/plugins/current/analysis-icu.html)
+which ensures that alphabetical sorting is correct for every language and its set of rules.
 
 ## Where does Elasticsearch run?
 When using docker installation, Elasticsearch API is available on the address [http://127.0.0.1:9200](http://127.0.0.1:9200).

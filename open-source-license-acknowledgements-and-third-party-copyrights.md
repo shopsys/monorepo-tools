@@ -20,6 +20,11 @@ License: Apache License 2.0
 https://github.com/elastic/elasticsearch-php/blob/master/LICENSE  
 Copyright 2013-2014 Elasticsearch
 
+#### Elasticsearch ICU Analysis plugin
+License: Apache License 2.0  
+https://github.com/elastic/elasticsearch/blob/master/LICENSE.txt
+Copyright 2013-2014 Elasticsearch
+
 ### Grunt: The JavaScript Task Runner
 License: MIT  
 https://github.com/gruntjs/grunt/blob/master/LICENSE  

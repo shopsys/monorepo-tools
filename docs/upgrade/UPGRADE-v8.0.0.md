@@ -71,38 +71,4 @@ There you can find links to upgrade notes for other versions too.
             ```
 - update the minimal PHP version in your `composer.json` in `require` and `config.platform` section to `7.2` because version `7.1` is no longer supported in Shopsys Framework ([#1066](https://github.com/shopsys/shopsys/pull/1066))
 
-### Tools
-- improve `build-dev.xml` to use test prefix for elasticsearch in tests ([#933](https://github.com/shopsys/shopsys/pull/933))
-   - add `test-product-search-recreate-structure,test-product-search-export-products` to the end of `test-db-demo` phing target in your `build-dev.xml`
-   - add new phing targets:
-        ```xml
-        <target name="test-product-search-recreate-structure" depends="test-product-search-delete-structure,test-product-search-create-structure" description="Recreates structure for searching via elasticsearch in test environment (deletes existing structure and creates new one)." />
-        ```
-        and
-        ```xml
-        <target name="test-product-search-create-structure" description="Creates structure for searching via elasticsearch for test environment.">
-            <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
-                <arg value="${path.bin-console}" />
-                <arg value="--env=test" />
-                <arg value="shopsys:product-search:create-structure" />
-            </exec>
-        </target>
-
-        <target name="test-product-search-delete-structure" description="Deletes structure for searching via elasticsearch for test environment.">
-            <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
-                <arg value="${path.bin-console}" />
-                <arg value="--env=test" />
-                <arg value="shopsys:product-search:delete-structure" />
-            </exec>
-        </target>
-
-        <target name="test-product-search-export-products" description="Exports all products for searching via elasticsearch for test environment.">
-            <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
-                <arg value="${path.bin-console}" />
-                <arg value="--env=test" />
-                <arg value="shopsys:product-search:export-products" />
-            </exec>
-        </target>
-        ```
-
 [shopsys/framework]: https://github.com/shopsys/framework

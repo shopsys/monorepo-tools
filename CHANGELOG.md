@@ -981,7 +981,7 @@ It was only important with [the original open-box architecture](https://blog.sho
 - [#143 - Shopsys framework now uses latest version of Shopsys coding standards](https://github.com/shopsys/shopsys/pull/143) [Shopsys Coding Standards dev-master](./packages/coding-standards/) is now used
     - version of coding-standards package was updated to dev-master in [composer.json](./packages/project-base/composer.json)
     - inline code skips moved to [autoload-easy-coding-standard.yml](./project-base/autoload-easy-coding-standard.yml)
-    - replaced php-cs-fixer. phpcs. phpmd for ecs in [build.xml](./project-base/build.xml) and [build-dev.xml](./project-base/build-dev.xml) scripts
+    - replaced php-cs-fixer. phpcs. phpmd for ecs in `build.xml` and `build-dev.xml` scripts
 - [#171 - Update to twig 2.x](https://github.com/shopsys/shopsys/pull/171):
     - updated to Twig 2.4.8
     - all depracated calls has been fixed
@@ -2414,6 +2414,6 @@ That's why is this section formatted differently.
 [#1077]: https://github.com/shopsys/shopsys/pull/1077
 [#1078]: https://github.com/shopsys/shopsys/pull/1078
 [#1082]: https://github.com/shopsys/shopsys/pull/1082
-[#1082]: https://github.com/shopsys/shopsys/pull/1083
+[#1083]: https://github.com/shopsys/shopsys/pull/1083
 [#1084]: https://github.com/shopsys/shopsys/pull/1084
 [@malyMiso]: https://github.com/malyMiso

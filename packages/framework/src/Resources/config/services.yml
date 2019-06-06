@@ -465,6 +465,10 @@ services:
         arguments:
             - '@logger'
 
+    Shopsys\FrameworkBundle\Model\Mail\MailTemplateFacade:
+        calls:
+            - method: setMailTemplateAttachmentFilepathProvider
+
     Shopsys\FrameworkBundle\Model\Pricing\DelayedPricingSetting: ~
 
     Shopsys\FrameworkBundle\Model\Pricing\InputPriceRecalculationScheduler:

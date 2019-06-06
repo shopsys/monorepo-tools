@@ -6,28 +6,11 @@ Instructions are meant to be followed when you upgrade from `v7.2.0` to `unrelea
 We recommend upgrading to level 4 and increasing the level gradually from version 0 to 4 to ensure smooth implementation.
 
 To upgrade level of PHPStan you need to:
-- change argument level in `build-dev.xml`.
-    ```diff
-    <target name="phpstan" depends="tests-acceptance-build" description="Performs static analysis of PHP files using PHPStan.">
-        <exec
-            executable="${path.phpstan.executable}"
-            logoutput="true"
-            passthru="true"
-            checkreturn="true"
-        >
-            <arg value="analyze"/>
-
-            <arg value="-c"/>
-            <arg path="${path.phpstan.config}"/>
-
-            <arg path="${path.src}"/>
-            <arg path="${path.tests}"/>
-    -       <arg value="--level=0"/>
-    +       <arg value="--level=4"/>
-            <arg value="-vvv"/>
-        </exec>
-    </target>
+- change the value of `phpstan.level` Phing property in your `build.xml` (`4` is the default value)
+    ```xml
+    <property name="phpstan.level" value="4"/>
     ```
+    - if you have [overridden the `phpstan` Phing target](/docs/introduction/console-commands-for-application-management-phing-targets.md#customization-of-phing-targets-and-properties) or don't use the `build.xml` from `shopsys/framework` package yet, look for `<arg value="--level=0"/>` in your `build.xml` and change its value instead.
 - add `phpstan-doctrine` and `phpstan-phpunit` extension packages as dev dependencies to `composer.json`
     ```diff
     "require-dev": {

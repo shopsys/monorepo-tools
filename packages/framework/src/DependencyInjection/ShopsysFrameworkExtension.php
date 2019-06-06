@@ -4,6 +4,8 @@ namespace Shopsys\FrameworkBundle\DependencyInjection;
 
 use Shopsys\FrameworkBundle\Component\Environment\EnvironmentType;
 use Shopsys\FrameworkBundle\Component\Grid\InlineEdit\GridInlineEditInterface;
+use Shopsys\FrameworkBundle\Twig\NoVarDumperExtension;
+use Shopsys\FrameworkBundle\Twig\VarDumperExtension;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
@@ -25,7 +27,22 @@ class ShopsysFrameworkExtension extends Extension
             $loader->load('services_test.yml');
         }
 
+        $this->configureVarDumperTwigExtension($container);
+
         $container->registerForAutoconfiguration(GridInlineEditInterface::class)
             ->addTag('shopsys.grid_inline_edit');
+    }
+
+    /**
+     * @param \Symfony\Component\DependencyInjection\ContainerBuilder $container
+     */
+    protected function configureVarDumperTwigExtension(ContainerBuilder $container): void
+    {
+        $isDev = $container->getParameter('kernel.environment') === EnvironmentType::DEVELOPMENT;
+
+        $varDumperExtensionService = $isDev ? VarDumperExtension::class : NoVarDumperExtension::class;
+
+        $container->getDefinition($varDumperExtensionService)
+            ->addTag('twig.extension');
     }
 }
