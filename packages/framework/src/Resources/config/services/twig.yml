@@ -17,3 +17,9 @@ services:
 
     Shopsys\FrameworkBundle\Twig\ImageExtension:
         arguments: ['%shopsys.front_design_image_url_prefix%']
+
+    Shopsys\FrameworkBundle\Twig\NoVarDumperExtension:
+        autoconfigure: false
+
+    Shopsys\FrameworkBundle\Twig\VarDumperExtension:
+        autoconfigure: false
