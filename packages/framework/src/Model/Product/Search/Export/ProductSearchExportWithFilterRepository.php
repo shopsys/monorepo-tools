@@ -82,42 +82,64 @@ class ProductSearchExportWithFilterRepository extends ProductSearchExportReposit
 
         $query = $queryBuilder->getQuery();
 
-        $result = [];
+        $results = [];
         /** @var \Shopsys\FrameworkBundle\Model\Product\Product $product */
         foreach ($query->getResult() as $product) {
-            $flagIds = $this->extractFlags($product);
-            $categoryIds = $this->extractCategories($domainId, $product);
-            $parameters = $this->extractParameters($locale, $product);
-            $prices = $this->extractPrices($domainId, $product);
-            $visibility = $this->extractVisibility($domainId, $product);
-
-            $friendlyUrl = $this->friendlyUrlRepository->getMainFriendlyUrl($domainId, 'front_product_detail', $product->getId());
-
-            $result[] = [
-                'id' => $product->getId(),
-                'catnum' => $product->getCatnum(),
-                'partno' => $product->getPartno(),
-                'ean' => $product->getEan(),
-                'name' => $product->getName($locale),
-                'description' => $product->getDescription($domainId),
-                'shortDescription' => $product->getShortDescription($domainId),
-                'brand' => $product->getBrand() ? $product->getBrand()->getId() : '',
-                'flags' => $flagIds,
-                'categories' => $categoryIds,
-                'in_stock' => $product->getCalculatedAvailability()->getDispatchTime() === 0,
-                'prices' => $prices,
-                'parameters' => $parameters,
-                'ordering_priority' => $product->getOrderingPriority(),
-                'calculated_selling_denied' => $product->getCalculatedSellingDenied(),
-                'selling_denied' => $product->isSellingDenied(),
-                'availability' => $product->getAvailability()->getName($locale),
-                'main_variant' => $product->isMainVariant(),
-                'detail_url' => $friendlyUrl->getAbsoluteUrl($this->domain),
-                'visibility' => $visibility,
-            ];
+            $results[] = $this->extractResult($product, $domainId, $locale);
         }
 
-        return $result;
+        return $results;
+    }
+
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Product\Product $product
+     * @param int $domainId
+     * @param string $locale
+     * @return array
+     */
+    protected function extractResult(Product $product, int $domainId, string $locale): array
+    {
+        $flagIds = $this->extractFlags($product);
+        $categoryIds = $this->extractCategories($domainId, $product);
+        $parameters = $this->extractParameters($locale, $product);
+        $prices = $this->extractPrices($domainId, $product);
+        $visibility = $this->extractVisibility($domainId, $product);
+        $detailUrl = $this->extractDetailUrl($domainId, $product);
+
+        return [
+            'id' => $product->getId(),
+            'catnum' => $product->getCatnum(),
+            'partno' => $product->getPartno(),
+            'ean' => $product->getEan(),
+            'name' => $product->getName($locale),
+            'description' => $product->getDescription($domainId),
+            'shortDescription' => $product->getShortDescription($domainId),
+            'brand' => $product->getBrand() ? $product->getBrand()->getId() : '',
+            'flags' => $flagIds,
+            'categories' => $categoryIds,
+            'in_stock' => $product->getCalculatedAvailability()->getDispatchTime() === 0,
+            'prices' => $prices,
+            'parameters' => $parameters,
+            'ordering_priority' => $product->getOrderingPriority(),
+            'calculated_selling_denied' => $product->getCalculatedSellingDenied(),
+            'selling_denied' => $product->isSellingDenied(),
+            'availability' => $product->getAvailability()->getName($locale),
+            'main_variant' => $product->isMainVariant(),
+            'detail_url' => $detailUrl,
+            'visibility' => $visibility,
+        ];
+    }
+
+    /**
+     * @param int $domainId
+     * @param \Shopsys\FrameworkBundle\Model\Product\Product $product
+     * @return string
+     */
+    protected function extractDetailUrl(int $domainId, Product $product): string
+    {
+        $friendlyUrl = $this->friendlyUrlRepository->getMainFriendlyUrl($domainId, 'front_product_detail', $product->getId());
+
+        return $friendlyUrl->getAbsoluteUrl($this->domain);
     }
 
     /**

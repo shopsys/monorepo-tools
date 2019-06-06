@@ -87,60 +87,22 @@ declare(strict_types=1);
 
 namespace Shopsys\ShopBundle\Model\Product\Search\Export;
 
+use Shopsys\FrameworkBundle\Model\Product\Product as BaseProduct;
 use Shopsys\FrameworkBundle\Model\Product\Search\Export\ProductSearchExportWithFilterRepository as BaseProductSearchExportWithFilterRepository;
 
 class ProductSearchExportWithFilterRepository extends BaseProductSearchExportWithFilterRepository
 {
-    /**
-     * @param int $domainId
-     * @param string $locale
-     * @param int $startFrom
-     * @param int $batchSize
-     * @return array
-     */
-    public function getProductsData(int $domainId, string $locale, int $startFrom, int $batchSize): array
+   /**
+    * @param \Shopsys\ShopBundle\Model\Product\Product $product
+    * @param int $domainId
+    * @param string $locale
+    * @return array
+    */
+    protected function extractResult(BaseProduct $product, int $domainId, string $locale): array
     {
-        $queryBuilder = $this->createQueryBuilder($domainId, $locale)
-            ->setFirstResult($startFrom)
-            ->setMaxResults($batchSize);
+        $result = parent::extractResult($product, $domainId, $locale);
 
-        $query = $queryBuilder->getQuery();
-
-        $result = [];
-        /** @var \Shopsys\FrameworkBundle\Model\Product\Product $product */
-        foreach ($query->getResult() as $product) {
-            $flagIds = $this->extractFlags($product);
-            $categoryIds = $this->extractCategories($domainId, $product);
-            $parameters = $this->extractParameters($locale, $product);
-            $prices = $this->extractPrices($domainId, $product);
-            $visibility = $this->extractVisibility($domainId, $product);
-
-            $friendlyUrl = $this->friendlyUrlRepository->getMainFriendlyUrl($domainId, 'front_product_detail', $product->getId());
-
-            $result[] = [
-                'id' => $product->getId(),
-                'catnum' => $product->getCatnum(),
-                'partno' => $product->getPartno(),
-                'ean' => $product->getEan(),
-                'name' => $product->getName($locale),
-                'description' => $product->getDescription($domainId),
-                'shortDescription' => $product->getShortDescription($domainId),
-                'brand' => $product->getBrand() ? $product->getBrand()->getId() : '',
-                'brand_name' => $product->getBrand() ? $product->getBrand()->getName() : '',
-                'flags' => $flagIds,
-                'categories' => $categoryIds,
-                'in_stock' => $product->getCalculatedAvailability()->getDispatchTime() === 0,
-                'prices' => $prices,
-                'parameters' => $parameters,
-                'ordering_priority' => $product->getOrderingPriority(),
-                'calculated_selling_denied' => $product->getCalculatedSellingDenied(),
-                'selling_denied' => $product->isSellingDenied(),
-                'availability' => $product->getAvailability()->getName($locale),
-                'main_variant' => $product->isMainVariant(),
-                'detail_url' => $friendlyUrl->getAbsoluteUrl($this->domain),
-                'visibility' => $visibility,
-            ];
-        }
+        $result['brand_name'] = $product->getBrand() ? $product->getBrand()->getName() : '';
 
         return $result;
     }
