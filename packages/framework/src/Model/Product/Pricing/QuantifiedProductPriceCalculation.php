@@ -102,9 +102,7 @@ class QuantifiedProductPriceCalculation
      */
     protected function getTotalPriceVatAmount(Money $totalPriceWithVat, Vat $vat): Money
     {
-        $vatCoefficient = $this->priceCalculation->getVatCoefficientByPercent($vat->getPercent());
-
-        return $this->rounding->roundVatAmount($totalPriceWithVat->multiply($vatCoefficient));
+        return $this->priceCalculation->getVatAmountByPriceWithVat($totalPriceWithVat, $vat);
     }
 
     /**
