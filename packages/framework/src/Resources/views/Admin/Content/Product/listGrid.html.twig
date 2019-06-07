@@ -15,10 +15,10 @@
 
 {% block grid_value_cell_id_name %}
     {% if row.p.variantType == VARIANT_TYPE_MAIN %}
-        <span class="in-letter cursor-help js-tooltip" title="{{ 'Main variant'|trans }}">H</span>
+        <span class="in-letter cursor-help js-tooltip" title="{{ 'Main variant'|trans }}">{{ 'Main variant [abbreviation]'|trans }}</span>
     {% endif %}
     {% if row.p.variantType == VARIANT_TYPE_VARIANT %}
-        <span class="in-letter cursor-help js-tooltip" title="{{ 'Variant'|trans }}">V</span>
+        <span class="in-letter cursor-help js-tooltip" title="{{ 'Variant'|trans }}">{{ 'Variant [abbreviation]'|trans }}</span>
     {% endif %}
     <a href="{{ url('admin_product_edit', { id: row.p.id }) }}" target="_blank">{{ row.product|productListDisplayName }}</a>
 {% endblock %}

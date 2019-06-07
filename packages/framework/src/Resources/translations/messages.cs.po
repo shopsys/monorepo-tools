@@ -1237,6 +1237,9 @@ msgstr "Zboží na titulní stránce"
 msgid "Main variant"
 msgstr "Hlavní varianta"
 
+msgid "Main variant [abbreviation]"
+msgstr "H"
+
 msgid "Make modification"
 msgstr "Provést úpravu"
 
@@ -2223,6 +2226,9 @@ msgstr "Varianta"
 
 msgid "Variant <strong>{{ productVariant|productDisplayName }}</strong> successfully created."
 msgstr "Varianta <strong>{{ productVariant|productDisplayName }}</strong> byla úspěšně vytvořena."
+
+msgid "Variant [abbreviation]"
+msgstr "V"
 
 msgid "Variant alias"
 msgstr "Alias varianty"
