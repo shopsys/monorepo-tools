@@ -42,28 +42,6 @@ class OrderProductFacadeTest extends TestCase
         $this->assertSame($productStockQuantity - $orderProductQuantity, $product->getStockQuantity());
     }
 
-    public function testSubtractOrderProductsFromStockNotUsingStock()
-    {
-        $productStockQuantity = 15;
-        $orderProductQuantity = 10;
-
-        $orderMock = $this->createMock(Order::class);
-
-        $productData = new ProductData();
-        $productData->usingStock = false;
-        $productData->stockQuantity = $productStockQuantity;
-        $product = Product::create($productData, new ProductCategoryDomainFactory(new EntityNameResolver([])));
-        $productPrice = Price::zero();
-
-        $orderProduct = new OrderItem($orderMock, 'productName', $productPrice, 0, $orderProductQuantity, OrderItem::TYPE_PRODUCT, null, null);
-        $orderProduct->setProduct($product);
-
-        $orderProductFacade = $this->createOrderProductFacade();
-        $orderProductFacade->subtractOrderProductsFromStock([$orderProduct]);
-
-        $this->assertSame($productStockQuantity, $product->getStockQuantity());
-    }
-
     public function testAddOrderProductsToStockUsingStock()
     {
         $productStockQuantity = 15;
@@ -84,28 +62,6 @@ class OrderProductFacadeTest extends TestCase
         $orderProductFacade->addOrderProductsToStock([$orderProduct]);
 
         $this->assertSame($productStockQuantity + $orderProductQuantity, $product->getStockQuantity());
-    }
-
-    public function testAddOrderProductsToStockNotUsingStock()
-    {
-        $productStockQuantity = 15;
-        $orderProductQuantity = 10;
-
-        $orderMock = $this->createMock(Order::class);
-
-        $productData = new ProductData();
-        $productData->usingStock = false;
-        $productData->stockQuantity = $productStockQuantity;
-        $product = Product::create($productData, new ProductCategoryDomainFactory(new EntityNameResolver([])));
-        $productPrice = Price::zero();
-
-        $orderProduct = new OrderItem($orderMock, 'productName', $productPrice, 0, $orderProductQuantity, OrderItem::TYPE_PRODUCT, null, null);
-        $orderProduct->setProduct($product);
-
-        $orderProductFacade = $this->createOrderProductFacade();
-        $orderProductFacade->addOrderProductsToStock([$orderProduct]);
-
-        $this->assertSame($productStockQuantity, $product->getStockQuantity());
     }
 
     /**
