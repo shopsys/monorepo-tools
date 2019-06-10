@@ -97,6 +97,21 @@ There you can find links to upgrade notes for other versions too.
         -   $this->assertIdWithFilter($filter, [19, 17]);
         +   $this->assertIdWithFilter($filter, [17, 19]);
         ```
+- extend DI configuration for your project by updating ([#1049](https://github.com/shopsys/shopsys/pull/1049))
+    - `src/Shopsys/ShopBundle/Resources/config/services.yml`
+        ```diff
+        -    Shopsys\ShopBundle\Model\:
+        -        resource: '../../Model/**/*{Facade,Factory,Repository}.php'
+        +    Shopsys\ShopBundle\:
+        +        resource: '../../**/*{Calculation,Facade,Factory,Generator,Handler,InlineEdit,Listener,Loader,Mapper,Parser,Provider,Recalculator,Registry,Repository,Resolver,Service,Scheduler,Subscriber,Transformer}.php'
+        +        exclude: '../../{Command,Controller,DependencyInjection,Form,Migrations,Resources,Twig}'
+        ```
+    - `src/Shopsys/ShopBundle/Resources/config/services/twig.yml`
+        ```diff
+        -    Shopsys\ShopBundle\Twig\FlagsExtension: ~
+        +    Shopsys\ShopBundle\Twig\:
+        +        resource: '../../Twig/'
+        ```
 
 ### Tools
 - use the `build.xml` [Phing configuration](/docs/introduction/console-commands-for-application-management-phing-targets.md) from the `shopsys/framework` package ([#1068](https://github.com/shopsys/shopsys/pull/1068))
