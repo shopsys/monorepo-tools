@@ -500,7 +500,7 @@ class OrderFacade
 
         $order->fillOrderProducts($orderPreview, $this->orderItemFactory, $this->numberFormatterExtension, $locale);
         $this->fillOrderPayment($order, $orderPreview, $locale);
-        $order->fillOrderTransport($this->transportPriceCalculation, $this->orderItemFactory, $orderPreview->getProductsPrice(), $locale);
+        $this->fillOrderTransport($order, $orderPreview, $locale);
         $order->fillOrderRounding($this->orderItemFactory, $orderPreview->getRoundingPrice(), $locale);
     }
 
@@ -527,6 +527,31 @@ class OrderFacade
             $payment
         );
         $order->addItem($orderPayment);
+    }
+
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Order\Order $order
+     * @param \Shopsys\FrameworkBundle\Model\Order\Preview\OrderPreview $orderPreview
+     * @param string $locale
+     */
+    protected function fillOrderTransport(Order $order, OrderPreview $orderPreview, string $locale): void
+    {
+        $transport = $order->getTransport();
+        $transportPrice = $this->transportPriceCalculation->calculatePrice(
+            $transport,
+            $order->getCurrency(),
+            $orderPreview->getProductsPrice(),
+            $order->getDomainId()
+        );
+        $orderTransport = $this->orderItemFactory->createTransport(
+            $order,
+            $transport->getName($locale),
+            $transportPrice,
+            $transport->getVat()->getPercent(),
+            1,
+            $transport
+        );
+        $order->addItem($orderTransport);
     }
 
     /**

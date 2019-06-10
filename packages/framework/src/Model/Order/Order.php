@@ -945,36 +945,6 @@ class Order
     }
 
     /**
-     * @param \Shopsys\FrameworkBundle\Model\Transport\TransportPriceCalculation $transportPriceCalculation
-     * @param \Shopsys\FrameworkBundle\Model\Order\Item\OrderItemFactoryInterface $orderItemFactory
-     * @param \Shopsys\FrameworkBundle\Model\Pricing\Price $productsPrice
-     * @param string $locale
-     */
-    public function fillOrderTransport(
-        TransportPriceCalculation $transportPriceCalculation,
-        OrderItemFactoryInterface $orderItemFactory,
-        Price $productsPrice,
-        $locale
-    ) {
-        $transport = $this->getTransport();
-        $transportPrice = $transportPriceCalculation->calculatePrice(
-            $transport,
-            $this->getCurrency(),
-            $productsPrice,
-            $this->getDomainId()
-        );
-        $orderTransport = $orderItemFactory->createTransport(
-            $this,
-            $transport->getName($locale),
-            $transportPrice,
-            $transport->getVat()->getPercent(),
-            1,
-            $transport
-        );
-        $this->addItem($orderTransport);
-    }
-
-    /**
      * @param \Shopsys\FrameworkBundle\Model\Order\Preview\OrderPreview $orderPreview
      * @param \Shopsys\FrameworkBundle\Model\Order\Item\OrderItemFactoryInterface $orderItemFactory
      * @param \Shopsys\FrameworkBundle\Twig\NumberFormatterExtension $numberFormatterExtension
