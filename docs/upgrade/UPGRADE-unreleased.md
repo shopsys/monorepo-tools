@@ -60,6 +60,14 @@ There you can find links to upgrade notes for other versions too.
             + }
             ```
     - you can copy-paste a new functional test [`ProductVariantCreationTest.php`](https://github.com/shopsys/project-base/blob/master/tests/ShopBundle/Functional/Model/Product/ProductVariantCreationTest.php) into `tests/ShopBundle/Functional/Model/Product/` to avoid regression of issues with creating product variants in the future
+- prevent indexing `CustomerPassword:setNewPassword` by robots ([#1119](https://github.com/shopsys/shopsys/pull/1119))
+    - add a `meta_robots` Twig block to your `@ShopsysShop/Front/Content/Registration/setNewPassword.html.twig` template:
+        ```twig
+        {% block meta_robots -%}
+            <meta name="robots" content="noindex, follow">
+        {% endblock %}
+        ```
+    - you should prevent indexing by robots using this block on all pages that are secured by an URL hash
 
 ### Configuration
 - update `phpstan.neon` with following change to skip phpstan error ([#1086](https://github.com/shopsys/shopsys/pull/1086))
