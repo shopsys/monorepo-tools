@@ -499,9 +499,34 @@ class OrderFacade
         $locale = $this->domain->getDomainConfigById($order->getDomainId())->getLocale();
 
         $order->fillOrderProducts($orderPreview, $this->orderItemFactory, $this->numberFormatterExtension, $locale);
-        $order->fillOrderPayment($this->paymentPriceCalculation, $this->orderItemFactory, $orderPreview->getProductsPrice(), $locale);
+        $this->fillOrderPayment($order, $orderPreview, $locale);
         $order->fillOrderTransport($this->transportPriceCalculation, $this->orderItemFactory, $orderPreview->getProductsPrice(), $locale);
         $order->fillOrderRounding($this->orderItemFactory, $orderPreview->getRoundingPrice(), $locale);
+    }
+
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Order\Order $order
+     * @param \Shopsys\FrameworkBundle\Model\Order\Preview\OrderPreview $orderPreview
+     * @param string $locale
+     */
+    protected function fillOrderPayment(Order $order, OrderPreview $orderPreview, string $locale): void
+    {
+        $payment = $order->getPayment();
+        $paymentPrice = $this->paymentPriceCalculation->calculatePrice(
+            $payment,
+            $order->getCurrency(),
+            $orderPreview->getProductsPrice(),
+            $order->getDomainId()
+        );
+        $orderPayment = $this->orderItemFactory->createPayment(
+            $order,
+            $payment->getName($locale),
+            $paymentPrice,
+            $payment->getVat()->getPercent(),
+            1,
+            $payment
+        );
+        $order->addItem($orderPayment);
     }
 
     /**

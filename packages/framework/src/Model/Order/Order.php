@@ -11,7 +11,6 @@ use Shopsys\FrameworkBundle\Model\Order\Item\OrderItem;
 use Shopsys\FrameworkBundle\Model\Order\Item\OrderItemFactoryInterface;
 use Shopsys\FrameworkBundle\Model\Order\Preview\OrderPreview;
 use Shopsys\FrameworkBundle\Model\Order\Status\OrderStatus;
-use Shopsys\FrameworkBundle\Model\Payment\PaymentPriceCalculation;
 use Shopsys\FrameworkBundle\Model\Pricing\Price;
 use Shopsys\FrameworkBundle\Model\Product\Product;
 use Shopsys\FrameworkBundle\Model\Transport\TransportPriceCalculation;
@@ -943,36 +942,6 @@ class Order
         $this->editData($orderData);
 
         return new OrderEditResult($statusChanged);
-    }
-
-    /**
-     * @param \Shopsys\FrameworkBundle\Model\Payment\PaymentPriceCalculation $paymentPriceCalculation
-     * @param \Shopsys\FrameworkBundle\Model\Order\Item\OrderItemFactoryInterface $orderItemFactory
-     * @param \Shopsys\FrameworkBundle\Model\Pricing\Price $productsPrice
-     * @param string $locale
-     */
-    public function fillOrderPayment(
-        PaymentPriceCalculation $paymentPriceCalculation,
-        OrderItemFactoryInterface $orderItemFactory,
-        Price $productsPrice,
-        $locale
-    ) {
-        $payment = $this->getPayment();
-        $paymentPrice = $paymentPriceCalculation->calculatePrice(
-            $payment,
-            $this->getCurrency(),
-            $productsPrice,
-            $this->getDomainId()
-        );
-        $orderPayment = $orderItemFactory->createPayment(
-            $this,
-            $payment->getName($locale),
-            $paymentPrice,
-            $payment->getVat()->getPercent(),
-            1,
-            $payment
-        );
-        $this->addItem($orderPayment);
     }
 
     /**
