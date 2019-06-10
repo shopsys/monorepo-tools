@@ -503,7 +503,7 @@ class OrderFacade
         $this->fillOrderProducts($order, $orderPreview, $locale);
         $this->fillOrderPayment($order, $orderPreview, $locale);
         $this->fillOrderTransport($order, $orderPreview, $locale);
-        $order->fillOrderRounding($this->orderItemFactory, $orderPreview->getRoundingPrice(), $locale);
+        $this->fillOrderRounding($order, $orderPreview, $locale);
     }
 
     /**
@@ -593,6 +593,27 @@ class OrderFacade
             $transport
         );
         $order->addItem($orderTransport);
+    }
+
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Order\Order $order
+     * @param \Shopsys\FrameworkBundle\Model\Order\Preview\OrderPreview $orderPreview
+     * @param string $locale
+     */
+    protected function fillOrderRounding(Order $order, OrderPreview $orderPreview, string $locale): void
+    {
+        if ($orderPreview->getRoundingPrice() !== null) {
+            $this->orderItemFactory->createProduct(
+                $order,
+                t('Rounding', [], 'messages', $locale),
+                $orderPreview->getRoundingPrice(),
+                0,
+                1,
+                null,
+                null,
+                null
+            );
+        }
     }
 
     /**

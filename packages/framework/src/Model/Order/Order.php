@@ -8,7 +8,6 @@ use Doctrine\ORM\Mapping as ORM;
 use Shopsys\FrameworkBundle\Component\Money\Money;
 use Shopsys\FrameworkBundle\Model\Customer\User;
 use Shopsys\FrameworkBundle\Model\Order\Item\OrderItem;
-use Shopsys\FrameworkBundle\Model\Order\Item\OrderItemFactoryInterface;
 use Shopsys\FrameworkBundle\Model\Order\Status\OrderStatus;
 use Shopsys\FrameworkBundle\Model\Pricing\Price;
 
@@ -938,26 +937,5 @@ class Order
         $this->editData($orderData);
 
         return new OrderEditResult($statusChanged);
-    }
-
-    /**
-     * @param \Shopsys\FrameworkBundle\Model\Order\Item\OrderItemFactoryInterface $orderItemFactory
-     * @param \Shopsys\FrameworkBundle\Model\Pricing\Price|null $roundingPrice
-     * @param string $locale
-     */
-    public function fillOrderRounding(OrderItemFactoryInterface $orderItemFactory, ?Price $roundingPrice, $locale)
-    {
-        if ($roundingPrice !== null) {
-            $orderItemFactory->createProduct(
-                $this,
-                t('Rounding', [], 'messages', $locale),
-                $roundingPrice,
-                0,
-                1,
-                null,
-                null,
-                null
-            );
-        }
     }
 }
