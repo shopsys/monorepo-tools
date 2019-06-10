@@ -5,7 +5,6 @@ namespace Shopsys\FrameworkBundle\Model\Order;
 use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
-use Shopsys\FrameworkBundle\Component\Domain\Domain;
 use Shopsys\FrameworkBundle\Component\Money\Money;
 use Shopsys\FrameworkBundle\Model\Customer\User;
 use Shopsys\FrameworkBundle\Model\Order\Item\OrderItem;
@@ -25,9 +24,6 @@ use Shopsys\FrameworkBundle\Twig\NumberFormatterExtension;
  */
 class Order
 {
-    /** @access protected */
-    const DEFAULT_PRODUCT_QUANTITY = 1;
-
     /**
      * @var int
      *
@@ -936,41 +932,6 @@ class Order
     public function isCancelled()
     {
         return $this->status->getType() === OrderStatus::TYPE_CANCELED;
-    }
-
-    /**
-     * @param \Shopsys\FrameworkBundle\Model\Product\Product $product
-     * @param \Shopsys\FrameworkBundle\Model\Pricing\Price $productPrice
-     * @param \Shopsys\FrameworkBundle\Model\Order\Item\OrderItemFactoryInterface $orderItemFactory
-     * @param \Shopsys\FrameworkBundle\Component\Domain\Domain $domain
-     * @param \Shopsys\FrameworkBundle\Model\Order\OrderPriceCalculation $orderPriceCalculation
-     * @return \Shopsys\FrameworkBundle\Model\Order\Item\OrderItem
-     */
-    public function addProduct(
-        Product $product,
-        Price $productPrice,
-        OrderItemFactoryInterface $orderItemFactory,
-        Domain $domain,
-        OrderPriceCalculation $orderPriceCalculation
-    ): OrderItem {
-        $orderDomainConfig = $domain->getDomainConfigById($this->getDomainId());
-
-        $orderProduct = $orderItemFactory->createProduct(
-            $this,
-            $product->getName($orderDomainConfig->getLocale()),
-            $productPrice,
-            $product->getVat()->getPercent(),
-            static::DEFAULT_PRODUCT_QUANTITY,
-            $product->getUnit()->getName($orderDomainConfig->getLocale()),
-            $product->getCatnum(),
-            $product
-        );
-
-        $this->addItem($orderProduct);
-        $orderTotalPrice = $orderPriceCalculation->getOrderTotalPrice($this);
-        $this->setTotalPrice($orderTotalPrice);
-
-        return $orderProduct;
     }
 
     /**
