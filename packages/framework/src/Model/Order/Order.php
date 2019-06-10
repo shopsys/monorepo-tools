@@ -12,8 +12,6 @@ use Shopsys\FrameworkBundle\Model\Order\Item\OrderItemFactoryInterface;
 use Shopsys\FrameworkBundle\Model\Order\Preview\OrderPreview;
 use Shopsys\FrameworkBundle\Model\Order\Status\OrderStatus;
 use Shopsys\FrameworkBundle\Model\Pricing\Price;
-use Shopsys\FrameworkBundle\Model\Product\Product;
-use Shopsys\FrameworkBundle\Model\Transport\TransportPriceCalculation;
 use Shopsys\FrameworkBundle\Twig\NumberFormatterExtension;
 
 /**
@@ -945,50 +943,6 @@ class Order
     }
 
     /**
-     * @param \Shopsys\FrameworkBundle\Model\Order\Preview\OrderPreview $orderPreview
-     * @param \Shopsys\FrameworkBundle\Model\Order\Item\OrderItemFactoryInterface $orderItemFactory
-     * @param \Shopsys\FrameworkBundle\Twig\NumberFormatterExtension $numberFormatterExtension
-     * @param string $locale
-     */
-    public function fillOrderProducts(
-        OrderPreview $orderPreview,
-        OrderItemFactoryInterface $orderItemFactory,
-        NumberFormatterExtension $numberFormatterExtension,
-        $locale
-    ) {
-        $quantifiedItemPrices = $orderPreview->getQuantifiedItemsPrices();
-        $quantifiedItemDiscounts = $orderPreview->getQuantifiedItemsDiscounts();
-
-        foreach ($orderPreview->getQuantifiedProducts() as $index => $quantifiedProduct) {
-            $product = $quantifiedProduct->getProduct();
-            if (!$product instanceof Product) {
-                $message = 'Object "' . get_class($product) . '" is not valid for order creation.';
-                throw new \Shopsys\FrameworkBundle\Model\Order\Item\Exception\InvalidQuantifiedProductException($message);
-            }
-
-            $quantifiedItemPrice = $quantifiedItemPrices[$index];
-            /* @var $quantifiedItemPrice \Shopsys\FrameworkBundle\Model\Order\Item\QuantifiedItemPrice */
-            $quantifiedItemDiscount = $quantifiedItemDiscounts[$index];
-            /* @var $quantifiedItemDiscount \Shopsys\FrameworkBundle\Model\Pricing\Price|null */
-
-            $orderItem = $orderItemFactory->createProduct(
-                $this,
-                $product->getName($locale),
-                $quantifiedItemPrice->getUnitPrice(),
-                $product->getVat()->getPercent(),
-                $quantifiedProduct->getQuantity(),
-                $product->getUnit()->getName($locale),
-                $product->getCatnum(),
-                $product
-            );
-
-            if ($quantifiedItemDiscount !== null) {
-                $this->addOrderItemDiscount($numberFormatterExtension, $orderPreview, $orderItemFactory, $quantifiedItemDiscount, $orderItem, $locale);
-            }
-        }
-    }
-
-    /**
      * @param \Shopsys\FrameworkBundle\Twig\NumberFormatterExtension $numberFormatterExtension
      * @param \Shopsys\FrameworkBundle\Model\Order\Preview\OrderPreview $orderPreview
      * @param \Shopsys\FrameworkBundle\Model\Order\Item\OrderItemFactoryInterface $orderItemFactory
@@ -996,7 +950,7 @@ class Order
      * @param \Shopsys\FrameworkBundle\Model\Order\Item\OrderItem $orderItem
      * @param string $locale
      */
-    protected function addOrderItemDiscount(
+    public function addOrderItemDiscount(
         NumberFormatterExtension $numberFormatterExtension,
         OrderPreview $orderPreview,
         OrderItemFactoryInterface $orderItemFactory,

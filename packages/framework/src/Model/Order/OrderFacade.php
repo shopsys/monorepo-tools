@@ -24,6 +24,7 @@ use Shopsys\FrameworkBundle\Model\Order\Status\OrderStatus;
 use Shopsys\FrameworkBundle\Model\Order\Status\OrderStatusRepository;
 use Shopsys\FrameworkBundle\Model\Payment\PaymentPriceCalculation;
 use Shopsys\FrameworkBundle\Model\Pricing\Price;
+use Shopsys\FrameworkBundle\Model\Product\Product;
 use Shopsys\FrameworkBundle\Model\Transport\TransportPriceCalculation;
 use Shopsys\FrameworkBundle\Twig\NumberFormatterExtension;
 
@@ -498,10 +499,56 @@ class OrderFacade
     {
         $locale = $this->domain->getDomainConfigById($order->getDomainId())->getLocale();
 
-        $order->fillOrderProducts($orderPreview, $this->orderItemFactory, $this->numberFormatterExtension, $locale);
+        $this->fillOrderProducts($order, $orderPreview, $locale);
         $this->fillOrderPayment($order, $orderPreview, $locale);
         $this->fillOrderTransport($order, $orderPreview, $locale);
         $order->fillOrderRounding($this->orderItemFactory, $orderPreview->getRoundingPrice(), $locale);
+    }
+
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Order\Order $order
+     * @param \Shopsys\FrameworkBundle\Model\Order\Preview\OrderPreview $orderPreview
+     * @param string $locale
+     */
+    protected function fillOrderProducts(Order $order, OrderPreview $orderPreview, string $locale): void
+    {
+        $quantifiedItemPrices = $orderPreview->getQuantifiedItemsPrices();
+        $quantifiedItemDiscounts = $orderPreview->getQuantifiedItemsDiscounts();
+
+        foreach ($orderPreview->getQuantifiedProducts() as $index => $quantifiedProduct) {
+            $product = $quantifiedProduct->getProduct();
+            if (!$product instanceof Product) {
+                $message = 'Object "' . get_class($product) . '" is not valid for order creation.';
+                throw new \Shopsys\FrameworkBundle\Model\Order\Item\Exception\InvalidQuantifiedProductException($message);
+            }
+
+            /* @var $quantifiedItemPrice \Shopsys\FrameworkBundle\Model\Order\Item\QuantifiedItemPrice */
+            $quantifiedItemPrice = $quantifiedItemPrices[$index];
+            /* @var $quantifiedItemDiscount \Shopsys\FrameworkBundle\Model\Pricing\Price|null */
+            $quantifiedItemDiscount = $quantifiedItemDiscounts[$index];
+
+            $orderItem = $this->orderItemFactory->createProduct(
+                $order,
+                $product->getName($locale),
+                $quantifiedItemPrice->getUnitPrice(),
+                $product->getVat()->getPercent(),
+                $quantifiedProduct->getQuantity(),
+                $product->getUnit()->getName($locale),
+                $product->getCatnum(),
+                $product
+            );
+
+            if ($quantifiedItemDiscount !== null) {
+                $order->addOrderItemDiscount(
+                    $this->numberFormatterExtension,
+                    $orderPreview,
+                    $this->orderItemFactory,
+                    $quantifiedItemDiscount,
+                    $orderItem,
+                    $locale
+                );
+            }
+        }
     }
 
     /**
