@@ -23,6 +23,7 @@ use Shopsys\FrameworkBundle\Model\Order\PromoCode\CurrentPromoCodeFacade;
 use Shopsys\FrameworkBundle\Model\Order\Status\OrderStatus;
 use Shopsys\FrameworkBundle\Model\Order\Status\OrderStatusRepository;
 use Shopsys\FrameworkBundle\Model\Payment\PaymentPriceCalculation;
+use Shopsys\FrameworkBundle\Model\Pricing\Price;
 use Shopsys\FrameworkBundle\Model\Transport\TransportPriceCalculation;
 use Shopsys\FrameworkBundle\Twig\NumberFormatterExtension;
 
@@ -334,11 +335,14 @@ class OrderFacade
     {
         $order = $this->orderRepository->getById($orderId);
         $originalOrderStatus = $order->getStatus();
-        $orderEditResult = $order->edit(
-            $orderData,
-            $this->orderItemPriceCalculation,
-            $this->orderItemFactory,
-            $this->orderPriceCalculation
+
+        $this->calculatePriceWithoutVatForOrderPaymentDataAndOrderTransportData($orderData);
+        $this->refreshOrderItemsWithoutTransportAndPayment($order, $orderData);
+
+        $orderEditResult = $order->edit($orderData);
+
+        $order->setTotalPrice(
+            $this->orderPriceCalculation->getOrderTotalPrice($order)
         );
 
         $this->em->flush();
@@ -498,5 +502,51 @@ class OrderFacade
         $order->fillOrderPayment($this->paymentPriceCalculation, $this->orderItemFactory, $orderPreview->getProductsPrice(), $locale);
         $order->fillOrderTransport($this->transportPriceCalculation, $this->orderItemFactory, $orderPreview->getProductsPrice(), $locale);
         $order->fillOrderRounding($this->orderItemFactory, $orderPreview->getRoundingPrice(), $locale);
+    }
+
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Order\OrderData $orderData
+     */
+    protected function calculatePriceWithoutVatForOrderPaymentDataAndOrderTransportData(OrderData $orderData): void
+    {
+        $orderTransportData = $orderData->orderTransport;
+        $orderTransportData->priceWithoutVat = $this->orderItemPriceCalculation->calculatePriceWithoutVat($orderTransportData);
+
+        $orderPaymentData = $orderData->orderPayment;
+        $orderPaymentData->priceWithoutVat = $this->orderItemPriceCalculation->calculatePriceWithoutVat($orderPaymentData);
+    }
+
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Order\Order $order
+     * @param \Shopsys\FrameworkBundle\Model\Order\OrderData $orderData
+     */
+    protected function refreshOrderItemsWithoutTransportAndPayment(Order $order, OrderData $orderData): void
+    {
+        $orderItemsWithoutTransportAndPaymentData = $orderData->itemsWithoutTransportAndPayment;
+        foreach ($order->getItemsWithoutTransportAndPayment() as $orderItem) {
+            if (array_key_exists($orderItem->getId(), $orderItemsWithoutTransportAndPaymentData)) {
+                $orderItemData = $orderItemsWithoutTransportAndPaymentData[$orderItem->getId()];
+                $orderItemData->priceWithoutVat = $this->orderItemPriceCalculation->calculatePriceWithoutVat($orderItemData);
+                $orderItem->edit($orderItemData);
+            } else {
+                $order->removeItem($orderItem);
+            }
+        }
+
+        foreach ($orderData->getNewItemsWithoutTransportAndPayment() as $newOrderItemData) {
+            $newOrderItemData->priceWithoutVat = $this->orderItemPriceCalculation->calculatePriceWithoutVat($newOrderItemData);
+            $this->orderItemFactory->createProduct(
+                $order,
+                $newOrderItemData->name,
+                new Price(
+                    $newOrderItemData->priceWithoutVat,
+                    $newOrderItemData->priceWithVat
+                ),
+                $newOrderItemData->vatPercent,
+                $newOrderItemData->quantity,
+                $newOrderItemData->unitName,
+                $newOrderItemData->catnum
+            );
+        }
     }
 }

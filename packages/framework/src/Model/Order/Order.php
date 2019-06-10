@@ -9,7 +9,6 @@ use Shopsys\FrameworkBundle\Component\Money\Money;
 use Shopsys\FrameworkBundle\Model\Customer\User;
 use Shopsys\FrameworkBundle\Model\Order\Item\OrderItem;
 use Shopsys\FrameworkBundle\Model\Order\Item\OrderItemFactoryInterface;
-use Shopsys\FrameworkBundle\Model\Order\Item\OrderItemPriceCalculation;
 use Shopsys\FrameworkBundle\Model\Order\Preview\OrderPreview;
 use Shopsys\FrameworkBundle\Model\Order\Status\OrderStatus;
 use Shopsys\FrameworkBundle\Model\Payment\PaymentPriceCalculation;
@@ -936,55 +935,12 @@ class Order
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\Order\OrderData $orderData
-     * @param \Shopsys\FrameworkBundle\Model\Order\Item\OrderItemPriceCalculation $orderItemPriceCalculation
-     * @param \Shopsys\FrameworkBundle\Model\Order\Item\OrderItemFactoryInterface $orderItemFactory
-     * @param \Shopsys\FrameworkBundle\Model\Order\OrderPriceCalculation $orderPriceCalculation
      * @return \Shopsys\FrameworkBundle\Model\Order\OrderEditResult
      */
-    public function edit(
-        OrderData $orderData,
-        OrderItemPriceCalculation $orderItemPriceCalculation,
-        OrderItemFactoryInterface $orderItemFactory,
-        OrderPriceCalculation $orderPriceCalculation
-    ): OrderEditResult {
-        $orderTransportData = $orderData->orderTransport;
-        $orderTransportData->priceWithoutVat = $orderItemPriceCalculation->calculatePriceWithoutVat($orderTransportData);
-        $orderPaymentData = $orderData->orderPayment;
-        $orderPaymentData->priceWithoutVat = $orderItemPriceCalculation->calculatePriceWithoutVat($orderPaymentData);
-
+    public function edit(OrderData $orderData): OrderEditResult
+    {
         $statusChanged = $this->getStatus() !== $orderData->status;
         $this->editData($orderData);
-
-        $orderItemsWithoutTransportAndPaymentData = $orderData->itemsWithoutTransportAndPayment;
-
-        foreach ($this->getItemsWithoutTransportAndPayment() as $orderItem) {
-            if (array_key_exists($orderItem->getId(), $orderItemsWithoutTransportAndPaymentData)) {
-                $orderItemData = $orderItemsWithoutTransportAndPaymentData[$orderItem->getId()];
-                $orderItemData->priceWithoutVat = $orderItemPriceCalculation->calculatePriceWithoutVat($orderItemData);
-                $orderItem->edit($orderItemData);
-            } else {
-                $this->removeItem($orderItem);
-            }
-        }
-
-        foreach ($orderData->getNewItemsWithoutTransportAndPayment() as $newOrderItemData) {
-            $newOrderItemData->priceWithoutVat = $orderItemPriceCalculation->calculatePriceWithoutVat($newOrderItemData);
-            $orderItemFactory->createProduct(
-                $this,
-                $newOrderItemData->name,
-                new Price(
-                    $newOrderItemData->priceWithoutVat,
-                    $newOrderItemData->priceWithVat
-                ),
-                $newOrderItemData->vatPercent,
-                $newOrderItemData->quantity,
-                $newOrderItemData->unitName,
-                $newOrderItemData->catnum
-            );
-        }
-
-        $orderTotalPrice = $orderPriceCalculation->getOrderTotalPrice($this);
-        $this->setTotalPrice($orderTotalPrice);
 
         return new OrderEditResult($statusChanged);
     }
