@@ -3,6 +3,7 @@
 namespace Tests\ShopBundle\Functional\Model\Product\Availability;
 
 use Doctrine\ORM\EntityManager;
+use PHPUnit\Framework\MockObject\MockObject;
 use Shopsys\FrameworkBundle\Model\Product\Availability\Availability;
 use Shopsys\FrameworkBundle\Model\Product\Availability\AvailabilityFacade;
 use Shopsys\FrameworkBundle\Model\Product\Availability\ProductAvailabilityCalculation;
@@ -55,7 +56,7 @@ class ProductAvailabilityCalculationTest extends FunctionalTestCase
 
         $productSellingDeniedRecalculatorMock = $this->createMock(ProductSellingDeniedRecalculator::class);
         $productVisibilityFacadeMock = $this->createMock(ProductVisibilityFacade::class);
-        $entityManagerMock = $this->createMock(EntityManager::class);
+        $entityManagerMock = $this->createEntityManagerMock();
         $productRepositoryMock = $this->createMock(ProductRepository::class);
 
         $productAvailabilityCalculation = new ProductAvailabilityCalculation(
@@ -146,7 +147,7 @@ class ProductAvailabilityCalculationTest extends FunctionalTestCase
         $availabilityFacadeMock = $this->createMock(AvailabilityFacade::class);
         $productSellingDeniedRecalculatorMock = $this->createMock(ProductSellingDeniedRecalculator::class);
         $productVisibilityFacadeMock = $this->createMock(ProductVisibilityFacade::class);
-        $entityManagerMock = $this->createMock(EntityManager::class);
+        $entityManagerMock = $this->createEntityManagerMock();
 
         $productRepositoryMock = $this->createMock(ProductRepository::class);
         $productRepositoryMock
@@ -194,7 +195,7 @@ class ProductAvailabilityCalculationTest extends FunctionalTestCase
             ->willReturn($defaultInStockAvailability);
         $productSellingDeniedRecalculatorMock = $this->createMock(ProductSellingDeniedRecalculator::class);
         $productVisibilityFacadeMock = $this->createMock(ProductVisibilityFacade::class);
-        $entityManagerMock = $this->createMock(EntityManager::class);
+        $entityManagerMock = $this->createEntityManagerMock();
 
         $productRepositoryMock = $this->createMock(ProductRepository::class);
         $productRepositoryMock
@@ -216,5 +217,17 @@ class ProductAvailabilityCalculationTest extends FunctionalTestCase
         $mainVariantCalculatedAvailability = $productAvailabilityCalculation->calculateAvailability($mainVariant);
 
         $this->assertSame($defaultInStockAvailability, $mainVariantCalculatedAvailability);
+    }
+
+    /**
+     * @return \PHPUnit\Framework\MockObject\MockObject
+     */
+    protected function createEntityManagerMock(): MockObject
+    {
+        $entityManagerMock = $this->createMock(EntityManager::class);
+
+        $entityManagerMock->method('contains')->willReturn(true);
+
+        return $entityManagerMock;
     }
 }
