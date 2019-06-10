@@ -39,7 +39,7 @@ E.g., if the latest release is `v7.1.0` and you want to introduce a breaking cha
 * Now just wait for review of your change.
 
 ## 2. Changes after review
-During the review, reviewer will write comments how to improve the solution or fix bugs. CR can end in `Approved` or `RequestChanges` status when further edits are needed. After completing the CR, it is necessary to correct to correct errors encountered by the reviewer.
+During the review, reviewer will write comments how to improve the solution or fix bugs. CR can end in `Approved` or `RequestChanges` status when further edits are needed. After completing the CR, it is necessary to correct errors encountered by the reviewer.
 It would be good if you could respond to each comment so that we knew you were reading them.
 We use fixup commits for correcting pull request so the reviewer can see what edits were made. Once the changes are done, the branch must be pushed. Comments to commit message should be corrected after the fixup commit squash.
 

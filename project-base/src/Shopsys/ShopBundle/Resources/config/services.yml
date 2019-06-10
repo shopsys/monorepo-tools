@@ -13,8 +13,9 @@ services:
         public: true
         tags: ['controller.service_arguments']
 
-    Shopsys\ShopBundle\Model\:
-        resource: '../../Model/**/*{Facade,Factory,Repository}.php'
+    Shopsys\ShopBundle\:
+        resource: '../../**/*{Calculation,Facade,Factory,Generator,Handler,InlineEdit,Listener,Loader,Mapper,Parser,Provider,Recalculator,Registry,Repository,Resolver,Service,Scheduler,Subscriber,Transformer}.php'
+        exclude: '../../{Command,Controller,DependencyInjection,Form,Migrations,Resources,Twig}'
 
     League\Flysystem\MountManager:
         arguments:

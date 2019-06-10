@@ -47,7 +47,7 @@
 * [Adding an Icon into a Button](./cookbook/adding-an-icon-into-a-button.md)
 * [Modifying a Template in Administration](./cookbook/modifying-a-template-in-administration.md)
 * [Adding Ajax Load More Button into Pagination](./cookbook/adding-ajax-load-more-button-into-pagination.md)
-* [Implementing a basic data import](./cookbook/basic-data-import.md)
+* [Implementing a Basic Data Import](./cookbook/basic-data-import.md)
 * [Creating a Multidomain Design](./cookbook/creating-a-multidomain-design.md)
 * [Working with Multiple Cron Instances](./cookbook/working-with-multiple-cron-instances.md)
 * [Create Basic Grid](./cookbook/create-basic-grid.md)
@@ -68,7 +68,7 @@
 ## Frontend
 * [Design implementation and Customization](./frontend/design-implementation-and-customization.md)
 * [Introduction to LESS](./frontend/introduction-to-less.md)
-* [Configuring image sizes for individual devices width](./frontend/configuring-image-sizes-for-individual-devices-width.md)
+* [Configuring Image Sizes for Individual Devices Width](./frontend/configuring-image-sizes-for-individual-devices-width.md)
 * [Frontend Troubleshooting](./frontend/frontend-troubleshooting.md)
 * [Understanding the Style Directory](./frontend/understanding-the-style-directory.md)
 

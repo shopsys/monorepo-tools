@@ -1237,6 +1237,9 @@ msgstr ""
 msgid "Main variant"
 msgstr ""
 
+msgid "Main variant [abbreviation]"
+msgstr "M"
+
 msgid "Make modification"
 msgstr ""
 
@@ -2223,6 +2226,9 @@ msgstr ""
 
 msgid "Variant <strong>{{ productVariant|productDisplayName }}</strong> successfully created."
 msgstr ""
+
+msgid "Variant [abbreviation]"
+msgstr "V"
 
 msgid "Variant alias"
 msgstr ""
