@@ -276,7 +276,10 @@ class OrderFacade
             $toFlush[] = $orderItem;
         }
 
-        $order->calculateTotalPrice($this->orderPriceCalculation);
+        $order->setTotalPrice(
+            $this->orderPriceCalculation->getOrderTotalPrice($order)
+        );
+
         $this->em->persist($order);
         $this->em->flush($toFlush);
 

@@ -587,7 +587,7 @@ class Order
     /**
      * @param \Shopsys\FrameworkBundle\Model\Order\OrderTotalPrice $orderTotalPrice
      */
-    protected function setTotalPrice(OrderTotalPrice $orderTotalPrice)
+    public function setTotalPrice(OrderTotalPrice $orderTotalPrice): void
     {
         $this->totalPriceWithVat = $orderTotalPrice->getPriceWithVat();
         $this->totalPriceWithoutVat = $orderTotalPrice->getPriceWithoutVat();
@@ -939,15 +939,6 @@ class Order
     }
 
     /**
-     * @param \Shopsys\FrameworkBundle\Model\Order\OrderPriceCalculation $orderPriceCalculation
-     */
-    public function calculateTotalPrice(OrderPriceCalculation $orderPriceCalculation)
-    {
-        $orderTotalPrice = $orderPriceCalculation->getOrderTotalPrice($this);
-        $this->setTotalPrice($orderTotalPrice);
-    }
-
-    /**
      * @param \Shopsys\FrameworkBundle\Model\Product\Product $product
      * @param \Shopsys\FrameworkBundle\Model\Pricing\Price $productPrice
      * @param \Shopsys\FrameworkBundle\Model\Order\Item\OrderItemFactoryInterface $orderItemFactory
@@ -976,7 +967,8 @@ class Order
         );
 
         $this->addItem($orderProduct);
-        $this->calculateTotalPrice($orderPriceCalculation);
+        $orderTotalPrice = $orderPriceCalculation->getOrderTotalPrice($this);
+        $this->setTotalPrice($orderTotalPrice);
 
         return $orderProduct;
     }
@@ -1030,7 +1022,8 @@ class Order
             );
         }
 
-        $this->calculateTotalPrice($orderPriceCalculation);
+        $orderTotalPrice = $orderPriceCalculation->getOrderTotalPrice($this);
+        $this->setTotalPrice($orderTotalPrice);
 
         return new OrderEditResult($statusChanged);
     }
