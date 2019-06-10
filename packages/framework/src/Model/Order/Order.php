@@ -9,10 +9,8 @@ use Shopsys\FrameworkBundle\Component\Money\Money;
 use Shopsys\FrameworkBundle\Model\Customer\User;
 use Shopsys\FrameworkBundle\Model\Order\Item\OrderItem;
 use Shopsys\FrameworkBundle\Model\Order\Item\OrderItemFactoryInterface;
-use Shopsys\FrameworkBundle\Model\Order\Preview\OrderPreview;
 use Shopsys\FrameworkBundle\Model\Order\Status\OrderStatus;
 use Shopsys\FrameworkBundle\Model\Pricing\Price;
-use Shopsys\FrameworkBundle\Twig\NumberFormatterExtension;
 
 /**
  * @ORM\Table(name="orders")
@@ -940,41 +938,6 @@ class Order
         $this->editData($orderData);
 
         return new OrderEditResult($statusChanged);
-    }
-
-    /**
-     * @param \Shopsys\FrameworkBundle\Twig\NumberFormatterExtension $numberFormatterExtension
-     * @param \Shopsys\FrameworkBundle\Model\Order\Preview\OrderPreview $orderPreview
-     * @param \Shopsys\FrameworkBundle\Model\Order\Item\OrderItemFactoryInterface $orderItemFactory
-     * @param \Shopsys\FrameworkBundle\Model\Pricing\Price $quantifiedItemDiscount
-     * @param \Shopsys\FrameworkBundle\Model\Order\Item\OrderItem $orderItem
-     * @param string $locale
-     */
-    public function addOrderItemDiscount(
-        NumberFormatterExtension $numberFormatterExtension,
-        OrderPreview $orderPreview,
-        OrderItemFactoryInterface $orderItemFactory,
-        Price $quantifiedItemDiscount,
-        OrderItem $orderItem,
-        $locale
-    ) {
-        $name = sprintf(
-            '%s %s - %s',
-            t('Promo code', [], 'messages', $locale),
-            $numberFormatterExtension->formatPercent(-$orderPreview->getPromoCodeDiscountPercent(), $locale),
-            $orderItem->getName()
-        );
-
-        $orderItemFactory->createProduct(
-            $orderItem->getOrder(),
-            $name,
-            $quantifiedItemDiscount->inverse(),
-            $orderItem->getVatPercent(),
-            1,
-            null,
-            null,
-            null
-        );
     }
 
     /**

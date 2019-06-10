@@ -13,6 +13,7 @@ use Shopsys\FrameworkBundle\Model\Customer\CustomerFacade;
 use Shopsys\FrameworkBundle\Model\Customer\User;
 use Shopsys\FrameworkBundle\Model\Heureka\HeurekaFacade;
 use Shopsys\FrameworkBundle\Model\Localization\Localization;
+use Shopsys\FrameworkBundle\Model\Order\Item\OrderItem;
 use Shopsys\FrameworkBundle\Model\Order\Item\OrderItemFactoryInterface;
 use Shopsys\FrameworkBundle\Model\Order\Item\OrderItemPriceCalculation;
 use Shopsys\FrameworkBundle\Model\Order\Item\OrderProductFacade;
@@ -539,14 +540,7 @@ class OrderFacade
             );
 
             if ($quantifiedItemDiscount !== null) {
-                $order->addOrderItemDiscount(
-                    $this->numberFormatterExtension,
-                    $orderPreview,
-                    $this->orderItemFactory,
-                    $quantifiedItemDiscount,
-                    $orderItem,
-                    $locale
-                );
+                $this->addOrderItemDiscount($orderItem, $quantifiedItemDiscount, $locale, $orderPreview->getPromoCodeDiscountPercent());
             }
         }
     }
@@ -599,6 +593,33 @@ class OrderFacade
             $transport
         );
         $order->addItem($orderTransport);
+    }
+
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Order\Item\OrderItem $orderItem
+     * @param \Shopsys\FrameworkBundle\Model\Pricing\Price $quantifiedItemDiscount
+     * @param string $locale
+     * @param float $discountPercent
+     */
+    protected function addOrderItemDiscount(OrderItem $orderItem, Price $quantifiedItemDiscount, string $locale, float $discountPercent): void
+    {
+        $name = sprintf(
+            '%s %s - %s',
+            t('Promo code', [], 'messages', $locale),
+            $this->numberFormatterExtension->formatPercent(-$discountPercent, $locale),
+            $orderItem->getName()
+        );
+
+        $this->orderItemFactory->createProduct(
+            $orderItem->getOrder(),
+            $name,
+            $quantifiedItemDiscount->inverse(),
+            $orderItem->getVatPercent(),
+            1,
+            null,
+            null,
+            null
+        );
     }
 
     /**
