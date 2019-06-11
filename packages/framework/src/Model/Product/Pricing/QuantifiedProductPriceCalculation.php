@@ -12,7 +12,6 @@ use Shopsys\FrameworkBundle\Model\Pricing\Price;
 use Shopsys\FrameworkBundle\Model\Pricing\PriceCalculation;
 use Shopsys\FrameworkBundle\Model\Pricing\Rounding;
 use Shopsys\FrameworkBundle\Model\Pricing\Vat\Vat;
-use Shopsys\FrameworkBundle\Model\Product\Product;
 
 class QuantifiedProductPriceCalculation
 {
@@ -55,10 +54,6 @@ class QuantifiedProductPriceCalculation
     public function calculatePrice(QuantifiedProduct $quantifiedProduct, int $domainId, ?User $user = null): QuantifiedItemPrice
     {
         $product = $quantifiedProduct->getProduct();
-        if (!$product instanceof Product) {
-            $message = 'Object "' . get_class($product) . '" is not valid for QuantifiedProductPriceCalculation.';
-            throw new \Shopsys\FrameworkBundle\Model\Order\Item\Exception\InvalidQuantifiedProductException($message);
-        }
 
         $productPrice = $this->productPriceCalculationForUser->calculatePriceForUserAndDomainId(
             $product,

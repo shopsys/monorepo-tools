@@ -25,7 +25,6 @@ use Shopsys\FrameworkBundle\Model\Order\Status\OrderStatus;
 use Shopsys\FrameworkBundle\Model\Order\Status\OrderStatusRepository;
 use Shopsys\FrameworkBundle\Model\Payment\PaymentPriceCalculation;
 use Shopsys\FrameworkBundle\Model\Pricing\Price;
-use Shopsys\FrameworkBundle\Model\Product\Product;
 use Shopsys\FrameworkBundle\Model\Transport\TransportPriceCalculation;
 use Shopsys\FrameworkBundle\Twig\NumberFormatterExtension;
 
@@ -518,10 +517,6 @@ class OrderFacade
 
         foreach ($orderPreview->getQuantifiedProducts() as $index => $quantifiedProduct) {
             $product = $quantifiedProduct->getProduct();
-            if (!$product instanceof Product) {
-                $message = 'Object "' . get_class($product) . '" is not valid for order creation.';
-                throw new \Shopsys\FrameworkBundle\Model\Order\Item\Exception\InvalidQuantifiedProductException($message);
-            }
 
             /* @var $quantifiedItemPrice \Shopsys\FrameworkBundle\Model\Order\Item\QuantifiedItemPrice */
             $quantifiedItemPrice = $quantifiedItemPrices[$index];
