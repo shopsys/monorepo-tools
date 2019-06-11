@@ -5,6 +5,7 @@ namespace Shopsys\FrameworkBundle\Model\Order\Item;
 use Doctrine\ORM\Mapping as ORM;
 use Shopsys\FrameworkBundle\Component\Money\Money;
 use Shopsys\FrameworkBundle\Model\Order\Item\Exception\MainVariantCannotBeOrderedException;
+use Shopsys\FrameworkBundle\Model\Order\Item\Exception\OrderItemHasOnlyOneTotalPriceException;
 use Shopsys\FrameworkBundle\Model\Order\Item\Exception\WrongItemTypeException;
 use Shopsys\FrameworkBundle\Model\Order\Order;
 use Shopsys\FrameworkBundle\Model\Payment\Payment;
@@ -67,6 +68,26 @@ class OrderItem
      * @ORM\Column(type="money", precision=20, scale=6)
      */
     protected $priceWithVat;
+
+    /**
+     * This property can be used when order item has prices that differ from current price calculation implementation.
+     * Otherwise it should be set to NULL (which means it will be calculated automatically).
+     *
+     * @var \Shopsys\FrameworkBundle\Component\Money\Money|null
+     *
+     * @ORM\Column(type="money", precision=20, scale=6, nullable=true)
+     */
+    protected $totalPriceWithoutVat;
+
+    /**
+     * This property can be used when order item has prices that differ from current price calculation implementation.
+     * Otherwise it should be set to NULL (which means it will be calculated automatically).
+     *
+     * @var \Shopsys\FrameworkBundle\Component\Money\Money|null
+     *
+     * @ORM\Column(type="money", precision=20, scale=6, nullable=true)
+     */
+    protected $totalPriceWithVat;
 
     /**
      * @var string
@@ -193,6 +214,46 @@ class OrderItem
     }
 
     /**
+     * @return \Shopsys\FrameworkBundle\Component\Money\Money|null
+     */
+    public function getTotalPriceWithoutVat(): ?Money
+    {
+        return $this->hasForcedTotalPrice() ? $this->totalPriceWithoutVat : null;
+    }
+
+    /**
+     * @return \Shopsys\FrameworkBundle\Component\Money\Money
+     */
+    public function getTotalPriceWithVat(): Money
+    {
+        return $this->hasForcedTotalPrice() ? $this->totalPriceWithVat : $this->priceWithVat->multiply($this->quantity);
+    }
+
+    /**
+     * The total price property can be used when order item has prices that differ from current price calculation implementation.
+     * Otherwise it should be set to NULL (which means it will be calculated automatically).
+     *
+     * @param \Shopsys\FrameworkBundle\Model\Pricing\Price|null $totalPrice
+     */
+    public function setTotalPrice(?Price $totalPrice): void
+    {
+        $this->totalPriceWithVat = $totalPrice !== null ? $totalPrice->getPriceWithVat() : null;
+        $this->totalPriceWithoutVat = $totalPrice !== null ? $totalPrice->getPriceWithoutVat() : null;
+    }
+
+    /**
+     * @return bool
+     */
+    public function hasForcedTotalPrice(): bool
+    {
+        if ($this->totalPriceWithVat === null xor $this->totalPriceWithoutVat === null) {
+            throw new OrderItemHasOnlyOneTotalPriceException($this->totalPriceWithVat, $this->totalPriceWithoutVat);
+        }
+
+        return $this->totalPriceWithoutVat !== null && $this->totalPriceWithVat !== null;
+    }
+
+    /**
      * @return string
      */
     public function getVatPercent()
@@ -225,14 +286,6 @@ class OrderItem
     }
 
     /**
-     * @return \Shopsys\FrameworkBundle\Component\Money\Money
-     */
-    public function getTotalPriceWithVat(): Money
-    {
-        return $this->priceWithVat->multiply($this->quantity);
-    }
-
-    /**
      * @param \Shopsys\FrameworkBundle\Model\Order\Item\OrderItemData $orderItemData
      */
     public function edit(OrderItemData $orderItemData)
@@ -240,6 +293,13 @@ class OrderItem
         $this->name = $orderItemData->name;
         $this->priceWithoutVat = $orderItemData->priceWithoutVat;
         $this->priceWithVat = $orderItemData->priceWithVat;
+
+        if ($orderItemData->usePriceCalculation) {
+            $this->setTotalPrice(null);
+        } else {
+            $this->setTotalPrice(new Price($orderItemData->totalPriceWithoutVat, $orderItemData->totalPriceWithVat));
+        }
+
         $this->vatPercent = $orderItemData->vatPercent;
         $this->quantity = $orderItemData->quantity;
         $this->unitName = $orderItemData->unitName;
