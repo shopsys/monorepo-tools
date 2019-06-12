@@ -1,0 +1,15 @@
+services:
+
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        public: false
+
+    shopsys.component.elasticsearch.tracer:
+        class: Shopsys\FrameworkBundle\Component\Elasticsearch\Debug\ElasticsearchTracer
+
+    Shopsys\FrameworkBundle\Component\Elasticsearch\Debug\ElasticsearchCollector:
+        tags:
+            - { name: 'data_collector', template: '@ShopsysFramework/Debug/Elasticsearch/template.html.twig', id: 'shopsys.elasticsearch_collector' }
+
+    Shopsys\FrameworkBundle\Component\Elasticsearch\Debug\ElasticsearchRequestCollection:

@@ -983,6 +983,9 @@ services:
             $globalClient: '@snc_redis.global'
             $currentVersion: '%build-version%'
 
+    shopsys.component.elasticsearch.tracer:
+        class: Psr\Log\NullLogger
+
     Elasticsearch\ClientBuilder:
       class: Elasticsearch\ClientBuilder
       factory: [Elasticsearch\ClientBuilder, create]
@@ -990,6 +993,9 @@ services:
         - method: setHosts
           arguments:
             - ['%elasticsearch_host%']
+        - method: setTracer
+          arguments:
+            - '@shopsys.component.elasticsearch.tracer'
 
     Elasticsearch\Client:
       class: Elasticsearch\Client
