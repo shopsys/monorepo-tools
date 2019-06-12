@@ -173,34 +173,10 @@ class Cart
     }
 
     /**
-     * @param \Shopsys\FrameworkBundle\Model\Cart\Cart $cartToMerge
-     * @param \Shopsys\FrameworkBundle\Model\Cart\Item\CartItemFactoryInterface $cartItemFactory
-     */
-    public function mergeWithCart(self $cartToMerge, CartItemFactoryInterface $cartItemFactory)
-    {
-        foreach ($cartToMerge->getItems() as $itemToMerge) {
-            $similarItem = $this->findSimilarItemByItem($itemToMerge);
-            if ($similarItem instanceof CartItem) {
-                $similarItem->changeQuantity($similarItem->getQuantity() + $itemToMerge->getQuantity());
-            } else {
-                $newCartItem = $cartItemFactory->create(
-                    $this,
-                    $itemToMerge->getProduct(),
-                    $itemToMerge->getQuantity(),
-                    $itemToMerge->getWatchedPrice()
-                );
-                $this->addItem($newCartItem);
-            }
-        }
-
-        $this->setModifiedNow();
-    }
-
-    /**
      * @param \Shopsys\FrameworkBundle\Model\Cart\Item\CartItem $item
      * @return \Shopsys\FrameworkBundle\Model\Cart\Item\CartItem|null
      */
-    protected function findSimilarItemByItem(CartItem $item)
+    public function findSimilarItemByItem(CartItem $item): ?CartItem
     {
         foreach ($this->items as $similarItem) {
             if ($similarItem->isSimilarItemAs($item)) {
@@ -252,7 +228,7 @@ class Cart
         return $this->cartIdentifier;
     }
 
-    protected function setModifiedNow()
+    public function setModifiedNow(): void
     {
         $this->modifiedAt = new DateTime();
     }
