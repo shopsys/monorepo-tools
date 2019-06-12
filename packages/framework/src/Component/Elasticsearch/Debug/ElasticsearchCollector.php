@@ -27,7 +27,7 @@ class ElasticsearchCollector extends DataCollector
     /**
      * @inheritdoc
      */
-    public function collect(Request $request, Response $response, Exception $exception = null): void
+    public function collect(Request $request, Response $response, ?Exception $exception = null): void
     {
         $this->data = [
             'requests' => $this->elasticsearchRequestCollection->getCollectedData(),
