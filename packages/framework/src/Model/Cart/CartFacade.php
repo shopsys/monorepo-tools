@@ -2,6 +2,7 @@
 
 namespace Shopsys\FrameworkBundle\Model\Cart;
 
+use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
 use Shopsys\FrameworkBundle\Component\Domain\Domain;
 use Shopsys\FrameworkBundle\Model\Cart\Item\CartItemFactoryInterface;
@@ -128,8 +129,27 @@ class CartFacade
         );
         $cart = $this->getCartOfCurrentCustomerCreateIfNotExists();
 
-        /* @var $result \Shopsys\FrameworkBundle\Model\Cart\AddProductResult */
-        $result = $cart->addProduct($product, $quantity, $this->productPriceCalculation, $this->cartItemFactory);
+        if (!is_int($quantity) || $quantity <= 0) {
+            throw new \Shopsys\FrameworkBundle\Model\Cart\Exception\InvalidQuantityException($quantity);
+        }
+
+        foreach ($cart->getItems() as $item) {
+            if ($item->getProduct() === $product) {
+                $item->changeQuantity($item->getQuantity() + $quantity);
+                $item->changeAddedAt(new DateTime());
+                $result = new AddProductResult($item, false, $quantity);
+                $this->em->persist($result->getCartItem());
+                $this->em->flush();
+
+                return $result;
+            }
+        }
+        $productPrice = $this->productPriceCalculation->calculatePriceForCurrentUser($product);
+        $newCartItem = $this->cartItemFactory->create($cart, $product, $quantity, $productPrice->getPriceWithVat());
+        $cart->addItem($newCartItem);
+        $cart->setModifiedNow();
+
+        $result = new AddProductResult($newCartItem, true, $quantity);
 
         $this->em->persist($result->getCartItem());
         $this->em->flush();

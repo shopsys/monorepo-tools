@@ -5,14 +5,12 @@ namespace Tests\ShopBundle\Functional\Model\Order;
 use Shopsys\FrameworkBundle\Component\DataFixture\PersistentReferenceFacade;
 use Shopsys\FrameworkBundle\Component\Money\Money;
 use Shopsys\FrameworkBundle\Model\Cart\CartFacade;
-use Shopsys\FrameworkBundle\Model\Cart\Item\CartItemFactoryInterface;
 use Shopsys\FrameworkBundle\Model\Order\Item\OrderItemData;
 use Shopsys\FrameworkBundle\Model\Order\OrderDataFactoryInterface;
 use Shopsys\FrameworkBundle\Model\Order\OrderFacade;
 use Shopsys\FrameworkBundle\Model\Order\OrderRepository;
 use Shopsys\FrameworkBundle\Model\Order\Preview\OrderPreviewFactory;
 use Shopsys\FrameworkBundle\Model\Payment\PaymentRepository;
-use Shopsys\FrameworkBundle\Model\Product\Pricing\ProductPriceCalculationForUser;
 use Shopsys\FrameworkBundle\Model\Product\ProductRepository;
 use Shopsys\FrameworkBundle\Model\Transport\TransportRepository;
 use Shopsys\ShopBundle\DataFixtures\Demo\CountryDataFixture;
@@ -41,15 +39,10 @@ class OrderFacadeTest extends TransactionFunctionalTestCase
         $paymentRepository = $this->getContainer()->get(PaymentRepository::class);
         /** @var \Shopsys\FrameworkBundle\Component\DataFixture\PersistentReferenceFacade $persistentReferenceFacade */
         $persistentReferenceFacade = $this->getContainer()->get(PersistentReferenceFacade::class);
-        /** @var \Shopsys\FrameworkBundle\Model\Product\Pricing\ProductPriceCalculationForUser $productPriceCalculation */
-        $productPriceCalculation = $this->getContainer()->get(ProductPriceCalculationForUser::class);
-        /** @var \Shopsys\FrameworkBundle\Model\Cart\Item\CartItemFactory $cartItemFactory */
-        $cartItemFactory = $this->getContainer()->get(CartItemFactoryInterface::class);
 
-        $cart = $cartFacade->getCartOfCurrentCustomerCreateIfNotExists();
         $product = $productRepository->getById(1);
 
-        $cart->addProduct($product, 1, $productPriceCalculation, $cartItemFactory);
+        $cartFacade->addProductToCart($product->getId(), 1);
 
         $transport = $transportRepository->getById(1);
         $payment = $paymentRepository->getById(1);
