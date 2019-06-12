@@ -52,7 +52,7 @@ class UserFormType extends AbstractType
                 'type' => PasswordType::class,
                 'required' => false,
                 'options' => [
-                    'attr' => ['autocomplete' => 'off'],
+                    'attr' => ['autocomplete' => 'new-password'],
                 ],
                 'first_options' => [
                     'constraints' => [

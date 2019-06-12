@@ -68,6 +68,15 @@ There you can find links to upgrade notes for other versions too.
         {% endblock %}
         ```
     - you should prevent indexing by robots using this block on all pages that are secured by an URL hash
+- use `autocomplete="new-password"` attribute for password changing inputs to prevent filling it by browser ([#1121](https://github.com/shopsys/shopsys/pull/1121))
+    - in `shopsys/project-base` repository this change was needed in 3 form classes (`NewPasswordFormType`, `UserFormType` and `RegistrationFormType`):
+        ```diff
+          'type' => PasswordType::class,
+          'options' => [
+        -     'attr' => ['autocomplete' => 'off'],
+        +     'attr' => ['autocomplete' => 'new-password'],
+          ],
+        ```
 
 ### Configuration
 - update `phpstan.neon` with following change to skip phpstan error ([#1086](https://github.com/shopsys/shopsys/pull/1086))
