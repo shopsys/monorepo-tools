@@ -10,27 +10,27 @@ use Symfony\Component\Routing\RouterInterface;
 
 class LocalizedRouterFactoryTest extends TestCase
 {
+    protected const LOCALE_ROUTERS_CONFIGURATION_MASK = __DIR__ . '/Resources/routing_front_*.yml';
+
     public function testGetRouterRouterNotResolvedException()
     {
-        $localeRoutersConfiguration = [];
         $delegatingLoaderMock = $this->createMock(DelegatingLoader::class);
         $context = new RequestContext();
 
-        $localizedRouterFactory = new LocalizedRouterFactory($localeRoutersConfiguration, $delegatingLoaderMock);
+        $localizedRouterFactory = new LocalizedRouterFactory(static::LOCALE_ROUTERS_CONFIGURATION_MASK, $delegatingLoaderMock);
         $this->expectException(\Shopsys\FrameworkBundle\Component\Router\Exception\LocalizedRoutingConfigFileNotFoundException::class);
-        $localizedRouterFactory->getRouter('en', $context);
+        $localizedRouterFactory->getRouter('ru', $context);
     }
 
     public function testGetRouter()
     {
-        $localeRoutersConfiguration = ['en' => 'pathToResource', 'cs' => 'pathToAnotherResource'];
         $delegatingLoaderMock = $this->createMock(DelegatingLoader::class);
         $context1 = new RequestContext();
         $context1->setHost('host1');
         $context2 = new RequestContext();
         $context2->setHost('host2');
 
-        $localizedRouterFactory = new LocalizedRouterFactory($localeRoutersConfiguration, $delegatingLoaderMock);
+        $localizedRouterFactory = new LocalizedRouterFactory(static::LOCALE_ROUTERS_CONFIGURATION_MASK, $delegatingLoaderMock);
 
         $router1 = $localizedRouterFactory->getRouter('en', $context1);
         $router2 = $localizedRouterFactory->getRouter('en', $context2);

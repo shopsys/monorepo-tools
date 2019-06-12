@@ -18,6 +18,10 @@ services:
     Shopsys\FrameworkBundle\Twig\ImageExtension:
         arguments: ['%shopsys.front_design_image_url_prefix%']
 
+    Shopsys\FrameworkBundle\Twig\LocalizationExtension:
+        arguments:
+            - '%shopsys.web_dir%'
+
     Shopsys\FrameworkBundle\Twig\NoVarDumperExtension:
         autoconfigure: false
 
