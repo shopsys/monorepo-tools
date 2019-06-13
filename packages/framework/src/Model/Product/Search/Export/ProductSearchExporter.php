@@ -1,9 +1,16 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Shopsys\FrameworkBundle\Model\Product\Search\Export;
 
+use BadMethodCallException;
+use Doctrine\ORM\EntityManagerInterface;
+use Shopsys\FrameworkBundle\Component\Console\ProgressBarFactory;
+use Shopsys\FrameworkBundle\Component\Doctrine\SqlLoggerFacade;
 use Shopsys\FrameworkBundle\Model\Product\Search\ProductElasticsearchConverter;
 use Shopsys\FrameworkBundle\Model\Product\Search\ProductElasticsearchRepository;
+use Symfony\Component\Console\Style\SymfonyStyle;
 
 class ProductSearchExporter
 {
@@ -26,6 +33,21 @@ class ProductSearchExporter
     protected $productElasticsearchConverter;
 
     /**
+     * @var \Shopsys\FrameworkBundle\Component\Console\ProgressBarFactory
+     */
+    protected $progressBarFactory;
+
+    /**
+     * @var \Shopsys\FrameworkBundle\Component\Doctrine\SqlLoggerFacade
+     */
+    protected $sqlLoggerFacade;
+
+    /**
+     * @var \Doctrine\ORM\EntityManagerInterface
+     */
+    protected $entityManager;
+
+    /**
      * @param \Shopsys\FrameworkBundle\Model\Product\Search\Export\ProductSearchExportRepository $productSearchExportRepository
      * @param \Shopsys\FrameworkBundle\Model\Product\Search\ProductElasticsearchRepository $productElasticsearchRepository
      * @param \Shopsys\FrameworkBundle\Model\Product\Search\ProductElasticsearchConverter $productElasticsearchConverter
@@ -41,8 +63,48 @@ class ProductSearchExporter
     }
 
     /**
+     * @param \Shopsys\FrameworkBundle\Component\Console\ProgressBarFactory $progressBarFactory
+     * @internal Will be replaced with constructor injection in the next major release
+     */
+    public function setProgressBarFactory(ProgressBarFactory $progressBarFactory): void
+    {
+        if ($this->progressBarFactory !== null) {
+            throw new BadMethodCallException(sprintf('Method "%s" has been already called and cannot be called multiple times.', __METHOD__));
+        }
+
+        $this->progressBarFactory = $progressBarFactory;
+    }
+
+    /**
+     * @param \Shopsys\FrameworkBundle\Component\Doctrine\SqlLoggerFacade $sqlLoggerFacade
+     * @internal Will be replaced with constructor injection in the next major release
+     */
+    public function setSqlLoggerFacade(SqlLoggerFacade $sqlLoggerFacade): void
+    {
+        if ($this->sqlLoggerFacade !== null) {
+            throw new BadMethodCallException(sprintf('Method "%s" has been already called and cannot be called multiple times.', __METHOD__));
+        }
+
+        $this->sqlLoggerFacade = $sqlLoggerFacade;
+    }
+
+    /**
+     * @param \Doctrine\ORM\EntityManagerInterface $entityManager
+     * @internal Will be replaced with constructor injection in the next major release
+     */
+    public function setEntityManager(EntityManagerInterface $entityManager): void
+    {
+        if ($this->entityManager !== null) {
+            throw new BadMethodCallException(sprintf('Method "%s" has been already called and cannot be called multiple times.', __METHOD__));
+        }
+
+        $this->entityManager = $entityManager;
+    }
+
+    /**
      * @param int $domainId
      * @param string $locale
+     * @deprecated Use `exportWithOutput` instead
      */
     public function export(int $domainId, string $locale): void
     {
@@ -53,7 +115,42 @@ class ProductSearchExporter
             $exportedIds = array_merge($exportedIds, $batchExportedIds);
             $startFrom += static::BATCH_SIZE;
         } while (!empty($batchExportedIds));
-        $this->removeNotUpdated((string)$domainId, $exportedIds);
+        $this->removeNotUpdated($domainId, $exportedIds);
+    }
+
+    /**
+     * @param int $domainId
+     * @param string $locale
+     * @param \Symfony\Component\Console\Style\SymfonyStyle $symfonyStyleIo
+     */
+    public function exportWithOutput(int $domainId, string $locale, SymfonyStyle $symfonyStyleIo): void
+    {
+        $this->validateInjectedDependencies();
+
+        $this->sqlLoggerFacade->temporarilyDisableLogging();
+
+        $startFrom = 0;
+        $exportedIds = [];
+        $totalCount = $this->productSearchExportRepository->getProductTotalCountForDomainAndLocale($domainId, $locale);
+
+        $progressBar = $this->progressBarFactory->create($symfonyStyleIo, $totalCount);
+
+        do {
+            $progressBar->setProgress(min($startFrom, $totalCount));
+
+            $batchExportedIds = $this->exportBatch($domainId, $locale, $startFrom);
+            $exportedIds = array_merge($exportedIds, $batchExportedIds);
+
+            $startFrom += static::BATCH_SIZE;
+
+            $this->entityManager->clear();
+        } while (!empty($batchExportedIds));
+
+        $progressBar->finish();
+
+        $this->removeNotUpdated($domainId, $exportedIds);
+
+        $this->sqlLoggerFacade->reenableLogging();
     }
 
     /**
@@ -82,5 +179,23 @@ class ProductSearchExporter
     protected function removeNotUpdated(int $domainId, array $exportedIds): void
     {
         $this->productElasticsearchRepository->deleteNotPresent($domainId, $exportedIds);
+    }
+
+    /**
+     * @internal Will be removed in the next major release
+     */
+    protected function validateInjectedDependencies(): void
+    {
+        if (!$this->progressBarFactory instanceof ProgressBarFactory) {
+            throw new BadMethodCallException(sprintf('Method "%s::setProgressBarFactory()" has to be called in "services.yml" definition.', __CLASS__));
+        }
+
+        if (!$this->sqlLoggerFacade instanceof SqlLoggerFacade) {
+            throw new BadMethodCallException(sprintf('Method "%s::setSqlLoggerFacade()" has to be called in "services.yml" definition.', __CLASS__));
+        }
+
+        if (!$this->entityManager instanceof EntityManagerInterface) {
+            throw new BadMethodCallException(sprintf('Method "%s::setEntityManager()" has to be called in "services.yml" definition.', __CLASS__));
+        }
     }
 }

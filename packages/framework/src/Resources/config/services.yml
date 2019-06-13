@@ -1006,7 +1006,11 @@ services:
             - '%shopsys.elasticsearch.structure_dir%'
             - '%env(ELASTIC_SEARCH_INDEX_PREFIX)%'
 
-    Shopsys\FrameworkBundle\Model\Product\Search\Export\ProductSearchExporter: ~
+    Shopsys\FrameworkBundle\Model\Product\Search\Export\ProductSearchExporter:
+        calls:
+            - method: setProgressBarFactory
+            - method: setSqlLoggerFacade
+            - method: setEntityManager
 
     Shopsys\FrameworkBundle\Model\Product\Search\ProductElasticsearchConverter: ~
 
