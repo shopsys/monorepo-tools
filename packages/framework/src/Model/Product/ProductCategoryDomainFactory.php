@@ -35,4 +35,27 @@ class ProductCategoryDomainFactory implements ProductCategoryDomainFactoryInterf
 
         return new $classData($product, $category, $domainId);
     }
+
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Product\Product $product
+     * @param \Shopsys\FrameworkBundle\Model\Category\Category[][] $categoriesIndexedByDomainId
+     * @return \Shopsys\FrameworkBundle\Model\Product\ProductCategoryDomain[]
+     */
+    public function createMultiple(
+        Product $product,
+        array $categoriesIndexedByDomainId
+    ): array {
+        $productCategoryDomains = [];
+        foreach ($categoriesIndexedByDomainId as $domainId => $categoriesOnDomain) {
+            foreach ($categoriesOnDomain as $category) {
+                $productCategoryDomains[] = $this->create(
+                    $product,
+                    $category,
+                    $domainId
+                );
+            }
+        }
+
+        return $productCategoryDomains;
+    }
 }

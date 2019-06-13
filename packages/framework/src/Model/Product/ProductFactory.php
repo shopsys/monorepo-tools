@@ -18,23 +18,15 @@ class ProductFactory implements ProductFactoryInterface
     protected $productAvailabilityCalculation;
 
     /**
-     * @var \Shopsys\FrameworkBundle\Model\Product\ProductCategoryDomainFactoryInterface
-     */
-    protected $productCategoryDomainFactory;
-
-    /**
      * @param \Shopsys\FrameworkBundle\Component\EntityExtension\EntityNameResolver $entityNameResolver
      * @param \Shopsys\FrameworkBundle\Model\Product\Availability\ProductAvailabilityCalculation $productAvailabilityCalculation
-     * @param \Shopsys\FrameworkBundle\Model\Product\ProductCategoryDomainFactoryInterface $productCategoryDomainFactory
      */
     public function __construct(
         EntityNameResolver $entityNameResolver,
-        ProductAvailabilityCalculation $productAvailabilityCalculation,
-        ProductCategoryDomainFactoryInterface $productCategoryDomainFactory
+        ProductAvailabilityCalculation $productAvailabilityCalculation
     ) {
         $this->entityNameResolver = $entityNameResolver;
         $this->productAvailabilityCalculation = $productAvailabilityCalculation;
-        $this->productCategoryDomainFactory = $productCategoryDomainFactory;
     }
 
     /**
@@ -45,7 +37,7 @@ class ProductFactory implements ProductFactoryInterface
     {
         $classData = $this->entityNameResolver->resolve(Product::class);
 
-        $product = $classData::create($data, $this->productCategoryDomainFactory);
+        $product = $classData::create($data);
         $this->setCalculatedAvailabilityIfMissing($product);
 
         return $product;
@@ -63,7 +55,7 @@ class ProductFactory implements ProductFactoryInterface
 
         $classData = $this->entityNameResolver->resolve(Product::class);
 
-        $mainVariant = $classData::createMainVariant($data, $this->productCategoryDomainFactory, $variants);
+        $mainVariant = $classData::createMainVariant($data, $variants);
         $this->setCalculatedAvailabilityIfMissing($mainVariant);
 
         return $mainVariant;

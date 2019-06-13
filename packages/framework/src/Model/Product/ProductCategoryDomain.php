@@ -67,4 +67,12 @@ class ProductCategoryDomain
     {
         return $this->domainId;
     }
+
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Product\Product $product
+     */
+    public function setProduct(Product $product): void
+    {
+        $this->product = $product;
+    }
 }
