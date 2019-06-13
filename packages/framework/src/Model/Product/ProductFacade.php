@@ -278,7 +278,8 @@ class ProductFacade
         $product = $this->productRepository->getById($productId);
 
         $productCategoryDomains = $this->productCategoryDomainFactory->createMultiple($product, $productData->categoriesByDomainId);
-        $product->edit($productCategoryDomains, $productData, $this->productPriceRecalculationScheduler);
+        $product->edit($productCategoryDomains, $productData);
+        $this->productPriceRecalculationScheduler->scheduleProductForImmediateRecalculation($product);
 
         $this->saveParameters($product, $productData->parameters);
         if (!$product->isMainVariant()) {

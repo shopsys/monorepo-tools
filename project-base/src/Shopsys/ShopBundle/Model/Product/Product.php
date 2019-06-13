@@ -3,7 +3,6 @@
 namespace Shopsys\ShopBundle\Model\Product;
 
 use Doctrine\ORM\Mapping as ORM;
-use Shopsys\FrameworkBundle\Model\Product\Pricing\ProductPriceRecalculationScheduler;
 use Shopsys\FrameworkBundle\Model\Product\Product as BaseProduct;
 use Shopsys\FrameworkBundle\Model\Product\ProductData as BaseProductData;
 
@@ -25,13 +24,11 @@ class Product extends BaseProduct
     /**
      * @param \Shopsys\FrameworkBundle\Model\Product\ProductCategoryDomain[] $productCategoryDomains
      * @param \Shopsys\ShopBundle\Model\Product\ProductData $productData
-     * @param \Shopsys\FrameworkBundle\Model\Product\Pricing\ProductPriceRecalculationScheduler $productPriceRecalculationScheduler
      */
     public function edit(
         array $productCategoryDomains,
-        BaseProductData $productData,
-        ProductPriceRecalculationScheduler $productPriceRecalculationScheduler
+        BaseProductData $productData
     ) {
-        parent::edit($productCategoryDomains, $productData, $productPriceRecalculationScheduler);
+        parent::edit($productCategoryDomains, $productData);
     }
 }

@@ -3,6 +3,7 @@
 namespace Tests\ShopBundle\Functional\Model\Product;
 
 use ReflectionClass;
+use Shopsys\FrameworkBundle\Model\Product\Pricing\ProductPriceRecalculationScheduler;
 use Shopsys\FrameworkBundle\Model\Product\ProductDataFactoryInterface;
 use Shopsys\FrameworkBundle\Model\Product\ProductFacade;
 use Shopsys\ShopBundle\DataFixtures\Demo\AvailabilityDataFixture;
@@ -127,5 +128,19 @@ class ProductFacadeTest extends TransactionFunctionalTestCase
         $productFacade->edit($product->getId(), $productDataFactory->createFromProduct($product));
 
         $this->assertSame(true, $reflectionPropertyRecalculateVisibility->getValue($product));
+    }
+
+    public function testEditSchedulesPriceRecalculation()
+    {
+        $productFacade = $this->getContainer()->get(ProductFacade::class);
+        $productPriceRecalculationScheduler = $this->getContainer()->get(ProductPriceRecalculationScheduler::class);
+        $productDataFactory = $this->getContainer()->get(ProductDataFactoryInterface::class);
+        /** @var \Shopsys\ShopBundle\Model\Product\Product $product */
+        $product = $this->getReference(ProductDataFixture::PRODUCT_PREFIX . 1);
+        $productId = $product->getId();
+
+        $productFacade->edit($productId, $productDataFactory->create());
+
+        $this->assertArrayHasKey($productId, $productPriceRecalculationScheduler->getProductsForImmediateRecalculation());
     }
 }
