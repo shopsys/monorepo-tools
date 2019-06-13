@@ -5,7 +5,7 @@
     right: 0;
     z-index: 1010;
 
-    background-color: @bg-web;
+    background-color: @color-f;
     box-shadow: 0 -5px 10px rgba(0, 0, 0, 0.02);
 
     &--developer-mode {
@@ -27,12 +27,10 @@
 
     &__in {
         display: flex;
-        width: 100%;
+        width: @width-web;
 
         margin: 0 auto;
         max-width: 100%;
-
-        background: @color-f;
 
         .window-fixed-bar--type-alert & {
             background: @color-alert;
@@ -41,6 +39,7 @@
         }
 
         .window-fixed-bar--top & {
+            width: 100%;
             max-width: 100%;
             height: @height-fixed-bar;
         }
@@ -48,9 +47,9 @@
 
     &__item {
         display: flex;
-        height: @input-height;
-        padding-left: 18px;
-        padding-right: 18px;
+        height: @input-height + 4px;
+        padding-left: 0;
+        padding-right: 22px;
         flex: 1;
         align-items: center;
 
@@ -98,6 +97,7 @@
 
             .window-fixed-bar--top & {
                 color: @color-f;
+                text-align: center;
             }
         }
     }
