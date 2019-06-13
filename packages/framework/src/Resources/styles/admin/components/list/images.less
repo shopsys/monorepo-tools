@@ -32,7 +32,7 @@
             border-radius: @radius;
 
             .list-images__item:first-child & {
-                border-color: @color-blue;
+                border-color: @color-orange;
             }
 
             &--removed {
@@ -45,9 +45,13 @@
             height: 164px;
             position: relative;
 
-            border: 1px solid @color-border-light;
+            border: 1px solid darken(@color-border-light, 10%);
             border-radius: @radius;
             background: @color-f;
+
+            .list-images__item:first-child & {
+                border: 1px solid @color-f;
+            }
 
             &__type {
                 position: absolute;
@@ -161,7 +165,7 @@
                 line-height: 19px;
                 padding: 0 8px;
 
-                background: @color-primary;
+                background: @color-orange;
                 border-bottom-right-radius: @radius;
                 font-size: 10px;
                 font-weight: 700;
