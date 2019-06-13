@@ -1,7 +1,8 @@
 @list-images-pipe-height: 20px;
-@list-images-icon-size: 17px;
+@list-images-icon-size: 18px;
 @list-images-icon-background: #2a384e;
 @list-images-icon-color: @color-f;
+@list-images-icon-font-size: 10px;
 @list-images-item-gap: 26px;
 
 .list-images {
@@ -14,8 +15,6 @@
         padding: 22px;
 
         background: @color-f;
-        border: 1px solid @color-border-dark;
-        border-bottom-color: @color-border;
     }
 
     &__item {
@@ -110,7 +109,7 @@
             padding-top: 1px;
             z-index: 3;
 
-            font-size: 11px;
+            font-size: @list-images-icon-font-size;
             background: @list-images-icon-background;
             color: @list-images-icon-color;
             border-radius: 50%;
@@ -130,6 +129,7 @@
             left: -@list-images-icon-size/2;
             right: auto;
             cursor: move;
+            font-size: @list-images-icon-font-size + 2px;
         }
 
         &__overlay {
