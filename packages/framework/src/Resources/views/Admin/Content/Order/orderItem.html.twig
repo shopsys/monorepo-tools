@@ -41,13 +41,11 @@
         <td class="text-right">-</td>
         <td class="text-no-wrap">{{ form_widget(orderTransportForm.priceWithVat, {attr: { class: 'text-right input--half-width'}, symbolAfterInput: currencySymbol}) }}</td>
         <td class="text-right">1</td>
-        <td class="text-right"></td>
-        <td class="text-right">{{ form_widget(orderTransportForm.vatPercent, {attr: { class: 'text-right input--half-width'}}) }}</td>
+        <td></td>
+        <td>{{ form_widget(orderTransportForm.vatPercent, {attr: { class: 'text-right input--half-width'}}) }}</td>
         <td class="text-center">{{ form_widget(orderTransportForm.usePriceCalculation, {attr: { class: 'js-use-price-calculation'}}) }}</td>
         <td class="text-no-wrap">{{ form_widget(orderTransportForm.priceWithoutVat, {attr: { class: 'js-calculable-price text-right input--half-width'}, symbolAfterInput: currencySymbol}) }}</td>
-        <td class="text-right"></td>
-        <td class="text-right"></td>
-        <td></td>
+        <td colspan="3"></td>
     </tr>
 {% endmacro %}
 
@@ -62,12 +60,10 @@
         <td class="text-right">-</td>
         <td class="text-no-wrap">{{ form_widget(orderPaymentForm.priceWithVat, {attr: { class: 'text-right input--half-width'}, symbolAfterInput: currencySymbol}) }}</td>
         <td class="text-right">1</td>
-        <td class="text-right"></td>
-        <td class="text-right">{{ form_widget(orderPaymentForm.vatPercent, {attr: { class: 'text-right input--half-width'}}) }}</td>
+        <td></td>
+        <td>{{ form_widget(orderPaymentForm.vatPercent, {attr: { class: 'text-right input--half-width'}}) }}</td>
         <td class="text-center">{{ form_widget(orderPaymentForm.usePriceCalculation, {attr: { class: 'js-use-price-calculation'}}) }}</td>
         <td class="text-no-wrap">{{ form_widget(orderPaymentForm.priceWithoutVat, {attr: { class: 'js-calculable-price text-right input--half-width'}, symbolAfterInput: currencySymbol}) }}</td>
-        <td class="text-right"></td>
-        <td class="text-right"></td>
-        <td></td>
+        <td colspan="3"></td>
     </tr>
 {% endmacro %}
