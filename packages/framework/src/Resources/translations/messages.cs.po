@@ -2194,6 +2194,9 @@ msgstr "Využito: %currentLength% znaků. Doporučeno max. %recommendedLength%"
 msgid "Username"
 msgstr "Uživatelské jméno"
 
+msgid "Using price calculation has been disabled, don't forget to edit all prices."
+msgstr "Přepočítávání cen bylo zakázáno, nezapomeňte upravovat všechny ceny."
+
 msgid "VAT"
 msgstr "DPH"
 

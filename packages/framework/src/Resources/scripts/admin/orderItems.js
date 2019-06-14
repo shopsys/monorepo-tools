@@ -131,16 +131,17 @@
         $container.filterAllNodes('.js-order-item-any').each(function () {
             var $orderItem = $(this);
 
-            function toggleReadonlyPrice ($orderItem) {
+            function onPriceCalculationChange ($orderItem) {
                 var usePriceCalculation = $orderItem.find('.js-use-price-calculation').is(':checked');
 
                 $orderItem.find('.js-calculable-price').prop('readonly', usePriceCalculation);
+                $orderItem.find('.js-not-using-price-calculation-warning').css('visibility', usePriceCalculation ? 'hidden' : 'visible');
             }
 
-            toggleReadonlyPrice($orderItem);
+            onPriceCalculationChange($orderItem);
 
             $orderItem.find('.js-use-price-calculation').change(function () {
-                toggleReadonlyPrice($orderItem);
+                onPriceCalculationChange($orderItem);
             });
         });
     });

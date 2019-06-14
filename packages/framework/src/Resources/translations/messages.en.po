@@ -2194,6 +2194,9 @@ msgstr ""
 msgid "Username"
 msgstr ""
 
+msgid "Using price calculation has been disabled, don't forget to edit all prices."
+msgstr ""
+
 msgid "VAT"
 msgstr ""
 
