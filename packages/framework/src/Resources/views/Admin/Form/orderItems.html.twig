@@ -16,8 +16,10 @@
                                 <th class="table-col-10 text-right">{{ 'Amount'|trans }}</th>
                                 <th class="table-col-10 text-right">{{ 'Unit'|trans }}</th>
                                 <th class="table-col-10 text-right">{{ 'VAT rate (%)'|trans }}</th>
-                                <th class="table-col-15 text-right text-no-wrap">{{ 'Total including VAT'|trans }}</th>
-                                <th class="table-col-15 text-right text-no-wrap">{{ 'Total excluding VAT'|trans }}</th>
+                                <th class="table-col-5 text-right">{{ 'Use price calculation'|trans }}</th>
+                                <th class="table-col-15 text-right">{{ 'Unit price excluding VAT'|trans }}</th>
+                                <th class="table-col-15 text-right">{{ 'Total including VAT'|trans }}</th>
+                                <th class="table-col-15 text-right">{{ 'Total excluding VAT'|trans }}</th>
                                 <th ></th>
                         </tr>
                         </thead>
@@ -41,7 +43,7 @@
                         </tbody>
                         <tfoot>
                             <tr>
-                                <td colspan="9">
+                                <td colspan="11">
                                     <a id="js-order-item-add" href="#" class="btn btn--plus">
                                         <i class="btn__icon">+</i>
                                         {{ 'Add item'|trans }}
@@ -53,7 +55,7 @@
                                 </td>
                             </tr>
                             <tr>
-                                <th colspan="6">{{ 'Total'|trans }}:</th>
+                                <th colspan="8">{{ 'Total'|trans }}:</th>
                                 <th class="text-right">{{ order.totalPriceWithVat|priceWithCurrency(order.currency) }}</th>
                                 <th class="text-right">{{ order.totalPriceWithoutVat|priceWithCurrency(order.currency) }}</th>
                                 <th></th>

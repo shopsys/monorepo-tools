@@ -127,4 +127,22 @@
         Shopsys.order.items.init();
     });
 
+    Shopsys.register.registerCallback(function ($container) {
+        $container.filterAllNodes('.js-order-item-any').each(function () {
+            var $orderItem = $(this);
+
+            function toggleReadonlyPrice ($orderItem) {
+                var usePriceCalculation = $orderItem.find('.js-use-price-calculation').is(':checked');
+
+                $orderItem.find('.js-calculable-price').prop('readonly', usePriceCalculation);
+            }
+
+            toggleReadonlyPrice($orderItem);
+
+            $orderItem.find('.js-use-price-calculation').change(function () {
+                toggleReadonlyPrice($orderItem);
+            });
+        });
+    });
+
 })(jQuery);

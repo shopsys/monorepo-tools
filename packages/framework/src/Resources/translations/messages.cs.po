@@ -2149,6 +2149,9 @@ msgstr "Jednotka <strong>{{ name }}</strong> byla smazána"
 msgid "Unit <strong>{{ name }}</strong> deleted and replaced by unit <strong>{{ newName }}</strong>"
 msgstr "Jednotka <strong>{{ name }}</strong> byla smazána a byla nahrazena jednotkou <strong>{{ newName }}</strong>."
 
+msgid "Unit price excluding VAT"
+msgstr "Jednotková cena bez DPH"
+
 msgid "Unit price including VAT"
 msgstr "Jednotková cena s DPH"
 
@@ -2178,6 +2181,9 @@ msgstr "Url adresa"
 
 msgid "Use"
 msgstr "Používat"
+
+msgid "Use price calculation"
+msgstr "Přepočítávat ceny"
 
 msgid "Use stocks"
 msgstr "Používat skladové zásoby"

@@ -2149,6 +2149,9 @@ msgstr ""
 msgid "Unit <strong>{{ name }}</strong> deleted and replaced by unit <strong>{{ newName }}</strong>"
 msgstr ""
 
+msgid "Unit price excluding VAT"
+msgstr ""
+
 msgid "Unit price including VAT"
 msgstr ""
 
@@ -2177,6 +2180,9 @@ msgid "Url address"
 msgstr ""
 
 msgid "Use"
+msgstr ""
+
+msgid "Use price calculation"
 msgstr ""
 
 msgid "Use stocks"

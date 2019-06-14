@@ -22,12 +22,16 @@
             var selectedTransportId = $transportSelect.val();
             $('#order_form_orderItems_orderTransport_priceWithVat').val(transportPricesWithVatByTransportId[selectedTransportId].amount);
             $('#order_form_orderItems_orderTransport_vatPercent').val(transportVatPercentsByTransportId[selectedTransportId]);
+            $('#order_form_orderItems_orderTransport_usePriceCalculation').prop('checked', true).change();
+            $('#order_form_orderItems_orderTransport_priceWithoutVat').val('');
         };
 
         var onOrderPaymentChange = function () {
             var selectedPaymentId = $paymentSelect.val();
             $('#order_form_orderItems_orderPayment_priceWithVat').val(paymentPricesWithVatByPaymentId[selectedPaymentId].amount);
             $('#order_form_orderItems_orderPayment_vatPercent').val(paymentVatPercentsByPaymentId[selectedPaymentId]);
+            $('#order_form_orderItems_orderPayment_usePriceCalculation').prop('checked', true).change();
+            $('#order_form_orderItems_orderPayment_priceWithoutVat').val('');
         };
     };
 

@@ -316,11 +316,20 @@ msgstr "Vyplňte prosím předmět"
 msgid "Please enter telephone number"
 msgstr "Vyplňte prosím telefon"
 
+msgid "Please enter total price with VAT"
+msgstr "Vyplňte prosím celkovou cenu s DPH"
+
+msgid "Please enter total price without VAT"
+msgstr "Vyplňte prosím celkovou cenu bez DPH"
+
 msgid "Please enter unit name in all languages"
 msgstr "Vyplňte prosím název jednotky ve všech jazycích"
 
 msgid "Please enter unit price with VAT"
 msgstr "Vyplňte prosím jednotkovou cenu s DPH"
+
+msgid "Please enter unit price without VAT"
+msgstr "Vyplňte prosím jednotkovou cenu bez DPH"
 
 msgid "Please enter username"
 msgstr "Vyplňte prosím přihlašovací jméno"
