@@ -217,7 +217,8 @@ class ImageFacade
     {
         $entityName = $image->getEntityName();
         $imageConfig = $this->imageConfig->getEntityConfigByEntityName($entityName);
-        foreach ($imageConfig->getSizeConfigs() as $sizeConfig) {
+        $sizeConfigs = $image->getType() === null ? $imageConfig->getSizeConfigs() : $imageConfig->getSizeConfigsByType($image->getType());
+        foreach ($sizeConfigs as $sizeConfig) {
             $filepath = $this->imageLocator->getAbsoluteImageFilepath($image, $sizeConfig->getName());
 
             if ($this->filesystem->has($filepath)) {
@@ -303,7 +304,7 @@ class ImageFacade
         $image = $this->getImageByObject($imageOrEntity, $type);
 
         $entityConfig = $this->imageConfig->getEntityConfigByEntityName($image->getEntityName());
-        $sizeConfig = $entityConfig->getSizeConfig($sizeName);
+        $sizeConfig = $entityConfig->getSizeConfigByType($type, $sizeName);
 
         $result = [];
         foreach ($sizeConfig->getAdditionalSizes() as $additionalSizeIndex => $additionalSizeConfig) {
@@ -331,7 +332,7 @@ class ImageFacade
         ?string $sizeName = null
     ): array {
         $entityConfig = $this->imageConfig->getEntityConfigByEntityName($entityName);
-        $sizeConfig = $entityConfig->getSizeConfig($sizeName);
+        $sizeConfig = $entityConfig->getSizeConfigByType($type, $sizeName);
 
         $result = [];
         foreach ($sizeConfig->getAdditionalSizes() as $additionalSizeIndex => $additionalSizeConfig) {
