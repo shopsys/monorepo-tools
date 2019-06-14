@@ -55,6 +55,10 @@ services:
 
     Shopsys\FrameworkBundle\Model\Product\ProductOnCurrentDomainFacadeInterface: '@Shopsys\FrameworkBundle\Model\Product\ProductOnCurrentDomainElasticFacade'
 
+    Shopsys\ReadModelBundle\Product\Listed\ListedProductViewFacadeInterface: '@Shopsys\ReadModelBundle\Product\Listed\ListedProductViewElasticFacade'
+
+    Shopsys\ReadModelBundle\Product\Listed\ListedProductViewElasticFacade: ~
+
     Shopsys\FrameworkBundle\Model\Product\Search\Export\ProductSearchExportRepository:
         alias: Shopsys\FrameworkBundle\Model\Product\Search\Export\ProductSearchExportWithFilterRepository
 

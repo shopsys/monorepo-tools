@@ -5,6 +5,9 @@ Besides better logical separation of the application, it is a first step towards
 The read model package is marked as *experimental* at the moment so there is a possibility we might introduce some BC breaking changes there.
 You do not need to perform the upgrade instantly, however, if you do so, you will be better prepared for the upcoming changes.
 
+There are two implementations of read model facades right now as we want to provide you possibilities that suits you the best.
+You can choose between SQL or Elasticsearch implementation, you can learn more in [Front-end product filtering](/docs/model/front-end-product-filtering.md).
+
 <!-- TODO change link to PR to the split merge commit in project-base -->
 To start using the read model, follow the instructions (you can also find inspiration in [#1018](https://github.com/shopsys/shopsys/pull/1018) where the read model was introduced to `project-base`):
 - add dependency on `shopsys/read-model` to your `composer.json`
@@ -229,3 +232,22 @@ To start using the read model, follow the instructions (you can also find inspir
                 ]);
             }
         ```
+    - fix tests in `ListedProductViewFacadeTest` by changing `ListedProductViewFacade` to `ListedProductViewFacadeInterface`
+        ```diff
+        -   $listedProductViewFacade = $this->getContainer()->get(ListedProductViewFacade::class);
+        +   $listedProductViewFacade = $this->getContainer()->get(ListedProductViewFacadeInterface::class);
+        ```
+    ### Use SQL read model facade
+    - use `ListedProductViewFacade` implementation of `ListedProductViewFacadeInterface` in `services.yml` and `services_test.yml`
+        ```yaml
+            Shopsys\ReadModelBundle\Product\Listed\ListedProductViewFacadeInterface: '@Shopsys\ReadModelBundle\Product\Listed\ListedProductViewFacade'
+        ```
+    - to use this implementation you need to use `ProductOnCurrentDomainFacade` as well. You can find more about it [Front-end product filtering](/docs/model/front-end-product-filtering.md)
+    ### Use Elasticsearch read model facade
+    - use `ListedProductViewElasticFacade` implementation of `ListedProductViewFacadeInterface` in `services.yml` and `services_test.yml`
+        ```yaml
+            Shopsys\ReadModelBundle\Product\Listed\ListedProductViewFacadeInterface: '@Shopsys\ReadModelBundle\Product\Listed\ListedProductViewElasticFacade'
+
+            Shopsys\ReadModelBundle\Product\Listed\ListedProductViewElasticFacade: ~  
+        ```
+     - to use this implementation you need to use `ProductOnCurrentDomainElasticFacade` as well. You can find more about it [Front-end product filtering](/docs/model/front-end-product-filtering.md)

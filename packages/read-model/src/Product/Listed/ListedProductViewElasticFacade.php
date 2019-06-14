@@ -19,7 +19,7 @@ use Shopsys\ReadModelBundle\Product\Action\ProductActionViewFacade;
 /**
  * @experimental
  */
-class ListedProductViewFacade implements ListedProductViewFacadeInterface
+class ListedProductViewElasticFacade implements ListedProductViewFacadeInterface
 {
     /**
      * @var \Shopsys\FrameworkBundle\Model\Product\ProductFacade
@@ -176,7 +176,8 @@ class ListedProductViewFacade implements ListedProductViewFacadeInterface
     public function getFilteredPaginatedInCategory(int $categoryId, ProductFilterData $filterData, string $orderingModeId, int $page, int $limit): PaginationResult
     {
         $paginationResult = $this->productOnCurrentDomainFacade->getPaginatedProductsInCategory($filterData, $orderingModeId, $page, $limit, $categoryId);
-        return $this->createPaginationResultWithData($paginationResult);
+
+        return $this->createPaginationResultWithArray($paginationResult);
     }
 
     /**
@@ -190,7 +191,8 @@ class ListedProductViewFacade implements ListedProductViewFacadeInterface
     public function getFilteredPaginatedForSearch(string $searchText, ProductFilterData $filterData, string $orderingModeId, int $page, int $limit): PaginationResult
     {
         $paginationResult = $this->productOnCurrentDomainFacade->getPaginatedProductsForSearch($searchText, $filterData, $orderingModeId, $page, $limit);
-        return $this->createPaginationResultWithData($paginationResult);
+
+        return $this->createPaginationResultWithArray($paginationResult);
     }
 
     /**
@@ -203,21 +205,44 @@ class ListedProductViewFacade implements ListedProductViewFacadeInterface
     public function getPaginatedForBrand(int $brandId, string $orderingModeId, int $page, int $limit): PaginationResult
     {
         $paginationResult = $this->productOnCurrentDomainFacade->getPaginatedProductsForBrand($orderingModeId, $page, $limit, $brandId);
-        return $this->createPaginationResultWithData($paginationResult);
+
+        return $this->createPaginationResultWithArray($paginationResult);
     }
 
     /**
      * @param \Shopsys\FrameworkBundle\Component\Paginator\PaginationResult $paginationResult
      * @return \Shopsys\FrameworkBundle\Component\Paginator\PaginationResult
      */
-    protected function createPaginationResultWithData(PaginationResult $paginationResult): PaginationResult
+    protected function createPaginationResultWithArray(PaginationResult $paginationResult): PaginationResult
     {
         return new PaginationResult(
             $paginationResult->getPage(),
             $paginationResult->getPageSize(),
             $paginationResult->getTotalCount(),
-            $this->createFromProducts($paginationResult->getResults())
+            $this->createFromArray($paginationResult->getResults())
         );
+    }
+
+    /**
+     * @param array $productsArray
+     * @return \Shopsys\ReadModelBundle\Product\Listed\ListedProductView[]
+     */
+    protected function createFromArray(array $productsArray): array
+    {
+        $imageViews = $this->imageViewFacade->getForEntityIds(Product::class, array_column($productsArray, 'id'));
+
+        $listedProductViews = [];
+        foreach ($productsArray as $productArray) {
+            $productId = $productArray['id'];
+            $listedProductViews[$productId] = $this->listedProductViewFactory->createFromArray(
+                $productArray,
+                $imageViews[$productId],
+                $this->productActionViewFacade->getForArray($productArray),
+                $this->currentCustomer->getPricingGroup()
+            );
+        }
+
+        return $listedProductViews;
     }
 
     /**

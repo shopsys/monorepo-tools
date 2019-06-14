@@ -5,15 +5,15 @@ namespace Tests\ReadModelBundle\Functional\Product\Listed;
 use Shopsys\FrameworkBundle\Model\Product\Filter\ProductFilterData;
 use Shopsys\FrameworkBundle\Model\Product\Listing\ProductListOrderingConfig;
 use Shopsys\ReadModelBundle\Product\Listed\ListedProductView;
-use Shopsys\ReadModelBundle\Product\Listed\ListedProductViewFacade;
+use Shopsys\ReadModelBundle\Product\Listed\ListedProductViewFacadeInterface;
 use Tests\ShopBundle\Test\FunctionalTestCase;
 
 class ListedProductViewFacadeTest extends FunctionalTestCase
 {
     public function testGetAllAccessories(): void
     {
-        /** @var \Shopsys\ReadModelBundle\Product\Listed\ListedProductViewFacade $listedProductViewFacade */
-        $listedProductViewFacade = $this->getContainer()->get(ListedProductViewFacade::class);
+        /** @var \Shopsys\ReadModelBundle\Product\Listed\ListedProductViewFacadeInterface $listedProductViewFacade */
+        $listedProductViewFacade = $this->getContainer()->get(ListedProductViewFacadeInterface::class);
 
         $productId1 = 24;
         $productId2 = 13;
@@ -34,8 +34,8 @@ class ListedProductViewFacadeTest extends FunctionalTestCase
 
     public function testGetPaginatedForBrand(): void
     {
-        /** @var \Shopsys\ReadModelBundle\Product\Listed\ListedProductViewFacade $listedProductViewFacade */
-        $listedProductViewFacade = $this->getContainer()->get(ListedProductViewFacade::class);
+        /** @var \Shopsys\ReadModelBundle\Product\Listed\ListedProductViewFacadeInterface $listedProductViewFacade */
+        $listedProductViewFacade = $this->getContainer()->get(ListedProductViewFacadeInterface::class);
 
         $brandId = 1;
         $foundProductId = 5;
@@ -50,8 +50,8 @@ class ListedProductViewFacadeTest extends FunctionalTestCase
 
     public function testGetFilteredPaginatedForSearch(): void
     {
-        /** @var \Shopsys\ReadModelBundle\Product\Listed\ListedProductViewFacade $listedProductViewFacade */
-        $listedProductViewFacade = $this->getContainer()->get(ListedProductViewFacade::class);
+        /** @var \Shopsys\ReadModelBundle\Product\Listed\ListedProductViewFacadeInterface $listedProductViewFacade */
+        $listedProductViewFacade = $this->getContainer()->get(ListedProductViewFacadeInterface::class);
         $emptyFilterData = new ProductFilterData();
 
         $paginationResults = $listedProductViewFacade->getFilteredPaginatedForSearch('kitty', $emptyFilterData, ProductListOrderingConfig::ORDER_BY_NAME_ASC, 1, 10);
@@ -64,8 +64,8 @@ class ListedProductViewFacadeTest extends FunctionalTestCase
 
     public function testGetTop(): void
     {
-        /** @var \Shopsys\ReadModelBundle\Product\Listed\ListedProductViewFacade $listedProductViewFacade */
-        $listedProductViewFacade = $this->getContainer()->get(ListedProductViewFacade::class);
+        /** @var \Shopsys\ReadModelBundle\Product\Listed\ListedProductViewFacadeInterface $listedProductViewFacade */
+        $listedProductViewFacade = $this->getContainer()->get(ListedProductViewFacadeInterface::class);
 
         $firstTopProductId = 1;
 
@@ -80,8 +80,8 @@ class ListedProductViewFacadeTest extends FunctionalTestCase
     public function testGetFilteredPaginatedInCategory(): void
     {
 
-        /** @var \Shopsys\ReadModelBundle\Product\Listed\ListedProductViewFacade $listedProductViewFacade */
-        $listedProductViewFacade = $this->getContainer()->get(ListedProductViewFacade::class);
+        /** @var \Shopsys\ReadModelBundle\Product\Listed\ListedProductViewFacadeInterface $listedProductViewFacade */
+        $listedProductViewFacade = $this->getContainer()->get(ListedProductViewFacadeInterface::class);
         $emptyFilterData = new ProductFilterData();
 
         $categoryId = 9;
