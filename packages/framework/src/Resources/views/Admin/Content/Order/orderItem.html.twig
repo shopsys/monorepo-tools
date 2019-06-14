@@ -1,4 +1,5 @@
 {% macro orderItem(orderItemForm, orderItemId, orderItemTotalPricesById, currency, productItem) %}
+    {% set currencySymbol = currency is not null ? currencySymbolByCurrencyId(currency.id) : null %}
     <tr class="js-order-item js-order-item-any" id="{{ orderItemForm.vars.id }}" data-index="{{ orderItemId }}">
         <td>
             {% if productItem and productItem.product %}
@@ -14,15 +15,15 @@
             {% endif %}
         </td>
         <td>{{ form_widget(orderItemForm.catnum, {attr: { class: 'text-right'}}) }}</td>
-        <td>{{ form_widget(orderItemForm.priceWithVat, {attr: { class: 'text-right'}}) }}</td>
-        <td>{{ form_widget(orderItemForm.quantity, {attr: { class: 'text-right'}}) }}</td>
-        <td>{{ form_widget(orderItemForm.unitName, {attr: { class: 'text-right'}}) }}</td>
-        <td>{{ form_widget(orderItemForm.vatPercent, {attr: { class: 'text-right'}}) }}</td>
+        <td class="text-no-wrap">{{ form_widget(orderItemForm.priceWithVat, {attr: { class: 'text-right input--half-width'}, symbolAfterInput: currencySymbol}) }}</td>
+        <td>{{ form_widget(orderItemForm.quantity, {attr: { class: 'text-right input--half-width'}}) }}</td>
+        <td>{{ form_widget(orderItemForm.unitName, {attr: { class: 'text-right input--half-width'}}) }}</td>
+        <td>{{ form_widget(orderItemForm.vatPercent, {attr: { class: 'text-right input--half-width'}}) }}</td>
         {% set uncheckedByDefault = orderItemForm.vars.data is not null ? orderItemForm.usePriceCalculation.vars.data : true %}
-        <td>{{ form_widget(orderItemForm.usePriceCalculation, {attr: { class: 'js-use-price-calculation'}, checked: uncheckedByDefault}) }}</td>
-        <td>{{ form_widget(orderItemForm.priceWithoutVat, {attr: { class: 'js-calculable-price text-right'}}) }}</td>
-        <td>{{ form_widget(orderItemForm.totalPriceWithVat, {attr: { class: 'js-calculable-price text-right'}}) }}</td>
-        <td>{{ form_widget(orderItemForm.totalPriceWithoutVat, {attr: { class: 'js-calculable-price text-right'}}) }}</td>
+        <td class="text-center">{{ form_widget(orderItemForm.usePriceCalculation, {attr: { class: 'js-use-price-calculation'}, checked: uncheckedByDefault}) }}</td>
+        <td class="text-no-wrap">{{ form_widget(orderItemForm.priceWithoutVat, {attr: { class: 'js-calculable-price text-right input--half-width'}, symbolAfterInput: currencySymbol}) }}</td>
+        <td class="text-no-wrap">{{ form_widget(orderItemForm.totalPriceWithVat, {attr: { class: 'js-calculable-price text-right input--half-width'}, symbolAfterInput: currencySymbol}) }}</td>
+        <td class="text-no-wrap">{{ form_widget(orderItemForm.totalPriceWithoutVat, {attr: { class: 'js-calculable-price text-right input--half-width'}, symbolAfterInput: currencySymbol}) }}</td>
         <td class="table-col-5 table-edit__body__cell text-center">
             <a href="#" class="js-order-item-remove table-action"><i class="svg svg-trash"></i></a>
         </td>
@@ -30,6 +31,7 @@
 {% endmacro %}
 
 {% macro orderTransport(orderTransportForm, order, transportPricesWithVatByTransportId, transportVatPercentsByTransportId) %}
+    {% set currencySymbol = order is not null ? currencySymbolByCurrencyId(order.currency.id) : null %}
     <tr
             class="js-order-transport-row js-order-item-any"
             data-transport-prices-with-vat-by-transport-id="{{ transportPricesWithVatByTransportId|json_encode() }}"
@@ -37,12 +39,12 @@
             >
         <td>{{ form_widget(orderTransportForm.transport, {isSimple: true}) }}</td>
         <td class="text-right">-</td>
-        <td>{{ form_widget(orderTransportForm.priceWithVat, {attr: { class: 'text-right'}}) }}</td>
+        <td class="text-no-wrap">{{ form_widget(orderTransportForm.priceWithVat, {attr: { class: 'text-right input--half-width'}, symbolAfterInput: currencySymbol}) }}</td>
         <td class="text-right">1</td>
         <td class="text-right"></td>
-        <td class="text-right">{{ form_widget(orderTransportForm.vatPercent, {attr: { class: 'text-right'}}) }}</td>
-        <td>{{ form_widget(orderTransportForm.usePriceCalculation, {attr: { class: 'js-use-price-calculation'}}) }}</td>
-        <td>{{ form_widget(orderTransportForm.priceWithoutVat, {attr: { class: 'js-calculable-price text-right'}}) }}</td>
+        <td class="text-right">{{ form_widget(orderTransportForm.vatPercent, {attr: { class: 'text-right input--half-width'}}) }}</td>
+        <td class="text-center">{{ form_widget(orderTransportForm.usePriceCalculation, {attr: { class: 'js-use-price-calculation'}}) }}</td>
+        <td class="text-no-wrap">{{ form_widget(orderTransportForm.priceWithoutVat, {attr: { class: 'js-calculable-price text-right input--half-width'}, symbolAfterInput: currencySymbol}) }}</td>
         <td class="text-right"></td>
         <td class="text-right"></td>
         <td></td>
@@ -50,6 +52,7 @@
 {% endmacro %}
 
 {% macro orderPayment(orderPaymentForm, order, paymentPricesWithVatByPaymentId, paymentVatPercentsByPaymentId) %}
+    {% set currencySymbol = order is not null ? currencySymbolByCurrencyId(order.currency.id) : null %}
     <tr
             class="js-order-payment-row js-order-item-any"
             data-payment-prices-with-vat-by-payment-id="{{ paymentPricesWithVatByPaymentId|json_encode() }}"
@@ -57,12 +60,12 @@
             >
         <td>{{ form_widget(orderPaymentForm.payment, {isSimple: true}) }}</td>
         <td class="text-right">-</td>
-        <td>{{ form_widget(orderPaymentForm.priceWithVat, {attr: { class: 'text-right'}}) }}</td>
+        <td class="text-no-wrap">{{ form_widget(orderPaymentForm.priceWithVat, {attr: { class: 'text-right input--half-width'}, symbolAfterInput: currencySymbol}) }}</td>
         <td class="text-right">1</td>
         <td class="text-right"></td>
-        <td class="text-right">{{ form_widget(orderPaymentForm.vatPercent, {attr: { class: 'text-right'}}) }}</td>
-        <td>{{ form_widget(orderPaymentForm.usePriceCalculation, {attr: { class: 'js-use-price-calculation'}}) }}</td>
-        <td>{{ form_widget(orderPaymentForm.priceWithoutVat, {attr: { class: 'js-calculable-price text-right'}}) }}</td>
+        <td class="text-right">{{ form_widget(orderPaymentForm.vatPercent, {attr: { class: 'text-right input--half-width'}}) }}</td>
+        <td class="text-center">{{ form_widget(orderPaymentForm.usePriceCalculation, {attr: { class: 'js-use-price-calculation'}}) }}</td>
+        <td class="text-no-wrap">{{ form_widget(orderPaymentForm.priceWithoutVat, {attr: { class: 'js-calculable-price text-right input--half-width'}, symbolAfterInput: currencySymbol}) }}</td>
         <td class="text-right"></td>
         <td class="text-right"></td>
         <td></td>

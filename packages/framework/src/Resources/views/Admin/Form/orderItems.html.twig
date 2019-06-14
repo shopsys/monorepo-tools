@@ -25,7 +25,7 @@
                         </thead>
                         <tbody
                             id="js-order-items"
-                            data-prototype="{{ orderItemMacro.orderItem(form.itemsWithoutTransportAndPayment.vars.prototype)|escape }}"
+                            data-prototype="{{ orderItemMacro.orderItem(form.itemsWithoutTransportAndPayment.vars.prototype, null, [], order.currency, null)|escape }}"
                             data-order-product-add-url="{{ url('admin_order_addproduct', { orderId: order.id }) }}"
                         >
                             {% for productItem in order.productItems %}
