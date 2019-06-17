@@ -145,6 +145,28 @@ The changelog is generated during the release process using [ChangelogLinker](ht
 - [#931] fixed: translations are now extracted also from overwritten templates in `app/Resources`
 - [#980] ecs-fix phing target fixes result of ecs phing target
 
+## [v7.1.1](https://github.com/shopsys/shopsys/compare/v7.1.0...v7.1.1) - 2019-06-18
+
+### [shopsys/framework]
+
+#### Fixed
+
+- [#1084] CurrentPromoCodeFacadeTest: fixed call of getMockForAbstractClass
+- [#1120] escaping values in emails to prevent HTML injection
+
+### [shopsys/shopsys]
+
+#### Fixed
+
+- [#993] fixed typo non-breaking space -> space
+
+### [shopsys/coding-standards]
+
+#### Fixed
+
+- [#995] helper PhpToDocTypeTransformer is updated for use with new version of phpcs-fixer package
+- [#1008] include config of better-phpdoc-parser in ECS config
+
 ## [v7.1.0](https://github.com/shopsys/shopsys/compare/v7.0.0...v7.1.0) - 2019-04-02
 
 ### [shopsys/shopsys]
@@ -203,6 +225,28 @@ The changelog is generated during the release process using [ChangelogLinker](ht
 - [#902] Performance\CategoryDataFixture: fix maximum count in progress bar
 - [#899] fix EntityExtensionTest when extending entity related to Product
 - [#885] overflow of long e-mail for unique e-mail validation
+
+## [v7.0.1](https://github.com/shopsys/shopsys/compare/v7.0.0...v7.0.1) - 2019-06-18
+
+### [shopsys/framework]
+
+#### Fixed
+
+- [#1084] CurrentPromoCodeFacadeTest: fixed call of getMockForAbstractClass
+- [#1120] escaping values in emails to prevent HTML injection
+
+### [shopsys/shopsys]
+
+#### Fixed
+
+- [#993] fixed typo non-breaking space -> space
+
+### [shopsys/coding-standards]
+
+#### Fixed
+
+- [#995] helper PhpToDocTypeTransformer is updated for use with new version of phpcs-fixer package
+- [#1008] include config of better-phpdoc-parser in ECS config
 
 ## [v7.0.0](https://github.com/shopsys/shopsys/compare/v7.0.0-beta6...v7.0.0) - 2019-02-27
 
@@ -2322,6 +2366,11 @@ That's why is this section formatted differently.
 [#821]: https://github.com/shopsys/shopsys/pull/821
 [#817]: https://github.com/shopsys/shopsys/pull/817
 [@pejaycz]: https://github.com/pejaycz
+[#993]: https://github.com/shopsys/shopsys/pull/993
+[#995]: https://github.com/shopsys/shopsys/pull/995
+[#1008]: https://github.com/shopsys/shopsys/pull/1008
+[#1084]: https://github.com/shopsys/shopsys/pull/1084
+[#1120]: https://github.com/shopsys/shopsys/pull/1120
 
 [#905]: https://github.com/shopsys/shopsys/pull/905
 [#903]: https://github.com/shopsys/shopsys/pull/903
@@ -2357,13 +2406,10 @@ That's why is this section formatted differently.
 [#1016]: https://github.com/shopsys/shopsys/pull/1016
 [#1014]: https://github.com/shopsys/shopsys/pull/1014
 [#1013]: https://github.com/shopsys/shopsys/pull/1013
-[#1008]: https://github.com/shopsys/shopsys/pull/1008
 [#1006]: https://github.com/shopsys/shopsys/pull/1006
 [#1001]: https://github.com/shopsys/shopsys/pull/1001
 [#1000]: https://github.com/shopsys/shopsys/pull/1000
 [#999]: https://github.com/shopsys/shopsys/pull/999
-[#995]: https://github.com/shopsys/shopsys/pull/995
-[#993]: https://github.com/shopsys/shopsys/pull/993
 [#992]: https://github.com/shopsys/shopsys/pull/992
 [#991]: https://github.com/shopsys/shopsys/pull/991
 [#990]: https://github.com/shopsys/shopsys/pull/990
@@ -2414,6 +2460,5 @@ That's why is this section formatted differently.
 [#1077]: https://github.com/shopsys/shopsys/pull/1077
 [#1078]: https://github.com/shopsys/shopsys/pull/1078
 [#1082]: https://github.com/shopsys/shopsys/pull/1082
-[#1082]: https://github.com/shopsys/shopsys/pull/1083
-[#1084]: https://github.com/shopsys/shopsys/pull/1084
+[#1083]: https://github.com/shopsys/shopsys/pull/1083
 [@malyMiso]: https://github.com/malyMiso
