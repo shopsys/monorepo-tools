@@ -121,8 +121,8 @@ class PersonalDataAccessMail implements MailTypeInterface, MessageFactoryInterfa
     {
         return [
             self::VARIABLE_URL => $url,
-            self::VARIABLE_EMAIL => $email,
-            self::VARIABLE_DOMAIN => $domainName,
+            self::VARIABLE_EMAIL => htmlspecialchars($email, ENT_QUOTES),
+            self::VARIABLE_DOMAIN => htmlspecialchars($domainName, ENT_QUOTES),
         ];
     }
 

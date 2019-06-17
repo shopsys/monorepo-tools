@@ -66,9 +66,9 @@ class RegistrationMail implements MessageFactoryInterface
         $router = $this->domainRouterFactory->getRouter($user->getDomainId());
 
         return [
-            self::VARIABLE_FIRST_NAME => $user->getFirstName(),
-            self::VARIABLE_LAST_NAME => $user->getLastName(),
-            self::VARIABLE_EMAIL => $user->getEmail(),
+            self::VARIABLE_FIRST_NAME => htmlspecialchars($user->getFirstName(), ENT_QUOTES),
+            self::VARIABLE_LAST_NAME => htmlspecialchars($user->getLastName(), ENT_QUOTES),
+            self::VARIABLE_EMAIL => htmlspecialchars($user->getEmail(), ENT_QUOTES),
             self::VARIABLE_URL => $router->generate('front_homepage', [], UrlGeneratorInterface::ABSOLUTE_URL),
             self::VARIABLE_LOGIN_PAGE => $router->generate('front_login', [], UrlGeneratorInterface::ABSOLUTE_URL),
         ];

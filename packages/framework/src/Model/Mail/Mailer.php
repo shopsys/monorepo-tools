@@ -68,7 +68,7 @@ class Mailer
             $message->addReplyTo($messageData->replyTo);
         }
         $message->setContentType('text/plain; charset=UTF-8');
-        $message->setBody(strip_tags($body), 'text/plain');
+        $message->setBody(htmlspecialchars_decode(strip_tags($body), ENT_QUOTES), 'text/plain');
         $message->addPart($body, 'text/html');
         foreach ($messageData->attachmentsFilepaths as $attachmentFilepath) {
             $message->attach(Swift_Attachment::fromPath($attachmentFilepath));
