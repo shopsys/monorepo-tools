@@ -3,10 +3,8 @@
 namespace Shopsys\FrameworkBundle\Model\Product\Pricing;
 
 use Doctrine\ORM\EntityManagerInterface;
-use Shopsys\FrameworkBundle\Model\Pricing\BasePriceCalculation;
 use Shopsys\FrameworkBundle\Model\Pricing\Currency\CurrencyFacade;
 use Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroupFacade;
-use Shopsys\FrameworkBundle\Model\Pricing\InputPriceCalculation;
 use Shopsys\FrameworkBundle\Model\Pricing\PricingSetting;
 use Shopsys\FrameworkBundle\Model\Product\Product;
 use Shopsys\FrameworkBundle\Model\Product\ProductRepository;
@@ -57,14 +55,9 @@ class ProductInputPriceFacade
     protected $productRowsIterator;
 
     /**
-     * @var \Shopsys\FrameworkBundle\Model\Pricing\BasePriceCalculation
+     * @var \Shopsys\FrameworkBundle\Model\Product\Pricing\ProductInputPriceRecalculator
      */
-    protected $basePriceCalculation;
-
-    /**
-     * @var \Shopsys\FrameworkBundle\Model\Pricing\InputPriceCalculation
-     */
-    protected $inputPriceCalculation;
+    protected $productInputPriceRecalculator;
 
     /**
      * @param \Doctrine\ORM\EntityManagerInterface $em
@@ -73,8 +66,7 @@ class ProductInputPriceFacade
      * @param \Shopsys\FrameworkBundle\Model\Product\Pricing\ProductManualInputPriceRepository $productManualInputPriceRepository
      * @param \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroupFacade $pricingGroupFacade
      * @param \Shopsys\FrameworkBundle\Model\Product\ProductRepository $productRepository
-     * @param \Shopsys\FrameworkBundle\Model\Pricing\BasePriceCalculation $basePriceCalculation
-     * @param \Shopsys\FrameworkBundle\Model\Pricing\InputPriceCalculation $inputPriceCalculation
+     * @param \Shopsys\FrameworkBundle\Model\Product\Pricing\ProductInputPriceRecalculator $productInputPriceRecalculator
      */
     public function __construct(
         EntityManagerInterface $em,
@@ -83,8 +75,7 @@ class ProductInputPriceFacade
         ProductManualInputPriceRepository $productManualInputPriceRepository,
         PricingGroupFacade $pricingGroupFacade,
         ProductRepository $productRepository,
-        BasePriceCalculation $basePriceCalculation,
-        InputPriceCalculation $inputPriceCalculation
+        ProductInputPriceRecalculator $productInputPriceRecalculator
     ) {
         $this->em = $em;
         $this->currencyFacade = $currencyFacade;
@@ -92,8 +83,7 @@ class ProductInputPriceFacade
         $this->productManualInputPriceRepository = $productManualInputPriceRepository;
         $this->pricingGroupFacade = $pricingGroupFacade;
         $this->productRepository = $productRepository;
-        $this->basePriceCalculation = $basePriceCalculation;
-        $this->inputPriceCalculation = $inputPriceCalculation;
+        $this->productInputPriceRecalculator = $productInputPriceRecalculator;
     }
 
     /**
@@ -136,11 +126,10 @@ class ProductInputPriceFacade
             $productManualInputPrices = $this->productManualInputPriceRepository->getByProduct($product);
             $inputPriceType = $this->pricingSetting->getInputPriceType();
             foreach ($productManualInputPrices as $productManualInputPrice) {
-                $productManualInputPrice->recalculateInputPriceForNewVatPercent(
+                $this->productInputPriceRecalculator->recalculateInputPriceForNewVatPercent(
+                    $productManualInputPrice,
                     $inputPriceType,
-                    $newVat->getPercent(),
-                    $this->basePriceCalculation,
-                    $this->inputPriceCalculation
+                    $newVat->getPercent()
                 );
             }
             $product->changeVat($newVat);

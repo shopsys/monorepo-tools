@@ -4,9 +4,7 @@ namespace Shopsys\FrameworkBundle\Model\Product\Pricing;
 
 use Doctrine\ORM\Mapping as ORM;
 use Shopsys\FrameworkBundle\Component\Money\Money;
-use Shopsys\FrameworkBundle\Model\Pricing\BasePriceCalculation;
 use Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroup;
-use Shopsys\FrameworkBundle\Model\Pricing\InputPriceCalculation;
 use Shopsys\FrameworkBundle\Model\Product\Product;
 
 /**
@@ -82,32 +80,5 @@ class ProductManualInputPrice
     public function setInputPrice(?Money $inputPrice)
     {
         $this->inputPrice = $inputPrice;
-    }
-
-    /**
-     * @param int $inputPriceType
-     * @param string $newVatPercent
-     * @param \Shopsys\FrameworkBundle\Model\Pricing\BasePriceCalculation $basePriceCalculation
-     * @param \Shopsys\FrameworkBundle\Model\Pricing\InputPriceCalculation $inputPriceCalculation
-     */
-    public function recalculateInputPriceForNewVatPercent(
-        $inputPriceType,
-        $newVatPercent,
-        BasePriceCalculation $basePriceCalculation,
-        InputPriceCalculation $inputPriceCalculation
-    ) {
-        if ($this->inputPrice !== null) {
-            $basePriceForPricingGroup = $basePriceCalculation->calculateBasePrice(
-                $this->inputPrice,
-                $inputPriceType,
-                $this->getProduct()->getVat()
-            );
-            $inputPriceForPricingGroup = $inputPriceCalculation->getInputPrice(
-                $inputPriceType,
-                $basePriceForPricingGroup->getPriceWithVat(),
-                $newVatPercent
-            );
-            $this->setInputPrice($inputPriceForPricingGroup);
-        }
     }
 }

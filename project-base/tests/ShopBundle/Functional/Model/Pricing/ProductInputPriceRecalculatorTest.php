@@ -4,11 +4,10 @@ namespace Tests\ShopBundle\Functional\Model\Pricing;
 
 use Shopsys\FrameworkBundle\Component\Money\Money;
 use Shopsys\FrameworkBundle\Component\Setting\Setting;
-use Shopsys\FrameworkBundle\Model\Pricing\BasePriceCalculation;
-use Shopsys\FrameworkBundle\Model\Pricing\InputPriceCalculation;
 use Shopsys\FrameworkBundle\Model\Pricing\PricingSetting;
 use Shopsys\FrameworkBundle\Model\Pricing\Vat\Vat;
 use Shopsys\FrameworkBundle\Model\Pricing\Vat\VatData;
+use Shopsys\FrameworkBundle\Model\Product\Pricing\ProductInputPriceRecalculator;
 use Shopsys\FrameworkBundle\Model\Product\Pricing\ProductManualInputPrice;
 use Shopsys\FrameworkBundle\Model\Product\ProductDataFactoryInterface;
 use Shopsys\ShopBundle\DataFixtures\Demo\PricingGroupDataFixture;
@@ -17,7 +16,7 @@ use Shopsys\ShopBundle\Model\Product\Product;
 use Tests\FrameworkBundle\Test\IsMoneyEqual;
 use Tests\ShopBundle\Test\TransactionFunctionalTestCase;
 
-class ProductManualInputPriceTest extends TransactionFunctionalTestCase
+class ProductInputPriceRecalculatorTest extends TransactionFunctionalTestCase
 {
     public function testRecalculateInputPriceForNewVatPercentWithInputPriceWithoutVat()
     {
@@ -25,10 +24,8 @@ class ProductManualInputPriceTest extends TransactionFunctionalTestCase
         $setting = $this->getContainer()->get(Setting::class);
         /** @var \Shopsys\FrameworkBundle\Model\Pricing\PricingSetting $pricingSetting */
         $pricingSetting = $this->getContainer()->get(PricingSetting::class);
-        /** @var \Shopsys\FrameworkBundle\Model\Pricing\BasePriceCalculation $basePriceCalculation */
-        $basePriceCalculation = $this->getContainer()->get(BasePriceCalculation::class);
-        /** @var \Shopsys\FrameworkBundle\Model\Pricing\InputPriceCalculation $inputPriceCalculation */
-        $inputPriceCalculation = $this->getContainer()->get(InputPriceCalculation::class);
+        /** @var \Shopsys\FrameworkBundle\Model\Product\Pricing\ProductInputPriceRecalculator $productInputPriceRecalculator */
+        $productInputPriceRecalculator = $this->getContainer()->get(ProductInputPriceRecalculator::class);
 
         $producDataFactory = $this->getContainer()->get(ProductDataFactoryInterface::class);
 
@@ -39,6 +36,7 @@ class ProductManualInputPriceTest extends TransactionFunctionalTestCase
         $vatData->percent = '21';
         $vat = new Vat($vatData);
 
+        /** @var \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroup $pricingGroup */
         $pricingGroup = $this->getReference(PricingGroupDataFixture::PRICING_GROUP_ORDINARY_DOMAIN_1);
 
         $productData = $producDataFactory->create();
@@ -48,7 +46,7 @@ class ProductManualInputPriceTest extends TransactionFunctionalTestCase
 
         $productManualInputPrice = new ProductManualInputPrice($product, $pricingGroup, Money::create(1000));
         $inputPriceType = $pricingSetting->getInputPriceType();
-        $productManualInputPrice->recalculateInputPriceForNewVatPercent($inputPriceType, 15, $basePriceCalculation, $inputPriceCalculation);
+        $productInputPriceRecalculator->recalculateInputPriceForNewVatPercent($productManualInputPrice, $inputPriceType, '15');
 
         $this->assertThat($productManualInputPrice->getInputPrice(), new IsMoneyEqual(Money::create('1052.173913')));
     }
@@ -59,10 +57,8 @@ class ProductManualInputPriceTest extends TransactionFunctionalTestCase
         $setting = $this->getContainer()->get(Setting::class);
         /** @var \Shopsys\FrameworkBundle\Model\Pricing\PricingSetting $pricingSetting */
         $pricingSetting = $this->getContainer()->get(PricingSetting::class);
-        /** @var \Shopsys\FrameworkBundle\Model\Pricing\BasePriceCalculation $basePriceCalculation */
-        $basePriceCalculation = $this->getContainer()->get(BasePriceCalculation::class);
-        /** @var \Shopsys\FrameworkBundle\Model\Pricing\InputPriceCalculation $inputPriceCalculation */
-        $inputPriceCalculation = $this->getContainer()->get(InputPriceCalculation::class);
+        /** @var \Shopsys\FrameworkBundle\Model\Product\Pricing\ProductInputPriceRecalculator $productInputPriceRecalculator */
+        $productInputPriceRecalculator = $this->getContainer()->get(ProductInputPriceRecalculator::class);
 
         $productDataFactory = $this->getContainer()->get(ProductDataFactoryInterface::class);
 
@@ -73,6 +69,7 @@ class ProductManualInputPriceTest extends TransactionFunctionalTestCase
         $vatData->percent = '21';
         $vat = new Vat($vatData);
 
+        /** @var \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroup $pricingGroup */
         $pricingGroup = $this->getReference(PricingGroupDataFixture::PRICING_GROUP_ORDINARY_DOMAIN_1);
 
         $productData = $productDataFactory->create();
@@ -83,7 +80,7 @@ class ProductManualInputPriceTest extends TransactionFunctionalTestCase
         $productManualInputPrice = new ProductManualInputPrice($product, $pricingGroup, Money::create(1000));
 
         $inputPriceType = $pricingSetting->getInputPriceType();
-        $productManualInputPrice->recalculateInputPriceForNewVatPercent($inputPriceType, 15, $basePriceCalculation, $inputPriceCalculation);
+        $productInputPriceRecalculator->recalculateInputPriceForNewVatPercent($productManualInputPrice, $inputPriceType, '15');
 
         $this->assertThat($productManualInputPrice->getInputPrice(), new IsMoneyEqual(Money::create(1000)));
     }
