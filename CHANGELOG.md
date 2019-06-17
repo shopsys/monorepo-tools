@@ -17,6 +17,7 @@ There is a list of all the repositories maintained by monorepo:
 * [shopsys/product-feed-heureka-delivery]
 * [shopsys/product-feed-zbozi]
 * [shopsys/google-cloud-bundle]
+* [shopsys/read-model]
 
 Packages are formatted by release version. You can see all the changes done to package that you carry about with this tree.
 
@@ -2056,6 +2057,7 @@ That's why is this section formatted differently.
 [shopsys/migrations]: https://github.com/shopsys/migrations
 [shopsys/monorepo-tools]: https://github.com/shopsys/monorepo-tools
 [shopsys/google-cloud-bundle]: https://github.com/shopsys/google-cloud-bundle
+[shopsys/read-model]: https://github.com/shopsys/read-model
 
 [@pk16011990]: https://github.com/pk16011990
 [@stanoMilan]: https://github.com/stanoMilan
