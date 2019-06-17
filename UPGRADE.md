@@ -42,6 +42,7 @@ Follow instructions in a [monorepo upgrade guide](docs/contributing/upgrading-mo
 ## Upgrade
 * ### [From v7.1.0 to Unreleased](./docs/upgrade/UPGRADE-unreleased.md)
 * ### [From v7.0.0 to v7.1.0](./docs/upgrade/UPGRADE-v7.1.0.md)
+* ### [From v7.0.0 to v7.0.1](./docs/upgrade/UPGRADE-v7.0.1.md)
 * ### [From v7.0.0-beta6 to v7.0.0](./docs/upgrade/UPGRADE-v7.0.0.md)
 * ### [From v7.0.0-beta5 to v7.0.0-beta6](./docs/upgrade/UPGRADE-v7.0.0-beta6.md)
 * ### [From v7.0.0-beta4 to v7.0.0-beta5](./docs/upgrade/UPGRADE-v7.0.0-beta5.md)
