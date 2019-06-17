@@ -27,6 +27,28 @@ The changelog is generated during the release process using [ChangelogLinker](ht
 
 <!-- changelog-linker -->
 
+## [v7.1.1](https://github.com/shopsys/shopsys/compare/v7.1.0...v7.1.1) - 2019-06-18
+
+### [shopsys/framework]
+
+#### Fixed
+
+- [#1084] CurrentPromoCodeFacadeTest: fixed call of getMockForAbstractClass
+- [#1120] escaping values in emails to prevent HTML injection
+
+### [shopsys/shopsys]
+
+#### Fixed
+
+- [#993] fixed typo non-breaking space -> space
+
+### [shopsys/coding-standards]
+
+#### Fixed
+
+- [#995] helper PhpToDocTypeTransformer is updated for use with new version of phpcs-fixer package
+- [#1008] include config of better-phpdoc-parser in ECS config
+
 ## [v7.1.0](https://github.com/shopsys/shopsys/compare/v7.0.0...v7.1.0) - 2019-04-02
 
 ### [shopsys/shopsys]
