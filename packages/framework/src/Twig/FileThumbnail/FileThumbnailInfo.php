@@ -7,12 +7,12 @@ class FileThumbnailInfo
     /**
      * @var string|null
      */
-    private $iconType;
+    protected $iconType;
 
     /**
      * @var string|null
      */
-    private $imageUri;
+    protected $imageUri;
 
     /**
      * @param string|null $iconType

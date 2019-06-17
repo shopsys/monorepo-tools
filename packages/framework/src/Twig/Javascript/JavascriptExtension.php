@@ -11,7 +11,7 @@ class JavascriptExtension extends Twig_Extension
     /**
      * @var \Shopsys\FrameworkBundle\Twig\Javascript\JavascriptCompiler
      */
-    private $javascriptCompiler;
+    protected $javascriptCompiler;
 
     /**
      * @param \Shopsys\FrameworkBundle\Twig\Javascript\JavascriptCompiler $javascriptCompiler
@@ -48,7 +48,7 @@ class JavascriptExtension extends Twig_Extension
      * @param array $javascriptLinks
      * @return string
      */
-    private function getHtmlJavascriptImports(array $javascriptLinks)
+    protected function getHtmlJavascriptImports(array $javascriptLinks)
     {
         $html = '';
         foreach ($javascriptLinks as $javascriptLink) {

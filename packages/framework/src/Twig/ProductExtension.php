@@ -13,12 +13,12 @@ class ProductExtension extends \Twig_Extension
     /**
      * @var \Shopsys\FrameworkBundle\Model\Category\CategoryFacade
      */
-    private $categoryFacade;
+    protected $categoryFacade;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Product\ProductCachedAttributesFacade
      */
-    private $productCachedAttributesFacade;
+    protected $productCachedAttributesFacade;
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\Category\CategoryFacade $categoryFacade

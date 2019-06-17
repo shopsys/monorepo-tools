@@ -12,7 +12,7 @@ class FormDetailExtension extends Twig_Extension
     /**
      * @var \Twig_Environment
      */
-    private $twigEnvironment;
+    protected $twigEnvironment;
 
     /**
      * @param \Twig_Environment $twigEnvironment

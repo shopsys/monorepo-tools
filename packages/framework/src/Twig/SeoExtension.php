@@ -11,12 +11,12 @@ class SeoExtension extends \Twig_Extension
     /**
      * @var \Shopsys\FrameworkBundle\Model\Seo\SeoSettingFacade
      */
-    private $seoSettingFacade;
+    protected $seoSettingFacade;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\Domain\Domain
      */
-    private $domain;
+    protected $domain;
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\Seo\SeoSettingFacade $seoSettingFacade

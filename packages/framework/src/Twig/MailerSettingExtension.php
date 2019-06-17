@@ -12,27 +12,27 @@ class MailerSettingExtension extends Twig_Extension
     /**
      * @var \Symfony\Component\DependencyInjection\ContainerInterface
      */
-    private $container;
+    protected $container;
 
     /**
      * @var bool
      */
-    private $isDeliveryDisabled;
+    protected $isDeliveryDisabled;
 
     /**
      * @var string
      */
-    private $mailerMasterEmailAddress;
+    protected $mailerMasterEmailAddress;
 
     /**
      * @var string[]
      */
-    private $mailerWhitelistExpressions;
+    protected $mailerWhitelistExpressions;
 
     /**
      * @var \Symfony\Component\Templating\EngineInterface
      */
-    private $templating;
+    protected $templating;
 
     /**
      * @param \Symfony\Component\DependencyInjection\ContainerInterface $container

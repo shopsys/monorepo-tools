@@ -48,7 +48,7 @@ class HoneyPotExtension extends Twig_Extension
      * @param \Symfony\Component\Form\FormView $formView
      * @return \Symfony\Component\Form\FormView
      */
-    private function getRootFormView(FormView $formView)
+    protected function getRootFormView(FormView $formView)
     {
         $rootFormView = $formView;
 
@@ -63,7 +63,7 @@ class HoneyPotExtension extends Twig_Extension
      * @param \Symfony\Component\Form\FormView $formView
      * @return bool
      */
-    private function containsNotRenderedPassword(FormView $formView)
+    protected function containsNotRenderedPassword(FormView $formView)
     {
         foreach ($formView->children as $childForm) {
             if (strpos($childForm->vars['name'], static::PASSWORD_FIELD_NAME) !== false && !$childForm->isRendered()) {

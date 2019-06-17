@@ -11,12 +11,12 @@ class ShopInfoExtension extends \Twig_Extension
     /**
      * @var \Shopsys\FrameworkBundle\Model\ShopInfo\ShopInfoSettingFacade
      */
-    private $shopInfoSettingFacade;
+    protected $shopInfoSettingFacade;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\Domain\Domain
      */
-    private $domain;
+    protected $domain;
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\ShopInfo\ShopInfoSettingFacade $shopInfoSettingFacade
@@ -45,7 +45,7 @@ class ShopInfoExtension extends \Twig_Extension
     /**
      * @return \Shopsys\FrameworkBundle\Component\Domain\Domain
      */
-    private function getDomain()
+    protected function getDomain()
     {
         // Twig extensions are loaded during assetic:dump command,
         // so they cannot be dependent on Domain service

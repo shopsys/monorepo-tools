@@ -12,6 +12,7 @@ services:
                     - Shopsys\FrameworkBundle\Model
                     - Shopsys\FrameworkBundle\Component
                     - Shopsys\FrameworkBundle\Controller
+                    - Shopsys\FrameworkBundle\Twig
 
     Shopsys\CodingStandards\Sniffs\ConstantVisibilityRequiredSniff: ~
 

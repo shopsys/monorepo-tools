@@ -10,7 +10,7 @@ class CssExtension extends \Twig_Extension
     /**
      * @var \Shopsys\FrameworkBundle\Component\Css\CssFacade
      */
-    private $cssFacade;
+    protected $cssFacade;
 
     /**
      * @param \Shopsys\FrameworkBundle\Component\Css\CssFacade $cssFacade

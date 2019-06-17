@@ -12,22 +12,22 @@ class DomainExtension extends \Twig_Extension
     /**
      * @var string
      */
-    private $domainImagesUrlPrefix;
+    protected $domainImagesUrlPrefix;
 
     /**
      * @var \Symfony\Component\Asset\Packages
      */
-    private $assetPackages;
+    protected $assetPackages;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\Domain\Domain
      */
-    private $domain;
+    protected $domain;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\Domain\DomainFacade
      */
-    private $domainFacade;
+    protected $domainFacade;
 
     /**
      * @param mixed $domainImagesUrlPrefix

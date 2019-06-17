@@ -11,7 +11,7 @@ class RequestExtension extends Twig_Extension
     /**
      * @var \Symfony\Component\HttpFoundation\RequestStack
      */
-    private $requestStack;
+    protected $requestStack;
 
     /**
      * @param \Symfony\Component\HttpFoundation\RequestStack $requestStack
@@ -64,7 +64,7 @@ class RequestExtension extends Twig_Extension
     /**
      * @return array
      */
-    private function getParamsFromRequest()
+    protected function getParamsFromRequest()
     {
         return $this->requestStack->getMasterRequest()->query->all();
     }

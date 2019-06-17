@@ -11,12 +11,12 @@ class LocalizationExtension extends \Twig_Extension
     /**
      * @var \Shopsys\FrameworkBundle\Model\Localization\Localization
      */
-    private $localization;
+    protected $localization;
 
     /**
      * @var \Symfony\Component\Asset\Packages
      */
-    private $assetPackages;
+    protected $assetPackages;
 
     /**
      * @param \Symfony\Component\Asset\Packages $assetPackages
@@ -64,7 +64,7 @@ class LocalizationExtension extends \Twig_Extension
      * @param string $locale
      * @return string
      */
-    private function getTitle($locale)
+    protected function getTitle($locale)
     {
         try {
             $title = $this->localization->getLanguageName($locale);

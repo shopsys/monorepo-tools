@@ -10,7 +10,7 @@ class CookiesExtension extends \Twig_Extension
     /**
      * @var \Shopsys\FrameworkBundle\Model\Cookies\CookiesFacade
      */
-    private $cookiesFacade;
+    protected $cookiesFacade;
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\Cookies\CookiesFacade $cookiesFacade

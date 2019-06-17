@@ -15,47 +15,47 @@ class JavascriptCompiler
     /**
      * @var string
      */
-    private $webPath;
+    protected $webPath;
 
     /**
      * @var string
      */
-    private $jsUrlPrefix;
+    protected $jsUrlPrefix;
 
     /**
      * @var string[]
      */
-    private $allowedDirectories;
+    protected $allowedDirectories;
 
     /**
      * @var string[]
      */
-    private $jsSourcePaths;
+    protected $jsSourcePaths;
 
     /**
      * @var \Symfony\Component\Filesystem\Filesystem
      */
-    private $filesystem;
+    protected $filesystem;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\Domain\Domain
      */
-    private $domain;
+    protected $domain;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\Javascript\Compiler\JsCompiler
      */
-    private $jsCompiler;
+    protected $jsCompiler;
 
     /**
      * @var array
      */
-    private $javascriptLinks = [];
+    protected $javascriptLinks = [];
 
     /**
      * @var \Symfony\Component\Asset\Packages
      */
-    private $assetPackages;
+    protected $assetPackages;
 
     /**
      * @param string $webPath
@@ -105,7 +105,7 @@ class JavascriptCompiler
     /**
      * @param string $javascript
      */
-    private function process($javascript)
+    protected function process($javascript)
     {
         foreach ($this->jsSourcePaths as $jsSourcePath) {
             if ($this->tryToProcessJavascriptFile($jsSourcePath, $javascript)) {
@@ -127,7 +127,7 @@ class JavascriptCompiler
      * @param string $javascript
      * @return bool
      */
-    private function tryToProcessJavascriptFile($jsSourcePath, $javascript)
+    protected function tryToProcessJavascriptFile($jsSourcePath, $javascript)
     {
         $sourcePath = $jsSourcePath . '/' . $javascript;
         $relativeTargetPath = $this->getRelativeTargetPath($javascript);
@@ -152,7 +152,7 @@ class JavascriptCompiler
      * @param string $timestamp
      * @return string
      */
-    private function getPathWithTimestamp($relativePath, $timestamp)
+    protected function getPathWithTimestamp($relativePath, $timestamp)
     {
         $version = '-v' . $timestamp;
 
@@ -163,7 +163,7 @@ class JavascriptCompiler
      * @param string $javascript
      * @return string|null
      */
-    private function getRelativeTargetPath($javascript)
+    protected function getRelativeTargetPath($javascript)
     {
         $relativeTargetPath = null;
         if ($this->isDirectoryAllowed($javascript)) {
@@ -182,7 +182,7 @@ class JavascriptCompiler
      * @param string $javascript
      * @return bool
      */
-    private function isDirectoryAllowed(string $javascript): bool
+    protected function isDirectoryAllowed(string $javascript): bool
     {
         foreach ($this->allowedDirectories as $allowedDirectory) {
             if (strpos($javascript, $allowedDirectory) === 0) {
@@ -196,7 +196,7 @@ class JavascriptCompiler
      * @param string $sourceFilename
      * @param string $relativeTargetPath
      */
-    private function compileJavascriptFile($sourceFilename, $relativeTargetPath)
+    protected function compileJavascriptFile($sourceFilename, $relativeTargetPath)
     {
         $compiledFilename = $this->webPath . '/' . $relativeTargetPath;
 
@@ -219,7 +219,7 @@ class JavascriptCompiler
      * @param string $sourceFilename
      * @return bool
      */
-    private function isCompiledFileFresh($compiledFilename, $sourceFilename)
+    protected function isCompiledFileFresh($compiledFilename, $sourceFilename)
     {
         if (is_file($compiledFilename) && parse_url($sourceFilename, PHP_URL_HOST) === null) {
             $isCompiledFileFresh = filemtime($sourceFilename) < filemtime($compiledFilename);
@@ -234,7 +234,7 @@ class JavascriptCompiler
      * @param string $directoryMask
      * @return bool
      */
-    private function tryToProcessJavascriptDirectoryMask($jsSourcePath, $directoryMask)
+    protected function tryToProcessJavascriptDirectoryMask($jsSourcePath, $directoryMask)
     {
         $parts = explode('/', $directoryMask);
         $mask = array_pop($parts);
@@ -254,7 +254,7 @@ class JavascriptCompiler
      * @param string $filenameMask
      * @return bool
      */
-    private function processJavascriptByMask($jsSourcePath, $path, $filenameMask)
+    protected function processJavascriptByMask($jsSourcePath, $path, $filenameMask)
     {
         $filepaths = (array)glob($jsSourcePath . '/' . $path . '/' . $filenameMask);
         foreach ($filepaths as $filepath) {
@@ -269,7 +269,7 @@ class JavascriptCompiler
      * @param string $filenameMask
      * @return bool
      */
-    private function isMaskValid($filenameMask)
+    protected function isMaskValid($filenameMask)
     {
         return $filenameMask === '' || strpos($filenameMask, '*') !== false;
     }
@@ -277,7 +277,7 @@ class JavascriptCompiler
     /**
      * @param string $javascriptUrl
      */
-    private function processExternalJavascript($javascriptUrl)
+    protected function processExternalJavascript($javascriptUrl)
     {
         $this->javascriptLinks[] = $this->assetPackages->getUrl($javascriptUrl);
     }
