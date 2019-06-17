@@ -20,4 +20,4 @@ There you can find links to upgrade notes for other versions too.
     - if you have customized e-mailing on your project (eg. by implementing Twig templates for mail content), you should check your code to avoid double escaping (eg. execute `htmlspecialchars_decode($value, ENT_QUOTES)` before passing the variables replacements to you implementation)
 
 [shopsys/framework]: https://github.com/shopsys/framework
-[Upgrade from v7.0.0 to Unreleased]: https://github.com/shopsys/shopsys/compare/v7.0.0...HEAD
+[Upgrade from v7.0.0 to Unreleased]: https://github.com/shopsys/shopsys/compare/v7.0.0...7.0
