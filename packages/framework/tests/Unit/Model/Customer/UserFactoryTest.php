@@ -22,7 +22,6 @@ class UserFactoryTest extends TestCase
 
         $billingAddress = $this->createBillingAddress();
         $deliveryAddress = $this->createDeliveryAddress();
-        $userByEmail = null;
         $userData = new UserData();
         $userData->firstName = 'firstName';
         $userData->lastName = 'lastName';
@@ -33,8 +32,7 @@ class UserFactoryTest extends TestCase
         $user = $customerService->create(
             $userData,
             $billingAddress,
-            $deliveryAddress,
-            $userByEmail
+            $deliveryAddress
         );
 
         $this->assertInstanceOf(User::class, $user);

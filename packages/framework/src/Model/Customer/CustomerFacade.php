@@ -112,17 +112,16 @@ class CustomerFacade
      */
     public function register(UserData $userData)
     {
-        $userByEmailAndDomain = $this->findUserByEmailAndDomain($userData->email, $userData->domainId);
-
         $billingAddressData = $this->billingAddressDataFactory->create();
         $billingAddress = $this->billingAddressFactory->create($billingAddressData);
 
         $user = $this->userFactory->create(
             $userData,
             $billingAddress,
-            null,
-            $userByEmailAndDomain
+            null
         );
+
+        $this->setEmail($userData->email, $user);
 
         $this->em->persist($billingAddress);
         $this->em->persist($user);
@@ -142,17 +141,13 @@ class CustomerFacade
         $billingAddress = $this->billingAddressFactory->create($customerData->billingAddressData);
         $deliveryAddress = $this->deliveryAddressFactory->create($customerData->deliveryAddressData);
 
-        $userByEmailAndDomain = $this->findUserByEmailAndDomain(
-            $customerData->userData->email,
-            $customerData->userData->domainId
-        );
-
         $user = $this->userFactory->create(
             $customerData->userData,
             $billingAddress,
-            $deliveryAddress,
-            $userByEmailAndDomain
+            $deliveryAddress
         );
+
+        $this->setEmail($customerData->userData->email, $user);
 
         $this->em->persist($user);
         $this->em->flush($user);
@@ -194,11 +189,7 @@ class CustomerFacade
     {
         $user = $this->edit($userId, $customerData);
 
-        $userByEmailAndDomain = $this->findUserByEmailAndDomain(
-            $customerData->userData->email,
-            $customerData->userData->domainId
-        );
-        $user->changeEmail($customerData->userData->email, $userByEmailAndDomain);
+        $this->setEmail($customerData->userData->email, $user);
 
         $this->em->flush();
 
@@ -242,5 +233,23 @@ class CustomerFacade
         );
 
         $this->em->flush();
+    }
+
+    /**
+     * @param string $email
+     * @param \Shopsys\FrameworkBundle\Model\Customer\User $user
+     */
+    protected function setEmail(string $email, User $user): void
+    {
+        $userByEmailAndDomain = $this->findUserByEmailAndDomain(
+            $email,
+            $user->getDomainId()
+        );
+
+        if ($userByEmailAndDomain !== null && $user->getId() !== $userByEmailAndDomain->getId()) {
+            throw new \Shopsys\FrameworkBundle\Model\Customer\Exception\DuplicateEmailException($email);
+        }
+
+        $user->setEmail($email);
     }
 }
