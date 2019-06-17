@@ -72,7 +72,7 @@ class AdministratorFormType extends AbstractType
                 'type' => PasswordType::class,
                 'required' => $options['scenario'] === self::SCENARIO_CREATE,
                 'options' => [
-                    'attr' => ['autocomplete' => 'off'],
+                    'attr' => ['autocomplete' => 'new-password'],
                 ],
                 'first_options' => [
                     'label' => t('Password'),

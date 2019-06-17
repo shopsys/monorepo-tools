@@ -14,12 +14,12 @@ class DateTimeFormatterExtension extends Twig_Extension
     /**
      * @var \Shopsys\FrameworkBundle\Component\Localization\DateTimeFormatter
      */
-    private $dateTimeFormatter;
+    protected $dateTimeFormatter;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Localization\Localization
      */
-    private $localization;
+    protected $localization;
 
     /**
      * @param \Shopsys\FrameworkBundle\Component\Localization\DateTimeFormatter $dateTimeFormatter
@@ -119,7 +119,7 @@ class DateTimeFormatterExtension extends Twig_Extension
      * @param string|null $locale
      * @return string
      */
-    private function format($dateTime, $dateType, $timeType, $locale = null)
+    protected function format($dateTime, $dateType, $timeType, $locale = null)
     {
         if ($dateTime === null) {
             return '-';
@@ -137,7 +137,7 @@ class DateTimeFormatterExtension extends Twig_Extension
      * @param string|null $locale
      * @return string
      */
-    private function getLocale($locale = null)
+    protected function getLocale($locale = null)
     {
         if ($locale === null) {
             $locale = $this->localization->getLocale();
@@ -150,7 +150,7 @@ class DateTimeFormatterExtension extends Twig_Extension
      * @param mixed $value
      * @return \DateTime
      */
-    private function convertToDateTime($value)
+    protected function convertToDateTime($value)
     {
         if ($value instanceof DateTime) {
             return $value;

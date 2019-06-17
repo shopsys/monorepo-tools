@@ -23,6 +23,10 @@ class ShopsysFrameworkExtension extends Extension
         $loader->load('services.yml');
         $loader->load('paths.yml');
 
+        if ($container->getParameter('kernel.environment') === EnvironmentType::DEVELOPMENT) {
+            $loader->load('services_dev.yml');
+        }
+
         if ($container->getParameter('kernel.environment') === EnvironmentType::TEST) {
             $loader->load('services_test.yml');
         }

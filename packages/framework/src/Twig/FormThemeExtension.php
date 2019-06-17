@@ -54,7 +54,7 @@ class FormThemeExtension extends \Twig_Extension
      * @param string $controller
      * @return bool
      */
-    private function isAdmin(string $controller) : bool
+    protected function isAdmin(string $controller) : bool
     {
         return strpos($controller, 'Shopsys\FrameworkBundle\Controller\Admin') === 0 ||
             strpos($controller, 'Shopsys\ShopBundle\Controller\Admin') === 0;

@@ -159,7 +159,7 @@ class UserFormType extends AbstractType
                 'type' => PasswordType::class,
                 'required' => $options['user'] === null,
                 'options' => [
-                    'attr' => ['autocomplete' => 'off'],
+                    'attr' => ['autocomplete' => 'new-password'],
                 ],
                 'first_options' => [
                     'constraints' => $this->getFirstPasswordConstraints($options['user'] === null),

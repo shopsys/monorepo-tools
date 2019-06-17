@@ -20,7 +20,7 @@ class ImageExtension extends Twig_Extension
     /**
      * @var string
      */
-    private $frontDesignImageUrlPrefix;
+    protected $frontDesignImageUrlPrefix;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\Domain\Domain
@@ -30,7 +30,7 @@ class ImageExtension extends Twig_Extension
     /**
      * @var \Shopsys\FrameworkBundle\Component\Image\ImageLocator
      */
-    private $imageLocator;
+    protected $imageLocator;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\Image\ImageFacade
@@ -40,7 +40,7 @@ class ImageExtension extends Twig_Extension
     /**
      * @var \Symfony\Component\Templating\EngineInterface
      */
-    private $templating;
+    protected $templating;
 
     /**
      * @param string $frontDesignImageUrlPrefix
@@ -157,7 +157,7 @@ class ImageExtension extends Twig_Extension
     /**
      * @return string
      */
-    private function getEmptyImageUrl(): string
+    protected function getEmptyImageUrl(): string
     {
         return $this->domain->getUrl() . $this->frontDesignImageUrlPrefix . '/' . static::NOIMAGE_FILENAME;
     }
@@ -168,7 +168,7 @@ class ImageExtension extends Twig_Extension
      * @param string|null $sizeName
      * @return string
      */
-    private function getImageCssClass($entityName, $type, $sizeName)
+    protected function getImageCssClass($entityName, $type, $sizeName)
     {
         $allClassParts = [
             'image',

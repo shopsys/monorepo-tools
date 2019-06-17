@@ -17,12 +17,12 @@ class NumberFormatterExtension extends Twig_Extension
     /**
      * @var \Shopsys\FrameworkBundle\Model\Localization\Localization
      */
-    private $localization;
+    protected $localization;
 
     /**
      * @var \CommerceGuys\Intl\NumberFormat\NumberFormatRepositoryInterface
      */
-    private $numberFormatRepository;
+    protected $numberFormatRepository;
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\Localization\Localization $localization
@@ -107,7 +107,7 @@ class NumberFormatterExtension extends Twig_Extension
      * @param string|null $locale
      * @return string
      */
-    private function getLocale($locale = null)
+    protected function getLocale($locale = null)
     {
         if ($locale === null) {
             $locale = $this->localization->getLocale();

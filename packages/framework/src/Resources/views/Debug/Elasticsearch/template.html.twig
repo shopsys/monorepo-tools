@@ -1,0 +1,142 @@
+{% extends '@WebProfiler/Profiler/layout.html.twig' %}
+
+{% block toolbar %}
+    {% if collector.data.requestsCount > 0 %}
+        {# >200ms as elasticsearch response time will be marked as critical state #}
+        {% if collector.data.totalRequestsTime > 200 %}
+            {% set status = 'red' %}
+        {# >100ms as elasticsearch response time will be marked as warning state #}
+        {% elseif collector.data.totalRequestsTime > 100 %}
+            {% set status = 'yellow' %}
+        {% else %}
+            {% set status = 'normal' %}
+        {% endif %}
+
+        {% set icon %}
+            <svg width="18" height="18" xmlns="http://www.w3.org/2000/svg">
+                <path stroke="null" fill="#ffffff" id="Page-1" d="m5.481853,17.07872c1.230774,-1.16928 2.216608,-2.593495 2.870156,-4.19037l4.507732,0c1.276297,0 2.419239,0.570738 3.187699,1.470909c-1.606738,2.108639 -4.144209,3.46982 -6.999603,3.470771l-0.006011,0c-1.267109,-0.000419 -2.471601,-0.26869 -3.559973,-0.751311l0,0zm2.301358,-4.195021c-0.626839,1.533421 -1.634522,2.869062 -2.903581,3.894428c-1.61976,-0.872225 -2.93438,-2.237258 -3.744046,-3.894428l6.647627,0zm-7.185292,-6.323093l11.217994,0c1.366184,0 2.473266,1.108889 2.470698,2.475292c-0.002283,1.362807 -1.107843,2.466332 -2.470698,2.466417l-3.324099,0c0.203877,-0.744767 0.328919,-1.568862 0.328919,-2.477508c0,-0.908066 -0.133784,-1.726939 -0.351614,-2.464106l-0.528801,0c0.191863,0.737167 0.309705,1.55604 0.309705,2.464106c0,0.908617 -0.110137,1.732694 -0.28973,2.477546l-7.362374,0c-0.22895,-0.78387 -0.351719,-1.613025 -0.351719,-2.47085c0,-0.857881 0.122769,-1.687027 0.351719,-2.470897l0,0zm4.531635,-5.410709c1.179181,-0.58688 2.508688,-0.91694 3.915278,-0.91694c2.843561,0 5.372091,1.348968 6.980541,3.44195c-0.768936,0.91675 -1.922911,1.499635 -3.213191,1.49973l-11.677758,0c0.766853,-1.569832 1.987259,-2.877614 3.490565,-3.752607c1.289614,0.974011 2.330141,2.260391 3.007431,3.747851l0.57071,0c-0.711751,-1.563174 -1.769048,-2.935065 -3.073576,-4.019984l0,0z"/>
+            </svg>
+
+            <span class="sf-toolbar-value">{{ collector.data.requestsCount }}</span>
+            <span class="sf-toolbar-info-piece-additional-detail">
+                <span class="sf-toolbar-label">in</span>
+                <span class="sf-toolbar-value">{{ '%0.2f'|format(collector.data.totalRequestsTime) }}</span>
+                <span class="sf-toolbar-label">ms</span>
+            </span>
+        {% endset %}
+
+        {% set text %}
+            <div class="sf-toolbar-info-piece">
+                <b>Requests</b>
+                {# we would set limit of 4 requests to elasticsearch for 1 http request as  #}
+                <span class="sf-toolbar-status {{ collector.data.requestsCount > 5 ? 'sf-toolbar-status-yellow' : '' }}">{{ collector.data.requestsCount }}</span>
+            </div>
+            <div class="sf-toolbar-info-piece">
+                <b>Total time</b>
+                <span class="sf-toolbar-status-{{ status }}">{{ '%0.2f'|format(collector.data.totalRequestsTime) }} ms</span>
+            </div>
+        {% endset %}
+
+        {{ include('@WebProfiler/Profiler/toolbar_item.html.twig', { link: true, status: status }) }}
+    {% endif %}
+{% endblock %}
+
+{% block menu %}
+    {% if collector.data.requestsCount > 0 %}
+        <span class="label">
+            <span class="icon">
+                <svg width="18" height="18" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke="null" fill="#ffffff" id="Page-1" d="m5.481853,17.07872c1.230774,-1.16928 2.216608,-2.593495 2.870156,-4.19037l4.507732,0c1.276297,0 2.419239,0.570738 3.187699,1.470909c-1.606738,2.108639 -4.144209,3.46982 -6.999603,3.470771l-0.006011,0c-1.267109,-0.000419 -2.471601,-0.26869 -3.559973,-0.751311l0,0zm2.301358,-4.195021c-0.626839,1.533421 -1.634522,2.869062 -2.903581,3.894428c-1.61976,-0.872225 -2.93438,-2.237258 -3.744046,-3.894428l6.647627,0zm-7.185292,-6.323093l11.217994,0c1.366184,0 2.473266,1.108889 2.470698,2.475292c-0.002283,1.362807 -1.107843,2.466332 -2.470698,2.466417l-3.324099,0c0.203877,-0.744767 0.328919,-1.568862 0.328919,-2.477508c0,-0.908066 -0.133784,-1.726939 -0.351614,-2.464106l-0.528801,0c0.191863,0.737167 0.309705,1.55604 0.309705,2.464106c0,0.908617 -0.110137,1.732694 -0.28973,2.477546l-7.362374,0c-0.22895,-0.78387 -0.351719,-1.613025 -0.351719,-2.47085c0,-0.857881 0.122769,-1.687027 0.351719,-2.470897l0,0zm4.531635,-5.410709c1.179181,-0.58688 2.508688,-0.91694 3.915278,-0.91694c2.843561,0 5.372091,1.348968 6.980541,3.44195c-0.768936,0.91675 -1.922911,1.499635 -3.213191,1.49973l-11.677758,0c0.766853,-1.569832 1.987259,-2.877614 3.490565,-3.752607c1.289614,0.974011 2.330141,2.260391 3.007431,3.747851l0.57071,0c-0.711751,-1.563174 -1.769048,-2.935065 -3.073576,-4.019984l0,0z"/>
+                </svg>
+            </span>
+            <strong>Elasticsearch</strong>
+            <span class="count">
+                <span>{{ collector.data.requestsCount }}</span>
+            </span>
+        </span>
+    {% endif %}
+{% endblock %}
+
+{% block panel %}
+    <style type="text/css">
+        .status--ok {
+            background-color: #DDFFDD;
+        }
+        .status--404 {
+            background-color: #FFFFDD;
+        }
+        .status--error {
+            background-color: #FFDDDD;
+        }
+    </style>
+
+    <h1>Elasticsearch - total {{ collector.data.requestsCount }} queries in {{ '%0.2f'|format(collector.data.totalRequestsTime) }} ms</h1>
+
+    {% for index, request in collector.data.requests %}
+        {% if request.statusCode is null or request.statusCode >= 500 %}
+            {% set statusClass = 'status--error' %}
+        {% elseif request.statusCode >= 400 %}
+            {% set statusClass = 'status--404' %}
+        {% else %}
+            {% set statusClass = 'status--ok' %}
+        {% endif %}
+        <table>
+            <tr style="">
+                <th class="{{ statusClass }}" style="width: 28px;">{{ request.statusCode }}</th>
+                <th class="{{ statusClass }}" style="width: 70px;">{{ request.method }}</th>
+                <th class="{{ statusClass }}">{{ request.uri }}</th>
+                <td class="{{ statusClass }}" style="width: 200px;">
+                    {% if request.requestJson is not null %}
+                        <button type="button" style="float: right;" onclick="document.getElementById('js-elasticsearch-response-data-{{ index }}').classList.toggle('hidden'); return false;">
+                            Response
+                        </button>
+                    {% endif %}
+                    {% if request.requestData is not null %}
+                    <button type="button" style="float: right;" onclick="document.getElementById('js-elasticsearch-request-data-{{ index }}').classList.toggle('hidden'); return false;">
+                        Request
+                    </button>
+                    {% endif %}
+                    {% if request.response is not null %}
+                        <button type="button" style="float: right;" onclick="document.getElementById('js-elasticsearch-request-json-{{ index }}').classList.toggle('hidden'); return false;">
+                            Json
+                        </button>
+                    {% endif %}
+                </td>
+            </tr>
+            <tr>
+                <td colspan="4" style="padding: 5px; word-break: break-all;">
+                    {{ request.requestCurl  }}
+                </td>
+            </tr>
+
+            {% if request.requestJson is not null %}
+                <tr id="js-elasticsearch-request-json-{{ index }}" class="hidden">
+                    <td colspan="4"><pre>{{ request.requestJson }}</pre></td>
+                </tr>
+            {% endif %}
+
+            {% if request.requestData is not null %}
+                <tr id="js-elasticsearch-request-data-{{ index }}" class="hidden">
+                    <td colspan="4">
+                        <b>Request:</b><br>
+                        {{ dump(request.requestData) }}
+                    </td>
+                </tr>
+            {% endif %}
+
+            {% if request.response is not null %}
+                <tr id="js-elasticsearch-response-data-{{ index }}" class="hidden">
+                    <td colspan="4">
+                        <b>Response:</b><br>
+                        {{ dump(request.response) }}
+                    </td>
+                </tr>
+            {% endif %}
+
+            <tr>
+                <td colspan="4">Elasticsearch duration time <b style="float: right;">{{ '%0.2f'|format(request.duration * 1000) }} ms</b></td>
+            </tr>
+        </table>
+        <br />
+    {% endfor %}
+{% endblock %}

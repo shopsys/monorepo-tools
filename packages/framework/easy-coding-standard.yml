@@ -12,6 +12,7 @@ services:
                     - Shopsys\FrameworkBundle\Model
                     - Shopsys\FrameworkBundle\Component
                     - Shopsys\FrameworkBundle\Controller
+                    - Shopsys\FrameworkBundle\Twig
 
     Shopsys\CodingStandards\Sniffs\ConstantVisibilityRequiredSniff: ~
 
@@ -55,6 +56,10 @@ parameters:
         PHP_CodeSniffer\Standards\Generic\Sniffs\NamingConventions\CamelCapsFunctionNameSniff:
             # public methods in the parent class \Doctrine\DBAL\Types\Type are not in camel case format
             - '*/src/Component/Doctrine/MoneyType.php'
+
+        Shopsys\CodingStandards\CsFixer\ForbiddenDumpFixer:
+            # this template is used only in dev environment
+            - '*/src/Resources/views/Debug/Elasticsearch/template.html.twig'
 
         Shopsys\CodingStandards\Sniffs\ObjectIsCreatedByFactorySniff:
             - '*/tests/*'

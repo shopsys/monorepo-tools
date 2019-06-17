@@ -5,6 +5,7 @@ namespace Shopsys\FrameworkBundle\Model\Product\Search\Export;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Query\Expr\Join;
 use Doctrine\ORM\QueryBuilder;
+use Shopsys\FrameworkBundle\Component\Paginator\QueryPaginator;
 use Shopsys\FrameworkBundle\Model\Product\Product;
 use Shopsys\FrameworkBundle\Model\Product\ProductVisibility;
 
@@ -70,5 +71,17 @@ class ProductSearchExportRepository
             ->setParameter('variantTypeVariant', Product::VARIANT_TYPE_VARIANT);
 
         return $queryBuilder;
+    }
+
+    /**
+     * @param int $domainId
+     * @param string $locale
+     * @return int
+     */
+    public function getProductTotalCountForDomainAndLocale(int $domainId, string $locale): int
+    {
+        $result = new QueryPaginator($this->createQueryBuilder($domainId, $locale));
+
+        return $result->getTotalCount();
     }
 }

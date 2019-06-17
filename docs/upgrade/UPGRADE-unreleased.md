@@ -60,6 +60,23 @@ There you can find links to upgrade notes for other versions too.
             + }
             ```
     - you can copy-paste a new functional test [`ProductVariantCreationTest.php`](https://github.com/shopsys/project-base/blob/master/tests/ShopBundle/Functional/Model/Product/ProductVariantCreationTest.php) into `tests/ShopBundle/Functional/Model/Product/` to avoid regression of issues with creating product variants in the future
+- prevent indexing `CustomerPassword:setNewPassword` by robots ([#1119](https://github.com/shopsys/shopsys/pull/1119))
+    - add a `meta_robots` Twig block to your `@ShopsysShop/Front/Content/Registration/setNewPassword.html.twig` template:
+        ```twig
+        {% block meta_robots -%}
+            <meta name="robots" content="noindex, follow">
+        {% endblock %}
+        ```
+    - you should prevent indexing by robots using this block on all pages that are secured by an URL hash
+- use `autocomplete="new-password"` attribute for password changing inputs to prevent filling it by browser ([#1121](https://github.com/shopsys/shopsys/pull/1121))
+    - in `shopsys/project-base` repository this change was needed in 3 form classes (`NewPasswordFormType`, `UserFormType` and `RegistrationFormType`):
+        ```diff
+          'type' => PasswordType::class,
+          'options' => [
+        -     'attr' => ['autocomplete' => 'off'],
+        +     'attr' => ['autocomplete' => 'new-password'],
+          ],
+        ```
 
 ### Configuration
 - update `phpstan.neon` with following change to skip phpstan error ([#1086](https://github.com/shopsys/shopsys/pull/1086))
@@ -112,6 +129,14 @@ There you can find links to upgrade notes for other versions too.
         +    Shopsys\ShopBundle\Twig\:
         +        resource: '../../Twig/'
         ```
+- if you have `Shopsys\FrameworkBundle\Model\Product\Search\Export\ProductSearchExporter` re-registered in your `services.yml`, add proper setter calls ([#1122](https://github.com/shopsys/shopsys/pull/1122))
+    ```diff
+        Shopsys\FrameworkBundle\Model\Product\Search\Export\ProductSearchExporter
+    +       calls:
+    +           - method: setProgressBarFactory
+    +           - method: setSqlLoggerFacade
+    +           - method: setEntityManager
+    ```
 
 ### Tools
 - use the `build.xml` [Phing configuration](/docs/introduction/console-commands-for-application-management-phing-targets.md) from the `shopsys/framework` package ([#1068](https://github.com/shopsys/shopsys/pull/1068))

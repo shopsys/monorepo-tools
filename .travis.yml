@@ -31,7 +31,7 @@ before_install:
 -   mkdir -p $CACHE_DIR
 -   cp -f ./docker/conf/docker-compose.yml.dist ./docker-compose.yml
 -   yq write --inplace docker-compose.yml services.php-fpm.build.args.www_data_uid $TRAVIS_USER_ID
--   yq write --inplace docker-compose.yml services.php-fpm.build.args.www_data_uid $TRAVIS_GROUP_ID
+-   yq write --inplace docker-compose.yml services.php-fpm.build.args.www_data_gid $TRAVIS_GROUP_ID
 
 install:
 -   docker load < $CACHE_FILE_IMAGE || true

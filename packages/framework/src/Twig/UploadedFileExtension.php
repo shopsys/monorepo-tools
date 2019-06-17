@@ -13,17 +13,17 @@ class UploadedFileExtension extends Twig_Extension
     /**
      * @var \Shopsys\FrameworkBundle\Component\Domain\Domain
      */
-    private $domain;
+    protected $domain;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\UploadedFile\UploadedFileFacade
      */
-    private $uploadedFileFacade;
+    protected $uploadedFileFacade;
 
     /**
      * @var \Shopsys\FrameworkBundle\Twig\FileThumbnail\FileThumbnailExtension
      */
-    private $fileThumbnailExtension;
+    protected $fileThumbnailExtension;
 
     /**
      * @param \Shopsys\FrameworkBundle\Component\Domain\Domain $domain

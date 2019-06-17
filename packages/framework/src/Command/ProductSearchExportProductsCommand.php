@@ -26,13 +26,13 @@ class ProductSearchExportProductsCommand extends Command
     public function __construct(ProductSearchExportFacade $productSearchExportFacade)
     {
         parent::__construct();
+
         $this->productSearchExportFacade = $productSearchExportFacade;
     }
 
     protected function configure()
     {
-        $this
-            ->setDescription('Exports all products to Elasticsearch for searching ');
+        $this->setDescription('Exports all products to Elasticsearch for searching ');
     }
 
     /**
@@ -43,7 +43,9 @@ class ProductSearchExportProductsCommand extends Command
     {
         $symfonyStyleIo = new SymfonyStyle($input, $output);
         $output->writeln('Exporting products to Elasticsearch');
-        $this->productSearchExportFacade->exportAll();
+
+        $this->productSearchExportFacade->exportAllWithOutput($symfonyStyleIo);
+
         $symfonyStyleIo->success('All products successfully exported');
     }
 }

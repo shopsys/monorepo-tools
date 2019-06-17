@@ -82,7 +82,7 @@ class TranslationExtension extends \Twig_Extension
      * @param array $elements
      * @return array
      */
-    private function getEscapedElements(Twig_Environment $twig, array $elements)
+    protected function getEscapedElements(Twig_Environment $twig, array $elements)
     {
         $defaultEscapeFilterCallable = $twig->getFilter('escape')->getCallable();
         $escapedElements = [];

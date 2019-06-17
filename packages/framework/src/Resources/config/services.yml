@@ -981,6 +981,9 @@ services:
             $globalClient: '@snc_redis.global'
             $currentVersion: '%build-version%'
 
+    shopsys.component.elasticsearch.tracer:
+        class: Psr\Log\NullLogger
+
     Elasticsearch\ClientBuilder:
       class: Elasticsearch\ClientBuilder
       factory: [Elasticsearch\ClientBuilder, create]
@@ -988,6 +991,9 @@ services:
         - method: setHosts
           arguments:
             - ['%elasticsearch_host%']
+        - method: setTracer
+          arguments:
+            - '@shopsys.component.elasticsearch.tracer'
 
     Elasticsearch\Client:
       class: Elasticsearch\Client
@@ -998,7 +1004,11 @@ services:
             - '%shopsys.elasticsearch.structure_dir%'
             - '%env(ELASTIC_SEARCH_INDEX_PREFIX)%'
 
-    Shopsys\FrameworkBundle\Model\Product\Search\Export\ProductSearchExporter: ~
+    Shopsys\FrameworkBundle\Model\Product\Search\Export\ProductSearchExporter:
+        calls:
+            - method: setProgressBarFactory
+            - method: setSqlLoggerFacade
+            - method: setEntityManager
 
     Shopsys\FrameworkBundle\Model\Product\Search\ProductElasticsearchConverter: ~
 

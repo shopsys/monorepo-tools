@@ -16,17 +16,17 @@ class FileThumbnailExtension extends Twig_Extension
     /**
      * @var string[]
      */
-    private $iconsByExtension;
+    protected $iconsByExtension;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\FileUpload\FileUpload
      */
-    private $fileUpload;
+    protected $fileUpload;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\Image\Processing\ImageThumbnailFactory
      */
-    private $imageThumbnailFactory;
+    protected $imageThumbnailFactory;
 
     /**
      * @param \Shopsys\FrameworkBundle\Component\FileUpload\FileUpload $fileUpload
@@ -98,7 +98,7 @@ class FileThumbnailExtension extends Twig_Extension
      * @param string $filepath
      * @return \Shopsys\FrameworkBundle\Twig\FileThumbnail\FileThumbnailInfo
      */
-    private function getImageThumbnailInfo($filepath)
+    protected function getImageThumbnailInfo($filepath)
     {
         $image = $this->imageThumbnailFactory->getImageThumbnail($filepath);
 
@@ -109,7 +109,7 @@ class FileThumbnailExtension extends Twig_Extension
      * @param string $filepath
      * @return string
      */
-    private function getIconTypeByFilename($filepath)
+    protected function getIconTypeByFilename($filepath)
     {
         $extension = strtolower(pathinfo($filepath, PATHINFO_EXTENSION));
         if (array_key_exists($extension, $this->iconsByExtension)) {

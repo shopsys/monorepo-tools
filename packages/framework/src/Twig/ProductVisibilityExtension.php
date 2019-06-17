@@ -13,17 +13,17 @@ class ProductVisibilityExtension extends \Twig_Extension
     /**
      * @var \Shopsys\FrameworkBundle\Model\Product\ProductVisibilityRepository
      */
-    private $productVisibilityRepository;
+    protected $productVisibilityRepository;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroupSettingFacade
      */
-    private $pricingGroupSettingFacade;
+    protected $pricingGroupSettingFacade;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\Domain\Domain
      */
-    private $domain;
+    protected $domain;
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\Product\ProductVisibilityRepository $productVisibilityRepository

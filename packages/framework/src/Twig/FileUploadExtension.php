@@ -11,7 +11,7 @@ class FileUploadExtension extends Twig_Extension
     /**
      * @var \Shopsys\FrameworkBundle\Component\FileUpload\FileUpload
      */
-    private $fileUpload;
+    protected $fileUpload;
 
     /**
      * @param \Shopsys\FrameworkBundle\Component\FileUpload\FileUpload $fileUpload
