@@ -1,6 +1,6 @@
 # Installation Using Docker for Linux
 
-**This guide is for the version which is not released yet. See the [version for `v7.0.0`](https://github.com/shopsys/shopsys/blob/v7.0.0/docs/installation/installation-using-docker-linux.md).**
+**This guide is for version `v7.0.1`. Switch to another tag to see other versions.**
 
 This guide covers building new projects based on Shopsys Framework.
 If you want to contribute to the framework itself,
