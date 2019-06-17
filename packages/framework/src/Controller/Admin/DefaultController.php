@@ -4,6 +4,8 @@ namespace Shopsys\FrameworkBundle\Controller\Admin;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Shopsys\FrameworkBundle\Component\Setting\Setting;
+use Shopsys\FrameworkBundle\Form\Admin\QuickSearch\QuickSearchFormData;
+use Shopsys\FrameworkBundle\Form\Admin\QuickSearch\QuickSearchFormType;
 use Shopsys\FrameworkBundle\Model\Mail\MailTemplateFacade;
 use Shopsys\FrameworkBundle\Model\Product\Availability\AvailabilityFacade;
 use Shopsys\FrameworkBundle\Model\Product\Unit\UnitFacade;
@@ -68,6 +70,7 @@ class DefaultController extends AdminBaseController
 
     /**
      * @Route("/dashboard/")
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function dashboardAction()
     {
@@ -78,6 +81,11 @@ class DefaultController extends AdminBaseController
         $newOrdersInLastTwoWeeksDates = $this->statisticsProcessingFacade->getDateTimesFormattedToLocaleFormat($newOrdersCountByDayInLastTwoWeeks);
         $newOrdersInLastTwoWeeksCounts = $this->statisticsProcessingFacade->getCounts($newOrdersCountByDayInLastTwoWeeks);
 
+        $quickProductSearchData = new QuickSearchFormData();
+        $quickProductSearchForm = $this->createForm(QuickSearchFormType::class, $quickProductSearchData, [
+            'action' => $this->generateUrl('admin_product_list'),
+        ]);
+
         $this->addWarningMessagesOnDashboard();
 
         return $this->render(
@@ -87,6 +95,7 @@ class DefaultController extends AdminBaseController
                 'registeredInLastTwoWeeksValues' => $registeredInLastTwoWeeksCounts,
                 'newOrdersInLastTwoWeeksLabels' => $newOrdersInLastTwoWeeksDates,
                 'newOrdersInLastTwoWeeksValues' => $newOrdersInLastTwoWeeksCounts,
+                'quickProductSearchForm' => $quickProductSearchForm->createView(),
             ]
         );
     }

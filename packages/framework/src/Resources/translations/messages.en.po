@@ -1720,6 +1720,9 @@ msgstr ""
 msgid "Published data"
 msgstr ""
 
+msgid "Quick product search"
+msgstr ""
+
 msgid "Quick search"
 msgstr ""
 
@@ -1797,6 +1800,9 @@ msgstr "Search"
 
 msgid "Search [verb]"
 msgstr "Search"
+
+msgid "Search by name, catalogue number, or product part number..."
+msgstr ""
 
 msgid "Searching in all currencies"
 msgstr ""

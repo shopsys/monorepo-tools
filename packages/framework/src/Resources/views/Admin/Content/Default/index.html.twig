@@ -4,20 +4,33 @@
 {% block h1 %}{{ 'Dashboard'|trans }}{% endblock %}
 
 {% block main_content %}
-	<div class="width-50-percent float-left">
-		<canvas
-			class="js-line-chart"
-			data-chart-labels="{{ newOrdersInLastTwoWeeksLabels|json_encode }}"
-			data-chart-values="{{ newOrdersInLastTwoWeeksValues|json_encode }}"
-			data-chart-title="{{ 'New orders'|trans }}"
-		></canvas>
-	</div>
-	<div class="width-50-percent float-left">
-		<canvas
-			class="js-line-chart"
-			data-chart-labels="{{ registeredInLastTwoWeeksLabels|json_encode }}"
-			data-chart-values="{{ registeredInLastTwoWeeksValues|json_encode }}"
-			data-chart-title="{{ 'New registered customers'|trans }}"
-		></canvas>
-	</div>
+    <div class="margin-bottom-20">
+        <div class="width-50-percent float-left">
+            <h2>{{ 'Quick product search'|trans }}</h2>
+        </div>
+        <div class="width-50-percent float-left text-right padding-top-10">
+            <a href="{{ url('admin_product_list', { as: [{ subject: 'productName' }] }) }}">
+                {{ 'Advanced search'|trans }}
+            </a>
+        </div>
+        <div class="in-tab__content clear">
+            {% include '@ShopsysFramework/Admin/Content/Product/quickSearchFormContent.html.twig' with {quickSearchForm: quickProductSearchForm} %}
+        </div>
+    </div>
+    <div class="width-50-percent float-left">
+        <canvas
+            class="js-line-chart"
+            data-chart-labels="{{ newOrdersInLastTwoWeeksLabels|json_encode }}"
+            data-chart-values="{{ newOrdersInLastTwoWeeksValues|json_encode }}"
+            data-chart-title="{{ 'New orders'|trans }}"
+        ></canvas>
+    </div>
+    <div class="width-50-percent float-left">
+        <canvas
+            class="js-line-chart"
+            data-chart-labels="{{ registeredInLastTwoWeeksLabels|json_encode }}"
+            data-chart-values="{{ registeredInLastTwoWeeksValues|json_encode }}"
+            data-chart-title="{{ 'New registered customers'|trans }}"
+        ></canvas>
+    </div>
 {% endblock %}

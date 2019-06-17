@@ -1720,6 +1720,9 @@ msgstr "Slevové kupóny"
 msgid "Published data"
 msgstr "Zveřejněné údaje"
 
+msgid "Quick product search"
+msgstr "Rychlé vyhledávání v produktech"
+
 msgid "Quick search"
 msgstr "Rychlé vyhledávání"
 
@@ -1797,6 +1800,9 @@ msgstr "Hledání"
 
 msgid "Search [verb]"
 msgstr "Vyhledat"
+
+msgid "Search by name, catalogue number, or product part number..."
+msgstr "Vyhledat dle názvu, katalogového čísla nebo partno produktu..."
 
 msgid "Searching in all currencies"
 msgstr "Vyhledává se ve všech měnách"
