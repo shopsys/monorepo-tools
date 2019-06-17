@@ -5,6 +5,7 @@ namespace Shopsys\FrameworkBundle\Model\Product;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Prezent\Doctrine\Translatable\Annotation as Prezent;
+use Ramsey\Uuid\Uuid;
 use Shopsys\FrameworkBundle\Model\Localization\AbstractTranslatableEntity;
 use Shopsys\FrameworkBundle\Model\Pricing\Vat\Vat;
 use Shopsys\FrameworkBundle\Model\Product\Availability\Availability;
@@ -277,6 +278,13 @@ class Product extends AbstractTranslatableEntity
     protected $domains;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(type="guid", unique=true)
+     */
+    protected $uuid;
+
+    /**
      * @param \Shopsys\FrameworkBundle\Model\Product\ProductData $productData
      * @param \Shopsys\FrameworkBundle\Model\Product\ProductCategoryDomainFactoryInterface $productCategoryDomainFactory
      * @param \Shopsys\FrameworkBundle\Model\Product\Product[]|null $variants
@@ -320,6 +328,8 @@ class Product extends AbstractTranslatableEntity
             $this->variantType = self::VARIANT_TYPE_MAIN;
             $this->addVariants($variants, $productCategoryDomainFactory);
         }
+
+        $this->uuid = $productData->uuid ?: Uuid::uuid4()->toString();
     }
 
     /**
@@ -1061,5 +1071,13 @@ class Product extends AbstractTranslatableEntity
                 $originalVariant->unsetMainVariant();
             }
         }
+    }
+
+    /**
+     * @return string
+     */
+    public function getUuid(): string
+    {
+        return $this->uuid;
     }
 }

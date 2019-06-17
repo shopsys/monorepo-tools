@@ -9,6 +9,7 @@
         "project-base/app/",
         "project-base/src/Shopsys/"
       ],
+      "Shopsys\\BackendApiBundle\\": "packages/backend-api/src/",
       "Shopsys\\CodingStandards\\": "packages/coding-standards/src/",
       "Shopsys\\FormTypesBundle\\": "packages/form-types-bundle/src/",
       "Shopsys\\GoogleCloudBundle\\": "packages/google-cloud-bundle/src/",
@@ -37,6 +38,7 @@
   "autoload-dev": {
     "psr-4": {
       "Tests\\": "project-base/tests/",
+      "Tests\\BackendApiBundle\\": "packages/backend-api/tests/",
       "Tests\\CodingStandards\\": "packages/coding-standards/tests/",
       "Tests\\FrameworkBundle\\": "packages/framework/tests/",
       "Tests\\HttpSmokeTesting\\": "packages/http-smoke-testing/tests/",
@@ -76,6 +78,7 @@
     "commerceguys/intl": "0.7.4",
     "composer/composer": "^1.6.0",
     "craue/formflow-bundle": "^3.0.3",
+    "defuse/php-encryption": "^2.2.1",
     "doctrine/annotations": "^1.6.0",
     "doctrine/cache": "^1.7",
     "doctrine/collections": "^1.5",
@@ -90,6 +93,7 @@
     "elasticsearch/elasticsearch": "^6.0.1",
     "friendsofphp/php-cs-fixer": "^2.14.0",
     "friendsofsymfony/ckeditor-bundle": "^2.1",
+    "friendsofsymfony/rest-bundle": "^2.5",
     "fp/jsformvalidator-bundle": "^1.5.1",
     "fzaninotto/faker": "^1.7.1",
     "gedmo/doctrine-extensions": "^2.4.34",
@@ -103,6 +107,7 @@
     "jdorn/sql-formatter": "^1.2",
     "jms/metadata": "^1.6",
     "jms/translation-bundle": "^1.4.1",
+    "jms/serializer-bundle": "^2.4",
     "joschi127/doctrine-entity-override-bundle": "^0.5.0",
     "knplabs/knp-menu-bundle": "^2.2.1",
     "league/flysystem": "^1.0",
@@ -115,6 +120,7 @@
     "prezent/doctrine-translatable": "^1.2",
     "prezent/doctrine-translatable-bundle": "^1.0.3",
     "psr/log": "^1.0",
+    "ramsey/uuid": "^3.8",
     "sensio/distribution-bundle": "^5.0.21",
     "sensio/framework-extra-bundle": "^3.0.29",
     "sensio/generator-bundle": "^3.1.7",
@@ -140,7 +146,8 @@
     "twig/extensions": "^1.5.1",
     "twig/twig": "^2.4.8",
     "vasek-purchart/console-errors-bundle": "^1.0.1",
-    "webmozart/assert": "^1.4"
+    "webmozart/assert": "^1.4",
+    "trikoder/oauth2-bundle": "^1.1"
   },
   "require-dev": {
     "ext-pgsql": "*",
@@ -198,6 +205,7 @@
     ]
   },
   "replace": {
+    "shopsys/backend-api": "self.version",
     "shopsys/form-types-bundle": "self.version",
     "shopsys/google-cloud-bundle": "self.version",
     "shopsys/http-smoke-testing": "self.version",

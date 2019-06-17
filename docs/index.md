@@ -80,6 +80,13 @@
 * [Deploy Your Application to Google Cloud on your CI/CD](/docs/kubernetes/deploy-your-application-to-google-cloud-on-your-ci-cd.md)
 * [How to set SMTP Server Container](/docs/kubernetes/how-to-set-smtp-server-container.md)
 
+## Backend API
+* [Introduction to Backend API](/docs/backend-api/introduction-to-backend-api.md)
+* [API Versioning](/docs/backend-api/api-versioning.md)
+* [Adding an Attribute to Product Export](/docs/cookbook/backend-api/adding-an-attribute-to-product-export.md)
+* [Creating Custom API Endpoint](/docs/cookbook/backend-api/creating-custom-api-endpoint.md)
+* [API Methods](/docs/backend-api/api-methods.md)
+
 ## FAQ
 For the frequently asked questions, see
 * [FAQ and Common Issues](./introduction/faq-and-common-issues.md)

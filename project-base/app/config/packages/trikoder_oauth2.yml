@@ -1,0 +1,33 @@
+trikoder_oauth2:
+    authorization_server:
+        # Full path to the private key file.
+        # How to generate a private key: https://oauth2.thephpleague.com/installation/#generating-public-and-private-keys
+        private_key: '%shopsys.root_dir%/app/config/packages/oauth2/private.key'
+
+        # The string used as an encryption key.
+        # How to generate an encryption key: https://oauth2.thephpleague.com/installation/#string-password
+        encryption_key: '%oauth2_encryption_key%'
+
+        # How long the issued access token should be valid for.
+        # The value should be a valid interval: http://php.net/manual/en/dateinterval.construct.php#refsect1-dateinterval.construct-parameters
+        access_token_ttl: PT1H
+
+        # How long the issued refresh token should be valid for.
+        # The value should be a valid interval: http://php.net/manual/en/dateinterval.construct.php#refsect1-dateinterval.construct-parameters
+        refresh_token_ttl: P1M
+
+    resource_server:
+        # Full path to the public key file
+        # How to generate a public key: https://oauth2.thephpleague.com/installation/#generating-public-and-private-keys
+        public_key: '%shopsys.root_dir%/app/config/packages/oauth2/public.key'
+
+    # Scopes that you wish to utilize in your application.
+    # This should be a simple array of strings.
+    scopes: []
+
+    # Configures different persistence methods that can be used by the bundle for saving client and token data.
+    # Only one persistence method can be configured at a time.
+    persistence:
+        doctrine:
+            # Name of the entity manager that you wish to use for managing clients and tokens.
+            entity_manager: default # Required

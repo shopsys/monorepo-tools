@@ -126,4 +126,44 @@ class PaginationResult
     {
         return $this->toItem;
     }
+
+    /**
+     * @return bool
+     */
+    public function isFirstPage(): bool
+    {
+        return $this->page === 1;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isLastPage(): bool
+    {
+        return $this->page === $this->pageCount;
+    }
+
+    /**
+     * @return int|null
+     */
+    public function getPreviousPage(): ?int
+    {
+        if ($this->isFirstPage()) {
+            return null;
+        }
+
+        return $this->page - 1;
+    }
+
+    /**
+     * @return int|null
+     */
+    public function getNextPage(): ?int
+    {
+        if ($this->isLastPage()) {
+            return null;
+        }
+
+        return $this->page + 1;
+    }
 }
