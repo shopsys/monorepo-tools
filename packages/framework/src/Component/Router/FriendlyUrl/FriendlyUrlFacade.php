@@ -208,4 +208,15 @@ class FriendlyUrlFacade
 
         $this->em->flush($friendlyUrls);
     }
+
+    /**
+     * @param \Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\FriendlyUrl $friendlyUrl
+     * @return string
+     */
+    public function getAbsoluteUrlByFriendlyUrl(FriendlyUrl $friendlyUrl): string
+    {
+        $domainConfig = $this->domain->getDomainConfigById($friendlyUrl->getDomainId());
+
+        return $domainConfig->getUrl() . '/' . $friendlyUrl->getSlug();
+    }
 }

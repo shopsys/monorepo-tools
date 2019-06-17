@@ -7,6 +7,7 @@ use Shopsys\FrameworkBundle\Component\Domain\Domain;
 use Shopsys\FrameworkBundle\Component\Image\Config\ImageConfig;
 use Shopsys\FrameworkBundle\Component\Image\ImageFacade;
 use Shopsys\FrameworkBundle\Component\Image\ImageRepository;
+use Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\FriendlyUrlFacade;
 use Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\FriendlyUrlRepository;
 use Shopsys\FrameworkBundle\Model\Product\Parameter\ParameterRepository;
 use Shopsys\FrameworkBundle\Model\Product\Product;
@@ -50,6 +51,11 @@ class ProductCollectionFacade
     protected $domain;
 
     /**
+     * @var \Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\FriendlyUrlFacade
+     */
+    protected $friendlyUrlFacade;
+
+    /**
      * @param \Shopsys\FrameworkBundle\Model\Product\ProductRepository $productRepository
      * @param \Shopsys\FrameworkBundle\Component\Image\Config\ImageConfig $imageConfig
      * @param \Shopsys\FrameworkBundle\Component\Image\ImageRepository $imageRepository
@@ -57,6 +63,7 @@ class ProductCollectionFacade
      * @param \Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\FriendlyUrlRepository $friendlyUrlRepository
      * @param \Shopsys\FrameworkBundle\Model\Product\Parameter\ParameterRepository $parameterRepository
      * @param \Shopsys\FrameworkBundle\Component\Domain\Domain $domain
+     * @param \Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\FriendlyUrlFacade $friendlyUrlFacade
      */
     public function __construct(
         ProductRepository $productRepository,
@@ -65,7 +72,8 @@ class ProductCollectionFacade
         ImageFacade $imageFacade,
         FriendlyUrlRepository $friendlyUrlRepository,
         ParameterRepository $parameterRepository,
-        Domain $domain
+        Domain $domain,
+        FriendlyUrlFacade $friendlyUrlFacade
     ) {
         $this->imageConfig = $imageConfig;
         $this->imageRepository = $imageRepository;
@@ -74,6 +82,7 @@ class ProductCollectionFacade
         $this->productRepository = $productRepository;
         $this->parameterRepository = $parameterRepository;
         $this->domain = $domain;
+        $this->friendlyUrlFacade = $friendlyUrlFacade;
     }
 
     /**
@@ -137,7 +146,7 @@ class ProductCollectionFacade
 
         $absoluteUrlsByProductId = [];
         foreach ($mainFriendlyUrlsByProductId as $productId => $friendlyUrl) {
-            $absoluteUrlsByProductId[$productId] = $friendlyUrl->getAbsoluteUrl($this->domain);
+            $absoluteUrlsByProductId[$productId] = $this->friendlyUrlFacade->getAbsoluteUrlByFriendlyUrl($friendlyUrl);
         }
 
         return $absoluteUrlsByProductId;
