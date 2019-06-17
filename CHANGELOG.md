@@ -27,6 +27,14 @@ The changelog is generated during the release process using [ChangelogLinker](ht
 
 <!-- changelog-linker -->
 
+## [v7.2.2](https://github.com/shopsys/shopsys/compare/v7.2.1...v7.2.2) - 2019-06-18
+
+### [shopsys/framework]
+
+#### Fixed
+
+- [#1120] escaping values in emails to prevent HTML injection
+
 ## [v7.2.1](https://github.com/shopsys/shopsys/compare/v7.2.0...v7.2.1) - 2019-05-29
 
 ### [shopsys/framework]
