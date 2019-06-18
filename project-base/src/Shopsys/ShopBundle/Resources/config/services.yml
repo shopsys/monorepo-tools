@@ -8,10 +8,6 @@ services:
         autoconfigure: true
         public: false
 
-    _instanceof:
-        Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\CompilerPass\FriendlyUrlDataProviderInterface:
-            tags: ['shopsys.friendly_url_provider']
-
     Shopsys\ShopBundle\Controller\:
         resource: '../../Controller/'
         public: true

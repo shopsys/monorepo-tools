@@ -4,6 +4,7 @@ namespace Shopsys\FrameworkBundle\DependencyInjection;
 
 use Shopsys\FrameworkBundle\Component\Environment\EnvironmentType;
 use Shopsys\FrameworkBundle\Component\Grid\InlineEdit\GridInlineEditInterface;
+use Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\FriendlyUrlDataProviderInterface;
 use Shopsys\FrameworkBundle\Twig\NoVarDumperExtension;
 use Shopsys\FrameworkBundle\Twig\VarDumperExtension;
 use Symfony\Component\Config\FileLocator;
@@ -35,6 +36,9 @@ class ShopsysFrameworkExtension extends Extension
 
         $container->registerForAutoconfiguration(GridInlineEditInterface::class)
             ->addTag('shopsys.grid_inline_edit');
+
+        $container->registerForAutoconfiguration(FriendlyUrlDataProviderInterface::class)
+            ->addTag('shopsys.friendly_url_provider');
     }
 
     /**

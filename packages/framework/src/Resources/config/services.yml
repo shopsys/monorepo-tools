@@ -16,10 +16,6 @@ services:
         autoconfigure: true
         public: false
 
-    _instanceof:
-        Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\CompilerPass\FriendlyUrlDataProviderInterface:
-            tags: ['shopsys.friendly_url_provider']
-
     Shopsys\FrameworkBundle\:
         resource: '../../**/*{Calculation,Facade,Factory,Generator,Handler,InlineEdit,Listener,Loader,Mapper,Parser,Provider,Recalculator,Registry,Repository,Resolver,Service,Scheduler,Subscriber,Transformer}.php'
         exclude: '../../{Command,Controller,DependencyInjection,Form,Migrations,Resources,Twig}'
@@ -527,6 +523,9 @@ services:
         arguments: ['%router.resource%']
         calls:
             - method: setRequestStack
+
+    Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\FriendlyUrlDataProviderRegistry:
+        arguments: [!tagged shopsys.friendly_url_provider]
 
     Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\FriendlyUrlRouterFactory:
         arguments: ['%shopsys.router.friendly_url_router_filepath%']
