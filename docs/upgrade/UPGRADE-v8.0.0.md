@@ -72,6 +72,7 @@ There you can find links to upgrade notes for other versions too.
 - update the minimal PHP version in your `composer.json` in `require` and `config.platform` section to `7.2` because version `7.1` is no longer supported in Shopsys Framework ([#1066](https://github.com/shopsys/shopsys/pull/1066))
 - if you want to use our experimental API follow these instructions in [the separate article](upgrade-instructions-for-backend-api.md) to introduce backend API into your project ([#1055](https://github.com/shopsys/shopsys/pull/1055))
     - we recommend to read [introduction to backend API](/docs/backend-api/introduction-to-backend-api.md) article as well
+- run [db-create](/docs/introduction/console-commands-for-application-management-phing-targets.md#db-create) (this one even on production) and `test-db-create` phing targets to install extension for UUID
 
 ### Configuration
 - simplify local configuration ([#1004](https://github.com/shopsys/shopsys/pull/1004))

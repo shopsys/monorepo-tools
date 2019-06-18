@@ -33,6 +33,7 @@ Typical upgrade sequence should be:
         - eg. you can use `tests-unit` to run unit tests in the whole monorepo instead of running `tests-unit`, `tests-packages` and `tests-utils`
         - you can even use coding standards subtargets in the whole monorepo, such as `ecs`, `eslint-fix`, etc.
     - read [the new guidelines for phing targets](/docs/contributing/guidelines-for-phing-targets.md) before suggesting changes via pull requests
+- run `db-create` and `test-db-create` phing targets to install extension for UUID ([#1055](https://github.com/shopsys/shopsys/pull/1055))
 
 ## [From v7.2.0 to v7.2.1]
 
