@@ -64,7 +64,7 @@ class ProductAvailabilityCalculation
     {
         // If the product is not managed by EntityManager yet, it's not possible to calculate its availability consistently
         // Let's return a default availability for the moment and mark the product for recalculation
-        if (!$this->em->contains($product)) {
+        if ($this->em->contains($product) === false) {
             $product->markForAvailabilityRecalculation();
 
             return $this->availabilityFacade->getDefaultInStockAvailability();
