@@ -110,5 +110,4 @@ To start using the backend API, follow the instructions (you can also find inspi
     +     $configs[] = __DIR__ . '/config/packages/oauth2/parameters_oauth.yml';
     + }
     ```
-- run [db-create](/docs/introduction/console-commands-for-application-management-phing-targets.md#db-create) (this one even on production) and `test-db-create` phing targets to install extension for UUID
 - read [Introduction to Backend API](/docs/backend-api/introduction-to-backend-api.md) to learn how to start using API in your project
