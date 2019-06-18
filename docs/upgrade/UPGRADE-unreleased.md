@@ -33,33 +33,8 @@ There you can find links to upgrade notes for other versions too.
 ### Application
 - follow instructions in [the separate article](upgrade-instructions-for-read-model-for-product-lists.md) to introduce read model for frontend product lists into your project ([#1018](https://github.com/shopsys/shopsys/pull/1018))
     - we recommend to read [Introduction to Read Model](/docs/model/introduction-to-read-model.md) article
-- fix up your functional tests because of availability calculation patch in the `shopsys/framework` ([#1113](https://github.com/shopsys/shopsys/pull/1113))
-    - when providing a mock of `EntityManager` to `ProductAvailabilityCalculation` in a test, set its `contains` to always return `true`
-        - it's recommended to extract the mocking into a method, for example see changes in `ProductAvailabilityCalculationTest`:
-            ```diff
-            -     $entityManagerMock = $this->createMock(EntityManager::class);
-            +     $entityManagerMock = $this->createEntityManagerMock();
-            ...
-            -     $entityManagerMock = $this->createMock(EntityManager::class);
-            +     $entityManagerMock = $this->createEntityManagerMock();
-            ...
-            -     $entityManagerMock = $this->createMock(EntityManager::class);
-            +     $entityManagerMock = $this->createEntityManagerMock();
-            ...
-            +
-            + /**
-            +  * @return \PHPUnit\Framework\MockObject\MockObject
-            +  */
-            + protected function createEntityManagerMock(): MockObject
-            + {
-            +     $entityManagerMock = $this->createMock(EntityManager::class);
-            +
-            +     $entityManagerMock->method('contains')->willReturn(true);
-            +
-            +     return $entityManagerMock;
-            + }
-            ```
-    - you can copy-paste a new functional test [`ProductVariantCreationTest.php`](https://github.com/shopsys/project-base/blob/master/tests/ShopBundle/Functional/Model/Product/ProductVariantCreationTest.php) into `tests/ShopBundle/Functional/Model/Product/` to avoid regression of issues with creating product variants in the future
+- copy a new functional test to avoid regression of issues with creating product variants in the future ([#1113](https://github.com/shopsys/shopsys/pull/1113))
+    - you can copy-paste the class [`ProductVariantCreationTest.php`](https://github.com/shopsys/project-base/blob/master/tests/ShopBundle/Functional/Model/Product/ProductVariantCreationTest.php) into `tests/ShopBundle/Functional/Model/Product/` in your project
 - prevent indexing `CustomerPassword:setNewPassword` by robots ([#1119](https://github.com/shopsys/shopsys/pull/1119))
     - add a `meta_robots` Twig block to your `@ShopsysShop/Front/Content/Registration/setNewPassword.html.twig` template:
         ```twig
