@@ -99,10 +99,26 @@ class AdministratorFacade
     public function delete($administratorId)
     {
         $administrator = $this->administratorRepository->getById($administratorId);
-        $adminCountExcludingSuperadmin = $this->administratorRepository->getCountExcludingSuperadmin();
-        $administrator->checkForDelete($this->tokenStorage, $adminCountExcludingSuperadmin);
+        $this->checkForDelete($administrator);
         $this->em->remove($administrator);
         $this->em->flush();
+    }
+
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Administrator\Administrator $administrator
+     */
+    protected function checkForDelete(Administrator $administrator)
+    {
+        $adminCountExcludingSuperadmin = $this->administratorRepository->getCountExcludingSuperadmin();
+        if ($adminCountExcludingSuperadmin === 1) {
+            throw new \Shopsys\FrameworkBundle\Model\Administrator\Exception\DeletingLastAdministratorException();
+        }
+        if ($this->tokenStorage->getToken()->getUser() === $administrator) {
+            throw new \Shopsys\FrameworkBundle\Model\Administrator\Exception\DeletingSelfException();
+        }
+        if ($administrator->isSuperadmin()) {
+            throw new \Shopsys\FrameworkBundle\Model\Administrator\Exception\DeletingSuperadminException();
+        }
     }
 
     /**
