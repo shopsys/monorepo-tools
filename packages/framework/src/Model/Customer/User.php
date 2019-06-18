@@ -376,26 +376,6 @@ class User implements UserInterface, TimelimitLoginInterface, Serializable
     }
 
     /**
-     * @param \Shopsys\FrameworkBundle\Model\Customer\DeliveryAddressData $deliveryAddressData
-     * @param \Shopsys\FrameworkBundle\Model\Customer\DeliveryAddressFactoryInterface $deliveryAddressFactory
-     */
-    public function editDeliveryAddress(
-        DeliveryAddressData $deliveryAddressData,
-        DeliveryAddressFactoryInterface $deliveryAddressFactory
-    ) {
-        if (!$deliveryAddressData->addressFilled) {
-            $this->deliveryAddress = null;
-            return;
-        }
-
-        if ($this->deliveryAddress instanceof DeliveryAddress) {
-            $this->deliveryAddress->edit($deliveryAddressData);
-        } else {
-            $this->deliveryAddress = $deliveryAddressFactory->create($deliveryAddressData);
-        }
-    }
-
-    /**
      * @param string $resetPasswordHash
      */
     public function setResetPasswordHash(string $resetPasswordHash): void
@@ -417,5 +397,13 @@ class User implements UserInterface, TimelimitLoginInterface, Serializable
         $now = new DateTime();
 
         return $this->resetPasswordHashValidThrough !== null && $this->resetPasswordHashValidThrough >= $now;
+    }
+
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Customer\DeliveryAddress|null $deliveryAddress
+     */
+    public function setDeliveryAddress(?DeliveryAddress $deliveryAddress): void
+    {
+        $this->deliveryAddress = $deliveryAddress;
     }
 }

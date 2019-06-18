@@ -175,12 +175,28 @@ class CustomerFacade
 
         $user->getBillingAddress()->edit($customerData->billingAddressData);
 
-        $user->editDeliveryAddress(
-            $customerData->deliveryAddressData,
-            $this->deliveryAddressFactory
-        );
+        $this->editDeliveryAddress($user, $customerData->deliveryAddressData);
 
         return $user;
+    }
+
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Customer\User $user
+     * @param \Shopsys\FrameworkBundle\Model\Customer\DeliveryAddressData $deliveryAddressData
+     */
+    protected function editDeliveryAddress(User $user, DeliveryAddressData $deliveryAddressData): void
+    {
+        if (!$deliveryAddressData->addressFilled) {
+            $user->setDeliveryAddress(null);
+            return;
+        }
+
+        $deliveryAddress = $user->getDeliveryAddress();
+        if ($deliveryAddress instanceof DeliveryAddress) {
+            $deliveryAddress->edit($deliveryAddressData);
+        } else {
+            $user->setDeliveryAddress($this->deliveryAddressFactory->create($deliveryAddressData));
+        }
     }
 
     /**
