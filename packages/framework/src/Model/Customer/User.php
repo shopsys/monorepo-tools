@@ -5,7 +5,6 @@ namespace Shopsys\FrameworkBundle\Model\Customer;
 use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 use Serializable;
-use Shopsys\FrameworkBundle\Component\String\HashGenerator;
 use Shopsys\FrameworkBundle\Model\Security\Roles;
 use Shopsys\FrameworkBundle\Model\Security\TimelimitLoginInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -24,9 +23,6 @@ use Symfony\Component\Security\Core\User\UserInterface;
  */
 class User implements UserInterface, TimelimitLoginInterface, Serializable
 {
-    /** @access protected */
-    const RESET_PASSWORD_HASH_LENGTH = 50;
-
     /**
      * @ORM\Column(type="integer")
      * @ORM\Id
@@ -400,12 +396,11 @@ class User implements UserInterface, TimelimitLoginInterface, Serializable
     }
 
     /**
-     * @param \Shopsys\FrameworkBundle\Component\String\HashGenerator $hashGenerator
+     * @param string $resetPasswordHash
      */
-    public function resetPassword(HashGenerator $hashGenerator): void
+    public function setResetPasswordHash(string $resetPasswordHash): void
     {
-        $hash = $hashGenerator->generateHash(static::RESET_PASSWORD_HASH_LENGTH);
-        $this->resetPasswordHash = $hash;
+        $this->resetPasswordHash = $resetPasswordHash;
         $this->resetPasswordHashValidThrough = new DateTime('+48 hours');
     }
 

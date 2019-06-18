@@ -11,6 +11,8 @@ use Symfony\Component\Security\Core\Encoder\EncoderFactoryInterface;
 
 class CustomerPasswordFacade
 {
+    public const RESET_PASSWORD_HASH_LENGTH = 50;
+
     /**
      * @var \Doctrine\ORM\EntityManagerInterface
      */
@@ -65,7 +67,9 @@ class CustomerPasswordFacade
     {
         $user = $this->userRepository->getUserByEmailAndDomain($email, $domainId);
 
-        $user->resetPassword($this->hashGenerator);
+        $resetPasswordHash = $this->hashGenerator->generateHash(static::RESET_PASSWORD_HASH_LENGTH);
+        $user->setResetPasswordHash($resetPasswordHash);
+
         $this->em->flush($user);
         $this->resetPasswordMailFacade->sendMail($user);
     }
