@@ -27,12 +27,9 @@ class Administrator extends BaseAdministrator
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\Administrator\AdministratorData $administratorData
-     * @param \Shopsys\FrameworkBundle\Model\Administrator\Administrator|null $administratorByUserName
      */
-    public function edit(
-        BaseAdministratorData $administratorData,
-        ?BaseAdministrator $administratorByUserName
-    ) {
-        parent::edit($administratorData, $administratorByUserName);
+    public function edit(BaseAdministratorData $administratorData): void
+    {
+        parent::edit($administratorData);
     }
 }

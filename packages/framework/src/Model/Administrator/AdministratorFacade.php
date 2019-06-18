@@ -81,11 +81,8 @@ class AdministratorFacade
     public function edit($administratorId, AdministratorData $administratorData)
     {
         $administrator = $this->administratorRepository->getById($administratorId);
-        $administratorByUserName = $this->administratorRepository->findByUserName($administratorData->username);
-        $administrator->edit(
-            $administratorData,
-            $administratorByUserName
-        );
+        $this->checkUsername($administrator, $administratorData->username);
+        $administrator->edit($administratorData);
         if ($administratorData->password !== null) {
             $this->setPassword($administrator, $administratorData->password);
         }
@@ -93,6 +90,21 @@ class AdministratorFacade
         $this->em->flush();
 
         return $administrator;
+    }
+
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Administrator\Administrator $administrator
+     * @param string $username
+     */
+    protected function checkUsername(Administrator $administrator, string $username): void
+    {
+        $administratorByUserName = $this->administratorRepository->findByUserName($username);
+        if ($administratorByUserName !== null
+            && $administratorByUserName !== $this
+            && $administratorByUserName->getUsername() === $username
+        ) {
+            throw new \Shopsys\FrameworkBundle\Model\Administrator\Exception\DuplicateUserNameException($administrator->getUsername());
+        }
     }
 
     /**

@@ -116,19 +116,9 @@ class Administrator implements UserInterface, Serializable, UniqueLoginInterface
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\Administrator\AdministratorData $administratorData
-     * @param \Shopsys\FrameworkBundle\Model\Administrator\Administrator|null $administratorByUserName
      */
-    public function edit(
-        AdministratorData $administratorData,
-        ?self $administratorByUserName
-    ) {
-        if ($administratorByUserName !== null
-            && $administratorByUserName !== $this
-            && $administratorByUserName->getUsername() === $administratorData->username
-        ) {
-            throw new \Shopsys\FrameworkBundle\Model\Administrator\Exception\DuplicateUserNameException($this->username);
-        }
-
+    public function edit(AdministratorData $administratorData): void
+    {
         $this->email = $administratorData->email;
         $this->realName = $administratorData->realName;
         $this->username = $administratorData->username;
