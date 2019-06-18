@@ -10,7 +10,6 @@ use Shopsys\FrameworkBundle\Component\Grid\Grid;
 use Shopsys\FrameworkBundle\Model\Security\Roles;
 use Shopsys\FrameworkBundle\Model\Security\TimelimitLoginInterface;
 use Shopsys\FrameworkBundle\Model\Security\UniqueLoginInterface;
-use Symfony\Component\Security\Core\Encoder\EncoderFactoryInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
@@ -117,12 +116,10 @@ class Administrator implements UserInterface, Serializable, UniqueLoginInterface
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\Administrator\AdministratorData $administratorData
-     * @param \Symfony\Component\Security\Core\Encoder\EncoderFactoryInterface $encoderFactory
      * @param \Shopsys\FrameworkBundle\Model\Administrator\Administrator|null $administratorByUserName
      */
     public function edit(
         AdministratorData $administratorData,
-        EncoderFactoryInterface $encoderFactory,
         ?self $administratorByUserName
     ) {
         if ($administratorByUserName !== null
@@ -135,10 +132,6 @@ class Administrator implements UserInterface, Serializable, UniqueLoginInterface
         $this->email = $administratorData->email;
         $this->realName = $administratorData->realName;
         $this->username = $administratorData->username;
-
-        if ($administratorData->password !== null) {
-            $this->setPassword($administratorData->password, $encoderFactory);
-        }
     }
 
     /**
@@ -244,13 +237,10 @@ class Administrator implements UserInterface, Serializable, UniqueLoginInterface
     }
 
     /**
-     * @param string $password
-     * @param \Symfony\Component\Security\Core\Encoder\EncoderFactoryInterface $encoderFactory
+     * @param string $passwordHash
      */
-    public function setPassword(string $password, EncoderFactoryInterface $encoderFactory)
+    public function setPasswordHash(string $passwordHash)
     {
-        $encoder = $encoderFactory->getEncoder($this);
-        $passwordHash = $encoder->encodePassword($password, $this->getSalt());
         $this->password = $passwordHash;
     }
 
