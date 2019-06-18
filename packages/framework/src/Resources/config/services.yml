@@ -16,6 +16,10 @@ services:
         autoconfigure: true
         public: false
 
+    _instanceof:
+        Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\CompilerPass\FriendlyUrlDataProviderInterface:
+            tags: ['shopsys.friendly_url_provider']
+
     Shopsys\FrameworkBundle\:
         resource: '../../**/*{Calculation,Facade,Factory,Generator,Handler,InlineEdit,Listener,Loader,Mapper,Parser,Provider,Recalculator,Registry,Repository,Resolver,Service,Scheduler,Subscriber,Transformer}.php'
         exclude: '../../{Command,Controller,DependencyInjection,Form,Migrations,Resources,Twig}'
@@ -669,10 +673,6 @@ services:
     Shopsys\FrameworkBundle\Model\Article\ArticleFactoryInterface:
         alias: Shopsys\FrameworkBundle\Model\Article\ArticleFactory
 
-    Shopsys\FrameworkBundle\Model\Article\ArticleDetailFriendlyUrlDataProvider:
-        tags:
-            - {name: shopsys.friendly_url_provider}
-
     Shopsys\FrameworkBundle\Model\Product\Availability\AvailabilityFactoryInterface:
         alias: Shopsys\FrameworkBundle\Model\Product\Availability\AvailabilityFactory
 
@@ -681,10 +681,6 @@ services:
 
     Shopsys\FrameworkBundle\Model\Product\Brand\BrandFactoryInterface:
         alias: Shopsys\FrameworkBundle\Model\Product\Brand\BrandFactory
-
-    Shopsys\FrameworkBundle\Model\Product\Brand\BrandDetailFriendlyUrlDataProvider:
-        tags:
-            - {name: shopsys.friendly_url_provider}
 
     Shopsys\FrameworkBundle\Model\Cart\Item\CartItemFactoryInterface:
         alias: Shopsys\FrameworkBundle\Model\Cart\Item\CartItemFactory
@@ -759,14 +755,6 @@ services:
 
     Shopsys\FrameworkBundle\Model\Product\ProductFactoryInterface:
         alias: Shopsys\FrameworkBundle\Model\Product\ProductFactory
-
-    Shopsys\FrameworkBundle\Model\Product\ProductDetailFriendlyUrlDataProvider:
-        tags:
-            - {name: shopsys.friendly_url_provider}
-
-    Shopsys\FrameworkBundle\Model\Product\ProductListFriendlyUrlDataProvider:
-        tags:
-            - {name: shopsys.friendly_url_provider}
 
     Shopsys\FrameworkBundle\Model\Product\Accessory\ProductAccessoryFactoryInterface:
         alias: Shopsys\FrameworkBundle\Model\Product\Accessory\ProductAccessoryFactory
