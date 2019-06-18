@@ -5,7 +5,6 @@ namespace Shopsys\FrameworkBundle\Model\Customer;
 use Doctrine\ORM\EntityManagerInterface;
 use Shopsys\FrameworkBundle\Model\Customer\Mail\CustomerMailFacade;
 use Shopsys\FrameworkBundle\Model\Order\Order;
-use Symfony\Component\Security\Core\Encoder\EncoderFactoryInterface;
 
 class CustomerFacade
 {
@@ -23,11 +22,6 @@ class CustomerFacade
      * @var \Shopsys\FrameworkBundle\Model\Customer\CustomerDataFactoryInterface
      */
     protected $customerDataFactory;
-
-    /**
-     * @var \Symfony\Component\Security\Core\Encoder\EncoderFactoryInterface
-     */
-    protected $encoderFactory;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Customer\Mail\CustomerMailFacade
@@ -55,36 +49,41 @@ class CustomerFacade
     protected $userFactory;
 
     /**
+     * @var \Shopsys\FrameworkBundle\Model\Customer\CustomerPasswordFacade
+     */
+    protected $customerPasswordFacade;
+
+    /**
      * @param \Doctrine\ORM\EntityManagerInterface $em
      * @param \Shopsys\FrameworkBundle\Model\Customer\UserRepository $userRepository
      * @param \Shopsys\FrameworkBundle\Model\Customer\CustomerDataFactoryInterface $customerDataFactory
-     * @param \Symfony\Component\Security\Core\Encoder\EncoderFactoryInterface $encoderFactory
      * @param \Shopsys\FrameworkBundle\Model\Customer\Mail\CustomerMailFacade $customerMailFacade
      * @param \Shopsys\FrameworkBundle\Model\Customer\BillingAddressFactoryInterface $billingAddressFactory
      * @param \Shopsys\FrameworkBundle\Model\Customer\DeliveryAddressFactoryInterface $deliveryAddressFactory
      * @param \Shopsys\FrameworkBundle\Model\Customer\BillingAddressDataFactoryInterface $billingAddressDataFactory
      * @param \Shopsys\FrameworkBundle\Model\Customer\UserFactoryInterface $userFactory
+     * @param \Shopsys\FrameworkBundle\Model\Customer\CustomerPasswordFacade $customerPasswordFacade
      */
     public function __construct(
         EntityManagerInterface $em,
         UserRepository $userRepository,
         CustomerDataFactoryInterface $customerDataFactory,
-        EncoderFactoryInterface $encoderFactory,
         CustomerMailFacade $customerMailFacade,
         BillingAddressFactoryInterface $billingAddressFactory,
         DeliveryAddressFactoryInterface $deliveryAddressFactory,
         BillingAddressDataFactoryInterface $billingAddressDataFactory,
-        UserFactoryInterface $userFactory
+        UserFactoryInterface $userFactory,
+        CustomerPasswordFacade $customerPasswordFacade
     ) {
         $this->em = $em;
         $this->userRepository = $userRepository;
         $this->customerDataFactory = $customerDataFactory;
-        $this->encoderFactory = $encoderFactory;
         $this->customerMailFacade = $customerMailFacade;
         $this->billingAddressFactory = $billingAddressFactory;
         $this->deliveryAddressFactory = $deliveryAddressFactory;
         $this->billingAddressDataFactory = $billingAddressDataFactory;
         $this->userFactory = $userFactory;
+        $this->customerPasswordFacade = $customerPasswordFacade;
     }
 
     /**
@@ -168,7 +167,11 @@ class CustomerFacade
     {
         $user = $this->getUserById($userId);
 
-        $user->edit($customerData->userData, $this->encoderFactory);
+        $user->edit($customerData->userData);
+
+        if ($customerData->userData->password !== null) {
+            $this->customerPasswordFacade->changePassword($user, $customerData->userData->password);
+        }
 
         $user->getBillingAddress()->edit($customerData->billingAddressData);
 

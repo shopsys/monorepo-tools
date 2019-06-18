@@ -3,7 +3,6 @@
 namespace Shopsys\FrameworkBundle\Model\Customer;
 
 use Shopsys\FrameworkBundle\Component\EntityExtension\EntityNameResolver;
-use Symfony\Component\Security\Core\Encoder\EncoderFactoryInterface;
 
 class UserFactory implements UserFactoryInterface
 {
@@ -18,13 +17,20 @@ class UserFactory implements UserFactoryInterface
     protected $encoderFactory;
 
     /**
-     * @param \Shopsys\FrameworkBundle\Component\EntityExtension\EntityNameResolver $entityNameResolver
-     * @param \Symfony\Component\Security\Core\Encoder\EncoderFactoryInterface $encoderFactory
+     * @var \Shopsys\FrameworkBundle\Model\Customer\CustomerPasswordFacade
      */
-    public function __construct(EntityNameResolver $entityNameResolver, EncoderFactoryInterface $encoderFactory)
-    {
+    protected $customerPasswordFacade;
+
+    /**
+     * @param \Shopsys\FrameworkBundle\Component\EntityExtension\EntityNameResolver $entityNameResolver
+     * @param \Shopsys\FrameworkBundle\Model\Customer\CustomerPasswordFacade $customerPasswordFacade
+     */
+    public function __construct(
+        EntityNameResolver $entityNameResolver,
+        CustomerPasswordFacade $customerPasswordFacade
+) {
         $this->entityNameResolver = $entityNameResolver;
-        $this->encoderFactory = $encoderFactory;
+        $this->customerPasswordFacade = $customerPasswordFacade;
     }
 
     /**
@@ -42,7 +48,7 @@ class UserFactory implements UserFactoryInterface
 
         $user = new $classData($userData, $billingAddress, $deliveryAddress);
 
-        $user->changePassword($this->encoderFactory, $userData->password);
+        $this->customerPasswordFacade->changePassword($user, $userData->password);
 
         return $user;
     }

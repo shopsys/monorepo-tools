@@ -7,7 +7,6 @@ use Shopsys\FrameworkBundle\Model\Customer\BillingAddress;
 use Shopsys\FrameworkBundle\Model\Customer\DeliveryAddress;
 use Shopsys\FrameworkBundle\Model\Customer\User as BaseUser;
 use Shopsys\FrameworkBundle\Model\Customer\UserData as BaseUserData;
-use Symfony\Component\Security\Core\Encoder\EncoderFactoryInterface;
 
 /**
  * @ORM\Table(
@@ -38,10 +37,9 @@ class User extends BaseUser
 
     /**
      * @param \Shopsys\ShopBundle\Model\Customer\UserData $userData
-     * @param \Symfony\Component\Security\Core\Encoder\EncoderFactoryInterface $encoderFactory
      */
-    public function edit(BaseUserData $userData, EncoderFactoryInterface $encoderFactory)
+    public function edit(BaseUserData $userData)
     {
-        parent::edit($userData, $encoderFactory);
+        parent::edit($userData);
     }
 }
