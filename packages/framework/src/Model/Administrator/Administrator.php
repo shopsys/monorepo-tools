@@ -128,7 +128,7 @@ class Administrator implements UserInterface, Serializable, UniqueLoginInterface
      * @param string $gridId
      * @return \Shopsys\FrameworkBundle\Model\Administrator\AdministratorGridLimit|null
      */
-    protected function getGridLimit(string $gridId): ?AdministratorGridLimit
+    public function getGridLimit(string $gridId): ?AdministratorGridLimit
     {
         foreach ($this->gridLimits as $gridLimit) {
             if ($gridLimit->getGridId() === $gridId) {
@@ -346,30 +346,6 @@ class Administrator implements UserInterface, Serializable, UniqueLoginInterface
 
     /**
      * @param \Shopsys\FrameworkBundle\Component\Grid\Grid $grid
-     * @param \Shopsys\FrameworkBundle\Model\Administrator\AdministratorGridLimitFactoryInterface $administratorGridLimitFactory
-     * @throws \Shopsys\FrameworkBundle\Model\Administrator\Exception\InvalidGridLimitValueException
-     * @throws \Shopsys\FrameworkBundle\Model\Administrator\Exception\RememberGridLimitException
-     */
-    public function rememberGridLimit(Grid $grid, AdministratorGridLimitFactoryInterface $administratorGridLimitFactory)
-    {
-        if (!$grid->isEnabledPaging()) {
-            throw new \Shopsys\FrameworkBundle\Model\Administrator\Exception\RememberGridLimitException($grid->getId());
-        }
-        if ($grid->getLimit() <= 0) {
-            throw new \Shopsys\FrameworkBundle\Model\Administrator\Exception\InvalidGridLimitValueException($grid->getLimit());
-        }
-
-        $gridLimit = $this->getGridLimit($grid->getId());
-        if ($gridLimit === null) {
-            $gridLimit = $administratorGridLimitFactory->create($this, $grid->getId(), $grid->getLimit());
-            $this->gridLimits->add($gridLimit);
-        } else {
-            $gridLimit->setLimit($grid->getLimit());
-        }
-    }
-
-    /**
-     * @param \Shopsys\FrameworkBundle\Component\Grid\Grid $grid
      */
     public function restoreGridLimit(Grid $grid)
     {
@@ -377,5 +353,13 @@ class Administrator implements UserInterface, Serializable, UniqueLoginInterface
         if ($gridLimit !== null) {
             $grid->setDefaultLimit($gridLimit->getLimit());
         }
+    }
+
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Administrator\AdministratorGridLimit $administratorGridLimit
+     */
+    public function addGridLimit(AdministratorGridLimit $administratorGridLimit): void
+    {
+        $this->gridLimits->add($administratorGridLimit);
     }
 }
