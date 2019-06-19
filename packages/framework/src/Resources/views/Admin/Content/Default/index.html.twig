@@ -17,6 +17,50 @@
             {% include '@ShopsysFramework/Admin/Content/Product/quickSearchFormContent.html.twig' with {quickSearchForm: quickProductSearchForm} %}
         </div>
     </div>
+
+    <div class="box-overview">
+        <h2>{{ 'Sales overview'|trans }}</h2>
+
+        <div class="box-overview__wrap">
+            <div class="box-overview__item">
+                <div class="box-overview__item__percent box-overview__item__percent--up">
+                    <i class="svg svg-arrow"></i>
+                    <span class="box-overview__item__percent__value js-counter">34</span>%
+                </div>
+                <div class="box-overview__item__number js-counterUp">
+                    289
+                </div>
+                <div class="box-overview__item__text">
+                    {{ 'orders sold'|trans }}
+                </div>
+            </div>
+            <div class="box-overview__item">
+                <div class="box-overview__item__percent box-overview__item__percent--down">
+                    <i class="svg svg-arrow"></i>
+                    <span class="box-overview__item__percent__value js-counter">5</span>%
+                </div>
+                <div class="box-overview__item__number js-counterUp">
+                    75
+                </div>
+                <div class="box-overview__item__text">
+                    {{ 'new customers'|trans }}
+                </div>
+            </div>
+            <div class="box-overview__item">
+                <div class="box-overview__item__percent box-overview__item__percent--up">
+                    <i class="svg svg-arrow"></i>
+                    <span class="box-overview__item__percent__value js-counter">20</span>%
+                </div>
+                <div class="box-overview__item__number js-counterUp">
+                    2,701,821
+                </div>
+                <div class="box-overview__item__text">
+                    {{ 'turnabout in CZK'|trans }}
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="width-50-percent float-left">
         <canvas
             class="js-line-chart"
