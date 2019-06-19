@@ -1,10 +1,62 @@
 # Entity Extension
 
-This article describes the internals of entity extension system implemented in Shopsys Framework along with a quick guide on how to use it.
-The entity extension is a work in progress.
+This article describes a quick way to extend your entity and the internals of entity extension system implemented in Shopsys Framework.
+
+## How can I extend an entity?
+
+* Create a new entity in your `src/Shopsys/ShopBundle/Model` directory that extends already existing framework entity
+  * there are entities that are already prepared out of the box
+    * `Administrator`
+    * `Article`
+    * `Brand`
+    * `Category`
+    * `Order`
+    * `OrderItem`
+    * `Payment`
+    * `Product`
+    * `Transport`
+    * `User`
+  * keep entity and table annotations
+  * you can add new properties and use annotations to configure ORM
+* Add information about the entity extension into the container configuration
+  * add it to the configuration parameter `shopsys.entity_extension.map` placed in `app/config/parameters_common.yml` file
+  * use the parent entity name as a key and the extended entity name as a value
+  * eg. `Shopsys\FrameworkBundle\Model\Product\Product: Shopsys\ShopBundle\Model\Product\Product`
+* Create a new data object in your `src/Shopsys/ShopBundle/Model` directory that extends already existing framework entity data
+* Create a factory for this entity data that extends existing framework factory or implements the factory interface from the framework
+  * Rewrite Symfony configuration for the interface to alias your factory
+    * eg.
+      ```php
+        Shopsys\FrameworkBundle\Model\Product\ProductDataFactoryInterface:
+          alias: Shopsys\ShopBundle\Model\Product\ProductDataFactory
+      ```
+* Now your extended entity is automatically used instead of the parent entity:
+  * in hydrated Doctrine references
+  * in the EntityManager, Repositories and QueryBuilders
+  * in newly created entities
+* If you are running tests, update also `\Tests\ShopBundle\Functional\EntityExtension\EntityExtensionTest`
+  * add your extended entity into `$entityExtensionMap` in the `setUp()` method
+
+*Tip: to see how it works in practice check out `\Tests\ShopBundle\Functional\EntityExtension\EntityExtensionTest` that tests end-to-end extensibility of `Product`, `Category` and `OrderItem`.*
+
+## Limitations
+
+### OrderItem
+
+`OrderItem` is a bit special entity because it is not created from `OrderItemData`, it is created from different sources like from product itself.
+All creations are done by [`Order`](/packages/framework/src/Model/Order/Order.php) entity only, where you can check that it really make sense to not create the `OrderItem` from a data object.
+
+If you need to extend the `OrderItem` by a new field, for example, an ID from an external system, you'll have to fill this field after the `Order` is created by a new public method on `Order` class.
+And then if you'll need to be able to edit this field from the administration, you'll have to override `edit` method of `Order` entity and solve setting this new field there.
+
+The other way of data - from `OrderItem` to `OrderItemData` is standard.
+So if you extend `OrderItem` in a standard fashion, set a new field in extended `OrderItemDataFactory` then `OrderItemData` object will contain the correct value from the `OrderItem` object.
+
+Creating a new type of `OrderItem` is possible and does not cause problems because the new type is completely in your hands.
 
 You can read about alternative solutions we considered and the reasons behind this approach in [Entity Extension vs. Entity Generation](entity-extension-vs-entity-generation.md).
 
+## Introduction into entity extensibility
 Let's suppose that we are implementing Dream project as a clone of the [project-base repository](https://github.com/shopsys/project-base).
 Dream project is dependent on the glass-box [framework repository](https://github.com/shopsys/framework).
 The framework is, of course, independent of our Dream project.
@@ -95,57 +147,3 @@ Entity data are created by factories only.
 These factories work in the same manner as the entity factories mentioned above.
 If any part of framework creates an entity data, it uses a factory.
 So in the project, we can change the factory to produce extended entity data instead of original and the whole system will create extended entity data.
-
-## How can I extend an entity?
-
-* Create a new entity in your `src/Shopsys/ShopBundle/Model` directory that extends already existing framework entity
-  * there are entities that are already prepared out of the box
-    * `Administrator`
-    * `Article`
-    * `Brand`
-    * `Category`
-    * `Order`
-    * `OrderItem`
-    * `Payment`
-    * `Product`
-    * `Transport`
-    * `User`
-  * keep entity and table annotations
-  * you can add new properties and use annotations to configure ORM
-* Add information about the entity extension into the container configuration
-  * add it to the configuration parameter `shopsys.entity_extension.map`
-  * use the parent entity name as a key and the extended entity name as a value
-  * eg. `Shopsys\FrameworkBunde\Model\Product\Product: DreamProject\Model\Product\Product`
-* Create a new data object in your `src/Shopsys/ShopBundle/Model` directory that extends already existing framework entity data
-* Create a factory for this entity data
-* Implement the factory interface from the framework
-    * eg. `class ProductDataFactory implements ProductDataFactoryInterface`
-  * Rewrite symfony configuration for the interface to alias your factory
-    * eg.
-      ```php
-        Shopsys\FrameworkBundle\Model\Product\ProductDataFactoryInterface:
-          alias: DreamProject\Model\Product\ProductDataFactory
-      ```
-* Now your extended entity is automatically used instead of the parent entity:
-  * in hydrated Doctrine references
-  * in the EntityManager, Repositories and QueryBuilders
-  * in newly created entities
-* If you are running tests, update also `\Tests\ShopBundle\Functional\EntityExtension\EntityExtensionTest`
-  * add your extended entity into `$entityExtensionMap` in the `setUp()` method
-
-*Tip: to see how it works in practice check out `\Tests\ShopBundle\Functional\EntityExtension\EntityExtensionTest` that tests end-to-end extensibility of `Product`, `Category` and `OrderItem`.*
-
-## Limitations
-
-### OrderItem
-
-`OrderItem` is a bit special entity because it is not created from `OrderItemData`, it is created from different sources like from product itself.
-All creations are done by [`Order`](/packages/framework/src/Model/Order/Order.php) entity only, where you can check that it really make sense to not create the `OrderItem` from a data object.
-
-If you need to extend the `OrderItem` by a new field, for example, an ID from an external system, you'll have to fill this field after the `Order` is created by a new public method on `Order` class.
-And then if you'll need to be able to edit this field from the administration, you'll have to override `edit` method of `Order` entity and solve setting this new field there.
-
-The other way of data - from `OrderItem` to `OrderItemData` is standard.
-So if you extend `OrderItem` in a standard fashion, set a new field in extended `OrderItemDataFactory` then `OrderItemData` object will contain the correct value from the `OrderItem` object.
-
-Creating a new type of `OrderItem` is possible and does not cause problems because the new type is completely in your hands.
