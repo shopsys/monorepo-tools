@@ -3,7 +3,7 @@
 namespace Tests\ShopBundle\Functional\Model\Category;
 
 use Shopsys\FrameworkBundle\Model\Category\CategoryDataFactoryInterface;
-use Shopsys\FrameworkBundle\Model\Category\CategoryFactory;
+use Shopsys\FrameworkBundle\Model\Category\CategoryFactoryInterface;
 use Shopsys\ShopBundle\Model\Category\Category;
 use Tests\ShopBundle\Test\TransactionFunctionalTestCase;
 
@@ -34,7 +34,7 @@ class CategoryDomainTest extends TransactionFunctionalTestCase
     {
         parent::setUp();
         $this->categoryDataFactory = $this->getContainer()->get(CategoryDataFactoryInterface::class);
-        $this->categoryFactory = $this->getContainer()->get(CategoryFactory::class);
+        $this->categoryFactory = $this->getContainer()->get(CategoryFactoryInterface::class);
         $this->em = $this->getEntityManager();
     }
 

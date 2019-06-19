@@ -9,7 +9,7 @@ use Shopsys\FrameworkBundle\Model\Cart\CartFacade;
 use Shopsys\FrameworkBundle\Model\Cart\CartFactory;
 use Shopsys\FrameworkBundle\Model\Cart\CartRepository;
 use Shopsys\FrameworkBundle\Model\Cart\Item\CartItem;
-use Shopsys\FrameworkBundle\Model\Cart\Item\CartItemFactory;
+use Shopsys\FrameworkBundle\Model\Cart\Item\CartItemFactoryInterface;
 use Shopsys\FrameworkBundle\Model\Cart\Watcher\CartWatcherFacade;
 use Shopsys\FrameworkBundle\Model\Customer\CurrentCustomer;
 use Shopsys\FrameworkBundle\Model\Customer\CustomerFacade;
@@ -135,7 +135,7 @@ class CartFacadeDeleteOldCartsTest extends TransactionFunctionalTestCase
             $this->getContainer()->get(CurrentCustomer::class),
             $this->getContainer()->get(CurrentPromoCodeFacade::class),
             $this->getContainer()->get(ProductPriceCalculationForUser::class),
-            $this->getContainer()->get(CartItemFactory::class),
+            $this->getContainer()->get(CartItemFactoryInterface::class),
             $this->getContainer()->get(CartRepository::class),
             $this->getContainer()->get(CartWatcherFacade::class)
         );

@@ -27,7 +27,8 @@ services:
 
     Shopsys\FrameworkBundle\Model\Product\Brand\BrandFacade: ~
 
-    Shopsys\FrameworkBundle\Model\Product\Brand\BrandFactory: ~
+    Shopsys\FrameworkBundle\Model\Product\Brand\BrandFactoryInterface:
+        alias: Shopsys\FrameworkBundle\Model\Product\Brand\BrandFactory
 
     Shopsys\FrameworkBundle\Model\Security\CustomerLoginHandler: ~
 
@@ -41,7 +42,8 @@ services:
 
     Shopsys\FrameworkBundle\Model\Category\CategoryFacade: ~
 
-    Shopsys\FrameworkBundle\Model\Category\CategoryFactory: ~
+    Shopsys\FrameworkBundle\Model\Category\CategoryFactoryInterface:
+        alias: Shopsys\FrameworkBundle\Model\Category\CategoryFactory
 
     Shopsys\FrameworkBundle\Model\Cart\Item\CartItemRepository: ~
 
@@ -56,6 +58,9 @@ services:
     Shopsys\FrameworkBundle\Model\Customer\CurrentCustomer: ~
 
     Shopsys\FrameworkBundle\Model\Order\PromoCode\CurrentPromoCodeFacade: ~
+
+    Shopsys\FrameworkBundle\Model\Customer\CustomerDataFactoryInterface:
+        alias: Shopsys\FrameworkBundle\Model\Customer\CustomerDataFactory
 
     Shopsys\FrameworkBundle\Model\Feed\Delivery\DeliveryFeedItemRepository: ~
 
@@ -120,9 +125,11 @@ services:
 
     Shopsys\FrameworkBundle\Model\Product\Parameter\ParameterRepository: ~
 
-    Shopsys\FrameworkBundle\Model\Payment\PaymentDataFactory: ~
+    Shopsys\FrameworkBundle\Model\Payment\PaymentDataFactoryInterface:
+        alias: Shopsys\FrameworkBundle\Model\Payment\PaymentDataFactory
 
-    Shopsys\FrameworkBundle\Model\Payment\PaymentFactory: ~
+    Shopsys\FrameworkBundle\Model\Payment\PaymentFactoryInterface:
+        alias: Shopsys\FrameworkBundle\Model\Payment\PaymentFactory
 
     Shopsys\FrameworkBundle\Model\Payment\PaymentFacade: ~
 
@@ -140,11 +147,13 @@ services:
 
     Shopsys\FrameworkBundle\Component\System\PostgresqlLocaleMapper: ~
 
-    Shopsys\FrameworkBundle\Model\Product\ProductDataFactory: ~
+    Shopsys\FrameworkBundle\Model\Product\ProductDataFactoryInterface:
+        alias: Shopsys\FrameworkBundle\Model\Product\ProductDataFactory
 
     Shopsys\FrameworkBundle\Model\Product\ProductFacade: ~
 
-    Shopsys\FrameworkBundle\Model\Product\ProductFactory: ~
+    Shopsys\FrameworkBundle\Model\Product\ProductFactoryInterface:
+        alias: Shopsys\FrameworkBundle\Model\Product\ProductFactory
 
     Shopsys\FrameworkBundle\Model\Product\ProductHiddenRecalculator: ~
 
@@ -168,11 +177,13 @@ services:
 
     Shopsys\FrameworkBundle\Model\Localization\TranslatableListener: ~
 
-    Shopsys\FrameworkBundle\Model\Transport\TransportDataFactory: ~
+    Shopsys\FrameworkBundle\Model\Transport\TransportDataFactoryInterface:
+        alias: Shopsys\FrameworkBundle\Model\Transport\TransportDataFactory
 
     Shopsys\FrameworkBundle\Model\Transport\TransportFacade: ~
 
-    Shopsys\FrameworkBundle\Model\Transport\TransportFactory: ~
+    Shopsys\FrameworkBundle\Model\Transport\TransportFactoryInterface:
+        alias: Shopsys\FrameworkBundle\Model\Transport\TransportFactory
 
     Shopsys\FrameworkBundle\Model\Transport\TransportRepository: ~
 
@@ -186,7 +197,8 @@ services:
 
     Shopsys\FrameworkBundle\Model\Product\Pricing\ProductManualInputPriceFacade: ~
 
-    Shopsys\FrameworkBundle\Model\Cart\Item\CartItemFactory: ~
+    Shopsys\FrameworkBundle\Model\Cart\Item\CartItemFactoryInterface:
+        alias: Shopsys\FrameworkBundle\Model\Cart\Item\CartItemFactory
 
     Shopsys\FrameworkBundle\Model\Cart\CartRepository: ~
 

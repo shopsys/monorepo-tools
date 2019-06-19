@@ -7,7 +7,7 @@ use Shopsys\FrameworkBundle\Component\Money\Money;
 use Shopsys\FrameworkBundle\Model\Cart\CartFacade;
 use Shopsys\FrameworkBundle\Model\Cart\CartFactory;
 use Shopsys\FrameworkBundle\Model\Cart\CartRepository;
-use Shopsys\FrameworkBundle\Model\Cart\Item\CartItemFactory;
+use Shopsys\FrameworkBundle\Model\Cart\Item\CartItemFactoryInterface;
 use Shopsys\FrameworkBundle\Model\Cart\Watcher\CartWatcherFacade;
 use Shopsys\FrameworkBundle\Model\Customer\CurrentCustomer;
 use Shopsys\FrameworkBundle\Model\Customer\CustomerIdentifier;
@@ -150,7 +150,7 @@ class CartFacadeTest extends TransactionFunctionalTestCase
         /** @var \Shopsys\FrameworkBundle\Model\Cart\CartFacade $cartFacade */
         $cartFacade = $this->getContainer()->get(CartFacade::class);
         /** @var \Shopsys\FrameworkBundle\Model\Cart\Item\CartItemFactory $cartItemFactory */
-        $cartItemFactory = $this->getContainer()->get(CartItemFactory::class);
+        $cartItemFactory = $this->getContainer()->get(CartItemFactoryInterface::class);
         /** @var \Shopsys\ShopBundle\Model\Product\Product $product */
         $product = $this->getReference(ProductDataFixture::PRODUCT_PREFIX . $productId);
 
@@ -196,7 +196,7 @@ class CartFacadeTest extends TransactionFunctionalTestCase
             $this->getContainer()->get(CurrentCustomer::class),
             $this->getContainer()->get(CurrentPromoCodeFacade::class),
             $this->getContainer()->get(ProductPriceCalculationForUser::class),
-            $this->getContainer()->get(CartItemFactory::class),
+            $this->getContainer()->get(CartItemFactoryInterface::class),
             $this->getContainer()->get(CartRepository::class),
             $this->getContainer()->get(CartWatcherFacade::class)
         );

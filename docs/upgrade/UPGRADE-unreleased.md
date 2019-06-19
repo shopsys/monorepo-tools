@@ -52,6 +52,8 @@ There you can find links to upgrade notes for other versions too.
         +     'attr' => ['autocomplete' => 'new-password'],
           ],
         ```
+- update your tests to use interfaces of factories fetched from dependency injection container
+    -  update tests same way as in PR ([#970](https://github.com/shopsys/shopsys/pull/970/files))
 
 ### Configuration
 - update `phpstan.neon` with following change to skip phpstan error ([#1086](https://github.com/shopsys/shopsys/pull/1086))
