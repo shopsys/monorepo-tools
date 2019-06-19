@@ -166,15 +166,15 @@ class OrderMail implements MessageFactoryInterface
         $paymentInstructions = $payment->getInstructions($orderDomainConfig->getLocale());
 
         return [
-            self::VARIABLE_NUMBER => $order->getNumber(),
+            self::VARIABLE_NUMBER => htmlspecialchars($order->getNumber(), ENT_QUOTES),
             self::VARIABLE_DATE => $this->getFormattedDateTime($order),
             self::VARIABLE_URL => $router->generate('front_homepage', [], UrlGeneratorInterface::ABSOLUTE_URL),
-            self::VARIABLE_TRANSPORT => $order->getTransportName(),
-            self::VARIABLE_PAYMENT => $order->getPaymentName(),
+            self::VARIABLE_TRANSPORT => htmlspecialchars($order->getTransportName(), ENT_QUOTES),
+            self::VARIABLE_PAYMENT => htmlspecialchars($order->getPaymentName(), ENT_QUOTES),
             self::VARIABLE_TOTAL_PRICE => $this->getFormattedPrice($order),
             self::VARIABLE_BILLING_ADDRESS => $this->getBillingAddressHtmlTable($order),
             self::VARIABLE_DELIVERY_ADDRESS => $this->getDeliveryAddressHtmlTable($order),
-            self::VARIABLE_NOTE => $order->getNote(),
+            self::VARIABLE_NOTE => htmlspecialchars($order->getNote(), ENT_QUOTES),
             self::VARIABLE_PRODUCTS => $this->getProductsHtmlTable($order),
             self::VARIABLE_ORDER_DETAIL_URL => $this->orderUrlGenerator->getOrderDetailUrl($order),
             self::VARIABLE_TRANSPORT_INSTRUCTIONS => $transportInstructions,

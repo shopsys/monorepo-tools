@@ -102,7 +102,7 @@ class ResetPasswordMail implements MailTypeInterface, MessageFactoryInterface
     protected function getBodyValuesIndexedByVariableName(User $user)
     {
         return [
-            self::VARIABLE_EMAIL => $user->getEmail(),
+            self::VARIABLE_EMAIL => htmlspecialchars($user->getEmail(), ENT_QUOTES),
             self::VARIABLE_NEW_PASSWORD_URL => $this->getVariableNewPasswordUrl($user),
         ];
     }
