@@ -168,8 +168,17 @@
             "pricing_group_id": {
               "type": "integer"
             },
-            "amount": {
+            "price_with_vat": {
               "type": "float"
+            },
+            "price_without_vat": {
+              "type": "float"
+            },
+            "vat": {
+              "type": "float"
+            },
+            "price_from": {
+              "type": "boolean"
             }
           }
         },
@@ -192,6 +201,29 @@
         },
         "calculated_selling_denied": {
           "type": "boolean"
+        },
+        "selling_denied": {
+          "type": "boolean"
+        },
+        "availability": {
+          "type": "text"
+        },
+        "main_variant": {
+          "type": "boolean"
+        },
+        "detail_url": {
+          "type": "text"
+        },
+        "visibility": {
+          "type": "nested",
+          "properties": {
+            "pricing_group_id": {
+              "type": "integer"
+            },
+            "visible": {
+              "type": "boolean"
+            }
+          }
         }
       }
     }

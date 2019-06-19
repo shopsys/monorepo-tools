@@ -6,7 +6,7 @@ services:
 
     Shopsys\FrameworkBundle\Model\Product\Search\Export\ProductSearchExportCronModule:
         tags:
-            - { name: shopsys.cron, hours: '*', minutes: '0' }
+            - { name: shopsys.cron, hours: '*', minutes: '*' }
 
     Shopsys\FrameworkBundle\Model\Pricing\Vat\VatDeletionCronModule:
         tags:

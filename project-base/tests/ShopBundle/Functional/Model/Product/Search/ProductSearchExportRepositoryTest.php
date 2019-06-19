@@ -59,14 +59,19 @@ class ProductSearchExportRepositoryTest extends TransactionFunctionalTestCase
 
         if ($productSearchExportRepository instanceof ProductSearchExportWithFilterRepository) {
             $structure = \array_merge($structure, [
+                'availability',
                 'brand',
                 'flags',
                 'categories',
+                'detail_url',
                 'in_stock',
                 'prices',
                 'parameters',
                 'ordering_priority',
                 'calculated_selling_denied',
+                'selling_denied',
+                'main_variant',
+                'visibility',
             ]);
         }
 

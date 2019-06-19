@@ -154,6 +154,19 @@ class ProductVisibilityRepository
         return $productVisibility;
     }
 
+    /**
+     * @param int $domainId
+     * @param \Shopsys\FrameworkBundle\Model\Product\Product $product
+     * @return \Shopsys\FrameworkBundle\Model\Product\ProductVisibility[]
+     */
+    public function findProductVisibilitiesByDomainIdAndProduct($domainId, Product $product): array
+    {
+        return $this->getProductVisibilityRepository()->findBy([
+            'product' => $product->getId(),
+            'domainId' => $domainId,
+        ]);
+    }
+
     protected function markAllProductsVisibilityAsRecalculated()
     {
         $this->em->createNativeQuery(

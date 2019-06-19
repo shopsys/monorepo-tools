@@ -75,7 +75,7 @@ class FilterQuery
 
         if ($orderingModeId === ProductListOrderingConfig::ORDER_BY_PRICE_ASC) {
             $clone->sorting = [
-                'prices.amount' => [
+                'prices.price_with_vat' => [
                     'order' => 'asc',
                     'nested' => [
                         'path' => 'prices',
@@ -95,7 +95,7 @@ class FilterQuery
 
         if ($orderingModeId === ProductListOrderingConfig::ORDER_BY_PRICE_DESC) {
             $clone->sorting = [
-                'prices.amount' => [
+                'prices.price_with_vat' => [
                     'order' => 'desc',
                     'nested' => [
                         'path' => 'prices',
@@ -203,7 +203,7 @@ class FilterQuery
                             ],
                             [
                                 'range' => [
-                                    'prices.amount' => $prices,
+                                    'prices.price_with_vat' => $prices,
                                 ],
                             ],
                         ],
@@ -292,6 +292,42 @@ class FilterQuery
         $clone->filters[] = [
             'term' => [
                 'calculated_selling_denied' => false,
+            ],
+        ];
+
+        return $clone;
+    }
+
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroup $pricingGroup
+     * @return \Shopsys\FrameworkBundle\Model\Product\Search\FilterQuery
+     */
+    public function filterOnlyVisible(PricingGroup $pricingGroup): self
+    {
+        $clone = clone $this;
+
+        $clone->filters[] = [
+            'nested' => [
+                'path' => 'visibility',
+                'query' => [
+                    'bool' => [
+                        'must' => [
+                            'match_all' => new \stdClass(),
+                        ],
+                        'filter' => [
+                            [
+                                'term' => [
+                                    'visibility.pricing_group_id' => $pricingGroup->getId(),
+                                ],
+                            ],
+                            [
+                                'term' => [
+                                    'visibility.visible' => true,
+                                ],
+                            ],
+                        ],
+                    ],
+                ],
             ],
         ];
 

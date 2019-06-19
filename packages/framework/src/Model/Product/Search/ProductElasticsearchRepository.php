@@ -155,6 +155,17 @@ class ProductElasticsearchRepository
     }
 
     /**
+     * @param \Shopsys\FrameworkBundle\Model\Product\Search\FilterQuery $filterQuery
+     * @return \Shopsys\FrameworkBundle\Model\Product\Search\ProductsResult
+     */
+    public function getSortedProductsResultByFilterQuery(FilterQuery $filterQuery): ProductsResult
+    {
+        $result = $this->client->search($filterQuery->getQuery());
+
+        return new ProductsResult($this->extractTotalCount($result), $this->extractHits($result));
+    }
+
+    /**
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-body.html
      * @param string $indexName
      * @param string $searchText
@@ -177,6 +188,20 @@ class ProductElasticsearchRepository
     {
         $hits = $result['hits']['hits'];
         return array_column($hits, '_id');
+    }
+
+    /**
+     * @param array $result
+     * @return array
+     */
+    protected function extractHits(array $result): array
+    {
+        return array_map(static function ($value) {
+            $data = $value['_source'];
+            $data['id'] = (int)$value['_id'];
+
+            return $data;
+        }, $result['hits']['hits']);
     }
 
     /**

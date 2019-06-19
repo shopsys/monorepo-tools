@@ -59,4 +59,13 @@ class ProductActionViewFacade
 
         return $productActionViews;
     }
+
+    /**
+     * @param array $productArray
+     * @return \Shopsys\ReadModelBundle\Product\Action\ProductActionView
+     */
+    public function getForArray(array $productArray): ProductActionView
+    {
+        return $this->productActionViewFactory->createFromArray($productArray);
+    }
 }

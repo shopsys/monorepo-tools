@@ -140,13 +140,11 @@ class ProductOnCurrentDomainElasticFacade implements ProductOnCurrentDomainFacad
      */
     public function getPaginatedProductsInCategory(ProductFilterData $productFilterData, $orderingModeId, $page, $limit, $categoryId): PaginationResult
     {
-        $filterQuery = $this->createProductsInCategoryFilterQuery($productFilterData, $orderingModeId, $page, $limit, $categoryId);
+        $filterQuery = $this->createListableProductsInCategoryFilterQuery($productFilterData, $orderingModeId, $page, $limit, $categoryId);
 
-        $productIds = $this->productElasticsearchRepository->getSortedProductIdsByFilterQuery($filterQuery);
+        $productsResult = $this->productElasticsearchRepository->getSortedProductsResultByFilterQuery($filterQuery);
 
-        $listableProductsByIds = $this->productRepository->getListableByIds($this->domain->getId(), $this->currentCustomer->getPricingGroup(), $productIds->getIds());
-
-        return new PaginationResult($page, $limit, $productIds->getTotal(), $listableProductsByIds);
+        return new PaginationResult($page, $limit, $productsResult->getTotal(), $productsResult->getHits());
     }
 
     /**
@@ -157,7 +155,7 @@ class ProductOnCurrentDomainElasticFacade implements ProductOnCurrentDomainFacad
      * @param int $categoryId
      * @return \Shopsys\FrameworkBundle\Model\Product\Search\FilterQuery
      */
-    protected function createProductsInCategoryFilterQuery(ProductFilterData $productFilterData, $orderingModeId, $page, $limit, $categoryId): FilterQuery
+    protected function createListableProductsInCategoryFilterQuery(ProductFilterData $productFilterData, $orderingModeId, $page, $limit, $categoryId): FilterQuery
     {
         return $this->createFilterQueryWithProductFilterData($productFilterData, $orderingModeId, $page, $limit)
             ->filterByCategory([$categoryId]);
@@ -170,13 +168,11 @@ class ProductOnCurrentDomainElasticFacade implements ProductOnCurrentDomainFacad
     {
         $emptyProductFilterData = new ProductFilterData();
 
-        $filterQuery = $this->createProductsForBrandFilterQuery($emptyProductFilterData, $orderingModeId, $page, $limit, $brandId);
+        $filterQuery = $this->createListableProductsForBrandFilterQuery($emptyProductFilterData, $orderingModeId, $page, $limit, $brandId);
 
-        $productIds = $this->productElasticsearchRepository->getSortedProductIdsByFilterQuery($filterQuery);
+        $productsResult = $this->productElasticsearchRepository->getSortedProductsResultByFilterQuery($filterQuery);
 
-        $listableProductsByIds = $this->productRepository->getListableByIds($this->domain->getId(), $this->currentCustomer->getPricingGroup(), $productIds->getIds());
-
-        return new PaginationResult($page, $limit, $productIds->getTotal(), $listableProductsByIds);
+        return new PaginationResult($page, $limit, $productsResult->getTotal(), $productsResult->getHits());
     }
 
     /**
@@ -187,7 +183,7 @@ class ProductOnCurrentDomainElasticFacade implements ProductOnCurrentDomainFacad
      * @param int $brandId
      * @return \Shopsys\FrameworkBundle\Model\Product\Search\FilterQuery
      */
-    protected function createProductsForBrandFilterQuery(ProductFilterData $productFilterData, $orderingModeId, $page, $limit, $brandId): FilterQuery
+    protected function createListableProductsForBrandFilterQuery(ProductFilterData $productFilterData, $orderingModeId, $page, $limit, $brandId): FilterQuery
     {
         return $this->createFilterQueryWithProductFilterData($productFilterData, $orderingModeId, $page, $limit)
             ->filterByBrands([$brandId]);
@@ -198,13 +194,11 @@ class ProductOnCurrentDomainElasticFacade implements ProductOnCurrentDomainFacad
      */
     public function getPaginatedProductsForSearch($searchText, ProductFilterData $productFilterData, $orderingModeId, $page, $limit): PaginationResult
     {
-        $filterQuery = $this->createProductsForSearchTextFilterQuery($productFilterData, $orderingModeId, $page, $limit, $searchText);
+        $filterQuery = $this->createListableProductsForSearchTextFilterQuery($productFilterData, $orderingModeId, $page, $limit, $searchText);
 
-        $productIds = $this->productElasticsearchRepository->getSortedProductIdsByFilterQuery($filterQuery);
+        $productsResult = $this->productElasticsearchRepository->getSortedProductsResultByFilterQuery($filterQuery);
 
-        $listableProductsByIds = $this->productRepository->getListableByIds($this->domain->getId(), $this->currentCustomer->getPricingGroup(), $productIds->getIds());
-
-        return new PaginationResult($page, $limit, $productIds->getTotal(), $listableProductsByIds);
+        return new PaginationResult($page, $limit, $productsResult->getTotal(), $productsResult->getHits());
     }
 
     /**
@@ -215,7 +209,7 @@ class ProductOnCurrentDomainElasticFacade implements ProductOnCurrentDomainFacad
      * @param string $searchText
      * @return \Shopsys\FrameworkBundle\Model\Product\Search\FilterQuery
      */
-    protected function createProductsForSearchTextFilterQuery(ProductFilterData $productFilterData, $orderingModeId, $page, $limit, $searchText): FilterQuery
+    protected function createListableProductsForSearchTextFilterQuery(ProductFilterData $productFilterData, $orderingModeId, $page, $limit, $searchText): FilterQuery
     {
         $searchText = $searchText ?? '';
 
@@ -234,6 +228,7 @@ class ProductOnCurrentDomainElasticFacade implements ProductOnCurrentDomainFacad
     {
         $filterQuery = $this->filterQueryFactory->create($this->getIndexName())
             ->filterOnlySellable()
+            ->filterOnlyVisible($this->currentCustomer->getPricingGroup())
             ->setPage($page)
             ->setLimit($limit)
             ->applyOrdering($orderingModeId, $this->currentCustomer->getPricingGroup());
@@ -255,7 +250,13 @@ class ProductOnCurrentDomainElasticFacade implements ProductOnCurrentDomainFacad
         $emptyProductFilterData = new ProductFilterData();
         $page = 1;
 
-        return $this->getPaginatedProductsForSearch($searchText, $emptyProductFilterData, ProductListOrderingConfig::ORDER_BY_RELEVANCE, $page, $limit);
+        $filterQuery = $this->createListableProductsForSearchTextFilterQuery($emptyProductFilterData, ProductListOrderingConfig::ORDER_BY_RELEVANCE, $page, $limit, $searchText);
+
+        $productIds = $this->productElasticsearchRepository->getSortedProductIdsByFilterQuery($filterQuery);
+
+        $listableProductsByIds = $this->productRepository->getListableByIds($this->domain->getId(), $this->currentCustomer->getPricingGroup(), $productIds->getIds());
+
+        return new PaginationResult($page, $limit, $productIds->getTotal(), $listableProductsByIds);
     }
 
     /**

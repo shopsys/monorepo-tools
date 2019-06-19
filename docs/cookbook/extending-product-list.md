@@ -66,15 +66,85 @@ class ListedProductView extends BaseListedProductView
 }
 ```
 
-### 2. Extend `ListedProductViewFactory` so it returns the new required data
+### 2. Add new attribute to Elasticsearch
 
-The class is responsible for creating the view object. We need to ensure that the objects is created with proper brand name. We are able to get the brand name from the product entity, so we just need to overwrite `createFromProduct()` method.  
+In order to add new attribute to Elasticsearch you need to add it to the structure first.
+You can do that by adding it to `mappings` in all `src/Shopsys/ShopBundle/Resources/definition/product/*.json` files like this:
+```diff
+  "mappings": {
+    "_doc": {
+      "properties": {
++       "brand_name": {
++         "type": "text"
++       },
+```
+
+### 3. Export new attribute to Elasticsearch
+
+The class responsible for exporting products to Elasticsearch is `ProductSearchExportWithFilterRepository` so we need to extend it and add the attribute to method `getProductsData`.
+```php
+declare(strict_types=1);
+
+namespace Shopsys\ShopBundle\Model\Product\Search\Export;
+
+use Shopsys\FrameworkBundle\Model\Product\Product as BaseProduct;
+use Shopsys\FrameworkBundle\Model\Product\Search\Export\ProductSearchExportWithFilterRepository as BaseProductSearchExportWithFilterRepository;
+
+class ProductSearchExportWithFilterRepository extends BaseProductSearchExportWithFilterRepository
+{
+   /**
+    * @param \Shopsys\ShopBundle\Model\Product\Product $product
+    * @param int $domainId
+    * @param string $locale
+    * @return array
+    */
+    protected function extractResult(BaseProduct $product, int $domainId, string $locale): array
+    {
+        $result = parent::extractResult($product, $domainId, $locale);
+
+        $result['brand_name'] = $product->getBrand() ? $product->getBrand()->getName() : '';
+
+        return $result;
+    }
+}
+```
+
+You need to register your new class as an alias for the one from the FrameworkBundle in `services.yml` and `services_test.yml`:
+
+```yml
+Shopsys\FrameworkBundle\Model\Product\Search\Export\ProductSearchExportWithFilterRepository: '@Shopsys\ShopBundle\Model\Product\Search\Export\ProductSearchExportWithFilterRepository'
+```
+
+Then you need to fix `ProductSearchExportRepositoryTest::getExpectedStructureForRepository` (because this test check if your structure is correct) by adding new attribute:
+```diff
+$structure = \array_merge($structure, [
+    'availability',
+    'brand',
+    'flags',
+    'categories',
+    'detail_url',
+    'in_stock',
+    'prices',
+    'parameters',
+    'ordering_priority',
+    'calculated_selling_denied',
+    'selling_denied',
+    'main_variant',
+    'visibility',
++   'brand_name',
+]);
+```
+
+### 4. Extend `ListedProductViewFactory` so it returns the new required data
+
+The class is responsible for creating the view object. We need to ensure that the objects is created with proper brand name. We are able to get the brand name from the product entity, so we just need to overwrite `createFromArray()` and `createFromProduct()` methods.  
 
 ```php
 declare(strict_types=1);
 
 namespace Shopsys\ShopBundle\Model\Product\View;
 
+use Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroup;
 use Shopsys\FrameworkBundle\Model\Product\Product;
 use Shopsys\ReadModelBundle\Image\ImageView;
 use Shopsys\ReadModelBundle\Product\Action\ProductActionView;
@@ -84,10 +154,32 @@ use Shopsys\ReadModelBundle\Product\Listed\ListedProductView as BaseListedProduc
 class ListedProductViewFactory extends BaseListedProductViewFactory
 {
     /**
+     * @param array $productArray
+     * @param \Shopsys\ReadModelBundle\Image\ImageView|null $imageView
+     * @param \Shopsys\ReadModelBundle\Product\Action\ProductActionView $productActionView
+     * @param \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroup $pricingGroup
+     * @return \Shopsys\ShopBundle\Model\Product\ViewListedProductView
+     */
+    public function createFromArray(array $productArray, ?ImageView $imageView, ProductActionView $productActionView, PricingGroup $pricingGroup): BaseListedProductView
+    {
+        return new ListedProductView(
+            $productArray['id'],
+            $productArray['name'],
+            $productArray['shortDescription'],
+            $productArray['availability'],
+            $this->getProductPriceFromArrayByPricingGroup($productArray['prices'], $pricingGroup),
+            $productArray['flags'],
+            $productActionView,
+            $imageView,
+            $productArray['brand_name']
+        );
+    }
+
+    /**
      * @param \Shopsys\ShopBundle\Model\Product\Product $product
      * @param \Shopsys\ReadModelBundle\Image\ImageView|null $imageView
      * @param \Shopsys\ReadModelBundle\Product\Action\ProductActionView $productActionView
-     * @return \Shopsys\ReadModelBundle\Product\Listed\ListedProductView
+     * @return \Shopsys\ShopBundle\Model\Product\View\ListedProductView
      */
     public function createFromProduct(Product $product, ?ImageView $imageView, ProductActionView $productActionView): BaseListedProductView
     {
@@ -100,7 +192,7 @@ class ListedProductViewFactory extends BaseListedProductViewFactory
             $this->getFlagIdsForProduct($product),
             $productActionView,
             $imageView,
-            $product->getBrand() ? $product->getBrand()->getName() : null
+            $product->getBrand() !== null ? $product->getBrand()->getName() : null
         );
     }
 }
@@ -112,7 +204,7 @@ You need to register your new class as an alias for the one from the bundle in `
 Shopsys\ReadModelBundle\Product\Listed\ListedProductViewFactory: '@Shopsys\ShopBundle\Model\Product\View\ListedProductViewFactory'
 ```
 
-### 3. Modify the frontend template for rendering product lists so it displays the new attribute
+### 5. Modify the frontend template for rendering product lists so it displays the new attribute
 
 All product lists are rendered using `productListMacro.html.twig`. You can modify this macro to display product brand name wherever it is suitable for you.
 
