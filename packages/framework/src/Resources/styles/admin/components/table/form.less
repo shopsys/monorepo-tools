@@ -48,20 +48,18 @@
             font-weight: bold;
         }
 
-        &--field {
-
-        }
-
         &--actions {
             width: 45px;
 
             text-align: center;
 
             a {
-                font-size: 20px;
+                font-size: 14px;
                 color: @color-hint;
+
                 &:hover {
-                    color: @color-base;
+                    color: @color-grey;
+                    text-decoration: none;
                 }
             }
         }
@@ -71,6 +69,7 @@
             padding: 0;
 
             text-align: center;
+            color: @color-grey;
         }
 
         &--del-before {
@@ -132,7 +131,11 @@
 
     &__action {
         text-decoration: none;
-        color: @color-action;
-        font-size: 22px;
+        color: @color-grey;
+        font-size: 14px;
+
+        &:hover {
+            text-decoration: none;
+        }
     }
 }

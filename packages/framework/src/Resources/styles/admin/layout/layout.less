@@ -93,6 +93,7 @@ body {
         bottom: 0;
         padding-bottom: @height-fixed-bar;
         width: @width-panel;
+        z-index: 1000;
 
         background-color: @color-f;
 
@@ -160,10 +161,6 @@ body {
             &__in {
                 width: @width-web;
             }
-        }
-
-        &__panel {
-            z-index: 1000;
         }
     }
 }
