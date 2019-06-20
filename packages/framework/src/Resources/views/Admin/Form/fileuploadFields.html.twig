@@ -21,7 +21,9 @@
                                     {% elseif thumbnailUri is not null %}
                                         <img src="{{ thumbnailUri }}" class="js-file-upload-image-thumbnail" />
                                     {% endif %}
-                                    <i class="list-images__item__remove svg svg-circle-cross js-file-upload-delete" title="{{ 'Delete'|trans }}"></i>
+                                    <button class="js-image-upload-delete-button btn-no-style list-images__item__remove" type="button" title="{{ 'Delete'|trans }}">
+                                        <i class="svg svg-delete js-file-upload-delete"></i>
+                                    </button>
 
                                     <div class="js-file-upload-progress list-images__item__pipe">
                                         <div class="js-file-upload-progress-bar list-images__item__pipe__line">
