@@ -13,9 +13,7 @@
                 {{ 'Advanced search'|trans }}
             </a>
         </div>
-        <div class="in-tab__content clear">
-            {% include '@ShopsysFramework/Admin/Content/Product/quickSearchFormContent.html.twig' with {quickSearchForm: quickProductSearchForm} %}
-        </div>
+        {% include '@ShopsysFramework/Admin/Content/Product/quickSearchFormContent.html.twig' with {quickSearchForm: quickProductSearchForm} %}
     </div>
 
     <div class="box-overview">
