@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Shopsys\FrameworkBundle\Controller\Admin;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -11,9 +13,12 @@ use Shopsys\FrameworkBundle\Model\Product\Availability\AvailabilityFacade;
 use Shopsys\FrameworkBundle\Model\Product\Unit\UnitFacade;
 use Shopsys\FrameworkBundle\Model\Statistics\StatisticsFacade;
 use Shopsys\FrameworkBundle\Model\Statistics\StatisticsProcessingFacade;
+use Symfony\Component\HttpFoundation\Response;
 
 class DefaultController extends AdminBaseController
 {
+    protected const PREVIOUS_DAYS_TO_LOAD_STATISTICS_FOR = 7;
+
     /**
      * @var \Shopsys\FrameworkBundle\Model\Statistics\StatisticsFacade
      */
@@ -72,7 +77,7 @@ class DefaultController extends AdminBaseController
      * @Route("/dashboard/")
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function dashboardAction()
+    public function dashboardAction(): Response
     {
         $registeredInLastTwoWeeks = $this->statisticsFacade->getCustomersRegistrationsCountByDayInLastTwoWeeks();
         $registeredInLastTwoWeeksDates = $this->statisticsProcessingFacade->getDateTimesFormattedToLocaleFormat($registeredInLastTwoWeeks);
@@ -86,6 +91,30 @@ class DefaultController extends AdminBaseController
             'action' => $this->generateUrl('admin_product_list'),
         ]);
 
+        $currentCountOfOrders = $this->statisticsFacade->getOrdersCount(static::PREVIOUS_DAYS_TO_LOAD_STATISTICS_FOR);
+        $previousCountOfOrders = $this->statisticsFacade->getOrdersCount(
+            static::PREVIOUS_DAYS_TO_LOAD_STATISTICS_FOR * 2,
+            static::PREVIOUS_DAYS_TO_LOAD_STATISTICS_FOR
+        );
+
+        $ordersTrend = $this->getTrendDifference($previousCountOfOrders, $currentCountOfOrders);
+
+        $currentCountOfNewCustomers = $this->statisticsFacade->getNewCustomersCount(static::PREVIOUS_DAYS_TO_LOAD_STATISTICS_FOR);
+        $previousCountOfNewCustomers = $this->statisticsFacade->getNewCustomersCount(
+            static::PREVIOUS_DAYS_TO_LOAD_STATISTICS_FOR * 2,
+            static::PREVIOUS_DAYS_TO_LOAD_STATISTICS_FOR
+        );
+
+        $newCustomersTrend = $this->getTrendDifference($previousCountOfNewCustomers, $currentCountOfNewCustomers);
+
+        $currentValueOfOrders = $this->statisticsFacade->getOrdersValue(static::PREVIOUS_DAYS_TO_LOAD_STATISTICS_FOR);
+        $previousValueOfOrders = $this->statisticsFacade->getOrdersValue(
+            static::PREVIOUS_DAYS_TO_LOAD_STATISTICS_FOR * 2,
+            static::PREVIOUS_DAYS_TO_LOAD_STATISTICS_FOR
+        );
+
+        $ordersValueTrend = $this->getTrendDifference($previousValueOfOrders, $currentValueOfOrders);
+
         $this->addWarningMessagesOnDashboard();
 
         return $this->render(
@@ -96,6 +125,12 @@ class DefaultController extends AdminBaseController
                 'newOrdersInLastTwoWeeksLabels' => $newOrdersInLastTwoWeeksDates,
                 'newOrdersInLastTwoWeeksValues' => $newOrdersInLastTwoWeeksCounts,
                 'quickProductSearchForm' => $quickProductSearchForm->createView(),
+                'newCustomers' => $currentCountOfNewCustomers,
+                'newCustomersTrend' => $newCustomersTrend,
+                'newOrders' => $currentCountOfOrders,
+                'newOrdersTrend' => $ordersTrend,
+                'ordersValue' => $currentValueOfOrders,
+                'ordersValueTrend' => $ordersValueTrend,
             ]
         );
     }
@@ -146,5 +181,21 @@ class DefaultController extends AdminBaseController
                 ]
             );
         }
+    }
+
+    /**
+     * @param int $previous
+     * @param int $current
+     * @return int
+     */
+    protected function getTrendDifference(int $previous, int $current): int
+    {
+        if ($previous === 0) {
+            $trend = 100;
+        } else {
+            $trend = (int)round(($current / $previous - 1) * 100);
+        }
+
+        return $trend;
     }
 }

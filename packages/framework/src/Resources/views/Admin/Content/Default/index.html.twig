@@ -3,6 +3,17 @@
 {% block title %}- {{ 'Dashboard'|trans }}{% endblock %}
 {% block h1 %}{{ 'Dashboard'|trans }}{% endblock %}
 
+{% macro statisticNumberWithPercent(number, percent) %}
+    <div class="box-overview__item__percent box-overview__item__percent--{% if percent > 0 %}up{% elseif percent < 0 %}down{% else %}same{% endif %}">
+        <i class="svg svg-arrow"></i>
+        <span class="box-overview__item__percent__value" data-counter="counterup" data-value="{{ percent|abs }}">0</span>%
+    </div>
+    
+    <div class="box-overview__item__number" data-counter="counterup" data-value="{{ number }}">
+        0
+    </div>
+{% endmacro %}
+
 {% block main_content %}
     <div class="margin-bottom-20">
         <div class="width-50-percent float-left">
@@ -17,43 +28,25 @@
     </div>
 
     <div class="box-overview">
-        <h2>{{ 'Sales overview'|trans }}</h2>
+        <h2>{{ 'Sales overview (last 7 days)'|trans }}</h2>
 
         <div class="box-overview__wrap">
             <div class="box-overview__item">
-                <div class="box-overview__item__percent box-overview__item__percent--up">
-                    <i class="svg svg-arrow"></i>
-                    <span class="box-overview__item__percent__value" data-counter="counterup" data-value="34">0</span>%
-                </div>
-                <div class="box-overview__item__number" data-counter="counterup" data-value="289">
-                    0
-                </div>
+                {{ _self.statisticNumberWithPercent(newOrders, newOrdersTrend) }}
                 <div class="box-overview__item__text">
                     {{ 'orders sold'|trans }}
                 </div>
             </div>
             <div class="box-overview__item">
-                <div class="box-overview__item__percent box-overview__item__percent--down">
-                    <i class="svg svg-arrow"></i>
-                    <span class="box-overview__item__percent__value" data-counter="counterup" data-value="5">0</span>%
-                </div>
-                <div class="box-overview__item__number" data-counter="counterup" data-value="75">
-                    0
-                </div>
+                {{ _self.statisticNumberWithPercent(newCustomers, newCustomersTrend) }}
                 <div class="box-overview__item__text">
                     {{ 'new customers'|trans }}
                 </div>
             </div>
             <div class="box-overview__item">
-                <div class="box-overview__item__percent box-overview__item__percent--up">
-                    <i class="svg svg-arrow"></i>
-                    <span class="box-overview__item__percent__value" data-counter="counterup" data-value="20">0</span>%
-                </div>
-                <div class="box-overview__item__number" data-counter="counterup" data-value="2,701,821">
-                    0
-                </div>
+                {{ _self.statisticNumberWithPercent(ordersValue|formatNumber, ordersValueTrend) }}
                 <div class="box-overview__item__text">
-                    {{ 'turnover in CZK'|trans }}
+                    {{ 'turnover in'|trans }} {{ currencySymbolDefault() }}
                 </div>
             </div>
         </div>

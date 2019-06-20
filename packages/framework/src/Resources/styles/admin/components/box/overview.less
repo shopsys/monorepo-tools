@@ -5,6 +5,7 @@
 @box-overview-number-font-size: 60px;
 @box-overview-color-up: #1ca448;
 @box-overview-color-down: #ba2929;
+@box-overview-color-same: #fcbe46;
 
 .box-overview {
     margin-bottom: @box-overview-bottom-gap;
@@ -58,6 +59,14 @@
                 .svg {
                     top: 2px;
                     transform: rotate(180deg);
+                }
+            }
+
+            &--same {
+                background-color: @box-overview-color-same;
+
+                .svg {
+                    display: none;
                 }
             }
         }
