@@ -1,0 +1,14 @@
+fos_rest:
+    serializer:
+        serialize_null: true
+    param_fetcher_listener: true
+    view:
+        view_response_listener: false
+    format_listener:
+        rules:
+            - { path: '^/api', prefer_extension: true, fallback_format: 'json', priorities: [ 'json', 'xml' ] }
+            - { path: '^/', stop: true }
+    exception:
+        enabled: true
+    zone:
+        - { path: ^/api/* }

@@ -241,6 +241,23 @@ Great tool when you want to translate your application into another language.
 
 For more information about translations, see [the separate article](/docs/introduction/translations.md).
 
+### For monorepo developers
+
+#### backend-api-install
+
+Install backend API to the project from monorepo point of view.
+
+A tool that should be part of all `build-*` targets because it allows to run all checks with installed backend API.
+
+When the backend API is installed in monorepo, installed files should never be committed and always reverted by `backend-api-uninstall`.
+
+#### backend-api-uninstall
+
+Uninstall backend API from the project.
+
+Reverts changes done by `backend-api-install` because we don't commit the backend API integration.
+If the install script was successful, the uninstall will be successful as well.
+
 ## Customization of Phing targets and properties
 <!--- TODO: Remove or update the note below -->
 *Note: This section describes customization of Phing targets in version of Shopsys Framework that hasn't been released yet.*  

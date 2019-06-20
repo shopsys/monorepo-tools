@@ -12,6 +12,18 @@
     <import file="${path.framework}/build.xml"/>
     <import file="${path.backend-api}/build.xml"/>
 
+    <target name="backend-api-install" description="Install backend API to the project">
+        <exec executable="${path.backend-api}/install/install.sh" checkreturn="true" passthru="true">
+            <arg value="monorepo"/>
+        </exec>
+    </target>
+
+    <target name="backend-api-uninstall" description="Uninstall backend API from the project">
+        <exec executable="${path.backend-api}/install/uninstall.sh" checkreturn="true" passthru="true">
+            <arg value="monorepo"/>
+        </exec>
+    </target>
+
     <target name="clean" description="Cleans up directories with cache and scripts which are generated on demand.">
         <phingcall target="shopsys_framework.clean"/>
         <delete failonerror="false" includeemptydirs="true" quiet="true">

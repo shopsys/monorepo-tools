@@ -1,0 +1,9 @@
+@@ -6,3 +6,8 @@
+     resource: "@ShopsysShopBundle/Controller/Admin"
+     prefix: /admin
+     type: annotation
++
++shopsys_shop_api_v1:
++    resource: "@ShopsysShopBundle/Controller/Api/V1"
++    prefix: /api/v1
++    type: annotation
