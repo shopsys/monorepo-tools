@@ -103,16 +103,12 @@
     {% else %}
         {% if form.vars.display_format == 'multidomain_form_rows_no_padding' %}
             {% if form.vars.label is not null %}
-                <div class="form-line">
+                <div class="form-line form-line--no-bottom-gap">
                     {{- form_label(form) -}}
                     {{- form_errors(form) -}}
-                    <div class="form-line__line">
-            {% endif %}
-                {{- block('multidomain_form_rows_no_padding') -}}
-            {% if form.vars.label is not null %}
-                    </div>
                 </div>
             {% endif %}
+            {{- block('multidomain_form_rows_no_padding') -}}
         {% else %}
             <div class="form-line">
                 {{- form_label(form) -}}
