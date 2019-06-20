@@ -1,0 +1,25 @@
+@wrap-box-padding: 10px;
+@wrap-box-item-gap: 15px;
+
+.wrap-box {
+    display: flex;
+
+    &__half {
+        flex-direction: row;
+        width: 100%/2;
+        padding: @wrap-box-padding;
+
+        border-radius: @radius;
+        background-color: @color-f;
+
+        &--in-row {
+            &:first-child {
+                margin-right: @wrap-box-item-gap;
+            }
+
+            &:last-child {
+                margin-left: @wrap-box-item-gap;
+            }
+        }
+    }
+}

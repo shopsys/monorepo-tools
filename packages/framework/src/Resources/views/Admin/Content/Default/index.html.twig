@@ -60,21 +60,22 @@
             </div>
         </div>
     </div>
-
-    <div class="width-50-percent float-left">
-        <canvas
-            class="js-line-chart"
-            data-chart-labels="{{ newOrdersInLastTwoWeeksLabels|json_encode }}"
-            data-chart-values="{{ newOrdersInLastTwoWeeksValues|json_encode }}"
-            data-chart-title="{{ 'New orders'|trans }}"
-        ></canvas>
-    </div>
-    <div class="width-50-percent float-left">
-        <canvas
-            class="js-line-chart"
-            data-chart-labels="{{ registeredInLastTwoWeeksLabels|json_encode }}"
-            data-chart-values="{{ registeredInLastTwoWeeksValues|json_encode }}"
-            data-chart-title="{{ 'New registered customers'|trans }}"
-        ></canvas>
+    <div class="wrap-box">
+        <div class="wrap-box__half wrap-box__half--in-row">
+            <canvas
+                class="js-line-chart"
+                data-chart-labels="{{ newOrdersInLastTwoWeeksLabels|json_encode }}"
+                data-chart-values="{{ newOrdersInLastTwoWeeksValues|json_encode }}"
+                data-chart-title="{{ 'New orders'|trans }}"
+            ></canvas>
+        </div>
+        <div class="wrap-box__half wrap-box__half--in-row">
+            <canvas
+                class="js-line-chart"
+                data-chart-labels="{{ registeredInLastTwoWeeksLabels|json_encode }}"
+                data-chart-values="{{ registeredInLastTwoWeeksValues|json_encode }}"
+                data-chart-title="{{ 'New registered customers'|trans }}"
+            ></canvas>
+        </div>
     </div>
 {% endblock %}
