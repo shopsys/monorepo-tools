@@ -63,6 +63,8 @@ services:
 
     Shopsys\FrameworkBundle\Model\Order\PromoCode\CurrentPromoCodeFacade: ~
 
+    Shopsys\FrameworkBundle\Model\Customer\CustomerDataFactory: ~ # @deprecated
+
     Shopsys\FrameworkBundle\Model\Customer\CustomerDataFactoryInterface:
         alias: Shopsys\FrameworkBundle\Model\Customer\CustomerDataFactory
 
