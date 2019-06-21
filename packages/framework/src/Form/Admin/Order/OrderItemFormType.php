@@ -2,6 +2,7 @@
 
 namespace Shopsys\FrameworkBundle\Form\Admin\Order;
 
+use Shopsys\FrameworkBundle\Form\Transformers\InverseTransformer;
 use Shopsys\FrameworkBundle\Form\ValidationGroup;
 use Shopsys\FrameworkBundle\Model\Order\Item\OrderItemData;
 use Symfony\Component\Form\AbstractType;
@@ -75,7 +76,11 @@ class OrderItemFormType extends AbstractType
                 ],
                 'error_bubbling' => true,
             ])
-            ->add('usePriceCalculation', CheckboxType::class)
+            ->add(
+                $builder->create('setPricesManually', CheckboxType::class, [
+                    'property_path' => 'usePriceCalculation',
+                ])->addModelTransformer(new InverseTransformer())
+            )
             ->add('vatPercent', NumberType::class, [
                 'constraints' => [
                     new Constraints\NotBlank(['message' => 'Please enter VAT rate']),

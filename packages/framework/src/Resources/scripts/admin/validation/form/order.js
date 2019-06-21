@@ -22,7 +22,7 @@
                 'groups': function () {
 
                     var groups = [Shopsys.constant('\\Shopsys\\FrameworkBundle\\Form\\ValidationGroup::VALIDATION_GROUP_DEFAULT')];
-                    if (!$orderItemForm.find('.js-use-price-calculation').is(':checked')) {
+                    if ($orderItemForm.find('.js-set-prices-manually').is(':checked')) {
                         groups.push(Shopsys.constant('\\Shopsys\\FrameworkBundle\\Form\\Admin\\Order\\OrderItemFormType::VALIDATION_GROUP_NOT_USING_PRICE_CALCULATION'));
                     }
 

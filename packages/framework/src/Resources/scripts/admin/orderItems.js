@@ -132,15 +132,15 @@
             var $orderItem = $(this);
 
             function onPriceCalculationChange ($orderItem) {
-                var usePriceCalculation = $orderItem.find('.js-use-price-calculation').is(':checked');
+                var setPricesManually = $orderItem.find('.js-set-prices-manually').is(':checked');
 
-                $orderItem.find('.js-calculable-price').prop('readonly', usePriceCalculation);
-                $orderItem.find('.js-not-using-price-calculation-warning').css('visibility', usePriceCalculation ? 'hidden' : 'visible');
+                $orderItem.find('.js-calculable-price').prop('readonly', !setPricesManually);
+                $orderItem.find('.js-setting-prices-manually-warning').css('visibility', setPricesManually ? 'visible' : 'hidden');
             }
 
             onPriceCalculationChange($orderItem);
 
-            $orderItem.find('.js-use-price-calculation').change(function () {
+            $orderItem.find('.js-set-prices-manually').change(function () {
                 onPriceCalculationChange($orderItem);
             });
         });

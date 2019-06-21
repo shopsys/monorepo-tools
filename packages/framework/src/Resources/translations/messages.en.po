@@ -166,6 +166,9 @@ msgstr ""
 msgid "All pages"
 msgstr ""
 
+msgid "All prices have to be handled manually if checked, otherwise the unit price without VAT and the total prices for that item will be recalculated automatically."
+msgstr ""
+
 msgid "All search results"
 msgstr ""
 
@@ -1915,6 +1918,9 @@ msgstr ""
 msgid "Set alternative availability"
 msgstr ""
 
+msgid "Set prices manually"
+msgstr ""
+
 msgid "Settings"
 msgstr ""
 
@@ -2180,9 +2186,6 @@ msgid "Url address"
 msgstr ""
 
 msgid "Use"
-msgstr ""
-
-msgid "Use price calculation"
 msgstr ""
 
 msgid "Use stocks"

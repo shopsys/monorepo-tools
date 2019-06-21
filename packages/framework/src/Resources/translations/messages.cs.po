@@ -166,6 +166,9 @@ msgstr "Všechny maily budou doručeny pouze na uvedené adresy."
 msgid "All pages"
 msgstr "Všechny stránky"
 
+msgid "All prices have to be handled manually if checked, otherwise the unit price without VAT and the total prices for that item will be recalculated automatically."
+msgstr "Pokud je zaškrtnuto, všechny ceny je třeba nastavovat ručně, jinak se jednotková cena bez DPH a celkové ceny pro tuto položku přepočítají automaticky."
+
 msgid "All search results"
 msgstr "Všechny výsledky hledání"
 
@@ -1915,6 +1918,9 @@ msgstr "Nastavit"
 msgid "Set alternative availability"
 msgstr "Nastavit alternativní dostupnost"
 
+msgid "Set prices manually"
+msgstr "Manuálně nastavené ceny"
+
 msgid "Settings"
 msgstr "Nastavení"
 
@@ -2181,9 +2187,6 @@ msgstr "Url adresa"
 
 msgid "Use"
 msgstr "Používat"
-
-msgid "Use price calculation"
-msgstr "Přepočítávat ceny"
 
 msgid "Use stocks"
 msgstr "Používat skladové zásoby"

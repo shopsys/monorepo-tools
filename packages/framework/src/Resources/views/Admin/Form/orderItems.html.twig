@@ -16,7 +16,15 @@
                                 <th class="text-right">{{ 'Amount'|trans }}</th>
                                 <th class="text-right">{{ 'Unit'|trans }}</th>
                                 <th class="text-right">{{ 'VAT rate (%)'|trans }}</th>
-                                <th class="text-right">{{ 'Use price calculation'|trans }}</th>
+                                <th class="text-center">
+                                    <span class="display-inline-block" style="width: 80px">
+                                        {{ 'Set prices manually'|trans }}
+                                        <i class="svg svg-info cursor-help js-tooltip"
+                                           data-toggle="tooltip" data-placement="bottom"
+                                           title="{{ 'All prices have to be handled manually if checked, otherwise the unit price without VAT and the total prices for that item will be recalculated automatically.'|trans }}"
+                                        ></i>
+                                    </span>
+                                </th>
                                 <th class="text-right">{{ 'Unit price excluding VAT'|trans }}</th>
                                 <th class="text-right">{{ 'Total including VAT'|trans }}</th>
                                 <th class="text-right">{{ 'Total excluding VAT'|trans }}</th>

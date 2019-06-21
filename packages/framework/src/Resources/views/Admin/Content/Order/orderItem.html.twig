@@ -20,8 +20,8 @@
         <td>{{ form_widget(orderItemForm.quantity, {attr: { class: 'text-right input--half-width'}}) }}</td>
         <td>{{ form_widget(orderItemForm.unitName, {attr: { class: 'text-right input--half-width'}}) }}</td>
         <td>{{ form_widget(orderItemForm.vatPercent, {attr: { class: 'text-right input--half-width'}}) }}</td>
-        {% set uncheckedByDefault = orderItemForm.vars.data is not null ? orderItemForm.usePriceCalculation.vars.data : true %}
-        <td class="text-center">{{ form_widget(orderItemForm.usePriceCalculation, {attr: { class: 'js-use-price-calculation'}, checked: uncheckedByDefault}) }}</td>
+        {% set uncheckedByDefault = orderItemForm.vars.data is not null ? orderItemForm.setPricesManually.vars.data : true %}
+        <td class="text-center">{{ form_widget(orderItemForm.setPricesManually, {attr: { class: 'js-set-prices-manually'}, checked: uncheckedByDefault}) }}</td>
         <td>{{ self.calculablePriceWidget(orderItemForm.priceWithoutVat, currencySymbol) }}</td>
         <td>{{ self.calculablePriceWidget(orderItemForm.totalPriceWithVat, currencySymbol) }}</td>
         <td>{{ self.calculablePriceWidget(orderItemForm.totalPriceWithoutVat, currencySymbol) }}</td>
@@ -45,7 +45,7 @@
         <td class="text-right">1</td>
         <td></td>
         <td>{{ form_widget(orderTransportForm.vatPercent, {attr: { class: 'text-right input--half-width'}}) }}</td>
-        <td class="text-center">{{ form_widget(orderTransportForm.usePriceCalculation, {attr: { class: 'js-use-price-calculation'}}) }}</td>
+        <td class="text-center">{{ form_widget(orderTransportForm.setPricesManually, {attr: { class: 'js-set-prices-manually'}}) }}</td>
         <td>{{ self.calculablePriceWidget(orderTransportForm.priceWithoutVat, currencySymbol) }}</td>
         <td colspan="3"></td>
     </tr>
@@ -65,7 +65,7 @@
         <td class="text-right">1</td>
         <td></td>
         <td>{{ form_widget(orderPaymentForm.vatPercent, {attr: { class: 'text-right input--half-width'}}) }}</td>
-        <td class="text-center">{{ form_widget(orderPaymentForm.usePriceCalculation, {attr: { class: 'js-use-price-calculation'}}) }}</td>
+        <td class="text-center">{{ form_widget(orderPaymentForm.setPricesManually, {attr: { class: 'js-set-prices-manually'}}) }}</td>
         <td>{{ self.calculablePriceWidget(orderPaymentForm.priceWithoutVat, currencySymbol) }}</td>
         <td colspan="3"></td>
     </tr>
@@ -77,7 +77,7 @@
         <span class="display-inline-block text-normal-wrap">
             <i
                     title="{{ 'Using price calculation has been disabled, don\'t forget to edit all prices.'|trans }}"
-                    class="svg svg-warning js-not-using-price-calculation-warning js-tooltip table-action cursor-help"
+                    class="svg svg-warning js-setting-prices-manually-warning js-tooltip table-action cursor-help"
                     data-toggle="tooltip"
                     data-placement="right"
             ></i>

@@ -3,6 +3,7 @@
 namespace Shopsys\FrameworkBundle\Form\Admin\Order;
 
 use Shopsys\FrameworkBundle\Form\Transformers\CopyTotalPricesOfOrderItemTransformer;
+use Shopsys\FrameworkBundle\Form\Transformers\InverseTransformer;
 use Shopsys\FrameworkBundle\Model\Order\Item\OrderItemData;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
@@ -53,7 +54,11 @@ class OrderTransportFormType extends AbstractType
                 ],
                 'error_bubbling' => true,
             ])
-            ->add('usePriceCalculation', CheckboxType::class)
+            ->add(
+                $builder->create('setPricesManually', CheckboxType::class, [
+                    'property_path' => 'usePriceCalculation',
+                ])->addModelTransformer(new InverseTransformer())
+            )
             ->addModelTransformer(new CopyTotalPricesOfOrderItemTransformer());
     }
 
