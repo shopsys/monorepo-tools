@@ -156,6 +156,7 @@
   },
   "conflict": {
     "symfony/dependency-injection": "3.4.15|3.4.16",
+    "symfony/monolog-bundle": ">=3.4.0",
     "symplify/better-phpdoc-parser": "5.4.14|5.4.15",
     "twig/twig": "2.6.1"
   },

@@ -105,6 +105,7 @@
     },
     "conflict": {
         "symfony/dependency-injection": "3.4.15|3.4.16",
+        "symfony/monolog-bundle": ">=3.4.0",
         "twig/twig": "2.6.1"
     }
 }

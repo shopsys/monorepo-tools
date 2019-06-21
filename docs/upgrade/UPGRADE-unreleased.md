@@ -115,6 +115,14 @@ There you can find links to upgrade notes for other versions too.
     +           - method: setSqlLoggerFacade
     +           - method: setEntityManager
     ```
+- set `symfony/monolog-bundle` as conflicting in your `composer.json` and run `composer update` command ([#1148](https://github.com/shopsys/shopsys/pull/1148))
+    ```diff
+         "conflict": {
+         "symfony/dependency-injection": "3.4.15|3.4.16",
+    +    "symfony/monolog-bundle": ">=3.4.0",
+         "twig/twig": "2.6.1"
+    },
+    ```
 
 ### Tools
 - use the `build.xml` [Phing configuration](/docs/introduction/console-commands-for-application-management-phing-targets.md) from the `shopsys/framework` package ([#1068](https://github.com/shopsys/shopsys/pull/1068))
