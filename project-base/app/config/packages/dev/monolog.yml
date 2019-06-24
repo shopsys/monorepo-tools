@@ -4,3 +4,4 @@ monolog:
             # change "fingers_crossed" handler to "group" that works as a passthrough to "nested"
             type: group
             members: [ nested ]
+            excluded_404s: false
