@@ -71,7 +71,7 @@ class StatisticsRepository
         $query = $this->em->createNativeQuery(
             'SELECT DATE(o.created_at) AS date, COUNT(o.created_at) AS count
             FROM orders o
-            WHERE o.created_at BETWEEN :start_date AND :end_date
+            WHERE o.created_at BETWEEN :start_date AND :end_date AND o.status_id != :canceled
             GROUP BY date
             ORDER BY date ASC',
             $resultSetMapping
@@ -79,6 +79,7 @@ class StatisticsRepository
 
         $query->setParameter('start_date', $start);
         $query->setParameter('end_date', $end);
+        $query->setParameter('canceled', OrderStatus::TYPE_CANCELED);
 
         return array_map(
             function (array $item) {
