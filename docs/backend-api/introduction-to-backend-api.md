@@ -3,6 +3,11 @@
 Shopsys Framework backend API is an interface to the application that is dedicated for integration with your third party systems systems (like IS, storage system, ERP, ...).
 We use [REST](https://en.wikipedia.org/wiki/Representational_state_transfer) (implemented using [FOSRestBundle](https://github.com/FriendsOfSymfony/FOSRestBundle)) with JSON format and [OAuth2](https://oauth.net/2/) authorization (implemented using [oauth2-bundle](https://github.com/trikoder/oauth2-bundle)).
 
+## Installation
+
+The backend API is not a part of the Shopsys Framework by default and you have to install it by yourself.
+Please follow simple [installation instructions](/docs/backend-api/backend-api-installation.md).
+
 ## Try it
 
 ### You need to create OAuth2 client in database and configure OAuth2 first
