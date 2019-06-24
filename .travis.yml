@@ -47,7 +47,7 @@ jobs:
     include:
     -   stage: Tests
         name: "Smoke, Functional and Acceptance Tests"
-        script: docker-compose exec php-fpm ./phing db-create test-db-create build-demo-dev-quick error-pages-generate checks-ci
+        script: docker-compose exec php-fpm ./phing db-create test-db-create backend-api-install backend-api-oauth-keys-generate build-demo-dev-quick error-pages-generate checks-ci
 
     -   name: "Standards, Unit Tests"
-        script: docker-compose exec php-fpm ./phing standards tests-unit
+        script: docker-compose exec php-fpm ./phing backend-api-install backend-api-oauth-keys-generate standards tests-unit

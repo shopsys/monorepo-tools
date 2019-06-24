@@ -31,4 +31,4 @@ kubectl rollout status --namespace=${JOB_NAME} deployment/webserver-php-fpm --wa
 PHP_FPM_POD=$(kubectl get pods -n ${JOB_NAME} -l app=webserver-php-fpm -o=jsonpath='{.items[0].metadata.name}')
 
 # Run phing build in the pod
-kubectl exec --namespace=${JOB_NAME} ${PHP_FPM_POD} ./phing clean dirs-create product-search-recreate-structure product-search-export-products grunt error-pages-generate
+kubectl exec --namespace=${JOB_NAME} ${PHP_FPM_POD} ./phing clean dirs-create backend-api-install backend-api-oauth-keys-generate product-search-recreate-structure product-search-export-products grunt error-pages-generate
