@@ -5,6 +5,7 @@ echo ${DOCKER_PASSWORD} | docker login --username ${DOCKER_USERNAME} --password-
 
 # Create unique docker image tag with commit hash
 DOCKER_IMAGE_TAG=production-commit-${GIT_COMMIT}
+DOCKER_ELASTIC_IMAGE_TAG=ci-elasticsearch
 
 # Authenticate yourself with service.account.json file.
 export GOOGLE_APPLICATION_CREDENTIALS=/tmp/infrastructure/google-cloud/service-account.json
@@ -20,6 +21,16 @@ docker image pull ${DOCKER_USERNAME}/php-fpm:${DOCKER_IMAGE_TAG} || (
     docker image push ${DOCKER_USERNAME}/php-fpm:${DOCKER_IMAGE_TAG}
 )
 
+## Docker image for application elasticsearch container
+docker image pull ${DOCKER_USERNAME}/elasticsearch:${DOCKER_ELASTIC_IMAGE_TAG} || (
+    echo "Image not found (see warning above), building it instead..." &&
+    docker image build \
+        --tag ${DOCKER_USERNAME}/elasticsearch:${DOCKER_ELASTIC_IMAGE_TAG} \
+        -f docker/elasticsearch/Dockerfile \
+        . &&
+    docker image push ${DOCKER_USERNAME}/elasticsearch:${DOCKER_ELASTIC_IMAGE_TAG}
+)
+
 # Set proxy url address to google cloud storage bucket API
 sed -i "s/{{GOOGLE_CLOUD_STORAGE_BUCKET_NAME}}/${GOOGLE_CLOUD_STORAGE_BUCKET_NAME}/g" docker/nginx/google-cloud/nginx.conf
 
@@ -31,6 +42,9 @@ cp app/config/parameters.yml.dist app/config/parameters.yml
 yq write --inplace kubernetes/deployments/webserver-php-fpm.yml spec.template.spec.containers[0].image ${DOCKER_USERNAME}/php-fpm:${DOCKER_IMAGE_TAG}
 yq write --inplace kubernetes/deployments/webserver-php-fpm.yml spec.template.spec.initContainers[0].image ${DOCKER_USERNAME}/php-fpm:${DOCKER_IMAGE_TAG}
 yq write --inplace kubernetes/deployments/webserver-php-fpm.yml spec.template.spec.initContainers[1].image ${DOCKER_USERNAME}/php-fpm:${DOCKER_IMAGE_TAG}
+
+# Replace docker image for elasticsearch of application
+yq write --inplace kubernetes/deployments/elasticsearch.yml spec.template.spec.containers[0].image ${DOCKER_USERNAME}/elasticsearch:${DOCKER_ELASTIC_IMAGE_TAG}
 
 # Set domain name into ingress controller so ingress can listen on domain name
 yq write --inplace kubernetes/ingress.yml spec.rules[0].host ${FIRST_DOMAIN_HOSTNAME}

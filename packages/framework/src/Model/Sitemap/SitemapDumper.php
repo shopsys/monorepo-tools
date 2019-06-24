@@ -57,7 +57,12 @@ class SitemapDumper extends Dumper
         $this->deleteExistingSitemaps($targetDir);
 
         $finder = new Finder();
-        foreach ($finder->files()->in($this->tmpFolder)->getIterator() as $file) {
+        $sitemapFileFinder = $finder
+            ->files()
+            ->name(sprintf('%s*.xml', $this->sitemapFilePrefix))
+            ->in($this->tmpFolder);
+
+        foreach ($sitemapFileFinder->getIterator() as $file) {
             $this->mountManager->move(
                 'local://' . TransformString::removeDriveLetterFromPath($file->getPathname()),
                 'main://' . $targetDir . '/' . $file->getBasename()
@@ -74,7 +79,9 @@ class SitemapDumper extends Dumper
      */
     protected function deleteExistingSitemaps($targetDir)
     {
-        $files = $this->abstractFilesystem->listContents($targetDir);
+        $files = array_filter($this->abstractFilesystem->listContents($targetDir), function ($file) {
+            return strpos($file['filename'], $this->sitemapFilePrefix) === 0;
+        });
         foreach ($files as $file) {
             $this->abstractFilesystem->delete($file['path']);
         }

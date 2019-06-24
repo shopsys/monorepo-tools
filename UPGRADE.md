@@ -21,11 +21,11 @@ Follow the instructions in the [monorepo upgrade guide](docs/contributing/upgrad
 * check the instructions in all sections, any of them could be relevant for you
 * typical upgrade sequence should be:
     * run `docker-compose down` to turn off your containers
-    * *(MacOS, Windows only)* run `docker-sync stop`
-    * *(MacOS, Windows only)* run `docker-sync clean` so your volumes will be removed
+    * *(MacOS, Windows only)* run `docker-sync clean` so your volumes will be stopped and removed
     * follow upgrade notes in the *Infrastructure* section (related with `docker-compose.yml`, `Dockerfile`, docker containers, `nginx.conf`, `php.ini`, etc.)
     * *(MacOS, Windows only)* run `docker-sync start` to create volumes  
-    * run `docker-compose up -d --build --force-recreate --remove-orphans` to start the application again
+    * run `docker-compose build --no-cache --pull` to build your images without cache and with latest version
+    * run `docker-compose up -d --force-recreate --remove-orphans` to start the application again
     * update the `shopsys/*` dependencies in `composer.json` to version you are upgrading to
         eg. `"shopsys/framework": "v7.0.0"`
     * run `composer update`

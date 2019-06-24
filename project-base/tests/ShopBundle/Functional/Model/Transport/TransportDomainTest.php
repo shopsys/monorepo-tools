@@ -3,7 +3,7 @@
 namespace Tests\ShopBundle\Functional\Model\Transport;
 
 use Shopsys\FrameworkBundle\Model\Transport\TransportDataFactoryInterface;
-use Shopsys\FrameworkBundle\Model\Transport\TransportFactory;
+use Shopsys\FrameworkBundle\Model\Transport\TransportFactoryInterface;
 use Shopsys\ShopBundle\Model\Transport\Transport;
 use Tests\ShopBundle\Test\TransactionFunctionalTestCase;
 
@@ -31,7 +31,7 @@ class TransportDomainTest extends TransactionFunctionalTestCase
     {
         parent::setUp();
         $this->transportDataFactory = $this->getContainer()->get(TransportDataFactoryInterface::class);
-        $this->transportFactory = $this->getContainer()->get(TransportFactory::class);
+        $this->transportFactory = $this->getContainer()->get(TransportFactoryInterface::class);
         $this->em = $this->getEntityManager();
     }
 

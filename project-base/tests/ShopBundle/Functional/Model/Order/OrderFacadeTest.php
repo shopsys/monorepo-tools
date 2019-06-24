@@ -5,7 +5,7 @@ namespace Tests\ShopBundle\Functional\Model\Order;
 use Shopsys\FrameworkBundle\Component\DataFixture\PersistentReferenceFacade;
 use Shopsys\FrameworkBundle\Component\Money\Money;
 use Shopsys\FrameworkBundle\Model\Cart\CartFacade;
-use Shopsys\FrameworkBundle\Model\Cart\Item\CartItemFactory;
+use Shopsys\FrameworkBundle\Model\Cart\Item\CartItemFactoryInterface;
 use Shopsys\FrameworkBundle\Model\Order\Item\OrderItemData;
 use Shopsys\FrameworkBundle\Model\Order\OrderDataFactoryInterface;
 use Shopsys\FrameworkBundle\Model\Order\OrderFacade;
@@ -44,7 +44,7 @@ class OrderFacadeTest extends TransactionFunctionalTestCase
         /** @var \Shopsys\FrameworkBundle\Model\Product\Pricing\ProductPriceCalculationForUser $productPriceCalculation */
         $productPriceCalculation = $this->getContainer()->get(ProductPriceCalculationForUser::class);
         /** @var \Shopsys\FrameworkBundle\Model\Cart\Item\CartItemFactory $cartItemFactory */
-        $cartItemFactory = $this->getContainer()->get(CartItemFactory::class);
+        $cartItemFactory = $this->getContainer()->get(CartItemFactoryInterface::class);
 
         $cart = $cartFacade->getCartOfCurrentCustomerCreateIfNotExists();
         $product = $productRepository->getById(1);

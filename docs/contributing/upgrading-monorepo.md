@@ -1,8 +1,13 @@
 # Upgrading monorepo
 
 Typical upgrade sequence should be:
-* when you update your `docker-compose.yml`, you need to apply the changes by using command `docker-compose up -d`
-* *(Windows, MacOS only)* any changes in `docker-sync.yml` file should follow with `docker-sync stop`, `docker-sync clean` and `docker-sync start` to restart synchronization
+* run `docker-compose down` to turn off your containers
+* *(MacOS, Windows only)* run `docker-sync clean` so your volumes will be stopped and removed
+* update your `docker-compose.yml` by `docker-compose` file specific for your operating system from `docker/conf` folder
+* *(MacOS, Windows only)* update your `docker-sync.yml` by `docker-sync` file specific for your operating system from `docker/conf` folder
+* *(MacOS, Windows only)* run `docker-sync start` to create volumes
+* run `docker-compose build --no-cache --pull` to build your images without cache and with latest version
+* run `docker-compose up -d --force-recreate --remove-orphans` to start the application again
 * run `php phing composer-dev clean db-migrations` in `php-fpm` container
 * if you're experiencing some errors, you can always rebuild application and load demo data with `php phing build-demo-dev`
 

@@ -3,7 +3,7 @@
 namespace Tests\ShopBundle\Functional\Model\Product;
 
 use Shopsys\FrameworkBundle\Model\Product\ProductDataFactoryInterface;
-use Shopsys\FrameworkBundle\Model\Product\ProductFactory;
+use Shopsys\FrameworkBundle\Model\Product\ProductFactoryInterface;
 use Shopsys\ShopBundle\DataFixtures\Demo\AvailabilityDataFixture;
 use Shopsys\ShopBundle\Model\Product\Product;
 use Tests\ShopBundle\Test\TransactionFunctionalTestCase;
@@ -37,7 +37,7 @@ class ProductDomainTest extends TransactionFunctionalTestCase
     {
         parent::setUp();
         $this->productDataFactory = $this->getContainer()->get(ProductDataFactoryInterface::class);
-        $this->productFactory = $this->getContainer()->get(ProductFactory::class);
+        $this->productFactory = $this->getContainer()->get(ProductFactoryInterface::class);
         $this->em = $this->getEntityManager();
     }
 

@@ -29,6 +29,7 @@ There you can find links to upgrade notes for other versions too.
                 environment:
                     - discovery.type=single-node
         ```
+    - if you deploy to the google cloud, copy new [`.ci/deploy-to-google-cloud.sh`](https://github.com/shopsys/project-base/blob/master/.ci/deploy-to-google-cloud.sh) script from `shopsys/project-base` ([#1126](https://github.com/shopsys/shopsys/pull/1126))
 
 ### Application
 - follow instructions in [the separate article](upgrade-instructions-for-read-model-for-product-lists.md) to introduce read model for frontend product lists into your project ([#1018](https://github.com/shopsys/shopsys/pull/1018))
@@ -52,6 +53,8 @@ There you can find links to upgrade notes for other versions too.
         +     'attr' => ['autocomplete' => 'new-password'],
           ],
         ```
+- update your tests to use interfaces of factories fetched from dependency injection container
+    -  update tests same way as in PR ([#970](https://github.com/shopsys/shopsys/pull/970/files))
 
 ### Configuration
 - update `phpstan.neon` with following change to skip phpstan error ([#1086](https://github.com/shopsys/shopsys/pull/1086))
@@ -111,6 +114,14 @@ There you can find links to upgrade notes for other versions too.
     +           - method: setProgressBarFactory
     +           - method: setSqlLoggerFacade
     +           - method: setEntityManager
+    ```
+- set `symfony/monolog-bundle` as conflicting in your `composer.json` and run `composer update` command ([#1148](https://github.com/shopsys/shopsys/pull/1148))
+    ```diff
+         "conflict": {
+         "symfony/dependency-injection": "3.4.15|3.4.16",
+    +    "symfony/monolog-bundle": ">=3.4.0",
+         "twig/twig": "2.6.1"
+    },
     ```
 
 ### Tools

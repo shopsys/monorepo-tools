@@ -3,7 +3,7 @@
 namespace Tests\ShopBundle\Functional\Controller;
 
 use Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\FriendlyUrlFacade;
-use Shopsys\FrameworkBundle\Model\Product\ProductDataFactory;
+use Shopsys\FrameworkBundle\Model\Product\ProductDataFactoryInterface;
 use Shopsys\FrameworkBundle\Model\Product\ProductFacade;
 use Shopsys\ShopBundle\DataFixtures\Demo\ProductDataFixture;
 use Tests\ShopBundle\Test\TransactionFunctionalTestCase;
@@ -18,7 +18,7 @@ class ProductRenameRedirectPreviousUrlTest extends TransactionFunctionalTestCase
         $productFacade = $this->getContainer()->get(ProductFacade::class);
 
         /** @var \Shopsys\FrameworkBundle\Model\Product\ProductDataFactory $productDataFactory */
-        $productDataFactory = $this->getContainer()->get(ProductDataFactory::class);
+        $productDataFactory = $this->getContainer()->get(ProductDataFactoryInterface::class);
 
         $product = $this->getReference(ProductDataFixture::PRODUCT_PREFIX . self::TESTED_PRODUCT_ID);
 

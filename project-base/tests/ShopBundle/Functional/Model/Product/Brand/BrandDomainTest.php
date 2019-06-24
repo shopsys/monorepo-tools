@@ -3,7 +3,7 @@
 namespace Tests\ShopBundle\Functional\Model\Product\Brand;
 
 use Shopsys\FrameworkBundle\Model\Product\Brand\BrandDataFactoryInterface;
-use Shopsys\FrameworkBundle\Model\Product\Brand\BrandFactory;
+use Shopsys\FrameworkBundle\Model\Product\Brand\BrandFactoryInterface;
 use Shopsys\ShopBundle\Model\Product\Brand\Brand;
 use Tests\ShopBundle\Test\TransactionFunctionalTestCase;
 
@@ -33,7 +33,7 @@ class BrandDomainTest extends TransactionFunctionalTestCase
     {
         parent::setUp();
         $this->brandDataFactory = $this->getContainer()->get(BrandDataFactoryInterface::class);
-        $this->brandFactory = $this->getContainer()->get(BrandFactory::class);
+        $this->brandFactory = $this->getContainer()->get(BrandFactoryInterface::class);
         $this->em = $this->getEntityManager();
     }
 
