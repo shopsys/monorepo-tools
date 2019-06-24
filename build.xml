@@ -4,11 +4,13 @@
     <property name="path.root" value="${project.basedir}/project-base"/>
     <property name="path.vendor" value="${project.basedir}/vendor"/>
     <property name="path.packages" value="${project.basedir}/packages"/>
+    <property name="path.backend-api" value="${path.packages}/backend-api"/>
     <property name="path.framework" value="${path.packages}/framework"/>
     <property name="path.utils" value="${project.basedir}/utils"/>
     <property name="translations.dump.flags" value=""/>
 
     <import file="${path.framework}/build.xml"/>
+    <import file="${path.backend-api}/build.xml"/>
 
     <target name="clean" description="Cleans up directories with cache and scripts which are generated on demand.">
         <phingcall target="shopsys_framework.clean"/>

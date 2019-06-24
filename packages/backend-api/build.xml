@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="backend_api">
+    <property name="path.openssl.executable" value="openssl"/>
+    <property name="path.defuse-key-generate.executable" value="${path.bin}/generate-defuse-key"/>
+
+    <target name="backend-api-oauth-keys-generate" description="Generates keys and parameter for backend OAuth">
+        <exec executable="${path.openssl.executable}" checkreturn="true">
+            <arg value="genrsa"/>
+            <arg value="-out"/>
+            <arg value="${path.app}/config/packages/oauth2/private.key"/>
+            <arg value="2048"/>
+        </exec>
+        <exec executable="${path.openssl.executable}" checkreturn="true">
+            <arg value="rsa"/>
+            <arg value="-in"/>
+            <arg value="${path.app}/config/packages/oauth2/private.key"/>
+            <arg value="-pubout"/>
+            <arg value="-out"/>
+            <arg value="${path.app}/config/packages/oauth2/public.key"/>
+        </exec>
+        <exec executable="${path.defuse-key-generate.executable}" checkreturn="true" outputProperty="encryption_key" error="/dev/null">
+        </exec>
+        <copy file="${path.app}/config/packages/oauth2/parameters_oauth.yml.dist" tofile="${path.app}/config/packages/oauth2/parameters_oauth.yml" overwrite="true">
+            <filterchain>
+                <replacetokens begintoken="%%" endtoken="%%">
+                    <token key="encryption_key" value="${encryption_key}"/>
+                </replacetokens>
+            </filterchain>
+        </copy>
+    </target>
+</project>
