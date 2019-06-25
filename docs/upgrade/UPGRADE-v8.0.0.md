@@ -70,9 +70,8 @@ There you can find links to upgrade notes for other versions too.
             + use FOS\CKEditorBundle\Form\Type\CKEditorType;
             ```
 - update the minimal PHP version in your `composer.json` in `require` and `config.platform` section to `7.2` because version `7.1` is no longer supported in Shopsys Framework ([#1066](https://github.com/shopsys/shopsys/pull/1066))
-- if you want to use our experimental API follow these instructions in [the separate article](upgrade-instructions-for-backend-api.md) to introduce backend API into your project ([#1055](https://github.com/shopsys/shopsys/pull/1055))
-    - we recommend to read [introduction to backend API](/docs/backend-api/introduction-to-backend-api.md) article as well
 - run [db-create](/docs/introduction/console-commands-for-application-management-phing-targets.md#db-create) (this one even on production) and `test-db-create` phing targets to install extension for UUID
+- if you want to use our experimental API read [introduction to backend API](/docs/backend-api/introduction-to-backend-api.md)
 - update your application and tests to correctly handle availabilities and stock ([#1115](https://github.com/shopsys/shopsys/pull/1115))
     - copy and replace the functional test [AvailabilityFacadeTest.php](https://github.com/shopsys/project-base/blob/master/tests/ShopBundle/Functional/Model/Product/Availability/AvailabilityFacadeTest.php) in `tests/ShopBundle/Functional/Model/Product/Availability/` to test deletion and replacement of availabilities properly
     - if you have made any custom changes to the test you should merge your changes with the ones described in the pull request linked above
