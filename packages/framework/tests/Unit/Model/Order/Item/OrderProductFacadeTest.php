@@ -47,12 +47,25 @@ final class OrderProductFacadeTest extends TestCase
         );
     }
 
-    public function testSubtractOrderProductsFromStockUsingStock(): void
+    /**
+     * @return iterable
+     */
+    public function subtractOrderProductsFromStockUsingStockProvider(): iterable
     {
-        $stockQuantity = 15;
-        $orderedQuantity = 10;
-        $expectedStockQuantity = 5;
+        yield [15, 10, 5];
+        yield [10, 10, 0];
+        yield [5, 0, 5];
+        yield [0, 5, -5];
+    }
 
+    /**
+     * @dataProvider subtractOrderProductsFromStockUsingStockProvider
+     * @param int $stockQuantity
+     * @param int $orderedQuantity
+     * @param int $expectedStockQuantity
+     */
+    public function testSubtractOrderProductsFromStockUsingStock(int $stockQuantity, int $orderedQuantity, int $expectedStockQuantity): void
+    {
         $product = $this->createProductWithStockQuantity($stockQuantity);
         $orderProduct = $this->createOrderItem($product, $orderedQuantity);
 
@@ -61,12 +74,25 @@ final class OrderProductFacadeTest extends TestCase
         $this->assertSame($expectedStockQuantity, $product->getStockQuantity());
     }
 
-    public function testAddOrderProductsToStockUsingStock(): void
+    /**
+     * @return iterable
+     */
+    public function addOrderProductsFromStockUsingStockProvider(): iterable
     {
-        $stockQuantity = 15;
-        $orderedQuantity = 10;
-        $expectedStockQuantity = 25;
+        yield [15, 10, 25];
+        yield [10, 10, 20];
+        yield [5, 0, 5];
+        yield [0, 5, 5];
+    }
 
+    /**
+     * @dataProvider addOrderProductsFromStockUsingStockProvider
+     * @param int $stockQuantity
+     * @param int $orderedQuantity
+     * @param int $expectedStockQuantity
+     */
+    public function testAddOrderProductsToStockUsingStock(int $stockQuantity, int $orderedQuantity, int $expectedStockQuantity): void
+    {
         $product = $this->createProductWithStockQuantity($stockQuantity);
         $orderProduct = $this->createOrderItem($product, $orderedQuantity);
 
