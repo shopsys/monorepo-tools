@@ -52,11 +52,8 @@ class ProductCalculatedPricesType extends AbstractType
         $product = $options['product'];
 
         if ($product !== null) {
-            try {
-                $productSellingPricesIndexedByDomainId = $this->productFacade->getAllProductSellingPricesIndexedByDomainId($product);
-                $view->vars['productSellingPricesIndexedByDomainId'] = $productSellingPricesIndexedByDomainId;
-            } catch (\Shopsys\FrameworkBundle\Model\Product\Pricing\Exception\MainVariantPriceCalculationException $ex) {
-            }
+            $productSellingPricesIndexedByDomainId = $this->productFacade->getAllProductSellingPricesIndexedByDomainId($product);
+            $view->vars['productSellingPricesIndexedByDomainId'] = $productSellingPricesIndexedByDomainId;
         } else {
             $view->vars['pricingGroupsIndexedByDomainId'] = $this->pricingGroupFacade->getAllIndexedByDomainId();
         }

@@ -975,6 +975,7 @@ services:
             - '@snc_redis.bestselling_products'
             - '@snc_redis.doctrine_metadata'
             - '@snc_redis.doctrine_query'
+            - '@snc_redis.framework_annotations'
 
     Shopsys\FrameworkBundle\Component\Redis\RedisVersionsFacade:
         arguments:
@@ -1018,4 +1019,5 @@ services:
             - '@snc_redis.bestselling_products'
             - '@snc_redis.doctrine_metadata'
             - '@snc_redis.doctrine_query'
+            - '@snc_redis.framework_annotations'
             - '@snc_redis.session'

@@ -115,14 +115,25 @@ There you can find links to upgrade notes for other versions too.
     +           - method: setSqlLoggerFacade
     +           - method: setEntityManager
     ```
-- set `symfony/monolog-bundle` as conflicting in your `composer.json` and run `composer update` command ([#1148](https://github.com/shopsys/shopsys/pull/1148))
-    ```diff
-         "conflict": {
-         "symfony/dependency-injection": "3.4.15|3.4.16",
-    +    "symfony/monolog-bundle": ">=3.4.0",
-         "twig/twig": "2.6.1"
-    },
-    ```
+- unset the incompatible `excluded_404s` configuration from monolog handlers that don't use the `fingers_crossed` type ([#1154](https://github.com/shopsys/shopsys/pull/1154))
+    - in `app/config/packages/dev/monolog.yml`:
+        ```diff
+            monolog:
+               handlers:
+                   main:
+                       # change "fingers_crossed" handler to "group" that works as a passthrough to "nested"
+                       type: group
+                       members: [ nested ]
+        +              excluded_404s: false
+        ```
+    - in `app/config/packages/test/monolog.yml`:
+        ```diff
+            monolog:
+                handlers:
+                    main:
+                        type: "null"
+        +               excluded_404s: false
+        ```
 
 ### Tools
 - use the `build.xml` [Phing configuration](/docs/introduction/console-commands-for-application-management-phing-targets.md) from the `shopsys/framework` package ([#1068](https://github.com/shopsys/shopsys/pull/1068))
