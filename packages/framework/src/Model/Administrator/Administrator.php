@@ -10,8 +10,6 @@ use Shopsys\FrameworkBundle\Component\Grid\Grid;
 use Shopsys\FrameworkBundle\Model\Security\Roles;
 use Shopsys\FrameworkBundle\Model\Security\TimelimitLoginInterface;
 use Shopsys\FrameworkBundle\Model\Security\UniqueLoginInterface;
-use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
-use Symfony\Component\Security\Core\Encoder\EncoderFactoryInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
@@ -118,35 +116,19 @@ class Administrator implements UserInterface, Serializable, UniqueLoginInterface
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\Administrator\AdministratorData $administratorData
-     * @param \Symfony\Component\Security\Core\Encoder\EncoderFactoryInterface $encoderFactory
-     * @param \Shopsys\FrameworkBundle\Model\Administrator\Administrator|null $administratorByUserName
      */
-    public function edit(
-        AdministratorData $administratorData,
-        EncoderFactoryInterface $encoderFactory,
-        ?self $administratorByUserName
-    ) {
-        if ($administratorByUserName !== null
-            && $administratorByUserName !== $this
-            && $administratorByUserName->getUsername() === $administratorData->username
-        ) {
-            throw new \Shopsys\FrameworkBundle\Model\Administrator\Exception\DuplicateUserNameException($this->username);
-        }
-
+    public function edit(AdministratorData $administratorData): void
+    {
         $this->email = $administratorData->email;
         $this->realName = $administratorData->realName;
         $this->username = $administratorData->username;
-
-        if ($administratorData->password !== null) {
-            $this->setPassword($administratorData->password, $encoderFactory);
-        }
     }
 
     /**
      * @param string $gridId
      * @return \Shopsys\FrameworkBundle\Model\Administrator\AdministratorGridLimit|null
      */
-    protected function getGridLimit(string $gridId): ?AdministratorGridLimit
+    public function getGridLimit(string $gridId): ?AdministratorGridLimit
     {
         foreach ($this->gridLimits as $gridLimit) {
             if ($gridLimit->getGridId() === $gridId) {
@@ -245,13 +227,10 @@ class Administrator implements UserInterface, Serializable, UniqueLoginInterface
     }
 
     /**
-     * @param string $password
-     * @param \Symfony\Component\Security\Core\Encoder\EncoderFactoryInterface $encoderFactory
+     * @param string $passwordHash
      */
-    public function setPassword(string $password, EncoderFactoryInterface $encoderFactory)
+    public function setPasswordHash(string $passwordHash)
     {
-        $encoder = $encoderFactory->getEncoder($this);
-        $passwordHash = $encoder->encodePassword($password, $this->getSalt());
         $this->password = $passwordHash;
     }
 
@@ -367,30 +346,6 @@ class Administrator implements UserInterface, Serializable, UniqueLoginInterface
 
     /**
      * @param \Shopsys\FrameworkBundle\Component\Grid\Grid $grid
-     * @param \Shopsys\FrameworkBundle\Model\Administrator\AdministratorGridLimitFactoryInterface $administratorGridLimitFactory
-     * @throws \Shopsys\FrameworkBundle\Model\Administrator\Exception\InvalidGridLimitValueException
-     * @throws \Shopsys\FrameworkBundle\Model\Administrator\Exception\RememberGridLimitException
-     */
-    public function rememberGridLimit(Grid $grid, AdministratorGridLimitFactoryInterface $administratorGridLimitFactory)
-    {
-        if (!$grid->isEnabledPaging()) {
-            throw new \Shopsys\FrameworkBundle\Model\Administrator\Exception\RememberGridLimitException($grid->getId());
-        }
-        if ($grid->getLimit() <= 0) {
-            throw new \Shopsys\FrameworkBundle\Model\Administrator\Exception\InvalidGridLimitValueException($grid->getLimit());
-        }
-
-        $gridLimit = $this->getGridLimit($grid->getId());
-        if ($gridLimit === null) {
-            $gridLimit = $administratorGridLimitFactory->create($this, $grid->getId(), $grid->getLimit());
-            $this->gridLimits->add($gridLimit);
-        } else {
-            $gridLimit->setLimit($grid->getLimit());
-        }
-    }
-
-    /**
-     * @param \Shopsys\FrameworkBundle\Component\Grid\Grid $grid
      */
     public function restoreGridLimit(Grid $grid)
     {
@@ -401,19 +356,10 @@ class Administrator implements UserInterface, Serializable, UniqueLoginInterface
     }
 
     /**
-     * @param \Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface $tokenStorage
-     * @param int $adminCountExcludingSuperadmin
+     * @param \Shopsys\FrameworkBundle\Model\Administrator\AdministratorGridLimit $administratorGridLimit
      */
-    public function checkForDelete(TokenStorageInterface $tokenStorage, int $adminCountExcludingSuperadmin)
+    public function addGridLimit(AdministratorGridLimit $administratorGridLimit): void
     {
-        if ($adminCountExcludingSuperadmin === 1) {
-            throw new \Shopsys\FrameworkBundle\Model\Administrator\Exception\DeletingLastAdministratorException();
-        }
-        if ($tokenStorage->getToken()->getUser() === $this) {
-            throw new \Shopsys\FrameworkBundle\Model\Administrator\Exception\DeletingSelfException();
-        }
-        if ($this->isSuperadmin()) {
-            throw new \Shopsys\FrameworkBundle\Model\Administrator\Exception\DeletingSuperadminException();
-        }
+        $this->gridLimits->add($administratorGridLimit);
     }
 }

@@ -11,6 +11,8 @@ use Shopsys\FrameworkBundle\Model\Product\ProductRepository;
 
 class OrderItemFacade
 {
+    protected const DEFAULT_PRODUCT_QUANTITY = 1;
+
     /**
      * @var \Doctrine\ORM\EntityManagerInterface
      */
@@ -82,6 +84,7 @@ class OrderItemFacade
     {
         $order = $this->orderRepository->getById($orderId);
         $product = $this->productRepository->getById($productId);
+        $orderDomainConfig = $this->domain->getDomainConfigById($order->getDomainId());
 
         $productPrice = $this->productPriceCalculationForUser->calculatePriceForUserAndDomainId(
             $product,
@@ -89,12 +92,20 @@ class OrderItemFacade
             $order->getCustomer()
         );
 
-        $orderProduct = $order->addProduct(
-            $product,
+        $orderProduct = $this->orderItemFactory->createProduct(
+            $order,
+            $product->getName($orderDomainConfig->getLocale()),
             $productPrice,
-            $this->orderItemFactory,
-            $this->domain,
-            $this->orderPriceCalculation
+            $product->getVat()->getPercent(),
+            static::DEFAULT_PRODUCT_QUANTITY,
+            $product->getUnit()->getName($orderDomainConfig->getLocale()),
+            $product->getCatnum(),
+            $product
+        );
+
+        $order->addItem($orderProduct);
+        $order->setTotalPrice(
+            $this->orderPriceCalculation->getOrderTotalPrice($order)
         );
 
         $this->em->flush($order);

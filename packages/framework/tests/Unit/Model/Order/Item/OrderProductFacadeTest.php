@@ -6,7 +6,6 @@ namespace Tests\FrameworkBundle\Unit\Model\Order\Item;
 
 use Doctrine\ORM\EntityManager;
 use PHPUnit\Framework\TestCase;
-use Shopsys\FrameworkBundle\Component\EntityExtension\EntityNameResolver;
 use Shopsys\FrameworkBundle\Model\Module\ModuleFacade;
 use Shopsys\FrameworkBundle\Model\Order\Item\OrderItem;
 use Shopsys\FrameworkBundle\Model\Order\Item\OrderProductFacade;
@@ -14,7 +13,6 @@ use Shopsys\FrameworkBundle\Model\Order\Order;
 use Shopsys\FrameworkBundle\Model\Pricing\Price;
 use Shopsys\FrameworkBundle\Model\Product\Availability\ProductAvailabilityRecalculationScheduler;
 use Shopsys\FrameworkBundle\Model\Product\Product;
-use Shopsys\FrameworkBundle\Model\Product\ProductCategoryDomainFactory;
 use Shopsys\FrameworkBundle\Model\Product\ProductData;
 use Shopsys\FrameworkBundle\Model\Product\ProductHiddenRecalculator;
 use Shopsys\FrameworkBundle\Model\Product\ProductSellingDeniedRecalculator;
@@ -112,7 +110,7 @@ final class OrderProductFacadeTest extends TestCase
         $productData->stockQuantity = $productStockQuantity;
         $productData->outOfStockAction = Product::OUT_OF_STOCK_ACTION_HIDE;
 
-        return Product::create($productData, new ProductCategoryDomainFactory(new EntityNameResolver([])));
+        return Product::create($productData);
     }
 
     /**

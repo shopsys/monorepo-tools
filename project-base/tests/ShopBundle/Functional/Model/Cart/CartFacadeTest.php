@@ -248,4 +248,82 @@ class CartFacadeTest extends TransactionFunctionalTestCase
 
         return $customerIdentifierFactoryMock;
     }
+
+    /**
+     * @return \Shopsys\FrameworkBundle\Model\Product\Product
+     */
+    private function createProduct()
+    {
+        return $this->getReference(ProductDataFixture::PRODUCT_PREFIX . 1);
+    }
+
+    /**
+     * @return \Shopsys\FrameworkBundle\Model\Cart\CartFacade
+     */
+    private function getCartFacadeFromContainer()
+    {
+        return $this->getContainer()->get(CartFacade::class);
+    }
+
+    public function testCannotAddProductFloatQuantityToCart()
+    {
+        $product = $this->createProduct();
+
+        $this->expectException('Shopsys\FrameworkBundle\Model\Cart\Exception\InvalidQuantityException');
+        $this->getCartFacadeFromContainer()->addProductToCart($product->getId(), 1.1);
+    }
+
+    public function testCannotAddProductZeroQuantityToCart()
+    {
+        $product = $this->createProduct();
+
+        $this->expectException('Shopsys\FrameworkBundle\Model\Cart\Exception\InvalidQuantityException');
+        $this->getCartFacadeFromContainer()->addProductToCart($product->getId(), 0);
+    }
+
+    public function testCannotAddProductNegativeQuantityToCart()
+    {
+        $product = $this->createProduct();
+
+        $this->expectException('Shopsys\FrameworkBundle\Model\Cart\Exception\InvalidQuantityException');
+        $this->getCartFacadeFromContainer()->addProductToCart($product->getId(), -10);
+    }
+
+    public function testAddProductToCartMarksAddedProductAsNew()
+    {
+        $product = $this->createProduct();
+
+        $result = $this->getCartFacadeFromContainer()->addProductToCart($product->getId(), 2);
+        $this->assertTrue($result->getIsNew());
+    }
+
+    public function testAddProductToCartMarksRepeatedlyAddedProductAsNotNew()
+    {
+        $product = $this->createProduct();
+
+        $this->getCartFacadeFromContainer()->addProductToCart($product->getId(), 1);
+        $result = $this->getCartFacadeFromContainer()->addProductToCart($product->getId(), 2);
+        $this->assertFalse($result->getIsNew());
+    }
+
+    public function testAddProductResultContainsAddedProductQuantity()
+    {
+        $product = $this->createProduct();
+
+        $quantity = 2;
+        $result = $this->getCartFacadeFromContainer()->addProductToCart($product->getId(), $quantity);
+        $this->assertSame($quantity, $result->getAddedQuantity());
+    }
+
+    public function testAddProductResultDoesNotContainPreviouslyAddedProductQuantity()
+    {
+        $product = $this->createProduct();
+
+        $cartFacade = $this->getCartFacadeFromContainer();
+        $cartFacade->addProductToCart($product->getId(), 1);
+        $quantity = 2;
+
+        $result = $cartFacade->addProductToCart($product->getId(), $quantity);
+        $this->assertSame($quantity, $result->getAddedQuantity());
+    }
 }

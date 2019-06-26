@@ -232,3 +232,5 @@ services:
         arguments:
             - '%shopsys.elasticsearch.structure_dir%'
             - 'test-%env(ELASTIC_SEARCH_INDEX_PREFIX)%'
+
+    Shopsys\FrameworkBundle\Model\Product\Pricing\ProductInputPriceRecalculator: ~

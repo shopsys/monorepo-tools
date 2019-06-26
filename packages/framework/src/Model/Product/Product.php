@@ -10,7 +10,6 @@ use Shopsys\FrameworkBundle\Model\Localization\AbstractTranslatableEntity;
 use Shopsys\FrameworkBundle\Model\Pricing\Vat\Vat;
 use Shopsys\FrameworkBundle\Model\Product\Availability\Availability;
 use Shopsys\FrameworkBundle\Model\Product\Exception\ProductDomainNotFoundException;
-use Shopsys\FrameworkBundle\Model\Product\Pricing\ProductPriceRecalculationScheduler;
 
 /**
  * Product
@@ -286,10 +285,9 @@ class Product extends AbstractTranslatableEntity
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\Product\ProductData $productData
-     * @param \Shopsys\FrameworkBundle\Model\Product\ProductCategoryDomainFactoryInterface $productCategoryDomainFactory
      * @param \Shopsys\FrameworkBundle\Model\Product\Product[]|null $variants
      */
-    protected function __construct(ProductData $productData, ProductCategoryDomainFactoryInterface $productCategoryDomainFactory, ?array $variants = null)
+    protected function __construct(ProductData $productData, ?array $variants = null)
     {
         $this->translations = new ArrayCollection();
         $this->domains = new ArrayCollection();
@@ -322,7 +320,7 @@ class Product extends AbstractTranslatableEntity
             $this->variantType = self::VARIANT_TYPE_NONE;
         } else {
             $this->variantType = self::VARIANT_TYPE_MAIN;
-            $this->addVariants($variants, $productCategoryDomainFactory);
+            $this->addVariants($variants);
         }
 
         $this->uuid = $productData->uuid ?: Uuid::uuid4()->toString();
@@ -330,34 +328,30 @@ class Product extends AbstractTranslatableEntity
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\Product\ProductData $productData
-     * @param \Shopsys\FrameworkBundle\Model\Product\ProductCategoryDomainFactoryInterface $productCategoryDomainFactory
      * @return \Shopsys\FrameworkBundle\Model\Product\Product
      */
-    public static function create(ProductData $productData, ProductCategoryDomainFactoryInterface $productCategoryDomainFactory)
+    public static function create(ProductData $productData)
     {
-        return new static($productData, $productCategoryDomainFactory, null);
+        return new static($productData, null);
     }
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\Product\ProductData $productData
-     * @param \Shopsys\FrameworkBundle\Model\Product\ProductCategoryDomainFactoryInterface $productCategoryDomainFactory
      * @param \Shopsys\FrameworkBundle\Model\Product\Product[] $variants
      * @return \Shopsys\FrameworkBundle\Model\Product\Product
      */
-    public static function createMainVariant(ProductData $productData, ProductCategoryDomainFactoryInterface $productCategoryDomainFactory, array $variants)
+    public static function createMainVariant(ProductData $productData, array $variants)
     {
-        return new static($productData, $productCategoryDomainFactory, $variants);
+        return new static($productData, $variants);
     }
 
     /**
-     * @param \Shopsys\FrameworkBundle\Model\Product\ProductCategoryDomainFactoryInterface $productCategoryDomainFactory
+     * @param \Shopsys\FrameworkBundle\Model\Product\ProductCategoryDomain[] $productCategoryDomains
      * @param \Shopsys\FrameworkBundle\Model\Product\ProductData $productData
-     * @param \Shopsys\FrameworkBundle\Model\Product\Pricing\ProductPriceRecalculationScheduler $productPriceRecalculationScheduler
      */
     public function edit(
-        ProductCategoryDomainFactoryInterface $productCategoryDomainFactory,
-        ProductData $productData,
-        ProductPriceRecalculationScheduler $productPriceRecalculationScheduler
+        array $productCategoryDomains,
+        ProductData $productData
     ) {
         $this->vat = $productData->vat;
         $this->sellingFrom = $productData->sellingFrom;
@@ -372,7 +366,7 @@ class Product extends AbstractTranslatableEntity
         $this->setDomains($productData);
 
         if (!$this->isVariant()) {
-            $this->setCategories($productCategoryDomainFactory, $productData->categoriesByDomainId);
+            $this->setProductCategoryDomains($productCategoryDomains);
         }
         if (!$this->isMainVariant()) {
             $this->setAvailabilityAndStock($productData);
@@ -383,7 +377,6 @@ class Product extends AbstractTranslatableEntity
 
         $this->orderingPriority = $productData->orderingPriority;
 
-        $productPriceRecalculationScheduler->scheduleProductForImmediateRecalculation($this);
         $this->markForVisibilityRecalculation();
     }
 
@@ -638,56 +631,19 @@ class Product extends AbstractTranslatableEntity
     }
 
     /**
-     * @param \Shopsys\FrameworkBundle\Model\Product\ProductCategoryDomainFactoryInterface $productCategoryDomainFactory
-     * @param \Shopsys\FrameworkBundle\Model\Category\Category[] $categoriesByDomainId
+     * @param \Shopsys\FrameworkBundle\Model\Product\ProductCategoryDomain[] $productCategoryDomains
      */
-    public function setCategories(
-        ProductCategoryDomainFactoryInterface $productCategoryDomainFactory,
-        array $categoriesByDomainId
-    ) {
-        foreach ($categoriesByDomainId as $domainId => $categories) {
-            $this->removeOldProductCategoryDomains($categories, $domainId);
-            $this->createNewProductCategoryDomains($productCategoryDomainFactory, $categories, $domainId);
+    public function setProductCategoryDomains(array $productCategoryDomains)
+    {
+        $this->productCategoryDomains->clear();
+
+        foreach ($productCategoryDomains as $productCategoryDomain) {
+            $this->productCategoryDomains->add($productCategoryDomain);
         }
 
         if ($this->isMainVariant()) {
             foreach ($this->getVariants() as $variant) {
-                $variant->setCategories($productCategoryDomainFactory, $categoriesByDomainId);
-            }
-        }
-    }
-
-    /**
-     * @param \Shopsys\FrameworkBundle\Model\Product\ProductCategoryDomainFactoryInterface $productCategoryDomainFactory
-     * @param \Shopsys\FrameworkBundle\Model\Category\Category[] $newCategories
-     * @param int $domainId
-     */
-    protected function createNewProductCategoryDomains(
-        ProductCategoryDomainFactoryInterface $productCategoryDomainFactory,
-        array $newCategories,
-        $domainId
-    ) {
-        $currentProductCategoryDomainsOnDomainByCategoryId = $this->getProductCategoryDomainsByDomainIdIndexedByCategoryId($domainId);
-
-        foreach ($newCategories as $newCategory) {
-            if (!array_key_exists($newCategory->getId(), $currentProductCategoryDomainsOnDomainByCategoryId)) {
-                $productCategoryDomain = $productCategoryDomainFactory->create($this, $newCategory, $domainId);
-                $this->productCategoryDomains->add($productCategoryDomain);
-            }
-        }
-    }
-
-    /**
-     * @param \Shopsys\FrameworkBundle\Model\Category\Category[] $newCategories
-     * @param int $domainId
-     */
-    protected function removeOldProductCategoryDomains(array $newCategories, $domainId)
-    {
-        $currentProductCategoryDomains = $this->getProductCategoryDomainsByDomainIdIndexedByCategoryId($domainId);
-
-        foreach ($currentProductCategoryDomains as $currentProductCategoryDomain) {
-            if (!in_array($currentProductCategoryDomain->getCategory(), $newCategories, true)) {
-                $this->productCategoryDomains->removeElement($currentProductCategoryDomain);
+                $variant->copyProductCategoryDomains($productCategoryDomains);
             }
         }
     }
@@ -828,9 +784,8 @@ class Product extends AbstractTranslatableEntity
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\Product\Product $variant
-     * @param \Shopsys\FrameworkBundle\Model\Product\ProductCategoryDomainFactoryInterface $productCategoryDomainFactory
      */
-    public function addVariant(self $variant, ProductCategoryDomainFactoryInterface $productCategoryDomainFactory)
+    public function addVariant(self $variant)
     {
         if (!$this->isMainVariant()) {
             throw new \Shopsys\FrameworkBundle\Model\Product\Exception\VariantCanBeAddedOnlyToMainVariantException(
@@ -848,18 +803,32 @@ class Product extends AbstractTranslatableEntity
         if (!$this->variants->contains($variant)) {
             $this->variants->add($variant);
             $variant->setMainVariant($this);
-            $variant->setCategories($productCategoryDomainFactory, $this->getCategoriesIndexedByDomainId());
+            $variant->copyProductCategoryDomains($this->productCategoryDomains->toArray());
         }
     }
 
     /**
-     * @param \Shopsys\FrameworkBundle\Model\Product\Product[] $variants
-     * @param \Shopsys\FrameworkBundle\Model\Product\ProductCategoryDomainFactoryInterface $productCategoryDomainFactory
+     * @param \Shopsys\FrameworkBundle\Model\Product\ProductCategoryDomain[] $productCategoryDomains
      */
-    protected function addVariants(array $variants, ProductCategoryDomainFactoryInterface $productCategoryDomainFactory)
+    protected function copyProductCategoryDomains(array $productCategoryDomains)
+    {
+        $newProductCategoryDomains = [];
+
+        foreach ($productCategoryDomains as $productCategoryDomain) {
+            $copiedProductCategoryDomain = clone $productCategoryDomain;
+            $copiedProductCategoryDomain->setProduct($this);
+            $newProductCategoryDomains[] = $copiedProductCategoryDomain;
+        }
+        $this->setProductCategoryDomains($newProductCategoryDomains);
+    }
+
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Product\Product[] $variants
+     */
+    protected function addVariants(array $variants)
     {
         foreach ($variants as $variant) {
-            $this->addVariant($variant, $productCategoryDomainFactory);
+            $this->addVariant($variant);
         }
     }
 
@@ -1051,23 +1020,21 @@ class Product extends AbstractTranslatableEntity
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\Product\Product[] $currentVariants
-     * @param \Shopsys\FrameworkBundle\Model\Product\ProductCategoryDomainFactoryInterface $productCategoryDomainFactory
      */
-    public function refreshVariants(array $currentVariants, ProductCategoryDomainFactoryInterface $productCategoryDomainFactory): void
+    public function refreshVariants(array $currentVariants): void
     {
         $this->unsetRemovedVariants($currentVariants);
-        $this->addNewVariants($currentVariants, $productCategoryDomainFactory);
+        $this->addNewVariants($currentVariants);
     }
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\Product\Product[] $currentVariants
-     * @param \Shopsys\FrameworkBundle\Model\Product\ProductCategoryDomainFactoryInterface $productCategoryDomainFactory
      */
-    protected function addNewVariants(array $currentVariants, ProductCategoryDomainFactoryInterface $productCategoryDomainFactory): void
+    protected function addNewVariants(array $currentVariants): void
     {
         foreach ($currentVariants as $currentVariant) {
             if (!in_array($currentVariant, $this->getVariants(), true)) {
-                $this->addVariant($currentVariant, $productCategoryDomainFactory);
+                $this->addVariant($currentVariant);
             }
         }
     }

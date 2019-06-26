@@ -21,6 +21,7 @@ For more detailed information about the Shopsys Framework, please see [Shopsys F
 - [What is the configuration file `services_test.yml` good for?](#what-is-the-configuration-file-services_testyml-good-for)
 - [How to change the behavior of the product search on the front-end?](#how-to-change-the-behavior-of-the-product-search-on-the-front-end)
 - [Why are e-mails not sent immediately but at the end of the script](#why-are-e-mails-sent-before-end-of-the-script-and-not-immediately)
+- [Where does the business logic belong?](#where-does-the-business-logic-belong)
 
 ## What are the phing targets?
 Every phing target is a task that can be executed simply by `php phing <target-name>` command.
@@ -113,3 +114,7 @@ Project uses `SwiftMailer` package for sending e-mails and defaultly it has set 
 This spooling method helps the user not to wait for the next page to load while the email is sending.
 However, based on implementations of many projects, project gained functionality that releases spool after the `*cronModule` run is ended in case of `cron` phing target that runs all cron modules at once.
 It is also possible to turn the spool off by removing it from [swiftmailer.yml](../../project-base/app/config/packages/swiftmailer.yml) or changing the behavior of storing e-mails based on [symfony docs](https://symfony.com/doc/3.4/email/spool.html) or [snc_redis docs](https://github.com/snc/SncRedisBundle/blob/master/Resources/doc/index.md#swiftmailer-spooling).
+
+## Where does the business logic belong?
+The business logic should be implemented directly in an entity every time when there is no need for external services.
+Otherwise, the logic is in facades (resp. the facades are used as delegates to other services, e.g. another *Facade*, *Repository*, *Calculation*, etc.). You can read more about the model architecture in [Introduction to model architecture](/docs/model/introduction-to-model-architecture.md).

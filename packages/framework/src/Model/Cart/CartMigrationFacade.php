@@ -3,6 +3,7 @@
 namespace Shopsys\FrameworkBundle\Model\Cart;
 
 use Doctrine\ORM\EntityManagerInterface;
+use Shopsys\FrameworkBundle\Model\Cart\Item\CartItem;
 use Shopsys\FrameworkBundle\Model\Cart\Item\CartItemFactoryInterface;
 use Shopsys\FrameworkBundle\Model\Customer\CustomerIdentifierFactory;
 use Symfony\Component\HttpKernel\Event\FilterControllerEvent;
@@ -53,11 +54,26 @@ class CartMigrationFacade
     /**
      * @param \Shopsys\FrameworkBundle\Model\Cart\Cart $cart
      */
-    protected function mergeCurrentCartWithCart(Cart $cart)
+    public function mergeCurrentCartWithCart(Cart $cart): void
     {
         $customerIdentifier = $this->customerIdentifierFactory->get();
         $currentCart = $this->cartFacade->getCartByCustomerIdentifierCreateIfNotExists($customerIdentifier);
-        $currentCart->mergeWithCart($cart, $this->cartItemFactory);
+
+        foreach ($cart->getItems() as $itemToMerge) {
+            $similarItem = $currentCart->findSimilarItemByItem($itemToMerge);
+            if ($similarItem instanceof CartItem) {
+                $similarItem->changeQuantity($similarItem->getQuantity() + $itemToMerge->getQuantity());
+            } else {
+                $newCartItem = $this->cartItemFactory->create(
+                    $currentCart,
+                    $itemToMerge->getProduct(),
+                    $itemToMerge->getQuantity(),
+                    $itemToMerge->getWatchedPrice()
+                );
+                $currentCart->addItem($newCartItem);
+            }
+        }
+        $currentCart->setModifiedNow();
 
         foreach ($currentCart->getItems() as $item) {
             $this->em->persist($item);

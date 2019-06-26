@@ -3,7 +3,6 @@
 namespace Tests\ShopBundle\Functional\Model\Cart\Watcher;
 
 use Shopsys\FrameworkBundle\Component\Domain\Domain;
-use Shopsys\FrameworkBundle\Component\EntityExtension\EntityNameResolver;
 use Shopsys\FrameworkBundle\Component\Money\Money;
 use Shopsys\FrameworkBundle\Model\Cart\Cart;
 use Shopsys\FrameworkBundle\Model\Cart\Item\CartItem;
@@ -14,7 +13,6 @@ use Shopsys\FrameworkBundle\Model\Pricing\Vat\Vat;
 use Shopsys\FrameworkBundle\Model\Pricing\Vat\VatData;
 use Shopsys\FrameworkBundle\Model\Product\Pricing\ProductManualInputPriceFacade;
 use Shopsys\FrameworkBundle\Model\Product\Pricing\ProductPriceCalculationForUser;
-use Shopsys\FrameworkBundle\Model\Product\ProductCategoryDomainFactory;
 use Shopsys\FrameworkBundle\Model\Product\ProductDataFactoryInterface;
 use Shopsys\FrameworkBundle\Model\Product\ProductVisibility;
 use Shopsys\FrameworkBundle\Model\Product\ProductVisibilityRepository;
@@ -97,7 +95,7 @@ class CartWatcherTest extends TransactionFunctionalTestCase
         $vatData->name = 'vat';
         $vatData->percent = '21';
         $productData->vat = new Vat($vatData);
-        $product = Product::create($productData, new ProductCategoryDomainFactory(new EntityNameResolver([])));
+        $product = Product::create($productData);
 
         $cartItemMock = $this->getMockBuilder(CartItem::class)
             ->disableOriginalConstructor()

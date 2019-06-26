@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Shopsys\FrameworkBundle\Model\Customer;
 
 use Doctrine\ORM\EntityManagerInterface;
@@ -9,6 +11,8 @@ use Symfony\Component\Security\Core\Encoder\EncoderFactoryInterface;
 
 class CustomerPasswordFacade
 {
+    public const RESET_PASSWORD_HASH_LENGTH = 50;
+
     /**
      * @var \Doctrine\ORM\EntityManagerInterface
      */
@@ -63,7 +67,9 @@ class CustomerPasswordFacade
     {
         $user = $this->userRepository->getUserByEmailAndDomain($email, $domainId);
 
-        $user->resetPassword($this->hashGenerator);
+        $resetPasswordHash = $this->hashGenerator->generateHash(static::RESET_PASSWORD_HASH_LENGTH);
+        $user->setResetPasswordHash($resetPasswordHash);
+
         $this->em->flush($user);
         $this->resetPasswordMailFacade->sendMail($user);
     }
@@ -84,16 +90,31 @@ class CustomerPasswordFacade
     /**
      * @param string $email
      * @param int $domainId
-     * @param string|null $hash
+     * @param string|null $resetPasswordHash
      * @param string $newPassword
      * @return \Shopsys\FrameworkBundle\Model\Customer\User
      */
-    public function setNewPassword($email, $domainId, $hash, $newPassword)
+    public function setNewPassword(string $email, int $domainId, ?string $resetPasswordHash, string $newPassword): User
     {
         $user = $this->userRepository->getUserByEmailAndDomain($email, $domainId);
 
-        $user->setNewPassword($this->encoderFactory, $hash, $newPassword);
+        if (!$user->isResetPasswordHashValid($resetPasswordHash)) {
+            throw new \Shopsys\FrameworkBundle\Model\Customer\Exception\InvalidResetPasswordHashException();
+        }
+
+        $this->changePassword($user, $newPassword);
 
         return $user;
+    }
+
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Customer\User $user
+     * @param string $password
+     */
+    public function changePassword(User $user, string $password): void
+    {
+        $encoder = $this->encoderFactory->getEncoder($user);
+        $passwordHash = $encoder->encodePassword($password, null);
+        $user->setPasswordHash($passwordHash);
     }
 }

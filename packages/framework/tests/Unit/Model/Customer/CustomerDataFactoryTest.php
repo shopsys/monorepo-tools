@@ -72,7 +72,7 @@ class CustomerDataFactoryTest extends TestCase
 
         $billingAddress = $this->createBillingAddress($billingAddressData);
         $deliveryAddress = $this->createDeliveryAddress($deliveryAddressData);
-        $user = new User($userData, $billingAddress, $deliveryAddress, null);
+        $user = new User($userData, $billingAddress, $deliveryAddress);
 
         $transportData = new TransportData();
         $transportData->name = ['cs' => 'transportName'];
@@ -143,7 +143,7 @@ class CustomerDataFactoryTest extends TestCase
         $userData->domainId = 1;
 
         $billingAddress = $this->createBillingAddress();
-        $user = new User($userData, $billingAddress, null, null);
+        $user = new User($userData, $billingAddress, null);
 
         $transportData = new TransportData();
         $transportData->name = ['cs' => 'transportName'];

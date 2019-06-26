@@ -6,13 +6,12 @@ use PHPUnit\Framework\TestCase;
 use Shopsys\FrameworkBundle\Component\EntityExtension\EntityNameResolver;
 use Shopsys\FrameworkBundle\Model\Customer\BillingAddress;
 use Shopsys\FrameworkBundle\Model\Customer\BillingAddressData;
+use Shopsys\FrameworkBundle\Model\Customer\CustomerPasswordFacade;
 use Shopsys\FrameworkBundle\Model\Customer\DeliveryAddress;
 use Shopsys\FrameworkBundle\Model\Customer\DeliveryAddressData;
 use Shopsys\FrameworkBundle\Model\Customer\User;
 use Shopsys\FrameworkBundle\Model\Customer\UserData;
 use Shopsys\FrameworkBundle\Model\Customer\UserFactory;
-use Symfony\Component\Security\Core\Encoder\BCryptPasswordEncoder;
-use Symfony\Component\Security\Core\Encoder\EncoderFactory;
 
 class UserFactoryTest extends TestCase
 {
@@ -22,7 +21,6 @@ class UserFactoryTest extends TestCase
 
         $billingAddress = $this->createBillingAddress();
         $deliveryAddress = $this->createDeliveryAddress();
-        $userByEmail = null;
         $userData = new UserData();
         $userData->firstName = 'firstName';
         $userData->lastName = 'lastName';
@@ -33,8 +31,7 @@ class UserFactoryTest extends TestCase
         $user = $customerService->create(
             $userData,
             $billingAddress,
-            $deliveryAddress,
-            $userByEmail
+            $deliveryAddress
         );
 
         $this->assertInstanceOf(User::class, $user);
@@ -45,19 +42,9 @@ class UserFactoryTest extends TestCase
      */
     private function getUserFactory(): UserFactory
     {
-        $encoderFactory = $this->getEncoderFactory();
+        $customerPasswordFacade = $this->createMock(CustomerPasswordFacade::class);
 
-        return new UserFactory(new EntityNameResolver([]), $encoderFactory);
-    }
-
-    /**
-     * @return \Symfony\Component\Security\Core\Encoder\EncoderFactory
-     */
-    private function getEncoderFactory(): EncoderFactory
-    {
-        $encoder = new BCryptPasswordEncoder(12);
-
-        return new EncoderFactory([User::class => $encoder]);
+        return new UserFactory(new EntityNameResolver([]), $customerPasswordFacade);
     }
 
     /**

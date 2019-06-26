@@ -20,6 +20,7 @@ parameters:
             - '*/tests/ShopBundle/Functional/Model/Pricing/InputPriceRecalculationSchedulerTest.php'
             - '*/tests/ShopBundle/Smoke/Http/RouteConfigCustomization.php'
             - '*/tests/ShopBundle/Functional/Model/Product/ProductOnCurrentDomainFacadeCountDataTest.php'
+            - '*/tests/ShopBundle/Functional/Model/Cart/CartMigrationFacadeTest.php'
 
         ObjectCalisthenics\Sniffs\Files\ClassTraitAndInterfaceLengthSniff:
             - '*/tests/ShopBundle/Functional/Model/Product/ProductVisibilityRepositoryTest.php'

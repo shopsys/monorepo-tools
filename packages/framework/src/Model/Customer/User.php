@@ -5,10 +5,8 @@ namespace Shopsys\FrameworkBundle\Model\Customer;
 use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 use Serializable;
-use Shopsys\FrameworkBundle\Component\String\HashGenerator;
 use Shopsys\FrameworkBundle\Model\Security\Roles;
 use Shopsys\FrameworkBundle\Model\Security\TimelimitLoginInterface;
-use Symfony\Component\Security\Core\Encoder\EncoderFactoryInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
@@ -25,9 +23,6 @@ use Symfony\Component\Security\Core\User\UserInterface;
  */
 class User implements UserInterface, TimelimitLoginInterface, Serializable
 {
-    /** @access protected */
-    const RESET_PASSWORD_HASH_LENGTH = 50;
-
     /**
      * @ORM\Column(type="integer")
      * @ORM\Id
@@ -122,13 +117,11 @@ class User implements UserInterface, TimelimitLoginInterface, Serializable
      * @param \Shopsys\FrameworkBundle\Model\Customer\UserData $userData
      * @param \Shopsys\FrameworkBundle\Model\Customer\BillingAddress $billingAddress
      * @param \Shopsys\FrameworkBundle\Model\Customer\DeliveryAddress|null $deliveryAddress
-     * @param \Shopsys\FrameworkBundle\Model\Customer\User|null $userByEmail
      */
     public function __construct(
         UserData $userData,
         BillingAddress $billingAddress,
-        ?DeliveryAddress $deliveryAddress,
-        ?self $userByEmail
+        ?DeliveryAddress $deliveryAddress
     ) {
         $this->firstName = $userData->firstName;
         $this->lastName = $userData->lastName;
@@ -142,67 +135,33 @@ class User implements UserInterface, TimelimitLoginInterface, Serializable
         $this->domainId = $userData->domainId;
         $this->pricingGroup = $userData->pricingGroup;
         $this->telephone = $userData->telephone;
-
-        $this->changeEmail($userData->email, $userByEmail);
+        $this->setEmail($userData->email);
     }
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\Customer\UserData $userData
-     * @param \Symfony\Component\Security\Core\Encoder\EncoderFactoryInterface $encoderFactory
      */
-    public function edit(UserData $userData, EncoderFactoryInterface $encoderFactory)
+    public function edit(UserData $userData)
     {
         $this->firstName = $userData->firstName;
         $this->lastName = $userData->lastName;
         $this->pricingGroup = $userData->pricingGroup;
         $this->telephone = $userData->telephone;
-
-        if ($userData->password !== null) {
-            $this->changePassword($encoderFactory, $userData->password);
-        }
     }
 
     /**
      * @param string $email
-     * @param \Shopsys\FrameworkBundle\Model\Customer\User|null $userByEmail
      */
-    public function changeEmail(string $email, ?self $userByEmail)
+    public function setEmail(string $email): void
     {
-        $email = mb_strtolower($email);
-
-        if ($this !== $userByEmail) {
-            $this->checkDuplicateEmail($email, $this->domainId, $userByEmail);
-        }
-
-        $this->email = $email;
+        $this->email = mb_strtolower($email);
     }
 
     /**
-     * @param string $email
-     * @param int $domainId
-     * @param self|null $userByEmail
+     * @param string $passwordHash
      */
-    protected function checkDuplicateEmail(string $email, int $domainId, ?self $userByEmail): void
+    public function setPasswordHash(string $passwordHash): void
     {
-        if ($userByEmail === null) {
-            return;
-        }
-
-        $isSameEmail = ($userByEmail->getEmail() === $email);
-        $isSameDomain = ($userByEmail->getDomainId() === $domainId);
-        if ($isSameEmail && $isSameDomain) {
-            throw new \Shopsys\FrameworkBundle\Model\Customer\Exception\DuplicateEmailException($email);
-        }
-    }
-
-    /**
-     * @param \Symfony\Component\Security\Core\Encoder\EncoderFactoryInterface $encoderFactory
-     * @param string $password
-     */
-    public function changePassword(EncoderFactoryInterface $encoderFactory, $password)
-    {
-        $encoder = $encoderFactory->getEncoder($this);
-        $passwordHash = $encoder->encodePassword($password, null);
         $this->password = $passwordHash;
         $this->resetPasswordHash = null;
         $this->resetPasswordHashValidThrough = null;
@@ -417,32 +376,11 @@ class User implements UserInterface, TimelimitLoginInterface, Serializable
     }
 
     /**
-     * @param \Shopsys\FrameworkBundle\Model\Customer\DeliveryAddressData $deliveryAddressData
-     * @param \Shopsys\FrameworkBundle\Model\Customer\DeliveryAddressFactoryInterface $deliveryAddressFactory
+     * @param string $resetPasswordHash
      */
-    public function editDeliveryAddress(
-        DeliveryAddressData $deliveryAddressData,
-        DeliveryAddressFactoryInterface $deliveryAddressFactory
-    ) {
-        if (!$deliveryAddressData->addressFilled) {
-            $this->deliveryAddress = null;
-            return;
-        }
-
-        if ($this->deliveryAddress instanceof DeliveryAddress) {
-            $this->deliveryAddress->edit($deliveryAddressData);
-        } else {
-            $this->deliveryAddress = $deliveryAddressFactory->create($deliveryAddressData);
-        }
-    }
-
-    /**
-     * @param \Shopsys\FrameworkBundle\Component\String\HashGenerator $hashGenerator
-     */
-    public function resetPassword(HashGenerator $hashGenerator): void
+    public function setResetPasswordHash(string $resetPasswordHash): void
     {
-        $hash = $hashGenerator->generateHash(static::RESET_PASSWORD_HASH_LENGTH);
-        $this->resetPasswordHash = $hash;
+        $this->resetPasswordHash = $resetPasswordHash;
         $this->resetPasswordHashValidThrough = new DateTime('+48 hours');
     }
 
@@ -462,16 +400,10 @@ class User implements UserInterface, TimelimitLoginInterface, Serializable
     }
 
     /**
-     * @param \Symfony\Component\Security\Core\Encoder\EncoderFactoryInterface $encoderFactory
-     * @param string|null $hash
-     * @param string $newPassword
+     * @param \Shopsys\FrameworkBundle\Model\Customer\DeliveryAddress|null $deliveryAddress
      */
-    public function setNewPassword(EncoderFactoryInterface $encoderFactory, ?string $hash, string $newPassword)
+    public function setDeliveryAddress(?DeliveryAddress $deliveryAddress): void
     {
-        if (!$this->isResetPasswordHashValid($hash)) {
-            throw new \Shopsys\FrameworkBundle\Model\Customer\Exception\InvalidResetPasswordHashException();
-        }
-
-        $this->changePassword($encoderFactory, $newPassword);
+        $this->deliveryAddress = $deliveryAddress;
     }
 }

@@ -44,6 +44,7 @@ parameters:
             - '*/src/Form/Admin/Product/ProductFormType.php'
             - '*/src/Component/Grid/Grid.php'
             - '*/src/Model/Order/Order.php'
+            - '*/src/Model/Order/OrderFacade.php'
             - '*/src/Model/Product/Product.php'
             - '*/src/Model/Product/ProductRepository.php'
             - '*/tests/Unit/Component/Money/MoneyTest.php'

@@ -249,7 +249,8 @@ class ProductFacade
     {
         // Persist of ProductCategoryDomain requires known primary key of Product
         // @see https://github.com/doctrine/doctrine2/issues/4869
-        $product->setCategories($this->productCategoryDomainFactory, $productData->categoriesByDomainId);
+        $productCategoryDomains = $this->productCategoryDomainFactory->createMultiple($product, $productData->categoriesByDomainId);
+        $product->setProductCategoryDomains($productCategoryDomains);
         $this->em->flush($product);
 
         $this->saveParameters($product, $productData->parameters);
@@ -276,13 +277,15 @@ class ProductFacade
     {
         $product = $this->productRepository->getById($productId);
 
-        $product->edit($this->productCategoryDomainFactory, $productData, $this->productPriceRecalculationScheduler);
+        $productCategoryDomains = $this->productCategoryDomainFactory->createMultiple($product, $productData->categoriesByDomainId);
+        $product->edit($productCategoryDomains, $productData);
+        $this->productPriceRecalculationScheduler->scheduleProductForImmediateRecalculation($product);
 
         $this->saveParameters($product, $productData->parameters);
         if (!$product->isMainVariant()) {
             $this->refreshProductManualInputPrices($product, $productData->manualInputPricesByPricingGroupId);
         } else {
-            $product->refreshVariants($productData->variants, $this->productCategoryDomainFactory);
+            $product->refreshVariants($productData->variants);
         }
         $this->refreshProductAccessories($product, $productData->accessories);
         $this->em->flush();

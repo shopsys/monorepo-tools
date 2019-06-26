@@ -24,7 +24,10 @@ Model is mostly divided into three parts: Entity, Repository and Facade.
 ## Entity
 Entity is a class encapsulating data. All entities are persisted by Doctrine ORM. One entity class usually represents one table in the database and one instance of the entity represents one row in the table. The entity is composed of fields, which can be mapped to columns in the table. Doctrine ORM annotations are used to define the details about the database mapping (types of columns, relations, etc.).
 
-Entities are inspired by Rich Domain Model. That means entity is the place where domain logic belongs (e.g. `Product::changeVat()` sets vat and marks product for price recalculation).
+Entities are inspired by Rich Domain Model. That means entity is usually the place where domain logic belongs (e.g. `Product::changeVat()` sets vat and marks product for price recalculation).
+However, the rule applies only to the situations where there is no external dependency required. In other words, entities should deal with their own data only and must not be dependent on any other services,
+i.e. they must not require the services in constructor nor as arguments of their methods.
+When there is a need for a service in a given scenario, [`Facade`](#facade) is used to provide the desired use case.
 
 Entities can be used by all layers of the model and even outside of model (eg. controller or templates).
 
@@ -151,7 +154,7 @@ class CartRepository
 *Note: Repositories in Shopsys Framework wrap Doctrine repositories. This is done in order to provide only useful methods with understandable names instead of generic API of Doctrine repositories.*
 
 ## Facade
-Facades are a single entry-point into the model. That means you can use the same method in your controller, CLI command, REST API, etc. with the same results. All methods in facade should have single responsibility without any complex logic. Every method has a single use case and does not contain any business logic only sequence of calls of entities and repositories methods.
+Facades are a single entry-point into the model. That means you can use the same method in your controller, CLI command, REST API, etc. with the same results. All methods in facade should have single responsibility without any complex logic. Every method has a single use case and does not contain any complex business logic, only a sequence of calls of entities, repositories, and other specialized services.
 
 Facades as entry-point of the model can be used anywhere outside of the model.
 

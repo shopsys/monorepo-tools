@@ -6,6 +6,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Query\Expr\Join;
 use Doctrine\ORM\QueryBuilder;
 use Shopsys\FrameworkBundle\Component\Domain\Domain;
+use Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\FriendlyUrlFacade;
 use Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\FriendlyUrlRepository;
 use Shopsys\FrameworkBundle\Model\Product\Parameter\ParameterRepository;
 use Shopsys\FrameworkBundle\Model\Product\Pricing\ProductPrice;
@@ -42,12 +43,18 @@ class ProductSearchExportWithFilterRepository extends ProductSearchExportReposit
     protected $productVisibilityRepository;
 
     /**
+     * @var \Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\FriendlyUrlFacade
+     */
+    protected $friendlyUrlFacade;
+
+    /**
      * @param \Doctrine\ORM\EntityManagerInterface $em
      * @param \Shopsys\FrameworkBundle\Model\Product\Parameter\ParameterRepository $parameterRepository
      * @param \Shopsys\FrameworkBundle\Model\Product\ProductFacade $productFacade
      * @param \Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\FriendlyUrlRepository $friendlyUrlRepository
      * @param \Shopsys\FrameworkBundle\Component\Domain\Domain $domain
      * @param \Shopsys\FrameworkBundle\Model\Product\ProductVisibilityRepository $productVisibilityRepository
+     * @param \Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\FriendlyUrlFacade $friendlyUrlFacade
      */
     public function __construct(
         EntityManagerInterface $em,
@@ -55,7 +62,8 @@ class ProductSearchExportWithFilterRepository extends ProductSearchExportReposit
         ProductFacade $productFacade,
         FriendlyUrlRepository $friendlyUrlRepository,
         Domain $domain,
-        ProductVisibilityRepository $productVisibilityRepository
+        ProductVisibilityRepository $productVisibilityRepository,
+        FriendlyUrlFacade $friendlyUrlFacade
     ) {
         parent::__construct($em);
 
@@ -65,6 +73,7 @@ class ProductSearchExportWithFilterRepository extends ProductSearchExportReposit
         $this->friendlyUrlRepository = $friendlyUrlRepository;
         $this->domain = $domain;
         $this->productVisibilityRepository = $productVisibilityRepository;
+        $this->friendlyUrlFacade = $friendlyUrlFacade;
     }
 
     /**
@@ -139,7 +148,7 @@ class ProductSearchExportWithFilterRepository extends ProductSearchExportReposit
     {
         $friendlyUrl = $this->friendlyUrlRepository->getMainFriendlyUrl($domainId, 'front_product_detail', $product->getId());
 
-        return $friendlyUrl->getAbsoluteUrl($this->domain);
+        return $this->friendlyUrlFacade->getAbsoluteUrlByFriendlyUrl($friendlyUrl);
     }
 
     /**

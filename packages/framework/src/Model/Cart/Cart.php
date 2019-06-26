@@ -6,11 +6,8 @@ use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Shopsys\FrameworkBundle\Model\Cart\Item\CartItem;
-use Shopsys\FrameworkBundle\Model\Cart\Item\CartItemFactoryInterface;
 use Shopsys\FrameworkBundle\Model\Customer\User;
 use Shopsys\FrameworkBundle\Model\Order\Item\QuantifiedProduct;
-use Shopsys\FrameworkBundle\Model\Product\Pricing\ProductPriceCalculationForUser;
-use Shopsys\FrameworkBundle\Model\Product\Product;
 
 /**
  * @ORM\Table(name="carts")
@@ -173,34 +170,10 @@ class Cart
     }
 
     /**
-     * @param \Shopsys\FrameworkBundle\Model\Cart\Cart $cartToMerge
-     * @param \Shopsys\FrameworkBundle\Model\Cart\Item\CartItemFactoryInterface $cartItemFactory
-     */
-    public function mergeWithCart(self $cartToMerge, CartItemFactoryInterface $cartItemFactory)
-    {
-        foreach ($cartToMerge->getItems() as $itemToMerge) {
-            $similarItem = $this->findSimilarItemByItem($itemToMerge);
-            if ($similarItem instanceof CartItem) {
-                $similarItem->changeQuantity($similarItem->getQuantity() + $itemToMerge->getQuantity());
-            } else {
-                $newCartItem = $cartItemFactory->create(
-                    $this,
-                    $itemToMerge->getProduct(),
-                    $itemToMerge->getQuantity(),
-                    $itemToMerge->getWatchedPrice()
-                );
-                $this->addItem($newCartItem);
-            }
-        }
-
-        $this->setModifiedNow();
-    }
-
-    /**
      * @param \Shopsys\FrameworkBundle\Model\Cart\Item\CartItem $item
      * @return \Shopsys\FrameworkBundle\Model\Cart\Item\CartItem|null
      */
-    protected function findSimilarItemByItem(CartItem $item)
+    public function findSimilarItemByItem(CartItem $item): ?CartItem
     {
         foreach ($this->items as $similarItem) {
             if ($similarItem->isSimilarItemAs($item)) {
@@ -212,39 +185,6 @@ class Cart
     }
 
     /**
-     * @param \Shopsys\FrameworkBundle\Model\Product\Product $product
-     * @param int $quantity
-     * @param \Shopsys\FrameworkBundle\Model\Product\Pricing\ProductPriceCalculationForUser $productPriceCalculation
-     * @param \Shopsys\FrameworkBundle\Model\Cart\Item\CartItemFactoryInterface $cartItemFactory
-     * @return \Shopsys\FrameworkBundle\Model\Cart\AddProductResult
-     */
-    public function addProduct(
-        Product $product,
-        $quantity,
-        ProductPriceCalculationForUser $productPriceCalculation,
-        CartItemFactoryInterface $cartItemFactory
-    ) {
-        if (!is_int($quantity) || $quantity <= 0) {
-            throw new \Shopsys\FrameworkBundle\Model\Cart\Exception\InvalidQuantityException($quantity);
-        }
-
-        foreach ($this->items as $item) {
-            if ($item->getProduct() === $product) {
-                $item->changeQuantity($item->getQuantity() + $quantity);
-                $item->changeAddedAt(new DateTime());
-                return new AddProductResult($item, false, $quantity);
-            }
-        }
-
-        $productPrice = $productPriceCalculation->calculatePriceForCurrentUser($product);
-        $newCartItem = $cartItemFactory->create($this, $product, $quantity, $productPrice->getPriceWithVat());
-        $this->addItem($newCartItem);
-        $this->setModifiedNow();
-
-        return new AddProductResult($newCartItem, true, $quantity);
-    }
-
-    /**
      * @return string
      */
     public function getCartIdentifier()
@@ -252,7 +192,7 @@ class Cart
         return $this->cartIdentifier;
     }
 
-    protected function setModifiedNow()
+    public function setModifiedNow(): void
     {
         $this->modifiedAt = new DateTime();
     }

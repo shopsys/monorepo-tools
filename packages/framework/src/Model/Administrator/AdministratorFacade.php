@@ -65,7 +65,7 @@ class AdministratorFacade
             throw new \Shopsys\FrameworkBundle\Model\Administrator\Exception\DuplicateUserNameException($administratorByUserName->getUsername());
         }
         $administrator = $this->administratorFactory->create($administratorData);
-        $administrator->setPassword($administratorData->password, $this->encoderFactory);
+        $this->setPassword($administrator, $administratorData->password);
 
         $this->em->persist($administrator);
         $this->em->flush();
@@ -81,16 +81,41 @@ class AdministratorFacade
     public function edit($administratorId, AdministratorData $administratorData)
     {
         $administrator = $this->administratorRepository->getById($administratorId);
-        $administratorByUserName = $this->administratorRepository->findByUserName($administratorData->username);
-        $administrator->edit(
-            $administratorData,
-            $this->encoderFactory,
-            $administratorByUserName
-        );
+        $this->checkUsername($administrator, $administratorData->username);
+        $administrator->edit($administratorData);
+        if ($administratorData->password !== null) {
+            $this->setPassword($administrator, $administratorData->password);
+        }
 
         $this->em->flush();
 
         return $administrator;
+    }
+
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Administrator\Administrator $administrator
+     * @param string $username
+     */
+    protected function checkUsername(Administrator $administrator, string $username): void
+    {
+        $administratorByUserName = $this->administratorRepository->findByUserName($username);
+        if ($administratorByUserName !== null
+            && $administratorByUserName !== $this
+            && $administratorByUserName->getUsername() === $username
+        ) {
+            throw new \Shopsys\FrameworkBundle\Model\Administrator\Exception\DuplicateUserNameException($administrator->getUsername());
+        }
+    }
+
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Administrator\Administrator $administrator
+     * @param string $password
+     */
+    protected function setPassword(Administrator $administrator, string $password): void
+    {
+        $encoder = $this->encoderFactory->getEncoder($administrator);
+        $passwordHash = $encoder->encodePassword($password, $administrator->getSalt());
+        $administrator->setPasswordHash($passwordHash);
     }
 
     /**
@@ -99,10 +124,26 @@ class AdministratorFacade
     public function delete($administratorId)
     {
         $administrator = $this->administratorRepository->getById($administratorId);
-        $adminCountExcludingSuperadmin = $this->administratorRepository->getCountExcludingSuperadmin();
-        $administrator->checkForDelete($this->tokenStorage, $adminCountExcludingSuperadmin);
+        $this->checkForDelete($administrator);
         $this->em->remove($administrator);
         $this->em->flush();
+    }
+
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Administrator\Administrator $administrator
+     */
+    protected function checkForDelete(Administrator $administrator)
+    {
+        $adminCountExcludingSuperadmin = $this->administratorRepository->getCountExcludingSuperadmin();
+        if ($adminCountExcludingSuperadmin === 1) {
+            throw new \Shopsys\FrameworkBundle\Model\Administrator\Exception\DeletingLastAdministratorException();
+        }
+        if ($this->tokenStorage->getToken()->getUser() === $administrator) {
+            throw new \Shopsys\FrameworkBundle\Model\Administrator\Exception\DeletingSelfException();
+        }
+        if ($administrator->isSuperadmin()) {
+            throw new \Shopsys\FrameworkBundle\Model\Administrator\Exception\DeletingSuperadminException();
+        }
     }
 
     /**
@@ -112,7 +153,7 @@ class AdministratorFacade
     public function changePassword($administratorUsername, $newPassword)
     {
         $administrator = $this->administratorRepository->getByUserName($administratorUsername);
-        $administrator->setPassword($newPassword, $this->encoderFactory);
+        $administrator->setPasswordHash($newPassword);
         $this->em->flush($administrator);
     }
 

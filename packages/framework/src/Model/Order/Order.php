@@ -5,19 +5,11 @@ namespace Shopsys\FrameworkBundle\Model\Order;
 use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
-use Shopsys\FrameworkBundle\Component\Domain\Domain;
 use Shopsys\FrameworkBundle\Component\Money\Money;
 use Shopsys\FrameworkBundle\Model\Customer\User;
 use Shopsys\FrameworkBundle\Model\Order\Item\OrderItem;
-use Shopsys\FrameworkBundle\Model\Order\Item\OrderItemFactoryInterface;
-use Shopsys\FrameworkBundle\Model\Order\Item\OrderItemPriceCalculation;
-use Shopsys\FrameworkBundle\Model\Order\Preview\OrderPreview;
 use Shopsys\FrameworkBundle\Model\Order\Status\OrderStatus;
-use Shopsys\FrameworkBundle\Model\Payment\PaymentPriceCalculation;
 use Shopsys\FrameworkBundle\Model\Pricing\Price;
-use Shopsys\FrameworkBundle\Model\Product\Product;
-use Shopsys\FrameworkBundle\Model\Transport\TransportPriceCalculation;
-use Shopsys\FrameworkBundle\Twig\NumberFormatterExtension;
 
 /**
  * @ORM\Table(name="orders")
@@ -25,9 +17,6 @@ use Shopsys\FrameworkBundle\Twig\NumberFormatterExtension;
  */
 class Order
 {
-    /** @access protected */
-    const DEFAULT_PRODUCT_QUANTITY = 1;
-
     /**
      * @var int
      *
@@ -587,7 +576,7 @@ class Order
     /**
      * @param \Shopsys\FrameworkBundle\Model\Order\OrderTotalPrice $orderTotalPrice
      */
-    protected function setTotalPrice(OrderTotalPrice $orderTotalPrice)
+    public function setTotalPrice(OrderTotalPrice $orderTotalPrice): void
     {
         $this->totalPriceWithVat = $orderTotalPrice->getPriceWithVat();
         $this->totalPriceWithoutVat = $orderTotalPrice->getPriceWithoutVat();
@@ -939,259 +928,14 @@ class Order
     }
 
     /**
-     * @param \Shopsys\FrameworkBundle\Model\Order\OrderPriceCalculation $orderPriceCalculation
-     */
-    public function calculateTotalPrice(OrderPriceCalculation $orderPriceCalculation)
-    {
-        $orderTotalPrice = $orderPriceCalculation->getOrderTotalPrice($this);
-        $this->setTotalPrice($orderTotalPrice);
-    }
-
-    /**
-     * @param \Shopsys\FrameworkBundle\Model\Product\Product $product
-     * @param \Shopsys\FrameworkBundle\Model\Pricing\Price $productPrice
-     * @param \Shopsys\FrameworkBundle\Model\Order\Item\OrderItemFactoryInterface $orderItemFactory
-     * @param \Shopsys\FrameworkBundle\Component\Domain\Domain $domain
-     * @param \Shopsys\FrameworkBundle\Model\Order\OrderPriceCalculation $orderPriceCalculation
-     * @return \Shopsys\FrameworkBundle\Model\Order\Item\OrderItem
-     */
-    public function addProduct(
-        Product $product,
-        Price $productPrice,
-        OrderItemFactoryInterface $orderItemFactory,
-        Domain $domain,
-        OrderPriceCalculation $orderPriceCalculation
-    ): OrderItem {
-        $orderDomainConfig = $domain->getDomainConfigById($this->getDomainId());
-
-        $orderProduct = $orderItemFactory->createProduct(
-            $this,
-            $product->getName($orderDomainConfig->getLocale()),
-            $productPrice,
-            $product->getVat()->getPercent(),
-            static::DEFAULT_PRODUCT_QUANTITY,
-            $product->getUnit()->getName($orderDomainConfig->getLocale()),
-            $product->getCatnum(),
-            $product
-        );
-
-        $this->addItem($orderProduct);
-        $this->calculateTotalPrice($orderPriceCalculation);
-
-        return $orderProduct;
-    }
-
-    /**
      * @param \Shopsys\FrameworkBundle\Model\Order\OrderData $orderData
-     * @param \Shopsys\FrameworkBundle\Model\Order\Item\OrderItemPriceCalculation $orderItemPriceCalculation
-     * @param \Shopsys\FrameworkBundle\Model\Order\Item\OrderItemFactoryInterface $orderItemFactory
-     * @param \Shopsys\FrameworkBundle\Model\Order\OrderPriceCalculation $orderPriceCalculation
      * @return \Shopsys\FrameworkBundle\Model\Order\OrderEditResult
      */
-    public function edit(
-        OrderData $orderData,
-        OrderItemPriceCalculation $orderItemPriceCalculation,
-        OrderItemFactoryInterface $orderItemFactory,
-        OrderPriceCalculation $orderPriceCalculation
-    ): OrderEditResult {
-        $orderTransportData = $orderData->orderTransport;
-        $orderTransportData->priceWithoutVat = $orderItemPriceCalculation->calculatePriceWithoutVat($orderTransportData);
-        $orderPaymentData = $orderData->orderPayment;
-        $orderPaymentData->priceWithoutVat = $orderItemPriceCalculation->calculatePriceWithoutVat($orderPaymentData);
-
+    public function edit(OrderData $orderData): OrderEditResult
+    {
         $statusChanged = $this->getStatus() !== $orderData->status;
         $this->editData($orderData);
 
-        $orderItemsWithoutTransportAndPaymentData = $orderData->itemsWithoutTransportAndPayment;
-
-        foreach ($this->getItemsWithoutTransportAndPayment() as $orderItem) {
-            if (array_key_exists($orderItem->getId(), $orderItemsWithoutTransportAndPaymentData)) {
-                $orderItemData = $orderItemsWithoutTransportAndPaymentData[$orderItem->getId()];
-                $orderItemData->priceWithoutVat = $orderItemPriceCalculation->calculatePriceWithoutVat($orderItemData);
-                $orderItem->edit($orderItemData);
-            } else {
-                $this->removeItem($orderItem);
-            }
-        }
-
-        foreach ($orderData->getNewItemsWithoutTransportAndPayment() as $newOrderItemData) {
-            $newOrderItemData->priceWithoutVat = $orderItemPriceCalculation->calculatePriceWithoutVat($newOrderItemData);
-            $orderItemFactory->createProduct(
-                $this,
-                $newOrderItemData->name,
-                new Price(
-                    $newOrderItemData->priceWithoutVat,
-                    $newOrderItemData->priceWithVat
-                ),
-                $newOrderItemData->vatPercent,
-                $newOrderItemData->quantity,
-                $newOrderItemData->unitName,
-                $newOrderItemData->catnum
-            );
-        }
-
-        $this->calculateTotalPrice($orderPriceCalculation);
-
         return new OrderEditResult($statusChanged);
-    }
-
-    /**
-     * @param \Shopsys\FrameworkBundle\Model\Payment\PaymentPriceCalculation $paymentPriceCalculation
-     * @param \Shopsys\FrameworkBundle\Model\Order\Item\OrderItemFactoryInterface $orderItemFactory
-     * @param \Shopsys\FrameworkBundle\Model\Pricing\Price $productsPrice
-     * @param string $locale
-     */
-    public function fillOrderPayment(
-        PaymentPriceCalculation $paymentPriceCalculation,
-        OrderItemFactoryInterface $orderItemFactory,
-        Price $productsPrice,
-        $locale
-    ) {
-        $payment = $this->getPayment();
-        $paymentPrice = $paymentPriceCalculation->calculatePrice(
-            $payment,
-            $this->getCurrency(),
-            $productsPrice,
-            $this->getDomainId()
-        );
-        $orderPayment = $orderItemFactory->createPayment(
-            $this,
-            $payment->getName($locale),
-            $paymentPrice,
-            $payment->getVat()->getPercent(),
-            1,
-            $payment
-        );
-        $this->addItem($orderPayment);
-    }
-
-    /**
-     * @param \Shopsys\FrameworkBundle\Model\Transport\TransportPriceCalculation $transportPriceCalculation
-     * @param \Shopsys\FrameworkBundle\Model\Order\Item\OrderItemFactoryInterface $orderItemFactory
-     * @param \Shopsys\FrameworkBundle\Model\Pricing\Price $productsPrice
-     * @param string $locale
-     */
-    public function fillOrderTransport(
-        TransportPriceCalculation $transportPriceCalculation,
-        OrderItemFactoryInterface $orderItemFactory,
-        Price $productsPrice,
-        $locale
-    ) {
-        $transport = $this->getTransport();
-        $transportPrice = $transportPriceCalculation->calculatePrice(
-            $transport,
-            $this->getCurrency(),
-            $productsPrice,
-            $this->getDomainId()
-        );
-        $orderTransport = $orderItemFactory->createTransport(
-            $this,
-            $transport->getName($locale),
-            $transportPrice,
-            $transport->getVat()->getPercent(),
-            1,
-            $transport
-        );
-        $this->addItem($orderTransport);
-    }
-
-    /**
-     * @param \Shopsys\FrameworkBundle\Model\Order\Preview\OrderPreview $orderPreview
-     * @param \Shopsys\FrameworkBundle\Model\Order\Item\OrderItemFactoryInterface $orderItemFactory
-     * @param \Shopsys\FrameworkBundle\Twig\NumberFormatterExtension $numberFormatterExtension
-     * @param string $locale
-     */
-    public function fillOrderProducts(
-        OrderPreview $orderPreview,
-        OrderItemFactoryInterface $orderItemFactory,
-        NumberFormatterExtension $numberFormatterExtension,
-        $locale
-    ) {
-        $quantifiedItemPrices = $orderPreview->getQuantifiedItemsPrices();
-        $quantifiedItemDiscounts = $orderPreview->getQuantifiedItemsDiscounts();
-
-        foreach ($orderPreview->getQuantifiedProducts() as $index => $quantifiedProduct) {
-            $product = $quantifiedProduct->getProduct();
-            if (!$product instanceof Product) {
-                $message = 'Object "' . get_class($product) . '" is not valid for order creation.';
-                throw new \Shopsys\FrameworkBundle\Model\Order\Item\Exception\InvalidQuantifiedProductException($message);
-            }
-
-            $quantifiedItemPrice = $quantifiedItemPrices[$index];
-            /* @var $quantifiedItemPrice \Shopsys\FrameworkBundle\Model\Order\Item\QuantifiedItemPrice */
-            $quantifiedItemDiscount = $quantifiedItemDiscounts[$index];
-            /* @var $quantifiedItemDiscount \Shopsys\FrameworkBundle\Model\Pricing\Price|null */
-
-            $orderItem = $orderItemFactory->createProduct(
-                $this,
-                $product->getName($locale),
-                $quantifiedItemPrice->getUnitPrice(),
-                $product->getVat()->getPercent(),
-                $quantifiedProduct->getQuantity(),
-                $product->getUnit()->getName($locale),
-                $product->getCatnum(),
-                $product
-            );
-
-            if ($quantifiedItemDiscount !== null) {
-                $this->addOrderItemDiscount($numberFormatterExtension, $orderPreview, $orderItemFactory, $quantifiedItemDiscount, $orderItem, $locale);
-            }
-        }
-    }
-
-    /**
-     * @param \Shopsys\FrameworkBundle\Twig\NumberFormatterExtension $numberFormatterExtension
-     * @param \Shopsys\FrameworkBundle\Model\Order\Preview\OrderPreview $orderPreview
-     * @param \Shopsys\FrameworkBundle\Model\Order\Item\OrderItemFactoryInterface $orderItemFactory
-     * @param \Shopsys\FrameworkBundle\Model\Pricing\Price $quantifiedItemDiscount
-     * @param \Shopsys\FrameworkBundle\Model\Order\Item\OrderItem $orderItem
-     * @param string $locale
-     */
-    protected function addOrderItemDiscount(
-        NumberFormatterExtension $numberFormatterExtension,
-        OrderPreview $orderPreview,
-        OrderItemFactoryInterface $orderItemFactory,
-        Price $quantifiedItemDiscount,
-        OrderItem $orderItem,
-        $locale
-    ) {
-        $name = sprintf(
-            '%s %s - %s',
-            t('Promo code', [], 'messages', $locale),
-            $numberFormatterExtension->formatPercent(-$orderPreview->getPromoCodeDiscountPercent(), $locale),
-            $orderItem->getName()
-        );
-
-        $orderItemFactory->createProduct(
-            $orderItem->getOrder(),
-            $name,
-            $quantifiedItemDiscount->inverse(),
-            $orderItem->getVatPercent(),
-            1,
-            null,
-            null,
-            null
-        );
-    }
-
-    /**
-     * @param \Shopsys\FrameworkBundle\Model\Order\Item\OrderItemFactoryInterface $orderItemFactory
-     * @param \Shopsys\FrameworkBundle\Model\Pricing\Price|null $roundingPrice
-     * @param string $locale
-     */
-    public function fillOrderRounding(OrderItemFactoryInterface $orderItemFactory, ?Price $roundingPrice, $locale)
-    {
-        if ($roundingPrice !== null) {
-            $orderItemFactory->createProduct(
-                $this,
-                t('Rounding', [], 'messages', $locale),
-                $roundingPrice,
-                0,
-                1,
-                null,
-                null,
-                null
-            );
-        }
     }
 }
