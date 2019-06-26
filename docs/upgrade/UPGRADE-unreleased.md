@@ -154,6 +154,8 @@ There you can find links to upgrade notes for other versions too.
                         type: "null"
         +               excluded_404s: false
         ```
+- remove the useless route `front_category_panel` from your `routing_front.yml` ([#1042](https://github.com/shopsys/shopsys/pull/1042))
+    - you'll find the configuration file in `src/Shopsys/ShopBundle/Resources/config/`
 
 ### Tools
 - use the `build.xml` [Phing configuration](/docs/introduction/console-commands-for-application-management-phing-targets.md) from the `shopsys/framework` package ([#1068](https://github.com/shopsys/shopsys/pull/1068))
