@@ -166,6 +166,9 @@ msgstr ""
 msgid "All pages"
 msgstr ""
 
+msgid "All prices have to be handled manually if checked, otherwise the unit price without VAT and the total prices for that item will be recalculated automatically."
+msgstr ""
+
 msgid "All search results"
 msgstr ""
 
@@ -1921,6 +1924,9 @@ msgstr ""
 msgid "Set alternative availability"
 msgstr ""
 
+msgid "Set prices manually"
+msgstr ""
+
 msgid "Settings"
 msgstr ""
 
@@ -2155,6 +2161,9 @@ msgstr ""
 msgid "Unit <strong>{{ name }}</strong> deleted and replaced by unit <strong>{{ newName }}</strong>"
 msgstr ""
 
+msgid "Unit price excluding VAT"
+msgstr ""
+
 msgid "Unit price including VAT"
 msgstr ""
 
@@ -2192,6 +2201,9 @@ msgid "Used: %currentLength% characters. Recommended max. %recommendedLength%"
 msgstr ""
 
 msgid "Username"
+msgstr ""
+
+msgid "Using price calculation has been disabled, don't forget to edit all prices."
 msgstr ""
 
 msgid "VAT"

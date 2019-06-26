@@ -9,6 +9,8 @@ use Shopsys\FrameworkBundle\Model\Pricing\Vat\Vat;
 
 class PriceCalculation
 {
+    protected const PRICE_CALCULATION_MAX_SCALE = 6;
+
     /**
      * @var \Shopsys\FrameworkBundle\Model\Pricing\Rounding
      */
@@ -29,17 +31,25 @@ class PriceCalculation
      */
     public function getVatAmountByPriceWithVat(Money $priceWithVat, Vat $vat): Money
     {
-        $vatCoefficient = $this->getVatCoefficientByPercent($vat->getPercent());
+        $divisor = (string)(1 + $vat->getPercent() / 100);
 
-        return $this->rounding->roundVatAmount($priceWithVat->multiply($vatCoefficient));
+        $priceWithoutVat = $priceWithVat->divide($divisor, static::PRICE_CALCULATION_MAX_SCALE);
+
+        return $this->rounding->roundVatAmount($priceWithVat->subtract($priceWithoutVat));
     }
 
     /**
      * @param string $vatPercent
      * @return string
+     * @deprecated This method is deprecated since SSFW 7.3, use getVatAmountByPriceWithVat() for VAT calculation instead
      */
     public function getVatCoefficientByPercent(string $vatPercent): string
     {
+        @trigger_error(
+            sprintf('Using method "%s" is deprecated since SSFW 7.3, use getVatAmountByPriceWithVat() for VAT calculation instead', __METHOD__),
+            E_USER_DEPRECATED
+        );
+
         $ratio = (float)$vatPercent / (100 + (float)$vatPercent);
 
         return (string)round($ratio, 4);

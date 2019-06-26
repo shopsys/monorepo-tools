@@ -19,6 +19,8 @@ The change introduced many [BC breaks](/docs/contributing/backward-compatibility
     - use `OrderFacade::addOrderItemDiscount()` instead
 - `Order::fillOrderRounding()`
     - use `OrderFacade::fillOrderRounding()` instead
+- `Order::calculateOrderItemDataPrices()`
+    - use `OrderFacade::calculateOrderItemDataPrices()` instead
 - `Cart::mergeWithCart()`
     - use `CartMigrationFacade::mergeCurrentCartWithCart` instead
 - `Cart::addProduct()`
@@ -158,6 +160,17 @@ and fix them appropriately (you can copy paste them from [Github](https://github
     - you can copy paste it from [Github](https://github.com/shopsys/project-base/blob/v8.0.0/tests/ShopBundle/Functional/Model/Product/ProductFacadeTest.php#L133)
 - rename `Tests\ShopBundle\Functional\Model\Pricing\ProductManualInputPriceTest` to `Tests\ShopBundle\Functional\Model\Pricing\ProductInputPriceRecalculatorTest` and use instance of `ProductInputPriceRecalculator` for input prices recalculations
     - you can copy paste the class from [Github](https://github.com/shopsys/project-base/blob/v8.0.0/tests/ShopBundle/Functional/Model/Pricing/ProductInputPriceRecalculatorTest.php)
+- rename `Tests\ShopBundle\Functional\Model\Order\OrderEditTest` to `Tests\ShopBundle\Functional\Model\Order\OrderFacadeEditTest`
+    - change the test to is uses `OrderFacade` to edit the orders instead of calling `Order::edit()` directly
+    - you'll have to modify the *act* phase of the test:
+        ```diff
+        - $this->order->edit($orderData, $this->orderItemPriceCalculation, $this->orderItemFactory, $this->orderPriceCalculation);
+        + $this->orderFacade->edit(self::ORDER_ID, $orderData);
+        ```
+    - and modify the `setUp()` method to set up the dependencies correctly
+        - add `OrderFacade` from the DIC
+        - remove `OrderItemPriceCalculation`, `OrderItemFactoryInterface` and `OrderPriceCalculation`
+    - you can see the test class on [Github](https://github.com/shopsys/project-base/blob/v8.0.0/tests/ShopBundle/Functional/Model/Order/OrderFacadeEditTest.php)
 - remove the following tests from `Tests\FrameworkBundle\Unit\Model\Customer\UserTest` and create new `Tests\ShopBundle\Functional\Model\Customer\CustomerFacadeTest` class that will test the behavior
 (you can copy paste the class from [Github](https://github.com/shopsys/project-base/blob/v8.0.0/tests/ShopBundle/Functional/Model/Customer/CustomerFacadeTest.php))
     - `testChangeEmailToExistingEmailButDifferentDomainDoNotThrowException()`

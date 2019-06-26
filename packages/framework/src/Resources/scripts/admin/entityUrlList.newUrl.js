@@ -23,7 +23,6 @@
             Shopsys.register.registerNewContent($newUrl);
 
             Shopsys.validation.addNewItemToCollection('#' + newUrlsId, index);
-            Shopsys.formChangeInfo.showInfo();
         };
 
         var getNextNewUrlIndex = function () {
@@ -39,7 +38,6 @@
             var $row = $(this).closest('.js-entity-url-list-new-row');
             var index = $row.data('index');
             Shopsys.validation.removeItemFromCollection('#' + newUrlsId, index);
-            Shopsys.formChangeInfo.showInfo();
             $row.remove();
         };
     };

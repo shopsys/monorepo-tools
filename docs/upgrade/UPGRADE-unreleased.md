@@ -55,6 +55,26 @@ There you can find links to upgrade notes for other versions too.
         ```
 - update your tests to use interfaces of factories fetched from dependency injection container
     -  update tests same way as in PR ([#970](https://github.com/shopsys/shopsys/pull/970/files))
+- check your VAT calculations after it was modified in `shopsys/framework` ([#1129](https://github.com/shopsys/shopsys/pull/1129))
+    - we strongly recommend seeing [the description of the PR](https://github.com/shopsys/shopsys/pull/1129) to understand the scope of this change
+    - ẗo ensure you data is consistent, run DB migrations on your demo data and on a copy of production database
+        - if you modified the price calculation or you altered the prices in the database directly, the migration might fail during a check sum - in that case the DB transaction will be reverted and it'll tell what to do
+    - copy the functional test [OrderEditTest.php](https://github.com/shopsys/project-base/blob/master/tests/ShopBundle/Functional/Model/Order/OrderEditTest.php) into `tests/ShopBundle/Functional/Model/Order/` to test editing of order items
+        - for the test to work, add test service definitions for `OrderItemDataFactory` and `OrderItemFactory` in your `src/Shopsys/ShopBundle/Resources/config/services_test.yml` configuration:
+            ```diff
+
+                 Shopsys\FrameworkBundle\Model\Customer\UserDataFactoryInterface: '@Shopsys\ShopBundle\Model\Customer\UserDataFactory'
+
+            +    Shopsys\FrameworkBundle\Model\Order\Item\OrderItemDataFactoryInterface: '@Shopsys\ShopBundle\Model\Order\Item\OrderItemDataFactory'
+            +
+            +    Shopsys\FrameworkBundle\Model\Order\Item\OrderItemFactoryInterface: '@Shopsys\FrameworkBundle\Model\Order\Item\OrderItemFactory'
+            +
+                 Shopsys\FrameworkBundle\Model\Order\OrderDataFactoryInterface: '@Shopsys\ShopBundle\Model\Order\OrderDataFactory'
+
+            ```
+    - stop using the deprecated method `\Shopsys\FrameworkBundle\Model\Pricing\PriceCalculation::getVatCoefficientByPercent()`, use `PriceCalculation::getVatAmountByPriceWithVat()` for VAT calculation instead
+    - if you want to customize the VAT calculation (eg. revert it back to the previous implementation), extend the service `@Shopsys\FrameworkBundle\Model\Pricing\PriceCalculation` and override the method `getVatAmountByPriceWithVat()`
+    - if you created new tests regarding the price calculation they might start failing after the upgrade - in such case, please see the new VAT calculation and change the tests expectations accordingly
 
 ### Configuration
 - update `phpstan.neon` with following change to skip phpstan error ([#1086](https://github.com/shopsys/shopsys/pull/1086))

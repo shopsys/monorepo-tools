@@ -14,6 +14,7 @@ use Shopsys\FrameworkBundle\Model\Customer\User;
 use Shopsys\FrameworkBundle\Model\Heureka\HeurekaFacade;
 use Shopsys\FrameworkBundle\Model\Localization\Localization;
 use Shopsys\FrameworkBundle\Model\Order\Item\OrderItem;
+use Shopsys\FrameworkBundle\Model\Order\Item\OrderItemData;
 use Shopsys\FrameworkBundle\Model\Order\Item\OrderItemFactoryInterface;
 use Shopsys\FrameworkBundle\Model\Order\Item\OrderItemPriceCalculation;
 use Shopsys\FrameworkBundle\Model\Order\Item\OrderProductFacade;
@@ -27,6 +28,7 @@ use Shopsys\FrameworkBundle\Model\Payment\PaymentPriceCalculation;
 use Shopsys\FrameworkBundle\Model\Pricing\Price;
 use Shopsys\FrameworkBundle\Model\Transport\TransportPriceCalculation;
 use Shopsys\FrameworkBundle\Twig\NumberFormatterExtension;
+use Webmozart\Assert\Assert;
 
 class OrderFacade
 {
@@ -337,7 +339,8 @@ class OrderFacade
         $order = $this->orderRepository->getById($orderId);
         $originalOrderStatus = $order->getStatus();
 
-        $this->calculatePriceWithoutVatForOrderPaymentDataAndOrderTransportData($orderData);
+        $this->calculateOrderItemDataPrices($orderData->orderTransport);
+        $this->calculateOrderItemDataPrices($orderData->orderPayment);
         $this->refreshOrderItemsWithoutTransportAndPayment($order, $orderData);
 
         $orderEditResult = $order->edit($orderData);
@@ -639,18 +642,6 @@ class OrderFacade
     }
 
     /**
-     * @param \Shopsys\FrameworkBundle\Model\Order\OrderData $orderData
-     */
-    protected function calculatePriceWithoutVatForOrderPaymentDataAndOrderTransportData(OrderData $orderData): void
-    {
-        $orderTransportData = $orderData->orderTransport;
-        $orderTransportData->priceWithoutVat = $this->orderItemPriceCalculation->calculatePriceWithoutVat($orderTransportData);
-
-        $orderPaymentData = $orderData->orderPayment;
-        $orderPaymentData->priceWithoutVat = $this->orderItemPriceCalculation->calculatePriceWithoutVat($orderPaymentData);
-    }
-
-    /**
      * @param \Shopsys\FrameworkBundle\Model\Order\Order $order
      * @param \Shopsys\FrameworkBundle\Model\Order\OrderData $orderData
      */
@@ -660,7 +651,7 @@ class OrderFacade
         foreach ($order->getItemsWithoutTransportAndPayment() as $orderItem) {
             if (array_key_exists($orderItem->getId(), $orderItemsWithoutTransportAndPaymentData)) {
                 $orderItemData = $orderItemsWithoutTransportAndPaymentData[$orderItem->getId()];
-                $orderItemData->priceWithoutVat = $this->orderItemPriceCalculation->calculatePriceWithoutVat($orderItemData);
+                $this->calculateOrderItemDataPrices($orderItemData);
                 $orderItem->edit($orderItemData);
             } else {
                 $order->removeItem($orderItem);
@@ -668,8 +659,9 @@ class OrderFacade
         }
 
         foreach ($orderData->getNewItemsWithoutTransportAndPayment() as $newOrderItemData) {
-            $newOrderItemData->priceWithoutVat = $this->orderItemPriceCalculation->calculatePriceWithoutVat($newOrderItemData);
-            $this->orderItemFactory->createProduct(
+            $this->calculateOrderItemDataPrices($newOrderItemData);
+
+            $newOrderItem = $this->orderItemFactory->createProduct(
                 $order,
                 $newOrderItemData->name,
                 new Price(
@@ -680,6 +672,26 @@ class OrderFacade
                 $newOrderItemData->quantity,
                 $newOrderItemData->unitName,
                 $newOrderItemData->catnum
+            );
+            if (!$newOrderItemData->usePriceCalculation) {
+                $newOrderItem->setTotalPrice(new Price($newOrderItemData->totalPriceWithoutVat, $newOrderItemData->totalPriceWithVat));
+            }
+        }
+    }
+
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Order\Item\OrderItemData $orderItemData
+     */
+    protected function calculateOrderItemDataPrices(OrderItemData $orderItemData): void
+    {
+        if ($orderItemData->usePriceCalculation) {
+            $orderItemData->priceWithoutVat = $this->orderItemPriceCalculation->calculatePriceWithoutVat($orderItemData);
+            $orderItemData->totalPriceWithVat = null;
+            $orderItemData->totalPriceWithoutVat = null;
+        } else {
+            Assert::allNotNull(
+                [$orderItemData->priceWithoutVat, $orderItemData->totalPriceWithVat, $orderItemData->totalPriceWithoutVat],
+                'When not using price calculation for an order item, all prices must be filled.'
             );
         }
     }

@@ -124,6 +124,9 @@
     // PR with fix in the original package: https://github.com/formapro/JsFormValidatorBundle/pull/141
     FpJsFormValidator._preparePrototype = FpJsFormValidator.preparePrototype;
     FpJsFormValidator.preparePrototype = function (prototype, name) {
+        if (prototype.data && prototype.data.form && typeof prototype.data.form.groups === 'string') {
+            prototype.data.form.groups = prototype.data.form.groups.replace(/__name__/g, name);
+        }
         prototype.name = prototype.name.replace(/__name__/g, name);
         prototype.id = prototype.id.replace(/__name__/g, name);
 

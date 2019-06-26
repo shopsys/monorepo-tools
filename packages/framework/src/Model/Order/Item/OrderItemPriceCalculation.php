@@ -63,6 +63,10 @@ class OrderItemPriceCalculation
      */
     public function calculateTotalPrice(OrderItem $orderItem): Price
     {
+        if ($orderItem->hasForcedTotalPrice()) {
+            return new Price($orderItem->getTotalPriceWithoutVat(), $orderItem->getTotalPriceWithVat());
+        }
+
         $vatData = $this->vatDataFactory->create();
         $vatData->name = 'orderItemVat';
         $vatData->percent = $orderItem->getVatPercent();
