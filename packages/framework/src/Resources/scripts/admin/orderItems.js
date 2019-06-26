@@ -46,7 +46,6 @@
         $item.remove();
 
         Shopsys.order.items.refreshCount($collection);
-        Shopsys.formChangeInfo.showInfo();
     };
 
     Shopsys.order.items.getNewIndex = function ($collection) {
@@ -75,9 +74,8 @@
 
         $collection.append($item);
         Shopsys.register.registerNewContent($item);
-
         Shopsys.validation.addNewItemToCollection('#js-order-items', index);
-        Shopsys.formChangeInfo.showInfo();
+
         Shopsys.order.items.refreshCount($collection);
     };
 
@@ -97,8 +95,8 @@
 
                 $collection.append($orderItem);
                 Shopsys.register.registerNewContent($orderItem);
-
                 Shopsys.validation.addNewItemToCollection('#js-order-items', index);
+
                 Shopsys.order.items.refreshCount($collection);
 
                 Shopsys.window({ content: Shopsys.translator.trans('Product saved in order') });
@@ -127,6 +125,25 @@
 
     $(document).ready(function () {
         Shopsys.order.items.init();
+    });
+
+    Shopsys.register.registerCallback(function ($container) {
+        $container.filterAllNodes('.js-order-item-any').each(function () {
+            var $orderItem = $(this);
+
+            function onPriceCalculationChange ($orderItem) {
+                var setPricesManually = $orderItem.find('.js-set-prices-manually').is(':checked');
+
+                $orderItem.find('.js-calculable-price').prop('readonly', !setPricesManually);
+                $orderItem.find('.js-setting-prices-manually-warning').css('visibility', setPricesManually ? 'visible' : 'hidden');
+            }
+
+            onPriceCalculationChange($orderItem);
+
+            $orderItem.find('.js-set-prices-manually').change(function () {
+                onPriceCalculationChange($orderItem);
+            });
+        });
     });
 
 })(jQuery);

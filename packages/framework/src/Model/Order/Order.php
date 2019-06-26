@@ -9,6 +9,7 @@ use Shopsys\FrameworkBundle\Component\Domain\Domain;
 use Shopsys\FrameworkBundle\Component\Money\Money;
 use Shopsys\FrameworkBundle\Model\Customer\User;
 use Shopsys\FrameworkBundle\Model\Order\Item\OrderItem;
+use Shopsys\FrameworkBundle\Model\Order\Item\OrderItemData;
 use Shopsys\FrameworkBundle\Model\Order\Item\OrderItemFactoryInterface;
 use Shopsys\FrameworkBundle\Model\Order\Item\OrderItemPriceCalculation;
 use Shopsys\FrameworkBundle\Model\Order\Preview\OrderPreview;
@@ -18,6 +19,7 @@ use Shopsys\FrameworkBundle\Model\Pricing\Price;
 use Shopsys\FrameworkBundle\Model\Product\Product;
 use Shopsys\FrameworkBundle\Model\Transport\TransportPriceCalculation;
 use Shopsys\FrameworkBundle\Twig\NumberFormatterExtension;
+use Webmozart\Assert\Assert;
 
 /**
  * @ORM\Table(name="orders")
@@ -994,10 +996,8 @@ class Order
         OrderItemFactoryInterface $orderItemFactory,
         OrderPriceCalculation $orderPriceCalculation
     ): OrderEditResult {
-        $orderTransportData = $orderData->orderTransport;
-        $orderTransportData->priceWithoutVat = $orderItemPriceCalculation->calculatePriceWithoutVat($orderTransportData);
-        $orderPaymentData = $orderData->orderPayment;
-        $orderPaymentData->priceWithoutVat = $orderItemPriceCalculation->calculatePriceWithoutVat($orderPaymentData);
+        $this->calculateOrderItemDataPrices($orderData->orderTransport, $orderItemPriceCalculation);
+        $this->calculateOrderItemDataPrices($orderData->orderPayment, $orderItemPriceCalculation);
 
         $statusChanged = $this->getStatus() !== $orderData->status;
         $this->editData($orderData);
@@ -1007,7 +1007,7 @@ class Order
         foreach ($this->getItemsWithoutTransportAndPayment() as $orderItem) {
             if (array_key_exists($orderItem->getId(), $orderItemsWithoutTransportAndPaymentData)) {
                 $orderItemData = $orderItemsWithoutTransportAndPaymentData[$orderItem->getId()];
-                $orderItemData->priceWithoutVat = $orderItemPriceCalculation->calculatePriceWithoutVat($orderItemData);
+                $this->calculateOrderItemDataPrices($orderItemData, $orderItemPriceCalculation);
                 $orderItem->edit($orderItemData);
             } else {
                 $this->removeItem($orderItem);
@@ -1015,8 +1015,8 @@ class Order
         }
 
         foreach ($orderData->getNewItemsWithoutTransportAndPayment() as $newOrderItemData) {
-            $newOrderItemData->priceWithoutVat = $orderItemPriceCalculation->calculatePriceWithoutVat($newOrderItemData);
-            $orderItemFactory->createProduct(
+            $this->calculateOrderItemDataPrices($newOrderItemData, $orderItemPriceCalculation);
+            $newOrderItem = $orderItemFactory->createProduct(
                 $this,
                 $newOrderItemData->name,
                 new Price(
@@ -1028,11 +1028,32 @@ class Order
                 $newOrderItemData->unitName,
                 $newOrderItemData->catnum
             );
+            if (!$newOrderItemData->usePriceCalculation) {
+                $newOrderItem->setTotalPrice(new Price($newOrderItemData->totalPriceWithoutVat, $newOrderItemData->totalPriceWithVat));
+            }
         }
 
         $this->calculateTotalPrice($orderPriceCalculation);
 
         return new OrderEditResult($statusChanged);
+    }
+
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Order\Item\OrderItemData $orderItemData
+     * @param \Shopsys\FrameworkBundle\Model\Order\Item\OrderItemPriceCalculation $orderItemPriceCalculation
+     */
+    protected function calculateOrderItemDataPrices(OrderItemData $orderItemData, OrderItemPriceCalculation $orderItemPriceCalculation): void
+    {
+        if ($orderItemData->usePriceCalculation) {
+            $orderItemData->priceWithoutVat = $orderItemPriceCalculation->calculatePriceWithoutVat($orderItemData);
+            $orderItemData->totalPriceWithVat = null;
+            $orderItemData->totalPriceWithoutVat = null;
+        } else {
+            Assert::allNotNull(
+                [$orderItemData->priceWithoutVat, $orderItemData->totalPriceWithVat, $orderItemData->totalPriceWithoutVat],
+                'When not using price calculation for an order item, all prices must be filled.'
+            );
+        }
     }
 
     /**

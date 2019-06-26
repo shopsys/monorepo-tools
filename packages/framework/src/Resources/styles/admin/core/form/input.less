@@ -38,11 +38,19 @@
     &--flag {
         width: @input-width-with-flag;
         padding-left: @input-space-for-icon;
+
+        &.input--half-width {
+            width: @input-width-with-flag / 2;
+        }
     }
 
     &--domain {
         width: @input-width-with-domain;
         padding-left: @input-space-for-domain;
+
+        &.input--half-width {
+            width: @input-width-with-domain / 2;
+        }
     }
 
     &--seo {
@@ -52,12 +60,20 @@
         padding-bottom: 6px;
     }
 
+    &--half-width {
+        width: @input-width / 2;
+    }
+
     &--textarea {
         width: 100%;
         height: 80px;
         line-height: 20px;
         padding-top: 10px;
         padding-bottom: 10px;
+
+        &.input--half-width {
+            width: 50%;
+        }
     }
 
     &__wysiwyg {

@@ -657,11 +657,14 @@
 {% endblock %}
 
 {% block form_errors %}
-    {% set errors_attr = errors_attr|default({})|merge({'class': (errors_attr.class|default('form-line__error'))}) %}
+    {% set inline = errors_attr.inline|default(false) %}
+    {% set errors_attr = errors_attr|default({})|merge({'class': (errors_attr.class|default(inline ? '' : 'form-line__error'))}) %}
     {% spaceless %}
-        <div class="form-error {{ errors|length > 0 ? '' : ' display-none' }}  js-validation-errors-list js-validation-error-list-{{ form.vars.id }} {{ errors_attr.class }}">
-            <span class="svg svg-circle-remove js-validation-error-toggle"></span>
-            <div class="in-message in-message--error js-validation-error {{ form.parent is not empty ? ' in-message--pin' : '' }}">
+        <div class="{{ inline ? '' : 'form-error' }} {{ errors|length > 0 ? '' : ' display-none' }}  js-validation-errors-list js-validation-error-list-{{ form.vars.id }} {{ errors_attr.class }}">
+            {% if not inline %}
+                <span class="svg svg-circle-remove js-validation-error-toggle"></span>
+            {% endif %}
+            <div class="in-message in-message--{{ inline ? 'danger' : 'form-error' }} js-validation-error {{ form.parent is not empty and not inline ? ' in-message--pin' : '' }}">
                 <ul class="in-message__list">
                     {% if errors|length > 0 %}
                         {% for error in errors %}
@@ -671,7 +674,9 @@
                         {% endfor %}
                     {% endif %}
                 </ul>
-                <span class="in-message__close js-validation-error-close">x</span>
+                {% if not inline %}
+                    <span class="in-message__close js-validation-error-close">x</span>
+                {% endif %}
             </div>
         </div>
     {% endspaceless %}

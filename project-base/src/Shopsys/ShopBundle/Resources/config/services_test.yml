@@ -38,6 +38,10 @@ services:
 
     Shopsys\FrameworkBundle\Model\Customer\UserDataFactoryInterface: '@Shopsys\ShopBundle\Model\Customer\UserDataFactory'
 
+    Shopsys\FrameworkBundle\Model\Order\Item\OrderItemDataFactoryInterface: '@Shopsys\ShopBundle\Model\Order\Item\OrderItemDataFactory'
+
+    Shopsys\FrameworkBundle\Model\Order\Item\OrderItemFactoryInterface: '@Shopsys\FrameworkBundle\Model\Order\Item\OrderItemFactory'
+
     Shopsys\FrameworkBundle\Model\Order\OrderDataFactoryInterface: '@Shopsys\ShopBundle\Model\Order\OrderDataFactory'
 
     Shopsys\FrameworkBundle\Model\Transport\TransportDataFactoryInterface: '@Shopsys\ShopBundle\Model\Transport\TransportDataFactory'

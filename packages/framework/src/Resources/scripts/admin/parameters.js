@@ -12,8 +12,6 @@
             Shopsys.validation.removeItemFromCollection('#product_form_parameters', index);
             $item.remove();
 
-            Shopsys.formChangeInfo.showInfo();
-
             Shopsys.parameters.refreshCount($collection);
 
             event.preventDefault();
@@ -36,7 +34,6 @@
             Shopsys.register.registerNewContent($item);
 
             Shopsys.validation.addNewItemToCollection('#product_form_parameters', index);
-            Shopsys.formChangeInfo.showInfo();
             Shopsys.parameters.refreshCount($collection);
 
             return false;

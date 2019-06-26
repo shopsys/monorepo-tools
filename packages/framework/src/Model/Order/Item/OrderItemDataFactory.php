@@ -2,8 +2,26 @@
 
 namespace Shopsys\FrameworkBundle\Model\Order\Item;
 
+use Shopsys\FrameworkBundle\Model\Order\Item\Exception\OrderItemPriceCalculationNotInjectedException;
+use Shopsys\FrameworkBundle\Model\Order\Item\Exception\OrderItemUnitPricesAreInconsistentButTotalsAreNotForcedException;
+
 class OrderItemDataFactory implements OrderItemDataFactoryInterface
 {
+    /**
+     * @var \Shopsys\FrameworkBundle\Model\Order\Item\OrderItemPriceCalculation|null
+     */
+    protected $orderItemPriceCalculation;
+
+    /**
+     * @required
+     * @internal Will be replaced with constructor injection in the next major release
+     * @param \Shopsys\FrameworkBundle\Model\Order\Item\OrderItemPriceCalculation $orderItemPriceCalculation
+     */
+    public function setOrderItemPriceCalculation(OrderItemPriceCalculation $orderItemPriceCalculation)
+    {
+        $this->orderItemPriceCalculation = $orderItemPriceCalculation;
+    }
+
     /**
      * @return \Shopsys\FrameworkBundle\Model\Order\Item\OrderItemData
      */
@@ -34,10 +52,17 @@ class OrderItemDataFactory implements OrderItemDataFactoryInterface
         $orderItemData->name = $orderItem->getName();
         $orderItemData->priceWithVat = $orderItem->getPriceWithVat();
         $orderItemData->priceWithoutVat = $orderItem->getPriceWithoutVat();
+
+        $orderItemTotalPrice = $this->getOrderItemPriceCalculation()->calculateTotalPrice($orderItem);
+        $orderItemData->totalPriceWithVat = $orderItemTotalPrice->getPriceWithVat();
+        $orderItemData->totalPriceWithoutVat = $orderItemTotalPrice->getPriceWithoutVat();
+
         $orderItemData->vatPercent = $orderItem->getVatPercent();
         $orderItemData->quantity = $orderItem->getQuantity();
         $orderItemData->unitName = $orderItem->getUnitName();
         $orderItemData->catnum = $orderItem->getCatnum();
+
+        $orderItemData->usePriceCalculation = $this->isUsingPriceCalculation($orderItemData, $orderItem);
     }
 
     /**
@@ -51,5 +76,36 @@ class OrderItemDataFactory implements OrderItemDataFactoryInterface
         } elseif ($orderItem->isTypePayment()) {
             $orderItemData->payment = $orderItem->getPayment();
         }
+    }
+
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Order\Item\OrderItemData $orderItemData
+     * @param \Shopsys\FrameworkBundle\Model\Order\Item\OrderItem $orderItem
+     * @return bool
+     */
+    protected function isUsingPriceCalculation(OrderItemData $orderItemData, OrderItem $orderItem): bool
+    {
+        if ($orderItem->hasForcedTotalPrice()) {
+            return false;
+        }
+
+        $calculatedPriceWithoutVat = $this->getOrderItemPriceCalculation()->calculatePriceWithoutVat($orderItemData);
+        if (!$orderItemData->priceWithoutVat->equals($calculatedPriceWithoutVat)) {
+            throw new OrderItemUnitPricesAreInconsistentButTotalsAreNotForcedException($orderItem, $calculatedPriceWithoutVat);
+        }
+
+        return true;
+    }
+
+    /**
+     * @return \Shopsys\FrameworkBundle\Model\Order\Item\OrderItemPriceCalculation
+     */
+    protected function getOrderItemPriceCalculation(): OrderItemPriceCalculation
+    {
+        if ($this->orderItemPriceCalculation === null) {
+            throw new OrderItemPriceCalculationNotInjectedException(static::class, 'setOrderItemPriceCalculation');
+        }
+
+        return $this->orderItemPriceCalculation;
     }
 }

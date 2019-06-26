@@ -63,7 +63,6 @@ class VatGridFactory implements GridFactoryInterface
         $dataSource = new QueryBuilderWithRowManipulatorDataSource($queryBuilder, 'v.id', function ($row) {
             $vat = $this->vatFacade->getById($row['v']['id']);
             $row['vat'] = $vat;
-            $row['coefficient'] = $this->priceCalculation->getVatCoefficientByPercent($vat->getPercent());
 
             return $row;
         });
@@ -72,7 +71,6 @@ class VatGridFactory implements GridFactoryInterface
         $grid->setDefaultOrder('name');
         $grid->addColumn('name', 'v.name', t('Name'), true);
         $grid->addColumn('percent', 'v.percent', t('Percent'), true);
-        $grid->addColumn('coefficient', 'v.percent', t('Coefficient'), true);
         $grid->setActionColumnClassAttribute('table-col table-col-10');
         $grid->addDeleteActionColumn('admin_vat_deleteconfirm', ['id' => 'v.id'])
             ->setAjaxConfirm();

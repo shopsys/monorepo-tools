@@ -66,10 +66,6 @@
     {{ value|formatPercent }}
 {% endblock %}
 
-{% block grid_value_cell_id_coefficient %}
-    {{ row.coefficient|formatNumber }}
-{% endblock %}
-
 {% block grid_no_data %}
     {{ 'No VAT rate found. You have to create some first.'|trans }}
 {% endblock %}

@@ -10,20 +10,30 @@
                     <table class="table-main">
                         <thead>
                             <tr>
-                                <th class="table-col-30">{{ 'Name'|trans }}</th>
-                                <th class="table-col-5">{{ 'Catalogue number'|trans }}</th>
-                                <th class="table-col-15 text-right">{{ 'Unit price including VAT'|trans }}</th>
-                                <th class="table-col-10 text-right">{{ 'Amount'|trans }}</th>
-                                <th class="table-col-10 text-right">{{ 'Unit'|trans }}</th>
-                                <th class="table-col-10 text-right">{{ 'VAT rate (%)'|trans }}</th>
-                                <th class="table-col-15 text-right text-no-wrap">{{ 'Total including VAT'|trans }}</th>
-                                <th class="table-col-15 text-right text-no-wrap">{{ 'Total excluding VAT'|trans }}</th>
-                                <th ></th>
+                                <th>{{ 'Name'|trans }}</th>
+                                <th>{{ 'Catalogue number'|trans }}</th>
+                                <th class="text-right">{{ 'Unit price including VAT'|trans }}</th>
+                                <th class="text-right">{{ 'Amount'|trans }}</th>
+                                <th class="text-right">{{ 'Unit'|trans }}</th>
+                                <th class="text-right">{{ 'VAT rate (%)'|trans }}</th>
+                                <th class="text-center">
+                                    <span class="display-inline-block" style="width: 80px">
+                                        {{ 'Set prices manually'|trans }}
+                                        <i class="svg svg-info cursor-help js-tooltip"
+                                           data-toggle="tooltip" data-placement="bottom"
+                                           title="{{ 'All prices have to be handled manually if checked, otherwise the unit price without VAT and the total prices for that item will be recalculated automatically.'|trans }}"
+                                        ></i>
+                                    </span>
+                                </th>
+                                <th class="text-right">{{ 'Unit price excluding VAT'|trans }}</th>
+                                <th class="text-right">{{ 'Total including VAT'|trans }}</th>
+                                <th class="text-right">{{ 'Total excluding VAT'|trans }}</th>
+                                <th></th>
                         </tr>
                         </thead>
                         <tbody
                             id="js-order-items"
-                            data-prototype="{{ orderItemMacro.orderItem(form.itemsWithoutTransportAndPayment.vars.prototype)|escape }}"
+                            data-prototype="{{ orderItemMacro.orderItem(form.itemsWithoutTransportAndPayment.vars.prototype, null, [], order.currency, null)|escape }}"
                             data-order-product-add-url="{{ url('admin_order_addproduct', { orderId: order.id }) }}"
                         >
                             {% for productItem in order.productItems %}
@@ -41,7 +51,7 @@
                         </tbody>
                         <tfoot>
                             <tr>
-                                <td colspan="9">
+                                <td colspan="11">
                                     <a id="js-order-item-add" href="#" class="btn btn--plus">
                                         <i class="btn__icon">+</i>
                                         {{ 'Add item'|trans }}
@@ -53,7 +63,7 @@
                                 </td>
                             </tr>
                             <tr>
-                                <th colspan="6">{{ 'Total'|trans }}:</th>
+                                <th colspan="8">{{ 'Total'|trans }}:</th>
                                 <th class="text-right">{{ order.totalPriceWithVat|priceWithCurrency(order.currency) }}</th>
                                 <th class="text-right">{{ order.totalPriceWithoutVat|priceWithCurrency(order.currency) }}</th>
                                 <th></th>

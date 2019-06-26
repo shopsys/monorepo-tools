@@ -316,10 +316,19 @@ msgstr ""
 msgid "Please enter telephone number"
 msgstr ""
 
+msgid "Please enter total price with VAT"
+msgstr ""
+
+msgid "Please enter total price without VAT"
+msgstr ""
+
 msgid "Please enter unit name in all languages"
 msgstr ""
 
 msgid "Please enter unit price with VAT"
+msgstr ""
+
+msgid "Please enter unit price without VAT"
 msgstr ""
 
 msgid "Please enter username"

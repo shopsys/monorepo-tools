@@ -22,17 +22,17 @@ class BasePriceCalculationTest extends TestCase
                 'inputPriceType' => PricingSetting::INPUT_PRICE_TYPE_WITHOUT_VAT,
                 'inputPrice' => Money::create(6999),
                 'vatPercent' => '21',
-                'basePriceWithoutVat' => Money::create('6998.78'),
+                'basePriceWithoutVat' => Money::create('6999.17'),
                 'basePriceWithVat' => Money::create(8469),
-                'basePriceVatAmount' => Money::create('1470.22'),
+                'basePriceVatAmount' => Money::create('1469.83'),
             ],
             [
                 'inputPriceType' => PricingSetting::INPUT_PRICE_TYPE_WITH_VAT,
                 'inputPrice' => Money::create('6999.99'),
                 'vatPercent' => '21',
-                'basePriceWithoutVat' => Money::create('5784.8'),
+                'basePriceWithoutVat' => Money::create('5785.12'),
                 'basePriceWithVat' => Money::create(7000),
-                'basePriceVatAmount' => Money::create('1215.2'),
+                'basePriceVatAmount' => Money::create('1214.88'),
             ],
         ];
     }
