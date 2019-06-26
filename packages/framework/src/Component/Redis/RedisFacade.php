@@ -11,25 +11,51 @@ class RedisFacade
     /**
      * @var \Redis[]
      */
-    protected $cacheClients;
+    protected $allClients;
 
     /**
-     * @param \Redis[] $cacheClients
+     * @var \Redis[]
      */
-    public function __construct(array $cacheClients)
+    protected $persistentClients;
+
+    /**
+     * @param \Redis[] $allClients
+     * @param \Redis[] $persistentClients
+     */
+    public function __construct(iterable $allClients, iterable $persistentClients)
     {
-        $this->cacheClients = $cacheClients;
+        $this->allClients = $allClients;
+        $this->persistentClients = $persistentClients;
+    }
+
+    /**
+     * @return \Redis[]
+     */
+    protected function getCacheClients(): iterable
+    {
+        foreach ($this->allClients as $redis) {
+            if (!in_array($redis, $this->persistentClients, true)) {
+                yield $redis;
+            }
+        }
     }
 
     public function cleanCache(): void
     {
-        foreach ($this->cacheClients as $redis) {
+        foreach ($this->getCacheClients() as $redis) {
             $prefix = (string)$redis->getOption(Redis::OPT_PREFIX);
             $pattern = $prefix . '*';
             if (!$this->hasAnyKey($redis, $pattern)) {
                 continue;
             }
             $redis->eval("return redis.call('del', unpack(redis.call('keys', ARGV[1])))", [$pattern]);
+        }
+    }
+
+    public function pingAllClients(): void
+    {
+        foreach ($this->allClients as $redis) {
+            $redis->ping();
         }
     }
 

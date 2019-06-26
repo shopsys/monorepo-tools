@@ -2,6 +2,7 @@
 
 namespace Shopsys\FrameworkBundle\Command;
 
+use Shopsys\FrameworkBundle\Component\Redis\RedisFacade;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -14,18 +15,18 @@ class CheckRedisCommand extends Command
     protected static $defaultName = 'shopsys:redis:check-availability';
 
     /**
-     * @var \Redis[]
+     * @var \Shopsys\FrameworkBundle\Component\Redis\RedisFacade
      */
-    protected $cacheClients;
+    protected $redisFacade;
 
     /**
-     * @param \Redis[] $cacheClients
+     * @param \Shopsys\FrameworkBundle\Component\Redis\RedisFacade $redisFacade
      */
-    public function __construct(array $cacheClients)
+    public function __construct(RedisFacade $redisFacade)
     {
-        $this->cacheClients = $cacheClients;
-
         parent::__construct();
+
+        $this->redisFacade = $redisFacade;
     }
 
     protected function configure()
@@ -41,13 +42,11 @@ class CheckRedisCommand extends Command
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $output->writeln('Checks availability of Redis...');
-        foreach ($this->cacheClients as $cacheClient) {
-            try {
-                $cacheClient->ping();
-            } catch (\RedisException $e) {
-                throw new \Shopsys\FrameworkBundle\Command\Exception\RedisNotRunningException('Redis is not available.');
-            }
+        try {
+            $this->redisFacade->pingAllClients();
+            $output->writeln('Redis is available');
+        } catch (\RedisException $e) {
+            throw new \Shopsys\FrameworkBundle\Command\Exception\RedisNotRunningException('Redis is not available.', 0, $e);
         }
-        $output->writeln('Redis is available');
     }
 }

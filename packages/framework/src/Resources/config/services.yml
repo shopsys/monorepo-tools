@@ -973,11 +973,10 @@ services:
 
     Shopsys\FrameworkBundle\Component\Redis\RedisFacade:
         arguments:
-            $cacheClients:
-            - '@snc_redis.bestselling_products'
-            - '@snc_redis.doctrine_metadata'
-            - '@snc_redis.doctrine_query'
-            - '@snc_redis.framework_annotations'
+            $allClients: !tagged snc_redis.client
+            $persistentClients:
+                - '@snc_redis.global'
+                - '@snc_redis.session'
 
     Shopsys\FrameworkBundle\Component\Redis\RedisVersionsFacade:
         arguments:
@@ -1014,12 +1013,3 @@ services:
             - method: setEntityManager
 
     Shopsys\FrameworkBundle\Model\Product\Search\ProductElasticsearchConverter: ~
-
-    Shopsys\FrameworkBundle\Command\CheckRedisCommand:
-        arguments:
-            $cacheClients:
-            - '@snc_redis.bestselling_products'
-            - '@snc_redis.doctrine_metadata'
-            - '@snc_redis.doctrine_query'
-            - '@snc_redis.framework_annotations'
-            - '@snc_redis.session'
