@@ -234,6 +234,7 @@ class ProductOnCurrentDomainElasticFacade implements ProductOnCurrentDomainFacad
     {
         $filterQuery = $this->filterQueryFactory->create($this->getIndexName())
             ->filterOnlySellable()
+            ->filterOnlyVisible($this->currentCustomer->getPricingGroup())
             ->setPage($page)
             ->setLimit($limit)
             ->applyOrdering($orderingModeId, $this->currentCustomer->getPricingGroup());
@@ -264,8 +265,9 @@ class ProductOnCurrentDomainElasticFacade implements ProductOnCurrentDomainFacad
     public function getProductFilterCountDataInCategory($categoryId, ProductFilterConfig $productFilterConfig, ProductFilterData $productFilterData): ProductFilterCountData
     {
         $baseFilterQuery = $this->filterQueryFactory->create($this->getIndexName())
-            ->filterByCategory([$categoryId])
-            ->filterOnlySellable();
+            ->filterOnlySellable()
+            ->filterOnlyVisible($this->currentCustomer->getPricingGroup())
+            ->filterByCategory([$categoryId]);
         $baseFilterQuery = $this->productFilterDataToQueryTransformer->addPricesToQuery($productFilterData, $baseFilterQuery, $this->currentCustomer->getPricingGroup());
         $baseFilterQuery = $this->productFilterDataToQueryTransformer->addStockToQuery($productFilterData, $baseFilterQuery);
 
@@ -283,8 +285,9 @@ class ProductOnCurrentDomainElasticFacade implements ProductOnCurrentDomainFacad
         $searchText = $searchText ?? '';
 
         $baseFilterQuery = $this->filterQueryFactory->create($this->getIndexName())
-            ->search($searchText)
-            ->filterOnlySellable();
+            ->filterOnlySellable()
+            ->filterOnlyVisible($this->currentCustomer->getPricingGroup())
+            ->search($searchText);
         $baseFilterQuery = $this->productFilterDataToQueryTransformer->addPricesToQuery($productFilterData, $baseFilterQuery, $this->currentCustomer->getPricingGroup());
         $baseFilterQuery = $this->productFilterDataToQueryTransformer->addStockToQuery($productFilterData, $baseFilterQuery);
 

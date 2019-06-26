@@ -216,6 +216,44 @@ class FilterQuery
     }
 
     /**
+     * @param \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroup $pricingGroup
+     * @return \Shopsys\FrameworkBundle\Model\Product\Search\FilterQuery
+     */
+    public function filterOnlyVisible(PricingGroup $pricingGroup): self
+    {
+        $clone = clone $this;
+
+        $clone->filters[] = [
+            'nested' => [
+                'path' => 'prices',
+                'query' => [
+                    'bool' => [
+                        'must' => [
+                            'match_all' => new \stdClass(),
+                        ],
+                        'filter' => [
+                            [
+                                'term' => [
+                                    'prices.pricing_group_id' => $pricingGroup->getId(),
+                                ],
+                            ],
+                            [
+                                'range' => [
+                                    'prices.amount' => [
+                                        'gt' => 0,
+                                    ],
+                                ],
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+        ];
+
+        return $clone;
+    }
+
+    /**
      * @param int[] $categoryIds
      * @return \Shopsys\FrameworkBundle\Model\Product\Search\FilterQuery
      */
