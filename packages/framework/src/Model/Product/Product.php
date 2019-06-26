@@ -301,12 +301,8 @@ class Product extends AbstractTranslatableEntity
         $this->sellingTo = $productData->sellingTo;
         $this->sellingDenied = $productData->sellingDenied;
         $this->hidden = $productData->hidden;
-        $this->usingStock = $productData->usingStock;
-        $this->stockQuantity = $productData->stockQuantity;
         $this->unit = $productData->unit;
-        $this->outOfStockAction = $productData->outOfStockAction;
-        $this->availability = $productData->availability;
-        $this->outOfStockAvailability = $productData->outOfStockAvailability;
+        $this->setAvailabilityAndStock($productData);
         $this->calculatedAvailability = $this->availability;
         $this->recalculateAvailability = true;
         $this->calculatedVisibility = false;
@@ -379,11 +375,7 @@ class Product extends AbstractTranslatableEntity
             $this->setCategories($productCategoryDomainFactory, $productData->categoriesByDomainId);
         }
         if (!$this->isMainVariant()) {
-            $this->usingStock = $productData->usingStock;
-            $this->stockQuantity = $productData->stockQuantity;
-            $this->outOfStockAction = $productData->outOfStockAction;
-            $this->availability = $productData->availability;
-            $this->outOfStockAvailability = $productData->outOfStockAvailability;
+            $this->setAvailabilityAndStock($productData);
             $this->catnum = $productData->catnum;
             $this->partno = $productData->partno;
             $this->ean = $productData->ean;
@@ -403,6 +395,25 @@ class Product extends AbstractTranslatableEntity
         $this->flags->clear();
         foreach ($flags as $flag) {
             $this->flags->add($flag);
+        }
+    }
+
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Product\ProductData $productData
+     */
+    protected function setAvailabilityAndStock(ProductData $productData): void
+    {
+        $this->usingStock = $productData->usingStock;
+        if ($this->usingStock) {
+            $this->stockQuantity = $productData->stockQuantity;
+            $this->outOfStockAction = $productData->outOfStockAction;
+            $this->outOfStockAvailability = $productData->outOfStockAvailability;
+            $this->availability = null;
+        } else {
+            $this->stockQuantity = null;
+            $this->outOfStockAction = null;
+            $this->outOfStockAvailability = null;
+            $this->availability = $productData->availability;
         }
     }
 

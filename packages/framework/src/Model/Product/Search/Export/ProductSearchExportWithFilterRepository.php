@@ -123,7 +123,7 @@ class ProductSearchExportWithFilterRepository extends ProductSearchExportReposit
             'ordering_priority' => $product->getOrderingPriority(),
             'calculated_selling_denied' => $product->getCalculatedSellingDenied(),
             'selling_denied' => $product->isSellingDenied(),
-            'availability' => $product->getAvailability()->getName($locale),
+            'availability' => $product->getCalculatedAvailability()->getName($locale),
             'main_variant' => $product->isMainVariant(),
             'detail_url' => $detailUrl,
             'visibility' => $visibility,
