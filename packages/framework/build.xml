@@ -99,7 +99,7 @@
 
     <target name="build-demo" depends="wipe,build-version-generate,composer-prod,backend-api-oauth-keys-generate,redis-check,npm,dirs-create,assets,db-demo,grunt,error-pages-generate,warmup,product-search-recreate-structure,product-search-export-products,clean-redis-old" description="Builds application for production with clean demo DB."/>
 
-    <target name="build-demo-ci" depends="build-version-generate,backend-api-oauth-keys-generate,wipe-excluding-logs,timezones-check,dirs-create,test-dirs-create,db-demo,product-search-recreate-structure,product-search-export-products,grunt,error-pages-generate,clean-redis-old,checks-ci" description="Builds application for development with clean demo DB and runs CI checks."/>
+    <target name="build-demo-ci" depends="build-version-generate,backend-api-oauth-keys-generate,wipe-excluding-logs,composer-dev,npm,timezones-check,dirs-create,test-dirs-create,assets,db-demo,product-search-recreate-structure,product-search-export-products,grunt,error-pages-generate,tests-acceptance-build,clean-redis-old,checks-ci" description="Builds application for development with clean demo DB and runs CI checks."/>
 
     <target name="build-demo-ci-diff" hidden="true">
         <phingcall target="build-demo-ci"/>
