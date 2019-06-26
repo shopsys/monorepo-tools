@@ -25,8 +25,8 @@ class FrontOrderDataMapper
      */
     protected function prefillTransportAndPaymentFromOrder(FrontOrderData $frontOrderData, Order $order)
     {
-        $frontOrderData->transport = $order->getTransport();
-        $frontOrderData->payment = $order->getPayment();
+        $frontOrderData->transport = $order->getTransport()->isDeleted() ? null : $order->getTransport();
+        $frontOrderData->payment = $order->getPayment()->isDeleted() ? null : $order->getPayment();
     }
 
     /**
