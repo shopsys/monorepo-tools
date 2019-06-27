@@ -176,8 +176,6 @@ services:
             - '%shopsys.domain_urls_config_filepath%'
         lazy: true
 
-    Shopsys\FrameworkBundle\Component\Domain\Multidomain\MultidomainEntityClassProvider: ~
-
     Shopsys\FrameworkBundle\Component\Domain\Multidomain\MultidomainEntityClassProviderInterface:
         alias: Shopsys\FrameworkBundle\Model\MultidomainEntityClassProvider
 
@@ -405,13 +403,9 @@ services:
         tags:
             - { name: validator.constraint_validator, alias: Shopsys\FrameworkBundle\Form\Constraints\UniqueSlugsOnDomainsValidator }
 
-    Shopsys\FrameworkBundle\Model\Administrator\Security\AdministratorUserProvider: ~
-
     Shopsys\FrameworkBundle\Model\Cookies\CookiesFacade:
         arguments:
             - '%kernel.environment%'
-
-    Shopsys\FrameworkBundle\Model\Customer\FrontendUserProvider: ~
 
     Shopsys\FrameworkBundle\Model\Customer\CurrentCustomer: ~
 
@@ -937,8 +931,6 @@ services:
     Shopsys\FrameworkBundle\Component\Doctrine\QueryBuilderExtender: ~
 
     Shopsys\FrameworkBundle\Component\Domain\DomainUrlReplacer: ~
-
-    Shopsys\FrameworkBundle\Component\Image\Processing\ImageGenerator: ~
 
     Shopsys\FrameworkBundle\Component\Image\Processing\ImageProcessor: ~
 
