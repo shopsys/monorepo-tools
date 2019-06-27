@@ -19,6 +19,12 @@ class RedisFacade
     protected $persistentClients;
 
     /**
+     * @deprecated This property is deprecated since SSFW 7.3
+     * @var \Redis[]
+     */
+    protected $cacheClients;
+
+    /**
      * @param \Redis[] $allClients
      * @param \Redis[] $persistentClients
      */
@@ -26,6 +32,7 @@ class RedisFacade
     {
         $this->allClients = $allClients;
         $this->persistentClients = $persistentClients;
+        $this->cacheClients = $this->getCacheClients();
     }
 
     /**
