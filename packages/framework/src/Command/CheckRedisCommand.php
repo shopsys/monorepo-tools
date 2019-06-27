@@ -21,9 +21,15 @@ class CheckRedisCommand extends Command
     protected static $defaultName = 'shopsys:redis:check-availability';
 
     /**
-     * @var \Shopsys\FrameworkBundle\Component\Redis\RedisFacade|\Redis[]
+     * @deprecated This property is deprecated since SSFW 7.3
+     * @var \Redis[]
      */
-    protected $redisFacadeOrClients;
+    protected $cacheClients;
+
+    /**
+     * @var \Shopsys\FrameworkBundle\Component\Redis\RedisFacade|null
+     */
+    protected $redisFacade;
 
     /**
      * @param \Shopsys\FrameworkBundle\Component\Redis\RedisFacade|\Redis[] $redisFacadeOrClients
@@ -39,8 +45,12 @@ class CheckRedisCommand extends Command
                 sprintf('Passing instances of "%s" directly into constructor of "%s" is deprecated since SSFW 7.3, pass "%s" instead', Redis::class, __CLASS__, RedisFacade::class),
                 E_USER_DEPRECATED
             );
+
+            $this->cacheClients = $redisFacadeOrClients;
+        } else {
+            $this->cacheClients = [];
+            $this->redisFacade = $redisFacadeOrClients;
         }
-        $this->redisFacadeOrClients = $redisFacadeOrClients;
     }
 
     protected function configure()
@@ -76,10 +86,10 @@ class CheckRedisCommand extends Command
      */
     protected function pingAllClients(): void
     {
-        if ($this->redisFacadeOrClients instanceof RedisFacade) {
-            $this->redisFacadeOrClients->pingAllClients();
+        if ($this->redisFacade !== null) {
+            $this->redisFacade->pingAllClients();
         } else {
-            foreach ($this->redisFacadeOrClients as $redisClient) {
+            foreach ($this->cacheClients as $redisClient) {
                 $redisClient->ping();
             }
         }
