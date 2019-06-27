@@ -154,6 +154,10 @@ services:
             # must be ran before ProductVisibilityFacade
             - { name: kernel.event_listener, event: kernel.response, method: onKernelResponse, priority: 20 }
 
+    Shopsys\FrameworkBundle\Command\CheckRedisCommand:
+        arguments:
+            - '@Shopsys\FrameworkBundle\Component\Redis\RedisFacade'
+
     Shopsys\FrameworkBundle\Component\Cron\CronFacade:
         arguments:
             - '@monolog.logger.cron'

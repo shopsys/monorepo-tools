@@ -22,7 +22,7 @@ class RedisFacade
      * @param \Redis[] $allClients
      * @param \Redis[] $persistentClients
      */
-    public function __construct(iterable $allClients, iterable $persistentClients)
+    public function __construct(iterable $allClients, iterable $persistentClients = [])
     {
         $this->allClients = $allClients;
         $this->persistentClients = $persistentClients;

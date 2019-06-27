@@ -2,31 +2,45 @@
 
 namespace Shopsys\FrameworkBundle\Command;
 
+use Redis;
 use Shopsys\FrameworkBundle\Component\Redis\RedisFacade;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Console\Style\SymfonyStyle;
+use Webmozart\Assert\Assert;
 
 class CheckRedisCommand extends Command
 {
+    protected const RETURN_CODE_OK = 0;
+    protected const RETURN_CODE_ERROR = 1;
+
     /**
      * @var string
      */
     protected static $defaultName = 'shopsys:redis:check-availability';
 
     /**
-     * @var \Shopsys\FrameworkBundle\Component\Redis\RedisFacade
+     * @var \Shopsys\FrameworkBundle\Component\Redis\RedisFacade|\Redis[]
      */
-    protected $redisFacade;
+    protected $redisFacadeOrClients;
 
     /**
-     * @param \Shopsys\FrameworkBundle\Component\Redis\RedisFacade $redisFacade
+     * @param \Shopsys\FrameworkBundle\Component\Redis\RedisFacade|\Redis[] $redisFacadeOrClients
      */
-    public function __construct(RedisFacade $redisFacade)
+    public function __construct($redisFacadeOrClients)
     {
         parent::__construct();
 
-        $this->redisFacade = $redisFacade;
+        if (!$redisFacadeOrClients instanceof RedisFacade) {
+            Assert::allIsInstanceOf($redisFacadeOrClients, Redis::class);
+
+            @trigger_error(
+                sprintf('Passing instances of "%s" directly into constructor of "%s" is deprecated since SSFW 7.3, pass "%s" instead', Redis::class, __CLASS__, RedisFacade::class),
+                E_USER_DEPRECATED
+            );
+        }
+        $this->redisFacadeOrClients = $redisFacadeOrClients;
     }
 
     protected function configure()
@@ -38,15 +52,36 @@ class CheckRedisCommand extends Command
     /**
      * @param \Symfony\Component\Console\Input\InputInterface $input
      * @param \Symfony\Component\Console\Output\OutputInterface $output
+     * @return int
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $output->writeln('Checks availability of Redis...');
+        $io = new SymfonyStyle($input, $output);
+
+        $io->comment('Checks availability of Redis...');
         try {
-            $this->redisFacade->pingAllClients();
-            $output->writeln('Redis is available');
+            $this->pingAllClients();
+            $io->success('Redis is available.');
         } catch (\RedisException $e) {
-            throw new \Shopsys\FrameworkBundle\Command\Exception\RedisNotRunningException('Redis is not available.', 0, $e);
+            $io->error('Redis is not available.');
+
+            return static::RETURN_CODE_ERROR;
+        }
+
+        return static::RETURN_CODE_OK;
+    }
+
+    /**
+     * @internal This method will be inlined when its implementation will be able to be simplified
+     */
+    protected function pingAllClients(): void
+    {
+        if ($this->redisFacadeOrClients instanceof RedisFacade) {
+            $this->redisFacadeOrClients->pingAllClients();
+        } else {
+            foreach ($this->redisFacadeOrClients as $redisClient) {
+                $redisClient->ping();
+            }
         }
     }
 }
