@@ -415,11 +415,6 @@ services:
 
     Shopsys\FrameworkBundle\Model\PersonalData\Mail\PersonalDataExportMail: ~
 
-    Shopsys\FrameworkBundle\Model\Feed\FeedConfigFacade:
-        arguments:
-            - '%shopsys.feed_url_prefix%'
-            - '%shopsys.feed_dir%'
-
     Shopsys\FrameworkBundle\Model\Feed\FeedPathProvider:
         arguments:
             $feedUrlPrefix: '%shopsys.feed_url_prefix%'
@@ -705,8 +700,6 @@ services:
     Shopsys\FrameworkBundle\Model\Product\Flag\FlagFactoryInterface:
         alias: Shopsys\FrameworkBundle\Model\Product\Flag\FlagFactory
 
-    Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\CompilerPass\FriendlyUrlDataProviderConfig: ~
-
     Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\FriendlyUrlFactoryInterface:
         alias: Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\FriendlyUrlFactory
 
@@ -913,8 +906,6 @@ services:
 
     Shopsys\FrameworkBundle\Model\Transport\TransportDataFactoryInterface:
         alias: Shopsys\FrameworkBundle\Model\Transport\TransportDataFactory
-
-    Shopsys\FrameworkBundle\Model\Product\Search\Export\ProductSearchExportDataConverter: ~
 
     Shopsys\FrameworkBundle\Model\Sitemap\SitemapFilePrefixer: ~
 
