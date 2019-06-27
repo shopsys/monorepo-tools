@@ -59,6 +59,7 @@ class MailTemplateFacade
      * @param \Shopsys\FrameworkBundle\Component\UploadedFile\UploadedFileFacade $uploadedFileFacade
      * @param \Shopsys\FrameworkBundle\Model\Mail\MailTemplateFactoryInterface $mailTemplateFactory
      * @param \Shopsys\FrameworkBundle\Model\Mail\MailTemplateDataFactoryInterface $mailTemplateDataFactory
+     * @param \Shopsys\FrameworkBundle\Model\Mail\MailTemplateAttachmentFilepathProvider|null $mailTemplateAttachmentFilepathProvider
      */
     public function __construct(
         EntityManagerInterface $em,
@@ -67,7 +68,8 @@ class MailTemplateFacade
         Domain $domain,
         UploadedFileFacade $uploadedFileFacade,
         MailTemplateFactoryInterface $mailTemplateFactory,
-        MailTemplateDataFactoryInterface $mailTemplateDataFactory
+        MailTemplateDataFactoryInterface $mailTemplateDataFactory,
+        ?MailTemplateAttachmentFilepathProvider $mailTemplateAttachmentFilepathProvider = null
     ) {
         $this->em = $em;
         $this->mailTemplateRepository = $mailTemplateRepository;
@@ -76,19 +78,25 @@ class MailTemplateFacade
         $this->uploadedFileFacade = $uploadedFileFacade;
         $this->mailTemplateFactory = $mailTemplateFactory;
         $this->mailTemplateDataFactory = $mailTemplateDataFactory;
+        $this->mailTemplateAttachmentFilepathProvider = $mailTemplateAttachmentFilepathProvider;
     }
 
     /**
+     * @required
      * @param \Shopsys\FrameworkBundle\Model\Mail\MailTemplateAttachmentFilepathProvider $mailTemplateAttachmentFilepathProvider
-     * @deprecated Will be changed to constructor injection in 8.0
+     * @deprecated Will be replaced with constructor injection in the next major release
      */
     public function setMailTemplateAttachmentFilepathProvider(MailTemplateAttachmentFilepathProvider $mailTemplateAttachmentFilepathProvider): void
     {
-        if ($this->mailTemplateAttachmentFilepathProvider !== null) {
+        if ($this->mailTemplateAttachmentFilepathProvider !== null && $this->mailTemplateAttachmentFilepathProvider !== $mailTemplateAttachmentFilepathProvider) {
             throw new BadMethodCallException(sprintf('Method "%s" has been already called and cannot be called multiple times.', __METHOD__));
         }
 
-        $this->mailTemplateAttachmentFilepathProvider = $mailTemplateAttachmentFilepathProvider;
+        if ($this->mailTemplateAttachmentFilepathProvider === null) {
+            @trigger_error(sprintf('The %s() method is deprecated and will be removed in the next major. Use the constructor injection instead.', __METHOD__), E_USER_DEPRECATED);
+
+            $this->mailTemplateAttachmentFilepathProvider = $mailTemplateAttachmentFilepathProvider;
+        }
     }
 
     /**

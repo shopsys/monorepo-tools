@@ -465,10 +465,6 @@ services:
         arguments:
             - '@logger'
 
-    Shopsys\FrameworkBundle\Model\Mail\MailTemplateFacade:
-        calls:
-            - method: setMailTemplateAttachmentFilepathProvider
-
     Shopsys\FrameworkBundle\Model\Pricing\DelayedPricingSetting: ~
 
     Shopsys\FrameworkBundle\Model\Pricing\InputPriceRecalculationScheduler:
@@ -523,8 +519,6 @@ services:
 
     Shopsys\FrameworkBundle\Component\Router\DomainRouterFactory:
         arguments: ['%router.resource%']
-        calls:
-            - method: setRequestStack
 
     Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\FriendlyUrlRouterFactory:
         arguments: ['%shopsys.router.friendly_url_router_filepath%']
@@ -1007,11 +1001,7 @@ services:
             - '%shopsys.elasticsearch.structure_dir%'
             - '%env(ELASTIC_SEARCH_INDEX_PREFIX)%'
 
-    Shopsys\FrameworkBundle\Model\Product\Search\Export\ProductSearchExporter:
-        calls:
-            - method: setProgressBarFactory
-            - method: setSqlLoggerFacade
-            - method: setEntityManager
+    Shopsys\FrameworkBundle\Model\Product\Search\Export\ProductSearchExporter: ~
 
     Shopsys\FrameworkBundle\Model\Product\Search\ProductElasticsearchConverter: ~
 

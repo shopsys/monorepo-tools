@@ -127,14 +127,6 @@ There you can find links to upgrade notes for other versions too.
         +    Shopsys\ShopBundle\Twig\:
         +        resource: '../../Twig/'
         ```
-- if you have `Shopsys\FrameworkBundle\Model\Product\Search\Export\ProductSearchExporter` re-registered in your `services.yml`, add proper setter calls ([#1122](https://github.com/shopsys/shopsys/pull/1122))
-    ```diff
-        Shopsys\FrameworkBundle\Model\Product\Search\Export\ProductSearchExporter
-    +       calls:
-    +           - method: setProgressBarFactory
-    +           - method: setSqlLoggerFacade
-    +           - method: setEntityManager
-    ```
 - unset the incompatible `excluded_404s` configuration from monolog handlers that don't use the `fingers_crossed` type ([#1154](https://github.com/shopsys/shopsys/pull/1154))
     - in `app/config/packages/dev/monolog.yml`:
         ```diff
