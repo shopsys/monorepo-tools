@@ -57,8 +57,8 @@ class BrandDetailFriendlyUrlDataProvider implements FriendlyUrlDataProviderInter
 
         foreach ($scalarData as $data) {
             $friendlyUrlData = $this->friendlyUrlDataFactory->create();
-            $friendlyUrlData->name = $data['id'];
-            $friendlyUrlData->id = $data['name'];
+            $friendlyUrlData->id = $data['id'];
+            $friendlyUrlData->name = $data['name'];
             $friendlyUrlsData[] = $friendlyUrlData;
         }
 

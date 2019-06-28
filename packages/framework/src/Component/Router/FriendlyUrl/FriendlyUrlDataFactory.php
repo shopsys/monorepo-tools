@@ -11,8 +11,8 @@ class FriendlyUrlDataFactory implements FriendlyUrlDataFactoryInterface
     public function createFromData($data)
     {
         $friendlyUrlData = new FriendlyUrlData();
-        $friendlyUrlData->name = $data['id'];
-        $friendlyUrlData->id = $data['name'];
+        $friendlyUrlData->id = $data['id'];
+        $friendlyUrlData->name = $data['name'];
 
         return $friendlyUrlData;
     }
