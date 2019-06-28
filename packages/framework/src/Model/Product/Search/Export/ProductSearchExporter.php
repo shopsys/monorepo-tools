@@ -178,6 +178,40 @@ class ProductSearchExporter
     /**
      * @param int $domainId
      * @param string $locale
+     * @param int[] $productIds
+     */
+    public function exportIds(int $domainId, string $locale, array $productIds): void
+    {
+        $productsData = $this->productSearchExportRepository->getProductsDataForIds($domainId, $locale, $productIds);
+        if (count($productsData) === 0) {
+            $this->productElasticsearchRepository->delete($domainId, $productIds);
+
+            return;
+        }
+
+        $this->exportProductsData($domainId, $productsData);
+        $exportedIds = $this->productElasticsearchConverter->extractIds($productsData);
+
+        $idsToDelete = array_diff($productIds, $exportedIds);
+
+        if ($idsToDelete !== []) {
+            $this->productElasticsearchRepository->delete($domainId, $idsToDelete);
+        }
+    }
+
+    /**
+     * @param int $domainId
+     * @param array $productsData
+     */
+    protected function exportProductsData(int $domainId, array $productsData): void
+    {
+        $data = $this->productElasticsearchConverter->convertExportBulk($productsData);
+        $this->productElasticsearchRepository->bulkUpdate($domainId, $data);
+    }
+
+    /**
+     * @param int $domainId
+     * @param string $locale
      * @param int $startFrom
      * @return int[]
      */

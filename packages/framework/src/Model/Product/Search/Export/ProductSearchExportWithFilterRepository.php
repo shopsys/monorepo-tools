@@ -53,28 +53,62 @@ class ProductSearchExportWithFilterRepository extends ProductSearchExportReposit
         $result = [];
         /** @var \Shopsys\FrameworkBundle\Model\Product\Product $product */
         foreach ($query->getResult() as $product) {
-            $flagIds = $this->extractFlags($product);
-            $categoryIds = $this->extractCategories($domainId, $product);
-            $parameters = $this->extractParameters($locale, $product);
-            $prices = $this->extractPrices($domainId, $product);
+            $result[] = $this->extractResult($product, $domainId, $locale);
+        }
 
-            $result[] = [
-                'id' => $product->getId(),
-                'catnum' => $product->getCatnum(),
-                'partno' => $product->getPartno(),
-                'ean' => $product->getEan(),
-                'name' => $product->getName($locale),
-                'description' => $product->getDescription($domainId),
-                'shortDescription' => $product->getShortDescription($domainId),
-                'brand' => $product->getBrand() ? $product->getBrand()->getId() : '',
-                'flags' => $flagIds,
-                'categories' => $categoryIds,
-                'in_stock' => $product->getCalculatedAvailability()->getDispatchTime() === 0,
-                'prices' => $prices,
-                'parameters' => $parameters,
-                'ordering_priority' => $product->getOrderingPriority(),
-                'calculated_selling_denied' => $product->getCalculatedSellingDenied(),
-            ];
+        return $result;
+    }
+
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Product\Product $product
+     * @param int $domainId
+     * @param string $locale
+     * @return array
+     */
+    protected function extractResult(Product $product, int $domainId, string $locale): array
+    {
+        $flagIds = $this->extractFlags($product);
+        $categoryIds = $this->extractCategories($domainId, $product);
+        $parameters = $this->extractParameters($locale, $product);
+        $prices = $this->extractPrices($domainId, $product);
+
+        return [
+            'id' => $product->getId(),
+            'catnum' => $product->getCatnum(),
+            'partno' => $product->getPartno(),
+            'ean' => $product->getEan(),
+            'name' => $product->getName($locale),
+            'description' => $product->getDescription($domainId),
+            'shortDescription' => $product->getShortDescription($domainId),
+            'brand' => $product->getBrand() ? $product->getBrand()->getId() : '',
+            'flags' => $flagIds,
+            'categories' => $categoryIds,
+            'in_stock' => $product->getCalculatedAvailability()->getDispatchTime() === 0,
+            'prices' => $prices,
+            'parameters' => $parameters,
+            'ordering_priority' => $product->getOrderingPriority(),
+            'calculated_selling_denied' => $product->getCalculatedSellingDenied(),
+        ];
+    }
+
+    /**
+     * @param int $domainId
+     * @param string $locale
+     * @param int[] $productIds
+     * @return array
+     */
+    public function getProductsDataForIds(int $domainId, string $locale, array $productIds): array
+    {
+        $queryBuilder = $this->createQueryBuilder($domainId, $locale)
+            ->andWhere('p.id IN (:productIds)')
+            ->setParameter('productIds', $productIds);
+
+        $query = $queryBuilder->getQuery();
+
+        $result = [];
+        /** @var \Shopsys\FrameworkBundle\Model\Product\Product $product */
+        foreach ($query->getResult() as $product) {
+            $result[] = $this->extractResult($product, $domainId, $locale);
         }
 
         return $result;

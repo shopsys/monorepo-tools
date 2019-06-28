@@ -76,6 +76,22 @@ class ProductSearchExportRepository
     /**
      * @param int $domainId
      * @param string $locale
+     * @param int[] $productIds
+     * @return array
+     */
+    public function getProductsDataForIds(int $domainId, string $locale, array $productIds): array
+    {
+        $queryBuilder = $this->createQueryBuilder($domainId, $locale)
+            ->andWhere('p.id IN (:productIds)')
+            ->setParameter('productIds', $productIds);
+
+        $query = $queryBuilder->getQuery();
+        return $query->getArrayResult();
+    }
+
+    /**
+     * @param int $domainId
+     * @param string $locale
      * @return int
      */
     public function getProductTotalCountForDomainAndLocale(int $domainId, string $locale): int

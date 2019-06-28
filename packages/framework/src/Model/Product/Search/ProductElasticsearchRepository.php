@@ -231,4 +231,27 @@ class ProductElasticsearchRepository
             ],
         ]);
     }
+
+    /**
+     * @param int $domainId
+     * @param int[] $deleteIds
+     */
+    public function delete(int $domainId, array $deleteIds): void
+    {
+        $this->client->deleteByQuery([
+            'index' => $this->elasticsearchStructureManager->getIndexName($domainId, self::ELASTICSEARCH_INDEX),
+            'type' => '_doc',
+            'body' => [
+                'query' => [
+                    'bool' => [
+                        'must' => [
+                            'ids' => [
+                                'values' => array_values($deleteIds),
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+        ]);
+    }
 }
