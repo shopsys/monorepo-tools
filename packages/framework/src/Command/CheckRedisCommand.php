@@ -38,7 +38,10 @@ class CheckRedisCommand extends Command
     {
         parent::__construct();
 
-        if (!$redisFacadeOrClients instanceof RedisFacade) {
+        if ($redisFacadeOrClients instanceof RedisFacade) {
+            $this->redisFacade = $redisFacadeOrClients;
+            $this->cacheClients = [];
+        } else {
             Assert::allIsInstanceOf($redisFacadeOrClients, Redis::class);
 
             @trigger_error(
@@ -47,9 +50,6 @@ class CheckRedisCommand extends Command
             );
 
             $this->cacheClients = $redisFacadeOrClients;
-        } else {
-            $this->cacheClients = [];
-            $this->redisFacade = $redisFacadeOrClients;
         }
     }
 
