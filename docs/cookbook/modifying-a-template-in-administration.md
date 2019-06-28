@@ -32,24 +32,14 @@ For the extensions of the forms, see [Enable administrator to edit the `extId` f
 
     ```
         ...
-        {% block menu_panel_visibilities %}{% endblock %}
-        {% endblock %}
-
-        {% block breadcrumb %}{% endblock %}
-
         {% block main_content %}
-            {% if isMultidomain() %}
-                {% set cssClassOnMultidomainInputs = 'input--domain' %}
-            {% else %}
-                {% set cssClassOnMultidomainInputs = '' %}
-            {% endif %}
 
             {{ form_start(form) }}
                 {{ form_errors(form) }}
 
                 {% embed '@ShopsysFramework/Admin/Inline/FixedBar/fixedBar.html.twig' %}
                     {% block fixed_bar_content %}
-                        <button id="js-close-without-saving" type="button" class="btn-link-style">{{ 'Close without saving'|trans }}</button>
+                        <a href="{{ url('admin_product_list') }}" class="btn-link-style">{{ 'Back to overview'|trans }}</a>
                         {{ form_save(product|default(null), form) }}
                     {% endblock %}
                 {% endembed %}
@@ -86,18 +76,7 @@ For the extensions of the forms, see [Enable administrator to edit the `extId` f
 
     ```
         ...
-        {% block menu_panel_visibilities %}{% endblock %}
-        {% endblock %}
-
-        {% block breadcrumb %}{% endblock %}
-
         {% block main_content %}
-            {% if isMultidomain() %}
-                {% set cssClassOnMultidomainInputs = 'input--domain' %}
-            {% else %}
-                {% set cssClassOnMultidomainInputs = '' %}
-            {% endif %}
-
             <div class="form-line">
                 <div class="form-line__line form-line__line--no-space">
                     <div class="form-line__item form-line__item--text">
@@ -115,7 +94,7 @@ For the extensions of the forms, see [Enable administrator to edit the `extId` f
 
                 {% embed '@ShopsysFramework/Admin/Inline/FixedBar/fixedBar.html.twig' %}
                     {% block fixed_bar_content %}
-                        <button id="js-close-without-saving" type="button" class="btn-link-style">{{ 'Close without saving'|trans }}</button>
+                        <a href="{{ url('admin_product_list') }}" class="btn-link-style">{{ 'Back to overview'|trans }}</a>
                         {{ form_save(product|default(null), form) }}
                     {% endblock %}
                 {% endembed %}

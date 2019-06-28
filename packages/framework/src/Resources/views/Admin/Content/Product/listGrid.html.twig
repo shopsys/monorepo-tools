@@ -9,7 +9,6 @@
         class="in-icon in-icon--edit svg svg-pencil table-action{% if actionColumn.classAttribute %} {{ actionColumn.classAttribute }}{% endif %}"
         href="{{ actionColumn.targetUrl(row) }}"
         title = "{{ actionColumn.title }}"
-        target ="_blank"
     ></a>
 {% endblock %}
 
@@ -20,7 +19,7 @@
     {% if row.p.variantType == VARIANT_TYPE_VARIANT %}
         <span class="in-letter cursor-help js-tooltip" title="{{ 'Variant'|trans }}">{{ 'Variant [abbreviation]'|trans }}</span>
     {% endif %}
-    <a href="{{ url('admin_product_edit', { id: row.p.id }) }}" target="_blank">{{ row.product|productListDisplayName }}</a>
+    <a href="{{ url('admin_product_edit', { id: row.p.id }) }}">{{ row.product|productListDisplayName }}</a>
 {% endblock %}
 
 {% block grid_value_cell_id_calculatedVisibility %}
@@ -42,7 +41,7 @@
     {% else %}
         {% if isVisibleForDefaultPricingGroupOnEachDomain(row.product) %}
             {% spaceless %}
-                <a href="{{ findUrlByDomainId('front_product_detail', { id: row.product.id }, getDomain().id) }}" target="_blank">
+                <a href="{{ findUrlByDomainId('front_product_detail', { id: row.product.id }, getDomain().id) }}">
                     <span class="in-icon svg svg-visible in-icon--visible"></span>
                 </a>
             {% endspaceless %}

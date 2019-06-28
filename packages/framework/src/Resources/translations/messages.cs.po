@@ -379,17 +379,11 @@ msgstr "Zavřít"
 msgid "Close (Esc)"
 msgstr "Zavřít (Esc)"
 
-msgid "Close without saving"
-msgstr "Zavřít bez uložení"
-
 msgid "Code"
 msgstr "Kód"
 
 msgid "Code of service Heureka - Verified by Customer"
 msgstr "Kód služby Ověřeno zákazníky"
-
-msgid "Coefficient"
-msgstr "Koeficient"
 
 msgid "Colour"
 msgstr "Barva"
@@ -1648,26 +1642,23 @@ msgstr "Priorita"
 msgid "Privacy policy"
 msgstr "Zásady ochrany osobních údajů"
 
+msgid "Product"
+msgstr "Zboží"
+
+msgid "Product <strong><a href=\"{{ url }}\">{{ product|productDisplayName }}</a></strong> created"
+msgstr "Bylo vytvořeno zboží <strong><a href=\"{{ url }}\">{{ product|productDisplayName }}</a></strong>"
+
+msgid "Product <strong><a href=\"{{ url }}\">{{ product|productDisplayName }}</a></strong> modified"
+msgstr "Bylo upraveno zboží <strong><a href=\"{{ url }}\">{{ product|productDisplayName }}</a></strong>"
+
 msgid "Product <strong>{{ name }}</strong> you had in cart is no longer available. Please check your order."
 msgstr "Zboží <strong>{{ name }}</strong>, které jste měli v košíku, již není v nabídce. Prosím, překontrolujte si objednávku."
-
-msgid "Product <strong>{{ product|productDisplayName }}</strong> created"
-msgstr "Bylo vytvořeno zboží <strong>{{ product|productDisplayName }}</strong>"
 
 msgid "Product <strong>{{ product|productDisplayName }}</strong> deleted"
 msgstr "Produkt <strong>{{ product|productDisplayName }}</strong> byl smazán"
 
-msgid "Product <strong>{{ product|productDisplayName }}</strong> modified"
-msgstr "Bylo upraveno zboží <strong>{{ product|productDisplayName }}</strong>"
-
-msgid "Product detail"
-msgstr "Karta zboží"
-
 msgid "Product excluded from sale"
 msgstr "Zboží je vyřazeno z prodeje"
-
-msgid "Product excluded from sale."
-msgstr "Zboží je vyřazeno z prodeje."
 
 msgid "Product in order"
 msgstr "Zboží v objednávce"

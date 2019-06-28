@@ -19,11 +19,6 @@
         Shopsys.product.toggleIsUsingAlternateAvailability($outOfStockActionSelection.val() === Shopsys.constant('\\Shopsys\\FrameworkBundle\\Model\\Product\\Product::OUT_OF_STOCK_ACTION_SET_ALTERNATE_AVAILABILITY'));
 
         Shopsys.product.initializeSideNavigation();
-
-        $('#js-close-without-saving').on('click', function () {
-            window.close();
-            return false;
-        });
     };
 
     Shopsys.product.toggleIsUsingStock = function (isUsingStock) {

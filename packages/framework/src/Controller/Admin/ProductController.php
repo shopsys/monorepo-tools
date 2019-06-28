@@ -165,13 +165,16 @@ class ProductController extends AdminBaseController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->productFacade->edit($id, $form->getData());
 
-            $this->getFlashMessageSender()->addSuccessFlashTwig(
-                t('Product <strong>{{ product|productDisplayName }}</strong> modified'),
-                [
-                    'product' => $product,
-                ]
-            );
-            return $this->redirectToRoute('admin_product_edit', ['id' => $product->getId()]);
+            $this->getFlashMessageSender()
+                ->addSuccessFlashTwig(
+                    t('Product <strong><a href="{{ url }}">{{ product|productDisplayName }}</a></strong> modified'),
+                    [
+                        'product' => $product,
+                        'url' => $this->generateUrl('admin_product_edit', ['id' => $product->getId()]),
+                    ]
+                );
+
+            return $this->redirectToRoute('admin_product_list');
         }
 
         if ($form->isSubmitted() && !$form->isValid()) {
@@ -208,13 +211,16 @@ class ProductController extends AdminBaseController
         if ($form->isSubmitted() && $form->isValid()) {
             $product = $this->productFacade->create($form->getData());
 
-            $this->getFlashMessageSender()->addSuccessFlashTwig(
-                t('Product <strong>{{ product|productDisplayName }}</strong> created'),
-                [
-                    'product' => $product,
-                ]
-            );
-            return $this->redirectToRoute('admin_product_edit', ['id' => $product->getId()]);
+            $this->getFlashMessageSender()
+                ->addSuccessFlashTwig(
+                    t('Product <strong><a href="{{ url }}">{{ product|productDisplayName }}</a></strong> created'),
+                    [
+                        'product' => $product,
+                        'url' => $this->generateUrl('admin_product_edit', ['id' => $product->getId()]),
+                    ]
+                );
+
+            return $this->redirectToRoute('admin_product_list', ['id' => $product->getId()]);
         }
 
         if ($form->isSubmitted() && !$form->isValid()) {

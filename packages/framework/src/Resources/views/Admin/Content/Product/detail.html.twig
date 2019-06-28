@@ -1,49 +1,18 @@
 {% extends '@ShopsysFramework/Admin/Layout/layoutWithPanel.html.twig' %}
-{% set showHeading = false %}
 {% import '@ShopsysFramework/Admin/Form/seoFormRowMacros.html.twig' as seoFormRowMacros %}
 {% import _self as self %}
 
-{% block title %}- {{ 'Product detail'|trans }}{% endblock %}
-{% block h1 %}{% endblock %}
-
-{% block header %}
-    <header class="web__header">
-        <div class="web__header__in web__header__in--small">
-            <div class="web__header__logo">
-                <img class="web__header__logo__svg" src="{{ asset('assets/admin/images/logo.svg') }}" alt="Shopsys Framework">
-            </div>
-            <div class="top-info">
-                <div class="top-info__text">
-                    <h1 class="top-info__text__title">{% block product_header_heading %}{% endblock %}</h1>
-                </div>
-            </div>
-        </div>
-    </header>
-{% endblock %}
-
-{% block menu_panel %}
-    <div class="panel">
-        <ul class="anchor-menu js-product-detail-navigation"></ul>
-    </div>
-    {% block menu_panel_visibilities %}{% endblock %}
-{% endblock %}
-
-{% block breadcrumb %}{% endblock %}
+{% block title %}- {{ 'Product'|trans }}{% endblock %}
+{% block h1 %}{{ 'Product'|trans }}{% endblock %}
 
 {% block main_content %}
-    {% if isMultidomain() %}
-        {% set cssClassOnMultidomainInputs = 'input--domain' %}
-    {% else %}
-        {% set cssClassOnMultidomainInputs = '' %}
-    {% endif %}
 
     {{ form_start(form) }}
         {{ form_errors(form) }}
 
-
         {% embed '@ShopsysFramework/Admin/Inline/FixedBar/fixedBar.html.twig' %}
             {% block fixed_bar_content %}
-                <button id="js-close-without-saving" type="button" class="btn-link-style">{{ 'Close without saving'|trans }}</button>
+                <a href="{{ url('admin_product_list') }}" class="btn-link-style">{{ 'Back to overview'|trans }}</a>
                 {{ form_save(product|default(null), form) }}
             {% endblock %}
         {% endembed %}

@@ -379,16 +379,10 @@ msgstr ""
 msgid "Close (Esc)"
 msgstr ""
 
-msgid "Close without saving"
-msgstr ""
-
 msgid "Code"
 msgstr ""
 
 msgid "Code of service Heureka - Verified by Customer"
-msgstr ""
-
-msgid "Coefficient"
 msgstr ""
 
 msgid "Colour"
@@ -1648,25 +1642,22 @@ msgstr ""
 msgid "Privacy policy"
 msgstr ""
 
-msgid "Product <strong>{{ name }}</strong> you had in cart is no longer available. Please check your order."
+msgid "Product"
 msgstr ""
 
-msgid "Product <strong>{{ product|productDisplayName }}</strong> created"
+msgid "Product <strong><a href=\"{{ url }}\">{{ product|productDisplayName }}</a></strong> created"
+msgstr ""
+
+msgid "Product <strong><a href=\"{{ url }}\">{{ product|productDisplayName }}</a></strong> modified"
+msgstr ""
+
+msgid "Product <strong>{{ name }}</strong> you had in cart is no longer available. Please check your order."
 msgstr ""
 
 msgid "Product <strong>{{ product|productDisplayName }}</strong> deleted"
 msgstr ""
 
-msgid "Product <strong>{{ product|productDisplayName }}</strong> modified"
-msgstr ""
-
-msgid "Product detail"
-msgstr ""
-
 msgid "Product excluded from sale"
-msgstr ""
-
-msgid "Product excluded from sale."
 msgstr ""
 
 msgid "Product in order"

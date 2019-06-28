@@ -4,7 +4,7 @@
 {% block h1 %}{{ 'Products overview'|trans }}{% endblock %}
 {% block btn %}
     {% if productCanBeCreated %}
-        <a href="{{ url('admin_product_new') }}" class="btn btn--plus wrap-bar__btn" target="_blank">
+        <a href="{{ url('admin_product_new') }}" class="btn btn--plus wrap-bar__btn">
             <i class="btn__icon">+</i>{{ 'Create new product'|trans }}
         </a>
         <a href="{{ url('admin_product_createvariant') }}" class="btn btn--plus wrap-bar__btn">
