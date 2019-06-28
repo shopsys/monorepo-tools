@@ -7,6 +7,7 @@ use Doctrine\ORM\Query\Expr\Join;
 use Shopsys\FrameworkBundle\Component\Domain\Config\DomainConfig;
 use Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\CompilerPass\FriendlyUrlDataProviderInterface;
 use Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\FriendlyUrl;
+use Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\FriendlyUrlData;
 use Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\FriendlyUrlDataFactoryInterface;
 
 class ProductDetailFriendlyUrlDataProvider implements FriendlyUrlDataProviderInterface
@@ -58,10 +59,7 @@ class ProductDetailFriendlyUrlDataProvider implements FriendlyUrlDataProviderInt
         $friendlyUrlsData = [];
 
         foreach ($scalarData as $data) {
-            $friendlyUrlData = $this->friendlyUrlDataFactory->create();
-            $friendlyUrlData->id = $data['id'];
-            $friendlyUrlData->name = $data['name'];
-            $friendlyUrlsData[] = $friendlyUrlData;
+            $friendlyUrlsData[] = $this->createFriendlyUrlData($data);
         }
 
         return $friendlyUrlsData;
@@ -73,5 +71,31 @@ class ProductDetailFriendlyUrlDataProvider implements FriendlyUrlDataProviderInt
     public function getRouteName(): string
     {
         return static::ROUTE_NAME;
+    }
+
+    /**
+     * @internal This method will be inlined when its implementation will be able to be simplified
+     *
+     * @param array $data
+     * @return \Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\FriendlyUrlData
+     */
+    protected function createFriendlyUrlData(array $data): FriendlyUrlData
+    {
+        if (method_exists($this->friendlyUrlDataFactory, 'createFromIdAndName')) {
+            return $this->friendlyUrlDataFactory->createFromIdAndName($data['id'], $data['name']);
+        }
+
+        $message = sprintf(
+            'Creating instance of FriendlyUrlData directly in "%s" is deprecated since SSFW 7.3, implement "%s" instead',
+            __CLASS__,
+            get_class($this->friendlyUrlDataFactory) . '::createFromIdAndName()'
+        );
+        @trigger_error($message, E_USER_DEPRECATED);
+
+        $friendlyUrlData = $this->friendlyUrlDataFactory->create();
+        $friendlyUrlData->id = $data['id'];
+        $friendlyUrlData->name = $data['name'];
+
+        return $friendlyUrlData;
     }
 }

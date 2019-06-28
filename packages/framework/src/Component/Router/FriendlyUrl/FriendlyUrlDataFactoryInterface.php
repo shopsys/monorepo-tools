@@ -2,6 +2,9 @@
 
 namespace Shopsys\FrameworkBundle\Component\Router\FriendlyUrl;
 
+/**
+ * @method FriendlyUrlData createFromIdAndName(int $id, string $name)
+ */
 interface FriendlyUrlDataFactoryInterface
 {
     /**
