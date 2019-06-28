@@ -154,6 +154,7 @@ services:
             # must be ran before ProductVisibilityFacade
             - { name: kernel.event_listener, event: kernel.response, method: onKernelResponse, priority: 20 }
 
+    # this explicit definition will not be needed when the @deprecated argument type is removed
     Shopsys\FrameworkBundle\Command\CheckRedisCommand:
         arguments:
             - '@Shopsys\FrameworkBundle\Component\Redis\RedisFacade'
