@@ -5,6 +5,9 @@ namespace Shopsys\FrameworkBundle\Command\Exception;
 use Exception;
 use Throwable;
 
+/**
+ * @deprecated This exception is deprecated since SSFW 7.3
+ */
 class RedisNotRunningException extends Exception
 {
     /**

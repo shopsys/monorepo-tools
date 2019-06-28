@@ -154,6 +154,11 @@ services:
             # must be ran before ProductVisibilityFacade
             - { name: kernel.event_listener, event: kernel.response, method: onKernelResponse, priority: 20 }
 
+    # this explicit definition will not be needed when the @deprecated argument type is removed
+    Shopsys\FrameworkBundle\Command\CheckRedisCommand:
+        arguments:
+            - '@Shopsys\FrameworkBundle\Component\Redis\RedisFacade'
+
     Shopsys\FrameworkBundle\Component\Cron\CronFacade:
         arguments:
             - '@monolog.logger.cron'
@@ -955,11 +960,10 @@ services:
 
     Shopsys\FrameworkBundle\Component\Redis\RedisFacade:
         arguments:
-            $cacheClients:
-            - '@snc_redis.bestselling_products'
-            - '@snc_redis.doctrine_metadata'
-            - '@snc_redis.doctrine_query'
-            - '@snc_redis.framework_annotations'
+            $allClients: !tagged snc_redis.client
+            $persistentClients:
+                - '@snc_redis.global'
+                - '@snc_redis.session'
 
     Shopsys\FrameworkBundle\Component\Redis\RedisVersionsFacade:
         arguments:
@@ -992,12 +996,3 @@ services:
     Shopsys\FrameworkBundle\Model\Product\Search\Export\ProductSearchExporter: ~
 
     Shopsys\FrameworkBundle\Model\Product\Search\ProductElasticsearchConverter: ~
-
-    Shopsys\FrameworkBundle\Command\CheckRedisCommand:
-        arguments:
-            $cacheClients:
-            - '@snc_redis.bestselling_products'
-            - '@snc_redis.doctrine_metadata'
-            - '@snc_redis.doctrine_query'
-            - '@snc_redis.framework_annotations'
-            - '@snc_redis.session'

@@ -9,23 +9,42 @@ use Tests\ShopBundle\Test\FunctionalTestCase;
 
 class RedisFacadeTest extends FunctionalTestCase
 {
+    /**
+     * @var \Redis
+     */
+    private $redisClient;
+
+    protected function setUp(): void
+    {
+        $this->redisClient = $this->getContainer()->get('snc_redis.test');
+    }
+
     public function testCleanCache(): void
     {
-        $redisClient = $this->getContainer()->get('snc_redis.test');
-        $redisClient->set('test', 'test');
-        $facade = new RedisFacade([$redisClient]);
+        $this->redisClient->set('test', 'test');
+        $facade = new RedisFacade([$this->redisClient], []);
 
         $facade->cleanCache();
-        $this->assertSame(0, $redisClient->exists('test'));
+
+        $this->assertFalse((bool)$this->redisClient->exists('test'));
     }
 
     public function testCleanCacheNoErrorOnEmpty(): void
     {
-        $redisClient = $this->getContainer()->get('snc_redis.test');
-        $facade = new RedisFacade([$redisClient]);
+        $facade = new RedisFacade([$this->redisClient], []);
 
         $facade->cleanCache();
-        $lastError = $redisClient->getLastError();
-        $this->assertSame(null, $lastError);
+
+        $this->assertNull($this->redisClient->getLastError());
+    }
+
+    public function testNotCleaningPersistentClient(): void
+    {
+        $this->redisClient->set('test', 'test');
+        $facade = new RedisFacade([$this->redisClient], [$this->redisClient]);
+
+        $facade->cleanCache();
+
+        $this->assertTrue((bool)$this->redisClient->exists('test'));
     }
 }
