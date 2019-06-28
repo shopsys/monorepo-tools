@@ -1,27 +1,25 @@
 <?php
 
-namespace Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\CompilerPass;
+namespace Shopsys\FrameworkBundle\Component\Router\FriendlyUrl;
 
 use Shopsys\FrameworkBundle\Component\Domain\Config\DomainConfig;
+use Webmozart\Assert\Assert;
 
 class FriendlyUrlDataProviderRegistry
 {
     /**
-     * @var \Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\CompilerPass\FriendlyUrlDataProviderInterface[]
+     * @var \Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\FriendlyUrlDataProviderInterface[]
      */
     protected $friendlyUrlDataProviders;
 
-    public function __construct()
-    {
-        $this->friendlyUrlDataProviders = [];
-    }
-
     /**
-     * @param \Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\CompilerPass\FriendlyUrlDataProviderInterface $service
+     * @param \Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\FriendlyUrlDataProviderInterface[] $friendlyUrlDataProviders
      */
-    public function registerFriendlyUrlDataProvider(FriendlyUrlDataProviderInterface $service)
+    public function __construct(iterable $friendlyUrlDataProviders)
     {
-        $this->friendlyUrlDataProviders[] = $service;
+        Assert::allIsInstanceOf($friendlyUrlDataProviders, FriendlyUrlDataProviderInterface::class);
+
+        $this->friendlyUrlDataProviders = $friendlyUrlDataProviders;
     }
 
     /**

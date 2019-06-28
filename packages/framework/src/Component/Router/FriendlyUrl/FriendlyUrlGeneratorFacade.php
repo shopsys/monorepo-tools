@@ -5,7 +5,6 @@ namespace Shopsys\FrameworkBundle\Component\Router\FriendlyUrl;
 use Shopsys\FrameworkBundle\Component\Domain\Config\DomainConfig;
 use Shopsys\FrameworkBundle\Component\Domain\Domain;
 use Shopsys\FrameworkBundle\Component\Router\DomainRouterFactory;
-use Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\CompilerPass\FriendlyUrlDataProviderRegistry;
 use Symfony\Component\Console\Output\OutputInterface;
 
 class FriendlyUrlGeneratorFacade
@@ -26,7 +25,7 @@ class FriendlyUrlGeneratorFacade
     protected $friendlyUrlFacade;
 
     /**
-     * @var \Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\CompilerPass\FriendlyUrlDataProviderRegistry
+     * @var \Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\FriendlyUrlDataProviderRegistry
      */
     protected $friendlyUrlDataProviderConfig;
 
@@ -34,7 +33,7 @@ class FriendlyUrlGeneratorFacade
      * @param \Shopsys\FrameworkBundle\Component\Domain\Domain $domain
      * @param \Shopsys\FrameworkBundle\Component\Router\DomainRouterFactory $domainRouterFactory
      * @param \Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\FriendlyUrlFacade $friendlyUrlFacade
-     * @param \Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\CompilerPass\FriendlyUrlDataProviderRegistry $friendlyUrlDataProviderConfig
+     * @param \Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\FriendlyUrlDataProviderRegistry $friendlyUrlDataProviderConfig
      */
     public function __construct(
         Domain $domain,
