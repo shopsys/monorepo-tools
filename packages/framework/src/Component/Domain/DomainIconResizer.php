@@ -8,12 +8,9 @@ use Symfony\Bridge\Monolog\Logger;
 
 class DomainIconResizer
 {
-    /** @access protected */
-    const DOMAIN_ICON_WIDTH = 48;
-    /** @access protected */
-    const DOMAIN_ICON_HEIGHT = 33;
-    /** @access protected */
-    const DOMAIN_ICON_CROP = false;
+    protected const DOMAIN_ICON_WIDTH = 48;
+    protected const DOMAIN_ICON_HEIGHT = 33;
+    protected const DOMAIN_ICON_CROP = false;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\Image\Processing\ImageProcessor

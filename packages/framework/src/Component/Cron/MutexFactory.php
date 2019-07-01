@@ -7,8 +7,7 @@ use NinjaMutex\Mutex;
 
 class MutexFactory
 {
-    /** @access protected */
-    const MUTEX_CRON_NAME = 'cron';
+    protected const MUTEX_CRON_NAME = 'cron';
 
     /**
      * @var \NinjaMutex\Lock\LockInterface

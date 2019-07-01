@@ -10,8 +10,7 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class FileUpload
 {
-    /** @access protected */
-    const TEMPORARY_DIRECTORY = 'fileUploads';
+    protected const TEMPORARY_DIRECTORY = 'fileUploads';
 
     /**
      * @var string

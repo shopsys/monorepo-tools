@@ -10,8 +10,7 @@ use Symfony\Component\HttpKernel\KernelEvents;
 
 class SlowLogSubscriber implements EventSubscriberInterface
 {
-    /** @access protected */
-    const REQUEST_TIME_LIMIT_SECONDS = 2;
+    protected const REQUEST_TIME_LIMIT_SECONDS = 2;
 
     /**
      * @var \Symfony\Bridge\Monolog\Logger

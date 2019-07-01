@@ -5,8 +5,7 @@ namespace Shopsys\FrameworkBundle\Component\FileUpload;
 class FileNamingConvention
 {
     public const TYPE_ID = 1;
-    /** @access protected */
-    const TYPE_ORIGINAL_NAME = 2;
+    protected const TYPE_ORIGINAL_NAME = 2;
 
     /**
      * @param int $namingConventionType

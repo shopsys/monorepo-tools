@@ -11,10 +11,8 @@ use Symfony\Component\Filesystem\Filesystem;
 
 class FeedExport
 {
-    /** @access protected */
-    const TEMPORARY_FILENAME_SUFFIX = '.tmp';
-    /** @access protected */
-    const BATCH_SIZE = 1000;
+    protected const TEMPORARY_FILENAME_SUFFIX = '.tmp';
+    protected const BATCH_SIZE = 1000;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Feed\FeedInterface

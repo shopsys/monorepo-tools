@@ -8,10 +8,8 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class DatePickerType extends AbstractType
 {
-    /** @access protected */
-    const FORMAT_PHP = 'dd.MM.yyyy';
-    /** @access protected */
-    const FORMAT_JS = 'dd.mm.yy';
+    protected const FORMAT_PHP = 'dd.MM.yyyy';
+    public const FORMAT_JS = 'dd.mm.yy';
 
     /**
      * @param \Symfony\Component\OptionsResolver\OptionsResolver $resolver

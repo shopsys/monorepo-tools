@@ -8,8 +8,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 
 class RequestDataSet implements RequestDataSetConfig
 {
-    /** @access private */
-    const DEFAULT_EXPECTED_STATUS_CODE = 200;
+    private const DEFAULT_EXPECTED_STATUS_CODE = 200;
 
     /**
      * @var string

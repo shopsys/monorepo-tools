@@ -12,8 +12,7 @@ use Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\FriendlyUrlDataProvider
 
 class BrandDetailFriendlyUrlDataProvider implements FriendlyUrlDataProviderInterface
 {
-    /** @access protected */
-    const ROUTE_NAME = 'front_brand_detail';
+    protected const ROUTE_NAME = 'front_brand_detail';
 
     /**
      * @var \Doctrine\ORM\EntityManagerInterface

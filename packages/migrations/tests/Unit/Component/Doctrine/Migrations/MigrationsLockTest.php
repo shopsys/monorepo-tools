@@ -12,10 +12,8 @@ use Tests\MigrationBundle\Unit\Component\Doctrine\Migrations\Resources\Version20
 
 class MigrationsLockTest extends TestCase
 {
-    /** @access private */
-    const MIGRATION_LOCK_TEMPLATE = __DIR__ . '/Resources/migrations-lock.yml';
-    /** @access private */
-    const MIGRATION_LOCK = __DIR__ . '/Resources/migrations-lock.yml.tmp';
+    private const MIGRATION_LOCK_TEMPLATE = __DIR__ . '/Resources/migrations-lock.yml';
+    private const MIGRATION_LOCK = __DIR__ . '/Resources/migrations-lock.yml.tmp';
 
     /**
      * @var \Shopsys\MigrationBundle\Component\Doctrine\Migrations\MigrationsLock

@@ -28,8 +28,7 @@ use Shopsys\FrameworkBundle\Model\Transport\TransportData;
 
 class CustomerDataFactoryTest extends TestCase
 {
-    /** @access private */
-    const DOMAIN_ID = 1;
+    private const DOMAIN_ID = 1;
 
     public function testGetAmendedCustomerDataByOrderWithoutChanges()
     {

@@ -9,10 +9,8 @@ use Twig_Extension;
 
 class NumberFormatterExtension extends Twig_Extension
 {
-    /** @access protected */
-    const MINIMUM_FRACTION_DIGITS = 0;
-    /** @access protected */
-    const MAXIMUM_FRACTION_DIGITS = 10;
+    protected const MINIMUM_FRACTION_DIGITS = 0;
+    protected const MAXIMUM_FRACTION_DIGITS = 10;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Localization\Localization

@@ -52,13 +52,9 @@ use Symfony\Component\Validator\Constraints;
 
 class ProductFormType extends AbstractType
 {
-    /** @access protected */
-    const VALIDATION_GROUP_USING_STOCK = 'usingStock';
-    /** @access protected */
-    const VALIDATION_GROUP_USING_STOCK_AND_ALTERNATE_AVAILABILITY = 'usingStockAndAlternateAvailability';
-    /** @access protected */
-    const VALIDATION_GROUP_NOT_USING_STOCK = 'notUsingStock';
-
+    public const VALIDATION_GROUP_USING_STOCK = 'usingStock';
+    public const VALIDATION_GROUP_USING_STOCK_AND_ALTERNATE_AVAILABILITY = 'usingStockAndAlternateAvailability';
+    public const VALIDATION_GROUP_NOT_USING_STOCK = 'notUsingStock';
     public const CSRF_TOKEN_ID = 'product_edit_type';
 
     /**

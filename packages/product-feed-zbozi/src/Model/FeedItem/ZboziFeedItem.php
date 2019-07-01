@@ -8,8 +8,7 @@ use Shopsys\FrameworkBundle\Model\Pricing\Price;
 
 class ZboziFeedItem implements FeedItemInterface
 {
-    /** @access protected */
-    const CATEGORY_PATH_SEPARATOR = ' | ';
+    protected const CATEGORY_PATH_SEPARATOR = ' | ';
 
     /**
      * @var int

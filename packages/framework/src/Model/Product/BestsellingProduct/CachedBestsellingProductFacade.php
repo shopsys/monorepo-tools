@@ -10,8 +10,7 @@ use Shopsys\FrameworkBundle\Model\Product\ProductRepository;
 
 class CachedBestsellingProductFacade
 {
-    /** @access protected */
-    const LIFETIME = 43200; // 12h
+    protected const LIFETIME = 43200; // 12h
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Product\BestsellingProduct\BestsellingProductFacade

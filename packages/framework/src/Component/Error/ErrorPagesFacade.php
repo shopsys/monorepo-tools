@@ -13,10 +13,8 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 class ErrorPagesFacade
 {
-    /** @access protected */
-    const PAGE_STATUS_CODE_404 = Response::HTTP_NOT_FOUND;
-    /** @access protected */
-    const PAGE_STATUS_CODE_500 = Response::HTTP_INTERNAL_SERVER_ERROR;
+    protected const PAGE_STATUS_CODE_404 = Response::HTTP_NOT_FOUND;
+    protected const PAGE_STATUS_CODE_500 = Response::HTTP_INTERNAL_SERVER_ERROR;
 
     /**
      * @var string

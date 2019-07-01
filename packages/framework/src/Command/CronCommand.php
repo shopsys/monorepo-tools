@@ -15,10 +15,8 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 
 class CronCommand extends Command
 {
-    /** @access private */
-    const OPTION_MODULE = 'module';
-    /** @access private */
-    const OPTION_LIST = 'list';
+    private const OPTION_MODULE = 'module';
+    private const OPTION_LIST = 'list';
     private const OPTION_INSTANCE_NAME = 'instance-name';
 
     /**

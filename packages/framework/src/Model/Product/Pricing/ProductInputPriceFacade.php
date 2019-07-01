@@ -11,8 +11,7 @@ use Shopsys\FrameworkBundle\Model\Product\ProductRepository;
 
 class ProductInputPriceFacade
 {
-    /** @access protected */
-    const BATCH_SIZE = 50;
+    protected const BATCH_SIZE = 50;
 
     /**
      * @var \Doctrine\ORM\EntityManagerInterface

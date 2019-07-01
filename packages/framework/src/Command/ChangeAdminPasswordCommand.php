@@ -12,8 +12,7 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 
 class ChangeAdminPasswordCommand extends Command
 {
-    /** @access private */
-    const ARG_USERNAME = 'username';
+    private const ARG_USERNAME = 'username';
 
     /**
      * @var string

@@ -9,8 +9,7 @@ use Symfony\Component\HttpKernel\Event\FilterResponseEvent;
 
 class ProductPriceRecalculator
 {
-    /** @access protected */
-    const BATCH_SIZE = 250;
+    protected const BATCH_SIZE = 250;
 
     /**
      * @var \Doctrine\ORM\EntityManagerInterface

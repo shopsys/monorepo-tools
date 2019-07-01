@@ -8,10 +8,8 @@ use Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroup;
 
 class BestsellingProductFacade
 {
-    /** @access protected */
-    const MAX_RESULTS = 10;
-    /** @access protected */
-    const ORDERS_CREATED_AT_LIMIT = '-1 month';
+    protected const MAX_RESULTS = 10;
+    protected const ORDERS_CREATED_AT_LIMIT = '-1 month';
     public const MAX_SHOW_RESULTS = 3;
 
     /**

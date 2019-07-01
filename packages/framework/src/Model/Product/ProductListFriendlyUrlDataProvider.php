@@ -13,8 +13,7 @@ use Shopsys\FrameworkBundle\Model\Category\Category;
 
 class ProductListFriendlyUrlDataProvider implements FriendlyUrlDataProviderInterface
 {
-    /** @access protected */
-    const ROUTE_NAME = 'front_product_list';
+    protected const ROUTE_NAME = 'front_product_list';
 
     /**
      * @var \Doctrine\ORM\EntityManagerInterface

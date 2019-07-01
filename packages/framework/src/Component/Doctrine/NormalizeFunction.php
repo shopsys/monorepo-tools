@@ -9,8 +9,7 @@ use Doctrine\ORM\Query\SqlWalker;
 
 class NormalizeFunction extends FunctionNode
 {
-    /** @access protected */
-    const FUNCTION_NORMALIZE = 'normalize';
+    protected const FUNCTION_NORMALIZE = 'normalize';
 
     /**
      * @var \Doctrine\ORM\Query\AST\Node

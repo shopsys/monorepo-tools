@@ -11,8 +11,7 @@ use Symfony\Component\HttpFoundation\Request;
 
 class AdvancedSearchOrderFacade
 {
-    /** @access protected */
-    const RULES_FORM_NAME = 'as';
+    protected const RULES_FORM_NAME = 'as';
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\AdvancedSearch\OrderAdvancedSearchFormFactory
