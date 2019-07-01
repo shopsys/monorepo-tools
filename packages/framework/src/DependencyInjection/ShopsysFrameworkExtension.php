@@ -20,6 +20,7 @@ class ShopsysFrameworkExtension extends Extension
     {
         $loader = new YamlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
         $loader->load('directories.yml');
+        $loader->load('parameters_common.yml');
         $loader->load('services.yml');
         $loader->load('paths.yml');
 

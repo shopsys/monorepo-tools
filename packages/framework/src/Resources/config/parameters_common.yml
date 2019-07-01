@@ -1,0 +1,12 @@
+parameters:
+    # Default Redis keys prefix
+    build-version: '0000000000000000'
+
+    # Seed for demo data generation
+    faker.seed: 1234
+
+    # Administration locale. Must be registered in domains.yml
+    shopsys.admin_locale: en
+
+    # Default extended classes mapping
+    shopsys.entity_extension.map: {}
