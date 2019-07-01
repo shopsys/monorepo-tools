@@ -1,4 +1,4 @@
-# Shopsys Framework Development Workflow
+# Development Workflow of Project on Shopsys Framework
 
 ## Requirements
 * Shopsys Framework [installed](/docs/installation/installation-guide.md)
