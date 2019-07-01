@@ -2233,8 +2233,8 @@ msgstr "Jde o hodnotu nakoupeného zboží s DPH po uplatnění všech slev a sl
 msgid "Variant"
 msgstr "Varianta"
 
-msgid "Variant <strong>{{ productVariant|productDisplayName }}</strong> successfully created."
-msgstr "Varianta <strong>{{ productVariant|productDisplayName }}</strong> byla úspěšně vytvořena."
+msgid "Variant <strong><a href=\"{{ url }}\">{{ productVariant|productDisplayName }}</a></strong> successfully created."
+msgstr "Varianta <strong><a href=\"{{ url }}\">{{ productVariant|productDisplayName }}</a></strong> byla úspěšně vytvořena."
 
 msgid "Variant [abbreviation]"
 msgstr "V"

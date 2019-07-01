@@ -2233,7 +2233,7 @@ msgstr ""
 msgid "Variant"
 msgstr ""
 
-msgid "Variant <strong>{{ productVariant|productDisplayName }}</strong> successfully created."
+msgid "Variant <strong><a href=\"{{ url }}\">{{ productVariant|productDisplayName }}</a></strong> successfully created."
 msgstr ""
 
 msgid "Variant [abbreviation]"
