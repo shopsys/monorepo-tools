@@ -100,6 +100,7 @@ There you can find links to upgrade notes for other versions too.
         - instead of instantiating `CheckRedisCommand` with an array of redis clients, pass an instance of `RedisFacade` instead
     - modify the functional test `\Tests\ShopBundle\Functional\Component\Redis\RedisFacadeTest` so it creates `RedisFacade` using the two arrays and add a new test case `testNotCleaningPersistentClient`
         - you can copy-paste the [`RedisFacadeTest`](https://github.com/shopsys/project-base/blob/master/tests/ShopBundle/Functional/Component/Redis/RedisFacadeTest.php) from `shopsys/project-base`
+- implement `createFromIdAndName(int $id, string $name): FriendlyUrlData` method in your implementations of `FriendlyUrlDataFactoryInterface` as the method will be added to the interface in `v8.0.0` version ([#948](https://github.com/shopsys/shopsys/pull/948))
 
 ### Configuration
 - update `phpstan.neon` with following change to skip phpstan error ([#1086](https://github.com/shopsys/shopsys/pull/1086))
