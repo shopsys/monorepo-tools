@@ -17,7 +17,6 @@ syncs:
             'docker',
             'nbproject',
             'project-base/docker',
-            'project-base/docs',
             'project-base/kubernetes',
             'project-base/node_modules',
             'project-base/var/cache',
