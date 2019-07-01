@@ -2,7 +2,7 @@
 
 This document will provide you with information about 2 ways of developing and runninng the Shopsys Framework project and the services that it depends on.  
 The first option [using docker](#installation-using-docker) is **highly recommended** since it is the easiest and fastest way to start Shopsys Framework.
-In the case the operation system does not support docker, we prepared also second section with document about project [installation without docker](#installation-without-docker), however this way is slower and harder to configure and maintain because of different operation systems and their versions.
+In the case the operation system does not support docker, or you are not able to use Docker (e.g. due to the performance problems with Docker-sync), we prepared also second section with document about project [installation without docker](#installation-without-docker), however this way is slower and harder to configure and maintain because of different operation systems and their versions.
 
 ## Installation using Docker
 
