@@ -2239,6 +2239,9 @@ msgstr "Varianta"
 msgid "Variant <strong>{{ productVariant|productDisplayName }}</strong> successfully created."
 msgstr "Varianta <strong>{{ productVariant|productDisplayName }}</strong> byla úspěšně vytvořena."
 
+msgid "Variant <strong><a href=\"{{ url }}\" target=\"_blank\">{{ productVariant|productDisplayName }}</a></strong> successfully created."
+msgstr "Varianta <strong><a href=\"{{ url }}\" target=\"_blank\">{{ productVariant|productDisplayName }}</a></strong> byla úspěšně vytvořena."
+
 msgid "Variant [abbreviation]"
 msgstr "V"
 

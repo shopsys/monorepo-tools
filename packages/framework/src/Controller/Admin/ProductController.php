@@ -340,13 +340,14 @@ class ProductController extends AdminBaseController
                 $newMainVariant = $this->productVariantFacade->createVariant($mainVariant, $formData[VariantFormType::VARIANTS]);
 
                 $this->getFlashMessageSender()->addSuccessFlashTwig(
-                    t('Variant <strong>{{ productVariant|productDisplayName }}</strong> successfully created.'),
+                    t('Variant <strong><a href="{{ url }}" target="_blank">{{ productVariant|productDisplayName }}</a></strong> successfully created.'),
                     [
                         'productVariant' => $newMainVariant,
+                        'url' => $this->generateUrl('admin_product_edit', ['id' => $newMainVariant->getId()]),
                     ]
                 );
 
-                return $this->redirectToRoute('admin_product_edit', ['id' => $newMainVariant->getId()]);
+                return $this->redirectToRoute('admin_product_list');
             } catch (\Shopsys\FrameworkBundle\Model\Product\Exception\VariantException $ex) {
                 $this->getFlashMessageSender()->addErrorFlash(
                     t('Not possible to create variations of products that are already variant or main variant.')
