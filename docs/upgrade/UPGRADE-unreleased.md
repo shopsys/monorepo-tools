@@ -8,6 +8,13 @@ There you can find links to upgrade notes for other versions too.
 ## [shopsys/framework]
 
 ### Infrastructure
+- update your `docker/php-fpm/Dockerfile` production stage build ([#1177](https://github.com/shopsys/shopsys/pull/1177))
+    ```diff
+    RUN composer install --optimize-autoloader --no-interaction --no-progress --no-dev
+
+    -RUN php phing composer-prod npm dirs-create assets
+    +RUN php phing build-deploy-part-1-db-independent
+    ```
 - update Elasticsearch build configuration ([#1069](https://github.com/shopsys/shopsys/pull/1069))
     - copy new [Dockerfile from shopsys/project-base](https://github.com/shopsys/project-base/blob/master/docker/elasticsearch/Dockerfile)
     - update `docker-compose.yml` and `docker-compose.yml.dist`

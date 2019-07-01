@@ -82,9 +82,9 @@
 
     <target name="build-demo-dev-quick" depends="build-version-generate,wipe-excluding-logs,composer-dev,npm,dirs-create,test-dirs-create,assets,db-demo,product-search-recreate-structure,product-search-export-products,grunt,clean-redis-old" description="Builds application for development with clean demo DB while skipping nonessential steps."/>
 
-    <target name="build-deploy-part-1-db-independent" depends="build-version-generate,clean,composer-prod,redis-check,npm,dirs-create,assets" description="First part of application build for production preserving your DB (can be run without maintenance page)."/>
+    <target name="build-deploy-part-1-db-independent" depends="build-version-generate,clean,composer-prod,npm,dirs-create,assets" description="First part of application build for production preserving your DB (can be run without maintenance page)."/>
 
-    <target name="build-deploy-part-2-db-dependent" depends="db-migrations,domains-data-create,friendly-urls-generate,domains-urls-replace,grunt,error-pages-generate,warmup,clean-redis-old" description="Second part of application build for production preserving your DB (must be run with maintenance page when containing DB migrations)."/>
+    <target name="build-deploy-part-2-db-dependent" depends="redis-check,db-migrations,domains-data-create,friendly-urls-generate,domains-urls-replace,grunt,error-pages-generate,warmup,clean-redis-old" description="Second part of application build for production preserving your DB (must be run with maintenance page when containing DB migrations)."/>
 
     <target name="build-dev" depends="build-version-generate,clean,composer-dev,npm,timezones-check,dirs-create,test-dirs-create,assets,db-migrations,domains-data-create,friendly-urls-generate,domains-urls-replace,product-search-recreate-structure,product-search-export-products,grunt,error-pages-generate,tests-acceptance-build,clean-redis-old,checks-diff" description="Builds application for development preserving your DB and runs checks on changed files."/>
 
