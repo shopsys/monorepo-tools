@@ -47,18 +47,20 @@ class ProductElasticsearchRepository
      * @param \Elasticsearch\Client $client
      * @param \Shopsys\FrameworkBundle\Model\Product\Search\ProductElasticsearchConverter $productElasticsearchConverter
      * @param \Shopsys\FrameworkBundle\Component\Elasticsearch\ElasticsearchStructureManager $elasticsearchStructureManager
+     * @param \Shopsys\FrameworkBundle\Model\Product\Search\FilterQueryFactory|null $filterQueryFactory
      */
     public function __construct(
         string $indexPrefix,
         Client $client,
         ProductElasticsearchConverter $productElasticsearchConverter,
-        ElasticsearchStructureManager $elasticsearchStructureManager
+        ElasticsearchStructureManager $elasticsearchStructureManager,
+        ?FilterQueryFactory $filterQueryFactory = null
     ) {
         $this->indexPrefix = $indexPrefix;
         $this->client = $client;
         $this->productElasticsearchConverter = $productElasticsearchConverter;
         $this->elasticsearchStructureManager = $elasticsearchStructureManager;
-        $this->filterQueryFactory = $this->createFilterQueryFactory();
+        $this->filterQueryFactory = $filterQueryFactory ?? $this->createFilterQueryFactory();
     }
 
     /**
@@ -67,6 +69,8 @@ class ProductElasticsearchRepository
      */
     protected function createFilterQueryFactory(): FilterQueryFactory
     {
+        @trigger_error(sprintf('The %s() method is deprecated and will be removed in the next major. Use the constructor injection instead.', __METHOD__), E_USER_DEPRECATED);
+
         return new FilterQueryFactory();
     }
 
@@ -245,6 +249,29 @@ class ProductElasticsearchRepository
                         'must_not' => [
                             'ids' => [
                                 'values' => $keepIds,
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+        ]);
+    }
+
+    /**
+     * @param int $domainId
+     * @param int[] $deleteIds
+     */
+    public function delete(int $domainId, array $deleteIds): void
+    {
+        $this->client->deleteByQuery([
+            'index' => $this->elasticsearchStructureManager->getIndexName($domainId, self::ELASTICSEARCH_INDEX),
+            'type' => '_doc',
+            'body' => [
+                'query' => [
+                    'bool' => [
+                        'must' => [
+                            'ids' => [
+                                'values' => array_values($deleteIds),
                             ],
                         ],
                     ],

@@ -205,6 +205,10 @@ services:
 
     Shopsys\FrameworkBundle\Model\Pricing\Vat\VatFacade: ~
 
+    # Prevent listening to kernel.response event while running tests
+    Shopsys\FrameworkBundle\Model\Product\Search\Export\ProductSearchExportListener:
+        tags: []
+
     Shopsys\FrameworkBundle\Model\Product\Search\Export\ProductSearchExportRepository: ~
 
     Shopsys\FrameworkBundle\Model\Product\Search\FilterQueryFactory: ~

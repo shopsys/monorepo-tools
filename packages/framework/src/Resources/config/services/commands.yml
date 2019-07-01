@@ -38,5 +38,7 @@ services:
         arguments:
             - '%shopsys.vendor_dir%'
 
+    # RedisCleanCacheOldCommand is not being autoconfigured because of BC (see #886) @deprecated
+    # It must have been configured manually in src/Shopsys/ShopBundle/Resources/config/services/commands.yml
     Shopsys\FrameworkBundle\Command\RedisCleanCacheOldCommand:
         autoconfigure: false

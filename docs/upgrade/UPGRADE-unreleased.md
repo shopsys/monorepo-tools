@@ -75,6 +75,24 @@ There you can find links to upgrade notes for other versions too.
     - stop using the deprecated method `\Shopsys\FrameworkBundle\Model\Pricing\PriceCalculation::getVatCoefficientByPercent()`, use `PriceCalculation::getVatAmountByPriceWithVat()` for VAT calculation instead
     - if you want to customize the VAT calculation (eg. revert it back to the previous implementation), extend the service `@Shopsys\FrameworkBundle\Model\Pricing\PriceCalculation` and override the method `getVatAmountByPriceWithVat()`
     - if you created new tests regarding the price calculation they might start failing after the upgrade - in such case, please see the new VAT calculation and change the tests expectations accordingly
+- use automatic wiring of Redis clients for easier checking and cleaning ([#1161](https://github.com/shopsys/shopsys/pull/1161))
+    - if you have redefined the service `@Shopsys\FrameworkBundle\Component\Redis\RedisFacade` or `@Shopsys\FrameworkBundle\Command\CheckRedisCommand` in your project, or you instantiate the classes in your code:
+        - instead of instantiating `RedisFacade` with an array of cache clients to be cleaned by `php phing redis-clean`, pass an array of all redis clients and another array of redis clients you don't want to clean (eg. `global` and `session`)
+            ```diff
+                Shopsys\FrameworkBundle\Component\Redis\RedisFacade:
+                    arguments:
+            -           - '@snc_redis.doctrine_metadata'
+            -           - '@snc_redis.doctrine_query'
+            -           - '@snc_redis.my_custom_cache'
+            +           $allClients: !tagged snc_redis.client
+            +           $persistentClients:
+            +               - '@snc_redis.global'
+            +               - '@snc_redis.session'
+            ```
+            - this allows you to use `!tagged snc_redis.client` in your DIC config for the first argument, ensuring that newly created clients will be registered by the facade
+        - instead of instantiating `CheckRedisCommand` with an array of redis clients, pass an instance of `RedisFacade` instead
+    - modify the functional test `\Tests\ShopBundle\Functional\Component\Redis\RedisFacadeTest` so it creates `RedisFacade` using the two arrays and add a new test case `testNotCleaningPersistentClient`
+        - you can copy-paste the [`RedisFacadeTest`](https://github.com/shopsys/project-base/blob/master/tests/ShopBundle/Functional/Component/Redis/RedisFacadeTest.php) from `shopsys/project-base`
 
 ### Configuration
 - update `phpstan.neon` with following change to skip phpstan error ([#1086](https://github.com/shopsys/shopsys/pull/1086))
@@ -127,14 +145,6 @@ There you can find links to upgrade notes for other versions too.
         +    Shopsys\ShopBundle\Twig\:
         +        resource: '../../Twig/'
         ```
-- if you have `Shopsys\FrameworkBundle\Model\Product\Search\Export\ProductSearchExporter` re-registered in your `services.yml`, add proper setter calls ([#1122](https://github.com/shopsys/shopsys/pull/1122))
-    ```diff
-        Shopsys\FrameworkBundle\Model\Product\Search\Export\ProductSearchExporter
-    +       calls:
-    +           - method: setProgressBarFactory
-    +           - method: setSqlLoggerFacade
-    +           - method: setEntityManager
-    ```
 - unset the incompatible `excluded_404s` configuration from monolog handlers that don't use the `fingers_crossed` type ([#1154](https://github.com/shopsys/shopsys/pull/1154))
     - in `app/config/packages/dev/monolog.yml`:
         ```diff
@@ -154,6 +164,8 @@ There you can find links to upgrade notes for other versions too.
                         type: "null"
         +               excluded_404s: false
         ```
+- remove the useless route `front_category_panel` from your `routing_front.yml` ([#1042](https://github.com/shopsys/shopsys/pull/1042))
+    - you'll find the configuration file in `src/Shopsys/ShopBundle/Resources/config/`
 
 ### Tools
 - use the `build.xml` [Phing configuration](/docs/introduction/console-commands-for-application-management-phing-targets.md) from the `shopsys/framework` package ([#1068](https://github.com/shopsys/shopsys/pull/1068))

@@ -51,54 +51,78 @@ class ProductSearchExporter
      * @param \Shopsys\FrameworkBundle\Model\Product\Search\Export\ProductSearchExportRepository $productSearchExportRepository
      * @param \Shopsys\FrameworkBundle\Model\Product\Search\ProductElasticsearchRepository $productElasticsearchRepository
      * @param \Shopsys\FrameworkBundle\Model\Product\Search\ProductElasticsearchConverter $productElasticsearchConverter
+     * @param \Shopsys\FrameworkBundle\Component\Console\ProgressBarFactory|null $progressBarFactory
+     * @param \Shopsys\FrameworkBundle\Component\Doctrine\SqlLoggerFacade|null $sqlLoggerFacade
+     * @param \Doctrine\ORM\EntityManagerInterface|null $entityManager
      */
     public function __construct(
         ProductSearchExportRepository $productSearchExportRepository,
         ProductElasticsearchRepository $productElasticsearchRepository,
-        ProductElasticsearchConverter $productElasticsearchConverter
+        ProductElasticsearchConverter $productElasticsearchConverter,
+        ?ProgressBarFactory $progressBarFactory = null,
+        ?SqlLoggerFacade $sqlLoggerFacade = null,
+        ?EntityManagerInterface $entityManager = null
     ) {
         $this->productSearchExportRepository = $productSearchExportRepository;
         $this->productElasticsearchRepository = $productElasticsearchRepository;
         $this->productElasticsearchConverter = $productElasticsearchConverter;
+        $this->progressBarFactory = $progressBarFactory;
+        $this->sqlLoggerFacade = $sqlLoggerFacade;
+        $this->entityManager = $entityManager;
     }
 
     /**
+     * @required
      * @param \Shopsys\FrameworkBundle\Component\Console\ProgressBarFactory $progressBarFactory
-     * @internal Will be replaced with constructor injection in the next major release
+     * @deprecated Will be replaced with constructor injection in the next major release
      */
     public function setProgressBarFactory(ProgressBarFactory $progressBarFactory): void
     {
-        if ($this->progressBarFactory !== null) {
+        if ($this->progressBarFactory !== null && $this->progressBarFactory !== $progressBarFactory) {
             throw new BadMethodCallException(sprintf('Method "%s" has been already called and cannot be called multiple times.', __METHOD__));
         }
 
-        $this->progressBarFactory = $progressBarFactory;
+        if ($this->progressBarFactory === null) {
+            @trigger_error(sprintf('The %s() method is deprecated and will be removed in the next major. Use the constructor injection instead.', __METHOD__), E_USER_DEPRECATED);
+
+            $this->progressBarFactory = $progressBarFactory;
+        }
     }
 
     /**
+     * @required
      * @param \Shopsys\FrameworkBundle\Component\Doctrine\SqlLoggerFacade $sqlLoggerFacade
-     * @internal Will be replaced with constructor injection in the next major release
+     * @deprecated Will be replaced with constructor injection in the next major release
      */
     public function setSqlLoggerFacade(SqlLoggerFacade $sqlLoggerFacade): void
     {
-        if ($this->sqlLoggerFacade !== null) {
+        if ($this->sqlLoggerFacade !== null && $this->sqlLoggerFacade !== $sqlLoggerFacade) {
             throw new BadMethodCallException(sprintf('Method "%s" has been already called and cannot be called multiple times.', __METHOD__));
         }
 
-        $this->sqlLoggerFacade = $sqlLoggerFacade;
+        if ($this->sqlLoggerFacade === null) {
+            @trigger_error(sprintf('The %s() method is deprecated and will be removed in the next major. Use the constructor injection instead.', __METHOD__), E_USER_DEPRECATED);
+
+            $this->sqlLoggerFacade = $sqlLoggerFacade;
+        }
     }
 
     /**
+     * @required
      * @param \Doctrine\ORM\EntityManagerInterface $entityManager
-     * @internal Will be replaced with constructor injection in the next major release
+     * @deprecated Will be replaced with constructor injection in the next major release
      */
     public function setEntityManager(EntityManagerInterface $entityManager): void
     {
-        if ($this->entityManager !== null) {
+        if ($this->entityManager !== null && $this->entityManager !== $entityManager) {
             throw new BadMethodCallException(sprintf('Method "%s" has been already called and cannot be called multiple times.', __METHOD__));
         }
 
-        $this->entityManager = $entityManager;
+        if ($this->entityManager === null) {
+            @trigger_error(sprintf('The %s() method is deprecated and will be removed in the next major. Use the constructor injection instead.', __METHOD__), E_USER_DEPRECATED);
+
+            $this->entityManager = $entityManager;
+        }
     }
 
     /**
@@ -125,8 +149,6 @@ class ProductSearchExporter
      */
     public function exportWithOutput(int $domainId, string $locale, SymfonyStyle $symfonyStyleIo): void
     {
-        $this->validateInjectedDependencies();
-
         $this->sqlLoggerFacade->temporarilyDisableLogging();
 
         $startFrom = 0;
@@ -156,6 +178,40 @@ class ProductSearchExporter
     /**
      * @param int $domainId
      * @param string $locale
+     * @param int[] $productIds
+     */
+    public function exportIds(int $domainId, string $locale, array $productIds): void
+    {
+        $productsData = $this->productSearchExportRepository->getProductsDataForIds($domainId, $locale, $productIds);
+        if (count($productsData) === 0) {
+            $this->productElasticsearchRepository->delete($domainId, $productIds);
+
+            return;
+        }
+
+        $this->exportProductsData($domainId, $productsData);
+        $exportedIds = $this->productElasticsearchConverter->extractIds($productsData);
+
+        $idsToDelete = array_diff($productIds, $exportedIds);
+
+        if ($idsToDelete !== []) {
+            $this->productElasticsearchRepository->delete($domainId, $idsToDelete);
+        }
+    }
+
+    /**
+     * @param int $domainId
+     * @param array $productsData
+     */
+    protected function exportProductsData(int $domainId, array $productsData): void
+    {
+        $data = $this->productElasticsearchConverter->convertExportBulk($productsData);
+        $this->productElasticsearchRepository->bulkUpdate($domainId, $data);
+    }
+
+    /**
+     * @param int $domainId
+     * @param string $locale
      * @param int $startFrom
      * @return int[]
      */
@@ -179,23 +235,5 @@ class ProductSearchExporter
     protected function removeNotUpdated(int $domainId, array $exportedIds): void
     {
         $this->productElasticsearchRepository->deleteNotPresent($domainId, $exportedIds);
-    }
-
-    /**
-     * @internal Will be removed in the next major release
-     */
-    protected function validateInjectedDependencies(): void
-    {
-        if (!$this->progressBarFactory instanceof ProgressBarFactory) {
-            throw new BadMethodCallException(sprintf('Method "%s::setProgressBarFactory()" has to be called in "services.yml" definition.', __CLASS__));
-        }
-
-        if (!$this->sqlLoggerFacade instanceof SqlLoggerFacade) {
-            throw new BadMethodCallException(sprintf('Method "%s::setSqlLoggerFacade()" has to be called in "services.yml" definition.', __CLASS__));
-        }
-
-        if (!$this->entityManager instanceof EntityManagerInterface) {
-            throw new BadMethodCallException(sprintf('Method "%s::setEntityManager()" has to be called in "services.yml" definition.', __CLASS__));
-        }
     }
 }

@@ -44,7 +44,17 @@ During an upgrade to the next major version, you have to make the changes yourse
 *Note: The same holds true for the [demoshop repository](https://github.com/shopsys/demoshop) which is a complex example of an e-commerce project using a custom design and modifications.*
 
 ### PHP Code
-Rules for PHP code are fully covered by [Symfony Backward Compatibility Promise](https://symfony.com/doc/3.4/contributing/code/bc.html).
+Basic rules for PHP code are covered by [Symfony Backward Compatibility Promise](https://symfony.com/doc/3.4/contributing/code/bc.html).
+
+#### Exceptions
+There are some exceptions that extend or override the BC promise of Symfony, which allows us a bit more flexibility without compromising the user's code:
+
+**Adding an optional parameter to a constructor** is not considered a BC break and may be done in any release.
+
+**Changing type of constructor's parameter to a parent type** (eg. changing `array` to `iterable`) is not considered a BC break and may be done in any release.
+
+Constructors in extended classes are not forced to have the same signature as the parent and the previous usage is still supported in these cases.
+Doing this in other public or protected methods is still considered a BC break.
 
 ### Database Migrations
 A new version may include database migrations if the structure of [the entities](/docs/model/entities.md) changed.

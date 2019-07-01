@@ -53,4 +53,17 @@ class ProductSearchExportFacade
             $this->exporter->exportWithOutput($domainId, $locale, $symfonyStyleIo);
         }
     }
+
+    /**
+     * @param int[] $productIds
+     */
+    public function exportIds(array $productIds): void
+    {
+        foreach ($this->domain->getAll() as $domain) {
+            $domainId = $domain->getId();
+            $locale = $domain->getLocale();
+
+            $this->exporter->exportIds($domainId, $locale, $productIds);
+        }
+    }
 }
