@@ -16,6 +16,11 @@ use Symfony\Component\HttpKernel\Bundle\Bundle;
 class ShopsysFrameworkBundle extends Bundle
 {
     /**
+     * @var string
+     */
+    public const VERSION = '7.3.0-dev';
+
+    /**
      * @param \Symfony\Component\DependencyInjection\ContainerBuilder $container
      */
     public function build(ContainerBuilder $container)

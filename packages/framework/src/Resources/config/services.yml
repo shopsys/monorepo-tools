@@ -57,6 +57,10 @@ services:
             - '@request_stack'
             - '%kernel.debug%'
 
+    Shopsys\FrameworkBundle\Component\Collector\ShopsysFrameworkDataCollector:
+        tags:
+            - { name: data_collector, id: shopsys_framework_core, template: '@ShopsysFramework/Components/Collector/shopsysFramework.html.twig', priority: -300 }
+
     Symfony\Component\Translation\MessageSelector: '@translator.selector'
 
     Doctrine\Common\Annotations\DocParser: '@jms_translation.doc_parser'
