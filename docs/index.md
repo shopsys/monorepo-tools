@@ -25,7 +25,8 @@
 * [Directories](./introduction/directories.md)
 * [Cron](./introduction/cron.md)
 * [Using Form Types](./introduction/using-form-types.md)
-* [Friendly URL](./introduction/friendly-url.md)
+* [Friendly URL](introduction/friendly-url.md)
+* [Front-end Breadcrumb Navigation](/docs/introduction/front-end-breadcrumb-navigation.md)
 
 ## Model
 * [Introduction to Model Architecture](./model/introduction-to-model-architecture.md)

@@ -2,6 +2,8 @@
 
 namespace Shopsys\FrameworkBundle\Component\Breadcrumb;
 
+use Webmozart\Assert\Assert;
+
 class BreadcrumbResolver
 {
     /**
@@ -9,18 +11,24 @@ class BreadcrumbResolver
      */
     protected $breadcrumbGeneratorsByRouteName;
 
-    public function __construct()
+    /**
+     * @param \Shopsys\FrameworkBundle\Component\Breadcrumb\BreadcrumbGeneratorInterface[] $breadcrumbGenerators
+     */
+    public function __construct(iterable $breadcrumbGenerators)
     {
-        $this->breadcrumbGeneratorsByRouteName = [];
+        $this->registerGenerators($breadcrumbGenerators);
     }
 
     /**
-     * @param \Shopsys\FrameworkBundle\Component\Breadcrumb\BreadcrumbGeneratorInterface $breadcrumbGenerator
+     * @param \Shopsys\FrameworkBundle\Component\Breadcrumb\BreadcrumbGeneratorInterface[] $breadcrumbGenerators
      */
-    public function registerGenerator(BreadcrumbGeneratorInterface $breadcrumbGenerator)
+    protected function registerGenerators(iterable $breadcrumbGenerators)
     {
-        foreach ($breadcrumbGenerator->getRouteNames() as $routeName) {
-            $this->breadcrumbGeneratorsByRouteName[$routeName] = $breadcrumbGenerator;
+        Assert::allIsInstanceOf($breadcrumbGenerators, BreadcrumbGeneratorInterface::class);
+        foreach ($breadcrumbGenerators as $breadcrumbGenerator) {
+            foreach ($breadcrumbGenerator->getRouteNames() as $routeName) {
+                $this->breadcrumbGeneratorsByRouteName[$routeName] = $breadcrumbGenerator;
+            }
         }
     }
 

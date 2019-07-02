@@ -2,6 +2,7 @@
 
 namespace Shopsys\FrameworkBundle\DependencyInjection;
 
+use Shopsys\FrameworkBundle\Component\Breadcrumb\BreadcrumbGeneratorInterface;
 use Shopsys\FrameworkBundle\Component\Environment\EnvironmentType;
 use Shopsys\FrameworkBundle\Component\Grid\InlineEdit\GridInlineEditInterface;
 use Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\FriendlyUrlDataProviderInterface;
@@ -40,6 +41,9 @@ class ShopsysFrameworkExtension extends Extension
 
         $container->registerForAutoconfiguration(FriendlyUrlDataProviderInterface::class)
             ->addTag('shopsys.friendly_url_provider');
+
+        $container->registerForAutoconfiguration(BreadcrumbGeneratorInterface::class)
+            ->addTag('shopsys.breadcrumb_generator');
     }
 
     /**

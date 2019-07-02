@@ -91,6 +91,10 @@ There you can find links to upgrade notes for other versions too.
     - the namespace of `FriendlyUrlDataProviderInterface` and `FriendlyUrlDataProviderRegistry` has changed from `Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\CompilerPass` to `Shopsys\FrameworkBundle\Component\Router\FriendlyUrl` so change all your usages accordingly
     - you no longer need to tag your `FriendlyUrlDataProviders` with `shopsys.friendly_url_provider` because it is now done automatically
     - remove the usages of `RegisterFriendlyUrlDataProviderCompilerPass` class and `FriendlyUrlDataProviderRegistry::registerFriendlyUrlDataProvider` method because they have been removed
+- update your way of registration of `BreadcrumbGenerator` classes ([#1141](https://github.com/shopsys/shopsys/pull/1140))
+    - remove the usages of `FrontBreadcrumbResolverFactory` class as it has been removed.
+    - remove the usages of `BreadcrumbResolver::registerGenerator` method as it has been removed
+    - update your usages of `BreadcrumbResolver::__contruct()` as it now requires a new parameter
 
 ### Configuration
 - simplify local configuration ([#1004](https://github.com/shopsys/shopsys/pull/1004))
