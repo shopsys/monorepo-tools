@@ -84,11 +84,11 @@
 
     <target name="build-deploy-part-1-db-independent" depends="build-version-generate,clean,composer-prod,npm,dirs-create,assets" description="First part of application build for production preserving your DB (can be run without maintenance page)."/>
 
-    <target name="build-deploy-part-2-db-dependent" depends="redis-check,db-migrations,domains-data-create,friendly-urls-generate,domains-urls-replace,grunt,error-pages-generate,warmup,clean-redis-old" description="Second part of application build for production preserving your DB (must be run with maintenance page when containing DB migrations)."/>
+    <target name="build-deploy-part-2-db-dependent" depends="product-search-migrate-structure,redis-check,db-migrations,domains-data-create,friendly-urls-generate,domains-urls-replace,grunt,error-pages-generate,warmup,clean-redis-old" description="Second part of application build for production preserving your DB (must be run with maintenance page when containing DB migrations)."/>
 
     <target name="build-dev" depends="build-version-generate,clean,composer-dev,npm,timezones-check,dirs-create,test-dirs-create,assets,db-migrations,domains-data-create,friendly-urls-generate,domains-urls-replace,product-search-recreate-structure,product-search-export-products,grunt,error-pages-generate,tests-acceptance-build,clean-redis-old,checks-diff" description="Builds application for development preserving your DB and runs checks on changed files."/>
 
-    <target name="build-dev-quick" depends="build-version-generate,clean,composer-dev,npm,dirs-create,test-dirs-create,assets,db-migrations,domains-data-create,friendly-urls-generate,domains-urls-replace,grunt,clean-redis-old" description="Builds application for development preserving your DB while skipping nonessential steps."/>
+    <target name="build-dev-quick" depends="build-version-generate,clean,composer-dev,npm,dirs-create,test-dirs-create,assets,db-migrations,domains-data-create,friendly-urls-generate,domains-urls-replace,product-search-migrate-structure,grunt,clean-redis-old" description="Builds application for development preserving your DB while skipping nonessential steps."/>
 
     <target name="build-new" depends="wipe,build-version-generate,composer-prod,redis-check,npm,dirs-create,assets,db-rebuild,grunt,error-pages-generate,warmup,product-search-recreate-structure,clean-redis-old" description="Builds application for production with clean DB (with base data only)."/>
 
@@ -688,6 +688,13 @@
         <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
             <arg value="${path.bin-console}"/>
             <arg value="shopsys:product-search:export-products"/>
+        </exec>
+    </target>
+
+    <target name="product-search-migrate-structure" description="Creates new structure, reindexes it from old one, deletes old structure and add alias to new structure.">
+        <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
+            <arg value="${path.bin-console}"/>
+            <arg value="shopsys:product-search:migrate-if-necessary"/>
         </exec>
     </target>
 

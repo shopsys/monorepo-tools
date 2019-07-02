@@ -33,13 +33,13 @@ class ElasticsearchStructureManagerTest extends TestCase
         $this->client = $this->createMock(Client::class);
         $this->indices = $this->createMock(IndicesNamespace::class);
         $this->client->method('indices')->willReturn($this->indices);
-        $this->structureManager = new ElasticsearchStructureManager($definitionDirectory, '', $this->client);
+        $this->structureManager = new ElasticsearchStructureManager($definitionDirectory, '', $this->client, '12345');
     }
 
-    public function testCreateSuccessIndex(): void
+    public function testCreateSuccessIndexWithAlias(): void
     {
         $expected = [
-            'index' => 'test-product1',
+            'index' => '12345test-product1',
             'body' => [
                 'settings' => [
                     'index' => [
@@ -51,6 +51,7 @@ class ElasticsearchStructureManagerTest extends TestCase
         $this->indices->expects($this->once())->method('create')->with($expected);
 
         $this->structureManager->createIndex(1, static::ELASTICSEARCH_INDEX);
+        $this->structureManager->createAliasForIndex(1, static::ELASTICSEARCH_INDEX);
     }
 
     public function testCreateWhileJsonNotExistsFails(): void
@@ -72,7 +73,7 @@ class ElasticsearchStructureManagerTest extends TestCase
         $expectedDelete = ['index' => 'test-product1'];
         $this->indices->expects($this->once())->method('delete')->with($expectedDelete);
 
-        $this->structureManager->deleteIndex(1, static::ELASTICSEARCH_INDEX);
+        $this->structureManager->deleteCurrentIndex(1, static::ELASTICSEARCH_INDEX);
     }
 
     public function testDeleteNotExisting(): void
@@ -81,6 +82,6 @@ class ElasticsearchStructureManagerTest extends TestCase
 
         $this->indices->expects($this->never())->method('delete');
 
-        $this->structureManager->deleteIndex(1, static::ELASTICSEARCH_INDEX);
+        $this->structureManager->deleteCurrentIndex(1, static::ELASTICSEARCH_INDEX);
     }
 }

@@ -170,7 +170,7 @@ class FilterQueryTest extends TransactionFunctionalTestCase
         /** @var \Shopsys\FrameworkBundle\Component\Elasticsearch\ElasticsearchStructureManager $elasticSearchStructureManager */
         $elasticSearchStructureManager = $this->getContainer()->get(ElasticsearchStructureManager::class);
 
-        $elasticSearchIndexName = $elasticSearchStructureManager->getIndexName(1, self::ELASTICSEARCH_INDEX);
+        $elasticSearchIndexName = $elasticSearchStructureManager->getAliasName(1, self::ELASTICSEARCH_INDEX);
 
         $filter = $filterQueryFactory->create($elasticSearchIndexName);
 

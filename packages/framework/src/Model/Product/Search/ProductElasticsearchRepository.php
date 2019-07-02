@@ -125,9 +125,14 @@ class ProductElasticsearchRepository
     /**
      * @param int $domainId
      * @return string
+     * @deprecated Getting index name using this method is deprecated since SSFW 7.3, use ElasticsearchStructureManager::getCurrentIndexName or ElasticsearchStructureManager::getAliasName instead
      */
     protected function getIndexName(int $domainId): string
     {
+        @trigger_error(
+            sprintf('Getting index name using method "%s" is deprecated since SSFW 7.3, use %s or %s instead', __METHOD__, 'ElasticsearchStructureManager::getCurrentIndexName', 'ElasticsearchStructureManager::getAliasName'),
+            E_USER_DEPRECATED
+        );
         return $this->indexPrefix . self::ELASTICSEARCH_INDEX . $domainId;
     }
 
@@ -142,7 +147,7 @@ class ProductElasticsearchRepository
             return [];
         }
 
-        $parameters = $this->createQuery($this->getIndexName($domainId), $searchText);
+        $parameters = $this->createQuery($this->elasticsearchStructureManager->getAliasName($domainId, self::ELASTICSEARCH_INDEX), $searchText);
         $result = $this->client->search($parameters);
         return $this->extractIds($result);
     }
@@ -199,7 +204,7 @@ class ProductElasticsearchRepository
     public function bulkUpdate(int $domainId, array $data): void
     {
         $body = $this->productElasticsearchConverter->convertBulk(
-            $this->elasticsearchStructureManager->getIndexName($domainId, self::ELASTICSEARCH_INDEX),
+            $this->elasticsearchStructureManager->getCurrentIndexName($domainId, self::ELASTICSEARCH_INDEX),
             $data
         );
 
@@ -216,7 +221,7 @@ class ProductElasticsearchRepository
     public function deleteNotPresent(int $domainId, array $keepIds): void
     {
         $this->client->deleteByQuery([
-            'index' => $this->elasticsearchStructureManager->getIndexName($domainId, self::ELASTICSEARCH_INDEX),
+            'index' => $this->elasticsearchStructureManager->getCurrentIndexName($domainId, self::ELASTICSEARCH_INDEX),
             'type' => '_doc',
             'body' => [
                 'query' => [
