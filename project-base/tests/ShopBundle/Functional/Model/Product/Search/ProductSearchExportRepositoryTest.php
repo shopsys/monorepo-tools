@@ -54,7 +54,7 @@ class ProductSearchExportRepositoryTest extends TransactionFunctionalTestCase
             'partno',
             'ean',
             'description',
-            'shortDescription',
+            'short_description',
         ];
 
         if ($productSearchExportRepository instanceof ProductSearchExportWithFilterRepository) {

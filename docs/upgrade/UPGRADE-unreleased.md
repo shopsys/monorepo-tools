@@ -39,6 +39,13 @@ There you can find links to upgrade notes for other versions too.
     - if you deploy to the google cloud, copy new [`.ci/deploy-to-google-cloud.sh`](https://github.com/shopsys/project-base/blob/master/.ci/deploy-to-google-cloud.sh) script from `shopsys/project-base` ([#1126](https://github.com/shopsys/shopsys/pull/1126))
 
 ### Application
+- **BC-BREAK** fix inconsistently named field `shortDescription` in Elasticsearch ([#1180](https://github.com/shopsys/shopsys/pull/1180))
+    - in `ProductSearchExportRepositoryTest::getExpectedStructureForRepository()` (the test will fail otherwise)
+        ```diff
+        -   'shortDescription',
+        +   'short_description',
+        ```
+    - in other places you might have used it in your custom code
 - follow instructions in [the separate article](upgrade-instructions-for-read-model-for-product-lists.md) to introduce read model for frontend product lists into your project ([#1018](https://github.com/shopsys/shopsys/pull/1018))
     - we recommend to read [Introduction to Read Model](/docs/model/introduction-to-read-model.md) article
 - copy a new functional test to avoid regression of issues with creating product variants in the future ([#1113](https://github.com/shopsys/shopsys/pull/1113))
