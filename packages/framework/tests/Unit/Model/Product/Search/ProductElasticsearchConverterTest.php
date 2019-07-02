@@ -30,7 +30,7 @@ class ProductElasticsearchConverterTest extends TestCase
                 'partno' => '47LA790V',
                 'ean' => '8845781245928',
                 'description' => 'At first glance its <strong> beautiful design </strong>',
-                'shortDescription' => '47 "LG 47LA790V Luxury TV from the South Korean company LG bears 47LA790S',
+                'short_description' => '47 "LG 47LA790V Luxury TV from the South Korean company LG bears 47LA790S',
             ],
             2 => [
                 'name' => '47" LG 47LA790V',
@@ -38,7 +38,7 @@ class ProductElasticsearchConverterTest extends TestCase
                 'partno' => '47LA',
                 'ean' => '8845781',
                 'description' => 'At first glance its beautiful',
-                'shortDescription' => '47 "LG 47LA790V Luxury TV',
+                'short_description' => '47 "LG 47LA790V Luxury TV',
             ],
         ];
     }
@@ -62,7 +62,7 @@ class ProductElasticsearchConverterTest extends TestCase
                 'partno' => '47LA790V',
                 'ean' => '8845781245928',
                 'description' => 'At first glance its <strong> beautiful design </strong>',
-                'shortDescription' => '47 "LG 47LA790V Luxury TV from the South Korean company LG bears 47LA790S',
+                'short_description' => '47 "LG 47LA790V Luxury TV from the South Korean company LG bears 47LA790S',
             ],
             [
                 'index' => [
@@ -77,7 +77,7 @@ class ProductElasticsearchConverterTest extends TestCase
                 'partno' => '47LA',
                 'ean' => '8845781',
                 'description' => 'At first glance its beautiful',
-                'shortDescription' => '47 "LG 47LA790V Luxury TV',
+                'short_description' => '47 "LG 47LA790V Luxury TV',
             ],
         ];
     }

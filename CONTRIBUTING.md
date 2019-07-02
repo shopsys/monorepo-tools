@@ -11,7 +11,6 @@ You can take part in making Shopsys Framework better.
 * [Guidelines for Pull Request](./docs/contributing/guidelines-for-pull-request.md)
 * [Guidelines for Dependencies](./docs/contributing/guidelines-for-dependencies.md)
 * [Guidelines for writing UPGRADE.md](./docs/contributing/guidelines-for-writing-upgrade.md)
-* [Shopsys Framework Development Workflow](./docs/contributing/shopsys-framework-development-workflow.md)
 * [Merging to Master on Github](./docs/contributing/merging-to-master-on-github.md)
 * [Releasing a new version of Shopsys Framework monorepo](docs/contributing/releasing-a-new-version-of-shopsys-framework.md)
 * [Code Quality Principles](docs/contributing/code-quality-principles.md)

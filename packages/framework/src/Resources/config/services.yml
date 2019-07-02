@@ -2,13 +2,14 @@ imports:
     - { resource: services/*.yml }
 
 parameters:
+    # Use Shopsys validator factory for fp/jsformvalidator-bundle
     fp_js_form_validator.factory.class: Shopsys\FrameworkBundle\Form\JsFormValidatorFactory
+
+    # Use Shopsys routing for knplabs/knp-menu-bundle that ignores missing parameters in routes
     knp_menu.factory_extension.routing.class: Shopsys\FrameworkBundle\Model\AdminNavigation\RoutingExtension
+
+    # Use Shopsys Translatable listener for prezent/doctrine-translatable to allow set fallback language on postPersist event
     prezent_doctrine_translatable.listener.class: Shopsys\FrameworkBundle\Model\Localization\TranslatableListener
-    faker.seed: 1234
-    shopsys.entity_extension.map: {}
-    shopsys.admin_locale: en
-    build-version: '0000000000000000'
 
 services:
     _defaults:

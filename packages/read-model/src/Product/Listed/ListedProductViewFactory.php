@@ -73,7 +73,7 @@ class ListedProductViewFactory
         return new ListedProductView(
             $productArray['id'],
             $productArray['name'],
-            $productArray['shortDescription'],
+            $productArray['short_description'],
             $productArray['availability'],
             $this->getProductPriceFromArrayByPricingGroup($productArray['prices'], $pricingGroup),
             $productArray['flags'],

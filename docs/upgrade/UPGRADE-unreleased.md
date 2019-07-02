@@ -8,6 +8,13 @@ There you can find links to upgrade notes for other versions too.
 ## [shopsys/framework]
 
 ### Infrastructure
+- update your `docker/php-fpm/Dockerfile` production stage build ([#1177](https://github.com/shopsys/shopsys/pull/1177))
+    ```diff
+    RUN composer install --optimize-autoloader --no-interaction --no-progress --no-dev
+
+    -RUN php phing composer-prod npm dirs-create assets
+    +RUN php phing build-deploy-part-1-db-independent
+    ```
 - update Elasticsearch build configuration ([#1069](https://github.com/shopsys/shopsys/pull/1069))
     - copy new [Dockerfile from shopsys/project-base](https://github.com/shopsys/project-base/blob/master/docker/elasticsearch/Dockerfile)
     - update `docker-compose.yml` and `docker-compose.yml.dist`
@@ -32,6 +39,13 @@ There you can find links to upgrade notes for other versions too.
     - if you deploy to the google cloud, copy new [`.ci/deploy-to-google-cloud.sh`](https://github.com/shopsys/project-base/blob/master/.ci/deploy-to-google-cloud.sh) script from `shopsys/project-base` ([#1126](https://github.com/shopsys/shopsys/pull/1126))
 
 ### Application
+- **BC-BREAK** fix inconsistently named field `shortDescription` in Elasticsearch ([#1180](https://github.com/shopsys/shopsys/pull/1180))
+    - in `ProductSearchExportRepositoryTest::getExpectedStructureForRepository()` (the test will fail otherwise)
+        ```diff
+        -   'shortDescription',
+        +   'short_description',
+        ```
+    - in other places you might have used it in your custom code
 - follow instructions in [the separate article](upgrade-instructions-for-read-model-for-product-lists.md) to introduce read model for frontend product lists into your project ([#1018](https://github.com/shopsys/shopsys/pull/1018))
     - we recommend to read [Introduction to Read Model](/docs/model/introduction-to-read-model.md) article
 - copy a new functional test to avoid regression of issues with creating product variants in the future ([#1113](https://github.com/shopsys/shopsys/pull/1113))
@@ -93,6 +107,7 @@ There you can find links to upgrade notes for other versions too.
         - instead of instantiating `CheckRedisCommand` with an array of redis clients, pass an instance of `RedisFacade` instead
     - modify the functional test `\Tests\ShopBundle\Functional\Component\Redis\RedisFacadeTest` so it creates `RedisFacade` using the two arrays and add a new test case `testNotCleaningPersistentClient`
         - you can copy-paste the [`RedisFacadeTest`](https://github.com/shopsys/project-base/blob/master/tests/ShopBundle/Functional/Component/Redis/RedisFacadeTest.php) from `shopsys/project-base`
+- implement `createFromIdAndName(int $id, string $name): FriendlyUrlData` method in your implementations of `FriendlyUrlDataFactoryInterface` as the method will be added to the interface in `v8.0.0` version ([#948](https://github.com/shopsys/shopsys/pull/948))
 
 ### Configuration
 - update `phpstan.neon` with following change to skip phpstan error ([#1086](https://github.com/shopsys/shopsys/pull/1086))
