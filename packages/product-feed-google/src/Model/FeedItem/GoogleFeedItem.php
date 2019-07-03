@@ -8,15 +8,10 @@ use Shopsys\FrameworkBundle\Model\Pricing\Price;
 
 class GoogleFeedItem implements FeedItemInterface
 {
-    /** @access protected */
-    const IDENTIFIER_TYPE_EAN = 'gtin';
-    /** @access protected */
-    const IDENTIFIER_TYPE_PARTNO = 'mpn';
-
-    /** @access protected */
-    const AVAILABILITY_OUT_OF_STOCK = 'out of stock';
-    /** @access protected */
-    const AVAILABILITY_IN_STOCK = 'in stock';
+    protected const IDENTIFIER_TYPE_EAN = 'gtin';
+    protected const IDENTIFIER_TYPE_PARTNO = 'mpn';
+    protected const AVAILABILITY_OUT_OF_STOCK = 'out of stock';
+    protected const AVAILABILITY_IN_STOCK = 'in stock';
 
     /**
      * @var int

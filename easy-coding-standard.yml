@@ -12,3 +12,7 @@ parameters:
         Shopsys\CodingStandards\Sniffs\ForceLateStaticBindingForProtectedConstantsSniff:
             - '*/src/Shopsys/ShopBundle/*'
             - '*/tests/ShopBundle/*'
+
+        PhpCsFixer\Fixer\ClassNotation\VisibilityRequiredFixer:
+            - '*/src/Shopsys/ShopBundle/*'
+            - '*/tests/ShopBundle/*'

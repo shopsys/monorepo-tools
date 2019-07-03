@@ -14,8 +14,7 @@ use Shopsys\FrameworkBundle\Component\FileUpload\FileNamingConvention;
  */
 class UploadedFile implements EntityFileUploadInterface
 {
-    /** @access protected */
-    const UPLOAD_KEY = 'uploadedFile';
+    protected const UPLOAD_KEY = 'uploadedFile';
 
     /**
      * @var int

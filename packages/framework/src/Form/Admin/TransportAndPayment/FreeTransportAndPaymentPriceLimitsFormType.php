@@ -19,8 +19,7 @@ class FreeTransportAndPaymentPriceLimitsFormType extends AbstractType
     public const DOMAINS_SUBFORM_NAME = 'priceLimits';
     public const FIELD_ENABLED = 'enabled';
     public const FIELD_PRICE_LIMIT = 'priceLimit';
-    /** @access protected */
-    const VALIDATION_GROUP_PRICE_LIMIT_ENABLED = 'priceLimitEnabled';
+    public const VALIDATION_GROUP_PRICE_LIMIT_ENABLED = 'priceLimitEnabled';
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\Domain\Domain

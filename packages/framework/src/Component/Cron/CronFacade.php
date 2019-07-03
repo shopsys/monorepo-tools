@@ -11,8 +11,7 @@ use Symfony\Bridge\Monolog\Logger;
 
 class CronFacade
 {
-    /** @access protected */
-    const TIMEOUT_SECONDS = 4 * 60;
+    protected const TIMEOUT_SECONDS = 4 * 60;
 
     /**
      * @var \Symfony\Bridge\Monolog\Logger

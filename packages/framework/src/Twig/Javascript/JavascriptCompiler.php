@@ -9,8 +9,7 @@ use Symfony\Component\Filesystem\Filesystem;
 
 class JavascriptCompiler
 {
-    /** @access protected */
-    const NOT_COMPILED_FOLDER = '/plugins/';
+    protected const NOT_COMPILED_FOLDER = '/plugins/';
 
     /**
      * @var string

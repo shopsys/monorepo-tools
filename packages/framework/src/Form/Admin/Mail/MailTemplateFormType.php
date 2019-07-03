@@ -20,8 +20,7 @@ use Symfony\Component\Validator\Constraints;
 
 class MailTemplateFormType extends AbstractType
 {
-    /** @access protected */
-    const VALIDATION_GROUP_SEND_MAIL = 'sendMail';
+    public const VALIDATION_GROUP_SEND_MAIL = 'sendMail';
 
     /**
      * @param \Symfony\Component\Form\FormBuilderInterface $builder

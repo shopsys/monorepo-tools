@@ -12,8 +12,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 class AdministratorFrontSecurityFacade
 {
     // same as in security.yml
-    /** @access protected */
-    const ADMINISTRATION_CONTEXT = 'administration';
+    public const ADMINISTRATION_CONTEXT = 'administration';
 
     /**
      * @var \Symfony\Component\HttpFoundation\Session\SessionInterface

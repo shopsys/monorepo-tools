@@ -9,8 +9,7 @@ use Symfony\Component\Filesystem\Filesystem;
 
 class SitemapDumperFactory
 {
-    /** @access protected */
-    const MAX_ITEMS_IN_FILE = 50000;
+    protected const MAX_ITEMS_IN_FILE = 50000;
 
     /**
      * @var \Symfony\Component\EventDispatcher\EventDispatcherInterface

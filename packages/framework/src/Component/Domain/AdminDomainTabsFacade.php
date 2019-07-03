@@ -6,8 +6,7 @@ use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 class AdminDomainTabsFacade
 {
-    /** @access protected */
-    const SESSION_SELECTED_DOMAIN = 'selected_domain_id';
+    protected const SESSION_SELECTED_DOMAIN = 'selected_domain_id';
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\Domain\Domain

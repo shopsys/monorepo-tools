@@ -36,7 +36,6 @@ services:
     # add all @param, @return and @var annotations, in FQN
     Shopsys\CodingStandards\CsFixer\Phpdoc\MissingParamAnnotationsFixer: ~
     Shopsys\CodingStandards\CsFixer\Phpdoc\MissingReturnAnnotationFixer: ~
-    Shopsys\CodingStandards\CsFixer\Phpdoc\NoUselessAccessFixer: ~
     Shopsys\CodingStandards\CsFixer\Phpdoc\OrderedParamAnnotationsFixer: ~
     SlevomatCodingStandard\Sniffs\Namespaces\FullyQualifiedClassNameInAnnotationSniff: ~
 
@@ -125,6 +124,7 @@ services:
     PhpCsFixer\Fixer\Phpdoc\PhpdocNoAliasTagFixer:
         type: var
     PhpCsFixer\Fixer\Phpdoc\PhpdocNoEmptyReturnFixer: ~
+    PhpCsFixer\Fixer\Phpdoc\PhpdocNoAccessFixer: ~
     PhpCsFixer\Fixer\Phpdoc\PhpdocNoPackageFixer: ~
     PhpCsFixer\Fixer\Phpdoc\PhpdocOrderFixer: ~
     PhpCsFixer\Fixer\Phpdoc\PhpdocScalarFixer: ~

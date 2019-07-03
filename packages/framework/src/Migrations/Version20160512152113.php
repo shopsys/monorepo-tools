@@ -9,8 +9,7 @@ class Version20160512152113 extends AbstractMigration
 {
     use MultidomainMigrationTrait;
 
-    /** @access private */
-    const COUNTRIES_SEQUENCE_NAME = 'countries_id_seq';
+    private const COUNTRIES_SEQUENCE_NAME = 'countries_id_seq';
 
     /**
      * @param \Doctrine\DBAL\Schema\Schema $schema

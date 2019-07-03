@@ -14,8 +14,7 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 
 class ProductSearchExporter
 {
-    /** @access protected */
-    const BATCH_SIZE = 100;
+    protected const BATCH_SIZE = 100;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Product\Search\Export\ProductSearchExportRepository

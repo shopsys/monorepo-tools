@@ -8,8 +8,7 @@ use Symfony\Component\HttpKernel\Event\FilterResponseEvent;
 
 class ProductAvailabilityRecalculator
 {
-    /** @access protected */
-    const BATCH_SIZE = 100;
+    protected const BATCH_SIZE = 100;
 
     /**
      * @var \Doctrine\ORM\EntityManagerInterface

@@ -4,17 +4,13 @@ namespace Shopsys\FrameworkBundle\Component\Environment;
 
 class EnvironmentFileSetting
 {
-    /** @access protected */
-    const FILE_NAMES_BY_ENVIRONMENT = [
+    protected const FILE_NAMES_BY_ENVIRONMENT = [
         EnvironmentType::DEVELOPMENT => 'DEVELOPMENT',
         EnvironmentType::PRODUCTION => 'PRODUCTION',
         EnvironmentType::TEST => 'TEST',
     ];
-
-    /** @access protected */
-    const ENVIRONMENTS_CONSOLE = [EnvironmentType::DEVELOPMENT, EnvironmentType::PRODUCTION];
-    /** @access protected */
-    const ENVIRONMENTS_DEFAULT = [EnvironmentType::TEST, EnvironmentType::DEVELOPMENT, EnvironmentType::PRODUCTION];
+    protected const ENVIRONMENTS_CONSOLE = [EnvironmentType::DEVELOPMENT, EnvironmentType::PRODUCTION];
+    protected const ENVIRONMENTS_DEFAULT = [EnvironmentType::TEST, EnvironmentType::DEVELOPMENT, EnvironmentType::PRODUCTION];
 
     /**
      * @var string

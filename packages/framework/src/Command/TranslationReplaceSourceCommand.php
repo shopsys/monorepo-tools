@@ -14,15 +14,11 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class TranslationReplaceSourceCommand extends Command
 {
-    /** @access private */
-    const ARG_TRANSLATIONS_DIR = 'translationsDir';
-    /** @access private */
-    const ARG_SOURCE_CODE_DIR = 'sourceCodeDir';
-    /** @access private */
-    const ARG_TARGET_LOCALE = 'targetLocale';
+    private const ARG_TRANSLATIONS_DIR = 'translationsDir';
+    private const ARG_SOURCE_CODE_DIR = 'sourceCodeDir';
+    private const ARG_TARGET_LOCALE = 'targetLocale';
 
-    /** @access private */
-    const FILE_NAME_REPLACEMENT_ERRORS = 'replacement_errors.log';
+    private const FILE_NAME_REPLACEMENT_ERRORS = 'replacement_errors.log';
 
     /**
      * @var string

@@ -13,28 +13,18 @@ use Shopsys\FrameworkBundle\Component\Money\Money;
  */
 class SettingValue
 {
-    /** @access protected */
-    const DATETIME_STORED_FORMAT = DateTime::ISO8601;
+    protected const DATETIME_STORED_FORMAT = DateTime::ISO8601;
 
-    /** @access protected */
-    const TYPE_STRING = 'string';
-    /** @access protected */
-    const TYPE_INTEGER = 'integer';
-    /** @access protected */
-    const TYPE_FLOAT = 'float';
-    /** @access protected */
-    const TYPE_BOOLEAN = 'boolean';
-    /** @access protected */
-    const TYPE_DATETIME = 'datetime';
-    /** @access protected */
-    const TYPE_MONEY = 'money';
-    /** @access protected */
-    const TYPE_NULL = 'none';
+    protected const TYPE_STRING = 'string';
+    protected const TYPE_INTEGER = 'integer';
+    protected const TYPE_FLOAT = 'float';
+    protected const TYPE_BOOLEAN = 'boolean';
+    protected const TYPE_DATETIME = 'datetime';
+    protected const TYPE_MONEY = 'money';
+    protected const TYPE_NULL = 'none';
 
-    /** @access protected */
-    const BOOLEAN_TRUE = 'true';
-    /** @access protected */
-    const BOOLEAN_FALSE = 'false';
+    protected const BOOLEAN_TRUE = 'true';
+    protected const BOOLEAN_FALSE = 'false';
 
     public const DOMAIN_ID_COMMON = 0;
 

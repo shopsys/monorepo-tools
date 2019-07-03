@@ -17,8 +17,7 @@ use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 class AdministratorController extends AdminBaseController
 {
-    /** @access protected */
-    const MAX_ADMINISTRATOR_ACTIVITIES_COUNT = 10;
+    protected const MAX_ADMINISTRATOR_ACTIVITIES_COUNT = 10;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\AdminNavigation\BreadcrumbOverrider

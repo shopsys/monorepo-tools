@@ -20,8 +20,7 @@ use Twig_Environment;
 
 class OrderMail implements MessageFactoryInterface
 {
-    /** @access protected */
-    const MAIL_TEMPLATE_NAME_PREFIX = 'order_status_';
+    protected const MAIL_TEMPLATE_NAME_PREFIX = 'order_status_';
     public const VARIABLE_NUMBER = '{number}';
     public const VARIABLE_DATE = '{date}';
     public const VARIABLE_URL = '{url}';

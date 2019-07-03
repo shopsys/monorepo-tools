@@ -31,8 +31,7 @@ use Symfony\Component\Validator\Constraints;
 
 class OrderFormType extends AbstractType
 {
-    /** @access protected */
-    const VALIDATION_GROUP_DELIVERY_ADDRESS_SAME_AS_BILLING_ADDRESS = 'deliveryAddressSameAsBillingAddress';
+    public const VALIDATION_GROUP_DELIVERY_ADDRESS_SAME_AS_BILLING_ADDRESS = 'deliveryAddressSameAsBillingAddress';
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Country\CountryFacade

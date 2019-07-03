@@ -10,11 +10,6 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class MigrateCommand extends AbstractCommand
 {
-    /** @access private */
-    const RETURN_CODE_OK = 0;
-    /** @access private */
-    const RETURN_CODE_ERROR = 1;
-
     /**
      * @var string
      */

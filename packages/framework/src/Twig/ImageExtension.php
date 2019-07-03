@@ -14,8 +14,7 @@ use Twig_SimpleFunction;
 
 class ImageExtension extends Twig_Extension
 {
-    /** @access protected */
-    const NOIMAGE_FILENAME = 'noimage.png';
+    protected const NOIMAGE_FILENAME = 'noimage.png';
 
     /**
      * @var string
