@@ -79,7 +79,7 @@ class ElasticsearchStructureUpdateChecker
             $definition['settings']['index']['creation_date'],
             $definition['settings']['index']['provided_name'],
             $definition['settings']['index']['uuid'],
-            $definition['settings']['index']['version'],
+            $definition['settings']['index']['version']
         );
 
         $this->recursiveArraySorter->recursiveArrayKsort($definition);
