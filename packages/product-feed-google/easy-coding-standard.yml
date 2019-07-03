@@ -11,8 +11,11 @@ services:
                   - analyzed_namespaces:
                         - Shopsys\ProductFeed\GoogleBundle\Model
 
-
-    Shopsys\CodingStandards\Sniffs\ConstantVisibilityRequiredSniff: ~
+    PhpCsFixer\Fixer\ClassNotation\VisibilityRequiredFixer:
+        elements:
+            - 'property'
+            - 'method'
+            - 'const'
 
     Shopsys\CodingStandards\Sniffs\ForceLateStaticBindingForProtectedConstantsSniff: ~
 

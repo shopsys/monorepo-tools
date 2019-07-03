@@ -95,6 +95,7 @@ There you can find links to upgrade notes for other versions too.
     - remove the usages of `FrontBreadcrumbResolverFactory` class as it has been removed.
     - remove the usages of `BreadcrumbResolver::registerGenerator` method as it has been removed
     - update your usages of `BreadcrumbResolver::__contruct()` as it now requires a new parameter
+- run `php phing phpstan` in order to check, that you are not using any private, protected or removed constant from Shopsys packages ([#1181](https://github.com/shopsys/shopsys/pull/1181))
 
 ### Configuration
 - simplify local configuration ([#1004](https://github.com/shopsys/shopsys/pull/1004))
