@@ -108,6 +108,25 @@ There you can find links to upgrade notes for other versions too.
     - modify the functional test `\Tests\ShopBundle\Functional\Component\Redis\RedisFacadeTest` so it creates `RedisFacade` using the two arrays and add a new test case `testNotCleaningPersistentClient`
         - you can copy-paste the [`RedisFacadeTest`](https://github.com/shopsys/project-base/blob/master/tests/ShopBundle/Functional/Component/Redis/RedisFacadeTest.php) from `shopsys/project-base`
 - implement `createFromIdAndName(int $id, string $name): FriendlyUrlData` method in your implementations of `FriendlyUrlDataFactoryInterface` as the method will be added to the interface in `v8.0.0` version ([#948](https://github.com/shopsys/shopsys/pull/948))
+- use aliases of index and build version in index name in Elasticsearch for better usage when deploying ([#1133](https://github.com/shopsys/shopsys/pull/1133))
+    - use method `ElasticsearchStructureManager::getCurrentIndexName` or `ElasticsearchStructureManager::getAliasName` instead of `ElasticsearchStructureManager::getIndexName` when calling a query to elasticSearch in order to always target the right index
+        - use `getAliasName` if you need to access the index for read operations (eg. searching, filtering)
+        - use `getCurrentIndexName` if need to write to the index or manipulate it (eg. product export)
+    - run `php phing product-search-recreate-structure` to generate new indexes with aliases
+    - use method `ElasticsearchStructureManager::deleteCurrentIndex` instead of `ElasticsearchStructureManager::deleteIndex` as it was deprecated
+    - if you have extended `ElasticsearchStructureManager` in `services.yml` you'll need to send the `build-version` parameter to the 4th argument of the constructor or call `setBuildVersion` setter injector like this:
+        ```diff
+          Shopsys\FrameworkBundle\Component\Elasticsearch\ElasticsearchStructureManager:
+              arguments:
+                  - '%shopsys.elasticsearch.structure_dir%'
+                  - '%env(ELASTIC_SEARCH_INDEX_PREFIX)%'
+        +     calls:
+        +         - method: setBuildVersion
+        +           arguments:
+        +               - '%build-version%'
+        ```
+    - copy a new functional test [`ElasticsearchStructureUpdateCheckerTest`](https://github.com/shopsys/project-base/blob/master/tests/ShopBundle/Functional/Component/Elasticsearch/ElasticsearchStructureUpdateCheckerTest.php) into `tests/ShopBundle/Functional/Component/Elasticsearch/` in your project
+        - this test will ensure that the check whether to update Elasticsearch structure works as intended
 
 ### Configuration
 - update `phpstan.neon` with following change to skip phpstan error ([#1086](https://github.com/shopsys/shopsys/pull/1086))

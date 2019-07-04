@@ -348,6 +348,9 @@ docker-compose -p production up -d --force-recreate webserver
 # remove container for building the application image
 docker rm -f build-php-fpm-container
 ```
+***Note:** During `build-deploy-part-2-db-dependent` phing target `product-search-migrate-structure` is called and can cause error when you change the type of field to another (eg. you change it from `bool` to `integer`). If you need to make this change, please add new field with the correct type and delete the old field instead*
+
+***Note:** If you need to have freshly exported products in Elasticsearch after deploy, you can call phing target `product-search-export-products` during `build-deploy-part-2-db-dependent`.*
 
 ## Logging
 If you need to inspect your application logs, use `docker-compose logs` command.

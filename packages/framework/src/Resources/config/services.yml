@@ -57,6 +57,10 @@ services:
             - '@request_stack'
             - '%kernel.debug%'
 
+    Shopsys\FrameworkBundle\Component\Collector\ShopsysFrameworkDataCollector:
+        tags:
+            - { name: data_collector, id: shopsys_framework_core, template: '@ShopsysFramework/Components/Collector/shopsysFramework.html.twig', priority: -300 }
+
     Symfony\Component\Translation\MessageSelector: '@translator.selector'
 
     Doctrine\Common\Annotations\DocParser: '@jms_translation.doc_parser'
@@ -976,9 +980,14 @@ services:
 
     Shopsys\FrameworkBundle\Component\Elasticsearch\ElasticsearchStructureManager:
         arguments:
-            - '%shopsys.elasticsearch.structure_dir%'
-            - '%env(ELASTIC_SEARCH_INDEX_PREFIX)%'
+            $definitionDirectory: '%shopsys.elasticsearch.structure_dir%'
+            $indexPrefix: '%env(ELASTIC_SEARCH_INDEX_PREFIX)%'
+            $buildVersion: '%build-version%'
 
     Shopsys\FrameworkBundle\Model\Product\Search\Export\ProductSearchExporter: ~
 
     Shopsys\FrameworkBundle\Model\Product\Search\ProductElasticsearchConverter: ~
+
+    Shopsys\FrameworkBundle\Component\Elasticsearch\ElasticsearchStructureUpdateChecker: ~
+
+    Shopsys\FrameworkBundle\Component\ArrayUtils\RecursiveArraySorter: ~
