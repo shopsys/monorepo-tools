@@ -107,7 +107,7 @@ class TransportDataFactory implements TransportDataFactoryInterface
             $transportData->enabled[$domainId] = $transport->isEnabled($domainId);
         }
 
-        $transportData->payments = $transport->getPayments()->toArray();
+        $transportData->payments = $transport->getPayments();
 
         foreach ($transport->getPrices() as $transportPrice) {
             $transportData->pricesByCurrencyId[$transportPrice->getCurrency()->getId()] = $transportPrice->getPrice();

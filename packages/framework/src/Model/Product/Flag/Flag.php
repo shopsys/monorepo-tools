@@ -25,7 +25,7 @@ class Flag extends AbstractTranslatableEntity
     protected $id;
 
     /**
-     * @var \Doctrine\Common\Collections\ArrayCollection|\Shopsys\FrameworkBundle\Model\Product\Flag\FlagTranslation[]
+     * @var \Shopsys\FrameworkBundle\Model\Product\Flag\FlagTranslation[]|\Doctrine\Common\Collections\Collection
      *
      * @Prezent\Translations(targetEntity="Shopsys\FrameworkBundle\Model\Product\Flag\FlagTranslation")
      */

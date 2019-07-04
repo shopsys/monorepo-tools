@@ -33,14 +33,14 @@ class Brand extends AbstractTranslatableEntity
     protected $name;
 
     /**
-     * @var \Doctrine\Common\Collections\ArrayCollection|\Shopsys\FrameworkBundle\Model\Product\Brand\BrandTranslation[]
+     * @var \Shopsys\FrameworkBundle\Model\Product\Brand\BrandTranslation[]|\Doctrine\Common\Collections\Collection
      *
      * @Prezent\Translations(targetEntity="Shopsys\FrameworkBundle\Model\Product\Brand\BrandTranslation")
      */
     protected $translations;
 
     /**
-     * @var \Shopsys\FrameworkBundle\Model\Product\Brand\BrandDomain[]|\Doctrine\Common\Collections\ArrayCollection
+     * @var \Shopsys\FrameworkBundle\Model\Product\Brand\BrandDomain[]|\Doctrine\Common\Collections\Collection
      *
      * @ORM\OneToMany(targetEntity="Shopsys\FrameworkBundle\Model\Product\Brand\BrandDomain", mappedBy="brand", cascade={"persist"}, fetch="EXTRA_LAZY")
      */
@@ -125,7 +125,7 @@ class Brand extends AbstractTranslatableEntity
 
         foreach ($domainIds as $domainId) {
             $brandDomain = new BrandDomain($this, $domainId);
-            $this->domains[] = $brandDomain;
+            $this->domains->add($brandDomain);
         }
 
         $this->setDomains($brandData);

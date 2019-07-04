@@ -28,7 +28,7 @@ class Category extends AbstractTranslatableEntity
     protected $id;
 
     /**
-     * @var \Doctrine\Common\Collections\ArrayCollection|\Shopsys\FrameworkBundle\Model\Category\CategoryTranslation[]
+     * @var \Shopsys\FrameworkBundle\Model\Category\CategoryTranslation[]|\Doctrine\Common\Collections\Collection
      *
      * @Prezent\Translations(targetEntity="Shopsys\FrameworkBundle\Model\Category\CategoryTranslation")
      */
@@ -44,7 +44,7 @@ class Category extends AbstractTranslatableEntity
     protected $parent;
 
     /**
-     * @var \Shopsys\FrameworkBundle\Model\Category\Category[]
+     * @var \Shopsys\FrameworkBundle\Model\Category\Category[]|\Doctrine\Common\Collections\Collection
      *
      * @ORM\OneToMany(targetEntity="Shopsys\FrameworkBundle\Model\Category\Category", mappedBy="parent")
      * @ORM\OrderBy({"lft" = "ASC"})
@@ -76,7 +76,7 @@ class Category extends AbstractTranslatableEntity
     protected $rgt;
 
     /**
-     * @var \Shopsys\FrameworkBundle\Model\Category\CategoryDomain[]|\Doctrine\Common\Collections\ArrayCollection
+     * @var \Shopsys\FrameworkBundle\Model\Category\CategoryDomain[]|\Doctrine\Common\Collections\Collection
      *
      * @ORM\OneToMany(targetEntity="Shopsys\FrameworkBundle\Model\Category\CategoryDomain", mappedBy="category", cascade={"persist"}, fetch="EXTRA_LAZY")
      */
@@ -90,6 +90,7 @@ class Category extends AbstractTranslatableEntity
         $this->setParent($categoryData->parent);
         $this->translations = new ArrayCollection();
         $this->domains = new ArrayCollection();
+        $this->children = new ArrayCollection();
 
         $this->setTranslations($categoryData);
         $this->createDomains($categoryData);
@@ -174,7 +175,7 @@ class Category extends AbstractTranslatableEntity
      */
     public function getChildren()
     {
-        return $this->children;
+        return $this->children->toArray();
     }
 
     /**
@@ -304,7 +305,7 @@ class Category extends AbstractTranslatableEntity
 
         foreach ($domainIds as $domainId) {
             $categoryDomain = new CategoryDomain($this, $domainId);
-            $this->domains[] = $categoryDomain;
+            $this->domains->add($categoryDomain);
         }
 
         $this->setDomains($categoryData);

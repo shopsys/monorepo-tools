@@ -28,7 +28,7 @@ class ListedProductViewFactoryTest extends TestCase
      * @param int $priceAmount
      * @param \Shopsys\ReadModelBundle\Image\ImageView $imageView
      * @param \Shopsys\ReadModelBundle\Product\Action\ProductActionView $productActionView
-     * @param \Shopsys\FrameworkBundle\Model\Product\Flag\Flag[]|\Doctrine\Common\Collections\ArrayCollection $flags
+     * @param \Shopsys\FrameworkBundle\Model\Product\Flag\Flag[]|\Doctrine\Common\Collections\Collection $flags
      * @param int[] $expectedFlags
      */
     public function testCreateFromProduct(
@@ -70,7 +70,7 @@ class ListedProductViewFactoryTest extends TestCase
      * @param string $name
      * @param string $shortDescription
      * @param string $availabilityName
-     * @param \Shopsys\FrameworkBundle\Model\Product\Flag\Flag[]|\Doctrine\Common\Collections\ArrayCollection $flags
+     * @param \Shopsys\FrameworkBundle\Model\Product\Flag\Flag[]|\Doctrine\Common\Collections\Collection $flags
      * @return \PHPUnit\Framework\MockObject\MockObject|\Shopsys\FrameworkBundle\Model\Product\Product
      */
     private function createProductMock(int $id, string $name, string $shortDescription, string $availabilityName, $flags)

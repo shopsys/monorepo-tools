@@ -34,14 +34,14 @@ class Country extends AbstractTranslatableEntity
     protected $code;
 
     /**
-     * @var \Doctrine\Common\Collections\ArrayCollection|\Shopsys\FrameworkBundle\Model\Country\CountryTranslation[]
+     * @var \Shopsys\FrameworkBundle\Model\Country\CountryTranslation[]|\Doctrine\Common\Collections\Collection
      *
      * @Prezent\Translations(targetEntity="Shopsys\FrameworkBundle\Model\Country\CountryTranslation")
      */
     protected $translations;
 
     /**
-     * @var \Doctrine\Common\Collections\ArrayCollection|\Shopsys\FrameworkBundle\Model\Country\CountryDomain[]
+     * @var \Shopsys\FrameworkBundle\Model\Country\CountryDomain[]|\Doctrine\Common\Collections\Collection
      *
      * @ORM\OneToMany(targetEntity="Shopsys\FrameworkBundle\Model\Country\CountryDomain", mappedBy="country", cascade={"persist"}, fetch="EXTRA_LAZY")
      */
@@ -151,7 +151,7 @@ class Country extends AbstractTranslatableEntity
 
         foreach ($domainIds as $domainId) {
             $countryDomain = new CountryDomain($this, $domainId);
-            $this->domains[] = $countryDomain;
+            $this->domains->add($countryDomain);
         }
 
         $this->setDomains($countryData);
@@ -163,11 +163,9 @@ class Country extends AbstractTranslatableEntity
      */
     protected function getCountryDomain(int $domainId): CountryDomain
     {
-        if ($this->domains !== null) {
-            foreach ($this->domains as $countryDomain) {
-                if ($countryDomain->getDomainId() === $domainId) {
-                    return $countryDomain;
-                }
+        foreach ($this->domains as $countryDomain) {
+            if ($countryDomain->getDomainId() === $domainId) {
+                return $countryDomain;
             }
         }
 

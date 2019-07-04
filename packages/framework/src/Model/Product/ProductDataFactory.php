@@ -200,7 +200,7 @@ class ProductDataFactory implements ProductDataFactoryInterface
         $productData->sellingFrom = $product->getSellingFrom();
         $productData->sellingTo = $product->getSellingTo();
         $productData->sellingDenied = $product->isSellingDenied();
-        $productData->flags = $product->getFlags()->toArray();
+        $productData->flags = $product->getFlags();
         $productData->usingStock = $product->isUsingStock();
         $productData->stockQuantity = $product->getStockQuantity();
         $productData->unit = $product->getUnit();

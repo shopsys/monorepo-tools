@@ -95,7 +95,7 @@ class TransportAndPaymentFormType extends AbstractType
 
         $relationExists = false;
         if ($payment instanceof Payment && $transport instanceof Transport) {
-            if ($payment->getTransports()->contains($transport)) {
+            if (in_array($transport, $payment->getTransports(), true)) {
                 $relationExists = true;
             }
         }

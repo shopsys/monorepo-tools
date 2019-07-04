@@ -40,7 +40,7 @@ class Cart
     protected $user;
 
     /**
-     * @var \Doctrine\Common\Collections\ArrayCollection|\Shopsys\FrameworkBundle\Model\Cart\Item\CartItem[]
+     * @var \Shopsys\FrameworkBundle\Model\Cart\Item\CartItem[]|\Doctrine\Common\Collections\Collection
      *
      * @ORM\OneToMany(
      *     targetEntity="Shopsys\FrameworkBundle\Model\Cart\Item\CartItem",

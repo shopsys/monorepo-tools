@@ -37,6 +37,8 @@ class HeurekaCategory
     protected $fullName;
 
     /**
+     * @var \Shopsys\FrameworkBundle\Model\Category\Category[]|\Doctrine\Common\Collections\Collection
+     *
      * @ORM\ManyToMany(targetEntity="Shopsys\FrameworkBundle\Model\Category\Category")
      * @ORM\JoinTable(
      *     name="heureka_category_categories",
@@ -119,10 +121,10 @@ class HeurekaCategory
     }
 
     /**
-     * @return \Doctrine\Common\Collections\ArrayCollection|\Shopsys\FrameworkBundle\Model\Category\Category[]
+     * @return \Shopsys\FrameworkBundle\Model\Category\Category[]
      */
     public function getCategories()
     {
-        return $this->categories;
+        return $this->categories->toArray();
     }
 }

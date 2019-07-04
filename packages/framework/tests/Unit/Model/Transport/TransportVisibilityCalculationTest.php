@@ -2,7 +2,6 @@
 
 namespace Tests\FrameworkBundle\Unit\Model\Transport;
 
-use Doctrine\Common\Collections\ArrayCollection;
 use PHPUnit\Framework\TestCase;
 use Shopsys\FrameworkBundle\Model\Payment\IndependentPaymentVisibilityCalculation;
 use Shopsys\FrameworkBundle\Model\Payment\Payment;
@@ -80,7 +79,7 @@ class TransportVisibilityCalculationTest extends TestCase
             ->disableOriginalConstructor()
             ->setMethods(['getTransports'])
             ->getMock();
-        $paymentMock->expects($this->atLeastOnce())->method('getTransports')->willReturn(new ArrayCollection([]));
+        $paymentMock->expects($this->atLeastOnce())->method('getTransports')->willReturn([]);
 
         $independentTransportVisibilityCalculationMock = $this->getMockBuilder(IndependentTransportVisibilityCalculation::class)
             ->disableOriginalConstructor()
@@ -118,7 +117,7 @@ class TransportVisibilityCalculationTest extends TestCase
             ->disableOriginalConstructor()
             ->setMethods(['getTransports'])
             ->getMock();
-        $paymentMock->expects($this->atLeastOnce())->method('getTransports')->willReturn(new ArrayCollection([$transportMock]));
+        $paymentMock->expects($this->atLeastOnce())->method('getTransports')->willReturn([$transportMock]);
 
         $independentTransportVisibilityCalculationMock = $this->getMockBuilder(IndependentTransportVisibilityCalculation::class)
             ->disableOriginalConstructor()
@@ -157,7 +156,7 @@ class TransportVisibilityCalculationTest extends TestCase
             ->disableOriginalConstructor()
             ->setMethods(['getTransports'])
             ->getMock();
-        $paymentMock->expects($this->atLeastOnce())->method('getTransports')->willReturn(new ArrayCollection([$transportVisibleMock]));
+        $paymentMock->expects($this->atLeastOnce())->method('getTransports')->willReturn([$transportVisibleMock]);
 
         $independentTransportVisibilityCalculationMock = $this->getMockBuilder(IndependentTransportVisibilityCalculation::class)
             ->disableOriginalConstructor()

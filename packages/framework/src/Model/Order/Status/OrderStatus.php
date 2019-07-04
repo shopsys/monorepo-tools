@@ -30,7 +30,7 @@ class OrderStatus extends AbstractTranslatableEntity
     protected $id;
 
     /**
-     * @var \Doctrine\Common\Collections\ArrayCollection|\Shopsys\FrameworkBundle\Model\Order\Status\OrderStatusTranslation[]
+     * @var \Shopsys\FrameworkBundle\Model\Order\Status\OrderStatusTranslation[]|\Doctrine\Common\Collections\Collection
      *
      * @Prezent\Translations(targetEntity="Shopsys\FrameworkBundle\Model\Order\Status\OrderStatusTranslation")
      */

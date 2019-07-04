@@ -34,21 +34,21 @@ class Transport extends AbstractTranslatableEntity implements OrderableEntityInt
     protected $id;
 
     /**
-     * @var \Doctrine\Common\Collections\ArrayCollection|\Shopsys\FrameworkBundle\Model\Transport\TransportTranslation[]
+     * @var \Shopsys\FrameworkBundle\Model\Transport\TransportTranslation[]|\Doctrine\Common\Collections\Collection
      *
      * @Prezent\Translations(targetEntity="Shopsys\FrameworkBundle\Model\Transport\TransportTranslation")
      */
     protected $translations;
 
     /**
-     * @var \Doctrine\Common\Collections\ArrayCollection|\Shopsys\FrameworkBundle\Model\Transport\TransportDomain[]
+     * @var \Shopsys\FrameworkBundle\Model\Transport\TransportDomain[]|\Doctrine\Common\Collections\Collection
      *
      * @ORM\OneToMany(targetEntity="Shopsys\FrameworkBundle\Model\Transport\TransportDomain", mappedBy="transport", cascade={"persist"}, fetch="EXTRA_LAZY")
      */
     protected $domains;
 
     /**
-     * @var \Doctrine\Common\Collections\ArrayCollection|\Shopsys\FrameworkBundle\Model\Transport\TransportPrice[]
+     * @var \Shopsys\FrameworkBundle\Model\Transport\TransportPrice[]|\Doctrine\Common\Collections\Collection
      *
      * @ORM\OneToMany(targetEntity="Shopsys\FrameworkBundle\Model\Transport\TransportPrice", mappedBy="transport", cascade={"persist"})
      */
@@ -179,11 +179,11 @@ class Transport extends AbstractTranslatableEntity implements OrderableEntityInt
     }
 
     /**
-     * @return \Doctrine\Common\Collections\ArrayCollection|\Shopsys\FrameworkBundle\Model\Transport\TransportPrice[]
+     * @return \Shopsys\FrameworkBundle\Model\Transport\TransportPrice[]
      */
     public function getPrices()
     {
-        return $this->prices;
+        return $this->prices->toArray();
     }
 
     /**
@@ -220,7 +220,7 @@ class Transport extends AbstractTranslatableEntity implements OrderableEntityInt
             }
         }
 
-        $this->prices[] = $transportPriceFactory->create($this, $currency, $price);
+        $this->prices->add($transportPriceFactory->create($this, $currency, $price));
     }
 
     /**
@@ -288,7 +288,7 @@ class Transport extends AbstractTranslatableEntity implements OrderableEntityInt
 
         foreach ($domainIds as $domainId) {
             $transportDomain = new TransportDomain($this, $domainId);
-            $this->domains[] = $transportDomain;
+            $this->domains->add($transportDomain);
         }
 
         $this->setDomains($transportData);
@@ -341,11 +341,11 @@ class Transport extends AbstractTranslatableEntity implements OrderableEntityInt
     }
 
     /**
-     * @return \Shopsys\FrameworkBundle\Model\Payment\Payment[]|\Doctrine\Common\Collections\Collection
+     * @return \Shopsys\FrameworkBundle\Model\Payment\Payment[]
      */
     public function getPayments()
     {
-        return $this->payments;
+        return $this->payments->toArray();
     }
 
     /**
@@ -354,11 +354,9 @@ class Transport extends AbstractTranslatableEntity implements OrderableEntityInt
      */
     protected function getTransportDomain(int $domainId)
     {
-        if ($this->domains !== null) {
-            foreach ($this->domains as $transportDomain) {
-                if ($transportDomain->getDomainId() === $domainId) {
-                    return $transportDomain;
-                }
+        foreach ($this->domains as $transportDomain) {
+            if ($transportDomain->getDomainId() === $domainId) {
+                return $transportDomain;
             }
         }
 

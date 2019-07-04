@@ -49,7 +49,7 @@ class Order
     protected $createdAt;
 
     /**
-     * @var \Doctrine\Common\Collections\ArrayCollection|\Shopsys\FrameworkBundle\Model\Order\Item\OrderItem[]
+     * @var \Shopsys\FrameworkBundle\Model\Order\Item\OrderItem[]|\Doctrine\Common\Collections\Collection
      *
      * @ORM\OneToMany(
      *     targetEntity="Shopsys\FrameworkBundle\Model\Order\Item\OrderItem",
@@ -629,11 +629,11 @@ class Order
     }
 
     /**
-     * @return \Doctrine\Common\Collections\ArrayCollection|\Shopsys\FrameworkBundle\Model\Order\Item\OrderItem[]
+     * @return \Shopsys\FrameworkBundle\Model\Order\Item\OrderItem[]
      */
     public function getItems()
     {
-        return $this->items;
+        return $this->items->toArray();
     }
 
     /**

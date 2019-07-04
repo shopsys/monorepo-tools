@@ -145,7 +145,7 @@ class TransportFacade
         $transport->markAsDeleted();
         $paymentsByTransport = $this->paymentRepository->getAllByTransport($transport);
         foreach ($paymentsByTransport as $payment) {
-            $payment->getTransports()->removeElement($transport);
+            $payment->removeTransport($transport);
         }
         $this->em->flush();
     }

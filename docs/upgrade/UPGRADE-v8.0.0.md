@@ -96,6 +96,28 @@ There you can find links to upgrade notes for other versions too.
     - remove the usages of `BreadcrumbResolver::registerGenerator` method as it has been removed
     - update your usages of `BreadcrumbResolver::__contruct()` as it now requires a new parameter
 - run `php phing phpstan` in order to check, that you are not using any private, protected or removed constant from Shopsys packages ([#1181](https://github.com/shopsys/shopsys/pull/1181))
+- update your code due to collection entities encapsulation change ([#1047](https://github.com/shopsys/shopsys/pull/1047))
+    - when you use values from an entity getter that has returned an `ArrayCollection` before, use the value as an array instead of an object, for example:
+        - `src/Shopsys/ShopBundle/Form/Front/Order/TransportAndPaymentFormType.php`
+            ```diff
+            if ($payment instanceof Payment && $transport instanceof Transport) {
+            -   if ($payment->getTransports()->contains($transport)) {
+            +   if (in_array($transport, $payment->getTransports(), true)) {
+                    $relationExists = true;
+                }
+            ```
+        - `tests/ShopBundle/Functional/Model/Payment/PaymentTest.php`
+            ```diff
+                $transportFacade->deleteById($transport->getId());
+            -   $this->assertFalse($payment->getTransports()->contains($transport));
+            +   $this->assertNotContains($transport, $payment->getTransports());
+            }
+            ```
+    - fix annotations or your extended code to apply new return value of entities where `ArrayCollection` was removed and replaced by an array, eg. in:
+        - `Shopsys\FrameworkBundle\Model\Order\Order::getItems`
+        - `Shopsys\FrameworkBundle\Model\Payment\Payment::getPrices`
+        - `Shopsys\ProductFeed\HeurekaBundle\Model\HeurekaCategory:getCategories`
+    - we recommend encapsulating collections similarly in your own custom entities as well
 
 ### Configuration
 - simplify local configuration ([#1004](https://github.com/shopsys/shopsys/pull/1004))

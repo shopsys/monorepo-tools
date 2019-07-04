@@ -43,7 +43,7 @@ class Product extends AbstractTranslatableEntity
     protected $id;
 
     /**
-     * @var \Doctrine\Common\Collections\ArrayCollection|\Shopsys\FrameworkBundle\Model\Product\ProductTranslation[]
+     * @var \Shopsys\FrameworkBundle\Model\Product\ProductTranslation[]|\Doctrine\Common\Collections\Collection
      *
      * @Prezent\Translations(targetEntity="Shopsys\FrameworkBundle\Model\Product\ProductTranslation")
      */
@@ -199,7 +199,7 @@ class Product extends AbstractTranslatableEntity
     protected $calculatedVisibility;
 
     /**
-     * @var \Doctrine\Common\Collections\ArrayCollection|\Shopsys\FrameworkBundle\Model\Product\ProductCategoryDomain[]
+     * @var \Shopsys\FrameworkBundle\Model\Product\ProductCategoryDomain[]|\Doctrine\Common\Collections\Collection
      *
      * @ORM\OneToMany(
      *   targetEntity="Shopsys\FrameworkBundle\Model\Product\ProductCategoryDomain",
@@ -211,7 +211,7 @@ class Product extends AbstractTranslatableEntity
     protected $productCategoryDomains;
 
     /**
-     * @var \Doctrine\Common\Collections\ArrayCollection|\Shopsys\FrameworkBundle\Model\Product\Flag\Flag[]
+     * @var \Shopsys\FrameworkBundle\Model\Product\Flag\Flag[]|\Doctrine\Common\Collections\Collection
      *
      * @ORM\ManyToMany(targetEntity="Shopsys\FrameworkBundle\Model\Product\Flag\Flag")
      * @ORM\JoinTable(name="product_flags")
@@ -241,7 +241,7 @@ class Product extends AbstractTranslatableEntity
     protected $brand;
 
     /**
-     * @var \Doctrine\Common\Collections\ArrayCollection|\Shopsys\FrameworkBundle\Model\Product\Product[]
+     * @var \Shopsys\FrameworkBundle\Model\Product\Product[]|\Doctrine\Common\Collections\Collection
      *
      * @ORM\OneToMany(targetEntity="Shopsys\FrameworkBundle\Model\Product\Product", mappedBy="mainVariant", cascade={"persist"})
      */
@@ -270,7 +270,7 @@ class Product extends AbstractTranslatableEntity
     protected $orderingPriority;
 
     /**
-     * @var \Shopsys\FrameworkBundle\Model\Product\ProductDomain[]|\Doctrine\Common\Collections\ArrayCollection
+     * @var \Shopsys\FrameworkBundle\Model\Product\ProductDomain[]|\Doctrine\Common\Collections\Collection
      *
      * @ORM\OneToMany(targetEntity="Shopsys\FrameworkBundle\Model\Product\ProductDomain", mappedBy="product", cascade={"persist"}, fetch="EXTRA_LAZY")
      */
@@ -666,11 +666,11 @@ class Product extends AbstractTranslatableEntity
     }
 
     /**
-     * @return \Doctrine\Common\Collections\ArrayCollection|\Shopsys\FrameworkBundle\Model\Product\Flag\Flag[]
+     * @return \Shopsys\FrameworkBundle\Model\Product\Flag\Flag[]
      */
     public function getFlags()
     {
-        return $this->flags;
+        return $this->flags->toArray();
     }
 
     /**
@@ -988,7 +988,7 @@ class Product extends AbstractTranslatableEntity
 
         foreach ($domainIds as $domainId) {
             $productDomain = new ProductDomain($this, $domainId);
-            $this->domains[] = $productDomain;
+            $this->domains->add($productDomain);
         }
 
         $this->setDomains($productData);

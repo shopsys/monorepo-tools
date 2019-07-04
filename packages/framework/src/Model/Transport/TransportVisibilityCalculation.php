@@ -53,7 +53,7 @@ class TransportVisibilityCalculation
     {
         foreach ($payments as $payment) {
             if ($this->independentPaymentVisibilityCalculation->isIndependentlyVisible($payment, $domainId)) {
-                if ($payment->getTransports()->contains($transport)) {
+                if (in_array($transport, $payment->getTransports(), true)) {
                     return true;
                 }
             }
