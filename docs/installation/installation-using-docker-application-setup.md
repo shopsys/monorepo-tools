@@ -41,7 +41,7 @@ More information about what Phing targets are and how they work can be found in 
 
 ### 1.4. Build the application
 ```
-php phing build-demo-dev
+php phing build-demo-dev-quick error-pages-generate
 ```
 
 ***Note:** During the execution of `build-demo-dev phing target`, there will be installed 3-rd party software as dependencies of Shopsys Framework by [composer](https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies) and [npm](https://docs.npmjs.com/about-the-public-npm-registry) with licenses that are described in document [Open Source License Acknowledgements and Third-Party Copyrights](../../open-source-license-acknowledgements-and-third-party-copyrights.md)*
