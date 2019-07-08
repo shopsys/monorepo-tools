@@ -1,0 +1,8 @@
+@@ -85,6 +85,7 @@
+         "symfony-cmf/routing": "^2.0.3",
+         "symfony-cmf/routing-bundle": "^2.0.3",
+         "tracy/tracy": "^2.4.13",
++        "trikoder/oauth2-bundle": "^1.1",
+         "twig/extensions": "^1.5.1",
+         "twig/twig": "^2.4.8",
+         "vasek-purchart/console-errors-bundle": "^1.0.1",

@@ -8,32 +8,10 @@ The bundle is dedicated for projects based on Shopsys Framework (i.e. created fr
 This repository is maintained by [shopsys/shopsys] monorepo, information about changes are in [monorepo CHANGELOG.md](https://github.com/shopsys/shopsys/blob/master/CHANGELOG.md).
 
 ## Installation
-The plugin and all requirements are a Symfony bundles and are installed in the same way:
-
-### Download
-First, you download the package using [Composer](https://getcomposer.org/):
-```
-composer require shopsys/backend-api
-```
-
-### Register
-For the bundles to be loaded in your application you need to register them in `registerBundles()` method in the `app/AppKernel.php` file of your project:
-```diff
-// app/AppKernel.php
-
-public function registerBundles()
-{
-    $bundles = array(
-        // ...
-+       new FOS\RestBundle\FOSRestBundle(),
-+       new JMS\SerializerBundle\JMSSerializerBundle($this),
-+       new Shopsys\BackendApiBundle\ShopsysBackendApiBundle(),
-    );
-}
-```
+[Installation instructions](https://github.com/shopsys/shopsys/blob/8.0/docs/backend-api/backend-api-installation.md) can be found in our monorepo repository.
 
 ## Documentation
-[Documentation](https://github.com/shopsys/shopsys/docs/backend-api/introduction-to-backend-api.md) can be found in our monorepo repository.
+[Documentation](https://github.com/shopsys/shopsys/blob/8.0/docs/backend-api/introduction-to-backend-api.md) can be found in our monorepo repository.
 
 ## Contributing
 Thank you for your contributions to Shopsys Backend API package.

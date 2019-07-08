@@ -19,10 +19,8 @@ class AppKernel extends Kernel
             new Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle(),
             new Doctrine\Bundle\MigrationsBundle\DoctrineMigrationsBundle(),
             new FM\ElfinderBundle\FMElfinderBundle(),
-            new FOS\RestBundle\FOSRestBundle(),
             new Fp\JsFormValidatorBundle\FpJsFormValidatorBundle(),
             new Intaro\PostgresSearchBundle\IntaroPostgresSearchBundle(),
-            new JMS\SerializerBundle\JMSSerializerBundle(),
             new JMS\TranslationBundle\JMSTranslationBundle(),
             new Knp\Bundle\MenuBundle\KnpMenuBundle(),
             new Presta\SitemapBundle\PrestaSitemapBundle(),
@@ -35,7 +33,6 @@ class AppKernel extends Kernel
             new Shopsys\ProductFeed\HeurekaDeliveryBundle\ShopsysProductFeedHeurekaDeliveryBundle(),
             new Shopsys\ProductFeed\ZboziBundle\ShopsysProductFeedZboziBundle(),
             new Shopsys\ProductFeed\GoogleBundle\ShopsysProductFeedGoogleBundle(),
-            new Shopsys\BackendApiBundle\ShopsysBackendApiBundle(),
             new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
             new Snc\RedisBundle\SncRedisBundle(),
             new Symfony\Bundle\AsseticBundle\AsseticBundle(),
@@ -45,7 +42,6 @@ class AppKernel extends Kernel
             new Symfony\Bundle\SwiftmailerBundle\SwiftmailerBundle(),
             new Symfony\Bundle\TwigBundle\TwigBundle(),
             new Symfony\Cmf\Bundle\RoutingBundle\CmfRoutingBundle(),
-            new Trikoder\Bundle\OAuth2Bundle\TrikoderOAuth2Bundle(),
             new VasekPurchart\ConsoleErrorsBundle\ConsoleErrorsBundle(),
             new FOS\CKEditorBundle\FOSCKEditorBundle(), // has to be loaded after FrameworkBundle and TwigBundle
             new Joschi127\DoctrineEntityOverrideBundle\Joschi127DoctrineEntityOverrideBundle(),
@@ -105,10 +101,6 @@ class AppKernel extends Kernel
 
         if (file_exists(__DIR__ . '/config/parameters_version.yml')) {
             $configs[] = __DIR__ . '/config/parameters_version.yml';
-        }
-
-        if (file_exists(__DIR__ . '/config/packages/oauth2/parameters_oauth.yml')) {
-            $configs[] = __DIR__ . '/config/packages/oauth2/parameters_oauth.yml';
         }
 
         return $configs;

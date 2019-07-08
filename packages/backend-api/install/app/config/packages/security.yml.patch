@@ -1,0 +1,15 @@
+@@ -36,6 +36,14 @@
+                 csrf_token_generator: security.csrf.token_manager
+                 csrf_token_id: admin_logout
+                 invalidate_session: false
++        backend_api_token:
++            pattern: ^/api/token$
++            security: false
++        backend_api:
++            pattern: ^/api
++            security: true
++            stateless: true
++            oauth2: true
+         frontend:
+             pattern: ^/
+             anonymous: ~
