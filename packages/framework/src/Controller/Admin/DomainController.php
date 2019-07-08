@@ -134,7 +134,7 @@ class DomainController extends AdminBaseController
                     $this->domainFacade->editIcon($id, $iconName);
 
                     $this->getFlashMessageSender()->addSuccessFlashTwig(
-                        t('Domain <strong>{{ name }}</strong> modified'),
+                        t('Domain <strong>{{ name }}</strong> modified. Try clearing your browser cache (CTRL+F5) if you can\'t see the new icon.'),
                         ['name' => $domain->getName()]
                     );
                 }
