@@ -1,2 +1,0 @@
-parameters:
-    oauth2_encryption_key: %%encryption_key%%
