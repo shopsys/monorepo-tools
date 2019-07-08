@@ -135,7 +135,43 @@ $structure = \array_merge($structure, [
 ]);
 ```
 
-### 4. Extend `ListedProductViewFactory` so it returns the new required data
+### 4. Extend `ProductElasticsearchConverter` to fill empty fields
+
+There are old documents in the Elasticsearch, usually in the production environment.
+Before you reexport all products from the database, there are documents that don't have the new field `brand_name`.
+So you have to provide default values for the case of reading such old documents.
+
+```php
+declare(strict_types=1);
+
+namespace Shopsys\ShopBundle\Model\Product\Search;
+
+use Shopsys\FrameworkBundle\Model\Product\Search\ProductElasticsearchConverter as BaseProductElasticsearchConverter;
+
+class ProductElasticsearchConverter extends BaseProductElasticsearchConverter
+{
+    /**
+     * @param array $product
+     * @return array
+     */
+    public function fillEmptyFields(array $product): array
+    {
+        $result = parent::fillEmptyFields($product);
+        $result['brand_name'] = $product['brand_name'] ?? '';
+
+        return $result;
+    }
+}
+```
+
+You need to register your new class in `services.yml` and add it as an alias for the one from the bundle
+
+```yml
+Shopsys\ShopBundle\Model\Product\Search\ProductElasticsearchConverter: ~
+Shopsys\ReadModelBundle\Product\Listed\ListedProductViewFactory: '@Shopsys\ShopBundle\Model\Product\View\ListedProductViewFactory'
+```
+
+### 5. Extend `ListedProductViewFactory` so it returns the new required data
 
 The class is responsible for creating the view object. We need to ensure that the objects is created with proper brand name. We are able to get the brand name from the product entity, so we just need to overwrite `createFromArray()` and `createFromProduct()` methods.  
 
@@ -204,7 +240,7 @@ You need to register your new class as an alias for the one from the bundle in `
 Shopsys\ReadModelBundle\Product\Listed\ListedProductViewFactory: '@Shopsys\ShopBundle\Model\Product\View\ListedProductViewFactory'
 ```
 
-### 5. Modify the frontend template for rendering product lists so it displays the new attribute
+### 6. Modify the frontend template for rendering product lists so it displays the new attribute
 
 All product lists are rendered using `productListMacro.html.twig`. You can modify this macro to display product brand name wherever it is suitable for you.
 
