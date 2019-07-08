@@ -11,8 +11,8 @@ class ProductElasticsearchConverterTest extends TestCase
     {
         $translator = new ProductElasticsearchConverter();
 
-        $data = $this->createData();
-        $expected = $this->createExpected();
+        $data = $this->createConvertBulkData();
+        $expected = $this->createConvertBulkExpected();
 
         $result = $translator->convertBulk('1', $data);
         $this->assertSame($expected, $result);
@@ -21,7 +21,7 @@ class ProductElasticsearchConverterTest extends TestCase
     /**
      * @return array
      */
-    private function createData(): array
+    private function createConvertBulkData(): array
     {
         return [
             3 => [
@@ -46,7 +46,7 @@ class ProductElasticsearchConverterTest extends TestCase
     /**
      * @return array
      */
-    private function createExpected(): array
+    private function createConvertBulkExpected(): array
     {
         return [
             [
@@ -80,5 +80,42 @@ class ProductElasticsearchConverterTest extends TestCase
                 'short_description' => '47 "LG 47LA790V Luxury TV',
             ],
         ];
+    }
+
+    public function testFillEmptyFields(): void
+    {
+        $product = [
+            'name' => '47" LG 47LA790V (FHD)',
+            'catnum' => '5965879P',
+            'partno' => '47LA790V',
+            'ean' => '8845781245928',
+            'description' => 'At first glance its <strong> beautiful design </strong>',
+            'short_description' => '47 "LG 47LA790V Luxury TV from the South Korean company LG bears 47LA790S',
+        ];
+
+        $expected = [
+            'name' => '47" LG 47LA790V (FHD)',
+            'catnum' => '5965879P',
+            'partno' => '47LA790V',
+            'ean' => '8845781245928',
+            'description' => 'At first glance its <strong> beautiful design </strong>',
+            'short_description' => '47 "LG 47LA790V Luxury TV from the South Korean company LG bears 47LA790S',
+            'availability' => '',
+            'detail_url' => '',
+            'categories' => [],
+            'flags' => [],
+            'parameters' => [],
+            'prices' => [],
+            'visibility' => [],
+            'ordering_priority' => 0,
+            'in_stock' => false,
+            'main_variant' => false,
+            'calculated_selling_denied' => true,
+            'selling_denied' => true,
+            'brand' => null,
+        ];
+
+        $converter = new ProductElasticsearchConverter();
+        $this->assertSame($expected, $converter->fillEmptyFields($product));
     }
 }

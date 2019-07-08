@@ -205,11 +205,11 @@ class ProductElasticsearchRepository
      */
     protected function extractHits(array $result): array
     {
-        return array_map(static function ($value) {
+        return array_map(function ($value) {
             $data = $value['_source'];
             $data['id'] = (int)$value['_id'];
 
-            return $data;
+            return $this->productElasticsearchConverter->fillEmptyFields($data);
         }, $result['hits']['hits']);
     }
 
