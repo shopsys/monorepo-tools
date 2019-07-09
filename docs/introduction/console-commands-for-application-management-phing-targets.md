@@ -235,8 +235,6 @@ Great tool when you want to translate your application into another language.
 For more information about translations, see [the separate article](/docs/introduction/translations.md).
 
 ## Customization of Phing targets and properties
-<!--- TODO: Remove or update the note below -->
-*Note: This section describes customization of Phing targets in version of Shopsys Framework that hasn't been released yet.*  
 *If you're not yet using `v7.3.0`, all Phing targets are defined in `build.xml` in the project repository only - you can directly modify them or delete them instead of overwriting them.*
 
 You can override and replace any Phing target or property defined in the `shopsys/framework` package by redefining it in your `build.xml` config.
