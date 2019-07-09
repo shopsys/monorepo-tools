@@ -61,12 +61,12 @@ class ElasticsearchStructureManager
      * @param int $domainId
      * @param string $index
      * @return string
-     * @deprecated Getting index name without a version using this method is deprecated since SSFW 7.3, use getVersionedIndexName or getAliasName instead
+     * @deprecated Getting index name without a version using this method is deprecated since SSFW 7.3, use getCurrentIndexName or getAliasName instead
      */
     public function getIndexName(int $domainId, string $index): string
     {
         @trigger_error(
-            sprintf('Getting index name without a version using method "%s" is deprecated since SSFW 7.3, use %s or %s instead', __METHOD__, 'getVersionedIndexName', 'getAliasName'),
+            sprintf('Getting index name without a version using method "%s" is deprecated since SSFW 7.3, use %s or %s instead', __METHOD__, 'getCurrentIndexName', 'getAliasName'),
             E_USER_DEPRECATED
         );
         return $this->getAliasName($domainId, $index);
@@ -77,7 +77,7 @@ class ElasticsearchStructureManager
      * @param string $index
      * @return string
      */
-    public function getVersionedIndexName(int $domainId, string $index): string
+    protected function getVersionedIndexName(int $domainId, string $index): string
     {
         return $this->indexPrefix . ($this->buildVersion ?? 'null') . $index . $domainId;
     }
