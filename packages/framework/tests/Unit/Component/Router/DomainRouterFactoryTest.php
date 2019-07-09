@@ -65,10 +65,10 @@ class DomainRouterFactoryTest extends TestCase
             $delegatingLoaderMock,
             $localizedRouterFactoryMock,
             $friendlyUrlRouterFactoryMock,
-            $domain
+            $domain,
+            $requestStackMock
         );
 
-        $domainRouterFactory->setRequestStack($requestStackMock);
         $router = $domainRouterFactory->getRouter(3);
 
         $this->assertInstanceOf(RouterInterface::class, $router);

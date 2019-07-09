@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Shopsys\FrameworkBundle\Model\Product\Search\Export;
 
-use BadMethodCallException;
 use Doctrine\ORM\EntityManagerInterface;
 use Shopsys\FrameworkBundle\Component\Console\ProgressBarFactory;
 use Shopsys\FrameworkBundle\Component\Doctrine\SqlLoggerFacade;
@@ -68,60 +67,6 @@ class ProductSearchExporter
         $this->progressBarFactory = $progressBarFactory;
         $this->sqlLoggerFacade = $sqlLoggerFacade;
         $this->entityManager = $entityManager;
-    }
-
-    /**
-     * @required
-     * @param \Shopsys\FrameworkBundle\Component\Console\ProgressBarFactory $progressBarFactory
-     * @deprecated Will be replaced with constructor injection in the next major release
-     */
-    public function setProgressBarFactory(ProgressBarFactory $progressBarFactory): void
-    {
-        if ($this->progressBarFactory !== null && $this->progressBarFactory !== $progressBarFactory) {
-            throw new BadMethodCallException(sprintf('Method "%s" has been already called and cannot be called multiple times.', __METHOD__));
-        }
-
-        if ($this->progressBarFactory === null) {
-            @trigger_error(sprintf('The %s() method is deprecated and will be removed in the next major. Use the constructor injection instead.', __METHOD__), E_USER_DEPRECATED);
-
-            $this->progressBarFactory = $progressBarFactory;
-        }
-    }
-
-    /**
-     * @required
-     * @param \Shopsys\FrameworkBundle\Component\Doctrine\SqlLoggerFacade $sqlLoggerFacade
-     * @deprecated Will be replaced with constructor injection in the next major release
-     */
-    public function setSqlLoggerFacade(SqlLoggerFacade $sqlLoggerFacade): void
-    {
-        if ($this->sqlLoggerFacade !== null && $this->sqlLoggerFacade !== $sqlLoggerFacade) {
-            throw new BadMethodCallException(sprintf('Method "%s" has been already called and cannot be called multiple times.', __METHOD__));
-        }
-
-        if ($this->sqlLoggerFacade === null) {
-            @trigger_error(sprintf('The %s() method is deprecated and will be removed in the next major. Use the constructor injection instead.', __METHOD__), E_USER_DEPRECATED);
-
-            $this->sqlLoggerFacade = $sqlLoggerFacade;
-        }
-    }
-
-    /**
-     * @required
-     * @param \Doctrine\ORM\EntityManagerInterface $entityManager
-     * @deprecated Will be replaced with constructor injection in the next major release
-     */
-    public function setEntityManager(EntityManagerInterface $entityManager): void
-    {
-        if ($this->entityManager !== null && $this->entityManager !== $entityManager) {
-            throw new BadMethodCallException(sprintf('Method "%s" has been already called and cannot be called multiple times.', __METHOD__));
-        }
-
-        if ($this->entityManager === null) {
-            @trigger_error(sprintf('The %s() method is deprecated and will be removed in the next major. Use the constructor injection instead.', __METHOD__), E_USER_DEPRECATED);
-
-            $this->entityManager = $entityManager;
-        }
     }
 
     /**

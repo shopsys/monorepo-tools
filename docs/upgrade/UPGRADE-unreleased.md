@@ -136,6 +136,12 @@ There you can find links to upgrade notes for other versions too.
     - check whether all deprecated methods from multiple cron commands implementation are replaced with the new ones based on ([#817](https://github.com/shopsys/shopsys/pull/817))
     - check whether all deprecated methods and configurations for redis clients and redis commands are removed and modified to use new way based on ([#1161](https://github.com/shopsys/shopsys/pull/1161)) and ([#886](https://github.com/shopsys/shopsys/pull/886))
         - remove registration of `Shopsys\FrameworkBundle\Command\RedisCleanCacheOldCommand: ~` from `commands.yml`
+    - check whether you extended classes that constructor signature was changed and fix them
+        - `Shopsys\FrameworkBundle\Model\Mail\MailTemplateFacade`
+        - `Shopsys\FrameworkBundle\Component\Router\DomainRouterFactory`
+        - `Shopsys\FrameworkBundle\Model\Product\Search\Export\ProductSearchExporter`
+    - check whether removed deprecated method is not used or overriden anymore
+        - `Shopsys\FrameworkBundle\Form\Admin\Country\CountryFormType::validateUniqueCode`
 
 ### Configuration
 - simplify local configuration ([#1004](https://github.com/shopsys/shopsys/pull/1004))

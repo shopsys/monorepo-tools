@@ -2,7 +2,6 @@
 
 namespace Shopsys\FrameworkBundle\Component\Router;
 
-use BadMethodCallException;
 use Shopsys\FrameworkBundle\Component\Domain\Config\DomainConfig;
 use Shopsys\FrameworkBundle\Component\Domain\Domain;
 use Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\FriendlyUrlRouterFactory;
@@ -54,7 +53,7 @@ class DomainRouterFactory
      * @param \Shopsys\FrameworkBundle\Component\Router\LocalizedRouterFactory $localizedRouterFactory
      * @param \Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\FriendlyUrlRouterFactory $friendlyUrlRouterFactory
      * @param \Shopsys\FrameworkBundle\Component\Domain\Domain $domain
-     * @param \Symfony\Component\HttpFoundation\RequestStack|null $requestStack
+     * @param \Symfony\Component\HttpFoundation\RequestStack $requestStack
      */
     public function __construct(
         $routerConfiguration,
@@ -62,7 +61,7 @@ class DomainRouterFactory
         LocalizedRouterFactory $localizedRouterFactory,
         FriendlyUrlRouterFactory $friendlyUrlRouterFactory,
         Domain $domain,
-        ?RequestStack $requestStack = null
+        RequestStack $requestStack
     ) {
         $this->routerConfiguration = $routerConfiguration;
         $this->configLoader = $configLoader;
@@ -70,24 +69,6 @@ class DomainRouterFactory
         $this->domain = $domain;
         $this->friendlyUrlRouterFactory = $friendlyUrlRouterFactory;
         $this->requestStack = $requestStack;
-    }
-
-    /**
-     * @required
-     * @param \Symfony\Component\HttpFoundation\RequestStack $requestStack
-     * @deprecated Will be replaced with constructor injection in the next major release
-     */
-    public function setRequestStack(RequestStack $requestStack)
-    {
-        if ($this->requestStack !== null && $this->requestStack !== $requestStack) {
-            throw new BadMethodCallException(sprintf('Method "%s" has been already called and cannot be called multiple times.', __METHOD__));
-        }
-
-        if ($this->requestStack === null) {
-            @trigger_error(sprintf('The %s() method is deprecated and will be removed in the next major. Use the constructor injection instead.', __METHOD__), E_USER_DEPRECATED);
-
-            $this->requestStack = $requestStack;
-        }
     }
 
     /**
