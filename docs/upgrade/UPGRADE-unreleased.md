@@ -143,6 +143,13 @@ There you can find links to upgrade notes for other versions too.
     - check whether removed deprecated methods are not used or overriden anymore
         - `Shopsys\FrameworkBundle\Form\Admin\Country\CountryFormType::validateUniqueCode`
         - `Shopsys\FrameworkBundle\Model\Pricing\PriceCalculation::getVatCoefficientByPercent`
+    - update `tests/ShopBundle/Functional/Model/Cart/CartMigrationFacadeTest.php`
+        ```diff
+        -use Shopsys\FrameworkBundle\Model\Cart\Item\CartItemFactory;
+        +use Shopsys\FrameworkBundle\Model\Cart\Item\CartItemFactoryInterface;
+        -        $cartItemFactory = $this->getContainer()->get(CartItemFactory::class);
+        +        $cartItemFactory = $this->getContainer()->get(CartItemFactoryInterface::class);
+        ```
 
 ### Configuration
 - simplify local configuration ([#1004](https://github.com/shopsys/shopsys/pull/1004))
