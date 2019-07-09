@@ -975,9 +975,9 @@ services:
 
     Shopsys\FrameworkBundle\Component\Elasticsearch\ElasticsearchStructureManager:
         arguments:
+            $buildVersion: '%build-version%'
             $definitionDirectory: '%shopsys.elasticsearch.structure_dir%'
             $indexPrefix: '%env(ELASTIC_SEARCH_INDEX_PREFIX)%'
-            $buildVersion: '%build-version%'
 
     Shopsys\FrameworkBundle\Model\Product\Search\Export\ProductSearchExporter: ~
 

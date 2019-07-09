@@ -143,6 +143,11 @@ There you can find links to upgrade notes for other versions too.
         - `Shopsys\FrameworkBundle\Model\Product\Search\Export\ProductSearchExportStructureFacade`
         - `Shopsys\FrameworkBundle\Model\Product\ProductFacade`
         - `Shopsys\FrameworkBundle\Model\Product\ProductVariantFacade`
+        - `Shopsys\FrameworkBundle\Component\Elasticsearch\ElasticsearchStructureManager`
+    - check wether you have overwritten methods of `Shopsys\FrameworkBundle\Model\Product\Search\Export\ProductSearchExportWithFilterRepository` class and fix their signatures
+        - `createQueryBuilder` has less parameters
+        - `getProductTotalCountForDomainAndLocale` was renamed to `getProductTotalCountForDomain` and has less parameters
+    - rename `ProductSearchExportRepositoryTest` into `ProductSearchExportWithFilterRepositoryTest` and [fix or replace the code](https://github.com/shopsys/shopsys/blob/v8.0.0/project-base/tests/ShopBundle/Functional/Model/Product/Search/ProductSearchExportWithFilterRepositoryTest.php)
     - check whether removed deprecated methods are not used or overriden anymore
         - `Shopsys\FrameworkBundle\Form\Admin\Country\CountryFormType::validateUniqueCode`
         - `Shopsys\FrameworkBundle\Model\Pricing\PriceCalculation::getVatCoefficientByPercent`

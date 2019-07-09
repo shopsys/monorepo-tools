@@ -59,9 +59,6 @@ services:
 
     Shopsys\ReadModelBundle\Product\Listed\ListedProductViewElasticFacade: ~
 
-    Shopsys\FrameworkBundle\Model\Product\Search\Export\ProductSearchExportRepository:
-        alias: Shopsys\FrameworkBundle\Model\Product\Search\Export\ProductSearchExportWithFilterRepository
-
     Shopsys\FrameworkBundle\Model\Product\Brand\BrandDataFactoryInterface: '@Shopsys\ShopBundle\Model\Product\Brand\BrandDataFactory'
 
     Shopsys\ShopBundle\DataFixtures\ProductDataFixtureReferenceInjector: ~

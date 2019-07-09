@@ -16,9 +16,9 @@ class ProductSearchExporter
     protected const BATCH_SIZE = 100;
 
     /**
-     * @var \Shopsys\FrameworkBundle\Model\Product\Search\Export\ProductSearchExportRepository
+     * @var \Shopsys\FrameworkBundle\Model\Product\Search\Export\ProductSearchExportWithFilterRepository
      */
-    protected $productSearchExportRepository;
+    protected $productSearchExportWithFilterRepository;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Product\Search\ProductElasticsearchRepository
@@ -46,22 +46,22 @@ class ProductSearchExporter
     protected $entityManager;
 
     /**
-     * @param \Shopsys\FrameworkBundle\Model\Product\Search\Export\ProductSearchExportRepository $productSearchExportRepository
+     * @param \Shopsys\FrameworkBundle\Model\Product\Search\Export\ProductSearchExportWithFilterRepository $productSearchExportWithFilterRepository
      * @param \Shopsys\FrameworkBundle\Model\Product\Search\ProductElasticsearchRepository $productElasticsearchRepository
      * @param \Shopsys\FrameworkBundle\Model\Product\Search\ProductElasticsearchConverter $productElasticsearchConverter
-     * @param \Shopsys\FrameworkBundle\Component\Console\ProgressBarFactory|null $progressBarFactory
-     * @param \Shopsys\FrameworkBundle\Component\Doctrine\SqlLoggerFacade|null $sqlLoggerFacade
-     * @param \Doctrine\ORM\EntityManagerInterface|null $entityManager
+     * @param \Shopsys\FrameworkBundle\Component\Console\ProgressBarFactory $progressBarFactory
+     * @param \Shopsys\FrameworkBundle\Component\Doctrine\SqlLoggerFacade $sqlLoggerFacade
+     * @param \Doctrine\ORM\EntityManagerInterface $entityManager
      */
     public function __construct(
-        ProductSearchExportRepository $productSearchExportRepository,
+        ProductSearchExportWithFilterRepository $productSearchExportWithFilterRepository,
         ProductElasticsearchRepository $productElasticsearchRepository,
         ProductElasticsearchConverter $productElasticsearchConverter,
-        ?ProgressBarFactory $progressBarFactory = null,
-        ?SqlLoggerFacade $sqlLoggerFacade = null,
-        ?EntityManagerInterface $entityManager = null
+        ProgressBarFactory $progressBarFactory,
+        SqlLoggerFacade $sqlLoggerFacade,
+        EntityManagerInterface $entityManager
     ) {
-        $this->productSearchExportRepository = $productSearchExportRepository;
+        $this->productSearchExportWithFilterRepository = $productSearchExportWithFilterRepository;
         $this->productElasticsearchRepository = $productElasticsearchRepository;
         $this->productElasticsearchConverter = $productElasticsearchConverter;
         $this->progressBarFactory = $progressBarFactory;
@@ -97,7 +97,7 @@ class ProductSearchExporter
 
         $startFrom = 0;
         $exportedIds = [];
-        $totalCount = $this->productSearchExportRepository->getProductTotalCountForDomainAndLocale($domainId, $locale);
+        $totalCount = $this->productSearchExportWithFilterRepository->getProductTotalCountForDomain($domainId);
 
         $progressBar = $this->progressBarFactory->create($symfonyStyleIo, $totalCount);
 
@@ -126,7 +126,7 @@ class ProductSearchExporter
      */
     public function exportIds(int $domainId, string $locale, array $productIds): void
     {
-        $productsData = $this->productSearchExportRepository->getProductsDataForIds($domainId, $locale, $productIds);
+        $productsData = $this->productSearchExportWithFilterRepository->getProductsDataForIds($domainId, $locale, $productIds);
         if (count($productsData) === 0) {
             $this->productElasticsearchRepository->delete($domainId, $productIds);
 
@@ -161,7 +161,7 @@ class ProductSearchExporter
      */
     protected function exportBatch(int $domainId, string $locale, int $startFrom): array
     {
-        $productsData = $this->productSearchExportRepository->getProductsData($domainId, $locale, $startFrom, static::BATCH_SIZE);
+        $productsData = $this->productSearchExportWithFilterRepository->getProductsData($domainId, $locale, $startFrom, static::BATCH_SIZE);
         if (count($productsData) === 0) {
             return [];
         }

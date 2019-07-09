@@ -33,7 +33,7 @@ class ElasticsearchStructureManagerTest extends TestCase
         $this->client = $this->createMock(Client::class);
         $this->indices = $this->createMock(IndicesNamespace::class);
         $this->client->method('indices')->willReturn($this->indices);
-        $this->structureManager = new ElasticsearchStructureManager($definitionDirectory, '', $this->client, '12345');
+        $this->structureManager = new ElasticsearchStructureManager('12345', $definitionDirectory, '', $this->client);
     }
 
     public function testCreateSuccessIndexWithAlias(): void
@@ -69,8 +69,10 @@ class ElasticsearchStructureManagerTest extends TestCase
     public function testDeleteSuccess(): void
     {
         $this->indices->method('exists')->willReturn(true);
+        $this->indices->method('existsAlias')->willReturn(true);
+        $this->indices->method('getAlias')->willReturn(['12345test-product1' => 'test-product1']);
 
-        $expectedDelete = ['index' => 'test-product1'];
+        $expectedDelete = ['index' => '12345test-product1'];
         $this->indices->expects($this->once())->method('delete')->with($expectedDelete);
 
         $this->structureManager->deleteCurrentIndex(1, static::ELASTICSEARCH_INDEX);
