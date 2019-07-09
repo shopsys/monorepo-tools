@@ -1,21 +1,29 @@
 @form-line-input-size: 230px;
 @form-line-label-size: 230px;
 @form-line-gap-size: 10px;
-@form-line-padding-horizontal: 15px;
-@form-line-padding-vertical: 10px;
+@form-line-padding-horizontal: 22px;
+@form-line-padding-vertical: 15px;
+@form-line-border-style: none;
+@form-line-min-height: 44px;
+@form-line-inner-padding: 13px 10px 11px 0;
 
 .form-line {
     .clearfix();
     padding: @form-line-padding-vertical @form-line-padding-horizontal;
     position: relative;
+    min-height: @form-line-min-height;
 
-    border: 1px solid @color-border;
+    border: @form-line-border-style;
     border-left-color: @color-border-darker;
     border-right-color: @color-border-darker;
     background: @color-f;
 
     &--no-top-border {
         border-top: none;
+    }
+
+    &--no-bottom-gap {
+        padding-bottom: 0;
     }
 
     & + .form-line,
@@ -45,13 +53,34 @@
         padding: 0;
     }
 
+    &--in-box {
+        padding-left: 0;
+        padding-right: 0;
+    }
+
+    .form-group & {
+        &:first-child {
+            padding-top: 20px;
+
+            &.form-line--no-padd {
+                padding-top: 0;
+            }
+        }
+
+        &:last-child {
+            padding-bottom: 20px;
+        }
+    }
+
     &__label {
         width: @form-line-label-size;
-        padding: 6px 10px 6px 0;
-        height: 30px;
+        padding: @form-line-inner-padding;
         float: left;
 
+        font-family: @font-medium;
+        font-size: 15px;
         font-weight: bold;
+        color: @color-grey-middle;
 
         &--input {
             padding-top: 0;
@@ -60,9 +89,8 @@
     }
 
     &__compulsory {
-        position: absolute;
-        top: 14px;
-        left: -9px;
+        position: relative;
+        top: -2px;
         z-index: 50;
     }
 
@@ -100,8 +128,12 @@
         vertical-align: middle;
 
         &--text {
+            padding-top: 15px;
+            padding-bottom: 14px;
+        }
+
+        &--info {
             padding-top: 6px;
-            padding-bottom: 6px;
         }
 
         &--btn {
@@ -118,7 +150,7 @@
         &--right {
             float: right;
             padding-right: 0;
-            padding-left: 10px;
+            padding-left: 0;
         }
 
         &--left {
@@ -146,8 +178,7 @@
         }
 
         &__price {
-            padding-top: 6px;
-            padding-bottom: 6px;
+            padding: @form-line-inner-padding;
             width: 140px;
             display: inline-block;
             vertical-align: middle;
@@ -199,9 +230,11 @@
 
     &__group {
         .clearfix();
-        padding: 6px 15px;
+        padding: 14px;
 
         background: @bg-info;
+        border: 1px solid @color-border-light;
+        border-radius: @radius @radius 0 0;
 
         &__image {
             float: left;
@@ -222,46 +255,6 @@
             line-height: 26px;
 
             font-weight: bold;
-        }
-    }
-
-    &__box {
-        margin-bottom: 4px;
-
-        &__title {
-            .clearfix();
-            padding: 6px 15px;
-
-            background: @bg-info;
-            border: 1px solid @color-border;
-
-            &__image {
-                float: left;
-                width: 46px;
-                height: 26px;
-                position: relative;
-                margin-right: 10px;
-
-                text-align: center;
-                background: @color-f;
-
-                img {
-                    .center-image();
-                }
-            }
-
-            &__name {
-                line-height: 26px;
-
-                font-weight: bold;
-            }
-        }
-
-        &__content {
-            padding: 6px 15px;
-
-            border: 1px solid @color-border;
-            border-top: none;
         }
     }
 }

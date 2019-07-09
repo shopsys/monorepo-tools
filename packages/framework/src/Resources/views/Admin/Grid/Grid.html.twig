@@ -97,7 +97,7 @@
             {% set orderBy = column.id %}
         {% endif %}
         <a class="in-sort-arrows" href="{{ gridView.url({'order': orderBy}) }}">
-            <span class="in-sort-arrows__link">{{ column.title }}</span>
+            <span class="in-sort-arrows__link {% if grid.orderSourceColumnName == column.id %} active{% endif %}">{{ column.title }}</span>
             {% if grid.orderSourceColumnName == column.id %}
                 {% if grid.orderDirection == 'desc' %}
                     <span class="in-sort-arrows__item in-sort-arrows__item--down"></span>
@@ -387,7 +387,7 @@
 
 {% block grid_inline_edit_add_button %}
     <div class="wrap-bar">
-        <a href="#" class="btn btn--plus wrap-bar__btn js-inline-edit-add">
+        <a href="#" class="btn btn--primary btn--plus wrap-bar__btn js-inline-edit-add">
             <i class="btn__icon">+</i>
             {{ addEntity|default('Create record'|trans) }}
         </a>

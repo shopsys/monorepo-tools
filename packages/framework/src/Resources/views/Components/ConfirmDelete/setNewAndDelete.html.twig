@@ -1,28 +1,37 @@
-{% if possibleReplacements|length > 0 %}
-    {{ message|nl2br }}
-    {# custom form rendering because of csrf token and input names - controllers delete actions expect "newId" parameter #}
-    <form action="{{ url(route, {id: entityId}) }}" method="get" class="js-confirm-delete-form margin-top-20">
-        <input
-            type="hidden"
-            name="{{ CSRF_TOKEN_REQUEST_PARAMETER }}"
-            value="{{ routeCsrfToken }}"
-        />
-        <select name="newId" class="js-confirm-delete-select">
-            <option value="">-- {{ 'Select new value'|trans }} --</option>
-            {% for possibleReplacement in possibleReplacements %}
-                <option value="{{ possibleReplacement.id }}">{{ possibleReplacement.name }}</option>
-            {% endfor %}
-        </select>
-
-        <div class="window__actions">
-            <button type="submit" class="btn">
-                {{ 'Delete and set'|trans }}
-            </button>
-        </div>
-    </form>
-{% else %}
-    <p>
-        {{ 'To delete this value there has to be selected another one, which will be used instead of the existing one. Unfortunately there is no other value available, you have to create new value before deleting this one.'|trans }}
-    </p>
-{% endif %}
-
+<div class="window-content__in">
+    <div class="window-content__heading">
+        <h1 class="wrap-bar__heading">{{ 'Delete status of order'|trans }}</h1>
+    </div>
+    {% if possibleReplacements|length > 0 %}
+        {{ message|nl2br }}
+        {# custom form rendering because of csrf token and input names - controllers delete actions expect "newId" parameter #}
+        <form action="{{ url(route, {id: entityId}) }}" method="get" class="js-confirm-delete-form margin-top-20">
+            <input
+                type="hidden"
+                name="{{ CSRF_TOKEN_REQUEST_PARAMETER }}"
+                value="{{ routeCsrfToken }}"
+            />
+            <select name="newId" class="js-confirm-delete-select input">
+                <option value="">-- {{ 'Select new value'|trans }} --</option>
+                {% for possibleReplacement in possibleReplacements %}
+                    <option value="{{ possibleReplacement.id }}">{{ possibleReplacement.name }}</option>
+                {% endfor %}
+            </select>
+            
+            <div class="window-fixed-bar window-fixed-bar--in-window js-window-fixed-bar">
+                <div class="window-fixed-bar__in">
+                    <div class="window-fixed-bar__item">
+                        <div class="window-fixed-bar__item__cell">
+                            <button type="submit" class="btn btn--primary">
+                                {{ 'Delete and set'|trans }}
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    {% else %}
+        <p>
+            {{ 'To delete this value there has to be selected another one, which will be used instead of the existing one. Unfortunately there is no other value available, you have to create new value before deleting this one.'|trans }}
+        </p>
+    {% endif %}

@@ -127,7 +127,7 @@ class OrderFormType extends AbstractType
     private function createBasicInformationGroup(FormBuilderInterface $builder, Order $order)
     {
         $builderBasicInformationGroup = $builder->create('basicInformationGroup', GroupType::class, [
-            'label' => t('Order Nr.') . ' ' . $order->getNumber(),
+            'label' => t('Basic information'),
         ]);
 
         if ($order !== null) {

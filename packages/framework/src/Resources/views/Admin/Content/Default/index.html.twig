@@ -13,24 +13,67 @@
                 {{ 'Advanced search'|trans }}
             </a>
         </div>
-        <div class="in-tab__content clear">
-            {% include '@ShopsysFramework/Admin/Content/Product/quickSearchFormContent.html.twig' with {quickSearchForm: quickProductSearchForm} %}
+        {% include '@ShopsysFramework/Admin/Content/Product/quickSearchFormContent.html.twig' with {quickSearchForm: quickProductSearchForm} %}
+    </div>
+
+    <div class="box-overview">
+        <h2>{{ 'Sales overview'|trans }}</h2>
+
+        <div class="box-overview__wrap">
+            <div class="box-overview__item">
+                <div class="box-overview__item__percent box-overview__item__percent--up">
+                    <i class="svg svg-arrow"></i>
+                    <span class="box-overview__item__percent__value" data-counter="counterup" data-value="34">0</span>%
+                </div>
+                <div class="box-overview__item__number" data-counter="counterup" data-value="289">
+                    0
+                </div>
+                <div class="box-overview__item__text">
+                    {{ 'orders sold'|trans }}
+                </div>
+            </div>
+            <div class="box-overview__item">
+                <div class="box-overview__item__percent box-overview__item__percent--down">
+                    <i class="svg svg-arrow"></i>
+                    <span class="box-overview__item__percent__value" data-counter="counterup" data-value="5">0</span>%
+                </div>
+                <div class="box-overview__item__number" data-counter="counterup" data-value="75">
+                    0
+                </div>
+                <div class="box-overview__item__text">
+                    {{ 'new customers'|trans }}
+                </div>
+            </div>
+            <div class="box-overview__item">
+                <div class="box-overview__item__percent box-overview__item__percent--up">
+                    <i class="svg svg-arrow"></i>
+                    <span class="box-overview__item__percent__value" data-counter="counterup" data-value="20">0</span>%
+                </div>
+                <div class="box-overview__item__number" data-counter="counterup" data-value="2,701,821">
+                    0
+                </div>
+                <div class="box-overview__item__text">
+                    {{ 'turnover in CZK'|trans }}
+                </div>
+            </div>
         </div>
     </div>
-    <div class="width-50-percent float-left">
-        <canvas
-            class="js-line-chart"
-            data-chart-labels="{{ newOrdersInLastTwoWeeksLabels|json_encode }}"
-            data-chart-values="{{ newOrdersInLastTwoWeeksValues|json_encode }}"
-            data-chart-title="{{ 'New orders'|trans }}"
-        ></canvas>
-    </div>
-    <div class="width-50-percent float-left">
-        <canvas
-            class="js-line-chart"
-            data-chart-labels="{{ registeredInLastTwoWeeksLabels|json_encode }}"
-            data-chart-values="{{ registeredInLastTwoWeeksValues|json_encode }}"
-            data-chart-title="{{ 'New registered customers'|trans }}"
-        ></canvas>
+    <div class="wrap-box">
+        <div class="wrap-box__half wrap-box__half--in-row">
+            <canvas
+                class="js-line-chart"
+                data-chart-labels="{{ newOrdersInLastTwoWeeksLabels|json_encode }}"
+                data-chart-values="{{ newOrdersInLastTwoWeeksValues|json_encode }}"
+                data-chart-title="{{ 'New orders'|trans }}"
+            ></canvas>
+        </div>
+        <div class="wrap-box__half wrap-box__half--in-row">
+            <canvas
+                class="js-line-chart"
+                data-chart-labels="{{ registeredInLastTwoWeeksLabels|json_encode }}"
+                data-chart-values="{{ registeredInLastTwoWeeksValues|json_encode }}"
+                data-chart-title="{{ 'New registered customers'|trans }}"
+            ></canvas>
+        </div>
     </div>
 {% endblock %}

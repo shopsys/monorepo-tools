@@ -1,7 +1,11 @@
+@form-type-ang-go-height: @input-height-small;
+
 .form-type-and-go {
     position: relative;
 
     &__input {
+        line-height: @form-type-ang-go-height;
+        height: @form-type-ang-go-height;
         padding-right: 30px;
     }
 
@@ -9,13 +13,15 @@
         padding: 0;
         width: 30px;
         position: absolute;
-        top: 3px;
-        right: 3px;
+        top: 1px;
+        right: 0px;
         width: 27px;
-        height: 27px;
-        line-height: 24px;
+        height: @form-type-ang-go-height - 2px;
+        line-height: @form-type-ang-go-height - 2px;
 
         text-align: center;
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
 
         i {
             position: relative;

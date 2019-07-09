@@ -3,40 +3,23 @@
     border-collapse: collapse;
 
     thead {
-        background: @bg-primary;
-        color: @color-f;
+        background: @color-f;
+        color: @color-grey;
         font-weight: bold;
     }
 
     tbody, tfoot {
         background: @color-f;
-        border: 1px solid @color-border;
-    }
-
-    tr {
-        border-bottom: 1px solid @color-border;
     }
 
     tbody {
         tr {
             background: @color-f;
-
-            &:hover {
-                background: darken(@color-f, 2%);
-            }
-
-            &:nth-of-type(2n) {
-                background: @bg-stripe;
-
-                &:hover {
-                    background: darken(@bg-stripe, 2%);
-                }
-            }
         }
     }
 
     td, th {
-        padding: 6px 17px;
+        padding: 14px 17px;
     }
 
     thead {

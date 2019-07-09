@@ -1,3 +1,5 @@
+@in-grid-height: @input-height-small;
+
 .in-grid-control {
     font-size: 0;
 
@@ -7,30 +9,44 @@
         width: 30%;
 
         font-size: 12px;
-        color: @color-action;
+        color: @color-base;
 
         &--paging {
-            width: 40%;
-
             text-align: center;
+
+            .window-content & {
+                width: 38%;
+            }
         }
 
         &--settings {
+            width: 40%;
+
             text-align: right;
+
+            .window-content & {
+                width: 42%;
+            }
         }
 
         &--show {
-            line-height: 22px;
-            padding: 5px 0;
+            line-height: @in-grid-height;
+
+            .window-content & {
+                width: 20%;
+                line-height: @in-grid-height/2;
+            }
         }
 
         &__go {
+            width: 50%;
+            float: left;
             display: block;
 
             text-align: right;
 
             &__text {
-                line-height: 32px;
+                line-height: @in-grid-height;
                 display: inline-block;
                 margin-right: 5px;
 
@@ -41,6 +57,11 @@
                 display: inline-block;
                 width: 70px;
                 margin-bottom: 3px;
+
+                .input {
+                    height: @in-grid-height;
+                    line-height: @in-grid-height;
+                }
             }
         }
     }

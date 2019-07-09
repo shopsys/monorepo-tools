@@ -1,11 +1,14 @@
-<div class="text-left">
+<div class="window-content__in">
+    <div class="window-content__heading">
+        <h1 class="wrap-bar__heading">{{ 'Edit domain icon'|trans }}</h1>
+    </div>
     <div id="js-domain-icon-errors" class="in-message in-message--danger js-domain-icon-errors display-none">
         <ul class="in-message__list"></ul>
     </div>
 
     {{ form_start(form) }}
         {{ form_errors(form) }}
-        <div class="margin-bottom-10">
+        <div class="margin-top-30">
             <div class="form-line">
                 <label class="form-line__label">
                     {{ 'Existing icon'|trans }}:
@@ -15,8 +18,14 @@
 
             {{ form_row(form.icon, { label: 'Upload icon'|trans}) }}
         </div>
-        <div class="text-right">
-            {{ form_save(domain|default(null), form) }}
+        <div class="window-fixed-bar window-fixed-bar--in-window js-window-fixed-bar">
+            <div class="window-fixed-bar__in">
+                <div class="window-fixed-bar__item">
+                    <div class="window-fixed-bar__item__cell">
+                        {{ form_save(domain|default(null), form, { attr: { class: "btn--primary"} }) }}
+                    </div>
+                </div>
+            </div>
         </div>
     {{ form_end(form) }}
 </div>

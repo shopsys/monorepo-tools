@@ -103,16 +103,12 @@
     {% else %}
         {% if form.vars.display_format == 'multidomain_form_rows_no_padding' %}
             {% if form.vars.label is not null %}
-                <div class="form-line">
+                <div class="form-line form-line--no-bottom-gap">
                     {{- form_label(form) -}}
                     {{- form_errors(form) -}}
-                    <div class="form-line__line">
-            {% endif %}
-                {{- block('multidomain_form_rows_no_padding') -}}
-            {% if form.vars.label is not null %}
-                    </div>
                 </div>
             {% endif %}
+            {{- block('multidomain_form_rows_no_padding') -}}
         {% else %}
             <div class="form-line">
                 {{- form_label(form) -}}
@@ -126,19 +122,22 @@
 
 {% block multidomain_form_rows_no_padding %}
     {% for domainId, contentForm in form %}
-        {% if isMultidomain() %}
-            <div class="form-line form-line--no-padd">
-                <div class="form-line__group">
-                            <span class="form-line__group__image">
-                                {{ domainIcon(domainId, 'large') }}
-                            </span>
-                    <strong class="form-line__group__name">{{ getDomainName(domainId) }}</strong>
-                </div>
-            </div>
-        {% endif %}
         <div class="form-line">
-            <div class="form-line__line form-line__line--no-space">
-                {{ form_widget(contentForm) }}
+            <div class="form-line__box js-entity-url-list-domain-{{ domainId }}">
+                {% if isMultidomain() %}
+                    <div class="form-line__box__title">
+                        <span class="form-line__box__title__image">
+                            {{ domainIcon(domainId, 'large') }}
+                        </span>
+                        <strong class="form-line__box__title__name">
+                            {{ 'Domain %domainName%'|trans({'%domainName%' : getDomainName(domainId)}) }}
+                        </strong>
+                    </div>
+                {% endif %}
+
+                <div {% if isMultidomain() %} class="form-line__box__content"{% endif %}>
+                    {{ form_widget(contentForm) }}
+                </div>
             </div>
         </div>
     {% endfor %}
@@ -223,7 +222,7 @@
                 <div class="form-line__item">
                     {{ form_widget(form) }}
                     {% if form.vars.icon_title is not null %}
-                        <i class="svg svg-info in-icon cursor-help form-line__item form-line__item--text js-tooltip"
+                        <i class="svg svg-info in-icon cursor-help form-line__item form-line__item--info js-tooltip"
                            data-toggle="tooltip" data-placement="right"
                            title="{{ form.vars.icon_title }}"
                         ></i>
@@ -581,7 +580,7 @@
         data-products-picker-url="{{ url('admin_productpicker_pickmultiple', {jsInstanceId: '__js_instance_id__', allowMainVariants: allow_main_variants, allowVariants: allow_variants}) }}"
         data-products-picker-main-product-id="{{ form.vars.main_product ? form.vars.main_product.id : '' }}"
     >
-        <table class="table-form margin-bottom-20">
+        <table class="table-form">
             <thead class="js-products-picker-header">
                 <tr class="table-form__row">
                     <td class="table-form__cell">{{ 'Name'|trans }}</td>
@@ -594,10 +593,14 @@
                 {% endfor %}
             </tbody>
         </table>
-        <a href="#" class="btn btn--plus js-products-picker-button-add">
-            <i class="btn__icon">+</i>
-            {{ label_button_add }}
-        </a>
+        <div class="form-line form-line--no-top-border">
+            <div class="form-line__line form-line__line--no-space">
+                <a href="#" class="btn btn--plus js-products-picker-button-add">
+                    <i class="btn__icon">+</i>
+                    {{ label_button_add }}
+                </a>
+            </div>
+        </div>
     </div>
 {% endblock products_widget %}
 
@@ -757,7 +760,7 @@
     {% if isSimple|default(false) == false %}
             </div>
             {% if form.vars.icon_title is not null %}
-                <i class="svg svg-info in-icon cursor-help form-line__item form-line__item--text js-tooltip"
+                <i class="svg svg-info in-icon cursor-help form-line__item form-line__item--info js-tooltip"
                    data-toggle="tooltip" data-placement="right"
                    title="{{ form.vars.icon_title }}"
                 ></i>
@@ -909,7 +912,7 @@
         {{- block('appendix_block') -}}
     {% endif %}
     {% if form.vars.icon_title is not null %}
-        <i class="svg svg-info in-icon cursor-help form-line__item form-line__item--text js-tooltip"
+        <i class="svg svg-info in-icon cursor-help form-line__item form-line__item--info js-tooltip"
            data-toggle="tooltip" data-placement="right"
            title="{{ form.vars.icon_title }}"
         ></i>
@@ -1028,7 +1031,7 @@
         <span class="form-line__item form-line__item--text form-line__item--fixed-width-left">{{ symbolAfterInput }}</span>
     {% endif %}
     {% if attr.icon is defined %}
-        <i class="svg svg-{{ attr.iconType|default('info') }} in-icon cursor-help form-line__item form-line__item--text js-tooltip"
+        <i class="svg svg-{{ attr.iconType|default('info') }} in-icon cursor-help form-line__item form-line__item--info js-tooltip"
             data-toggle="tooltip" data-placement="{{ attr.iconPlacement|default('right') }}"
             title="{{ attr.iconTitle|default('') }}"
          ></i>

@@ -6,18 +6,18 @@
 
 {% block main_content %}
 
-    <div id="js-mail-templates">
-
+<div id="js-mail-templates">
+    <div class="form-line">
         {{ render(controller('ShopsysFrameworkBundle:Admin/Domain:domainTabs')) }}
 
         {% macro mailTemplate(name, mailTemplate, templateForm,variables, requiredVariables, variablesLabels, variablesInfoText, sendMailText) %}
             <div class="wrap-divider">
-                <div class="js-mail-template-toggle-container js-toggle-container form-group">
-                    <h2 class ="form-group__title">
+                <div class="js-mail-template-toggle-container js-toggle-container form-line__box">
+                    <h2 class ="form-line__box__title">
                             {{ name }}
-                        <span class="form-group__title__click js-toggle-button">+</span>
+                        <span class="form-line__box__title__click js-toggle-button">+</span>
                     </h2>
-                    <div id="{{ templateForm.vars.id }}" class="js-mail-template js-toggle-content display-none box-expand__hidden">
+                    <div id="{{ templateForm.vars.id }}" class="js-mail-template js-toggle-content display-none form-line__box__content">
                         {{ form_row(templateForm.subject, { label: 'Subject'|trans}) }}
                         {{ form_row(templateForm.bccEmail, { label: 'Hidden copy'|trans}) }}
                         {{ form_row(templateForm.body, { label: 'Content'|trans}) }}
@@ -163,5 +163,5 @@
         {{ form_end(form) }}
 
     </div>
-
+</div>
 {% endblock %}

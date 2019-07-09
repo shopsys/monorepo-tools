@@ -1,3 +1,6 @@
+@admin-header-background: @color-f;
+@admin-header-padding: 15px;
+
 body {
     background: @bg-web;
 }
@@ -34,7 +37,7 @@ body {
             width: 100%;
             height: @height-header;
 
-            background: @bg-primary;
+            background: @admin-header-background;
             color: @color-f;
 
             &--small {
@@ -43,7 +46,7 @@ body {
         }
 
         &__logo {
-            padding-left: 20px;
+            padding-left: @admin-header-padding;
             min-width: 160px;
 
             @media @query-lg {
@@ -61,8 +64,9 @@ body {
         position: relative;
         padding-top: @height-header;
         padding-bottom: @height-fixed-bar;
-        padding-left: @width-panel;
         min-height: 100vh;
+        width: @width-web;
+        margin: 0 auto;
 
         background: @bg-page;
 
@@ -72,19 +76,6 @@ body {
 
         .web--with-info & {
             padding-top: @height-header + @height-fixed-bar;
-        }
-
-        &:after {
-            display: block;
-            position: absolute;
-            top: 0;
-            bottom: 0;
-            left: @width-panel;
-            width: 1px;
-            content: '';
-            opacity: 0.3;
-
-            background: @color-a;
         }
 
         &--blank {
@@ -100,9 +91,9 @@ body {
         position: fixed;
         top: @height-header;
         bottom: 0;
-        left: 0;
         padding-bottom: @height-fixed-bar;
         width: @width-panel;
+        z-index: 1000;
 
         background-color: @color-f;
 
@@ -146,8 +137,15 @@ body {
     &__content {
         position: relative;
         margin: 0 auto;
-        padding: 0 @item-gap @content-gap @item-gap;
+        padding-top: calc(~"@{content-gap} - @{wrap-border-gap}");
+        padding-right: 0;
+        padding-bottom: @content-gap;
+        padding-left: @width-panel + @content-gap;
         max-width: @width-content;
+
+        .web__container--blank & {
+            padding-left: 0;
+        }
 
         &--padding-top {
             padding-top: 20px;
@@ -163,11 +161,6 @@ body {
             &__in {
                 width: @width-web;
             }
-        }
-
-        &__panel {
-            left: 0;
-            z-index: 1000;
         }
     }
 }

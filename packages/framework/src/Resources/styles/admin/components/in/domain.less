@@ -1,8 +1,7 @@
 .in-domain {
-    margin-bottom: 25px;
     padding-bottom: 25px;
 
-    border-bottom: 1px solid @color-border-dark;
+    border-radius: @radius;
 
     &__item {
         display: inline-block;
@@ -10,7 +9,9 @@
         line-height: 18px;
         padding: 10px;
 
+        background: @bg-page;
         border: 1px solid @color-border-dark;
+        border-radius: @radius;
         text-decoration: none;
 
         &--active {

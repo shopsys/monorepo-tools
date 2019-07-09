@@ -6,13 +6,12 @@
     top: 50%;
     left: 50%;
     margin: -@window-height/2 0 0 -@window-width/2;
-    padding: 25px 50px 25px 50px;
+    padding: 40px 20px 15px 20px;
     z-index: 10002;
 
     text-align: center;
-    border: 1px solid @color-border;
+    border-radius: @radius;
     background: @bg-window;
-
     box-shadow: 0 0 20px rgba(0,0,0, 0.3);
 
     &--wide {
@@ -44,11 +43,12 @@
         position: absolute;
         top: 0;
         right: 0;
-        width: 48px;
-        height: 48px;
-        line-height: 48px;
+        width: 32px;
+        height: 32px;
+        line-height: 32px;
 
-        background: @bg-primary-dark;
+        background: @color-base;
+        border-bottom-left-radius: @radius;
         color: @color-f;
         text-decoration: none;
         font-weight: bold;

@@ -4,20 +4,20 @@
 {% block h1 %}{{ 'Products overview'|trans }}{% endblock %}
 {% block btn %}
     {% if productCanBeCreated %}
-        <a href="{{ url('admin_product_new') }}" class="btn btn--plus wrap-bar__btn">
+        <a href="{{ url('admin_product_new') }}" class="btn btn--primary btn--plus wrap-bar__btn">
             <i class="btn__icon">+</i>{{ 'Create new product'|trans }}
         </a>
-        <a href="{{ url('admin_product_createvariant') }}" class="btn btn--plus wrap-bar__btn">
+        <a href="{{ url('admin_product_createvariant') }}" class="btn btn--primary btn--plus wrap-bar__btn">
             <i class="btn__icon">+</i>{{ 'Create variant'|trans }}
         </a>
     {% else %}
         <a href="{{ url('admin_default_dashboard') }}" class="btn-link-style wrap-bar__btn">
             {{ 'Fill missing settings to enable creating products. More information here.'|trans }}
         </a>
-        <span class="btn btn--plus wrap-bar__btn btn--disabled">
+        <span class="btn btn--primary btn--plus wrap-bar__btn btn--disabled">
             <i class="btn__icon">+</i>{{ 'Create new product'|trans }}
         </span>
-        <span class="btn btn--plus wrap-bar__btn btn--disabled">
+        <span class="btn btn--primary btn--plus wrap-bar__btn btn--disabled">
             <i class="btn__icon">+</i>{{ 'Create variant'|trans }}
         </span>
     {% endif %}
@@ -87,7 +87,7 @@
 
                             <div class="box-mass-action__filter__line box-mass-action__filter__line--submit">
                                 <div class="box-mass-action__filter__line__item">
-                                    {{ form_widget(massActionForm.submit, { label: 'Make modification'|trans, attr: { class: 'btn btn--medium js-mass-action-submit' } }) }}
+                                    {{ form_widget(massActionForm.submit, { label: 'Make modification'|trans, attr: { class: 'btn btn--primary btn--medium js-mass-action-submit' } }) }}
                                 </div>
                             </div>
                         </div>

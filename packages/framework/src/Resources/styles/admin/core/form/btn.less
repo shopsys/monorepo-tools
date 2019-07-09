@@ -1,11 +1,11 @@
-@btn-height: 30px;
+@btn-height: @input-height-small;
 @btn-padding-vertical: 5px;
 @btn-padding-horizontal: 15px;
 
 @btn-color: @color-f;
 @btn-color-hover: @color-f;
-@btn-bg: darken(@color-orange, 17%);
-@btn-bg-hover: darken(@btn-bg, 5%);
+@btn-bg: @color-orange;
+@btn-bg-hover: darken(@btn-bg, 10%);
 
 // base settings for button
 .btn {
@@ -17,6 +17,7 @@
     display: inline-block;
 
     border: 0;
+    border-radius: @radius;
     color: @btn-color;
     background: @btn-bg;
     cursor: pointer;
@@ -28,19 +29,26 @@
     &:hover {
         color: @btn-color-hover;
         background: @btn-bg-hover;
+
+        text-decoration: none;
     }
 
     &__icon {
         margin-right: 7px;
         float: left;
         position: relative;
-        top: 3px;
+        top: 5px;
     }
 }
 
 // Modification - colors
 @btn-default-bg: #C1CDD1;
 @btn-default-color: @color-f;
+
+@btn-primary-bg: @color-blue;
+@btn-primary-bg-hover: darken(@color-blue, 10%);
+@btn-primary-color: @color-f;
+@btn-primary-color-hover: @color-f;
 
 @btn-light-bg: @color-f;
 @btn-light-bg-hover: @color-fa;
@@ -59,6 +67,17 @@
         &:hover {
             background: @btn-default-bg;
             color: @btn-default-color;
+        }
+    }
+
+    &--primary,
+    .window-fixed-bar & {
+        background: @btn-primary-bg;
+        color: @btn-primary-color;
+
+        &:hover {
+            background: @btn-primary-bg-hover;
+            color: @btn-primary-color-hover;
         }
     }
 
@@ -97,6 +116,8 @@
 @btn-large-height: @btn-height + @btn-large-height-increase;
 @btn-large-line-height: @btn-height - 2*@btn-padding-vertical + @btn-large-height-increase;
 
+@btn-icon-size: 18px;
+
 .btn {
     &--small {
         height: @btn-small-height;
@@ -108,15 +129,16 @@
 
         .btn__icon {
             margin-right: 5px;
-            top: 1px;
+            top: calc(~"50% - @{btn-icon-size}/2 + 4px");
 
             font-size: 10px;
         }
     }
 
-    &--medium {
-        height: @btn-medium-height;
-        line-height: @btn-medium-line-height;
+    &--medium,
+    .window-fixed-bar & {
+        height: @btn-height;
+        line-height: @btn-height - 10;
         padding-left: @btn-medium-padding-horizontal;
         padding-right: @btn-medium-padding-horizontal;
 
@@ -134,10 +156,10 @@
 
         .btn__icon {
             position: absolute;
-            top: 5px;
+            top: calc(~"50% - @{btn-icon-size}/2 - 2px");
             left: 6px;
-            width: 18px;
-            height: 18px;
+            width: @btn-icon-size;
+            height: @btn-icon-size;
 
             text-align: center;
             line-height: 19px;
@@ -150,8 +172,8 @@
             padding-right: 10px;
 
             .btn__icon {
-                top: 2px;
                 left: 1px;
+                top: calc(~"50% - @{btn-icon-size}/2");
 
                 font-size: 20px;
             }
@@ -203,7 +225,8 @@
         i {
             margin-right: 3px;
             position: relative;
-            top: -2px;
+            top: 2px;
+            left: 3px;
 
             font-size: 16px;
         }

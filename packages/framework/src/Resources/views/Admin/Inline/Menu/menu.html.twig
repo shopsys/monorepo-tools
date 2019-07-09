@@ -1,38 +1,46 @@
 <ul class="js-toggle-menu navig navig--side">
-    <li class="js-toggle-menu-item navig__item" >
-        <div
-                class="navig__item__link navig__item__link--bordered"
-                title="{{ 'Frontend'|trans }}"
-        >
-            <i class="svg svg-forward-page"></i>
+    <li class="js-toggle-menu-item navig__item">
+        <div class="box-dropdown">
+            <div
+                    class="box-dropdown__select"
+                    title="{{ 'Frontend'|trans }}"
+            >
+                {{ 'Go to Frontend'|trans }}
+                <i class="box-dropdown__select__arrow box-dropdown__select__arrow--up"></i>
+                <i class="box-dropdown__select__arrow box-dropdown__select__arrow--down"></i>
+            </div>
+            <ul class="js-toggle-menu-submenu box-dropdown__options">
+                {% for domainConfig in domainConfigs %}
+                    <li class="box-dropdown__options__item">
+                        <a href="{{ domainConfig.url }}" target="_blank" class="box-dropdown__options__item__link" title="{{ domainConfig.name }}">{{ domainConfig.url }}</a>
+                    </li>
+                {% endfor %}
+            </ul>
         </div>
-        <ul class="js-toggle-menu-submenu display-none navig__item__sub">
-            {% for domainConfig in domainConfigs %}
-                <li class="navig__item__sub__item">
-                    <a href="{{ domainConfig.url }}" target="_blank" class="navig__item__sub__item__link" title="{{ domainConfig.name }}">{{ domainConfig.url }}</a>
-                </li>
-            {% endfor %}
-        </ul>
     </li>
 
-    <li class="js-toggle-menu-item navig__item" >
-        <div
-                class="navig__item__link navig__item__link--bordered"
-                title="{{ 'Account'|trans }}"
-        >
-            <i class="svg svg-person-man"></i>
+    <li class="js-toggle-menu-item navig__item">
+        <div class="box-dropdown">
+            <div
+                    class="box-dropdown__select"
+                    title="{{ 'Account'|trans }}"
+            >
+                <i class="svg svg-person-man"></i>
+                <i class="box-dropdown__select__arrow box-dropdown__select__arrow--up"></i>
+                <i class="box-dropdown__select__arrow box-dropdown__select__arrow--down"></i>
+            </div>
+            <ul class="js-toggle-menu-submenu box-dropdown__options">
+                <li class="box-dropdown__options__item">
+                    <a href="{{ url('admin_administrator_myaccount') }}" class="box-dropdown__options__item__link" title="{{ 'My account'|trans }}">
+                        {{ 'My account'|trans }}
+                    </a>
+                </li>
+                <li class="box-dropdown__options__item">
+                    <a href="{{ url('admin_logout', { _csrf_token: csrf_token('admin_logout')}) }}" class="box-dropdown__options__item__link" title="{{ 'Log out'|trans }}">
+                        {{ 'Log out'|trans }}
+                    </a>
+                </li>
+            </ul>
         </div>
-        <ul class="js-toggle-menu-submenu display-none navig__item__sub">
-            <li class="navig__item__sub__item">
-                <a href="{{ url('admin_administrator_myaccount') }}" class="navig__item__sub__item__link" title="{{ 'My account'|trans }}">
-                    {{ 'My account'|trans }}
-                </a>
-            </li>
-            <li class="navig__item__sub__item">
-                <a href="{{ url('admin_logout', { _csrf_token: csrf_token('admin_logout')}) }}" class="navig__item__sub__item__link" title="{{ 'Log out'|trans }}">
-                    {{ 'Log out'|trans }}
-                </a>
-            </li>
-        </ul>
     </li>
 </ul>
