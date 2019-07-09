@@ -140,8 +140,9 @@ There you can find links to upgrade notes for other versions too.
         - `Shopsys\FrameworkBundle\Model\Mail\MailTemplateFacade`
         - `Shopsys\FrameworkBundle\Component\Router\DomainRouterFactory`
         - `Shopsys\FrameworkBundle\Model\Product\Search\Export\ProductSearchExporter`
-    - check whether removed deprecated method is not used or overriden anymore
+    - check whether removed deprecated methods are not used or overriden anymore
         - `Shopsys\FrameworkBundle\Form\Admin\Country\CountryFormType::validateUniqueCode`
+        - `Shopsys\FrameworkBundle\Model\Pricing\PriceCalculation::getVatCoefficientByPercent`
 
 ### Configuration
 - simplify local configuration ([#1004](https://github.com/shopsys/shopsys/pull/1004))
