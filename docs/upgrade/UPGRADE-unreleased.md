@@ -133,6 +133,7 @@ There you can find links to upgrade notes for other versions too.
 - get rid of not needed deprecations and BC-promise implementation from 7.x version ([#1193](https://github.com/shopsys/shopsys/pull/1193))
     - remove registration of `productCategoryFilter` filter from `Shopsys\ShopBundle\Model\AdvancedSearch\ProductAdvancedSearchConfig`, `services.yml` and `services_test.yml`
         - in the case, the class contains custom filters, move the filter into the `parent::__construct` as the last parameter
+    - check whether all deprecated methods from multiple cron commands implementation are replaced with the new ones based on ([#817](https://github.com/shopsys/shopsys/pull/817))
 
 ### Configuration
 - simplify local configuration ([#1004](https://github.com/shopsys/shopsys/pull/1004))

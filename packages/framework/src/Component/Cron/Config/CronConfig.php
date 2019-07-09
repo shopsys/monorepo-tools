@@ -29,19 +29,6 @@ class CronConfig
     }
 
     /**
-     * @param \Shopsys\Plugin\Cron\SimpleCronModuleInterface|\Shopsys\Plugin\Cron\IteratedCronModuleInterface $service
-     * @param string $serviceId
-     * @param string $timeHours
-     * @param string $timeMinutes
-     *
-     * @deprecated Use `registerCronModuleInstance` instead
-     */
-    public function registerCronModule($service, $serviceId, $timeHours, $timeMinutes)
-    {
-        $this->registerCronModuleInstance($service, $serviceId, $timeHours, $timeMinutes, CronModuleConfig::DEFAULT_INSTANCE_NAME);
-    }
-
-    /**
      * @param \Shopsys\Plugin\Cron\SimpleCronModuleInterface|\Shopsys\Plugin\Cron\IteratedCronModuleInterface|mixed $service
      * @param string $serviceId
      * @param string $timeHours
