@@ -134,6 +134,8 @@ There you can find links to upgrade notes for other versions too.
     - remove registration of `productCategoryFilter` filter from `Shopsys\ShopBundle\Model\AdvancedSearch\ProductAdvancedSearchConfig`, `services.yml` and `services_test.yml`
         - in the case, the class contains custom filters, move the filter into the `parent::__construct` as the last parameter
     - check whether all deprecated methods from multiple cron commands implementation are replaced with the new ones based on ([#817](https://github.com/shopsys/shopsys/pull/817))
+    - check whether all deprecated methods and configurations for redis clients and redis commands are removed and modified to use new way based on ([#1161](https://github.com/shopsys/shopsys/pull/1161)) and ([#886](https://github.com/shopsys/shopsys/pull/886))
+        - remove registration of `Shopsys\FrameworkBundle\Command\RedisCleanCacheOldCommand: ~` from `commands.yml`
 
 ### Configuration
 - simplify local configuration ([#1004](https://github.com/shopsys/shopsys/pull/1004))

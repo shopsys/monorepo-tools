@@ -24,21 +24,16 @@ final class CheckRedisCommandTest extends TestCase
         yield [true, new RedisFacade([$this->createRedisMockExpectingPing(), $this->createRedisMockExpectingPing(), $this->createRedisMockExpectingPing()])];
         yield [false, new RedisFacade([$this->createRedisMockThrowingException()])];
         yield [false, new RedisFacade([$this->createRedisMockExpectingPing(), $this->createRedisMockThrowingException()])];
-        yield [true, []];
-        yield [true, [$this->createRedisMockExpectingPing()]];
-        yield [true, [$this->createRedisMockExpectingPing(), $this->createRedisMockExpectingPing(), $this->createRedisMockExpectingPing()]];
-        yield [false, [$this->createRedisMockThrowingException()]];
-        yield [false, [$this->createRedisMockExpectingPing(), $this->createRedisMockThrowingException()]];
     }
 
     /**
      * @dataProvider pingAllRedisClientsProvider
      * @param bool $expectSuccess
-     * @param \Shopsys\FrameworkBundle\Component\Redis\RedisFacade|\Redis[] $redisFacadeOrClients
+     * @param \Shopsys\FrameworkBundle\Component\Redis\RedisFacade $redisFacade
      */
-    public function testPingAllRedisClients(bool $expectSuccess, $redisFacadeOrClients): void
+    public function testPingAllRedisClients(bool $expectSuccess, RedisFacade $redisFacade): void
     {
-        $checkRedisCommand = new CheckRedisCommand($redisFacadeOrClients);
+        $checkRedisCommand = new CheckRedisCommand($redisFacade);
 
         $output = new BufferedOutput();
         $returnCode = $checkRedisCommand->run(new StringInput(''), $output);

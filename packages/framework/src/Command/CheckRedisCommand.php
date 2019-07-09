@@ -2,13 +2,11 @@
 
 namespace Shopsys\FrameworkBundle\Command;
 
-use Redis;
 use Shopsys\FrameworkBundle\Component\Redis\RedisFacade;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
-use Webmozart\Assert\Assert;
 
 class CheckRedisCommand extends Command
 {
@@ -21,42 +19,23 @@ class CheckRedisCommand extends Command
     protected static $defaultName = 'shopsys:redis:check-availability';
 
     /**
-     * @deprecated This property is deprecated since SSFW 7.3
-     * @var \Redis[]
-     */
-    protected $cacheClients;
-
-    /**
-     * @var \Shopsys\FrameworkBundle\Component\Redis\RedisFacade|null
+     * @var \Shopsys\FrameworkBundle\Component\Redis\RedisFacade
      */
     protected $redisFacade;
 
     /**
-     * @param \Shopsys\FrameworkBundle\Component\Redis\RedisFacade|\Redis[] $redisFacadeOrClients
+     * @param \Shopsys\FrameworkBundle\Component\Redis\RedisFacade $redisFacade
      */
-    public function __construct($redisFacadeOrClients)
+    public function __construct(RedisFacade $redisFacade)
     {
         parent::__construct();
 
-        if ($redisFacadeOrClients instanceof RedisFacade) {
-            $this->redisFacade = $redisFacadeOrClients;
-            $this->cacheClients = [];
-        } else {
-            Assert::allIsInstanceOf($redisFacadeOrClients, Redis::class);
-
-            @trigger_error(
-                sprintf('Passing instances of "%s" directly into constructor of "%s" is deprecated since SSFW 7.3, pass "%s" instead', Redis::class, __CLASS__, RedisFacade::class),
-                E_USER_DEPRECATED
-            );
-
-            $this->cacheClients = $redisFacadeOrClients;
-        }
+        $this->redisFacade = $redisFacade;
     }
 
     protected function configure()
     {
-        $this
-            ->setDescription('Checks availability of Redis');
+        $this->setDescription('Checks availability of Redis');
     }
 
     /**
@@ -70,7 +49,7 @@ class CheckRedisCommand extends Command
 
         $io->comment('Checks availability of Redis...');
         try {
-            $this->pingAllClients();
+            $this->redisFacade->pingAllClients();
             $io->success('Redis is available.');
         } catch (\RedisException $e) {
             $io->error('Redis is not available.');
@@ -79,19 +58,5 @@ class CheckRedisCommand extends Command
         }
 
         return static::RETURN_CODE_OK;
-    }
-
-    /**
-     * @internal This method will be inlined when its implementation will be able to be simplified
-     */
-    protected function pingAllClients(): void
-    {
-        if ($this->redisFacade !== null) {
-            $this->redisFacade->pingAllClients();
-        } else {
-            foreach ($this->cacheClients as $redisClient) {
-                $redisClient->ping();
-            }
-        }
     }
 }
