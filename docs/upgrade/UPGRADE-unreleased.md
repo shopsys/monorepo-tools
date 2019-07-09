@@ -141,6 +141,8 @@ There you can find links to upgrade notes for other versions too.
         - `Shopsys\FrameworkBundle\Component\Router\DomainRouterFactory`
         - `Shopsys\FrameworkBundle\Model\Product\Search\Export\ProductSearchExporter`
         - `Shopsys\FrameworkBundle\Model\Product\Search\Export\ProductSearchExportStructureFacade`
+        - `Shopsys\FrameworkBundle\Model\Product\ProductFacade`
+        - `Shopsys\FrameworkBundle\Model\Product\ProductVariantFacade`
     - check whether removed deprecated methods are not used or overriden anymore
         - `Shopsys\FrameworkBundle\Form\Admin\Country\CountryFormType::validateUniqueCode`
         - `Shopsys\FrameworkBundle\Model\Pricing\PriceCalculation::getVatCoefficientByPercent`

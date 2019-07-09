@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Shopsys\FrameworkBundle\Model\Product;
 
-use BadMethodCallException;
 use Doctrine\ORM\EntityManagerInterface;
 use Shopsys\FrameworkBundle\Component\Domain\Domain;
 use Shopsys\FrameworkBundle\Component\Image\ImageFacade;
@@ -166,7 +165,7 @@ class ProductFacade
      * @param \Shopsys\FrameworkBundle\Model\Product\Parameter\ProductParameterValueFactoryInterface $productParameterValueFactory
      * @param \Shopsys\FrameworkBundle\Model\Product\ProductVisibilityFactoryInterface $productVisibilityFactory
      * @param \Shopsys\FrameworkBundle\Model\Product\Pricing\ProductPriceCalculation $productPriceCalculation
-     * @param \Shopsys\FrameworkBundle\Model\Product\Search\Export\ProductSearchExportScheduler|null $productSearchExportScheduler
+     * @param \Shopsys\FrameworkBundle\Model\Product\Search\Export\ProductSearchExportScheduler $productSearchExportScheduler
      */
     public function __construct(
         EntityManagerInterface $em,
@@ -191,7 +190,7 @@ class ProductFacade
         ProductParameterValueFactoryInterface $productParameterValueFactory,
         ProductVisibilityFactoryInterface $productVisibilityFactory,
         ProductPriceCalculation $productPriceCalculation,
-        ?ProductSearchExportScheduler $productSearchExportScheduler = null
+        ProductSearchExportScheduler $productSearchExportScheduler
     ) {
         $this->em = $em;
         $this->productRepository = $productRepository;
@@ -216,24 +215,6 @@ class ProductFacade
         $this->productVisibilityFactory = $productVisibilityFactory;
         $this->productPriceCalculation = $productPriceCalculation;
         $this->productSearchExportScheduler = $productSearchExportScheduler;
-    }
-
-    /**
-     * @required
-     * @param \Shopsys\FrameworkBundle\Model\Product\Search\Export\ProductSearchExportScheduler $productSearchExportScheduler
-     * @deprecated Will be replaced with constructor injection in the next major release
-     */
-    public function setProductSearchExportScheduler(ProductSearchExportScheduler $productSearchExportScheduler): void
-    {
-        if ($this->productSearchExportScheduler !== null && $this->productSearchExportScheduler !== $productSearchExportScheduler) {
-            throw new BadMethodCallException(sprintf('Method "%s" has been already called and cannot be called multiple times.', __METHOD__));
-        }
-
-        if ($this->productSearchExportScheduler === null) {
-            @trigger_error(sprintf('The %s() method is deprecated and will be removed in the next major. Use the constructor injection instead.', __METHOD__), E_USER_DEPRECATED);
-
-            $this->productSearchExportScheduler = $productSearchExportScheduler;
-        }
     }
 
     /**
