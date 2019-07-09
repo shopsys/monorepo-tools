@@ -73,11 +73,6 @@
 
     <target name="build-demo-ci" depends="build-version-generate,wipe-excluding-logs,composer-dev,npm,timezones-check,dirs-create,test-dirs-create,assets,db-demo,product-search-recreate-structure,product-search-export-products,grunt,error-pages-generate,tests-acceptance-build,clean-redis-old,checks-ci" description="Builds application for development with clean demo DB and runs CI checks."/>
 
-    <target name="build-demo-ci-diff" hidden="true">
-        <phingcall target="build-demo-ci"/>
-        <echo level="warning" message="This phing target is deprecated since Shopsys Framework 7.3.0, use 'build-demo-ci' instead."/>
-    </target>
-
     <target name="build-demo-dev" depends="build-version-generate,wipe-excluding-logs,composer-dev,npm,timezones-check,dirs-create,test-dirs-create,assets,db-demo,product-search-recreate-structure,product-search-export-products,grunt,error-pages-generate,tests-acceptance-build,clean-redis-old,checks-diff" description="Builds application for development with clean demo DB and runs checks on changed files."/>
 
     <target name="build-demo-dev-quick" depends="build-version-generate,wipe-excluding-logs,composer-dev,npm,dirs-create,test-dirs-create,assets,db-demo,product-search-recreate-structure,product-search-export-products,grunt,clean-redis-old" description="Builds application for development with clean demo DB while skipping nonessential steps."/>
@@ -109,11 +104,6 @@
     <target name="checks" depends="checks-internal,standards,tests" description="Runs internal checks, coding standards and runs unit, DB and smoke tests."/>
 
     <target name="checks-ci" depends="checks-internal,test-db-demo,test-product-search-recreate-structure,test-product-search-export-products,tests-functional,tests-smoke,tests-acceptance" description="Runs internal checks and runs DB, smoke and acceptance tests."/>
-
-    <target name="checks-ci-diff" hidden="true">
-        <phingcall target="checks-ci"/>
-        <echo level="warning" message="This phing target is deprecated since Shopsys Framework 7.3.0, use 'checks-ci' instead."/>
-    </target>
 
     <target name="checks-diff" depends="checks-internal,standards-diff,tests" description="Runs internal checks, coding standards on changed files and runs unit, DB and smoke tests."/>
 
@@ -164,11 +154,6 @@
         </delete>
     </target>
 
-    <target name="composer" hidden="true">
-        <phingcall target="composer-prod"/>
-        <echo level="warning" message="This phing target is deprecated since Shopsys Framework 7.3.0, use 'composer-prod' instead."/>
-    </target>
-
     <target name="composer-check" description="Checks if Composer lock file is valid." hidden="true">
         <exec executable="${path.composer.executable}" logoutput="true" passthru="true" checkreturn="true">
             <arg value="validate"/>
@@ -187,16 +172,6 @@
             <arg value="install"/>
             <arg value="--no-dev"/>
         </exec>
-    </target>
-
-    <target name="create-domains-data" hidden="true">
-        <phingcall target="domains-data-create"/>
-        <echo level="warning" message="This phing target is deprecated since Shopsys Framework 7.3.0, use 'domains-data-create' instead."/>
-    </target>
-
-    <target name="create-domains-db-functions" hidden="true">
-        <phingcall target="domains-db-functions-create"/>
-        <echo level="warning" message="This phing target is deprecated since Shopsys Framework 7.3.0, use 'domains-db-functions-create' instead."/>
     </target>
 
     <target name="cron" description="Runs background jobs. Should be executed periodically by system Cron every 5 minutes.">
@@ -440,16 +415,6 @@
         </exec>
     </target>
 
-    <target name="dump-translations" hidden="true">
-        <phingcall target="translations-dump"/>
-        <echo level="warning" message="This phing target is deprecated since Shopsys Framework 7.3.0, use 'translations-dump' instead."/>
-    </target>
-
-    <target name="dump-translations-project-base" hidden="true">
-        <phingcall target="translations-dump"/>
-        <echo level="warning" message="This phing target is deprecated since Shopsys Framework 7.3.0, use 'translations-dump' instead."/>
-    </target>
-
     <target name="ecs" description="Checks coding standards in all files by PHP easy coding standards." hidden="true">
         <exec executable="${path.ecs.executable}" logoutput="true" passthru="true" checkreturn="true">
             <arg value="check"/>
@@ -568,16 +533,6 @@
         </exec>
     </target>
 
-    <target name="generate-build-version" hidden="true">
-        <phingcall target="build-version-generate"/>
-        <echo level="warning" message="This phing target is deprecated since Shopsys Framework 7.3.0, use 'build-version-generate' instead."/>
-    </target>
-
-    <target name="generate-friendly-urls" hidden="true">
-        <phingcall target="friendly-urls-generate"/>
-        <echo level="warning" message="This phing target is deprecated since Shopsys Framework 7.3.0, use 'friendly-urls-generate' instead."/>
-    </target>
-
     <target name="grunt" depends="gruntfile,clean-styles" description="Builds CSS from LESS via Grunt.">
         <exec executable="${path.grunt.executable}" dir="${path.root}" passthru="true" checkreturn="true"/>
     </target>
@@ -594,11 +549,6 @@
             <arg value="phing"/>
             <arg value="-l"/>
         </exec>
-    </target>
-
-    <target name="load-plugin-demo-data" hidden="true">
-        <phingcall target="plugin-demo-data-load"/>
-        <echo level="warning" message="This phing target is deprecated since Shopsys Framework 7.3.0, use 'plugin-demo-data-load' instead."/>
     </target>
 
     <target name="maintenance-off" description="Turns the maintenance page off.">
@@ -707,11 +657,6 @@
         </exec>
     </target>
 
-    <target name="replace-domains-urls" hidden="true">
-        <phingcall target="domains-urls-replace"/>
-        <echo level="warning" message="This phing target is deprecated since Shopsys Framework 7.3.0, use 'domains-urls-replace' instead."/>
-    </target>
-
     <target name="selenium-run" description="Runs the Selenium server for acceptance testing. ChromeDriver is required. Only for native installation (Selenium is always running in Docker setup).">
         <exec executable="${path.chromedriver.executable}" logoutput="true" passthru="true" checkreturn="true">
             <arg value="--port=4444"/>
@@ -733,25 +678,6 @@
     <target name="standards-fix" depends="ecs-fix,eslint-fix" description="Automatically fixes *some* coding standards violations in all files. Always run 'standards' to be sure there are no further violations."/>
 
     <target name="standards-fix-diff" depends="ecs-fix-diff,eslint-fix-diff" description="Automatically fixes *some* coding standards violations in changed files. Always run 'standards' to be sure there are no further violations."/>
-
-    <target name="test-create-domains-data" hidden="true">
-        <phingcall target="test-domains-data-create"/>
-        <echo level="warning" message="This phing target is deprecated since Shopsys Framework 7.3.0, use 'test-domains-data-create' instead."/>
-    </target>
-
-    <target name="test-create-domains-db-functions" hidden="true">
-        <phingcall target="test-domains-db-functions-create"/>
-        <echo level="warning" message="This phing target is deprecated since Shopsys Framework 7.3.0, use 'test-domains-db-functions-create' instead."/>
-    </target>
-
-    <target name="test-db-check-schema" depends="clean-redis,db-check-mapping" description="Checks if test database schema is satisfying ORM and returns a list of suggestions to fix it." hidden="true">
-        <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
-            <arg value="${path.bin-console}"/>
-            <arg value="--env=test"/>
-            <arg value="shopsys:migrations:check-schema"/>
-        </exec>
-        <echo level="warning" message="This phing target is deprecated since Shopsys Framework 7.3.0, schema is checked automatically after DB migrations are executed."/>
-    </target>
 
     <target name="test-db-create" description="Creates test database for application with required configuration.">
         <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
@@ -872,16 +798,6 @@
         </exec>
     </target>
 
-    <target name="test-generate-friendly-urls" hidden="true">
-        <phingcall target="test-friendly-urls-generate"/>
-        <echo level="warning" message="This phing target is deprecated since Shopsys Framework 7.3.0, use 'test-friendly-urls-generate' instead."/>
-    </target>
-
-    <target name="test-load-plugin-demo-data" hidden="true">
-        <phingcall target="test-plugin-demo-data-load"/>
-        <echo level="warning" message="This phing target is deprecated since Shopsys Framework 7.3.0, use 'test-plugin-demo-data-load' instead."/>
-    </target>
-
     <target name="test-plugin-demo-data-load" description="Loads data fixtures of all registered plugins into test DB." hidden="true">
         <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
             <arg value="${path.bin-console}"/>
@@ -915,11 +831,6 @@
     </target>
 
     <target name="test-product-search-recreate-structure" depends="test-product-search-delete-structure,test-product-search-create-structure" description="Recreates structure for searching via elasticsearch in test environment (deletes existing structure and creates new one)"/>
-
-    <target name="test-replace-domains-urls" hidden="true">
-        <phingcall target="test-domains-urls-replace"/>
-        <echo level="warning" message="This phing target is deprecated since Shopsys Framework 7.3.0, use 'test-domains-urls-replace' instead."/>
-    </target>
 
     <target name="tests" depends="test-db-demo,test-product-search-recreate-structure,test-product-search-export-products,tests-unit,tests-functional,tests-smoke" description="Runs unit, functional and smoke tests. Builds new test database in the process."/>
 
@@ -1041,11 +952,6 @@
                 </exec>
             </else>
         </if>
-    </target>
-
-    <target name="tests-static" hidden="true">
-        <phingcall target="tests-unit"/>
-        <echo level="warning" message="This phing target is deprecated since Shopsys Framework 7.3.0, use 'tests-unit' instead."/>
     </target>
 
     <target name="tests-unit" depends="clean" description="Runs unit tests.">
