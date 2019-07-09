@@ -113,20 +113,6 @@ class ProductElasticsearchRepository
 
     /**
      * @param int $domainId
-     * @return string
-     * @deprecated Getting index name using this method is deprecated since SSFW 7.3, use ElasticsearchStructureManager::getCurrentIndexName or ElasticsearchStructureManager::getAliasName instead
-     */
-    protected function getIndexName(int $domainId): string
-    {
-        @trigger_error(
-            sprintf('Getting index name using method "%s" is deprecated since SSFW 7.3, use %s or %s instead', __METHOD__, 'ElasticsearchStructureManager::getCurrentIndexName', 'ElasticsearchStructureManager::getAliasName'),
-            E_USER_DEPRECATED
-        );
-        return $this->indexPrefix . self::ELASTICSEARCH_INDEX . $domainId;
-    }
-
-    /**
-     * @param int $domainId
      * @param string|null $searchText
      * @return int[]
      */

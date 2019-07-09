@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Shopsys\FrameworkBundle\Model\Product\Search\Export;
 
-use BadMethodCallException;
 use Shopsys\FrameworkBundle\Component\Domain\Domain;
 use Shopsys\FrameworkBundle\Component\Elasticsearch\ElasticsearchStructureManager;
 use Shopsys\FrameworkBundle\Component\Elasticsearch\ElasticsearchStructureUpdateChecker;
@@ -31,34 +30,16 @@ class ProductSearchExportStructureFacade
     /**
      * @param \Shopsys\FrameworkBundle\Component\Domain\Domain $domain
      * @param \Shopsys\FrameworkBundle\Component\Elasticsearch\ElasticsearchStructureManager $elasticsearchStructureManager
-     * @param \Shopsys\FrameworkBundle\Component\Elasticsearch\ElasticsearchStructureUpdateChecker|null $elasticsearchStructureUpdateChecker
+     * @param \Shopsys\FrameworkBundle\Component\Elasticsearch\ElasticsearchStructureUpdateChecker $elasticsearchStructureUpdateChecker
      */
     public function __construct(
         Domain $domain,
         ElasticsearchStructureManager $elasticsearchStructureManager,
-        ?ElasticsearchStructureUpdateChecker $elasticsearchStructureUpdateChecker
+        ElasticsearchStructureUpdateChecker $elasticsearchStructureUpdateChecker
     ) {
         $this->domain = $domain;
         $this->elasticsearchStructureManager = $elasticsearchStructureManager;
         $this->elasticsearchStructureUpdateChecker = $elasticsearchStructureUpdateChecker;
-    }
-
-    /**
-     * @required
-     * @param \Shopsys\FrameworkBundle\Component\Elasticsearch\ElasticsearchStructureUpdateChecker $elasticsearchStructureUpdateChecker
-     * @internal Will be replaced with constructor injection in the next major release
-     */
-    public function setElasticsearchStructureUpdateChecker(ElasticsearchStructureUpdateChecker $elasticsearchStructureUpdateChecker): void
-    {
-        if ($this->elasticsearchStructureUpdateChecker !== null && $this->elasticsearchStructureUpdateChecker !== $elasticsearchStructureUpdateChecker) {
-            throw new BadMethodCallException(sprintf('Method "%s" has been already called and cannot be called multiple times.', __METHOD__));
-        }
-
-        if ($this->elasticsearchStructureUpdateChecker === null) {
-            @trigger_error(sprintf('The %s() method is deprecated and will be removed in the next major version. Use the constructor injection instead.', __METHOD__), E_USER_DEPRECATED);
-
-            $this->elasticsearchStructureUpdateChecker = $elasticsearchStructureUpdateChecker;
-        }
     }
 
     /**

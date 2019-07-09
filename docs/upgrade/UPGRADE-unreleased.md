@@ -140,9 +140,14 @@ There you can find links to upgrade notes for other versions too.
         - `Shopsys\FrameworkBundle\Model\Mail\MailTemplateFacade`
         - `Shopsys\FrameworkBundle\Component\Router\DomainRouterFactory`
         - `Shopsys\FrameworkBundle\Model\Product\Search\Export\ProductSearchExporter`
+        - `Shopsys\FrameworkBundle\Model\Product\Search\Export\ProductSearchExportStructureFacade`
     - check whether removed deprecated methods are not used or overriden anymore
         - `Shopsys\FrameworkBundle\Form\Admin\Country\CountryFormType::validateUniqueCode`
         - `Shopsys\FrameworkBundle\Model\Pricing\PriceCalculation::getVatCoefficientByPercent`
+        - `Shopsys\FrameworkBundle\Component\Elasticsearch\ElasticsearchStructureManager::getIndexName`
+        - `Shopsys\FrameworkBundle\Component\Elasticsearch\ElasticsearchStructureManager::deleteIndex`
+        - `Shopsys\FrameworkBundle\Component\Elasticsearch\ElasticsearchStructureManager::getConfig`
+        - `Shopsys\FrameworkBundle\Model\Product\Search\ProductElasticsearchRepository::getIndexName`
     - update `tests/ShopBundle/Functional/Model/Cart/CartMigrationFacadeTest.php`
         ```diff
         -use Shopsys\FrameworkBundle\Model\Cart\Item\CartItemFactory;
