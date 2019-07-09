@@ -60,7 +60,7 @@ class ProductElasticsearchRepository
         $this->client = $client;
         $this->productElasticsearchConverter = $productElasticsearchConverter;
         $this->elasticsearchStructureManager = $elasticsearchStructureManager;
-        $this->filterQueryFactory = $filterQueryFactory ?? $this->createFilterQueryFactory();
+        $this->filterQueryFactory = $filterQueryFactory;
     }
 
     /**

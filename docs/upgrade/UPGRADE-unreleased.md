@@ -162,6 +162,19 @@ There you can find links to upgrade notes for other versions too.
         -        $cartItemFactory = $this->getContainer()->get(CartItemFactory::class);
         +        $cartItemFactory = $this->getContainer()->get(CartItemFactoryInterface::class);
         ```
+    - replace the use of method `createFromData` with `createFromIdAndName` method of `Shopsys\FrameworkBundle\Component\Router\FriendlyUrl` class or its descendants
+        - remove extended internal method `createFriendlyUrlData` from descendent classes of
+            - `Shopsys\FrameworkBundle\Model\Article\ArticleDetailFriendlyUrlDataProvider`
+            - `Shopsys\FrameworkBundle\Model\Product\Brand\BrandDetailFriendlyUrlDataProvider`
+            - `Shopsys\FrameworkBundle\Model\Product\ProductDetailFriendlyUrlDataProvider`
+            - `Shopsys\FrameworkBundle\Model\Product\ProductListFriendlyUrlDataProvider`
+    - replace the use of `Advert::POSITION_*` constants with their values, for instance in `Shopsys\ShopBundle\DataFixtures\Demo\AdvertDataFixture`
+        ```php
+        POSITION_HEADER => 'header'
+        POSITION_FOOTER => 'footer'
+        POSITION_PRODUCT_LIST => 'productList'
+        POSITION_LEFT_SIDEBAR => 'leftSidebar'
+        ```
 
 ### Configuration
 - simplify local configuration ([#1004](https://github.com/shopsys/shopsys/pull/1004))

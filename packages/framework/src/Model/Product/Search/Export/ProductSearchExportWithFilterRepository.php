@@ -19,6 +19,11 @@ use Shopsys\FrameworkBundle\Model\Product\ProductVisibilityRepository;
 class ProductSearchExportWithFilterRepository
 {
     /**
+     * @var \Doctrine\ORM\EntityManagerInterface
+     */
+    protected $em;
+
+    /**
      * @var \Shopsys\FrameworkBundle\Model\Product\Parameter\ParameterRepository
      */
     protected $parameterRepository;
