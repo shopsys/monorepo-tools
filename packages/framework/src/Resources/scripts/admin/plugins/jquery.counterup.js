@@ -28,7 +28,9 @@
             var num = $this.attr('data-value');
             var nums = [num];
             var isComma = /[0-9]+,[0-9]+/.test(num);
+            var isSpace = /\s/.test(num);
             num = num.replace(/,/g, '');
+            num = num.replace(/\s/g, '');
             var isInt = /^[0-9]+$/.test(num);
             var isFloat = /^[0-9]+\.[0-9]+$/.test(num);
             var decimalPlaces = isFloat ? (num.split('.')[1] || []).length : 0;
@@ -48,6 +50,13 @@
                 if (isComma) {
                     while (/(\d+)(\d{3})/.test(newNum.toString())) {
                         newNum = newNum.toString().replace(/(\d+)(\d{3})/, '$1'+','+'$2');
+                    }
+                }
+
+                // Preserve spaces if input contained spaces
+                if (isSpace) {
+                    while (/(\d+)(\d{3})/.test(newNum.toString())) {
+                        newNum = newNum.toString().replace(/(\d+)(\d{3})/, '$1'+' '+'$2');
                     }
                 }
 

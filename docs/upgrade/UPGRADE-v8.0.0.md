@@ -117,6 +117,8 @@ There you can find links to upgrade notes for other versions too.
         - `Shopsys\FrameworkBundle\Model\Payment\Payment::getPrices`
         - `Shopsys\ProductFeed\HeurekaBundle\Model\HeurekaCategory:getCategories`
     - we recommend encapsulating collections similarly in your own custom entities as well
+- update your `OrderDataFixture` and `UserDataFixture` to create new users and orders in last two weeks instead of one ([#1147](https://github.com/shopsys/shopsys/pull/1147))
+    - this is done by changing all occurrences of `$this->faker->dateTimeBetween('-1 week', 'now');` by `$this->faker->dateTimeBetween('-2 week', 'now');`
 
 ### Configuration
 - simplify local configuration ([#1004](https://github.com/shopsys/shopsys/pull/1004))

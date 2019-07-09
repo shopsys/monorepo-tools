@@ -86,7 +86,7 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
         $orderData->deliveryAddressSameAsBillingAddress = true;
         $orderData->domainId = Domain::FIRST_DOMAIN_ID;
         $orderData->currency = $this->getReference(CurrencyDataFixture::CURRENCY_CZK);
-        $orderData->createdAt = $this->faker->dateTimeBetween('-1 week', 'now');
+        $orderData->createdAt = $this->faker->dateTimeBetween('-2 week', 'now');
         $this->createOrder(
             $orderData,
             [
@@ -111,7 +111,7 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
         $orderData->deliveryAddressSameAsBillingAddress = true;
         $orderData->domainId = Domain::FIRST_DOMAIN_ID;
         $orderData->currency = $this->getReference(CurrencyDataFixture::CURRENCY_CZK);
-        $orderData->createdAt = $this->faker->dateTimeBetween('-1 week', 'now');
+        $orderData->createdAt = $this->faker->dateTimeBetween('-2 week', 'now');
         $orderData->createdAsAdministrator = $this->getReference(AdministratorDataFixture::ADMINISTRATOR);
         $this->createOrder(
             $orderData,
@@ -139,7 +139,7 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
         $orderData->deliveryAddressSameAsBillingAddress = true;
         $orderData->domainId = Domain::FIRST_DOMAIN_ID;
         $orderData->currency = $this->getReference(CurrencyDataFixture::CURRENCY_CZK);
-        $orderData->createdAt = $this->faker->dateTimeBetween('-1 week', 'now');
+        $orderData->createdAt = $this->faker->dateTimeBetween('-2 week', 'now');
         $this->createOrder(
             $orderData,
             [
@@ -164,7 +164,7 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
         $orderData->deliveryAddressSameAsBillingAddress = true;
         $orderData->domainId = Domain::FIRST_DOMAIN_ID;
         $orderData->currency = $this->getReference(CurrencyDataFixture::CURRENCY_CZK);
-        $orderData->createdAt = $this->faker->dateTimeBetween('-1 week', 'now');
+        $orderData->createdAt = $this->faker->dateTimeBetween('-2 week', 'now');
         $this->createOrder(
             $orderData,
             [
@@ -188,7 +188,7 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
         $orderData->deliveryAddressSameAsBillingAddress = true;
         $orderData->domainId = Domain::FIRST_DOMAIN_ID;
         $orderData->currency = $this->getReference(CurrencyDataFixture::CURRENCY_CZK);
-        $orderData->createdAt = $this->faker->dateTimeBetween('-1 week', 'now');
+        $orderData->createdAt = $this->faker->dateTimeBetween('-2 week', 'now');
         $orderData->createdAsAdministrator = $this->getReference(AdministratorDataFixture::SUPERADMINISTRATOR);
         $this->createOrder(
             $orderData,
@@ -215,7 +215,7 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
         $orderData->deliveryAddressSameAsBillingAddress = true;
         $orderData->domainId = Domain::FIRST_DOMAIN_ID;
         $orderData->currency = $this->getReference(CurrencyDataFixture::CURRENCY_CZK);
-        $orderData->createdAt = $this->faker->dateTimeBetween('-1 week', 'now');
+        $orderData->createdAt = $this->faker->dateTimeBetween('-2 week', 'now');
         $this->createOrder(
             $orderData,
             [
@@ -244,7 +244,7 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
         $orderData->deliveryAddressSameAsBillingAddress = true;
         $orderData->domainId = Domain::FIRST_DOMAIN_ID;
         $orderData->currency = $this->getReference(CurrencyDataFixture::CURRENCY_CZK);
-        $orderData->createdAt = $this->faker->dateTimeBetween('-1 week', 'now');
+        $orderData->createdAt = $this->faker->dateTimeBetween('-2 week', 'now');
         $this->createOrder(
             $orderData,
             [
@@ -269,7 +269,7 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
         $orderData->deliveryAddressSameAsBillingAddress = true;
         $orderData->domainId = Domain::FIRST_DOMAIN_ID;
         $orderData->currency = $this->getReference(CurrencyDataFixture::CURRENCY_CZK);
-        $orderData->createdAt = $this->faker->dateTimeBetween('-1 week', 'now');
+        $orderData->createdAt = $this->faker->dateTimeBetween('-2 week', 'now');
         $orderData->createdAsAdministrator = $this->getReference(AdministratorDataFixture::SUPERADMINISTRATOR);
         $this->createOrder(
             $orderData,
@@ -295,7 +295,7 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
         $orderData->deliveryAddressSameAsBillingAddress = true;
         $orderData->domainId = Domain::FIRST_DOMAIN_ID;
         $orderData->currency = $this->getReference(CurrencyDataFixture::CURRENCY_CZK);
-        $orderData->createdAt = $this->faker->dateTimeBetween('-1 week', 'now');
+        $orderData->createdAt = $this->faker->dateTimeBetween('-2 week', 'now');
         $this->createOrder(
             $orderData,
             [
@@ -319,7 +319,7 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
         $orderData->deliveryAddressSameAsBillingAddress = true;
         $orderData->domainId = Domain::FIRST_DOMAIN_ID;
         $orderData->currency = $this->getReference(CurrencyDataFixture::CURRENCY_CZK);
-        $orderData->createdAt = $this->faker->dateTimeBetween('-1 week', 'now');
+        $orderData->createdAt = $this->faker->dateTimeBetween('-2 week', 'now');
         $this->createOrder(
             $orderData,
             [
@@ -342,7 +342,7 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
         $orderData->deliveryAddressSameAsBillingAddress = true;
         $orderData->domainId = Domain::FIRST_DOMAIN_ID;
         $orderData->currency = $this->getReference(CurrencyDataFixture::CURRENCY_CZK);
-        $orderData->createdAt = $this->faker->dateTimeBetween('-1 week', 'now');
+        $orderData->createdAt = $this->faker->dateTimeBetween('-2 week', 'now');
         $this->createOrder(
             $orderData,
             [
@@ -367,7 +367,7 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
         $orderData->deliveryAddressSameAsBillingAddress = true;
         $orderData->domainId = Domain::FIRST_DOMAIN_ID;
         $orderData->currency = $this->getReference(CurrencyDataFixture::CURRENCY_CZK);
-        $orderData->createdAt = $this->faker->dateTimeBetween('-1 week', 'now');
+        $orderData->createdAt = $this->faker->dateTimeBetween('-2 week', 'now');
         $this->createOrder(
             $orderData,
             [
@@ -391,7 +391,7 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
         $orderData->deliveryAddressSameAsBillingAddress = true;
         $orderData->domainId = Domain::FIRST_DOMAIN_ID;
         $orderData->currency = $this->getReference(CurrencyDataFixture::CURRENCY_CZK);
-        $orderData->createdAt = $this->faker->dateTimeBetween('-1 week', 'now');
+        $orderData->createdAt = $this->faker->dateTimeBetween('-2 week', 'now');
         $orderData->createdAsAdministrator = $this->getReference(AdministratorDataFixture::ADMINISTRATOR);
         $this->createOrder(
             $orderData,
@@ -416,7 +416,7 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
         $orderData->deliveryAddressSameAsBillingAddress = true;
         $orderData->domainId = Domain::FIRST_DOMAIN_ID;
         $orderData->currency = $this->getReference(CurrencyDataFixture::CURRENCY_CZK);
-        $orderData->createdAt = $this->faker->dateTimeBetween('-1 week', 'now');
+        $orderData->createdAt = $this->faker->dateTimeBetween('-2 week', 'now');
         $this->createOrder(
             $orderData,
             [
@@ -442,7 +442,7 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
         $orderData->deliveryAddressSameAsBillingAddress = true;
         $orderData->domainId = Domain::FIRST_DOMAIN_ID;
         $orderData->currency = $this->getReference(CurrencyDataFixture::CURRENCY_CZK);
-        $orderData->createdAt = $this->faker->dateTimeBetween('-1 week', 'now');
+        $orderData->createdAt = $this->faker->dateTimeBetween('-2 week', 'now');
         $this->createOrder(
             $orderData,
             [
@@ -470,7 +470,7 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
         $orderData->note = 'Doufám, že vše dorazí v pořádku a co nejdříve :)';
         $orderData->domainId = Domain::FIRST_DOMAIN_ID;
         $orderData->currency = $this->getReference(CurrencyDataFixture::CURRENCY_CZK);
-        $orderData->createdAt = $this->faker->dateTimeBetween('-1 week', 'now');
+        $orderData->createdAt = $this->faker->dateTimeBetween('-2 week', 'now');
         $this->createOrder(
             $orderData,
             [
@@ -508,7 +508,7 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
         $orderData->note = 'Doufám, že vše dorazí v pořádku a co nejdříve :)';
         $orderData->domainId = Domain::FIRST_DOMAIN_ID;
         $orderData->currency = $this->getReference(CurrencyDataFixture::CURRENCY_CZK);
-        $orderData->createdAt = $this->faker->dateTimeBetween('-1 week', 'now');
+        $orderData->createdAt = $this->faker->dateTimeBetween('-2 week', 'now');
         $orderData->createdAsAdministrator = $this->getReference(AdministratorDataFixture::ADMINISTRATOR);
         $this->createOrder(
             $orderData,
@@ -548,7 +548,7 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
         $orderData->note = 'Doufám, že vše dorazí v pořádku a co nejdříve :)';
         $orderData->domainId = Domain::FIRST_DOMAIN_ID;
         $orderData->currency = $this->getReference(CurrencyDataFixture::CURRENCY_CZK);
-        $orderData->createdAt = $this->faker->dateTimeBetween('-1 week', 'now');
+        $orderData->createdAt = $this->faker->dateTimeBetween('-2 week', 'now');
         $this->createOrder(
             $orderData,
             [

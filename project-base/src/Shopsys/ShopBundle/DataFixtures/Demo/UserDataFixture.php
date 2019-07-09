@@ -67,7 +67,7 @@ class UserDataFixture extends AbstractReferenceFixture implements DependentFixtu
         $customersData = $this->loaderService->getCustomersDataByDomainId(Domain::FIRST_DOMAIN_ID);
 
         foreach ($customersData as $customerData) {
-            $customerData->userData->createdAt = $this->faker->dateTimeBetween('-1 week', 'now');
+            $customerData->userData->createdAt = $this->faker->dateTimeBetween('-2 week', 'now');
 
             $customer = $this->customerFacade->create($customerData);
 
