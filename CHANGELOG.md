@@ -29,6 +29,83 @@ The changelog is generated during the release process using [ChangelogLinker](ht
 
 <!-- changelog-linker -->
 
+## [v7.3.0](https://github.com/shopsys/shopsys/compare/v7.2.2...v7.3.0) - 2019-07-09
+
+### [shopsys/framework]
+
+#### Added
+
+- [#1053] added elasticsearch debug toolbar for dev env
+- [#1153] added immediate export to elastic on product update in administration
+
+#### Changed
+
+- [#1105] changed variant abbreviation to a translation in administration
+- [#1106] configure VarDumperExtension in all environments
+- [#1114] all the properties and methods in Shopsys\FrameworkBundle\Twig namespace has now protected instead of private visibility
+- [#1129] changed VAT calculation - not using a rounded coefficient now
+- [#1161] RedisFacade: unification of used clients
+
+#### Fixed
+
+- [#1092] ImageConfigDefinition bugfix - added additionalSizes under types
+- [#1094] ImageFacade: use provided "type" when accessing size config
+- [#1109] checking of order item type is fixed by using type getters
+- [#1122] fixed memory leak on shopsys:product-search:export-products command
+- [#1125] multidomain sitemaps are now properly generated
+- [#1145] transport and payments are prefilled to the order only if they exists
+- [#1157] product variants without a price for a pricing group are exportable to elastic
+- [#1159] products with zero price are now not returned from Elasticsearch
+- [#1064] fixed sending emails with attachment
+
+#### Removed
+
+- [#1166] removed redundant service definitions
+
+### [shopsys/project-base]
+
+#### Changed
+
+- [#1049] prepared DI configuration for project-base like framework
+- [#1119] prevent indexing `CustomerPassword:setNewPassword` by robots
+
+#### Fixed
+
+- [#1073] created an empty folder app/Resources/ for overwritten templates
+- [#1126] deploy-to-google-cloud.sh: script sets correct elasticsearch image from dockerhub
+- [#1175] DI parameter %build-version% is always string now
+
+### [shopsys/shopsys]
+
+#### Added
+
+- [#1018] added read model for front-end product lists
+- [#1133] added Elasticsearch structure migration via reindexing for easier deployment
+- [#1069] added sorting by language to Elasticsearch
+
+#### Changed
+
+- [#1139] entity-extension.md has been updated to be more useful by new users
+- [#1040] upgraded phpstan from level 0 to level 4
+- [#1121] use autocomplete="new-password" attributed for password inputs
+- [#1154] stop using excluded_404s in monolog config for incompatible types
+- [#1162] added exceptions for constructor parameters in BC promise
+- [#1164] all services injected in order to prevent BC breaks are now injected same way
+- [#1068] restructuring of Phing targets
+- [#1172] docker-sync now does not exclude project-base/docs in monorepo
+
+#### Fixed
+
+- [#1113] ProductAvailabilityCalculation: fix calculation of not-yet-persisted products
+- [#1177] build.xml: build-deploy-* phing targets are fixed
+- [#1180] **(BC-BREAK)** fixed wrong field in exporting products to Elasticsearch
+
+### [shopsys/migrations]
+
+#### Fixed
+
+- [#1063] Configuration::shouldExecuteMigration is fixed
+
 ## [v7.2.2](https://github.com/shopsys/shopsys/compare/v7.2.1...v7.2.2) - 2019-06-18
 
 ### [shopsys/framework]
@@ -2474,3 +2551,40 @@ That's why is this section formatted differently.
 [#1082]: https://github.com/shopsys/shopsys/pull/1082
 [#1083]: https://github.com/shopsys/shopsys/pull/1083
 [@malyMiso]: https://github.com/malyMiso
+[#1018]: https://github.com/shopsys/shopsys/pull/1018
+[#1040]: https://github.com/shopsys/shopsys/pull/1040
+[#1049]: https://github.com/shopsys/shopsys/pull/1049
+[#1053]: https://github.com/shopsys/shopsys/pull/1053
+[#1063]: https://github.com/shopsys/shopsys/pull/1063
+[#1064]: https://github.com/shopsys/shopsys/pull/1064
+[#1068]: https://github.com/shopsys/shopsys/pull/1068
+[#1069]: https://github.com/shopsys/shopsys/pull/1069
+[#1073]: https://github.com/shopsys/shopsys/pull/1073
+[#1092]: https://github.com/shopsys/shopsys/pull/1092
+[#1094]: https://github.com/shopsys/shopsys/pull/1094
+[#1105]: https://github.com/shopsys/shopsys/pull/1105
+[#1106]: https://github.com/shopsys/shopsys/pull/1106
+[#1109]: https://github.com/shopsys/shopsys/pull/1109
+[#1113]: https://github.com/shopsys/shopsys/pull/1113
+[#1114]: https://github.com/shopsys/shopsys/pull/1114
+[#1119]: https://github.com/shopsys/shopsys/pull/1119
+[#1121]: https://github.com/shopsys/shopsys/pull/1121
+[#1122]: https://github.com/shopsys/shopsys/pull/1122
+[#1125]: https://github.com/shopsys/shopsys/pull/1125
+[#1126]: https://github.com/shopsys/shopsys/pull/1126
+[#1129]: https://github.com/shopsys/shopsys/pull/1129
+[#1133]: https://github.com/shopsys/shopsys/pull/1133
+[#1139]: https://github.com/shopsys/shopsys/pull/1139
+[#1145]: https://github.com/shopsys/shopsys/pull/1145
+[#1153]: https://github.com/shopsys/shopsys/pull/1153
+[#1154]: https://github.com/shopsys/shopsys/pull/1154
+[#1157]: https://github.com/shopsys/shopsys/pull/1157
+[#1159]: https://github.com/shopsys/shopsys/pull/1159
+[#1161]: https://github.com/shopsys/shopsys/pull/1161
+[#1162]: https://github.com/shopsys/shopsys/pull/1162
+[#1164]: https://github.com/shopsys/shopsys/pull/1164
+[#1166]: https://github.com/shopsys/shopsys/pull/1166
+[#1172]: https://github.com/shopsys/shopsys/pull/1172
+[#1175]: https://github.com/shopsys/shopsys/pull/1175
+[#1177]: https://github.com/shopsys/shopsys/pull/1177
+[#1180]: https://github.com/shopsys/shopsys/pull/1180

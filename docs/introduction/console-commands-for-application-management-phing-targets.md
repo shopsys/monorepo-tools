@@ -259,8 +259,6 @@ Reverts changes done by `backend-api-install` because we don't commit the backen
 If the install script was successful, the uninstall will be successful as well.
 
 ## Customization of Phing targets and properties
-<!--- TODO: Remove or update the note below -->
-*Note: This section describes customization of Phing targets in version of Shopsys Framework that hasn't been released yet.*  
 *If you're not yet using `v7.3.0`, all Phing targets are defined in `build.xml` in the project repository only - you can directly modify them or delete them instead of overwriting them.*
 
 You can override and replace any Phing target or property defined in the `shopsys/framework` package by redefining it in your `build.xml` config.

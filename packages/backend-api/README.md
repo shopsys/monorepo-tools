@@ -8,10 +8,10 @@ The bundle is dedicated for projects based on Shopsys Framework (i.e. created fr
 This repository is maintained by [shopsys/shopsys] monorepo, information about changes are in [monorepo CHANGELOG.md](https://github.com/shopsys/shopsys/blob/master/CHANGELOG.md).
 
 ## Installation
-[Installation instructions](https://github.com/shopsys/shopsys/blob/8.0/docs/backend-api/backend-api-installation.md) can be found in our monorepo repository.
+[Installation instructions](https://github.com/shopsys/shopsys/blob/master/docs/backend-api/backend-api-installation.md) can be found in our monorepo repository.
 
 ## Documentation
-[Documentation](https://github.com/shopsys/shopsys/blob/8.0/docs/backend-api/introduction-to-backend-api.md) can be found in our monorepo repository.
+[Documentation](https://github.com/shopsys/shopsys/blob/master/docs/backend-api/introduction-to-backend-api.md) can be found in our monorepo repository.
 
 ## Contributing
 Thank you for your contributions to Shopsys Backend API package.

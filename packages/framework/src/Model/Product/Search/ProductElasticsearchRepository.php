@@ -269,7 +269,7 @@ class ProductElasticsearchRepository
     public function delete(int $domainId, array $deleteIds): void
     {
         $this->client->deleteByQuery([
-            'index' => $this->elasticsearchStructureManager->getIndexName($domainId, self::ELASTICSEARCH_INDEX),
+            'index' => $this->elasticsearchStructureManager->getCurrentIndexName($domainId, self::ELASTICSEARCH_INDEX),
             'type' => '_doc',
             'body' => [
                 'query' => [

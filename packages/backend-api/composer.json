@@ -28,10 +28,10 @@
         "friendsofsymfony/rest-bundle": "^2.5",
         "jms/serializer-bundle": "^2.4",
         "ramsey/uuid": "^3.8",
-        "shopsys/form-types-bundle": "8.0.x-dev",
-        "shopsys/framework": "8.0.x-dev",
-        "shopsys/migrations": "8.0.x-dev",
-        "shopsys/plugin-interface": "8.0.x-dev",
+        "shopsys/form-types-bundle": "dev-master",
+        "shopsys/framework": "dev-master",
+        "shopsys/migrations": "dev-master",
+        "shopsys/plugin-interface": "dev-master",
         "symfony/config": "^3.4",
         "symfony/dependency-injection": "^3.4",
         "symfony/http-foundation": "^3.4",
@@ -39,6 +39,6 @@
     },
     "require-dev": {
         "phpunit/phpunit": "^7.0",
-        "shopsys/coding-standards": "8.0.x-dev"
+        "shopsys/coding-standards": "dev-master"
     }
 }

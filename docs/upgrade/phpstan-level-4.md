@@ -1,8 +1,8 @@
 # Upgrade Instructions for Upgrading PHPStan to Level 4
 
 This article describes the upgrade instructions for [#1040 Upgrading PHPStan to level 4](https://github.com/shopsys/shopsys/pull/1040).
-Upgrade instructions are in a separate article because there is a lot of instructions and we don't want to jam the [UPGRADE-unreleased.md](/docs/upgrade/UPGRADE-unreleased.md). <!--- TODO change to released version -->
-Instructions are meant to be followed when you upgrade from `v7.2.0` to `unreleased`. <!--- TODO change to released version -->
+Upgrade instructions are in a separate article because there is a lot of instructions and we don't want to jam the [UPGRADE-v7.3.0](/docs/upgrade/UPGRADE-v7.3.0.md).
+Instructions are meant to be followed when you upgrade from `v7.2.0` to `v7.3.0`.
 We recommend upgrading to level 4 and increasing the level gradually from version 0 to 4 to ensure smooth implementation.
 
 To upgrade level of PHPStan you need to:

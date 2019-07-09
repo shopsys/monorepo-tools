@@ -667,7 +667,7 @@
             {% if not inline %}
                 <span class="svg svg-circle-remove js-validation-error-toggle"></span>
             {% endif %}
-            <div class="in-message in-message--{{ inline ? 'danger' : 'form-error' }} js-validation-error {{ form.parent is not empty and not inline ? ' in-message--pin' : '' }}">
+            <div class="in-message in-message--{{ inline ? 'danger' : 'error' }} js-validation-error {{ form.parent is not empty and not inline ? ' in-message--pin' : '' }}">
                 <ul class="in-message__list">
                     {% if errors|length > 0 %}
                         {% for error in errors %}
