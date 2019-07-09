@@ -130,6 +130,9 @@ There you can find links to upgrade notes for other versions too.
     - `IntlCurrencyRepository::isSupportedCurrency()` is now strictly type hinted
     - protected `PriceExtension::getNumberFormatter()` is renamed to `getCurrencyFormatter()` and returns an instance of `CommerceGuys\Intl\Formatter\CurrencyFormatter` now
         - you need to change your usages accordingly
+- get rid of not needed deprecations and BC-promise implementation from 7.x version ([#1193](https://github.com/shopsys/shopsys/pull/1193))
+    - remove registration of `productCategoryFilter` filter from `Shopsys\ShopBundle\Model\AdvancedSearch\ProductAdvancedSearchConfig`, `services.yml` and `services_test.yml`
+        - in the case, the class contains custom filters, move the filter into the `parent::__construct` as the last parameter
 
 ### Configuration
 - simplify local configuration ([#1004](https://github.com/shopsys/shopsys/pull/1004))
