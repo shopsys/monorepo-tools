@@ -17,9 +17,9 @@
             <header class="web__header">
                 <div class="web__header__in">
                     <div class="web__header__logo">
-
-                        <img class="web__header__logo__svg" src="{{ asset('assets/admin/images/logo.svg') }}" alt="Shopsys Framework">
-
+                        <a href="{{ url('admin_default_dashboard') }}">
+                            <img class="web__header__logo__svg" src="{{ asset('assets/admin/images/logo.svg') }}" alt="Shopsys Framework">
+                        </a>
                     </div>
                     {{ render(controller('ShopsysFrameworkBundle:Admin/Menu:menu')) }}
                 </div>
