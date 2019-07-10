@@ -72,23 +72,6 @@ class ProductSearchExporter
     /**
      * @param int $domainId
      * @param string $locale
-     * @deprecated Use `exportWithOutput` instead
-     */
-    public function export(int $domainId, string $locale): void
-    {
-        $startFrom = 0;
-        $exportedIds = [];
-        do {
-            $batchExportedIds = $this->exportBatch($domainId, $locale, $startFrom);
-            $exportedIds = array_merge($exportedIds, $batchExportedIds);
-            $startFrom += static::BATCH_SIZE;
-        } while (!empty($batchExportedIds));
-        $this->removeNotUpdated($domainId, $exportedIds);
-    }
-
-    /**
-     * @param int $domainId
-     * @param string $locale
      * @param \Symfony\Component\Console\Style\SymfonyStyle $symfonyStyleIo
      */
     public function exportWithOutput(int $domainId, string $locale, SymfonyStyle $symfonyStyleIo): void
