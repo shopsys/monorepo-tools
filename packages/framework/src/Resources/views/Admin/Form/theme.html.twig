@@ -49,39 +49,20 @@
 {%- endblock localized_widget %}
 
 {% block form_row %}
-    {% if form.vars.is_plugin_data_group == true %}
-        {% if form.pluginData is empty %}
-            {% do form.pluginData.setRendered %}
-        {% else %}
-            {% for pluginForm in form.pluginData %}
-                <div class="wrap-divider">
-                    <div class="form-group">
-                        <div class="form-group__title">
-                            {{ pluginForm.vars.label }}
-                        </div>
-
-                        {{ form_widget(pluginForm) }}
-                        {{ form_errors(pluginForm) }}
-                    </div>
-                </div>
-            {% endfor %}
-        {% endif %}
-    {% else %}
-        {% if render_form_row %}
-            <div class="form-line{{ attr.disabledField is defined ? ' form-input-disabled form-line--disabled' }}">
-            {{ form_errors(form) }}
-            {{ form_label(form, label) }}
-        {% endif %}
-        {{ form_widget(form) }}
-        {% if attr.disabledField is defined %}
-            <span class="form-disabled {{ attr.disabledFieldClass|default('') }} js-tooltip" data-toggle="tooltip" data-placement="{{ attr.disabledFieldPlacement|default('right') }}"
-                  title="{{ attr.disabledFieldTitle|default('') }}">
-                <i class="svg svg-pencil"></i>
-            </span>
-        {% endif %}
-        {% if render_form_row %}
-            </div>
-        {% endif %}
+    {% if render_form_row %}
+        <div class="form-line{{ attr.disabledField is defined ? ' form-input-disabled form-line--disabled' }}">
+        {{ form_errors(form) }}
+        {{ form_label(form, label) }}
+    {% endif %}
+    {{ form_widget(form) }}
+    {% if attr.disabledField is defined %}
+        <span class="form-disabled {{ attr.disabledFieldClass|default('') }} js-tooltip" data-toggle="tooltip" data-placement="{{ attr.disabledFieldPlacement|default('right') }}"
+                title="{{ attr.disabledFieldTitle|default('') }}">
+            <i class="svg svg-pencil"></i>
+        </span>
+    {% endif %}
+    {% if render_form_row %}
+        </div>
     {% endif %}
 {% endblock form_row %}
 
