@@ -119,6 +119,17 @@ There you can find links to upgrade notes for other versions too.
     - we recommend encapsulating collections similarly in your own custom entities as well
 - update your `OrderDataFixture` and `UserDataFixture` to create new users and orders in last two weeks instead of one ([#1147](https://github.com/shopsys/shopsys/pull/1147))
     - this is done by changing all occurrences of `$this->faker->dateTimeBetween('-1 week', 'now');` by `$this->faker->dateTimeBetween('-2 week', 'now');`
+- upgrade `commerceguys/intl` to `^1.0.0` version ([#1192](https://github.com/shopsys/shopsys/pull/1192))
+    - in your `composer.json`, change the dependency:
+        ```diff
+        - "commerceguys/intl": "0.7.4",
+        + "commerceguys/intl": "^1.0.0",
+        ```
+    - `IntlCurrencyRepository::get()` and `::getAll()` methods no longer accept `$fallbackLocale` as the a parameter
+        - you can set the parameter using the class constructor if necessary
+    - `IntlCurrencyRepository::isSupportedCurrency()` is now strictly type hinted
+    - protected `PriceExtension::getNumberFormatter()` is renamed to `getCurrencyFormatter()` and returns an instance of `CommerceGuys\Intl\Formatter\CurrencyFormatter` now
+        - you need to change your usages accordingly
 
 ### Configuration
 - simplify local configuration ([#1004](https://github.com/shopsys/shopsys/pull/1004))

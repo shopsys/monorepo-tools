@@ -42,8 +42,8 @@ class CurrencyFormType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        /** @var \CommerceGuys\Intl\Currency\Currency[] $intlCurrencies */
         $intlCurrencies = $this->intlCurrencyRepository->getAll($this->localization->getLocale());
-        /* @var $intlCurrencies \CommerceGuys\Intl\Currency\CurrencyInterface[] */
 
         $possibleCurrencyCodes = [];
         foreach ($intlCurrencies as $intlCurrency) {

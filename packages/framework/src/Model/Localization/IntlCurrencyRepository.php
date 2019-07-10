@@ -1,7 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Shopsys\FrameworkBundle\Model\Localization;
 
+use CommerceGuys\Intl\Currency\Currency;
 use CommerceGuys\Intl\Currency\CurrencyRepository as BaseCurrencyRepository;
 
 class IntlCurrencyRepository extends BaseCurrencyRepository
@@ -30,6 +33,7 @@ class IntlCurrencyRepository extends BaseCurrencyRepository
         'BSD',
         'BTN',
         'BWP',
+        'BYN',
         'BYR',
         'BZD',
         'CAD',
@@ -98,6 +102,7 @@ class IntlCurrencyRepository extends BaseCurrencyRepository
         'MNT',
         'MOP',
         'MRO',
+        'MRU',
         'MUR',
         'MVR',
         'MWK',
@@ -135,6 +140,7 @@ class IntlCurrencyRepository extends BaseCurrencyRepository
         'SRD',
         'SSP',
         'STD',
+        'STN',
         'SVC',
         'SYP',
         'SZL',
@@ -151,8 +157,10 @@ class IntlCurrencyRepository extends BaseCurrencyRepository
         'UGX',
         'USD',
         'UYU',
+        'UYW',
         'UZS',
         'VEF',
+        'VES',
         'VND',
         'VUV',
         'WST',
@@ -169,40 +177,82 @@ class IntlCurrencyRepository extends BaseCurrencyRepository
     /**
      * {@inheritDoc}
      */
-    public function get($currencyCode, $locale = null, $fallbackLocale = null)
+    public function get($currencyCode, $locale = null)
     {
         if (!$this->isSupportedCurrency($currencyCode)) {
             throw new \Shopsys\FrameworkBundle\Model\Localization\Exception\UnsupportedCurrencyException($currencyCode);
         }
 
-        return parent::get($currencyCode, $locale, $fallbackLocale);
+        try {
+            return parent::get($currencyCode, $locale);
+        } catch (\CommerceGuys\Intl\Exception\UnknownCurrencyException $ex) {
+            $legacyCurrencies = $this->getLegacyCurrenciesIndexedByCurrencyCodes();
+            if (array_key_exists($currencyCode, $legacyCurrencies)) {
+                return $legacyCurrencies[$currencyCode];
+            }
+            throw new \Shopsys\FrameworkBundle\Model\Localization\Exception\UndefinedLegacyCurrencyException($currencyCode);
+        }
     }
 
     /**
      * {@inheritDoc}
-     * @return \CommerceGuys\Intl\Currency\CurrencyInterface[]
+     * @return \CommerceGuys\Intl\Currency\Currency[]
      */
-    public function getAll($locale = null, $fallbackLocale = null)
+    public function getAll($locale = null)
     {
-        $intlCurrencies = parent::getAll($locale, $fallbackLocale);
-        /* @var $intlCurrencies \CommerceGuys\Intl\Currency\CurrencyInterface[] */
+        /** @var \CommerceGuys\Intl\Currency\Currency[] $intlCurrencies */
+        $intlCurrencies = parent::getAll($locale);
 
         $supportedCurrencies = [];
         foreach ($intlCurrencies as $intlCurrency) {
-            if ($this->isSupportedCurrency($intlCurrency->getCurrencyCode())) {
-                $supportedCurrencies[] = $intlCurrency;
+            $currencyCode = $intlCurrency->getCurrencyCode();
+            if ($this->isSupportedCurrency($currencyCode)) {
+                $supportedCurrencies[$currencyCode] = $intlCurrency;
             }
         }
 
-        return $supportedCurrencies;
+        return array_merge($this->getLegacyCurrenciesIndexedByCurrencyCodes(), $supportedCurrencies);
     }
 
     /**
      * @param string $currencyCode
      * @return bool
      */
-    public function isSupportedCurrency($currencyCode)
+    public function isSupportedCurrency(string $currencyCode): bool
     {
         return in_array($currencyCode, self::SUPPORTED_CURRENCY_CODES, true);
+    }
+
+    /**
+     * @return \CommerceGuys\Intl\Currency\Currency[]
+     */
+    protected function getLegacyCurrenciesIndexedByCurrencyCodes(): array
+    {
+        return [
+            'BYR' => new Currency([
+                'currency_code' => 'BYR',
+                'name' => 'Belarusian Ruble (2000–2016)',
+                'locale' => 'en',
+                'numeric_code' => '974',
+            ]),
+            'MRO' => new Currency([
+                'currency_code' => 'MRO',
+                'name' => 'Mauritanian Ouguiya',
+                'locale' => 'en',
+                'numeric_code' => '478',
+            ]),
+            'STD' => new Currency([
+                'currency_code' => 'STD',
+                'name' => 'São Tomé & Príncipe Dobra',
+                'locale' => 'en',
+                'numeric_code' => '678',
+            ]),
+            'VEF' => new Currency([
+                'currency_code' => 'VEF',
+                'name' => 'Venezuelan Bolívar',
+                'locale' => 'en',
+                'numeric_code' => '937',
+            ]),
+        ];
     }
 }

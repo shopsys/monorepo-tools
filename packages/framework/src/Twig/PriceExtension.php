@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Shopsys\FrameworkBundle\Twig;
 
 use CommerceGuys\Intl\Currency\CurrencyRepositoryInterface;
-use CommerceGuys\Intl\Formatter\NumberFormatter;
+use CommerceGuys\Intl\Formatter\CurrencyFormatter;
 use CommerceGuys\Intl\NumberFormat\NumberFormatRepositoryInterface;
 use Shopsys\FrameworkBundle\Component\Domain\Domain;
 use Shopsys\FrameworkBundle\Component\Money\Money;
@@ -235,27 +235,33 @@ class PriceExtension extends Twig_Extension
             $locale = $this->localization->getLocale();
         }
 
-        $numberFormatter = $this->getNumberFormatter($locale);
+        $currencyFormatter = $this->getCurrencyFormatter($locale);
         $intlCurrency = $this->intlCurrencyRepository->get(
             $currency->getCode(),
             $locale
         );
 
-        return $numberFormatter->formatCurrency($price->getAmount(), $intlCurrency);
+        return $currencyFormatter->format($price->getAmount(), $intlCurrency->getCurrencyCode());
     }
 
     /**
      * @param string $locale
-     * @return \CommerceGuys\Intl\Formatter\NumberFormatter
+     * @return \CommerceGuys\Intl\Formatter\CurrencyFormatter
      */
-    protected function getNumberFormatter(string $locale): NumberFormatter
+    protected function getCurrencyFormatter(string $locale): CurrencyFormatter
     {
-        $numberFormat = $this->numberFormatRepository->get($locale);
-        $numberFormatter = new NumberFormatter($numberFormat, NumberFormatter::CURRENCY);
-        $numberFormatter->setMinimumFractionDigits(static::MINIMUM_FRACTION_DIGITS);
-        $numberFormatter->setMaximumFractionDigits(static::MAXIMUM_FRACTION_DIGITS);
+        $currencyFormatter = new CurrencyFormatter(
+            $this->numberFormatRepository,
+            $this->intlCurrencyRepository,
+            [
+                'locale' => $locale,
+                'style' => 'standard',
+                'minimum_fraction_digits' => static::MINIMUM_FRACTION_DIGITS,
+                'maximum_fraction_digits' => static::MAXIMUM_FRACTION_DIGITS,
+            ]
+        );
 
-        return $numberFormatter;
+        return $currencyFormatter;
     }
 
     /**

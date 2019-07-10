@@ -62,10 +62,12 @@ class NumberFormatterExtension extends Twig_Extension
      */
     public function formatNumber($number, $locale = null)
     {
-        $numberFormat = $this->numberFormatRepository->get($this->getLocale($locale));
-        $numberFormatter = new NumberFormatter($numberFormat, NumberFormatter::DECIMAL);
-        $numberFormatter->setMinimumFractionDigits(static::MINIMUM_FRACTION_DIGITS);
-        $numberFormatter->setMaximumFractionDigits(static::MAXIMUM_FRACTION_DIGITS);
+        $numberFormatter = new NumberFormatter($this->numberFormatRepository, [
+            'locale' => $this->getLocale($locale),
+            'style' => 'decimal',
+            'minimum_fraction_digits' => static::MINIMUM_FRACTION_DIGITS,
+            'maximum_fraction_digits' => static::MAXIMUM_FRACTION_DIGITS,
+        ]);
 
         return $numberFormatter->format($number);
     }
@@ -78,10 +80,12 @@ class NumberFormatterExtension extends Twig_Extension
      */
     public function formatDecimalNumber($number, $minimumFractionDigits, $locale = null)
     {
-        $numberFormat = $this->numberFormatRepository->get($this->getLocale($locale));
-        $numberFormatter = new NumberFormatter($numberFormat, NumberFormatter::DECIMAL);
-        $numberFormatter->setMinimumFractionDigits($minimumFractionDigits);
-        $numberFormatter->setMaximumFractionDigits(static::MAXIMUM_FRACTION_DIGITS);
+        $numberFormatter = new NumberFormatter($this->numberFormatRepository, [
+            'locale' => $this->getLocale($locale),
+            'style' => 'decimal',
+            'minimum_fraction_digits' => $minimumFractionDigits,
+            'maximum_fraction_digits' => static::MAXIMUM_FRACTION_DIGITS,
+        ]);
 
         return $numberFormatter->format($number);
     }
@@ -93,12 +97,14 @@ class NumberFormatterExtension extends Twig_Extension
      */
     public function formatPercent($number, $locale = null)
     {
-        $numberFormat = $this->numberFormatRepository->get($this->getLocale($locale));
-        $numberFormatter = new NumberFormatter($numberFormat, NumberFormatter::PERCENT);
-        $numberFormatter->setMinimumFractionDigits(static::MINIMUM_FRACTION_DIGITS);
-        $numberFormatter->setMaximumFractionDigits(static::MAXIMUM_FRACTION_DIGITS);
+        $numberFormatter = new NumberFormatter($this->numberFormatRepository, [
+            'locale' => $this->getLocale($locale),
+            'style' => 'percent',
+            'minimum_fraction_digits' => static::MINIMUM_FRACTION_DIGITS,
+            'maximum_fraction_digits' => static::MAXIMUM_FRACTION_DIGITS,
+        ]);
 
-        return $numberFormatter->format($number);
+        return $numberFormatter->format($number / 100);
     }
 
     /**

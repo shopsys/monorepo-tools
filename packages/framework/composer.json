@@ -39,7 +39,7 @@
         "barryvdh/elfinder-flysystem-driver": "^0.2",
         "bmatzner/jquery-bundle": "^2.2.2",
         "bmatzner/jquery-ui-bundle": "^1.10.3",
-        "commerceguys/intl": "0.7.4",
+        "commerceguys/intl": "^1.0.0",
         "composer/composer": "^1.6.0",
         "craue/formflow-bundle": "^3.0.3",
         "defuse/php-encryption": "^2.2.1",
