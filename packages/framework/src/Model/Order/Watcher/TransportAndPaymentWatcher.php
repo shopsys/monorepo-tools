@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Shopsys\FrameworkBundle\Model\Order\Watcher;
 
-use Shopsys\FrameworkBundle\Component\Money\Money;
 use Shopsys\FrameworkBundle\Model\Order\OrderData;
 use Shopsys\FrameworkBundle\Model\Order\Preview\OrderPreview;
 use Shopsys\FrameworkBundle\Model\Payment\Payment;
@@ -114,14 +113,6 @@ class TransportAndPaymentWatcher
 
         if (array_key_exists($transport->getId(), $transportPrices)) {
             $rememberedTransportPriceValue = $transportPrices[$transport->getId()];
-            if (!($rememberedTransportPriceValue instanceof Money)) {
-                @trigger_error(
-                    $this->getUnexpectedTypeOfPriceInSessionDeprecationMessage($rememberedTransportPriceValue, __METHOD__),
-                    E_USER_DEPRECATED
-                );
-
-                return true;
-            }
 
             $transportPrice = $this->transportPriceCalculation->calculatePrice(
                 $transport,
@@ -155,14 +146,6 @@ class TransportAndPaymentWatcher
 
         if (array_key_exists($payment->getId(), $paymentPrices)) {
             $rememberedPaymentPriceValue = $paymentPrices[$payment->getId()];
-            if (!($rememberedPaymentPriceValue instanceof Money)) {
-                @trigger_error(
-                    $this->getUnexpectedTypeOfPriceInSessionDeprecationMessage($rememberedPaymentPriceValue, __METHOD__),
-                    E_USER_DEPRECATED
-                );
-
-                return true;
-            }
 
             $paymentPrice = $this->paymentPriceCalculation->calculatePrice(
                 $payment,
@@ -288,22 +271,5 @@ class TransportAndPaymentWatcher
     protected function getRememberedPaymentPrices(): array
     {
         return $this->getRememberedTransportAndPayment()[static::SESSION_PAYMENT_PRICES];
-    }
-
-    /**
-     * @param mixed $value
-     * @param string $methodName
-     * @return string
-     */
-    protected function getUnexpectedTypeOfPriceInSessionDeprecationMessage($value, string $methodName): string
-    {
-        $message = sprintf(
-            'Method "%s" expected the price to be saved as "%s" in session, got "%s" instead.',
-            $methodName,
-            Money::class,
-            \is_object($value) ? \get_class($value) : \gettype($value)
-        );
-
-        return $message . ' The method warned about the possibility of changed price, but it would fail in the future.';
     }
 }
