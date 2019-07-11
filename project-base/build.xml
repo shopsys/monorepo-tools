@@ -7,8 +7,8 @@
     <property name="path.vendor" value="${path.root}/vendor"/>
     <property name="path.framework" value="${path.vendor}/shopsys/framework"/>
 
-    <import file="${path.framework}/build.xml"/>
-
     <property name="is-multidomain" value="true"/>
+    <property name="phpstan.level" value="1" />
 
+    <import file="${path.framework}/build.xml"/>
 </project>

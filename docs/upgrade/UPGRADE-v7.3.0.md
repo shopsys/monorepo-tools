@@ -124,10 +124,10 @@ There you can find links to upgrade notes for other versions too.
             <property name="path.vendor" value="${path.root}/vendor"/>
             <property name="path.framework" value="${path.vendor}/shopsys/framework"/>
 
-            <import file="${path.framework}/build.xml"/>
-
             <property name="is-multidomain" value="true"/>
             <property name="phpstan.level" value="0"/>
+
+            <import file="${path.framework}/build.xml"/>
 
         </project>
         ```
