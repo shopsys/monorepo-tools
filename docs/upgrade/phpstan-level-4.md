@@ -106,8 +106,3 @@ To upgrade level of PHPStan you need to:
     +   $form['product_form[displayAvailabilityGroup][unit]']->setValue($unit->getId());
     +   $form['product_form[displayAvailabilityGroup][availability]']->setValue($availability->getId());
     ```
-- fix typo in `OrderDataFixture::getRandomCountryFromFirstDomain()`
-    ```diff
-    -   $randomPaymentReferenceName = $this->faker->randomElement([
-    +   $randomCountryReferenceName = $this->faker->randomElement([
-    ```

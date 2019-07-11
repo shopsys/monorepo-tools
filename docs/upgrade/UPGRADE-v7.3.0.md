@@ -15,9 +15,9 @@ There you can find links to upgrade notes for other versions too.
     -RUN php phing composer-prod npm dirs-create assets
     +RUN php phing build-deploy-part-1-db-independent
     ```
-- update Elasticsearch build configuration ([#1069](https://github.com/shopsys/shopsys/pull/1069))
-    - copy new [Dockerfile from shopsys/project-base](https://github.com/shopsys/project-base/blob/v7.3.0/docker/elasticsearch/Dockerfile)
-    - update `docker-compose.yml` and `docker-compose.yml.dist`
+- update Elasticsearch build configuration to allow sorting each language properly ([#1069](https://github.com/shopsys/shopsys/pull/1069))
+    - copy new [Dockerfile from shopsys/project-base](https://github.com/shopsys/project-base/blob/v7.3.0/docker/elasticsearch/Dockerfile) into new `docker/elasticsearch` folder
+    - update docker compose files (`docker-compose.yml`, `docker-compose.yml.dist`, `docker-compose-mac.yml.dist` and `docker-compose-win.yml.dist`)
         ```diff
             elasticsearch:
         -       image: docker.elastic.co/elasticsearch/elasticsearch-oss:6.3.2
@@ -25,17 +25,8 @@ There you can find links to upgrade notes for other versions too.
         +           context: .
         +           dockerfile: docker/elasticsearch/Dockerfile
                 container_name: shopsys-framework-elasticsearch
-                ulimits:
-                    nofile:
-                        soft: 65536
-                        hard: 65536
-                ports:
-                    - "9200:9200"
-                volumes:
-                    - elasticsearch-data:/usr/share/elasticsearch/data
-                environment:
-                    - discovery.type=single-node
         ```
+    - for natively installed Elasticsearch (for example in production) you have to [install ICU analysis plugin](https://www.elastic.co/guide/en/elasticsearch/plugins/current/analysis-icu.html) manually
 - if you deploy to the google cloud, copy new [`.ci/deploy-to-google-cloud.sh`](https://github.com/shopsys/project-base/blob/v7.3.0/.ci/deploy-to-google-cloud.sh) script from `shopsys/project-base` ([#1126](https://github.com/shopsys/shopsys/pull/1126))
 
 ### Configuration
@@ -47,6 +38,26 @@ There you can find links to upgrade notes for other versions too.
     +    message: '#(PHPDoc tag @(param|return) has invalid value (.|\n)+ expected TOKEN_IDENTIFIER at offset \d+)#'
          path: %currentWorkingDirectory%/tests/ShopBundle/Test/Codeception/_generated/AcceptanceTesterActions.php
     ```
+- for `symfony/monolog-bundle` in version `>=3.4.0` you have to unset the incompatible `excluded_404s` configuration from monolog handlers that don't use the `fingers_crossed` type ([#1154](https://github.com/shopsys/shopsys/pull/1154))
+    - for lower versions of the library it's still recommended to do so
+    - in `app/config/packages/dev/monolog.yml`:
+        ```diff
+            monolog:
+               handlers:
+                   main:
+                       # change "fingers_crossed" handler to "group" that works as a passthrough to "nested"
+                       type: group
+                       members: [ nested ]
+        +              excluded_404s: false
+        ```
+    - in `app/config/packages/test/monolog.yml`:
+        ```diff
+            monolog:
+                handlers:
+                    main:
+                        type: "null"
+        +               excluded_404s: false
+        ```
 - change `name.keyword` field in Elasticsearch to sort each language properly ([#1069](https://github.com/shopsys/shopsys/pull/1069))
     - update field `name.keyword` to type `icu_collation_keyword` in `src/Shopsys/ShopBundle/Resources/definition/product/*.json` and set its `language` parameter according to what locale does your domain have:
         - example for English domain from [`1.json` of shopsys/project-base](https://github.com/shopsys/project-base/blob/v7.3.0/src/Shopsys/ShopBundle/Resources/definition/product/1.json) repository.
@@ -74,6 +85,7 @@ There you can find links to upgrade notes for other versions too.
         -   $this->assertIdWithFilter($filter, [19, 17]);
         +   $this->assertIdWithFilter($filter, [17, 19]);
         ```
+    - don't forget to recreate structure and export products to Elasticsearch afterwards with `php phing product-search-recreate-structure product-search-export-products`
 - extend DI configuration for your project by updating ([#1049](https://github.com/shopsys/shopsys/pull/1049))
     - `src/Shopsys/ShopBundle/Resources/config/services.yml`
         ```diff
@@ -82,31 +94,6 @@ There you can find links to upgrade notes for other versions too.
         +    Shopsys\ShopBundle\:
         +        resource: '../../**/*{Calculation,Facade,Factory,Generator,Handler,InlineEdit,Listener,Loader,Mapper,Parser,Provider,Recalculator,Registry,Repository,Resolver,Service,Scheduler,Subscriber,Transformer}.php'
         +        exclude: '../../{Command,Controller,DependencyInjection,Form,Migrations,Resources,Twig}'
-        ```
-    - `src/Shopsys/ShopBundle/Resources/config/services/twig.yml`
-        ```diff
-        -    Shopsys\ShopBundle\Twig\FlagsExtension: ~
-        +    Shopsys\ShopBundle\Twig\:
-        +        resource: '../../Twig/'
-        ```
-- unset the incompatible `excluded_404s` configuration from monolog handlers that don't use the `fingers_crossed` type ([#1154](https://github.com/shopsys/shopsys/pull/1154))
-    - in `app/config/packages/dev/monolog.yml`:
-        ```diff
-            monolog:
-               handlers:
-                   main:
-                       # change "fingers_crossed" handler to "group" that works as a passthrough to "nested"
-                       type: group
-                       members: [ nested ]
-        +              excluded_404s: false
-        ```
-    - in `app/config/packages/test/monolog.yml`:
-        ```diff
-            monolog:
-                handlers:
-                    main:
-                        type: "null"
-        +               excluded_404s: false
         ```
 - remove the useless route `front_category_panel` from your `routing_front.yml` ([#1042](https://github.com/shopsys/shopsys/pull/1042))
     - you'll find the configuration file in `src/Shopsys/ShopBundle/Resources/config/`
@@ -187,7 +174,7 @@ There you can find links to upgrade notes for other versions too.
             <meta name="robots" content="noindex, follow">
         {% endblock %}
         ```
-    - you should prevent indexing by robots using this block on all pages that are secured by an URL hash
+    - you should prevent indexing by robots using this block on all in your project created pages that are secured by an URL hash
 - use `autocomplete="new-password"` attribute for password changing inputs to prevent filling it by browser ([#1121](https://github.com/shopsys/shopsys/pull/1121))
     - in `shopsys/project-base` repository this change was needed in 3 form classes (`NewPasswordFormType`, `UserFormType` and `RegistrationFormType`):
         ```diff
@@ -197,8 +184,21 @@ There you can find links to upgrade notes for other versions too.
         +     'attr' => ['autocomplete' => 'new-password'],
           ],
         ```
-- update your tests to use interfaces of factories fetched from dependency injection container
-    -  update tests same way as in PR ([#970](https://github.com/shopsys/shopsys/pull/970/files))
+- update your tests to use interfaces of factories fetched from dependency injection container ([#970](https://github.com/shopsys/shopsys/pull/970/files))
+    - example
+        ```diff
+        -        /** @var \Shopsys\FrameworkBundle\Model\Cart\Item\CartItemFactory $cartItemFactory */
+        -        $cartItemFactory = $this->getContainer()->get(CartItemFactory::class);
+        +        /** @var \Shopsys\FrameworkBundle\Model\Cart\Item\CartItemFactoryInterface $cartItemFactory */
+        +        $cartItemFactory = $this->getContainer()->get(CartItemFactoryInterface::class);
+        ```
+    - you have to configure factories in `services_test.yml` the same way as it is in the application (`services.yml`), ie. alias the interface with your implementation
+        ```diff
+        -   Shopsys\FrameworkBundle\Model\Customer\UserDataFactory:
+        +   Shopsys\FrameworkBundle\Model\Customer\UserDataFactoryInterface:
+                alias: Shopsys\ShopBundle\Model\Customer\UserDataFactory
+        ```
+    - you can see updated tests from clean project-base in the [pull request](https://github.com/shopsys/shopsys/pull/970/files)
 - check your VAT calculations after it was modified in `shopsys/framework` ([#1129](https://github.com/shopsys/shopsys/pull/1129))
     - we strongly recommend seeing [the description of the PR](https://github.com/shopsys/shopsys/pull/1129) to understand the scope of this change
     - ẗo ensure you data is consistent, run DB migrations on your demo data and on a copy of production database
@@ -238,10 +238,11 @@ There you can find links to upgrade notes for other versions too.
     - modify the functional test `\Tests\ShopBundle\Functional\Component\Redis\RedisFacadeTest` so it creates `RedisFacade` using the two arrays and add a new test case `testNotCleaningPersistentClient`
         - you can copy-paste the [`RedisFacadeTest`](https://github.com/shopsys/project-base/blob/v7.3.0/tests/ShopBundle/Functional/Component/Redis/RedisFacadeTest.php) from `shopsys/project-base`
 - implement `createFromIdAndName(int $id, string $name): FriendlyUrlData` method in your implementations of `FriendlyUrlDataFactoryInterface` as the method will be added to the interface in `v8.0.0` version ([#948](https://github.com/shopsys/shopsys/pull/948))
+    - you can take a look at the [default implementation](https://github.com/shopsys/shopsys/pull/948/files#diff-3bf55feed4b73ffb418e24c623673188R37) and inspire yourself
 - use aliases of index and build version in index name in Elasticsearch for better usage when deploying ([#1133](https://github.com/shopsys/shopsys/pull/1133))
-    - use method `ElasticsearchStructureManager::getCurrentIndexName` or `ElasticsearchStructureManager::getAliasName` instead of `ElasticsearchStructureManager::getIndexName` when calling a query to Elasticsearch in order to always target the right index
-        - use `getAliasName` if you need to access the index for read operations (eg. searching, filtering)
-        - use `getCurrentIndexName` if need to write to the index or manipulate it (eg. product export)
+    - method `ElasticsearchStructureManager::getIndexName` is deprecated, use one of the following instead
+        - use `ElasticsearchStructureManager::getAliasName` if you need to access the index for read operations (eg. searching, filtering)
+        - use `ElasticsearchStructureManager::getCurrentIndexName` if need to write to the index or manipulate it (eg. product export)
     - run `php phing product-search-recreate-structure` to generate new indexes with aliases
     - use method `ElasticsearchStructureManager::deleteCurrentIndex` instead of `ElasticsearchStructureManager::deleteIndex` as it was deprecated
     - if you have extended `ElasticsearchStructureManager` in `services.yml` you'll need to send the `build-version` parameter to the 4th argument of the constructor or call `setBuildVersion` setter injector like this:
@@ -257,5 +258,10 @@ There you can find links to upgrade notes for other versions too.
         ```
     - copy a new functional test [`ElasticsearchStructureUpdateCheckerTest`](https://github.com/shopsys/project-base/blob/v7.3.0/tests/ShopBundle/Functional/Component/Elasticsearch/ElasticsearchStructureUpdateCheckerTest.php) into `tests/ShopBundle/Functional/Component/Elasticsearch/` in your project
         - this test will ensure that the check whether to update Elasticsearch structure works as intended
+- fix typo in `OrderDataFixture::getRandomCountryFromFirstDomain()`
+    ```diff
+    -   $randomPaymentReferenceName = $this->faker->randomElement([
+    +   $randomCountryReferenceName = $this->faker->randomElement([
+    ```
 
 [shopsys/framework]: https://github.com/shopsys/framework
