@@ -8,6 +8,7 @@
 ## Introduction
 * [Installation Guide](/docs/installation/installation-guide.md)
 * [Installation Using Docker on Production Server](installation/installation-using-docker-on-production-server.md)
+* [Start Building Your Application](/docs/introduction/start-building-your-application.md)
 * [Console Commands for Application Management (Phing Targets)](./introduction/console-commands-for-application-management-phing-targets.md)
 * [Automated Testing](./introduction/automated-testing.md)
 * [Framework Extensibility](introduction/framework-extensibility.md)

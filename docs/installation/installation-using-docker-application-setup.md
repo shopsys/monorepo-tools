@@ -62,3 +62,5 @@ You can use e.g. [Postman](https://www.getpostman.com/apps) or [Kibana](https://
 
 If you need to inspect your application logs, use `docker-compose logs` command.
 For more information about logging see [the separate article](/docs/introduction/logging.md).
+
+*And now you can [start building your application](/docs/introduction/start-building-your-application.md).*

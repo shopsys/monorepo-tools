@@ -54,3 +54,5 @@ Open [http://127.0.0.1:8000/](http://127.0.0.1:8000/) to see running application
 You can also login into the administration section on [http://127.0.0.1:8000/admin/](http://127.0.0.1:8000/admin/) with default credentials:
 * Username: `admin` or `superadmin` (the latter has access to advanced options)
 * Password: `admin123`
+
+*And now you can [start building your application](/docs/introduction/start-building-your-application.md).*
