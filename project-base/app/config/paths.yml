@@ -7,7 +7,7 @@ parameters:
     shopsys.default_db_schema_filepath: '%shopsys.framework.resources_dir%/database/schema.sql'
     shopsys.domain_config_filepath: '%kernel.root_dir%/config/domains.yml'
     shopsys.domain_images_dir: '/web%shopsys.domain_images_url_prefix%'
-    shopsys.domain_images_url_prefix: '/%shopsys.content_dir_name%/admin/images/domain'
+    shopsys.domain_images_url_prefix: '/%shopsys.content_dir_name%/admin/images/domain/'
     shopsys.domain_urls_config_filepath: '%kernel.root_dir%/config/domains_urls.yml'
     shopsys.error_pages_dir: '%shopsys.root_dir%/var/errorPages/'
     shopsys.feed_dir: '/web%shopsys.feed_url_prefix%'

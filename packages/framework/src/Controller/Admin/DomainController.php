@@ -125,17 +125,19 @@ class DomainController extends AdminBaseController
 
         if ($form->isSubmitted() && $form->isValid()) {
             try {
-                $files = $form->getData()[DomainFormType::FIELD_ICON]->uploadedFiles;
+                /** @var \Shopsys\FrameworkBundle\Component\FileUpload\ImageUploadData|null $iconData */
+                $iconData = $form->getData()[DomainFormType::FIELD_ICON];
+                $files = $iconData !== null ? $iconData->uploadedFiles : [];
                 if (count($files) !== 0) {
                     $iconName = reset($files);
 
                     $this->domainFacade->editIcon($id, $iconName);
-                }
 
-                $this->getFlashMessageSender()->addSuccessFlashTwig(
-                    t('Domain <strong>{{ name }}</strong> modified'),
-                    ['name' => $domain->getName()]
-                );
+                    $this->getFlashMessageSender()->addSuccessFlashTwig(
+                        t('Domain <strong>{{ name }}</strong> modified. Try clearing your browser cache (CTRL+F5) if you can\'t see the new icon.'),
+                        ['name' => $domain->getName()]
+                    );
+                }
 
                 return new JsonResponse(['result' => 'valid']);
             } catch (\Shopsys\FrameworkBundle\Component\Image\Processing\Exception\FileIsNotSupportedImageException $ex) {

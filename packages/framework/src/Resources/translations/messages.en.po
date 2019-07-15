@@ -739,7 +739,7 @@ msgstr ""
 msgid "Domain %domainName%"
 msgstr ""
 
-msgid "Domain <strong>{{ name }}</strong> modified"
+msgid "Domain <strong>{{ name }}</strong> modified. Try clearing your browser cache (CTRL+F5) if you can't see the new icon."
 msgstr ""
 
 msgid "Domain name"

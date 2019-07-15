@@ -739,8 +739,8 @@ msgstr "Doména"
 msgid "Domain %domainName%"
 msgstr "Doména %domainName%"
 
-msgid "Domain <strong>{{ name }}</strong> modified"
-msgstr "Byla upravena doména <strong>{{ name }}</strong>"
+msgid "Domain <strong>{{ name }}</strong> modified. Try clearing your browser cache (CTRL+F5) if you can't see the new icon."
+msgstr "Byla upravena doména <strong>{{ name }}</strong>. Nevidíte-li novou ikonu, zkuste smazat cache vašeho prohlížeče (CTRL+F5)."
 
 msgid "Domain name"
 msgstr "Název domény"

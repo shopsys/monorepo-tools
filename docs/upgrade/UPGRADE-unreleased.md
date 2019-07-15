@@ -177,6 +177,11 @@ There you can find links to upgrade notes for other versions too.
         ```
     - remove the use of `is_plugin_data_group` attribute in form extensions or customized twig templates, the functionality was also removed from `form_row` block in `@FrameworkBundle/src/Resources/views/Admin/Form/theme.html.twig`
 - follow instructions in [the separate article](/docs/upgrade/upgrade-instructions-for-read-model-for-product-lists-from-elasticsearch.md) to use Elasticsearch to get data into read model ([#1096](https://github.com/shopsys/shopsys/pull/1096))
+- fix `shopsys.domain_images_url_prefix` parameter in your `paths.yml` file to properly load domain icons in images data fixtures ([#1183](https://github.com/shopsys/shopsys/pull/1183))
+    ```diff
+    -   shopsys.domain_images_url_prefix: '/%shopsys.content_dir_name%/admin/images/domain'
+    +   shopsys.domain_images_url_prefix: '/%shopsys.content_dir_name%/admin/images/domain/'
+    ```
 
 ### Configuration
 - simplify local configuration ([#1004](https://github.com/shopsys/shopsys/pull/1004))
