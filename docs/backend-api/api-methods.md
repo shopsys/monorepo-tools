@@ -14,22 +14,22 @@ You need to provide token via `Authorization` header to access requested data li
 
   `/api/token`
 
-* **Method:**
+* **Method**
 
   `POST`
 
 *  **Data Params**
 
-   **Required:**
+   **Required**
 
    `grant_type=client_credentials`
    `client_id=[string]`
    `client_secret=[string]`
 
-* **Success Response:**
+* **Success Response**
 
-  * **Code:** `200` <br />
-     **Content:**
+  * **Code** `200` <br />
+     **Content**
         ```
         {
             "token_type": "Bearer",
@@ -38,10 +38,10 @@ You need to provide token via `Authorization` header to access requested data li
         }
         ```
 
-* **Error Response:**
+* **Error Response**
 
-  * **Code:** `401 UNAUTHORIZED` <br />
-    **Content:**
+  * **Code** `401 UNAUTHORIZED` <br />
+    **Content**
     ```
     {
         "error": "invalid_client",
@@ -51,9 +51,9 @@ You need to provide token via `Authorization` header to access requested data li
 
   OR
 
-  * **Code:** `400 Bad Request` <br />
+  * **Code** `400 Bad Request` <br />
 
-* **Notes:**
+* **Notes**
 Token is valid for one hour.
 You will need to generate new token after the first one expires.
 
@@ -64,20 +64,20 @@ You will need to generate new token after the first one expires.
 
   `/api/v1/products/{uuid}`
 
-* **Method:**
+* **Method**
 
   `GET`
 
 *  **URL Params**
 
-   **Required:**
+   **Required**
 
    `uuid=[string]`
 
-* **Success Response:**
+* **Success Response**
 
-  * **Code:** `200` <br />
-    **Content:**
+  * **Code** `200` <br />
+    **Content**
     ```
     {
       "uuid": "2ad32b16-bfb4-4cfa-8bbe-331e630769c5",
@@ -102,10 +102,10 @@ You will need to generate new token after the first one expires.
     }
     ```
 
-* **Error Response:**
+* **Error Response**
 
-  * **Code:** `400 Bad Request` <br />
-    **Content:**
+  * **Code** `400 Bad Request` <br />
+    **Content**
     ```
     {
         "code": 400,
@@ -115,12 +115,12 @@ You will need to generate new token after the first one expires.
 
   OR
 
-  * **Code:** `401 UNAUTHORIZED` <br />
+  * **Code** `401 UNAUTHORIZED` <br />
 
   OR
 
-  * **Code:** `404 Not Found` <br />
-    **Content:**
+  * **Code** `404 Not Found` <br />
+    **Content**
     ```
     {
         "code": 404,
@@ -135,21 +135,21 @@ You will need to generate new token after the first one expires.
 
   `/api/v1/products`
 
-* **Method:**
+* **Method**
 
   `GET`
 
 *  **URL Params**
 
-   **Optional:**
+   **Optional**
 
    `uuids=[array of strings]`
    `page=[integer]`
 
-* **Success Response:**
+* **Success Response**
 
-  * **Code:** `200` <br />
-    **Content:**
+  * **Code** `200` <br />
+    **Content**
     ```
     [
        {
@@ -176,14 +176,14 @@ You will need to generate new token after the first one expires.
        # next products here
     ]
     ```
-    **Headers:**
+    **Headers**
     In headers there is list of links to another pages with products, it can be found under Link header
     `<http://127.0.0.1:8000/api/v1/products?page=2>; rel="next", <http://127.0.0.1:8000/api/v1/products?page=2>; rel="last"`
 
-* **Error Response:**
+* **Error Response**
 
-  * **Code:** `400 Bad Request` <br />
-    **Content:**
+  * **Code** `400 Bad Request` <br />
+    **Content**
     ```
     {
         "code": 400,
@@ -193,12 +193,12 @@ You will need to generate new token after the first one expires.
 
   OR
 
-  * **Code:** `401 UNAUTHORIZED` <br />
+  * **Code** `401 UNAUTHORIZED` <br />
 
   OR
 
-  * **Code:** `422 Unprocessable Entity` <br />
-    **Content:**
+  * **Code** `422 Unprocessable Entity` <br />
+    **Content**
     ```
     {
         "code": 422,
@@ -206,6 +206,6 @@ You will need to generate new token after the first one expires.
     }
     ```
 
-* **Sample Call:**
+* **Sample Call**
 
     `http://127.0.0.1:8000/api/v1/products?uuids[]=877a07d5-a276-49f8-9b73-6ac0edef83be&uuids[]=f564da76-6d51-4ecd-b004-895c8019a235x   `
