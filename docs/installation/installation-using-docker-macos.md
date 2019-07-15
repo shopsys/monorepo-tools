@@ -1,6 +1,6 @@
 # Installation Using Docker for MacOS
 
-**This guide is for the version which is not released yet. See the [version for `v7.3.0`](https://github.com/shopsys/shopsys/blob/v7.3.0/docs/installation/installation-using-docker-macos.md).**
+**This guide is for the version which is not released yet. See the [version for `v7.3.1`](https://github.com/shopsys/shopsys/blob/v7.3.1/docs/installation/installation-using-docker-macos.md).**
 
 This guide covers building new projects based on Shopsys Framework.
 If you want to contribute to the framework itself,

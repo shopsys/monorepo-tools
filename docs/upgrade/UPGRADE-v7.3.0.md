@@ -30,14 +30,6 @@ There you can find links to upgrade notes for other versions too.
 - if you deploy to the google cloud, copy new [`.ci/deploy-to-google-cloud.sh`](https://github.com/shopsys/project-base/blob/v7.3.0/.ci/deploy-to-google-cloud.sh) script from `shopsys/project-base` ([#1126](https://github.com/shopsys/shopsys/pull/1126))
 
 ### Configuration
-- update `phpstan.neon` with following change to skip PHPStan error ([#1086](https://github.com/shopsys/shopsys/pull/1086))
-    ```diff
-     #ignore annotations in generated code#
-     -
-    -    message: '#(PHPDoc tag @(param|return) has invalid value .+ expected TOKEN_IDENTIFIER at offset \d+)#'
-    +    message: '#(PHPDoc tag @(param|return) has invalid value (.|\n)+ expected TOKEN_IDENTIFIER at offset \d+)#'
-         path: %currentWorkingDirectory%/tests/ShopBundle/Test/Codeception/_generated/AcceptanceTesterActions.php
-    ```
 - for `symfony/monolog-bundle` in version `>=3.4.0` you have to unset the incompatible `excluded_404s` configuration from monolog handlers that don't use the `fingers_crossed` type ([#1154](https://github.com/shopsys/shopsys/pull/1154))
     - for lower versions of the library it's still recommended to do so
     - in `app/config/packages/dev/monolog.yml`:
@@ -111,10 +103,10 @@ There you can find links to upgrade notes for other versions too.
             <property name="path.vendor" value="${path.root}/vendor"/>
             <property name="path.framework" value="${path.vendor}/shopsys/framework"/>
 
-            <import file="${path.framework}/build.xml"/>
-
             <property name="is-multidomain" value="true"/>
             <property name="phpstan.level" value="0"/>
+
+            <import file="${path.framework}/build.xml"/>
 
         </project>
         ```
@@ -147,8 +139,8 @@ There you can find links to upgrade notes for other versions too.
         - `(test-)replace-domains-urls` was deprecated, use `(test-)domains-urls-replace` instead
         - `(test-)load-plugin-demo-data` was deprecated, use `(test-)plugin-demo-data-load` instead
         - don't forget to update your Dockerfiles, Kubernetes manifests, scripts and other files that might reference the phing targets above
-- we recommend upgrading PHPStan to level 4 [#1040](https://github.com/shopsys/shopsys/pull/1040)
-    - you'll find detailed instructions in separate article [Upgrade Instructions for Upgrading PHPStan to Level 4](/docs/upgrade/phpstan-level-4.md)
+- we recommend upgrading PHPStan to level 1
+    - you'll find detailed instructions in separate article [Upgrade Instructions for Upgrading PHPStan to Level 1](/docs/upgrade/phpstan-level-1.md)
 - update your installation script (`scripts/install.sh`) to lower installation time by not running tests and standards checks during the build
     ```diff
     -    docker-compose exec php-fpm ./phing db-create test-db-create build-demo-dev
