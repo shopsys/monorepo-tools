@@ -22,14 +22,20 @@
 {% endblock %}
 
 {% block root %}
-    <nav class="panel">
-        {{ block('list') -}}
-    </nav>
+    {% if options.renderNavElement is defined and options.renderNavElement %}
+        <nav class="panel">
+    {% endif %}
+
+    {{ block('list') -}}
+
+    {% if options.renderNavElement is defined and options.renderNavElement %}
+        </nav>
+    {% endif %}
 {% endblock %}
 
 {% block list %}
     {%- if item.level == 0 -%}
-        {%- set classes = ['side-menu', 'js-side-menu'] -%}
+        {%- set classes = ['side-menu', 'js-side-menu', options.rootListClass|default('')] -%}
     {%- else -%}
         {%- set classes = ['side-menu__submenu', 'side-menu__submenu--level' ~ item.level] -%}
         {%- if item.level == 1 -%}
@@ -106,12 +112,13 @@
     {%- if icon is not null -%}
         <i class="svg svg-{{ icon }}"></i>
     {%- endif -%}
-    {%- if options.allow_safe_labels and item.getExtra('safe_label', false) -%}
-        {{ item.label|raw }}
-    {%- else -%}
-        {{ item.label }}
-    {%- endif -%}
-
-    <i class="side-menu__item__arrow side-menu__item__arrow--down"></i>
-
+    {%- set class = item.level == 1 ? 'side-menu__item__text' : 'side-menu__submenu__item__text' -%}
+    <span{{ self.attributes(item.labelAttributes, [class]) }}>
+        {%- if options.allow_safe_labels and item.getExtra('safe_label', false) -%}
+            {{ item.label|raw }}
+        {%- else -%}
+            {{ item.label }}
+        {%- endif -%}
+        <i class="side-menu__item__arrow side-menu__item__arrow--down"></i>
+    </span>
 {% endblock %}

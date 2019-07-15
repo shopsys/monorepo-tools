@@ -39,7 +39,7 @@
             var $titleClone = $title.clone();
 
             $titleClone.find('.js-validation-errors-list').remove();
-            var $navigationItem = $('<li class="anchor-menu__item"><span class="anchor-menu__item__anchor link cursor-pointer">' + $titleClone.text() + '</span></li>');
+            var $navigationItem = $('<li class="side-menu__item"><span class="side-menu__item__link"><span class="side-menu__item__text">' + $titleClone.text() + '</span></span></li>');
             $productDetailNavigation.append($navigationItem);
 
             $navigationItem.click(function () {

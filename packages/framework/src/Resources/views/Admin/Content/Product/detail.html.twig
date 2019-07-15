@@ -20,3 +20,10 @@
     {{ form_end(form) }}
 
 {% endblock %}
+
+{% block menu_panel %}
+    <nav class="panel">
+        {{ knp_menu_render('admin_side_menu', {template: 'ShopsysFrameworkBundle:Admin/Menu:side_menu.html.twig', renderNavElement: false, rootListClass: 'side-menu--collapsed js-side-menu-close-after-mouseleave'}) }}
+        <ul class="side-menu side-menu--detail js-product-detail-navigation"></ul>
+    </nav>
+{% endblock %}
