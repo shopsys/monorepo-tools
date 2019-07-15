@@ -28,6 +28,20 @@ The changelog is generated during the release process using [ChangelogLinker](ht
 
 <!-- changelog-linker -->
 
+## [v7.3.1](https://github.com/shopsys/shopsys/compare/v7.3.0...v7.3.1) - 2019-07-15
+
+### [shopsys/framework]
+
+#### Fixed
+
+- [#1195] fixed memory leak in cron ProductSearchExportCronModule
+
+### [shopsys/project-base]
+
+#### Changed
+
+- [#1199] PHPStan level lowered to 1
+
 ## [v7.3.0](https://github.com/shopsys/shopsys/compare/v7.2.2...v7.3.0) - 2019-07-09
 
 ### [shopsys/framework]
@@ -2586,3 +2600,5 @@ That's why is this section formatted differently.
 [#1175]: https://github.com/shopsys/shopsys/pull/1175
 [#1177]: https://github.com/shopsys/shopsys/pull/1177
 [#1180]: https://github.com/shopsys/shopsys/pull/1180
+[#1195]: https://github.com/shopsys/shopsys/pull/1195
+[#1199]: https://github.com/shopsys/shopsys/pull/1199
