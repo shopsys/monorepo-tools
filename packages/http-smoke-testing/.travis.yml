@@ -15,7 +15,7 @@ matrix:
         - { php: 7.3 }
 
 install:
-    - if [[ "$CHECK_STANDARDS" == "true" ]]; then composer require --dev shopsys/coding-standards:dev-master; fi
+    - if [[ "$CHECK_STANDARDS" == "true" ]]; then composer require --dev shopsys/coding-standards; fi
     - travis_retry composer update $DEPENDENCIES
 
 script:
