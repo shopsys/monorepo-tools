@@ -20,6 +20,6 @@
         "symfony/monolog-bridge": "^3.0.0"
     },
     "require-dev": {
-        "shopsys/coding-standards": "7.3.1"
+        "shopsys/coding-standards": "7.3.x-dev"
     }
 }
