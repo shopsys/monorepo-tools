@@ -2,7 +2,6 @@
 
 namespace Shopsys\FrameworkBundle\Component\Elasticsearch;
 
-use BadMethodCallException;
 use Elasticsearch\Client;
 use Shopsys\FrameworkBundle\Component\Elasticsearch\Exception\ElasticsearchMoreThanOneCurrentIndexException;
 use Shopsys\FrameworkBundle\Component\Elasticsearch\Exception\ElasticsearchNoCurrentIndexException;
@@ -10,6 +9,11 @@ use Shopsys\FrameworkBundle\Component\Elasticsearch\Exception\ElasticsearchStruc
 
 class ElasticsearchStructureManager
 {
+    /**
+     * @var string
+     */
+    protected $buildVersion;
+
     /**
      * @var string
      */
@@ -26,50 +30,17 @@ class ElasticsearchStructureManager
     protected $client;
 
     /**
-     * @var string|null
-     */
-    protected $buildVersion;
-
-    /**
+     * @param string $buildVersion
      * @param string $definitionDirectory
      * @param string $indexPrefix
      * @param \Elasticsearch\Client $client
-     * @param string|null $buildVersion
      */
-    public function __construct(string $definitionDirectory, string $indexPrefix, Client $client, ?string $buildVersion = null)
+    public function __construct(string $buildVersion, string $definitionDirectory, string $indexPrefix, Client $client)
     {
+        $this->buildVersion = $buildVersion;
         $this->definitionDirectory = $definitionDirectory;
         $this->indexPrefix = $indexPrefix;
         $this->client = $client;
-        $this->buildVersion = $buildVersion;
-    }
-
-    /**
-     * @param string $buildVersion
-     * @internal Will be replaced with constructor injection in the next major release
-     */
-    public function setBuildVersion(string $buildVersion): void
-    {
-        if ($this->buildVersion !== null) {
-            throw new BadMethodCallException(sprintf('Method "%s" has been already called and cannot be called multiple times.', __METHOD__));
-        }
-
-        $this->buildVersion = $buildVersion;
-    }
-
-    /**
-     * @param int $domainId
-     * @param string $index
-     * @return string
-     * @deprecated Getting index name without a version using this method is deprecated since SSFW 7.3, use getCurrentIndexName or getAliasName instead
-     */
-    public function getIndexName(int $domainId, string $index): string
-    {
-        @trigger_error(
-            sprintf('Getting index name without a version using method "%s" is deprecated since SSFW 7.3, use %s or %s instead', __METHOD__, 'getCurrentIndexName', 'getAliasName'),
-            E_USER_DEPRECATED
-        );
-        return $this->getAliasName($domainId, $index);
     }
 
     /**
@@ -90,15 +61,6 @@ class ElasticsearchStructureManager
     public function getCurrentIndexName(int $domainId, string $index): string
     {
         $aliasName = $this->getAliasName($domainId, $index);
-
-        $indexes = $this->client->indices();
-        if (!$indexes->existsAlias(['name' => $aliasName]) && $indexes->exists(['index' => $aliasName])) {
-            @trigger_error(
-                sprintf('Passing index name instead of alias name to method %s is deprecated since SSFW 7.3', __METHOD__),
-                E_USER_DEPRECATED
-            );
-            return $aliasName;
-        }
 
         $indexNames = $this->getExistingIndexNamesForAlias($aliasName);
 
@@ -184,25 +146,6 @@ class ElasticsearchStructureManager
     /**
      * @param int $domainId
      * @param string $index
-     * @deprecated Deleting index using this method is deprecated since SSFW 7.3, use deleteIndexesOfCurrentAlias instead
-     */
-    public function deleteIndex(int $domainId, string $index)
-    {
-        @trigger_error(
-            sprintf('Deleting index using method "%s" is deprecated since SSFW 7.3, use %s instead', __METHOD__, 'deleteIndexesOfCurrentAlias'),
-            E_USER_DEPRECATED
-        );
-
-        $indexes = $this->client->indices();
-        $indexName = $this->getIndexName($domainId, $index);
-        if ($indexes->exists(['index' => $indexName])) {
-            $indexes->delete(['index' => $indexName]);
-        }
-    }
-
-    /**
-     * @param int $domainId
-     * @param string $index
      */
     protected function reindexFromCurrentIndexToNewIndex(int $domainId, string $index)
     {
@@ -256,17 +199,6 @@ class ElasticsearchStructureManager
         }
 
         $this->client->indices()->delete(['index' => $indexName]);
-    }
-
-    /**
-     * @param int $domainId
-     * @param string $index
-     * @return array
-     * @deprecated using method getDefinition is deprecated since SSFW 7.3. Use public method getStructureDefinition instead
-     */
-    protected function getDefinition(int $domainId, string $index): array
-    {
-        $this->getStructureDefinition($domainId, $index);
     }
 
     /**

@@ -2,7 +2,6 @@
 
 namespace Shopsys\FrameworkBundle\Model\Mail;
 
-use BadMethodCallException;
 use Doctrine\ORM\EntityManagerInterface;
 use Shopsys\FrameworkBundle\Component\Domain\Domain;
 use Shopsys\FrameworkBundle\Component\UploadedFile\UploadedFileFacade;
@@ -47,7 +46,7 @@ class MailTemplateFacade
     protected $mailTemplateDataFactory;
 
     /**
-     * @var \Shopsys\FrameworkBundle\Model\Mail\MailTemplateAttachmentFilepathProvider|null
+     * @var \Shopsys\FrameworkBundle\Model\Mail\MailTemplateAttachmentFilepathProvider
      */
     protected $mailTemplateAttachmentFilepathProvider;
 
@@ -59,7 +58,7 @@ class MailTemplateFacade
      * @param \Shopsys\FrameworkBundle\Component\UploadedFile\UploadedFileFacade $uploadedFileFacade
      * @param \Shopsys\FrameworkBundle\Model\Mail\MailTemplateFactoryInterface $mailTemplateFactory
      * @param \Shopsys\FrameworkBundle\Model\Mail\MailTemplateDataFactoryInterface $mailTemplateDataFactory
-     * @param \Shopsys\FrameworkBundle\Model\Mail\MailTemplateAttachmentFilepathProvider|null $mailTemplateAttachmentFilepathProvider
+     * @param \Shopsys\FrameworkBundle\Model\Mail\MailTemplateAttachmentFilepathProvider $mailTemplateAttachmentFilepathProvider
      */
     public function __construct(
         EntityManagerInterface $em,
@@ -69,7 +68,7 @@ class MailTemplateFacade
         UploadedFileFacade $uploadedFileFacade,
         MailTemplateFactoryInterface $mailTemplateFactory,
         MailTemplateDataFactoryInterface $mailTemplateDataFactory,
-        ?MailTemplateAttachmentFilepathProvider $mailTemplateAttachmentFilepathProvider = null
+        MailTemplateAttachmentFilepathProvider $mailTemplateAttachmentFilepathProvider
     ) {
         $this->em = $em;
         $this->mailTemplateRepository = $mailTemplateRepository;
@@ -79,24 +78,6 @@ class MailTemplateFacade
         $this->mailTemplateFactory = $mailTemplateFactory;
         $this->mailTemplateDataFactory = $mailTemplateDataFactory;
         $this->mailTemplateAttachmentFilepathProvider = $mailTemplateAttachmentFilepathProvider;
-    }
-
-    /**
-     * @required
-     * @param \Shopsys\FrameworkBundle\Model\Mail\MailTemplateAttachmentFilepathProvider $mailTemplateAttachmentFilepathProvider
-     * @deprecated Will be replaced with constructor injection in the next major release
-     */
-    public function setMailTemplateAttachmentFilepathProvider(MailTemplateAttachmentFilepathProvider $mailTemplateAttachmentFilepathProvider): void
-    {
-        if ($this->mailTemplateAttachmentFilepathProvider !== null && $this->mailTemplateAttachmentFilepathProvider !== $mailTemplateAttachmentFilepathProvider) {
-            throw new BadMethodCallException(sprintf('Method "%s" has been already called and cannot be called multiple times.', __METHOD__));
-        }
-
-        if ($this->mailTemplateAttachmentFilepathProvider === null) {
-            @trigger_error(sprintf('The %s() method is deprecated and will be removed in the next major. Use the constructor injection instead.', __METHOD__), E_USER_DEPRECATED);
-
-            $this->mailTemplateAttachmentFilepathProvider = $mailTemplateAttachmentFilepathProvider;
-        }
     }
 
     /**
@@ -233,10 +214,6 @@ class MailTemplateFacade
      */
     public function getMailTemplateAttachmentsFilepaths(MailTemplate $mailTemplate)
     {
-        if ($this->mailTemplateAttachmentFilepathProvider === null) {
-            throw new BadMethodCallException(sprintf('Method "%s::setMailTemplateAttachmentFilepathProvider()" has to be called in "services.yml" definition.', __CLASS__));
-        }
-
         $filepaths = [];
         if ($this->uploadedFileFacade->hasUploadedFile($mailTemplate)) {
             $uploadedFile = $this->uploadedFileFacade->getUploadedFileByEntity($mailTemplate);

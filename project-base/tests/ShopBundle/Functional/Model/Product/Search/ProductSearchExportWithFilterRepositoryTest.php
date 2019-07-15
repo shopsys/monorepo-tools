@@ -3,14 +3,13 @@
 namespace Tests\ShopBundle\Functional\Model\Product\Search;
 
 use Shopsys\FrameworkBundle\Component\Domain\Domain;
-use Shopsys\FrameworkBundle\Model\Product\Search\Export\ProductSearchExportRepository;
 use Shopsys\FrameworkBundle\Model\Product\Search\Export\ProductSearchExportWithFilterRepository;
 use Tests\ShopBundle\Test\TransactionFunctionalTestCase;
 
-class ProductSearchExportRepositoryTest extends TransactionFunctionalTestCase
+class ProductSearchExportWithFilterRepositoryTest extends TransactionFunctionalTestCase
 {
     /**
-     * @var \Shopsys\FrameworkBundle\Model\Product\Search\Export\ProductSearchExportRepository
+     * @var \Shopsys\FrameworkBundle\Model\Product\Search\Export\ProductSearchExportWithFilterRepository
      */
     private $repository;
 
@@ -22,7 +21,7 @@ class ProductSearchExportRepositoryTest extends TransactionFunctionalTestCase
     protected function setUp()
     {
         parent::setUp();
-        $this->repository = $this->getContainer()->get(ProductSearchExportRepository::class);
+        $this->repository = $this->getContainer()->get(ProductSearchExportWithFilterRepository::class);
         $this->domain = $this->getContainer()->get(Domain::class);
     }
 
@@ -42,12 +41,12 @@ class ProductSearchExportRepositoryTest extends TransactionFunctionalTestCase
     }
 
     /**
-     * @param \Shopsys\FrameworkBundle\Model\Product\Search\Export\ProductSearchExportRepository $productSearchExportRepository
+     * @param \Shopsys\FrameworkBundle\Model\Product\Search\Export\ProductSearchExportWithFilterRepository $productSearchExportRepository
      * @return string[]
      */
-    private function getExpectedStructureForRepository(ProductSearchExportRepository $productSearchExportRepository): array
+    private function getExpectedStructureForRepository(ProductSearchExportWithFilterRepository $productSearchExportRepository): array
     {
-        $structure = [
+        return [
             'id',
             'name',
             'catnum',
@@ -55,26 +54,19 @@ class ProductSearchExportRepositoryTest extends TransactionFunctionalTestCase
             'ean',
             'description',
             'short_description',
+            'availability',
+            'brand',
+            'flags',
+            'categories',
+            'detail_url',
+            'in_stock',
+            'prices',
+            'parameters',
+            'ordering_priority',
+            'calculated_selling_denied',
+            'selling_denied',
+            'main_variant',
+            'visibility',
         ];
-
-        if ($productSearchExportRepository instanceof ProductSearchExportWithFilterRepository) {
-            $structure = \array_merge($structure, [
-                'availability',
-                'brand',
-                'flags',
-                'categories',
-                'detail_url',
-                'in_stock',
-                'prices',
-                'parameters',
-                'ordering_priority',
-                'calculated_selling_denied',
-                'selling_denied',
-                'main_variant',
-                'visibility',
-            ]);
-        }
-
-        return $structure;
     }
 }

@@ -6,6 +6,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Query\Expr\Join;
 use Doctrine\ORM\QueryBuilder;
 use Shopsys\FrameworkBundle\Component\Domain\Domain;
+use Shopsys\FrameworkBundle\Component\Paginator\QueryPaginator;
 use Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\FriendlyUrlFacade;
 use Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\FriendlyUrlRepository;
 use Shopsys\FrameworkBundle\Model\Product\Parameter\ParameterRepository;
@@ -15,8 +16,13 @@ use Shopsys\FrameworkBundle\Model\Product\ProductFacade;
 use Shopsys\FrameworkBundle\Model\Product\ProductVisibility;
 use Shopsys\FrameworkBundle\Model\Product\ProductVisibilityRepository;
 
-class ProductSearchExportWithFilterRepository extends ProductSearchExportRepository
+class ProductSearchExportWithFilterRepository
 {
+    /**
+     * @var \Doctrine\ORM\EntityManagerInterface
+     */
+    protected $em;
+
     /**
      * @var \Shopsys\FrameworkBundle\Model\Product\Parameter\ParameterRepository
      */
@@ -65,8 +71,6 @@ class ProductSearchExportWithFilterRepository extends ProductSearchExportReposit
         ProductVisibilityRepository $productVisibilityRepository,
         FriendlyUrlFacade $friendlyUrlFacade
     ) {
-        parent::__construct($em);
-
         $this->parameterRepository = $parameterRepository;
         $this->productFacade = $productFacade;
         $this->em = $em;
@@ -85,7 +89,7 @@ class ProductSearchExportWithFilterRepository extends ProductSearchExportReposit
      */
     public function getProductsData(int $domainId, string $locale, int $startFrom, int $batchSize): array
     {
-        $queryBuilder = $this->createQueryBuilder($domainId, $locale)
+        $queryBuilder = $this->createQueryBuilder($domainId)
             ->setFirstResult($startFrom)
             ->setMaxResults($batchSize);
 
@@ -108,7 +112,7 @@ class ProductSearchExportWithFilterRepository extends ProductSearchExportReposit
      */
     public function getProductsDataForIds(int $domainId, string $locale, array $productIds): array
     {
-        $queryBuilder = $this->createQueryBuilder($domainId, $locale)
+        $queryBuilder = $this->createQueryBuilder($domainId)
             ->andWhere('p.id IN (:productIds)')
             ->setParameter('productIds', $productIds);
 
@@ -121,6 +125,17 @@ class ProductSearchExportWithFilterRepository extends ProductSearchExportReposit
         }
 
         return $result;
+    }
+
+    /**
+     * @param int $domainId
+     * @return int
+     */
+    public function getProductTotalCountForDomain(int $domainId): int
+    {
+        $result = new QueryPaginator($this->createQueryBuilder($domainId));
+
+        return $result->getTotalCount();
     }
 
     /**
@@ -176,10 +191,9 @@ class ProductSearchExportWithFilterRepository extends ProductSearchExportReposit
 
     /**
      * @param int $domainId
-     * @param string $locale
      * @return \Doctrine\ORM\QueryBuilder
      */
-    protected function createQueryBuilder(int $domainId, string $locale): QueryBuilder
+    protected function createQueryBuilder(int $domainId): QueryBuilder
     {
         $queryBuilder = $this->em->createQueryBuilder()
             ->select('p')

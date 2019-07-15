@@ -16,7 +16,6 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints;
-use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
 class CountryFormType extends AbstractType
 {
@@ -120,23 +119,6 @@ class CountryFormType extends AbstractType
                 'data_class' => CountryData::class,
                 'attr' => ['novalidate' => 'novalidate'],
             ]);
-    }
-
-    /**
-     * @param mixed $countryCodeValue
-     * @param \Symfony\Component\Validator\Context\ExecutionContextInterface $context
-     * @deprecated Validation using this method as callback is deprecated since SSFW 7.3, use NotInArray instead
-     */
-    public function validateUniqueCode($countryCodeValue, ExecutionContextInterface $context): void
-    {
-        @trigger_error(
-            sprintf('Validation using method "%s" as callback is deprecated since SSFW 7.3, use %s instead', __METHOD__, NotInArray::class),
-            E_USER_DEPRECATED
-        );
-
-        if (in_array($countryCodeValue, $this->getOtherCountryCodes(), true)) {
-            $context->addViolation('Country code with this code already exists');
-        }
     }
 
     /**

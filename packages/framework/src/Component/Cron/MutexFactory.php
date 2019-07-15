@@ -29,15 +29,6 @@ class MutexFactory
     }
 
     /**
-     * @return \NinjaMutex\Mutex
-     * @deprecated Use `getPrefixedCronMutex` instead
-     */
-    public function getCronMutex()
-    {
-        return $this->getMutexByName(static::MUTEX_CRON_NAME);
-    }
-
-    /**
      * @param string $prefix
      * @return \NinjaMutex\Mutex
      */

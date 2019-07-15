@@ -14,14 +14,6 @@ class Advert
     public const TYPE_CODE = 'code';
 
     /**
-     * @deprecated use of position constants is discouraged, use literal strings instead
-     */
-    public const POSITION_HEADER = 'header';
-    public const POSITION_FOOTER = 'footer';
-    public const POSITION_PRODUCT_LIST = 'productList';
-    public const POSITION_LEFT_SIDEBAR = 'leftSidebar';
-
-    /**
      * @var int
      *
      * @ORM\Column(type="integer")

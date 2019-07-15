@@ -4,6 +4,9 @@ namespace Shopsys\FrameworkBundle\Model\Product\Search\Export;
 
 use Shopsys\Plugin\Cron\SimpleCronModuleInterface;
 use Symfony\Bridge\Monolog\Logger;
+use Symfony\Component\Console\Input\ArrayInput;
+use Symfony\Component\Console\Output\NullOutput;
+use Symfony\Component\Console\Style\SymfonyStyle;
 
 class ProductSearchExportCronModule implements SimpleCronModuleInterface
 {
@@ -29,6 +32,7 @@ class ProductSearchExportCronModule implements SimpleCronModuleInterface
 
     public function run()
     {
-        $this->productSearchExportFacade->exportAll();
+        $symfonyStyle = new SymfonyStyle(new ArrayInput([]), new NullOutput());
+        $this->productSearchExportFacade->exportAllWithOutput($symfonyStyle);
     }
 }

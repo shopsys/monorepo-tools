@@ -130,6 +130,52 @@ There you can find links to upgrade notes for other versions too.
     - `IntlCurrencyRepository::isSupportedCurrency()` is now strictly type hinted
     - protected `PriceExtension::getNumberFormatter()` is renamed to `getCurrencyFormatter()` and returns an instance of `CommerceGuys\Intl\Formatter\CurrencyFormatter` now
         - you need to change your usages accordingly
+- get rid of not needed deprecations and BC-promise implementation from 7.x version ([#1193](https://github.com/shopsys/shopsys/pull/1193))
+    - remove registration of `productCategoryFilter` filter from `Shopsys\ShopBundle\Model\AdvancedSearch\ProductAdvancedSearchConfig`, `services.yml` and `services_test.yml`
+        - in the case, the class contains custom filters, move the filter into the `parent::__construct` as the last parameter
+    - check whether all deprecated methods from multiple cron commands implementation are replaced with the new ones based on ([#817](https://github.com/shopsys/shopsys/pull/817))
+    - check whether all deprecated methods and configurations for redis clients and redis commands are removed and modified to use new way based on ([#1161](https://github.com/shopsys/shopsys/pull/1161)) and ([#886](https://github.com/shopsys/shopsys/pull/886))
+        - remove registration of `Shopsys\FrameworkBundle\Command\RedisCleanCacheOldCommand: ~` from `commands.yml`
+    - check whether you extended classes that constructor signature was changed and fix them
+        - `Shopsys\FrameworkBundle\Model\Mail\MailTemplateFacade`
+        - `Shopsys\FrameworkBundle\Component\Router\DomainRouterFactory`
+        - `Shopsys\FrameworkBundle\Model\Product\Search\Export\ProductSearchExporter`
+        - `Shopsys\FrameworkBundle\Model\Product\Search\Export\ProductSearchExportStructureFacade`
+        - `Shopsys\FrameworkBundle\Model\Product\ProductFacade`
+        - `Shopsys\FrameworkBundle\Model\Product\ProductVariantFacade`
+        - `Shopsys\FrameworkBundle\Component\Elasticsearch\ElasticsearchStructureManager`
+    - check wether you have overwritten methods of `Shopsys\FrameworkBundle\Model\Product\Search\Export\ProductSearchExportWithFilterRepository` class and fix their signatures
+        - `createQueryBuilder` has less parameters
+        - `getProductTotalCountForDomainAndLocale` was renamed to `getProductTotalCountForDomain` and has less parameters
+    - rename `ProductSearchExportRepositoryTest` into `ProductSearchExportWithFilterRepositoryTest` and [fix or replace the code](https://github.com/shopsys/shopsys/blob/v8.0.0/project-base/tests/ShopBundle/Functional/Model/Product/Search/ProductSearchExportWithFilterRepositoryTest.php)
+    - check whether removed deprecated methods are not used or overriden anymore
+        - `Shopsys\FrameworkBundle\Form\Admin\Country\CountryFormType::validateUniqueCode`
+        - `Shopsys\FrameworkBundle\Model\Pricing\PriceCalculation::getVatCoefficientByPercent`
+        - `Shopsys\FrameworkBundle\Component\Elasticsearch\ElasticsearchStructureManager::getIndexName`
+        - `Shopsys\FrameworkBundle\Component\Elasticsearch\ElasticsearchStructureManager::deleteIndex`
+        - `Shopsys\FrameworkBundle\Component\Elasticsearch\ElasticsearchStructureManager::getConfig`
+        - `Shopsys\FrameworkBundle\Model\Product\Search\ProductElasticsearchRepository::getIndexName`
+    - update `tests/ShopBundle/Functional/Model/Cart/CartMigrationFacadeTest.php`
+        ```diff
+        -use Shopsys\FrameworkBundle\Model\Cart\Item\CartItemFactory;
+        +use Shopsys\FrameworkBundle\Model\Cart\Item\CartItemFactoryInterface;
+        -        $cartItemFactory = $this->getContainer()->get(CartItemFactory::class);
+        +        $cartItemFactory = $this->getContainer()->get(CartItemFactoryInterface::class);
+        ```
+    - replace the use of method `createFromData` with `createFromIdAndName` method of `Shopsys\FrameworkBundle\Component\Router\FriendlyUrl` class or its descendants
+        - remove extended internal method `createFriendlyUrlData` from descendent classes of
+            - `Shopsys\FrameworkBundle\Model\Article\ArticleDetailFriendlyUrlDataProvider`
+            - `Shopsys\FrameworkBundle\Model\Product\Brand\BrandDetailFriendlyUrlDataProvider`
+            - `Shopsys\FrameworkBundle\Model\Product\ProductDetailFriendlyUrlDataProvider`
+            - `Shopsys\FrameworkBundle\Model\Product\ProductListFriendlyUrlDataProvider`
+    - replace the use of `Advert::POSITION_*` constants with their values, for instance in `Shopsys\ShopBundle\DataFixtures\Demo\AdvertDataFixture`
+        ```php
+        POSITION_HEADER => 'header'
+        POSITION_FOOTER => 'footer'
+        POSITION_PRODUCT_LIST => 'productList'
+        POSITION_LEFT_SIDEBAR => 'leftSidebar'
+        ```
+    - remove the use of `is_plugin_data_group` attribute in form extensions or customized twig templates, the functionality was also removed from `form_row` block in `@FrameworkBundle/src/Resources/views/Admin/Form/theme.html.twig`
 
 ### Configuration
 - simplify local configuration ([#1004](https://github.com/shopsys/shopsys/pull/1004))
@@ -161,5 +207,9 @@ There you can find links to upgrade notes for other versions too.
         - $container->setParameter('shopsys.router.locale_router_filepaths', $config['router']['locale_router_filepaths']);
         + $container->setParameter('shopsys.router.locale_router_filepath_mask', $config['router']['locale_router_filepath_mask']);
         ```
+### Tools
+- get rid of not needed deprecations and BC-promise implementation from 7.x version
+    - check and get rid of the use of all removed deprecated phing targets from [v7.3.0 release](./UPGRADE-unreleased.md#tools)
+
 
 [shopsys/framework]: https://github.com/shopsys/framework

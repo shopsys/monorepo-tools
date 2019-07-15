@@ -61,19 +61,6 @@ class CronFacade
     }
 
     /**
-     * @deprecated Use `runScheduledModulesForInstance` instead
-     */
-    public function runScheduledModules()
-    {
-        $cronModuleExecutor = new CronModuleExecutor(static::TIMEOUT_SECONDS);
-
-        $cronModuleConfigs = $this->cronConfig->getAllCronModuleConfigs();
-
-        $scheduledCronModuleConfigs = $this->cronModuleFacade->getOnlyScheduledCronModuleConfigs($cronModuleConfigs);
-        $this->runModules($cronModuleExecutor, $scheduledCronModuleConfigs);
-    }
-
-    /**
      * @param string $instanceName
      */
     public function runScheduledModulesForInstance(string $instanceName): void
@@ -84,16 +71,6 @@ class CronFacade
 
         $scheduledCronModuleConfigs = $this->cronModuleFacade->getOnlyScheduledCronModuleConfigs($cronModuleConfigs);
         $this->runModulesForInstance($cronModuleExecutor, $scheduledCronModuleConfigs, $instanceName);
-    }
-
-    /**
-     * @param \Shopsys\FrameworkBundle\Component\Cron\CronModuleExecutor $cronModuleExecutor
-     * @param \Shopsys\FrameworkBundle\Component\Cron\Config\CronModuleConfig[] $cronModuleConfigs
-     * @deprecated Use `runModulesForInstance` instead
-     */
-    protected function runModules(CronModuleExecutor $cronModuleExecutor, array $cronModuleConfigs)
-    {
-        $this->runModulesForInstance($cronModuleExecutor, $cronModuleConfigs, CronModuleConfig::DEFAULT_INSTANCE_NAME);
     }
 
     /**

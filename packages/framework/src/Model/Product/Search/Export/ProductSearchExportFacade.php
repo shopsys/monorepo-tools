@@ -28,18 +28,6 @@ class ProductSearchExportFacade
     }
 
     /**
-     * @deprecated Use `exportAllWithOutput` instead
-     */
-    public function exportAll(): void
-    {
-        foreach ($this->domain->getAll() as $domain) {
-            $id = $domain->getId();
-            $locale = $domain->getLocale();
-            $this->exporter->export($id, $locale);
-        }
-    }
-
-    /**
      * @param \Symfony\Component\Console\Style\SymfonyStyle $symfonyStyleIo
      */
     public function exportAllWithOutput(SymfonyStyle $symfonyStyleIo): void

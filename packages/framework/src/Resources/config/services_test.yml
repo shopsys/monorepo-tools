@@ -29,8 +29,6 @@ services:
 
     Shopsys\FrameworkBundle\Model\Product\Brand\BrandFacade: ~
 
-    Shopsys\FrameworkBundle\Model\Product\Brand\BrandFactory: ~ # @deprecated
-
     Shopsys\FrameworkBundle\Model\Product\Brand\BrandFactoryInterface:
         alias: Shopsys\FrameworkBundle\Model\Product\Brand\BrandFactory
 
@@ -45,8 +43,6 @@ services:
     Shopsys\FrameworkBundle\Model\Cart\CartFactory: ~
 
     Shopsys\FrameworkBundle\Model\Category\CategoryFacade: ~
-
-    Shopsys\FrameworkBundle\Model\Category\CategoryFactory: ~ # @deprecated
 
     Shopsys\FrameworkBundle\Model\Category\CategoryFactoryInterface:
         alias: Shopsys\FrameworkBundle\Model\Category\CategoryFactory
@@ -64,8 +60,6 @@ services:
     Shopsys\FrameworkBundle\Model\Customer\CurrentCustomer: ~
 
     Shopsys\FrameworkBundle\Model\Order\PromoCode\CurrentPromoCodeFacade: ~
-
-    Shopsys\FrameworkBundle\Model\Customer\CustomerDataFactory: ~ # @deprecated
 
     Shopsys\FrameworkBundle\Model\Customer\CustomerDataFactoryInterface:
         alias: Shopsys\FrameworkBundle\Model\Customer\CustomerDataFactory
@@ -133,12 +127,8 @@ services:
 
     Shopsys\FrameworkBundle\Model\Product\Parameter\ParameterRepository: ~
 
-    Shopsys\FrameworkBundle\Model\Payment\PaymentDataFactory: ~ # @deprecated
-
     Shopsys\FrameworkBundle\Model\Payment\PaymentDataFactoryInterface:
         alias: Shopsys\FrameworkBundle\Model\Payment\PaymentDataFactory
-
-    Shopsys\FrameworkBundle\Model\Payment\PaymentFactory: ~ # @deprecated
 
     Shopsys\FrameworkBundle\Model\Payment\PaymentFactoryInterface:
         alias: Shopsys\FrameworkBundle\Model\Payment\PaymentFactory
@@ -157,14 +147,10 @@ services:
 
     Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroupFacade: ~
 
-    Shopsys\FrameworkBundle\Model\Product\ProductDataFactory: ~ # @deprecated
-
     Shopsys\FrameworkBundle\Model\Product\ProductDataFactoryInterface:
         alias: Shopsys\FrameworkBundle\Model\Product\ProductDataFactory
 
     Shopsys\FrameworkBundle\Model\Product\ProductFacade: ~
-
-    Shopsys\FrameworkBundle\Model\Product\ProductFactory: ~ # @deprecated
 
     Shopsys\FrameworkBundle\Model\Product\ProductFactoryInterface:
         alias: Shopsys\FrameworkBundle\Model\Product\ProductFactory
@@ -189,14 +175,10 @@ services:
 
     Shopsys\FrameworkBundle\Model\Localization\TranslatableListener: ~
 
-    Shopsys\FrameworkBundle\Model\Transport\TransportDataFactory: ~ # @deprecated
-
     Shopsys\FrameworkBundle\Model\Transport\TransportDataFactoryInterface:
         alias: Shopsys\FrameworkBundle\Model\Transport\TransportDataFactory
 
     Shopsys\FrameworkBundle\Model\Transport\TransportFacade: ~
-
-    Shopsys\FrameworkBundle\Model\Transport\TransportFactory: ~ # @deprecated
 
     Shopsys\FrameworkBundle\Model\Transport\TransportFactoryInterface:
         alias: Shopsys\FrameworkBundle\Model\Transport\TransportFactory
@@ -211,13 +193,9 @@ services:
     Shopsys\FrameworkBundle\Model\Product\Search\Export\ProductSearchExportListener:
         tags: []
 
-    Shopsys\FrameworkBundle\Model\Product\Search\Export\ProductSearchExportRepository: ~
-
     Shopsys\FrameworkBundle\Model\Product\Search\FilterQueryFactory: ~
 
     Shopsys\FrameworkBundle\Model\Product\Pricing\ProductManualInputPriceFacade: ~
-
-    Shopsys\FrameworkBundle\Model\Cart\Item\CartItemFactory: ~ # @deprecated
 
     Shopsys\FrameworkBundle\Model\Cart\Item\CartItemFactoryInterface:
         alias: Shopsys\FrameworkBundle\Model\Cart\Item\CartItemFactory
@@ -236,7 +214,8 @@ services:
 
     Shopsys\FrameworkBundle\Component\Elasticsearch\ElasticsearchStructureManager:
         arguments:
-            - '%shopsys.elasticsearch.structure_dir%'
-            - 'test-%env(ELASTIC_SEARCH_INDEX_PREFIX)%'
+            $buildVersion: '%build-version%'
+            $definitionDirectory: '%shopsys.elasticsearch.structure_dir%'
+            $indexPrefix: '%env(ELASTIC_SEARCH_INDEX_PREFIX)%'
 
     Shopsys\FrameworkBundle\Model\Product\Pricing\ProductInputPriceRecalculator: ~

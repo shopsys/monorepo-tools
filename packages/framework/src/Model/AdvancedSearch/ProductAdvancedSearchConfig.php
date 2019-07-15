@@ -5,6 +5,7 @@ namespace Shopsys\FrameworkBundle\Model\AdvancedSearch;
 use Shopsys\FrameworkBundle\Model\AdvancedSearch\Filter\ProductAvailabilityFilter;
 use Shopsys\FrameworkBundle\Model\AdvancedSearch\Filter\ProductBrandFilter;
 use Shopsys\FrameworkBundle\Model\AdvancedSearch\Filter\ProductCalculatedSellingDeniedFilter;
+use Shopsys\FrameworkBundle\Model\AdvancedSearch\Filter\ProductCategoryFilter;
 use Shopsys\FrameworkBundle\Model\AdvancedSearch\Filter\ProductCatnumFilter;
 use Shopsys\FrameworkBundle\Model\AdvancedSearch\Filter\ProductFlagFilter;
 use Shopsys\FrameworkBundle\Model\AdvancedSearch\Filter\ProductNameFilter;
@@ -22,6 +23,7 @@ class ProductAdvancedSearchConfig extends AdvancedSearchConfig
      * @param \Shopsys\FrameworkBundle\Model\AdvancedSearch\Filter\ProductCalculatedSellingDeniedFilter $productCalculatedSellingDeniedFilter
      * @param \Shopsys\FrameworkBundle\Model\AdvancedSearch\Filter\ProductAvailabilityFilter $productAvailabilityFilter
      * @param \Shopsys\FrameworkBundle\Model\AdvancedSearch\Filter\ProductBrandFilter $productBrandFilter
+     * @param \Shopsys\FrameworkBundle\Model\AdvancedSearch\Filter\ProductCategoryFilter $productCategoryFilter
      */
     public function __construct(
         ProductCatnumFilter $productCatnumFilter,
@@ -31,7 +33,8 @@ class ProductAdvancedSearchConfig extends AdvancedSearchConfig
         ProductFlagFilter $productFlagFilter,
         ProductCalculatedSellingDeniedFilter $productCalculatedSellingDeniedFilter,
         ProductAvailabilityFilter $productAvailabilityFilter,
-        ProductBrandFilter $productBrandFilter
+        ProductBrandFilter $productBrandFilter,
+        ProductCategoryFilter $productCategoryFilter
     ) {
         parent::__construct();
 
@@ -43,5 +46,6 @@ class ProductAdvancedSearchConfig extends AdvancedSearchConfig
         $this->registerFilter($productCalculatedSellingDeniedFilter);
         $this->registerFilter($productAvailabilityFilter);
         $this->registerFilter($productBrandFilter);
+        $this->registerFilter($productCategoryFilter);
     }
 }

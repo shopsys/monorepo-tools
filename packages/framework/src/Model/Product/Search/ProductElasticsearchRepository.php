@@ -47,31 +47,20 @@ class ProductElasticsearchRepository
      * @param \Elasticsearch\Client $client
      * @param \Shopsys\FrameworkBundle\Model\Product\Search\ProductElasticsearchConverter $productElasticsearchConverter
      * @param \Shopsys\FrameworkBundle\Component\Elasticsearch\ElasticsearchStructureManager $elasticsearchStructureManager
-     * @param \Shopsys\FrameworkBundle\Model\Product\Search\FilterQueryFactory|null $filterQueryFactory
+     * @param \Shopsys\FrameworkBundle\Model\Product\Search\FilterQueryFactory $filterQueryFactory
      */
     public function __construct(
         string $indexPrefix,
         Client $client,
         ProductElasticsearchConverter $productElasticsearchConverter,
         ElasticsearchStructureManager $elasticsearchStructureManager,
-        ?FilterQueryFactory $filterQueryFactory = null
+        FilterQueryFactory $filterQueryFactory
     ) {
         $this->indexPrefix = $indexPrefix;
         $this->client = $client;
         $this->productElasticsearchConverter = $productElasticsearchConverter;
         $this->elasticsearchStructureManager = $elasticsearchStructureManager;
-        $this->filterQueryFactory = $filterQueryFactory ?? $this->createFilterQueryFactory();
-    }
-
-    /**
-     * @return \Shopsys\FrameworkBundle\Model\Product\Search\FilterQueryFactory
-     * @deprecated Will be replaced with constructor injection in the next major release
-     */
-    protected function createFilterQueryFactory(): FilterQueryFactory
-    {
-        @trigger_error(sprintf('The %s() method is deprecated and will be removed in the next major. Use the constructor injection instead.', __METHOD__), E_USER_DEPRECATED);
-
-        return new FilterQueryFactory();
+        $this->filterQueryFactory = $filterQueryFactory;
     }
 
     /**
@@ -120,20 +109,6 @@ class ProductElasticsearchRepository
         }
 
         return $this->foundProductIdsCache[$domainId][$searchText];
-    }
-
-    /**
-     * @param int $domainId
-     * @return string
-     * @deprecated Getting index name using this method is deprecated since SSFW 7.3, use ElasticsearchStructureManager::getCurrentIndexName or ElasticsearchStructureManager::getAliasName instead
-     */
-    protected function getIndexName(int $domainId): string
-    {
-        @trigger_error(
-            sprintf('Getting index name using method "%s" is deprecated since SSFW 7.3, use %s or %s instead', __METHOD__, 'ElasticsearchStructureManager::getCurrentIndexName', 'ElasticsearchStructureManager::getAliasName'),
-            E_USER_DEPRECATED
-        );
-        return $this->indexPrefix . self::ELASTICSEARCH_INDEX . $domainId;
     }
 
     /**
