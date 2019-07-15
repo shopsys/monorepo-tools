@@ -22,11 +22,21 @@ The objects in read model are immutable, read-only by definition, and do not hav
 The read model is implemented in a separate [`shopsys/read-model`](https://github.com/shopsys/read-model) package.
 
 Currently, you can choose between two implementations of `ListedProductViewFacadeInterface` that represents read model:
- - `ListedProductViewElasticFacade` *(default)*
-    - data from Elasticsearch
-    - faster than getting products from SQL
-    - to use this implementation you need to use `ProductOnCurrentDomainElasticFacade` as well. You can find more about this topic in [Front-end product filtering](/docs/model/front-end-product-filtering.md)
- - `ListedProductViewFacade`
-    - data from SQL
-    - slower than Elasticsearch, but can be easily used for complex pricing models that calculate prices by SQL function
-    - to use this implementation you need to use `ProductOnCurrentDomainFacade` as well. You can find more about this topic in [Front-end product filtering](/docs/model/front-end-product-filtering.md)
+
+## Option 1 - use data from Elasticsearch
+- use `ListedProductViewElasticFacade` *(default)* implementation of `ListedProductViewFacadeInterface` in `services.yml` and `services_test.yml`
+    ```yaml
+       Shopsys\ReadModelBundle\Product\Listed\ListedProductViewFacadeInterface: '@Shopsys\ReadModelBundle\Product\Listed\ListedProductViewElasticFacade'
+
+       Shopsys\ReadModelBundle\Product\Listed\ListedProductViewElasticFacade: ~
+    ```
+- faster than getting products from SQL
+- to use this implementation you need to use `ProductOnCurrentDomainElasticFacade` as well. You can find more about this topic in [Front-end product filtering](/docs/model/front-end-product-filtering.md)
+
+## Option 2 - use data from SQL database
+- use `ListedProductViewFacade` implementation of `ListedProductViewFacadeInterface` in `services.yml` and `services_test.yml`
+    ```yaml
+        Shopsys\ReadModelBundle\Product\Listed\ListedProductViewFacadeInterface: '@Shopsys\ReadModelBundle\Product\Listed\ListedProductViewFacade'
+    ```
+- slower than Elasticsearch, but can be easily used for complex pricing models that calculate prices by SQL function
+- to use this implementation you need to use `ProductOnCurrentDomainFacade` as well. You can find more about this topic in [Front-end product filtering](/docs/model/front-end-product-filtering.md)

@@ -196,6 +196,10 @@ We will also make elasticsearch server listen on 192.168.0.1 subnet by modifying
 ```
 network.host: 0.0.0.0
 ```
+
+To [sort properly in different locales](/docs/introduction/how-to-set-up-domains-and-locales.md#37-sorting-in-different-locales) we need to [install ICU analysis plugin](https://www.elastic.co/guide/en/elasticsearch/plugins/current/analysis-icu.html)
+which ensures that alphabetical sorting is correct for every language and its set of rules.
+
 We also need to restart service so the new configuration is applied.
 ```
 service elasticsearch restart
