@@ -1,19 +1,65 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!-- Generator: Adobe Illustrator 19.1.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
-<svg version="1.1" id="Vrstva_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-	 viewBox="-711 25 512 512" style="enable-background:new -711 25 512 512;" xml:space="preserve">
-<style type="text/css">
-	.st0{fill:#444444;}
-</style>
-<g>
-	<path class="st0" d="M-224.6,181.5h-66.1L-327,55.6c-4.3-10.7-17.1-14.9-27.7-10.7l-2.1,2.1c-10.7,6.4-14.9,19.2-10.7,29.9
-		l25.6,104.5h-228.3L-544.6,77c4.3-10.7,0-23.5-10.7-29.9v0c-10.7-6.4-23.5-2.1-29.9,8.5l-36.3,125.9h-64
-		c-14.9,0-25.6,8.5-25.6,21.3c0,0,10.7,42.7,25.6,42.7h21.3l14.9,228.3c0,0,2.1,44.8,72.5,44.8h241.1c74.7,0,72.5-46.9,72.5-46.9
-		l12.8-228.3h25.6c12.8,0,25.6-42.7,25.6-42.7C-199,190-209.7,181.5-224.6,181.5L-224.6,181.5z M-608.6,247.6h-36.3v-36.3h36.3
-		V247.6L-608.6,247.6z M-538.2,443.9c0,12.8-8.5,21.3-19.2,21.3l0,0c-10.7,0-19.2-10.7-19.2-21.3V294.6c0-12.8,8.5-21.3,19.2-21.3
-		l0,0c10.7,0,19.2,10.7,19.2,21.3V443.9L-538.2,443.9z M-435.8,437.5c0,10.7-8.5,21.3-19.2,21.3l0,0c-10.7,0-19.2-8.5-19.2-21.3
-		V296.7c0-10.7,8.5-21.3,19.2-21.3l0,0c10.7,0,19.2,8.5,19.2,21.3V437.5L-435.8,437.5z M-333.4,439.6c0,10.7-8.5,21.3-19.2,21.3l0,0
-		c-10.7,0-19.2-8.5-19.2-21.3V296.7c0-10.7,8.5-21.3,19.2-21.3l0,0c10.7,0,19.2,8.5,19.2,21.3V439.6L-333.4,439.6z M-265.1,247.6
-		h-38.4v-36.3h38.4V247.6L-265.1,247.6z"/>
-</g>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="512"
+   height="512"
+   viewBox="0 0 512 512"
+   version="1.1"
+   id="svg8"
+   sodipodi:docname="cart.svg"
+   inkscape:version="0.92.4 (33fec40, 2019-01-16)">
+  <metadata
+     id="metadata14">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <defs
+     id="defs12" />
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1920"
+     inkscape:window-height="987"
+     id="namedview10"
+     showgrid="false"
+     inkscape:zoom="0.26339286"
+     inkscape:cx="1004.6166"
+     inkscape:cy="531.4001"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg8" />
+  <g
+     id="g6"
+     style="fill:#000000"
+     transform="matrix(32,0,0,32,0,35.138622)">
+    <g
+       id="g4"
+       style="fill:#000000">
+      <path
+         d="m 6.545,9.435 c 0,-0.797 0.653,-1.45 1.45,-1.45 0.797,0 1.45,0.653 1.45,1.45 0,0.797 -0.653,1.45 -1.45,1.45 -0.797,0 -1.45,-0.653 -1.45,-1.45 z M 8,1.876 l 2.182,3.2 H 5.818 Z M 8.604,0.306 A 0.722,0.722 0 0 0 8,0 0.71,0.71 0 0 0 7.396,0.313 L 4.211,5.076 H 0.727 A 0.73,0.73 0 0 0 0,5.804 C 0,5.869 0.007,5.934 0.03,6 l 1.846,6.742 c 0.168,0.61 0.728,1.062 1.397,1.062 h 9.454 c 0.67,0 1.23,-0.451 1.404,-1.062 L 15.978,6 16,5.804 A 0.73,0.73 0 0 0 15.273,5.076 h -3.484 z"
+         id="path2"
+         style="fill:#000000;fill-opacity:0.65"
+         inkscape:connector-curvature="0" />
+    </g>
+  </g>
 </svg>
