@@ -1,15 +1,16 @@
-@@ -5,10 +5,16 @@
- 
+@@ -5,10 +5,17 @@
+
      <property name="path.root" value="${project.basedir}"/>
      <property name="path.vendor" value="${path.root}/vendor"/>
 +    <property name="path.backend-api" value="${path.vendor}/shopsys/backend-api"/>
      <property name="path.framework" value="${path.vendor}/shopsys/framework"/>
- 
+
+     <property name="is-multidomain" value="true"/>
+     <property name="phpstan.level" value="1"/>
+
      <import file="${path.framework}/build.xml"/>
 +    <import file="${path.backend-api}/build.xml"/>
- 
-     <property name="is-multidomain" value="true"/>
-
++
 +    <target name="composer-dev" depends="shopsys_framework.composer-dev,backend-api-oauth-keys-generate" description="Installs dependencies for development and generate OAuth keys."/>
 +
 +    <target name="composer-prod" depends="shopsys_framework.composer-prod,backend-api-oauth-keys-generate" description="Installs dependencies for production and generate OAuth keys."/>
