@@ -1,0 +1,38 @@
+@in-corner-size: 10px;
+
+.in-corner {
+    position: absolute;
+    display: block;
+    width: @in-corner-size;
+    height: @in-corner-size;
+
+    background-color: @bg-page;
+
+    &--header {
+        right: 0;
+        bottom: 0;
+    }
+
+    &--menu {
+        top: 0;
+        right: -@in-corner-size;
+        background-color : @color-f;
+    }
+
+    &__in {
+        display: block;
+        width: @in-corner-size;
+        height: @in-corner-size;
+        overflow: hidden;
+
+        .in-corner--header & {
+            border-bottom-right-radius: @radius;
+            background: @color-f;
+        }
+
+        .in-corner--menu & {
+            border-top-left-radius: @radius;
+            background-color: @bg-page;
+        }
+    }
+}
