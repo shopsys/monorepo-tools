@@ -45,7 +45,7 @@ class ComposerScriptHandler extends ScriptHandler
         $options = self::getOptions($event);
         $consoleDir = self::getConsoleDir($event, $actionName);
 
-        if (null === $consoleDir) {
+        if ($consoleDir === null) {
             $io->writeError(sprintf('Could not locate console dir to %s.', $actionName));
             $io->writeError(sprintf('Commands "%s" not executed.', implode('", "', $commands)));
 

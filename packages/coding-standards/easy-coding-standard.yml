@@ -83,6 +83,9 @@ services:
     PhpCsFixer\Fixer\Alias\EregToPregFixer: ~
     PhpCsFixer\Fixer\FunctionNotation\FunctionTypehintSpaceFixer: ~
     PhpCsFixer\Fixer\ControlStructure\IncludeFixer: ~
+    PhpCsFixer\Fixer\ControlStructure\YodaStyleFixer:
+        equal: false
+        identical: false
     PhpCsFixer\Fixer\PhpTag\LinebreakAfterOpeningTagFixer: ~
     PhpCsFixer\Fixer\CastNotation\LowercaseCastFixer: ~
     PhpCsFixer\Fixer\Casing\NativeFunctionCasingFixer: ~

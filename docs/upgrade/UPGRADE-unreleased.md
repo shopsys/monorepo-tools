@@ -217,5 +217,8 @@ There you can find links to upgrade notes for other versions too.
 - get rid of not needed deprecations and BC-promise implementation from 7.x version
     - check and get rid of the use of all removed deprecated phing targets from [v7.3.0 release](./UPGRADE-unreleased.md#tools)
 
+## [shopsys/coding-standards]
+- run `php phing standards-fix` to fix code style as we now disallow Yoda style for comparison in the Shopsys Framework coding standards ([#1209](https://github.com/shopsys/shopsys/pull/1209))
 
 [shopsys/framework]: https://github.com/shopsys/framework
+[shopsys/coding-standards]: https://github.com/shopsys/coding-standards

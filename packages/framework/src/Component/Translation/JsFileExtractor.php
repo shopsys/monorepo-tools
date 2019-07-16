@@ -43,7 +43,7 @@ class JsFileExtractor implements FileVisitorInterface
      */
     public function visitFile(SplFileInfo $file, MessageCatalogue $catalogue)
     {
-        if ('.js' !== substr($file, -3)) {
+        if (substr($file, -3) !== '.js') {
             return;
         }
 

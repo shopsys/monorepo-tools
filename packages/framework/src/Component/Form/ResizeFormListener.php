@@ -200,7 +200,7 @@ class ResizeFormListener implements EventSubscriberInterface
             );
         }
 
-        if (null === $previousViewData) {
+        if ($previousViewData === null) {
             $previousViewData = [];
         }
         if (!is_array($previousViewData) && !($previousViewData instanceof Traversable && $previousViewData instanceof ArrayAccess)) {

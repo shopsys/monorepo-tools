@@ -31,7 +31,7 @@ class FieldFunction extends FunctionNode
 
         $lexer = $parser->getLexer();
         $this->nextArgumentExpressions = [];
-        while (Lexer::T_COMMA === $lexer->lookahead['type']) {
+        while ($lexer->lookahead['type'] === Lexer::T_COMMA) {
             $parser->match(Lexer::T_COMMA);
             $this->nextArgumentExpressions[] = $parser->ArithmeticPrimary();
         }
