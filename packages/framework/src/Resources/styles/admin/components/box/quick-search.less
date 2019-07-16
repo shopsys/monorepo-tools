@@ -1,13 +1,14 @@
 @quick-search-btn-height: @input-height - 2px;
 
 .box-quick-search {
+    position: relative;
     padding: 10px 0;
 
     font-size: 0;
 
     &__input {
         vertical-align: middle;
-        width: 86%;
+        width: 89%;
         height: @input-height;
         line-height: 30px;
     }
@@ -26,7 +27,9 @@
     }
 
     &__icon {
-        width: 3%;
+        position: absolute;
+        right: 115px;
+        top: 25px;
         vertical-align: middle;
 
         text-align: center;
