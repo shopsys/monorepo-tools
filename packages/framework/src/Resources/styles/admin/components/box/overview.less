@@ -32,16 +32,18 @@
         &__percent {
             display: inline-block;
             padding: 0 6px;
-            margin-bottom: 10px;
+            margin-bottom: 5px;
             line-height: 21px;
 
             color: @color-f;
             font-size: 13px;
+            font-weight: bold;
             border-radius: @radius;
 
             .svg {
                 position: relative;
                 padding: 3px 0;
+                font-size: 9px;
             }
 
             &--down {
@@ -49,7 +51,7 @@
 
                 .svg {
                     position: relative;
-                    top: 1px;
+                    top: 0px;
                 }
             }
 
@@ -57,7 +59,7 @@
                 background-color: @box-overview-color-up;
 
                 .svg {
-                    top: 2px;
+                    top: 0px;
                     transform: rotate(180deg);
                 }
             }
