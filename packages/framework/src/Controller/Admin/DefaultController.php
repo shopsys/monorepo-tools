@@ -190,7 +190,9 @@ class DefaultController extends AdminBaseController
      */
     protected function getTrendDifference(int $previous, int $current): int
     {
-        if ($previous === 0) {
+        if ($previous === 0 && $current === 0) {
+            $trend = 0;
+        } elseif ($previous === 0) {
             $trend = 100;
         } else {
             $trend = (int)round(($current / $previous - 1) * 100);
