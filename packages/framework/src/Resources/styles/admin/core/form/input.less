@@ -26,6 +26,10 @@
     border-radius: @radius;
     color: @color-base;
 
+    &:focus {
+        outline: none;
+    }
+
     &[readonly] {
         background-color: @color-grey-light;
         cursor: not-allowed;
@@ -38,7 +42,7 @@
     &--small {
         width: 80px;
     }
-    
+
     &--auto-size {
         width: auto;
     }
