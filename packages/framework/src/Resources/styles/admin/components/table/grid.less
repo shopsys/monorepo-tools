@@ -6,6 +6,8 @@
 .table-grid {
     width: 100%;
     border-collapse: collapse;
+    border-radius: @radius;
+    overflow: hidden;
 
     thead {
         background: @color-f;
@@ -18,7 +20,13 @@
     }
 
     &__row {
-        border-bottom: 1px solid @table-grid-line-color;
+        border-bottom: 2px solid @table-grid-line-color;
+
+        &:last-child {
+            tbody & {
+                border-bottom: none;
+            }
+        }
 
         &--edit {
             background: @bg-edit;
@@ -71,9 +79,14 @@
 
             a, span {
                 width: 18px;
+                margin: 5px;
 
                 text-align: center;
             }
+        }
+
+        &--bold {
+            font-weight: 800;
         }
 
         thead & {

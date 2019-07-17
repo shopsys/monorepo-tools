@@ -8,6 +8,11 @@
     text-decoration: none;
     cursor: pointer;
 
+    &:hover {
+        color: @color-action-hover;
+        text-decoration: none;
+    }
+
     &--after-input {
         position: absolute;
         top: calc(~"50% - @{in-icon-size}/2");
@@ -95,9 +100,5 @@
             color: @color-base;
             border-color: @color-9;
         }
-    }
-
-    &:hover {
-        text-decoration: none;
     }
 }
