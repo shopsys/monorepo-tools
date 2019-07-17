@@ -1,14 +1,18 @@
-@in-message-padding-horizontal: 9px;
-@in-message-padding-vertical: 6px;
+@in-message-padding-horizontal: 15px;
+@in-message-padding-vertical: 14px;
 
 @in-message-close-size: 17px;
 @in-message-close-background: #2a384e;
 @in-message-close-color: @color-f;
+@in-message-height: @input-height;
 
 // base message settings and elements
 .in-message {
     display: inline-block;
     padding: @in-message-padding-vertical @in-message-padding-horizontal;
+    height: @in-message-height;
+    border-radius: @radius;
+    width: 100%;
 
     font-style: italic;
     font-size: 14px;
@@ -85,25 +89,31 @@
     &--error {
         color: @color-message-alert-text;
         background: @color-message-alert;
+        border: 1px solid darken(@color-message-alert, 10%);
     }
 
     &--warning {
         color: @color-message-warning-text;
         background: @color-message-warning;
+        border: 1px solid darken(@color-message-warning, 10%);
     }
 
     &--info {
         color: @color-message-info-text;
         background: @color-message-info;
+        border: 1px solid darken(@color-message-info, 10%);
     }
 
     &--success {
         color: @color-message-success-text;
         background: @color-message-success;
+        border: 1px solid darken(@color-message-success, 10%);
     }
 
     &--danger {
         color: @color-message-alert-text;
+        background: @color-message-alert;
+        border: 1px solid darken(@color-message-alert, 10%);
     }
 }
 
