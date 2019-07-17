@@ -15,6 +15,6 @@ install:
     - composer install
 
 script:
-    - php vendor/bin/parallel-lint ./src ./tests
-    - php vendor/bin/ecs check ./src ./tests
+    - php vendor/bin/parallel-lint ./src ./tests ./install
+    - php vendor/bin/ecs check ./src ./tests ./install
     - php vendor/bin/phpunit tests
