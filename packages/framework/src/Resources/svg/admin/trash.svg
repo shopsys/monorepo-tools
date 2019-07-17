@@ -1,18 +1,65 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!-- Generator: Adobe Illustrator 19.1.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
-<svg version="1.1" id="Vrstva_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-	 viewBox="-711 25 512 512" style="enable-background:new -711 25 512 512;" xml:space="preserve">
-<style type="text/css">
-	.st0{fill:#444444;}
-</style>
-<g>
-	<g transform="translate(1.000000, 0.000000)">
-		<path class="st0" d="M-630.9,187.1l32,328.5c0,10.7,10.7,21.3,21.3,21.3h243.2c12.8,0,21.3-8.5,21.3-21.3l32-328.5L-630.9,187.1
-			L-630.9,187.1z M-438.9,475.1h-34.1V249h34.1V475.1L-438.9,475.1z M-374.9,475.1h-34.1l32-226.1h34.1L-374.9,475.1L-374.9,475.1z
-			 M-502.9,475.1h-34.1l-32-226.1h34.1L-502.9,475.1L-502.9,475.1z"/>
-		<path class="st0" d="M-276.8,93.3h-100.3V48.5c0-12.8-14.9-23.5-27.7-23.5h-98.1c-12.8,0-32,6.4-32,19.2V89l-100.3,4.3
-			c-12.8,0-23.5,8.5-23.5,21.3V153h405.3v-38.4C-253.3,101.8-264,93.3-276.8,93.3L-276.8,93.3z M-505.1,71.9
-			c0-10.7,10.7-17.1,25.6-17.1h49.1c12.8,0,25.6,8.5,25.6,17.1v21.3h-100.3V71.9L-505.1,71.9z"/>
-	</g>
-</g>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="512"
+   height="512"
+   viewBox="0 0 512 512"
+   version="1.1"
+   id="svg8"
+   sodipodi:docname="trash.svg"
+   inkscape:version="0.92.4 (33fec40, 2019-01-16)">
+  <metadata
+     id="metadata14">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <defs
+     id="defs12" />
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1920"
+     inkscape:window-height="987"
+     id="namedview10"
+     showgrid="false"
+     inkscape:zoom="0.23046875"
+     inkscape:cx="-2273.137"
+     inkscape:cy="-344.55877"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg8" />
+  <g
+     id="g6"
+     transform="matrix(32,0,0,32,56.896,0)"
+     style="fill:#000000">
+    <g
+       id="g4"
+       style="fill:#000000">
+      <path
+         d="M 9.333,0.889 8.444,0 H 4 L 3.111,0.889 H 0 V 2.667 H 12.444 V 0.889 Z M 4.33,6.64 6.223,8.524 8.107,6.64 9.36,7.893 7.476,9.778 9.36,11.662 8.107,12.916 6.222,11.031 4.338,12.916 3.084,11.662 4.97,9.778 3.076,7.893 Z M 2.667,16 h 7.11 c 0.979,0 1.779,-0.8 1.779,-1.778 V 3.556 H 0.889 V 14.222 C 0.889,15.2 1.689,16 2.667,16 Z"
+         id="path2"
+         inkscape:connector-curvature="0"
+         style="fill:#000000;fill-opacity:0.3" />
+    </g>
+  </g>
 </svg>
