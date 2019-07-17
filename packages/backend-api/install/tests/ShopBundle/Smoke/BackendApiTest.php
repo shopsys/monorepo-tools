@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Tests\ShopBundle\Smoke;
 
 use DateTime;
-use Shopsys\FrameworkBundle\Component\Domain\Domain;
 use Shopsys\ShopBundle\DataFixtures\Demo\ProductDataFixture;
 use Tests\ShopBundle\Test\OauthTestCase;
 use Webmozart\Assert\Assert;
@@ -18,7 +17,7 @@ class BackendApiTest extends OauthTestCase
 {
     public function testProductsReturnsArray(): void
     {
-        $response = $this->runOauthRequest('GET', $this->getDomainBaseUrl() . '/api/v1/products');
+        $response = $this->runOauthRequest('GET', '/api/v1/products');
 
         $this->assertSame(200, $response->getStatusCode());
         $jsonContent = json_decode($response->getContent(), true);
@@ -30,14 +29,14 @@ class BackendApiTest extends OauthTestCase
 
     public function testProductsReturnsLinksInHeaders(): void
     {
-        $firstPageResponse = $this->runOauthRequest('GET', $this->getDomainBaseUrl() . '/api/v1/products');
+        $firstPageResponse = $this->runOauthRequest('GET', '/api/v1/products');
 
         $firstPageLink = $firstPageResponse->headers->get('Link');
         $this->assertStringContainsString('api/v1/products?page=2', $firstPageLink);
         $this->assertStringContainsString('rel="next"', $firstPageLink);
         $this->assertStringContainsString('rel="last"', $firstPageLink);
 
-        $secondPageResponse = $this->runOauthRequest('GET', $this->getDomainBaseUrl() . '/api/v1/products?page=2');
+        $secondPageResponse = $this->runOauthRequest('GET', '/api/v1/products?page=2');
 
         $secondPageLink = $secondPageResponse->headers->get('Link');
         $this->assertStringContainsString('api/v1/products?page=1', $secondPageLink);
@@ -49,7 +48,7 @@ class BackendApiTest extends OauthTestCase
     {
         $product = $this->getReference(ProductDataFixture::PRODUCT_PREFIX . '1');
 
-        $uri = sprintf('%s/api/v1/products/%s', $this->getDomainBaseUrl(), $product->getUuid());
+        $uri = sprintf('/api/v1/products/%s', $product->getUuid());
         $response = $this->runOauthRequest('GET', $uri);
 
         $this->assertSame(200, $response->getStatusCode());
@@ -89,16 +88,5 @@ class BackendApiTest extends OauthTestCase
 
         $datetime = DateTime::createFromFormat(DateTime::ATOM, $datetime);
         $this->assertInstanceOf(DateTime::class, $datetime);
-    }
-
-    /**
-     * @return string
-     */
-    private function getDomainBaseUrl(): string
-    {
-        /** @var \Shopsys\FrameworkBundle\Component\Domain\Domain $domain */
-        $domain = $this->getContainer()->get(Domain::class);
-
-        return $domain->getUrl();
     }
 }
