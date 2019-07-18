@@ -5,8 +5,14 @@
 
 {% block main_content %}
     {{ form_start(form) }}
-        {{ form_row(form.mainVariant, { label: 'Main variant'|trans }) }}
-        {{ form_row(form.variants, { label: 'Variants'|trans }) }}
-        {{ form_row(form.save, { label: 'Create'|trans }) }}
+        <div class="wrap-divider">
+            {{ form_row(form.mainVariant, { label: 'Main variant'|trans }) }}
+        </div>
+        <div class="wrap-divider">
+            {{ form_row(form.variants, { label: 'Variants'|trans }) }}
+        </div>
+        <div class="wrap-divider text-right">
+            {{ form_row(form.save, { label: 'Create'|trans, attr: { 'class': 'btn--primary' }}) }}
+        </div>
     {{ form_end(form) }}
 {% endblock %}
