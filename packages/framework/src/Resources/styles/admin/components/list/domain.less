@@ -1,3 +1,5 @@
+@list-domain-item-height: 26px;
+
 .list-domain {
     .reset-ul();
 
@@ -14,11 +16,14 @@
         &__info {
             float: right;
             width: 40px;
+            height: @list-domain-item-height;
+            line-height: @list-domain-item-height;
 
             text-align: right;
 
             &__visible {
                 padding: 0;
+                line-height: @list-domain-item-height;
 
                 font-size: 14px;
             }
@@ -35,8 +40,12 @@
         &__name {
             display: block;
             margin: 0 40px 0 55px;
+            height: @list-domain-item-height;
+            line-height: @list-domain-item-height;
 
             i {
+                position: relative;
+                top: 2px;
                 margin-left: 5px;
 
                 font-size: 12px;
