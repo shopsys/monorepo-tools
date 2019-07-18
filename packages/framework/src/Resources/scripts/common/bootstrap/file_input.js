@@ -24,7 +24,7 @@ $.fn.bootstrapFileInput = function() {
     }
 
     // Set the word to be displayed on the button
-    var buttonWord = Shopsys.translator.trans('Browse');
+    var buttonWord = Shopsys.translator.trans('Browse files');
 
     if (typeof $elem.attr('title') != 'undefined') {
       buttonWord = $elem.attr('title');
@@ -38,7 +38,7 @@ $.fn.bootstrapFileInput = function() {
 
     // Now we're going to wrap that input field with a Bootstrap button.
     // The input will actually still be there, it will just be float above and transparent (done with the CSS).
-    $elem.wrap('<a class="js-fileInputWrapper btn ' + className + '"></a>').parent().prepend($('<span></span>').html(buttonWord)).prepend($('<i class="svg svg-search btn__icon"></i>'));
+    $elem.wrap('<a class="js-fileInputWrapper btn ' + className + '"></a>').parent().prepend($('<span></span>').html(buttonWord)).prepend($('<i class="svg svg-folder btn__icon"></i>'));
   })
 
   // After we have found all of the file inputs let's apply a listener for tracking the mouse movement.

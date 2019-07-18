@@ -1,3 +1,6 @@
+@box-upload-drag-place-width: 50%;
+@box-upload-icon-color: #d4d6da;
+
 .box-upload {
     background: @color-f;
     clear: both;
@@ -24,7 +27,7 @@
             position: absolute;
             top: 0;
             bottom: 0;
-            left: 70%;
+            left: @box-upload-drag-place-width;
             width: 0;
             height: 100%;
             content: '';
@@ -35,8 +38,8 @@
         &__drop {
             display: inline-block;
             vertical-align: middle;
-            padding: 30px;
-            width: 70%;
+            padding: 76px 50px;
+            width: @box-upload-drag-place-width;
 
             text-align: center;
             font-size: 16px;
@@ -45,7 +48,8 @@
             &__icon {
                 margin-bottom: 10px;
 
-                font-size: 26px;
+                font-size: 25px;
+                color: @box-upload-icon-color;
             }
 
             &__title {
@@ -58,6 +62,7 @@
             &__info {
                 font-size: 15px;
                 font-weight: 400;
+                color: @color-grey;
             }
         }
 
@@ -65,7 +70,7 @@
             display: inline-block;
             vertical-align: middle;
             padding: 30px;
-            width: 30%;
+            width: calc(~"100% - @{box-upload-drag-place-width}");
 
             text-align: center;
         }
@@ -73,7 +78,7 @@
         &__between {
             position: absolute;
             top: 50%;
-            left: 70%;
+            left: @box-upload-drag-place-width;
             height: 22px;
             line-height: 20px;
             width: 44px;
@@ -84,7 +89,7 @@
             border: 1px solid @color-f;
             border-radius: @radius;
             background: @color-f;
-            color: @color-action;
+            color: @color-grey;
             font-family: @font-medium;
             font-weight: 600;
             font-size: 13px;
