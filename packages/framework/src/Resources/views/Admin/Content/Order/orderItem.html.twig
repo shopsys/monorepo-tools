@@ -1,6 +1,5 @@
-{% macro orderItem(orderItemForm, orderItemId, orderItemTotalPricesById, currency, productItem) %}
+{% macro orderItem(orderItemForm, orderItemId, productItem) %}
     {% import _self as self %}
-    {% set currencySymbol = currency is not null ? currencySymbolByCurrencyId(currency.id) : null %}
     <tr class="js-order-item js-order-item-any" id="{{ orderItemForm.vars.id }}" data-index="{{ orderItemId }}">
         <td class="position-relative">
             {% if productItem and productItem.product %}
@@ -31,9 +30,8 @@
     </tr>
 {% endmacro %}
 
-{% macro orderTransport(orderTransportForm, order, transportPricesWithVatByTransportId, transportVatPercentsByTransportId) %}
+{% macro orderTransport(orderTransportForm, transportPricesWithVatByTransportId, transportVatPercentsByTransportId) %}
     {% import _self as self %}
-    {% set currencySymbol = order is not null ? currencySymbolByCurrencyId(order.currency.id) : null %}
     <tr
             class="js-order-transport-row js-order-item-any"
             data-transport-prices-with-vat-by-transport-id="{{ transportPricesWithVatByTransportId|json_encode() }}"
@@ -51,9 +49,8 @@
     </tr>
 {% endmacro %}
 
-{% macro orderPayment(orderPaymentForm, order, paymentPricesWithVatByPaymentId, paymentVatPercentsByPaymentId) %}
+{% macro orderPayment(orderPaymentForm, paymentPricesWithVatByPaymentId, paymentVatPercentsByPaymentId) %}
     {% import _self as self %}
-    {% set currencySymbol = order is not null ? currencySymbolByCurrencyId(order.currency.id) : null %}
     <tr
             class="js-order-payment-row js-order-item-any"
             data-payment-prices-with-vat-by-payment-id="{{ paymentPricesWithVatByPaymentId|json_encode() }}"
@@ -71,7 +68,7 @@
     </tr>
 {% endmacro %}
 
-{% macro priceWithVatWidget(priceWithVatForm, currencySymbol) %}
+{% macro priceWithVatWidget(priceWithVatForm) %}
     {{ form_errors(priceWithVatForm, {errors_attr: {inline: true}}) }}
     <span class="text-no-wrap">
         <span class="display-inline-block text-normal-wrap">
@@ -82,13 +79,13 @@
                     data-placement="right"
             ></i>
         </span>
-        {{ form_widget(priceWithVatForm, {attr: { class: 'input--small text-right input--half-width'}, symbolAfterInput: currencySymbol}) }}
+        {{ form_widget(priceWithVatForm, {attr: { class: 'input--small text-right input--half-width'}}) }}
     </span>
 {% endmacro %}
 
-{% macro calculablePriceWidget(calculablePriceForm, currencySymbol) %}
+{% macro calculablePriceWidget(calculablePriceForm) %}
     {{ form_errors(calculablePriceForm, {errors_attr: {inline: true}}) }}
     <span class="text-no-wrap">
-        {{ form_widget(calculablePriceForm, {attr: { class: 'input--small text-right input--half-width js-calculable-price'}, symbolAfterInput: currencySymbol}) }}
+        {{ form_widget(calculablePriceForm, {attr: { class: 'input--small text-right input--half-width js-calculable-price'}}) }}
     </span>
 {% endmacro %}

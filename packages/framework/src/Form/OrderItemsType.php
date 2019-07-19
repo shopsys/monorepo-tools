@@ -5,7 +5,6 @@ namespace Shopsys\FrameworkBundle\Form;
 use Shopsys\FrameworkBundle\Form\Admin\Order\OrderItemFormType;
 use Shopsys\FrameworkBundle\Form\Admin\Order\OrderPaymentFormType;
 use Shopsys\FrameworkBundle\Form\Admin\Order\OrderTransportFormType;
-use Shopsys\FrameworkBundle\Model\Order\Item\OrderItemPriceCalculation;
 use Shopsys\FrameworkBundle\Model\Order\Order;
 use Shopsys\FrameworkBundle\Model\Payment\PaymentFacade;
 use Shopsys\FrameworkBundle\Model\Transport\TransportFacade;
@@ -30,23 +29,15 @@ class OrderItemsType extends AbstractType
     private $paymentFacade;
 
     /**
-     * @var \Shopsys\FrameworkBundle\Model\Order\Item\OrderItemPriceCalculation
-     */
-    private $orderItemPriceCalculation;
-
-    /**
      * @param \Shopsys\FrameworkBundle\Model\Transport\TransportFacade $transportFacade
      * @param \Shopsys\FrameworkBundle\Model\Payment\PaymentFacade $paymentFacade
-     * @param \Shopsys\FrameworkBundle\Model\Order\Item\OrderItemPriceCalculation $orderItemPriceCalculation
      */
     public function __construct(
         TransportFacade $transportFacade,
-        PaymentFacade $paymentFacade,
-        OrderItemPriceCalculation $orderItemPriceCalculation
+        PaymentFacade $paymentFacade
     ) {
         $this->transportFacade = $transportFacade;
         $this->paymentFacade = $paymentFacade;
-        $this->orderItemPriceCalculation = $orderItemPriceCalculation;
     }
 
     /**
@@ -93,7 +84,6 @@ class OrderItemsType extends AbstractType
         $order = $options['order'];
 
         $view->vars['order'] = $order;
-        $view->vars['orderItemTotalPricesById'] = $this->orderItemPriceCalculation->calculateTotalPricesIndexedById($order->getItems());
         $view->vars['transportPricesWithVatByTransportId'] = $this->transportFacade->getTransportPricesWithVatIndexedByTransportId(
             $order->getCurrency()
         );

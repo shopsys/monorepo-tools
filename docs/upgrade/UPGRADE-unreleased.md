@@ -182,6 +182,33 @@ There you can find links to upgrade notes for other versions too.
     -   shopsys.domain_images_url_prefix: '/%shopsys.content_dir_name%/admin/images/domain'
     +   shopsys.domain_images_url_prefix: '/%shopsys.content_dir_name%/admin/images/domain/'
     ```
+- update your usage of `OrderItemsType` and Twig macros from `@ShopsysFramework/Admin/Content/Order/orderItem.html.twig` ([#1229](https://github.com/shopsys/shopsys/pull/1229))
+    - if you haven't customized Twig templates for editing orders in admin or used `OrderItemsType` directly you don't have to do anything
+    - change your usage after the macro signatures were modified (unused parameters were removed):
+        ```diff
+        - {% macro orderItem(orderItemForm, orderItemId, orderItemTotalPricesById, currency, productItem) %}
+        + {% macro orderItem(orderItemForm, orderItemId, productItem) %}
+        ```
+        ```diff
+        - {% macro orderTransport(orderTransportForm, order, transportPricesWithVatByTransportId, transportVatPercentsByTransportId) %}
+        + {% macro orderTransport(orderTransportForm, transportPricesWithVatByTransportId, transportVatPercentsByTransportId) %}
+        ```
+        ```diff
+        - {% macro orderPayment(orderPaymentForm, order, paymentPricesWithVatByPaymentId, paymentVatPercentsByPaymentId) %}
+        + {% macro orderPayment(orderPaymentForm, paymentPricesWithVatByPaymentId, paymentVatPercentsByPaymentId) %}
+        ```
+        ```diff
+        - {% macro priceWithVatWidget(priceWithVatForm, currencySymbol) %}
+        + {% macro priceWithVatWidget(priceWithVatForm) %}
+        ```
+        ```diff
+        - {% macro calculablePriceWidget(calculablePriceForm, currencySymbol) %}
+        + {% macro calculablePriceWidget(calculablePriceForm) %}
+        ```
+    - constructor of `OrderItemsType` no longer accepts `OrderItemPriceCalculation` as third parameter
+        - please change your usage accordingly if you extended this class or call the constructor directly
+    - if you have overridden `{% block order_items_widget %}` you don't have the variable `orderItemTotalPricesById` defined in the block anymore
+        - you can use the totals defined in `OrderItemData::$totalPriceWithVat` and `OrderItemData::$totalPriceWithoutVat` instead
 
 ### Configuration
 - simplify local configuration ([#1004](https://github.com/shopsys/shopsys/pull/1004))
