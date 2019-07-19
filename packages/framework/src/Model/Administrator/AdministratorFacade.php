@@ -100,7 +100,7 @@ class AdministratorFacade
     {
         $administratorByUserName = $this->administratorRepository->findByUserName($username);
         if ($administratorByUserName !== null
-            && $administratorByUserName !== $this
+            && $administratorByUserName !== $administrator
             && $administratorByUserName->getUsername() === $username
         ) {
             throw new \Shopsys\FrameworkBundle\Model\Administrator\Exception\DuplicateUserNameException($administrator->getUsername());
