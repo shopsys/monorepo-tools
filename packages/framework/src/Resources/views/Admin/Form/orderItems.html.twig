@@ -12,7 +12,7 @@
                             <tr>
                                 <th>{{ 'Name'|trans }}</th>
                                 <th>{{ 'Catalogue number'|trans }}</th>
-                                <th class="text-right">{{ 'Unit price including VAT'|trans }}</th>
+                                <th class="text-right">{{ 'Unit price including VAT'|trans }} ({{ currencySymbolByCurrencyId(order.currency.id) }})</th>
                                 <th class="text-right">{{ 'Amount'|trans }}</th>
                                 <th class="text-right">{{ 'Unit'|trans }}</th>
                                 <th class="text-right">{{ 'VAT rate (%)'|trans }}</th>
@@ -25,29 +25,29 @@
                                         ></i>
                                     </span>
                                 </th>
-                                <th class="text-right">{{ 'Unit price excluding VAT'|trans }}</th>
-                                <th class="text-right">{{ 'Total including VAT'|trans }}</th>
-                                <th class="text-right">{{ 'Total excluding VAT'|trans }}</th>
+                                <th class="text-right">{{ 'Unit price excluding VAT'|trans }} ({{ currencySymbolByCurrencyId(order.currency.id) }})</th>
+                                <th class="text-right">{{ 'Total including VAT'|trans }} ({{ currencySymbolByCurrencyId(order.currency.id) }})</th>
+                                <th class="text-right">{{ 'Total excluding VAT'|trans }} ({{ currencySymbolByCurrencyId(order.currency.id) }})</th>
                                 <th></th>
                         </tr>
                         </thead>
                         <tbody
                             id="js-order-items"
-                            data-prototype="{{ orderItemMacro.orderItem(form.itemsWithoutTransportAndPayment.vars.prototype, null, [], order.currency, null)|escape }}"
+                            data-prototype="{{ orderItemMacro.orderItem(form.itemsWithoutTransportAndPayment.vars.prototype, null, null)|escape }}"
                             data-order-product-add-url="{{ url('admin_order_addproduct', { orderId: order.id }) }}"
                         >
                             {% for productItem in order.productItems %}
-                                {{ orderItemMacro.orderItem(form.itemsWithoutTransportAndPayment[productItem.id], productItem.id, orderItemTotalPricesById, order.currency, productItem) }}
+                                {{ orderItemMacro.orderItem(form.itemsWithoutTransportAndPayment[productItem.id], productItem.id, productItem) }}
                             {% endfor %}
 
                             {% for orderItemId, orderItemForm in form.itemsWithoutTransportAndPayment %}
                                 {% if not orderItemForm.rendered %}
-                                    {{ orderItemMacro.orderItem(orderItemForm, orderItemId, orderItemTotalPricesById, order.currency, null) }}
+                                    {{ orderItemMacro.orderItem(orderItemForm, orderItemId, null) }}
                                 {% endif %}
                             {% endfor %}
 
-                            {{ orderItemMacro.orderTransport(form.orderTransport, order, transportPricesWithVatByTransportId, transportVatPercentsByTransportId) }}
-                            {{ orderItemMacro.orderPayment(form.orderPayment, order, paymentPricesWithVatByPaymentId, paymentVatPercentsByPaymentId) }}
+                            {{ orderItemMacro.orderTransport(form.orderTransport, transportPricesWithVatByTransportId, transportVatPercentsByTransportId) }}
+                            {{ orderItemMacro.orderPayment(form.orderPayment, paymentPricesWithVatByPaymentId, paymentVatPercentsByPaymentId) }}
                         </tbody>
                         <tfoot>
                             <tr>
