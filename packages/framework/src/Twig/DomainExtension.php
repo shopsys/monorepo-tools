@@ -97,7 +97,7 @@ class DomainExtension extends \Twig_Extension
             $src = $this->assetPackages->getUrl(sprintf('%s/%u.png', $this->domainImagesUrlPrefix, $domainId));
 
             return '
-                <span class="in-image in-image--' . $size . '">
+                <span class="in-image">
                     <span
                         class="in-image__in"
                     >
@@ -108,7 +108,7 @@ class DomainExtension extends \Twig_Extension
                 </span>';
         } else {
             return '
-                <span class="in-image in-image--' . $size . '">
+                <span class="in-image">
                     <span
                         class="in-image__in in-image__in--' . $domainId . '"
                         title="' . htmlspecialchars($domainName, ENT_QUOTES) . '"

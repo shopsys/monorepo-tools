@@ -6,7 +6,7 @@
 @input-padding-horizontal: 14px;
 
 @input-space-for-icon: 40px;
-@input-space-for-domain: 60px;
+@input-space-for-domain: 65px;
 @input-icon-position: 1px;
 @input-icon-size: 30px;
 
@@ -174,25 +174,15 @@
 
     &__domain {
         position: absolute;
-        top: 7px;
-        left: 7px;
-        width: 40px;
-        height: calc(~"@{input-height} - 2*7px");
-
-        &:after {
-            position: absolute;
-            top: 0;
-            bottom: 0;
-            width: 1px;
-            right: -7px;
-            display: block;
-            content: '';
-
-            background: @color-border;
-        }
+        top: 10px;
+        left: 10px;
+        width: 46px;
+        height: calc(~"@{input-height} - 2*10px");
 
         img {
             .center-image();
+            max-width: @in-image-width;
+            max-height: @in-image-height;
         }
     }
 
