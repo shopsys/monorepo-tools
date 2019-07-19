@@ -20,7 +20,7 @@
         <td>{{ form_widget(orderItemForm.quantity, {attr: { class: 'text-right input--half-width'}}) }}</td>
         <td>{{ form_widget(orderItemForm.unitName, {attr: { class: 'text-right input--half-width'}}) }}</td>
         <td>{{ form_widget(orderItemForm.vatPercent, {attr: { class: 'text-right input--half-width'}}) }}</td>
-        {% set uncheckedByDefault = orderItemForm.vars.data is not null ? orderItemForm.setPricesManually.vars.data : true %}
+        {% set uncheckedByDefault = orderItemForm.vars.data is not null ? orderItemForm.setPricesManually.vars.data : false %}
         <td class="text-center">{{ form_widget(orderItemForm.setPricesManually, {attr: { class: 'js-set-prices-manually'}, checked: uncheckedByDefault}) }}</td>
         <td>{{ self.calculablePriceWidget(orderItemForm.priceWithoutVat, currencySymbol) }}</td>
         <td>{{ self.calculablePriceWidget(orderItemForm.totalPriceWithVat, currencySymbol) }}</td>
