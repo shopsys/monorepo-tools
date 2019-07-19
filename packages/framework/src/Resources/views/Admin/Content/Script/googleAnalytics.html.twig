@@ -9,7 +9,9 @@
     {{ form_start(form) }}
         {{ form_errors(form) }}
 
-        {{ form_row(form.trackingId, { label: 'Tracking ID'|trans}) }}
+        <div class="wrap-divider">
+            {{ form_row(form.trackingId, { label: 'Tracking ID'|trans}) }}
+        </div>
 
         {% embed '@ShopsysFramework/Admin/Inline/FixedBar/fixedBar.html.twig' %}
             {% block fixed_bar_content %}

@@ -4,12 +4,13 @@
 
 {% block h1 %}{{ 'Countries overview'|trans }}{% endblock %}
 
+{% block btn %}
+    <a href="{{ url('admin_country_new') }}" class="btn btn--primary btn--plus wrap-bar__btn">
+        <i class="btn__icon">+</i>
+        {{ 'Create new country'|trans }}
+    </a>
+{% endblock %}
+
 {% block main_content %}
-    <div class="wrap-bar">
-        <a href="{{ url('admin_country_new') }}" class="btn btn--primary btn--plus wrap-bar__btn">
-            <i class="btn__icon">+</i>
-            {{ 'Create new country'|trans }}
-        </a>
-    </div>
     {{ gridView.render() }}
 {% endblock %}

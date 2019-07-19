@@ -1,9 +1,13 @@
 {{ form_start(form) }}
-    <div class="form-group">
-        <div class="form-group__title">
-            {{ 'Settings'|trans }}
+    <div class="wrap-divider wrap-divider--bottom">
+        <div class="form-group">
+            <div class="form-group__title">
+                {{ 'Settings'|trans }}
+            </div>
+            <div>
+                {{ form_row(form.defaultUnit, { label: 'Default unit'|trans, icon: { title : 'Default unit will be used when creating new product'|trans } }) }}
+            </div>
         </div>
-        {{ form_row(form.defaultUnit, { label: 'Default unit'|trans, icon: { title : 'Default unit will be used when creating new product'|trans } }) }}
     </div>
 
     {% embed '@ShopsysFramework/Admin/Inline/FixedBar/fixedBar.html.twig' %}

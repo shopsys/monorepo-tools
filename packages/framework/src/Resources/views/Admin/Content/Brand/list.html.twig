@@ -4,29 +4,33 @@
 {% block h1 %}{{ 'Brand overview'|trans }}{% endblock %}
 
 {% block main_content %}
-    <div class="wrap-bar">
-        <div class="form-group margin-bottom-20">
+    <div class="wrap-divider wrap-divider--bottom">
+        <div class="form-group">
             <h2 class="form-group__title">
                 {{ 'Link to the overview of brands'|trans }}
             </h2>
+            <div>
                 {% for domain in domains %}
-                <div class="form-line">
-                    <div class="form-line__line">
-                        <div class="form-line__label">
-                            {{ getDomainName(domain.id) }}
-                            {% if isMultidomain() %}
-                                {{ domainIcon(domain.id) }}
-                            {% endif %}
-                        </div>
-                        <div class="form-line__item form-line__item--text">
-                            <a href="{{ findUrlByDomainId('front_brand_list', {}, domain.id) }}" target="_blank">
-                                {{ findUrlByDomainId('front_brand_list', {}, domain.id) }}
-                            </a>
+                    <div class="form-line">
+                        <div class="form-line__line">
+                            <div class="form-line__label">
+                                {{ getDomainName(domain.id) }}
+                                {% if isMultidomain() %}
+                                    {{ domainIcon(domain.id) }}
+                                {% endif %}
+                            </div>
+                            <div class="form-line__item form-line__item--text">
+                                <a href="{{ findUrlByDomainId('front_brand_list', {}, domain.id) }}" target="_blank">
+                                    {{ findUrlByDomainId('front_brand_list', {}, domain.id) }}
+                                </a>
+                            </div>
                         </div>
                     </div>
-                </div>
-            {% endfor %}
+                {% endfor %}
+            </div>
         </div>
+    </div>
+    <div class="wrap-bar">
         <a href="{{ url('admin_brand_new') }}" class="btn btn--primary btn--plus wrap-bar__btn">
             <i class="btn__icon">+</i>
             {{ 'Create new brand'|trans }}
