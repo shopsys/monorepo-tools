@@ -4,7 +4,9 @@
 {% block h1 %}{{ 'Units overview'|trans }}{% endblock %}
 
 {% block main_content %}
-    {{ render(controller('ShopsysFrameworkBundle:Admin/Unit:setting')) }}
+    <div class="wrap-divider wrap-divider--bottom">
+        {{ render(controller('ShopsysFrameworkBundle:Admin/Unit:setting')) }}
+    </div>
 
     {{ gridView.render() }}
 {% endblock %}

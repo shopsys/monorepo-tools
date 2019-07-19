@@ -4,9 +4,9 @@
 {% block h1 %}{{ 'Currencies'|trans }}{% endblock %}
 
 {% block main_content %}
-
-    {{ render(controller('ShopsysFrameworkBundle:Admin/Currency:settings')) }}
+    <div class="wrap-divider wrap-divider--bottom">
+        {{ render(controller('ShopsysFrameworkBundle:Admin/Currency:settings')) }}
+    </div>
 
     {{ gridView.render() }}
-
 {% endblock %}

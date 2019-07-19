@@ -1,11 +1,9 @@
 {{ form_start(form) }}
-    <div class="wrap-divider wrap-divider--bottom">
-        <div class="form-group">
-            <div class="form-group__title">
-                {{ 'Settings'|trans }}
-            </div>
-            {{ form_row(form.defaultPricingGroup, { 'label': 'Default pricing group'|trans }) }}
+    <div class="form-group">
+        <div class="form-group__title">
+            {{ 'Settings'|trans }}
         </div>
+        {{ form_row(form.defaultPricingGroup, { 'label': 'Default pricing group'|trans }) }}
     </div>
 
     {% embed '@ShopsysFramework/Admin/Inline/FixedBar/fixedBar.html.twig' %}

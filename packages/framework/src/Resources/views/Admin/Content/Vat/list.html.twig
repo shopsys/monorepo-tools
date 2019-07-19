@@ -4,8 +4,9 @@
 {% block h1 %}{{ 'VAT and rounding'|trans }}{% endblock %}
 
 {% block main_content %}
-
-    {{ render(controller('ShopsysFrameworkBundle:Admin/Vat:settings')) }}
+    <div class="wrap-divider wrap-divider--bottom">
+        {{ render(controller('ShopsysFrameworkBundle:Admin/Vat:settings')) }}
+    </div>
 
     {{ gridView.render() }}
 {% endblock %}

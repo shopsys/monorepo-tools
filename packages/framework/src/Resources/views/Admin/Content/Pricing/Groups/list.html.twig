@@ -6,7 +6,9 @@
 {% block main_content %}
     {{ render(controller('ShopsysFrameworkBundle:Admin/Domain:domainTabs')) }}
 
-    {{ render(controller('ShopsysFrameworkBundle:Admin/PricingGroup:settings')) }}
+    <div class="wrap-divider wrap-divider--bottom">
+        {{ render(controller('ShopsysFrameworkBundle:Admin/PricingGroup:settings')) }}
+    </div>
 
     {{ gridView.render() }}
 {% endblock %}

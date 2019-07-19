@@ -1,14 +1,12 @@
 {{ form_start(form) }}
-    <div class="wrap-divider wrap-divider--bottom">
-        <div class="form-group">
-            <div class="form-group__title">
-                {{ 'Settings'|trans }}
-            </div>
-            {{ form_row(form.defaultCurrency, { label: 'Default administration currency'|trans, icon: { title: 'When changing the default currency there is no recalculation of prices'|trans } }) }}
-            {% for item in form.domainDefaultCurrencies %}
-                {{ form_row(item, { label: 'Basic frontend currency %domainName%'|trans({'%domainName%': domainNames[item.vars.name]})}) }}
-            {% endfor %}
+    <div class="form-group">
+        <div class="form-group__title">
+            {{ 'Settings'|trans }}
         </div>
+        {{ form_row(form.defaultCurrency, { label: 'Default administration currency'|trans, icon: { title: 'When changing the default currency there is no recalculation of prices'|trans } }) }}
+        {% for item in form.domainDefaultCurrencies %}
+            {{ form_row(item, { label: 'Basic frontend currency %domainName%'|trans({'%domainName%': domainNames[item.vars.name]})}) }}
+        {% endfor %}
     </div>
 
     {% embed '@ShopsysFramework/Admin/Inline/FixedBar/fixedBar.html.twig' %}
