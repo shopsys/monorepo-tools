@@ -16,15 +16,15 @@
             {% endif %}
         </td>
         <td>{{ form_widget(orderItemForm.catnum, {attr: { class: 'input--auto-size text-right'}}) }}</td>
-        <td>{{ self.priceWithVatWidget(orderItemForm.priceWithVat, currencySymbol) }}</td>
+        <td>{{ self.priceWithVatWidget(orderItemForm.priceWithVat) }}</td>
         <td>{{ form_widget(orderItemForm.quantity, {attr: { class: 'input--small text-right input--half-width'}}) }}</td>
         <td>{{ form_widget(orderItemForm.unitName, {attr: { class: 'input--small text-right input--half-width'}}) }}</td>
         <td>{{ form_widget(orderItemForm.vatPercent, {attr: { class: 'input--small text-right input--half-width'}}) }}</td>
         {% set uncheckedByDefault = orderItemForm.vars.data is not null ? orderItemForm.setPricesManually.vars.data : false %}
         <td class="text-center">{{ form_widget(orderItemForm.setPricesManually, {attr: { class: 'js-set-prices-manually'}, checked: uncheckedByDefault}) }}</td>
-        <td>{{ self.calculablePriceWidget(orderItemForm.priceWithoutVat, currencySymbol) }}</td>
-        <td>{{ self.calculablePriceWidget(orderItemForm.totalPriceWithVat, currencySymbol) }}</td>
-        <td>{{ self.calculablePriceWidget(orderItemForm.totalPriceWithoutVat, currencySymbol) }}</td>
+        <td>{{ self.calculablePriceWidget(orderItemForm.priceWithoutVat) }}</td>
+        <td>{{ self.calculablePriceWidget(orderItemForm.totalPriceWithVat) }}</td>
+        <td>{{ self.calculablePriceWidget(orderItemForm.totalPriceWithoutVat) }}</td>
         <td class="table-col-5 table-grid__cell--actions text-center">
             <a href="#" class="js-order-item-remove table-action in-icon in-icon--delete"><i class="svg svg-trash"></i></a>
         </td>
@@ -41,12 +41,12 @@
             >
         <td>{{ form_widget(orderTransportForm.transport, {isSimple: true}) }}</td>
         <td class="text-right">-</td>
-        <td>{{ self.priceWithVatWidget(orderTransportForm.priceWithVat, currencySymbol) }}</td>
+        <td>{{ self.priceWithVatWidget(orderTransportForm.priceWithVat) }}</td>
         <td class="text-right">1</td>
         <td></td>
         <td>{{ form_widget(orderTransportForm.vatPercent, {attr: { class: 'input--small text-right input--half-width'}}) }}</td>
         <td class="text-center">{{ form_widget(orderTransportForm.setPricesManually, {attr: { class: 'js-set-prices-manually'}}) }}</td>
-        <td>{{ self.calculablePriceWidget(orderTransportForm.priceWithoutVat, currencySymbol) }}</td>
+        <td>{{ self.calculablePriceWidget(orderTransportForm.priceWithoutVat) }}</td>
         <td colspan="3"></td>
     </tr>
 {% endmacro %}
@@ -61,12 +61,12 @@
     >
         <td>{{ form_widget(orderPaymentForm.payment, {isSimple: true}) }}</td>
         <td class="text-right">-</td>
-        <td>{{ self.priceWithVatWidget(orderPaymentForm.priceWithVat, currencySymbol) }}</td>
+        <td>{{ self.priceWithVatWidget(orderPaymentForm.priceWithVat) }}</td>
         <td class="text-right">1</td>
         <td></td>
         <td>{{ form_widget(orderPaymentForm.vatPercent, {attr: { class: 'input--small text-right input--half-width'}}) }}</td>
         <td class="text-center">{{ form_widget(orderPaymentForm.setPricesManually, {attr: { class: 'js-set-prices-manually'}}) }}</td>
-        <td>{{ self.calculablePriceWidget(orderPaymentForm.priceWithoutVat, currencySymbol) }}</td>
+        <td>{{ self.calculablePriceWidget(orderPaymentForm.priceWithoutVat) }}</td>
         <td colspan="3"></td>
     </tr>
 {% endmacro %}
