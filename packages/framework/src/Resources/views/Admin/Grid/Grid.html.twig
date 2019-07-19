@@ -166,10 +166,14 @@
         {% if grid.actionColumns|length > 0 or grid.inlineEdit %}
             <td class="table-grid__cell--actions js-inline-edit-unmatched-inputs">
                 {% if grid.inlineEdit and form is defined %}
-                    <span class="js-inline-edit-buttons">
-                        <a href="#" class="js-inline-edit-save in-icon in-icon--save svg svg-checked" title="{{ 'Save changes'|trans }}"></a>
-                        <a href="#" class="js-inline-edit-cancel in-icon in-icon--cancel svg svg-delete" title="{{ 'Discard changes'|trans }}"> </a>
-                    </span>
+                    <div class="form-inline-edit js-inline-edit-buttons">
+                        <div class="form-inline-edit__item">
+                            <a href="#" class="js-inline-edit-save in-icon in-icon--save svg svg-checked" title="{{ 'Save changes'|trans }}"></a>
+                        </div>
+                        <div class="form-inline-edit__item">
+                            <a href="#" class="js-inline-edit-cancel in-icon in-icon--cancel svg svg-delete" title="{{ 'Discard changes'|trans }}"> </a>
+                        </div>
+                    </div>
                     <span class="js-inline-edit-saving">
                         <span class="svg svg-gear in-icon in-icon--spinner"></span>
                     </span>
