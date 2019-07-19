@@ -4,7 +4,7 @@
     {% if notAllowedToDeleteCurrencyIds is defined %}
         {% if row is not empty and row.c.id in notAllowedToDeleteCurrencyIds %}
             <span title="{{ 'This currency can\'t be deleted, it is set as default or is saved with order.'|trans }}"
-                class="js-tooltip cursor-help in-icon in-icon--info" data-toggle="tooltip" data-placement="bottom"
+                class="js-tooltip cursor-help in-icon in-icon--info" data-toggle="tooltip" data-placement="top"
             >
                 <i class="svg svg-info"></i>
             </span>
