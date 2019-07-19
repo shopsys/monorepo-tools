@@ -22,10 +22,11 @@
     <li class="js-toggle-menu-item navig__item">
         <div class="box-dropdown">
             <div
-                    class="box-dropdown__select"
+                    class="box-dropdown__select box-dropdown__select--with-icon"
                     title="{{ 'Account'|trans }}"
             >
                 <i class="svg svg-person-man"></i>
+                {{ app.user.realName }}
                 <i class="box-dropdown__select__arrow box-dropdown__select__arrow--up"></i>
                 <i class="box-dropdown__select__arrow box-dropdown__select__arrow--down"></i>
             </div>
