@@ -19,7 +19,7 @@
 {% block grid_value_cell_edit_id_exchangeRate %}
     <span class="form-edit-block form-edit-block--size-1">
         {% form_theme form '@ShopsysFramework/Admin/Form/theme.html.twig' %}
-        {{ form_widget(form.exchangeRate) }}
+        {{ form_widget(form.exchangeRate, {attr: {class: "input--half-width"}}) }}
         <span class="form-edit-block__info">
             {% if row is null %}
                 <span title="" class="js-tooltip cursor-help in-icon" data-toggle="tooltip" data-placement="top" data-original-title="{{ '%defaultCurrency% per unit'|trans({'%defaultCurrency%': currencySymbolByCurrencyId(defaultCurrency.id)}) }}">
