@@ -57,7 +57,8 @@ class AdvancedSearchOrderFacade
      */
     public function createAdvancedSearchOrderForm(Request $request)
     {
-        $rulesData = (array)$request->get(static::RULES_FORM_NAME);
+        $rawRulesData = $request->get(static::RULES_FORM_NAME);
+        $rulesData = is_array($rawRulesData) ? $rawRulesData : [];
         $rulesFormData = $this->ruleFormViewDataFactory->createFromRequestData(OrderPriceFilterWithVatFilter::NAME, $rulesData);
 
         return $this->orderAdvancedSearchFormFactory->createRulesForm(static::RULES_FORM_NAME, $rulesFormData);
