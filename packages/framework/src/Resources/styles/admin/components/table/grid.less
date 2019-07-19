@@ -11,8 +11,7 @@
 
     thead {
         background: @color-f;
-        color: @color-base;
-        font-weight: bold;
+        color: @color-0;
     }
 
     tbody {
@@ -83,6 +82,10 @@
 
                 text-align: center;
             }
+
+            thead & {
+                color: @color-0;
+            }
         }
 
         &--bold {
@@ -94,10 +97,9 @@
             padding-bottom: @table-grid-cell-padding;
 
             font-size: @table-grid-font-size;
-            font-weight: bold;
-            
+
             a {
-                color: @color-base;
+                color: @color-0;
                 text-decoration: none;
             }
         }

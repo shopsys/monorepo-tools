@@ -225,10 +225,8 @@
 
 {% block grid_pager_totalcount %}
     <div class="in-grid-control__item in-grid-control__item--show">
-        <strong>
-            {{ 'Displaying'|trans }} {{ entityName|default('records'|trans)|trim }}
-            {{ grid.paginationResults.fromItem }} - {{ grid.paginationResults.toItem }} {{ 'from'|trans }} {{ grid.totalCount }}
-        </strong>
+        {{ 'Displaying'|trans }} {{ entityName|default('records'|trans)|trim }}
+        {{ grid.paginationResults.fromItem }} - {{ grid.paginationResults.toItem }} {{ 'from'|trans }} {{ grid.totalCount }}
     </div>
 {% endblock %}
 
