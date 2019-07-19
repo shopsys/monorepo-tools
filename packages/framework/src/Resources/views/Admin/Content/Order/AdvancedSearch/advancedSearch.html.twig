@@ -12,7 +12,7 @@
                 {{ 'Add requirement'|trans }}
             </button>
 
-            <a href="{{ url('admin_order_list') }}" class="in-iconic-link">
+            <a href="{{ url('admin_order_list', { as: [{ subject: 'orderTotalPriceWithVat' }] }) }}" class="in-iconic-link">
                 <i class="svg svg-circle-cross"></i>
                 {{ 'Reset filter'|trans }}
             </a>
