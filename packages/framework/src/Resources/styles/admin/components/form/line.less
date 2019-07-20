@@ -96,18 +96,18 @@
 
     &__error {
         position: absolute;
-        top: 10px;
+        top: calc(~"50% - @{form-error-icon-size}/2");
         left: -12px;
         z-index: 70;
 
         .box-login & {
-            top: 14px
+            top: 32px
         }
     }
 
     &__disabled {
         position: absolute;
-        top: 10px;
+        top: calc(~"50% - @{form-disabled-icon-size}/2");
         left: -12px;
         z-index: 60;
     }

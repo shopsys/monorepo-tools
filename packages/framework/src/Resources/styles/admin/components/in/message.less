@@ -1,9 +1,9 @@
 @in-message-padding-horizontal: 15px;
 @in-message-padding-vertical: 14px;
 
-@in-message-close-size: 17px;
-@in-message-close-background: #2a384e;
-@in-message-close-color: @color-f;
+@in-message-close-size: 16px;
+@in-message-close-color: #2a384e;
+@in-message-close-bg: @color-f;
 @in-message-height: @input-height;
 
 // base message settings and elements
@@ -29,22 +29,25 @@
         display: inline-block;
         height: @in-message-close-size;
         width: @in-message-close-size;
-        line-height: @in-message-close-size;
+        line-height: @in-message-close-size - 4px;
         right: -@in-message-close-size/2;
         top: -@in-message-close-size/2;
         vertical-align: middle;
-        padding-left: 1px;
 
         border-radius: 50%;
-        background: @in-message-close-background;
+        background-color: @in-message-close-bg;
         color: @in-message-close-color;
         font-style: normal;
-        font-size: 12px;
+        font-size: @in-message-close-size;
         font-weight: bold;
         text-align: center;
         text-decoration: none;
         text-transform: lowercase;
         cursor: pointer;
+
+        .svg {
+            font-size: @in-message-close-size;    
+        }
 
         &:hover {
             color: @in-message-close-color;

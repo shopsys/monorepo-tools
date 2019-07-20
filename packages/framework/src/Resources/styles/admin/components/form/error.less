@@ -1,3 +1,5 @@
+@form-error-icon-size: 20px;
+
 .form-error {
     width: 25px;
     height: 25px;
@@ -8,18 +10,16 @@
 
     text-align: center;
     font-size: 18px;
-    background: @color-f;
-    border: 1px solid @color-border;
     color: @color-red;
 
     border-radius: 50%;
 
-    .svg {
+    &__icon {
         position: relative;
-        left: 2px;
-        top: 2px;
+        left: 0px;
+        top: 0px;
         float: left;
 
-        font-size: 20px;
+        font-size: @form-error-icon-size;
     }
 }
