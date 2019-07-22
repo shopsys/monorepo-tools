@@ -144,7 +144,7 @@
             <span class="in-article__preview__info">Live view of the component in white window</span>
             <div class="wrap-bar">
                 <h2 class="wrap-bar__heading">Headline</h2>
-                <button class="btn wrap-bar__btn" type="button">Button</button>
+                <button class="btn btn--primary wrap-bar__btn" type="button">Button</button>
             </div>
         </div>
 
@@ -673,7 +673,7 @@
                     <tr class="table-form__row table-form__row--group">
                         <td class="table-form__cell" colspan="3">
                             <div class="table-form__cell__image">
-                                <img src="https://placeholdit.imgix.net/~text?txtsize=6&txt=46%C3%9726&w=46&h=26&txtpad=1" alt="Domain 1">
+                                <img src="https://placehold.it/46x26" alt="Domain 1">
                             </div>
                             <div class="table-form__cell__group-name">
                                 Domain 1
@@ -693,7 +693,7 @@
                     <tr class="table-form__row table-form__row--group">
                         <td class="table-form__cell" colspan="3">
                             <div class="table-form__cell__image">
-                                <img src="https://placeholdit.imgix.net/~text?txtsize=6&txt=46%C3%9726&w=46&h=26&txtpad=1" alt="Domain 2">
+                                <img src="https://placehold.it/46x26" alt="Domain 2">
                             </div>
                             <div class="table-form__cell__group-name">
                                 Domain 2
@@ -796,24 +796,32 @@
 
         <div class="in-article__preview">
             <span class="in-article__preview__info">Live view of the component in white window</span>
-            <div class="input__wrap">
-                <input type="text" class="input input--flag" value="Input with flag">
-                <div class="input__flag">
-                    <img src="https://placehold.it/16x12" alt="Domain 1">
+            <div class="form-line">
+                <div class="input__wrap">
+                    <input type="text" class="input input--flag" value="Input with flag">
+                    <div class="input__flag">
+                        <img src="https://placehold.it/16x12" alt="Domain 1">
+                    </div>
                 </div>
             </div>
-            <div class="input__wrap">
-                <input type="text" class="input input--domain" value="Input with domain">
-                <div class="input__domain">
-                    <span class="in-image">
-                        <img src="https://placehold.it/46x2618" alt="Domain 1">
-                    </span>
+            <div class="form-line">
+                <div class="input__wrap">
+                    <input type="text" class="input input--domain" value="Input with domain">
+                    <div class="input__domain">
+                        <span class="in-image">
+                            <span class="in-image__in">
+                                <img src="https://placehold.it/46x26" alt="Domain 1">
+                            </span>
+                        </span>
+                    </div>
                 </div>
             </div>
-            <div class="input__wrap">
-                <input type="text" class="input input--iconic" value="Input with icon">
-                <div class="input__icon">
-                    <i class="svg svg-phone"></i>
+            <div class="form-line">
+                <div class="input__wrap">
+                    <input type="text" class="input input--iconic" value="Input with icon">
+                    <div class="in-icon in-icon--after-input">
+                        <i class="svg svg-phone"></i>
+                    </div>
                 </div>
             </div>
         </div>
@@ -826,13 +834,19 @@
         <div class="in-article__preview">
             <span class="in-article__preview__info">Live view of the component in white window</span>
             <label class="form-choice">
-                <input type="checkbox" class="form-choice__input">
+                <label>
+                    <input type="checkbox" class="css-checkbox form-choice__input">
+                    <span class="css-checkbox__image"></span>
+                </label>
                 <span class="form-choice__label">
                     simple checkbox
                 </span>
             </label>
             <label class="form-choice">
-                <input type="checkbox" class="form-choice__input">
+                <label>
+                    <input type="checkbox" class="css-checkbox form-choice__input">
+                    <span class="css-checkbox__image"></span>
+                </label>
                 <span class="form-choice__label">
                     simple checkbox can be ordered consecutively
                 </span>
@@ -840,15 +854,24 @@
             <br><br>
             <div class="form-choice-list">
                 <label class="form-choice-list__item">
-                    <input type="checkbox" class="form-choice-list__input">
+                    <label>
+                        <input type="checkbox" class="css-checkbox form-choice__input">
+                        <span class="css-checkbox__image"></span>
+                    </label>
                     checkbox in list
                 </label>
                 <label class="form-choice-list__item">
-                    <input type="checkbox" class="form-choice-list__input">
+                    <label>
+                        <input type="checkbox" class="css-checkbox form-choice__input">
+                        <span class="css-checkbox__image"></span>
+                    </label>
                     checkbox in list
                 </label>
                 <label class="form-choice-list__item">
-                    <input type="checkbox" class="form-choice-list__input">
+                    <label>
+                        <input type="checkbox" class="css-checkbox form-choice__input">
+                        <span class="css-checkbox__image"></span>
+                    </label>
                     checkbox in list
                 </label>
             </div>
@@ -856,20 +879,30 @@
             <div class="form-choice-list">
                 <label class="form-choice-list__item">
                     <span class="form-choice-list__icon">
-                        <span class="in-image">
-                            <img src="https://placeholdit.imgix.net/~text?txtsize=5&txt=40%C3%9712&w=40&h=12&txtpad=1" alt="Domain 1">
+                        <span class="in-image in-image--small">
+                            <span class="in-image__in">
+                                <img src="https://placehold.it/40x12" alt="Domain 1">
+                            </span>
                         </span>
                     </span>
-                    <input type="checkbox" class="form-choice-list__input">
-                    domain icon only in checkbox list, icon is inserted <strong class="in-article__visible">domainIcon(domainId, "small") </strong>
+                    <label>
+                        <input type="checkbox" class="css-checkbox form-choice__input">
+                        <span class="css-checkbox__image"></span>
+                    </label>
+                    domain icon only in checkbox list, icon is inserted &nbsp;<strong class="in-article__visible">domainIcon(domainId, "small") </strong>
                 </label>
                 <label class="form-choice-list__item">
                     <span class="form-choice-list__icon">
-                        <span class="in-image">
-                            <img src="https://placeholdit.imgix.net/~text?txtsize=5&txt=40%C3%9712&w=40&h=12&txtpad=1" alt="Domain 1">
+                        <span class="in-image in-image--small">
+                            <span class="in-image__in">
+                                <img src="https://placehold.it/40x12" alt="Domain 1">
+                            </span>
                         </span>
                     </span>
-                    <input type="checkbox" class="form-choice-list__input">
+                    <label>
+                        <input type="checkbox" class="css-checkbox form-choice__input">
+                        <span class="css-checkbox__image"></span>
+                    </label>
                     domain icon only in checkbox list, it is possible to add action icon
                     <a href="#" class="form-choice-list__item__action form-choice-list__item__action--link text-no-decoration">
                         <i class="svg svg-forward-page"></i>
@@ -885,28 +918,30 @@
 
         <div class="in-article__preview">
             <span class="in-article__preview__info">Live view of the component in white window</span>
-            <div class="form-group">
-                <h2 class="form-group__title">
-                    Headline of information block
-                </h2>
+            <div class="wrap-divider">
+                <div class="form-line__box">
+                    <h2 class="form-line__box__title">
+                        Headline of information block
+                    </h2>
+                </div>
             </div>
-            <br><br>
-            <div class="form-group">
-                <h2 class="form-group__title">
-                    Headline of information block with possibility to expand, necessary to bind to existing JS
-                    <span class="form-group__title__click">
-                        +
-                    </span>
-                </h2>
+            <div class="wrap-divider">
+                <div class="form-line__box">
+                    <h2 class="form-line__box__title">
+                        Headline block with possibility to expand, necessary to bind to existing JS
+                        <span class="form-line__box__title__click">+</span>
+                    </h2>
+                </div>
             </div>
-            <br><br>
-            <div class="form-group">
-                <h2 class="form-group__title">
-                    Headline of information block with button possibility
-                    <span class="form-group__title__buttons">
-                        <button class="btn btn--small" type="button">Button</button>
-                    </span>
-                </h2>
+            <div class="wrap-divider">
+                <div class="form-line__box">
+                    <h2 class="form-line__box__title">
+                        Headline of information block with button possibility
+                        <span class="form-group__title__buttons">
+                            <button class="btn btn--small" type="button">Button</button>
+                        </span>
+                    </h2>
+                </div>
             </div>
         </div>
 
@@ -917,12 +952,10 @@
 
         <div class="in-article__preview">
             <span class="in-article__preview__info">Live view of the component in white window</span>
-            <div class="form-group wrap-border">
-                <h2 class="form-group__title">
+            <div class="form-line__box">
+                <h2 class="form-line__box__title">
                     Headline of information block
-                    <span class="form-group__title__click">
-                        +
-                    </span>
+                    <span class="form-line__box__title__click">+</span>
                 </h2>
 
                 <div class="form-line">
@@ -947,12 +980,10 @@
                 </div>
             </div>
 
-            <div class="form-group">
-                <h2 class="form-group__title">
+            <div class="form-line__box">
+                <h2 class="form-line__box__title">
                     Headline of information block
-                    <span class="form-group__title__click">
-                        +
-                    </span>
+                    <span class="form-line__box__title__click">+</span>
                 </h2>
 
                 <div class="form-line">
@@ -1261,6 +1292,9 @@
         </div>
 
         <h4>Checkboxes or radiobuttons</h4>
+        <p>
+            Graphic checkboxes and radio buttons are made by special html structure with special classes.
+        </p>
 
         <div class="in-article__preview">
             <span class="in-article__preview__info">Live view of the component in white window</span>
@@ -1272,16 +1306,57 @@
                     <div class="form-line__item">
                         <div class="form-choice-list">
                             <label class="form-choice-list__item">
-                                <input type="checkbox" class="form-choice-list__input">
+                                <label>
+                                    <input type="checkbox" class="css-checkbox form-choice__input">
+                                    <span class="css-checkbox__image"></span>
+                                </label>
                                 checkbox in list
                             </label>
                             <label class="form-choice-list__item">
-                                <input type="checkbox" class="form-choice-list__input">
+                                <label>
+                                    <input type="checkbox" class="css-checkbox form-choice__input">
+                                    <span class="css-checkbox__image"></span>
+                                </label>
                                 checkbox in list
                             </label>
                             <label class="form-choice-list__item">
-                                <input type="checkbox" class="form-choice-list__input">
+                                <label>
+                                    <input type="checkbox" class="css-checkbox form-choice__input">
+                                    <span class="css-checkbox__image"></span>
+                                </label>
                                 checkbox in list
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-line">
+                <label class="form-line__label">
+                    Radiobuttons
+                </label>
+                <div class="form-line__side">
+                    <div class="form-line__item">
+                        <div class="form-choice-list">
+                            <label class="form-choice-list__item">
+                                <label>
+                                    <input type="radio" class="css-radio form-choice__input" name="radiobuttons">
+                                    <span class="css-radio__image"></span>
+                                </label>
+                                radio in list
+                            </label>
+                            <label class="form-choice-list__item">
+                                <label>
+                                    <input type="radio" class="css-radio form-choice__input" name="radiobuttons">
+                                    <span class="css-radio__image"></span>
+                                </label>
+                                radio in list
+                            </label>
+                            <label class="form-choice-list__item">
+                                <label>
+                                    <input type="radio" class="css-radio form-choice__input" name="radiobuttons">
+                                    <span class="css-radio__image"></span>
+                                </label>
+                                radio in list
                             </label>
                         </div>
                     </div>
@@ -1367,17 +1442,17 @@
             </div>
         </div>
 
-
-
-        <h4>Double border between elements prevention</h4>
+        <h4>Section wrap</h4>
         <p>
-            Sometimes there is thicker line between some elements than between others. It is mainly in cases when the form-line elements are not directly behind each other, but some of them are covered with some dive, e.g. because of JS, for hiding and revealing. To that kind of dive you need to add class <strong class="in-article__visible">form-line__js</strong>.
+            Every section with form, table etc with header must be wrapped with special element <strong class="in-article__visible">wrap-divider</strong>.
+            <br>
+            You can use <strong class="in-article__visible">wrap-divider wrap-divider--bottom</strong> if you want to make bigger gap under section.
         </p>
-        <div class="in-article__preview">
-            <span class="in-article__preview__info">Live view of the component in white window</span>
+        <div class="wrap-divider wrap-divider--bottom">
+            <span class="in-article__preview__info">Wrap divider with bottom gap</span>
             <div class="form-line">
                 <label class="form-line__label">
-                    Thick line between
+                    Input label
                 </label>
                 <div class="form-line__side">
                     <div class="form-line__item">
@@ -1385,24 +1460,11 @@
                     </div>
                 </div>
             </div>
-            <div>
-                <div class="form-line">
-                    <label class="form-line__label">
-                        This form-line is wrapped
-                    </label>
-                    <div class="form-line__side">
-                        <div class="form-line__item">
-                            <input type="text" class="input">
-                        </div>
-                    </div>
-                </div>
-            </div>
         </div>
-        <div class="in-article__preview">
-            <span class="in-article__preview__info">Live view of the component in white window</span>
+        <div class="wrap-divider">
             <div class="form-line">
                 <label class="form-line__label">
-                    Thick line between disappeared
+                    Input label
                 </label>
                 <div class="form-line__side">
                     <div class="form-line__item">
@@ -1410,19 +1472,20 @@
                     </div>
                 </div>
             </div>
-            <div class="form-line__js">
-                <div class="form-line">
-                    <label class="form-line__label">
-                        This form-line is wrapped
-                    </label>
-                    <div class="form-line__side">
-                        <div class="form-line__item">
-                            <input type="text" class="input">
-                        </div>
+        </div>
+        <div class="wrap-divider">
+            <div class="form-line">
+                <label class="form-line__label">
+                    Input label
+                </label>
+                <div class="form-line__side">
+                    <div class="form-line__item">
+                        <input type="text" class="input">
                     </div>
                 </div>
             </div>
         </div>
+
     </div>
 
 {% endblock %}
