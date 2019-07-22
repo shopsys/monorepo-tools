@@ -1,5 +1,7 @@
 @in-image-height: 26px;
+@in-image-height-small: 16px;
 @in-image-width: 46px;
+@in-image-width-small: 28px;
 @in-image-gap: 10px;
 
 .in-image {
@@ -7,6 +9,18 @@
     float: left;
     margin-right: @in-image-gap;
     width: @in-image-width;
+
+    &--small {
+        height: @in-image-height-small;
+        line-height: @in-image-height-small;
+        width: @in-image-width-small;
+
+        .in-image__in {
+            height: @in-image-height-small;
+            line-height: @in-image-height-small;
+            width: @in-image-width-small;
+        }
+    }
 
     &--long-bordered {
         height: @in-image-height;
