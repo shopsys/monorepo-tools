@@ -9,7 +9,7 @@ We created these scripts because we couldn't find a tool that would keep the git
 
 You may need to update your `git` (tested on `2.16.1`).
 
-This repository is maintained by [shopsys/shopsys](https://github.com/shopsys/shopsys) monorepo, information about changes are in [monorepo CHANGELOG.md](https://github.com/shopsys/shopsys/blob/master/CHANGELOG.md).
+This repository is maintained by [shopsys/shopsys](https://github.com/shopsys/shopsys) monorepo, information about changes is in [monorepo CHANGELOG.md](https://github.com/shopsys/shopsys/blob/master/CHANGELOG.md).
 
 ## Quick start
 
