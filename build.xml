@@ -10,6 +10,8 @@
 
     <import file="${path.framework}/build.xml"/>
 
+    <target name="checks-internal" depends="shopsys_framework.checks-internal,project-base-vendor-check" description="Runs all internal checks for monorepo, eg. availability of services or validity of configuration f." hidden="true"/>
+
     <target name="clean" description="Cleans up directories with cache and scripts which are generated on demand.">
         <phingcall target="shopsys_framework.clean"/>
         <delete failonerror="false" includeemptydirs="true" quiet="true">
@@ -198,6 +200,16 @@
             <arg value="--level=${phpstan.level}"/>
             <arg value="-vvv"/>
         </exec>
+    </target>
+
+    <target name="project-base-vendor-check" description="Check there exists no vendor directory in project-base/ as that would break the autoloader" hidden="true">
+        <if>
+            <available file="${path.root}/vendor" type="dir" property="dir.Exists"/>
+            <then>
+                <echo level="error" message="Composer dependencies are installed in ${path.root} directory which would break the monorepo autoloader. Remove ${path.root}/vendor before re-running the command."/>
+                <fail message="Directory ${path.root}/vendor found."/>
+            </then>
+        </if>
     </target>
 
     <target name="standards" depends="shopsys_framework.standards,phing-config-check" description="Checks coding standards."/>
