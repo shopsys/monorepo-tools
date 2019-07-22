@@ -12,7 +12,7 @@
     width: auto;
     height: @btn-height;
     padding: @btn-padding-vertical @btn-padding-horizontal;
-    line-height: @btn-height - 10;
+    line-height: @btn-height - 9;
     vertical-align:middle;
     display: inline-block;
 
@@ -129,7 +129,8 @@
 
         .btn__icon {
             margin-right: 5px;
-            top: calc(~"50% - @{btn-icon-size}/2 + 4px");
+            top: calc(~"50% - @{btn-icon-size}/2");
+            line-height: @btn-small-line-height;
 
             font-size: 10px;
         }
