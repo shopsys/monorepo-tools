@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Shopsys\BackendApiBundle\Controller\V1\Product;
 
 use FOS\RestBundle\Controller\AbstractFOSRestController;
+use FOS\RestBundle\Controller\Annotations\Delete;
 use FOS\RestBundle\Controller\Annotations\Get;
 use FOS\RestBundle\Controller\Annotations\Post;
 use FOS\RestBundle\Controller\Annotations\QueryParam;
@@ -165,6 +166,26 @@ class ProductController extends AbstractFOSRestController
     }
 
     /**
+     * Delete a Product resource
+     * @Delete("/products/{uuid}")
+     * @param string $uuid
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function deleteProductAction(string $uuid): Response
+    {
+        $this->validateUuids([$uuid]);
+
+        $product = $this->productFacade->getByUuid($uuid);
+        $this->assertProductIsNotVariantType($product);
+
+        $this->productFacade->delete($product->getId());
+
+        $view = View::create([], Response::HTTP_NO_CONTENT);
+
+        return $this->handleView($view);
+    }
+
+    /**
      * @param array $errors
      * @return \FOS\RestBundle\View\View
      */
@@ -207,6 +228,16 @@ class ProductController extends AbstractFOSRestController
 
             throw new UnprocessableEntityHttpException('Product with ' . $uuid . ' UUID already exists');
         } catch (\Shopsys\FrameworkBundle\Model\Product\Exception\ProductNotFoundException $e) {
+        }
+    }
+
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Product\Product $product
+     */
+    protected function assertProductIsNotVariantType(Product $product): void
+    {
+        if ($product->isVariant() || $product->isMainVariant()) {
+            throw new BadRequestHttpException('cannot update/delete variant/main variant, this functionality is not supported yet');
         }
     }
 }
