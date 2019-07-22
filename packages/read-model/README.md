@@ -6,7 +6,7 @@
 This bundle for [Shopsys Framework](https://www.shopsys.com) separates templates from model using [read model concept](https://github.com/shopsys/shopsys/blob/master/docs/model/introduction-to-read-model.md).
 The bundle is dedicated for projects based on Shopsys Framework (i.e. created from [`shopsys/project-base`](https://github.com/shopsys/project-base)) exclusively.
 
-This repository is maintained by [shopsys/shopsys] monorepo, information about changes are in [monorepo CHANGELOG.md](https://github.com/shopsys/shopsys/blob/master/CHANGELOG.md).
+This repository is maintained by [shopsys/shopsys] monorepo, information about changes is in [monorepo CHANGELOG.md](https://github.com/shopsys/shopsys/blob/master/CHANGELOG.md).
 
 ## Installation
 The plugin is a Symfony bundle and is installed in the same way:

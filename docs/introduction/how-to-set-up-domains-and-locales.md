@@ -11,7 +11,7 @@ For an explanation of the basic terms, please read [domain, multidomain and mult
 
 #### 1.1 Domain configuration
 Modify the configuration of the domain in `app/config/domains.yml`.
-This configuration file contains informations about the domain ID, the domain identifier for the domain tabs in the administration, and the domain locale.
+This configuration file contains information about the domain ID, the domain identifier for the domain tabs in the administration, and the domain locale.
 
 #### 1.2 Set up the url address
 Set the url address for the domain in `app/config/domains_urls.yml`.

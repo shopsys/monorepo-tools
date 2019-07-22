@@ -7,9 +7,9 @@ This repository is part of Shopsys Framework - a **scalable ecommerce framework*
 
 Shopsys/framework package is part of Shopsys Framework environment and it stands out as a core of Shopsys Framework projects. This repository is READ-ONLY and it is maintained by monorepo [shopsys/shopsys](https://github.com/shopsys/shopsys).
 
-For more informations about project, please see [shopsys/shopsys] readme.
+For more information about project, please see [shopsys/shopsys] readme.
 
-This repository is maintained by [shopsys/shopsys] monorepo, information about changes are in [monorepo CHANGELOG.md](https://github.com/shopsys/shopsys/blob/master/CHANGELOG.md).
+This repository is maintained by [shopsys/shopsys] monorepo, information about changes is in [monorepo CHANGELOG.md](https://github.com/shopsys/shopsys/blob/master/CHANGELOG.md).
 
 ## How to Start New Project
 For the purposes of building the new project use our [shopsys/project-base](https://github.com/shopsys/project-base), which is fully ready as the base for building your Shopsys Framework based project.

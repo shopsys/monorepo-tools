@@ -5,7 +5,7 @@
 
 This bundle for [Shopsys Framework](https://www.shopsys.com) adds backend API using [FOSRestBundle](https://github.com/FriendsOfSymfony/FOSRestBundle), [oauth2-bundle](https://github.com/trikoder/oauth2-bundle) and [JMSSerializerBundle](https://github.com/schmittjoh/JMSSerializerBundle).
 The bundle is dedicated for projects based on Shopsys Framework (i.e. created from [`shopsys/project-base`](https://github.com/shopsys/project-base)) exclusively.
-This repository is maintained by [shopsys/shopsys] monorepo, information about changes are in [monorepo CHANGELOG.md](https://github.com/shopsys/shopsys/blob/master/CHANGELOG.md).
+This repository is maintained by [shopsys/shopsys] monorepo, information about changes is in [monorepo CHANGELOG.md](https://github.com/shopsys/shopsys/blob/master/CHANGELOG.md).
 
 ## Installation
 [Installation instructions](https://github.com/shopsys/shopsys/blob/master/docs/backend-api/backend-api-installation.md) can be found in our monorepo repository.

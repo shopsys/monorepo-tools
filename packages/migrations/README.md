@@ -17,7 +17,7 @@ This bundle provides commands which can be useful for database migrations:
 
 This bundle uses [DoctrineMigrationsBundle](https://symfony.com/doc/current/bundles/DoctrineMigrationsBundle), so you have to install both.
 
-This repository is maintained by [shopsys/shopsys] monorepo, information about changes are in [monorepo CHANGELOG.md](https://github.com/shopsys/shopsys/blob/master/CHANGELOG.md).
+This repository is maintained by [shopsys/shopsys] monorepo, information about changes is in [monorepo CHANGELOG.md](https://github.com/shopsys/shopsys/blob/master/CHANGELOG.md).
 
 ## To be able to use this bundle, you need to do following:
 1. Require `shopsys/migrations` in `composer.json`

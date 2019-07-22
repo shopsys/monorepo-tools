@@ -5,7 +5,7 @@
 
 Package of interfaces providing compatibility between [Shopsys Framework](https://www.shopsys-framework.com) and plugins.
 
-This repository is maintained by [shopsys/shopsys] monorepo, information about changes are in [monorepo CHANGELOG.md](https://github.com/shopsys/shopsys/blob/master/CHANGELOG.md).
+This repository is maintained by [shopsys/shopsys] monorepo, information about changes is in [monorepo CHANGELOG.md](https://github.com/shopsys/shopsys/blob/master/CHANGELOG.md).
 
 ## Features
 This package contains interfaces responsible for general functionality usable in almost any plugin.

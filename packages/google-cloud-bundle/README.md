@@ -5,7 +5,7 @@
 
 This bundle is used to allow [Shopsys Framework](https://www.shopsys-framework.com) integration with Google Cloud.
 
-This repository is maintained by [shopsys/shopsys] monorepo, information about changes are in [monorepo CHANGELOG.md](https://github.com/shopsys/shopsys/blob/master/CHANGELOG.md).
+This repository is maintained by [shopsys/shopsys] monorepo, information about changes is in [monorepo CHANGELOG.md](https://github.com/shopsys/shopsys/blob/master/CHANGELOG.md).
 
 ## Installation
 The plugin is a Symfony bundle and is installed in the same way:
