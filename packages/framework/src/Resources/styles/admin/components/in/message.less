@@ -3,6 +3,7 @@
 
 @in-message-close-size: 16px;
 @in-message-close-color: #2a384e;
+@in-message-close-color-hover: @color-blue;
 @in-message-close-bg: @color-f;
 @in-message-height: @input-height;
 
@@ -46,11 +47,11 @@
         cursor: pointer;
 
         .svg {
-            font-size: @in-message-close-size;    
+            font-size: @in-message-close-size;
         }
 
         &:hover {
-            color: @in-message-close-color;
+            color: @in-message-close-color-hover;
             text-decoration: none;
         }
     }
