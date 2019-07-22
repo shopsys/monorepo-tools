@@ -450,18 +450,20 @@
 {% endblock form_label %}
 
 {% block checkbox_widget %}
+    {% set class = 'css-checkbox' %}
     {% if inTree|default(false) == true %}
-        {% set class = 'form-tree__item__choice' %}
+        {% set class = class ~ ' form-tree__item__choice' %}
     {% elseif inList|default(false) == true %}
-        {% set class = 'form-choice-list__input' %}
+        {% set class = class ~ ' form-choice-list__input' %}
     {% elseif inFormChoice|default(false) == true %}
-        {% set class = 'form-choice__input' %}
-    {% else %}
-        {% set class = '' %}
+        {% set class = class ~ ' form-choice__input' %}
     {% endif %}
 
     {% set attr = attr|merge({'class': (attr.class|default('') ~ ' ' ~ class)|trim}) %}
-    {{ parent('form_widget_simple') }}
+    <label>
+        {{ parent('form_widget_simple') }}
+        <span class="css-checkbox__image"></span>
+    </label>
 {% endblock checkbox_widget %}
 
 {% block checkbox_label %}
@@ -470,6 +472,15 @@
         {{ block('form_label') }}
     {% endspaceless %}
 {% endblock checkbox_label %}
+
+{% block radio_widget %}
+    {% set class = 'css-radio' %}
+    {% set attr = attr|merge({'class': (attr.class|default('') ~ ' ' ~ class)|trim}) %}
+    <label>
+        {{ parent('form_widget_simple') }}
+        <span class="css-radio__image"></span>
+    </label>
+{% endblock radio_widget %}
 
 {% block product_row %}
     {{ block('form_row') }}

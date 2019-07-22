@@ -75,7 +75,12 @@
                 <th class="table-grid__cell"></th>
             {% endif %}
             {% if grid.enabledSelecting %}
-                <th class="table-grid__cell table-grid__cell--choice"><input type="checkbox" class="js-grid-mass-action-select-all" /></th>
+                <th class="table-grid__cell table-grid__cell--choice">
+                    <label>
+                        <input type="checkbox" class="js-grid-mass-action-select-all css-checkbox" />
+                        <span class="css-checkbox__image"></span>
+                    </label>
+                </th>
             {% endif %}
             {% for column in grid.columnsById %}
                 <th class="table-grid__cell {% if column.classAttribute %} {{ column.classAttribute }}{% endif %}">
@@ -149,13 +154,16 @@
         {% endif %}
         {% if grid.enabledSelecting %}
             <td class="table-grid__cell table-grid__cell--choice">
-                <input
-                    class="js-grid-mass-action-select-row"
-                    type="checkbox"
-                    name="g[{{ grid.id|escape('html_attr') }}][selectedRowIds][]"
-                    value="{{ grid.getRowId(row)|json_encode() }}"
-                    {% if grid.isRowSelected(row) %}checked="checked"{% endif %}
-                />
+                <label>
+                    <input
+                        class="js-grid-mass-action-select-row css-checkbox"
+                        type="checkbox"
+                        name="g[{{ grid.id|escape('html_attr') }}][selectedRowIds][]"
+                        value="{{ grid.getRowId(row)|json_encode() }}"
+                        {% if grid.isRowSelected(row) %}checked="checked"{% endif %}
+                    />
+                    <span class="css-checkbox__image"></span>
+                </label>
             </td>
         {% endif %}
         {% for column in grid.columnsById %}
