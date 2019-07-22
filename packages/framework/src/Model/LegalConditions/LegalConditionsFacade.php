@@ -113,7 +113,7 @@ class LegalConditionsFacade
         $articleId = $this->setting->getForDomain($settingKey, $domainId);
 
         if ($articleId !== null) {
-            return $this->articleFacade->getById($articleId);
+            return $this->articleFacade->findById($articleId);
         }
 
         return null;
