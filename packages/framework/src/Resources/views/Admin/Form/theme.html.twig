@@ -833,7 +833,7 @@
             {{ 'Add'|trans }}
         </button>
 
-        <div class="js-sortable-values-items">
+        <div class="box-sortable js-sortable-values-items">
             {% for valueItem in value %}
                 {{ self.sortableValuesWidgetItem(item_input_name, valueItem, labels_by_value[valueItem]|default(valueItem)) }}
             {% endfor %}
@@ -850,12 +850,12 @@
 {%- endblock sortable_values_widget -%}
 
 {% macro sortableValuesWidgetItem(inputName, value, label) %}
-    <div class="js-sortable-values-item padding-5">
-        <span class="js-sortable-values-item-handle cursor-move" title="{{ 'Move'|trans }}">
+    <div class="box-sortable__item js-sortable-values-item">
+        <span class="box-sortable__item__move js-sortable-values-item-handle" title="{{ 'Move'|trans }}">
             <i class="svg svg-move"></i>
         </span>
         {{ label }}
-        <span class="js-sortable-values-item-remove cursor-pointer float-right" type="button">
+        <span class="box-sortable__item__remove js-sortable-values-item-remove" type="button">
             <i class="svg svg-delete"></i>
         </span>
         <input class="js-sortable-values-item-input" type="hidden" name="{{ inputName }}" value="{{ value }}">
