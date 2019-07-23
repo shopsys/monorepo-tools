@@ -52,7 +52,7 @@ class LocalizationExtension extends \Twig_Extension
      */
     public function getLocaleFlagHtml($locale, $showTitle = true)
     {
-        $src = $this->assetPackages->getUrl('assets/admin/images/flags/' . $locale . '.png');
+        $src = $this->assetPackages->getUrl('bundles/shopsysframework/flags/' . $locale . '.png');
 
         if (file_exists($this->webDir . $src) === false) {
             return strtoupper($locale);

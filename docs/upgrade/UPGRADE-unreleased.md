@@ -209,6 +209,9 @@ There you can find links to upgrade notes for other versions too.
         - please change your usage accordingly if you extended this class or call the constructor directly
     - if you have overridden `{% block order_items_widget %}` you don't have the variable `orderItemTotalPricesById` defined in the block anymore
         - you can use the totals defined in `OrderItemData::$totalPriceWithVat` and `OrderItemData::$totalPriceWithoutVat` instead
+    - clean your project repository after administration image assets were moved from `shopsys/project-base` into `shopsys/framework` repository ([#1243](https://github.com/shopsys/shopsys/pull/1243))
+        - remove `bg/`, `flags/`, `logo.svg`, and `preloader.gif` from `web/assets/admin/images/`
+        - if you need to use these assets yourself, you can find them in `web/assets/bundles/shopsysframework/` (they are copied using `php phing assets` which is a part of standard build targets)
 
 ### Configuration
 - simplify local configuration ([#1004](https://github.com/shopsys/shopsys/pull/1004))
