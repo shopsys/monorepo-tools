@@ -827,9 +827,10 @@
 
         <button
             type="button"
-            class="js-sortable-values-item-add btn-link-style"
+            class="btn btn--plus margin-top-10 margin-bottom-10 js-sortable-values-item-add"
             data-item-template="{{ self.sortableValuesWidgetItem(item_input_name, '%value%', '%label%')|escape('html_attr') }}"
         >
+            <i class="btn__icon">+</i>
             {{ 'Add'|trans }}
         </button>
 
