@@ -243,6 +243,14 @@ There you can find links to upgrade notes for other versions too.
         - $container->setParameter('shopsys.router.locale_router_filepaths', $config['router']['locale_router_filepaths']);
         + $container->setParameter('shopsys.router.locale_router_filepath_mask', $config['router']['locale_router_filepath_mask']);
         ```
+- add the installation of the useful tools to your `docker/php-fpm/Dockerfile` ([#1239](https://github.com/shopsys/shopsys/pull/1239))
+    ```diff
+    libpq-dev \
+    + vim \
+    + nano \
+    + mc \
+    + htop \
+    ```
 ### Tools
 - get rid of not needed deprecations and BC-promise implementation from 7.x version
     - check and get rid of the use of all removed deprecated phing targets from [v7.3.0 release](./UPGRADE-unreleased.md#tools)
