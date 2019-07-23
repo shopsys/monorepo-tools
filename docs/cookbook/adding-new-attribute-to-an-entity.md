@@ -17,7 +17,6 @@ You can find instructions in [Extending Product List](./extending-product-list.m
 
     use Doctrine\ORM\Mapping as ORM;
     use Shopsys\FrameworkBundle\Model\Product\Product as BaseProduct;
-    use Shopsys\FrameworkBundle\Model\Product\ProductCategoryDomainFactoryInterface;
     use Shopsys\FrameworkBundle\Model\Product\ProductData as BaseProductData;
 
     /**
@@ -35,12 +34,11 @@ You can find instructions in [Extending Product List](./extending-product-list.m
 
         /**
          * @param \Shopsys\ShopBundle\Model\Product\ProductData $productData
-         * @param \Shopsys\FrameworkBundle\Model\Product\ProductCategoryDomainFactoryInterface $productCategoryDomainFactory
          * @param \Shopsys\ShopBundle\Model\Product\Product[]|null $variants
          */
-        protected function __construct(BaseProductData $productData, ProductCategoryDomainFactoryInterface $productCategoryDomainFactory, array $variants = null)
+        protected function __construct(BaseProductData $productData, ?array $variants = null)
         {
-            parent::__construct($productData, $productCategoryDomainFactory, $variants);
+            parent::__construct($productData, $variants);
 
             $this->extId = $productData->extId ?? 0;
         }
@@ -192,23 +190,19 @@ The original `ProductFormType` is set as the extended type by implementation of 
     ```php
     namespace Shopsys\ShopBundle\Model\Product;
 
-    use Shopsys\FrameworkBundle\Model\Product\ProductCategoryDomainFactoryInterface;
     use Shopsys\FrameworkBundle\Model\Product\ProductData as BaseProductData;
-    use Shopsys\FrameworkBundle\Model\Product\Pricing\ProductPriceRecalculationScheduler;
 
     // ...
 
     /**
-     * @param \Shopsys\FrameworkBundle\Model\Product\ProductCategoryDomainFactoryInterface $productCategoryDomainFactory
+     * @param \Shopsys\FrameworkBundle\Model\Product\ProductCategoryDomain[] $productCategoryDomains
      * @param \Shopsys\ShopBundle\Model\Product\ProductData $productData
-     * @param \Shopsys\FrameworkBundle\Model\Product\Pricing\ProductPriceRecalculationScheduler $productPriceRecalculationScheduler
      */
     public function edit(
-        ProductCategoryDomainFactoryInterface $productCategoryDomainFactory,
-        BaseProductData $productData,
-        ProductPriceRecalculationScheduler $productPriceRecalculationScheduler
+        array $productCategoryDomains,
+        BaseProductData $productData
     ) {
-        parent::edit($productCategoryDomainFactory, $productData, $productPriceRecalculationScheduler);
+        parent::edit($productCategoryDomains, $productData);
 
         $this->extId = $productData->extId;
     }
