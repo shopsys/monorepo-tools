@@ -14,4 +14,10 @@ interface ProductApiDataValidatorInterface
      * @return string[]
      */
     public function validateCreate(array $productApiData): array;
+
+    /**
+     * @param array $productApiData
+     * @return string[]
+     */
+    public function validateUpdate(array $productApiData): array;
 }

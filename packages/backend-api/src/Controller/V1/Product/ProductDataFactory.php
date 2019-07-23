@@ -7,6 +7,7 @@ namespace Shopsys\BackendApiBundle\Controller\V1\Product;
 use Ramsey\Uuid\Uuid;
 use Shopsys\BackendApiBundle\Component\DataSetter\ApiDataSetter;
 use Shopsys\FrameworkBundle\Model\Product\Availability\AvailabilityFacade;
+use Shopsys\FrameworkBundle\Model\Product\Product;
 use Shopsys\FrameworkBundle\Model\Product\ProductData;
 use Shopsys\FrameworkBundle\Model\Product\ProductDataFactoryInterface as BaseProductDataFactoryInterface;
 
@@ -56,6 +57,29 @@ class ProductDataFactory implements ProductDataFactoryInterface
         $productData->uuid = $uuid ?: Uuid::uuid4()->toString();
         $productData->availability = $this->availabilityFacade->getDefaultInStockAvailability();
 
+        $this->setProductDataByApi($productData, $productApiData);
+
+        return $productData;
+    }
+
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Product\Product $product
+     * @param array $productApiData
+     * @return \Shopsys\FrameworkBundle\Model\Product\ProductData
+     */
+    public function createFromProductAndApi(Product $product, array $productApiData): ProductData
+    {
+        $productData = $this->productDataFactory->createFromProduct($product);
+        $this->setProductDataByApi($productData, $productApiData);
+        return $productData;
+    }
+
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Product\ProductData $productData
+     * @param array $productApiData
+     */
+    protected function setProductDataByApi(ProductData $productData, array $productApiData): void
+    {
         $this->apiDataSetter->setValueIfExists('hidden', $productApiData, $productData);
         $this->apiDataSetter->setValueIfExists('sellingDenied', $productApiData, $productData);
         $this->apiDataSetter->setDateTimeValueIfExists('sellingFrom', $productApiData, $productData);
@@ -66,7 +90,5 @@ class ProductDataFactory implements ProductDataFactoryInterface
         $this->apiDataSetter->setMultilanguageValueIfExists('name', $productApiData, $productData);
         $this->apiDataSetter->setMultidomainValueIfExists('shortDescription', $productApiData, $productData, 'shortDescriptions');
         $this->apiDataSetter->setMultidomainValueIfExists('longDescription', $productApiData, $productData, 'descriptions');
-
-        return $productData;
     }
 }

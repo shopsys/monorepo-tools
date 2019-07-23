@@ -7,6 +7,7 @@ namespace Shopsys\BackendApiBundle\Controller\V1\Product;
 use FOS\RestBundle\Controller\AbstractFOSRestController;
 use FOS\RestBundle\Controller\Annotations\Delete;
 use FOS\RestBundle\Controller\Annotations\Get;
+use FOS\RestBundle\Controller\Annotations\Patch;
 use FOS\RestBundle\Controller\Annotations\Post;
 use FOS\RestBundle\Controller\Annotations\QueryParam;
 use FOS\RestBundle\Request\ParamFetcher;
@@ -239,5 +240,33 @@ class ProductController extends AbstractFOSRestController
         if ($product->isVariant() || $product->isMainVariant()) {
             throw new BadRequestHttpException('cannot update/delete variant/main variant, this functionality is not supported yet');
         }
+    }
+
+    /**
+     * Partially update a Product resource
+     * @Patch("/products/{uuid}")
+     * @param string $uuid
+     * @param \Symfony\Component\HttpFoundation\Request $request
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function patchProductAction(string $uuid, Request $request): Response
+    {
+        $this->validateUuids([$uuid]);
+        $productApiData = $request->request->all();
+        $errors = $this->productApiDataValidator->validateUpdate($productApiData);
+        if (count($errors)) {
+            return $this->handleView($this->createValidationView($errors));
+        }
+
+        $product = $this->productFacade->getByUuid($uuid);
+        $this->assertProductIsNotVariantType($product);
+
+        $productData = $this->productDataFactory->createFromProductAndApi($product, $productApiData);
+
+        $this->productFacade->edit($product->getId(), $productData);
+
+        $view = View::create([], Response::HTTP_NO_CONTENT);
+
+        return $this->handleView($view);
     }
 }

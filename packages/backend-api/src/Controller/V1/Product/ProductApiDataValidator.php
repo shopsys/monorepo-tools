@@ -46,6 +46,15 @@ class ProductApiDataValidator implements ProductApiDataValidatorInterface
     }
 
     /**
+     * @param array $productApiData
+     * @return string[]
+     */
+    public function validateUpdate(array $productApiData): array
+    {
+        return $this->validateCreate($productApiData);
+    }
+
+    /**
      * @return array
      */
     protected function getConstraintDefinition(): array
