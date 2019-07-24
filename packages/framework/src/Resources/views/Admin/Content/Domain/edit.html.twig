@@ -13,9 +13,16 @@
                 <label class="form-line__label">
                     {{ 'Existing icon'|trans }}:
                 </label>
-                {{ domainIcon(domain.id) }}
+                <div class="form-line__side">
+                    <div class="form-line__item">
+                        <div class="form-line__item__domain">
+                            <div class="form-line__item__domain__image">
+                                {{ domainIcon(domain.id) }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-
             {{ form_row(form.icon, { label: 'Upload icon'|trans}) }}
         </div>
         <div class="window-fixed-bar window-fixed-bar--in-window js-window-fixed-bar">
