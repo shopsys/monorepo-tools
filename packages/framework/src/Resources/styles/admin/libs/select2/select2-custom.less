@@ -24,6 +24,7 @@
     .select2-selection__rendered {
         line-height: @select2-height - 2px;
         padding-left: 15px;
+        padding-right: @select2-arrow-button-width;
 
         color: @color-base;
 
@@ -31,6 +32,7 @@
             width: @select2-arrow-button-width;
             line-height: @select2-height-small - 2px;
             padding-left: 7px;
+            padding-right: 0;
             text-align: left;
         }
     }
@@ -58,6 +60,7 @@
 
 .select2-dropdown {
     border: 2px solid @color-border;
+    z-index: 1000;
 }
 
 .select2-results__option {
