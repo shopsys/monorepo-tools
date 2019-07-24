@@ -39,7 +39,7 @@
         var $select = $option.closest('.js-sortable-values-input');
 
         $option.prop('disabled', true);
-        $select.val('');
+        $select.val('').trigger('change.select2');
     };
 
     Shopsys.sortableValues.removeItemButtonClick = function () {

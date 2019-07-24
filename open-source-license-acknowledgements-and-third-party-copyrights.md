@@ -58,10 +58,10 @@ Copyright JS Foundation and other contributors, https://js.foundation
 License: MIT or GPL Version 2  
 http://jquery.org/license
 
-### selectize.js
-License: Apache License 2.0  
-https://github.com/selectize/selectize.js/blob/master/LICENSE  
-Copyright 2013–2015 Brian Reavis
+### Select2
+License: MIT  
+https://github.com/select2/select2/blob/4.0.8/LICENSE.md  
+Copyright (c) 2012-2017 Kevin Brown, Igor Vaynberg, and Select2 contributors
 
 ### slick.js
 License: MIT  
