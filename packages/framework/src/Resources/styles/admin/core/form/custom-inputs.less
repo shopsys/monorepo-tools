@@ -80,6 +80,22 @@ input[type=checkbox].css-radio:disabled ~ .css-radio__image {
     color: @color-inactive;
 }
 
+input[type=checkbox].css-checkbox {
+    &.display-none, &[style*="display: none"], &[style*="display:none"] {
+        & ~ .css-checkbox__image {
+            display: none;
+        }
+    }
+}
+
+input[type=radio].css-radio, input[type=checkbox].css-radio {
+    &.display-none, &[style*="display: none"], &[style*="display:none"] {
+        & ~ .css-radio__image {
+            display: none;
+        }
+    }
+}
+
 .css-checkbox__image, .css-radio__image {
     -webkit-touch-callout: none;
     -webkit-user-select: none;
