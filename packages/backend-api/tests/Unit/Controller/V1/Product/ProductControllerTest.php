@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Tests\BackendApiBundle\Unit\Controller\V1;
+namespace Tests\BackendApiBundle\Unit\Controller\V1\Product;
 
 use PHPUnit\Framework\TestCase;
 use Shopsys\BackendApiBundle\Component\HeaderLinks\HeaderLinksTransformer;
-use Shopsys\BackendApiBundle\Controller\V1\ApiProductTransformer;
-use Shopsys\BackendApiBundle\Controller\V1\ProductController;
+use Shopsys\BackendApiBundle\Controller\V1\Product\ApiProductTransformer;
+use Shopsys\BackendApiBundle\Controller\V1\Product\ProductController;
 use Shopsys\FrameworkBundle\Component\Domain\Config\DomainConfig;
 use Shopsys\FrameworkBundle\Component\Domain\Domain;
 use Shopsys\FrameworkBundle\Component\Setting\Setting;
@@ -25,7 +25,7 @@ class ProductControllerTest extends TestCase
     protected $productFacade;
 
     /**
-     * @var \Shopsys\BackendApiBundle\Controller\V1\ProductController
+     * @var \Shopsys\BackendApiBundle\Controller\V1\Product\ProductController
      */
     protected $productController;
 

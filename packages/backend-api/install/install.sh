@@ -33,8 +33,8 @@ cp ${INSTALL_DIR}/app/config/packages/oauth2/parameters_oauth.yml.dist ${PROJECT
 echo "Done"
 
 echo "Creating directory src/Shopsys/ShopBundle/Controller/Api/V1..."
-mkdir -p ${PROJECT_BASE_PATH}/src/Shopsys/ShopBundle/Controller/Api/V1
-touch ${PROJECT_BASE_PATH}/src/Shopsys/ShopBundle/Controller/Api/V1/.gitkeep
+mkdir -p ${PROJECT_BASE_PATH}/src/Shopsys/ShopBundle/Controller/Api/V1/Product
+touch ${PROJECT_BASE_PATH}/src/Shopsys/ShopBundle/Controller/Api/V1/Product/.gitkeep
 echo "Done"
 
 echo "Copying tests..."

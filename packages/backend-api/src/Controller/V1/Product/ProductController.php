@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Shopsys\BackendApiBundle\Controller\V1;
+namespace Shopsys\BackendApiBundle\Controller\V1\Product;
 
 use FOS\RestBundle\Controller\AbstractFOSRestController;
 use FOS\RestBundle\Controller\Annotations\Get;
@@ -30,7 +30,7 @@ class ProductController extends AbstractFOSRestController
     protected $productFacade;
 
     /**
-     * @var \Shopsys\BackendApiBundle\Controller\V1\ApiProductTransformer
+     * @var \Shopsys\BackendApiBundle\Controller\V1\Product\ApiProductTransformer
      */
     protected $productTransformer;
 
@@ -46,7 +46,7 @@ class ProductController extends AbstractFOSRestController
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\Product\ProductFacade $productFacade
-     * @param \Shopsys\BackendApiBundle\Controller\V1\ApiProductTransformer $productTransformer
+     * @param \Shopsys\BackendApiBundle\Controller\V1\Product\ApiProductTransformer $productTransformer
      * @param \Shopsys\BackendApiBundle\Component\HeaderLinks\HeaderLinksTransformer $linksTransformer
      */
     public function __construct(ProductFacade $productFacade, ApiProductTransformer $productTransformer, HeaderLinksTransformer $linksTransformer)

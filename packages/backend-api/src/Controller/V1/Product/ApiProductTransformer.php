@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Shopsys\BackendApiBundle\Controller\V1;
+namespace Shopsys\BackendApiBundle\Controller\V1\Product;
 
 use DateTimeInterface;
 use Shopsys\FrameworkBundle\Component\Domain\Domain;

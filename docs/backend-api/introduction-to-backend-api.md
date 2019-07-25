@@ -84,7 +84,7 @@ e.g. provided there is a GET route `products/` in the core, you need to add your
 ```php
 declare(strict_types=1);
 
-namespace Shopsys\ShopBundle\Controller\Api\V1;
+namespace Shopsys\ShopBundle\Controller\Api\V1\Product;
 
 use FOS\RestBundle\Controller\AbstractFOSRestController;
 use FOS\RestBundle\Controller\Annotations\Get;
