@@ -39,6 +39,7 @@ echo "Done"
 
 echo "Copying tests..."
 cp ${INSTALL_DIR}/tests/ShopBundle/Smoke/BackendApiTest.php ${PROJECT_BASE_PATH}/tests/ShopBundle/Smoke/BackendApiTest.php
+cp ${INSTALL_DIR}/tests/ShopBundle/Smoke/BackendApiCreateProductTest.php ${PROJECT_BASE_PATH}/tests/ShopBundle/Smoke/BackendApiCreateProductTest.php
 cp ${INSTALL_DIR}/tests/ShopBundle/Test/OauthTestCase.php ${PROJECT_BASE_PATH}/tests/ShopBundle/Test/OauthTestCase.php
 echo "Done"
 

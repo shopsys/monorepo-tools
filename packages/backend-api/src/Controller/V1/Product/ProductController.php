@@ -6,6 +6,7 @@ namespace Shopsys\BackendApiBundle\Controller\V1\Product;
 
 use FOS\RestBundle\Controller\AbstractFOSRestController;
 use FOS\RestBundle\Controller\Annotations\Get;
+use FOS\RestBundle\Controller\Annotations\Post;
 use FOS\RestBundle\Controller\Annotations\QueryParam;
 use FOS\RestBundle\Request\ParamFetcher;
 use FOS\RestBundle\View\View;
@@ -45,15 +46,34 @@ class ProductController extends AbstractFOSRestController
     protected $pageSize = 100;
 
     /**
+     * @var \Shopsys\BackendApiBundle\Controller\V1\Product\ProductDataFactoryInterface
+     */
+    protected $productDataFactory;
+
+    /**
+     * @var \Shopsys\BackendApiBundle\Controller\V1\Product\ProductApiDataValidatorInterface
+     */
+    protected $productApiDataValidator;
+
+    /**
      * @param \Shopsys\FrameworkBundle\Model\Product\ProductFacade $productFacade
      * @param \Shopsys\BackendApiBundle\Controller\V1\Product\ApiProductTransformer $productTransformer
      * @param \Shopsys\BackendApiBundle\Component\HeaderLinks\HeaderLinksTransformer $linksTransformer
+     * @param \Shopsys\BackendApiBundle\Controller\V1\Product\ProductDataFactoryInterface $productDataFactory
+     * @param \Shopsys\BackendApiBundle\Controller\V1\Product\ProductApiDataValidatorInterface $productApiDataValidator
      */
-    public function __construct(ProductFacade $productFacade, ApiProductTransformer $productTransformer, HeaderLinksTransformer $linksTransformer)
-    {
+    public function __construct(
+        ProductFacade $productFacade,
+        ApiProductTransformer $productTransformer,
+        HeaderLinksTransformer $linksTransformer,
+        ProductDataFactoryInterface $productDataFactory,
+        ProductApiDataValidatorInterface $productApiDataValidator
+    ) {
         $this->productFacade = $productFacade;
         $this->productTransformer = $productTransformer;
         $this->linksTransformer = $linksTransformer;
+        $this->productDataFactory = $productDataFactory;
+        $this->productApiDataValidator = $productApiDataValidator;
     }
 
     /**
@@ -115,6 +135,48 @@ class ProductController extends AbstractFOSRestController
     }
 
     /**
+     * Create a Product resource
+     * If UUID ins't specified, generates it's own
+     * @Post("/products")
+     * @param \Symfony\Component\HttpFoundation\Request $request
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function createProductAction(Request $request): Response
+    {
+        $productApiData = $request->request->all();
+        $uuid = $productApiData['uuid'] ?? null;
+        if ($uuid) {
+            $this->validateCreatingProductWithDefinedUuid((string)$uuid);
+        }
+
+        $errors = $this->productApiDataValidator->validateCreate($productApiData);
+
+        if (count($errors) > 0) {
+            return $this->handleView($this->createValidationView($errors));
+        }
+
+        $productData = $this->productDataFactory->createFromApi($productApiData, $uuid);
+        $this->productFacade->create($productData);
+
+        $location = sprintf('%s/%s', $request->getUri(), $productData->uuid);
+        $view = View::create([], Response::HTTP_CREATED, ['Location' => $location]);
+
+        return $this->handleView($view);
+    }
+
+    /**
+     * @param array $errors
+     * @return \FOS\RestBundle\View\View
+     */
+    protected function createValidationView(array $errors): View
+    {
+        $code = Response::HTTP_BAD_REQUEST;
+        $message = 'Provided data did not pass validation';
+
+        return View::create(['code' => $code, 'message' => $message, 'errors' => $errors], $code);
+    }
+
+    /**
      * @param array $uuids
      */
     protected function validateUuids(array $uuids): void
@@ -131,6 +193,20 @@ class ProductController extends AbstractFOSRestController
             throw new BadRequestHttpException('This UUID is not valid: ' . reset($invalidUuids));
         } elseif (count($invalidUuids) > 1) {
             throw new BadRequestHttpException('These UUIDS are not valid: ' . implode(', ', $invalidUuids));
+        }
+    }
+
+    /**
+     * @param string $uuid
+     */
+    protected function validateCreatingProductWithDefinedUuid(string $uuid): void
+    {
+        $this->validateUuids([$uuid]);
+        try {
+            $this->productFacade->getByUuid($uuid);
+
+            throw new UnprocessableEntityHttpException('Product with ' . $uuid . ' UUID already exists');
+        } catch (\Shopsys\FrameworkBundle\Model\Product\Exception\ProductNotFoundException $e) {
         }
     }
 }

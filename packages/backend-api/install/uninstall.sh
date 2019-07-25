@@ -29,6 +29,7 @@ rm -rf ${PROJECT_BASE_PATH}/app/config/packages/oauth2
 rm -rf ${PROJECT_BASE_PATH}/src/Shopsys/ShopBundle/Controller/Api
 
 rm -f ${PROJECT_BASE_PATH}/tests/ShopBundle/Smoke/BackendApiTest.php
+rm -f ${PROJECT_BASE_PATH}/tests/ShopBundle/Smoke/BackendApiCreateProductTest.php
 rm -f ${PROJECT_BASE_PATH}/tests/ShopBundle/Test/OauthTestCase.php
 
 function apply_patch_reverse () {

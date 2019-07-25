@@ -17,3 +17,5 @@ parameters:
     skip:
         Shopsys\CodingStandards\Sniffs\ObjectIsCreatedByFactorySniff:
             - '*/tests/*'
+        ObjectCalisthenics\Sniffs\Files\FunctionLengthSniff:
+            - '*/src/Controller/**/*Validator.php'
