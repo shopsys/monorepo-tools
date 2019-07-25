@@ -766,10 +766,13 @@
         <div class="in-article__preview">
             <span class="in-article__preview__info">Live view of the component in white window</span>
             <input type="text" class="input" value="Input">
+            <br><br>
             <select class="input">
                 <option>Select</option>
                 <option>Select</option>
             </select>
+            <br><br>
+            <span class="in-article__preview__info">For graphic select we use : <strong class="in-article__visible"><a href="https://select2.github.io/select2/" target="_blank">https://select2.github.io/select2/</a></strong></span>
             <textarea class="input">Textarea</textarea>
         </div>
 
@@ -829,8 +832,77 @@
         <h4>Checkboxes and radio buttons</h4>
         <div class="in-message in-message--info">
             Display of inputs like checkboxes and radio buttons is done via <strong class="in-article__visible">form_widget</strong>. The type of displayed inputs - behind each other below each other - is determined by attr. If it is not filled, they are behind each other when setting <strong class="in-article__visible">inList</strong> and they are displayed below each other on true.
+            <br><br>
+            Graphic checkboxes and radio buttons are made by special html structure with special classes.
         </div>
 
+        <div class="in-article__preview">
+            <span class="in-article__preview__info">Live view of the component in white window</span>
+            <div class="form-line">
+                <label class="form-line__label">
+                    Checkboxes
+                </label>
+                <div class="form-line__side">
+                    <div class="form-line__item">
+                        <div class="form-choice-list">
+                            <label class="form-choice-list__item">
+                                <label>
+                                    <input type="checkbox" class="css-checkbox form-choice__input">
+                                    <span class="css-checkbox__image"></span>
+                                </label>
+                                checkbox in list
+                            </label>
+                            <label class="form-choice-list__item">
+                                <label>
+                                    <input type="checkbox" class="css-checkbox form-choice__input">
+                                    <span class="css-checkbox__image"></span>
+                                </label>
+                                checkbox in list
+                            </label>
+                            <label class="form-choice-list__item">
+                                <label>
+                                    <input type="checkbox" class="css-checkbox form-choice__input">
+                                    <span class="css-checkbox__image"></span>
+                                </label>
+                                checkbox in list
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-line">
+                <label class="form-line__label">
+                    Radiobuttons
+                </label>
+                <div class="form-line__side">
+                    <div class="form-line__item">
+                        <div class="form-choice-list">
+                            <label class="form-choice-list__item">
+                                <label>
+                                    <input type="radio" class="css-radio form-choice__input" name="radiobuttons">
+                                    <span class="css-radio__image"></span>
+                                </label>
+                                radio in list
+                            </label>
+                            <label class="form-choice-list__item">
+                                <label>
+                                    <input type="radio" class="css-radio form-choice__input" name="radiobuttons">
+                                    <span class="css-radio__image"></span>
+                                </label>
+                                radio in list
+                            </label>
+                            <label class="form-choice-list__item">
+                                <label>
+                                    <input type="radio" class="css-radio form-choice__input" name="radiobuttons">
+                                    <span class="css-radio__image"></span>
+                                </label>
+                                radio in list
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
         <div class="in-article__preview">
             <span class="in-article__preview__info">Live view of the component in white window</span>
             <label class="form-choice">
@@ -851,30 +923,6 @@
                     simple checkbox can be ordered consecutively
                 </span>
             </label>
-            <br><br>
-            <div class="form-choice-list">
-                <label class="form-choice-list__item">
-                    <label>
-                        <input type="checkbox" class="css-checkbox form-choice__input">
-                        <span class="css-checkbox__image"></span>
-                    </label>
-                    checkbox in list
-                </label>
-                <label class="form-choice-list__item">
-                    <label>
-                        <input type="checkbox" class="css-checkbox form-choice__input">
-                        <span class="css-checkbox__image"></span>
-                    </label>
-                    checkbox in list
-                </label>
-                <label class="form-choice-list__item">
-                    <label>
-                        <input type="checkbox" class="css-checkbox form-choice__input">
-                        <span class="css-checkbox__image"></span>
-                    </label>
-                    checkbox in list
-                </label>
-            </div>
             <br><br>
             <div class="form-choice-list">
                 <label class="form-choice-list__item">
@@ -1286,79 +1334,6 @@
                     </div>
                     <div class="form-line__item form-line__item--right form-line__item--btn">
                         <a href="#" class="btn">Right button</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <h4>Checkboxes or radiobuttons</h4>
-        <p>
-            Graphic checkboxes and radio buttons are made by special html structure with special classes.
-        </p>
-
-        <div class="in-article__preview">
-            <span class="in-article__preview__info">Live view of the component in white window</span>
-            <div class="form-line">
-                <label class="form-line__label">
-                    Checkboxes
-                </label>
-                <div class="form-line__side">
-                    <div class="form-line__item">
-                        <div class="form-choice-list">
-                            <label class="form-choice-list__item">
-                                <label>
-                                    <input type="checkbox" class="css-checkbox form-choice__input">
-                                    <span class="css-checkbox__image"></span>
-                                </label>
-                                checkbox in list
-                            </label>
-                            <label class="form-choice-list__item">
-                                <label>
-                                    <input type="checkbox" class="css-checkbox form-choice__input">
-                                    <span class="css-checkbox__image"></span>
-                                </label>
-                                checkbox in list
-                            </label>
-                            <label class="form-choice-list__item">
-                                <label>
-                                    <input type="checkbox" class="css-checkbox form-choice__input">
-                                    <span class="css-checkbox__image"></span>
-                                </label>
-                                checkbox in list
-                            </label>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="form-line">
-                <label class="form-line__label">
-                    Radiobuttons
-                </label>
-                <div class="form-line__side">
-                    <div class="form-line__item">
-                        <div class="form-choice-list">
-                            <label class="form-choice-list__item">
-                                <label>
-                                    <input type="radio" class="css-radio form-choice__input" name="radiobuttons">
-                                    <span class="css-radio__image"></span>
-                                </label>
-                                radio in list
-                            </label>
-                            <label class="form-choice-list__item">
-                                <label>
-                                    <input type="radio" class="css-radio form-choice__input" name="radiobuttons">
-                                    <span class="css-radio__image"></span>
-                                </label>
-                                radio in list
-                            </label>
-                            <label class="form-choice-list__item">
-                                <label>
-                                    <input type="radio" class="css-radio form-choice__input" name="radiobuttons">
-                                    <span class="css-radio__image"></span>
-                                </label>
-                                radio in list
-                            </label>
-                        </div>
                     </div>
                 </div>
             </div>
