@@ -329,6 +329,11 @@ class ProductFormType extends AbstractType
             $builderShortDescriptionGroup
                 ->add('shortDescriptions', MultidomainType::class, [
                     'entry_type' => TextareaType::class,
+                    'entry_options' => [
+                        'attr' => [
+                            'class' => 'input--full-width',
+                        ],
+                    ],
                     'required' => false,
                     'disabled' => $this->isProductVariant($product),
                     'display_format' => FormRenderingConfigurationExtension::DISPLAY_FORMAT_MULTIDOMAIN_ROWS_NO_PADDING,
