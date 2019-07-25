@@ -22,16 +22,13 @@ env:
         - TRAVIS_GROUP_ID=$(id -g)
 
 before_install:
-    -   sudo add-apt-repository ppa:rmescandon/yq -y
-    - sudo apt-get update
-    - sudo apt-get install -y yq
     -   curl -L https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-`uname -s`-`uname -m` > docker-compose
     - chmod +x docker-compose
     - sudo mv docker-compose /usr/local/bin
     - mkdir -p $CACHE_DIR
     - cp -f ./docker/conf/docker-compose.yml.dist ./docker-compose.yml
-    - yq write --inplace docker-compose.yml services.php-fpm.build.args.www_data_uid $TRAVIS_USER_ID
-    - yq write --inplace docker-compose.yml services.php-fpm.build.args.www_data_gid $TRAVIS_GROUP_ID
+    - "sed -i 's#www_data_uid: 1000#www_data_uid: $TRAVIS_USER_ID#' ./docker-compose.yml"
+    - "sed -i 's#www_data_gid: 1000#www_data_uid: $TRAVIS_GROUP_ID#' ./docker-compose.yml"
 
 install:
     - docker load < $CACHE_FILE_IMAGE || true
