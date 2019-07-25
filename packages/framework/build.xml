@@ -35,9 +35,12 @@
     <property name="path.web.scripts" value="${path.web}/assets/scripts"/>
     <property name="path.web.styles.admin" value="${path.web}/assets/admin/styles"/>
     <property name="path.web.styles.front" value="${path.web}/assets/frontend/styles"/>
+    <property name="path.yaml-standards.executable" value="${path.bin}/yaml-standards"/>
     <property name="phpstan.level" value="4"/>
     <property name="translations.dump.locales" value="en cs"/>
     <property name="translations.dump.flags" value="--keep"/>
+    <property name="yaml-standards.indent-count" value="4"/>
+    <property name="yaml-standards.args" value=""/>
 
     <if>
         <os family="windows"/>
@@ -671,13 +674,13 @@
         </exec>
     </target>
 
-    <target name="standards" depends="phplint,ecs,phpstan,twig-lint,yaml-lint,eslint-check" description="Checks coding standards."/>
+    <target name="standards" depends="phplint,ecs,phpstan,twig-lint,yaml-standards,eslint-check" description="Checks coding standards."/>
 
-    <target name="standards-diff" depends="phplint-diff,ecs-diff,phpstan,twig-lint-diff,yaml-lint,eslint-check-diff" description="Checks coding standards in changed files."/>
+    <target name="standards-diff" depends="phplint-diff,ecs-diff,phpstan,twig-lint-diff,yaml-standards,eslint-check-diff" description="Checks coding standards in changed files."/>
 
-    <target name="standards-fix" depends="ecs-fix,eslint-fix" description="Automatically fixes *some* coding standards violations in all files. Always run 'standards' to be sure there are no further violations."/>
+    <target name="standards-fix" depends="ecs-fix,yaml-standards-fix,eslint-fix" description="Automatically fixes *some* coding standards violations in all files. Always run 'standards' to be sure there are no further violations."/>
 
-    <target name="standards-fix-diff" depends="ecs-fix-diff,eslint-fix-diff" description="Automatically fixes *some* coding standards violations in changed files. Always run 'standards' to be sure there are no further violations."/>
+    <target name="standards-fix-diff" depends="ecs-fix-diff,yaml-standards-fix,eslint-fix-diff" description="Automatically fixes *some* coding standards violations in changed files. Always run 'standards' to be sure there are no further violations."/>
 
     <target name="test-db-create" description="Creates test database for application with required configuration.">
         <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
@@ -1061,5 +1064,36 @@
             <arg value="${path.app}/config"/>
             <arg value="--parse-tags"/>
         </exec>
+    </target>
+
+    <target name="yaml-standards" depends="yaml-lint,yaml-standards-availability" description="Runs YAML standards checks" hidden="true">
+        <exec executable="${path.yaml-standards.executable}" logoutput="true" passthru="true" checkreturn="true">
+            <arg value="${project.basedir}"/>
+            <arg value="--exclude-dir=${path.vendor}"/>
+            <arg value="--exclude-dir=${path.root}/node_modules"/>
+            <arg value="--exclude-dir=${path.var}"/>
+            <arg value="--exclude-file=${path.app}/config/domains_urls.yml"/>
+            <arg value="--check-indents-count-of-indents=${yaml-standards.indent-count}"/>
+            <arg line="${yaml-standards.args}"/>
+        </exec>
+    </target>
+
+    <target name="yaml-standards-availability" depends="yaml-lint" description="Checks whether yaml-standards executable is available" hidden="true">
+        <available file="${path.yaml-standards.executable}" type="file" property="yaml-standards.executable.exists"/>
+        <if>
+            <not>
+                <equals arg1="${yaml-standards.executable.exists}" arg2="true"/>
+            </not>
+            <then>
+                <echo level="error" message="The executable '${path.yaml-standards.executable}' is not available."/>
+                <echo level="info" message="You can require the package using Composer, run 'composer require --dev sspooky13/yaml-standards'"/>
+                <fail message="Executable ${path.yaml-standards.executable} not found."/>
+            </then>
+        </if>
+    </target>
+
+    <target name="yaml-standards-fix" description="Runs YAML standards checks and fixes the violations" hidden="true">
+        <property name="yaml-standards.args" value="${yaml-standards.args} --fix" override="true"/>
+        <phingcall target="yaml-standards"/>
     </target>
 </project>
