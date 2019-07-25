@@ -12,8 +12,8 @@ use FOS\RestBundle\Controller\Annotations\Post;
 use FOS\RestBundle\Controller\Annotations\QueryParam;
 use FOS\RestBundle\Request\ParamFetcher;
 use FOS\RestBundle\View\View;
-use Ramsey\Uuid\Uuid;
 use Shopsys\BackendApiBundle\Component\HeaderLinks\HeaderLinksTransformer;
+use Shopsys\BackendApiBundle\Component\Validation\HttpUuidValidator;
 use Shopsys\FrameworkBundle\Model\Product\Product;
 use Shopsys\FrameworkBundle\Model\Product\ProductFacade;
 use Shopsys\FrameworkBundle\Model\Product\ProductQueryParams;
@@ -86,7 +86,7 @@ class ProductController extends AbstractFOSRestController
      */
     public function getProductAction(string $uuid): Response
     {
-        $this->validateUuids([$uuid]);
+        HttpUuidValidator::validateUuids([$uuid]);
 
         $product = $this->productFacade->getByUuid($uuid);
 
@@ -114,7 +114,7 @@ class ProductController extends AbstractFOSRestController
 
         $filterUuids = $paramFetcher->get('uuids');
         if (is_array($filterUuids)) {
-            $this->validateUuids($filterUuids);
+            HttpUuidValidator::validateUuids($filterUuids);
 
             $query = $query->withUuids($filterUuids);
         }
@@ -174,7 +174,7 @@ class ProductController extends AbstractFOSRestController
      */
     public function deleteProductAction(string $uuid): Response
     {
-        $this->validateUuids([$uuid]);
+        HttpUuidValidator::validateUuids([$uuid]);
 
         $product = $this->productFacade->getByUuid($uuid);
         $this->assertProductIsNotVariantType($product);
@@ -199,31 +199,11 @@ class ProductController extends AbstractFOSRestController
     }
 
     /**
-     * @param array $uuids
-     */
-    protected function validateUuids(array $uuids): void
-    {
-        $invalidUuids = [];
-
-        foreach ($uuids as $uuid) {
-            if (!Uuid::isValid($uuid)) {
-                $invalidUuids[] = $uuid;
-            }
-        }
-
-        if (count($invalidUuids) === 1) {
-            throw new BadRequestHttpException('This UUID is not valid: ' . reset($invalidUuids));
-        } elseif (count($invalidUuids) > 1) {
-            throw new BadRequestHttpException('These UUIDS are not valid: ' . implode(', ', $invalidUuids));
-        }
-    }
-
-    /**
      * @param string $uuid
      */
     protected function validateCreatingProductWithDefinedUuid(string $uuid): void
     {
-        $this->validateUuids([$uuid]);
+        HttpUuidValidator::validateUuids([$uuid]);
         try {
             $this->productFacade->getByUuid($uuid);
 
@@ -251,7 +231,7 @@ class ProductController extends AbstractFOSRestController
      */
     public function patchProductAction(string $uuid, Request $request): Response
     {
-        $this->validateUuids([$uuid]);
+        HttpUuidValidator::validateUuids([$uuid]);
         $productApiData = $request->request->all();
         $errors = $this->productApiDataValidator->validateUpdate($productApiData);
         if (count($errors)) {
