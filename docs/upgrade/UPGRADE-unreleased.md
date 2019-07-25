@@ -209,9 +209,9 @@ There you can find links to upgrade notes for other versions too.
         - please change your usage accordingly if you extended this class or call the constructor directly
     - if you have overridden `{% block order_items_widget %}` you don't have the variable `orderItemTotalPricesById` defined in the block anymore
         - you can use the totals defined in `OrderItemData::$totalPriceWithVat` and `OrderItemData::$totalPriceWithoutVat` instead
-    - clean your project repository after administration image assets were moved from `shopsys/project-base` into `shopsys/framework` repository ([#1243](https://github.com/shopsys/shopsys/pull/1243))
-        - remove `bg/`, `flags/`, `logo.svg`, and `preloader.gif` from `web/assets/admin/images/`
-        - if you need to use these assets yourself, you can find them in `web/assets/bundles/shopsysframework/` (they are copied using `php phing assets` which is a part of standard build targets)
+- clean your project repository after administration image assets were moved from `shopsys/project-base` into `shopsys/framework` repository ([#1243](https://github.com/shopsys/shopsys/pull/1243))
+    - remove `bg/`, `flags/`, `logo.svg`, and `preloader.gif` from `web/assets/admin/images/`
+    - if you need to use these assets yourself, you can find them in `web/assets/bundles/shopsysframework/` (they are copied using `php phing assets` which is a part of standard build targets)
 - use new administration selectboxes, checkboxes and radiobuttons ([#1241](https://github.com/shopsys/shopsys/pull/1241))
     - if you have added javascripts in administration relying on `selectize.js` rewrite it to use `Select2` instead
         - the new library has a wider range of functionality, it's now used across all `select` elements, and it's easier to use than `selectize.js`
@@ -231,6 +231,24 @@ There you can find links to upgrade notes for other versions too.
         +     <span class="css-radio__image"></span>
         + </label>
         ```
+- update your administration acceptance tests after design face-lift ([#1245](https://github.com/shopsys/shopsys/pull/1245))
+    - you don't have to do anything if you haven't modified the admin acceptance tests or written your own scenarios
+        - implementing the `ActorInterface` (see below) is still recommended in the long-run
+    - implement `ActorInterface` in your `AcceptanceTesterClass`
+        ```diff
+          use Facebook\WebDriver\Remote\RemoteWebDriver;
+        + use Tests\FrameworkBundle\Test\Codeception\ActorInterface;
+          use Tests\ShopBundle\Test\Codeception\_generated\AcceptanceTesterActions;
+        ```
+        ```diff
+           */
+        - class AcceptanceTester extends Actor
+        + class AcceptanceTester extends Actor implements ActorInterface
+          {
+        ```
+    - use helper classes `AdminCheckbox` and `AdminRadiobutton` instead of directly manipulating `input[type="checkbox"]` and `input[type="radio"]` elements in your administration acceptance tests
+        - when you need to work with a particular input, create an instance of the appropriate class via static method `createByCss()` and use its methods to manipulate the input or assert its values
+        - run `php phing tests-acceptance` to see that your acceptance test pass
 
 ### Configuration
 - simplify local configuration ([#1004](https://github.com/shopsys/shopsys/pull/1004))
@@ -270,6 +288,7 @@ There you can find links to upgrade notes for other versions too.
     + mc \
     + htop \
     ```
+
 ### Tools
 - get rid of not needed deprecations and BC-promise implementation from 7.x version
     - check and get rid of the use of all removed deprecated phing targets from [v7.3.0 release](./UPGRADE-unreleased.md#tools)
