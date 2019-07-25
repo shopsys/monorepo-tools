@@ -53,33 +53,37 @@
         </ul>
     {% endmacro %}
 
-    {% if isForAllDomains %}
-        <div class="form-line">
-            <div id="js-category-tree-sorting" class="form-tree form-tree--open form-tree--dragable">
-                {{ self.categoryTreeItem(categoriesWithPreloadedChildren, true) }}
+        {% if isForAllDomains %}
+            <div class="wrap-divider">
+                <div class="form-line">
+                    <div id="js-category-tree-sorting" class="form-tree form-tree--open form-tree--dragable">
+                        {{ self.categoryTreeItem(categoriesWithPreloadedChildren, true) }}
+                    </div>
+                </div>
             </div>
-        </div>
 
-        {% embed '@ShopsysFramework/Admin/Inline/FixedBar/fixedBar.html.twig' %}
-            {% block fixed_bar_content %}
-                <button
-                    class="btn btn--disabled"
-                    id="js-category-tree-sorting-save-button"
-                    data-category-save-order-url="{{ url('admin_category_saveorder') }}"
-                    type="button"
-                >
-                    {{ 'Save changes in order'|trans }}
-                </button>
-            {% endblock %}
-        {% endembed %}
-    {% else %}
-        <div class="form-line">
-            <div class="form-tree form-tree--open form-tree--dragable">
-                {{ self.categoryTreeItem(categoriesWithPreloadedChildren, true) }}
+            {% embed '@ShopsysFramework/Admin/Inline/FixedBar/fixedBar.html.twig' %}
+                {% block fixed_bar_content %}
+                    <button
+                        class="btn btn--disabled"
+                        id="js-category-tree-sorting-save-button"
+                        data-category-save-order-url="{{ url('admin_category_saveorder') }}"
+                        type="button"
+                    >
+                        {{ 'Save changes in order'|trans }}
+                    </button>
+                {% endblock %}
+            {% endembed %}
+        {% else %}
+            <div class="wrap-divider">
+                <div class="form-line">
+                    <div class="form-tree form-tree--open form-tree--dragable">
+                        {{ self.categoryTreeItem(categoriesWithPreloadedChildren, true) }}
+                    </div>
+                </div>
+                <div>
+                    {{ 'In a particular domain tab it is not possible to adjust the order and plunge of categories. Please go to the category detail or to overview of categories of all domains'|trans }}
+                </div>
             </div>
-        </div>
-        <div>
-            {{ 'In a particular domain tab it is not possible to adjust the order and plunge of categories. Please go to the category detail or to overview of categories of all domains'|trans }}
-        </div>
-    {% endif %}
+        {% endif %}
 {% endblock %}

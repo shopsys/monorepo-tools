@@ -75,7 +75,12 @@
                 <th class="table-grid__cell"></th>
             {% endif %}
             {% if grid.enabledSelecting %}
-                <th class="table-grid__cell table-grid__cell--choice"><input type="checkbox" class="js-grid-mass-action-select-all" /></th>
+                <th class="table-grid__cell table-grid__cell--choice">
+                    <label>
+                        <input type="checkbox" class="js-grid-mass-action-select-all css-checkbox" />
+                        <span class="css-checkbox__image"></span>
+                    </label>
+                </th>
             {% endif %}
             {% for column in grid.columnsById %}
                 <th class="table-grid__cell {% if column.classAttribute %} {{ column.classAttribute }}{% endif %}">
@@ -149,13 +154,16 @@
         {% endif %}
         {% if grid.enabledSelecting %}
             <td class="table-grid__cell table-grid__cell--choice">
-                <input
-                    class="js-grid-mass-action-select-row"
-                    type="checkbox"
-                    name="g[{{ grid.id|escape('html_attr') }}][selectedRowIds][]"
-                    value="{{ grid.getRowId(row)|json_encode() }}"
-                    {% if grid.isRowSelected(row) %}checked="checked"{% endif %}
-                />
+                <label>
+                    <input
+                        class="js-grid-mass-action-select-row css-checkbox"
+                        type="checkbox"
+                        name="g[{{ grid.id|escape('html_attr') }}][selectedRowIds][]"
+                        value="{{ grid.getRowId(row)|json_encode() }}"
+                        {% if grid.isRowSelected(row) %}checked="checked"{% endif %}
+                    />
+                    <span class="css-checkbox__image"></span>
+                </label>
             </td>
         {% endif %}
         {% for column in grid.columnsById %}
@@ -166,10 +174,14 @@
         {% if grid.actionColumns|length > 0 or grid.inlineEdit %}
             <td class="table-grid__cell--actions js-inline-edit-unmatched-inputs">
                 {% if grid.inlineEdit and form is defined %}
-                    <span class="js-inline-edit-buttons">
-                        <a href="#" class="js-inline-edit-save in-icon in-icon--save svg svg-checked" title="{{ 'Save changes'|trans }}"></a>
-                        <a href="#" class="js-inline-edit-cancel in-icon in-icon--cancel svg svg-delete" title="{{ 'Discard changes'|trans }}"> </a>
-                    </span>
+                    <div class="form-inline-edit js-inline-edit-buttons">
+                        <div class="form-inline-edit__item">
+                            <a href="#" class="js-inline-edit-save in-icon in-icon--save svg svg-checked" title="{{ 'Save changes'|trans }}"></a>
+                        </div>
+                        <div class="form-inline-edit__item">
+                            <a href="#" class="js-inline-edit-cancel in-icon in-icon--cancel svg svg-delete" title="{{ 'Discard changes'|trans }}"> </a>
+                        </div>
+                    </div>
                     <span class="js-inline-edit-saving">
                         <span class="svg svg-gear in-icon in-icon--spinner"></span>
                     </span>
@@ -221,10 +233,8 @@
 
 {% block grid_pager_totalcount %}
     <div class="in-grid-control__item in-grid-control__item--show">
-        <strong>
-            {{ 'Displaying'|trans }} {{ entityName|default('records'|trans)|trim }}
-            {{ grid.paginationResults.fromItem }} - {{ grid.paginationResults.toItem }} {{ 'from'|trans }} {{ grid.totalCount }}
-        </strong>
+        {{ 'Displaying'|trans }} {{ entityName|default('records'|trans)|trim }}
+        {{ grid.paginationResults.fromItem }} - {{ grid.paginationResults.toItem }} {{ 'from'|trans }} {{ grid.totalCount }}
     </div>
 {% endblock %}
 

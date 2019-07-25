@@ -7,7 +7,7 @@
 @box-dropdown-arrow-size: 16px;
 
 @box-dropdown-item-bg: @color-f;
-@box-dropdown-item-bg-hover: @color-f;
+@box-dropdown-item-bg-hover: darken(@box-dropdown-bg, 5%);
 @box-dropdown-item-font-size: 13px;
 @box-dropdown-item-font-color: @color-base;
 
@@ -78,14 +78,16 @@
 
         &__item {
             display: block;
+
             background: @box-dropdown-item-bg;
-            padding: @box-dropdown-padding-vertical @box-dropdown-padding-horizontal;
+            border-top: 1px solid @bg-page;
 
             &:hover {
                 background: @box-dropdown-item-bg-hover;
             }
 
             &:first-child {
+                border-top: none;
                 border-top-right-radius: 0;
                 border-top-left-radius: @radius;
             }
@@ -96,7 +98,9 @@
             }
 
             &__link {
+                display: block;
                 white-space: nowrap;
+                padding: @box-dropdown-padding-vertical @box-dropdown-padding-horizontal;
 
                 color: @box-dropdown-item-font-color;
                 font-size: @box-dropdown-item-font-size;

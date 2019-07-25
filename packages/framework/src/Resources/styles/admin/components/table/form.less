@@ -1,6 +1,7 @@
 .table-form {
     width: 100%;
     border-collapse: collapse;
+    border-radius: @radius;
 
     thead {
         background: @color-f;
@@ -53,12 +54,21 @@
 
             text-align: center;
 
-            a {
-                font-size: 14px;
-                color: @color-hint;
+            .svg {
+                color: @color-grey;
+                margin-top: 5px;
 
                 &:hover {
-                    color: @color-grey;
+                    color: @color-blue;
+                }
+            }
+
+            a {
+                font-size: 14px;
+                color: @color-grey;
+
+                &:hover {
+                    color: @color-blue;
                     text-decoration: none;
                 }
             }

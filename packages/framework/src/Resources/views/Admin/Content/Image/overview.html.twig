@@ -19,27 +19,27 @@
 {% endblock %}
 
 {% macro entitySizes(name, sizeConfigs) %}
-    <div class="wrap-border">
+    <div class="wrap-divider wrap-divider--bottom">
         <h2>{{ name|humanize }}</h2>
-        <table class="table-main">
+        <table class="table-grid">
             <thead>
-                <tr>
-                    <th class="table-col-20">{{ 'Size name'|trans }}</th>
-                    <th class="table-col-10">{{ 'Width [px]'|trans }}</th>
-                    <th class="table-col-10">{{ 'Height [px]'|trans }}</th>
-                    <th class="table-col-50">{{ 'Occurrence'|trans }}</th>
-                    <th class="table-col-10 text-right">{{ 'Cropping'|trans }}</th>
+                <tr class="table-grid__row">
+                    <th class="table-grid__cell table-col-20">{{ 'Size name'|trans }}</th>
+                    <th class="table-grid__cell table-col-10">{{ 'Width [px]'|trans }}</th>
+                    <th class="table-grid__cell table-col-10">{{ 'Height [px]'|trans }}</th>
+                    <th class="table-grid__cell table-col-50">{{ 'Occurrence'|trans }}</th>
+                    <th class="table-grid__cell table-col-10 text-right">{{ 'Cropping'|trans }}</th>
                 </tr>
             </thead>
             <tbody>
                 {% for sizeConfig in sizeConfigs %}
                     {% if sizeConfig.name != 'original' %}
-                        <tr>
-                            <td>{{ sizeConfig.name|default('default'|trans)|humanize }}</td>
-                            <td>{{ sizeConfig.width|default('-')}}</td>
-                            <td>{{ sizeConfig.height|default('-') }}</td>
-                            <td>{{ sizeConfig.occurrence|default('-') }}</td>
-                            <td class ="text-right">
+                        <tr class="table-grid__row">
+                            <td class="table-grid__cell">{{ sizeConfig.name|default('default'|trans)|humanize }}</td>
+                            <td class="table-grid__cell">{{ sizeConfig.width|default('-')}}</td>
+                            <td class="table-grid__cell">{{ sizeConfig.height|default('-') }}</td>
+                            <td class="table-grid__cell">{{ sizeConfig.occurrence|default('-') }}</td>
+                            <td class="table-grid__cell text-right">
                                 {% if sizeConfig.crop == true %}
                                     {{ 'Yes'|trans }}
                                 {% else %}
@@ -49,12 +49,12 @@
                         </tr>
                     {% endif %}
                     {% for additionalSizeConfig in sizeConfig.additionalSizes %}
-                        <tr>
-                            <td><i>- additional_{{ loop.index }}</i></td>
-                            <td><i>{{ additionalSizeConfig.width|default('-')}}</i></td>
-                            <td><i>{{ additionalSizeConfig.height|default('-') }}</i></td>
-                            <td><i>{{ additionalSizeConfig.media }}</i></td>
-                            <td></td>
+                        <tr class="table-grid__row">
+                            <td class="table-grid__cell"><i>- additional_{{ loop.index }}</i></td>
+                            <td class="table-grid__cell"><i>{{ additionalSizeConfig.width|default('-')}}</i></td>
+                            <td class="table-grid__cell"><i>{{ additionalSizeConfig.height|default('-') }}</i></td>
+                            <td class="table-grid__cell"><i>{{ additionalSizeConfig.media }}</i></td>
+                            <td class="table-grid__cell"></td>
                         </tr>
                     {% endfor %}
                 {% endfor %}

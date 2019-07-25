@@ -20,7 +20,9 @@
 
     {{ gridView.render() }}
 
-    <a href="{{ url('admin_newsletter_export') }}" class="btn btn--primary">
-        {{ 'Export e-mail list in CSV format'|trans }}
-    </a>
+    <div class="wrap-divider margin-top-20 text-right">
+        <a href="{{ url('admin_newsletter_export') }}" class="btn btn--primary">
+            {{ 'Export e-mail list in CSV format'|trans }}
+        </a>
+    </div>
 {% endblock %}

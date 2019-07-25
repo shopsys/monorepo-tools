@@ -11,13 +11,13 @@
                 name="{{ CSRF_TOKEN_REQUEST_PARAMETER }}"
                 value="{{ routeCsrfToken }}"
             />
-            <select name="newId" class="js-confirm-delete-select input">
+            <select name="newId" class="js-confirm-delete-select input" data-dropdown-css-class="select2-dropdown--in-window">
                 <option value="">-- {{ 'Select new value'|trans }} --</option>
                 {% for possibleReplacement in possibleReplacements %}
                     <option value="{{ possibleReplacement.id }}">{{ possibleReplacement.name }}</option>
                 {% endfor %}
             </select>
-            
+
             <div class="window-fixed-bar window-fixed-bar--in-window js-window-fixed-bar">
                 <div class="window-fixed-bar__in">
                     <div class="window-fixed-bar__item">

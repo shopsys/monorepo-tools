@@ -1,0 +1,33 @@
+.box-sortable {
+    min-width: 350px;
+
+    &__item {
+        position: relative;
+        line-height: 20px;
+        padding: 5px;
+
+        &__move {
+            cursor: move;
+
+            .svg {
+                position: relative;
+                padding-right: 5px;
+                bottom: -2px;
+
+                font-size: 12px;
+            }
+        }
+
+        &__remove {
+            position: absolute;
+            cursor: pointer;
+            right: 5px;
+
+            .svg {
+                position: relative;
+                padding-right: 5px;
+                bottom: -2px;
+            }
+        }
+    }
+}

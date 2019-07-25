@@ -6,7 +6,7 @@
 
 {% block main_content %}
     {% import _self as self %}
-    
+
     {{ render(controller('ShopsysFrameworkBundle:Admin/Domain:domainTabs')) }}
 
     {% macro categoryTreeItem(categoriesWithPreloadedChildren, selectedDomainId, bestsellingProductsInCategories) %}
@@ -31,10 +31,11 @@
             {% endfor %}
         </ul>
     {% endmacro %}
-
-    <div class="form-line">
-        <div class="form-tree form-tree--open">
-            {{ self.categoryTreeItem(categoriesWithPreloadedChildren, selectedDomainId, bestsellingProductsInCategories) }}
+    <div class="wrap-divider">
+        <div class="form-line">
+            <div class="form-tree form-tree--open">
+                {{ self.categoryTreeItem(categoriesWithPreloadedChildren, selectedDomainId, bestsellingProductsInCategories) }}
+            </div>
         </div>
     </div>
 

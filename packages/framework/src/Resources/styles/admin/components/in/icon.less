@@ -8,10 +8,24 @@
     text-decoration: none;
     cursor: pointer;
 
+    &:hover {
+        color: @color-action-hover;
+        text-decoration: none;
+    }
+
+    &--no-click {
+        cursor: default;
+    }
+
     &--after-input {
         position: absolute;
         top: calc(~"50% - @{in-icon-size}/2");
-        right: -5px;
+        right: -@in-icon-size - 5px;
+    }
+
+    &--after-flag {
+        position: relative;
+        top: 2px;
     }
 
     &--info {
@@ -41,9 +55,6 @@
     }
 
     &--cancel {
-        position: relative;
-        top: 3px;
-
         color: @color-red;
         font-size: 14px;
     }
@@ -61,6 +72,7 @@
     }
 
     &--move {
+        margin-top: 1px;
         color: @color-move;
         cursor: move;
     }
@@ -92,12 +104,8 @@
         text-align: center;
 
         &:hover {
-            color: @color-base;
+            color: @color-primary;
             border-color: @color-9;
         }
-    }
-
-    &:hover {
-        text-decoration: none;
     }
 }

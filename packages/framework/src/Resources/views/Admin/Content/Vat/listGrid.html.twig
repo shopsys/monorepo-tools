@@ -4,14 +4,14 @@
     <span class="form-edit-block form-edit-block--size-0">
         {% form_theme form '@ShopsysFramework/Admin/Form/theme.html.twig' %}
         {{ form_widget(form.percent) }}
-        <span class="form-edit-block__info">
+        <span class="form-edit-block__info relative">
             %
             {% if row is not null %}
                 <span
                     title="{{ 'Rate can\'t be modified. It is necessary to create new rate, remove existing one and replace it with new one.'|trans }}"
                     class="js-tooltip table-action cursor-help in-action-icons__item"
                     data-toggle="tooltip"
-                    data-placement="bottom"
+                    data-placement="top"
                 >
                     <i class="svg svg-info"></i>
                 </span>

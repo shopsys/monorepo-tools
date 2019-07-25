@@ -11,15 +11,15 @@
             <i class="btn__icon">+</i>{{ 'Create variant'|trans }}
         </a>
     {% else %}
-        <a href="{{ url('admin_default_dashboard') }}" class="btn-link-style wrap-bar__btn">
-            {{ 'Fill missing settings to enable creating products. More information here.'|trans }}
-        </a>
         <span class="btn btn--primary btn--plus wrap-bar__btn btn--disabled">
             <i class="btn__icon">+</i>{{ 'Create new product'|trans }}
         </span>
         <span class="btn btn--primary btn--plus wrap-bar__btn btn--disabled">
             <i class="btn__icon">+</i>{{ 'Create variant'|trans }}
         </span>
+        <a href="{{ url('admin_default_dashboard') }}" class="btn-link-style wrap-bar__btn">
+            {{ 'Fill missing settings to enable creating products. More information here.'|trans }}
+        </a>
     {% endif %}
 {% endblock %}
 

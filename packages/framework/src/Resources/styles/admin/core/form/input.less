@@ -6,7 +6,7 @@
 @input-padding-horizontal: 14px;
 
 @input-space-for-icon: 40px;
-@input-space-for-domain: 60px;
+@input-space-for-domain: 65px;
 @input-icon-position: 1px;
 @input-icon-size: 30px;
 
@@ -26,8 +26,16 @@
     border-radius: @radius;
     color: @color-base;
 
+    &:focus {
+        outline: none;
+    }
+
     &[readonly] {
         background-color: @color-grey-light;
+        cursor: not-allowed;
+    }
+
+    &[disabled] {
         cursor: not-allowed;
     }
 
@@ -38,7 +46,11 @@
     &--small {
         width: 80px;
     }
-    
+
+    &--medium {
+        width: 110px;
+    }
+
     &--auto-size {
         width: auto;
     }
@@ -55,7 +67,6 @@
     }
 
     &--textarea {
-        width: 100%;
         height: 80px;
         line-height: 20px;
         padding-top: 10px;
@@ -63,6 +74,10 @@
 
         &.input--half-width {
             width: 50%;
+        }
+
+        &.input--full-width {
+            width: 100%;
         }
     }
 
@@ -166,25 +181,15 @@
 
     &__domain {
         position: absolute;
-        top: 7px;
-        left: 7px;
-        width: 40px;
-        height: calc(~"@{input-height} - 2*7px");
-
-        &:after {
-            position: absolute;
-            top: 0;
-            bottom: 0;
-            width: 1px;
-            right: -7px;
-            display: block;
-            content: '';
-
-            background: @color-border;
-        }
+        top: 10px;
+        left: 10px;
+        width: 46px;
+        height: calc(~"@{input-height} - 2*10px");
 
         img {
             .center-image();
+            max-width: @in-image-width;
+            max-height: @in-image-height;
         }
     }
 

@@ -1,5 +1,16 @@
 {% block display_only_domain_icon_widget %}
     {% if isMultidomain() and form.vars.data is not null %}
-        {{ domainIcon(form.vars.data) }} {{ getDomainName(form.vars.data) }}
+        <div class="form-line__side">
+            <div class="form-line__item">
+                <div class="form-line__item__domain">
+                    <span class="form-line__item__domain__image">
+                        {{ domainIcon(form.vars.data) }}
+                    </span>
+                    <strong class="form-line__item__domain__name">
+                        {{ getDomainName(form.vars.data) }}
+                    </strong>
+                </div>
+            </div>
+        </div>
     {% endif %}
 {% endblock %}

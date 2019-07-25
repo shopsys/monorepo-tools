@@ -5,7 +5,7 @@
     position: absolute;
     top: 0px;
     left: 20px;
-    padding: 25px 30px 30px;
+    padding: 25px 20px 0 20px;
     z-index: 499;
 
     text-align: center;
@@ -13,4 +13,21 @@
     background: @bg-window;
 
     box-shadow: 0 0 20px rgba(0,0,0, 0.3);
+
+    &__heading {
+        padding: 10px 60px 10px 20px;
+        height: 48px;
+        line-height: 28px;
+        position: absolute;
+        top: 0;
+        right: 0;
+        left: 0;
+
+        color: @color-base;
+        font-size: 28px;
+        font-weight: 500;
+        background-color: @bg-window;
+        border-top-left-radius: @radius;
+        border-top-right-radius: @radius;
+    }
 }

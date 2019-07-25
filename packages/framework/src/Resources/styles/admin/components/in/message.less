@@ -1,14 +1,19 @@
-@in-message-padding-horizontal: 9px;
-@in-message-padding-vertical: 6px;
+@in-message-padding-horizontal: 15px;
+@in-message-padding-vertical: 14px;
 
-@in-message-close-size: 17px;
-@in-message-close-background: #2a384e;
-@in-message-close-color: @color-f;
+@in-message-close-size: 16px;
+@in-message-close-color: #2a384e;
+@in-message-close-color-hover: @color-blue;
+@in-message-close-bg: @color-f;
+@in-message-height: @input-height;
 
 // base message settings and elements
 .in-message {
     display: inline-block;
     padding: @in-message-padding-vertical @in-message-padding-horizontal;
+    min-height: @in-message-height;
+    border-radius: @radius;
+    width: 100%;
 
     font-style: italic;
     font-size: 14px;
@@ -18,7 +23,6 @@
     &__icon {
         margin-right: 2px;
         position: relative;
-        top: -1px;
     }
 
     &__close {
@@ -26,25 +30,28 @@
         display: inline-block;
         height: @in-message-close-size;
         width: @in-message-close-size;
-        line-height: @in-message-close-size;
+        line-height: @in-message-close-size - 4px;
         right: -@in-message-close-size/2;
         top: -@in-message-close-size/2;
         vertical-align: middle;
-        padding-left: 1px;
 
         border-radius: 50%;
-        background: @in-message-close-background;
+        background-color: @in-message-close-bg;
         color: @in-message-close-color;
         font-style: normal;
-        font-size: 12px;
+        font-size: @in-message-close-size;
         font-weight: bold;
         text-align: center;
         text-decoration: none;
         text-transform: lowercase;
         cursor: pointer;
 
+        .svg {
+            font-size: @in-message-close-size;
+        }
+
         &:hover {
-            color: @in-message-close-color;
+            color: @in-message-close-color-hover;
             text-decoration: none;
         }
     }
@@ -56,7 +63,7 @@
 
 // Modifications - types
 @in-message-small-padding-horizontal: 6px;
-@in-message-small-padding-vertical: 3px;
+@in-message-small-padding-vertical: 5px;
 
 @in-message-block-margin-bottom: 10px;
 @in-message-block-padding-for-close: 20px;
@@ -66,6 +73,7 @@
         padding: @in-message-small-padding-vertical @in-message-small-padding-horizontal;
 
         font-size: 12px;
+        min-height: @in-message-height/2;
     }
 
     &--block {
@@ -85,25 +93,31 @@
     &--error {
         color: @color-message-alert-text;
         background: @color-message-alert;
+        border: 1px solid @color-message-alert-border;
     }
 
     &--warning {
         color: @color-message-warning-text;
         background: @color-message-warning;
+        border: 1px solid @color-message-warning-border;
     }
 
     &--info {
         color: @color-message-info-text;
         background: @color-message-info;
+        border: 1px solid @color-message-info-border;
     }
 
     &--success {
         color: @color-message-success-text;
         background: @color-message-success;
+        border: 1px solid @color-message-success-border;
     }
 
     &--danger {
         color: @color-message-alert-text;
+        background: @color-message-alert;
+        border: 1px solid @color-message-alert-border;
     }
 }
 

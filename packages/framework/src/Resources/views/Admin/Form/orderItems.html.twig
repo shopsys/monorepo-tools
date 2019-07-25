@@ -12,10 +12,10 @@
                             <tr>
                                 <th>{{ 'Name'|trans }}</th>
                                 <th>{{ 'Catalogue number'|trans }}</th>
-                                <th class="text-right">{{ 'Unit price including VAT'|trans }} ({{ currencySymbolByCurrencyId(order.currency.id) }})</th>
-                                <th class="text-right">{{ 'Amount'|trans }}</th>
-                                <th class="text-right">{{ 'Unit'|trans }}</th>
-                                <th class="text-right">{{ 'VAT rate (%)'|trans }}</th>
+                                <th>{{ 'Unit price including VAT'|trans }} ({{ currencySymbolByCurrencyId(order.currency.id) }})</th>
+                                <th>{{ 'Amount'|trans }}</th>
+                                <th>{{ 'Unit'|trans }}</th>
+                                <th>{{ 'VAT rate (%)'|trans }}</th>
                                 <th class="text-center">
                                     <span class="display-inline-block" style="width: 80px">
                                         {{ 'Set prices manually'|trans }}
@@ -25,9 +25,9 @@
                                         ></i>
                                     </span>
                                 </th>
-                                <th class="text-right">{{ 'Unit price excluding VAT'|trans }} ({{ currencySymbolByCurrencyId(order.currency.id) }})</th>
-                                <th class="text-right">{{ 'Total including VAT'|trans }} ({{ currencySymbolByCurrencyId(order.currency.id) }})</th>
-                                <th class="text-right">{{ 'Total excluding VAT'|trans }} ({{ currencySymbolByCurrencyId(order.currency.id) }})</th>
+                                <th>{{ 'Unit price excluding VAT'|trans }} ({{ currencySymbolByCurrencyId(order.currency.id) }})</th>
+                                <th>{{ 'Total including VAT'|trans }} ({{ currencySymbolByCurrencyId(order.currency.id) }})</th>
+                                <th>{{ 'Total excluding VAT'|trans }} ({{ currencySymbolByCurrencyId(order.currency.id) }})</th>
                                 <th></th>
                         </tr>
                         </thead>

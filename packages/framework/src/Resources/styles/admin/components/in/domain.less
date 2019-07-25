@@ -1,12 +1,15 @@
+@in-domain-padding: 10px;
+
 .in-domain {
+
     padding-bottom: 25px;
 
     border-radius: @radius;
 
     &__item {
         display: inline-block;
-        height: 38px;
-        line-height: 18px;
+        height: @in-image-height + 2*@in-domain-padding;
+        line-height: @in-image-height;
         padding: 10px;
 
         background: @bg-page;

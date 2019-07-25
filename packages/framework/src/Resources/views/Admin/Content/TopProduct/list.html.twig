@@ -9,8 +9,9 @@
     {{ form_start(form) }}
 
         {{ form_errors(form) }}
-        {{ form_row(form.products, { label: 'Products'|trans }) }}
-
+        <div class="wrap-divider">
+            {{ form_row(form.products, { label: 'Products'|trans }) }}
+        </div>
         {% embed '@ShopsysFramework/Admin/Inline/FixedBar/fixedBar.html.twig' %}
             {% block fixed_bar_content %}
                 {{ form_widget(form.save, { label: 'Save changes'|trans }) }}

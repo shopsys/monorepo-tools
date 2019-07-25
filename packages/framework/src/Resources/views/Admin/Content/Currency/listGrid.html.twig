@@ -4,7 +4,7 @@
     {% if notAllowedToDeleteCurrencyIds is defined %}
         {% if row is not empty and row.c.id in notAllowedToDeleteCurrencyIds %}
             <span title="{{ 'This currency can\'t be deleted, it is set as default or is saved with order.'|trans }}"
-                class="js-tooltip cursor-help in-icon in-icon--info" data-toggle="tooltip" data-placement="bottom"
+                class="js-tooltip cursor-help in-icon in-icon--info" data-toggle="tooltip" data-placement="top"
             >
                 <i class="svg svg-info"></i>
             </span>
@@ -19,14 +19,14 @@
 {% block grid_value_cell_edit_id_exchangeRate %}
     <span class="form-edit-block form-edit-block--size-1">
         {% form_theme form '@ShopsysFramework/Admin/Form/theme.html.twig' %}
-        {{ form_widget(form.exchangeRate) }}
-        <span class="form-edit-block__info">
+        {{ form_widget(form.exchangeRate, {attr: {class: "input--half-width"}}) }}
+        <span class="form-edit-block__info relative">
             {% if row is null %}
-                <span title="" class="js-tooltip cursor-help in-icon" data-toggle="tooltip" data-placement="top" data-original-title="{{ '%defaultCurrency% per unit'|trans({'%defaultCurrency%': currencySymbolByCurrencyId(defaultCurrency.id)}) }}">
+                <span title="" class="js-tooltip cursor-help in-icon in-icon--after-input" data-toggle="tooltip" data-placement="top" data-original-title="{{ '%defaultCurrency% per unit'|trans({'%defaultCurrency%': currencySymbolByCurrencyId(defaultCurrency.id)}) }}">
                     <i class="svg svg-question"></i>
                 </span>
             {% elseif row.c.id != defaultCurrency.id %}
-                <span title="" class="js-tooltip cursor-help in-icon" data-toggle="tooltip" data-placement="top" data-original-title="{{ '%defaultCurrency% per 1 %currentCurrency%'|trans({
+                <span title="" class="js-tooltip cursor-help in-icon in-icon--after-input padding-left-5" data-toggle="tooltip" data-placement="top" data-original-title="{{ '%defaultCurrency% per 1 %currentCurrency%'|trans({
                     '%defaultCurrency%': currencySymbolByCurrencyId(defaultCurrency.id),
                     '%currentCurrency%': currencySymbolByCurrencyId(row.c.id)
                 }) }}">

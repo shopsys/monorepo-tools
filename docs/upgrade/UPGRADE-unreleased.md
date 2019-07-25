@@ -212,6 +212,25 @@ There you can find links to upgrade notes for other versions too.
     - clean your project repository after administration image assets were moved from `shopsys/project-base` into `shopsys/framework` repository ([#1243](https://github.com/shopsys/shopsys/pull/1243))
         - remove `bg/`, `flags/`, `logo.svg`, and `preloader.gif` from `web/assets/admin/images/`
         - if you need to use these assets yourself, you can find them in `web/assets/bundles/shopsysframework/` (they are copied using `php phing assets` which is a part of standard build targets)
+- use new administration selectboxes, checkboxes and radiobuttons ([#1241](https://github.com/shopsys/shopsys/pull/1241))
+    - if you have added javascripts in administration relying on `selectize.js` rewrite it to use `Select2` instead
+        - the new library has a wider range of functionality, it's now used across all `select` elements, and it's easier to use than `selectize.js`
+        - see [official documentation of Select2](https://select2.org/)
+    - if you render checkboxes or radiobuttons in your own admin templates add a CSS class and a `span` and wrap it in `label` for it to be displayed nicely
+        ```diff
+        - <input type="checkbox" class="my-class" />
+        + <label>
+        +     <input type="checkbox" class="my-class css-checkbox" />
+        +     <span class="css-checkbox__image"></span>
+        + </label>
+        ```
+        ```diff
+        - <input type="radio" class="my-class" />
+        + <label>
+        +     <input type="radio" class="my-class css-radio" />
+        +     <span class="css-radio__image"></span>
+        + </label>
+        ```
 
 ### Configuration
 - simplify local configuration ([#1004](https://github.com/shopsys/shopsys/pull/1004))

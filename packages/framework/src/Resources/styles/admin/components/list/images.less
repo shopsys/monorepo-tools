@@ -1,4 +1,7 @@
-@list-images-pipe-height: 20px;
+@list-images-pipe-height: 31px;
+@list-images-pipe-bg: #d2a550;
+@list-images-pipe-color: #fcbd46;
+
 @list-images-icon-size: 18px;
 @list-images-icon-background: #2a384e;
 @list-images-icon-color: @color-f;
@@ -106,18 +109,22 @@
             line-height: @list-images-icon-size;
             top: -@list-images-icon-size/2;
             right: -@list-images-icon-size/2;
-            padding-top: 1px;
             z-index: 3;
 
-            font-size: @list-images-icon-font-size;
-            background: @list-images-icon-background;
-            color: @list-images-icon-color;
-            border-radius: 50%;
-            text-align: center;
-            cursor: pointer;
-
-            &:hover {
+            .svg {
+                line-height: @list-images-icon-size;
+                width: @list-images-icon-size;
+                height: @list-images-icon-size;
+                font-size: @list-images-icon-font-size;
+                background-color: @list-images-icon-background;
                 color: @list-images-icon-color;
+                border-radius: 50%;
+                text-align: center;
+                cursor: pointer;
+
+                &:hover {
+                    color: @list-images-icon-color;
+                }
             }
         }
 
@@ -128,8 +135,11 @@
         &__move {
             left: -@list-images-icon-size/2;
             right: auto;
-            cursor: move;
-            font-size: @list-images-icon-font-size + 2px;
+
+            .svg {
+                font-size: @list-images-icon-font-size + 2px;
+                cursor: move;
+            }
         }
 
         &__overlay {
@@ -179,12 +189,13 @@
             position: absolute;
             top: 50%;
             left: 50%;
-            width: 120px;
+            width: 122px;
             height: @list-images-pipe-height;
             margin: -@list-images-pipe-height/2 0 0 -60px;
             line-height: @list-images-pipe-height;
 
-            background: @color-0;
+            border-radius: @radius;
+            background: @list-images-pipe-bg;
 
             &__line {
                 display: block;
@@ -192,7 +203,8 @@
                 height: @list-images-pipe-height;
                 width: 0;
 
-                background: @color-primary;
+                background: @list-images-pipe-color;
+                border-radius: @radius;
                 text-align: center;
                 color: @color-f;
                 font-weight: bold;

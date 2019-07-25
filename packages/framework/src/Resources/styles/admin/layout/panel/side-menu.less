@@ -83,7 +83,7 @@
 
             background-color: @color-f;
             color: @color-base;
-            font-family: @font-medium;
+            font-family: @font;
             font-size: 14px;
             font-weight: 500;
             text-decoration: none;
@@ -98,6 +98,8 @@
             }
 
             .svg {
+                position: relative;
+                top: 1px;
                 margin-right: @side-menu-item-icon-right-gap;
 
                 color: @color-darklink;
@@ -111,6 +113,7 @@
                 background-color: @color-grey-light;
                 border-left: @side-menu-item-active-border-width solid @color-blue;
                 color: @color-link;
+                font-weight: 600;
 
                 .svg {
                     color: @color-link;
@@ -200,7 +203,7 @@
 
                 .side-menu__submenu__item--active > & {
                     color: @color-link;
-                    font-weight: 700;
+                    font-weight: 500;
                 }
 
                 .side-menu__submenu__item--superadmin & {

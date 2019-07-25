@@ -15,9 +15,7 @@
 *******************************************************************/
 @import url('https://fonts.googleapis.com/css?family=Roboto:400,500&subset=latin-ext');
 
-@font-base: "Roboto", Arial, Helvetica, sans-serif;
-@font-medium: "Roboto Medium", Arial, Helvetica, sans-serif;
-@font: @font-base;
+@font: "Roboto", Arial, Helvetica, sans-serif;
 
 @font-size: 13px;
 
@@ -45,6 +43,7 @@
 @color-0: #000;
 @color-1: #111;
 @color-2: #222;
+@color-29: #292929;
 @color-3: #333;
 @color-4: #444;
 @color-5: #555;
@@ -102,7 +101,9 @@
 @color-inactive: #BCC2C5;
 @color-hint: @color-grey;
 @color-action: @color-base;
+@color-action-hover: @color-blue;
 @color-move: #818d92;
+@color-title: #252525;
 
 @bg-web: #f3f3f3;
 @bg-page: #f3f3f3;
@@ -115,7 +116,7 @@
 @bg-primary-darker: #0487bc;
 @bg-bread: #E1E8EB;
 @bg-input-icon: #EBECED;
-@bg-upload: #EBECED;
+@bg-upload: @bg-page;
 @bg-dark: #dee4e7;
 
 @bg-success: #dff0d8;
@@ -126,15 +127,21 @@
 @bg-edit: #faffd7;
 
 // message colors
-@color-message-alert: #F7D6D6;
-@color-message-warning: #FFE7AD;
-@color-message-info: #BAE3F2;
-@color-message-success: @color-green;
+@color-message-alert: #ffd1d3;
+@color-message-alert-text: #9e0008;
+@color-message-alert-border: #ff9ea3;
 
-@color-message-alert-text: @color-red;
-@color-message-warning-text: #735204;
-@color-message-info-text: #005B7E;
-@color-message-success-text: @color-f;
+@color-message-warning: #ffeed1;
+@color-message-warning-text: #9e6400;
+@color-message-warning-border: #ffdb9e;
+
+@color-message-info: #d1f0ff;
+@color-message-info-text: #076fa2;
+@color-message-info-border: #9edfff;
+
+@color-message-success: #d1ffd8;
+@color-message-success-text: #009e18;
+@color-message-success-border: #9effad;
 
 
 /*******************************************************************
