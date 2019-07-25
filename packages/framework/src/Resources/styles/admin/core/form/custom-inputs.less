@@ -1,96 +1,80 @@
 @custom-inputs-margin-left: 30px;
 @custom-inputs-filter-margin-left: 25px;
 
-input[type=checkbox].css-checkbox, input[type=checkbox].css-radio, input[type=radio].css-radio, input[type=radio].css-checkbox {
-    position:absolute;
-    height:1px;
-    width:1px;
-    left:-1000px;
-    margin:-1px;
-    padding:0;
-    z-index:-1000;
+input[type=checkbox].css-checkbox, input[type=radio].css-checkbox, input[type=checkbox].css-radio, input[type=radio].css-radio {
+    position: absolute;
+    height: 1px;
+    width: 1px;
+    left: -1000px;
+    margin: -1px;
+    padding: 0;
+    z-index: -1000;
 
     overflow: hidden;
     clip: rect(0 0 0 0);
-    border:0;
-}
+    border: 0;
 
-input[type=checkbox].css-checkbox + .css-checkbox__image, input[type=checkbox].css-checkbox + .css-checkbox__image.clr,
-input[type=checkbox].css-radio + .css-radio__image, input[type=checkbox].css-radio + .css-radio__image.clr,
-input[type=checkbox].css-checkbox + .css-radio__image, input[type=checkbox].css-checkbox + .css-radio__image.clr,
-input[type=radio].css-radio + .css-radio__image, input[type=radio].css-radio + .css-radio__image.clr
-{
-    position: relative;
-    display: inline-block;
-    vertical-align: middle;
-    padding-left: @custom-inputs-margin-left;
-    line-height: 18px;
-
-    font-size: 18px;
-    cursor: pointer;
-
-    &:before {
-        content: "";
-        position: absolute;
+    & + .css-checkbox__image, & + .css-checkbox__image.clr, & + .css-radio__image, & + .css-radio__image.clr {
+        position: relative;
         display: inline-block;
-        top: -9px;
-        left: 0;
-        width: 18px;
-        height: 18px;
+        vertical-align: middle;
+        padding-left: @custom-inputs-margin-left;
+        line-height: 18px;
 
-        background-repeat: no-repeat;
-        background-position: left top;
-        background-size: 36px 36px;
-    }
+        font-size: 18px;
+        cursor: pointer;
 
-    &:hover, &:focus, &:active {
         &:before {
-            background-position: right top;
+            content: "";
+            position: absolute;
+            display: inline-block;
+            top: -9px;
+            left: 0;
+            width: 18px;
+            height: 18px;
+
+            background-repeat: no-repeat;
+            background-position: left top;
+            background-size: 36px 36px;
+        }
+
+        &:hover, &:focus, &:active {
+
+            &:before {
+                background-position: right top;
+            }
         }
     }
-}
 
-input[type=checkbox].css-checkbox:checked + .css-checkbox__image, input[type=checkbox].css-checkbox + .css-checkbox__image.chk,
-input[type=checkbox].css-radio:checked + .css-radio__image, input[type=checkbox].css-radio + .css-radio__image.chk,
-input[type=checkbox].css-checkbox:checked + .css-radio__image, input[type=radio].css-checkbox + .css-radio__image.chk,
-input[type=radio].css-radio:checked + .css-radio__image, input[type=radio].css-radio + .css-radio__image.chk
-{
-    &:before {
-        background-position: left bottom;
-    }
-}
+    &:checked {
 
-input[type=checkbox].css-checkbox:disabled + .css-checkbox__image, input[type=checkbox].css-checkbox + .css-checkbox__image.chk,
-input[type=checkbox].css-radio:disabled + .css-radio__image, input[type=checkbox].css-radio + .css-radio__image.chk,
-input[type=checkbox].css-checkbox:disabled + .css-radio__image, input[type=radio].css-checkbox + .css-radio__image.chk,
-input[type=radio].css-radio:disabled + .css-radio__image, input[type=radio].css-radio + .css-radio__image.chk
-{
-    &:before {
-        cursor:no-drop;
-        background-position: right bottom;
-    }
-}
-input[type=radio].css-radio:disabled ~ .css-checkbox__image,
-input[type=radio].css-radio:disabled ~ .css-radio__image,
-input[type=checkbox].css-checkbox:disabled ~ .css-checkbox__image,
-input[type=checkbox].css-checkbox:disabled ~ .css-radio__image,
-input[type=checkbox].css-radio:disabled ~ .css-radio__image,
-input[type=checkbox].css-radio:disabled ~ .css-radio__image {
-    cursor: no-drop;
-    color: @color-inactive;
-}
+        & + .css-checkbox__image, & + .css-checkbox__image.clr, & + .css-radio__image, & + .css-radio__image.clr {
 
-input[type=checkbox].css-checkbox {
-    &.display-none, &[style*="display: none"], &[style*="display:none"] {
-        & ~ .css-checkbox__image {
-            display: none;
+            &:before {
+                background-position: left bottom;
+            }
         }
     }
-}
 
-input[type=radio].css-radio, input[type=checkbox].css-radio {
+    &:disabled {
+
+        & + .css-checkbox__image, & + .css-checkbox__image.clr, & + .css-radio__image, & + .css-radio__image.clr {
+
+            &:before {
+                cursor: no-drop;
+                background-position: right bottom;
+            }
+        }
+
+        & ~ .css-checkbox__image, & ~ .css-radio__image {
+            cursor: no-drop;
+            color: @color-inactive;
+        }
+    }
+
     &.display-none, &[style*="display: none"], &[style*="display:none"] {
-        & ~ .css-radio__image {
+
+        & ~ .css-checkbox__image, & ~ .css-radio__image {
             display: none;
         }
     }
@@ -110,9 +94,7 @@ input[type=radio].css-radio, input[type=checkbox].css-radio {
     .css-checkbox__image__link {
         color: @color-base;
 
-        &:hover,
-        &:focus,
-        &:active {
+        &:hover, &:focus, &:active {
             color: @color-orange;
         }
     }
