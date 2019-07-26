@@ -6,6 +6,6 @@ spec:
     selector:
         app: selenium-server
     ports:
-    -   name: selenium
-        port: 4444
-        targetPort: 4444
+        -   name: selenium
+            port: 4444
+            targetPort: 4444

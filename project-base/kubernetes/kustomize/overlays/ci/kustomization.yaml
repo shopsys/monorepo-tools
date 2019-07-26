@@ -1,20 +1,20 @@
 bases:
--   ../../base
+    - ../../base
 resources:
--   ../../../deployments/adminer.yml
--   ../../../deployments/redis-admin.yml
--   ../../../deployments/selenium-server.yml
--   ../../../services/adminer.yml
--   ../../../services/redis-admin.yml
--   ../../../services/selenium-server.yml
+    - ../../../deployments/adminer.yml
+    - ../../../deployments/redis-admin.yml
+    - ../../../deployments/selenium-server.yml
+    - ../../../services/adminer.yml
+    - ../../../services/redis-admin.yml
+    - ../../../services/selenium-server.yml
 patchesJson6902:
--   target:
-        group: extensions
-        version: v1beta1
-        kind: Ingress
-        name: shopsys
-    path: ./ingress-patch.yaml
+    -   target:
+            group: extensions
+            version: v1beta1
+            kind: Ingress
+            name: shopsys
+        path: ./ingress-patch.yaml
 configMapGenerator:
--   name: nginx-configuration
-    files:
-    - ../../../../../docker/nginx/nginx.conf
+    -   name: nginx-configuration
+        files:
+            - ../../../../../docker/nginx/nginx.conf

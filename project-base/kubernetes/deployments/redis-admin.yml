@@ -10,12 +10,12 @@ spec:
                 app: redis-admin
         spec:
             containers:
-            -   name: redis-admin
-                image: erikdubbelboer/phpredisadmin:v1.10.2
-                env:
-                    -   name: REDIS_1_HOST
-                        value: redis
-                ports:
-                -   name: http
-                    containerPort: 80
-                    protocol: TCP
+                -   name: redis-admin
+                    image: erikdubbelboer/phpredisadmin:v1.10.2
+                    env:
+                        -   name: REDIS_1_HOST
+                            value: redis
+                    ports:
+                        -   name: http
+                            containerPort: 80
+                            protocol: TCP

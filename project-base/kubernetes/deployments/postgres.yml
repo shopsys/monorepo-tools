@@ -13,33 +13,33 @@ spec:
                 app: postgres
         spec:
             volumes:
-            -   name: postgres-configuration
-                configMap:
-                    name: postgres-configuration
-                    items:
-                    -   key: postgres.conf
-                        path: postgres.conf
-            containers:
-            -   name: postgres
-                image: postgres:10.5-alpine
-                volumeMounts:
                 -   name: postgres-configuration
-                    mountPath: /var/lib/postgresql/data/postgresql.conf
-                    subPath: postgres.conf
-                ports:
+                    configMap:
+                        name: postgres-configuration
+                        items:
+                            -   key: postgres.conf
+                                path: postgres.conf
+            containers:
                 -   name: postgres
-                    containerPort: 5432
-                    protocol: TCP
-                env:
-                    -   name: POSTGRES_USER
-                        value: root
-                    -   name: POSTGRES_PASSWORD
-                        value: root
-                    -   name: POSTGRES_DB
-                        value: shopsys
-                    -   name: PGDATA
-                        value: /var/lib/postgresql/data/pgdata
-                args:
-                    - postgres
-                    - -c
-                    - config_file=/var/lib/postgresql/data/postgresql.conf
+                    image: postgres:10.5-alpine
+                    volumeMounts:
+                        -   name: postgres-configuration
+                            mountPath: /var/lib/postgresql/data/postgresql.conf
+                            subPath: postgres.conf
+                    ports:
+                        -   name: postgres
+                            containerPort: 5432
+                            protocol: TCP
+                    env:
+                        -   name: POSTGRES_USER
+                            value: root
+                        -   name: POSTGRES_PASSWORD
+                            value: root
+                        -   name: POSTGRES_DB
+                            value: shopsys
+                        -   name: PGDATA
+                            value: /var/lib/postgresql/data/pgdata
+                    args:
+                        - postgres
+                        - -c
+                        - config_file=/var/lib/postgresql/data/postgresql.conf

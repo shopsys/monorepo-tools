@@ -6,6 +6,6 @@ spec:
     selector:
         app: smtp-server
     ports:
-    -   name: smtp
-        port: 25
-        targetPort: 25
+        -   name: smtp
+            port: 25
+            targetPort: 25

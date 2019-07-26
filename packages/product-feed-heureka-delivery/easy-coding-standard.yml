@@ -6,10 +6,10 @@ services:
     forbidden_private_visibility_fixer.product_feed_heureka_delivery:
         class: Shopsys\CodingStandards\CsFixer\ForbiddenPrivateVisibilityFixer
         calls:
-            - method: configure
-              arguments:
-                  - analyzed_namespaces:
-                        - Shopsys\ProductFeed\HeurekaDeliveryBundle\Model
+            -   method: configure
+                arguments:
+                    -   analyzed_namespaces:
+                            - Shopsys\ProductFeed\HeurekaDeliveryBundle\Model
 
     Shopsys\CodingStandards\Sniffs\ForceLateStaticBindingForProtectedConstantsSniff: ~
 

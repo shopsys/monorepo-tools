@@ -4,8 +4,8 @@ services:
         image: postgres:10.5-alpine
         container_name: shopsys-framework-postgres
         volumes:
-            - ./docker/postgres/postgres.conf:/var/lib/postgresql/data/postgresql.conf:delegated
-            - ./var/postgres-data:/var/lib/postgresql/data:cached
+            -   ./docker/postgres/postgres.conf:/var/lib/postgresql/data/postgresql.conf:delegated
+            -   ./var/postgres-data:/var/lib/postgresql/data:cached
         environment:
             - PGDATA=/var/lib/postgresql/data/pgdata
             - POSTGRES_USER=root
@@ -22,8 +22,8 @@ services:
         depends_on:
             - php-fpm
         volumes:
-            - shopsys-framework-web-sync:/var/www/html/web
-            - ./docker/nginx/nginx.conf:/etc/nginx/conf.d/default.conf:delegated
+            -   shopsys-framework-web-sync:/var/www/html/web
+            -   ./docker/nginx/nginx.conf:/etc/nginx/conf.d/default.conf:delegated
         ports:
             - "8000:8080"
 
@@ -37,9 +37,9 @@ services:
                 www_data_gid: 20
         container_name: shopsys-framework-php-fpm
         volumes:
-            - shopsys-framework-sync:/var/www/html
-            - shopsys-framework-vendor-sync:/var/www/html/vendor
-            - shopsys-framework-web-sync:/var/www/html/web
+            -   shopsys-framework-sync:/var/www/html
+            -   shopsys-framework-vendor-sync:/var/www/html/vendor
+            -   shopsys-framework-web-sync:/var/www/html/web
         ports:
             - "35729:35729"
 
@@ -86,7 +86,7 @@ services:
         ports:
             - "9200:9200"
         volumes:
-            - ./var/elasticsearch-data:/usr/share/elasticsearch/data:cached
+            -   ./var/elasticsearch-data:/usr/share/elasticsearch/data:cached
         environment:
             - discovery.type=single-node
 

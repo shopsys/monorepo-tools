@@ -1,22 +1,22 @@
 resources:
--   ../../deployments/elasticsearch.yml
--   ../../deployments/postgres.yml
--   ../../deployments/redis.yml
--   ../../deployments/smtp-server.yml
--   ../../deployments/webserver-php-fpm.yml
--   ../../services/elasticsearch.yml
--   ../../services/postgres.yml
--   ../../services/redis.yml
--   ../../services/smtp-server.yml
--   ../../services/webserver-php-fpm.yml
--   ../../ingress.yml
+    - ../../deployments/elasticsearch.yml
+    - ../../deployments/postgres.yml
+    - ../../deployments/redis.yml
+    - ../../deployments/smtp-server.yml
+    - ../../deployments/webserver-php-fpm.yml
+    - ../../services/elasticsearch.yml
+    - ../../services/postgres.yml
+    - ../../services/redis.yml
+    - ../../services/smtp-server.yml
+    - ../../services/webserver-php-fpm.yml
+    - ../../ingress.yml
 configMapGenerator:
     -   name: postgres-configuration
         files:
-        -   ../../../docker/postgres/postgres.conf
+            - ../../../docker/postgres/postgres.conf
     -   name: domains-urls
         files:
-        -   ../../../app/config/domains_urls.yml
+            - ../../../app/config/domains_urls.yml
     -   name: parameters
         files:
-        -   ../../../app/config/parameters.yml
+            - ../../../app/config/parameters.yml

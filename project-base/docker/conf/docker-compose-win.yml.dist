@@ -4,8 +4,8 @@ services:
         image: postgres:10.5-alpine
         container_name: shopsys-framework-postgres
         volumes:
-            - pgdata:/var/lib/postgresql/data
-            - ./docker/postgres/postgres.conf:/var/lib/postgresql/data/postgresql.conf
+            -   pgdata:/var/lib/postgresql/data
+            -   ./docker/postgres/postgres.conf:/var/lib/postgresql/data/postgresql.conf
         environment:
             - PGDATA=/var/lib/postgresql/data/pgdata
             - POSTGRES_USER=root
@@ -22,8 +22,8 @@ services:
         depends_on:
             - php-fpm
         volumes:
-            - shopsys-framework-web-sync:/var/www/html/web
-            - ./docker/nginx/nginx.conf:/etc/nginx/conf.d/default.conf
+            -   shopsys-framework-web-sync:/var/www/html/web
+            -   ./docker/nginx/nginx.conf:/etc/nginx/conf.d/default.conf
         ports:
             - "8000:8080"
 
@@ -37,10 +37,10 @@ services:
                 www_data_gid: 1000
         container_name: shopsys-framework-php-fpm
         volumes:
-            - shopsys-framework-sync:/var/www/html
-            - shopsys-framework-vendor-sync:/var/www/html/vendor
-            - shopsys-framework-web-sync:/var/www/html/web
-            - ./docker/php-fpm/php-ini-overrides.ini:/usr/local/etc/php/php.ini
+            -   shopsys-framework-sync:/var/www/html
+            -   shopsys-framework-vendor-sync:/var/www/html/vendor
+            -   shopsys-framework-web-sync:/var/www/html/web
+            -   ./docker/php-fpm/php-ini-overrides.ini:/usr/local/etc/php/php.ini
         ports:
             - "35729:35729"
 
@@ -87,7 +87,7 @@ services:
         ports:
             - "9200:9200"
         volumes:
-            - elasticsearch-data:/usr/share/elasticsearch/data
+            -   elasticsearch-data:/usr/share/elasticsearch/data
         environment:
             - discovery.type=single-node
 

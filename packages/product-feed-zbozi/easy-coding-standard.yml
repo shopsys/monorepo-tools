@@ -6,10 +6,10 @@ services:
     forbidden_private_visibility_fixer.product_feed_zbozi:
         class: Shopsys\CodingStandards\CsFixer\ForbiddenPrivateVisibilityFixer
         calls:
-            - method: configure
-              arguments:
-                  - analyzed_namespaces:
-                        - Shopsys\ProductFeed\ZboziBundle\Model
+            -   method: configure
+                arguments:
+                    -   analyzed_namespaces:
+                            - Shopsys\ProductFeed\ZboziBundle\Model
 
     Shopsys\CodingStandards\Sniffs\ForceLateStaticBindingForProtectedConstantsSniff: ~
 

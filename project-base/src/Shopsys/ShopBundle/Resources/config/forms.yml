@@ -5,7 +5,7 @@ services:
         public: false
 
     Shopsys\ShopBundle\Form\:
-            resource: '../../Form/'
+        resource: '../../Form/'
 
     Shopsys\ShopBundle\Form\Admin\ArticleFormTypeExtension:
         tags:

@@ -1,30 +1,30 @@
-- op: add
-  path: /spec/rules/-
-  value:
-    host: ~
-    http:
-        paths:
-        -   path: /
-            backend:
-                serviceName: adminer
-                servicePort: 80
-- op: add
-  path: /spec/rules/-
-  value:
-    host: ~
-    http:
-        paths:
-        -   path: /
-            backend:
-                serviceName: elasticsearch
-                servicePort: 9200
-- op: add
-  path: /spec/rules/-
-  value:
-    host: ~
-    http:
-        paths:
-        -   path: /
-            backend:
-                serviceName: redis-admin
-                servicePort: 80
+-   op: add
+    path: /spec/rules/-
+    value:
+        host: ~
+        http:
+            paths:
+                -   path: /
+                    backend:
+                        serviceName: adminer
+                        servicePort: 80
+-   op: add
+    path: /spec/rules/-
+    value:
+        host: ~
+        http:
+            paths:
+                -   path: /
+                    backend:
+                        serviceName: elasticsearch
+                        servicePort: 9200
+-   op: add
+    path: /spec/rules/-
+    value:
+        host: ~
+        http:
+            paths:
+                -   path: /
+                    backend:
+                        serviceName: redis-admin
+                        servicePort: 80

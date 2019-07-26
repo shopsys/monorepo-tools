@@ -18,7 +18,7 @@ services:
 
     Shopsys\MigrationBundle\Component\Doctrine\Migrations\MigrationsLock:
         arguments:
-                $migrationsLockFilePath: '%kernel.project_dir%/migrations-lock.yml'
+            $migrationsLockFilePath: '%kernel.project_dir%/migrations-lock.yml'
 
     Doctrine\DBAL\Migrations\Finder\RecursiveRegexFinder: ~
 

@@ -10,9 +10,9 @@ spec:
                 app: redis
         spec:
             containers:
-            -   name: redis
-                image: redis:4.0-alpine
-                ports:
                 -   name: redis
-                    containerPort: 6379
-                    protocol: TCP
+                    image: redis:4.0-alpine
+                    ports:
+                        -   name: redis
+                            containerPort: 6379
+                            protocol: TCP

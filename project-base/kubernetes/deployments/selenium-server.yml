@@ -10,13 +10,13 @@ spec:
                 app: selenium-server
         spec:
             containers:
-            -   name: selenium
-                image: selenium/standalone-chrome:3.11
-                ports:
-                    -   name: selenium
-                        containerPort: 4444
-                env:
-                    -   name: HUB_PORT_4444_TCP_ADDR
-                        value: hub
-                    -   name: HUB_PORT_4444_TCP_PORT
-                        value: "4444"
+                -   name: selenium
+                    image: selenium/standalone-chrome:3.11
+                    ports:
+                        -   name: selenium
+                            containerPort: 4444
+                    env:
+                        -   name: HUB_PORT_4444_TCP_ADDR
+                            value: hub
+                        -   name: HUB_PORT_4444_TCP_PORT
+                            value: "4444"

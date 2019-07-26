@@ -6,13 +6,13 @@ services:
     forbidden_private_visibility_fixer.framework:
         class: Shopsys\CodingStandards\CsFixer\ForbiddenPrivateVisibilityFixer
         calls:
-            - method: configure
-              arguments:
-                - analyzed_namespaces:
-                    - Shopsys\FrameworkBundle\Model
-                    - Shopsys\FrameworkBundle\Component
-                    - Shopsys\FrameworkBundle\Controller
-                    - Shopsys\FrameworkBundle\Twig
+            -   method: configure
+                arguments:
+                    -   analyzed_namespaces:
+                            - Shopsys\FrameworkBundle\Model
+                            - Shopsys\FrameworkBundle\Component
+                            - Shopsys\FrameworkBundle\Controller
+                            - Shopsys\FrameworkBundle\Twig
 
     Shopsys\CodingStandards\Sniffs\ForceLateStaticBindingForProtectedConstantsSniff: ~
 

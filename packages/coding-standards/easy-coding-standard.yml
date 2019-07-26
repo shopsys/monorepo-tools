@@ -157,13 +157,13 @@ services:
     # keep 0 empty lines before class end bracket }
     PhpCsFixer\Fixer\ClassNotation\ClassAttributesSeparationFixer:
         elements:
-        - 'property'
-        - 'method'
+            - 'property'
+            - 'method'
     PhpCsFixer\Fixer\ClassNotation\VisibilityRequiredFixer:
         elements:
-        - 'const'
-        - 'method'
-        - 'property'
+            - 'const'
+            - 'method'
+            - 'property'
 
     # Code Metrics
     ObjectCalisthenics\Sniffs\Files\ClassTraitAndInterfaceLengthSniff:
@@ -190,4 +190,4 @@ parameters:
         PHP_CodeSniffer\Standards\Squiz\Sniffs\WhiteSpace\ControlStructureSpacingSniff.NoLineAfterClose: ~
         # allow empty "catch (Exception $exception) { }"
         PHP_CodeSniffer\Standards\Generic\Sniffs\CodeAnalysis\EmptyStatementSniff.DetectedCatch: ~
-        # ignore php code in markdown file
+# ignore php code in markdown file

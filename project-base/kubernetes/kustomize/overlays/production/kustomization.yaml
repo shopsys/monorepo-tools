@@ -1,9 +1,9 @@
 bases:
-- ../../base
+    - ../../base
 resources:
-- ./namespace.yaml
+    - ./namespace.yaml
 patches:
-- ./ingress-patch.yaml
+    - ./ingress-patch.yaml
 namespace: production
 secretGenerator:
     -   name: domain-1-ssl-certificates
@@ -19,4 +19,4 @@ secretGenerator:
 configMapGenerator:
     -   name: nginx-configuration
         files:
-        -   ../../../../docker/nginx/google-cloud/nginx.conf
+            - ../../../../docker/nginx/google-cloud/nginx.conf

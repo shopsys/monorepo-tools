@@ -6,13 +6,13 @@ php:
 
 cache:
     directories:
-    - ~/.composer/cache
+        - ~/.composer/cache
 
 install:
     - composer install
 
 before_install:
-- echo "extension = redis.so" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
+    - echo "extension = redis.so" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
 
 script:
     - php vendor/bin/parallel-lint ./src
