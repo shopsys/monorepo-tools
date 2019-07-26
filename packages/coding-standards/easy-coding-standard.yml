@@ -190,4 +190,3 @@ parameters:
         PHP_CodeSniffer\Standards\Squiz\Sniffs\WhiteSpace\ControlStructureSpacingSniff.NoLineAfterClose: ~
         # allow empty "catch (Exception $exception) { }"
         PHP_CodeSniffer\Standards\Generic\Sniffs\CodeAnalysis\EmptyStatementSniff.DetectedCatch: ~
-# ignore php code in markdown file
