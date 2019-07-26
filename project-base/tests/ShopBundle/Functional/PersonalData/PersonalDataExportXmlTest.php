@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Tests\ShopBundle\Functional\PersonalData;
 
 use Shopsys\FrameworkBundle\Component\Domain\Domain;
@@ -162,7 +164,7 @@ class PersonalDataExportXmlTest extends TransactionFunctionalTestCase
         $orderData->deliveryAddressSameAsBillingAddress = true;
         $orderData->country = $country;
 
-        $order = new Order($orderData, 1523596513, 'hash');
+        $order = new Order($orderData, '1523596513', 'hash');
 
         return $order;
     }

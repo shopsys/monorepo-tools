@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Shopsys\ShopBundle\Form\Front\Customer\Password;
 
 use Symfony\Component\Form\AbstractType;

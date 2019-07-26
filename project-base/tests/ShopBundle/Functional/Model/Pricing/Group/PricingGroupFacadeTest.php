@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Tests\ShopBundle\Functional\Model\Pricing\Group;
 
 use Shopsys\FrameworkBundle\Model\Customer\CustomerDataFactoryInterface;

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Tests\ShopBundle\Functional\Component\Grid\Ordering;
 
 use Shopsys\FrameworkBundle\Component\Grid\Ordering\GridOrderingFacade;

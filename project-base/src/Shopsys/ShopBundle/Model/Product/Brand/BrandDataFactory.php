@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Shopsys\ShopBundle\Model\Product\Brand;
 
 use Shopsys\FrameworkBundle\Component\Domain\Domain;

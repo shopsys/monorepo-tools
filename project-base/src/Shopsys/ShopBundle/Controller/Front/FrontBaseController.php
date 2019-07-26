@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Shopsys\ShopBundle\Controller\Front;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;

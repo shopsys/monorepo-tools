@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Shopsys\ShopBundle\DependencyInjection;
 
 use Shopsys\FrameworkBundle\Component\Environment\EnvironmentType;

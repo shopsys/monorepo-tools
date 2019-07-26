@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Tests\ShopBundle\Functional\Model\Product\Filter;
 
 use Shopsys\FrameworkBundle\Model\Product\Filter\FlagFilterChoiceRepository;

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Tests\ShopBundle\Functional\Component\Domain\Multidomain;
 
 use Shopsys\FrameworkBundle\Component\Doctrine\SqlQuoter;

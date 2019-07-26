@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Tests\ShopBundle\Unit\Form\Front\Order;
 
 use Shopsys\FrameworkBundle\Component\Domain\Domain;

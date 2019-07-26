@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Shopsys\ShopBundle\Model\Category;
 
 use Doctrine\ORM\Mapping as ORM;

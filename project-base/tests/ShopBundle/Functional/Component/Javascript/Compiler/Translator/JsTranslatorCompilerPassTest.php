@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Tests\ShopBundle\Functional\Component\Javascript\Compiler\Translator;
 
 use Shopsys\FrameworkBundle\Component\Javascript\Compiler\JsCompiler;

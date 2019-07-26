@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Shopsys\ShopBundle\Model\Payment;
 
 use Shopsys\FrameworkBundle\Component\Domain\Domain;

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Tests\ShopBundle\Acceptance\acceptance;
 
 use Tests\ShopBundle\Acceptance\acceptance\PageObject\Admin\InlineEditPage;
