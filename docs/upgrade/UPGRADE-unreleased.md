@@ -249,6 +249,8 @@ There you can find links to upgrade notes for other versions too.
     - use helper classes `AdminCheckbox` and `AdminRadiobutton` instead of directly manipulating `input[type="checkbox"]` and `input[type="radio"]` elements in your administration acceptance tests
         - when you need to work with a particular input, create an instance of the appropriate class via static method `createByCss()` and use its methods to manipulate the input or assert its values
         - run `php phing tests-acceptance` to see that your acceptance test pass
+- use getter method instead of property inside `DailyFeedCronModule` ([#1207](https://github.com/shopsys/shopsys/pull/1207))
+    - if you extend `DailyFeedCronModule` in your project use the protected method `getFeedExportCreationDataQueue()` instead of `$this->feedExportCreationDataQueue` (which now might be `null`)
 
 ### Configuration
 - simplify local configuration ([#1004](https://github.com/shopsys/shopsys/pull/1004))

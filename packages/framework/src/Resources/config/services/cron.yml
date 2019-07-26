@@ -35,7 +35,6 @@ services:
     Shopsys\FrameworkBundle\Model\Feed\DailyFeedCronModule:
         tags:
             - { name: shopsys.cron, hours: '*/6', minutes: '0' }
-        lazy: true
 
     Shopsys\FrameworkBundle\Model\Feed\HourlyFeedCronModule:
         tags:

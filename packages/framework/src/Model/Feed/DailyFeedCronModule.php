@@ -30,7 +30,7 @@ class DailyFeedCronModule implements IteratedCronModuleInterface
     protected $logger;
 
     /**
-     * @var \Shopsys\FrameworkBundle\Model\Feed\FeedExportCreationDataQueue
+     * @var \Shopsys\FrameworkBundle\Model\Feed\FeedExportCreationDataQueue|null
      */
     protected $feedExportCreationDataQueue;
 
@@ -49,10 +49,6 @@ class DailyFeedCronModule implements IteratedCronModuleInterface
         $this->feedFacade = $feedFacade;
         $this->domain = $domain;
         $this->setting = $setting;
-        $this->feedExportCreationDataQueue = new FeedExportCreationDataQueue(
-            $this->feedFacade->getFeedNames('daily'),
-            $this->domain->getAll()
-        );
     }
 
     /**
@@ -68,7 +64,7 @@ class DailyFeedCronModule implements IteratedCronModuleInterface
      */
     public function iterate(): bool
     {
-        if ($this->feedExportCreationDataQueue->isEmpty()) {
+        if ($this->getFeedExportCreationDataQueue()->isEmpty()) {
             $this->logger->addDebug('Queue is empty, no feeds to process.');
 
             return false;
@@ -93,7 +89,7 @@ class DailyFeedCronModule implements IteratedCronModuleInterface
 
             $this->currentFeedExport = null;
 
-            return $this->feedExportCreationDataQueue->next();
+            return $this->getFeedExportCreationDataQueue()->next();
         }
 
         return true;
@@ -105,8 +101,8 @@ class DailyFeedCronModule implements IteratedCronModuleInterface
     public function sleep(): void
     {
         $this->currentFeedExport->sleep();
-        $currentFeedName = $this->feedExportCreationDataQueue->getCurrentFeedName();
-        $currentDomain = $this->feedExportCreationDataQueue->getCurrentDomain();
+        $currentFeedName = $this->getFeedExportCreationDataQueue()->getCurrentFeedName();
+        $currentDomain = $this->getFeedExportCreationDataQueue()->getCurrentDomain();
         $lastSeekId = $this->currentFeedExport !== null ? $this->currentFeedExport->getLastSeekId() : null;
 
         $this->setting->set(Setting::FEED_NAME_TO_CONTINUE, $currentFeedName);
@@ -129,7 +125,7 @@ class DailyFeedCronModule implements IteratedCronModuleInterface
         $feedNameToContinue = $this->setting->get(Setting::FEED_NAME_TO_CONTINUE);
         $domainIdToContinue = $this->setting->get(Setting::FEED_DOMAIN_ID_TO_CONTINUE);
         if ($feedNameToContinue !== null && $domainIdToContinue !== null) {
-            $queue = $this->feedExportCreationDataQueue;
+            $queue = $this->getFeedExportCreationDataQueue();
             while ($feedNameToContinue !== $queue->getCurrentFeedName() || $domainIdToContinue !== $queue->getCurrentDomain()->getId()) {
                 $queue->next();
             }
@@ -141,8 +137,8 @@ class DailyFeedCronModule implements IteratedCronModuleInterface
 
         $this->logger->addDebug(sprintf(
             'Waking up... Continuing with feed "%s" on "%s", processing from ID %d.',
-            $this->feedExportCreationDataQueue->getCurrentFeedName(),
-            $this->feedExportCreationDataQueue->getCurrentDomain()->getName(),
+            $this->getFeedExportCreationDataQueue()->getCurrentFeedName(),
+            $this->getFeedExportCreationDataQueue()->getCurrentDomain()->getName(),
             $this->currentFeedExport->getLastSeekId()
         ));
     }
@@ -154,9 +150,24 @@ class DailyFeedCronModule implements IteratedCronModuleInterface
     protected function createCurrentFeedExport(?int $lastSeekId = null): FeedExport
     {
         return $this->feedFacade->createFeedExport(
-            $this->feedExportCreationDataQueue->getCurrentFeedName(),
-            $this->feedExportCreationDataQueue->getCurrentDomain(),
+            $this->getFeedExportCreationDataQueue()->getCurrentFeedName(),
+            $this->getFeedExportCreationDataQueue()->getCurrentDomain(),
             $lastSeekId
         );
+    }
+
+    /**
+     * @return \Shopsys\FrameworkBundle\Model\Feed\FeedExportCreationDataQueue
+     */
+    protected function getFeedExportCreationDataQueue(): FeedExportCreationDataQueue
+    {
+        if ($this->feedExportCreationDataQueue === null) {
+            $this->feedExportCreationDataQueue = new FeedExportCreationDataQueue(
+                $this->feedFacade->getFeedNames('daily'),
+                $this->domain->getAll()
+            );
+        }
+
+        return $this->feedExportCreationDataQueue;
     }
 }
