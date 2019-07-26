@@ -300,6 +300,31 @@ There you can find links to upgrade notes for other versions too.
     - Yoda style for comparison is disallowed ([#1209](https://github.com/shopsys/shopsys/pull/1209))
     - visibility must be explicitly set for constants, methods and properties ([#1254](https://github.com/shopsys/shopsys/pull/1254))
     - there must be no space before and one space after a colon when hinting a return value ([#1255](https://github.com/shopsys/shopsys/pull/1255))
+- we recommend using `DeclareStrictTypesFixer` to enforce [strict typing](https://php.net/manual/en/functions.arguments.php#functions.arguments.type-declaration.strict) in your project ([#1256](https://github.com/shopsys/shopsys/pull/1256))
+    - add the fixer to your `easy-coding-standard.yml` config:
+        ```diff
+          imports:
+              - { resource: '%vendor_dir%/shopsys/coding-standards/easy-coding-standard.yml', ignore_errors: true  }
+
+        + services:
+        +     PhpCsFixer\Fixer\Strict\DeclareStrictTypesFixer: ~
+        +
+          parameters:
+        ```
+    - run the fixer via `php phing standards-fix` to add `declare(strict_type=1);` to your PHP files
+    - run static analysis check and tests via `php phing phpstan tests tests-acceptance`
+    - fix the types that are passed in your code
+        - in `shopsys/project-base` there was only one problem in `\Tests\ShopBundle\Functional\PersonalData\PersonalDataExportXmlTest`:
+            ```diff
+            - $order = new Order($orderData, 1523596513, 'hash');
+            + $order = new Order($orderData, '1523596513', 'hash');
+            ```
+        - you can always ignore the rule for a particular file by adding a `skip` parameter to your `easy-coding-standard.yml` config:
+            ```diff
+              skip:
+            +     PhpCsFixer\Fixer\Strict\DeclareStrictTypesFixer:
+            +         - 'src/Shopsys/ShopBundle/Model/MyCustomModel/ClassWithoutStrictTypes.php'
+            ```
 
 [shopsys/framework]: https://github.com/shopsys/framework
 [shopsys/coding-standards]: https://github.com/shopsys/coding-standards
