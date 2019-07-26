@@ -5,6 +5,10 @@ imports:
 
 parameters:
     skip:
+        PhpCsFixer\Fixer\Strict\DeclareStrictTypesFixer:
+            - 'packages/*'
+            - 'utils/*'
+
         Shopsys\CodingStandards\Sniffs\ConstantVisibilityRequiredSniff:
             - '*/src/Shopsys/ShopBundle/*'
             - '*/tests/ShopBundle/*'

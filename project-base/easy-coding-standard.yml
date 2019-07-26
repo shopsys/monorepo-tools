@@ -1,6 +1,9 @@
 imports:
     - { resource: '%vendor_dir%/shopsys/coding-standards/easy-coding-standard.yml', ignore_errors: true  }
 
+services:
+    PhpCsFixer\Fixer\Strict\DeclareStrictTypesFixer: ~
+
 parameters:
     exclude_files:
         - '*/tests/ShopBundle/Test/Codeception/_generated/AcceptanceTesterActions.php'
