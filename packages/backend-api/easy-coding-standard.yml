@@ -11,12 +11,6 @@ services:
                   - analyzed_namespaces:
                         - Shopsys\BackendApiBundle
 
-    PhpCsFixer\Fixer\ClassNotation\VisibilityRequiredFixer:
-        elements:
-            - 'property'
-            - 'method'
-            - 'const'
-
     Shopsys\CodingStandards\Sniffs\ForceLateStaticBindingForProtectedConstantsSniff: ~
 
 parameters:

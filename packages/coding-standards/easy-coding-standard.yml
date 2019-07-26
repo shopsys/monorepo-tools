@@ -158,6 +158,11 @@ services:
         elements:
         - 'property'
         - 'method'
+    PhpCsFixer\Fixer\ClassNotation\VisibilityRequiredFixer:
+        elements:
+        - 'const'
+        - 'method'
+        - 'property'
 
     # Code Metrics
     ObjectCalisthenics\Sniffs\Files\ClassTraitAndInterfaceLengthSniff:

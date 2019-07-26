@@ -14,14 +14,6 @@ services:
                     - Shopsys\FrameworkBundle\Controller
                     - Shopsys\FrameworkBundle\Twig
 
-    SlevomatCodingStandard\Sniffs\Classes\ClassConstantVisibilitySniff: ~
-
-    PhpCsFixer\Fixer\ClassNotation\VisibilityRequiredFixer:
-        elements:
-            - 'property'
-            - 'method'
-            - 'const'
-
     Shopsys\CodingStandards\Sniffs\ForceLateStaticBindingForProtectedConstantsSniff: ~
 
 parameters:

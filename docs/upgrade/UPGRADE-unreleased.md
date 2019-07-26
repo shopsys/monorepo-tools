@@ -296,7 +296,9 @@ There you can find links to upgrade notes for other versions too.
     - check and get rid of the use of all removed deprecated phing targets from [v7.3.0 release](./UPGRADE-unreleased.md#tools)
 
 ## [shopsys/coding-standards]
-- run `php phing standards-fix` to fix code style as we now disallow Yoda style for comparison in the Shopsys Framework coding standards ([#1209](https://github.com/shopsys/shopsys/pull/1209))
+- run `php phing standards-fix` to fix code style as we check more rules in the Shopsys Framework coding standards:
+    - Yoda style for comparison is disallowed ([#1209](https://github.com/shopsys/shopsys/pull/1209))
+    - visibility must be explicitly set for constants, methods and properties ([#1254](https://github.com/shopsys/shopsys/pull/1254))
 
 [shopsys/framework]: https://github.com/shopsys/framework
 [shopsys/coding-standards]: https://github.com/shopsys/coding-standards

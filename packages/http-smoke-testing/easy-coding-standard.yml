@@ -2,12 +2,6 @@ imports:
     - { resource: '%vendor_dir%/shopsys/coding-standards/easy-coding-standard.yml', ignore_errors: true  }
 
 services:
-    PhpCsFixer\Fixer\ClassNotation\VisibilityRequiredFixer:
-        elements:
-            - 'property'
-            - 'method'
-            - 'const'
-
     Shopsys\CodingStandards\Sniffs\ForceLateStaticBindingForProtectedConstantsSniff: ~
 
 parameters:
