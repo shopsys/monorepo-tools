@@ -19,6 +19,7 @@ services:
     # Slevomat Checkers
     SlevomatCodingStandard\Sniffs\Classes\UnusedPrivateElementsSniff: ~
     SlevomatCodingStandard\Sniffs\TypeHints\NullableTypeForNullDefaultValueSniff: ~
+    SlevomatCodingStandard\Sniffs\TypeHints\ReturnTypeHintSpacingSniff: ~
 
     # Shopsys Checkers
     Shopsys\CodingStandards\CsFixer\ForbiddenDumpFixer: ~

@@ -12,7 +12,7 @@ final class Version20181114134959 extends AbstractMigration
     /**
      * @param \Doctrine\DBAL\Schema\Schema $schema
      */
-    public function up(Schema $schema) : void
+    public function up(Schema $schema): void
     {
         /**
          * for each price group find matching currency on price group domain
@@ -41,7 +41,7 @@ final class Version20181114134959 extends AbstractMigration
     /**
      * @param \Doctrine\DBAL\Schema\Schema $schema
      */
-    public function down(Schema $schema) : void
+    public function down(Schema $schema): void
     {
     }
 }

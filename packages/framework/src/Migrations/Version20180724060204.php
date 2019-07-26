@@ -10,7 +10,7 @@ class Version20180724060204 extends AbstractMigration
     /**
      * @param \Doctrine\DBAL\Schema\Schema $schema
      */
-    public function up(Schema $schema) : void
+    public function up(Schema $schema): void
     {
         $this->sql('
             CREATE OR REPLACE FUNCTION set_product_catnum_tsvector() RETURNS trigger AS $$
@@ -156,7 +156,7 @@ class Version20180724060204 extends AbstractMigration
     /**
      * @param \Doctrine\DBAL\Schema\Schema $schema
      */
-    public function down(Schema $schema) : void
+    public function down(Schema $schema): void
     {
     }
 }

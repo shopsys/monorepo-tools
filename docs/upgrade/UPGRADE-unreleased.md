@@ -299,6 +299,7 @@ There you can find links to upgrade notes for other versions too.
 - run `php phing standards-fix` to fix code style as we check more rules in the Shopsys Framework coding standards:
     - Yoda style for comparison is disallowed ([#1209](https://github.com/shopsys/shopsys/pull/1209))
     - visibility must be explicitly set for constants, methods and properties ([#1254](https://github.com/shopsys/shopsys/pull/1254))
+    - there must be no space before and one space after a colon when hinting a return value ([#1255](https://github.com/shopsys/shopsys/pull/1255))
 
 [shopsys/framework]: https://github.com/shopsys/framework
 [shopsys/coding-standards]: https://github.com/shopsys/coding-standards
