@@ -164,7 +164,7 @@ class PersonalDataExportXmlTest extends TransactionFunctionalTestCase
         $orderData->deliveryAddressSameAsBillingAddress = true;
         $orderData->country = $country;
 
-        $order = new Order($orderData, 1523596513, 'hash');
+        $order = new Order($orderData, '1523596513', 'hash');
 
         return $order;
     }
