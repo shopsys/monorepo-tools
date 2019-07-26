@@ -42,7 +42,7 @@ final class OrderFacadeEditTest extends TransactionFunctionalTestCase
      */
     private $orderItemDataFactory;
 
-    protected function setUp():void
+    protected function setUp(): void
     {
         parent::setUp();
 
