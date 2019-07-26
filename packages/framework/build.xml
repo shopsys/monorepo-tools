@@ -1066,33 +1066,29 @@
         </exec>
     </target>
 
-    <target name="yaml-standards" depends="yaml-lint,yaml-standards-availability" description="Runs YAML standards checks" hidden="true">
-        <exec executable="${path.yaml-standards.executable}" logoutput="true" passthru="true" checkreturn="true">
-            <arg value="${project.basedir}"/>
-            <arg value="--exclude-dir=${path.vendor}"/>
-            <arg value="--exclude-dir=${path.root}/node_modules"/>
-            <arg value="--exclude-dir=${path.var}"/>
-            <arg value="--exclude-file=${path.app}/config/domains_urls.yml"/>
-            <arg value="--check-indents-count-of-indents=${yaml-standards.indent-count}"/>
-            <arg line="${yaml-standards.args}"/>
-        </exec>
-    </target>
-
-    <target name="yaml-standards-availability" depends="yaml-lint" description="Checks whether yaml-standards executable is available" hidden="true">
+    <target name="yaml-standards" depends="yaml-lint" description="Checks YAML standards (needs sspooky13/yaml-standards)" hidden="true">
         <available file="${path.yaml-standards.executable}" type="file" property="yaml-standards.executable.exists"/>
         <if>
-            <not>
-                <equals arg1="${yaml-standards.executable.exists}" arg2="true"/>
-            </not>
+            <equals arg1="${yaml-standards.executable.exists}" arg2="true"/>
             <then>
-                <echo level="error" message="The executable '${path.yaml-standards.executable}' is not available."/>
-                <echo level="info" message="You can require the package using Composer, run 'composer require --dev sspooky13/yaml-standards'"/>
-                <fail message="Executable ${path.yaml-standards.executable} not found."/>
+                <exec executable="${path.yaml-standards.executable}" logoutput="true" passthru="true" checkreturn="true">
+                    <arg value="${project.basedir}"/>
+                    <arg value="--exclude-dir=${path.vendor}"/>
+                    <arg value="--exclude-dir=${path.root}/node_modules"/>
+                    <arg value="--exclude-dir=${path.var}"/>
+                    <arg value="--exclude-file=${path.app}/config/domains_urls.yml"/>
+                    <arg value="--check-indents-count-of-indents=${yaml-standards.indent-count}"/>
+                    <arg line="${yaml-standards.args}"/>
+                </exec>
             </then>
+            <else>
+                <echo level="warning" message="The executable '${path.yaml-standards.executable}' is not available, your YAML files cannot be checked."/>
+                <echo level="info" message="You can require the package using Composer, run 'composer require --dev sspooky13/yaml-standards'"/>
+            </else>
         </if>
     </target>
 
-    <target name="yaml-standards-fix" description="Runs YAML standards checks and fixes the violations" hidden="true">
+    <target name="yaml-standards-fix" description="Checks YAML standards and fixes the violations automatically if possible" hidden="true">
         <property name="yaml-standards.args" value="${yaml-standards.args} --fix" override="true"/>
         <phingcall target="yaml-standards"/>
     </target>
