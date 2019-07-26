@@ -3,24 +3,23 @@ syncs:
     shopsys-framework-sync:
         sync_userid: 501
         src: './'
-        sync_excludes: [
-            '.ci',
-            '.git',
-            '.github',
-            '.idea',
-            '.docker-sync',
-            '.DS_Store',
-            'docker',
-            'nbproject',
-            'project-base/docker',
-            'project-base/kubernetes',
-            'project-base/node_modules',
-            'project-base/var/cache',
-            'project-base/var/elasticsearch-data',
-            'project-base/var/postgres-data',
-            'project-base/web',
-            'vendor'
-        ]
+        sync_excludes:
+            - .ci
+            - .git
+            - .github
+            - .idea
+            - .docker-sync
+            - .DS_Store
+            - docker
+            - nbproject
+            - project-base/docker
+            - project-base/kubernetes
+            - project-base/node_modules
+            - project-base/var/cache
+            - project-base/var/elasticsearch-data
+            - project-base/var/postgres-data
+            - project-base/web
+            - vendor
         host_disk_mount_mode: 'delegated'
 
     shopsys-framework-web-sync:
