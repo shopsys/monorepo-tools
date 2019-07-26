@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Shopsys\ShopBundle\Form\Front\Product;
 
 use Shopsys\FrameworkBundle\Model\Product\Filter\ParameterFilterData;

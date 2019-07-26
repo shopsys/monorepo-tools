@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Tests\ShopBundle\Functional\Component\Doctrine;
 
 use Doctrine\ORM\Query;

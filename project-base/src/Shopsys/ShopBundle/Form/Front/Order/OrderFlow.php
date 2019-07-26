@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Shopsys\ShopBundle\Form\Front\Order;
 
 use Craue\FormFlowBundle\Form\FormFlow;

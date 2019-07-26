@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Tests\ShopBundle\Functional\Model\Category;
 
 use Shopsys\FrameworkBundle\Model\Category\CategoryDataFactoryInterface;

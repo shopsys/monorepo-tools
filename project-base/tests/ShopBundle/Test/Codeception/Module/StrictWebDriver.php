@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Tests\ShopBundle\Test\Codeception\Module;
 
 use Codeception\Module\WebDriver;

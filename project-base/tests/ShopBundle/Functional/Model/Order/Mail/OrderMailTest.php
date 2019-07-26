@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Tests\ShopBundle\Functional\Model\Order\Mail;
 
 use Shopsys\FrameworkBundle\Component\Domain\Config\DomainConfig;

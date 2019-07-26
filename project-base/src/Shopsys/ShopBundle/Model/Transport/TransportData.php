@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Shopsys\ShopBundle\Model\Transport;
 
 use Shopsys\FrameworkBundle\Model\Transport\TransportData as BaseTransportData;

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Shopsys\ShopBundle;
 
 use Shopsys\FrameworkBundle\Component\Translation\Translator;

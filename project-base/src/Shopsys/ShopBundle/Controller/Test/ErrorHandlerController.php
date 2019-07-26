@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Shopsys\ShopBundle\Controller\Test;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Tests\ShopBundle\Functional\Twig;
 
 use Tests\ShopBundle\Test\FunctionalTestCase;

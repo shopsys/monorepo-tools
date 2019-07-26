@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Shopsys\ShopBundle\DataFixtures;
 
 use Shopsys\FrameworkBundle\Component\DataFixture\PersistentReferenceFacade;

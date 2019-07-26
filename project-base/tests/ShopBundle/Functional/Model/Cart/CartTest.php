@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Tests\ShopBundle\Functional\Model\Cart;
 
 use Shopsys\FrameworkBundle\Component\Money\Money;

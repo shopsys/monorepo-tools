@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Tests\ShopBundle\Functional\Model\Transport;
 
 use Shopsys\FrameworkBundle\Model\Pricing\Vat\Vat;

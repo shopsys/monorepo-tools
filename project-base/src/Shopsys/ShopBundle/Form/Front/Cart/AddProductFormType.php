@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Shopsys\ShopBundle\Form\Front\Cart;
 
 use Symfony\Component\Form\AbstractType;

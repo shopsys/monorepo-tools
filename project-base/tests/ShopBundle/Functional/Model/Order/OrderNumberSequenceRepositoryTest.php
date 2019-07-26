@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Tests\ShopBundle\Functional\Model\Order;
 
 use Shopsys\FrameworkBundle\Model\Order\OrderNumberSequenceRepository;

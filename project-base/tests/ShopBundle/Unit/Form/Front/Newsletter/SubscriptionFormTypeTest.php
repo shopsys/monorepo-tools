@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Tests\ShopBundle\Unit\Form\Front\Newsletter;
 
 use PHPUnit\Framework\Assert;
