@@ -15,7 +15,6 @@ class ParameterFilterRepository
     public function filterByParameters(QueryBuilder $productsQueryBuilder, array $parameters)
     {
         $parameterIndex = 1;
-        $valueIndex = 1;
 
         foreach ($parameters as $parameterFilterData) {
             /* @var $parameterFilterData \Shopsys\FrameworkBundle\Model\Product\Filter\ParameterFilterData */
@@ -27,8 +26,7 @@ class ParameterFilterRepository
             $parameterQueryBuilder = $this->getParameterQueryBuilder(
                 $parameterFilterData,
                 $productsQueryBuilder->getEntityManager(),
-                $parameterIndex,
-                $valueIndex
+                $parameterIndex
             );
 
             $productsQueryBuilder->andWhere($productsQueryBuilder->expr()->exists($parameterQueryBuilder));
@@ -44,14 +42,12 @@ class ParameterFilterRepository
      * @param \Shopsys\FrameworkBundle\Model\Product\Filter\ParameterFilterData $parameterFilterData
      * @param \Doctrine\ORM\EntityManagerInterface $em
      * @param int $parameterIndex
-     * @param int $valueIndex
      * @return \Doctrine\ORM\QueryBuilder
      */
     protected function getParameterQueryBuilder(
         ParameterFilterData $parameterFilterData,
         EntityManagerInterface $em,
-        $parameterIndex,
-        &$valueIndex
+        $parameterIndex
     ) {
         $ppvAlias = 'ppv' . $parameterIndex;
         $parameterPlaceholder = ':parameter' . $parameterIndex;
@@ -62,7 +58,7 @@ class ParameterFilterRepository
             $parameterFilterData->values,
             $parameterQueryBuilder,
             $ppvAlias,
-            $valueIndex
+            $parameterIndex
         );
 
         $parameterQueryBuilder
@@ -79,24 +75,25 @@ class ParameterFilterRepository
 
     /**
      * Generates:
-     * ppv.value = :parameterValueM OR ppv.value = :parameterValueN OR ...
+     * ppv.value = :parameterValueX_M OR ppv.value = :parameterValueX_N OR ...
      *
      * @param \Shopsys\FrameworkBundle\Model\Product\Parameter\ParameterValue[] $parameterValues
      * @param \Doctrine\ORM\QueryBuilder $parameterQueryBuilder
      * @param string $ppvAlias
-     * @param int $valueIndex
+     * @param int $parameterIndex
      * @return \Doctrine\ORM\Query\Expr\Orx
      */
     protected function getValuesExpr(
         array $parameterValues,
         QueryBuilder $parameterQueryBuilder,
         $ppvAlias,
-        &$valueIndex
+        $parameterIndex
     ) {
         $valuesExpr = $parameterQueryBuilder->expr()->orX();
 
+        $valueIndex = 1;
         foreach ($parameterValues as $parameterValue) {
-            $valuePlaceholder = ':parameterValue' . $valueIndex;
+            $valuePlaceholder = ':parameterValue' . $parameterIndex . '_' . $valueIndex;
 
             $valuesExpr->add($ppvAlias . '.value = ' . $valuePlaceholder);
             $parameterQueryBuilder->setParameter($valuePlaceholder, $parameterValue);

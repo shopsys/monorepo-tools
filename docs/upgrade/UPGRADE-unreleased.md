@@ -251,6 +251,8 @@ There you can find links to upgrade notes for other versions too.
         - run `php phing tests-acceptance` to see that your acceptance test pass
 - use getter method instead of property inside `DailyFeedCronModule` ([#1207](https://github.com/shopsys/shopsys/pull/1207))
     - if you extend `DailyFeedCronModule` in your project use the protected method `getFeedExportCreationDataQueue()` instead of `$this->feedExportCreationDataQueue` (which now might be `null`)
+- check the usage of protected methods of `ParameterFilterRepository` if you've extended it in your project ([#1044](https://github.com/shopsys/shopsys/pull/1044))
+    - the signatures of protected methods changed to remove the need of passing a parameter as a reference
 
 ### Configuration
 - simplify local configuration ([#1004](https://github.com/shopsys/shopsys/pull/1004))
