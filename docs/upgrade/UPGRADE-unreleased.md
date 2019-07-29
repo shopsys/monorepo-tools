@@ -7,27 +7,69 @@ There you can find links to upgrade notes for other versions too.
 
 ## [shopsys/framework]
 
-### Application
-- constructors of `FrameworkBundle\Model\Mail\Mailer` and `FrameworkBundle\Component\Cron\CronFacade` classes were changed so if you extend them change them accordingly: ([#875](https://github.com/shopsys/shopsys/pull/875)).
-    - `CronFacade::__construct(Logger $logger, CronConfig $cronConfig, CronModuleFacade $cronModuleFacade, Mailer $mailer)`
-    - `Mailer::__construct(Swift_Mailer $swiftMailer, Swift_Transport $realSwiftTransport)`
-    - find all usages of the constructors and fix them
-- `EntityNameResolver` was added into constructor of these classes: ([#918](https://github.com/shopsys/shopsys/pull/918))
-    - CronModuleFactory
-    - PersistentReferenceFactory
-    - ImageFactory
-    - FriendlyUrlFactory
-    - SettingValueFactory
-    - UploadedFileFactory
-    - AdministratorGridLimitFactory
-    - EnabledModuleFactory
-    - ProductCategoryDomainFactory
-    - ProductVisibilityFactory
-    - ScriptFactory
-    - SliderItemFactory
+### Configuration
+- simplify local configuration ([#1004](https://github.com/shopsys/shopsys/pull/1004))
+    - update `app/config/packages/shopsys_shop.yml`
+        ```diff
+        router:
+        -   locale_router_filepaths:
+        -       cs: '%shopsys.root_dir%/src/Shopsys/ShopBundle/Resources/config/routing_front_cs.yml'
+        -       en: '%shopsys.root_dir%/src/Shopsys/ShopBundle/Resources/config/routing_front_en.yml'
+        +   locale_router_filepath_mask: '%shopsys.root_dir%/src/Shopsys/ShopBundle/Resources/config/routing_front_*.yml'
+        ```
+    - update `src/Shopsys/ShopBundle/DependencyInjection/Configuration.php`
+        ```diff
+        ->arrayNode('router')
+            ->children()
+        -       ->arrayNode('locale_router_filepaths')
+        -           ->defaultValue([])
+        -           ->prototype('scalar')
+        +       ->scalarNode('locale_router_filepath_mask')
+        +       ->end()
+        +       ->scalarNode('friendly_url_router_filepath')
+                ->end()
+        -   ->end()
+        -   ->scalarNode('friendly_url_router_filepath')
+            ->end()
+        ```
+    - update `src/Shopsys/ShopBundle/DependencyInjection/ShopsysShopExtension.php`
+        ```diff
+        - $container->setParameter('shopsys.router.locale_router_filepaths', $config['router']['locale_router_filepaths']);
+        + $container->setParameter('shopsys.router.locale_router_filepath_mask', $config['router']['locale_router_filepath_mask']);
+        ```
+- fix `shopsys.domain_images_url_prefix` parameter in your `paths.yml` file to properly load domain icons in images data fixtures ([#1183](https://github.com/shopsys/shopsys/pull/1183))
+    ```diff
+    -   shopsys.domain_images_url_prefix: '/%shopsys.content_dir_name%/admin/images/domain'
+    +   shopsys.domain_images_url_prefix: '/%shopsys.content_dir_name%/admin/images/domain/'
+    ```
+- add the installation of the useful tools to your `docker/php-fpm/Dockerfile` ([#1239](https://github.com/shopsys/shopsys/pull/1239))
+    ```diff
+    libpq-dev \
+    + vim \
+    + nano \
+    + mc \
+    + htop \
+    ```
+- update the minimal PHP version in your `composer.json` in `require` and `config.platform` section to `7.2` because version `7.1` is no longer supported in Shopsys Framework ([#1066](https://github.com/shopsys/shopsys/pull/1066))
+- run [`db-create`](/docs/introduction/console-commands-for-application-management-phing-targets.md#db-create) (this one even on production) and `test-db-create` phing targets to install extension for UUID ([#1055](https://github.com/shopsys/shopsys/pull/1055))
 
-    In case of extending one of these classes, you should add an `EntityNameResolver` to a constructor and use it in a `create()` method to resolve correct class to return.
-- run `php phing standards-fix` so all nullable values will be now defined using nullability (?) symbol ([#1010](https://github.com/shopsys/shopsys/pull/1010))
+### Tools
+- check and get rid of the use of all removed phing targets ([#1193](https://github.com/shopsys/shopsys/pull/1193))
+    - the targets were marked as deprecated in `v7.3.0` version, see [the upgrade notes](/docs/upgrade/UPGRADE-v7.3.0.md#tools) and [#1068](https://github.com/shopsys/shopsys/pull/1068)
+
+### Application
+#### 3rd party dependencies
+- upgrade `commerceguys/intl` to `^1.0.0` version ([#1192](https://github.com/shopsys/shopsys/pull/1192))
+    - in your `composer.json`, change the dependency:
+        ```diff
+        - "commerceguys/intl": "0.7.4",
+        + "commerceguys/intl": "^1.0.0",
+        ```
+    - `IntlCurrencyRepository::get()` and `::getAll()` methods no longer accept `$fallbackLocale` as the a parameter
+        - you can set the parameter using the class constructor if necessary
+    - `IntlCurrencyRepository::isSupportedCurrency()` is now strictly type hinted
+    - protected `PriceExtension::getNumberFormatter()` is renamed to `getCurrencyFormatter()` and returns an instance of `CommerceGuys\Intl\Formatter\CurrencyFormatter` now
+        - you need to change your usages accordingly
 - replace `IvoryCKEditorBundle` with `FOSCKEditorBundle` ([#1072](https://github.com/shopsys/shopsys/pull/1072))
     - replace the registration of the bundle in `app/AppKernel`
         ```diff
@@ -69,11 +111,28 @@ There you can find links to upgrade notes for other versions too.
             - use Ivory\CKEditorBundle\Form\Type\CKEditorType;
             + use FOS\CKEditorBundle\Form\Type\CKEditorType;
             ```
-- update the minimal PHP version in your `composer.json` in `require` and `config.platform` section to `7.2` because version `7.1` is no longer supported in Shopsys Framework ([#1066](https://github.com/shopsys/shopsys/pull/1066))
-- run [db-create](/docs/introduction/console-commands-for-application-management-phing-targets.md#db-create) (this one even on production) and `test-db-create` phing targets to install extension for UUID
-- if you want to use our experimental API read [introduction to backend API](/docs/backend-api/introduction-to-backend-api.md)
+#### Shopsys Framework
+- constructors of `FrameworkBundle\Model\Mail\Mailer` and `FrameworkBundle\Component\Cron\CronFacade` classes were changed so if you extend them change them accordingly: ([#875](https://github.com/shopsys/shopsys/pull/875)).
+    - `CronFacade::__construct(Logger $logger, CronConfig $cronConfig, CronModuleFacade $cronModuleFacade, Mailer $mailer)`
+    - `Mailer::__construct(Swift_Mailer $swiftMailer, Swift_Transport $realSwiftTransport)`
+    - find all usages of the constructors and fix them
+- `EntityNameResolver` was added into constructor of these classes: ([#918](https://github.com/shopsys/shopsys/pull/918))
+    - `CronModuleFactory`
+    - `PersistentReferenceFactory`
+    - `ImageFactory`
+    - `FriendlyUrlFactory`
+    - `SettingValueFactory`
+    - `UploadedFileFactory`
+    - `AdministratorGridLimitFactory`
+    - `EnabledModuleFactory`
+    - `ProductCategoryDomainFactory`
+    - `ProductVisibilityFactory`
+    - `ScriptFactory`
+    - `SliderItemFactory`
+
+    In case of extending one of these classes, you should add an `EntityNameResolver` to a constructor and use it in a `create()` method to resolve correct class to return.
 - update your application and tests to correctly handle availabilities and stock ([#1115](https://github.com/shopsys/shopsys/pull/1115))
-    - copy and replace the functional test [AvailabilityFacadeTest.php](https://github.com/shopsys/project-base/blob/master/tests/ShopBundle/Functional/Model/Product/Availability/AvailabilityFacadeTest.php) in `tests/ShopBundle/Functional/Model/Product/Availability/` to test deletion and replacement of availabilities properly
+    - copy and replace the functional test [`AvailabilityFacadeTest.php`](https://github.com/shopsys/project-base/blob/v8.0.0/tests/ShopBundle/Functional/Model/Product/Availability/AvailabilityFacadeTest.php) in `tests/ShopBundle/Functional/Model/Product/Availability/` to test deletion and replacement of availabilities properly
     - if you have made any custom changes to the test you should merge your changes with the ones described in the pull request linked above
     - add a test service definition for `AvailabilityDataFactory` in your `src/Shopsys/ShopBundle/Resources/config/services_test.yml` configuration:
         ```diff
@@ -84,7 +143,6 @@ There you can find links to upgrade notes for other versions too.
             Shopsys\FrameworkBundle\Model\Payment\PaymentDataFactoryInterface: '@Shopsys\ShopBundle\Model\Payment\PaymentDataFactory'
         ```
     - check and fix your other tests, they might start failing if they assumed `Product::$availability` is not null when the product is using stock, or that stock quantity is not null when it's not using stock
-- follow upgrade instructions for entities simplification in the [separate article](./upgrade-instructions-for-entities-simplification.md) ([#1123](https://github.com/shopsys/shopsys/pull/1123))
 - JS functionality connected to `#js-close-without-saving` has been removed, implement your own if you relied on this ([#1168](https://github.com/shopsys/shopsys/pull/1168))
 - update your way of registration of `FriendlyUrlDataProviders` ([#1140](https://github.com/shopsys/shopsys/pull/1140))
     - the namespace of `FriendlyUrlDataProviderInterface` and `FriendlyUrlDataProviderRegistry` has changed from `Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\CompilerPass` to `Shopsys\FrameworkBundle\Component\Router\FriendlyUrl` so change all your usages accordingly
@@ -119,17 +177,6 @@ There you can find links to upgrade notes for other versions too.
     - we recommend encapsulating collections similarly in your own custom entities as well
 - update your `OrderDataFixture` and `UserDataFixture` to create new users and orders in last two weeks instead of one ([#1147](https://github.com/shopsys/shopsys/pull/1147))
     - this is done by changing all occurrences of `$this->faker->dateTimeBetween('-1 week', 'now');` by `$this->faker->dateTimeBetween('-2 week', 'now');`
-- upgrade `commerceguys/intl` to `^1.0.0` version ([#1192](https://github.com/shopsys/shopsys/pull/1192))
-    - in your `composer.json`, change the dependency:
-        ```diff
-        - "commerceguys/intl": "0.7.4",
-        + "commerceguys/intl": "^1.0.0",
-        ```
-    - `IntlCurrencyRepository::get()` and `::getAll()` methods no longer accept `$fallbackLocale` as the a parameter
-        - you can set the parameter using the class constructor if necessary
-    - `IntlCurrencyRepository::isSupportedCurrency()` is now strictly type hinted
-    - protected `PriceExtension::getNumberFormatter()` is renamed to `getCurrencyFormatter()` and returns an instance of `CommerceGuys\Intl\Formatter\CurrencyFormatter` now
-        - you need to change your usages accordingly
 - get rid of not needed deprecations and BC-promise implementation from 7.x version ([#1193](https://github.com/shopsys/shopsys/pull/1193))
     - remove registration of `productCategoryFilter` filter from `Shopsys\ShopBundle\Model\AdvancedSearch\ProductAdvancedSearchConfig`, `services.yml` and `services_test.yml`
         - in the case, the class contains custom filters, move the filter into the `parent::__construct` as the last parameter
@@ -176,12 +223,6 @@ There you can find links to upgrade notes for other versions too.
         POSITION_LEFT_SIDEBAR => 'leftSidebar'
         ```
     - remove the use of `is_plugin_data_group` attribute in form extensions or customized twig templates, the functionality was also removed from `form_row` block in `@FrameworkBundle/src/Resources/views/Admin/Form/theme.html.twig`
-- follow instructions in [the separate article](/docs/upgrade/upgrade-instructions-for-read-model-for-product-lists-from-elasticsearch.md) to use Elasticsearch to get data into read model ([#1096](https://github.com/shopsys/shopsys/pull/1096))
-- fix `shopsys.domain_images_url_prefix` parameter in your `paths.yml` file to properly load domain icons in images data fixtures ([#1183](https://github.com/shopsys/shopsys/pull/1183))
-    ```diff
-    -   shopsys.domain_images_url_prefix: '/%shopsys.content_dir_name%/admin/images/domain'
-    +   shopsys.domain_images_url_prefix: '/%shopsys.content_dir_name%/admin/images/domain/'
-    ```
 - update your usage of `OrderItemsType` and Twig macros from `@ShopsysFramework/Admin/Content/Order/orderItem.html.twig` ([#1229](https://github.com/shopsys/shopsys/pull/1229))
     - if you haven't customized Twig templates for editing orders in admin or used `OrderItemsType` directly you don't have to do anything
     - change your usage after the macro signatures were modified (unused parameters were removed):
@@ -253,52 +294,13 @@ There you can find links to upgrade notes for other versions too.
     - if you extend `DailyFeedCronModule` in your project use the protected method `getFeedExportCreationDataQueue()` instead of `$this->feedExportCreationDataQueue` (which now might be `null`)
 - check the usage of protected methods of `ParameterFilterRepository` if you've extended it in your project ([#1044](https://github.com/shopsys/shopsys/pull/1044))
     - the signatures of protected methods changed to remove the need of passing a parameter as a reference
-
-### Configuration
-- simplify local configuration ([#1004](https://github.com/shopsys/shopsys/pull/1004))
-    - update `app/config/packages/shopsys_shop.yml`
-        ```diff
-        router:
-        -   locale_router_filepaths:
-        -       cs: '%shopsys.root_dir%/src/Shopsys/ShopBundle/Resources/config/routing_front_cs.yml'
-        -       en: '%shopsys.root_dir%/src/Shopsys/ShopBundle/Resources/config/routing_front_en.yml'
-        +   locale_router_filepath_mask: '%shopsys.root_dir%/src/Shopsys/ShopBundle/Resources/config/routing_front_*.yml'
-        ```
-    - update `app/config/packages/shopsys_shop.yml`
-        ```diff
-        ->arrayNode('router')
-            ->children()
-        -       ->arrayNode('locale_router_filepaths')
-        -           ->defaultValue([])
-        -           ->prototype('scalar')
-        +       ->scalarNode('locale_router_filepath_mask')
-        +       ->end()
-        +       ->scalarNode('friendly_url_router_filepath')
-                ->end()
-        -   ->end()
-        -   ->scalarNode('friendly_url_router_filepath')
-            ->end()
-        ```
-    - update `src/Shopsys/ShopBundle/DependencyInjection/ShopsysShopExtension.php`
-        ```diff
-        - $container->setParameter('shopsys.router.locale_router_filepaths', $config['router']['locale_router_filepaths']);
-        + $container->setParameter('shopsys.router.locale_router_filepath_mask', $config['router']['locale_router_filepath_mask']);
-        ```
-- add the installation of the useful tools to your `docker/php-fpm/Dockerfile` ([#1239](https://github.com/shopsys/shopsys/pull/1239))
-    ```diff
-    libpq-dev \
-    + vim \
-    + nano \
-    + mc \
-    + htop \
-    ```
-
-### Tools
-- get rid of not needed deprecations and BC-promise implementation from 7.x version
-    - check and get rid of the use of all removed deprecated phing targets from [v7.3.0 release](./UPGRADE-unreleased.md#tools)
+- follow instructions in the [separate article](/docs/upgrade/upgrade-instructions-for-read-model-for-product-lists-from-elasticsearch.md) to use Elasticsearch to get data into read model ([#1096](https://github.com/shopsys/shopsys/pull/1096))
+- follow upgrade instructions for entities simplification in the [separate article](./upgrade-instructions-for-entities-simplification.md) ([#1123](https://github.com/shopsys/shopsys/pull/1123))
+- if you want to use our experimental backend API, read [introduction to backend API](/docs/backend-api/introduction-to-backend-api.md) ([#1055](https://github.com/shopsys/shopsys/pull/1055))
 
 ## [shopsys/coding-standards]
 - run `php phing standards-fix` to fix code style as we check more rules in the Shopsys Framework coding standards:
+    - all nullable parameters must be defined using nullability (?) symbol ([#1010](https://github.com/shopsys/shopsys/pull/1010))
     - Yoda style for comparison is disallowed ([#1209](https://github.com/shopsys/shopsys/pull/1209))
     - visibility must be explicitly set for constants, methods and properties ([#1254](https://github.com/shopsys/shopsys/pull/1254))
     - there must be no space before and one space after a colon when hinting a return value ([#1255](https://github.com/shopsys/shopsys/pull/1255))
