@@ -29,6 +29,120 @@ The changelog is generated during the release process using [ChangelogLinker](ht
 
 <!-- changelog-linker -->
 
+## [v8.0.0](https://github.com/shopsys/shopsys/compare/v7.3.1...v8.0.0) - 2019-07-29
+
+### [shopsys/framework]
+
+#### Added
+
+- [#1194] admin: added quick menu for product detail
+- [#1099] administration: quicksearch for products via dashboard
+- [#906] admin design facelift
+- [#875] mail spooling
+
+#### Changed
+
+- [#1215] admin: display real name of logged user instead of icon
+- [#1207] DailyFeedCronModule: use getter for queue to eliminate side effects in constructor, Thanks to [@hason]
+- [#1229] admin: currency is displayed in the order table header instead of behind every input
+- [#1197] admin: logo is now a link to dashboard
+- [#1191] changing elasticsearch data structure is safe even in production environment
+- [#1168] admin: product detail does not open in new window
+- [#1140] Registration of FriendlyUrlDataProviders is now done via service container
+- [#1044] remove unnecessary passing parameter as a reference, Thanks to [@pk16011990]
+- [#918] all entity factories now use EntityNameResolver
+
+#### Fixed
+
+- [#1248] DailyFeedCronModule set as lazy to avoid side-effects in constructor
+- [#1234] CountryFormType: removal of duplicate constraint
+- [#1232] LegalConditionsFacade::findArticle() returns null when the Article doesn't exist
+- [#1231] DomainController: fix non-existing route
+- [#1230] admin: consistency in separators in setting form
+- [#1227] AdministratorFacade: fix duplicate user name check
+- [#1226] admin: new order items have "Set prices manually" unchecked by default
+- [#1225] admin advanced search: reset button will not close the filter
+- [#1210] fixed ordering customers by telephone in administration
+- [#1204] dashboard statistics display zero trend when there are no data in previous week
+
+#### Removed
+
+- [#1097] end of support for helios-ag/fm-elfinder-bundle:^6.2.1
+
+### [shopsys/project-base]
+
+#### Changed
+
+- [#1256] enforce strict typing in project repository
+- [#1239] php-fpm dockerfile contains useful tools (vim, nano, mc, htop), Thanks to [@pk16011990]
+
+### [shopsys/shopsys]
+
+#### Added
+
+- [#1240] added Phing target that checks whether there is a project-base/vendor dir
+- [#1201] Start Building Your Application article
+- [#1245] acceptance test helper classes for graphical inputs
+- [#1181] all constants now have set their visibility
+- [#1096] use ElasticSearch to get data to readmodel
+- [#1004] support all languages and collations, Thanks to [@henzigo]
+- [#539] standards for .yaml and yaml.dist files, Thanks to [@sspooky13]
+
+#### Changed
+
+- [#1243] move admin assets into [shopsys/framework] repository
+- [#1192] commerceguys/intl is now upgraded to ^1.0.0
+- [#1176] BreadcrumbGenerators are now automatically registered in BreadcrumbResolver
+- [#1155] separated backend API from default project-base
+- [#1115] Product: availability cannot be set when using stock (and vice versa)
+- [#1123] entities: removal of dependencies on services
+- [#1072] Migration from IvoryCKEditorBundle to FOSCKEditorBundle
+- [#1047] encapsulation of collections inside of entities, Thanks to [@pk16011990]
+- [#933] phing target test-db-demo now exports products into elasticsearch with different index, Thanks to [@henzigo]
+
+#### Fixed
+
+- [#1219] fix grammar connected with "information" word
+- [#1183] fixed path for domain icons directory
+
+#### Removed
+
+- [#1193] remove deprecations from 7.x.x
+- [#1066] drop support for PHP 7.1
+
+### [shopsys/backend-api]
+
+#### Added
+
+- [#1055] API Product export
+- [#1203] create, update, delete products
+
+#### Changed
+
+- [#1250] moved backend API Product Controller classes to subdirectory
+
+#### Fixed
+
+- [#1208] backend-api installer is now updated with latest changes in build.xml file
+
+### [shopsys/coding-standards]
+
+#### Added
+
+- [#1255] added return type hint spacing fixer
+- [#1209] Yoda style for comparison is now disallowed
+- [#1010] all nullable values are now defined using nullability (?) symbol
+
+#### Changed
+
+- [#1254] explicit visibility is part of the general coding-standards
+
+### [shopsys/migrations]
+
+#### Changed
+
+- [#1262] add missing strict types and return types into template, Thanks to [@sspooky13]
+
 ## [v7.3.1](https://github.com/shopsys/shopsys/compare/v7.3.0...v7.3.1) - 2019-07-15
 
 ### [shopsys/framework]
@@ -54,6 +168,7 @@ The changelog is generated during the release process using [ChangelogLinker](ht
 
 #### Changed
 
+- [#1025] creating a new variant no longer redirects to product detail
 - [#1105] changed variant abbreviation to a translation in administration
 - [#1106] configure VarDumperExtension in all environments
 - [#1114] all the properties and methods in Shopsys\FrameworkBundle\Twig namespace has now protected instead of private visibility
@@ -2566,6 +2681,7 @@ That's why is this section formatted differently.
 [#1083]: https://github.com/shopsys/shopsys/pull/1083
 [@malyMiso]: https://github.com/malyMiso
 [#1018]: https://github.com/shopsys/shopsys/pull/1018
+[#1025]: https://github.com/shopsys/shopsys/pull/1025
 [#1040]: https://github.com/shopsys/shopsys/pull/1040
 [#1049]: https://github.com/shopsys/shopsys/pull/1049
 [#1053]: https://github.com/shopsys/shopsys/pull/1053
@@ -2604,3 +2720,60 @@ That's why is this section formatted differently.
 [#1180]: https://github.com/shopsys/shopsys/pull/1180
 [#1195]: https://github.com/shopsys/shopsys/pull/1195
 [#1199]: https://github.com/shopsys/shopsys/pull/1199
+
+[#1262]: https://github.com/shopsys/shopsys/pull/1262
+[#1256]: https://github.com/shopsys/shopsys/pull/1256
+[#1255]: https://github.com/shopsys/shopsys/pull/1255
+[#1254]: https://github.com/shopsys/shopsys/pull/1254
+[#1250]: https://github.com/shopsys/shopsys/pull/1250
+[#1248]: https://github.com/shopsys/shopsys/pull/1248
+[#1245]: https://github.com/shopsys/shopsys/pull/1245
+[#1243]: https://github.com/shopsys/shopsys/pull/1243
+[#1240]: https://github.com/shopsys/shopsys/pull/1240
+[#1239]: https://github.com/shopsys/shopsys/pull/1239
+[#1234]: https://github.com/shopsys/shopsys/pull/1234
+[#1232]: https://github.com/shopsys/shopsys/pull/1232
+[#1231]: https://github.com/shopsys/shopsys/pull/1231
+[#1230]: https://github.com/shopsys/shopsys/pull/1230
+[#1229]: https://github.com/shopsys/shopsys/pull/1229
+[#1227]: https://github.com/shopsys/shopsys/pull/1227
+[#1226]: https://github.com/shopsys/shopsys/pull/1226
+[#1225]: https://github.com/shopsys/shopsys/pull/1225
+[#1219]: https://github.com/shopsys/shopsys/pull/1219
+[#1215]: https://github.com/shopsys/shopsys/pull/1215
+[#1210]: https://github.com/shopsys/shopsys/pull/1210
+[#1209]: https://github.com/shopsys/shopsys/pull/1209
+[#1208]: https://github.com/shopsys/shopsys/pull/1208
+[#1207]: https://github.com/shopsys/shopsys/pull/1207
+[#1204]: https://github.com/shopsys/shopsys/pull/1204
+[#1203]: https://github.com/shopsys/shopsys/pull/1203
+[#1201]: https://github.com/shopsys/shopsys/pull/1201
+[#1197]: https://github.com/shopsys/shopsys/pull/1197
+[#1194]: https://github.com/shopsys/shopsys/pull/1194
+[#1193]: https://github.com/shopsys/shopsys/pull/1193
+[#1192]: https://github.com/shopsys/shopsys/pull/1192
+[#1191]: https://github.com/shopsys/shopsys/pull/1191
+[#1183]: https://github.com/shopsys/shopsys/pull/1183
+[#1181]: https://github.com/shopsys/shopsys/pull/1181
+[#1176]: https://github.com/shopsys/shopsys/pull/1176
+[#1168]: https://github.com/shopsys/shopsys/pull/1168
+[#1155]: https://github.com/shopsys/shopsys/pull/1155
+[#1140]: https://github.com/shopsys/shopsys/pull/1140
+[#1123]: https://github.com/shopsys/shopsys/pull/1123
+[#1096]: https://github.com/shopsys/shopsys/pull/1096
+[#1047]: https://github.com/shopsys/shopsys/pull/1047
+[#1044]: https://github.com/shopsys/shopsys/pull/1044
+[#1010]: https://github.com/shopsys/shopsys/pull/1010
+[#1115]: https://github.com/shopsys/shopsys/pull/1115
+[#1099]: https://github.com/shopsys/shopsys/pull/1099
+[#1097]: https://github.com/shopsys/shopsys/pull/1097
+[#1072]: https://github.com/shopsys/shopsys/pull/1072
+[#1066]: https://github.com/shopsys/shopsys/pull/1066
+[#1055]: https://github.com/shopsys/shopsys/pull/1055
+[#1004]: https://github.com/shopsys/shopsys/pull/1004
+[#933]: https://github.com/shopsys/shopsys/pull/933
+[#918]: https://github.com/shopsys/shopsys/pull/918
+[#906]: https://github.com/shopsys/shopsys/pull/906
+[#875]: https://github.com/shopsys/shopsys/pull/875
+[#539]: https://github.com/shopsys/shopsys/pull/539
+[@hason]: https://github.com/hason
