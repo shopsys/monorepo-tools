@@ -38,7 +38,8 @@ Follow the instructions in the [monorepo upgrade guide](docs/contributing/upgrad
 * even we care a lot about these instructions, it is possible we miss something. In case something doesn't work after the upgrade, you'll find more information in the [CHANGELOG](CHANGELOG.md)
 
 ## Upgrade guides
-* ### [From v7.3.1 to Unreleased](./docs/upgrade/UPGRADE-unreleased.md)
+* ### [From v8.0.0 to Unreleased](./docs/upgrade/UPGRADE-unreleased.md)
+* ### [From v7.3.1 to v8.0.0](docs/upgrade/UPGRADE-v8.0.0.md)
 * ### [From v7.3.0 to v7.3.1](./docs/upgrade/UPGRADE-v7.3.1.md)
 * ### [From v7.2.2 to v7.3.0](./docs/upgrade/UPGRADE-v7.3.0.md)
 * ### [From v7.2.1 to v7.2.2](./docs/upgrade/UPGRADE-v7.2.2.md)
