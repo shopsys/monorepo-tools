@@ -77,6 +77,7 @@ If the token is invalid, you'll get `401` HTTP response code.
 ## Extensibility of the API
 If you need to extend your backend API, you can follow the cookbooks:
 * [Adding an Attribute to Product Export](/docs/cookbook/backend-api/adding-an-attribute-to-product-export.md)
+* [Adding an Attribute to Product Import](/docs/cookbook/backend-api/adding-an-attribute-to-product-import.md)
 * [Creating Custom API Endpoint](/docs/cookbook/backend-api/creating-custom-api-endpoint.md)
 
 If you need to overwrite an existing core endpoint, you can [create a custom one](/docs/cookbook/backend-api/creating-custom-api-endpoint.md) and use the same route settings to overwrite the one from the core,

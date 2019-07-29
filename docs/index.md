@@ -88,6 +88,7 @@
 * [Introduction to Backend API](/docs/backend-api/introduction-to-backend-api.md)
 * [API Versioning](/docs/backend-api/api-versioning.md)
 * [Adding an Attribute to Product Export](/docs/cookbook/backend-api/adding-an-attribute-to-product-export.md)
+* [Adding an Attribute to Product Import](/docs/cookbook/backend-api/adding-an-attribute-to-product-import.md)
 * [Creating Custom API Endpoint](/docs/cookbook/backend-api/creating-custom-api-endpoint.md)
 * [API Methods](/docs/backend-api/api-methods.md)
 

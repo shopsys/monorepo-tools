@@ -1,8 +1,22 @@
 services:
-    Shopsys\BackendApiBundle\Controller\:
-        resource: '../../Controller/'
-        public: false
+    _defaults:
         autowire: true
+        autoconfigure: true
+        public: false
+
+    Shopsys\BackendApiBundle\:
+        resource: '../../**/*{DataSetter,Factory,Transformer,Validator}.php'
+
+    Shopsys\BackendApiBundle\Controller\:
+        resource: '../../Controller/**/*Controller.php'
         tags: ['controller.service_arguments']
 
     Shopsys\BackendApiBundle\Component\HeaderLinks\HeaderLinksTransformer: ~
+
+    Shopsys\BackendApiBundle\Controller\V1\Product\ProductDataFactoryInterface:
+        class: Shopsys\BackendApiBundle\Controller\V1\Product\ProductDataFactory
+
+    Shopsys\BackendApiBundle\Controller\V1\Product\ProductApiDataValidatorInterface:
+        class: Shopsys\BackendApiBundle\Controller\V1\Product\ProductApiDataValidator
+
+    Shopsys\BackendApiBundle\Component\Validation\ValidationRunner: ~

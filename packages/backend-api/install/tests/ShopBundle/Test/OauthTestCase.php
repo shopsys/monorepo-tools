@@ -5,9 +5,11 @@ declare(strict_types=1);
 namespace Tests\ShopBundle\Test;
 
 use Doctrine\DBAL\Exception\UniqueConstraintViolationException;
+use Shopsys\FrameworkBundle\Component\Domain\Domain;
 use Shopsys\FrameworkBundle\Component\Router\CurrentDomainRouter;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
+use Webmozart\Assert\Assert;
 
 class OauthTestCase extends FunctionalTestCase
 {
@@ -80,18 +82,43 @@ class OauthTestCase extends FunctionalTestCase
 
     /**
      * @param string $method
-     * @param string $uri
-     * @param mixed|null $content
+     * @param string $path
+     * @param array|null $content
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    protected function runOauthRequest(string $method, string $uri, $content = null): Response
+    protected function runOauthRequest(string $method, string $path, ?array $content = null): Response
     {
         $client = $this->getClient();
         $headers = [
             'HTTP_AUTHORIZATION' => sprintf('Bearer %s', $this->createOauthToken()),
             'HTTP_ACCEPT' => '*/*',
+            'CONTENT_TYPE' => 'application/json',
         ];
-        $client->request($method, $uri, [], [], $headers, $content);
+        $uri = $this->getDomainBaseUrl() . $path;
+        $encodedContent = $content !== null ? json_encode($content) : null;
+        $client->request($method, $uri, [], [], $headers, $encodedContent);
         return $client->getResponse();
+    }
+
+    /**
+     * @return string
+     */
+    protected function getDomainBaseUrl(): string
+    {
+        /** @var \Shopsys\FrameworkBundle\Component\Domain\Domain $domain */
+        $domain = $this->getContainer()->get(Domain::class);
+
+        return $domain->getUrl();
+    }
+
+    /**
+     * @param string $url
+     * @return string
+     */
+    protected function extractUuid(string $url): string
+    {
+        $uuid = preg_replace('~^.*/~', '', $url);
+        Assert::uuid($uuid);
+        return $uuid;
     }
 }

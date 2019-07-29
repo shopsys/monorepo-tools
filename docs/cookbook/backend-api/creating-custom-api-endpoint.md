@@ -8,7 +8,7 @@ To keep the cookbook as simple as possible, we will just add `/hello/<name>` end
 ```php
 declare(strict_types=1);
 
-namespace Shopsys\ShopBundle\Controller\Api\V1;
+namespace Shopsys\ShopBundle\Controller\Api\V1\Product;
 
 use FOS\RestBundle\Controller\AbstractFOSRestController;
 
@@ -23,7 +23,7 @@ Then, we need to create a view object and return a response object, like in any 
 ```diff
 declare(strict_types=1);
 
-namespace Shopsys\ShopBundle\Controller\Api\V1;
+namespace Shopsys\ShopBundle\Controller\Api\V1\Product;
 
 use FOS\RestBundle\Controller\AbstractFOSRestController;
 + use FOS\RestBundle\Controller\Annotations\Get;

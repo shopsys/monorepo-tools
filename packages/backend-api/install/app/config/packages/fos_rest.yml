@@ -8,6 +8,8 @@ fos_rest:
         rules:
             - { path: '^/api', prefer_extension: true, fallback_format: 'json', priorities: [ 'json', 'xml' ] }
             - { path: '^/', stop: true }
+    body_listener:
+        throw_exception_on_unsupported_content_type: true
     exception:
         enabled: true
     zone:
