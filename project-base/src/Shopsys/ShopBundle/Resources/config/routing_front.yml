@@ -82,8 +82,8 @@ front_additional_image_without_type:
         additionalIndex: \d+
 
 front_login_check:
+    # controller's action is unnecessary, because firewall processes whole request
     path: /login/check/
-# controller's action is unnecessary, because firewall processes whole request
 
 front_newsletter_send:
     path: /newsletter/subscribe-email/
