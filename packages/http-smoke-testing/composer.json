@@ -29,7 +29,7 @@
         "symfony/routing": "^3.4|^4.0"
     },
     "require-dev": {
-        "shopsys/coding-standards": "dev-master",
+        "shopsys/coding-standards": "8.0.0",
         "jakub-onderka/php-parallel-lint": "^0.9"
     },
     "conflict": {

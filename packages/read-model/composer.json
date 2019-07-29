@@ -22,10 +22,10 @@
     },
     "require": {
         "php": "^7.2",
-        "shopsys/form-types-bundle": "dev-master",
-        "shopsys/framework": "dev-master",
-        "shopsys/migrations": "dev-master",
-        "shopsys/plugin-interface": "dev-master",
+        "shopsys/form-types-bundle": "8.0.0",
+        "shopsys/framework": "8.0.0",
+        "shopsys/migrations": "8.0.0",
+        "shopsys/plugin-interface": "8.0.0",
         "symfony/config": "^3.4",
         "symfony/dependency-injection": "^3.4",
         "symfony/http-kernel": "^3.4",
@@ -33,6 +33,6 @@
     },
     "require-dev": {
         "phpunit/phpunit": "^7.0",
-        "shopsys/coding-standards": "dev-master"
+        "shopsys/coding-standards": "8.0.0"
     }
 }

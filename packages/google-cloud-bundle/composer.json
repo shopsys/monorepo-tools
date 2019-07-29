@@ -18,10 +18,10 @@
     "require": {
         "php": "^7.2",
         "google/cloud-storage": "^1.10",
-        "shopsys/form-types-bundle": "dev-master",
-        "shopsys/framework": "dev-master",
-        "shopsys/migrations": "dev-master",
-        "shopsys/plugin-interface": "dev-master",
+        "shopsys/form-types-bundle": "8.0.0",
+        "shopsys/framework": "8.0.0",
+        "shopsys/migrations": "8.0.0",
+        "shopsys/plugin-interface": "8.0.0",
         "superbalist/flysystem-google-storage": "^7.1",
         "symfony/config": "^3.4",
         "symfony/dependency-injection": "^3.4",
@@ -30,6 +30,6 @@
         "symfony/options-resolver": "^3.4"
     },
     "require-dev": {
-        "shopsys/coding-standards": "dev-master"
+        "shopsys/coding-standards": "8.0.0"
     }
 }
