@@ -6,10 +6,10 @@ services:
     forbidden_private_visibility_fixer.backend_api:
         class: Shopsys\CodingStandards\CsFixer\ForbiddenPrivateVisibilityFixer
         calls:
-            - method: configure
-              arguments:
-                  - analyzed_namespaces:
-                        - Shopsys\BackendApiBundle
+            -   method: configure
+                arguments:
+                    -   analyzed_namespaces:
+                            - Shopsys\BackendApiBundle
 
     Shopsys\CodingStandards\Sniffs\ForceLateStaticBindingForProtectedConstantsSniff: ~
 

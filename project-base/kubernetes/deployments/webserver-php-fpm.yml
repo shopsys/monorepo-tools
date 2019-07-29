@@ -20,11 +20,11 @@ spec:
                 app: webserver-php-fpm
         spec:
             hostAliases:
-            -   ip: "127.0.0.1"
-                hostnames:
-                -   "webserver-php-fpm"
-                -   "php-fpm"
-                -   "webserver"
+                -   ip: "127.0.0.1"
+                    hostnames:
+                        - "webserver-php-fpm"
+                        - "php-fpm"
+                        - "webserver"
             volumes:
                 -   name: source-codes
                     emptyDir: {}
@@ -38,74 +38,74 @@ spec:
                     configMap:
                         name: nginx-configuration
                         items:
-                        -   key: nginx.conf
-                            path: default.conf
+                            -   key: nginx.conf
+                                path: default.conf
             initContainers:
-            -   name: copy-source-codes-to-volume
-                image: ~
-                securityContext:
-                    runAsUser: 33
-                command: ["sh", "-c", "cp -r /var/www/html/. /tmp/source-codes"]
-                volumeMounts:
-                -   name: source-codes
-                    mountPath: /tmp/source-codes
-                -   name: domains-urls
-                    mountPath: /var/www/html/app/config/domains_urls.yml
-                    subPath: domains_urls.yml
-                -   name: parameters
-                    mountPath: /var/www/html/app/config/parameters.yml
-                    subPath: parameters.yml
-            -   name: initialize-database
-                image: ~
-                securityContext:
-                    runAsUser: 33
-                command: ["sh", "-c", "cd /var/www/html && ./phing db-create dirs-create db-demo product-search-recreate-structure product-search-export-products grunt error-pages-generate warmup"]
-                volumeMounts:
-                -   name: source-codes
-                    mountPath: /var/www/html
-                -   name: domains-urls
-                    mountPath: /var/www/html/app/config/domains_urls.yml
-                    subPath: domains_urls.yml
-                -   name: parameters
-                    mountPath: /var/www/html/app/config/parameters.yml
-                    subPath: parameters.yml
-                env:
-                -   name: GOOGLE_CLOUD_STORAGE_BUCKET_NAME
-                    value: ~
-                -   name: GOOGLE_CLOUD_PROJECT_ID
-                    value: ~
+                -   name: copy-source-codes-to-volume
+                    image: ~
+                    securityContext:
+                        runAsUser: 33
+                    command: ["sh", "-c", "cp -r /var/www/html/. /tmp/source-codes"]
+                    volumeMounts:
+                        -   name: source-codes
+                            mountPath: /tmp/source-codes
+                        -   name: domains-urls
+                            mountPath: /var/www/html/app/config/domains_urls.yml
+                            subPath: domains_urls.yml
+                        -   name: parameters
+                            mountPath: /var/www/html/app/config/parameters.yml
+                            subPath: parameters.yml
+                -   name: initialize-database
+                    image: ~
+                    securityContext:
+                        runAsUser: 33
+                    command: ["sh", "-c", "cd /var/www/html && ./phing db-create dirs-create db-demo product-search-recreate-structure product-search-export-products grunt error-pages-generate warmup"]
+                    volumeMounts:
+                        -   name: source-codes
+                            mountPath: /var/www/html
+                        -   name: domains-urls
+                            mountPath: /var/www/html/app/config/domains_urls.yml
+                            subPath: domains_urls.yml
+                        -   name: parameters
+                            mountPath: /var/www/html/app/config/parameters.yml
+                            subPath: parameters.yml
+                    env:
+                        -   name: GOOGLE_CLOUD_STORAGE_BUCKET_NAME
+                            value: ~
+                        -   name: GOOGLE_CLOUD_PROJECT_ID
+                            value: ~
             containers:
-            -   image: ~
-                name: php-fpm
-                securityContext:
-                    runAsUser: 33
-                workingDir: /var/www/html
-                volumeMounts:
-                -   name: source-codes
-                    mountPath: /var/www/html
-                -   name: domains-urls
-                    mountPath: /var/www/html/app/config/domains_urls.yml
-                    subPath: domains_urls.yml
-                -   name: parameters
-                    mountPath: /var/www/html/app/config/parameters.yml
-                    subPath: parameters.yml
-                env:
-                -   name: GOOGLE_CLOUD_STORAGE_BUCKET_NAME
-                    value: ~
-                -   name: GOOGLE_CLOUD_PROJECT_ID
-                    value: ~
-            -   image: nginx:1.13.10-alpine
-                name: webserver
-                ports:
-                -   containerPort: 8080
-                    name: http
-                volumeMounts:
-                -   name: nginx-configuration
-                    mountPath: /etc/nginx/conf.d
-                -   name: source-codes
-                    mountPath: /var/www/html
-                lifecycle:
-                    preStop:
-                        exec:
-                            command:
-                            -   nginx -s quit
+                -   image: ~
+                    name: php-fpm
+                    securityContext:
+                        runAsUser: 33
+                    workingDir: /var/www/html
+                    volumeMounts:
+                        -   name: source-codes
+                            mountPath: /var/www/html
+                        -   name: domains-urls
+                            mountPath: /var/www/html/app/config/domains_urls.yml
+                            subPath: domains_urls.yml
+                        -   name: parameters
+                            mountPath: /var/www/html/app/config/parameters.yml
+                            subPath: parameters.yml
+                    env:
+                        -   name: GOOGLE_CLOUD_STORAGE_BUCKET_NAME
+                            value: ~
+                        -   name: GOOGLE_CLOUD_PROJECT_ID
+                            value: ~
+                -   image: nginx:1.13.10-alpine
+                    name: webserver
+                    ports:
+                        -   containerPort: 8080
+                            name: http
+                    volumeMounts:
+                        -   name: nginx-configuration
+                            mountPath: /etc/nginx/conf.d
+                        -   name: source-codes
+                            mountPath: /var/www/html
+                    lifecycle:
+                        preStop:
+                            exec:
+                                command:
+                                    - nginx -s quit

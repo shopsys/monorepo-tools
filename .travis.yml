@@ -1,53 +1,50 @@
 language: bash
 dist: xenial
 stages:
--  Tests
+    - Tests
 
 services:
--   docker
+    - docker
 
 cache:
     directories:
-    -   $CACHE_DIR
+        - $CACHE_DIR
 
 addons:
     apt:
         update: true
 env:
     global:
-    -   CACHE_DIR=$HOME/.cache/docker
-    -   CACHE_FILE_IMAGE=$CACHE_DIR/php-fpm.tar.gz
-    -   DOCKER_COMPOSE_VERSION=1.24.0
-    -   TRAVIS_USER_ID=$(id -u)
-    -   TRAVIS_GROUP_ID=$(id -g)
+        - CACHE_DIR=$HOME/.cache/docker
+        - CACHE_FILE_IMAGE=$CACHE_DIR/php-fpm.tar.gz
+        - DOCKER_COMPOSE_VERSION=1.24.0
+        - TRAVIS_USER_ID=$(id -u)
+        - TRAVIS_GROUP_ID=$(id -g)
 
 before_install:
--   sudo add-apt-repository ppa:rmescandon/yq -y
--   sudo apt-get update
--   sudo apt-get install -y yq
--   curl -L https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-`uname -s`-`uname -m` > docker-compose
--   chmod +x docker-compose
--   sudo mv docker-compose /usr/local/bin
--   mkdir -p $CACHE_DIR
--   cp -f ./docker/conf/docker-compose.yml.dist ./docker-compose.yml
--   yq write --inplace docker-compose.yml services.php-fpm.build.args.www_data_uid $TRAVIS_USER_ID
--   yq write --inplace docker-compose.yml services.php-fpm.build.args.www_data_gid $TRAVIS_GROUP_ID
+    -   curl -L https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-`uname -s`-`uname -m` > docker-compose
+    - chmod +x docker-compose
+    - sudo mv docker-compose /usr/local/bin
+    - mkdir -p $CACHE_DIR
+    - cp -f ./docker/conf/docker-compose.yml.dist ./docker-compose.yml
+    - "sed -i 's#www_data_uid: 1000#www_data_uid: $TRAVIS_USER_ID#' ./docker-compose.yml"
+    - "sed -i 's#www_data_gid: 1000#www_data_uid: $TRAVIS_GROUP_ID#' ./docker-compose.yml"
 
 install:
--   docker load < $CACHE_FILE_IMAGE || true
--   sudo ionice -c 2 -n 0 nice -n -20 docker-compose pull postgres elasticsearch redis selenium-server webserver
--   docker-compose up -d postgres elasticsearch redis selenium-server php-fpm webserver
--   if [[ ! -f "$CACHE_FILE_IMAGE" ]]; then docker save $(docker-compose images php-fpm | tail -1 | awk '{print $2}') | gzip -1 -c > $CACHE_FILE_IMAGE; fi
--   docker ps
--   docker --version
--   docker-compose exec php-fpm composer install --no-interaction
--   docker-compose exec php-fpm ./phing npm
+    - docker load < $CACHE_FILE_IMAGE || true
+    - sudo ionice -c 2 -n 0 nice -n -20 docker-compose pull postgres elasticsearch redis selenium-server webserver
+    - docker-compose up -d postgres elasticsearch redis selenium-server php-fpm webserver
+    - if [[ ! -f "$CACHE_FILE_IMAGE" ]]; then docker save $(docker-compose images php-fpm | tail -1 | awk '{print $2}') | gzip -1 -c > $CACHE_FILE_IMAGE; fi
+    - docker ps
+    - docker --version
+    - docker-compose exec php-fpm composer install --no-interaction
+    - docker-compose exec php-fpm ./phing npm
 
 jobs:
     include:
-    -   stage: Tests
-        name: "Smoke, Functional and Acceptance Tests"
-        script: docker-compose exec php-fpm ./phing db-create test-db-create backend-api-install backend-api-oauth-keys-generate build-demo-dev-quick error-pages-generate checks-ci
+        -   stage: Tests
+            name: "Smoke, Functional and Acceptance Tests"
+            script: docker-compose exec php-fpm ./phing db-create test-db-create backend-api-install backend-api-oauth-keys-generate build-demo-dev-quick error-pages-generate checks-ci
 
-    -   name: "Standards, Unit Tests"
-        script: docker-compose exec php-fpm ./phing backend-api-install backend-api-oauth-keys-generate standards tests-unit
+        -   name: "Standards, Unit Tests"
+            script: docker-compose exec php-fpm ./phing backend-api-install backend-api-oauth-keys-generate standards tests-unit

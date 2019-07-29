@@ -5,21 +5,20 @@ syncs:
         sync_host_port: 10872
         sync_strategy: 'unison'
         src: './'
-        sync_excludes: [
-            '.git',
-            '.idea',
-            '.docker-sync',
-            '.DS_Store',
-            'docker',
-            'kubernetes',
-            'nbproject',
-            'node_modules',
-            'var/cache',
-            'var/elasticsearch-data',
-            'var/postgres-data',
-            'web',
-            'vendor'
-        ]
+        sync_excludes:
+            - .git
+            - .idea
+            - .docker-sync
+            - .DS_Store
+            - docker
+            - kubernetes
+            - nbproject
+            - node_modules
+            - var/cache
+            - var/elasticsearch-data
+            - var/postgres-data
+            - web
+            - vendor
         host_disk_mount_mode: 'delegated'
 
     shopsys-framework-web-sync:

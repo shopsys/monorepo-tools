@@ -24,7 +24,7 @@ front_login:
 
 front_logout:
     path: /odhlasit/{_csrf_token}
-    # controller's action is unnecessary, because firewall processes whole request
+# controller's action is unnecessary, because firewall processes whole request
 
 front_order_index:
     path: /objednavka/

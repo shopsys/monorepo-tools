@@ -7,11 +7,11 @@ services:
         depends_on:
             - php-fpm
         volumes:
-            - /var/www/production-content:/var/www/html/web/content
-            - web-volume:/var/www/html/web
-            - nginx-conf:/etc/nginx/conf.d/
+            -   /var/www/production-content:/var/www/html/web/content
+            -   web-volume:/var/www/html/web
+            -   nginx-conf:/etc/nginx/conf.d/
         ports:
-            - 8000:8080
+            -   8000:8080
         networks:
             - shopsys-network
 
@@ -20,12 +20,12 @@ services:
         image: production-php-fpm
         container_name: production-php-fpm
         volumes:
-            - /var/www/production-content:/var/www/html/web/content
-            - web-volume:/var/www/html/web
-            - nginx-conf:/var/www/html/docker/nginx
+            -   /var/www/production-content:/var/www/html/web/content
+            -   web-volume:/var/www/html/web
+            -   nginx-conf:/var/www/html/docker/nginx
         extra_hosts:
-            - postgres:192.168.0.1
-            - redis:192.168.0.1
+            -   postgres:192.168.0.1
+            -   redis:192.168.0.1
         networks:
             - shopsys-network
 
@@ -45,5 +45,5 @@ networks:
         ipam:
             driver: default
             config:
-            - subnet: 192.168.0.1/16
+                -   subnet: 192.168.0.1/16
 

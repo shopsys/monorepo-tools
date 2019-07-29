@@ -355,8 +355,8 @@ services:
             - { name: jms_translation.file_visitor }
 
     Shopsys\FrameworkBundle\Component\Translation\ConstraintViolationExtractor:
-      tags:
-        - { name: jms_translation.file_visitor }
+        tags:
+            - { name: jms_translation.file_visitor }
 
     Shopsys\FrameworkBundle\Component\Translation\PoDumper:
         tags:
@@ -959,19 +959,19 @@ services:
         class: Psr\Log\NullLogger
 
     Elasticsearch\ClientBuilder:
-      class: Elasticsearch\ClientBuilder
-      factory: [Elasticsearch\ClientBuilder, create]
-      calls:
-        - method: setHosts
-          arguments:
-            - ['%elasticsearch_host%']
-        - method: setTracer
-          arguments:
-            - '@shopsys.component.elasticsearch.tracer'
+        class: Elasticsearch\ClientBuilder
+        factory: [Elasticsearch\ClientBuilder, create]
+        calls:
+            -   method: setHosts
+                arguments:
+                    - ['%elasticsearch_host%']
+            -   method: setTracer
+                arguments:
+                    - '@shopsys.component.elasticsearch.tracer'
 
     Elasticsearch\Client:
-      class: Elasticsearch\Client
-      factory: ['@Elasticsearch\ClientBuilder', build]
+        class: Elasticsearch\Client
+        factory: ['@Elasticsearch\ClientBuilder', build]
 
     Shopsys\FrameworkBundle\Component\Elasticsearch\ElasticsearchStructureManager:
         arguments:

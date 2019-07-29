@@ -56,6 +56,35 @@ There you can find links to upgrade notes for other versions too.
 ### Tools
 - check and get rid of the use of all removed phing targets ([#1193](https://github.com/shopsys/shopsys/pull/1193))
     - the targets were marked as deprecated in `v7.3.0` version, see [the upgrade notes](/docs/upgrade/UPGRADE-v7.3.0.md#tools) and [#1068](https://github.com/shopsys/shopsys/pull/1068)
+- use YAML standards checker ([#539](https://github.com/shopsys/shopsys/pull/539))
+    - for your YAML files to be checked and fixed automatically, install `sspooky13/yaml-standards` as a dev-dependency via Composer
+        - you can do this by running `composer require --dev sspooky13/yaml-standards:^4.2`
+    - run `phing yaml-standards-fix` to fix all your YAML files automatically
+        - the YAML check/fix are also part of all `standards[-fix][-diff]` targets
+    - manually rewrite multi-line arrays in YAML, eg. in `docker-sync.yml`:
+        ```diff
+        - sync_excludes: [
+        -     'docker/',
+        -     '.git',
+        -     '.docker-sync',
+        -     'docker',
+        -     'node_modules',
+        -     'var/cache',
+        -     'web',
+        -     'vendor'
+        - ]
+        + sync_excludes:
+        +     - 'docker/'
+        +     - '.git'
+        +     - '.docker-sync'
+        +     - 'docker'
+        +     - 'node_modules'
+        +     - 'var/cache'
+        +     - 'web'
+        +     - 'vendor'
+        ```
+    - you can [override the `yaml-standards.args` property](https://github.com/shopsys/shopsys/blob/master/docs/introduction/console-commands-for-application-management-phing-targets.md#customization-of-phing-targets-and-properties) if you need to pass more arguments
+        - eg. `<property name="yaml-standards.args" value="--exclude-dir=./my-excluded-dir"/>` to exclude `my-excluded-dir/` from the standards
 
 ### Application
 #### 3rd party dependencies

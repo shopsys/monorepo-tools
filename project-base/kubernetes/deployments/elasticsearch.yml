@@ -13,13 +13,13 @@ spec:
                 app: elasticsearch
         spec:
             containers:
-            -   name: elasticsearch
-                image: ~
-                ports:
                 -   name: elasticsearch
-                    containerPort: 9200
-                    protocol: TCP
+                    image: ~
+                    ports:
+                        -   name: elasticsearch
+                            containerPort: 9200
+                            protocol: TCP
 
-                env:
-                    -   name: discovery.type
-                        value: single-node
+                    env:
+                        -   name: discovery.type
+                            value: single-node
