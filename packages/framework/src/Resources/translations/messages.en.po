@@ -307,7 +307,7 @@ msgstr ""
 msgid "Brands"
 msgstr ""
 
-msgid "Browse"
+msgid "Browse files"
 msgstr ""
 
 msgid "Bulk edit"
@@ -628,6 +628,9 @@ msgstr ""
 msgid "Delete and set"
 msgstr ""
 
+msgid "Delete status of order"
+msgstr ""
+
 msgid "Delivery address"
 msgstr ""
 
@@ -745,7 +748,7 @@ msgstr ""
 msgid "Domain name"
 msgstr ""
 
-msgid "Drag file here"
+msgid "Drag your files here"
 msgstr ""
 
 msgid "E-mail"
@@ -797,6 +800,9 @@ msgid "Edit"
 msgstr ""
 
 msgid "Edit data"
+msgstr ""
+
+msgid "Edit domain icon"
 msgstr ""
 
 msgid "Editing administrator"
@@ -1019,6 +1025,9 @@ msgid "Generate"
 msgstr ""
 
 msgid "Generated"
+msgstr ""
+
+msgid "Go to Frontend"
 msgstr ""
 
 msgid "Go to page:"
@@ -1759,6 +1768,9 @@ msgstr ""
 msgid "Sales including/excluding VAT settings"
 msgstr ""
 
+msgid "Sales overview (last 7 days)"
+msgstr ""
+
 msgid "Save"
 msgstr ""
 
@@ -2404,6 +2416,9 @@ msgstr ""
 msgid "never"
 msgstr ""
 
+msgid "new customers"
+msgstr ""
+
 msgid "not"
 msgstr ""
 
@@ -2417,6 +2432,9 @@ msgid "order statuses"
 msgstr ""
 
 msgid "orders"
+msgstr ""
+
+msgid "orders sold"
 msgstr ""
 
 msgid "parameters"
@@ -2435,6 +2453,9 @@ msgid "relevance"
 msgstr ""
 
 msgid "subscribers"
+msgstr ""
+
+msgid "turnover in"
 msgstr ""
 
 msgid "under heading"

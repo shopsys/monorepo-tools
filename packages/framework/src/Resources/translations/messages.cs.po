@@ -307,8 +307,8 @@ msgstr "Přehled značek"
 msgid "Brands"
 msgstr "Značky"
 
-msgid "Browse"
-msgstr "Procházet"
+msgid "Browse files"
+msgstr "Procházet soubory"
 
 msgid "Bulk edit"
 msgstr "Hromadné úpravy"
@@ -628,6 +628,9 @@ msgstr "Smazat"
 msgid "Delete and set"
 msgstr "Smazat a nastavit"
 
+msgid "Delete status of order"
+msgstr "Smazat stav objednávky"
+
 msgid "Delivery address"
 msgstr "Dodací adresa"
 
@@ -745,8 +748,8 @@ msgstr "Byla upravena doména <strong>{{ name }}</strong>. Nevidíte-li novou ik
 msgid "Domain name"
 msgstr "Název domény"
 
-msgid "Drag file here"
-msgstr "Zde přetáhněte soubor"
+msgid "Drag your files here"
+msgstr "Zde přetáhněte své soubory"
 
 msgid "E-mail"
 msgstr "E-mail"
@@ -798,6 +801,9 @@ msgstr "Upravit"
 
 msgid "Edit data"
 msgstr "Upravit údaje"
+
+msgid "Edit domain icon"
+msgstr "Změnit ikonu domény"
 
 msgid "Editing administrator"
 msgstr "Editace administrátora"
@@ -1020,6 +1026,9 @@ msgstr "Vygenerovat"
 
 msgid "Generated"
 msgstr "Vygenerováno"
+
+msgid "Go to Frontend"
+msgstr "Přejít na Frontend"
 
 msgid "Go to page:"
 msgstr "Přejít na stránku:"
@@ -1759,6 +1768,9 @@ msgstr "Natavení SEO atributů bylo upraveno"
 msgid "Sales including/excluding VAT settings"
 msgstr "Nastavení prodeje s/bez DPH"
 
+msgid "Sales overview (last 7 days)"
+msgstr "Přehled prodejů (za posledních 7 dní)"
+
 msgid "Save"
 msgstr "Uložit"
 
@@ -2404,6 +2416,9 @@ msgstr "menší než"
 msgid "never"
 msgstr "nikdy"
 
+msgid "new customers"
+msgstr "nových zákazníků"
+
 msgid "not"
 msgstr "není"
 
@@ -2418,6 +2433,9 @@ msgstr "stavů objednávek"
 
 msgid "orders"
 msgstr "objednávek"
+
+msgid "orders sold"
+msgstr "prodaných objednávek"
 
 msgid "parameters"
 msgstr "parametry"
@@ -2436,6 +2454,9 @@ msgstr "relevance"
 
 msgid "subscribers"
 msgstr "odběratelé newsletteru"
+
+msgid "turnover in"
+msgstr "obrat v"
 
 msgid "under heading"
 msgstr "pod hlavičkou"
