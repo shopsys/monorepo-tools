@@ -2,6 +2,8 @@
 
 [![Mentioned in Awesome Monorepo](https://awesome.re/mentioned-badge.svg)](https://github.com/korfuri/awesome-monorepo)
 
+**This package is used for splitting our monorepo and we share it with our community as it is. We do not intend to support or develop it any further. Feel free to fork it and adjust for your own need.**
+
 Tools for building and splitting monolithic repository from existing packages.
 You can read about pros and cons of monorepo approach on the [Shopsys Framework Blog](https://blog.shopsys.com/how-to-maintain-multiple-git-repositories-with-ease-61a5e17152e0).
 
