@@ -1,7 +1,7 @@
 # Contributing
 
 Thank you for your contributions to Shopsys Monorepo Tools package.
-Together we are making Shopsys Framework better.
+Together we are making Shopsys Platform better.
 
 This repository is READ-ONLY.
 If you want to [report issues](https://github.com/shopsys/shopsys/issues/new) and/or send [pull requests](https://github.com/shopsys/shopsys/compare),
