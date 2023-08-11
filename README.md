@@ -5,7 +5,7 @@
 **This package is used for splitting our monorepo and we share it with our community as it is. We do not intend to support or develop it any further. Feel free to fork it and adjust for your own need.**
 
 Tools for building and splitting monolithic repository from existing packages.
-You can read about pros and cons of monorepo approach on the [Shopsys Framework Blog](https://blog.shopsys.com/how-to-maintain-multiple-git-repositories-with-ease-61a5e17152e0).
+You can read about pros and cons of monorepo approach on the [Shopsys Platform Blog](https://blog.shopsys.com/how-to-maintain-multiple-git-repositories-with-ease-61a5e17152e0).
 
 We created these scripts because we couldn't find a tool that would keep the git history of subpackages unchanged.
 
@@ -168,7 +168,7 @@ Usage: `tag_refs_move_to_original.sh`
 
 ## Contributing
 Thank you for your contributions to Shopsys Monorepo Tools package.
-Together we are making Shopsys Framework better.
+Together we are making Shopsys Platform better.
 
 This repository is READ-ONLY.
 If you want to [report issues](https://github.com/shopsys/shopsys/issues/new) and/or send [pull requests](https://github.com/shopsys/shopsys/compare),
