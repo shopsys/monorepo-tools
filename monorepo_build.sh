@@ -11,10 +11,17 @@
 
 # Check provided arguments
 if [ "$#" -lt "2" ]; then
-    echo 'Please provide at least 2 remotes to be merged into a new monorepo'
+    echo 'You have provided at least 2 remotes to be merged into a new monorepo'
     echo 'Usage: monorepo_build.sh <remote-name>[:<subdirectory>] <remote-name>[:<subdirectory>] ...'
     echo 'Example: monorepo_build.sh main-repository package-alpha:packages/alpha package-beta:packages/beta'
-    exit
+    read -p "Do you want to proceed? (y/n) " yn
+    case $yn in 
+    	[yY] ) echo Proceeding;
+    		break;;
+    	[nN] ) echo exiting...;
+    		exit;;
+    	* ) echo invalid response;;
+    esac
 fi
 # Get directory of the other scripts
 MONOREPO_SCRIPT_DIR=$(dirname "$0")
