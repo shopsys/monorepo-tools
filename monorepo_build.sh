@@ -11,7 +11,7 @@
 
 # Check provided arguments
 if [ "$#" -lt "2" ]; then
-    echo 'You have provided at least 2 remotes to be merged into a new monorepo'
+    echo 'Please provide at least 2 remotes to be merged into a new monorepo'
     echo 'Usage: monorepo_build.sh <remote-name>[:<subdirectory>] <remote-name>[:<subdirectory>] ...'
     echo 'Example: monorepo_build.sh main-repository package-alpha:packages/alpha package-beta:packages/beta'
     read -p "Do you want to proceed? (y/n) " yn
