@@ -18,9 +18,8 @@ if [ "$#" -lt "2" ]; then
     case $yn in 
     	[yY] ) echo Proceeding;
     		break;;
-    	[nN] ) echo exiting...;
+    	* ) echo exiting...;
     		exit;;
-    	* ) echo invalid response;;
     esac
 fi
 # Get directory of the other scripts
