@@ -56,10 +56,11 @@ Only branches `master` will be merged together, other branches will be kept only
 This may take a while, depending on the size of your repositories.
 
 Now your `master` branch should contain all packages in separate directories. For our example it would mean:
-* **main-repository/** - contains repository *vendor/main-repository*
-* **packages/**
-  * **alpha/** - contains repository *vendor/alpha*
-  * **beta/** - contains repository *vendor/beta*
+
+-   **main-repository/** - contains repository _vendor/main-repository_
+-   **packages/**
+    -   **alpha/** - contains repository _vendor/alpha_
+    -   **beta/** - contains repository _vendor/beta_
 
 ### 4. Splitting into original repositories
 
@@ -78,24 +79,24 @@ Other branches are not pushed.
 
 It may again take a while, depending on the size of your monorepo.
 
-***Note:***  
-*The commits in the split repositories should be identical to those from the original repo, keeping the git history intact.*
-*Thus, if you have checked out the original `master` previously, you should be able to fast-forward to the new version after splitting.*  
-*The only known exception is a signed commit (note that GitHub signs commits made via its web UI by default).*
-*If you have signed commits in your original repository, the split commits will NOT be signed.*
-*This will prevent `monorepo_split.sh` from pushing the unsigned commits to the remote.*  
-*To overcome this you can add [the `--force` flag](https://git-scm.com/docs/git-push#git-push--f) to the `git push` calls in the script, but it may cause unforeseen consequences if you're not sure what you're doing.*
+**_Note:_**  
+_The commits in the split repositories should be identical to those from the original repo, keeping the git history intact._
+_Thus, if you have checked out the original `master` previously, you should be able to fast-forward to the new version after splitting._  
+_The only known exception is a signed commit (note that GitHub signs commits made via its web UI by default)._
+_If you have signed commits in your original repository, the split commits will NOT be signed._
+_This will prevent `monorepo_split.sh` from pushing the unsigned commits to the remote._  
+_To overcome this you can add [the `--force` flag](https://git-scm.com/docs/git-push#git-push--f) to the `git push` calls in the script, but it may cause unforeseen consequences if you're not sure what you're doing._
 
 ### Add a new package into the monorepo
 
 When you have the monorepo, you may find a reason for adding a new package after some time you already use the monorepo.
 In this case, don't use `monorepo_build.sh`, but do following steps:
 
-* Create a new repository, for example, *vendor/gamma*
-* Add remote into the monorepo `git remote add package-gamma http://github.com/vendor/gamma.git`
-* Create a new directory in the monorepo **packages/gamma**
-* Add the code and commit it
-* Use split tool with the new package
+-   Create a new repository, for example, _vendor/gamma_
+-   Add remote into the monorepo `git remote add package-gamma http://github.com/vendor/gamma.git`
+-   Create a new directory in the monorepo **packages/gamma**
+-   Add the code and commit it
+-   Use split tool with the new package
     ```
     ~/monorepo-tools/monorepo_split.sh \
         main-repository package-alpha:packages/alpha package-beta:packages/beta package-gamma:packages/gamma
@@ -167,6 +168,7 @@ Move tag refs from `refs/original-tags/` into `refs/original/`
 Usage: `tag_refs_move_to_original.sh`
 
 ## Contributing
+
 Thank you for your contributions to Shopsys Monorepo Tools package.
 Together we are making Shopsys Platform better.
 
@@ -177,6 +179,7 @@ please use the main [Shopsys repository](https://github.com/shopsys/shopsys).
 Please, check our [Contribution Guide](https://github.com/shopsys/shopsys/blob/master/CONTRIBUTING.md) before contributing.
 
 ## Support
+
 What to do when you are in troubles or need some help?
 The best way is to join our [Slack](https://join.slack.com/t/shopsysframework/shared_invite/zt-11wx9au4g-e5pXei73UJydHRQ7nVApAQ).
 
