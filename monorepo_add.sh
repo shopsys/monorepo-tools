@@ -2,7 +2,7 @@
 
 # Add repositories to a monorepo from specified remotes
 # You must first add the remotes by "git remote add <remote-name> <repository-url>" and fetch from them by "git fetch --all"
-# It will merge master branches of the monorepo and all remotes together while keeping all current branches in monorepo intact
+# It will merge main branches of the monorepo and all remotes together while keeping all current branches in monorepo intact
 # If subdirectory is not specified remote name will be used instead
 #
 # Usage: monorepo_add.sh <remote-name>[:<subdirectory>] <remote-name>[:<subdirectory>] ...
@@ -28,21 +28,21 @@ for PARAM in $@; do
     if [ "$SUBDIRECTORY" == "" ]; then
         SUBDIRECTORY=$REMOTE
     fi
-    echo "Building branch 'master' of the remote '$REMOTE'"
-    git checkout --detach $REMOTE/master
+    echo "Building branch 'main' of the remote '$REMOTE'"
+    git checkout --detach $REMOTE/main
     $MONOREPO_SCRIPT_DIR/rewrite_history_into.sh $SUBDIRECTORY
     MERGE_REFS="$MERGE_REFS $(git rev-parse HEAD)"
     # Wipe the back-up of original history
     $MONOREPO_SCRIPT_DIR/original_refs_wipe.sh
 done
-# Merge all master branches
+# Merge all main branches
 COMMIT_MSG="merge multiple repositories into an existing monorepo"$'\n'$'\n'"- merged using: 'monorepo_add.sh $@'"$'\n'"- see https://github.com/shopsys/monorepo-tools"
-git checkout master
+git checkout main
 echo "Merging refs: $MERGE_REFS"
 git merge --no-commit -q $MERGE_REFS --allow-unrelated-histories
 echo 'Resolving conflicts using trees of all parents'
 for REF in $MERGE_REFS; do
-    # Add all files from all master branches into index
+    # Add all files from all main branches into index
     # "git read-tree" with multiple refs cannot be used as it is limited to 8 refs
     git ls-tree -r $REF | git update-index --index-info
 done
