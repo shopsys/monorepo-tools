@@ -11,7 +11,7 @@ We created these scripts because we couldn't find a tool that would keep the git
 
 You may need to update your `git` (tested on `2.16.1`).
 
-This repository is maintained by [shopsys/shopsys](https://github.com/shopsys/shopsys) monorepo, information about changes is in [monorepo CHANGELOG.md](https://github.com/shopsys/shopsys/blob/master/CHANGELOG.md).
+This repository is maintained by [shopsys/shopsys](https://github.com/shopsys/shopsys) monorepo, information about changes is in its `CHANGELOG` file.
 
 ## Quick start
 
@@ -176,7 +176,7 @@ This repository is READ-ONLY.
 If you want to [report issues](https://github.com/shopsys/shopsys/issues/new) and/or send [pull requests](https://github.com/shopsys/shopsys/compare),
 please use the main [Shopsys repository](https://github.com/shopsys/shopsys).
 
-Please, check our [Contribution Guide](https://github.com/shopsys/shopsys/blob/master/CONTRIBUTING.md) before contributing.
+Please check our [Contribution Guide](https://github.com/shopsys/shopsys/blob/HEAD/CONTRIBUTING.md) before contributing.
 
 ## Support
 
