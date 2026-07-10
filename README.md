@@ -181,6 +181,6 @@ Please check our [Contribution Guide](https://github.com/shopsys/shopsys/blob/HE
 ## Support
 
 What to do when you are in troubles or need some help?
-The best way is to join our [Slack](https://join.slack.com/t/shopsysframework/shared_invite/zt-11wx9au4g-e5pXei73UJydHRQ7nVApAQ).
+The best way is to ask in our [GitHub Discussions](https://github.com/shopsys/shopsys/discussions).
 
 If you want to [report issues](https://github.com/shopsys/shopsys/issues/new), please use the main [Shopsys repository](https://github.com/shopsys/shopsys).
